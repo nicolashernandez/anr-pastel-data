@@ -1,0 +1,3421 @@
+http://www.i3s.unice.fr/~nlt/cours/master/ws/ws_mbds.pdf
+
+Des réseaux sémantiques au Web 
+
+sémantique
+
+Nhan LE THANH - Equipe KEWI 
+
+(Knowledge Engineering and Web Intelligent)
+
+Pôle GLC - Laboratoire de I3S
+
+Plan du séminaire
+
+(cid:132) Web sémantique : rêve et 
+
+défis
+
+(cid:132) Aspects théoriques
+
+(cid:137) Langages du web (balisage)
+(cid:137) Graphes conceptuels
+(cid:137) Logiques de descriptions
+
+(cid:132) Aspects pratiques
+
+(cid:137) Annotation : Langages
+(cid:137) Ontologies : la modélisation
+(cid:137) Web services : la mise en 
+
+oeuvre
+
+(cid:132) Tendances et thèmes de 
+
+recherche
+(cid:137) Distribution et fédération
+(cid:137) Web social et centre d’usage
+(cid:137) Thèmes de recherche
+
+(cid:132) Et demain …
+
+… c’est un autre jour …
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+2
+
+1
+
+Rêves et défis
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+3
+
+Web sémantique : rêve et défi
+« … Un jour de l’automne 2020 :
+(cid:132) Adam et Ève décident d’organiser 
+leur voyage de noce en l’Amérique 
+latin. 
+
+(cid:132) Adam est gourmet et Ève est une fan 
+de la nature. Ils ont donc décidé que 
+leur voyage sera un séjour 
+géographique et gastronomique …
+
+Je vois
+
+…
+
+... mon beau 
+voyage...
+
+(cid:132) Adam interroge Eden, son 
+moteur de recherche 
+personnel et dans quelques 
+minutes Eden leur propose 
+quelques propositions 
+illustrées par une 
+simulation multimédia de 
+leur voyage. 
+
+(cid:132) Après le choix du couple, 
+l’Eden s’occupe de la mise 
+en place du voyage le plus 
+adapté … »
+
+Eden
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+4
+
+2
+
+Web sémantique : rêve et défi
+
+(cid:132) Défis à relever pour Eden
+
+Je ne suis 
+pas humain 
+mais plutôt 
+une machine
+
+… je suis capable 
+comprendre Adam 
+(un humain !!) …
+
+Eden
+Web sémantique
+
+… je suis capable 
+
+comprendre et
+exploiter les 
+
+différences sources de 
+données sur le Web
+
+… je suis capable 
+
+comprendre et coopérer 
+
+avec les autres 
+
+machines sur Internet
+
+(évidement !!) …
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+5
+
+Web sémantique : rêve et défi
+
+Aujourd’hui : le Web est exploité par des
+personnes qui recherchent des informations via un
+moteur de recherche et qui exploitent elles-mêmes
+le(s) résultat(s).
+
+Demain : le Web sera exploité en priorité par des
+machines qui traiteront elles-mêmes les questions
+posées par des personnes, et qui délivreront les
+résultats à ces personnes.
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+6
+
+3
+
+Web sémantique : rêve et défi
+
+(cid:132) Vers le Web sémantique
+
+(cid:137) Le Web va devenir un espace d’échanges d’informations entre 
+machines, en permettant l’accès à un très grand volume 
+d’informations, et en fournissant les moyens de gérer ces 
+informations.
+
+(cid:137) Une machine peut appréhender le volume des 
+
+informations disponibles sur le Web, et donc fournir une 
+aide plus conséquente aux personnes, à condition qu’on la 
+dote d’une certaine « intelligence ».
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+7
+
+Web sémantique : rêve et défi
+
+(cid:132) Aujourd’hui dans le Web il existe …
+
+(cid:137) des moteurs de recherche et une indexation des pages,
+(cid:137) des procédures d’extraction d’information,
+(cid:137) des procédures d’analyse de l’information,
+mais
+(cid:137) il n’ y a pas encore (de manière massive) la possibilité 
+
+d’exploiter des connaissances pour une gestion plus 
+intelligente des informations : recherches par le contenu 
+des documents, raisonnements, résolution de problèmes, 
+etc.
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+8
+
+4
+
+Web sémantique : rêve et défi
+
+(cid:132) Demain dans le Web, on attend :
+
+(cid:137) Un Web qualitatif et quantitatif : « il y a 
+tout ce qu’on cherche sur le Web …».
+
+(cid:137) Cet espace d’échange peut être 
+
+personnalisé, avec des espaces privés, 
+publics, sécurisés, des procédures 
+d’authentification, une signature 
+digitale, …
+
+(cid:137) La preuve du bien fondé d’un résultat doit 
+
+pouvoir être donnée par la machine.
+
+… le web 
+sera plus 
+humain …
+
+W W
+
+W
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+9
+
+Web sémantique : rêve et défi
+
+(cid:132) Quels sont les besoins ?
+
+(cid:137) Une identification et un accès aux ressources du Web de 
+
+façon simple, robuste, et efficace (URI).
+
+(cid:137) Des langages pour décrire le contenu des documents et 
+
+ressources, pour associer une sémantique à ces descriptions, 
+et des moteurs d’inférences pour les manipuler …
+(cid:137) Des ressources de plusieurs types : ontologies (bases de 
+
+connaissances), bases de données, éléments de code, etc.
+
+Il y a beaucoup d’autres besoins qui ne sont pas cités…
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+10
+
+5
+
+Web sémantique : rêve et défi
+
+(cid:132) Et les technologies en jeu
+
+(cid:137) La technologie du Web : URI, XML, RDF(S), …
+(cid:137) La représentation des connaissances : ontologies, logique, 
+
+preuve de théorèmes, …
+
+(cid:137) La gestion de bases de données : requêtes, stockage, 
+
+données semi-structurées, …
+
+(cid:137) La recherche et extraction d’informations, fouille de 
+
+données.
+
+(cid:137) Le traitement et analyse de l’information.
+(cid:137) L’interopérabilité et coopération.
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+11
+
+Web sémantique : rêve et défi
+
+(cid:132) Trois grands obstacles
+
+d élis atio
+n ais s a n c e s
+
+n
+
+plexité
+
+Interopérabilité
+
+Plus il y a 
+d'information
+
+… moins on 
+en trouve.
+
+n  
+
+o
+M
+d e s c o
+calculabilité + com
+putation :
+
+Com
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+12
+
+6
+
+Web sémantique : rêve et défi
+
+(cid:132) Principaux domaines de recherche
+m
+x s é
+h e s c o
+
+Langages de balisage
+Langages du Web
+
+é s e a
+G r a
+
+WS
+
+u
+
+p
+
+R
+
+u e s
+n ti q
+n c e p t u el
+
+a
+
+Ce qu’on peut 
+résoudre …
+
+… est  
+bien 
+modeste ! 
+…
+
+giq
+
+giq
+
+L
+
+o
+
+lo
+
+u
+
+e d
+
+u
+
+e d
+e d
+
+es
+
+u 1er ordre
+criptio
+
+n
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+13
+
+Aspects théoriques
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+14
+
+7
+
+Aspects théoriques : langages du web
+
+(cid:132) Langage de balisage
+
+(cid:137) Sgml (Standard Generalized Markup Language) 
+
+(cid:132) Norme publiée en 1986 ISO 8879:1986 
+(cid:132) Projet euopéen FORMEX (Formalized Exchange of
+
+Electronic Publications) – code ASCII
+
+(cid:137) Langages de balise pour le web
+
+(cid:132) html : une application de sgml pour édition des pages web
+(cid:132) xml : langage générique pour le web issus de sgml (unicode
+à la place ASCII, balises bien formées,  espace de nom, …)
+
+(cid:132) Description, échange, du contenu documentaire 
+
+multimédia compréhensibles par homme mais l’absence 
+de la compréhension par la machine
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+15
+
+Aspects théoriques : langages du web
+
+(cid:132) Les 4 principaux langages du Web sémantique
+
+(cid:137) RDF: un modèle de triplets pour décrire et connecter des ressources 
+
+anonymes ou identifiées par un URI
+(sujet, prédicat, objet) / graphe orienté étiqueté 
+
+(cid:137) SPARQL: un langage de requête sur les graphes RDF
+(cid:137) RDFS est un langage de déclarations et descriptions légères; typage des 
+ressources et de leurs relations subClassOf, subPropertyOf, 
+range, domain
+
+(cid:137) OWL: 3 couches d'extension
+
+de l'expressivité (logique)
+
+(cid:137) Un modèle en couche dans
+une direction d'extension;
+RDF sans RDFS,
+RDFS sans OWL, …
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+16
+
+8
+
+Aspects théoriques : Représentation de 
+connaissances
+(cid:132) Objectif de la représentation des connaissances
+
+(cid:137) le support préalable aux traitements ultérieurs sur les 
+
+connaissances
+
+(cid:137) En allant du moins structuré vers le plus structuré, les 
+
+opérations les plus usuelles sont
+(cid:132) Organiser, classer,...
+(cid:132) Chercher, extraire,...
+(cid:132) Déduire, établir des contradictions, réviser,...
+
+(cid:137) la représentation des connaissances explicites dans un 
+
+formalisme vise la recherche de connaissances implicites 
+mais inhérentes aux faits de base.
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+17
+
+Aspects théoriques : Représentation de 
+connaissances
+(cid:132) Différents formalismes (selon Serge Haddad)
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+18
+
+9
+
+Aspects théoriques : Réseaux sémantiques
+
+(cid:132) Définition : un réseau sémantique est un graphe orienté acyclique 
+
+dont :
+
+(cid:132) les noeuds sont soit des classes d'entités, soit des entités spécifiques,
+(cid:132) les arcs sont de deux types arcs positifs et arcs négatifs.
+
+de plus une entité n'est jamais à l'extrémité d'un arc.
+
+(cid:132) Interprétation : 
+
+(cid:137) Un arc positif reliant un noeud C à un noeud D signifie : (un) C est 
+
+généralement un D. 
+
+(cid:137) Un arc négatif reliant un noeud C à un noeud D signifie : (un) C 
+
+n'est généralement pas un D. 
+
+(cid:137) L'article indéfini est présent dans le cas où C est une classe.
+
+(cid:132) la finalité de ce type de modèle est de classer entités et classes en 
+
+supportant des exceptions
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+19
+
+Aspects théoriques : Réseaux sémantiques
+
+(cid:132) Exemple :
+
+Cette classification est bien entendu discutable 
+et elle a pour seul but d'illustrer le modèle.
+
+(cid:132) Un nageur est 
+
+généralement un baigneur 
+(il faut bien aller dans 
+l'eau pour nager). 
+
+(cid:132) Un élève scolarisé sait 
+
+généralement nager 
+puisqu'il a suivi une ou 
+deux années d'initiation à 
+la natation. 
+
+(cid:132) Un biotoir ne sait 
+
+généralement pas nager
+
+(cid:132) Enfin Pascal est un 
+
+touareg qui a été scolarisé. 
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+20
+
+10
+
+Aspects théoriques : Réseaux sémantiques
+
+(cid:132) Requête sur les réseaux : 
+
+La question évidente que l'on désire poser est l'existence 
+d'une relation de spécialisation que peut entretenir une 
+classe C envers les autres classes D du réseau (ou une 
+entité envers les autres classes) avec trois réponses 
+possibles :
+
+(cid:132) 1. (Un) C est généralement un D.
+(cid:132) 2. (Un) C n'est généralement pas un D.
+(cid:132) 3. Le réseau ne permet pas de conclure.
+
+Ce type de question possède donc un unique paramètre C.
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+21
+
+Aspects théoriques : Réseaux sémantiques
+(cid:132) Problème d’ambiguïté :
+- Nous construisons les successeurs
+positifs à partir de C et nous calculons 
+ensuite les  successeurs négatifs.
+
+// suivant positif: un suivant par un arc positif
+Pile=∅;
+Marquer les suivants positifs de C;
+Empiler les suivants positifs de C;
+Tant que la pile est non vide faire
+Dépiler un noeud D;
+Pour tout suivant positif E de D non marqué
+faire E est un successeur positif de C; 
+Marquer E;
+Empiler E;
+Fin pour
+Fin tant que
+
+- Examinons le résultat de cet algorithme 
+sur l'exemple appliqué à Pascal. Nous
+concluons que :
+1- Pierre est un élève scolarisé, biotoir, 
+
+nageur et baigneur.
+
+2- Pierre n'est pas un nageur.
+
+- Autrement dit, l'algorithme produit
+deux informations contradictoires sur le 
+statut de Pierre en tant que nageur et de 
+plus il déduit de manière hasardeuse que 
+Pierre est baigneur en raison de l'ambiguïté 
+précédente. Il s'agit de corriger l'algorithme 
+pour intégrer le concept d'ambiguïté.
+
+Mais si on rencontre un arc négatif :
+// suivant négatif: un suivant par un arc négatif
+Pour tout successeur positif E de C faire
+Pour tout suivant négatif D de E faire
+D est un successeur négatif de C à D;
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+22
+
+11
+
+Aspects théoriques : Réseaux sémantiques
+
+(cid:132) Problème de redondance
+
+(cid:132) Sur la partie gauche de la figure, les liens A-C et E-C sont redondants car ils se déduisent
+des chemins A-B-C et E-A-B-C . Cependant cette redondance n'est pas inoffensive car 
+s'agissant de la relation de spécialisation qui lie E à D, on conclut à une ambiguïté. 
+En effet, aucun des chemins E-C-D et A-B-D n'est plus spécifique
+(cid:132) Si on supprime maintenant les liens redondants (partie droite), l'ambiguïté disparaît, le 
+chemin E-A-B-D est plus spécifique que le chemin E-A-B-C-D. E est donc généralement 
+un D.
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+23
+
+Aspects théoriques : Graphes Conceptuels
+
+(cid:132) Formalisme introduit par sowa (86-02) et Chein (92)
+
+(cid:137) Un des apports significatifs du modèle des graphes 
+
+conceptuels est la séparation entre la connaissance générale
+d'un domaine (concepts, relations, etc.) qui sera représentée 
+par un support et la description d'une situation particulière qui 
+sera modélisée par un S-graphe.
+
+(cid:137) Un support comprend
+
+(cid:132) un ensemble des concepts organisé en treillis avec la relation binaires 
+
+spécialisation/généralisation entre concepts
+
+(cid:132) un ensemble des relations binaires entre concepts
+(cid:132) un ensemble (éventuellement dénombrable) de marqueurs. Chaque 
+
+marqueur désigne un objet individuel excepté le marqueur * qui désigne 
+n'importe quel objet.
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+24
+
+12
+
+Aspects théoriques : Graphes Conceptuels
+
+(cid:132) Un support : sous forme d’un treillis de concepts
+
+Tout ce qu’on peut imaginer 
+sera un jour représenté…
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+25
+
+Aspects théoriques : Graphes Conceptuels
+
+(cid:132) Les marqueur
+
+(cid:137) Chaque marqueur désigne un objet individuel excepté le marqueur * 
+
+qui désigne n'importe quel objet
+
+(cid:137) Il y a implicitement une relation d'ordre partiel entre les marqueurs 
+
+telle que m < * pour m marqueur individuel et telle que deux 
+marqueurs ne sont jamais en relation par cet ordre.
+
+(cid:137) Il faut indiquer à quels concepts peuvent être associés les marqueurs. 
+
+On note alors conf(c,m) si m est associé au concept c :
+(cid:132) Si conf(c,m) et si c' généralise c alors conf(c',m)
+(cid:132) Si m est un marqueur individuel, si conf(c,m) et si conf(c',m) alors
+conf(c∧c',m) où c∧c' désigne le plus grand concept spécialisant c et c'
+(cid:132) conf(c,*) est vérifié excepté si c est le concept absurde.
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+26
+
+13
+
+Aspects théoriques : Graphes Conceptuels
+
+(cid:132) S-graphe
+
+(cid:137) Un S-graphe est un graphe biparti dont les deux types de noeuds 
+
+sont des instances de relation et des instances de concept.
+(cid:132) Un noeud instance de relation est étiqueté par une relation et 
+(cid:132) un noeud instance de concept est étiqueté par un couple (c,m) où c est 
+
+un concept et m un marqueur et où conf(c,m) est vérifié.
+
+(cid:132) L'ensemble des couples {(c,m)}est partiellement ordonné par l'ordre 
+
+produit sur les deux composantes
+
+(cid:132) Enfin un nœud instance d'une relation n-aire a exactement n noeuds 
+concepts voisins (dont les arcs sont étiquetés de 1 à n) tels que si c est 
+le concept associé au ième paramètre de la relation et (c',m) étiquette le 
+ième voisin du noeud instance de relation alors c'≤c.
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+27
+
+Aspects théoriques : Graphes Conceptuels
+(cid:132) Exemple un S-graphe
+
+Ce graphe décrit la situation suivante : 
+- Sur le sol s, sont posés un carré et un 
+rectangle. 
+- Le carré supporte un polygone et 
+- le rectangle supporte une figure. 
+
+Cette même situation peut être décrite par une formule de logique de premier 
+ordre ne comportant que des quantificateurs existentiels et des conjonctions :
+
+∃x ∃y ∃z $t polygone(x) ∧ carré(y) ∧ sol(s)∧ rectangle(z) ∧ figure(t) ∧ 
+sur(x,y) ∧ sur(y,s) ∧ sur(z,s) ∧ sur(t,z)
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+28
+
+14
+
+Aspects théoriques : Graphes Conceptuels
+
+(cid:132) Spécialisation/généralisation : opérations fondamentales et duales
+
+(cid:137) Soit H et G deux S-graphes, H est une spécialisation de G si et 
+seulement si il existe f, une application de l'ensemble des noeuds 
+concepts de G vers ceux de H, et g, une application de l'ensemble 
+des noeuds relations de G vers ceux de H, telles que :
+(cid:132) Le couple associé (c,m) associé au noeud f(nc), nc noeud concept, 
+
+spécialise celui de nc.
+
+(cid:132) La relation associée au noeud f(nr), nr noeud relation, est identique à 
+
+celle de nr.
+
+(cid:132) Pour chaque arc étiqueté i reliant nr à nc, il y a un arc étiqueté i reliant 
+
+f(nr) à f(nc).
+
+(cid:137) La généralisation est la relation inverse de la spécialisation.
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+29
+
+Aspects théoriques : Graphes Conceptuels
+
+(cid:132) Exemple de bande d’images (Serge Haddad)
+Cette spécialisation consiste à préciser
+que le carré et le rectangle du S-graphe
+initial ne sont qu'un seul objet et que
+la figure et le polygone sont identiques,
+d'identité p.
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+30
+
+15
+
+Aspects théoriques : Graphes Conceptuels
+(cid:132) Exemple de bande d’images (Serge Haddad)
+
+Cette spécialisation indique que la 
+figure a l'identité fg, que le polygone 
+est en fait un losange et que le carré est 
+à gauche du rectangle
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+31
+
+Aspects théoriques : Graphes Conceptuels
+
+(cid:132) Complexité algorithmique
+
+(cid:132) On ajoute aux axiomes de la logique du premier ordre, les 
+
+formules suivantes : 
+"∀c(x) ⇒ c'(x) pour tout concept c spécialisant c' «
+
+(cid:132) La puissance expressive du modèle :On démontre que H 
+
+spécialise G si et seulement si la formule associée à H 
+implique la formule associée à G.
+
+(cid:132) De nombreux problèmes simples (tels que le test de 
+
+spécialisation entre deux S-graphes) sont NP-complets et 
+n'admettent des algorithmes polynomiaux que dans des cas 
+restreints
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+32
+
+16
+
+Aspects théoriques : Logique de description
+(cid:132) Historique 
+
+(cid:137) Une famille de formalismes de représentation de connaissances basés 
+
+sur la logique descendants de réseaux sémantique and KL-ONE
+
+(cid:137) Description du domaine d’application en terme de concepts (classes), 
+
+rôles (propriétés, relations) and individus (objets) 
+
+(cid:137) Caractéristiques :
+
+(cid:132) Sémantique formelle (modèle théorique)
+
+(cid:137) fragments décidables de la LPO (sous ensemble de classe C2)
+(cid:137) Lien étroit aux Logiques Modales Propositionnelles & Logiques 
+
+Dynamiques
+
+(cid:132) Production des services d’inférence
+
+(cid:137) Procédure de décision pour des problèmes clés (satisfiabilité, 
+
+subsumption, etc)
+
+(cid:137) Systèmes implantés hautement optimisés
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+33
+
+Aspects théoriques : Logique de description
+
+(cid:132) Éléments basiques
+
+(cid:137) Les Concepts sont équivalents aux prédicats unaires
+
+(cid:132) En général, les concepts sont équivalents aux formules avec une 
+
+variable libre
+
+variables libres
+
+(cid:137) Les Rôles sont équivalents aux prédicats binaires
+
+(cid:132) En général, les rôles sont équivalents aux formules avec deux 
+
+(cid:137) Les Individus sont équivalents aux constantes
+(cid:137) Les Constructeurs sont restreints pour que :
+
+(cid:132) Le langage reste décidable et, si possible, avec une complexité 
+
+faible
+
+(cid:132) L’utilisation des variables n’est pas explicite 
+(cid:132) Les caractéristiques telles que calcul peuvent être exprimées 
+
+succinctement 
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+34
+
+17
+
+Aspects théoriques : Logique de description 
+
+(cid:132) Grands principes 
+
+(cid:137) Les éléments du monde réel sont représentés par des 
+
+concepts, des rôles et des individus.
+
+(cid:137) Adéquation syntaxe – sémantique
+
+(cid:132) les concepts et rôles possèdent une description structurée à laquelle est 
+
+associée une sémantique
+
+(cid:132) les manipulations opérées sur les concepts et les rôles sont réalisées en 
+
+accord avec la sémantique
+
+(cid:137) Deux types de connaissances sont prises en compte : 
+
+(cid:132) les concepts avec leurs composants, et 
+(cid:132) les faits ou assertions, où interviennent les concepts et les instances 
+(cid:132) La relation de subsomption organise concepts et rôles en hiérarchies
+
+(cid:137) Raisonnement : classification et instanciation
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+35
+
+Aspects théoriques : Logique de description
+
+Structure générale de système LD
+
+BASE DE CONNAISSANCES (BC)
+
+Terminologie (TBox)
+
+Logique de 
+Description
+
+Père ≡ Homme ⊓ ƎavoirEnfant.т
+
+Personne Mammifère
+
+Assertion (ABox)
+
+...
+
+...
+
+Frank : Père
+
+Frank avoirEnfant Marie
+
+IN
+T
+E
+R
+F
+A
+C
+E
+
+I
+N
+F
+E
+R
+E
+N
+C
+E
+
+S
+Y
+S
+T
+E
+M
+E
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+36
+
+18
+
+Aspects théoriques : Logique de description 
+
+(cid:132) Base de connaissances
+
+(cid:132) Une base de connaissances K est une paire {T ,A} où
+(cid:132) T  est un ensemble d’axiomes “terminologiques” (TBox)
+(cid:132) A est un ensemble d’axiomes “assertionnels” (ABox)
+
+(cid:137) Les axiomes de TBox sont sous forme :
+(cid:132) A, C ⋁ D, C ∧ D, r ⋁ s, r ∧ s et R+⋁ R
+où A est un concept atomique,  C, D sont des concepts, r, s 
+sont des rôles, et R+ l’ensemble de rôles transitifs
+
+(cid:137) Les axiomes de Abox sont sous forme :
+
+(cid:132) x:D, <x,y>:R
+où x,y sont des individus, D est un concept et R est un rôle
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+37
+
+Aspects théoriques : Logique de description
+
+(cid:132) Exemple : syntaxe d’une LD
+
+La syntaxe d’une logique de description
+Restriction universelle
+Restriction existentielle
+Restriction supérieure de cardinalité
+Restriction inférieure de cardinalité
+Subsomption de rôles
+Composition de rôles
+
+Subsomption de concepts
+Concept absurde
+Concept universel
+Conjonction de concepts
+Disjonction de concepts
+Négation de concept
+
+∀r.C
+∃r.C
+(≥n r) 
+(≤n r)
+r ⊑ a
+r ∧ s 
+
+C ⊑ A
+⊥
+⊤
+C ⊓ D
+C ⊔ D
+¬C
+
+- C et D sont des expressions de concepts,  r et s sont des expressions de rôles 
+- A est un concept primitif et a est un rôle primitif 
+- n est un entier non nul
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+38
+
+19
+
+Aspects théoriques : Logique de description
+(cid:132) Exemple : Base de connaissance
+(cid:132) Description en texte
+
+(cid:132) La base de connaissances DL
+(cid:137) Concepts primitifs : Personne, 
+
+Ensemble
+
+(cid:137) Rôles primitifs : membre
+(cid:137) Femme ⊑ Personne 
+(cid:137) Homme ⊑ Personne ⊓ ¬Femme
+(cid:137) chef ⊑ membre
+(cid:137) Equipe ⊑ Ensemble ⊓ (∀
+membre Personne) ⊓ (≥ 2 
+membre)
+
+(cid:137) Petite-équipe = Equipe ⊓ 
+
+(≤5 membre) 
+
+(cid:137) Equipe-moderne = Equipe 
+
+⊓(≥4membre)⊓ ∃chef
+⊓(∀chef.Femme)
+
+(cid:137) Un Homme est une Personne.
+(cid:137) Une Femme est une Personne.
+(cid:137) Aucune Femme n’est un Homme et 
+
+vice-versa.
+
+(cid:137) Une Equipe est (définie comme) un 
+
+Ensemble ayant au moins 2 
+membres qui sont tous des 
+Personnes.
+
+(cid:137) Une Petite-équipe est (définie 
+
+comme) une Equipe ayant au plus 5 
+membres.
+
+(cid:137) Une Equipe-moderne est (définie 
+comme) une Equipe ayant au moins 
+4 membres, ayant au moins 1 chef, 
+et dont tous les chefs sont des 
+Femmes
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+39
+
+Aspects théoriques : Logique de description 
+
+(cid:131) Langage FLE avec 3 constructeurs (le plus simple)
+
+Constructeur
+
+Syntaxe
+
+Exemple
+
+Concept universel
+
+Conjonction
+
+Quantification Universelle
+
+⊤
+
+A ⊓ B
+∀r.C
+
+Personne ⊓ Jeune
+∀enfant.Masculin
+
+Quantification Existentielle
+
+∃r. ⊤
+
+∃enfant. ⊤
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+40
+
+20
+
+Aspects théoriques : Logique de description 
+(cid:131) Famille des langages AL
+
+AL = {⊤,⊥ ,¬A,C ⊓ D, ∀ r.C, ∃r} 
+
+(cid:132) ALC = AL ∪ {¬C} (négation de concepts définis)
+
+(équivalent à la classe de logique modal K(m))
+
+(cid:132) ALU = AL ∪{C ⊔ D} (disjonction de concepts)
+(cid:132) ALE = AL ∪{∃r.C} (quantification existentielle typée)
+(cid:132) ALN = AL ∪ {≥n r, ≤n r} (cardinalité de rôles -
+
+remarque ∃r ≡ (≥1 r))
+
+(cid:132) ALR = AL ∪ {r1 ⊔ r2} (conjonction de rôles)
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+41
+
+Aspects théoriques : Logique de description 
+Famille des LD:  SHOIN et SHIQ (OWL)
+
+Sigle 
+
+Nom
+
+Syntaxe
+
+S
+(ALC et R+)
+
+H
+O
+I
+N
+Q
+
+Conjonction
+Disjonction
+Négation
+Quantificateur Universel
+Quantificateur Exitentiel
+Rôle transitif (R+)
+Rôle hiérarchique
+Concepts nominaux
+Inverse de rôle
+Restriction de nombre 
+RN qualifiée
+
+C ⊓ D
+C ⊔ D
+¬C
+∀r.C
+∃r.C
+r.r
+r ⊑ s
+{x}
+r−
+≥nr
+≥ nr.C
+
+Exemple
+personne ⊓ jeune
+vieux ⊔ jeune
+¬ (personne ⊓ jeune)
+∀enfant.male
+∃ enfant.male
+père.père
+mère ⊑ parent
+{Terre, Mars, Venus}
+enfant⇔parent
+≥2enfant
+≥2enfant.male
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+42
+
+21
+
+Aspects théoriques : Logique de description
+
+(cid:132) Sémantique de LD
+
+(cid:137) La sémantique de LD est définie par les interprétations
+(cid:137) Une interprétation  est définie comme
+
+ = (∆, ), où
+
+(cid:132) ∆ est le domaine (un ensemble vide) 
+(cid:132)  est une  fonction d’interprétation qui fait correspondre:
+
+(cid:137) Concept (classe) A ⇒ Sous ensemble A de ∆
+(cid:137) Rôle (propriété) r ⇒ relation binaire r sur ∆ x ∆
+(cid:137) Individus i ⇒ i élément de ∆
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+43
+
+Aspects théoriques : Logique de description
+
+(cid:132) Sémantique des expression LD
+
+(cid:137) La fonction d’interprétation  sur les expressions de concept 
+
+(ou de rôle) de la manière suivante :
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+44
+
+22
+
+Aspects théoriques : Logique de description 
+
+(cid:132) Exemple ABox – Interprétation sémantique :
+
+(cid:137) Soit la base terminologique
+(cid:137) ∑ = {enfant(pierre, marie), (∀enfant.(¬Musicien))(Pierre) , femme 
+
+(∃ enfant))(Marie)}
+
+(cid:137) La base ∑ est satisfiable et l’interprétation  ci-après est un modèle
+
+pour ∑
+(cid:132) △ = {Pierre, Marie}
+(cid:132) Pierre  = Pierre
+(cid:132) Marie  = Marie
+(cid:132) enfant  = {(Pierre, Marie)}
+(cid:132) femme  = {Marie}
+(cid:132) Musicien  = ∅
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+45
+
+Aspects théoriques : Logique de description 
+
+(cid:132) Exemple de base de connaissance
+(cid:132) Niveau Terminologique
+
+(cid:132) Concepts primitifs : Cours, 
+Professeur, Etudiants, DEA et 
+Doctorat
+
+(cid:132) Rôles primitifs  : enseigne et diplôme.
+(cid:132) Contraintes
+
+(cid:137) Tout enseignant d'un cours est 
+
+soit professeur, soit titulaire d'un 
+diplôme de DEA.
+
+(∃ enseigne.Cours) ⊑ (Etudiant ⊓ (∃
+
+diplôme.DEA)) ⊔ Professeur
+
+(cid:137) Tout professeur est titulaire d'un 
+
+diplôme de Doctorat.
+
+Professeur ⊑ (∃ diplôme.Doctorat)
+
+(cid:137) Pour obtenir un diplôme de 
+Doctorat, il faut posséder un 
+DEA.
+
+(∃ diplôme.Doctorat) ⊑  (∃ 
+
+diplôme.DEA)
+
+(cid:137) Les DEA et les Doctorats sont 
+
+des diplômes distincts.
+
+Doctorat ⊓ DEA ⊑ ⊥
+
+(cid:132) Niveau assertionnel
+
+(cid:137) Jean enseigne un "cours d'IA".
+enseigne(Jean,Cours-IA)
+(cid:137) Jean a au plus un diplôme.
+(≤ 1diplôme) (Jean)
+(cid:137) Un "cours d'IA" est un cours.
+Cours(Cours-IA)
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+46
+
+23
+
+Aspects théoriques : Logique de description 
+(cid:132) Les principaux tests d’inférence
+(cid:132) La connaissance est-elle correcte (intuitions capturées) ?
+(cid:137) Est-ce que C est subsompmé par D selon T? (CI ⊆ DI pour tout modèle I de T )
+
+(cid:132) La connaissance est-elle minimalement redondante (pas de 
+
+synonymes inattendus)
+(cid:137) Est-ce que C est équivalent à D selon T ? (CI = DI dans tout modèle I de T)
+
+(cid:132) La connaissance a-elle plein sens (meaningful) (classes doivent 
+
+être non vide)
+(cid:137) Est-ce que C est satisfiable selon T ? (CI ≠ ∅; dans un modèle I de T )
+
+(cid:132) La connaissance est-elle consultable (Querying knowledge)
+
+(cid:137) Est-ce que x est une instance de concept C selon T ? (xI ∊ CI dans tout modèle I de T )
+(cid:137) Est-ce que <x,y> est une instance de rôle R selon T ? ((xI,yI) ∊ RI dans tout modèle I de T )
+
+(cid:132) Les connaissances sont-elles incompatibles :
+
+(cid:137) Deux concepts C et D sont-ils incompatibles selon T ? (CI ⊓  DI= ∅ dans tout modèle I de T )
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+47
+
+Aspects théoriques : Logique de description
+
+(cid:132) Réduction de tests
+
+(cid:137) On peut réduire les tests de base :
+
+(cid:132) Au test de satisfaisabilité :
+
+(cid:137) C est subsumé par D si seulement si (C ⊓ ¬ D) n'est pas satisfaisable
+(cid:137) C et D sont équivalents si seulement si (C ⊓ ¬ D) ⊔  (D ⊓ ¬ C) n'est 
+
+pas satisfaisable
+
+(cid:137) C et D sont incompatibles si seulement si (C ⊓ D) n'est pas 
+
+satisfaisable
+
+(cid:132) Ou au test de subsomption :
+
+(cid:137) C n'est pas satisfaisable si seulement si C est subsumé par ⊥
+(cid:137) C et D sont équivalents si seulement si C est subsumé par D et D est 
+
+subsumé par C
+
+(cid:137) C et D sont incompatibles si seulement si (C ⊓ D) est subsumé par ⊥
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+48
+
+24
+
+Aspects théoriques : Logique de description
+
+(cid:132) Propriétés de transformation 
+
+(cid:137) Les constructeurs ⊓ et ⊔ obéissent aux règles suivantes
+
+(cid:132) Idempotence: C ⊓ C ≡ C et C ⊔ C ≡ C 
+(cid:132) Commutativité: C ⊓ D = D ⊓ C et C ⊔ D = D ⊔ C 
+(cid:132) Associativité : C ⊓ (D ⊓ E) = (C ⊓ D) ⊓ E et        C ⊔ (D ⊔
+
+E) = (C ⊔ D) ⊔ E 
+
+(cid:132) Si C ⊑ D et C ⊑ E alors C ⊑ D ⊓ C 
+(cid:132) Si C ⊑ D et E ⊑ D alors C ⊔ E ⊑ D 
+(cid:132) Si C ⊑ D alors C ⊓ X ⊑ D pour tout description X
+(cid:132) Si C ⊑ D alors C ⊑ D ⊔ X pour tout description X
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+49
+
+Aspects théoriques : Logique de description 
+
+(cid:132) Deux mécanismes de raisonnement 
+
+(cid:137) Les algorithmes de type normalisation–comparaison (algorithmes 
+
+NC) : 
+(cid:132) un processus de normalisation produit les formes normales des 
+
+concepts définis qui sont ensuite 
+
+(cid:132) effectivement comparées à l’aide de règles de comparaison
+(cid:137) La méthode des tableaux sémantiques : la question est-ce que D 
+subsume C (C ⊑ D) est transformée en est-ce que (C ⊓ ¬ D) 
+est non satisfiable.
+
+(cid:137) Note : le langage de description des concepts doit être 
+
+muni de la négation des concepts définis
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+50
+
+25
+
+Aspects théoriques : Logique de description
+(cid:132) Algorithme de tableau basique(sans TBox)
+
+(cid:137) Utilisé pour le test de satisfiabilité (consistance) d’une expression de concepts 
+
+C
+
+(cid:137) Essai de construire un arbre de modèles hypothétiques dont la racine est ¬C
+
+(sous forme normale : négation devant concepts atomiques) 
+
+(cid:137) Décomposer syntaxiquement et successivement de C 
+
+(cid:137) Les règles d’expansion de tableau correspondent aux constructeurs dans le 
+
+(cid:132) En appliquant des règles d’expansion de tableau
+(cid:132) En évaluant des contraintes sur les éléments du modèle
+langage LD utilisés (⋁, ∧ , ∀, ∃, ≥, ≤)
+(cid:132) Certaines règles sont non déterministes (par exemple : ∃, ⋁)
+(cid:132) En pratique, cela explose l’espace de recherche
+
+(cid:137) Arrêter quand aucune règle soit applicable ou motifs contradictoires (clash) par 
+
+exemple (A(x), ¬A(x))
+
+(cid:137) Le contrôle de cycle (blocking) peut-être nécessaire pour la terminaison
+(cid:137) C sera satisfiable ssi les règles peuvent-être appliquées telles que l’arbre 
+
+construit ne contenant que des feuilles avec motifs contradictoires (clash)
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+51
+
+Aspects théoriques : Logique de description
+
+(cid:132) Propriétés algorithmique
+
+(cid:137) Procédure de décision : un algorithme est appelé une procédure de 
+
+décision si et seulement si il vérifie 3 propriétés suivantes :
+(cid:132) Arrêt : l’algorithme doit donner le résultat à un temps fini
+(cid:132) Correction: les inférences produites sont en accord avec la sémantique 
+
+associée, autrement dit, ce qui est vrai sur le plan syntaxique l’est sur le plan 
+sémantique.
+
+(cid:132) Complétude: toutes les formules valides — vraies sur le plan sémantique 
+
+— peuvent être démontrées sur le plan syntaxique.
+
+(cid:137) Complexité d’un algorithme : Un algorithme doit appartient à une 
+classe de complexité qui qualifie son « coût » en temps et en 
+espace de mémoire
+(cid:132) NLOGSPACE ⊑ P ⊑ NP ⊑ PSPACE ⊑ EXPTIME ⊑ NEXPTIME ⊑ EXPSPACE
+
+(cid:132)
+
+P ≠ PSPACE, PSPACE = NPSPACE, PSPACE ≠ EXPSPACE
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+52
+
+26
+
+Aspects théoriques : Logique de description
+(cid:132) Propriétés des algorithmes de tableau 
+
+(cid:137) Théorème : 
+
+(cid:132) Les algorithmes de tableaux sont des procédures de décision 
+
+pour la satisfiabilité de concepts i.e., l’algorithme retourne 
+“SAT” ssi le concept est satisfiable
+
+(cid:132) Preuve (schématique)
+
+(cid:137) Terminaison
+
+(cid:131) La largeur (nombre de règles applicables par nœud) et la profondeur 
+
+(avec la stratégie de blocking) de l’arbre de tableaux sont bornées
+
+(cid:131) A partir d’un arbre de tableaux d’une formule satisfiable on peut 
+
+contruire un un modèle pour cette formule
+
+(cid:137) Correct
+
+(cid:137) Complet
+
+(cid:131) A partir d’un modèle d’une formule satisfiable, on peut diriger le 
+
+processus d’application de règles d’expansion tel que  arbre de tableaux 
+obtenu contenant un tableau correspondant à ce modèle 
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+53
+
+Aspects théoriques : Logique de description 
+Complexité des langages (sans TBox)
+
+Expressivité
+C ⊓D
+∀r.C
+∃r.⊤
+¬A
+∃r.C
+¬C
+{a1, ...}
+
+FLE
+
+AL
+
+ALE
+
+ALC (~ modal K(m))
+
+ALCO
+
+SHOIN(D)
+
+SHIQ
+
+⊨ C ⊑ D
+
+⊨C(a)
+
+P
+
+P
+
+NP
+
+P
+
+P
+
+PSPACE
+
+PSPACE
+PSPACE
+
+EXPTIME
+EXPTIME
+
+NLOGSPACE ⊑ P ⊑ NP ⊑ PSPACE = NPSPACE ⊑ EXPTIME ⊑ NEXPTIME ⊑ EXPSPACE
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+54
+
+27
+
+Aspects théoriques : Logique de description 
+Complexité des langages (suivant TBox)
+
+Expressivité
+
+⊨ C ⊑ D
+
+⊨C(a)
+
+FLE
+
+AL 
+
+ALE
+
+ALC (avec domaine concret et TBox cyclique)
+
+ALC (avec R⊓S, R⊔S, ¬R et TBox vide)
+
+SHOIN(D)
+
+SHIQ
+
+P
+
+EXPTIME
+
+PSPACE
+
+P
+
+EXPTIME
+
+PSPACE
+
+NEXPTIME
+
+NEXPTIME
+
+NEXPTIME
+
+NEXPTIME
+
+NLOGSPACE ⊑ P ⊑ NP ⊑ PSPACE = NPSPACE ⊑ EXPTIME ⊑ NEXPTIME ⊑ EXPSPACE
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+55
+
+Aspects théoriques : Logique de description 
+Exemple : Famille (DL Handbook)
+TBOX
+
+Femme 
+Homme 
+Mère 
+Père
+Parent
+GrandeMère ≡ Femme ⊓ ∃aEnfant.Parent
+
+≡ Personne ⊓ Féminin
+≡ Personne ⊓ ¬Féminin
+≡ Femme ⊓ ∃aEnfant.Personne
+≡ Homme ⊓ ∃aEnfant.Personne
+≡ Père ⊔ Mère
+
+MèrePlusDe3Enfants  ≡ Mère ⊓ ≥3aEnfant
+
+MèreSansFille ≡ Femme ⊓ ∀aEnfant.¬Femme
+≡ Femme ⊓ ∃eEpoux.Homme
+Epouse 
+
+Concepts atomiques
+Personne
+Féminin
+Rôles atomiques
+aEnfant
+eEpoux
+
+Concepts définis
+Femme 
+Homme 
+Mère 
+Père
+Parent
+GrandeMère
+MèrePlusDe3Enfants 
+MèreSansFille
+Epouse 
+
+ABOX
+
+MèreSansFille(Manon)
+aEnfant(Manon, Pierre)
+aEnfant(Manon, Paul)
+Père(Pierre)
+aEnfant(Pierre, Alexandre)
+
+Individus
+Manon
+Pierre
+Paul
+Pierre
+Alexandre
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+56
+
+28
+
+Aspects pratiques
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+57
+
+Aspects pratiques : Annotation de la sémantique 
+(cid:132) Schéma d’annotation générique
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+58
+
+29
+
+Aspects pratiques : Annotation de la sémantique 
+
+(cid:132) Fouille de données et annotation : un point de vue
+(cid:137) Moteur de recherche = passerelle entre la fouille de 
+
+données et le Web
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+59
+
+Aspects pratiques : Annotation de la sémantique 
+
+(cid:132) Langage RDF (Ressource Description Framework)
+
+(cid:137) un modèle de graphe destiné à décrire de façon formelle 
+
+les ressource Web et leurs métadonnées, de façon à 
+permettre le traitement automatique de telles descriptions.
+
+(cid:137) Un document RDF ainsi formé correspond à un multi-
+
+graphe orienté étiqueté. Chaque triplet correspond alors à 
+un arc orienté dont le label est le prédicat, le nœud source 
+est le sujet et le nœud cible est l'objet. 
+
+sujet
+
+Propriété
+
+objet
+
+littéral
+
+type
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+60
+
+30
+
+Aspects pratiques : Annotation de la sémantique 
+
+(cid:132) Exemple : graphe RDF
+« Nhan Le Thanh »
+
+« Kewi »
+
+ex:nom
+
+ex:titre
+
+_:xxx
+
+ex:membre
+
+_:yyy
+
+rdf:type
+
+rdf:type
+
+ex:personne
+
+ex:equipe
+
+<<rdf:Property
+
+rdf:Property rdf:IDrdf:ID='nom'>
+='nom'>
+
+<<rdfs:domain
+<<rdfs:range
+
+rdfs:domain rdf:resource
+rdfs:range rdf:resource
+
+rdf:resource='#='#Personne
+rdf:resource=’&=’&rdfs;Literal
+
+Personne'/>'/>
+rdfs;Literal'/>'/>
+
+</</rdf:Property
+<<rdf:Property
+
+rdf:Property>>
+rdf:Property rdf:IDrdf:ID=‘titre'>
+=‘titre'>
+
+<<rdfs:domain
+<<rdfs:range
+
+rdfs:domain rdf:resource
+rdfs:range rdf:resource
+
+equipe'/>'/>
+rdf:resource='#='#equipe
+rdf:resource=’&=’&rdfs;Literal
+rdfs;Literal'/>'/>
+
+</</rdf:Property
+<<rdf:Property
+
+rdf:Property>>
+rdf:Property rdf:IDrdf:ID=‘=‘membre
+
+membre'>'>
+
+<<rdfs:domain
+<<rdfs:range
+
+rdfs:domain rdf:resource
+rdfs:range rdf:resource
+
+personne'/>'/>
+rdf:resource =’#=’#personne
+equipe'/>'/>
+rdf:resource ='#='#equipe
+
+</</rdf:Property
+
+rdf:Property>>
+
+rdf:resource='#='#équippe
+
+équippe'/>'/>
+
+equipe rdf:resource
+
+Anotation
+Anotation
+<<rdf:Description
+rdf:Description
+=‘http://www.i3s.unice.fr/equipe’>
+rdf:about=‘http://www.i3s.unice.fr/equipe’>
+rdf:about
+<<rdf:type
+rdf:type equipe
+<titre>KewiKewi </titre>
+</titre>
+<titre>
+membre>>
+<<membre
+<<personne
+personne><nom> 
+Thanh</nom></personne
+Thanh</nom></
+<<personne
+personne><nom> Serge 
+><nom> Serge 
+Miranda</nom></personne
+Miranda</nom></
+</</membre
+membre>>
+equipe>>
+</</equipe
+</</rdf:Description
+
+><nom> NhanNhan Le Le 
+personne>>
+
+rdf:Description>>
+
+personne>>
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+61
+
+Aspects pratiques : Annotation de la sémantique
+
+(cid:131) Syntaxe XML
+
+<rdf:Description
+rdf:about=‘http://www.mnds.fr/cours/WS’>
+</rdf:Description>
+
+<titre> Web sémantique </titre>
+
+<rdf:Description rdf:about=‘http://
+www.mbds.fr/cours/WS’>
+
+<rdf:type rdf:resource='#Cours'/>
+<titre>Web sémantique</titre>
+
+(cid:131) On y ajoute de sens :
+
+(cid:131) La ressource est un cours, 
+(cid:131) un cours a des enseignants, 
+(cid:131) l’enseignant est un chercheur de l’I3S, etc.
+ex:WS rdf:type ns:Cours
+ex:WS ns:titre “W”eb Sémantique
+ns:Cours rdf:type rdfs:Class
+
+</rdf:Description>
+<rdfs:Class ID='Cours'/>
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+62
+
+31
+
+Aspects pratiques : Annotation de la sémantique
+
+(cid:132) Les classes :
+
+ns:Cours rdf:type rdfs:Class
+ns:CoursMBDS rdf:type rdfs:Class
+ns:CoursMBDS rdfs:subClassOf ns:Cours
+ns:CoursEPU rdfs:subClassOf ns:Cours
+
+<rdfs:Class rdf:ID='Cours'/>
+<rdfs:Class rdf:ID='CoursMBDS'>
+<rdfs:subClassOf
+</rdfs:Class>
+<rdfs:Class rdf:ID='CoursEPU'>
+<rdfs:subClassOf
+/rdfs:Class>
+
+rdf:resource='#Cours'/>
+
+rdf:resource='#Cours'/>
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+63
+
+Aspects pratiques : Annotation de la sémantique
+
+(cid:132) Les propriétés :
+
+<rdf:Property rdf:ID=‘enseignant’>
+
+<rdfs:domain
+<rdfs:range
+</rdf:Property>
+<rdf:Property rdf:ID='nom'>
+
+rdf:resource='#Cours'/>
+rdf:resource='#Personne'/>
+
+<rdfs:domain rdf:resource='#Personne'/>
+<rdfs:range rdf:resource=’&rdfs;Literal'/>
+
+</rdf:Property>
+
+<rdfs:Class rdf:ID='CoursCommun'>
+
+<rdfs:subClassOf rdf:resource='#CoursDEA'/>
+<rdfs:subClassOf rdf:resource='#CoursESSI'/>
+
+</rdfs:Class>
+<rdf:Property rdf:ID='titre'>
+
+<rdfs:domain
+<rdfs:range
+</rdf:Property>
+
+rdf:resource='#Cours'/>
+rdf:resource=’&rdfs;Literal’/>
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+64
+
+32
+
+Aspects pratiques : Annotation de la sémantique
+
+rdf:about='http://www.mbds.fr/cours/WS’>
+
+(cid:132) Annotation
+<rdf:Description
+<rdf:type rdf:resource='#Cours'/>
+<titre>Web sémantique</titre>
+<num>WS</num>
+<enseignant>
+<Professeur
+rdf:about='http://www.i3s.unice.fr/nlethanh’>
+
+<nom>Nhan Le Thanh</nom>
+<universite>Nice Sophia-Antipolis</université>
+
+</Professeur>
+
+</enseignant>
+</rdf:Description>
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+65
+
+Aspects pratiques : Annotation de la sémantique 
+
+(cid:132) Exemple application RDF : Le Dublin Core : 
+
+(cid:137) définit un certain nombre de champs de métadonnées
+
+utilisables pour décrire les ressources du Web
+
+(cid:137) 15 champs ou éléments standardisés
+
+(cid:132) titre, créateur, description, sujet, date, source, droits…
+
+(cid:137) Les champs peuvent être précisés à l'aide de raffinements
+
+(cid:132) description : résumé, table des matières
+
+(cid:137) Les valeurs de ces champs reprennent généralement 
+
+d'autres standards 
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+66
+
+33
+
+Aspects pratiques : Annotation de la sémantique 
+
+(cid:132) Exemple Dublin Core en HTML:
+<html>
+<head><title>Cours MBDS</title>
+<link rel="schema.DC"  href="http://purl.org/dc/elements/1.1/"/>
+<meta name="DC.Title" lang="fr" content="Cours MBDS en HTML"/>
+<meta name="DC.Date.created" scheme="W3CDTF«  content="2004-09-
+
+<meta name="DC.Date.modified" scheme="W3CDTF" content="2004-09-
+
+27"/>
+
+28"/>
+
+<meta name="DC.Subject" lang="fr" content="HTML,document, Dublin 
+
+Core"/>
+
+<meta name="DC.Language" scheme="RFC3066" content="fr-FR"/>
+</head>
+<body></body>
+</html>
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+67
+
+Aspects pratiques : Annotation de la sémantique 
+
+(cid:132) Exemple Dublin Core en RDF:
+
+<rdf:RDF
+xmlns:rdf=‘http://www.w3.org/1999/02/22-rdf-syntaxns#’
+xmlns:dc=‘http://purl.org/dc/elements/1.1/’>
+<rdf:Description about="Cours_MBDS.html">
+<dc:title>Cours MBDS en HTML</dc:title>
+<dc:created>2008-02-27</dc:created>
+<dc:modified>2008-02-28</dc:modified>
+<dc:language>fr</dc:language>
+</rdf:Description>
+</rdf:RDF>
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+68
+
+34
+
+Aspects pratiques : Annotation de la sémantique 
+
+(cid:132) Application de RDF Creative Commons
+
+(cid:137) Objectifs :
+
+(cid:132) adapter les droits des auteurs au nouveau médium qu’est 
+
+Internet,
+
+(cid:132) fournir un cadre juridique au partage sur le web d’oeuvres de 
+
+l’esprit comme les images, les sons ou les textes
+
+(cid:137) Principe : "un jeu de logos"
+
+(cid:132) la combinaison de ces 4 briques fournit 6 types de licence
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+69
+
+Aspects pratiques : Annotation de la sémantique 
+
+(cid:132) Application de RDF Creative Commons
+<rdf:RDF xmlns=‘http://web.resource.org/cc/’
+xmlns:dc=‘http://purl.org/dc/elements/1.1/’
+xmlns:rdf=‘http://www.w3.org/1999/02/22-rdf-syntax-ns#’>
+<Work rdf:about="">
+<license rdf:resource="http://creativecommons.org/licenses/by-ncsa/2.0/"/>
+</Work>
+</rdf:RDF>
+<License rdf:about="http://creativecommons.org/licenses/by-nc-sa/2.0/">
+<permits rdf:resource="http://web.resource.org/cc/Reproduction"/>
+<permits rdf:resource="http://web.resource.org/cc/Distribution"/>
+<requires rdf:resource="http://web.resource.org/cc/Notice"/>
+<requires rdf:resource="http://web.resource.org/cc/Attribution"/>
+<prohibits rdf:resource="http://web.resource.org/cc/CommercialUse"/>
+<permits rdf:resource="http://web.resource.org/cc/DerivativeWorks"/>
+<requires rdf:resource="http://web.resource.org/cc/ShareAlike"/>
+</License>
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+70
+
+35
+
+Aspects pratiques : langages du web
+
+(cid:132) Application de RDF Creative Commons
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+71
+
+Aspects pratiques : Annotation de la sémantique 
+
+(cid:132) Application de RDF Creative Commons
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+72
+
+36
+
+Aspects pratiques : Annotation de la sémantique 
+
+(cid:132) Application de RDF : RSS (RDF Site Summary)
+(cid:137) permet de publier un une succession d’éléments 
+
+d’information (syndication des contenus sur le web).
+
+(cid:137) dès qu’il est présenté en RDF, il permet la manipulation 
+
+et la sélection automatique
+
+(cid:137) utilisé pour obtenir les mises à jour d'information dont la 
+nature change fréquemment, typiquement cela peut être :
+(cid:132) des listes des tâches dans un projet, des prix, des alertes de 
+
+toutes natures, des nouveaux emplois proposés, les sites 
+d'information ou les blogs,  les podcasts et videocasts.
+
+(cid:137) deux autres format : Rich Site Summary et Really simple 
+
+Syndication
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+73
+
+Aspects pratiques : Annotation de la sémantique 
+
+(cid:132) Exemple RSS+DC+CC :
+
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF xmlns:ct="http://xmlfr.org/dtd/content" …>
+<channel rdf:about="http://xmlfr.org/documentations/articles/channel.rss10">
+<title>Articles</title>
+<link>http://xmlfr.org/documentations/articles/</link>
+<description>Articles de fond sur XML</description>
+<dc:source rdf:resource="http://xmlfr.org/documentations/articles/"/>
+<dc:language>fr</dc:language>
+<dc:publisher>Eric van der Vlist (mailto:vdv@dyomedea.com)</dc:publisher>
+<dc:creator>Eric van der Vlist (mailto:vdv@dyomedea.com)</dc:creator>
+<cc:license rdf:resource="http://creativecommons.org/licenses/by-ncsa/2.0/"/>
+<image rdf:resource="http://xmlfr.org/bandeaux/xmlfr_88x31.gif"/>
+<items>
+<rdf:Seq>
+<rdf:li rdf:resource="http://xmlfr.org/documentations/articles/040331-0001"/>
+<rdf:li rdf:resource="http://xmlfr.org/documentations/articles/040130-0001"/>
+<rdf:li rdf:resource="http://xmlfr.org/documentations/articles/031126-0001"/>
+</rdf:Seq>
+</items>
+</channel>
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+74
+
+37
+
+Aspects pratiques : Annotation de la sémantique
+
+(cid:132) Synthèse
+
+(cid:137) Il existe de nombreuses ressources en RDF;
+(cid:137) Elles sont utilisées conjointement.
+(cid:137) Ces ressources constituent un embryon de web sémantique…
+
+(cid:132) Besoins 
+
+(cid:137) Liens vers les documents en ligne;
+(cid:137) Décrire les méta-données (DublinCore);
+(cid:137) Connaissance des droits (Creative Commons);
+(cid:137) Liens vers les personnes et les organisations (FOAF);
+(cid:137) Référence à des évènements (iCalendar);
+(cid:137) Engendrer des fils (RSS)
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+75
+
+Aspects pratiques : Ontologie et modélisation 
+
+(cid:132) Origine de l’Ontologie : 
+
+(cid:137) Une  branche de philosophie qui cherche un accord avec 
+
+la nature et l’organisation de la réalité
+
+(cid:137) Science de l’Être (Aristote, Métaphysiques, IV, 1)
+
+(cid:132) Recherche de la réponse aux questions:
+
+(cid:137) Qu’est-ce que c’est les caractéristiques de l’Être?
+(cid:137) Eventuellement, Qu’est-ce que c’est l’Être ?
+
+(cid:137) Comment les «choses » sont-elles classifiées ?
+
+(cid:132) La classification a été étudiée depuis très long temps dans 
+
+l’histoire 
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+76
+
+38
+
+Aspects pratiques : Ontologie et modélisation
+
+(cid:132) Ontologie en Informatique
+
+(cid:137) Une ontologie est un produit d’ingénierie qui consiste en :
+(cid:132) un vocabulaire utilisé pour décrire (une vue particulière de) 
+
+un certain domaine
+
+(cid:132) une spécification explicite des sens attendus du vocabulaire. 
+(cid:132) Presque toujours  inclure comment les concepts sont-ils 
+
+classifiés
+
+(cid:137) Elle capture des contraintes, des connaissances 
+
+additionnelles sur le domaine
+
+(cid:137) Idéalement une ontologie permet de :
+
+(cid:132) Capturer des compréhensions partagées d’un domaine
+(cid:132) Produire un modèle formel du domaine manipulable par
+
+ordinateur
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+77
+
+Aspects pratiques : Ontologie et modélisation 
+
+(cid:132) Où utiliserons les ontologies
+
+(cid:137) e-Science, par exemple, Bioinformatiques
+
+(cid:132) L’Ontologie de Gènes (G.O)
+(cid:132) L’Ontologie de Protéines (MGED)
+
+(cid:137) Médecine
+
+(cid:137) Databases
+
+(cid:132) Terminologies (ontologie UMLS)
+
+(cid:132) Intégration
+(cid:132) Requêtes d’interrogation
+(cid:137) Interfaces d’utilisateur
+(cid:137) Linguistiques
+(cid:137) Le Sémantique Web
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+78
+
+39
+
+Aspects pratiques : Annotation de la sémantique
+
+(cid:132) Modélisation avec RDF : Sémantique du langage
+
+(cid:137) Tous les énoncés RDF sont considérés comme vrais, 
+
+dans un même environnement, la conjonction des 
+énoncés est considérée comme vrai également
+
+(cid:137) Il n’y a pas de contexte local (dans lequel quelque chose 
+
+serait vrai)
+
+(cid:137) Il n’y a pas de négation
+(cid:137) RDF est monotone : ce qui est vrai reste vrai au fur et a 
+
+mesure que l’on rajoute de l’information
+
+(cid:137) RDF est un sous-ensemble de la logique du premier ordre
+avec des prédicats binaires et des variables existentielles. 
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+79
+
+Aspects pratiques : Annotation de la sémantique
+
+(cid:132) Typage en RDF : 
+
+(cid:137) Les règles de typage diffèrent des modèles objet
+
+traditionnels
+
+(cid:132) Domaine : L’utilisation d’une propriété sur une
+
+ressource entraine que la ressource soit du type indiqué
+par le domaine de la propriété
+
+(cid:132) Rang : Si une ressource est la valeur d’une propriété, la 
+ressource est du type indiqué par le range de la propriété
+
+(cid:132) Class : Si une ressource a pour type C, alors C est une
+
+classe
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+80
+
+40
+
+Aspects pratiques : Annotation de la sémantique
+
+(cid:132) Typage en RDF : Exemples
+
+(cid:137) Domaine 
+ex:title rdfs:domain ex:Cours
+ex:log11 ex:title “Modélisation des connaissances”
+⇒ ex:log11 rdf:type ex:Cours
+(cid:137) Range
+ex:enseignant rdfs:range ex:Person
+ex:log11 ex:enseignant ex:olivier
+⇒ ex:olivier rdf:type ex:Person
+(cid:137) Class
+rdf:type rdfs:range rdfs:Class
+ex:olivier rdf:type ex:Person
+⇒ ex:Person rdf:type rdfs:Class
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+81
+
+Aspects pratiques : Annotation de la sémantique
+
+(cid:132) Méta modèle RDF
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+82
+
+41
+
+Aspects pratiques : Ontologie et modélisation 
+
+(cid:132) Exemple : Intégration de ressources avec RDF/RDFS
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+83
+
+Aspects pratiques : Ontologie et modélisation
+
+(cid:132) Exemple : Création des ressources avec RDF/RDFS
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+84
+
+42
+
+Aspects pratiques : Ontologie et modélisation
+
+(cid:132) Exemple : Ajout des contraintes avec RDF/RDFS
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+85
+
+Aspects pratiques : Ontologie et modélisation
+
+(cid:132) RDFS : RDF Schemas
+
+(cid:137) Introduction de classes et de propriétés;
+(cid:132) Spécialisation de classes et de propriétés;
+(cid:132) Restriction du domaine et codomaine des 
+
+propriétés.
+
+(cid:137) Méta-modèle réfléxif (tout est ressource, les 
+
+classes et propriétés spécialisent les ressources, 
+ressources et propriétés sont des classes…).
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+86
+
+43
+
+Aspects pratiques : Ontologie et modélisation
+
+(cid:132) Méta modèle de RDF
+
+(cid:137) Ressource : rdfs:Resource Classe racine de la hiérarchie
+(cid:137) Classe : rdfs:Class La meta classe qui engendre des classes, 
+
+de subsomption des classes, instance de rdfs:Class
+instance d’elle même, sous-classe de rdfs:Resource
+
+(cid:137) spécification
+
+rdfs:Resource rdf:type rdfs:Class
+rdfs:Class rdf:type rdfs:Class
+rdfs:Class rdfs:subClassOf rdfs:Resource
+
+(cid:137) La classe des propriétés rdf:Property
+rdf:Property rdf:type rdfs:Class
+rdf:Property rdfs:subClassOf rdfs:Resource
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+87
+
+Aspects pratiques : Ontologie et modélisation
+
+(cid:132) Métamodèle de RDF
+
+(cid:137) Typage : rdf:type La relation d’instanciation
+rdf:type rdf:type rdf:Property
+(cid:137) Relation de subsomption (en fait de spécialisation) : 
+
+rdfs:subClassOf
+
+rdfs:subClassOf rdf:type rdf:Property
+(cid:137) Relation de subsomption des propritétés : 
+
+rdfs:subPropertyOf
+
+rdfs:subPropertyOf rdf:type rdf:Property
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+88
+
+44
+
+Aspects pratiques : Ontologie et modélisation
+
+(cid:132) Exemple : Un schéma RDFS :
+
+<rdfs:Class rdf:ID="Document">
+<rdfs:subClassOf rdf:resource="#Entity"/>
+<rdfs:subClassOf rdf:resource="#EntityConcerningATopic"/>
+<rdfs:subClassOf rdf:resource="#NumberableEntity"/>
+<rdfs:comment xml:lang="en">Entity including elements serving as 
+
+a representation of thinking.</rdfs:comment>
+
+<rdfs:comment xml:lang="fr">Entite comprenant des elements de 
+
+representation de la pensee.</rdfs:comment>
+
+<rdfs:label xml:lang="en">document</rdfs:label>
+<rdfs:label xml:lang="fr">document</rdfs:label>
+</rdfs:Class>
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+89
+
+Aspects pratiques : Ontologie et modélisation 
+Ontologie et Logiques de description
+(cid:132) OWL est un standard de  langage d’ontologie de W3C basé sur les logiques de 
+
+description
+(cid:137) Les axiomes et les constructeurs d’OWL sont restreints pour que le 
+
+raisonnement soit décidable
+
+(cid:132) La Sémantique Web s’organise dans une architecture en couche
+
+(cid:137) XML produit la couche de transport syntaxique
+(cid:137) RDF(S) produit un language relationnel basique et des primitives 
+
+ontologiques simples
+
+(cid:137) OWL produit un langage d’ontologie puissant mais restant décidable
+(cid:137) Autres couches (par exemple SWRL – Semantic Web Rule Language) 
+
+seront des extensions de OWL
+(cid:132) La plupart seront indécidables
+
+(cid:132) Besoin des  “expériences d’implémentation”
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+90
+
+45
+
+Aspects pratiques : Ontologie et modélisation 
+Concepts (classes) et constructeurs 
+
+(cid:132)
+
+(cid:132)
+
+C est un concept (classe); P est un rôle (propriété); x est un nom d’individu 
+Types de données XMLS sont des classes dans 8P.C and 9P.C
+(cid:137) Forme de restriction de DL avec domaines concrets
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+91
+
+Aspects pratiques : Ontologie et modélisation 
+Ontologie et Base de connaissances LD
+(cid:132) Une Ontologie OWL est équivalente à une Base de 
+
+Connaissances de LD (BCLD)
+
+(cid:132) Une ontologie OWL consiste en un ensemble d’axiomes 
+
+et faits
+(cid:137) Note: une ontologie comprend usuellement  seulement des axiomes 
+dans la TBox (schéma)---OWL est donc non-standard pour cette 
+catégorie
+
+(cid:132) Rappel : une BCLD K est la paire hT ,Ai où
+
+(cid:137) T  est l’ensemble d’axiomes “terminologiques” (la TBox)
+(cid:137) A est l’ensemble d’axiomes “assertionnels” (l’ABox)
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+92
+
+46
+
+Aspects pratiques : Ontologie et modélisation
+(cid:131) Ontologie / Axiomes TBox
+
+(cid:132) Une équivalence à la logique PO/Modale
+
+(cid:137) p.e. DL: C v D    LPO: ∀x.C(x)⊔D(x)    LM: C ⊔ D
+
+(cid:132) Deux catégories différentes des axiomes TBox :
+
+(cid:137) “Définitions” C ≐ D ou C ⊆ D où C est un nom de concept
+(cid:137) Axiomes d’Inclusion générale de concepts (GCIs) où C peut-être 
+
+complexe
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+93
+
+Aspects pratiques : Ontologie et modélisation 
+Faits d’Ontologie / Axiomes ABox
+
+(cid:132) Note: dans une utilisation nominale (par exemple, dans SHOIN), 
+
+on peut réduire les axiomes d’ABox aux axiomes d’inclusion de 
+concept
+(cid:137) a : C 
+est équivalent à 
+(cid:137) (a,b) : r  est équivalent à
+
+{a} v C               
+{a} v ∃r.{b} 
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+94
+
+47
+
+Aspects pratiques : Ontologie et modélisation
+(cid:132) En langue naturelle
+« Personne dont tous les 
+enfants sont soit docteur soit 
+ayant un enfant docteur »
+(cid:132) Dans la syntaxe DL :
+Personne ⊓ ∀aEnfant.(Docteur ⊔
+
+(cid:131) Dans la syntaxe OWL
+<owl:Class>
+<owl:intersectionOf rdf:parseType=" collection">
+<owl:Class rdf:about="#Personne"/>
+<owl:Restriction>
+<owl:onProperty rdf:resource="#aEnfant"/>
+<owl:toClass>
+<owl:unionOf rdf:parseType=" collection">
+<owl:Class rdf:about="#Docteur"/>
+<owl:Restriction>
+<owl:onProperty rdf:resource="#aEnfant"/>
+<owl:hasClass rdf:resource="#Docteur"/>
+</owl:Restriction>
+</owl:unionOf>
+</owl:toClass>
+</owl:Restriction>
+</owl:intersectionOf>
+</owl:Class>
+
+…si on peut 
+écrire si court ! 
+
+∃aEnfant.Docteur)
+
+écrire tellement
+
+Faut-il 
+
+long…
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+95
+
+Aspects pratiques : Ontologie et modélisation
+
+(cid:131) Requêtes 
+
+(cid:131) Trouver les cours dont N. Le Thanh est enseignant ?
+(cid:131) Qui enseigne le cours WS ?
+(cid:131) Y a-t-il un enseignant-chercheur ?
+(cid:131) Y a-t-il une Personne de l‘UNS ?
+(cid:131) Moteurs de recherche RDF
+
+(cid:131) Jena : HP Lab
+(cid:137) SNOBASE : IBM
+(cid:131) Sesame : Java middleware, Aidministrator Nederland
+(cid:131) ICS-FORTH RDF Suite : BD, RDF Query Language
+(cid:131) Corese : INRIA
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+96
+
+48
+
+Aspects pratiques : Web services sémantique
+
+(cid:132) Moteur de recherche DL
+
+(cid:137) Les précurseurs DL : KL-ONE (77-79), CLASSIC et LOOM (89-92)
+(cid:137) FaCT++ (00-04) : Fast Classification of Terminologies
+(cid:132) Université Manchester (ALC – SHIQ - OWL DL), C++
+Issue commerciale avec CELEBRA (Network Inference)
+(cid:132)
+
+(cid:137) RACER (01-04) : Renamed ABox and Concept Expression Reasoner
+
+(cid:132) TBox et ABox (SHIQ (ALCQHIR+) – OWL DL)
+(cid:132) Combiner DL et Algèbre Relationnelle
+(cid:132)
+
+Issue commerciale avec RACERPro
+
+(cid:137) PELLET (03-05) :
+
+(cid:132) Raisonnement avec Abox (SHION(D)) 
+(cid:132)
+
+Java, Open Source
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+97
+
+Aspects pratiques : Web services sémantique 
+Implémentation de systèmes
+
+(cid:137) Architecture de PELLET  
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+98
+
+49
+
+Aspects pratiques : Web services sémantique 
+Implantation de systèmes
+(cid:137) Architecture de PELLET  
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+99
+
+Aspects pratiques : Web services sémantique 
+WSDL-S et METEOR-S
+(cid:132) Objectif : 
+
+(cid:137) Principes de représentation de la sémantique (RS) des 
+
+web services 
+
+(cid:137) Le mécanisme de RS dans WSDL-S
+(cid:137) Comparaison avec la solution OWL-S (DAML-S)
+(cid:137) Etude des fonctionnalités de  METEOR-S
+(cid:137) Vos remarques et critiques
+(cid:137) Identifier des différents problèmes à résoudre de RS dans 
+
+les WS
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+100
+
+50
+
+Aspects pratiques : Web services sémantique 
+WSDL-S et METEOR-S
+
+OWL-S
+
+Process Model
+
+Resources/Concepts
+
+Atomic Process
+
+Inputs / Outputs
+
+Operation
+
+Message
+
+Binding to SOAP, HTTP, etc.
+
+WSDL
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+101
+
+Quelques tendances et 
+thèmes de recherche
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+102
+
+51
+
+Tendance et thèmes de recherche
+
+(cid:132) Modèles de connaissances distribuées 
+
+(cid:137) Objectif : 
+
+(cid:132) Modéliser des systèmes distribués par ontologies
+
+(cid:137) Approche de Coopération : 
+
+(cid:132) Principe : cohabiter des systèmes indépendants 
+(cid:132) Solutions : DDL et Drago, є-connection
+
+(cid:137) Approche de fédération : 
+
+(cid:132) Principe : Partager d’une base de connaissances communes 
+
+dite « constitution »
+
+(cid:132) Solution : décomposition de DL, ONDIL (en cours)
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+103
+
+Tendance et thèmes de recherche
+(cid:131)DDL et Drago
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+104
+
+52
+
+Tendance et thèmes de recherche
+(cid:131)DDL et Drago
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+105
+
+Tendance et thèmes de recherche
+
+(cid:132) Approche de fédération :
+(cid:137) Création de fédération : 
+
+(cid:132) Décomposition de la constitution : « chaque membre on 
+
+des besoins différents »
+
+(cid:137) Évolution de la fédération :
+
+(cid:132) Par chaque membre 
+
+(cid:137) Soit des connaissances propres à lui (qui ne peuvent pas être 
+
+déduites de la constitution)
+
+(cid:137) Soit des connaissances développées à partir de la constitution 
+
+(qui doivent « « respecter » la constitution)
+(cid:137) Un thème de recherche de l’équipe Kewi
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+106
+
+53
+
+Tendance et thèmes de recherche
+
+(cid:132) Approche de fédération : Création .décomposition
+
+Ontologie
+
+Décomposition
+
+Ontologie
+
+…
+
+Ontologie
+
+Quelle  
+
+décomposition 
+
+?
+
+Est-ce qu’elle 
+est correcte ?
+
+Comment 
+
+décomposer ?
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+107
+
+Tendance et thèmes de recherche
+
+(cid:132) Approche de fédération : décomposition
+Nom de rôles: R, P,…
+Axiome: - C ⊑ D (inclusion de concept général – ICG)
+
+Ontologie 
+
+LD
+
+O
+
+- A ≡ C (concept défini)
+
+Ontologie 
+
+O1
+
+…
+
+Ontologie 
+
+On
+
+LDD
+
+Concepts de Oi : i:A, i:B,…
+Rôles de Oi : i:R, i:P,…
+Axiome de Oi : - i: C ⊑ D 
+- i: A ≡ C
+(into) 
+(onto)
+(identique) 
+
+Règle de pont : -
+-
+-
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+108
+
+54
+
+Tendance et thèmes de recherche
+
+(cid:132) Approche de fédération : algorithme de décomposition
+
+(cid:132) Transformer une TBox en un graphe 
+(cid:132) Décomposer le graphe présentant la TBox en des sous-
+
+graphes qui sont représentés dans un graphe 
+d’intersection.
+
+(cid:132) Transformer le graphe d’intersection en une TBox
+
+distribuée.
+
+Décomposition 
+par séparateurs minimaux
+
+Décomposition 
+par coupes normalisées
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+109
+
+Tendance et thèmes de recherche
+
+(cid:132) Thème de recherche 1 : approche fédération
+
+(cid:137) Modélisation des échanges entre les membres dans une 
+
+fédération : alignement et/ou importation des 
+connaissances
+
+(cid:137) L’optimisation des requêtes : décompositions, exécution 
+
+en parallèle, inférence
+
+(cid:137) Moteur d’inférence de fédération
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+110
+
+55
+
+Tendance et thèmes de recherche
+
+(cid:132) Web socio-sémantique et centre d’usage
+
+Web social
+
+Web 
+
+sémantique
+
+Web 
+
+socio-sémantique
+
+Web cognitivement
+
+sémantique
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+111
+
+Tendance et thèmes de recherche
+
+(cid:132) Web socio-sémantique selon Manuel Zacklad (UTT)
+
+(cid:137) Un Web qui s’adresse à des communautés 
+
+d’utilisateurs poursuivant des objectifs similaires
+
+(cid:137) Un Web social qui participe de la construction d’une 
+représentation structurée du domaine et du collectif
+
+(cid:137) Une structuration progressive des réseaux 
+
+sémantiques gérés par le collectif (présentant des 
+enjeux pour le réseau social lui-même)
+
+(cid:137) Approche qui peut être pertinente sur des marchés 
+
+électroniques notamment dans le cadre de « produits 
+complexes »
+
+(cid:137) Importance des activités de recherche d’information
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+112
+
+56
+
+Tendance et thèmes de recherche
+
+(cid:131)Web socio-sémantique selon Manuel Zacklad (UTT)
+Point de vue
+
+Attributs heuristiques
+
+Caractéristiques 
+fonctionnelles (confort 
+d’utilisation, fiabilité 
+technique, innovation, 
+design, etc…)
+
+Thème
+
+Attributs standards
+
+Entité
+
+Accès direct à des extraits du 
+contenu d’une entité (expérience 
+partielle) ou accès indirect  à des 
+images, des descriptions détaillées, 
+des comptes rendus d’utilisation
+
+Ressources
+
+Modélisation adaptée au domaine d’activité
+
+Caractéristiques 
+techniques 
+intrinsèques et 
+extrinsèques (services) 
+et administratives
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+113
+
+Tendance et thèmes de recherche
+
+(cid:132) Web socio-sémantique selon Manuel Zacklad (UTT)
+
+(cid:137) Questionnement
+
+(cid:132) L’utilisation d’ontologies sémiotiques demande un « investissement 
+
+définitionnel » important. Y a-t-il un retour sur cet investissement ? (par 
+rapport à un moteur)
+
+(cid:132) Quels types de représentations graphiques sont les plus adaptées pour 
+
+la navigation?
+
+(cid:132) Quels types de processus cognitifs situés & distribués sont mobilisés 
+
+pour la recherche de l’entité?
+
+(cid:132) Quels type de connaissances sont requises pour l’usage du système? 
+
+Quels apprentissages se mettent en place?
+
+(cid:132) Comment faire gérer le système de classification par le collectif? 
+
+Comment le faire évoluer par la délibération.
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+114
+
+57
+
+Tendance et thèmes de recherche
+
+(cid:132) Thème de Web social : veille et surveille
+
+(cid:137) L’activité veille consiste à détecter une tendance 
+
+mais aussi des exceptions (activités innovantes par 
+exemple)
+(cid:132) Web mining dirigé par ontologies d’usage et 
+
+sociales
+
+(cid:132) Modèle de calcul de la pertinence des exceptions
+(cid:132) Etc.
+
+(cid:137) L’activité de surveille consiste à des contrôles d’un 
+
+processus et de détection des anomalies. Cela 
+s’applique dans le domaine de sécurité mais aussi 
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+115
+
+Master MBDS
+
+d
+
+d
+
+d
+
+d
+
+Tendance et thèmes de recherche
+(cid:132) Thème de Web social : veille et surveille : Capture et 
+
+annotation d’émotions et projet EMOTICA
+«Emotion Modelling by Ontology Techniques for Interactive Capture
+
+mechanisms with Automatic learning »
+
+(cid:132) Questionnement
+
+(cid:137) Est-ce possible de percevoir les traits émotionnels humains à partir des 
+
+paramètres physiologiques ?
+
+(cid:137) Est-ce possible de déterminer un ensemble des paramètres 
+
+biométriques plus ou moins simples à observer (c-à-d captifs et mesurables 
+par les dispositifs simples et économiques) permettant de percevoir avec 
+une certaine précision les états émotionnels humains ? 
+
+(cid:137) Est-ce possible d’annoter les états émotionnels par les traits d’usage et 
+
+sociaux ?
+
+(cid:137) Enfin, peut-on modéliser ces notions afin de pouvoir les utiliser 
+algorithmiquement dans les systèmes à comportement adaptatif ?
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+116
+
+58
+
+MERCI !
+
+Et demain …
+. 
+
+… c’est un 
+autre jour …
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+117
+
+VI. Références
+
+(cid:132)
+
+(cid:132)
+
+(cid:132)
+
+(cid:132)
+
+[Baa03] F. Baader, D. Calvanese, D. McGuiness, D. Nardi and P.F. Patel-Schneider, « The Description 
+Logic Handbook: Theory, Implementation and Applications » Cambridge University Press, 2003
+[Bor03] Borgida A., Serafini L. "Distributed Description Logics : Assimilating Information from Peer 
+Sources" Journal of Data Semantics (1). 2003, pp.153-184
+[Don97] F.M. Donini, M. Lenzerini, D. Nardi, W. Nutt "The Complexity of Concept Languages" Information 
+and Computation, 134, pp 1-58, 1997
+[Nap97] Amedeo Napoli, « Une introduction aux logiques de description" Rapport de recherche INRIA 
+n°3314, décembre, 1997
+
+Master MBDS
+
+Séminaire: des réseaux sémantiques au Web sémantique             N. Le Thanh
+
+118
+
+59
+
+

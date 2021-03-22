@@ -1,0 +1,858 @@
+https://be.anses.fr/sites/default/files/BEP-mg-BE47-art2.pdf
+
+Vulnérabilité du réseau d’échanges d’animaux
+face à la diffusion de maladies infectieuses :
+approche méthodologique appliquée au réseau d’élevages
+bovins français
+
+Séverine Rautureau (1) (severine.rautureau@agriculture.gouv.fr), Barbara Dufour (2), Benoît Durand (3)
+(1) Direction générale de l’alimentation, Bureau de la santé animale, Paris
+(2) ENVA, Unité de recherche d’épidémiologie des maladies animales infectieuses (EPIMAI), Maisons-Alfort
+(3) Anses, Laboratoire de santé animale de Maisons-Alfort
+
+Résumé
+Les mouvements d’animaux forment un réseau complexe
+reliant les exploitations entre elles et représentent un
+risque important de dissémination d’agents infectieux entre
+établissements d’élevage et ce, sur de longues distances.
+En utilisant les méthodes d’analyse des réseaux sociaux,
+le réseau de mouvements de bovins à travers la France a
+été étudié, dans le but de déterminer des caractéristiques
+qui pourraient avoir des implications pour la diffusion
+d’épizooties.
+Dans cet objectif, des sous-groupes d’établissements de
+grande taille fortement connectés entre eux, les « giant
+strong components » (GSC) ont été analysés. Ces GSCs
+représentent des vulnérabilités structurelles du réseau
+d’élevages français vis-à-vis d’un risque épidémique, de
+façon permanente et sur tout le territoire. Les conditions
+permettant d’éviter leur formation afin de diminuer la
+vulnérabilité du réseau ont été alors étudiées. L’analyse des
+flux passant par les marchands (centres de rassemblement
+et marchés) a montré qu’une action de maîtrise des flux
+ciblant à la fois les deux types d’établissements était
+nécessaire. Mais un ciblage sur des établissements selon leur
+« centralité » (positionnement) dans le réseau était plus
+pertinent et efficace en termes de nombre d’établissements
+à surveiller.
+
+Mots clés
+Analyse de réseaux sociaux, mouvements de bovins,
+diffusion de maladie
+
+Abstract
+Vulnerability of animal trade networks to the spread of
+infectious diseases: a methodological approach applied to
+evaluation and emergency control strategies in cattle
+Animal movements form complex networks linking holdings
+and represent a major risk for the dissemination of infectious
+agentsbetweenfarms.Usingsocialnetworkanalysismethods,
+the network of cattle movements throughout France was
+studied to identify features that could have important
+implications for the spread of disease.
+For that purpose, large cohesive sub-groups known as
+‘giant strong components’ (GSC) were analysed; these sub-
+networksareacauseofpermanentandnation-widestructural
+vulnerability in the French cattle trade regarding the risk of
+epidemics. Ways of preventing the creation of GSCs were
+studied, in order to reduce network vulnerability. An analysis
+of flow via dealers and markets showed that control measures
+werenecessaryinbothsituations.However,targetingholdings
+based on their centrality within circuits was found to be more
+relevant and more efficient in terms of the number of sites to
+be monitored.
+
+Keywords
+Social network analysis, cattle movement, disease spread
+
+Les mouvements d’animaux représentent la principale voie de
+transmission de maladies contagieuses d’élevage à élevage. Les
+épizooties de fièvre aphteuse du Royaume-Uni en 2001 ou de peste
+porcine classique aux Pays-Bas en 2003 ont clairement confirmé
+le rôle des mouvements d’animaux dans la diffusion des maladies.
+Ces événements attirent non seulement l’attention sur un risque
+de diffusion de maladies à bas bruit lors d’échanges de routine mais
+soulignent également la vulnérabilité de cette organisation face à la
+diffusion de maladies.
+
+Par ailleurs, le renforcement du processus de maîtrise de la traçabilité et
+d’identification des animaux (initié dans la filière bovine par la directive
+92/102/CEE(1)) traduit par l’inventaire des établissements d’élevage et
+des animaux et par l’enregistrement des mouvements d’animaux entre
+ces exploitations permet désormais de fournir des informations riches
+sur lesquelles fonder des analyses. La France dispose, à ce titre, d’une
+base de données nationale d’identification, la BDNI.
+
+La méthode d’analyse de réseaux sociaux (SNA pour « social network
+analysis ») peut être utilisée pour étudier le risque de diffusion de
+maladies dans des réseaux composés d’établissements d’élevages et de
+mouvements d’animaux. Cette méthode, à l’origine une application à
+la sociologie de la théorie mathématique des graphes, se centre sur les
+
+relations et contacts entre acteurs pour pouvoir détecter et interpréter
+leurs rôles dans la structure. Un réseau est composé de nœuds qui
+sont les entités d’étude et de liens, relations que l’on étudie. L’analyse
+structurale des réseaux sociaux caractérise les réseaux en calculant des
+indicateurs pour les nœuds et leurs relations indiquant leur place et
+leur rôle dans le réseau [1]. Des applications sont désormais réalisées
+dans des domaines très variés de l’éthologie aux échanges Internet,
+aux connexions cellulaires ou métaboliques. En épidémiologie, cet outil
+d’analyse des réseaux sociaux est de plus en plus utilisé à commencer
+par la médecine humaine pour des maladies telles que le SIDA ou la
+tuberculose qui impliquent des contacts étroits entre personnes.
+
+En médecine vétérinaire, la discipline est plus récente [2, 3] et a débuté
+notamment par l’étude des mouvements d’animaux. Ces échanges ont
+été analysés pour évaluer le potentiel de transmission d’une maladie
+infectieuse à travers un réseau de contacts ou pour évaluer l’impact de
+restriction de mouvements dans ces réseaux. Ces transferts d’animaux
+reliant les exploitations entre elles forment un réseau complexe à
+travers lequel les agents pathogènes se propagent utilisant les animaux
+en mouvement comme liens entre les entités. La diffusion de la
+maladie est par conséquent très dépendante de la structure du réseau
+et cette topologie peut mettre en évidence l’existence de groupes
+
+(1) Directive 92/102/CEE du Conseil du 27 novembre 1992 concernant l’identification et l’enregistrement des animaux.
+
+8 Bulletin épidémiologique, santé animale et alimentation no 47
+
+d’établissements particulièrement exposés à l’infection, définissant des
+entités vulnérables. À l’échelle d’un réseau, la vulnérabilité face à une
+maladie infectieuse représenterait les mouvements à travers ce réseau
+pouvant favoriser la diffusion de maladies. Il est alors intéressant
+d‘étudier plus précisément l’organisation de ces échanges ; le réseau
+d’élevage est-il par son organisation vulnérable face à la diffusion de
+maladies? Favorise-t-il cette diffusion?
+
+Une description de l’organisation de la filière bovine et l’étude de sa
+structure par l’analyse de réseau ont pu être ainsi réalisées permettant
+de caractériser les relations entre établissements et d’analyser cette
+vulnérabilité structurale vis-à-vis de la diffusion de maladies en termes
+d’indicateurs « réseau » [4].
+
+Matériels et méthodes
+Création de réseaux
+Les données sur les établissements français détenant des bovins et
+celles portant sur les flux de bovins ont été extraites de la base de
+données nationale de l’identification (BDNI) pour l’année 2005, année
+non perturbée par des restrictions de mouvements dues à la présence
+de fièvre catarrhale ovine sur le territoire. Chaque détenteur doit notifier
+chaque événement de la vie d’un bovin. Ainsi nous avons collecté trois
+jeux de données « détenteurs » avec l’ensemble de leurs notifications:
+les élevages, les centres de rassemblements et les marchés. L’ensemble
+de ces données (plus de 40 millions d’événements) ont permis de
+reconstituer et d’étudier les transferts de bovins entre établissements
+pour chacun des jours de l’année 2005.
+
+En termes de réseau, chaque établissement (élevages, marchés et
+centres de rassemblement) a été assimilé à un « nœud » et les
+mouvements à des « liens » en tenant compte du sens des mouvements.
+Pour l’étude, un lien correspondait à au moins un échange entre deux
+exploitations réalisé au cours de la période étudiée. Les mouvements
+liés à l’importation ou à l’exportation d’animaux ont été exclus de
+l’étude ainsi que ceux vers les abattoirs qui représentent peu de risques
+dans la diffusion de maladies entre animaux. Le réseau a été étudié à
+différentes échelles de temps: annuelle, mensuelle et hebdomadaire.
+
+Analyse de réseaux d’échanges
+La méthode d’analyse de réseaux sociaux a été appliquée classiquement
+par le calcul d’indicateurs de réseaux et de centralité pour les nœuds
+et par la détection de sous-groupes [1]. La description des principaux
+indicateurs utilisés dans cette étude est résumée dans le Tableau 1.
+Les réseaux ont ensuite été comparés entre eux selon le pas de temps
+considéré (annuel/mensuel/hebdomadaire).
+
+Caractérisations des réseaux
+Une présentation générale des réseaux construits a tout d’abord été
+établie par des mesures simples de nombre de nœuds et de liens et
+
+par une distribution des nombres de liens par nœud (degrés). Cette
+distribution de degrés a permis de qualifier le réseau de « scale-free »
+et de déduire des particularités structurales du réseau et l’influence
+de certains nœuds.
+
+Puis, nous nous sommes intéressés à l’existence de groupes
+d’établissements, en nombre conséquent, tous connectés entre eux,
+ce qui peut représenter une structure à risque face à la diffusion de
+maladie. Ces sous graphes étudiés étaient des composants fortement
+connectés (SC, pour « strong component »). À l’intérieur de ces
+groupes, chaque entité peut être accessible par chacun des autres
+établissements en suivant le sens des mouvements d’animaux. Pour
+chaque réseau construit, la recherche de ces sous-groupes a été faite
+et leur nombre ainsi que la taille des deux plus grands ont été calculés.
+Ainsi, il a pu être mis en évidence la présence de sous-groupes de
+grande taille se distinguant des autres et appelés « géants ». Ensuite,
+les composants géants fortement connectés (GSC, « giant strong
+component ») ont fait l’objet d’une étude plus détaillée.
+
+Études de sous-graphes fortement connectés: ‘GSC’
+L’étude structurale des GSCs a été réalisée avec des indicateurs
+classiques : nombre de nœuds et de liens, degré moyen (nombre
+moyen de liens par nœud) et nombre moyen de liens entre deux
+nœuds (en suivant les chemins le plus court) (Tableau 1). La répartition
+géographique de ces sous-graphes GSC a été étudiée. Ont été
+représentés les GSCs hebdomadaires et mensuels les plus petits et
+les plus grands.
+
+Au sein du GSC annuel, des mesures de centralité courantes (degré,
+proximité,
+intermédiarité) ont été calculées pour chaque type
+d’établissements [5, 6](T ableau 1).
+
+Puis, on s’est intéressé à l’identification des fragilités structurales des
+réseaux afin de modifier leurs caractéristiques [7]. Par leurs propriétés,
+les réseaux de type « scale-free » présentent une robustesse aux
+« attaques » dites aléatoires (ils conservent leur structure avec la
+majorité des liens). Par contre, une « attaque » ciblée notamment
+visant des nœuds fortement connectés, les « hubs », déstructure
+plus facilement ces réseaux, les fragmente et leur fait perdre leurs
+propriétés et activité [7]. Ces « attaques » ont été réalisées suivant
+des procédures de retrait de nœuds.
+
+Quatre procédures consistant en des retraits de nœuds ciblés ont été
+testées (selon le type et les mesures de centralité des nœuds) pour
+déterminer la plus efficace permettant de ne pas voir se former un
+GSC. La disparition de GSC a été définie quand après les retraits de
+nœuds, la taille du plus grand SC était inférieure à un seuil prédéfini,
+ici 51. Cette taille correspondait au plus grand SC secondaire observé
+dans les réseaux entiers hebdomadaires (avant le retrait de nœuds).
+
+Tout d’abord, tous les marchés ou tous les centres de rassemblements
+et enfin les deux opérateurs commerciaux ont été retirés des réseaux.
+
+Tableau 1. Indicateurs d’analyse de réseau et interprétation en terme de diffusion de maladie
+
+Définitions
+
+Implication en épidémiologie
+
+Degré (‘Degree’)
+
+Nombre de liens adjacents
+à un nœud
+
+Distance moyenne
+(‘The average path
+length’)
+
+Longueur du plus court chemin
+reliant deux nœuds ; moyenne
+de ces plus courts chemins.
+
+Diamètre
+
+Chemin le plus long
+
+Proximité
+(‘Closeness’)
+
+Intermediarité
+(‘Betweenness’)
+
+Composant
+fortement
+connecté (‘Strong
+component’) SC
+
+Inverse de la somme des distances
+reliant deux nœuds
+Proportion de chemins (les plus
+courts) sur lequel se trouve le nœud
+étudié
+Un SC est un sous-réseau pour lequel
+un chemin existe entre chaque paire
+de nœud où la direction des liens est
+prise en compte
+
+Nombre de mouvements d’entrée et de sortie. Elle reflète l’activité commerciale directe
+de l’exploitation. Un établissement a haute centralité (= ‘hub’) sera à la fois plus vulnérable
+mais aussi facilitera la diffusion de la maladie par une dispersion plus large
+
+Informe de la distance (nombre de mouvements et d’exploitations intermédiaires) entre deux
+exploitations. Ces indicateurs sont en relation avec la vitesse de diffusion d’une maladie
+
+Informe de la distance (nombre de mouvements et d’exploitations intermédiaires) entre deux
+exploitations. Ces indicateurs sont en relation avec la vitesse de diffusion d’une maladie
+
+Permet de mesurer la capacité d’autonomie ou d’indépendance des acteurs
+
+Un établissement a haute intermédiarité (= ‘hub’) sera à la fois plus vulnérable mais aussi
+facilitera la diffusion de la maladie car se situe à un carrefour au niveau commercial plutôt
+incontournable mais a aussi capacité de contrôler cette circulation
+
+Structure vulnérable face à la diffusion de maladie = sous groupe de nœuds très cohésifs
+Les SC sont étudiés comme prédicateurs de la taille finale d’une épizootie
+
+Bulletin épidémiologique, santé animale et alimentation no 47 9
+
+Après ces retraits de nœuds en masse, la présence de GSC a été
+recherchée (SC de taille supérieure à 51).
+
+Puis, les nœuds à plus forte centralité (degré, proximité et intermédiarité)
+ont été éliminés un à un et l’émergence de GSC a été examinée jusqu’à
+l’obtention d’un SC de taille inférieure à 51. Les indicateurs de centralité
+ont été recalculés et les nœuds classés entre chaque éviction.
+
+Les analyses ont été réalisées avec les logiciels suivants : Pajek,
+programme pour les analyses de réseaux de grande taille (v1.25,
+http://pajek.imfm.si/doku.php?id=pajek) et le package Igraph du
+logiciel R (v 0.5.2, http://igraph.sourceforge.net).
+
+Résultats
+Le réseau d’échanges bovins français
+Un total de 265 298 établissements a été répertorié composé de 263
+907 élevages, 1315 centres de rassemblement et 76 marchés.
+
+Sur les 27 millions de bovins différents présents pendant l’année
+2005, 10 millions (36 %) s’étaient déplacés au moins une fois d’un
+établissement à un autre. La moitié de ceux-ci n’avait bougé qu’une
+seule fois, le nombre moyen de mouvements par animal étant de
+1,8 (de 1 à 24). Ont été ainsi enregistrés 18 millions de mouvements
+individuels correspondant à environ 6 millions de mouvements de
+lots d’animaux. Plus de la moitié des mouvements individuels étaient
+des mouvements d’import/export ou vers l’abattoir (Tableau 2). Le
+reste, soit 5028522 mouvements individuels, correspondaient à des
+transferts entre élevages et/ou opérateurs commerciaux (marchés et
+centres). Dans 57 % des cas, les élevages avaient acheté leurs animaux
+via un opérateur et dans 75 % des cas les avaient vendus de la même
+façon. La distance médiane de transit pour un bovin était de 35 km
+(33 km si le transfert était direct d’élevage à élevage 80 km via un
+opérateur). Cette différence était significative (test de Wilcoxon,
+p<0,001).
+
+Tableau 2. Mouvements de bovins entre établissements,
+en milliers d’animaux en 2005
+
+Destinations
+
+Origines
+
+Élevages
+Centres
+Marchés
+Import
+Total des
+destinations
+
+Élevages
+
+Centres
+
+Marchés
+
+(% total des
+
+(% total des
+
+(% total des
+
+origines)
+
+origines)
+
+origines)
+
+Autres*
+
+(% total des
+
+origines)
+
+1 542 (14)
+1 595 (30)
+
+429 (33,5)
+122 (55)
+
+3 931 (34)
+
+884 (16,5)
+508 (40)
+39 (17)
+
+797 (7)
+453 (8,5)
+NA (-)
+27 (12)
+
+5 148 (45)
+2 428 (45)
+
+341 (26,5)
+35 (16)
+
+3 688 (20)
+
+5 361 (29)
+
+1 277 (7)
+
+7 951 (44)
+
+* Autres: exports, abattoirs et équarrissages.
+
+Analyse de réseaux d’échanges
+Caractérisation des réseaux
+Le réseau annuel étudié comportait 244 097 nœuds et 1416208 liens.
+La quasi-totalité des élevages bovins recensés (92 %) et la totalité des
+opérateurs commerciaux avaient effectué un échange dans l’année.
+Un réseau mensuel comportait en moyenne 126613 nœuds (environ
+50 % des nœuds et 15 % des liens du réseau annuel), un réseau
+hebdomadaire 20 % des nœuds et 4 % des liens du réseau annuel
+(Tableau 3). Ces opérateurs commerciaux étaient presque toujours
+présents dans les réseaux mensuels (85 % des centres et 92 % des
+marchés) et dans les réseaux hebdomadaires (76 % des centres et
+86 % des marchés) alors que les élevages étaient proportionnellement
+moins impliqués (49 % pour les réseaux mensuels et 20 % pour les
+hebdomadaires).
+
+La distribution des degrés des établissements (nombre de liens)
+avait une forme en « comète » caractéristique (Figure 1). Ce résultat
+suggère que la croissance du réseau d’échanges était conduite par un
+
+10 Bulletin épidémiologique, santé animale et alimentation no 47
+
+Figure 1.Di stribution des degrés du réseau annuel
+de mouvements bovins en 2005
+
+attachement préférentiel des nœuds formant ainsi un réseau « scale-
+free »: quand un nœud est ajouté (ici, quand un établissement achète
+ou vend des animaux), il tend à se connecter à des nœuds fortement
+connectés (ici, un établissement a tendance à acheter ou vendre des
+animaux à des établissements qui achètent ou vendent beaucoup
+d’animaux). Une hiérarchie entre les nœuds apparaît; un petit nombre
+de nœuds très connectés dénommés « échangeurs » ou « hubs », puis
+un nombre de plus en plus important de nœuds moyennement ou peu
+connectés. Ces derniers forment des sous-réseaux passant en général
+par les « hubs » pour communiquer avec d’autres sous-réseaux. Les
+« hubs » sont des nœuds jouant des rôles centraux (fortes mesures
+de centralité) dans la connectivité.
+
+De larges SC que l’on a pu considérer comme des géants ont été
+détectés ; leurs tailles en moyenne de 10 277 établissements pour
+les réseaux mensuels et de 2 115 pour les hebdomadaires étaient
+toujours nettement supérieures (>103 plus grand) à celle des autres
+SC respectivement en moyenne de sept et neuf établissements (bornes
+de 4 à 51).
+
+Étude des GSCs
+Des GSCs ont été observés pour les différents pas de temps d’étude
+et le détail de leurs caractéristiques est décrit dans le Tableau 3. Quel
+que soit le réseau étudié, deux établissements étaient en moyenne
+séparés par approximativement cinq mouvements d’animaux et donc
+quatre établissements. La plus longue distance (i.e. le diamètre) variait
+de 14 liens (réseaux hebdomadaires) à 20 liens (réseau annuel).
+
+Des fluctuations saisonnières des flux dans les tailles des GSCs ont
+été observées; le GSC mensuel de novembre était composé de 12 652
+nœuds au total alors que celui du mois de juillet de 7254 nœuds. La
+semaine 47 (semaine du mois de novembre) impliquait le plus grand
+nombre d’établissements (2657) et la semaine 33 (semaine du mois
+de juillet) le moins (1 200 nœuds). La répartition géographique des
+GSCs montrait qu’ils étaient systématiquement largement répartis sur
+l’ensemble du territoire et couvraient les principales zones d’élevage
+(Figure 2).
+
+Par ailleurs, les marchés et les centres se distinguaient par des mesures
+de centralité plus élevées que les élevages (Figure 3). De ce fait, ces
+établissements correspondaient aux hubs d’un réseau « scale-free ».
+Leur implication était importante car parmi les 932 établissements
+se retrouvant systématiquement dans les GSCs mensuels, 610
+étaient des opérateurs (soit 65 % des établissements). Pour les GSCs
+hebdomadaires, 43 établissements étaient présents systématiquement
+dont 42 marchands.
+
+Figure 2.Ré partition géographique des établissements d’élevage détenant des bovins et participant à des GSCs en 2005.
+(a) le mois de juillet (7254 établissements); (b) le mois de novembre (12652 établissements); (c) la semaine 33 (1200 établissements);
+(d) la semaine 47 (2657 établissements)
+
+La présence de ces sous-graphes de typologie « scale-free » a
+finalement conduit à une étude de déstructuration de ces sous-réseaux.
+
+Le fait d’enlever les opérateurs commerciaux sur le réseau d’échange
+bovin annuel n’a pas permis l’émergence d’un GSC de petite taille
+(taille du GSC obtenu: 41588 nœuds). Par contre, cette procédure a
+été efficace pour les réseaux mensuels et hebdomadaires (Tableau 4).
+En effet, suite à la suppression de tous les opérateurs, aucun GSC de
+taille supérieure à 51 nœuds n’a été détecté, ce qui n’était pas le cas si
+seulement un des deux types d’opérateurs était maintenu.
+
+Cette même procédure de retrait de nœuds a été menée selon les
+valeurs de mesures de centralité et a permis de limiter l’apparition
+de GSCs en évinçant, pour la procédure la plus satisfaisante, en
+moyenne 299 établissements pour les réseaux mensuels et 82 pour
+les réseaux hebdomadaires (Tableau 4). Cela représentait moins de 1 %
+
+de la population impliquée dans la période d’étude. Cette procédure
+basée sur les mesures de centralité a permis de réduire le nombre
+d’établissements à cibler par rapport à la procédure impliquant le
+retrait de la totalité des opérateurs. Cependant, ces derniers étaient
+largement représentés; de 35 à 56 % des marchés et de 6 à 23 % des
+centres.
+
+Discussion
+Les établissements hébergeant des bovins (élevages, centres et
+marchés) formaient ainsi les points ou sommets du réseau d’élevages
+bovins français. Face à la diffusion de maladies infectieuses, ce réseau
+d’établissements reliés par les mouvements d’animaux montrait une
+vulnérabilité constante et largement répartie sur tout le territoire.
+
+Bulletin épidémiologique, santé animale et alimentation no 47 11
+
+Tableau 3. Description des réseaux d’échanges bovins de 2005 (annuel, mensuels et hebdomadaires)
+
+Taille totale
+Élevages
+Centres
+Marchés
+Liens
+SC*
+Nombre
+
+Réseau annuel
+
+244 097
+242 706
+1 315
+76
+1 416 208
+
+1 259
+
+Le plus grand (%)
+
+108 904 (45 %)
+
+2e plus grand
+Détail GSC*
+Taille
+Élevages
+Centres
+Marchés
+Liens
+Indicateurs de réseau
+Degré moyen
+Distance la plus courte
+Diamètre
+
+9
+
+108 904
+107 539
+1 289
+76
+804 331
+
+11,6
+4,44
+20
+
+*SC = Strong component, GSC = Giant strong component.
+
+L’analyse de réseau (SNA) offre un large panel d’outils pour étudier
+les réseaux d’élevages. Notre choix s’est porté avant tout sur l’étude
+de structures à risque simples, des sous-groupes d’établissements
+fortement connectés, les GSCs. La cohésion des établissements dans
+ces sous-groupes permet d’approcher un risque de vulnérabilité de
+diffusion de maladie. La prise en compte du sens des mouvements
+dans les GSCs précise le risque même si leur chronologie n’est pas
+
+Figure 3.Me sures de centralité des établissements du réseau
+d’échanges bovin: (a) degré, (b) intermédiarité, (c) proximité.
+Mesures de centralité pour les élevages (F), les centres
+de rassemblement (D) et les marchés (M)
+
+12 Bulletin épidémiologique, santé animale et alimentation no 47
+
+Réseaux mensuels
+
+Réseaux hebdomadaires
+
+Données moyennes
+[minimum-maximum]
+
+126 613 [106 141-139 650]
+125 427 [104 976-138 473]
+
+1 115 [1 091-1 145]
+
+71 [67-75]
+
+Données moyennes
+[minimum-maximum]
+
+49 246 [33 848-59 675]
+48 179 [32 920-58 605]
+1 001 [865-1 042]
+
+66 [57-73]
+
+212 497 [168 423-245 560]
+
+59 933 [35 984-73 401]
+
+362 [268-477]
+
+10 277 (8,1 %)
+
+125 [86-178]
+
+2 115 (4,3 %)
+
+[7 254 (6,8%) - 12 652 (9,2 %)]
+
+[885 (2,6 %) - 2 657(4,8%)]
+
+7 [5-14]
+
+9 [4-51]
+
+10 277 [7 254-12 652]
+9 245 [6 277-11 622]
+964 [908-1 008]
+
+69 [65-73]
+
+2 115 [885-2 657]
+1 430 [524-1 885]
+
+633 [320-714]
+52 [39-60]
+
+39 592 [29 726-47 581]
+
+7 417 [2 655-9 485]
+
+3,35 [3,17-3,55]
+4,74 [4,6-4,82]
+
+16 [13-20]
+
+2,43 [2,13-2,52]
+5,07 [4,84-6,24]
+
+14 [12-19]
+
+conservée mais seulement approchée par un découpage en mois et en
+semaine. Mais ces différentes échelles de temps ont permis d‘étudier
+cette vulnérabilité face à différents types de maladies (différentes selon
+leur vitesse de diffusion).
+
+L’étude a permis de qualifier le réseau de mouvements de bovins
+français de réseau « scale-free » et d’identifier l’influence de certains
+nœuds dans le réseau. De nombreux réseaux réels sont des réseaux
+« scale-free ». Cette topologie est assez commune et a été déjà
+décrite pour les mouvements de bovins dans d’autres pays d’Europe;
+par exemple, au Royaume-Uni [8], en Italie [9], au Danemark [10] et
+en Suède [11].
+
+Tableau 4. Nombre d’établissements retirés pour obtenir
+la disparition des GSC dans les différents réseaux d’échanges
+bovins, 2005
+
+Procédures de retrait de nœuds/établissements
+
+Échelle
+de temps
+
+Nombre de nœuds retirés (%*)
+
+Élevages
+
+Centres
+
+Marchés
+
+Selon le type
+d’établissements
+
+Mensuel
+
+Hebdomadaire
+
+-
+
+-
+
+964 (86 %) 69 (97 %)
+
+633 (63 %) 52 (79 %)
+
+Selon la
+centralité de
+degré ‘Degree’
+
+Selon
+la centralité
+de proximité
+‘Closeness’
+
+Selon la
+centralité
+d’intermédiarité
+‘Betweenness’
+
+Annuel
+
+Mensuel
+
+Hebdomadaire
+
+Annuel
+
+Mensuel
+
+Hebdomadaire
+
+Annuel
+
+Mensuel
+
+Hebdomadaire
+
+2 322 (1,0 %) 1 113(85 %)
+
+75 (100 %)
+
+3
+
+-
+
+351 (31 %) 48 (68 %)
+
+83 (8 %)
+
+29 (44 %)
+
+2805 (1,1 %) 1 073 (82 %) 75 (100 %)
+
+55
+
+10
+
+295 (26 %) 46 (65 %)
+
+79 (8 %)
+
+24 (36 %)
+
+1 766 (0,7 %) 1 035 (79 %) 75 (100 %)
+
+8
+
+1
+
+251 (23 %) 40 (56 %)
+
+59 (6 %)
+
+23 (35 %)
+
+* Pourcentage par catégorie ou global de nœuds évincés du réseau (moyennes
+
+pour les réseaux mensuels et hebdomadaires).
+
+Par ailleurs,
+les opérateurs commerciaux se sont distingués par
+leurs fortes valeurs de centralité ; les centres et les marchés avaient
+une place centrale dans le réseau de mouvements de bovins en
+France. Leur rôle dans les réseaux de mouvements d’animaux est
+bien incontestablement celui de « hubs » ou d’intermédiaires
+incontournables dans de nombreux flux [12]. Il était alors intéressant
+d’agir en partie sur ces établissements par une action (ou « attaque »)
+ciblée pour limiter la vulnérabilité du réseau. Cette étude a permis
+de démontrer qu’une action générale sur l’ensemble des centres et
+des marchés était nécessaire pour désorganiser le réseau et contrôler
+sa vulnérabilité. Cette application systématique de mesures de lutte
+ou de prévention apparaît toutefois difficilement réalisable et, sur du
+long terme, entrave lourdement le commerce.
+
+Par contre, la suite de l’étude a permis de préciser ces actions en
+sélectionnant les nœuds selon leurs mesures de centralité au sein du
+réseau. Une pression de surveillance ou une limitation de mouvements
+temporaire sur un plus faible nombre d’établissements par rapport à
+un ciblage par catégorie d’activité peut suffire à déconnecter le réseau
+et donc à limiter un risque de large diffusion de maladies.
+
+Bien sûr, pour cela, il faut une action rapide puisque ces indicateurs
+se placent dans un réseau donné et que tout événement notable
+(mesures de prévention ou lutte) survenant par la suite recrée un
+nouveau réseau ; des établissements sont isolés, fermés, les réseaux
+commerciaux cessent leur activité ou se réorganisent.
+
+Conclusion
+Cette étude a permis de mettre en évidence une vulnérabilité constante
+du réseau d’échanges bovins via l’existence des GSCs, structures à risque
+facilitant la diffusion de maladies. Limiter leur importance permet
+de diminuer un risque de large diffusion par le biais de mouvements
+d’animaux. Pour cela, l’étude a suggéré de cibler les mesures de lutte
+et de prévention sur un faible nombre d’établissements grâce à des
+indicateurs empruntés à la méthode d’analyse de réseaux sociaux
+(SNA). Une partie des marchands (centres et marchés) par leur
+fonctionnement de rassemblement et de redistribution d’animaux ont
+été naturellement visés. Ce ciblage permet de proposer une stratégie
+optimale pour le déploiement des ressources sans entraver trop
+lourdement les flux commerciaux.
+
+Références bibliographiques
+[1] Wasserman S. F., K. (1994) Social Network Analysis : Methods and
+
+Applications. Cambridge University Press, Cambridge: 825 pp.
+
+[2] Dube C., Ribble C., Kelton D., McNab B. (2009) A review of network
+analysis terminology and its application to foot-and-mouth disease
+modelling and policy development. Transbound Emerg Dis, 56(3):
+73-85.
+
+[3] Martinez-Lopez B., Perez A. M., Sanchez-Vizcaino J. M. (2009) Social
+network analysis. Review of general concepts and use in preventive
+veterinary medicine. Transbound Emerg Dis, 56(4): 109-120.
+
+[4] Rautureau S., Dufour B., Durand B. (2011) Vulnerability of Animal Trade
+Networks to The Spread of Infectious Diseases: A Methodological
+Approach Applied to Evaluation and Emergency Control Strategies in
+Cattle, France, 2005. Transbound Emerg Dis, 58(2): 110-120.
+
+[5] Sabidussi G. (1966) The centrality of a graph. Psychometrika, 31(4):
+
+581-603.
+
+[6] Freeman L. C. (1978/1979) Centrality in social networks, conceptual
+
+clarification. Soc. Networks, 1: 215-239.
+
+[7] Albert R., Jeong H., Barabasi A. L. (2000) Error and attack tolerance of
+
+complex networks. Nature, 406(6794): 378-382.
+
+[8] Christley R. M., Robinson, S.E., Lysons, R., French, N. (2005) Network
+analysis of cattle movement in Great Britain. Proc. Soc. Vet. Epidemiol.
+Prev. Med: 234-243.
+
+[9] Natale F., Giovannini A., Savini L., Palma D., Possenti L., Fiore G.,
+Calistri P. (2009) Network analysis of Italian cattle trade patterns and
+evaluation of risks for potential disease spread. Prev Vet Med, 92(4):
+341-350.
+
+[10] Bigras-Poulin M., Thompson R. A., Chriel M., Mortensen S., Greiner
+M. (2006) Network analysis of Danish cattle industry trade patterns
+as an evaluation of risk potential for disease spread. Prev Vet Med,
+76(1-2): 11-39.
+
+[11] Nöremark M., Hakansson N., Lewerin S. S., Lindberg A., Jonsson A.
+(2011) Network analysis of cattle and pig movements in Sweden:
+measures relevant for disease control and risk based surveillance. Prev
+Vet Med, 99(2-4): 78-90.
+
+[12] Robinson S. E., Christley R. M. (2007) Exploring the role of auction
+markets in cattle movements within Great Britain. Prev Vet Med,
+81(1-3): 21-37.
+
+Le Bulletin épidémiologique, santé animale et alimentation est désormais consultable sur Internet.
+Recherchez un article
+du Bulletin épidémiologique sur:
+www.anses.fr/bulletin-epidemiologique/index.htm
+
+Bulletin épidémiologique, santé animale et alimentation no 47 13
+
+

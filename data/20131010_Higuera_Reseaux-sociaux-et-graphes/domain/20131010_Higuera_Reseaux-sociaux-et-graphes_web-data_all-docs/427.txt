@@ -1,0 +1,105 @@
+https://moodle.polytechnique.fr/pluginfile.php/28597/course/section/3156/Projet_ComplexNetworks.pdf
+
+RÉSEAUX COMPLEXES : ANALYSE ET COMPARAISON DES
+
+MÉTHODES DE COMPRESSION
+
+(PROJET PERSONNEL EN LABORATOIRE, 2015-16)
+
+LUCA CASTELLI ALEARDI (LIX, ECOLE POLYTECHNIQUE)
+
+Résumé. Nous allons considérer le problème de compresser et représenter de manière
+compacte et eﬃcace la connectivité d’un graphe. En particulier, on s’intéresse aux réseaux
+complexes : en font partie les réseaux sociaux, le graphe du web, les réseaux neuronaux,
+ainsi que de nombreuses classes de graphes du monde réel. En plus de leur taille consi-
+dérable, les réseaux complexes partagent des propriétés structurelles assez surprenantes.
+Dans se stage on vise à tirer proﬁt des méthodes d’analyse des réseaux complexes, aﬁn
+d’établir des évaluations rigoureuses et comparaisons précises, sur le plan théorique ainsi
+que pratique, des schémas de compression et représentations de ces grands graphes. On
+considérera aussi le problème de concevoir de nouvelles représentations plus performantes,
+qui seraient plus adaptées pour certaines classes de réseaux complexes (par exemple, pour
+les réseaux sociaux, dont la structure combinatoire est dépendante de la localisation
+géographique des utilisateurs).
+
+Thématiques : réseaux complexes, graphes, structures de données, compression.
+Laboratoire d’accueil : LIX (Ecole Polytechnique), équipe "Combinatoire".
+Responsable : Luca Castelli Aleardi (amturing@lix.polytechnique.fr).
+Compétences souhaitées : une bonne connaissance de l’algorithmique et des struc-
+tures de données, maîtrise d’un langage de programmation (Java, par exemple), quelques
+notions de math discrètes (rudiments de théorie des graphes et combinatoire)
+
+1. Introduction
+
+Réseaux complexes. Nous vivons dans un petit monde, où deux personnes quelconques
+ont une grande probabilité d’être separées par un petit nombre d’amis. C’est l’une des
+propriétés, vériﬁées à niveau expérimental et prédites par des modèles théoriques, des
+réseaux complexes [5, 2, 4]. A cause de leur ubiquité dans le monde physique, les réseaux
+complexes constituent un outil privilégié pour l’étude des interactions entre les entités d’un
+système complexe : il peut s’agir des éléments d’un système physique, comme des usagers
+d’un réseau social.
+
+Représentations des réseaux complexes. Compte tenu du coût important de la connec-
+tivité d’un réseau complexe, il est crucial de se munir de représentations qui soient peu
+gourmandes en mémoire ; de plus, dans de nombreuses applications on souhaite aussi une
+navigation eﬃcace entre les noeuds du réseau. A titre d’exemple, on peut coder un réseau
+à l’aide de sa matrice d’adjacence : cette solution est facile à mettre en place et fournit un
+accès très rapide aux données (pour tester, par exemple, si deux noeuds sont voisins), mais
+elle est loin d’être adaptée pour représenter des grands réseaux (nécessitant de ressources
+mémoires de taille quadratique en le nombre de noeuds). Une manière plus eﬃcace consiste
+à se servir de listes d’adjacences (pour chaque sommet on stocke la liste de ses voisins), ce
+qui conduit à des meilleures représentations dans le cas des graphes creux. Même cette der-
+nière solution est loin d’être adaptée aux cas des réseaux complexes : pour faire face à des
+millions de noeuds (et dizaines, voir centaines de millions de liens), les travaux existants [1]
+
+1
+
+Figure 1. Réseaux complexes : exemple de réseau neuronal (organisme C.
+Elegans), exemple de réseau social (Orkut).
+
+font appel à des représentations plus sophistiquées, qui visent à réduire la redondance (et
+donc l’espace mémoire) en tirant proﬁt de plusieurs propriétés structurelles : entre autres,
+la localité et la similarité.
+
+Les travaux existants dans le domaine des structures de données compactes ont montré
+qu’il est possible de représenter des réseaux complexes avec des taux de compression très
+intéressants : peu de bits par lien suﬃsent pour coder des graphes, permettant aussi de
+répondre à des requêtes de navigation [1, 3]. Cependant pour la plupart de ces travaux
+(schémas de compression et structures de données compactes) il n’existe pas d’analyses
+précises permettant d’évaluer de manière rigoureuse leurs performances : en générale on
+ne se base que sur une évaluation expérimentale.
+
+2. Objectifs du stage
+
+Analyse adaptative des représentations des réseaux complexes. Il s’agit d’étudier
+de faire appel aux techniques d’analyses des réseaux complexes, et notamment d’utiliser
+les mesures de complexités (clustering coeﬃcients, modularity, betweeness, centrality, ...)
+introduites pour identiﬁer leurs propriétés structurelles.
+
+L’objectif primaire du stage est d’analyser les représentations et structures de données
+existantes à l’aide de ces mesures de complexités : le but étant de fournir une caractérisation
+ﬁne et rigoureuse de leur performance. On attaquera aussi le problème de concevoir (et
+éventuellement implémenter) de nouvelles représentations plus performantes, qui seraient
+plus adaptées pour certaines classes de réseaux complexes (par exemple, pour les réseaux
+sociaux, dont la structure combinatoire est dépendante de la localisation géographique des
+utilisateurs).
+
+Références
+
+[1] Paolo Boldi and Sebastiano Vigna. The webgraph framework I : compression techniques. In Proc. of
+
+the 13th international conference on World Wide Web (WWW), pages 595–602, 2004.
+
+[2] D. Easley and J.M. Kleinberg. Networks, Crowds, and Markets : Reasoning About a Highly Connected
+
+World. Cambridge Univ. Press, 2010.
+
+[3] Cecilia Hernández and Gonzalo Navarro. Compressed representations for web and social graphs. Knowl.
+
+Inf. Syst., 40(2) :279–313, 2014.
+
+[4] Jon M. Kleinberg. Navigation in a small world. Nature, 406 :845, 2000.
+[5] D.J. Watts and S.H. Strogatz. Collective dynamic of small-world networks. Nature, 393 :440–442, 1998.
+
+2
+
+

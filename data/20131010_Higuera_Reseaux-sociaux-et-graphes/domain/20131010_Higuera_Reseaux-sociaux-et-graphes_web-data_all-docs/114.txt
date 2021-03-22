@@ -1,0 +1,671 @@
+http://perso.ens-lyon.fr/eric.thierry/Graphes2007/thomas-braibant.pdf
+
+Graphes aléatoires
+
+Thomas Braibant
+
+Introduction
+
+Si l'on se place dans la perspective de l'analyse d'un algorithme, la complexité dans le pire
+cas est une mesure pessimiste de la qualité d'un algorithme. Tout comme certains problèmes
+sont dans NP à cause d'une petite famille d'instances dures, certains algorithmes peuvent être
+performants sur la plupart des instances, et être moins ecaces sur des instances bizarres.
+
+L'analyse probabiliste, qui consiste à xer une distribution de probabilité sur les entrées,
+et étudier l'espérance (ou valeur moyenne), du coût d'un algorithme en fonction de cette dis-
+tribution donne une mesure plus acceptable. Néanmoins, choisir une distribution de probabilité
+réaliste peut s'avérer dicile. Dans ce rapport, on va donc étudier deux formalisations diérentes
+de distributions de probabilités sur les graphes ayant un nombre de sommets xés. Une fois le
+formalisme établi, on analysera ensuite :
+
+ Quelques propriétés et leurs conditions d'apparition
+ Un exemple d'algorithme polynomial qui permet de répondre pour presque tous les couples
+
+de graphes à la question de savoir si ils sont isomorphes
+
+ Des comparaisons entre les prédictions et les données expérimentales tirées des graphes
+
+réels : Internet, réseaux divers, réseaux de collaboration (Acteurs -lms, scientique ...)
+
+Les sources dont je me suis inspiré pour la rédaction de ce rapport sont les suivantes :
+ [?] :)
+ [?] : Un livre spécialement consacré aux graphes aléatoires, contenant beaucoup de résultats
+
+complexes sur le modèle A.
+
+ [?] : Un revue bibliographique sur le sujet des graphes aléatoires, cité environ 1200 fois1
+ [?] : Un article présentant le modèle B. Pour information, les auteurs ne sont pas infor-
+maticiens, mais plutôt issus des milieux des sciences sociales ou de la matière. Article cité
+250 fois environ2
+
+1 Modélisations
+
+J'ai regroupé quelques informations utiles en annexe, sur les probabilités, et quelques théo-
+
+rèmes. Le lecteur peu familier (comme moi) avec les notions de probabilités peut s'y référer.
+
+1.1 Modèle A
+Modèle A : Erdös-Renyi Soit un ensemble V = {1, . . . n} de sommets. Soit un paramètre
+p, 0 < p < 1. Pour toute paire de sommets, il existe une arête avec probabilité p, les arêtes étant
+déterminées indépendamment les unes des autres. La variable aléatoire Gp dénote un graphe
+issu de cet espace de probabilités.
+
+1information basée sur le site www.citebase.org
+2idem
+
+1
+
+Fig. 1  Distribution des degrés , gure extraite de [?], page 12
+
+Lemme 1.1 (Degré d'un sommet) Le degré d'un sommet est déni par la loi de probabilité
+(où on reconnait une loi de Poisson) :
+
+(cid:18)n
+
+(cid:19)
+
+k
+
+pk =
+
+pk(1 − p)n−k
+
+Le degré moyen d'un sommet est donc :
+
+z = E(k) = p ∗ (n − 1)
+
+La gure ?? indique les prévisions du modèle théorique correspondent à ce que l'on observe
+si l'on génère un graphe suivant cette modélisation. J'ai personnellement réalisé des tests sur un
+graphe aléatoire avec 5000 noeuds, et trouvé une distribution des degrés correspondant également
+à ces prévisions, aux erreurs expérimentales près.
+
+Autre formalisation Soit n et m = m(n). On dénit la variable aléatoire Gm comme étant un
+
+graphe à n sommets et m arrêtes, apparaissant avec une probabilité(cid:0)(n
+
+La variable aléatoire
+
+(cid:1)−1
+
+2)
+m
+
+Gm dénote un graphe issu de cet espace de probabilités.
+
+Cette seconde dénition est plus commode dans de nombreux modèles étudiés, étant donné
+qu'il est plus facile de se demander, à n xé, combien d'arêtes sont nécessaires pour avoir presque
+toujours une propriété Q, plutôt que de se demander quelle est la probabilité p nécessaire pour
+avoir presque toujours Q
+
+Ce second modèle est fort heureusement décrit par le modèle A, quand n est grand, et
+
+p = m/(cid:0)n
+(cid:1).
+
+2
+
+1.2 Modèle B
+
+De nombreuses sources convergentes indiquent que la distribution des degrés dans les graphes
+réels étudiés (systèmes biologiques, réseaux sociaux, réseaux métaboliques, . . .) ne suit pas la
+
+2
+
+Fig. 2  Distribution des degrés, expérience avec 5000 noeuds
+
+loi de Poisson ci-dessus, et que de nombreuses propriétés sont mal approximées si on utilise le
+modèle A. On verra dans la section ?? des données expérimentales, mais il convient de dire en
+particulier que la répartition des degrés suit souvent une loi de puissance, qui n'est pas simulable
+dans le modèle d'Erdös-Renyi.
+
+Dénition On dénit la fonction génératrice G0(x) telle que
+
+∞X
+
+G0(x) =
+
+pkxk
+
+k=0
+
+avec pk la probabilité qu'un sommet choisi au hasard soit de degré k. On ne travaillera qu'avec
+G0 normalisée telle que G0(1) = 1. La variable aléatoire G(pk) dénote un graphe issu de cet
+espace de probabilités.
+
+Cette modélisation permet de calculer de façon simple certaines quantités.
+
+Lemme 1.2 (Degré moyen d'un sommet) Le degré moyen d'un sommet (ou espérance) est
+donné par :
+
+z =X
+
+k ∗ pk = G0
+
+0(1)
+
+k
+
+Lemme 1.3 (Puissances) Si la loi de distribution d'une propriété X sur un objet est donnée
+par une certaine fonction génératrice, alors la loi de distribution sur la somme de X sur m
+éléments indépendants est donnée par la m-ième puissance de cette fonction génératrice.
+
+Somme des degrés de deux sommets pris au hasard
+
+[G0(x)]2 =
+
+#
+
+pk ∗ xk
+pk ∗ pj ∗ xj+k
+
+"X
+= X
+
+k
+
+j,k
+
+3
+
+Les coecients de xn dans cette expression sont clairement les produits pj ∗pk tels que j +k = n,
+et par conséquent, on exprime bien ici la probabilité que la somme des degrés des deux sommets
+soit n.
+
+1.3 Relations entre ces modèles
+
+Si il n'existe pas d'arêtes multiples entre un même couple de sommets, il est clair que le
+modèle Gp recouvre le modèle Gm. Dans le cas contraire, il n'est pas facile de voir comment
+simuler cette possibilité.
+
+Le modèle B recouvre le modèle A, si on utilise comme probabilité pour le degré k : pk =
+
+(cid:0)n
+(cid:1)pk(1 − p)n−k, la probabilité donnée en ??.
+
+k
+
+2 Propriétés
+
+2.1 Propriétés pour presque tous les graphes
+Dénition Etant donnée une suite d'espaces de probabilités Ωn, soit qn la probabilité que la
+propriété Q soit vraie dans l'espace Ωn. On dit que la propriété Q est presque toujours vériée,
+si limn7→∞ qn = 1
+
+2.2 Diamètre
+
+On rappelle que le diamètre d'un graphe est déni par : voir en annexe.
+
+Théorème 2.1 (Diamètre) Si p est constant, alors presque tous les graphes Gp(on se place
+ici dans le cas du Modèle A) ont pour diamètre 2.
+
+alors Gp est connecté, et a pour diamètre 2. On pose X =P
+(1 − p2)n−2. Donc E(X) =(cid:0)n
+
+Preuve Soit X(Gp) le nombre de paires de sommets sans voisins communs. Si il n'y en a pas,
+i,j∈[1...n]2 Xi,j avec Xi,j = 1 si et
+seulement si vi, vj n'ont pas de voisins communs. Soient i0, j0 tels que Xi0,j0 = 1. Les sommets
+n − 2 autres sommets n'ont pas d'arêtes vers i0 et j0 à la fois. On en déduit P [Xi,j = 1] =
+Si p est xé, alors E(X) 7→ 0. Par l'inégalité de Markov, rappellée en annexe, cela implique
+
+(cid:1) ∗ (1 − p2)n−2.
+
+2
+
+que P (X = 0) 7→ 1 et donc presque tous les graphes Gp ont pour diamètre 2.
+Fin de preuve
+
+Contrairement à ce qu'on peut penser, ce résultat est en réalité assez faible. En eet, dans les
+graphes usuels, p est une fonction décroissante du nombre de sommets3. On trouve donc souvent
+dans la littérature des résultats qui mettent en relation l'apparition d'une propriété avec un
+comportement asymptotique de p, de la forme suivante.
+
+Théorème 2.2 (Diamètre) Dans le cadre du modèle A, on a :
+
+ Si la fonction M = M(n) <(cid:0)n
+
+ Si p2 ∗ n − 2 ∗ log n 7→ ∞ et n2(1 − p) 7→ ∞ alors presque tous les graphes Gp ont pour
+n3 − log n 7→ ∞ alors presque tous les graphes
+
+(cid:1) vérie 2 ∗ M 2
+
+diamètre 2.
+
+2
+
+GM ont pour diamètre 2
+
+Preuve [?], page 263
+
+Fin de preuve
+
+3Soit X le nombre d'arêtes : E(X) =`n
+
+´ ∗ p(n)
+
+2
+
+4
+
+2.3 Fonctions de seuils
+
+Fonction de seuil On appelle fonction de seuil de probabilité pour une propriété monotone Q4
+une fonction t(n) telle que p(n)/t(n) 7→ 0 implique que presque aucun Gp ne vérie la propriété
+Q, et telle que p(n)/t(n) 7→ ∞ implique que presque tous les Gp vérient Q.
+
+Cette formalisation de la notion précédente nous amène à réaliser des analyses plus nes
+des propriétés des graphes aléatoires. Par exemple, dans le modèle A, t : n 7→ ln(n)/n est une
+fonction de seuil de probabilité pour la disparition des sommets isolés.
+
+3 Variables aléatoires
+
+Dans cette section, je vais essayer de présenter des résultats permettant de mettre en relation
+
+des variables aléatoires identiques dans les deux modèles de graphes.
+
+3.1 Distance moyenne
+
+Il est clair que dans les deux modèles, le nombre moyen de premiers voisins est égal au degré
+
+moyen dans le graphe. Dans le modèle B, on a :
+
+z1 =< k >=X
+
+k
+
+k ∗ pk = G0
+
+0(1)
+
+(<k> désignant l'espérance du degré)
+Si on part d'un noeud aléatoire n, on s'intéresse alors à la distribution des degrés pour les
+premiers voisins atteints. Une arrête quelconque prise au hasard atteint un noeud n0 de degré k
+avec une probabilité proportionelle à k ∗ pk. On a donc :
+
+P
+P
+k k ∗ pk ∗ xk−1
+k k ∗ pk
+
+G1(x) =
+
+=
+
+1
+
+< k >
+
+G0
+0(x)
+
+Le nombre moyen de voisins est z1 =< k >= G0
+0.
+Par extension, on appelle zm le nombre de m-ièmes voisins, et on a :
+
+zm = [G0(1)]m−1G0
+
+0(1) =
+
+(cid:21)m−1
+
+(cid:20) z2
+
+z1
+
+Si on suppose que tous les noeuds sont accessibles en D étapes, on a :
+
+tX
+
+1 +
+
+zm = n
+
+D'où on a :
+
+m=1
+
+l =
+
+ln(n/z1)
+ln(z2/z1)
+
++ 1
+
+Dans le modèle A, on peut raisonablement penser que le nombre de sommets atteints à
+distance l en partant d'un noeud quelconque est de l'ordre de < k >l. En posant < k >l= n, il
+vient :
+
+l ∝ ln(n)
+
+ln(< k >)
+
+.
+
+4voir en annexe ??
+
+5
+
+Fig. 3  Longueur moyenne de chemin,
+comparaison entre modélisation et graphes
+réels
+
+Fig. 4  Une composante connexe peut
+être vue comme un sommet relié à dié-
+rentes composantes connexes
+
+3.2 Taille moyenne de composante connexe
+
+Je vais ici décrire un résultat général pour le modèle B, et le raner ensuite pour le modèle
+
+A.
+
+Dans le modèle B, on s'intéresse à la fonction génératice H1(x) pour la taille des composantes
+atteintes en suivant une arrête jusqu'à son bout, en excluant le cas où le graphe possède une
+composante géante. La probabilité d'avoir un cycle étant en 1/N , on peut la négliger pour N
+grand.
+
+Remarquons tout d'abord avec la loi de puissance5 que la fonction génératrice de la taille de
+la composante formée de k sous composantes distinctes s'exprime comme la puissance k-ième de
+H1(x).
+
+Donc, en s'appuyant sur le schéma gure ??, on remarque que H1(x) doit vérier l'équation
+
+suivante, avec qi la probabilité que le sommet initial aie i arrêtes sortantes :
+H1(x) = x ∗ q0 + x ∗ q1 ∗ H1(x) + x ∗ q2 ∗ [H1(x)]2 + . . .
+
+D'où il vient :
+
+En partant d'un sommet plutôt que d'une arrête, il vient
+
+H1(x) = xG1(H1(x))
+
+H0(x) = xG0(H1(x))
+
+De façon usuelle, on a alors :
+
+< s >= H0
+
+1(1)
+
+0(1) ∗ H0
+0(1) = 1 + G0
+= 1 + G0
+0(1)
+1 − G0
+= 1 + z2
+
+1(1)
+
+1
+
+z1 − z2
+
+5(voir ??)
+
+6
+
+Notons d'ailleurs que cette équation peut diverger, et donne une condition pour l'apparition
+
+d'une composante géante, qui est : X
+
+k ∗ (k − 2) ∗ pk = 0
+
+Pour le modèle A, on a G0(x) = G1(x) = exp (n − 1) ∗ p ∗ (x − 1), d'où < s >= 1+ (n−1)∗p
+1−(n−1)∗p .
+
+k
+
+3.3 Coecient de clusterisation
+Lemme 3.1 Dans un graphe aléatoire Gp, Cp = p = <k>
+n−1 .
+
+En eet, dans le modèle A, la probabilité qu'il existe une arrête entre deux voisins d'un même
+
+noeud est la même que la probabilité d'existence d'une arrête dans le cas général.
+Je reprends ici une explication que m'a donnée Eric Thierry sur le modèle B.
+Soit Ax,y la variable aléatoire entière valant 1 si il existe une arrête entre x et y et 0 sinon. Le
+modèle étant symétrique par rapport aux sommets, P [Ax,y = 1] est identique pour tout couple
+x, y ∈ V × V, x 6= y. On la note p.
+
+P
+E(P
+
+p =
+
+x,y P [Ax,y = 1]
+
+nombre de paires x,y
+
+x,y Ax,y)
+n ∗ (n − 1)/2
+
+n ∗ (n − 1)/2
+
+=
+= E(nombre d'arêtes)
+= E(somme des degrés)
+= n∗ < k >
+n ∗ (n − 1)
+
+n ∗ (n − 1)
+
+p = < k >
+n − 1
+
+Comme toujours en étudiant des probabilités, la solution est évidente, lorsqu'on l'a trouvée.
+Ce résultat implique cependant que le coecient de clusterisation est donné par la même ex-
+pression dans les deux modèles, ce qui est intuitif. Attention, cependant, car il est possible de
+construire presque arbitrairement une distribution de degré donnant une valeur donnée de ce
+coecient p pour le modèle B, tout en n'ayant que deux types de sommets de degrés a et b, et
+en choisissant judicieusement leurs probabilités respectives.
+
+4 Applications
+
+Les propriétés des graphes aléatoires peuvent permettre de trouver des algorithmes qui ré-
+solvent des problèmes diciles sur presque toutes les entrées. Le problème de décision de l'iso-
+morphisme de deux graphes est dicile6. Cependant, il est possible de construire un algorithme
+rapide qui permet de résoudre ce problème sur presque tous les graphes.
+
+L'idée de construction de cet algorithme repose sur certaines propriétés de la séquence des
+
+degrés d'un graphe aléatoire.
+
+6On ne sait pas si il est NP-Complet ou non
+
+7
+
+Théorème 4.1 (Erdõs-Rényi) Soient p = wn log(n)/n et  > 0 xés, avec n 7→ wn une fonc-
+tion non bornée à croissance arbitrairement lente. Alors presque tous les graphes Gp vérient :
+
+(1 − ) ∗ p ∗ n < δ(Gp) ≤ ∆(Gp) ≤ (1 + ) ∗ p ∗ n
+
+Théorème 4.2 (Bollobás) Dans le modèle A, avec p xé, et t(n) = θ((n/ log(n))1/4), les t(n)
+sommets de plus haut degré sont de degrés diérents pour presque tout Gp.
+
+Ce résultat va nous permettre de construire un algorithme permettant de tester l'isomor-
+
+phisme de deux graphes de façon rapide.
+
+Théorème 4.3 (Babai-Erdõs-Selkow) Il existe un algorithme quadratique qui teste l'isomor-
+phisme de presque toute paire de graphes.
+Preuve L'idée sous-jacente est la suivante : on construit un ensemble H qui contient presque
+tous les graphes, et on montre que l'isomorphisme avec un graphe de H peut être testée de façon
+rapide.
+Construction de H Soit un graphe G à n sommets, codé par matrices d'adjacence. Calculer
+le degré de ses sommets, et les indicer par degré décroissant. On pose r = b3 ∗ log(n)c. Si
+d(vi) = d(vi+1) pour un i < r, on rejette G. Le théorème ci dessus montre avec p = 1/2
+que presque tous les graphes passent ce test.
+On pose U = v1, . . . , vr. Il y de l'ordre de n3 diérents sous ensembles de U . On construit
+H comme l'ensemble des graphes non rejettés, tels que les sommets de V − U ont des
+voisinages diérents dans U . Cela peut être fait en Θ(n2) étapes : pour tout x ∈ V − U , on
+encode N(X) ∩ U comme un r-uplet binaire. On peut donc les trier comme des nombres
+binaires en Θ(n log n). On renomme les sommets restants dans l'ordre décroissant de ces
+valeurs, en éliminant le graphe si deux valeurs consécutives sont identiques.
+Il faut encore montrer que pour presque tous les graphes Gp la probabilité pour les sommets
+de V − U d'avoir le même voisinage dans U tend vers 0. On peut montrer que le nombre
+de paires de sommets en dehors de U avec des voisinages identiques dans U est bornée par
+
+(cid:1)(1 − p)r). Or cette quantité tend vers 0.
+
+Utilisation de H Les graphes de H sont les graphes qu'il est facile d'étiquetter. Supposons
+maintenant qu'on aie deux graphes étiquettés dans H, iomorphes au sens de l'étiquettage.
+Il sut alors de comparer les matrices d'adjacences, dont les lignes et les colonnes sont
+indicées par les étiquettes. Deux graphes sont isomorphes si et seulement si les matrices
+sont identiques, ce qui se vérie en Θ(n2) étapes.
+
+O((cid:0)n−r
+
+2
+
+Fin de preuve
+
+5 Expériences
+
+La gure ?? indique les caractéristiques générales de nombreux graphes. Pour chaque graphe,
+certaines quantités théoriques (longueur moyenne de chemin, coecient de clusterisation) sont
+comparées aux prévisions théoriques.
+
+On remarque que la longueur moyenne de chemin est assez bien décrite par le modèle théo-
+rique A. Par contre le coecient de clusterisation est beaucoup plus important que les prévisions
+théoriques du modèle A. [?], page 14 indique que même pour le modèle B, il existe parfois un
+facteur 2 entre prévision et réalisation.
+
+8
+
+Fig. 5  Figure extraite de [?], page 8, comparant les données issues de graphes réels aux
+prévisions statistiques
+
+Conclusion
+
+En conclusion de ce rapport, je dois dire que le sujet des graphes aléatoires est extrêmement
+riche et intéressant. Les diérentes modélisations peuvent être mises en examen en les comparant
+aux données expérimentales, ce qui conduit actuellement à un regain d'intérêt pour ce domaine.
+Les modélisations présentées ici sont des modélisations parmi d'autres, en particulier, elles
+ne traitent pas des problèmes de graphes orientés, et pourraient être ranées pour fournir des
+résultats plus intéressants sur des problèmes de graphes bipartis, petit-monde ou autres.
+
+Un aspect que je n'ai pas du tout abordé, mais qui est évoqué de façon importante dans
+les sources que j'ai parcourues est l'évolution temporelle des graphes auxquels on ajoute ou
+retranche des arêtes. On s'aperçoit que le comportement général de cette évolution peut varier
+de façon extrême pour des valeurs de p proches, par exemple, si l'on essaie de modéliser les
+propriétés d'un solide dont les liaisons entre les molécules sont détruites au hasard.
+
+Il m'a été dicile de réaliser des expériences sur le modèle B, étant donné que je n'ai pas
+trouvé de construction associée à la modélisation. En eet, étant donnée une distribution de
+degrés, rien ne dit qu'il est possible de construire un graphe correspondant (cas évident où la
+somme des degrés est impaire...), ni combien de graphes sont possibles. Ce défaut est négligeable
+dans le sens où ce qui intéresse les auteurs de [?] est le rapport entre les prévisions du modèle
+et les données expérimentales à leur disposition, sans qu'ils cherchent par exemple à réaliser des
+analyses d'algorithmes. Les informations de [?] et de l'ouvrage de référence [?] sont à ce titre
+présentées de façon plus informaticienne.
+
+9
+
+Annexes
+
+Formulaire de probabilités
+
+Espace de probabilités On appelle espace de probabilités S un ensemble dénombrable, tel
+x∈S wx = 1. On appelle événe-
+x∈E wx.
+
+qu'à chaque élément x de S on associe un poids wx, et tel queP
+ment un sous ensemble E de S. On appelle probabilité d'un événement E : P [E] =P
+X la quantité E(X) =P
+
+Variable aléatoire On appelle variable aléatoire une fonction X qui associe un réel à tout
+élément de S. On note X = k pour e ∈ S|X(e) = k. On appelle espérance d'une variable aléatoire
+
+k k ∗ P [X = k].
+
+P (X ≥ t ≤ E(X)/t
+
+Lemme 5.1 (Inégalité de Markov) Soit X une variable aléatoire prenant uniquement des
+valeurs non nulles. On a :
+
+De plus, si X ne prends que des valeurs entières, on a : Si E(X) 7→ 0, alors P (X = 0) 7→ 1
+
+Preuve E(X) =P
+
+k≥0 k ∗ pk ≥P
+
+k≥t k ∗ pk ≥ t ∗ (P
+
+k≥t pk) = t ∗ P (X ≥ t)
+
+Fin de preuve
+Variance On appelle variance7 la quantité :V ar(X) = E((X − E(X))2)
+
+Le formalisme suivant permet d'exprimer de façon élégante certains résultats sur le modèle
+
+B.
+
+Fonction génératrice d'une variable aléatoire Soit X une variable aléatoire à valeurs en-
+tières, non négatives. La fonction génératrice de X est dénie par :
+
+∞X
+
+G(x) =
+
+P (X = n) ∗ xn
+
+On supposera par la suite que cette série converge absolument pour tout x ≤ 1.
+
+n=0
+
+Lemme 5.2 (Propriétés des fonctions génératrices) Quelques propriétés usuelles :
+
+ P (X = k) = G(k)(0)
+ E(X) = G0(1)
+ V ar(X) = G00(1) + G0(1) − [G0(1)]2
+
+k!
+
+Dénitions
+Diamètre Le diamètre d'un graphe G = (V, E) est déni par :
+
+maxu,v∈V (d(u, v))
+
+Propriété monotone Une propriété est qualié de monotone si elle est préservée par addition
+d'arêtes.
+
+Coecient de clusterisation Le coecient de clusterisation est déni comme la probabilité
+que, partant d'un sommet d'un graphe, et choisissant deux voisins, il existe une arrête entre eux.
+Avec λG(v) le nombre de triangles pour dans lesquels le sommet v appairait, et TG(v) le
+
+nombre de triplets que l'on peut former avec deux voisins de v, on a :
+
+∗X
+
+v∈V
+
+C =
+
+1
+n
+
+λG(v)
+TG(v)
+
+7La variance représente la dispersion d'une variable aléatoire autour de sa valeur moyenne
+
+10
+
+Références
+
+[1] Reka Albert and Albert-Laszlo Barabasi. Statistical mechanics of complex networks. Reviews
+
+of Modern Physics, 74 :47, 2002.
+
+[2] B. Bollobas. Random Graphs. Cambridge University Press (2001), 2001.
+
+[3] M. E. J. Newman, S. H. Strogatz, and D. J. Watts. Random graphs with arbitrary degree
+
+distributions and their applications. Physical Review E, 64 :026118, 2001.
+
+[4] D. B. West. Introduction to Graph Theory (2nd Edition). (Prenctice Hall, Upper Saddle
+
+River), 2001.
+
+11
+
+

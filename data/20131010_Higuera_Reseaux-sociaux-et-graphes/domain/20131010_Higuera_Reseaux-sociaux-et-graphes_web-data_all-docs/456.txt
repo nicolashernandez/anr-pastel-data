@@ -1,0 +1,1203 @@
+https://pdfs.semanticscholar.org/presentation/a002/9e23be1e912ab220571771d3068733c45e70.pdf
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches
+
+structurelles
+
+C´eline Rouveirol
+
+A3 - LIPN UMR CNRS 7030
+
+Universit´e Paris 13
+
+pr´enom.nom@lipn.univ-paris13.fr
+
+February 21, 2012
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+1 / 40
+
+Plan
+
+1 Pr´evision de nouveaux liens
+
+2 Approches de pr´evision de liens
+
+Approches dyadiques / topologiques
+
+3 Approches structurelles
+
+4 Conclusion
+
+5 Bibliographie
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+2 / 40
+
+Pr´evision de nouveaux liens
+
+Tˆaches de pr´evision de liens
+
+Pr´evision temporelle : Pr´evoir l’apparition de liens `a un temps t + 1 `a
+partir de l’observation du graphe jusqu’`a l’instant t.
+
+Pr´evision structurelle : Calcul de liens cach´es, compl´etion de liens
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+3 / 40
+
+Pr´evision de nouveaux liens
+
+Pr´evision de nouveaux liens : D´eﬁnition
+
+D´eﬁnition informelle : pr´edire la formation d’un lien entre deux nœuds
+jamais connect´es auparavant.
+Soit G =< G1, G2, . . . , GT > un r´eseau temporel de r´eseaux sociaux,
+Gi est le graphe du r´eseau social `a l’instant i. La tˆache de pr´evision
+i=1 Vi tels que
+(cid:54) ∃j ∈ 1..T (u, v ) ∈ Ej si (u, v ) ∈ ET +1.
+
+de liens consiste `a pr´edire pour chaque couple u, v ∈(cid:84)T
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+4 / 40
+
+Pr´evision de nouveaux liens
+
+Application : Syst`eme de recommandation
+
+Recommandation de produits = pr´evision de liens dans le graphe
+biparti [7, 12, 2].
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+5 / 40
+
+Pr´evision de nouveaux liens
+
+Application : recommandation de collaborations
+acad´emiques
+
+Recommandation de collaboration = pr´ediction de liens dans le
+graphe projet´e / auteurs [14, 13, 8].
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+6 / 40
+
+Approches de pr´evision de liens
+
+Approches de pr´evision de liens
+
+Trois crit`eres de classiﬁcation :
+
+Approche : Dyadiques / Structurelles.
+
+Dyadique : Evaluer le score d’un lien entre deux nœuds vi , vj
+Structurelle : pr´edire l’´evolution de sous-graphes (pr´ediction de
+plusieurs liens en mˆeme temps) [10]
+
+Type d’attributs : topologiques / caract´eristiques des nœuds.
+
+Approche topologique : utiliser seulement le graphe du r´eseau.
+L’emploi des approches fond´ees sur l’analyse du contenu des nœuds
+n´ecessite une expertise dans le domaine de l’application.
+
+Prise en compte du temps : Oui / non.
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+7 / 40
+
+Approches de pr´evision de liens
+
+Approches dyadiques / topologiques
+
+Approches dyadiques topologiques
+
+Score d’un lien (u, v ) est calcul´e comme une fonction des
+caract´eristiques topologiques de u et v
+Deux familles de mesures de similarit´es topologiques :
+
+Produits des caract´eristiques des nœuds : produit des degr´es, des
+centralit´es, pageRank, etc.
+Mesures bas´ees sur le voisinage des nœuds
+Mesures bas´ees sur les distances entre les nœuds
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+8 / 40
+
+Approches de pr´evision de liens
+
+Approches dyadiques / topologiques
+
+Combinaison de pr´edicteurs
+
+Utilisation des techniques d’apprentissage automatique supervis´e.
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+9 / 40
+
+Approches de pr´evision de liens
+
+Approches dyadiques / topologiques
+
+Apprentissage supervis´e
+
+A partir de:
+
+l’´echantillon d’apprentissage S = (xi , yi )1..m; (xi : vecteur
+attribut-valeur, yi : classe)
+on cherche une loi de d´ependance sous-jacente, par exemple une
+fonction h aussi proche possible de f (fonction cible tq : yi = f (xi ))
+h(x) : pr´ediction/pr´evision du mod`ele pour l’entr´ee x
+
+aﬁn de pr´edire l’avenir. Si f est une fonction `a deux classes, on parle
+d’apprentissage de concept.
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+10 / 40
+
+Approches de pr´evision de liens
+
+Approches dyadiques / topologiques
+
+Approche bas´ee sur l’apprentissage automatique
+
+[1]: pour chaque paire de nœuds (x, y ) ∈ VO ∩ VE o`u < x, y > /∈ EO . Et x,y sont
+dans le mˆeme composante connexe.
+
+On calcule un ensemble d’attributs (ou mesures) sur le graphe GO .
+
+Les valeurs des attributs calcul´es pour le couple (x, y ) seront stock´ees dans
+le vecteur caract´eristique F(x,y ).
+
+Chaque vecteur F(x,y ) repr´esente un exemple d’apprentissage.
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+11 / 40
+
+Approches de pr´evision de liens
+
+Approches dyadiques / topologiques
+
+Approche bas´ee sur l’apprentissage automatique
+
+Les exemples d’apprentissage sont ensuite ´etiquet´es :
+
+Classe positive : les paires de nœuds qui sont li´ees dans GE .
+Classe n´egative : les paires de nœuds qui ne sont pas connect´ees dans
+GE , et dont l’un des nœuds participe `a la construction d’un exemple
+positif.
+
+On applique enﬁn un algorithme d’apprentissage supervis´e.
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+12 / 40
+
+Approches structurelles
+
+Approches structurelles
+
+Apprentissage de r`egles d’´evolution de sous-graphes caract´eristiques
+(fr´equents) dans le r´eseau temporel (G1, . . . , GT )
+Permet de pr´edire l’apparition / disparition d’un ensemble de liens
+
+Aspect temporel explicitement abord´e
+Tr`es expressif : graphes ´etiquet´es (nœuds comme arˆetes) → processus
+complexe pour des graphes de taille moyenne
+2 travaux :
+
+Extraction de r`egles de r´eecriture des graphes [10]
+Extraction de motifs de r`egles d’´evolution de sous-graphes fr´equents [3]
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+13 / 40
+
+Approches structurelles
+
+Apparition de groupes de liens [4]
+
+Un graphe dynamique est not´e DG (Gts ) = (VDG , EDG , es), o`u
+VDG = Vi pour tout 1 ≥ i ≥ n (pas d’apparition de nœuds dans le
+
+graphe temporel) et EDG =(cid:83)n
+
+i=1 Ei .
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+14 / 40
+
+Approches structurelles
+
+Apparition de groupes de liens [4]
+
+Un graphe dynamique est not´e DG (Gts ) = (VDG , EDG , es), o`u
+VDG = Vi pour tout 1 ≥ i ≥ n (pas d’apparition de nœuds dans le
+
+graphe temporel) et EDG =(cid:83)n
+
+i=1 Ei .
+
+Chaque ´el´ement e de EDG (arˆete) est repr´esent´e dans es par une
+chaˆıne de bits de longueur n. Le bit de rang i pour l’arˆete e indique
+que e ´etait pr´esente dans le graphe Gi .
+Les nœuds du graphe peuvent ´eventuellement ˆetre ´etiquet´es
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+14 / 40
+
+Approches structurelles
+
+Apparition de groupes de liens [4]
+
+Un sous-graphe dynamique DSG1 = (V1, E1, L1, es1, start1) est un
+sous-graphe dynamique d’un graphe dynamique DG2 s’il existe un
+sous-graphe topologique S de DG2 qui apparaˆıt dans au moins k
+graphes cons´ecutifs de DG2.
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+15 / 40
+
+Approches structurelles
+
+Apparition de groupes de liens [4]
+
+Recherche des sous-graphes dynamiques fr´equents.
+
+Extension d’un algorithme de fouille de graphe GREW [9] pour
+extraire des sous-graphes dynamiques.
+
+Premi`ere formalisation, hybride graphe-s´equence. Algorithme peu
+eﬃcace et limit´e `a des petits graphes.
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+16 / 40
+
+Approches structurelles
+
+Apparition de groupes de liens [10]
+
+Etant donn´e un r´eseau temporel (G1, . . . , GT ), le but est de pr´edire
+l’apparition d’un ensemble de liens pour un T (cid:48) ﬁx´e avec T (cid:48) > T .
+
+Gi = (Vi , Ei ), avec V =(cid:83)T
+
+i=1 Vi
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+17 / 40
+
+Approches structurelles
+
+Apparition de groupes de liens [10]
+
+Etant donn´e un r´eseau temporel (G1, . . . , GT ), le but est de pr´edire
+l’apparition d’un ensemble de liens pour un T (cid:48) ﬁx´e avec T (cid:48) > T .
+
+Gi = (Vi , Ei ), avec V =(cid:83)T
+
+i=1 Vi
+
+Graphe relationnel : chaque nœud est identiﬁ´e de mani`ere unique,
+graphe non pond´er´e.
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+17 / 40
+
+Approches structurelles
+
+Apparition de groupes de liens [10]
+
+Etant donn´e un r´eseau temporel (G1, . . . , GT ), le but est de pr´edire
+l’apparition d’un ensemble de liens pour un T (cid:48) ﬁx´e avec T (cid:48) > T .
+
+Gi = (Vi , Ei ), avec V =(cid:83)T
+
+i=1 Vi
+
+Graphe relationnel : chaque nœud est identiﬁ´e de mani`ere unique,
+graphe non pond´er´e.
+Soit un graphe G(cid:48) = (V (cid:48), E(cid:48)) tel que V (cid:48) ⊆ V , l’ ensemble support de
+G(cid:48) est ´egal `a {t | G(cid:48) ⊆ Gt}. La taille de l’ensemble de support est
+appel´ee support de G(cid:48). Un graphe est fr´equent si son support est plus
+grand qu’un seuil minsup ﬁx´e par un utilisateur.
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+17 / 40
+
+Approches structurelles
+
+Apparition de groupes de liens [10]
+
+Repr´esentation d’un graphe relationnel `a l’instant t, Gt : chaque
+interaction entre deux individus ij et ik est not´ee par un attribut aij .
+aij = 1 si i interagit avec j dans Gt, 0 sinon.
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+18 / 40
+
+Approches structurelles
+
+Apparition de groupes de liens [10]
+
+Repr´esentation d’un graphe relationnel `a l’instant t, Gt : chaque
+interaction entre deux individus ij et ik est not´ee par un attribut aij .
+aij = 1 si i interagit avec j dans Gt, 0 sinon.
+Nombre d’attributs codant un graphe relationnel `a n sommets
+(individus) : n(n − 1) o`u n est le nombre d’individus.
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+18 / 40
+
+Approches structurelles
+
+Apparition de groupes de liens [10]
+
+Repr´esentation d’un graphe relationnel `a l’instant t, Gt : chaque
+interaction entre deux individus ij et ik est not´ee par un attribut aij .
+aij = 1 si i interagit avec j dans Gt, 0 sinon.
+Nombre d’attributs codant un graphe relationnel `a n sommets
+(individus) : n(n − 1) o`u n est le nombre d’individus.
+→ dans ce cas particulier des graphes relationnels, la fouille de
+graphes fr´equents peut se ramener `a la recherche de motifs fr´equents
+(clos).
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+18 / 40
+
+Approches structurelles
+
+Apparition de groupes de liens [10]
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+19 / 40
+
+Approches structurelles
+
+Apparition de groupes de liens [10]
+
+Soit x et y deux interactions (arˆetes dans le graphe relationnel). On
+cherche `a identiﬁer le d´elai le plus probable δx,y au bout duquel y va
+apparaˆıtre quand x est observ´e (avec une tol´erance).
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+19 / 40
+
+Approches structurelles
+
+Apparition de groupes de liens [10]
+
+Soit x et y deux interactions (arˆetes dans le graphe relationnel). On
+cherche `a identiﬁer le d´elai le plus probable δx,y au bout duquel y va
+apparaˆıtre quand x est observ´e (avec une tol´erance).
+
+Approche na¨ıve : pour chaque paire x et y d’interactions, associer
+une variable al´eatoire et chercher `a apprendre la distribution de cette
+variable al´eatoire → tr`es coˆuteux
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+19 / 40
+
+Approches structurelles
+
+Apparition de groupes de liens [10]
+
+Soit x et y deux interactions (arˆetes dans le graphe relationnel). On
+cherche `a identiﬁer le d´elai le plus probable δx,y au bout duquel y va
+apparaˆıtre quand x est observ´e (avec une tol´erance).
+
+Approche na¨ıve : pour chaque paire x et y d’interactions, associer
+une variable al´eatoire et chercher `a apprendre la distribution de cette
+variable al´eatoire → tr`es coˆuteux
+Recherche de sous-graphes fr´equents (clos) aﬁn de ”r´esumer” le
+graphe temporel
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+19 / 40
+
+Approches structurelles
+
+Apparition de groupes de liens [10]
+
+1 Recherche de graphes (motifs) clos fr´equents. Chaque graphe Gt est
+
+repr´esent´e par {f1, . . . fn}, les graphes fr´equents qui ont une
+occurrence dans Gt
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+20 / 40
+
+Approches structurelles
+
+Apparition de groupes de liens [10]
+
+1 Recherche de graphes (motifs) clos fr´equents. Chaque graphe Gt est
+
+repr´esent´e par {f1, . . . fn}, les graphes fr´equents qui ont une
+occurrence dans Gt
+
+2 Construction de r`egles Fi →x Fj , o`u Fi et Fj sont des graphes clos
+fr´equents, qui d´enote que Fj apparaˆıt x ´etapes apr`es Fi (tol´erance
+pour x)
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+20 / 40
+
+Approches structurelles
+
+Apparition de groupes de liens [10]
+
+1 Recherche de graphes (motifs) clos fr´equents. Chaque graphe Gt est
+
+repr´esent´e par {f1, . . . fn}, les graphes fr´equents qui ont une
+occurrence dans Gt
+
+2 Construction de r`egles Fi →x Fj , o`u Fi et Fj sont des graphes clos
+fr´equents, qui d´enote que Fj apparaˆıt x ´etapes apr`es Fi (tol´erance
+pour x)
+
+3 Pour chaque Fi observ´e `a l’´etape t, les paires (Fi , Fj ) sont ´etudi´ees
+
+pour tout j et une pr´ediction est faite pour Fj au temps t + Φ(Fi , Fj )
+(plus forte densit´e de probabilit´e).
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+20 / 40
+
+Approches structurelles
+
+Apparition de groupes de liens [10]
+
+1 Recherche de graphes (motifs) clos fr´equents. Chaque graphe Gt est
+
+repr´esent´e par {f1, . . . fn}, les graphes fr´equents qui ont une
+occurrence dans Gt
+
+2 Construction de r`egles Fi →x Fj , o`u Fi et Fj sont des graphes clos
+fr´equents, qui d´enote que Fj apparaˆıt x ´etapes apr`es Fi (tol´erance
+pour x)
+
+3 Pour chaque Fi observ´e `a l’´etape t, les paires (Fi , Fj ) sont ´etudi´ees
+
+pour tout j et une pr´ediction est faite pour Fj au temps t + Φ(Fi , Fj )
+(plus forte densit´e de probabilit´e).
+
+4 Evaluation de la pertinence de la r`egle en calculant
+
+(0.9 dans les exp´eriences)
+
+#pr´edictions correctes
+
+#pr´edictions
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+20 / 40
+
+Approches structurelles
+
+Apprentissage de motifs p´eriodiques [11]
+
+Soit un graphe temporel G =< (V1, E1), . . . , (Vn, En) > et un graphe
+F = (Vf , Ef ) avec Vf ⊆ V . F apparaˆıt p´eriodiquement dans G si la
+diﬀ´erence entre deux apparitions de F dans G est constante (ou
+presque).
+
+Le sous-graphe bleu est fr´equent pour minsup = 3, mais il n’est pas
+p´eriodique, Le sous-graphe rouge est fr´equent et p´eriodique.
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+21 / 40
+
+Approches structurelles
+
+Apprentissage de r`egles d’´evolution de graphes [3]
+
+Entr´ee: un graphe temporel G = (G1, . . . , GT ). Ne consid`ere que
+l’ajout de nœuds ou d’arˆetes au cours du temps.
+
+Sorties: r`egles de la forme :
+
+Les nœuds et les arˆetes peuvent voir des ´etiquettes, ´eventuellement
+complexes : degr´e du nœud, date de premi`ere apparition du lien, ...
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+22 / 40
+
+Approches structurelles
+
+Apprentissage de r`egles d’´evolution de graphes [3]
+
+Calcul d’un graphe r´esum´e `a partir du graphe temporel : chaque arc
+est ´etiquet´e par la premi`ere date de son apparition
+
+Extraction de motifs temporels relatifs
+
+A partir de ces motifs, extraction de r`egles d’´evolution qui satisfont
+un seuil de conﬁance minimal
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+23 / 40
+
+Approches structurelles
+
+Calcul de support en fouille de graphes
+
+Recherche de sous-graphes fr´equents dans un graphe unique: nombre
+d’occurrences d’un sous-graphe dans un graphe n’est pas
+anti-monotone (recouvrement des occurrences d’un motif).
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+24 / 40
+
+Approches structurelles
+
+Calcul de support en fouille de graphes
+
+Propri´et´es souhait´ees pour le support
+
+Anti-monotone, facile `a calculer
+
+Minimum image based support [6]
+
+Nombre de nœuds uniques dans le graphe G = (V , E ) avec lequel un
+nœud du sous-graphe P = (VP , EP ) est appari´e:
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+25 / 40
+
+Approches structurelles
+
+Calcul de r`egles d’´evolution
+R`egle de la forme corps → tete
+
+corps: toutes les arˆetes du motifs sauf la (les) plus r´ecente(s), si
+connect´e
+tˆete : le motif complet
+
+corps → tete, avec conﬁance support(tete)
+
+support(corps)
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+26 / 40
+
+Approches structurelles
+
+Algorithme gSpan [15]
+
+Fouille de motifs en deux ´etapes :
+G´en´eration de motifs candidats
+Test de la fr´equence de ces candidats
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+27 / 40
+
+Approches structurelles
+
+Algorithme gSpan [15]
+
+Fouille de motifs en deux ´etapes :
+G´en´eration de motifs candidats
+Test de la fr´equence de ces candidats
+
+Pour la fouille de graphes, tester la fr´equence d’un candidat g revient
+`a multiplier les tests d’inclusion g ⊆ Gi (probl`eme NP-complet)
+Optimiser la phase de g´en´eration des candidats pour ´eviter au
+maximum la g´en´eration de
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+27 / 40
+
+Approches structurelles
+
+Algorithme gSpan [15]
+
+Fouille de motifs en deux ´etapes :
+G´en´eration de motifs candidats
+Test de la fr´equence de ces candidats
+
+Pour la fouille de graphes, tester la fr´equence d’un candidat g revient
+`a multiplier les tests d’inclusion g ⊆ Gi (probl`eme NP-complet)
+Optimiser la phase de g´en´eration des candidats pour ´eviter au
+maximum la g´en´eration de
+
+candidats redondants
+faux positifs
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+27 / 40
+
+Approches structurelles
+
+Algorithme gSpan [15]
+
+Fouille de motifs en deux ´etapes :
+G´en´eration de motifs candidats
+Test de la fr´equence de ces candidats
+
+Pour la fouille de graphes, tester la fr´equence d’un candidat g revient
+`a multiplier les tests d’inclusion g ⊆ Gi (probl`eme NP-complet)
+Optimiser la phase de g´en´eration des candidats pour ´eviter au
+maximum la g´en´eration de
+
+candidats redondants
+faux positifs
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+27 / 40
+
+Approches structurelles
+
+Algorithme gSpan [15]
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+28 / 40
+
+Approches structurelles
+
+Algorithme gSpan [15]
+
+Approche Growth: un graphe g peut ˆetre augment´e en y ajoutant une
+arˆete e : on note g + e cet ajout.
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+28 / 40
+
+Approches structurelles
+
+Algorithme gSpan [15]
+
+Approche Growth: un graphe g peut ˆetre augment´e en y ajoutant une
+arˆete e : on note g + e cet ajout.
+L’ajout de e peut (ou non) ajouter un nouveau sommet
+
+g +f e : nouveau sommet (f: forward)
+g +b e : pas de nouveau sommet (b: backward)
+
+Un k-graphe peut ˆetre obtenu `a partir de k diﬀ´erents
+(k − 1)-graphes... pb.
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+28 / 40
+
+Approches structurelles
+
+Algorithme gSpan [15]
+
+D´eﬁnition de codes DFS pour chaque arbre, puis d’un code DFS
+minimal (unique) = repr´esentation canonique d’un graphe
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+29 / 40
+
+Approches structurelles
+
+Algorithme gSpan [15]
+
+Tout sous-graphe de G (fr´equent) peut-ˆetre atteint par un parcours
+en profondeur d’abord dans l’arbre des codes DFS minimaux.
+On ´etend un graphe en d´eveloppant son chemin le plus `a droite. On
+peut soit :
+
+Ajouter un sommet et le relier `a un des sommets sur le chemin le plus
+`a droite (f-arˆete)
+Relier le sommet le plus `a droite `a un des sommets sur le chemin le
+plus `a droite (b-arˆete)
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+30 / 40
+
+Approches structurelles
+
+Recherche `a la gSpan [15]
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+31 / 40
+
+Approches structurelles
+
+Algorithme GERM
+
+Algorithme ”`a la gSpan” [15] sauf pour :
+
+code canonique diﬀ´erent
+
+recherche de motif dans un seul graphe
+
+minimum image based support
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+32 / 40
+
+Approches structurelles
+
+Exp´erimentations [5]
+
+4 jeux de donn´ees : Flick (partage de photos), Y!360 (blog), DBLP,
+ArXiv, ´etiquetage des nœuds : degr´e
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+33 / 40
+
+Approches structurelles
+
+Exp´erimentations pr´evision de liens [5]
+
+Possibilit´e de pr´edire de nouveaux liens entre des nœuds
+d´ej`a existants ainsi qu’entre des nœuds existants et de nouveaux
+nœuds (liens ’old-new’)
+Scores:
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+34 / 40
+
+Approches structurelles
+
+Exp´erimentations pr´evision de liens [5]
+
+Possibilit´e de pr´edire de nouveaux liens entre des nœuds
+d´ej`a existants ainsi qu’entre des nœuds existants et de nouveaux
+nœuds (liens ’old-new’)
+Scores:
+
+pour une r`egle pr´edisant un nouveau lien e : combinaisons conﬁance,
+support, nombre de fois o`u la r`egle pr´edit e, ...
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+34 / 40
+
+Approches structurelles
+
+Exp´erimentations pr´evision de liens [5]
+
+Possibilit´e de pr´edire de nouveaux liens entre des nœuds
+d´ej`a existants ainsi qu’entre des nœuds existants et de nouveaux
+nœuds (liens ’old-new’)
+Scores:
+
+pour une r`egle pr´edisant un nouveau lien e : combinaisons conﬁance,
+support, nombre de fois o`u la r`egle pr´edit e, ...
+pour un ensemble de r`egles pr´edisant un nouveau lien e: aggr´egat des
+scores des r`egles pr´edisant e (somme, max, ...)
+
+R´esultats prometteurs pour la pr´evision de liens ’old-new’ (meilleur
+score: somme des conﬁances des r`egles pr´edisant un lien), plus
+mitig´es pour les old-old (combinaison avec Adamic-Adar).
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+34 / 40
+
+Approches structurelles
+
+Exp´erimentations pr´evision de liens [5]
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+35 / 40
+
+Conclusion
+
+Conclusion
+
+Approches topologiques viables pour la pr´ediction de liens.
+
+Beaucoup de travaux sur des graphes statiques.
+
+Approches topologiques g´en´eralistes `a combiner avec des approches
+bas´ees sur l’exploration des caract´eristiques des nœuds.
+
+Pas de benchmark pour faciliter la comparaison d’approches.
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+36 / 40
+
+Conclusion (2)
+
+Conclusion
+
+Axes de recherche :
+
+Analyse des r´eseaux K-partis, valu´es, et temporels
+Exploration simultan´ee de r´eseaux h´et´erog`enes, approche de fouille de
+graphe
+Approches structurelles : fouille parall`ele de grands graphes.
+
+. . . .
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+37 / 40
+
+Bibliographie I
+
+Bibliographie
+
+Nesserine Benchettara, Rushed Kanawati, and C´eline Rouveirol.
+Supervised machine learning applied to link prediction in bipartite social networks.
+In International Conference on Advances in Social Network Analysis and Mining, ASONAM 2010, 2010.
+
+Nesserine benchettara, Rushed kanawati, and C´eline Rouveirol.
+Calcul de recommendation par pr´ediction de liens dans un graphe biparti.
+In Actes de l’ateiler sur l’apprentissage et graphes pour les syst`emes complexes (plate-forme AFIA 2009), Hammemt,
+Tunisie, Mai 2009.
+
+Michele Berlingerio, Francesco Bonchi, Bj¨orn Bringmann, and Aristides Gionis.
+Mining graph evolution rules.
+In Wray L. Buntine, Marko Grobelnik, Dunja Mladenic, and John Shawe-Taylor, editors, Machine Learning and
+Knowledge Discovery in Databases,, pages 115–130. Springer, September 2009.
+
+K.M. Borgwardt, H.-P. Kriegel, and P. Wackersreuther.
+Pattern mining in frequent dynamic subgraphs.
+In Proc. of International Conference on Data Mining (ICDM 2006), Hong Kong, pages 818–822, 2006.
+
+Bj¨orn Bringmann, Michele Berlingerio, Francesco Bonchi, and Aristides Gionis.
+Learning and predicting the evolution of social networks.
+IEEE Intelligent Systems, 25(4):26–35, 2010.
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+38 / 40
+
+Bibliographie II
+
+Bibliographie
+
+Bj¨orn Bringmann and Siegfried Nijssen.
+What is frequent in a single graph?
+In Takashi Washio, Einoshin Suzuki, Kai Ming Ting, and Akihiro Inokuchi, editors, PAKDD, volume 5012 of Lecture
+Notes in Computer Science, pages 858–863. Springer, 2008.
+
+Zan Huang, Xin Li, and Hsinchun Chen.
+Link prediction approach to collaborative ﬁltering.
+In Mary Marlino, Tamara Sumner, and Frank M. Shipman III, editors, JCDL, pages 141–142. ACM, 2005.
+
+Rushed Kanawati and c´eline Rouveirol.
+Lips: A sna-based system for intelligent management of academic conferences.
+In Proceedings of the 4th International conference on application of Social networkk analysis, Zurich, october 2009.
+
+Michihiro Kuramochi and George Karypis.
+Grew-a scalable frequent subgraph discovery algorithm.
+In Proc. of the 4th IEEE Int. Conf. on Data Mining (ICDM 2004), pages 439–442, 2004.
+
+Mayank Lahiri and Tanya Y. Berger-Wolf.
+Structure prediction in temporal networks using frequent subgraphs.
+In CIDM, pages 35–42. IEEE, 2007.
+
+Mayank Lahiri and Tanya Y. Berger-Wolf.
+Mining periodic behavior in dynamic social networks.
+In ICDM ’08: Proceedings of the 2008 Eighth IEEE International Conference on Data Mining, pages 373–382,
+Washington, DC, USA, 2008. IEEE Computer Society.
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+39 / 40
+
+Bibliographie III
+
+Bibliographie
+
+Neal Lathia, Stephen Hailes, and Licia Capra.
+knn cf: a temporal social network.
+In Pearl Pu, Derek G. Bridge, Bamshad Mobasher, and Francesco Ricci, editors, RecSys, pages 227–234. ACM, 2008.
+
+David Liben-Nowell.
+An Algorithmic Approach tp Social networks.
+PhD thesis, M.I.T., june 2005.
+
+Milen Pavlov and Ryutaro Ichise.
+Finding experts by link prediction in co-authorship networks.
+In Anna V. Zhdanova, Lyndon J. B. Nixon, Malgorzata Mochol, and John G. Breslin, editors, FEWS, volume 290 of
+CEUR Workshop Proceedings, pages 42–55. CEUR-WS.org, 2007.
+
+Xifeng Yan and Jiawei Han.
+gspan: Graph-based substructure pattern mining.
+In Proc. of the 2002 IEEE Int. Conf. on Data Mining (ICDM 2002, pages 721–724, 2002.
+
+C. Rouveirol (LIPN)
+
+Pr´evision de liens dans les r´eseaux sociaux, Approches structurelles
+
+February 21, 2012
+
+40 / 40
+
+

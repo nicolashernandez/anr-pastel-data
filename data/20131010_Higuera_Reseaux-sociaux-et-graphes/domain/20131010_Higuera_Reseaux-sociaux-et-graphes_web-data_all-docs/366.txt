@@ -1,0 +1,1110 @@
+https://iut-info.univ-reims.fr/users/blanchard/J2ISN/ars-fb-20180215-slides.pdf
+
+Analyse des réseaux sociaux
+
+Journée de formation ISN
+
+Frédéric Blanchard
+frederic.blanchard@univ-reims.fr
+
+CReSTIC - Équipe U.T.I.LE
+Département informatique de l’IUT RCC
+Université de Reims Champagne-Ardenne
+
+Les réseaux sociaux
+
+Analyse des contenus
+
+Problèmatiques classiques
+
+Aspects pédagogiques et didactiques
+
+Ressources
+
+2
+
+Les réseaux sociaux
+
+Les réseaux sociaux
+
+Introduction
+
+Définitions
+
+Dans son sens le plus général, un réseau social est un :
+
+• ensemble d’entités
+• ayant des interactions
+• leur conférant un environnement social
+
+5
+
+Exemples
+
+• réseaux professionnels,
+• réseaux associatifs,
+• familles,
+• réseaux sociaux numériques,
+• réseaux de co-auteurs,
+• world wild web.
+
+6
+
+Les réseaux sociaux
+
+L’analyse des réseaux sociaux
+
+Contexte
+
+L’analyse des réseaux sociaux s’est développée grâce
+
+• aux mathématiques,
+• et aux sciences sociales.
+
+Les sciences sociales s’intéressent aux comportements
+des individus dans ces réseaux.
+
+La théorie des graphes permet de modéliser les réseaux
+et fournissent des algorithmes pour les étudier.
+
+8
+
+Problématiques
+
+• Quelles sont les relations d’influence entre les
+
+membres d’un réseau ?
+
+• Qu’est ce qui distingue les différentes
+
+communautés qui constituent un réseau ?
+
+• Y a-t-il une typologie des utilisateurs et des
+
+individus représentatifs ?
+
+• Quelles actions suggérer ou recommander à quel
+
+individu ?
+
+• Qui sont les leaders ?
+
+9
+
+Objectifs
+
+L’objectif n’est évidemment pas le même pour :
+
+• les annonceurs,
+• les commerçants,
+• les administrateurs du réseau,
+• les utilisateurs du réseau,
+• les sociologues.
+
+10
+
+Les actions des individus génèrent des données utilisées
+pour :
+
+• cibler ces individus,
+• diffuser, prescrire, cibler d’autres individus.
+• modéliser leur comportement,
+• prédire leurs actions et celles de leurs relations.
+
+11
+
+Les réseaux sociaux
+
+Modélisation
+
+Première modélisation
+
+Le graphe est un ensemble de points et un ensemble de
+flèches qui les relient1. C’est le modèle naturel du réseau
+social :
+
+• individus ↔ sommets (points)
+• interactions/liens ↔ arcs (flèches)
+
+1Claude Berge, « Graphes et hypergraphes », Dunod, 1970
+
+13
+
+Concrètement
+
+Un graphe est la donnée d’un ensemble V et d’une
+relation binaire sur cet ensemble (i.e. un sous ensemble E
+de V × V).
+Modéliser un réseau social consiste donc simplement à
+définir V et E.
+
+14
+
+Exemple
+
+On peut représenter les utilisateurs de Twitter par un
+graphe de la façon suivante :
+
+• chaque utilisateur est un sommet,
+• lorsque un utilisateur a « suit » un utilisateur b on
+
+ajoute un arc du sommet a au sommet b.
+
+15
+
+Parfois le sens de la flèche n’a pas grand intérêt. On
+utilisera alors un graphe non orienté.
+
+Exemple
+
+Dans LinkedIn, le lien entre deux individus connectés est
+symétrique.
+
+16
+
+Exemple2
+
+2Zachary Karate club dataset
+
+17
+
+12345678910111213141516171819202122232425262728293031323334Les réseaux sociaux
+
+Propriétés et caractéristiques
+
+Ainsi :
+
+• Le degré d’un sommet (demi-degré extérieur et
+
+demi-degré intériieur), son accessibilité depuis les
+autres sommets, les points d’articulation
+
+• la densité d’un graphe, son diamètre, sa connexité,
+
+• le nombre de chemins entre deux sommets,
+
+l’existence de circuits, d’isthmes,
+
+sont des notions élémentaires qui donnent des
+informations importantes sur la structure d’un réseau et
+sur les rôles des individus qui le composent.
+
+19
+
+Les réseaux sociaux
+
+Informations structurales
+
+Classification
+
+Mesures globales
+
+• densité, diamètre, connexité (nombre de comp.)
+• distance géodésique moyenne
+• réciprocité
+
+Mesures locales
+
+• isthmes et points d’articulation, connexité
+• centralité(s)
+
+21
+
+Points d’articulation et isthmes
+
+Exemple
+
+22
+
+1234567891011121314151617181920212223242526Mesures locales de centralité
+
+Quels sont les sommets les plus « importants » ?
+
+Centralité(s)
+
+La centralité d’intermédiarité d’un sommet correspond
+au nombre de fois que ce sommet est sur le plus court
+chemin entre deux autres sommets.
+
+Cette centralité traduit une influence dans les transferts
+d’information dans le réseau.
+
+23
+
+Mesures locales de centralité
+
+Quels sont les sommets les plus « importants » ?
+
+Centralité(s)
+
+La centralité de degré d’un sommet est associé à son
+degré (ainsi qu’à ses demi-degrés entrant et sortant).
+
+Il caractérise la popularité et la grégarité des sommets.
+
+24
+
+Mesures locales de centralité
+
+Quels sont les sommets les plus « importants » ?
+
+Centralité(s)
+
+La centralité de proximité d’un sommet l’inverse de sa
+distance à tous les autres sommets.
+
+Cette centralité traduit une influence dans les transferts
+d’information dans le réseau.
+
+25
+
+Les réseaux sociaux
+
+La star des indicateurs
+
+le pagerank34
+
+Objectif
+
+Déterminer l’importance des pages web à l’aide d’un
+indicateur quantitatif afin de les classer
+
+Remarque : initialement conçu pour un réseau de pages
+web, le pagerank s’utilisedans tous les types de réseau
+
+3Michael Eisermann, « L’algorithme du Pagerank de Google : une promenade sur
+la toile », APMEP no489
+4Sergey Brin and Lawrence Page, « The Anatomy of a Large-Scale Hypertextual
+Web Search Engine », Seventh International World-Wide Web Conference (WWW
+1998), April 14-18, 1998, Brisbane, Australia.
+
+27
+
+Principe
+
+Une page est d’autant plus importante que :
+
+• le nombre de pages qui la référencent est grand
+• les pages qui la référencent sont importantes
+• les pages qui la référencent en référencent peu
+
+28
+
+Idée de l’algorithme : le surfeur aléatoire
+
+Le résultat obtenu est associé à la probabilité de parvenir
+à chaque page en cliquant « au hasard » sur les liens.
+
+29
+
+Exemple
+
+30
+
+12345678Matrice d’ajacence
+
+M = (mi,j)i=1,...,n
+j=1,...,n
+vers j.
+
+mi,j indique la présence d’un arc de i
+
+
+
+
+
+0 0 0 0 1 0 0 0
+1 0 1 0 1 1 1 0
+1 0 0 0 0 0 0 1
+1 0 0 0 0 0 0 0
+1 1 0 1 0 1 1 0
+1 1 1 0 1 0 1 0
+0 0 0 0 1 0 0 0
+0 0 1 0 1 0 0 0
+
+31
+
+Matrice de transition T
+
+T = (ti,j)i=1,...,n
+j=1,...,n
+
+où ti,j est la probabilité de passage de la page j vers la
+page i en cliquant « au hasard ».
+
+32
+
+
+
+0.00 0.20 0.50 1.00 0.20 0.20 0.00 0.00
+0.00 0.00 0.00 0.00 0.20 0.20 0.00 0.00
+0.00 0.20 0.00 0.00 0.00 0.20 0.00 0.50
+0.00 0.00 0.00 0.00 0.20 0.00 0.00 0.00
+1.00 0.20 0.00 0.00 0.00 0.20 1.00 0.50
+0.00 0.20 0.00 0.00 0.20 0.00 0.00 0.00
+0.00 0.20 0.00 0.00 0.20 0.20 0.00 0.00
+0.00 0.00 0.50 0.00 0.00 0.00 0.00 0.00
+
+
+
+33
+
+Vecteur de position après 2 clics aléatoires
+
+
+
+
+
+0.17
+0.08
+0.05
+0.07
+0.39
+0.08
+0.09
+0.06
+
+34
+
+Vecteur de position après 10 clics aléatoires
+
+
+
+
+
+0.20
+0.09
+0.05
+0.07
+0.36
+0.09
+0.11
+0.02
+
+35
+
+Vecteur de position après 20 clics aléatoires
+
+
+
+
+
+0.20
+0.09
+0.05
+0.07
+0.36
+0.09
+0.11
+0.02
+
+36
+
+Vecteur de position après 100 clics aléatoires
+
+
+
+
+
+0.20
+0.09
+0.05
+0.07
+0.36
+0.09
+0.11
+0.02
+
+37
+
+Parade anti « trous noirs »
+
+Éviter les problèmes d’accessibilité.
+
+À chaque étape :
+
+• on choisit une des n pages avec probabilité α
+• ou on effectue le surf aléatoire, défini par T, avec
+probabilité 1 − α
+
+38
+
+Analyse des contenus
+
+Tout ce que nous venons de voir concerne
+essentiellement la structure du réseau social.
+
+On peut aussi être intéressé par les éléments de
+contenus qui viennent enrichir les sommets et les arcs :
+
+• profil utilisateurs,
+• clics, pages vues, articles achetés,
+• nombre de vues d’un article,
+• nombre d’interactions avec un autre utilisateur
+
+40
+
+Analyse des contenus
+
+Modélisation avancée
+
+Graphes pondérés
+
+42
+
+22524412345Graphes bipartis
+
+43
+
+12345678Analyse de données et apprentissage automa-
+
+tique
+
+Au delà du modèle, il est nécessaire de faire appel aux
+méthodes d’analyse et d’exploration de données.
+
+Par exemple :
+
+• le clustering
+• les méthodes factorielles
+• l’extraction de règles d’association
+
+44
+
+Problèmatiques classiques
+
+Les recherches sur l’analyse des réseaux sociaux
+concernent de nombreux champs thématiques parmi
+lesquels :
+
+• les sciences du comportement,
+• la théorie des graphes et des réseaux,
+• l’analyse des données,
+• l’apprentissage automatique.
+
+46
+
+Les sujets qui suscitent le plus d’intérêt sont notamment
+:
+
+• la détection de communautés et de leaders
+• la recommandation,
+• la prédiction de liens.
+
+47
+
+Difficultés
+
+Les défis à relever sont liés :
+
+• au volume,
+• à la fiabilité,
+• à l’hétérogénéité,
+• à l’absence
+
+des données nécessaires.
+
+(Problèmes de « Big Data »)
+
+48
+
+Problèmatiques classiques
+
+Détection de communautés
+
+Communautés
+
+Les communautés d’un réseau sont définies comme des
+sous-graphes à forte densité.
+
+La recherche de communauté consiste à trouver une
+partition de l’ensemble des sommets.
+
+50
+
+Intérêt
+
+La détection de communautés permet regrouper les
+individus par similarité de comportement et de
+construire des typologies de ces individus.
+
+Remarque : Les objectifs sont comparables à ceux de la
+segmentation clientèle en marketing.
+
+51
+
+Clustering
+
+La détection de communauté peut être vue comme une
+classification automatique des données (ou clustering).
+
+Le principe du clustering est de partitionner les individus
+en classes de sorte que :
+
+• deux individus suffisamment dissimilaires sont dans
+
+des classes différentes
+
+• deux individus suffisamment similaires
+
+appartiennent à la même classe
+
+52
+
+Clustering
+
+Mathématiquement
+
+Il faut :
+
+• définir une mesure de similarité/dissimarité sur
+
+l’ensemble des individus (qui dépend des variables
+de description des individus)
+
+• mettre en place des algorithmes qui :
+
+• maximisent l’inertie inter-classe
+• minimisent l’inertie intra-classe induites par cette
+
+mesure.
+
+53
+
+Clustering
+
+On distingue principalement deux catégories
+d’algorithmes :
+
+1. algorithmes de partitionnement
+
+• k-moyennes,
+• pam
+
+2. algorithmes hiérarchiques
+
+• CAH
+
+54
+
+Application à la détection de communauté
+
+Deux approches :
+
+• approche structurale (la (dis)similarité est définie
+
+par les liens)
+
+• approche « contenus » (la (dis)similarité est définie
+
+par les descriptions des sommets)
+
+55
+
+Algorithmes de classification automatique
+
+Ouvrages et supports de cours :
+
+• L. Lebart (Auteur) A. Morineau, M. Piron
+
+« Statistique exploratoire multidimensionnelle »
+(4ème édition), Dunod, 2006
+
+• Supports de cours de R. Rakotomalala
+
+56
+
+Un algorithme basé-liens :
+vain5
+
+l’algorithme de Lou-
+
+Principe
+
+Regroupements successifs des sommets par
+maximisation de la mesure de modularité.
+
+5V. D. Blondel, J.-L. Guillaume, R. Lambiotte and E. Lefebvre. « Fast unfolding of
+communities in large networks ». J. Stat. Mech. P10008, volume 2008, October
+2008
+
+57
+
+Un algorithme basé-lien : l’algorithme de Louvain
+
+Modularité
+
+La mesure de modularité quantifie l’écart entre le
+nombre de liens dans une communauté et ce que serait
+ce nombre dans un réseau aléatoire.6
+
+6F. Fogelman Soulié et E. Viennet, « L’analyse des réseaux sociaux », Bulletin de la
+société informatique de France – numéro 8, avril 2016
+
+58
+
+∑
+
+i,j=1,...,n
+
+)
+
+(
+Mi,j − ki.kj
+
+2m
+
+Q =
+
+1
+2m
+
+δ(ci, cj)
+
+où :
+
+• Mi,j est le poids le l’arête i, j (0 si i et j ne sont pas
+
+liés)
+
+• ki est la somme des poids des arêtes ayant i comme
+
+extrêmité
+
+• ci est la communauté du sommet i
+• δ(u, v) = 1 si u = v et 0 sinon
+• m est la somme des poids des arêtes du graphe.
+
+59
+
+Un algorithme basé-lien : l’algorithme de Louvain
+
+Algorithme
+
+1. Initialisation :
+
+chaque sommet constitue une communauté
+
+2. Répéter jusqu'à stabilisation
+
+Pour chaque sommet s
+
+Pour chaque voisin t de s
+
+Si la modularité augmente lorsque s
+
+rejoint la communauté de t Alors :
+
+Affecter s à la communauté de t
+
+60
+
+Un algorithme basé-lien : l’algorithme de Louvain
+
+Algorithme
+
+3. Modifier le graphe en remplaçant chaque communauté
+
+par un sommet (le poids d'une arête entre deux
+
+communautés est la somme des poids des arêtes
+
+qui les relient)
+
+4. Répéter 2 et 3 jusque à stabilisation
+
+de la modularité
+
+61
+
+Exemple
+
+62
+
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465Exemple
+
+63
+
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465Problèmatiques classiques
+
+Systèmes de recommandation
+
+Objectif
+
+Personnaliser les suggestions :
+
+• d’achats,
+• d’articles,
+• de vidéos,
+• d’amis.
+
+pour les rendre plus pertinentes.
+
+65
+
+Deux types de recommandation
+
+Là encore, on distingue les recommandations :
+
+• de contenus (articles, achats, vidéos) [Facebook,
+
+Twitter, Amazon]
+
+• de liens (amis)
+
+(les algorithmes sont souvent mixtes : on utilise les liens
+pour suggérer des contenus et inversement)
+
+66
+
+Filtrage collaboratif
+
+L’idée du filtrage collaboratif est de :
+
+• sélectionner les éléments à présenter à l’utilisateur,
+• en utilisant les préférences des autres utilisateurs
+
+67
+
+Données de comportement
+
+Les données recueillies sur le comportement des
+utilisateurs est le socle de ces moteurs de
+recommandations :
+
+• notes attribuées, commentaires déposés,
+
+évaluations
+
+• clics, recherches, achats, temps passé, fréquence de
+
+visite
+
+68
+
+Modélisation
+
+On doit d’abord distinguer :
+
+• les items (produits, textes, photos)
+• les utilisateurs, qui évaluent les items ou expriment
+
+leurs préférences
+
+69
+
+Recherche de profils similaires
+
+On met en place un calcul de similarité entre les
+utilisateurs basé sur leurs profils de préférences.
+
+Exemple : corrélation
+
+On obtient alors un voisinage de l’utilisateur, dans lequel
+on va puiser les recommandations.
+
+70
+
+Approches centrées sur les items
+
+En trouvant les items fréquemment associés par les
+utilisateurs du réseau, on dispose de règles pour guider
+les recommandations.
+
+Cette approche, empruntée au data mining est appelée
+« découverte de règles d’associations »
+
+L’algorithme apriori est le plus utilisé (il repose sur la
+recherche des frequent itemsets)
+
+71
+
+Problèmatiques classiques
+
+Application à l’analyse de données
+
+médicales
+
+Projet COSYRES
+
+• thèse de Joris Falip, débutée en septembre 2016
+• collaboration CReSTIC et service endocrinologie du
+
+CHU de Reims
+
+• réseau de santé CAREDIAB
+
+Objectif : concevoir un système de recommandation pour
+aider les médecins à exploiter les données recueillies
+
+73
+
+Données et problématique
+
+Données
+
+• Données d’actes médicaux
+• de 1900 patients atteints de diabète
+
+Problématique
+
+Exploration / explication de la survenue des
+complications
+
+74
+
+Idée7
+
+« Augmenter » le raisonnement par analogie/association
+des médecins en utilisant les informations contenues
+dans ces masses de données pour :
+
+• Faire émerger de nouvelles hypothèses sur la
+
+survenue des complications
+
+• Mettre en avant les cas atypiques
+
+7Visual instance-based recommendation system for medical data mining. J. Falip,
+A. Aït Younes, F. Blanchard, B. Delemer, A. Diallo et M. Herbin Knowledge-Based
+and Intelligent Information Engineering Systems (KES), Procedia Computer
+Science, vol. 122, pp 1747-1754, Elsevier, Marseille, septembre 2017.
+
+75
+
+Comment
+
+Structuration
+
+• Chaque patient (ou cas) est comparé à tous les
+
+autres
+
+• Les classements obtenus sont agrégés pour définir
+
+des indices de représentativité et de singularité
+
+• Les patients sont ensuite liés dans un graphe
+
+orienté
+
+76
+
+Comment
+
+Utilisation
+
+• Cette structuration en réseau permet ensuite de
+
+faire des recommandations sous forme
+d’associations.
+
+Exemple :
+
+• Le Dr. B, saisit les caractéristiques d’un nouveau
+
+patient
+
+• Le système lui suggère alors une liste de cas
+
+emblématiques similaires ainsi qu’une liste de cas
+singuliers/rares (suffisamment similaires).
+
+77
+
+Comment
+
+Amélioration, renforcement
+
+• L’évaluation par le médecin, des recommandations
+
+qui lui sont faites, sont prises en compte pour
+améliorer le moteur de suggestion en l’adaptant au
+profil du médecin qui l’utilise.
+
+78
+
+Outil
+
+Figure 1: Graphe de structuration des cas
+
+79
+
+Outil
+
+Figure 2: Interface de consultation d’une fiche patient
+
+80
+
+Aspects pédagogiques et
+didactiques
+
+Approche « construction »
+
+Objectif
+
+• Comprendre la structure d’un réseau
+• Comprendre
+
+Méthode
+
+• Construire les réseaux :
+• structures de données
+• primitives
+
+• Implémenter les algorithmes
+
+• de calcul des indicateurs
+• de résolution de problèmes simples
+
+82
+
+Approche « construction »
+
+Notions nécessaires
+
+• Éléments de théorie des graphes
+
+• définitions élémentaires
+• représentations
+
+listes d’arcs
+
+•
+• ou matrice d’adjacence
+
+• Structures de données
+
+• tableaux 1D ou listes
+• tableaux 2D pour les matrices d’adjacence
+
+83
+
+Approche « construction »
+
+Outils
+
+Python
+
+• manipulation : numpy
+• visualisation/rendu : pygraphviz, graphviz, igraph
+
+(nécessite souvent un programme tiers)
+
+84
+
+Approche « construction »
+
+Avantages
+
+• Les graphes sont un support formidable
+• Mise en place d’algorithmes très simples
+
+85
+
+Approche « construction »
+
+Inconvénients
+
+• La visualisation peu nécessiter de « camoufler » des
+
+outils et des notions plus avancées de
+programmation
+
+• Les algorithmes à mettre en place peuvent se
+
+compliquer rapidement
+
+• L’approche incrémentale peut poser des problèmes
+
+86
+
+Approche « utilisation »
+
+Objectifs
+
+• Visualiser et explorer la structure d’un réseau
+• Choisir et interpréter un indicateur
+
+87
+
+Approche « utilisation »
+
+Méthodes
+
+• Générer/créer des réseaux
+
+• Utiliser les bibliothèques dédiées (en python, on
+
+retiendra principalement igraph et networkx) pour
+les explorer.
+
+88
+
+Approche « utilisation »
+
+Avantages
+
+• Peu d’algorithmique
+• Résultats rapides
+
+89
+
+Approche « utilisation »
+
+Inconvénients
+
+• Les bibliothèques sont pour la plupart
+
+orientées-objets
+
+• Effet « boîte noire » un peu frustrant
+
+90
+
+Approche logicielle
+
+Voir Les principaux logiciels pour l’analyse de réseau
+
+91
+
+Atelier
+
+Ces deux approches sont illustrées dans l’atelier
+d’accompagnement de cette présentation.
+
+92
+
+Ressources
+
+Ouvrage de référence (près de 30000 citations)
+
+Wasserman, S., & Faust, K. (1994). Social network
+analysis: Methods and applications (Vol. 8). Cambridge
+university press.
+
+94
+
+Chercheurs, équipes, groupes de recherche
+
+Travaux du Groupe f.m.r. (flux, matrices, réseaux)
+
+Slides et articles d’Emmanuel Viennet (L2TI, Paris 13)
+
+L’équipe KIWI (LORIA, Nancy)
+
+95
+
+Ressources « en vrac »
+
+Awesome Network Analysis
+
+96
+
+N’oubliez pas de noter cette présentation !
+
+Figure 3: Black mirror, « Nosedive » (S03E01)
+
+97
+
+

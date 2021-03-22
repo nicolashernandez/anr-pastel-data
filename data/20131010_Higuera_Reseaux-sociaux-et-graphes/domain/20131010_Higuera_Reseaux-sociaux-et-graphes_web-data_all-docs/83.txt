@@ -1,0 +1,1505 @@
+http://lipn.fr/~kanawati/ars/OLD/new-lpcopurs.pdf
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Prévision de liens dans les réseaux sociaux
+
+Rushed Kanawati
+
+A3 - LIPN UMR CNRS 7030
+
+Université Paris 13
+
+rushed.kanawati@lipn.univ-paris13.fr
+
+Rushed Kanawati
+
+1 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Plan
+
+Introduction
+
+Approches de prédiction de liens
+Problèmes similaires
+
+Approches de prédiction de liens
+
+Classiﬁcation
+Approches dyadiques / topologiques
+Prédicteurs simples
+Apprentissage automatique
+Approches basées sur le contenu des nœuds
+Approches temporelles
+Approches structurelles
+
+Conclusion
+
+Bibliographie
+
+Rushed Kanawati
+
+2 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Prédiction de liens : déﬁnition
+
+• Déﬁnition informelle : prédire la formation d’un lien entre deux
+
+nœuds jamais connectés auparavant.
+
+• Soit G =< G1, G2, . . . , GT > un réseau temporel de réseaux
+sociaux, Gi est le graphe du réseau social à l’instant i. La
+tâche de prédiction de liens consiste à prédire pour chaque
+(u, v ) ∈ ET +1.
+
+couple v , u ∈(cid:84)T
+
+i=1 Vi tels que (cid:54) ∃Ej (u, v ) ∈ Ej si
+
+Rushed Kanawati
+
+3 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Application : système de recommandation
+
+• Recommandation de produits = prédiction de liens dans le
+
+graphe biparti [HLC05a, LHC08, bkR09].
+
+• L’analyse des réseaux sociaux est une solution au problème
+
+posé par les matrices de transactions souvent creuses.
+
+Rushed Kanawati
+
+4 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Application : recommandation de collaborations
+
+académiques
+
+• Recommandation de collaboration = prédiction de liens dans le
+
+graphe projeté / auteurs [PI07, LN05, KcR09].
+
+Rushed Kanawati
+
+5 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Autres applications
+
+• Aide à la navigation sur le Web [Zhu03]
+• Aide à la réponse des questions sur forums [MM08], help-desk
+
+[Kan08]
+
+• Etude de propagation des virus informatiques par e-mail
+
+[LNH03]
+
+• . . .
+
+Rushed Kanawati
+
+6 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Problème similaire : liens cachés (1)
+
+• Etant donné un réseau Gt =< V , E > observé à l’instant t, la
+tâche de détection de liens cachés consiste à trouver les liens
+manquants à l’instant t.
+
+• Origine : information manquante, dissimulation d’information.
+
+Rushed Kanawati
+
+7 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Problème similaire : liens cachés (2)
+
+• [Coo06] : Comparer les caractéristiques topologiques des
+nœuds impliqués en liens cachés (LC) / liens en formation
+(LF).
+
+temporel de réseaux sociaux.
+
+• Méthodologie : éliminer aléatoirement des liens dans un réseau
+• Pour LC, le nombre de voisins communs est deux fois plus
+• Pour LC, le produit des degrés des nœuds impliqués est deux
+• LC : distribution des degrés des nœuds plus étalée.
+• Pas de diﬀérence signiﬁcative en ce qui concne les distances !
+
+grand que pour LF.
+
+fois plus petit que pour LF.
+
+Rushed Kanawati
+
+8 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Problème similaire : complétion de liens
+
+• Dans un graphe G =< V , E >, on considère un nœud v ∈ V
+
+dont on connaît le degré réel d (v ) > dG (v ). Le problème
+consiste à trouver les nœuds ui ∈ V auxquels v est
+susceptible d’être lié [GKK+03].
+
+• Exemple : Un client achète 4 livres sur un site de e-commerce
+
+mais le nom d’un des livres achetés est perdu dans la
+transaction. Quel est ce livre ?
+
+• Alice, Bob et une troisième personne ont fait une réunion.
+
+Identiﬁer cette personne inconnue en fonction des liens connus.
+• Dans [GKK+03], on se limite à examiner le cas d’un seul nœud
+
+inconnu.
+
+Rushed Kanawati
+
+9 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Problème similaire : liens alarmants
+
+• Etant donné un réseau temporel G =< G1, G2, . . . , GT >, le
+problème est de classiﬁer les nouveaux liens qui apparaissent
+dans GT en deux classes : {normal, anormal}, en fonction de
+l’évolution du réseau [RJ05]
+
+• Problème plus facile que la prédiction de liens.
+
+Rushed Kanawati
+
+10 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Problème similaire : évolution des réseaux
+
+[HZLG08] : déﬁnition de trois niveaux de granularité pour observer
+et/ou prédire l’évolution d’un réseau.
+
+• Niveau réseau
+
+• Leskovec et al. [LKF05], évolution des paramètres des réseaux :
+
+diamètre décroissant et densiﬁcation des degrés dans des
+réseaux de co-citations.
+
+• Barabasi et al. [BJN+02], réseaux de co-auteurs, domaine des
+
+maths et des neurosciences. Evolution gouvernée par
+l’attachement préférentiel (lien internes et externes),
+augmentation du degré moyen et décroissance de la séparation
+entre les nœuds.
+
+• Niveau communauté : évolution des communautés par taille et
+
+des communautés de thèmes
+
+Rushed Kanawati
+
+11 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Evolution d’un réseau de co-publications scientiﬁques
+
+• Niveau “individus” :
+
+• Déﬁnition d’un modèle de poisson stochastique pour modéliser
+
+le nombre de collaborations dans le temps, puis d’un arbre
+d’optimisation pour optimiser le modèle.
+
+• Pour une collaboration existante au temps t ei,j (t), on extrait
+un sous-graphe G (ei,j (t)) de voisinage de ei,j (t) : les auteurs
+vi, vj, leurs voisins immédiats (co-auteurs) et les arcs associés.
+• Un vecteur d’attributs ai,j = (a1, . . . , ap) est calculé à partir de
+• Pour un arc spéciﬁque ei,j (t), le taux de collaboration
+
+ce voisinage
+
+λ(ei,j (t)) = f (ai,j (t)), apprentissage de f (ai,j (t) par arbre
+d’optimisation, technique inspirée des arbres de régression
+[BFOS84]
+
+Rushed Kanawati
+
+12 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Approches de prédiction de liens
+
+Trois critères de classiﬁcation :
+
+• Approche : Dyadiques / Structurelles.
+
+• Dyadique : Evaluer le score d’un lien entre deux nœuds vi , vj
+• Structurelle : prédire l’évolution de sous-graphes (prédiction de
+
+plusieurs liens en même temps) [LBW07]
+
+• Type d’attributs : topologiques / caractéristiques des
+
+nœuds.
+
+• Approche topologique : utiliser seulement le graphe du réseau.
+• L’emploi des approches fondées sur l’analyse du contenu des
+
+nœuds nécessite une expertise dans le domaine de l’application.
+
+• Prise en compte du temps : Oui / non.
+
+Rushed Kanawati
+
+13 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Approches dyadiques topologiques
+
+• Score d’un lien (u, v ) est calculé comme une fonction des
+
+caractéristiques topologiques de u et v
+
+• Deux familles de mesures de similarités topologiques :
+
+des centralités, pageRank, etc.
+
+• Produits des caractéristiques des nœuds : produit des degrés,
+• Mesures basées sur le voisinage des nœuds
+• Mesures basées sur les distances entre les nœuds
+
+Rushed Kanawati
+
+14 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Prédiction de lien sur la base d’attributs simples
+
+• [LK07] : Prédicteur de lien = un unique attribut topologique
+• Tous les exemples (paires de nœuds) sont ordonnés, par ex., en
+
+fonction du plus court chemin les reliant
+
+• Autres attributs topologiques : graph distance, voisins
+
+communs, coeﬃcient de Jaccard, Adamic Adar, preferential
+attachement, Katz, hitting time, rooted pageRank, SimRank
+
+Rushed Kanawati
+
+15 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Prédiction de lien sur la base d’attributs simples
+
+• Réseau unimodal de co-auteurs : nœud = auteur, lien = un
+
+article co-signé. Pas de poids, pas de gestion du temps.
+
+• Tâche : prédire l’apparition, dans le graphe d’étiquetage, d’un
+
+lien entre deux nœuds non connectés dans le graphe
+d’apprentissage
+
+Rushed Kanawati
+
+16 / 58
+
+• Construction des exemples
+
+une période T1
+
+• Graphe d’apprentissage : les auteurs ayant co-signé pendant
+• Graphe d’étiquetage : les auteurs ayant co-signé pendant une
+• Exemples appartenant à une même composante connexe
+
+période T2 postérieure à T1
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Utilisation d’attributs pondérés pour la prédiction de liens
+
+• [MM08] : Application : forums sur le Yahoo japonais. Noeud :
+personne, lien entre p1 et p2 si p1 a répondu à une question de
+p2, poids du lien : nombre de réponses
+• Attributs : voisins communs, attachement préférentiel, Adamic
+
+Adar et leurs versions pondérées
+
+Rushed Kanawati
+
+17 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Utilisation d’attributs pondérés pour la prédiction de liens :
+
+résultats
+
+• Résultats pour les attributs pondérés vs non pondérés
+• Meilleurs résultats pour Adamic Adar pondéré et Voisins
+
+Communs pondéré
+
+• De meilleurs résultats pour les graphes denses (degré des
+
+noeuds élevé).
+
+• Attachement préférentiel se comporte moins bien si la
+
+distribution des degrés des noeuds du graphe est proche
+d’uniforme
+
+Rushed Kanawati
+
+18 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Prédiction de lien dans un graphe biparti
+
+• [HLC05b] : Tâche : recommandation pour un site de vente de
+
+livres on-line.Graphe biparti client-livre, extension des
+prédicteurs Voisins-Communs, Jaccard, Adamic-Adar,
+Attachement préférentiel, graph distance, Katz au cas biparti.
+
+• Evaluation : 5 années de transactions, 18771 transactions,
+
+faisant intervenir 2000 clients et 9 695 livres. 80 %
+apprentissage, 20 % test, 10 meilleures recommandations pour
+chaque client.
+
+Rushed Kanawati
+
+19 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Prédiction de lien dans un graphe biparti (2)
+
+• Meilleurs résultats pour attachement préférentiel et Katz
+
+Rushed Kanawati
+
+20 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Combinaison de prédicteurs
+
+Utilisation des techniques d’apprentissage automatique supervisé.
+
+Rushed Kanawati
+
+21 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Apprentissage automatique pour la prédiction de liens
+
+• [HCSZ06] : prédiction de liens → problème de classiﬁcation
+
+binaire
+
+• exemple + : apparition des liens dans le graphe Gi+1
+• exemple - : non apparition des liens dans le graphe Gi+1
+
+• Utilisation des informations topologiques dans le graphe des
+co-auteurs ( nb d’articles, nb de voisins, somme du log du
+nombre de voisins de rang 2) + information sur les nœuds, si
+disponible (mots-clés, ...)
+
+• (Sous-)exploitation d’un graphe biparti auteurs - mots-clés :
+
+un lien entre un auteur et un mot-clé si mot-clé utilisé dans au
+moins un article, deux mots-clés qui apparaissent dans un
+même abstract sont connectés..
+
+• Les autres attributs n’apportent pas d’information
+
+supplémentaires pour la discrimination
+
+Rushed Kanawati
+
+22 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Application aux réseaux de co-publications (1)
+
+DBLP (1990-2000 : apprentissage, 2001-2004 : étiquetage) : 540459
+auteurs, 1564617articles.
+
+Rushed Kanawati
+
+23 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Application aux réseaux de co-publications (2)
+
+Attributs utilisés sur la base DBLP
+
+Rushed Kanawati
+
+24 / 58
+
+Résultats sur la base DBLP
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Discussion
+
+Très bons résultats dus à :
+
+• échantillonage qui donne un nb d’exemples positifs et négatifs
+
+équilibré (non documenté dans l’article)
+
+• performance classe + et classe -
+
+Rushed Kanawati
+
+25 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Apprentissage supervisé : Bilan
+
+• Avantage : Possibilité de combiner les attributs (topologiques)
+
+aﬁn d’obtenir un meilleur taux de prédiction
+
+• Inconvénient : problème d’apprentissage diﬃcile
+
+• Classes non équilibrées : Taux d’exemple positifs ∼ 0.1% des
+exemples négatifs.
+• Exemples non i.i.d.
+
+• Solutions à envisager : échantillonnage, apprentissage
+
+semi-supervisé [KKY+09]
+
+Rushed Kanawati
+
+26 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Approches basées sur l’analyse des attributs des nœuds
+
+• Principe : apprendre la dépendance entre l’existence d’un lien
+
+et les attributs des nœuds reliés par le lien.
+
+• Modèles probabilistes [TWAK03] :
+
+• Réseaux Bayésiens
+• Réseaux de Markov Relationels
+• Apprentissage statistique relationnel
+• . . .
+
+• Nécessite d’avoir accès aux attributs des nœuds
+• Dépendant du domaine
+
+Rushed Kanawati
+
+27 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Techniques hybrides I
+
+• Principe : combiner des approches topologiques et des
+
+approches basées sur le contenu des nœuds.
+• Exemple : alignement de matrices [STCE08]
+
+• soit G un réseau décrit par la matrice d’adjacence AG
+• Soit X est la matrice (de dimension n × d) des attributs des
+
+nœuds. n est le nombre de nœuds et d est le nombre
+d’attributs.
+
+des nœuds.
+
+• XX T est une matrice n × n de similarités entre les attributs
+• Dans le cas idéal, on cherche à avoir : ∀i, jAg [i, j] = XX T [i, j]
+• Approche : trouver W qui minimise : (cid:107) AG − XWX T (cid:107)2
+• Le score d’un lien est donné par score(x, y ) = xWy T
+
+(après normalisation)
+
+Rushed Kanawati
+
+28 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Techniques hybrides II
+
+• Expérimentations : tests sur DBLP, TakingItGlobal.com,
+• Gain en précision de ∼ 0.2 avec l’utilisation de W
+
+WebKB
+
+Rushed Kanawati
+
+29 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Approches temporelles
+
+Deux grandes approches :
+
+• Utilisation d’attributs temporels
+• Résumé des graphes
+
+Rushed Kanawati
+
+30 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Attributs temporels
+
+• Indicateurs ﬁnanciers : moyenne mobile, pourcentage de
+changement d’attributs comme Katz ou Jaccard [Coo06]
+
+• Proﬁt d’un indicateur topologique sur une période de temps,
+
+Dt (v )
+tf −ti
+
+t=ti
+
+par exemple : Dtf (v )−Dti (v )
+
+• Moyenne temporelle :(cid:80)t=tf
+
+Dtf (v )
+
+• Date la dernière collaboration [TAB09]
+• . . .
+
+Rushed Kanawati
+
+31 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Série temporelle pour la prédiction de lien
+
+• [ZH09] . Surveillance de réseaux de télécommunications.
+
+Prédiction de lien, détection de liens anormaux.
+
+• Pour chaque lien (i, j) dans le graphe, modèle temporel local :
+
+(M1(i, j), ?, MT (i, j)), la série temporelle des moyennes
+d’occurrence observées pour ce lien pendant les périodes de 1
+à T .
+
+• Application d’une méthode ARIMA (Autoregressive integrated
+
+moving average) pour apprendre ce modèle.
+
+Rushed Kanawati
+
+32 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Série temporelle pour la prédiction de lien
+
+• Prédiction hybride : moyenne des valeurs pour les prédicteurs
+
+statiques (Voisins Communs, Katz, Adamic Adar, ...) +
+modèle temporel pour chaque lien
+
+• Expérimentations : Enron + réseaux de co-publication. Sur
+
+Enron : meilleurs résultats : Katz, équivalents à Adamic-Adar.
+• Amélioration signiﬁcative si combinaison prédicteurs statiques
+
+et temporels.
+
+Rushed Kanawati
+
+33 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Resumé des graphes
+
+[SN07] : calcul d’un graphe résumé :
+
+Rushed Kanawati
+
+34 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Approches structurelles
+
+• Caractérisation des liens par des sous-graphes fréquents dans le
+
+réseau temporel
+
+• Extraction de règles de réecriture des graphes [LBW07]
+• Extraction de motifs de règles d’évolution de sous-graphes
+
+fréquents [BBBG09]
+
+Rushed Kanawati
+
+35 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Apparition de groupes de liens [LBW07]
+
+• Etant donné un réseau temporel (G1, . . . , GT ), le but est de
+
+prédire l’apparition d’un ensemble de liens pour T (cid:48) > T .
+
+• Graphe non pondéré,
+• Si une entité v ne prend part à aucune interaction au temps i,
+
+ajout d’un arc e(v , v )
+
+• Mais, chaque noeud est identiﬁé de manière unique, et
+
+n’apparaît qu’une fois à un temps i donné → la fouille de
+graphe peut se ramener à la recherche de motifs fréquents
+(clos).
+
+Rushed Kanawati
+
+36 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Apparition de groupes de liens [LBW07]
+
+• Soit x et y deux interactions. On cherche à identiﬁer le délai le
+plus probable δx,y au bout duquel y va apparaître quand x est
+observé (avec une tolérance).
+
+• Approche naïve : pour chaque paire x et y d’interactions,
+associer une variable aléatoire et chercher à apprendre la
+distribution de cette variable aléatoire → très coûteux
+
+• Recherche de sous-graphes fréquents aﬁn de "résumer" le
+
+graphe temporel
+
+• Support d’un sous-graphe g : ensemble des index j, 1 ≤ j ≤ n
+
+tels que g soit sous-graphe de Gj
+
+Rushed Kanawati
+
+37 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Apparition de groupes de liens [LBW07]
+
+1. Recherche de graphes (motifs) clos fréquents. Chaque graphe
+Gt est représenté par {f1, . . . fn}, les graphes fréquents qui ont
+une occurrence dans Gt
+
+2. Construction de règles Fi →x Fj, où Fi et Fj sont des graphes
+
+clos fréquents, qui dénote que Fj apparaît x étapes après Fi
+(tolérance pour x)
+
+3. Pour chaque Fi observé à l’étape t, les paires (Fi , Fj ) sont
+étudiées pour tout j et une prédiction est faite pour Fj au
+temps t + Φ(Fi , Fj ) (plus forte densité de probabilité).
+
+4. Evaluation de la pertinence de la règle en calculant
+
+#predictionscorrectes
+#predictionsincorrectes
+
+Rushed Kanawati
+
+38 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Apprentissage de motifs périodiques [LBW08]
+
+• Soit deux graphes arbitraires G =< (V1, E1), . . . , (Vn, En) >
+
+et F = (Vf , Ef ), F apparaît périodiquement dans G si la
+diﬀérence entre deux apparitions de F dans G est constante
+(ou presque).
+
+Rushed Kanawati
+
+39 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Apprentissage de règles d’évolution de graphes [BBBG09]
+
+• Entrée : une séquence de graphes (G1, . . . , GT ). On ne
+
+considère que l’ajout de noeuds ou d’arêtes au cours du temps.
+
+• Sorties : règles de la forme :
+
+• Idéalement, les noeuds et les arêtes peuvent voir des
+
+étiquettes, éventuellement complexes : degré du noeud, date
+de première apparition du lien
+
+Rushed Kanawati
+
+40 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Apprentissage de règles d’évolution de graphes [BBBG09]
+
+• Calcul d’un graphe résumé à partir du graphe temporel :
+
+chaque arc est étiqueté par la première date de son apparition
+
+• Extraction de motifs temporels relatifs
+
+• A partir de ces motifs, extraction de règles d’évolution qui
+
+satisfont un seuil de conﬁance minimal
+
+Rushed Kanawati
+
+41 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Calcul de règles d’évolution
+
+Propriétés souhaitées pour le support
+• Règle de la forme corps → tete
+
+• corps : toutes les arêtes du motifs sauf la plus récente
+• tête : le motif complet
+
+• B → H
+
+Rushed Kanawati
+
+42 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Conﬁance pour les règles d’évolution
+
+Deux choix :
+
+• support(tete)
+support(corps)
+• #occurrences(tete)
+#occurrences(corps)
+
+Rushed Kanawati
+
+43 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Algorithme GERM
+
+Algorithme à la gSpan [YH02]
+
+Rushed Kanawati
+
+44 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Expérimentations
+
+• 4 jeux de données : Flick (partage de photos), Y !360 (blog),
+
+DBLP, ArXiv, étiquetage des noeuds : degré
+
+• Les règles extraites sont caractéristiques du type de réseau
+
+étudié (réseau social, réseau bibliographique) :
+
+• La conﬁance fondée sur le support semble plus adaptée que la
+
+conﬁance fondée sur le nombre d’occurrences
+
+Rushed Kanawati
+
+45 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Caractéristiques des jeux de données
+
+Rushed Kanawati
+
+46 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Expérimentations (2)
+
+Comparaison de la conﬁance des règles communes aux deux jeux de
+données
+
+Rushed Kanawati
+
+47 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Bilan
+
+• Une des premières approches de fouille de graphes appliquée
+
+au problème de l’analyse de graphes sociaux
+
+• Pbs ouverts : comment étiqueter les arcs et les noeuds pour
+
+trouver des motifs/règles en nombre raisonnable
+
+• Pas encore appliqué au problème de prédiction de lien
+
+Rushed Kanawati
+
+48 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Conclusion
+
+• Approches topologiques viables pour la prédiction de liens.
+• Beaucoup de travaux sur des graphes statiques.
+• Approches topologiques généralistes à combiner avec des
+approches basées sur l’exploration des caractéristiques des
+nœuds.
+
+• Pas de benchmark pour faciliter la comparaison d’approches.
+
+Rushed Kanawati
+
+49 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Conclusion (2)
+
+• Axes de recherche :
+
+• . . . .
+
+• Analyse des réseaux bipartis, valués, et temporels
+• Exploration simultanée de réseaux hétérogènes, approche de
+• Approches structurelles : fouille parallèle de grands graphes.
+
+fouille de graphe
+
+Rushed Kanawati
+
+50 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Bibliographie I
+
+Lada Adamic et Eytan Adar :
+Friends and neighbors on the web.
+Social Networks, 25(3):211–230, july 2003.
+
+Michele Berlingerio, Francesco Bonchi, Björn Bringmann et Aristides Gionis :
+Mining graph evolution rules.
+In Wray L. Buntine, Marko Grobelnik, Dunja Mladenic et John Shawe-Taylor, éditeurs : Machine
+Learning and Knowledge Discovery in Databases,, pages 115–130. Springer, September 2009.
+
+L. Breiman, J. Friedman, R. Ohlsen et C. Stone :
+Classiﬁcation and regression trees.
+Wadsworth International Group, Belmont, CA, 1984.
+
+A. L. Barabasi, H. Jeong, Z. Neda, E. Ravasz, A. Schubert et T. Vicsek :
+Evolution of the social network of scientiﬁc collaborations.
+PHYSICA A, 311:3, 2002.
+
+Rushed Kanawati
+
+51 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Bibliographie II
+
+Nesserine benchettara, Rushed kanawati et Céline Rouveirol :
+Calcul de recommendation par prédiction de liens dans un graphe biparti.
+In Actes de l’ateiler sur l’apprentissage et graphes pour les systèmes complexes (plate-forme AFIA
+2009), Hammemt, Tunisie, Mai 2009.
+
+Björn Bringmann et Siegfried Nijssen :
+What is frequent in a single graph ?
+In Takashi Washio, Einoshin Suzuki, Kai Ming Ting et Akihiro Inokuchi, éditeurs : PAKDD,
+volume 5012 de Lecture Notes in Computer Science, pages 858–863. Springer, 2008.
+
+Richard J.E. Cooke :
+Link prediction and link detection in sequences of large social networks using temporal and local
+metrics.
+Master thesis, University of cape Town, November 2006.
+
+Francois Fouss, Alain Pirotte, Jean-Michel Renders et Marco Sarens :
+Random-walk computation of similarities between nodes of a graph with application to
+collaborative recommendation.
+IEEE Transactions on knoledge and data engineering, 19(3):355–369, 2007.
+
+Rushed Kanawati
+
+52 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Bibliographie III
+
+A Goldenberg, J. Kubica, P. Komarek, A. Moore et J. Schneider :
+A comparaison of statistical and machine learning algorithms on the task of linl completion.
+In Proceedings of the KDD workshop on link analysis for detecting complex Behavior, August
+2003.
+
+Mohammad Al Hasan, Vineet Chaoji, Saeed Salem et Mohammed Zaki :
+Link prediction using supervised learning.
+In SIAM Workshop on Link Analysis, Counterterrorism and Security with SIAM Data Mining
+Conference, Bethesda, MD, 2006.
+
+Zan Huang, Xin Li et Hsinchun Chen :
+Link prediction approach to collaborative ﬁltering.
+In Mary Marlino, Tamara Sumner et Frank M. Shipman III, éditeurs : JCDL, pages 141–142.
+ACM, 2005.
+
+Zan Huang, Xin Li et Hsinchun Chen :
+Link prediction approach to collaborative ﬁltering.
+In JCDL, pages 141–142, 2005.
+
+Jian Huang, Ziming Zhuang, Jia Li et C. Lee Giles :
+Collaboration over time : characterizing and modeling network evolution.
+In WSDM, pages 107–116, 2008.
+
+Rushed Kanawati
+
+53 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Bibliographie IV
+
+Rushed Kanawati :
+On using sna techniques for enhancing performances of on-line help desks.
+In Proceedings of IADIS International Conference on E-commerce, Amsterdam, july 2008. IADIS.
+
+L. Katz. :
+A new status index derived from socimetric analysis.
+Psychmetrika, 18(1), 18(1):39–43, 1953.
+
+Rushed Kanawati et céline Rouveirol :
+Lips : A sna-based system for intelligent management of academic conferences.
+In Proceedings of the 4th International conference on application of Social networkk analysis,
+Zurich, october 2009.
+
+Hisashi Kashima, Tsuyoshi Kato, Yoshihiro Yamanishi, Masashi Sugiyama et Koji Tsuda :
+Link propagation : A fast semi-supervised learning algorithm for link prediction.
+In SDM, pages 1099–1110. SIAM, 2009.
+
+Mayank Lahiri et Tanya Y. Berger-Wolf :
+Structure prediction in temporal networks using frequent subgraphs.
+In CIDM, pages 35–42. IEEE, 2007.
+
+Rushed Kanawati
+
+54 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Bibliographie V
+
+Mayank Lahiri et Tanya Y. Berger-Wolf :
+Mining periodic behavior in dynamic social networks.
+In ICDM ’08 : Proceedings of the 2008 Eighth IEEE International Conference on Data Mining,
+pages 373–382, Washington, DC, USA, 2008. IEEE Computer Society.
+
+Neal Lathia, Stephen Hailes et Licia Capra :
+knn cf : a temporal social network.
+In Pearl Pu, Derek G. Bridge, Bamshad Mobasher et Francesco Ricci, éditeurs : RecSys, pages
+227–234. ACM, 2008.
+
+David Liben-Nowell et Jon M. Kleinberg :
+The link-prediction problem for social networks.
+JASIST, 58(7):1019–1031, 2007.
+
+Jure Leskovec, Jon Kleinberg et Christos Faloutsos :
+Graphs over time : densiﬁcation laws, shrinking diameters and possible explanations.
+In KDD ’05 : Proceedings of the eleventh ACM SIGKDD international conference on Knowledge
+discovery in data mining, pages 177–187, New York, NY, USA, 2005. ACM.
+
+David Liben-Nowell :
+An Algorithmic Approach tp Social networks.
+Thèse de doctorat, M.I.T., june 2005.
+
+Rushed Kanawati
+
+55 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Bibliographie VI
+
+M. Lim, M. Negnevitsky et J. Hartnett :
+Artiﬁcial intelligence applications for analysis of e-mail communication activities.
+In Proceedings of International Conference On Artiﬁcial Intelligence In Science And Technology,
+pages 109–113, 2003.
+
+Tsuyoshi Murata et Sakiko Moriyasu :
+Link prediction based on structural properties of online sociel networks.
+New Generation Computing, 26:245–257, 2008.
+
+Milen Pavlov et Ryutaro Ichise :
+Finding experts by link prediction in co-authorship networks.
+In Anna V. Zhdanova, Lyndon J. B. Nixon, Malgorzata Mochol et John G. Breslin, éditeurs :
+FEWS, volume 290 de CEUR Workshop Proceedings, pages 42–55. CEUR-WS.org, 2007.
+
+Matthew J. Rattigan et David Jensen :
+The case for anomalous link discovery.
+SIGKDD Explorations, 7(2):41–47, 2005.
+
+U. Sharan et J. Neville :
+Exploiting time-varying relationship in staistical relational models.
+In Proceedings of the ﬁrst SNA-KDD workshop, 2007.
+
+Rushed Kanawati
+
+56 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Bibliographie VII
+
+Jerry Scripps, Pang-Ning Tan, Feilong Chen et Abdol-Hossein Esfahanian :
+A matrix alignment approach for link prediction.
+In ICPR, pages 1–4. IEEE, 2008.
+
+Tomasz Tylenda, Ralitsa Angelova et Srikanta Bedathur :
+Towards time-aware link prediction in evolving social networks.
+In Proceedings of the 3rd ACM Workshop on Social Network Mining and Analysis (SNA-KDD),
+2009.
+
+Benjamin Taskar, Ming Fai Wong, Pieter Abbeel et Daphne Koller :
+Link prediction in relational data.
+In Sebastian Thrun, Lawrence K. Saul et Bernhard Schölkopf, éditeurs : NIPS. MIT Press, 2003.
+
+X. Yan et J. Han :
+gspan : Graph-based substructure pattern mining.
+In Proc. 2002 Int. Conf. on Data Mining (ICDM’02), pages 141–142, 2002.
+
+Dennis K. J. Lin Zan Huang :
+The time-series link prediction problem with applications in communication surveillance.
+INFORMS JOURNAL ON COMPUTING, Vol. 21(2, Spring):286–303, 2009.
+
+Rushed Kanawati
+
+57 / 58
+
+Introduction
+
+Approches de prédiction de liens
+
+Conclusion
+
+Bibliographie
+
+Bibliographie VIII
+
+J. Zhu :
+Mining Web Site Link Structures for Adaptive Web Site Navigation and Search.
+Thèse de doctorat, University of Ulster, 2003.
+
+Rushed Kanawati
+
+58 / 58
+
+

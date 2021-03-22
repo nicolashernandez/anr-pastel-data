@@ -1,0 +1,1076 @@
+https://pdfs.semanticscholar.org/presentation/f230/28c8c1ba88b2c325d509f7c64aba7390a767.pdf
+
+Fouilles de données et Medias sociaux
+
+Master 2 DAC - FDMS
+
+Sylvain Lamprier
+
+UPMC
+
+1 / 60
+
+Plan
+
+Réseaux Sociaux
+
+Différents types de réseaux
+Métriques et analyse sur les réseaux
+
+Fouille de données dans les media sociaux
+
+Internet et les Medias Sociaux
+Nouveaux Challenges
+
+Applications
+
+Détection de communautés
+Recommendation Sociale
+Classiﬁcation collective
+Diffusion d’information
+Prédiciton à partir de ﬂux
+
+Traitement parallèle / distribué
+
+Hadoop / Spark
+GPU / Cuda
+
+2 / 60
+
+Les Réseaux Sociaux
+
+Réseau social =
+
+Ensemble d’entités
+
++
+
+Ensemble de relations
+
+Entités :
+
+Individus, Groupes, Sites, etc...
+
+Relations
+
+Issues d’interactions sociales
+e.g., amitié, inﬂuence, pouvoir, etc...
+
+3 / 60
+
+Les Réseaux Sociaux
+
+Différents types de relations
+
+Orientées : inﬂuence, pouvoir, etc...
+Non-orientées : amitié, co-occurence, etc...
+
+4 / 60
+
+Les Réseaux Sociaux
+
+Le plus grand des réseaux : La société
+
+Noeuds = Individus
+Liens = Relations sociales (famile, travail, amis, etc...)
+
+⇒ S. Milgram (1967) : Six degrés de séparation entre les
+
+individus
+
+5 / 60
+
+Différents types de réseaux
+
+Différents modèles de réseaux:
+
+Random graphs (modèles Erdös-Rényi)
+Modèles Watts-Strogatz
+Réseaux Scale-free
+
+Modèle de Barabási-Albert
+Modèle Hiérarchique
+
+⇒ Analyse de la structure des réseaux
+
+Différentes propriétés (degré du graphe, nombre de
+connexions, densité, diamètre, etc...)
+Étude / Simulation de phénomènes
+Découverte de sous-structures (ex: communautés)
+
+6 / 60
+
+Random graphs (Modèles Erdös-Rényi)
+
+Deux modèles de graphes non-orientés
+
+Graphe aléatoire binomial
+
+La présence de chacune des n(n−1)/2 arrêtes possibles du
+graphe est décidée aléatoirement selon une probabilité p.
+
+Graphe aléatoire uniforme
+
+m arrêtes sont choisies uniformément parmi les n(n−1)/2
+arrêtes possibles du graphe.
+
+Modèles les plus étudiés mathématiquement
+⇒ Indépendance des arrêtes
+Lorsque p ≈ 2m
+très proches.
+
+n(n−1)
+
+, les deux modèles ont des propriétés
+
+7 / 60
+
+Random graphs (Modèles Erdös-Rényi)
+
+Propriétés
+
+Faible coefﬁcient de clustering
+
+Clustering Global =
+
+3×nombre de triangles
+
+nombre de triplets connectés
+i ci
+
+(cid:80)
+|V| où : ci = 2|{ejk :vj ,vk∈Ni ,ejk∈E}|
+
+Clustering Local =
+Avec Ni le voisinage du graphe et l’ensemble des arrêtes.
+Distribution des degrés des noeuds concentrée autour de
+sa moyenne
+
+ki (ki−1)
+
+Converge vers une loi de Poisson, plutôt qu’une loi de
+puissance observée sur de nombreux réseaux réels
+
+8 / 60
+
+Modèle Watts-Strogatz
+
+Graphe non-orienté de degré K construit en 2 étapes:
+
+1 Construction d’un réseau régulier en anneau: avec les N
+noeuds du graphe numérotés de n0 à nN−1, on établit un
+lien (ni ,nj ) ssi : 0 < |i −j| mod (n− K
+
+2 ) ≤ K
+2 .
+
+2 Chaque lien (ni ,nj ) avec i < j est remplacé par (ni ,nk ) avec
+une probabilité β, où nk est un noeud du graphe choisit
+uniformément (en évitant k = i et en évitant de produire un
+lien déjà existant).
+
+9 / 60
+
+Modèle Watts-Strogatz
+
+Propriétés
+
+Diamètre pour β = 0 élevé (N/(2K )), mais chutant
+rapidement lorsque β croît (small-world)
+Niveaux élevés de Clustering (surtout avec β proche de 0)
+Mais distributions des degrés fortement concentrées autour
+de la moyenne K
+
+10 / 60
+
+Modèles ”Scale-Free”
+
+Algorithme de Barabási-Albert
+
+Déﬁnir un graphe initial connecté de m0 noeuds:
+Pour chaque nouveau noeud ni à ajouter, on le connecte à
+m noeuds existants
+Les noeuds nj à connecter à ni sont successivement
+
+choisis selon la probabilité p = kj /( (cid:80)
+
+kl )
+⇒ Tend à choisir les noeuds de degrés supérieurs
+Avec m0 = m = 2:
+
+l,(ni ,nl )(cid:54)∈E
+
+11 / 60
+
+Modèles ”Scale-Free”
+
+Propriétés:
+
+Diamètre faible
+Distribution de degrés heavy-tailed : loi de puissance
+
+x→∞eλx Pr[X > x] = ∞ for all λ > 0.
+lim
+
+Faible coefﬁcient de clustering
+
+12 / 60
+
+Modèles Hiérarchiques
+
+Création itérative de niveaux hiérarchiques :
+
+Replication d’un pattern initial n fois
+Connexion des nouveaux noeuds avec le pattern initial
+selon une certaine règle
+
+Par exemple :
+
+1 Création d’un cluster initial de 5 noeuds entièrement
+
+connecté
+
+2 Réplication de 4 clusters identiques
+3 Connexion des noeuds périphériques des réplicas au
+
+noeud central du cluster initial.
+
+13 / 60
+
+Modèles Hiérarchiques
+
+Les modèles hierarchiques sont des modèles Scale-Free
+
+Présence de hubs
+Heavy tailed degree distribution
+
+Mais possèdent un bon coeffcient de clustering
+
+⇒ Souvent considérés comme plus réalistes
+
+14 / 60
+
+Modèles ”Scale-Free”
+
+Degree Distribution sur Facebook
+
+Quelques utilisateurs ont de très nombreux amis
+
+15 / 60
+
+Modèles ”Scale-Free”
+
+Exemples de réseaux invariants d’échelle (”Scale-Free”) :
+
+Le Web, dont l’étude, par Barabási et Albert a donné
+naissance au terme scale-free network
+Réseaux de citations dans les articles de recherche
+scientiﬁque
+Les réseaux de collaborations, comme celui des
+collaborations entre scientiﬁques (publications communes)
+ou entre entreprises
+Réseaux de ﬁlms communs entre acteurs
+Réseaux de relations sexuelles
+Les réseaux biologiques dans les cellules.
+
+16 / 60
+
+Mesures sur les réseaux
+
+Mesures globales pour caractériser la structure d’un
+réseau:
+
+Coefﬁcient de Clustering
+Distribution de degrés
+Diamètre
+Nombre de composantes
+...
+
+Mesures locales pour caractériser un noeud ou un groupe
+de noeud dans le réseau:
+
+Degré
+Centralité
+Modularité
+...
+
+17 / 60
+
+Mesures de centralité
+
+Mesures de centralité : Importance des noeuds du réseau
+
+A) Degree centrality : C(v ) = degre(v )
+
+B) Closeness centrality : C(v ) =(cid:80)
+C(v ) =(cid:80)
+
+dG(v,t) la distance de v à t dans G
+C) Betweenness centrality
+|σG(s,t)|
+
+|{l∈σG(s,t),v∈l}|
+
+t∈V \v 2−dG(v,t) avec
+
+(cid:80)
+
+s(cid:54)=v(cid:54)=t∈V
+
+avec σG(s,t)
+l’ensemble des plus courts chemins de s à t
+D) Eigenvector centrality : C(v ) = 1
+(cid:80)
+E) Katz centrality : C(v ) = 1
+(v,t)∈E (C(t)+1)
+(cid:80)
+F) Alpha Centrality : C(v ) = 1
+(v,t)∈E C(t)+ev avec
+ei l’inﬂuence externe accordée à v à chaque itération
+...
+
+(v,t)∈E C(t)
+
+λ
+
+λ
+
+λ
+
+18 / 60
+
+Modularité
+
+La modularité est une mesure de la qualité du
+partitionnement d’un réseau
+⇒ Proportion des poids des arêtes des noeuds d’une classe
+donnée moins la valeur qu’aurait été cette même proportion
+si les arêtes étaient disposées au hasard dans le graphe :
+
+(cid:183) Aij
+
+2m
+
+− ki ∗kj
+(2m)(2m)
+
+Q = (cid:88)
+
+(i,j),ci=cj
+
+(cid:184)
+
+avec :
+
+Aij la valeur de la matrice d’adjacence entre les noeuds i et j,
+ci le groupe de i,
+ki la somme des poids des arêtes adjacentes à i,
+m le nombre d’arêtes du graphe.
+
+Partitionnement considéré bon si Q > 0.3
+Limite de résolution (si communautés de différentes tailles)
+
+19 / 60
+
+Réseaux Sociaux
+
+De Nombreux travaux ont donc concerné la structure des
+réseaux sociaux...
+... Mais que faire si :
+
+Le graphe n’est que partiellement connu
+Les relations disponibles ne sont que peu représentatives
+des vrais canaux d’interactions
+Les noeuds possèdent des attributs connus (ex: proﬁl
+utilisateur)
+Les voies de communication diffèrent selon le message
+vehiculé / contexte d’interaction
+Le graphe de relations est amené a évoluer au cours du
+temps
+...
+
+20 / 60
+
+Fouille de données et Medias sociaux
+
+Les modèles traditionnels de traitement de l’information
+sur Internet:
+
+Le Web considéré comme une très grosse base
+d’information...
+... dont les données évoluent lentement
+Les moteurs de recherche peuvent crawler et indexer le
+Web
+Les besoins d’information sont formulés par des requêtes
+déﬁnies sur l’index du Web
+
+Ce modèle traditionnel est train de changer
+Nouveau mode de consommation de l’information sur
+Internet:
+
+L’information en ligne nous atteint via des ﬂux de données
+temps réels et les réseaux sociaux.
+
+Changement majeur pour les moteurs de recherche:
+
+”Tell me about X” vs ”Tell me what is hot now”
+”Tell me about X” vs ”Tell me who to ask”
+
+21 / 60
+
+Fouille de données et Medias sociaux
+
+La part des medias sociaux dans le Web a fortement augmenté
+
+ces dernières années
+
+Web de plus en plus tourné vers les interactions sociales
+Ne constitue plus une bibiolthèque statique explorée par
+les utilisateurs
+Un lieu où les utilisateurs consomment de
+l’information,créent du contenu et interagissent avec
+d’autres personnes.
+Exemples:
+
+Twitter, Digg, Facebook, Google news, Wikipedia, Flickr,
+LinkedIn, Blogger
+
+22 / 60
+
+Different types de medias
+
+Lieux où les utilisateurs consomment et produisent du
+contenu:
+
+Forums
+Blogs
+Social Networks
+MicroBloggs
+Wikis
+Podcasts
+Slide Sharing
+Social Bookmarks
+Product reviews
+...
+
+Facebook est > 7% du trafﬁc internet des US ! (Mars 2010)
+
+23 / 60
+
+Fouille de données et Medias sociaux
+
+Medias sociaux = Support de relations sociales
+Les medias sociaux réduisent la frontière entre monde réel
+et monde virtuel
+
+Rendent disponibles des traces complexes d’activités
+humaines
+Diverses interactions entre individus/groupes peuvent être
+enregistrés
+
+"Social Media Mining" = Representation, Analyse et
+Exploitation des échanges observés sur les media sociaux
+
+Analyse des réseaux
+Fouille de données
+Apprentissage automatique / statistique
+Sociologie
+
+24 / 60
+
+Opportunités
+
+N’importe quel utilisateur peut partager, créer et contribuer à la
+
+production de contenu. Il peut également exprimer des
+
+opinions, tagguer du contenu et conseiller des liens.
+
+Consequences:
+
+Il est possible d’étudier les opinions et les comportements
+de millions d’utilisateurs
+Pour différents objectifs:
+
+Analyse et compréhension des comportements d’utilisateurs
+Analyse du marché / Marketing viral
+Analyse d’opinion / de sentiment
+Surveillance / Sécurité
+Campagnes politiques
+...
+
+25 / 60
+
+Fouille de données dans les Medias sociaux
+
+Fouille de données dans les Medias sociaux
+
+Tâche de traitement de contenu dans un cadre social
+
+Nouveaux Challenges
+
+Paradoxe Big Data : Grandes Masses de données sociales
+vs. Dissémination des données individuelles
+Collecte des données : APIs limitées, Choix des données à
+collecter difﬁcile
+Réduction du bruit : Déﬁnition du bruit fortement dépendant
+de la tâche
+Évaluation : Vérité terrain très difﬁcile à obtenir
+Dynamicité : Distributions / Structures non stationnaires
+
+26 / 60
+
+Challenges
+
+De nouveaux paradigmes de modélisation requis pour le
+traitement de l’information en ligne
+Nouvelles unités d’analyse:
+
+En RI traditionnelle: pages, requêtes, besoin utilisateur.
+Pour le traitement temps réel de l’information : fragments
+d’information échangés sur les réseaux.
+
+Nouveaux modèles prédictifs:
+
+Diffusion d’information sur les réseaux
+Prediction d’opinions, de liens, etc...
+Tracking de contenu
+...
+
+27 / 60
+
+Fouille de données et Medias Sociaux
+
+Rich and big data:
+
+Millions d’utilisateurs
+Millions de contenus
+Multimedia (texte, image, videos, etc...)
+Millions de connections et relations (de differents types)
+Preferences, tendences, opinions, ...
+
+Analyse réseau social ⇒ Traitements à large échelle
+
+Taille des données
+Complexité des données
+Dynamicité
+
+Données + Traitements distribués
+
+28 / 60
+
+Fouille de Données et Media Sociaux
+
+Détection de communautés
+
+29 / 60
+
+Détection de communautés
+
+Détection de communautés = Partitionnement du réseau
+
+30 / 60
+
+Détection de communautés
+
+Partitionnement en communautés
+
+Avec peu de liens inter-communautés
+Un grand nombre de liens intra-communautés
+
+Utile pour
+
+Comprendre l’organisation générale du réseau
+Cibler une / des populations spéciﬁques
+Simpliﬁer le traitement du réseau
+
+Apprentissage non supervisé
+
+Clustering basé sur les liens du graphe
+Méthodes statiques / dynamiques
+Méthode globales / locales
+
+31 / 60
+
+Détection de communautés
+
+Nombreuses méthodes
+
+Minimum-cut
+
+Nombre de communautés k prédeterminé
+Découpage itératif en k communautés de tailles proches
+minimisant le nombre de liens inter-communautés
+
+Clustering hierarchique
+
+Similarité entre listes d’adjacence
+Regroupement itératif des groupes les plus proches
+
+Girvan-Newman
+
+Intermédiarité des arrêtes (Betweeness centrality)
+Les arrêtes de plus forte intermédiarité sont retirées
+
+Optimisation de modularité
+
+Modularité = Mesure de qualité d’un partitionnement
+Différentes méthodes itératives
+
+Modélisation statistique
+Modèles génératifs
+Inférence Bayésienne
+ex: Stochastic Block Model : z∗ = argmax
+
+Méthodes de cliques
+
+Clique = Sous-graphe entièrement connecté
+Recherche des cliques maximales
+
+P(G|z)×P(z)
+
+z
+
+32 / 60
+
+Détection de communautés : Méthode de Louvain
+
+∆Q =(cid:183) Σin +ki,in
+
+2m
+
+−(cid:181) Σtot +ki
+
+2m
+
+(cid:182)2(cid:184)−(cid:183) Σin
+
+2m
+
+−(cid:181) Σtot
+
+2m
+
+(cid:182)2 −(cid:181) ki
+
+2m
+
+(cid:182)2(cid:184)
+
+33 / 60
+
+Détection de communautés : Méthode de Louvain
+
+Limite de Resolution
+
+Critique à l’encontre des approches basées modularité :
+leur limite de résolution
+Difﬁculté à identiﬁer des communautés de tailles très
+différentes dans un même graphe (ex: réseaux
+hierarchiques)
+
+34 / 60
+
+Fouille de Données et Media Sociaux
+
+Recommandation / Filtrage collaboratif
+
+35 / 60
+
+Recommandation / Filtrage collaboratif
+
+Filtrage Collaboratif
+
+Automatisation de la sélection et la recommandation
+d’articles (ﬁltrage)
+Prédiction des préférences d’un utilisateur à partir des
+préférences d’autres utilisateurs (collaboratif)
+
+Approche standard
+
+Matrice de notes (utilisateurs x articles )
+Matrice à ”trous”
+Tâche = prédiction des notes manquantes
+||X −UV||2
+Factorisation matricielle: argmin
+
+U,V
+
+Dans un contexte social
+
+Utilisation de relations sociales explicites
+Inﬂuence sociale, Correlation, Homophilie, Transitivité
+
+36 / 60
+
+Inférence dans les réseaux sociaux
+
+Inﬂuence sociale
+
+Les notes données par un utilisateur sont inﬂuencées par
+celles données par ses amis
+⇒ Deux personnes connectées ont plus de chances d’avoir
+
+des avis similaires que deux utilisateurs qui ne se
+connaissent pas.
+
+Correlation
+
+La note données à un item par un utilisateur a tendance à
+être proche de celle donnée par des utilisateurs aux
+jugements similaires
+
+⇒ Deux utilisateurs aux jugements proches auront tendance à
+
+émettre des avis proches sur de nouveaux items.
+
+Homophilie (ou selection)
+
+Les utilisateurs aux avis proches ont tendance à devenir
+amis
+
+Transitivité
+
+Les amis des amis d’un utilisateur ont plus de chances de
+devenir ses propres amis que les autres utilisateurs
+
+37 / 60
+
+Social Rating Networks
+
+38 / 60
+
+Recommendation sur les réseaux sociaux
+
+Recommendation sur les réseaux:
+
+Filtrage Collaboratif + Liens sociaux
+
+Bénéﬁces:
+
+Exploitation de l’inﬂuence sociale, des correlations de
+préférences, de transitivité, d’homophilie...
+Démarrage à froid pour des nouveaux utilisateurs
+Robustesse à la fraude
+
+Challenges
+
+Avis fortement disséminés sur le réseau
+Propagation d’avis difﬁcile sur de longues distances
+Fiabilité des relations très variable
+Données sensibles (privauté, anonymat)
+
+39 / 60
+
+Recommendation sur les réseaux sociaux
+
+Deux principales familles d’approches:
+
+Modèles de voisinage
+
+Marches aléatoires sur des réseaux de conﬁance
+
+Modèles à variables latentes
+
+Factorisation matricielle avec prise en compte de la structure
+
+40 / 60
+
+Recommendation sur les réseaux sociaux
+
+Deux principales familles d’approches:
+
+Modèles de voisinage
+
+Marches aléatoires sur des réseaux de conﬁance
+
+Modèles à variables latentes
+
+Factorisation matricielle avec prise en compte de la structure
+
+41 / 60
+
+Recommendation sur les réseaux sociaux:
+TrustBased Approaches
+
+Approches basées sur la conﬁance en les utilisateurs du
+réseau
+
+42 / 60
+
+Recommendation sur les réseaux sociaux:
+TrustWalker
+
+TrustWalker [Jamali & Ester, 2009]:
+
++ conﬁance en les utilisateurs les plus proches...
+... Mais peu de chances d’observer des avis dans le
+voisinage proche pour un item particulier
+⇒ Scores sur items similaires pour utilisateurs proches
+
+⇒ Scores sur items identiques pour utilisateurs éloignés
+
+43 / 60
+
+Recommendation sur les réseaux sociaux:
+TrustWalker
+
+A chaque iteration k, pour le noeud u:
+
+Si u a donné un score ru,i à i alors on le retourne
+Sinon :
+
+Avec une proba φu,i,k , on sélectionne aléatoirement un item
+j noté par u selon p(Yu,i = j) et on retourne le score ru,j
+
+Avec une proba 1− φu,i,k , on continue le parcours sur un
+voisin de conﬁance de u.
+
+44 / 60
+
+Recommendation sur les réseaux sociaux:
+TrustWalker
+
+La similarité entre deux items est basée sur un coefﬁcient de
+correlation positive de Pearson:
+
+La probabilité φu,i,k de stopper l’exploration sur l’utilisateur u
+pour l’item cible i à l’iteration k est donnée par:
+
+45 / 60
+
+Recommendation sur les réseaux sociaux:
+TrustWalker
+
+Prediction = Espérance du score retourné
+
+Approximation matricielle des P(XYu,i = (v,j)) trop
+coûteuse
+
+⇒ Moyenne des résultats obtenus sur de multiples
+
+simulations de marches aléatoires simples
+
+46 / 60
+
+Recommendation sur les réseaux sociaux
+
+Deux principales familles d’approches:
+
+Modèles de voisinage
+
+Marches aléatoires sur des réseaux de conﬁance
+
+Modèles à variables latentes
+
+Factorisation matricielle avec prise en compte de la
+structure
+
+47 / 60
+
+Recommendation sur les réseaux sociaux:
+Factorisation matricielle
+
+Factorisation matricielle classique
+
+Découverte de facteurs latents U et V expliquant les scores
+observés R:
+
+⇒ Avec (cid:98)R = UV , chercher U et V minimisant :
+
+Dans les réseaux ⇒ inclusion de la structure T
+
+48 / 60
+
+Recommendation sur les réseaux sociaux:
+Factorisation matricielle
+
+Recommendation Social Trust Ensemble (RSTE) [Ma et
+al., 2009]:
+
+Combinaison linéaire
+
+D’une factorisation matricielle classique sur les scores
+observés
+Et de facteurs latents sur les utilisateurs de conﬁance sur le
+réseau
+
+49 / 60
+
+Recommendation sur les réseaux sociaux:
+Factorisation matricielle
+
+Recommendation Social Trust Ensemble (RSTE) [Ma et
+al., 2009]:
+
+Combinaison linéaire
+
+D’une factorisation matricielle classique sur les scores
+observés
+Et de facteurs latents sur les utilisateurs de conﬁance sur le
+réseau
+
+⇒ Scores d’un utilisateur dépendents des scores de son
+
+voisinage...
+
+50 / 60
+
+Recommendation sur les réseaux sociaux:
+Factorisation matricielle
+
+Recommendation Social Trust Ensemble (RSTE) [Ma et
+al., 2009]:
+
+Combinaison linéaire
+
+D’une factorisation matricielle classique sur les scores
+observés
+Et de facteurs latents sur les utilisateurs de conﬁance sur le
+réseau
+
+⇒ Scores d’un utilisateur dépendents des scores de son
+⇒ ... Mais pas de propagation de représentation
+
+voisinage...
+
+51 / 60
+
+Recommendation sur les réseaux sociaux:
+Factorisation matricielle
+
+Modèle SoRec [Ma et al., 2008]:
+
+Factorisation conjointe des scores R et du réseau T
+
+1 facteur latent pour les items et 2 pour les utilisateurs :
+
+1 pour les sources des relations
+1 pour les destinations
+
+Mêmes facteurs latents U pour les scores et la structure
+
+52 / 60
+
+Recommendation sur les réseaux sociaux:
+Factorisation matricielle
+
+Modèle SoRec [Ma et al., 2008]:
+
+Factorisation conjointe des scores R et du réseau T
+
+1 facteur latent pour les items et 2 pour les utilisateurs :
+
+1 pour les sources des relations
+1 pour les destinations
+
+Mêmes facteurs latents U pour les scores et la structure
+⇒ Utilisateurs avec des amis communs ont une représentation
+
+U proche
+
+53 / 60
+
+Recommendation sur les réseaux sociaux:
+Factorisation matricielle
+
+Social MF [Jamali & Ester, 2010]:
+
+Facteurs d’un utilisateur dépendent de ceux de son
+voisinage
+
+54 / 60
+
+Recommendation sur les réseaux sociaux:
+Factorisation matricielle
+
+Social MF [Jamali & Ester, 2010]:
+
+Facteurs d’un utilisateur dépendent de ceux de son
+voisinage
+
+Proche de SoREC
+⇒ Utilisateurs avec des amis communs ont une représentation
+
+U proche
+
+55 / 60
+
+Recommendation sur les réseaux sociaux:
+Factorisation matricielle
+
+Table des différentes fonctions de coûts que l’on peut déﬁnir
+pour les modèles de recommendation :
+
+56 / 60
+
+Recommendation sur les réseaux sociaux:
+Factorisation matricielle
+
+Modèle FIP [Yang et al., 2011]:
+
+Factorisation conjointe des scores R et du réseau T
+
+1 facteur latent pour les items et 1 pour les utilisateurs
+⇒ Graphe non-orienté
+Mêmes facteurs latents U pour les scores et la structure
+
+Proﬁls items et utilisateurs en tant que priors des facteurs
+latents
+
+57 / 60
+
+Recommendation sur les réseaux sociaux:
+Factorisation matricielle
+
+Modèle FIP [Yang et al., 2011]:
+
+Factorisation conjointe des scores R et du réseau T
+
+1 facteur latent pour les items et 1 pour les utilisateurs
+⇒ Graphe non-orienté
+Mêmes facteurs latents U pour les scores et la structure
+⇒ Utilisateurs avec des amis communs ont une représentation
+
+U proche
+
+Proﬁls items et utilisateurs en tant que priors des facteurs
+latents
+
+58 / 60
+
+Recommendation sur les réseaux sociaux:
+Factorisation matricielle
+
+Modèle FIP [Yang et al., 2011]:
+
+Factorisation conjointe des scores R et du réseau T
+
+1 facteur latent pour les items et 1 pour les utilisateurs
+⇒ Graphe non-orienté
+Mêmes facteurs latents U pour les scores et la structure
+⇒ Utilisateurs avec des amis communs ont une représentation
+
+U proche
+
+Proﬁls items et utilisateurs en tant que priors des facteurs
+latents
+⇒ Utilisateurs et items avec des proﬁls similaires ont des
+
+représentations proches
+
+59 / 60
+
+Recommendation sur les réseaux sociaux:
+Factorisation matricielle
+
+Generalized Stochastic Block Model [Jamali et al. 2011]:
+
+Appartenance à des groupes / communautés latents
+
+Les relations entre utilisateurs et items sont gouvernées
+par les relations entre leurs groupes d’appartenance
+
+60 / 60
+
+

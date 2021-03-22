@@ -1,0 +1,167 @@
+https://www.irif.fr/~habib/Documents/examencachan15.pdf
+
+Examen d’algorithmique de graphes,
+
+L3 ENS Cachan
+
+Michel Habib
+
+11 janvier 2018
+
+Les exercices sont ind´ependants et tous les graphes manipul´es ici sont
+
+suppos´es ﬁnis.
+
+1 Pour d´emarrer
+
+k > 1) connexe si :
+
+On dit qu’un graphe G = (X, U ) est fortement (resp. k-fortement avec
+∀x, y ∈ X, x (cid:54)= y, il existe un (resp. k arc-disjoint) chemin de x `a y.
+1. Montrer que si pour tout x ∈ V (G), d+(x) = d−(x) > 0, alors chaque
+
+composante connexe de G est fortement connexe.
+
+2. Montrer que si pour tout x ∈ V (G), d+(x) = d−(x) = k > 1, alors
+
+chaque composante connexe de G est k-fortement connexe.
+
+3. Les propri´et´es des pr´ec´edentes questions admettent-elles une r´eciproque ?
+
+2 R´eseaux sociaux
+
+On consid`ere un graphe non orient´e dont toutes les arˆetes sont marqu´ees
++ ou −. Ces marques signiﬁent aimer (resp. d´etester) ou encore ami (resp.
+ennemi).
+
+1. Un marquage est dit ´equilibr´e si pour tout cycle le produit des marques
+
+est positif.
+
+2. Ecrire un algorithme qui reconnaisse si le marquage d’un graphe est
+
+´equilibr´e.
+
+3. En d´eduire une caract´erisation de la classe C des graphes qui ad-
+
+mettent un marquage ´equilibr´e.
+
+1
+
+4. * Etant donn´e un graphe G ∈ C et un marquage de ce graphe, proposer
+un algorithme qui ´equilibre ce marquage en changeant un nombre
+minimum de marques.
+
+5. Etant donn´e un graphe G et un marquage proposer un algorithme qui
+
+v´eriﬁe sur les triangles du graphe une r´egularit´e du type :
+les amis de mes amis sont mes amis
+Que peut-on en conclure ?
+
+3 Exercices sur les ﬂots dans les graphes
+
+s•
+
+M
+
+M
+
+a•
+
+•
+b
+
+t•
+
+M
+
+M
+
+Les arcs ab et ba ont une capacit´e 2M
+
+1. Montrer sur l’exemple de la Figure 1, que l’on peut ajouter `a tout ﬂot
+φ une valeur  sur le circuit [a, b, a] et obtenir un nouveau ﬂot φ(cid:48) tel
+que : φ(s, t) = φ(cid:48)(s, t).
+
+2. On appelle ﬂot normal un ﬂot dont tous les circuit positifs utilisent
+
+l’arc ts.
+Montrer qu’`a tout ﬂot φ on peut associer un ﬂot ψ normal tel que
+ψ(t, s) = φ(t, s).
+
+3. Proposer un algorithme qui v´eriﬁe qu’un ﬂot donn´e φ est normal.
+
+4. Montrer que tout ﬂot normal se d´ecompose comme une somme de
+
+chemins positifs de s `a t.
+
+5. Consid´erons un graphe pour lequel tous les circuits passent par les
+
+sommets s et t.
+Dans ce cas le ﬂot maximum est-il unique (en tant que vecteur) ?
+
+2
+
+6. * Existe-t-il des conditions n´ecessaires et/ou suﬃsantes pour l’unicit´e
+
+d’un ﬂot maximum (en tant que vecteur).
+
+7. Montrer comment utiliser la th´eorie des ﬂots pour calculer l’existence
+
+de k chemins arc-disjoints entre les sommets s et t.
+
+8. * Lorsque ces chemins existent comment calculer k plus courts chemins
+
+arc-disjoints entre les sommets s et t.
+
+4
+
+2 plus courts chemins
+
+1. Montrer sur un exemple que le probl`eme de la recherche de deux plus
+courts chemins arc-disjoints entre s et t est diﬀ´erent de celui de la
+recherche des 2 plus courts chemins entre s et t.
+
+2. * Montrer qu’avec deux applications successives de l’algorithme de
+Dijkstra il est facile de calculer deux plus courts chemins arc disjoints
+de s `a tous les autres sommets.
+
+5 Flots et parit´e
+
+On consid`ere un r´eseau de transport R = (X, U ) dont les capacit´es sont
+
+enti`eres.
+
+1. Un ﬂot entier est dit pair (resp. impair) si toutes ses valeurs sont paires
+
+(resp. impaires).
+Est-il vrai que :
+(a) si toutes les capacit´es sont paires, il existe un ﬂot maximum pair.
+(b) si toutes les capacit´es sont impaires, il existe un ﬂot maximum
+impair.
+
+2. Est-il possible qu’il existe un ﬂot maximum sur R qui ne soit pas `a
+
+valeurs enti`eres ?
+
+3. Proposer un algorithme qui le transforme en un ﬂot maximum entier.
+
+6
+
+*Codages de graphes
+
+Notons G le compl´ementaire d’un graphe orient´e G. Pour l’obtenir `a partir
+de la repr´esentation matricielle il suﬃt de remplacer les 0 par des 1 et vice-
+versa.
+
+Nous disposons d’un graphe orient´e G d´eﬁni par ses listes de successeurs.
+
+3
+
+Est-il possible de calculer en O(|V (G)| + |A(G)|) les composantes forte-
+ment connexes du compl´ementaire de G (i.e., sans calculer la repr´esentation
+par listes de successeurs du compl´ementaire) ?
+
+4
+
+

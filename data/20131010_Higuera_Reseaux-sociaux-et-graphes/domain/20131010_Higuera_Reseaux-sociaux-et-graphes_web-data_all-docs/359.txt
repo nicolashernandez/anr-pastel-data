@@ -1,0 +1,6584 @@
+https://homepages.laas.fr/huguet/drupal/sites/homepages.laas.fr.huguet/files/u78/2017-2018-GRAPHES.pdf
+
+25/09/2017 
+
+GRAPHES  
+
+M.-J. Huguet 
+
+ 
+
+ 
+
+https://homepages.laas.fr/huguet 
+
+2017-2018 
+
+ 
+
+Objectifs 
+
+  Acquérir des connaissances sur un outil de modélisation 
+
+ Problèmes discrets / combinatoires 
+
+ 
+ 
+
+ Acquérir une connaissance de quelques problèmes 
+
+classiques de Graphes 
+ Modélisation 
+ Méthodes de résolution 
+
+ 
+
+ 
+
+2 
+
+Bibliographie 
+
+Déroulement 
+
+ Précis de Recherche Opérationnelle – 6ème édition – R. Faure, B. Lemaire, C. Picouleau, 
+
+Dunod, 2009. 
+
+ 
+
+ Graphes et Algorithmes – 4ème édition – M. Gondran et M. Minou, Lavoisier, 2009. 
+
+ 
+
+ UF Optimisation et SED Cours et TD de Graphes 
+
+ 
+ 
+
+ Evaluation :  
+
+ Network Flows : Theory, Algorithms and Applications – K. Ahuja, J. Orlin et T. Magnati – 
+
+ 1 examen écrit pour Graphes 
+
+Prentice Hall, 1993 
+
+ 
+
+ Graph Theory and its Applications – 2nd edition – J. Gross et J. Yellen – Chapman & Hall, 
+
+2005 
+
+ 
+
+ MOOC : Conception et mise en oeuvre d’algorithmes, Ecole Polytechnique (2013-2014)  
+
+ 
+
+ 3 
+
+ 
+
+ 
+
+4 
+
+1 
+
+Positionnement du cours 
+
+ 
+
+Plan 
+
+ Domaine scientifique 
+ Recherche Opérationnelle 
+
+ But : aider des décideurs à faire les meilleurs choix 
+
+ Modèles / méthodes / Validation expérimentale et analyse 
+
+ Applications 
+
+ Problèmes de décision dans des systèmes complexes (ne pouvant être 
+
+résolus à la main) 
+
+ Toute organisation / Tout système complexe 
+
+ Mots clés : décision / optimisation 
+ Exemples 
+
+ Planifier;  Concevoir;  Transporter;  Partitionner; …. 
+
+1.
+
+2.
+
+Introduction 
+ Généralités 
+
+ 
+
+(1 cours) 
+
+ Quelques définitions 
+
+ Représentations informatiques 
+
+Parcours de Graphe   
+ Principe du parcours 
+
+ Parcours en profondeur  d’abord 
+
+ Parcours en largeur d’abord 
+
+(1 cours) 
+
+ Premières applications d’un algorithme de parcours 
+
+ Connexité – Forte connexité 
+
+ Tri topologique 
+
+3. Optimisation et Graphes 
+
+ Plus courts chemins 
+
+ Problèmes de flots 
+
+ 
+
+ 
+
+(3 cours) 
+ 
+
+ 
+
+5 
+
+6 
+
+Plan 
+
+1.
+
+2.
+
+Introduction 
+ Généralités 
+
+ 
+
+ Quelques définitions 
+
+ Représentations informatiques 
+
+Parcours de Graphe   
+ Principe du parcours 
+
+ Parcours en profondeur  d’abord 
+
+ Parcours en largeur d’abord 
+
+ 
+
+ 
+
+ Premières applications d’un algorithme de parcours 
+
+ Connexité – Forte connexité 
+
+ Tri topologique 
+
+3. Optimisation et Graphes 
+
+ Plus courts chemins 
+
+ Problèmes de flots 
+
+ 
+
+ 
+
+ 
+
+ 
+
+7 
+
+1.1. Généralités (1) 
+
+ Graphes 
+
+ Modéliser des relations entre un ensemble fini d’entités 
+ Chercher des propriétés, des interactions, …. 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ Entités = sommets 
+
+ Relations =  non orientées 
+
+       orientées 
+
+   
+
+ 
+
+arêtes     
+
+       arcs 
+
+ 
+
+ 
+
+8 
+
+25/09/2017 
+
+2 
+
+25/09/2017 
+
+1.1. Généralités (2) 
+
+ Graphes dans la vie courante ? 
+
+ Réseaux de transport 
+
+ 
+
+ de passagers, de biens, d’énergie, ….. 
+
+ Internet 
+ Réseaux sociaux 
+
+ 
+
+ Mais aussi :  
+
+ Activités d’un projet 
+
+ Relation de dépendance entre activités 
+
+ 
+
+9 
+
+1.1. Généralités (3) 
+
+ Dimension 
+
+ Graphes finis 
+
+ Nombre de sommets : n 
+
+Ordre d’un graphe 
+
+ Nombre d’arêtes/d’arcs : m 
+
+ Complexité 
+
+ Fonction de n et de m 
+
+ 
+ Densité  
+
+ Nombre de relations existantes / Nombre de relations possibles 
+
+ 
+
+ Restriction pour ce cours 
+
+ Au maximum 1 arête (1 arc) entre 2 sommets (1-graphe) 
+
+10 
+
+ 
+
+non orienté 
+
+orienté 
+
+1.1. Exemple (1) 
+
+ Réseaux de Transport 
+
+ Entités  
+
+ Points spécifiques (par exemple des intersections de rues) 
+
+ Relations 
+
+ Lignes de transport entre deux entités (routes, lignes de bus, de métro, ….) 
+
+ 
+
+ Problèmes types 
+
+ Peut-on aller d’un point A à un point B ? 
+ Quel est le temps minimal pour aller de A à B ? 
+ Quels sont les points atteignables depuis A en moins de 30 min ? 
+ Etc. 
+
+ 
+
+11 
+
+1.1. Exemple (2) 
+
+ Extrait du réseau cyclable de Toulouse 
+
+ 
+
+12 
+
+3 
+
+25/09/2017 
+
+ 
+
+ 
+
+1.2. Définitions –  
+Graphes non orientés (3) 
+
+ Pour un sommet      , on définit :  
+            sommet voisin / adjacent ssi l’arête    
+          : l’ensemble des sommets voisins (ou adjacents) 
+
+ 
+
+       arête incidente à         ssi          extrémité de   
+          : l’ensemble des arêtes incidentes 
+
+ 
+
+          : son degré = nombre d’arêtes incidentes 
+    
+    
+
+si pas de boucle sur  
+
+s’il y a une boucle sur  
+
+  
+
+ 
+
+ 
+
+  
+
+1.1. Exemple (3) 
+
+ Modélisation 
+
+ Pistes cyclables mono-directionnelles ou bi-directionnelles 
+
+ Avec les orientations 
+
+ Sans les orientations 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+Plan 
+
+1.
+
+2.
+
+Introduction 
+ Généralités 
+
+ 
+
+ Quelques définitions 
+
+ Représentations informatiques 
+
+Parcours de Graphe   
+ Principe du parcours 
+
+ Parcours en profondeur  d’abord 
+
+ Parcours en largeur d’abord 
+
+ 
+
+ 
+
+ Premières applications d’un algorithme de parcours 
+
+ Connexité – Forte connexité 
+
+ Tri topologique 
+
+3. Optimisation et Graphes 
+
+ Plus courts chemins 
+
+ Problèmes de flots 
+
+ 
+
+ 
+
+ 
+
+ 
+
+13 
+
+- en moyenne 3 relations par sommet :  
+- densité : 
+
+         
+
+14 
+
+1.2. Définitions –  
+Graphes non orientés (1) 
+
+ Graphe non orienté : G(X, E) 
+
+ Ensemble des nœuds (sommets) 
+ Ensemble des arêtes   
+
+         
+
+   
+
+ 
+
+        nodes/vertices 
+
+                 edge 
+
+ 
+
+ Toute arête a deux extrémités    
+ 
+ 
+
+                 
+
+ 
+
+      extrémité  
+
+ 
+
+ 
+
+ 
+ Si les deux extrémités d’une arête sont identiques : boucle        loop 
+
+ 
+
+ Exemple. Tracer le graphe défini par :  
+
+15 
+
+ Quand une arête est une boucle : elle compte pour 2 dans le calcul du degré de son 
+
+extrémité. 
+
+ 
+
+ Propriété :  
+
+ 
+
+  
+
+16 
+
+4 
+
+25/09/2017 
+
+   
+
+ 
+
+        nodes/vertices 
+
+ 
+     vers 
+
+ arcs 
+ 
+
+1.2. Définitions –  
+Graphes orientés (1) 
+
+ Graphe orienté : G(X, A) 
+ Ensemble des nœuds (sommets) 
+ Ensemble des arcs 
+
+ 
+ 
+
+         
+va de  
+
+ Arc  
+
+ 
+
+ 
+
+ Toute arc a deux extrémités  
+
+  
+
+ 
+
+ 
+
+                extrémité initiale 
+
+ 
+
+extrémité finale 
+
+ 
+ Si les deux extrémités d’un arc sont identiques : boucle        loop 
+
+ 
+
+ Exemple. Tracer le graphe défini par 
+
+ 
+
+ 
+
+18 
+
+1.2. Définitions –  
+Graphes non orientés (4) 
+
+ Exemple 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+ Calculer les degrés de tous les sommets 
+ Vérifier la propriété 
+
+17 
+
+1.2. Définitions –  
+Graphes orientés (2) 
+
+ Pour un sommet      , on définit :  
+
+Graphe non orienté 
+
+Graphe orienté 
+
+Ens. Sommets voisins 
+
+Ens. Arêtes incidentes 
+
+Degré 
+
+Ens. Sommets successeurs 
+Ens. Sommets prédécesseurs 
+
+Ens. Arcs sortants 
+Ens. Arcs entrants 
+
+Degré sortant 
+Degré entrant 
+
+ Par définition 
+
+ 
+
+  
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+19 
+
+1.2. Définitions –  
+Graphes orientés (3) 
+
+ 
+          : degré d’un sommet 
+
+ 
+
+ On a 
+
+ 
+
+ Propriété :    
+
+20 
+
+5 
+
+25/09/2017 
+
+1.2. Définitions –  
+Graphes orientés (4) 
+
+ Exemple 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+ Calculer les degrés de tous les sommets 
+ Vérifier la propriété 
+
+ 
+
+21 
+
+1.2. Définitions générales – Graphes pondérés 
+ 
+
+ Graphes pondérés  
+
+ 
+ Graphe orienté ou non orienté 
+
+ 
+
+ 
+
+             weighted graphs 
+
+ Valuations associées aux arcs/arêtes 
+
+ Distance, temps, prix, capacité d’utilisation, etc. 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ Exemple d’application : 
+
+ Trajet de cout minimal / distance … 
+
+ Calculer un débit maximal / capacités d’utilisation  
+ 
+
+22 
+
+1.2. Définitions générales – Accessibilité (1) 
+ 
+
+1.2. Définitions générales – Accessibilité (2) 
+ 
+
+ Accessibilité 
+
+ 
+
+ 
+
+(graphe non orienté) 
+
+ Accessibilité 
+
+ 
+
+ 
+
+(graphe orienté) 
+
+ Entre deux sommets : existence d’une succession d’arêtes 
+
+ Entre deux sommets : existence d’une succession d’arcs 
+
+ 
+
+ Exemple 
+
+ 
+
+ 
+
+ 
+
+ 
+
+o J est accessible depuis A 
+
+o A est accessible depuis J 
+
+ 
+
+ accessibilité est symétrique 
+
+ 
+ Chaine 
+
+ 
+
+ Exemple 
+
+ 
+
+ 
+ 4 est accessible depuis 9 
+
+ 
+
+ 9 non accessible depuis 4 
+
+ 
+
+ Non symétrie 
+
+ 
+
+ Chemin 
+
+23 
+
+24 
+
+6 
+
+25/09/2017 
+
+1.2. Définitions générales – Accessibilité (3) 
+ 
+
+1.2. Définitions générales – Accessibilité (4) 
+ 
+
+ Chaines    
+
+ 
+
+(cas non orienté) 
+
+ Liste d’arêtes consécutives  
+ Longueur d’une chaine = nombre d’arêtes 
+
+ 
+
+ 
+(ou de sommets) 
+
+ Cycle = chaine fermée 
+
+ 
+
+ (cas non orienté) 
+
+ Chaine fermée 
+ Longueur d’un cycle = nombre d’arêtes 
+
+ 
+
+ Exemple 
+ 
+
+ 
+
+ 
+
+ 
+
+(A, B, D, E) : chaine de longueur 3 
+(H, K, J, I, G, H) : cycle de longueur 5 
+
+25 
+
+26 
+
+(cas orienté) 
+
+(cas orienté) 
+
+ Chemin 
+
+ 
+
+ 
+
+ Liste d’arcs consécutifs 
+ Longueur = nombre d’arcs 
+
+ Circuit 
+
+ 
+
+ 
+
+ Chemin fermé 
+ Longueur = nombre d’arcs 
+
+ 
+
+ 
+
+ 
+
+ Exemple 
+
+ 
+
+(x1, x2, x6, x3) : chemin de longueur 3 
+ 
+(x7, x1, x11, x10, x8, x7) : circuit de  
+longueur 5 
+
+1.2. Définitions générales – Accessibilité (5) 
+ 
+
+1.2. Définitions générales – Accessibilité (6) 
+ 
+
+ Chaine/Cycle/Chemin/Circuit élémentaires 
+
+ passe au maximum une seule fois par chacun des sommets 
+
+ 
+
+ Chaine/Cycle/Chemin/Circuit hamiltoniens 
+
+ passe exactement une seule fois par chacun des sommets 
+
+ 
+
+ Chaine/Cycle/Chemin/Circuit simples 
+
+ 
+
+ Chaine/Cycle/Chemin/Circuit eulériens   
+
+ passe au maximum une seule fois par chacun des arcs / arêtes 
+
+ passe exactement une seule fois par chacun des arcs / arêtes 
+
+ 
+
+ Exemple 
+
+ 
+
+ 
+
+ Exemple 
+
+ 
+
+(E, D, C, A, B) : chaine élémentaire (et simple) 
+(B, D, E, A, C) : chaine élémentaire (et simple) 
+ 
+(A, B, D, C, A, E, D) : chaine simple (non élémentaire) 
+
+Circuit hamiltonien ? 
+ 
+Circuit eulérien ?  
+
+27 
+
+28 
+
+7 
+
+1.2. Définitions générales –  
+Connexité  / Forte Connexité 
+
+ Connexité 
+
+ Un graphe (non orienté / orienté) est connexe ssi il existe une chaine entre toute 
+
+paire de sommets 
+
+ Exemple 
+
+ 
+
+ Forte Connexité 
+
+1.2. Définitions générales –  
+Graphes particuliers (1) 
+
+ Graphe acyclique 
+
+ Graphe sans cycle ou sans circuit 
+
+ 
+
+ Graphe complet   
+
+ 
+
+ 
+
+ Orienté ou non orienté 
+
+ Un graphe orienté est fortement connexe ssi il existe un chemin entre toute paire 
+
+ Il existe une relation entre toutes les paires de sommet 
+
+de sommets 
+
+ Exemple 
+
+ 
+
+ Questions 
+
+ Le réseau routier français est-il connexe ? Est-il fortement connexe ?  
+
+ Le réseau routier midi-pyrénées est-il connexe ? Est-il ortement connexe ? 
+
+29 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ Notation : K3, 
+
+ 
+
+       K4 
+
+ 
+
+ 
+
+          K5 
+
+ 
+
+ Question : quel est le degré des sommets dans un graphe complet ? 
+
+30 
+
+ 
+
+ 
+
+ 
+
+1.2. Définitions générales –  
+Graphes particuliers (2) 
+
+1.2. Définitions générales –  
+Graphes particuliers (3) 
+
+ Graphe biparti 
+
+ Deux ensembles de sommets U et V tels que X = {U, V} et U  V =  
+ Les relations ne sont qu’entre des sommets U et des sommets V 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ Notation 
+
+ 
+
+ 
+
+K5,4 
+
+ 
+
+ 
+
+31 
+
+ Graphe planaire   
+
+ 
+
+ 
+
+ Les arêtes ne se rencontrent que sur les sommets (pas d’intersection) 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+ Le graphe complet K5 n’est pas planaire (ni tout graphe le contenant) 
+ Le graphe biparti K3,3 n’est pas planaire (ni tout graphe le contenant) 
+
+ 
+
+ 
+
+32 
+
+25/09/2017 
+
+8 
+
+25/09/2017 
+
+1.2. Définitions générales –  
+Graphes particuliers (5) 
+
+ Exemple 
+
+ Quels graphes sont des arbres ? 
+
+ 
+
+ 
+
+ 
+
+ Arbres enracinés 
+
+ Sélectionner un sommet quelconque  sommet racine 
+ Il existe un unique chemin de cette racine vers les autres  une orientation 
+ Arborescence  : arbre avec orientation 
+
+ 
+
+34 
+
+1.2. Définitions générales –  
+Graphes particuliers (4) 
+
+ Arbres 
+
+ 
+
+ 
+
+ 
+
+ Graphe non orienté 
+ G est un arbre si : 
+
+ Il est connexe et acyclique / Il est connexe et a n-1 arêtes / Il est sans cycle et a n-1 arêtes 
+
+ 
+
+ Nœuds de l’arbre = sommets du graphe 
+
+o Feuilles = sommets de degrés = 1 
+
+o  Nœuds interne = sommets de degré > 1 
+
+ 
+
+ Exemples 
+
+ 
+
+ 
+
+ 
+
+33 
+
+ Nœud spécifique quelconque  racine 
+ Chaine de la racine à un nœud quelconque  branche de l’arbre 
+ 
+
+ 
+
+(arbre enraciné) 
+
+ 
+
+Plan 
+
+1.
+
+2.
+
+Introduction 
+ Généralités 
+
+ 
+
+ Quelques définitions 
+
+ Représentations informatiques 
+
+Parcours de Graphe   
+ Principe du parcours 
+
+ Parcours en profondeur  d’abord 
+
+ Parcours en largeur d’abord 
+
+ 
+
+ 
+
+ Premières applications d’un algorithme de parcours 
+
+ Connexité – Forte connexité 
+
+ Tri topologique 
+
+3. Optimisation et Graphes 
+
+ Plus courts chemins 
+
+ Problèmes de flots 
+
+ 
+
+ 
+
+ 
+
+ 
+
+1.3. Représentations informatiques – 
+Matrice d’Adjacence (1) 
+
+ Matrice d’adjacence 
+
+ Relation sommets – sommets 
+ Graphes orientés et non orientés 
+
+ 
+
+ Soit 
+
+      un graphe 
+
+           : matrice booléenne d’adjacence  
+ Matrice carrée 
+
+ 
+
+ Remarques 
+
+ Graphe non orienté  matrice symétrique 
+
+35 
+
+36 
+
+9 
+
+25/09/2017 
+
+1.3. Représentations informatiques – 
+Matrice d’Adjacence (2) 
+
+1.3. Représentations informatiques – 
+Tableau de Listes d’Adjacence (1) 
+
+ Exemples 
+
+ Donner le graphe correspondant à la matrice ci-dessous 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+x1 
+
+x2 
+
+x3 
+
+x4 
+
+x5 
+
+x1 
+
+x2 
+
+x3 
+
+x4 
+
+x5 
+
+0 
+
+0 
+
+0 
+
+1 
+
+1 
+
+1 
+
+1 
+
+0 
+
+0 
+
+0 
+
+1 
+
+1 
+
+0 
+
+0 
+
+1 
+
+0 
+
+0 
+
+1 
+
+0 
+
+0 
+
+1 
+
+0 
+
+0 
+
+1 
+
+0 
+
+ Comment représenter un graphe pondéré ? 
+
+ 
+
+ Donner les matrices correspondant aux graphes ci-dessous 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+37 
+
+ Tableau de Listes d’adjacence (ou de successeurs) 
+
+ Graphe non orienté 
+
+ Pour chaque sommet        : la liste des sommets voisins 
+
+ Graphe orienté 
+
+ Pour chaque sommet        : la liste des sommets successeurs 
+
+ 
+
+ Structure de données  
+
+ Ensemble des sommets et pour chacun ensemble des « adjacents » 
+ Implémentation classique :  
+
+ Tableau de taille    n   :    avec                                        ou   
+
+                                                         la « liste » des sommets adjacents / successeurs 
+
+ Intérêt  
+
+ Représentation plus compacte d’un graphe 
+ On ne mémorise pas l’absence de voisins / successeurs    
+
+38 
+
+1.3. Représentations informatiques – 
+Liste d’Adjacence (2) 
+
+ Exemples 
+
+ Donner le graphe correspondant à la liste d’adjacence ci-dessous 
+
+ 
+
+ 
+
+ 
+
+ 
+
+x1 
+
+x2 
+
+x3 
+
+(
+x
+4
+)
+ 
+
+x4 
+
+x5 
+
+ 
+ 
+
+(
+x
+1
+,
+ 
+x
+5
+)
+ 
+
+(
+x
+1
+,
+ 
+x
+3
+)
+ 
+
+(
+x
+2
+,
+ 
+x
+3
+,
+ 
+5
+)
+ 
+
+(
+x
+2
+,
+ 
+x
+3
+)
+ 
+
+ 
+ Comment représenter un graphe pondéré ? 
+
+ 
+
+ Donner les listes d’adjacence correspondant aux graphes ci-dessous 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+39 
+
+1.3. Représentations informatiques – 
+Liste d’Adjacence (3) 
+
+ Liste d’adjacence (ou de successeurs) 
+
+ Implémentation de la liste des adjacents / successeurs 
+
+ 
+ 
+ 
+ Tableaux 
+ Pointeurs (listes chainées) 
+ Voir cours Algo-Prog / Structures de Données (2MIC) 
+
+ 
+
+ Hypothèse pour la suite :  
+
+ Implémentation avec pointeurs (ou ayant les mêmes caractéristiques  que celle garantit par 
+
+les pointeurs) 
+
+ 
+
+40 
+
+10 
+
+25/09/2017 
+
+1.3. Représentations informatiques – 
+Comparaison (1) 
+
+1.3. Représentations informatiques – 
+Comparaison (2)  
+ 
+
+ 
+
+ 
+
+ 
+
+ Caractéristiques de ces représentations 
+
+ Caractéristiques de ces représentations (suite) 
+
+ Occupation mémoire 
+
+ Matrice d’adjacence 
+ Liste d’adjacence 
+
+ 
+
+ 
+
+ 
+
+Intéressant si 
+
+Graphe peu dense 
+
+ Complexité temporelle des opérations élémentaires 
+     
+
+ 
+
+ 
+ 
+ Ajouter arc (x, y) :   
+
+ 
+ 
+
+    Mat Adj         Liste Adj  
+        O(1)                   O(1) 
+
+ Supprimer arc (x, y) :  
+
+ Tester existence arc (x, y) :  
+
+ Parcourir tous les sommets :  
+
+ 
+
+ 
+
+ 
+
+        O(1)   
+
+        O(1)   
+
+        O(n)   
+
+ Parcourir les voisins d’un sommet x : 
+
+        O(n)   
+
+O((x)) 
+O((x)) 
+O(n) 
+O((x)) 
+
+ 
+
+41 
+
+ 
+
+Avantages 
+
+ 
+
+ 
+
+Inconvénients 
+
+ 
+
+ 
+
+Matrice Adjacence 
+
+Liste Adjacence 
+
+Implémentation/Utilisation 
+simple 
+Accès direct à l’information O(1) 
+
+Occupation mémoire 
+Accès voisinage efficace : O((x)) 
+Accès information assez rapide O((x)) 
+
+Occupation mémoire 
+Accès voisinage long : O(n) 
+Inadapté aux graphes dynamiques 
+
+Difficulté implémentation 
+
+ 
+ Transformation 
+
+ Matrice d’adjacence  Liste d’adjacence : O(n²) 
+ Liste d’adjacence  Matrice d’adjacence : O(m) 
+
+ 
+
+42 
+
+ 
+
+1.3. Représentations informatiques – 
+Matrice d’Incidence / Annexe 
+
+ Remarque 
+
+ Il existe une autre représentation appelée matrice d’incidence 
+
+ Pour des graphes orientés sans boucle 
+ Matrice arcs/arêtes – sommets 
+
+ 
+
+ 
+
+ 
+
+ Exemple : 
+
+1.4. Exercice 
+
+ Définition : Graphe inverse 
+
+ Uniquement dans le cas de graphe orienté  
+    
+ 
+
+      est le graphe inverse de                  si :  
+
+ 
+
+ 
+
+ Exemple : donner le graphe inverse du graphe ci-dessous 
+
+ 
+
+ 
+
+ 
+
+43 
+
+44 
+
+11 
+
+001100110000101001010110000011654321)(EDCBAaaaaaaG25/09/2017 
+
+1.4. Exercice 
+
+ Questions 
+
+1. On suppose que le graphe est implémenté avec une matrice d’adjacence 
+
+ Ecrire un algorithme permettant d’obtenir le graphe inverse (implémenté lui aussi 
+
+avec une matrice d’adjacence) 
+
+ Donner la complexité de l’algorithme 
+
+2. On suppose que le graphe est implémenté avec une liste d’adjacence 
+ Ecrire un algorithme permettant d’obtenir le graphe inverse (implémenté lui aussi 
+
+avec une liste d’adjacence) 
+
+ Donner la complexité de l’algorithme 
+
+ 
+
+3. Annexe – Suite de la question 2 
+
+ Modifier l’algorithme proposé pour calculer le degré entrant de chaque sommet 
+
+45 
+
+ 
+
+ 
+
+ 
+
+ 
+
+1.4. Exercice – 
+algorithme et complexité (question 1) 
+
+ Donnée : M[1..n; 1..n] : matrice d’adjacence 
+
+ Résultat : M’[1..n; 1..n]: matrice d’adjacence 
+
+ 
+
+ Principe : inverser lignes et colonnes 
+
+ 
+
+       Pour tout i de 1 à n 
+
+        Pour tout j de 1 à n 
+
+          M’[i,j]  M[j,i] 
+
+ 
+
+ Complexité : O(n²) 
+
+ 
+
+46 
+
+1.4. Exercice – 
+algorithme et complexité (question 2) 
+
+1.4. Exercice – 
+algorithme et complexité (question 3) 
+
+ Donnée : S[1..n] : tableau des successeurs 
+
+ Donnée : S[1..n] : tableau des successeurs 
+
+ Résultat : P[1..n]: tableau des prédécesseurs 
+
+ Résultat : P[1..n]: tableau des prédécesseurs 
+
+ 
+
+ Principe : parcourir les successeurs de chaque 
+sommet x_i et pour chacun d’eux insérer i dans la 
+
+liste de ses prédécesseurs 
+
+       Pour tout i de 1 à n 
+
+        Pour tout j successeur de i faire 
+
+          Insérer i dans P[j] 
+
+ 
+
+ Complexité :    
+ (complexité Inserer)  
+
+ 
+
+ Calcul degré entrant :  
+
+ 
+
+   
+
+47 
+
+ Nombre d’éléments dans chaque P[j] 
+
+            DegS[1..n] : tableau des degrés sortants 
+
+ 
+
+ Principe : reprendre algo de calcul du graphe 
+
+inverse et ajouter un compteur à chaque insertion 
+
+       Pour tout i de 1 à n 
+
+        Pour tout j successeur de i faire 
+
+          Insérer i dans P[j] 
+          DegS[j]  DegS[j] + 1 
+
+ 
+
+ Complexité :    
+
+ 
+
+   
+
+ 
+
+48 
+
+12 
+
+25/09/2017 
+
+2.1. Principe du Parcours (1) 
+ 
+
+ Parcours d’un graphe non orienté ou orienté 
+
+ Permet de résoudre différents problèmes sur les graphes 
+
+ Base de nombreux problèmes (algorithmes) 
+
+ 
+
+ Partir d’un sommet et visiter sur tous les autres 
+ 
+
+ 
+
+ Lors d’un parcours :  
+
+ Garder en mémoire la trace des sommets explorés 
+ 3 états possibles 
+o Inexploré 
+
+(blanc) 
+
+ 
+
+o Visité 
+
+o En Traitement 
+
+ 
+
+ 
+
+(noir) 
+
+(gris) 
+
+50 
+
+ 
+
+Plan 
+
+1.
+
+2.
+
+Introduction 
+ Généralités 
+
+ 
+
+ Quelques définitions 
+
+ Représentations informatiques 
+
+Parcours de Graphe   
+ Principe du parcours 
+
+ Parcours en profondeur  d’abord 
+
+ Parcours en largeur d’abord 
+
+ 
+
+ 
+
+ Premières applications d’un algorithme de parcours 
+
+ Connexité – Forte connexité 
+
+ Tri topologique 
+
+3. Optimisation et Graphes 
+
+ Plus courts chemins 
+
+ Problèmes de flots 
+
+ 
+
+ 
+
+ 
+
+ 
+
+49 
+
+2.1. Principe du Parcours (2) 
+ 
+
+2.1. Principe du Parcours –  
+Déroulement algorithme (1) 
+
+ Principe général 
+
+ Déroulement d’un parcours en partant de A 
+
+Initialisation : Tous les sommets sont INEXPLORÉ  
+
+Marquer un sommet TRAITEMENT 
+
+Tant qu’il existe des sommets dans l’état TRAITEMENT 
+
+ Choisir un tel sommet s 
+
+ Si s n’a pas de voisin dans l’état INEXPLORÉ alors 
+
+ Marquer s à l’état VISITÉ 
+
+ Sinon  
+
+ Sélectionner un voisin de s  
+
+ Le marquer dans l’état TRAITEMENT 
+
+ 
+
+ 
+
+ 
+
+ 
+
+51 
+
+52 
+
+Tant qu’il existe des sommets en TRAITEMENT 
+
+   Choisir un sommet s 
+   Si s n’a pas de voisin INEXPLORE alors 
+      Marquer s comme VISITE 
+
+   Sinon 
+      Sélectionner un voisin de s 
+      Le marquer en TRAITEMENT  
+
+13 
+
+25/09/2017 
+
+2.1. Principe du Parcours –  
+Déroulement algorithme (2) 
+
+2.1. Principe du Parcours –  
+Déroulement algorithme (3) 
+
+ Déroulement d’un parcours en partant de A 
+
+ Déroulement d’un parcours en partant de A 
+
+Tant qu’il existe des sommets en TRAITEMENT 
+
+   Choisir un sommet s 
+   Si s n’a pas de voisin INEXPLORE alors 
+      Marquer s comme VISITE 
+
+   Sinon 
+      Sélectionner un voisin de s 
+      Le marquer en TRAITEMENT  
+
+Tant qu’il existe des sommets en TRAITEMENT 
+
+   Choisir un sommet s 
+   Si s n’a pas de voisin INEXPLORE alors 
+      Marquer s comme VISITE 
+
+   Sinon 
+      Sélectionner un voisin de s 
+      Le marquer en TRAITEMENT  
+
+Quel sommet en TRAITEMENT choisir ? 
+
+Quel sommet en TRAITEMENT choisir ? 
+
+53 
+
+54 
+
+2.1. Principe du Parcours –  
+Déroulement algorithme (4) 
+
+2.1. Principe du Parcours –  
+Déroulement algorithme (5) 
+
+ Déroulement d’un parcours en partant de A 
+
+ Déroulement d’un parcours en partant de A 
+
+Tant qu’il existe des sommets en TRAITEMENT 
+
+   Choisir un sommet s 
+   Si s n’a pas de voisin INEXPLORE alors 
+      Marquer s comme VISITE 
+
+   Sinon 
+      Sélectionner un voisin de s 
+      Le marquer en TRAITEMENT  
+
+Tant qu’il existe des sommets en TRAITEMENT 
+
+   Choisir un sommet s 
+   Si s n’a pas de voisin INEXPLORE alors 
+      Marquer s comme VISITE 
+
+   Sinon 
+      Sélectionner un voisin de s 
+      Le marquer en TRAITEMENT  
+
+Quel sommet en TRAITEMENT choisir ? 
+
+Quel sommet en TRAITEMENT choisir ? 
+
+55 
+
+56 
+
+14 
+
+25/09/2017 
+
+2.1. Principe du Parcours –  
+Propriétés 
+
+ Remarques 
+
+ Le parcours se termine 
+ 
+ 
+ 
+
+ 
+
+ 
+ Tout sommet accessible depuis le sommet de départ est VISITÉ (et tous les sommets 
+
+VISITÉS sont accessibles depuis le sommet de départ)  
+
+ Adaptation immédiate dans le cas orienté 
+ On peut numéroter les sommets dans l’ordre où ils passent à l’état VISITÉ 
+ 
+ 
+
+57 
+
+ 
+
+2.1. Principe du Parcours –  
+Mise en œuvre (1) 
+
+ Deux types de parcours 
+
+ Lié à la sélection du sommet dans l’état TRAITEMENT 
+ 2 possibilités:  
+
+ Sélectionner le sommet passé dans TRAITEMENT en dernier 
+ Parcours en profondeur d’abord (Depth First Search) 
+
+ Sélectionner le sommet passé dans TRAITEMENT depuis le plus longtemps 
+
+ Parcours en largeur d’abord (Breadth First Search) 
+
+ 
+
+ Mise en œuvre de ces 2 possibilités 
+
+ Choix de structures de données adaptées pour représenter la liste des sommets dans 
+
+l’état TRAITEMENT  
+
+ 
+ 
+
+58 
+
+2.1. Principe du Parcours –  
+Mise en œuvre (1) 
+
+ Représentation de la liste des sommets en traitement 
+
+ FILE 
+ PILE 
+
+ 
+
+ Rappel (?) FILE 
+
+ Ajout en fin 
+ Suppression en début 
+
+ Rappel (?) PILE  
+
+ Ajout et suppression en début 
+
+Plan 
+
+1.
+
+2.
+
+Introduction 
+ Généralités 
+
+ 
+
+ Quelques définitions 
+
+ Représentations informatiques 
+
+Parcours de Graphe   
+ Principe du parcours 
+
+ Parcours en profondeur  d’abord 
+
+ Parcours en largeur d’abord 
+
+ 
+
+ 
+
+ Premières applications d’un algorithme de parcours 
+
+ Connexité – Forte connexité 
+
+ Tri topologique 
+
+3. Optimisation et Graphes 
+
+ Plus courts chemins 
+
+ Problèmes de flots 
+
+ 
+
+ 
+
+ 
+
+ 
+
+59 
+
+60 
+
+15 
+
+25/09/2017 
+
+2.2. Parcours en profondeur –  
+Utilisation d’une pile 
+
+ Opérations sur une PILE (LIFO : Last In First Out) 
+
+ CRÉER (pile) : Créer une pile vide 
+ ESTVIDE (pile) : Renvoie vrai si la pile est vide 
+ EMPILER(pile, element) :  Ajouter un élément au début de la pile 
+ DEPILER(pile) : Renvoie l’élément situé en début de la pile (et le retire de la pile) 
+ LIRE(pile) : Renvoie l’élément situé en début de la pile (sans modifier la pile) 
+
+ 
+
+ Dans le parcours 
+
+ Pour gérer les sommets dans l’état TRAITEMENT  
+ Permet d’explorer en priorité les voisins des sommets parcourus en dernier 
+
+2.2. Parcours en profondeur d’abord –  
+Déroulement algorithme  
+
+ Pile : pour la liste des sommets en traitement 
+ Exemple : à partir de A 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+H 
+F 
+G 
+D 
+E 
+C 
+B 
+A 
+A 
+
+61 
+
+ 
+
+ Ordre de marquage visité : H G E B F D C A 
+
+62 
+
+2.2. Parcours en profondeur d’abord –  
+Propriété de l’algorithme  
+
+2.2. Parcours en profondeur d’abord – 
+Algorithme (1) 
+
+ Exploration réalisée lors du parcours en profondeur 
+
+ Algorithme itératif  
+
+ DFS(s, ETAT) 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ A chaque étape 
+
+ Un sommet courant (haut pile) 
+ Il est accessible par tous les 
+autre sommets en traitement (reste pile) 
+
+63 
+
+DATA : Graphe G(X, A), Sommet s de départ du parcours 
+
+RESULT : liste de sommets atteints depuis s 
+
+INIT : Pour tout sommet x, ETAT(x)  INEXPLORÉ  
+
+ 
+
+ETAT(s)  TRAITEMENT;   // TRAITER(s)// 
+
+CRÉER(pile); EMPILER(pile, s) 
+
+While not ESTVIDE(pile) do 
+
+x  LIRE(pile) 
+
+If il existe y voisin(x) tque ETAT(y) == INEXPLORÉ then 
+
+     ETAT(y)  TRAITEMENT; {TRAITER(x)} EMPILER(pile, y); 
+
+Else 
+
+     DEPILER(pile); ETAT(x)  VISITE 
+
+G 
+E 
+B 
+A 
+
+Endif 
+
+End while 
+
+64 
+
+ 
+
+ 
+
+ 
+
+ 
+
+16 
+
+25/09/2017 
+
+2.2. Parcours en profondeur d’abord – 
+Algorithme (2) 
+
+2.2. Parcours en profondeur d’abord – 
+Propriété 
+
+ Algorithme récursif   DFS(s, ETAT) 
+
+ Propriétés de DFS(s, Etat) 
+
+DATA : Graphe G(X, A), Sommet s de départ du parcours 
+
+RESULT : liste de sommets atteints depuis s 
+
+INIT : Pour tout sommet x, ETAT(x)  INEXPLORÉ  
+
+ 
+
+ETAT(s)  TRAITEMENT;   TRAITER(s) 
+
+For tous les voisins x de s do 
+
+   if ETAT(x) == INEXPLORÉ then 
+
+       DFS(x, ETAT) 
+
+   endif 
+
+endFor 
+
+ETAT(s)  VISITE 
+
+ 
+
+65 
+
+66 
+
+ Visite tous les sommets accessibles depuis s via des sommets inexplorés (les autres 
+
+sommets ne changent pas d’état) 
+
+ 
+ A tout moment, les sommets en traitement représentent un chemin (une chaine) 
+
+depuis l’origine du parcours jusqu’au sommet courant 
+
+ 
+
+2.2. Parcours en profondeur d’abord – 
+Complexité 
+
+2.2. Parcours en profondeur d’abord – 
+Application 
+
+ Complexité 
+
+ Initialisation : O(n) 
+
+ 
+
+ Itération : O(m) 
+
+ Chaque arc/arête n’est traité qu’une seule fois  
+
+ Opérations sur la pile : temps constant 
+
+ 
+
+ O(n+m)  
+
+ soit O(m) car m > n 
+
+67 
+
+ Déroulement l’algorithme de parcours en profondeur sur 
+
+le graphe ci-dessous (partir du sommet 1) 
+
+ Fournir le contenu du tableau ETAT 
+ Donner également le contenu de la pile 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ Donner l’ordre dans lequel les sommets passent dans l’état TRAITEMENT 
+ Donner l’ordre dans lequel les sommets passent dans l’état VISITE 
+
+ 
+
+68 
+
+17 
+
+25/09/2017 
+
+Plan 
+
+1.
+
+2.
+
+Introduction 
+ Généralités 
+
+ 
+
+ Quelques définitions 
+
+ Représentations informatiques 
+
+Parcours de Graphe   
+ Principe du parcours 
+
+ Parcours en profondeur  d’abord 
+
+ Parcours en largeur d’abord 
+
+ 
+
+ 
+
+ Premières applications d’un algorithme de parcours 
+
+ Connexité – Forte connexité 
+
+ Tri topologique 
+
+3. Optimisation et Graphes 
+
+ Plus courts chemins 
+
+ Problèmes de flots 
+
+ 
+
+ 
+
+ 
+
+ 
+
+2.3. Parcours en largeur–  
+Utilisation d’une file 
+
+ Opérations sur une FILE (FIFO : First In First Out) 
+
+ CRÉER (file) : Créer une file vide 
+ ESTVIDE (file) : Renvoie vrai si la file est vide 
+ ENFILER(file, element) :  Ajouter un élément au fin de la file 
+ DEFILER(file) : Renvoie l’élément situé en début de la file (et le retire de la file) 
+ LIRE(file) : Renvoie l’élément situé en début de la file (sans modifier la file) 
+
+ 
+
+ Dans le parcours 
+
+ Pour gérer les sommets dans l’état TRAITEMENT  
+ Permet d’explorer en priorité les voisins des sommets parcourus en dernier 
+
+69 
+
+70 
+
+2.3. Parcours en largeur d’abord – 
+Déroulement algorithme  
+
+2.3. Parcours en largeur d’abord – 
+Déroulement algorithme (variante) 
+
+ File : pour la liste des sommets en traitement 
+ Exemple (à partir de A) 
+
+ File : pour la liste des sommets en traitement 
+ Exemple (à partir de A) 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+F G H 
+
+D 
+
+E 
+
+C 
+
+B 
+
+A 
+
+F G H 
+
+D 
+
+E 
+
+C 
+
+B 
+
+A 
+
+ Ordre de marquage visité : A B C E D F G H 
+
+71 
+
+ Ordre de marquage visité : A B C E D F G H 
+
+72 
+
+ 
+
+ 
+
+ 
+
+ 
+
+18 
+
+25/09/2017 
+
+2.3. Parcours en largeur d’abord – 
+Exploration effectuée 
+
+2.3. Parcours en largeur d’abord – 
+Algorithme (1) 
+
+ Exploration réalisée lors du parcours en largeur 
+
+ Algorithme itératif  
+
+ BFS(s, ETAT) 
+
+ 
+
+73 
+
+DATA : Graphe G(X, A), Sommet s de départ du parcours 
+
+RESULT : liste de sommets atteints depuis s 
+
+INIT : Pour tout sommet x, ETAT(x)  INEXPLORÉ  
+
+ 
+
+ETAT(s)  TRAITEMENT;   // TRAITER(s)// 
+
+CRÉER(file); ENFILER(file, s) 
+
+While not ESTVIDE(file) do 
+
+x  LIRE(file) 
+
+For tous y voisin(x) do 
+
+    If ETAT(y) == INEXPLORÉ then 
+
+         ENFILER(file, y); ETAT(y)  TRAITEMENT;  // TRAITER(x)//   
+
+    Endif 
+
+Endfor 
+
+x  DEFILER(file);  ETAT(x)  VISITE;  { TRAITER(x);} 
+
+End while 
+
+74 
+
+ 
+
+ 
+
+ 
+
+ 
+
+2.3. Parcours en largeur d’abord – 
+Algorithme (2) 
+
+ Algorithme itératif  
+
+ BFS(s, ETAT) 
+
+ Remarque:  
+
+ On peut retirer directement x de la file et le marquer comme VISITE 
+ 
+
+ETAT(s)  TRAITEMENT;   // TRAITER(s)// 
+
+CRÉER(file); ENFILER(file, s) 
+
+While not ESTVIDE(file) do 
+
+x  DEFILER(file); ETAT(x)  VISITE;  { TRAITER(x);} 
+
+For tous y voisin(x) do 
+
+    If ETAT(y) == INEXPLORÉ then 
+
+         ENFILER(file, y); ETAT(y)  TRAITEMENT;  // TRAITER(x)//   
+
+    Endif 
+
+Endfor 
+
+End while 
+
+75 
+
+ 
+
+ 
+
+ 
+
+ 
+
+2.3. Parcours en largeur d’abord – 
+Algorithme (2) 
+
+ Algorithme itératif  
+
+ BFS(s, ETAT) 
+
+ Remarque:  
+
+ Pas besoin des 3 états (un booléen suffit) 
+
+ Quand un sommet est entré dans la file : il ne peut plus y re-entrer 
+
+ Quand un sommet sort de la file : son exploration est terminé 
+
+ 
+
+ 
+
+ 
+
+ 
+
+76 
+
+19 
+
+25/09/2017 
+
+2.3. Parcours en largeur d’abord – 
+Complexité 
+
+2.3. Parcours en largeur  
+Application 
+
+ Complexité 
+
+ Initialisation : O(n) 
+
+ 
+
+ Itération : O(m) 
+
+ Chaque arc/arête n’est traité qu’une seule fois  
+
+ Opération sur la file : temps constant 
+
+ 
+
+ O(n+m)  
+
+ soit O(m) car m > n 
+
+ 
+
+77 
+
+ Déroulement l’algorithme de parcours en largeur sur le 
+
+graphe ci-dessous (partir du sommet 1) 
+
+ Fournir le contenu du tableau ETAT 
+ Donner également le contenu de la file 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ Donner l’ordre dans lequel les sommets passent dans l’état TRAITEMENT 
+ Donner l’ordre dans lequel les sommets passent dans l’état VISITE 
+
+ 
+
+78 
+
+Plan 
+
+1.
+
+2.
+
+Introduction 
+ Généralités 
+
+ 
+
+ Quelques définitions 
+
+ Représentations informatiques 
+
+Parcours de Graphe   
+ Principe du parcours 
+
+ Parcours en profondeur  d’abord 
+
+ Parcours en largeur d’abord 
+
+ 
+
+ 
+
+ Premières applications d’un algorithme de parcours 
+
+ Connexité – Forte connexité 
+
+ Tri topologique 
+
+3. Optimisation et Graphes 
+
+ Plus courts chemins 
+
+ Problèmes de flots 
+
+ 
+
+ 
+
+ 
+
+ 
+
+2.4. Application du parcours –  
+Premiers exemples 
+
+ Plus petite distance en nombre d’arcs/arêtes entre 1 sommet et tous les autres 
+ Connexité / Forte Connexité 
+ Détection de cycles / circuits 
+ Ordre topologique sur les sommets (numérotation des sommets) 
+ Exploration d’un graphe (ex. sortir d’un labyrinthe) 
+
+ 
+
+ Dans la suite 
+
+ Focus sur quelques applications 
+
+79 
+
+80 
+
+20 
+
+25/09/2017 
+
+2.4. Application du parcours –  
+Connexité (1) 
+
+ Soit un graphe non orienté 
+ Définitions 
+
+ 
+
+ Deux sommets x et y sont connexes ssi il existe une chaine entre x et y 
+ Composante connexe (CC) :  
+
+o ensemble des sommets connexes entre eux 
+
+ 
+
+ Graphe connexe :  
+
+o ne possède qu’une seule composante connexe 
+
+o Il existe une chaine entre toute paire de sommets 
+
+ Graphe non connexe :  
+
+o est composé de plusieurs CC maximales (=sous graphes de plus grande taille) 
+
+ 
+
+ Remarque : un sommet isolé (degré nul) = une CC maximale 
+
+ 81 
+
+2.4. Application du parcours –  
+Connexité (2) 
+
+ Exemples : Rechercher les CC de ces 2 graphes 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ Application du parcours 
+ Numéroter les composantes connexes 
+
+82 
+
+2.4. Application du parcours –  
+Connexité : Algorithme (1) 
+
+ Principe algorithme :  
+
+ Parcourir le graphe à partir d’un sommet donné x pour chercher les sommets 
+
+accessibles depuis x 
+
+ Recommencer tant qu’il existe des sommets sans CC 
+
+ 
+
+Tant qu’il existe des sommets en TRAITEMENT 
+   Choisir un sommet s 
+
+ Données :  
+
+   Si s n’a pas de voisin INEXPLORE alors 
+ TabCC(x) : numéro de composante connexe 
+      Marquer s comme VISITE 
+ NumCC : numéro courant de composante connexe 
+   Sinon 
+      Sélectionner un voisin de s 
+
+ 
+
+      Le marquer en TRAITEMENT  
+
+ 
+
+ Adaptation du parcours 
+
+ Parcours(s, Etat, NumCC, TabCC) 
+
+ Lorsqu’un sommet x est VISITÉ : TabCC(x)  NumCC 
+ 
+
+83 
+
+ 
+
+2.4. Application du parcours –  
+Connexité : Algorithme (2) 
+
+ Algorithme 
+ Initialisation 
+
+  TabCC(x)  0, pour tous les sommets x 
+  NumCC  0 
+
+ Itérations 
+
+  for tous les sommets s 
+
+  if TabCC(s) = 0 then 
+
+  NumCC  NumCC+1 
+  TabCC(s)  NumCC 
+
+  Parcours(s, NumCC, TabCC) 
+
+  end if 
+
+  end for 
+
+ A la fin de chaque parcours : tous les sommets accessibles depuis le 
+
+sommet concerné ont le même numéro de CC 
+
+84 
+
+21 
+
+25/09/2017 
+
+2.4. Application du parcours –  
+Connexité : Complexité 
+
+ Complexité 
+
+ Celle d’un parcours : O(n+m)  O(m) 
+
+85 
+
+2.4. Application du parcours –  
+Forte Connexité (1) 
+
+ Soit un graphe orienté 
+ Définitions 
+
+ 
+
+ Deux sommets x et y sont fortement connexes ssi il existe un chemin de x vers y 
+
+et de y vers x 
+
+ Composante fortement connexe (CFC):  
+
+o ensemble des sommets fortement connexes entre eux 
+
+ 
+
+ Graphe fortement connexe :  
+
+o ne possède qu’une seule composante fortement connexe 
+
+o Il existe un chemin entre toute paire de sommets 
+
+ Graphe non fortement connexe :  
+
+o est composé de plusieurs CFC maximales (=sous graphes de plus grande taille) 
+
+ 
+
+ Remarque : un sommet isolé (degré nul) = une CFC maximale 
+
+86 
+
+ 
+
+2.4. Application du parcours –  
+Forte Connexité (1) 
+
+2.4. Application du parcours –  
+Forte Connexité : Algorithme (1) 
+
+ Exemple 
+
+ Principe algorithme 
+
+ Parcourir le graphe à partir d’un sommet donné x pour chercher les sommets 
+
+successeurs  accessibles depuis x 
+
+ Parcourir le graphe inverse à partir d’un sommet donné x pour chercher les 
+
+sommets prédécesseurs  accessibles depuis x 
+
+ Les sommets accessibles par les 2 parcours sont dans la CFC de x 
+ Recommencer tant qu’il existe des sommets sans CFC 
+
+ 
+
+ Adaptation du parcours 
+
+ Mémoriser les sommets visités lors du parcours (marquage booléen par exemple)  
+ Attribuer un numéro de CFC aux sommets 
+ 
+
+87 
+
+Remarque : une CFC = un circuit 
+
+88 
+
+22 
+
+25/09/2017 
+
+2.4. Application du parcours –  
+Forte Connexité : Algorithme (2) 
+
+ Algorithme 
+ Initialisation 
+
+  TabCFC(x)  0, pour tous les sommets x; NumCFC  0 
+
+  Construire le graphe inverse 
+
+ Itérations 
+
+  for tous les sommets s 
+
+  if TabCFC(s) = 0 then 
+
+    NumCFC  NumCFC + 1 
+
+2.4. Application du parcours –  
+Forte Connexité : Complexité 
+
+ Complexité 
+
+ Au pire n parcours de Graphes : O(n.m) 
+
+ 
+
+ 
+
+ 
+
+ 
+
+    MarqueS(x)  false, MarqueP(x)  false, pour tout sommet x 
+
+    Parcourir-G(s, MarqueS) 
+
+  Parcourir-Ginv(s, MarqueP) 
+
+    for tous les sommets x  
+
+      if MarqueS(x)=MarqueP(x)=true  then TabCFC(x)  NumCFC 
+
+ Meilleur algorithme connu 
+
+ 1 seul parcours 
+ Algorithme de Tarjan (1972) 
+
+    end for      
+
+  end if 
+
+89 
+
+   end for 
+
+ 
+
+90 
+
+2.4. Application du parcours –  
+Exercice 
+
+ Calcul des distances dans un graphe 
+
+ Distance = Nombre d’arcs (arêtes) 
+
+ 
+
+91 
+
+2.4. Application du parcours –  
+Exercice 
+
+ Fermeture Transitive 
+
+ Pour un sommet x : ensemble de tous les sommets accessibles à partir de x 
+ Pour un graphe :  fermeture transitive de tous les sommets   
+                                tous les chemins d’un graphe 
+ Note : la longueur maximale des chemins est n-1 (pour n sommets) 
+
+ 
+
+ Principe Algo (dans le cas de graphes peu denses) :  
+
+ Utiliser un algorithme de parcours 
+
+    For tous sommets x de 1 à n 
+
+        Liste_Accessibilite(x)  Parcours(x) 
+
+ 
+
+ Modifier l’algorithme de parcours pour récupérer la liste des sommets marqués 
+
+ 
+
+ Complexité : O(n m) 
+
+92 
+
+23 
+
+2.4. Application du parcours –  
+Exercice 
+
+ Application : 
+
+ 
+
+ LA(x1) = {x2, x3, x4, x5, x6} 
+ LA(x2) = {x3, x4, x6} 
+ LA(x3) = {x4, x6} 
+ LA(x4) = {x6} 
+ LA(x5) = {x2, x3, x4, x6} 
+ LA(x6) = {} 
+
+ 
+
+ 
+
+Plan 
+
+1.
+
+2.
+
+Introduction 
+
+ 
+
+Parcours de Graphe   
+
+ 
+
+ 
+
+3. Optimisation et Graphes 
+
+ Plus courts chemins  
+
+ Généralités 
+
+ De 1 vers n - Valuations positives - Algorithme de Dijkstra 
+
+ De 1 vers n - Valuations quelconques - Algorithme de Bellman-Ford 
+
+ Plus courts chemins de n vers n 
+
+ 
+
+ Problèmes de flots 
+
+ 
+
+93 
+
+94 
+
+3.1. Plus courts chemins –  
+Généralités 
+
+ Quel est le problème posé ? 
+
+ Graphes valués : 
+
+ Distance, Temps, …. 
+
+ Cout d’un chemin/chaine 
+
+ Somme des valuations des arcs/arêtes qui le composent 
+
+ 
+
+ Chercher un chemin (chaine) de cout minimal entre deux sommets 
+
+donnés sur un graphe valué   
+
+ 
+
+ de 1 vers 1 
+
+ Chercher les chemins (chaines) de cout minimal entre 1 sommet donné 
+
+et tous les autres sur un graphe valué 
+
+ de 1 vers n 
+
+ 
+
+ 
+
+95 
+
+3.1. Plus courts chemins –  
+Généralités 
+
+ Variantes 
+
+ PCC entre toute paire de sommets 
+ PCC en nombre d’arcs/arêtes 
+
+ de n vers n 
+
+ 
+(distance) 
+
+ Méthode : Adaptation du parcours en largeur 
+
+ 
+
+ Intérêt 
+
+ Problème facile (complexité) 
+ Nombreuses applications 
+ Sous-Problème de problèmes difficiles 
+
+ 
+
+96 
+
+25/09/2017 
+
+24 
+
+25/09/2017 
+
+3.1. Plus courts chemins –  
+Généralités 
+
+3.1. Plus courts chemins –  
+Généralités 
+
+ Condition d’optimalité 
+
+ Conséquences 
+
+ Les sous-chemins de plus courts chemins sont des plus courts chemins 
+
+ 
+
+ Soit P=(i, ….., j) un plus court chemin de i vers j 
+ Montrons que si Q=(a, ….b) un sous chemin tel que i  a  b  j alors Q=(a, 
+
+…b) est un plus court chemin de a vers b 
+
+ Démonstration 
+
+ Décomposition de P = (i, ….., a, ……, b, ….., j) 
+
+ Cout de P : W(P) = W(i, …., a) + W(a, …., b) + W(b, …,j) 
+
+ Supposons qu’il existe R chemin de a à b tel que W(R) < W(Q) 
+
+ Le cout du nouveau chemin de i à j est donc  : W(T) = W(i, …, a) + W(R) + W(b, …, j), 
+
+et donc W(T) < W(P) car W(R) < W(Q) 
+
+ Impossible car P est un plus court chemin de i vers j par hypothèse 
+
+ Les plus courts chemin d’un sommet     (origine) vers tous les autres forment une 
+
+arborescence appelé « arborescence des plus courts chemins partant de    » 
+
+ Si      = valeur du PCC de     vers      alors le chemin         est un plus court chemin 
+
+ssi                              pour tout arc  
+
+ 
+
+ Principe des algorithmes : PCC depuis sommet s  
+
+ Chercher l’arborescence  des plus courts chemin partant de s et vérifiant 
+
+la condition d’optimalité 
+ Définir des étiquettes (labels) pour chaque sommet :       
+
+ Estimation du PCC de       vers   
+
+ Mettre à jour itérativement ces étiquettes   
+
+(principe de relaxation) 
+
+97 
+
+98 
+
+Plan 
+
+1.
+
+2.
+
+Introduction 
+
+ 
+
+Parcours de Graphe   
+
+ 
+
+ 
+
+3. Optimisation et Graphes 
+
+ Plus courts chemins  
+
+ Généralités 
+
+ De 1 vers n - Valuations positives - Algorithme de Dijkstra 
+
+ De 1 vers n - Valuations quelconques - Algorithme de Bellman-Ford 
+
+ Plus courts chemins de n vers n 
+
+ 
+
+ Problèmes de flots 
+
+ 
+
+99 
+
+3.2. Plus courts chemins –  
+Algorithme de Dijkstra  
+
+ PCC de 1 vers n et de 1 vers 1 
+ Conditions d’application 
+
+ Graphes orientés et Graphes non orientés 
+ Valuations positives 
+
+ 
+
+ Condition d’existence d’un chemin de cout minimal 
+ Le graphe ne comporte pas de circuit/cycle de longueur négative 
+
+ Vérifié avec l’hypothèse : valuations positives 
+
+ 
+
+ Recherche de chemins/chaines élémentaires 
+
+ Chemins/Chaines passant au maximum une fois par les sommets 
+
+ Tous les sommets du (des) chemin(s)/chaine(s) solution sont deux à deux distincts 
+
+100 
+
+ 
+
+ 
+
+25 
+
+25/09/2017 
+
+3.2. Plus courts chemins –  
+Algorithme de Dijkstra : Principe 
+
+ But :  
+
+ Plus court chemin d’une origine vers tous les autres sommets 
+
+ 
+ Principe 
+ Label :  
+
+ Cout du chemin à l’origine s = 0 
+ Cout du chemin aux autres sommets  ∞ 
+ Adaptation d’un parcours en largeur 
+
+ A chaque étape :  
+
+3.2. Plus courts chemins –  
+Algorithme de Dijkstra : Exemple 
+
+ Application : plus court chemin à partir de x1 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+x1 
+x1 
+x1 
+x1 
+x1 
+x1 
+
+0 
+0 
+0 
+0 
+0 
+0 
+
+0 
+0 
+0 
+0 
+0 
+
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+
+ 
+
+x2 
+x2 
+x2 
+x2 
+x2 
+x2 
+
+ 
+ 
+ 
+ 
+ 
+ 
+
+10, x1 
+10, x1 
+10, x1 
+10, x1 
+10, x1 
+
+x3 
+x3 
+x3 
+x3 
+X3 
+x3 
+
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+x4 
+x4 
+x4 
+x4 
+x4 
+x4 
+
+ 
+ 
+ 
+ 
+ 
+ 
+
+5, x1 
+5, x1 
+5, x1 
+5, x1 
+5, x1 
+
+8, x4 
+8, x4 
+8, x4 
+8, x4 
+
+14, x4 
+14,x4 
+14,x4 
+14, x4 
+
+5, x1 
+5, x1 
+5, x1 
+5, x1 
+
+8, x4 
+8, x4 
+8, x4 
+
+12,x5 
+12,x5 
+12,x5 
+
+8, x4 
+8, x4 
+
+ 
+
+9,x2 
+9, x2 
+
+9,x2 
+
+ 
+ 
+ 
+
+ 
+ 
+
+ 
+
+x5 
+x5 
+x5 
+x5 
+x5 
+x5 
+
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+7, x4 
+7,x4 
+7,x4 
+7, x4 
+
+7,x4 
+7,x4 
+7,x4 
+
+ 
+ 
+
+ 
+
+ Sélectionner le sommet de cout le plus faible et marquer ce sommet comme visité 
+
+(son cout ne changera plus) 
+
+ Actualiser les couts des sommets adjacents non marqués 
+
+ Arrêt 
+
+101 
+
+ Tous les sommets sont marqués 
+
+ Pour chaque sommet, mémoriser :  
+
+ Son meilleur cout courant,  
+ le sommet précédent pour ce meilleur cout 
+ un marquage 
+
+102 
+
+3.2. Plus courts chemins –  
+Algorithme de Dijkstra  
+
+ Déroulement de l’algorithme 
+
+ Associer un label (étiquette) à chaque sommet 
+
+ Cout 
+ 
+ Précédent   
+ Marquage   
+
+ 
+
+Cost(i) 
+
+Father(i) 
+
+Mark(i) 
+
+ Structure pour obtenir le sommet de plus petit cout 
+
+ File de priorité = Tas 
+
+ 
+
+ Algorithme 
+
+ 
+Priority queue , binary heap 
+
+ 
+
+ 
+
+ 
+
+ Basé sur un parcours en largeur 
+ Remplacer la file par un tas (file de priorité) 
+
+ 
+103 
+
+3.2. Plus courts chemins –  
+Algorithme de Dijkstra  
+
+ Initialisation 
+
+  For tous les sommets i  de 1 à n 
+
+  Mark(i)  Faux 
+  Cost(i)  +∞ 
+  Father(i)  0   // sommet inexistant 
+
+ 
+
+  end for  
+
+ 
+  Cost(s)  0 
+
+  Insert(s, Tas) 
+
+ 
+ A l’initialisation :  
+
+ la file de priorité ne contient que le sommet origine 
+
+ 
+104 
+
+26 
+
+25/09/2017 
+
+3.2. Plus courts chemins –  
+Algorithme de Dijkstra  
+
+ Itérations 
+ While il existe des sommets non marqués 
+   x  ExtractMin(Tas) 
+   Mark(x)  true 
+   For tous les y successeurs de x 
+
+     If not Mark(y) then 
+       Cost(y)  Min(Cost(y), Cost(x)+W(x,y)) 
+       If Cost(y) a été mis à jour then    
+
+if Cost(y) > Cost(x)+W(x, y) then 
+    Cost(y)  Cost(x) + W(x, y) 
+    if Exist(y, Tas) then  
+          Update(y, Tas) 
+    else 
+          Insert(y, Tas) 
+
+    end if 
+end if 
+
+          Placer(y, Tas) 
+          Father(y)  x 
+       end if 
+
+     end if 
+
+   end for 
+  end while 
+ 
+ 
+106 
+
+ 
+
+3.2. Plus courts chemins –  
+Algorithme de Dijkstra  
+
+ Itérations 
+ While il existe des sommets non marqués 
+   x  ExtractMin(Tas) 
+   Mark(x)  true 
+   For tous les y successeurs de x 
+
+     If not Mark(y) then 
+       Cost(y)  Min(Cost(y), Cost(x)+W(x,y)) 
+       If Cost(y) a été mis à jour then    
+
+          Placer(y, Tas) 
+          Father(y)  x 
+       end if 
+
+     end if 
+
+   end for 
+  end while 
+ 
+ 
+105 
+
+ 
+
+Déroulement Dijkstra 
+Madrid  Bruxelle 
+
+3.2. Plus courts chemins –  
+Algorithme de Dijkstra : Complexité 
+
+ Complexité 
+
+ Initialisation : O(n) 
+ Itérations 
+
+ N passages dans la boucle while : chaque sommet ne peut être marqué qu’une seule 
+
+fois 
+
+ A chaque passage dans la boucle 
+
+ Extraction du sommet de plus petit cout dans le tas : eq 
+ Mise à jour des successeurs et placement dans le tas : d+(x).iq 
+
+ Total : O(n eq + m iq) 
+
+ 
+
+ Avec un tas implémenté par un arbre binaire 
+
+ eq=iq = O(log nb éléments) 
+
+ Au maximum : il y a n éléments dans le tas 
+
+107 
+
+ D’où la complexité : O(n + (m+n).log n) = O((m+n).log n) 
+
+108 
+
+ 
+
+27 
+
+25/09/2017 
+
+3.2. Plus courts chemins –  
+Algorithme de Dijkstra  : Compréhesion 
+
+3.2. Plus courts chemins –  
+Algorithme de Dijkstra : Adaptation de 1 vers 1 
+
+ Questions 
+
+ Comment mettre en œuvre la condition du while 
+
+    while il existe des sommets non marqués 
+ 
+
+ 
+
+ Pourquoi tester si un sommet est déjà dans le tas avant de réaliser 
+
+l’insertion ? 
+
+ A quoi correspond l’opération « update » sur le tas ? 
+
+ 
+
+ Lien avec l’algorithme de parcours en largeur 
+
+109 
+
+ Ici 2 états : marqué / non marqué 
+ En fait 3 cas : non marqué et cout infini, non marqué et cout, marqué 
+ 
+ 
+ 
+ 
+ 
+
+ Résultat de l’algorithme 
+
+ Les plus courts chemins d’une origine vers tous les autres sommets 
+
+ Question : comment obtenir le plus court chemin d’une origine vers une 
+
+destination ? 
+
+ 
+
+110 
+
+3.2. Plus courts chemins –  
+Algorithme de Dijkstra : Correction 
+
+ Correction de l’algorithme 
+
+ 2 propriétés 
+
+ P1 : Sommets Marqués : le cout d’un sommet marqué est la longueur du plus court 
+
+chemin de l’origine jusqu’à ce sommet 
+
+ P2 : Sommets Non Marqués : le cout (non infini) d’un sommet non marqué est la 
+longueur du plus court chemin depuis l’origine parmi ceux qui ne passent que par 
+des sommets Marqués 
+
+ 
+
+ Initialement ces propriétés sont vraies 
+
+ 
+
+ Montrons qu’elles sont vraies au cours de l’algorithme 
+
+111 
+
+3.2. Plus courts chemins –  
+Algorithme de Dijkstra : Correction 
+
+ P1 . Considérons un sommet x  
+
+ Non marqué  Marqué 
+
+ x a un cout d, ce cout est le plus petit parmi les sommets non marqués 
+ On veut montrer que d = plus court chemin depuis l’origine 
+
+ 
+
+ Le chemin de l’origine vers x débute par des sommets marqués et se termine par un 
+
+sommet y non marqué de cout d’ 
+
+ d’ est la meilleure distance pour ce sommet y parmi les chemins ne passant que par 
+
+des sommets marqués (P2) 
+
+ Le chemin arrivé ensuite à x 
+ Donc le cout de x est alors d’ + dist(y, x) 
+ Or d  d’ car x a été marqué avant y  
+ Donc x = y car les distances sont positives 
+
+112 
+
+ 
+
+ 
+
+28 
+
+25/09/2017 
+
+3.2. Plus courts chemins –  
+Algorithme de Dijkstra : Correction 
+
+3.2. Plus courts chemins –  
+Algorithme de Dijkstra - Adaptations 
+
+ P2. Considérons un sommet x de cout non infini 
+
+ Variantes 
+
+ x va être marqué, que devient P2 pour les voisins de x ? 
+
+ 
+
+ 2 cas :  
+
+ y voisin de x avait un cout infini, il obtient un cout et ce cout est celui du chemin de 
+l’origine jusqu’à x puis de x vers y : avant y ce chemin ne passe que par des sommets 
+marqués. P2 est donc vérifiée 
+
+ z voisin de x avait un cout non infini (qui vérifiait donc P2): un nouveau chemin de 
+l’origine vers z apparait lorsque x est marqué. Le cout de z est actualisé (minimum 
+entre l’ancien cout et le cout du nouveau chemin). P2 est donc vérifiée. 
+
+113 
+
+ L’algorithme de Dijkstra permet de déterminer :  
+ les plus courts chemins d’un sommet vers tous les autres 
+ Le plus courts chemin d’une origine vers une destination 
+
+ 
+
+ Pour le plus court chemin origine-destination : peut-on avoir un meilleur 
+
+algorithme ? 
+ Dijkstra guidé vers la destination  
+
+ 
+
+ 
+
+ Utilisation d’une estimation (optimiste) du cout restant à la destination 
+
+ 
+
+ Dijkstra bidirectionnel  
+
+ 
+
+ 
+
+ 
+
+ Algorithmes en Forward depuis l’origine et en Backward depuis la destination 
+
+ Condition d’arrêt  
+
+114 
+
+ 
+
+Déroulement Dijkstra guidé 
+Madrid  Bruxelle 
+
+115 
+
+3.2. Plus courts chemins –  
+Algorithme de Dijkstra : Variantes 
+
+ Autres techniques d’accélération 
+
+ Pour des grands graphes 
+ Méthodes de pré-calcul 
+
+ Très nombreuses 
+ Principe 
+
+ Calculer certains plus courts chemins : mais on ne peut pas stocker tous les résultats 
+
+o Faire des pré-calculs pertinents 
+
+o Faire des pré-calculs utilisables pour accélérer la réponse à une requête  
+
+ 
+
+116 
+
+29 
+
+25/09/2017 
+
+Plan 
+
+1.
+
+2.
+
+Introduction 
+
+ 
+
+Parcours de Graphe   
+
+ 
+
+ 
+
+3. Optimisation et Graphes 
+
+ Plus courts chemins  
+
+ Généralités 
+
+ De 1 vers n - Valuations positives - Algorithme de Dijkstra 
+
+ De 1 vers n - Valuations quelconques - Algorithme de Bellman-Ford 
+
+ Plus courts chemins de n vers n 
+
+ 
+
+ Problèmes de flots 
+
+ 
+
+3.3. Plus courts chemins –  
+Valuations quelconques 
+
+ Et pour des valuations quelconques 
+ L’algorithme de Dijkstra n’est plus correct 
+
+ 
+
+ Existence de chemins de cout minimal 
+
+ Pas de circuit de longueur négative 
+
+ 
+
+ Principe de programmation dynamique 
+
+ Initialisation  
+
+ Cost_0(s) = 0 
+ Cost_0(x) =   
+
+ Récurrence 
+
+117 
+
+ Cost_k(x) = MIN (Cost_k-1(x), Cost_k-1(y) + W(y, x) ), pour tout y prédécesseur 
+
+118 
+
+de x  
+
+ 
+
+3.3. Plus courts chemins –  
+Valuations quelconques 
+
+ Principe de la méthode 
+
+ Calcul incrémental de Cost_k(x) 
+
+ 
+
+ Arrêt :  
+
+ Les couts n’évoluent pas  
+ Un nombre maximal d’itérations est atteint  
+ 
+ En effet, si le graphe ne contient pas de circuit absorbant 
+
+ Un chemin solution comportera au plus n-1 arcs (arêtes) car on ne recherche que des 
+
+chemins élémentaires 
+
+ Si le nombre d’itérations atteint n alors un circuit absorbant a été détecté 
+
+3.3. Plus courts chemins –  
+Valuations quelconques 
+
+ Algorithme dit Moore-Bellman-Ford 
+
+ Implémentation des équations de récurrence 
+ Pour chaque sommet : actualisation basée sur le cout des prédécesseurs  
+
+ 
+
+ Algorithme dit FIFO (Ahuja-Magnati-Orlin) 
+
+ Parcourir les sommets grâce à une file initialisée avec le sommet origine du calcul 
+ Les successeurs d’un sommet dont les couts sont améliorés sont insérés dans la file 
+ Arrêt : file vide ou détection de circuit absorbant 
+
+ 
+
+119 
+
+120 
+
+30 
+
+25/09/2017 
+
+3.3. Plus courts chemins –  
+Algorithme de Moore-Bellman-Ford 
+
+ Condition d’application 
+
+ Graphes orientés ou non orientés 
+ Valuations quelconques 
+ Pas de circuit/cycle absorbant 
+
+ 
+
+ Structure de données 
+
+ Associer un label (étiquette) à chaque sommet 
+
+ Cout 
+ 
+ Précédent   
+
+ 
+
+Cost(i) 
+
+Father(i) 
+
+ 
+
+121 
+
+3.3. Plus courts chemins –  
+Algorithme de Moore-Bellman-Ford 
+
+ Initialisation 
+
+ 
+
+Cost_0(x) = 0 
+Cost_0(x) = ∞, pour tout x ≠s 
+
+  For tous les sommets i  de 1 à n 
+
+  Cost(i)  +∞ 
+
+  Father(i)  0   // sommet inexistant 
+
+  end for  
+
+ 
+
+  Cost(s)  0 
+  k  0   
+
+// pour compter les itérations 
+
+ 
+
+ 
+
+122 
+
+3.3. Plus courts chemins –  
+Algorithme de Moore-Bellman-Ford 
+
+3.3. Plus courts chemins –  
+Algorithme de Moore-Bellman-Ford : Complexité 
+
+Cost_k(x) = MIN (Cost_k-1(x), Cost_k-1(y) + W(y, x) ), pour tout y  -(x) 
+
+ Itérations 
+ repeat  
+   continuer  false 
+   k  k+1 
+   For tous les sommets x (/= de s) 
+
+ 
+
+for tous les prédecesseurs y de x 
+
+   
+        Cost(x)  Min(Cost(x), Cost(y)+W(y,x)) 
+        if Cost(x) a été mis à jour then    
+          Father(x)  y 
+          continuer  true 
+   
+
+  end if 
+
+   
+
+end for 
+
+   end for 
+  until (k=n) or (not continuer) 
+
+ Complexité 
+
+ Initialisation : O(n) 
+ Itérations 
+
+ Boucle repeat: au maximum n itérations 
+ A chaque itération 
+
+ Parcourir tous les prédécesseurs de tous les sommets : O(m) 
+
+ 
+
+ D’où la complexité : O(n+ n.m) = O(n.m) 
+
+ 
+
+ 
+
+123 
+
+124 
+
+31 
+
+25/09/2017 
+
+3.3. Plus courts chemins –  
+Algorithme de Moore-Bellman-Ford : Exemple 
+
+3.3. Plus courts chemins –  
+Algorithme de Moore-Bellman-Ford : Questions 
+
+ Exemple : PCC à partir de x1 
+
+ Questions 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+x1 
+x1 
+x1 
+x1 
+
+0 
+0 
+0 
+0 
+
+0 
+0 
+0 
+
+0 
+0 
+
+0 
+
+x2 
+x2 
+x2 
+x2 
+ 
+ 
+ 
+ 
+4, x1 
+4, x1 
+4, x1 
+
+4, x1 
+4, x1 
+
+4, x1 
+
+x3 
+x3 
+x3 
+x3 
+ 
+ 
+ 
+ 
+6,x1 
+6,x1 
+6,x1 
+
+3,x4 
+3,x4 
+
+3,x4 
+
+x4 
+x4 
+x4 
+x4 
+ 
+ 
+ 
+ 
+7,x2 
+7,x2 
+7,x2 
+
+7,x2 
+7,x2 
+
+7,x2 
+
+x5 
+x5 
+x5 
+x5 
+ 
+ 
+ 
+ 
+8,x4 
+8,x4 
+8,x4 
+
+7,x3 
+7,x3 
+
+7,x3 
+
+x6 
+x6 
+x6 
+x6 
+ 
+ 
+ 
+ 
+
+10,x5 
+10,x5 
+10,x5 
+
+9, x5 
+9, x5 
+
+9, x5 
+
+ L’algorithme de Moore-Bellman-Ford détermine les plus courts chemins 
+
+d’une origine vers tous les sommets du graphe 
+ Peut-on adapter (comment) l’algorithme pour déterminer le plus court chemin 
+
+d’une origine à une destination ? 
+
+ 
+
+ L’ordre de traitement des sommets a-t-il une influence sur le nombre 
+
+d’itérations de l’algorithme ? 
+
+ 
+ 1 itération :  
+
+ Parcours (et mise à jour) de tous les sommets 
+
+Arrêt : pas de mise à jour 
+
+125 
+
+126 
+
+Plan 
+
+1.
+
+2.
+
+Introduction 
+
+ 
+
+Parcours de Graphe   
+
+ 
+
+ 
+
+3. Optimisation et Graphes 
+
+ Plus courts chemins  
+
+ Généralités 
+
+ De 1 vers n - Valuations positives - Algorithme de Dijkstra 
+
+ De 1 vers n - Valuations quelconques - Algorithme de Moore-Bellman-Ford 
+
+ Plus courts chemins de n vers n 
+
+ 
+
+ Problèmes de flots 
+
+ 
+
+3.4. Plus courts chemins –  
+De tous vers tous 
+
+ Graphe quelconque 
+
+ On cherche à déterminer les plus courts chemins de tous les sommets 
+
+vers tous les sommets 
+ 
+
+ Algorithme dédié : Algorithme de Floyd(dit Floyd-Warshall) 
+
+ Basé sur la représentation par matrice d’adjacence 
+ Variante de l’algorithme de Warshall pour la fermeture transitive 
+
+ 
+
+ Algorithmes précédents 
+
+ Appliquer un des algorithmes calculant les plus courts chemins de 1 vers tous en 
+
+itérant sur le sommet d’origine 
+
+127 
+
+128 
+
+32 
+
+25/09/2017 
+
+3.4. Plus courts chemins –  
+De tous vers tous : Exemple 
+
+ Exemple 
+
+3.4. Plus courts chemins –  
+De tous vers tous 
+
+ Itérer un algorithme de 1 vers tous 
+(valuations positives) 
+
+ N fois Dijkstra 
+
+ Complexité : O(n.m.log n) << O(n3) pour graphes peu denses 
+
+ N fois Bellman 
+
+(valuations quelconques) 
+
+ Complexité : O(n2.m) 
+
+ 
+
+ Algorithme dédié (Floyd-Warshall) 
+
+ Complexité : O(n3) 
+ 
+
+129 
+
+130 
+
+x1 
+
+x2 
+
+x3 
+
+x4 
+
+x5 
+
+x1 
+
+x2 
+
+x3 
+
+x4 
+
+x5 
+
+0 
+
+- 
+
+- 
+
+- 
+
+1 
+
+4 
+
+0 
+
+- 
+
+- 
+
+1 
+
+- 
+
+3 
+
+0 
+
+- 
+
+3 
+
+- 
+
+- 
+
+3 
+
+0 
+
+2 
+
+2 
+
+- 
+
+- 
+
+2 
+
+0 
+
+3.4. Plus courts chemins –  
+De tous vers tous : Exemple 
+
+ Solution :  
+
+ obtention du distancier 
+
+x1 
+
+x2 
+
+x3 
+
+x4 
+
+x5 
+
+x1 
+
+x2 
+
+x3 
+
+x4 
+
+x5 
+
+0 
+
+9 
+
+6 
+
+3 
+
+1 
+
+3 
+
+0 
+
+6 
+
+3 
+
+1 
+
+5 
+
+3 
+
+0 
+
+5 
+
+3 
+
+4 
+
+6 
+
+3 
+
+0 
+
+2 
+
+2 
+
+8 
+
+5 
+
+2 
+
+0 
+
+Plan 
+
+1.
+
+2.
+
+Introduction 
+
+ 
+
+Parcours de Graphe   
+
+ 
+
+ 
+
+3. Optimisation et Graphes 
+
+ Plus courts chemins  
+ Problèmes de flots 
+
+ Généralités et Définitions 
+
+ Problème de Flot Max & Coupe Min 
+
+ Algorithme de Ford-Fulkerson 
+
+ Problème de Flot Max à Cout Min 
+
+ Applications des flots 
+
+ 
+
+131 
+
+132 
+
+33 
+
+25/09/2017 
+
+3.5. Problèmes de flots – Généralités (1)  
+ 
+
+3.5. Problèmes de flots – Généralités (2) 
+ 
+
+ Graphes de Flots   
+
+Network Flow 
+
+ Modélisation de nombreux problèmes 
+
+ 
+
+ Interprétation 
+
+ Circulation d’un flot dans un réseau 
+
+ 
+
+ Acheminer la plus grande quantité possible d’une origine (source) vers une 
+
+destination (puits) 
+
+ Les liens du graphe ont une capacité limitée 
+ Il n’y a pas de création ni de perte de flot lors de l’acheminent 
+
+ 
+
+ Autre terme : réseau de transport (transportation network) 
+
+ Graphe de flot ou réseau de transport : G(X, A) 
+
+ Un graphe orienté valué avec 
+
+ Un sommet source s : tous les sommets de X sont accessibles depuis s 
+ Un sommet puits p : p est accessible depuis tous les sommets de X 
+ Les valuations = les capacités de circulation sur les arcs 
+
+ 
+
+ Exemple :  
+
+ Trouver le trafic maximal entre 2 villes compte tenu des capacités des tronçons 
+
+routiers 
+
+ 
+
+133 
+
+134 
+
+3.5. Problèmes de flots – Généralités (3)  
+ 
+
+3.5. Problèmes de flots – Généralités (4) 
+ 
+
+ Problème de flot maximal 
+
+ Maximiser la quantité de flot passant dans un réseau entre un sommet source et un 
+
+sommet puits en respectant les contraintes de capacité des arcs 
+
+ Exemple de valeurs pour les flots sur chaque arc :  
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ Problème de flot maximal à cout minimal 
+
+ Un cout de transport est associé à chaque lien du réseau (en plus des capacités) 
+ Déterminer un flot maximal de cout minimal entre un sommet source et un sommet 
+
+puits en respectant les contraintes de capacité des arcs 
+
+135 
+
+136 
+
+ Applications des flots 
+
+ Problèmes d’approvisionnement   
+
+ Réseau d’offres et de demandes 
+ Les offres peuvent-elles satisfaire les demandes ? 
+
+ 
+
+ Problèmes d’affectation (couplage biparti) 
+
+ Est-il possible d’affecter un ensemble de personnes X à un ensemble d’activités Y 
+
+(compte tenu des possibilités de X) ? 
+
+ 
+
+ Problèmes de fiabilité  
+
+ Existe-t-il plusieurs chemins entre deux points d’un réseau tels que ces chemins 
+
+n’ont pas de sommets (ou arcs) intermédiaires communs  
+
+34 
+
+25/09/2017 
+
+3.5. Problèmes de flots – Définitions (1) 
+ 
+
+3.5. Problèmes de flots – Définitions (2) 
+ 
+
+ Graphe de flots : 
+
+ Exemple 
+
+ X : sommets  
+ C : capacités :          capacité de l’arc 
+
+A : arcs 
+
+ 
+
+ 
+
+ Flot F : une solution 
+
+ F : de A  |N telle que         : flot de l’arc  
+
+ La valeur de flot respecte la capacité sur chaque arc 
+ 
+ La quantité de flot est conservée à chaque sommet du graphe 
+ 
+ Débit total =  quantité de flot partant du sommet source = quantité de flot arrivant 
+
+au sommet puits 
+
+137 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+138 
+
+ Le flot F est admissible :  
+
+ toutes les valeurs de flot des arcs respectent les contraintes 
+
+ Le débit total D = 19 
+
+3.5. Problèmes de flots – Définitions (3) 
+ 
+
+3.5. Problèmes de flots – Coupe (1) 
+ 
+
+ Arc saturé 
+
+ La valeur de flot de l’arc est égal à la capacité 
+
+ Arc nul  
+
+ La valeur de flot sur l’arc est nulle 
+ 
+
+ Solution 
+
+ Flot complet 
+
+ Tout chemin de s à p contient au moins un arc saturé 
+
+ 
+
+ Flot nul 
+
+ Le flot circulant dans tout le graphe est égal à 0 (débit total = 0) 
+
+ Le flot nul est un flot admissible 
+
+139 
+
+ Coupe d’un graphe de flot 
+
+ Une partition de l’ensemble X en 2 ensembles  
+   
+
+             
+ Peut également être définie par l’ensemble des arcs ayant 
+
+       et 
+
+; 
+
+ 
+
+ 
+
+et   
+
+:  
+
+ Une extrémité dans          et l’autre extrémité dans 
+
+ 
+
+ Soit une coupe 
+
+ Arcs entrants dans K = arcs orientés de  
+
+     vers   
+
+ Arcs sortants de K = arcs orientés de  
+
+ vers  
+
+ Flot net de K = somme des flots des arcs entrants (-) et sortant (+) 
+ Capacité de K = somme des capacités des arcs sortants 
+
+ 
+
+140 
+
+35 
+
+25/09/2017 
+
+3.5. Problèmes de flots –Coupe (2) 
+ 
+
+ Exemple 
+
+ Evaluer les flots et les capacités des coupes 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ Coupe verte  
+
+ 
+
+ Flot = 12 – 4 + 11 = 19 
+
+ Capacité = 12 + 14 = 26 
+
+ 
+ 
+
+ 
+
+Coupe bleue 
+      Flot =  
+
+      Capacité =  
+
+Plan 
+
+1.
+
+2.
+
+Introduction 
+
+ 
+
+Parcours de Graphe   
+
+ 
+
+ 
+
+3. Optimisation et Graphes 
+
+ Plus courts chemins  
+ Problèmes de flots 
+
+ Généralités et Définitions 
+
+ Problème de Flot Max & Coupe Min 
+
+ Algorithme de Ford Fulkerson 
+
+ Problème de Flot Max à Cout Min 
+
+ Applications des flots 
+
+ 
+
+141 
+
+142 
+
+3.6. Flot maximal – Coupe Minimale (1) 
+ 
+
+3.6. Flot maximal 
+ 
+
+ Exemple de modélisation en PL :  
+
+ Soit un graphe de flots G(X, A, C) 
+
+ Flot Maximale 
+
+ On cherche à déterminer les valeurs de F pour tout arc de telle sorte que le débit 
+
+total soit maximal 
+ Coupe Minimale 
+
+ On cherche une coupe (une partition des sommets) de capacité minimale 
+ 
+
+ Résolution 
+
+ Modélisation et outils de programmation linéaire 
+ Modélisation et algorithmes de graphes 
+
+143 
+
+144 
+
+PL :  
+
+Matrice unimodulaire 
+
+Solutions entières 
+
+36 
+
+25/09/2017 
+
+3.6. Coupe minimale (1) 
+ 
+
+ Théorème : Le débit de tout flot est inférieur ou égal à la 
+
+capacité de toute coupe (Th. Ford Fulkerson) 
+ Démonstration 
+
+ Flot sortant des sommets de S = Flot entrant dans les sommets de S 
+            = Flot entrant en s + Flot entrant dans les autres sommets de S 
+
+ 
+
+ 
+ Supprimer des 2 cotés les arcs ayant les 2 extrémités dans S 
+
+ 
+
+ 
+
+ C’est-à-dire : 
+
+ 
+
+ Comme   
+
+     on a :   
+
+145 
+
+3.6. Coupe minimale (2) 
+ 
+
+ On a  : 
+
+ 
+
+ Or par définition : 
+
+ 
+
+ D’où   
+
+ 
+
+ Comme 
+
+ 
+
+   on a la propriété : 
+
+ 
+
+ 
+
+ Résoudre le problème de Coupe Min revient à résoudre le problème de 
+
+Flot Max 
+
+    
+
+146 
+
+3.6. Coupe minimale (3) 
+ 
+
+ Application 
+
+ 
+ Exemple 
+
+ Coupe capacité 23 
+ Débit flot = 23 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ Ce flot est maximal et cette coupe est minimale 
+
+Plan 
+
+1.
+
+2.
+
+Introduction 
+
+ 
+
+Parcours de Graphe   
+
+ 
+
+ 
+
+3. Optimisation et Graphes 
+
+ Plus courts chemins  
+ Problèmes de flots 
+
+ Généralités et Définitions 
+
+ Problème de Flot Max & Coupe Min 
+
+ Algorithme de Ford-Fulkerson 
+
+ Problème de Flot Max à Cout Min 
+
+ Applications des flots 
+
+147 
+
+148 
+
+37 
+
+25/09/2017 
+
+3.6. Flot maximal – Graphe d’écart (1) 
+ 
+
+3.6. Flot maximal – Graphe d’écart (2) 
+ 
+
+ Soit un graphe de flots G(X, A, C) et soit un flot F 
+ Le graphe d’écart de G par rapport à F 
+
+ 
+
+ Exemple. 
+
+ Graphe de Flots 
+
+ est un graphe orienté valué tel que 
+
+ Les sommets sont ceux de de G 
+ Les arcs sont définis par :  
+
+ Tout arc   
+
+de G non saturé 
+
+  /          est dans 
+
+ Il est valué par  
+
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+
+Quantité de flot que l’on peut ajouter de i à j 
+
+ Graphe d’écart  
+
+ Tout arc                   de G de flot non nul 
+
+                est présent en sens inverse dans 
+
+ Il est valué par   
+
+ 
+
+Quantité de flot que l’on peut retirer de i à j 
+
+149 
+
+150 
+
+3.6. Flot maximal – Graphe d’écart (3) 
+ 
+
+3.6. Problèmes de flot maximal  
+– Algorithme de Ford Fulkerson (1) 
+
+ Le graphe d’écart  
+
+ 
+
+est composé de :  
+
+ Arcs A+ : permettant une augmentation du flot 
+ Arcs A- : permettant une diminution du flot 
+
+ Initialisation 
+ Flot initial Nul  
+
+ 
+
+ 
+
+ Propriété 
+
+ On peut augmenter le flot F dans un réseau de transport G ssi il existe un 
+
+chemin de s à p dans le graphe d’écart 
+ 
+
+ Le flot est maximal ssi il n’existe pas de chemin de s à p dans le graphe 
+
+ Itérations 
+     repeat  
+      chercher un chemin de s à p dans 
+      calculer la variation de flot de ce chemin: 
+
+      mettre à jour le graphe de flot 
+
+      mettre à jour D :  
+   until (plus de chemin) 
+
+d’écart 
+
+151 
+
+ 
+
+152 
+
+38 
+
+25/09/2017 
+
+3.7. Problèmes de flot maximal  
+– Algorithme de Ford Fulkerson (3) 
+
+ Exemple. Déterminer le flot maximal à partir du graphe de 
+
+flot ci-dessous 
+
+3.7. Problèmes de flot maximal  
+– Algorithme de Ford Fulkerson (2) 
+
+ Chercher un chemin de s à p 
+ Utiliser un algorithme de parcours 
+
+ Il existe un chemin si le sommet p est marqué en fin du parcours 
+
+ 
+
+ Calculer la variation de flot pour ce chemin 
+
+ Le chemin traverse des arcs « avant »       et des arcs « arrière » 
+
+ 
+
+ 
+
+ Mettre à jour le graphe de flot 
+
+ Augmenter de  
+ Diminuer de  
+
+    les arcs associés à ceux de          dans 
+
+    les arcs associés à ceux de           dans  
+
+153 
+
+154 
+
+3.7. Problèmes de flot maximal  
+– Algorithme de Ford Fulkerson (4) 
+
+3.7. Problèmes de flot maximal  
+– Algorithme de Ford Fulkerson (5) 
+
+ Exemple (suite) 
+
+ Exemple (suite) 
+
+155 
+
+156 
+
+39 
+
+25/09/2017 
+
+3.7. Problèmes de flot maximal  
+– Algorithme de Ford Fulkerson (6) 
+
+3.7. Problèmes de flot maximal  
+– Algorithme de Ford Fulkerson (7) 
+
+ Remarques 
+
+ Implémentation 
+
+ 1 seul graphe (et « simuler » le graphe d’écart) 
+
+ On considère des « arêtes » (parcours avant et arrière); on cherche une « chaine » de s à p 
+
+ Initialisation : Flot nul ou tout flot admissible 
+
+ 
+
+ Propriétés :  
+
+ En fin d’algorithme 
+
+ Un ensemble de sommets marqués par le dernier parcours 
+ Un ensemble de sommets non marqués 
+
+ Si les capacités sont entières alors 
+
+ Le débit du flot maximal F trouvé par est entier 
+ Sur chaque arc, le flot est un entier 
+ 
+
+157 
+
+ 
+
+ Recherche d’un chemin dans le graphe d’écart 
+
+ Algorithme de parcours 
+
+ En profondeur ?  
+ En largeur ? 
+
+ 
+
+ Propriété 
+
+ Pour des capacités entières (et flots entiers) : convergence de l’algorithme quel que soit le 
+
+parcours 
+
+ Pour des capacités non rationnelles : convergence de l’algorithme uniquement avec un 
+
+parcours en largeur 
+
+ 
+
+158 
+
+3.7. Problèmes de flot maximal  
+– Algorithme de Ford Fulkerson (8) 
+
+3.7. Problèmes de flot maximal  
+– Algorithme de Ford Fulkerson (9) 
+
+ Complexité 
+
+ A chaque itération :  
+
+ Recherche d’un chemin : O(m) 
+
+ Variation de flot sur ce chemin : O(n) 
+
+ Total : O(m+n) = O(m) si graphes peu denses 
+
+ Nombre d’itérations 
+
+ À chaque étape : variation de 1 de la capacité d’une coupe 
+ Capacité maximale d’une coupe : (n-1).Kmax où Kmax représente la valeur 
+
+maximale des capacités des arcs 
+
+ D’où (n-1)Kmax itérations 
+
+ 
+
+ D’où la complexité : O(m.n.Kmax) 
+
+159 
+
+ Correction de l’algorithme 
+
+ Par définition on a  
+
+ 
+
+ Le flot D obtenu en fin de l’algorithme est maximal 
+
+ On ne peut plus atteindre le sommet puits depuis le sommet source 
+ On a donc obtenu une séparation des sommets en deux ensembles : 
+
+     (contenant la source) et       (le complémentaire) 
+
+ 
+
+ Dans la coupe obtenue en fin d’algorithme :  
+
+ Tout arc sortant de      est saturé 
+
+ Tout arc entrant dans            est de flot nul  
+
+o Sinon on aurait trouvé un chemin de la source vers le puits 
+
+ 
+
+ D’où la preuve   
+
+160 
+
+40 
+
+25/09/2017 
+
+3.7. Problèmes de flot maximal  
+– Autre algorithme : Edmunds-Karp 
+
+ Algorithme d’Edmunds-Karp 
+
+ Variante de l’algorithme de Ford Fulkerson avec 
+
+ Parcours BFS déterminant un chemin améliorant le plus court en nombre d’arcs 
+
+ 
+
+ Convergence garantie de cet algorithme quelque soit les capacités 
+ Complexité O(nm²) (indépendante de la valeur des capacités) 
+
+Plan 
+
+1.
+
+2.
+
+Introduction 
+
+ 
+
+Parcours de Graphe   
+
+ 
+
+ 
+
+3. Optimisation et Graphes 
+
+ Plus courts chemins  
+ Problèmes de flots 
+
+ Généralités et Définitions 
+
+ Problème de Flot Max & Coupe Min 
+
+ Algorithme de Ford-Fulkerson 
+
+ Problème de Flot Max à Cout Min 
+
+ Applications des flots 
+
+ 
+
+161 
+
+162 
+
+3.8. Problèmes de flot max de cout minimal (1) 
+ 
+
+3.8. Problèmes de flot max de cout minimal (2) 
+ 
+
+ Graphe de flots : 
+
+ Graphe d’écart 
+
+ X : sommets (avec s source et p puits) 
+ A : arcs 
+ C :   
+ W :  
+
+capacité de l’arc 
+
+cout de l’arc  
+
+ Flot 
+
+ Mêmes caractéristiques (respect des capacités, conservation du flot, débit total) 
+
+ 
+
+ 
+
+ Flot maximal de cout minimal 
+
+ Trouver un flot maximal de s à p et de cout minimal 
+ 
+
+163 
+
+164 
+
+ Même principe que pour le problème de flot max 
+
+ Tout arc  
+
+ 
+
+de G non saturé  
+
+                   est dans 
+
+ Il est valué par                         et un cout    
+
+ 
+
+arcs « en avant » 
+
+ 
+
+ Tout arc  
+
+ 
+
+de G de flot nul 
+
+ Il est valué par                        et un cout 
+
+ 
+ 
+
+est en sens inverse dans 
+arcs « en arrière » 
+ 
+
+ 
+
+ Recherche d’un chemin augmentant dans le graphe d’écart 
+
+ Variation du flot d’une valeur le long du chemin :  
+ Variation du cout total (par unité de flot) :  
+
+41 
+
+25/09/2017 
+
+3.8. Problèmes de flot max de cout minimal  
+– Propriété 
+
+3.8. Problèmes de flot max de cout minimal  
+– Algorithme de Busacker Gowen 
+
+ Obtention d’un flot de cout minimal 
+
+ Un flot de débit D de s à p est de cout minimal si parmi tous les flots de 
+même débit il n’existe pas de circuit de longueur négative dans le graphe 
+d’écart 
+ Propriété admise  
+ 
+
+(voir PL ?) 
+
+ 2 types d’algorithme 
+
+ V1 : partir d’une solution de flot maximal et rendre le cout minimal en supprimant 
+
+les circuits de longueur négative 
+
+ V2 : construire progressivement la solution avec des débits croissants mais tous de 
+
+cout minimal 
+
+(Busacker-Gowen) 
+
+165 
+
+ Initialisation 
+ Flot initial nul 
+ Cout total nul  
+
+  
+
+ Itérations 
+     repeat  
+    chercher un chemin de cout minimal   de s à p dans 
+
+    calculer la variation de flot de ce chemin: 
+
+    mettre à jour le graphe de flot 
+
+    mettre à jour D :  
+
+    mettre à jour Z :  
+   until (plus de chemin) 
+
+ 
+
+166 
+
+3.8. Problèmes de flot max de cout minimal  
+– Exemple Algorithme de Busacker Gowen (1) 
+
+3.8. Problèmes de flot max de cout minimal  
+– Exemple Algorithme de Busacker Gowen (2) 
+
+ Graphe de Flot 
+
+ 
+
+ 
+
+ 
+
+Graphe d’écart 
+
+ Graphe de Flot 
+
+ 
+
+ 
+
+ 
+
+Graphe d’écart 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+   
+
+    
+
+             Cout min en x5=8; Var. flot = 20 (x1 x3 x5) 
+
+   
+
+    
+
+             Cout min x5=14; Var. flot = 5 (x1x2x3 x5) 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+                                        Cout min en x5=12; Var flot=10 (x1x2x4x5)  
+
+                                     Cout min x5=15; Var flot=10 (x1x2x3 x4x5)  
+
+167 
+
+168 
+
+42 
+
+25/09/2017 
+
+3.8. Problèmes de flot max de cout minimal  
+– Exemple Algorithme de Busacker Gowen (3) 
+
+3.8. Problèmes de flot max de cout minimal  
+– Exemple Algorithme de Busacker Gowen (4) 
+
+ Graphe de Flot 
+
+ 
+
+ 
+
+ 
+
+Graphe d’écart 
+
+ Si on calcule le flot maximal sur le même problème, on 
+
+ 
+
+ 
+
+ 
+
+ 
+
+   
+
+    
+
+                                   Plus de chemin de x1 vers x5 
+
+ Solution 
+
+ Flot max de débit D = 45 
+ Cout = 8 * 20 + 12 * 10 + 14 * 5 + 15 * 10 = 500 
+          = 25*7 + 20*6 + 15*5 + 10*4 + 10*2 + 25*2 + 20*1 
+
+169 
+
+obtient par exemple :  
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+170 
+
+ Le débit total est égal à 45 
+ Mais le cout de cette solution de flot maximal est égal à :  
+
+ 25*7+20*6+25*5+20*2+25*2+20*1=530 
+
+Plan 
+
+1.
+
+2.
+
+Introduction 
+
+ 
+
+Parcours de Graphe   
+
+ 
+
+ 
+
+3. Optimisation et Graphes 
+
+ Plus courts chemins  
+ Problèmes de flots 
+
+ Généralités et Définitions 
+
+ Problème de Flot Max 
+
+ Problème de Coupe Min 
+
+ Problème de Flot Max à Cout Min 
+
+ Applications des flots 
+
+ 
+
+171 
+
+3.9. Applications des flots – Couplage biparti (1) 
+ 
+
+ Couplage 
+
+ Soit G(X, E) un graphe non orienté 
+
+ Un couplage C : un sous ensemble des arêtes de E tel que les arêtes prises 2 à 2 n’ont 
+
+pas de sommet en commun 
+
+ 
+
+ Un sommet x est saturé par un couplage C :  
+
+ Il est extrémité d’une des arêtes de C 
+
+ Sinon x est dit insaturé (ou libre) 
+
+ 
+
+ Un couplage C est parfait ssi  
+
+ tous les sommets du graphe sont saturés par C 
+
+ 
+
+ Problèmes de couplage 
+
+172 
+
+ Couplage maximal = couplage de cardinalité maximale 
+ Couplage maximal à cout minimal/maximal (cout sur les arêtes) 
+ 
+
+43 
+
+25/09/2017 
+
+3.9. Applications des flots – Couplage biparti (2) 
+ 
+
+3.9. Applications des flots – Couplage biparti (3) 
+ 
+
+ Graphe biparti G(X, Y, E) 
+
+ Arêtes uniquement entre les sommets de X et de Y 
+
+ 
+
+ Exemple :  
+
+Couplage cardinalité 2 
+
+Couplage cardinalité 3 
+
+ Modélisation via un graphe de flot 
+
+ Ajout d’un sommet source et d’un sommet puits 
+ Orienter les arêtes (de s vers X, de X vers Y et de Y vers p) 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+173 
+
+Couplage  parfait 
+
+174 
+
+ Capacités des arêtes 
+
+ Cela dépend du problème de couplage …. 
+
+3.9. Applications des flots – Couplage biparti (4) 
+ 
+
+3.9. Applications des flots – Couplage biparti (5) 
+ 
+
+ Exemple 
+
+ Modélisation du problème d’affectation suivant :  
+
+ 3 personnes (P1, P2, P3) pour 3 tâches (A1, A2, A3) 
+ P1  A1 ou A2; P2  A2 ou A3 et P3  A1 ou A2 
+ Chaque personne ne peut faire qu’une seule tâche 
+ 1 tâche ne nécessite qu’une seule personne 
+
+ Exemple (suite) 
+
+ Algorithme de Flot Max 
+
+ Débit total =  
+      cardinalité couplage maximal 
+
+ 
+
+ 
+
+ 
+
+175 
+
+ La valeur du flot max = le nombre de personnes affectées à une tâche = le nombre 
+
+de tâches ayant une personne allouée 
+
+ 
+
+ Variantes 
+
+ Valeurs des capacités 
+ Ajout de cout (par exemple préférences) 
+
+ 
+ Voir TD 
+
+176 
+
+ 
+
+44 
+
+25/09/2017 
+
+3.9. Applications des flots  
+– Réseaux d’offres et de demandes (1) 
+
+3.9. Applications des flots  
+– Réseaux d’offres et de demandes (2) 
+
+ Soit un graphe composé  
+
+ Exemple 
+
+ D’un ensemble S de sommets source ayant chacun une offre 
+ D’un ensemble P de sommets puis ayant chacun une demande 
+ D’un ensemble V de sommets intermédiaires permettant une circulation des 
+
+sommets de S vers les sommets de P 
+
+ Réseaux de transport reliant les sommets S, P et V, avec capacités (et couts) sur les 
+
+arcs 
+
+ 
+
+ Problème de l’offre et de la demande :  
+
+ Existe-t-il une façon de faire circuler les produits des sources vers les puits de 
+
+manière à satisfaire les demandes ? 
+
+ Rechercher un flot de cout minimal satisfaisant les demandes 
+ Transformation en un problème de flot maximum (à cout minimal) 
+ 
+
+177 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ Transformation en un graphe de flots 
+
+178 
+
+3.9. Applications des flots  
+– Réseaux d’offres et de demandes (3) 
+
+3.9. Applications des flots  
+– Réseaux d’offres et de demandes (4) 
+
+ Résolution 
+
+ Chercher un flot max de S vers P 
+
+ Si la solution sature les arcs des sommets Pi vers P alors 
+
+ Les demandes sont satisfaites 
+
+ Sinon les demandes ne peuvent être satisfaites 
+
+ 
+
+ Application numérique à faire 
+
+179 
+
+ Autre exemple :  
+
+ On veut acheminer un produit à partir de 3 entrepôts (1,2,3) vers 4 clients (a,b,c,d) 
+
+ Quantités en stock : 45, 25, 25 
+
+ Demande des clients : 30,10, 20, 30 
+
+ Limitations en matière de transport d’un entrepôt à un client 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+a  b 
+
+c  d 
+
+1  10  15 
+
+-  20 
+
+2  20  5  5 
+
+- 
+
+3 
+
+- 
+
+-  10  10 
+
+ Donner le graphe de flots associé à ce problème 
+ Est-il possible de satisfaire les demandes des clients ? 
+
+ 
+180 
+
+45 
+
+3.9. Applications des flots  
+– Chemins disjoints 
+
+ Chemins disjoints 
+ En termes de sommets 
+ En termes d’arcs 
+ 
+
+ Recherche de chemins arcs-disjoints 
+
+ Soit un graphe G(X, A) 
+
+ On détermine le graphe de flot  
+
+ Même ensemble de sommets 
+
+ Même ensemble d’arcs 
+
+ Capacité = 1 sur chaque arc 
+
+ 
+
+3.9. Applications des flots  
+– Chemins disjoints (2) 
+
+ Exemple – chemins arcs-disjoints 
+
+ 
+
+ 
+
+ 
+
+ 
+ Résolution :  
+
+ou 
+
+ Le débit total obtenu en cherchant le flot maximal = le nombre de chemins disjoints 
+
+181 
+
+182 
+
+3.9. Applications des flots  
+– Chemins disjoints (3) 
+
+3.9. Applications des flots  
+– Chemins disjoints (4) 
+
+ Recherche de chemins sommets-disjoints 
+
+ Exemple 
+
+ Soit un graphe G(X, A) 
+
+ On détermine le graphe de flot  
+
+ Dédoubler les sommets :  
+
+o Sommet x 
+
+ 
+
+  
+
+x_in et x_out 
+
+ Arcs 
+
+o 1 arc de x_in vers x_out : capacité 1 
+
+o Si arc de x vers y dans le graphe initial : placer un arc de x_out vers y_in de capacité 1 
+
+ 
+
+ Le débit total obtenu en cherchant le flot maximal = le nombre de chemins disjoints 
+
+ 
+
+183 
+
+ 
+
+ 
+
+ 
+
+ 
+ Résolution  
+
+184 
+
+25/09/2017 
+
+46 
+
+25/09/2017 
+
+4. Autres problèmes de graphes 
+ 
+
+4. Autres problèmes de graphes 
+ 
+
+ Problèmes « faciles » 
+ Au sens de la complexité 
+ Appartiennent à la classe P 
+ 
+
+ Déterminer un arbre couvrant de cout minimal 
+ Déterminer des parcours eulériens, des parcours chinois 
+ Déterminer un couplage dans un graphe quelconque 
+ Tester si un graphe est planaire 
+ …… 
+
+185 
+
+ Problèmes « difficiles » 
+
+ Au sens de la complexité 
+
+ 
+
+ Trouver un stable (independent set) de cardinalité maximal 
+ Trouver un transversal (node cover) de cardinalité minimal 
+ Trouver une clique de taille maximale  
+ Trouver une coloration minimale des sommets 
+ Trouver des parcours hamiltoniens 
+ …… 
+
+ 
+
+186 
+
+Arbres couvrants de cout minimal (1) 
+ 
+
+ Arbre :  
+
+ Graphe non orienté connexe sans cycle 
+ Entre toute paire de sommets il y a une unique chaine 
+
+ 
+
+ 
+
+ 
+
+ Soit G un arbre à n sommets 
+
+ G est sans cycle et a n-1 arêtes 
+
+ G est connexe et a n-1 arêtes 
+
+ 
+
+ Remarque 
+
+ Arborescence : dans le cas orienté (avec racine ou non) 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+187 
+
+ 
+
+Arbres couvrants de cout minimal (2) 
+ 
+
+ Trouver un arbre couvrant de cout minimal 
+
+ Soit un Graphe G non orienté pondéré,  
+
+ On chercher à sélectionner un ensemble d’arêtes incluant tous les sommets tels que 
+
+l’on obtienne un graphe connexe sans cycle de cout minimal 
+
+ 
+
+188 
+
+47 
+
+25/09/2017 
+
+Arbres couvrants de cout minimal (3) 
+ 
+
+ Algorithmes  
+
+ Algorithme de Prim 
+
+ Partir d’un sommet quelconque 
+
+ ensemble E de sommets 
+
+ Sélectionner l’arête de cout minimal connectant le sommet sélectionné aux autres 
+
+ 
+
+ 
+
+ ajouter un nouveau sommet à E 
+
+ Recommencer tant que tous les sommets ne sont pas connectés 
+
+ Algorithme de Kruskal 
+
+ Classer les arêtes par cout croissant 
+
+ Partir de l’arête de plus petit cout 
+
+ 
+
+ Sélectionner au fur et à mesure l’arête de plus petit cout ne créant pas de cycle 
+
+ Arrêt : n-1 arêtes sélectionnées 
+
+ 
+ Voir TD 
+
+189 
+
+Parcours eulériens – Parcours Chinois (1) 
+ 
+
+ Parcours eulériens 
+
+ Passe une fois et une seule par tous les arcs/arêtes du graphe 
+
+ Pas d’optimisation (somme des couts des arcs/arêtes) 
+
+ 
+
+ Parcours chinois 
+
+ Un parcours eulérien peut ne pas exister 
+
+ Parcours visitant au moins 1 fois chaque arc/arête du graphe et de cout 
+
+minimal 
+ 
+
+ Applications 
+
+ Problèmes de tournées (ex. distribution de courrier, déneigement, …) 
+
+190 
+
+Parcours eulériens – Parcours Chinois (2) 
+ 
+
+Parcours eulériens – Parcours Chinois (3) 
+ 
+
+ Théorème d’Euler (Graphes non orientés) 
+
+ Conditions d’existence pour des graphes orientés 
+
+ Le graphe non orienté G(X,E) comporte un parcours eulérien ssi 
+
+ Le graphe orienté G(X, A) est équilibré ssi d+(x) = d-(x) pour tout 
+
+ Il est connexe 
+ Il a 0 ou 2 sommets de degré impair 
+
+ 
+
+ Si 0 sommet de degré impair : cycle eulérien 
+ Si 2 sommets de degré impair (x et y) : chaine eulérienne entre x et y 
+
+ 
+
+ Algorithme 
+
+ Vérifier le théorème 
+ Adapter un algorithme de parcours en marquant les arêtes 
+
+191 
+
+192 
+
+sommet x 
+ 
+
+ G(X, A) a un circuit eulérien ssi il est équilibré 
+ G(X,A) a un chemin eulérien ssi il est équilibré sauf en 2 sommets x et y 
+
+qui vérifient d+(x)=d-(x)+1 et d-(y)=d+(y)+1 
+
+48 
+
+Coloration minimale des sommets (1) 
+
+Coloration minimale des sommets (2) 
+
+ Soit un graphe non orienté G(X, E) 
+
+ Remarques 
+
+ On cherche une coloration des sommets de G telle que deux sommets adjacents 
+
+n’aient pas la même couleur 
+
+ 
+
+ Exemple :  
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ Minimiser le nombre de couleurs : problème NP-Complet 
+
+193 
+
+ Un stable = ensemble de sommets de la même couleur 
+ Coloration des sommets = partition des sommets en stables 
+
+ Bornes 
+
+ Nb couleurs  min ≤ degré max + 1 
+ Nb couleurs min . Card stable max ≥ Nb sommets 
+
+ 
+
+ Exemples 
+
+ Emplois du temps :  
+
+o sommets = cours; couleurs = créneaux, arêtes = incompatibilités 
+
+ Allocation de fréquences 
+
+o Sommets = antennes; couleurs = fréquences; arêtes = interférences 
+
+ Sudoku 
+
+o Sommets =cases grille; couleurs= nombres; arêtes=contraintes  sudoku 
+
+194 
+ 
+
+Coloration minimale des sommets (3) 
+
+Coloration minimale des sommets (4) 
+
+ Exemple de méthodes de résolution approchées 
+
+ Déroulement d’une heuristique dynamique 
+
+ Heuristiques :  
+
+ ordre sur les sommets 
+ Allouer les couleurs en prenant les sommets dans l’ordre 
+
+ Ordre statique ou dynamique 
+ Pas la solution optimale (ie nb minimal de couleurs) 
+ Efficacité en termes de temps de calcul 
+
+ 
+
+ Exemple d’heuristique dynamique 
+
+ Ordre des sommets = nb de voisins colorés décroissants 
+
+ Prendre les couleurs dans un ordre donné fixe 
+
+ Pour le premier sommet : allouer la première couleur possible 
+
+ Ré-ordonner les sommets restant en fonction du nb de voisins colorés 
+
+195 
+
+196 
+
+25/09/2017 
+
+49 
+
+25/09/2017 
+
+Graphe hamiltonien (1) 
+
+Graphe hamiltonien (2) 
+
+ Soit un graphe non orienté G(X, E) 
+
+ Exemple 
+
+ Une chaine hamiltonienne passe 1 fois et 1 seule par chaque sommet (et donc au plus 
+
+une fois chaque arête) 
+
+ Un graphe est hamiltonien ssi il contient un cycle hamiltonien 
+ 
+
+ Conditions suffisantes d’existence d’un cycle hamiltonien (cas non 
+
+orienté) 
+ Si G possède un sommet de degré 1, il ne peut pas être hamiltonien 
+ Si G est un graphe complet alors il est hamiltonien 
+ Si G possède un sommet de degré 2 alors les 2 arêtes font partie du cycle 
+
+hamiltonien 
+
+ 
+
+ Déterminer si un graphe est hamiltonien est NP-Complet 
+
+197 
+
+198 
+
+ Hamilton : trouver un cycle hamiltonien dans un dodécaèdre régulier 
+
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Nombre de cycles hamiltonien dans un graphe complet à n sommets ? 
+
+Graphe hamiltonien (3) 
+
+Graphe hamiltonien (4) 
+
+ Problème du Voyageur de Commerce 
+
+ Exemple de méthode approchée pour le problème du 
+
+ Graphe orienté ou non avec valuation 
+ Cout d’un cycle = somme des couts des arêtes/arcs 
+ Déterminer un cycle (circuit) hamiltonien de cout minimal 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+199 
+
+voyageur de commerce 
+
+ Déterminer A = arbre couvrant de cout minimal de G 
+ Ordonner les sommets à l’aide d’un parcours préfixe de A 
+ Le cycle = les sommets dans l’ordre préfixe 
+ 
+
+ De nombreux travaux de recherche 
+
+ Les méthodes exactes permettent de traiter des instances de taille 
+
+relativement grandes (> 25 000) en 2004  
+ contre 50 en 1954 
+
+200 
+
+50 
+
+Conclusion (1) 
+
+ A retenir 
+
+ Définitions générales 
+ Représentations informatiques 
+
+ 
+
+ Problèmes et Algorithmes 
+
+ Parcours de graphes 
+ Connexité, Forte Connexité, Tri, Rang 
+ Graphes et Optimisation  
+
+ Plus Courts Chemins 
+
+ Problèmes de Flots 
+
+ Autres problèmes 
+
+201 
+
+Conclusion (2) 
+
+ A retenir 
+
+ Complexité 
+
+ Problèmes « faciles » et « difficiles » 
+ 
+
+ Graphes et Optimisation : Méthodes de résolution 
+
+ Méthodes exactes 
+ Méthodes approchées 
+
+ 
+
+ Suite :  
+
+ 5IS : Optimisation pour la Production et la Logistique  
+
+ 
+
+202 
+
+25/09/2017 
+
+51 
+
+

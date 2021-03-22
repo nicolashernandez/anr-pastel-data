@@ -1,0 +1,1001 @@
+http://lioneltabourier.fr/documents/cours1A.pdf
+
+Représentation des réseaux en graphes
+Le degré d’un nœud
+La densité d’un graphe
+La connexité d’un graphe
+
+Introduction à l’analyse de réseaux
+
+complexes
+
+1 - La notion de réseau complexe (partie A)
+
+Lionel Tabourier
+
+LIP6 – Université Pierre et Marie Curie / CNRS
+
+Cours à l’Université Babes, -Bolyai
+
+Mai 2017
+
+1/32
+
+Représentation des réseaux en graphes
+Le degré d’un nœud
+La densité d’un graphe
+La connexité d’un graphe
+
+Présentation personnelle
+
+Enseignant
+
+Lionel Tabourier, enseignant-chercheur en Informatique
+
+Université Pierre et Marie Curie (Paris 6)
+
+Me contacter
+
+lionel.tabourier@lip6.fr
+
+Variante du cours (en Anglais, pour informaticiens)
+
+http://lioneltabourier.fr/teaching_en.html/
+
+2/32
+
+Représentation des réseaux en graphes
+Le degré d’un nœud
+La densité d’un graphe
+La connexité d’un graphe
+
+Présentation du cours
+
+Emploi du temps
+
+14h-15h30 puis 15h40-17h30
+de lundi 15 à mercredi 17
+
+Principe
+Analyse des réseaux complexes: vaste et interdisciplinaire
+→ description d’interactions réelles
+Trois thèmes orientés sciences économiques et gestion :
+
+Recherche d’information
+Recommandation de contenu
+Prévision de la dynamique (?)
+
+3/32
+
+Représentation des réseaux en graphes
+Le degré d’un nœud
+La densité d’un graphe
+La connexité d’un graphe
+
+Présentation du cours
+
+Emploi du temps
+
+14h-15h30 puis 15h40-17h30
+de lundi 15 à mercredi 17
+
+Principe
+Buts: culture générale, comprendre des problèmes techniques
+
+sous-jacents à des questions de société actuelles
+
+3/32
+
+Représentation des réseaux en graphes
+Le degré d’un nœud
+La densité d’un graphe
+La connexité d’un graphe
+
+Outline
+
+1 Représentation des réseaux en graphes
+
+2 Le degré d’un nœud
+
+3 La densité d’un graphe
+
+4 La connexité d’un graphe
+
+4/32
+
+Représentation des réseaux en graphes
+Le degré d’un nœud
+La densité d’un graphe
+La connexité d’un graphe
+
+Plan
+
+1 Représentation des réseaux en graphes
+
+2 Le degré d’un nœud
+
+3 La densité d’un graphe
+
+4 La connexité d’un graphe
+
+5/32
+
+Représentation des réseaux en graphes
+Le degré d’un nœud
+La densité d’un graphe
+La connexité d’un graphe
+
+Qu’est-ce qu’un graphe?
+
+Un objet mathématique très simple :
+un ensemble de nœuds, noté V
+un ensemble de liens entre ces nœuds, noté E
+
+Autres notations usuelles:
+
+|V| = N (nombre de nœuds)
+|E| = M (nombre de liens)
+
+6/32
+
+Représentation des réseaux en graphes
+Le degré d’un nœud
+La densité d’un graphe
+La connexité d’un graphe
+
+Qu’est-ce qu’un graphe?
+
+Variante graphes orientés:
+les liens sont dirigés d’un nœud vers un autre
+
+Variante graphes pondérés:
+les liens ont un poids
+
+Un objet très polyvalent
+
+7/32
+
+1332Représentation des réseaux en graphes
+Le degré d’un nœud
+La densité d’un graphe
+La connexité d’un graphe
+
+La représentation d’un graphe
+
+Attention: différencier un graphe de son dessin
+
+illustration: un seul et même graphe, une inﬁnité de dessins
+
+⇒ attention aux interprétations basées sur le dessin
+
+8/32
+
+012345250134Représentation des réseaux en graphes
+Le degré d’un nœud
+La densité d’un graphe
+La connexité d’un graphe
+
+La représentation d’un graphe
+
+Attention: différencier un graphe de son dessin
+
+illustration: un seul et même graphe, une inﬁnité de dessins
+
+⇒ attention aux interprétations basées sur le dessin
+
+8/32
+
+Représentation des réseaux en graphes
+Le degré d’un nœud
+La densité d’un graphe
+La connexité d’un graphe
+
+Qu’est-ce qu’un réseau complexe?
+
+Pas de déﬁnition stricte mais des caractéristiques communes:
+
+réseaux extraits de données réelles
+sans “cerveau central”
+
+Pas de plan de construction précis mais . . .
+
+des interactions locales d’où émerge une structure globale
+et des règles globales qui contraignent l’organisation locale
+
+Nous en faisons une représentation en graphe
+
+9/32
+
+Représentation des réseaux en graphes
+Le degré d’un nœud
+La densité d’un graphe
+La connexité d’un graphe
+
+Qu’est-ce qu’un réseau complexe?
+
+Pas de déﬁnition stricte mais des caractéristiques communes:
+
+réseaux extraits de données réelles
+sans “cerveau central”
+
+Pas de plan de construction précis mais . . .
+
+des interactions locales d’où émerge une structure globale
+et des règles globales qui contraignent l’organisation locale
+
+Nous en faisons une représentation en graphe
+
+9/32
+
+Représentation des réseaux en graphes
+Le degré d’un nœud
+La densité d’un graphe
+La connexité d’un graphe
+
+Des exemples
+
+Réseau de pages web connectées par liens hypertextes
+
+world wide web
+
+Représentation en graphe:
+
+nœud = page
+lien orienté = lien hypertexte
+
+10/32
+
+Représentation des réseaux en graphes
+Le degré d’un nœud
+La densité d’un graphe
+La connexité d’un graphe
+
+Des exemples
+
+Réseau de routeurs connectés par un canal de transmission
+
+Internet
+
+Représentation en graphe:
+
+nœud = routeur (ou plus souvent IP)
+lien = possible envoi direct d’information
+
+11/32
+
+Représentation des réseaux en graphes
+Le degré d’un nœud
+La densité d’un graphe
+La connexité d’un graphe
+
+Des exemples
+
+Réseau de comptes connectés par un type de relation sociale
+
+Réseaux sociaux en ligne
+
+ex: amitiés Facebook, following Twitter, conversation forum etc
+
+Représentation en graphe:
+
+nœud = compte
+lien (orienté, pondéré ou non) = relation sociale
+
+12/32
+
+Représentation des réseaux en graphes
+Le degré d’un nœud
+La densité d’un graphe
+La connexité d’un graphe
+
+Des exemples
+
+Réseaux boursiers (stock market)
+
+Réseau de corrélations entre valeurs d’action
+
+Mesure de corrélation entre valeurs boursières, si au-dessus
+
+d’un seuil arbitraire ⇒ lien
+
+Représentation en graphe:
+
+nœud = valeur
+lien = corrélation forte
+
+13/32
+
+Représentation des réseaux en graphes
+Le degré d’un nœud
+La densité d’un graphe
+La connexité d’un graphe
+
+Des exemples
+
+D’autres exemples, dans d’autres domaines
+
+économie réseaux échanges commerciaux
+logistique ﬂux d’individus dans les transports
+linguistique co-occurrences de mots dans une phrase
+biologie interactions entre protéines (métaboliques)
+. . .
+
+14/32
+
+Représentation des réseaux en graphes
+Le degré d’un nœud
+La densité d’un graphe
+La connexité d’un graphe
+
+Pourquoi étudier ensemble des objets si différents?
+
+Présentent des propriétés communes en tant que graphe
+
+⇒ problèmes communs, mêmes méthodes pour les résoudre
+
+Objet de ce premier cours: voir quelques unes de ces
+
+propriétés
+
+15/32
+
+Représentation des réseaux en graphes
+Le degré d’un nœud
+La densité d’un graphe
+La connexité d’un graphe
+
+Pourquoi étudier ensemble des objets si différents?
+
+Présentent des propriétés communes en tant que graphe
+
+⇒ problèmes communs, mêmes méthodes pour les résoudre
+
+Objet de ce premier cours: voir quelques unes de ces
+
+propriétés
+
+15/32
+
+Représentation des réseaux en graphes
+Le degré d’un nœud
+La densité d’un graphe
+La connexité d’un graphe
+
+Plan
+
+1 Représentation des réseaux en graphes
+
+2 Le degré d’un nœud
+
+3 La densité d’un graphe
+
+4 La connexité d’un graphe
+
+16/32
+
+Représentation des réseaux en graphes
+Le degré d’un nœud
+La densité d’un graphe
+La connexité d’un graphe
+
+Qu’est-ce que le degré d’un nœud?
+
+Déﬁnition : le nombre de liens d’un nœud dans le graphe
+remarque : donc son nombre de voisins
+⇒ degré maximum d’un nœud :
+
+si graphe orienté : degré entrant / sortant
+
+17/32
+
+Représentation des réseaux en graphes
+Le degré d’un nœud
+La densité d’un graphe
+La connexité d’un graphe
+
+Qu’est-ce que le degré d’un nœud?
+
+Déﬁnition : le nombre de liens d’un nœud dans le graphe
+remarque : donc son nombre de voisins
+⇒ degré maximum d’un nœud : N-1
+
+si graphe orienté : degré entrant / sortant
+
+17/32
+
+Représentation des réseaux en graphes
+Le degré d’un nœud
+La densité d’un graphe
+La connexité d’un graphe
+
+Qu’est-ce que le degré d’un nœud?
+
+Déﬁnition : le nombre de liens d’un nœud dans le graphe
+remarque : donc son nombre de voisins
+⇒ degré maximum d’un nœud : N-1
+
+si graphe orienté : degré entrant / sortant
+
+17/32
+
+Représentation des réseaux en graphes
+Le degré d’un nœud
+La densité d’un graphe
+La connexité d’un graphe
+
+Degré dans un réseau réel
+
+18/32
+
+Représentation des réseaux en graphes
+Le degré d’un nœud
+La densité d’un graphe
+La connexité d’un graphe
+
+Degré dans un réseau réel
+
+Observation : grande diversité des degrés, hétérogénéité
+
+Comment en rendre compte ?
+
+18/32
+
+Représentation des réseaux en graphes
+Le degré d’un nœud
+La densité d’un graphe
+La connexité d’un graphe
+
+Distribution des degrés
+
+Moyenne d ? pas sufﬁsante
+Variance V (d) = 1
+
+N Σi (di − d)2 ?
+
+19/32
+
+Représentation des réseaux en graphes
+Le degré d’un nœud
+La densité d’un graphe
+La connexité d’un graphe
+
+Distribution des degrés
+
+Moyenne d ? pas sufﬁsante
+Variance V (d) = 1
+
+N Σi (di − d)2 ? élevée
+
+en général on représente l’ensemble de la distribution
+
+donc pour chaque degré le nombre de nœuds correspondants
+
+19/32
+
+Représentation des réseaux en graphes
+Le degré d’un nœud
+La densité d’un graphe
+La connexité d’un graphe
+
+Distribution des degrés en coordonnées
+logarithmiques
+
+Allure typique en coordonnées linéaires:
+
+Principe de la transformation: graduations logarithmiques
+
+(1 graduation ≡ multiplier par 10)
+
+20/32
+
+ 0 50000 100000 150000 200000 250000 300000 350000 400000 450000 0 50000 100000 150000 200000 250000 1 10 100 1000 10000 100000 1e+06 1 10 100 1000 10000 100000 1e+06Représentation des réseaux en graphes
+Le degré d’un nœud
+La densité d’un graphe
+La connexité d’un graphe
+
+Quelques exemples réels
+
+tirés de http://konect.uni-koblenz.de
+
+Internet (cartes CAIDA)
+
+21/32
+
+Représentation des réseaux en graphes
+Le degré d’un nœud
+La densité d’un graphe
+La connexité d’un graphe
+
+Quelques exemples réels
+
+tirés de http://konect.uni-koblenz.de
+
+Réseau social (site gowalla)
+
+21/32
+
+Représentation des réseaux en graphes
+Le degré d’un nœud
+La densité d’un graphe
+La connexité d’un graphe
+
+Quelques exemples réels
+
+tirés de http://konect.uni-koblenz.de
+
+Réseau métabolique (d’une levure)
+
+21/32
+
+Représentation des réseaux en graphes
+Le degré d’un nœud
+La densité d’un graphe
+La connexité d’un graphe
+
+Quelques exemples réels
+
+tirés de http://konect.uni-koblenz.de
+
+World-Wide Web: degré entrant (données Google)
+
+21/32
+
+Représentation des réseaux en graphes
+Le degré d’un nœud
+La densité d’un graphe
+La connexité d’un graphe
+
+Pour aller un peu plus loin : le paradoxe de l’amitié
+
+Observation: dans un réseau social, nos connaissances ont
+
+en moyenne plus de connaissances que nous.
+
+Traduction graphe:
+
+pour un nœud i quelconque, en moyenne di ≤ 1
+Ni
+avec j voisin de i et Ni le nombre de voisins de i
+
+Σjdj
+
+Justiﬁcation: Les éléments de Ni ne sont pas des nœuds
+
+quelconques, mais plus probablement des nœuds de fort degré
+
+exemple typique de biais d’échantillonnage
+
+22/32
+
+Représentation des réseaux en graphes
+Le degré d’un nœud
+La densité d’un graphe
+La connexité d’un graphe
+
+Pour aller un peu plus loin : le paradoxe de l’amitié
+
+Observation: dans un réseau social, nos connaissances ont
+
+en moyenne plus de connaissances que nous.
+
+Traduction graphe:
+
+pour un nœud i quelconque, en moyenne di ≤ 1
+Ni
+avec j voisin de i et Ni le nombre de voisins de i
+
+Σjdj
+
+Justiﬁcation: Les éléments de Ni ne sont pas des nœuds
+
+quelconques, mais plus probablement des nœuds de fort degré
+
+exemple typique de biais d’échantillonnage
+
+22/32
+
+Représentation des réseaux en graphes
+Le degré d’un nœud
+La densité d’un graphe
+La connexité d’un graphe
+
+Pour aller un peu plus loin : le paradoxe de l’amitié
+
+Observation: dans un réseau social, nos connaissances ont
+
+en moyenne plus de connaissances que nous.
+
+Traduction graphe:
+
+pour un nœud i quelconque, en moyenne di ≤ 1
+Ni
+avec j voisin de i et Ni le nombre de voisins de i
+
+Σjdj
+
+Justiﬁcation: Les éléments de Ni ne sont pas des nœuds
+
+quelconques, mais plus probablement des nœuds de fort degré
+
+exemple typique de biais d’échantillonnage
+
+22/32
+
+Représentation des réseaux en graphes
+Le degré d’un nœud
+La densité d’un graphe
+La connexité d’un graphe
+
+Plan
+
+1 Représentation des réseaux en graphes
+
+2 Le degré d’un nœud
+
+3 La densité d’un graphe
+
+4 La connexité d’un graphe
+
+23/32
+
+Représentation des réseaux en graphes
+Le degré d’un nœud
+La densité d’un graphe
+La connexité d’un graphe
+
+Est-ce qu’un graphe contient “beaucoup” de liens?
+
+Nombre maximum de liens d’un graphe (non-orienté)?
+
+N−1(cid:88)
+
+i=1
+
+i =
+
+N(N − 1)
+
+2
+
+(on parle de clique ou de graphe complet)
+
+24/32
+
+Représentation des réseaux en graphes
+Le degré d’un nœud
+La densité d’un graphe
+La connexité d’un graphe
+
+Est-ce qu’un graphe contient “beaucoup” de liens?
+
+Nombre maximum de liens d’un graphe (non-orienté)?
+
+N−1(cid:88)
+
+i=1
+
+i =
+
+N(N − 1)
+
+2
+
+(on parle de clique ou de graphe complet)
+
+24/32
+
+Représentation des réseaux en graphes
+Le degré d’un nœud
+La densité d’un graphe
+La connexité d’un graphe
+
+Est-ce qu’un graphe contient “beaucoup” de liens?
+
+Nombre maximum de liens d’un graphe (non-orienté)?
+
+N−1(cid:88)
+
+i=1
+
+i =
+
+N(N − 1)
+
+2
+
+(on parle de clique ou de graphe complet)
+
+Comparer entre nombre de liens existants (M) et cette quantité
+
+24/32
+
+Représentation des réseaux en graphes
+Le degré d’un nœud
+La densité d’un graphe
+La connexité d’un graphe
+
+Qu’est-ce que la densité?
+
+Déﬁnition : densité δ = nombre de liens existants
+nombre de liens possibles
+
+soit δ =
+
+2M
+
+N(N − 1)
+
+remarques:
+
+somme des degrés des nœuds :
+degré moyen :
+
+25/32
+
+Représentation des réseaux en graphes
+Le degré d’un nœud
+La densité d’un graphe
+La connexité d’un graphe
+
+Qu’est-ce que la densité?
+
+Déﬁnition : densité δ = nombre de liens existants
+nombre de liens possibles
+
+soit δ =
+
+2M
+
+N(N − 1)
+
+remarques:
+
+somme des degrés des nœuds :(cid:80)
+
+i di = 2M
+
+(cid:80)
+
+degré moyen : d = 1
+N
+
+i di = 2M
+N
+
+25/32
+
+Représentation des réseaux en graphes
+Le degré d’un nœud
+La densité d’un graphe
+La connexité d’un graphe
+
+La densité des graphes réels
+
+plus généralement : image distribution de degré
+
+les graphes réels sont “creux” lorsqu’ils sont grands
+
+26/32
+
+Représentation des réseaux en graphes
+Le degré d’un nœud
+La densité d’un graphe
+La connexité d’un graphe
+
+La densité des graphes réels
+
+plus généralement : image distribution de degré
+
+les graphes réels sont “creux” lorsqu’ils sont grands
+
+26/32
+
+Représentation des réseaux en graphes
+Le degré d’un nœud
+La densité d’un graphe
+La connexité d’un graphe
+
+Plan
+
+1 Représentation des réseaux en graphes
+
+2 Le degré d’un nœud
+
+3 La densité d’un graphe
+
+4 La connexité d’un graphe
+
+27/32
+
+Représentation des réseaux en graphes
+Le degré d’un nœud
+La densité d’un graphe
+La connexité d’un graphe
+
+Qu’est-ce que la connexité?
+
+Déﬁnition: un chemin de i à j est une séquence de liens
+permettant d’aller d’un nœud i à un nœud j du graphe
+
+Déﬁnition: un graphe non-orienté est connexe s’il existe au
+moins un chemin de tout nœud i à tout nœud j
+
+28/32
+
+Représentation des réseaux en graphes
+Le degré d’un nœud
+La densité d’un graphe
+La connexité d’un graphe
+
+Connexité des graphes orientés
+
+Déﬁnition: un chemin orienté de i à j est une séquence de
+liens orientés permettant d’aller d’un nœud i à un nœud j du
+graphe
+
+Déﬁnition: un graphe orienté est fortement connexe s’il
+existe au moins un chemin orienté de tout nœud i à tout nœud j
+
+Déﬁnition: un graphe orienté est faiblement connexe s’il
+existe une séquence de liens (peu importe leur orientation) de
+tout nœud i à tout nœud j
+
+29/32
+
+Représentation des réseaux en graphes
+Le degré d’un nœud
+La densité d’un graphe
+La connexité d’un graphe
+
+Importance de la notion de connexité
+
+Un exemple: la propagation épidémique
+
+réseau de contacts infectieux entre individus
+mesure de limitation: isolement, vaccination . . .
+
+Autre exemple: propagation d’information dans réseau social
+
+30/32
+
+Représentation des réseaux en graphes
+Le degré d’un nœud
+La densité d’un graphe
+La connexité d’un graphe
+
+Importance de la notion de connexité
+
+Un exemple: la propagation épidémique
+
+réseau de contacts infectieux entre individus
+mesure de limitation: isolement, vaccination . . .
+
+Autre exemple: propagation d’information dans réseau social
+
+30/32
+
+Représentation des réseaux en graphes
+Le degré d’un nœud
+La densité d’un graphe
+La connexité d’un graphe
+
+Importance de la notion de connexité
+
+Un exemple: la propagation épidémique
+
+réseau de contacts infectieux entre individus
+mesure de limitation: isolement, vaccination . . .
+
+Autre exemple: propagation d’information dans réseau social
+
+30/32
+
+Représentation des réseaux en graphes
+Le degré d’un nœud
+La densité d’un graphe
+La connexité d’un graphe
+
+Importance de la notion de connexité
+
+Un exemple: la propagation épidémique
+
+réseau de contacts infectieux entre individus
+mesure de limitation: isolement, vaccination . . .
+
+Autre exemple: propagation d’information dans réseau social
+
+30/32
+
+Représentation des réseaux en graphes
+Le degré d’un nœud
+La densité d’un graphe
+La connexité d’un graphe
+
+Connexité de réseaux réels
+
+Intuition: le cas d’Internet
+
+Description simpliﬁée:
+
+des routeurs identiﬁés par (au moins) une adresse IP
+une source émet un message vers une destination
+chaque routeur envoie à un voisin plus proche de la cible
+jusqu’à l’atteindre
+
+Internet fonctionnel suppose connexité du réseau
+
+remarque: cela n’explique pas tout, comment un routeur sait-il
+qu’un voisin est plus proche de la cible?
+
+31/32
+
+Représentation des réseaux en graphes
+Le degré d’un nœud
+La densité d’un graphe
+La connexité d’un graphe
+
+Connexité de réseaux réels
+
+Intuition: le cas d’Internet
+
+Description simpliﬁée:
+
+des routeurs identiﬁés par (au moins) une adresse IP
+une source émet un message vers une destination
+chaque routeur envoie à un voisin plus proche de la cible
+jusqu’à l’atteindre
+
+Internet fonctionnel suppose connexité du réseau
+
+remarque: cela n’explique pas tout, comment un routeur sait-il
+qu’un voisin est plus proche de la cible?
+
+31/32
+
+Représentation des réseaux en graphes
+Le degré d’un nœud
+La densité d’un graphe
+La connexité d’un graphe
+
+Notion de composante géante
+
+il existe des composantes connexes regroupant beaucoup
+
+peut être contre-intuitif avec l’idée de densité faible . . .
+
+de noeuds
+
+En fait, les graphes de réseaux réels présentent très souvent
+
+une composante géante
+
+car un graphe avec plusieurs grandes composantes connexes
+
+est instable . . .
+
+32/32
+
+Représentation des réseaux en graphes
+Le degré d’un nœud
+La densité d’un graphe
+La connexité d’un graphe
+
+Notion de composante géante
+
+il existe des composantes connexes regroupant beaucoup
+
+peut être contre-intuitif avec l’idée de densité faible . . .
+
+de noeuds
+
+En fait, les graphes de réseaux réels présentent très souvent
+
+une composante géante
+
+car un graphe avec plusieurs grandes composantes connexes
+
+est instable . . .
+
+32/32
+
+

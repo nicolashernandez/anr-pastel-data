@@ -1,0 +1,108 @@
+https://pagesperso.g-scop.grenoble-inp.fr/~stehlikm/teaching/miashs/TD3-Plus-court-chemin.pdf
+
+Réseaux sociaux et théorie des graphes
+
+TD3
+
+Exercice 1. Entraînement avec Dijkstra
+Utiliser l’algorithme de Dijkstra pour déterminer la distance du sommet s aux autres
+sommets dans les graphes orientés suivants.
+
+1
+
+1
+
+1
+
+4
+
+6
+
+1
+
+1
+
+1
+
+6
+
+4
+
+1
+
+1
+
+1
+
+1
+
+1
+
+4
+
+1
+
+1
+
+8
+
+1
+
+6
+
+s
+
+1
+
+8
+
+s
+
+4
+
+1
+
+1
+
+4
+
+6
+
+1
+
+Exercice 2.
+Est-ce que l’algorithme de Dijkstra vu en cours trouve toujours les plus courts chemins si
+on autorise des arêtes de poids négatif ?
+
+Exercice 3. Le plus sûr chemin
+Plaçons-nous dans un réseau dans lequel on souhaite envoyer un message depuis une origine
+s vers une destination t. Dans ce réseau, on estime qu’un message empruntant un arc
+(i, j) a une probabilité pi,j de transiter correctement de i vers j. Ainsi, un message qui
+transite de s vers j puis de j vers t a une probabilité ps,jpj,t de transiter correctement.
+De même, si le message emprunte un chemin constitué des arcs a1, a2, . . . , ak, alors la
+probabilité qu’il transite correctement depuis l’origine jusqu’à la destination du chemin est
+pa1pa2 ··· pak. Déterminer un chemin de s à t maximisant la probabilité que le message
+transite correctement est appelé le problème du plus sûr chemin.
+Question 1. Donner une méthode permettant de trouver le plus sûr chemin de s à t.
+Indices : on pourra essayer d’adapter l’algorithme de Dijkstra en utilisant le fait que pour
+tout a, b > 0 on a : log ab = log a + log b.
+
+1
+
+Exercice 4. Arbitrage
+Le marché des changes est le marché sur lequel les devises sont échangées l’une contre
+l’autre à des taux de change qui varient en permanence. Soit ri,j le nombre d’unités de la
+devise j que l’on peut acheter avec une unité de la devise i. On peut enchaîner les échanges :
+si on échange une unité de la devise 1 en devise 2, et ensuite on échange le montant obtenu
+en devise 3, alors on obtient r12r23 unités de la devise 3. Donc, si on peut trouver une
+i=0 ri,i+1 > 1, alors on peut devenir très
+
+séquence v0, v1, . . . , vk où v0 = vk telle que (cid:81)k−1
+
+riche !
+Question 1. Modéliser la situation par un graphe orienté, où l’existence d’une telle séquence
+d’échanges correspond à un cycle de poids négatif.
+
+2
+
+

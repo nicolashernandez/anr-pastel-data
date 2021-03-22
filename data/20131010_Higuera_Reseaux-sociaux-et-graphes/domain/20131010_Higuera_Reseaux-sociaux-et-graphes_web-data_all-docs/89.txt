@@ -1,0 +1,107 @@
+http://lipn.univ-paris13.fr/~rouveirol/sujet_stage_rsocs.pdf
+
+TITRE : Pr´edictions de Lien dans les R´eseux sociaux pour la recom-
+mandation de collaborations
+Laboratoires : LIPN (Universit´e Paris-Nord)
+Sujet propos´e par : C´eline Rouveirol ( Celine.Rouveirol@lipn.univ-paris13.fr),
+Rushed Kanawati (Rushed.Kanawati@lipn.univ-paris13.fr).
+Mots-clefs : Analyse des r´eseaux sociaux, Pr´ediction de liens, Classiﬁcation
+supervis´ee, Apprentissage relationnel, Fouille de graphes, Recommandation de
+collaboration.
+
+R´esum´e :
+
+Notre objectif est d’explorer une th´ematique nouvelle et d’actualit´e qui consiste
+`a concevoir de nouvelles techniques de pr´ediction de liens dans les r´eseaux so-
+ciaux. Bien que beaucoup de travaux actuels adresse la probl´ematique d’analyse
+de r´eseaux sociaux, peu sont ceux qui traitent le probl`eme de la pr´ediction de
+l’´evolution de la structure d’un r´eseau. La majorit´e des approches r´ecemment
+propos´ees pour la pr´ediction de liens reposent sur l’emploi d’un pr´edicteur qui
+´evalue la probabilit´e de l’apparition d’un lien entre deux nœuds en fonction des
+leurs caract´eristiques topologiques.
+
+L’´etat de l’art est d’apprendre pour l’instant des r`egles d’´evolution de la struc-
+ture d’un r´eseau grˆace `a des classiﬁeurs propositionnels utilisant diﬀ´erents types
+de pr´edicteurs de base propos´es dans la litt´erature. Nous souhaitons explorer
+dans ce stage l’utilit´e des approches de pr´ediction de liens fond´ees sur l’emploi
+des techniques d’apprentissage automatique relationnel. Une application de re-
+commandation de collaborations scientiques sert de cadre de test et de validation
+des approches propos´ees.
+
+Description : Un r´eseau social est un graphe dont les nœuds sont des indi-
+vidus interconnect´es par des liens sociaux : appartenance `a une mˆeme famille,
+´echange de messages, co-signature de publications, etc. Les recherches dans ce
+domaine s’int´eressent principalement `a de grands r´eseaux compos´es de milliers
+voire de millions de nœuds. L’analyse de r´eseaux sociaux a connu un net regain
+d’int´erˆet depuis la ﬁn des ann´ees 90, lorsque l’on a remarqu´e que beaucoup de
+r´eseaux naturels (par exemple, les r´eseaux d’accointances, les r´eseaux biologiques
+[2, 12], de collaborations, . . .) ne se comportent pas comme des graphes al´eatoires
+mais partagent un certain nombre de caract´eristiques, notamment l’invariance de
+la structure par changement d’´echelle qui se traduit par une distribution des
+degr´es selon une loi de puissance. La majorit´e de travaux dans ce domaine se
+sont int´eress´es `a l’analyse de r´eseaux statiques [6]. A la diﬀ´erence de ces tra-
+vaux, nous nous int´eressons `a l’´etude de la dynamique des r´eseaux sociaux. Plus
+concr`etement, nous nous int´eressons au probl`eme de pr´ediction de liens [8]. Ce
+probl`eme peut ˆetre d´ecrit comme suit : ´etant donn´es deux nœuds d’un r´eseau,
+a et b non reli´es entre eux `a l’instant ti, quelle est la probabilit´e d’avoir un lien
+
+1
+
+< a, b > `a un instant tj > ti ? (dualement, ´etant donn´es deux nœuds d’un r´eseau,
+a et b reli´es entre eux `a l’instant ti par un lien < a, b >, quelle est la probabi-
+lit´e que ces nœuds n’aient plus de lien `a un instant tj > ti ?). Dans ce stage,
+nous proposons de v´eriﬁer l’applacibilit´e d’algorithmes de mettre en œuvre des
+algorithmes d’Apprentissage Relationnel (ou Programmation Logique Inductive).
+La Programmation Logique Inductive (PLI) [10] est un domaine de l’appren-
+tissage symbolique o`u l’on cherche `a caract´eriser des concepts complexes, ex-
+prim´es dans restrictions de la logique des pr´edicats du premier ordre. Par exemple,
+on va pouvoir exprimer que si deux personnes qui n’ont pas co-sign´e d’articles
+pendant la p´eriode T mais ont un co-auteur commun pendant la mˆeme p´eriode,
+alors, elle vont collaborer pendant la p´eriode T (cid:48) qui suit imm´ediatement T :
+∀X,∀Y not(co auteur(X, Y, T )), co auteur(X, Z, T ), co auteur(Y, Z, T ), succ(T, T (cid:48))
+→ co auteur(X, Y, T (cid:48)). La PLI permet d’exprimer des relations complexes reliant
+deux nœuds, qui ne peuvent pas ˆetre captur´ees `a partir d’attributs utilis´es usuel-
+lement dans la communaut´e des r´eseaux sociaux (intersection des voisinages,
+coeﬃcient de Jaccard, attachement pr´ef´erentiel [5], ou d’autres mesures fond´ees
+sur le voisinage des noeuds [1] ou sur la distance entre ces nœuds [7]).
+
+Le but du stage sera dans un premier temps de tester les syst`emes de PLI
+classiques [13, 9, 3] sur le probl`eme d’apprentissage, puis `a partir de cet ´etat des
+lieux, de proposer ou d’adapter un algorithme de PLI adapt´e au probl`eme de
+pr´ediction de lien. Les probl`emes `a r´egler seront :
+
+– les graphes `a traiter sont de taille importante. En eﬀet, l’extraction se fera `a
+partir de sites publics de bibliographie (tels que DBLP1, CiteSeer2, arXiv3,
+etc. Il faudra r´eﬂ´echir `a diverses repr´esentations des donn´ees qui capturent `a
+la fois l’aspect relationnel du probl`eme tout en gardant le probl`eme traitable
+
+– d’autre part, le probl`eme de pr´ediction de lien est par nature tr`es d´es´equilibr´e :
+
+en eﬀet, il existe tr`es peu de d’exemples positifs (par exemple, un exemple
+positif est une paire d’auteurs ayant co-sign´e un article pendant une p´eriode
+T ) et un ensemble tr`es vaste d’exemples n´egatifs (parmi tous les auteurs
+ayant publi´e au moins un article, l’ensemble des paires d’auteurs qui n’ont
+pas publi´e pendant la p´eriode T ).
+
+Les performances des syst`emes de PLI ((existants et originaux) seront `a comparer
+`a celles d’algorithmes d’apprentissage propositionnels sur le mˆeme probl`eme [4,
+11].
+R´esultats attendus : Evaluation de syst`emes de PLI de l’´etat de l’art sur
+la pr´ediction de lien pour la recommandation de collaborations acad´emiques.
+Conception d’un algorithme de PLI au probl`eme et comparaison aux perfor-
+mances des algorithmes d’apprentissage propositionnels sur le mˆeme probl`eme.
+
+1www.informatik.uni trier.de/ley/db
+2citeseer.ist.psu.edu
+3arXiv.org
+
+2
+
+R´ef´erences
+
+[1] Lada A. Adamic, Orkut Buyukkokten, and Eytan Adar. A social network
+
+caught in the web. First Monday, 8(6), 2003.
+
+[2] AL Barabasi and ZN Oltvai. Network biology : understanding the cell’s
+

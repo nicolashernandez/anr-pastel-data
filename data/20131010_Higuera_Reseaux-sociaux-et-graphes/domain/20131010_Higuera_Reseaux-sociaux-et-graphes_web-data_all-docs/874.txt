@@ -1,0 +1,1214 @@
+http://www.univ-montp3.fr/miap/ens/site/uploads/Misashs.Graphes/support_cours_graphes_seance1.pdf
+
+Passage aux graphes orientés Arbres couvrants Autour du dessin de graphe
+
+Graphes (et réseaux sociaux)
+
+G. Richomme
+
+gwenael.richomme@univ-montp3.fr
+
+Université Paul Valéry Montpellier 3
+
+Licence AES parcours Misahs
+
+cours 2013-2014 - Séance 1
+
+gwenael.richomme@univ-montp3.fr
+
+Graphes (et réseaux sociaux)
+
+1
+
+Passage aux graphes orientés Arbres couvrants Autour du dessin de graphe
+
+Objectifs et programmes
+
+Objectifs : donner aux étudiants les outils formels leur permettant
+d’analyser les réseaux rencontrés dans le domaine économique et
+social
+Programme :
+
+vocabulaire de la théorie des graphes,
+propriétés topologiques et paramètres des graphes servant à
+modéliser les réseaux sociaux (connexité, densité, coeﬃcient
+de clustering, diamètre...),
+algorithmes permettant de calculer ces paramètres
+
+Compétences visées
+
+Modélisation de problèmes à l’aide de graphe.
+Résolution de problèmes se ramenant à l’aide d’algorithmes de
+graphes
+
+gwenael.richomme@univ-montp3.fr
+
+Graphes (et réseaux sociaux)
+
+2
+
+Passage aux graphes orientés Arbres couvrants Autour du dessin de graphe
+
+Organisation
+
+26h cours-TD
+Les aspects "programmation" seront vus en Projet.
+Pré-requis : niveau L2
+Supports de cours : en ligne
+
+gwenael.richomme@univ-montp3.fr
+
+Graphes (et réseaux sociaux)
+
+3
+
+Passage aux graphes orientés Arbres couvrants Autour du dessin de graphe
+
+Modalités de contrôle des connaissances (1/2)
+
+Contrôle continu pour la première session
+
+Coeﬃcient 0,1 : notes de présentiel (présence obligatoire),
+participation et préparation des enseignements.
+Coeﬃcient 0,9 : exercices et/ou questions de cours, sur table
+répartis sur plusieurs séances d’enseignement
+
+Calendrier prévisionnel (voir site web à partir site Misashs) :
+
+Séance 4 : coeﬀ. 0,1 ; 30 septembre
+Séance 7 : coeﬀ. 0,2 ; 21 octobre
+Séance 10 : coeﬀ. 0,3 ; 18 novembre
+Séance 13 : coeﬀ. 0,3 ; 9 décembre
+
+(0 si absence pour une évaluation)
+
+gwenael.richomme@univ-montp3.fr
+
+Graphes (et réseaux sociaux)
+
+4
+
+Passage aux graphes orientés Arbres couvrants Autour du dessin de graphe
+
+Modalités de contrôle des connaissances (2/2)
+
+Deuxième session.
+
+Examen sur table (ou sur machine) de 2h00.
+Note ﬁnale UE = max première et deuxième session
+
+gwenael.richomme@univ-montp3.fr
+
+Graphes (et réseaux sociaux)
+
+5
+
+Passage aux graphes orientés Arbres couvrants Autour du dessin de graphe
+
+Réseaux sociaux ?
+
+gwenael.richomme@univ-montp3.fr
+
+Graphes (et réseaux sociaux)
+
+6
+
+Passage aux graphes orientés Arbres couvrants Autour du dessin de graphe
+
+Réseaux sociaux ?
+
+Sociologie = "Sciences des structures des relations sociales"
+[Forsé 2002] d’après [Mercklé 2011]
+
+gwenael.richomme@univ-montp3.fr
+
+Graphes (et réseaux sociaux)
+
+6
+
+Passage aux graphes orientés Arbres couvrants Autour du dessin de graphe
+
+Réseaux sociaux ?
+
+Sociologie = "Sciences des structures des relations sociales"
+[Forsé 2002] d’après [Mercklé 2011]
+
+Un "réseau social" peut-être vu comme : un ensemble
+d’individus (ou d’unités sociales) et un ensemble de relations
+entre eux (ou elles).
+
+Concept ancien : G. Simmel [1858-1918], J. L. Moreno
+[1889-1974]
+Terme = J. A. Barnes, anthropologue, 1954.
+
+gwenael.richomme@univ-montp3.fr
+
+Graphes (et réseaux sociaux)
+
+6
+
+Passage aux graphes orientés Arbres couvrants Autour du dessin de graphe
+
+Réseaux sociaux ?
+
+Sociologie = "Sciences des structures des relations sociales"
+[Forsé 2002] d’après [Mercklé 2011]
+
+Un "réseau social" peut-être vu comme : un ensemble
+d’individus (ou d’unités sociales) et un ensemble de relations
+entre eux (ou elles).
+
+Concept ancien : G. Simmel [1858-1918], J. L. Moreno
+[1889-1974]
+Terme = J. A. Barnes, anthropologue, 1954.
+
+Analyse des réseaux sociaux :
+
+un domaine actif de recherche en sciences humaines.
+s’appuie sur théorie des graphes et algèbre linéaire.
+
+gwenael.richomme@univ-montp3.fr
+
+Graphes (et réseaux sociaux)
+
+6
+
+Passage aux graphes orientés Arbres couvrants Autour du dessin de graphe
+
+Graphe ?
+
+Un outil mathématique [Théorie des graphes] utilisé dans de
+nombreux autres domaines comme outils de modélisation voire
+comme outils de décision
+Un objet d’étude en informatique [Algorithmique des graphes]
+
+gwenael.richomme@univ-montp3.fr
+
+Graphes (et réseaux sociaux)
+
+7
+
+e
+e
+
+
+=
+=
+3
+3
+*
+*
+e
+e
+a
+a
+S
+S
+3
+3
+<
+<
+Passage aux graphes orientés Arbres couvrants Autour du dessin de graphe
+
+Graphe ?
+
+Un outil mathématique [Théorie des graphes] utilisé dans de
+nombreux autres domaines comme outils de modélisation voire
+comme outils de décision
+Un objet d’étude en informatique [Algorithmique des graphes]
+Lien intuitif entre réseaux sociaux et graphes (dessin)
+
+Individus = points (sommets)
+Relations = ﬂèches (arcs) ou ligne (arêtes) selon orientation ou
+non
+
+4
+
+2
+
+3
+
+1
+
+a
+
+5
+
+b
+
+c
+
+6
+
+7
+
+8
+
+9
+
+d
+
+10
+
+gwenael.richomme@univ-montp3.fr
+
+Graphes (et réseaux sociaux)
+
+7
+
+e
+e
+
+
+=
+=
+3
+3
+*
+*
+e
+e
+a
+a
+S
+S
+3
+3
+<
+<
+Passage aux graphes orientés Arbres couvrants Autour du dessin de graphe
+
+D’autres exemples de modélisation.
+
+gwenael.richomme@univ-montp3.fr
+
+Graphes (et réseaux sociaux)
+
+8
+
+Passage aux graphes orientés Arbres couvrants Autour du dessin de graphe
+
+L’exemple historique
+
+Euler : les ponts de Kœnisberg
+
+Source image = wikipedia commons (domaine public)
+
+gwenael.richomme@univ-montp3.fr
+
+Graphes (et réseaux sociaux)
+
+9
+
+Passage aux graphes orientés Arbres couvrants Autour du dessin de graphe
+
+Physique, Chimie, Mathématiques, Web
+
+1847 : Kirschoﬀ, circuits électriques.
+1857-1874 : Cayley, positions et liens entre atomes dans
+molécules.
+Coloriage de cartes : théorème des 4 couleurs pour les graphes
+planaires.
+Le web = 1 grand graphe de pages interconnectées.
+
+gwenael.richomme@univ-montp3.fr
+
+Graphes (et réseaux sociaux)
+
+10
+
+Passage aux graphes orientés Arbres couvrants Autour du dessin de graphe
+
+Réseaux de transports
+
+P, Q : puits de pétrole
+A, B, C et D, E : ports
+R, S : raﬃnerie
+liaison de capacité limitée
+
+P
+
+Q
+
+A
+
+B
+
+C
+
+D
+
+E
+
+R
+
+S
+
+Exemples de questions :
+
+capacité globale du réseau ?
+comment optimiser le transport ?
+. . .
+
+gwenael.richomme@univ-montp3.fr
+
+Graphes (et réseaux sociaux)
+
+11
+
+,
+,
+&
+&
+
+
+2
+2
+,
+,
+
+
+/
+/
+)
+)
+
+
+
+
+2
+2
+,
+,
+O
+O
+
+
+2
+2
+,
+,
+O
+O
+/
+/
+5
+5
+O
+O
+O
+O
+2
+2
+8
+8
+O
+O
+Passage aux graphes orientés Arbres couvrants Autour du dessin de graphe
+
+Problèmes d’aﬀectation
+
+Chaque moyen ne peut être aﬀecté qu’à une seule tâche.
+Chaque tâche n’a besoin que d’un seul moyen à un moment
+donné.
+
+Comment optimiser ?
+
+Exemple = emplois du temps
+
+Moyen = salles de TDs d’eﬀectifs diﬀérents
+Tâche = groupe avec des eﬀectifs attendus
+
+⇒ Graphes bipartis
+
+gwenael.richomme@univ-montp3.fr
+
+Graphes (et réseaux sociaux)
+
+12
+
+Passage aux graphes orientés Arbres couvrants Autour du dessin de graphe
+
+Problèmes d’aﬀectation
+
+Chaque moyen ne peut être aﬀecté qu’à une seule tâche.
+Chaque tâche n’a besoin que d’un seul moyen à un moment
+donné.
+
+Comment optimiser ?
+
+Exemple = emplois du temps
+
+Moyen = salles de TDs d’eﬀectifs diﬀérents
+Tâche = groupe avec des eﬀectifs attendus
+
+⇒ Graphes bipartis
+
+Et si on ajoute les contraintes des enseignants ?
+
+gwenael.richomme@univ-montp3.fr
+
+Graphes (et réseaux sociaux)
+
+12
+
+Passage aux graphes orientés Arbres couvrants Autour du dessin de graphe
+
+Ordonnancement
+
+Exemple, problèmes de planning : dans un chantier, dans un atelier,
+dans un projet, certaines tâches peuvent être faites en parallèle,
+d’autre doivent être faites séquentiellement.
+
+Sommets = tâches à exécuter
+A chaque tâche, est associée une durée ?
+Les arcs précisent l’ordre des tâches.
+
+gwenael.richomme@univ-montp3.fr
+
+Graphes (et réseaux sociaux)
+
+13
+
+Passage aux graphes orientés Arbres couvrants Autour du dessin de graphe
+
+Etc...
+
+gwenael.richomme@univ-montp3.fr
+
+Graphes (et réseaux sociaux)
+
+14
+
+Passage aux graphes orientés Arbres couvrants Autour du dessin de graphe
+
+Petits mondes
+
+1967, expérience de Milgram : origine de l’hypothèse des six
+degrés de séparation
+1998, Watts et Strogatz : graphes petit-monde, diﬀérents des
+graphes aléatoires, plus proches des graphes réels
+De nombreuses autres expériences confortant les graphes
+petit-monde, et de nombreuses autres études :
+
+graphes d’acteurs avec relation "ayant joué dans le même
+ﬁlm",
+graphes de co-rédaction d’articles entre mathématiciens,
+graphes de messagerie instantanée, twitter ou facebook,
+. . .
+
+gwenael.richomme@univ-montp3.fr
+
+Graphes (et réseaux sociaux)
+
+15
+
+Passage aux graphes orientés Arbres couvrants Autour du dessin de graphe
+
+Quelques lectures (les articles se trouvent sur internet)
+
+Pierre Mercklé
+Sociologie des réseaux sociaux,
+Collection Repères, édition La Découverte, 2011.
+M. Forsé
+Les réseaux sociaux d’aujourd’hui
+Revue de l’OFCE/Débats et politiques 126, 155-169 (2012).
+
+J.P. Delahaye
+Que le monde est petit !
+Pour la science 308, 98-103 (2003).
+
+D. J. Watts, S. H. Strogatz
+Collective dynamics of ’small-word’ networks
+Nature 393, 440-442 (1998).
+
+M. E. J. Newmann
+Dessin de graphe : convention usuelle
+(sommet = point, arête = trait entre sommets)
+
+gwenael.richomme@univ-montp3.fr
+
+Graphes (et réseaux sociaux)
+
+19
+
+Passage aux graphes orientés Arbres couvrants Autour du dessin de graphe
+
+Autres types de graphes
+
+Dans la suite du cours, nous verrons aussi :
+
+les graphes orientés simples
+les graphes orientés ou non simples valués
+Ces derniers permettent de simuler les graphes avec
+arcs/arêtes multiples.
+
+gwenael.richomme@univ-montp3.fr
+
+Graphes (et réseaux sociaux)
+
+20
+
+Passage aux graphes orientés Arbres couvrants Autour du dessin de graphe
+
+Exercice
+
+Est-ce que le graphe suivant est un graphe non orienté simple ?
+
+b e
+
+a
+
+d e
+
+Si non, qu’enlever au minimum pour qu’il le devienne ?
+Pour le graphe alors obtenu, donner sa déﬁnition formelle.
+
+c
+
+gwenael.richomme@univ-montp3.fr
+
+Graphes (et réseaux sociaux)
+
+21
+
+e
+
+
+=
+=
+3
+3
+*
+*
+e
+a
+a
+S
+S
+3
+3
+<
+<
+Passage aux graphes orientés Arbres couvrants Autour du dessin de graphe
+
+Réponse
+
+Exemple S = {a, b, c, d}
+A = { [a, b], [c, a], [c, b], [c, d]}
+
+a
+
+b
+
+c
+
+d
+
+gwenael.richomme@univ-montp3.fr
+
+Graphes (et réseaux sociaux)
+
+22
+
+Passage aux graphes orientés Arbres couvrants Autour du dessin de graphe
+
+Exercice
+
+Dessinez les graphes G1 = (A1, S1), G2 = (A2, S2), G3 = (A3, S3),
+déﬁnis par :
+
+S1 = {1, 2, 3, 4, 5} ;
+A1 = {{x, y} | (x, y ) ∈ {1, 2, 3} × {4, 5}} ;
+S2 = {1, 2, 3, 4} ;
+A2 = {{x, y} | x, y ∈ S2, x (cid:54)= y} ;
+S3 = {1, 2, 3, 4, 5} ;
+A3 = {{x, y} | x, y ∈ S2, x (cid:54)= y}.
+
+gwenael.richomme@univ-montp3.fr
+
+Graphes (et réseaux sociaux)
+
+23
+
+Passage aux graphes orientés Arbres couvrants Autour du dessin de graphe
+
+Exercice
+
+Dessinez les graphes G1 = (A1, S1), G2 = (A2, S2), G3 = (A3, S3),
+déﬁnis par :
+
+S1 = {1, 2, 3, 4, 5} ;
+A1 = {{x, y} | (x, y ) ∈ {1, 2, 3} × {4, 5}} ;
+S2 = {1, 2, 3, 4} ;
+A2 = {{x, y} | x, y ∈ S2, x (cid:54)= y} ;
+S3 = {1, 2, 3, 4, 5} ;
+A3 = {{x, y} | x, y ∈ S2, x (cid:54)= y}.
+
+Graphes complets
+
+Déﬁnition
+Un graphe non orienté simple est complet si pour tous sommets
+diﬀérents x, y, il existe une arête entre x et y dans G.
+
+Le graphe non orienté simple à n sommets est noté Kn.
+Graphes (et réseaux sociaux)
+
+gwenael.richomme@univ-montp3.fr
+
+23
+
+Passage aux graphes orientés Arbres couvrants Autour du dessin de graphe
+
+Chaines dans un graphe non orienté
+
+Déﬁnition
+Une chaîne de longueur k dans un graphe non orienté G = (S, A)
+est une suite de k + 1 sommets (s0, . . . , sk ) tels que {si , si+1} est
+une arête de G pour tout i de 0 à k − 1.
+
+gwenael.richomme@univ-montp3.fr
+
+Graphes (et réseaux sociaux)
+
+24
+
+Passage aux graphes orientés Arbres couvrants Autour du dessin de graphe
+
+Chaines dans un graphe non orienté
+
+Déﬁnition
+Une chaîne de longueur k dans un graphe non orienté G = (S, A)
+est une suite de k + 1 sommets (s0, . . . , sk ) tels que {si , si+1} est
+une arête de G pour tout i de 0 à k − 1.
+
+a
+
+b
+
+c
+
+de
+
+Exemples
+dans ce graphe :
+(c, a, b, b)
+
+d
+
+chaînes
+
+gwenael.richomme@univ-montp3.fr
+
+Graphes (et réseaux sociaux)
+
+24
+
+Passage aux graphes orientés Arbres couvrants Autour du dessin de graphe
+
+Chaines dans un graphe non orienté
+
+Déﬁnition
+Une chaîne de longueur k dans un graphe non orienté G = (S, A)
+est une suite de k + 1 sommets (s0, . . . , sk ) tels que {si , si+1} est
+une arête de G pour tout i de 0 à k − 1.
+
+a
+
+b
+
+c
+
+de
+
+Exemples
+dans ce graphe :
+(c, a, b, b)
+
+d
+
+chaînes
+
+gwenael.richomme@univ-montp3.fr
+
+Graphes (et réseaux sociaux)
+
+24
+
+Passage aux graphes orientés Arbres couvrants Autour du dessin de graphe
+
+Chaines dans un graphe non orienté
+
+Déﬁnition
+Une chaîne de longueur k dans un graphe non orienté G = (S, A)
+est une suite de k + 1 sommets (s0, . . . , sk ) tels que {si , si+1} est
+une arête de G pour tout i de 0 à k − 1.
+
+a
+
+b
+
+c
+
+chaînes
+
+de
+
+Exemples
+dans ce graphe :
+(c, a, b, b)
+(a, b, c, d)
+
+d
+
+gwenael.richomme@univ-montp3.fr
+
+Graphes (et réseaux sociaux)
+
+24
+
+Passage aux graphes orientés Arbres couvrants Autour du dessin de graphe
+
+Chaines dans un graphe non orienté
+
+Déﬁnition
+Une chaîne de longueur k dans un graphe non orienté G = (S, A)
+est une suite de k + 1 sommets (s0, . . . , sk ) tels que {si , si+1} est
+une arête de G pour tout i de 0 à k − 1.
+
+a
+
+b
+
+c
+
+chaînes
+
+de
+
+Exemples
+dans ce graphe :
+(c, a, b, b)
+(a, b, c, d)
+(a, b, d)
+
+d
+
+gwenael.richomme@univ-montp3.fr
+
+Graphes (et réseaux sociaux)
+
+24
+
+Passage aux graphes orientés Arbres couvrants Autour du dessin de graphe
+
+Chaines dans un graphe non orienté
+
+Déﬁnition
+Une chaîne de longueur k dans un graphe non orienté G = (S, A)
+est une suite de k + 1 sommets (s0, . . . , sk ) tels que {si , si+1} est
+une arête de G pour tout i de 0 à k − 1.
+
+a
+
+b
+
+c
+
+chaînes
+
+de
+
+Exemples
+dans ce graphe :
+(c, a, b, b)
+(a, b, c, d)
+(a, b, d)
+
+d
+
+gwenael.richomme@univ-montp3.fr
+
+Graphes (et réseaux sociaux)
+
+24
+
+Passage aux graphes orientés Arbres couvrants Autour du dessin de graphe
+
+Chaines dans un graphe non orienté
+
+Déﬁnition
+Une chaîne de longueur k dans un graphe non orienté G = (S, A)
+est une suite de k + 1 sommets (s0, . . . , sk ) tels que {si , si+1} est
+une arête de G pour tout i de 0 à k − 1.
+
+a
+
+b
+
+c
+
+chaînes
+
+de
+
+Exemples
+dans ce graphe :
+(c, a, b, b)
+(a, b, c, d)
+(a, b, d)
+(c)
+
+d
+
+gwenael.richomme@univ-montp3.fr
+
+Graphes (et réseaux sociaux)
+
+24
+
+Passage aux graphes orientés Arbres couvrants Autour du dessin de graphe
+
+Chaines dans un graphe non orienté
+
+Déﬁnition
+Une chaîne de longueur k dans un graphe non orienté G = (S, A)
+est une suite de k + 1 sommets (s0, . . . , sk ) tels que {si , si+1} est
+une arête de G pour tout i de 0 à k − 1.
+
+a
+
+b
+
+c
+
+Exemples de chaînes dans
+ce graphe :
+(c, a, b, b)
+(a, b, c, d)
+(a, b, d)
+(c)
+(a, b, c, d, c, b, a, c)
+
+d
+
+gwenael.richomme@univ-montp3.fr
+
+Graphes (et réseaux sociaux)
+
+24
+
+Passage aux graphes orientés Arbres couvrants Autour du dessin de graphe
+
+Vocabulaire
+
+Déﬁnitions
+Soit C = (s0, . . . , sk ) une chaîne dans un graphe non orienté
+C est élémentaire si les si sont deux à deux diﬀérents.
+
+gwenael.richomme@univ-montp3.fr
+
+Graphes (et réseaux sociaux)
+
+25
+
+Passage aux graphes orientés Arbres couvrants Autour du dessin de graphe
+
+Vocabulaire
+
+Déﬁnitions
+Soit C = (s0, . . . , sk ) une chaîne dans un graphe non orienté
+C est élémentaire si les si sont deux à deux diﬀérents.
+C est simple si les arêtes {si , si+1} sont deux à deux
+diﬀérentes.
+
+gwenael.richomme@univ-montp3.fr
+
+Graphes (et réseaux sociaux)
+
+25
+
+Passage aux graphes orientés Arbres couvrants Autour du dessin de graphe
+
+Vocabulaire
+
+Déﬁnitions
+Soit C = (s0, . . . , sk ) une chaîne dans un graphe non orienté
+C est élémentaire si les si sont deux à deux diﬀérents.
+C est simple si les arêtes {si , si+1} sont deux à deux
+diﬀérentes.
+C est fermée si s0 = sk.
+
+gwenael.richomme@univ-montp3.fr
+
+Graphes (et réseaux sociaux)
+
+25
+
+Passage aux graphes orientés Arbres couvrants Autour du dessin de graphe
+
+Vocabulaire
+
+Déﬁnitions
+Soit C = (s0, . . . , sk ) une chaîne dans un graphe non orienté
+C est élémentaire si les si sont deux à deux diﬀérents.
+C est simple si les arêtes {si , si+1} sont deux à deux
+diﬀérentes.
+C est fermée si s0 = sk.
+C est un cycle si k > 0, C est fermé(e) et simple (→ k ≥ 3)
+
+gwenael.richomme@univ-montp3.fr
+
+Graphes (et réseaux sociaux)
+
+25
+
+Passage aux graphes orientés Arbres couvrants Autour du dessin de graphe
+
+Vocabulaire
+
+Déﬁnitions
+Soit C = (s0, . . . , sk ) une chaîne dans un graphe non orienté
+C est élémentaire si les si sont deux à deux diﬀérents.
+C est simple si les arêtes {si , si+1} sont deux à deux
+diﬀérentes.
+C est fermée si s0 = sk.
+C est un cycle si k > 0, C est fermé(e) et simple (→ k ≥ 3)
+C est un cycle élémentaire si C est un cycle et les si sont deux
+à deux distincts (sauf s0 = sk).
+
+gwenael.richomme@univ-montp3.fr
+
+Graphes (et réseaux sociaux)
+
+25
+
+Passage aux graphes orientés Arbres couvrants Autour du dessin de graphe
+
+Exercice
+
+a
+
+d
+
+b
+
+e
+
+c
+
+f
+
+1 Donnez le nombre de chaînes existant entre a et e ?
+2
+3 Donnez le nombre de chaînes élémentaires existant entre a et
+
+Idem entre b et f ?
+
+e ?
+Idem entre b et f ?
+
+4
+
+gwenael.richomme@univ-montp3.fr
+
+Graphes (et réseaux sociaux)
+
+26
+
+Passage aux graphes orientés Arbres couvrants Autour du dessin de graphe
+
+Diamètre d’un graphe
+
+Déﬁnition
+Le diamètre d’un graphe non orienté simple G est la longueur
+maximale d’une plus petite chaîne entre 2 sommets diﬀérents.
+
+Exemple :
+
+a
+
+d
+
+b
+
+e
+
+c
+
+f
+
+gwenael.richomme@univ-montp3.fr
+
+Graphes (et réseaux sociaux)
+
+27
+
+Passage aux graphes orientés Arbres couvrants Autour du dessin de graphe
+
+Vocabulaire
+
+Voisin
+Un sommet x est dit voisin d’un sommet y s’il existe une arête
+entre x et y.
+
+gwenael.richomme@univ-montp3.fr
+
+Graphes (et réseaux sociaux)
+
+28
+
+Passage aux graphes orientés Arbres couvrants Autour du dessin de graphe
+
+Principe général calcul diamètre
+
+Pour chaque sommet x de G faire
+
+calculer les longueurs des plus petites chaines issues de x
+
+Le diamètre est le max de toutes les longueurs
+
+gwenael.richomme@univ-montp3.fr
+
+Graphes (et réseaux sociaux)
+
+29
+
+Passage aux graphes orientés Arbres couvrants Autour du dessin de graphe
+
+Exemple 2
+
+e
+
+h
+
+b
+
+f
+
+g
+
+k
+
+i
+
+j
+
+a
+
+c
+
+d
+
+gwenael.richomme@univ-montp3.fr
+
+Graphes (et réseaux sociaux)
+
+30
+
+Passage aux graphes orientés Arbres couvrants Autour du dessin de graphe
+
+Pré-version calcul longueurs plus courtes chaînes
+
+fonction longueurs_plus_courtes_chaines_issues_sommet( G, x) :
+# Retourne un tableau recensant les longueurs des plus courtes
+#
+
+chaînes issues de x dans G
+
+Initialiser F à la ﬁle vide
+lpcc[x] = 0
+enﬁler x dans F
+tant que F n’est pas vide faire
+y = élément déﬁlé de F
+pour chaque voisin z de y faire
+si lpcc[z] non déﬁni faire
+
+lpcc[z] = lpcc[y] + 1
+enﬁler z dans F
+
+retourner lpcc
+
+gwenael.richomme@univ-montp3.fr
+
+Graphes (et réseaux sociaux)
+
+31
+
+Passage aux graphes orientés Arbres couvrants Autour du dessin de graphe
+
+Déterminisme ?
+
+Ordre de parcours des voisins ?
+
+on supposera unique car lié à la représentation en mémoire du
+graphe.
+dans les exercices, quand l’ordre ne sera pas précisé,
+on considérera les voisins dans l’ordre numérique ou dans
+l’ordre alphabétique (selon les noms des sommets).
+
+gwenael.richomme@univ-montp3.fr
+
+Graphes (et réseaux sociaux)
+
+32
+
+Passage aux graphes orientés Arbres couvrants Autour du dessin de graphe
+
+File
+
+File - structure FIFO (First In First Out)
+Structure de données pour laquelle les opérations suivantes sont
+permises :
+
+Initialisation à la ﬁle vide
+Tester si la ﬁle est vide
+Enﬁler un élément
+Déﬁler un élément : l’élément déﬁlé est l’élément le plus
+anciennement inséré (enﬁlé) dans la ﬁle
+
+gwenael.richomme@univ-montp3.fr
+
+Graphes (et réseaux sociaux)
+
+33
+
+Passage aux graphes orientés Arbres couvrants Autour du dessin de graphe
+
+Exemple 3
+
+Exemple :
+
+a
+
+e
+
+h
+
+b
+
+i
+
+c
+
+f
+
+j
+
+d
+
+g
+
+h
+
+Pour séance prochaine, calculer les longueurs des plus courtes
+chaînes issues du sommet i, en utilisant l’algorithme du cours et en
+montrant l’ordre dans lequel les sommets ont été enﬁlés.
+
+gwenael.richomme@univ-montp3.fr
+
+Graphes (et réseaux sociaux)
+
+34
+
+

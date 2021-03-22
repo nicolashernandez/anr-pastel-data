@@ -1,0 +1,3931 @@
+http://archipel.uqam.ca/3672/1/M11510.pdf
+
+UNIVERSITÉ DU  QUÉBEC  À MONTRÉAL 
+
+RÉALlSATlON  D'UN OUTIL DE  SIMULATlON  DE  RÉSEAUX  SOCIAUX MULTIPLEXES 
+
+MÉMOIRE
+ 
+
+PRÉSENTÉ
+ 
+
+COMME EXIGENCE PARTIELLE
+ 
+
+DE  LA MAÎTRlSE EN  INFORMATIQUE
+ 
+
+PAR
+ 
+
+FRANCK GOUDJO
+ 
+
+JUIN  2010
+ 
+
+UNIVERSITÉ DU  QUÉBEC À MONTRÉAL
+ 
+
+Service des bibliothèques
+ 
+
+Avertissement 
+
+La  diffusion  de  ce  mémoire se  fait  dans le  respect  des  droits de  son  auteur,  qui  a signé 
+le  formulaire  Autorisation  de  reproduire  et de  diffuser un  travail de  recherche  de  cycles 
+supérieurs (SDU-522 - Rév.01-2006).  Cette  autorisation  stipule  que  «conformément  à 
+l'article  11  du  Règlement  no  8  des  études  de  cycles  supérieurs,  [l'auteur]  concède  à 
+l'Université  du  Québec  à  Montréal  une 
+licence  non  exclusive  d'utilisation  et  de 
+publication  .de  la  totalité  ou  d'une  partie  importante  de  [son]  travail  de  recherche  pour 
+des  fins  pédagogiques  et  non  commerciales.  Plus  précisément,  [l'auteur]  autorise 
+l'Université du  Québec à Montréal à reproduire,  diffuser,  prêter, distribuer ou vendre des 
+copies  de  [son]  travail  de  recherche  à  des  fins  non  commerciales  sur  quelque  support 
+que  ce  soit,  y compris l'Internet.  Cette  licence et cette  autorisation  n'entraînent pas  une 
+renonciation  de  [la]  part [de  l'auteur]  à  [ses]  droits  moraux  ni  à  [ses]  droits  de propriété 
+intellectuelle.  Sauf  entente  contraire,  [l'auteur]  conserve  la  liberté  de  diffuser  et  de 
+commercialiser ou  non  ce travail dont [il]  possède un  exemplaire.» 
+
+Il 
+
+Remerciements: 
+J'aimerais  remercier  en  premier  lieu  ma  conjointe  Valérie  Bah  pour  son  support  constant 
+pendant  toute  la  durée  de  ma  maitrise  en  informatique  à l'Université  du  Québec  à Montréal. 
+J'aimerais  également  remercier  mon  directeur  de  recherche,  Monsieur  Daniel  Memmi  pour 
+ses  conseils  et  sa  patience  ainsi  que  Emmanuel  Lazega  qui  a  bien  voulu  mettre  à  notre 
+disposition des  matrices de  réseaux multiplexes.  Pour finir j'aimerais souligner la contribution 
+de  Mlle  Mélanie  Lord  qui  a pris  le  temps  de  m'expliquer en  détail  le  fonctionnement  de  son 
+logiciel Netsim. 
+
+III 
+
+Résumé 
+
+Nous  présentons  dans  ce document notre  projet  de  recherche dans  le  cadre de  la  maitrise  en 
+informatique  de  l'université  du  Québec  à  Montréal.  Dans  le  cadre  de  cette  maîtrise  nous 
+avons  conçu  un  langage  de  modélisation  de  réseaux  sociaux  permettant  de  modéliser 
+plusieurs  réseaux  sociaux  simultanément.  Nous  voulions  que  ce  langage  soit  proche  du 
+langage  naturel  afin  d'être accessible aux  néophytes  en  informatique.  Nous  avons  également 
+réalisé une plate-forme permettant  l'exécution de ce  langage.  La  conception de ce  langage est 
+motivée  par  le  fait  que  généralement  au  sein  d'un ensemble  social  donné  il  existe  plusieurs 
+types  d'interactions  sociales  simultanément.  Par  exemple  si  nous  considérons  le  groupe 
+social  constitué par l'ensemble des employés  d'une entreprise,  il  existe souvent des  relations 
+de collaboration mais  également des  relations d'amitié et/ou dcs relations de conseil entre les 
+employés  de  l'entreprise.  L'étude  des  réseaux  sociaux  doit  souvent  prendre  en  compte  tous 
+les  types  de  relations  présentes dans  un  ensemble  social  afin  de  bien comprendre  l'évolution 
+de  cet  ensemble  social.  Dans  le  but  de  mettre  en  pratique  le  langage  que  nous  avons  conçu 
+nous  avons  étudié  la  corrélation  entre  plusieurs  réseaux  sociaux.  Nous  avons  également 
+comparé  notre  plate-forme  avec  les  outils  d'analyse  et  de  simulation  de  réseaux  disponibles 
+sur le marché actuellement. 
+
+Mots-clés:  réseaux sociaux, analyse de réseaux, simulation, réseaux multiplexes 
+
+Table des matières 
+Introduction 
+Chapitre  1 : 
+Mise  en  contexte et  problématique 
+
+Les  réseaux 
+Les  réseaux sociaux 
+Concepts et  métriques en  analyse de  réseaux sociaux 
+Théorie des graphes 
+Représentation informatique des graphes 
+La  problématique 
+Objecti fs 
+Chapitre 2: 
+La  plateforme  SNSimulator 
+
+Caractéristiques attendues de  la  plate-forme proposée 
+Outils utilisés pour réaliser SNSimulator 
+
+Chapitre 3 : 
+Le  langage de  SNSimulator: 
+
+Section déclaration 
+Corps du  programme 
+
+Chapitre 4 : 
+Fonctionnement de  SNSimulator.................................................... 
+
+.. 
+
+Traitement des paramètres par SNSimulator. 
+Chargement de réseaux en  mémoire 
+Traitement du  programme source à exécuter. 
+Exécution de  la  simulation 
+
+Chapitre 5 : 
+Utilisation du  langage SNSimulator. 
+
+Réseaux  utilisés. 
+Le  modèle d'évolution des  réseaux sociaux de Newman, Jin et Girvan 
+L'Algorithme de  Monte Carlo cinétique 
+Réalisation du modèle de Newman, Jin et Girvan avec  SNSimulator. 
+Protocole expérimental appliqué et  résultats attendus 
+Résultats obtenus et  interprétation 
+
+.. 
+
+Chapitre 6
+: 
+Évaluation de  SNSimulator par rapport aux  outils existants 
+
+Logiciels de  modélisation 
+Logiciels de simulation disponibles 
+Apport de  SNSimulator à l'étude des  réseaux sociaux 
+
+Conclusion 
+Annexe  1 : Grammaire BNF du  langage  SNSimulatOf.. 
+Annexe  2 : Exemple de  programme SNSimulator. 
+Bibliographie 
+
+IV 
+
+7
+ 
+8
+ 
+8
+ 
+8
+ 
+12
+ 
+14
+ 
+17
+ 
+19
+ 
+24
+ 
+25
+ 
+27
+ 
+27
+ 
+27
+ 
+29
+ 
+32
+ 
+32
+ 
+32
+ 
+38
+ 
+.46
+ 
+.46
+ 
+.46
+ 
+.48
+ 
+53
+ 
+58
+ 
+64
+ 
+64
+ 
+64
+ 
+64
+ 
+67
+ 
+68
+ 
+75
+ 
+81
+ 
+103
+
+103
+ 
+103
+ 
+107
+ 
+112
+ 
+113
+ 
+115
+ 
+118
+ 
+119
+ 
+
+Index des illustrations 
+J1lustration  J:  Évolution de  la courbe de  la  loi  de  Poisson en  fonction  de  À 
+Illustration 2:  Illustration de  réseaux  aléatoires, sans échelle et hiérarchiques 
+Illustration 3:  Exemple de  graphe 
+Illustration 4:  Illustration de  la  théorie des six  degrés de séparation 
+Illustration 5:  Exemple de  graphe non orienté 
+Illustration 6:  Exemple de  graphe orienté 
+Illustration 7:  Graphe non orienté et matrice d'adjacence correspondante (à  droite) 
+Illustration 8:  Graphe orienté et matrice d'adjacence correspondante (à droite) 
+Illustration 9:  Graphe non orienté et  matrice d'incidence correspondante (à droite) 
+Illustration  10: Graphe orienté et matrice d'incidence correspondante (à  droite) 
+Illustration  Il: Exemple de  liste d'adjacence du  graphe non orienté présenté à droite 
+Illustration  12:  Exemple de  liste d'incidence du  graphe  non orienté présenté à droite 
+Illustration  13:  Exemple de  réseau comportant plusieurs relations 
+Illustration  14:  Visualisation d'un graphe avec JUNG 
+Illustration  15:  Exemple de  graphe 
+Illustration  16:  Matrice d'adjacence correspondante au  graphe précédent 
+Illustration  17:  Exemple de  fichier de  matrice d'adjacence pouvant être  traité par SNSimulator. 
+Illustration  18:  Exemple de  fichier  PAJEK. 
+Illustration  19:  Exemple de  fichier GraphML.. 
+Illustration 20:  Diagramme UML de  la  classe DirectedNetworks 
+Illustration 21:  Exemple d'arbre syntaxique de  la  phrase en anglais: "John thought that Mary  loved
+ 
+Bill" 
+Illustration 22:  Exemple d'arbre syntaxique abstrait d'un programme informatique 
+Illustration 23:  Diagramme UML de  la  classe ASTGetSimulationDefinition 
+Illustration 24:  Diagramme UML de  la  classe ASTFunctionDeclaration 
+Illustration 25:  Diagramme UML de  la classe visiteur.. 
+Illustration 26:  Diagramme UML de la classe Simulation 
+Illustration 27:  Réseau  d'amitié du  cabinet d'avocats décrit dans  [27] 
+Illustration 28:  Réseau de  conseil du  cabinet d'avocats décrit dans  [27] 
+Illustration 29:  Réseau  de collaboration du cabinet d'avocats décrit dans [27] 
+Illustration 30: Algorithme de Monte Carlo:  transitions du  système 
+Illustration 31: Algorithme de Monte Carlo:  choix de  la  transition à exécuter.. 
+llIustration 32:  Évolution de  la  corrélation de degré entre  les  deux  copies du  réseau d'amitié 
+llIustration 33:  État initial du  réseau  d'amitié 
+Illustration 34:  État final  du  réseau d'amitié à la  suite de  l'exécution de  l'expérimentation  1 
+Illustration 35:  Évolution de  la  corrélation de degré entre  le  réseau d'amitié et  le réseau de
+ 
+collaboration 
+Illustration 36:  Évolution du  degré moyen du  réseau  d'amitié 
+Illustration 37:  Évolution du  degré moyen du  réseau de  collaboration 
+Illustration 38:  État final  du  réseau  d'amitié après l'expérimentation 2 
+Illustration 39:  État final  du  réseau  de collaboration après  l'expérimentation 2 
+llIustration 40:  Évolution de  la  corrélation entre le  réseau d'amitié et  le  réseau de collaboration 
+lllustration 41:  Évolution du  degré moyen du  réseau d'amitié 
+lllustration 42:  Évolution du  degré moyen du  réseau de  collaboration 
+
+v 
+
+9
+ 
+11
+ 
+11
+ 
+13
+ 
+J7
+ 
+J8
+ 
+20
+ 
+20
+ 
+21
+ 
+21
+ 
+22
+ 
+23
+ 
+25
+ 
+30
+ 
+.49
+ 
+.49
+ 
+.49
+ 
+50
+ 
+50
+ 
+52
+ 
+
+54
+ 
+54
+ 
+55
+ 
+56
+ 
+57
+ 
+60
+ 
+61
+ 
+62
+ 
+63
+ 
+67
+ 
+68
+ 
+82
+ 
+83
+ 
+84
+ 
+
+86
+ 
+86
+ 
+87
+ 
+88
+ 
+89
+ 
+91
+ 
+9l
+ 
+92
+ 
+
+Illustration 43:  État  final  du  réseau  d'amitié après  l'expérimentation 3 
+Illustration 44:  État final  du  réseau  de collaboration après  l'expérimentation 3 
+Illustration 45:  Évolution de  la  corrélation entre le réseau d'amitié et  le  réseau  de conseil. 
+lllustration 46:  Évolution du  degré moyen du  réseau d'amitié 
+Illustration 47:  Évolution du  degré moyen du  réseau de  conseiL 
+Illustration 48:  État final  du  réseau  d'amitié après  l'expérimentation 4 
+lliustration 49:  État final  du  réseau  de conseil après  l'expérimentation 4 
+Illustration 50:  Évolution de  la  corrélation entre le  réseau  d'amitié et  le  réseau  de conseil. 
+Illustration 51:  Évolution du  degré moyen du  réseau d'amitié 
+Illustration 52:  Évolution du  degré moyen du  réseau  de conseil. 
+Illustration 53:  État final  du  réseau  d'amitié après  l'expérimentation 5 
+lllustration 54:  État final  du  réseau  de conseil après  l'expérimentation 5 
+Illustration 55:  Visualisation d'un réseau dans  Pajek 
+Illustration 56:  Visualisation de  graphe avec GraphViz 
+Illustration 57:  Fenêtre principale de NetSim 
+Illustration 58:  Exemple de programme GPSS 
+JIlustration 59:  Exemple de programme Simula 
+Jllustration 60:  Fenêtre de Simscript.. 
+Illustration 61:  Fenêtre principale de Simulink 
+
+VI 
+
+93
+ 
+94
+ 
+95
+ 
+96
+ 
+96
+ 
+97
+ 
+98
+ 
+99
+ 
+100
+ 
+100
+ 
+101
+ 
+102
+ 
+104
+ 
+106
+ 
+107
+ 
+I08
+ 
+109
+ 
+110
+ 
+III
+ 
+
+7 
+
+Introduction 
+
+Ces dernières années  les  réseaux sociaux  semblent être sur toutes les lèvres.  Cela est d'autant plus 
+
+vrai  dans  le domaine de  l'internet.  Un grand nombre de sites internet dits  de « réseautage » social 
+
+ont  fait  leur  apparition:  Nous  pouvons  notamment  citer  Facebook  et  plus  récemment  Twitter. 
+
+Mais  que sont donc  réellement  les  réseaux  sociaux?  Les  réseaux  sociaux  ont  été  un  domaine de 
+
+recherche en sociologie depuis de nombreuses années bien avant l'apparilion des sites internet de 
+
+réseautage  social.  Il  existe  une  branche  de  la  sociologie  qui  s'intéresse  beaucoup  aux  réseaux 
+
+sociaux:  la  sociologie  structurale.  La  sociologie  structurale,  appelée  maintenant  analyse  de 
+
+réseaux a développé une grande panoplie de métriques pour caractériser les réseaux sociaux. 
+
+Dans  le  cadre de  notre maîtrise en  informatique à l'université du  Québec à Montréal,  nous avons 
+
+cherché  à  proposer  un  langage  de  modélisation  par  génération  de  réseaux  sociaux  ainsi  qu'un 
+
+interpréteur  destiné  à  exécuter  ce  langage  de  modélisation  dans  le  but  d'offrir  aux  analystes  de 
+
+réseaux  un  outil  leur  permettant  de  modéliser  et  simuler  des  réseaux  sociaux.  La  spécificité  de 
+
+notre  outil  consiste  dans  le  fait  qu'il  est destiné  à permettre  aux  analystes  de  réseaux  sociaux  la 
+
+possibilité de modéliser et manipuler plusieurs réseaux en même temps. 
+
+Dans  ce  document  qui  rend  compte  des  résultats  que  nous  avons  obtenus,  nous  commencerons 
+
+d'abord  par  le  chapitre  1 qui  est  une  mise  en  contexte  de  notre  plate-forme  de  modélisation  de 
+
+réseaux sociaux et la  problématique que  nous nous proposons de  résoudre.  Le chapitre deux sera 
+
+consacré  aux  outils  que  nous  avons  utilisés  dans  le  cadre  de  ce  projet  de  recherche.  Dans  le 
+
+chapitre trois  nous  présenterons  le  langage  que  nous avons développé.  Le  quatrième  chapitre  est 
+
+consacré au  fonctionnement  interne  de  l'interpréteur SNSimulator destiné à interpréter  le  langage 
+
+présenté  au  chapitre  trois.  Dans  le  cinquième  chapitre  nous  présenterons  quelques  exemples 
+
+d'utilisation  du  langage  SNSimulator  dans  le  cadre  de  l'analyse  de  réseaux  sociaux.  Dans  le 
+
+chapitre  six  nous  comparerons  SNSimulator  aux  principaux  outils  de  modélisation  et  de 
+
+simulation  disponibles  actuellement.  La  dernière  section  de  ce  mémoire  de  recherche  nous 
+
+permettra de  conclure après avoir proposé quelques pistes d'amélioration. 
+
+Chapitre 1 :
+ 
+
+Mise en  contexte et problématique
+ 
+
+8 
+
+Dans  ce  chapitre  nous  présenterons  le  contexte  des  réseaux  sociaux  et  les  principaux  concepts 
+
+qu'il  nous  parait important de  connaître  afin  de  comprendre  l'univers  des  réseaux  sociaux.  Nous 
+
+parlerons  d'abord  des  réseaux  qui  nous  entourent.  Ensuite  nous  définirons  les  réseaux  sociaux  et 
+
+leurs  caractéristiques  et  spécificités.  Après  nous  présenterons  la  problématique  à  laquelle  nous 
+
+nous  sommes  attaqués  dans  le  cadre  de  ce  projet  de  recherche.  Dans  la  dernière  partie  de  ce 
+
+chapitre nous énoncerons les objectifs que nous cherchons à atteindre. 
+
+Les réseaux 
+
+Les  réseaux  sont omniprésents  dans  notre  entourage.  Par exemple,  lorsque  nous  nous  déplaçons 
+
+nous  empruntons  le  réseau  de  transports:  si  nous  prenons  notre  voiture  alors  nous  utilisons  le 
+
+réseau  routier,  si  nous  prenons  le  train,  nous  empruntons  le  réseau  de  voies  ferrées  et  si  nous 
+
+voyageons  par  avion  alors  nous  utilisons  le  réseau  des  voies  aériennes.  Même  notre  corps  est 
+
+consitué  de  réseaux.  Nos  vaisseaux  sanguins  constituent  par  exemple  un  réseau  de  plusieurs 
+
+kilomètres de  longueur.  Nous pouvons aussi  citer les réseaux  informatiques comme  l'Internet qui 
+
+regroupe  plusieurs  millions  d'ordinateurs  de  par  le  monde.  Tous  ces  réseaux  sont  très  différents 
+
+les  uns  des  autres  mais  ils  possèdent des  caractéristiques  communes:  ils  sont  tous  constitués  de 
+
+noeuds  et  de  liens.  Par  exemple  dans  le  cas  des  réseaux  informatiques,  les  noeuds  sont  les 
+
+ordinateurs connectés au  réseau  et  les  liens sont  les  câbles du  réseau reliant  ces ordinateurs,  pour 
+
+le  réseau routier,  les noeuds sont les  villes et les  liens sont les routes qui  relient ces villes. 
+
+Nous pouvons donc  dire  qu'un  réseau  est  un  ensemble de  nœuds  ou  sommets reliés  par des  liens. 
+
+Les  noeuds  d'un  réseau  sont caractérisés  par  le  nombre de  1iens  qui  les  relient aux  autres  noeuds 
+
+du  réseau.  Ce nombre de liens est appelé le degré du noeud. 
+
+Les  réseaux  peuvent  être classés  en  trois  groupes  principaux:  les  réseaux  aléatoires,  les  réseaux 
+
+sans échelle (scale-free) et les réseaux hiérarchiques. Ces groupes de réseaux diffèrent notamment 
+
+par leur distribution de degré. 
+
+La  distribution  de  degré  est  une  fonction  qui  permet  d'obtenir  la  probabilité,  p(k),  qu'un  nœud 
+
+donné du  réseau  aie  exactement k  liens.  Cette probabilité est  donnée  par  p(k) =  X(k)  / N  avec N 
+
+le  nombre de sommets (noeuds) dans  le  réseau et X(k)  le  nombre de  sommets du  réseau  ayant  un 
+
+degré k.
+ 
+
+Dans la suite de ce chapitre nous allons présenter chacun des principaux types de réseaux:
+ 
+
+9 
+
+Réseaux aléatoires: 
+
+Dans  un  réseau aléatoire les  liens entre  les  noeuds du  réseau sont distribués de  manière aléatoire, 
+
+c'est  à  dire  qu'il  existe  une  probabilité  de  lien  entre  deux  noeuds  du  réseau  pris  au  hasard.  La 
+
+distribution  des  degrés  dans  un  réseau  aléatoire  suit  une  loi  de  Poisson,  C'est  à  dire  que  la 
+
+probabilité  qu'un  noeud  quelconque  possède  un  degré  x  diminue  très  vite  lorsque  x  augmente. 
+
+Cette probabilité est définie par: 
+
+La  variable  À est  un  nombre  réel  strictement  positif qui  permet  de  paramétrer  la  distribution  de 
+(notament  À  =10),  la  loi  de  Poisson  peut  être 
+
+probabilité.  Pour  des  valeurs  de  À  grandes 
+
+approximé par la  loi normale. 
+
+1 
+<>)... 
+0)...  4 
+<> 
+
+).....J  10 
+
+(U 
+
+o,~ 
+
+0,1 
+
+U 
+
+0.0 L.....o..-=~--""' 
+
+lt:::::l_
+ 
+20 
+Illustration  1:  Évolution de la courbe de la loi de 
+Poisson en fonction de À 
+
+lU 
+
+~~..J:o=--__~ 
+
+....... 
+
+15 
+
+Source: site web Wikipédia. 
+
+Les  réseaux  aléatoires  ont  été  définis  par  Paul  Erdos  et  Alfréd  Rényi,  deux  mathématiciens 
+
+hongrois  dans  un  article  intitulé" On  Random Graphs"  paru en  1959  [25].  Les  réseaux  aléatoires 
+
+présentent  la  propriété des  "petits mondes"  que  nous  abordons de manière plus  détaillée plus dans 
+
+ce  chapitre,  c'est  à  dire  que  le  chemin  entre  deux  noeuds  quelconques  est  court,  mais  ils  sont 
+
+beaucoup moins structurés que  les  réseaux sociaux réels. 
+
+10 
+
+Réseaux sans échelle: 
+
+Les  réseaux  sans  échelle  (scale-free)  sont  caractérisés  par  une  distribution  dc  degré  suivant  une 
+
+loi de puissance.  La loi de puissance est  une  relation entre deux quantités x et  y telle que: 
+
+y =  axk 
+
+La  valeur "a " est une constante appelée constante de  proportionnalité. L'élément "k" est aussi  une
+ 
+
+constante  appelée  exposant  de  la  loi.  La  probabilité  de  degré  dans  un  réseau  sans  échelle  est
+ 
+
+généralement donnée par:
+ 
+
+Généralement, le  terme a est compris entre les valeurs deux et  trois dans  les réseaux sans échelle
+ 
+
+réels.
+ 
+
+Plusieurs  réseaux  réels  présentent  des  caractéristiques  de  réseaux  scale-free:  nous  pouvons
+ 
+
+notament citer le  World Wide Web.
+ 
+
+Réseau.x hiérarchiques: 
+
+Les  réseaux  hiérarchiques  sont  des  réseaux  construits  selon  une  structure  hiérarchique  le  plus 
+
+souvent à partir d'un plan délibéré. Comme exemples de  réseaux hiérarchiques nous pouvons citer 
+
+certains réseaux techniques comme  les réseaux informatiques. 
+
+A  Randolll  n~tlNork 
+
+B  Scale-rree Mtwo-rk 
+
+C  Hi~rarchi-cal  network 
+
+11 
+
+..
+ 
+
+\ 
+•\ 
+
+Cb  10:,0 
+1(" 
+1(~ 
+
+if:  1U-3 
+
+1C,...:l 
+
+10-6 
+1C.-'5 
+1er"'! 
+1~ 
+
+100 
+
+1,(0:­
+
+1·-' 
+
+100 
+
+1.((0  lÜ.Coo 
+
+10 
+k. 
+
+Ab 
+
+;i;: 
+Cl.. 
+
+Bb 
+
+;i:: 
+Cl.. 
+
+0.1 
+
+0.01
+
+0,(01 
+
+O.OrOl 
+
+\ 
+
+k. 
+
+Illustration 2: Illustration de réseaux aléatoires,  sans échelle et hiérarchiques. 
+
+Source: site web Wikipédia. 
+
+Les  courbes Ab,  Bb  et  Cb  représentent  la  distribution  de  degré  dans  les  trois  types  de  réseaux. 
+
+L'abscisse et  l'ordonnée des courbes Bb et Cb sont en logarithme.  Nous pouvons constater que la 
+
+courbe Ab n'est pas  un exemple typique de loi  de Poisson et est plus proche d'une loi  normale. 
+
+Les  réseaux  peuvent  être  représentés  par  des  graphes  qUI  sont  des  objets  mathématiques 
+
+constitutés de noeuds et de liens entre les noeuds. 
+
+Illustration 3: Exemple 
+de ~raphe 
+
+12 
+
+Les  réseaux  peuvent également être  séparés en  réseaux  orientés  et en  réseaux  non orientés.  Dans 
+
+les  réseaux  orientés  les  liens  du  réseau  possèdent un  sens  de  parcours et des  nœuds  de  départ et 
+
+d'arrivée.  Dans un réseau  non orienté  les  liens  ne  possèdent aucun  sens de  parcours  particulier et 
+
+les  deux  nœuds  reliés  par un  lien  sont  équivalents.  Les  réseaux  peuvent être  représentés  par des 
+
+graphes.  Dans le  langage de  modélisation  que nous  avons  réalisé  tous  les  réseaux  créés  sont par 
+
+défaut des  réseaux  orientés.  La plate-forme que  nous  avons  réalisée  permet de  créer des  réseaux 
+
+sans  échelle,  aléatoire ou  hiérarchique  parce  qu'elle  permet de  préciser des  règles  de création  de 
+
+liens  dans  les  réseaux  simulés.  Par ces  règles  l'utilisateur  peut  obtenir  une  distribution  de  degré 
+
+donnée. 
+
+Dans le  cadre de  la  réalisation  de  notre  outil  de  modélisation  de  réseaux  nous  nous  sorrunes  plus 
+
+particulièrement intéressés à un type particulier de réseaux, les réseaux sociaux. 
+
+Les réseaux sociaux 
+
+Un  réseau  social est un  ensemble d'individus  ou groupes reliés  entre eux par des  liens  créés  lors 
+
+d'interactions sociales.  Une  interaction au  sens social du  terme est un  échange d'informations ou 
+
+d'énergie entre deux agents au  sein d'un système. 
+
+Emmanuel  Lazega  dans  son  ouvrage  «Réseaux  sociaux  et structures  relationnelles»  [27]  appelle 
+
+réseau social un système de  relations entre les membres d'un ensemble social. 
+
+Pour  simplifier,  on  peut définir  un  réseau  social  comme  tout  ensemble  constitué  d'individus  ou 
+
+d'ensemble  d'individus.  Un  réseau  social  est  un  type  particulier  de  réseau.  Les  éléments  d'un 
+
+réseau  social  peuvent avoir ou  ne pas avoir d'interactions  les  uns avec  les autres.  Par exemple un 
+
+groupe  d'amis,  une  entreprise,  une  classe  dans  une  école  primaire,  l'ensemble  des  usagers  d'un 
+
+site  internet sont tous des réseaux sociaux. 
+
+Les  réseaux  sociaux possèdent plusieurs  caractéristiques très  intéressantes qui  méritent que  nous 
+
+les abordions:  l'attachement préférentiel et l'effet du  petit monde. 
+
+L'attachement préférentiel  qui  a  été  étudié par Barabasi  & Albert  [14]  est  une  propriété souvent 
+
+rencontrée  surtout  dans  les  réseaux  de  type  sans  échelle  mais  qui  est  également  présente  dans 
+
+certains  réseaux  sociaux  selon  laquelle  les  nœuds  du  réseau  établissent  des  liens  de  préférence 
+
+avec  les  nœuds  qui  possèdent  le  plus  de  liens.  Par exemple  si  nous  considérons  l'ensemble  des 
+
+chercheurs  en  informatique  de  la  planète,  un  chercheur  aura  tendance  à  citer  en  priorité  les 
+
+chercheurs  qui  sont  le  plus  cités  par  les  autres.  Donc  plus  un  chercheur  est  cité  plus  il  aura 
+
+tendance  à  être  cité.  Ce  comportement  donne  des  réseaux  présentant  une  distribution  de  degré 
+
+scion une  loi de puissancc. 
+
+13 
+
+L'effet  du  petit  monde  étudié  par  Stanley  Milgram  [35]  est  une  hypothèse  sociologique  selon 
+
+laquelle  chaque  individu  sur  terre  peut  être  relié  à  n'importe  quel  autre  individu  par  une  courte 
+
+chaine  de  relations  sociales.  L'effet  du  petit  monde  est  illustré  par  la  théorie  des  six  degrés  de 
+
+séparation  qui  est  une  hypothèse  élaborée  par  le  hongrois  Frigyes  Karinthy  selon  laquelle  toute 
+
+personne  peut  être  reliée  à  toute  autre  personne  par  une  chaine  de  relations  comprenant  au  plus 
+
+six  individus  au  total.  L'effet  du  petit  monde  a  des  conséquences  importantes  pour  la  recherche 
+
+sociale d'information,  la diffusion des  rumeurs,  la propagation des épidémies etc. 
+
+On  remarque  que  les  réseaux  sociaux  réels  sont  difficiles  à modéliser avec  les  modèles  formels 
+
+que  nous  avons  vus  précédemment.  Une  approche  informatique  est  alors  indiquée,  mais  on 
+
+dispose aussi  de mesures spécifiques sur ces réseaux. 
+
+mustration 4: Illustration de  la théorie des six degrés de 
+séparation 
+
+Source  site web Wikipédia 
+
+L'analyse  de  réseau  est  une  approche  sociologique  qui  a  pour  objectif  d'étudier  les  réseaux 
+
+sociaux  en  tant  qu'ensembles  de  nœuds  représentant  les  entités  sociales  ou  acteurs  et  de  liens 
+
+entre ces nœuds.  L'analyse de  réseau  cherche à caractériser les  propriétés spécifiques aux  graphes 
+
+14 
+
+des  réseaux  sociaux.  Pour cela  l'analyse de réseau  a  développé  de  nombreuses  métriques  comme 
+
+la  centralité  et  le  prestige.  Ces  deux  métriques  permettent  de  mesurer  l'importance  d'un  acteur 
+
+donné  dans  un  réseau.  La  mesure  de  centralité  est  d'autant  plus  élevée  que  l'acteur  est  engagé 
+
+directement  ou  indirectement  dans  beaucoup  de  relations.  Le  prestige  quant  à  lui  mesure  la 
+
+popularité  d'un  acteur.  Le  prestige  est  une  métrique  qui  tient  compte  du  sens  des  liens  dans  un 
+
+réseau.  Plus  l'acteur  considéré  reçoit  de  liens  des  autres  membres  du  réseau  plus  sa  mesurc  dc 
+
+prestige  sera  élevée.  Dans  les  lignes  qui  suivent  nous  allons  examiner  plus  en  détail  quelques 
+
+autres  métriques d'analyse de  réseau.  Nous allons  également présenter les  principaux concepts de 
+
+la  théorie  des  graphes.  Pour ces  concepts  nous  nous  sommes  inspirés  de  l'ouvrage  d'Emmanuel 
+
+Lazega, «  Réseaux Sociaux et Structures Relationnel1es »(27]. 
+
+Concepts et métriques en analyse de réseaux sociaux 
+
+La centralité : 
+
+La  centralité  d'une  entité  sociale  dans  un  réseau  social  mesure  l'importance  relative  de  cette 
+
+entité  dans  le  réseau.  Il  existe  différents  types  de  centralité  selon  la  définition  de  la  notion 
+
+d'importance d'une entité dans un  réseau  social. 
+
+La centra/ité de degré: 
+
+Ce concept  mesure le  nombre de  liens  entre un  nœud  et  les  autres  nœuds du  réseau.  La  centralité 
+
+de  degré d'une  entité est d'autant plus élevée que cette entité a  de  liens avec  les  autres acteurs  du 
+
+réseau. 
+
+La centralité d'intermédiarité  : 
+
+La  centralité  d'intennédiarité  exprime  le  fait  que  les  entités  sociales  du  réseau  dépendent  de 
+
+l'entité dont on cherche à déterminer la  centralité d'intermédiarité pour interagir  les  uns  avec  les 
+
+autres.  La  centralité  d'intermédiarité  d'une entité  est d'autant plus  élevée  que  les  autres  acteurs 
+
+doivent passer par ce nœud pour avoir des  interactions sociales. 
+
+La centralité de proximité: 
+
+15 
+
+La centralité de proximité mesure le  nombre minimum de pas que doit effectuer une entité sociale 
+
+pour entrer en contact avec les autres entités sociales du  réseau. 
+
+La centralité de prestige: 
+
+La centralité de prestige mesure le  nombre de  liens entre le  nœud considéré et les autres nœuds du 
+
+réseau.  À  la  différence  des  métriques  précédentes  la  centralité  de  prestige  tient  compte  de  la 
+
+direction des interactions sociales.  Plus un acteur reçoit d'interactions plus il  est prestigieux. 
+
+D'autres notions sont également utilisées en analyse de réseaux: 
+
+Les sous-groupes cohésifs : 
+
+Un  sous-groupe cohésif est un  sous-ensemble des entités d'un réseau  entre lesquelles existent des 
+
+relations  fortes.  Il  existe  essentiellement  trois  types  de  sous-groupes  cohésifs:  les  sous-groupes 
+
+basés sur la  réciprocité,  les  sous-groupes  basés sur l'accessibilité et  le  diamètre et  enfin  les  sous­
+
+groupes basés sur le  nombre de membres adjacents. 
+
+Les cliques: 
+
+Une clique dans  un  réseau  social  est  un  ensemble d'entités sociales  ayant  toutes  des  interactions 
+
+directes  les  unes  avec  les  autres.  Cette  notion  peut  être  généralisée  aux  n-cliques  qui  sont  des 
+
+ensembles  d'entités  sociales  ayant  toutes  des  interactions  directes  ou  indirectes  de  longueur 
+
+maximale de n intermédiaires les unes avec les autres. 
+
+Les dyades: 
+
+Une dyade représente un ensemble de deux entités sociales à l'intérieur d'un réseau  social. 
+
+Les triades: 
+
+Les triades sont un ensemble de  trois entités sociales à l'intérieur d'un réseau social. 
+
+Équivalence structurale: 
+
+16 
+
+Deux  acteurs d'un  réseau  sont structuralement équivalents s'ils ont dcs  relations  identiques  avec 
+
+les  autres  acteurs  du  réseau.  Étant  donné  qu'il  est  quasiment  impossible  de  trouver  deux 
+
+personnes  dans  un  réseau  ayant  exactement  les  mêmes  relations  avec  les  autres  membres  du 
+
+réseau,  la détermination des acteurs structuralement équivalents s'effectue de  manière statistique. 
+
+Deux  méthodes sont surtout utilisées:  la méthode des  blockmodels qui  s'appuie sur la  corrélation 
+
+entre deux  acteurs du  réseau;  la seconde  méthode  s'appuie sur la  distance euclidienne  entre deux 
+
+acteurs. 
+
+Équivalence régulière: 
+
+Deux  individus sont  régulièrement équivalents  s'ils ont  au  moins  une  relation  avec des  individus 
+
+eux-mêmes  équivalents.  Par  exemple,  les  étudiants  et  les  professeurs  sont  deux  ensembles 
+
+équivalents. 
+
+L'analyse  de  réseaux  sociaux  pour être  fiable  doit  tenir compte  de  la  corrélation  qui  peut  exister 
+
+entre les différentes variables étudiées.  Deux principaux modèles statistiques sont  utilisés: 
+
+Le modèle P2: 
+
+Le  modèle  P2  est  un  modèle  basé  sur  les  attributs  de  chaque  acteur  du  réseau  en  matière  de 
+
+propension  à  choisir  d'autres  acteurs,  de  propension  à  être  choisi  par  d'autres,  la  propension  à 
+
+faire  des  choix  réciproques et la tendance  moyenne à  interagir avec  tes  autres.  Ces attributs sont 
+
+appelés  respectivement  a,  ~,  p,  Il.  Le  modèle  P2  permet  de  formaliser  ces  caractéristiques  de 
+
+manière statistique. 
+
+Le modèle P* : 
+
+Le modèle p*  est une extension au modèle p2  qui  incorpore des caractéristiques structurales. 
+
+17 
+
+Théorie des graphes 
+
+Étant donné l'importance des graphes pour la  modélisation des réseaux, voici  un  bref rappel des 
+
+notions de base. C'est notions sont tirées de l'ouvrage « Théorie des graphes »de Jacques Labelle 
+
+[2]. 
+
+Graphe simple: 
+
+Un  graphe simple est un  ensemble de nœuds ou  sommets et des  liens ou arêtes reliant un  nœud de 
+
+['ensemble à un autre nœud de  ['ensemble. 
+
+Graphe non orienté: 
+
+Illustration 5: Exemple 
+de graphe non orienté 
+
+Graphe orienté: 
+
+Un  graphe  orienté  est  un  graphe  dont  les  arêtes  sont  orientées.  Chaque  arête  possède  une 
+
+extrémité initiale et une extrémité finale. 
+
+18 
+
+Illustration  6:  Exemple 
+de ~raphe  orienté 
+
+Arêtes: 
+
+Une arête est un  lien dans un  graphe non orienté. 
+
+Arcs: 
+
+Un  arc  est  un  lien  dans  un  graphe  orienté.  Un  arc  possède  un  nœud  de  départ  et  un  nœud 
+
+d'arrivée. 
+
+Sommets adjacents: 
+
+Deux  sommets  d'un  graphe  reliés  par  une  arête  A  sont  appelés  sommets  adjacents.  On  dit 
+
+également que ces sommets sont incidents à A. 
+
+Ordre d'un graphe: 
+
+Le nombre de sommets d'un graphe G est appelé l'ordre de G. 
+
+Degré d'un sommet d'un graphe: 
+
+Le nombre d'arêtes d'un graphe G incidentes à un sommet x est appelé le degré du sommet x. 
+
+Sous-graphe: 
+
+Un  sous-graphe  H  d'un  graphe  G  est  un  graphe  tel  que  tous  les  sommets  de  H  sont  aussi  des 
+
+sommets de G et tel que toutes les arêtes de H sont aussi des arêtes de G. 
+
+Graphe partiel: 
+
+19 
+
+Un  graphe  partiel  H  d'un  graphe  G  est  un  graphe  tel  que  tous  les  sommets  de  H  sont  aussi 
+
+sommets et que tous  les sommets de G sont aussi  sommets de H et que  toutes  les arêtes de  H sont 
+
+aussi des arêtes de G.  Il  est possible que des arêtes de G ne soient pas aussi  des arêtes de H. 
+
+Graphe régulier: 
+
+Un  graphe simple G est dit régulier de degré r si  tous les sommets de  G sont de degré r. 
+
+Représentation informatique des graphes 
+
+Afin de pouvoir effectuer sur les graphes les traitements souhaités, il  est nécessaire de les 
+
+convertir dans un format accessible aux ordinateurs.  Il  existe quatre principaux formats 
+
+de représentation de graphes: 
+
+Matrices d'adjacence 
+
+Une  matrice  d'adjacence  est  une  matrice  carrée  dont  les  lignes  et  les  colormes  représentent  les 
+
+nœuds  du  graphe  correspondant.  L'élément  de  la  matrice  au  croisement  de  la  ligne  i  et  de  la 
+
+colorme j  sera à 1 ou à vrai  (V) s'il existe  un  lien entre les  nœuds  i et j  et à zéro ou faux  (F) sinon. 
+
+Dans le cas d'un  graphe non  orienté,  la  matrice d'adjacence est une  matrice symétrique alors que 
+
+la  matrice  d'adjacence  d'un  graphe  orienté  n'est  souvent  pas  symétrique.  Dans  une  matrice 
+
+d'adjacence d'un graphe orienté,  les  colonnes représentent  les  nœuds de départ des  liens du  graphe 
+
+et les  lignes représentent les nœuds d'arrivée des  liens. 
+
+20 
+
+1  2  3  4 
+1  F  V  F  F 
+2  V  F  V 
+~l 
+3  F  V  V  F 
+l/  F  F 
+4  F 
+
+3
+
+1  2
+
+4 
+1  F V F F 
+2  F F V V 
+3  F F V F 
+4  F V F F 
+
+Illustration  7:  Graphe 
+non orienté et matrice 
+d'adjacence 
+correspondante (à  droite) 
+
+Illustration  8:  Graphe 
+orienté et matrice 
+d'adjacence 
+correspondante (à  droite) 
+
+Matrices d'incidence 
+
+Dans  une  matrice  d'incidence,  les  lignes  représentent  les  sommets  alors  que  les  colonnes 
+
+représentent les arêtes du graphe représenté.  L'élément de  la matrice au  croisement de  la  ligne i et 
+
+de  la colonne j  sera à  1 ou  vrai  (V)  si  l'arête j  est  incidente  au  nœud  i.  Dans  le  cas  d'un  graphe 
+
+orienté,  l'élément de  la  matrice  au  croisement  de  la  ligne  i et  de  la  colonne j  sera à  1 si  l'arc j 
+
+possède  comme  nœud  d'arrivée  le  nœud  i et  -1  si  le  nœud  i est  le  nœud  de  départ.  Les  boucles 
+
+(arcs  dont  le  nœud  d'arrivée  et  le  nœud  de  départ  sont  les  mêmes)  peuvent être  représentés  par 
+
+zéro.  D'une  manière  générale,  il  est  possible  de  choisir  trois  valeurs  aléatoires  a,  b  et  d  pour 
+
+représenter les nœuds de départ, d'arrivée et les boucles dans une matrice d'incidence orientée. 
+
+21 
+
+(1,2)  (2,3)  (2,4) 
+
+(3,3) 
+
+\1 
+\1 
+F 
+F 
+
+F 
+\1 
+\1 
+F 
+
+F 
+\1 
+F 
+\1 
+
+F 
+F 
+\1 
+F 
+
+1 
+2 
+3 
+4 
+
+(1,2)  (2,3)  (2,4) 
+
+(3,3)  (4,2) 
+
+d 
+a
+
+1 
+2 
+3 
+4 
+
+d
+a
+
+d 
+
+a
+
+b 
+
+a 
+
+d 
+
+Illustration  9:  Graphe 
+non orienté et matrice 
+d'incidence 
+correspondante (à droite) 
+
+Illustration  JO:  Graphe 
+orienté et matrice 
+d'incidence 
+correspondante (à  droite) 
+
+Listes d'adjacence 
+
+Une  liste d'adjacence est un  tableau (ou  une  liste chaînée) contenant autant de cases que  le graphe 
+
+représenté  a  de  sonunets.  Chaque  case  de  ce  tableau  pointe  sur  une  liste  de  sommets  qUI 
+
+représente  la  liste  des  sommets  successeurs  du  nœud  correspondant  à  la  case  considérée.  Par 
+
+exemple dans  l'illustration  Il  de  la  page suivante, la case  1 qui représente le  sommet 1 pointe sur 
+
+les  cases 2,3  et 4  qui  représentent les  sommets  2,3  et 4  ce  qui  signifie  que  les  sonunets 2,  3  et 4 
+
+sont successeurs du sommet 1 dans le  graphe.  Dans une  liste d'adjacence les sommets ne  sont pas 
+
+forcément  consécutifs  (un  sommet  y  peut  être  séparé  d'un  autre  sommet  x  par  un  troisième 
+
+sommet z  tout  en  restant  un  sonunet successeur de  x  comme  le  montrent  les  sommets  3  et  4  de 
+
+l'illustration  11  par rapport au sommet  1). 
+
+22 
+
+Illustration  11: Exemple de 
+liste d'adjacence du graphe 
+non orienté présenté à droite 
+
+Listes d'incidence 
+
+Dans  une  liste  d'incidence  chaque  case  du  tableau  pointe  sur  la  liste  d'arêtes  incidentes  au 
+
+sommet considéré. 
+
+23 
+
+Illustration  12:  Exemple de 
+liste d'incidence du graphe 
+non orienté présenté à droite 
+
+La représentation en  liste  d'incidence  ou d'adjacence est plus  économique  en termes  d'occupation 
+
+mémoire  dans  le  cas  de  graphes  peu  denses  (graphes  ayant  un  nombre  peu  élevé  de  liens).  En 
+
+effet  la  représentation  matricielle  de  ce  type  de  graphes  donne  une  matrice  creuse  comportant 
+
+beaucoup  de  zéros.  Même  si  les  zéros  ne  sont  pas  significatifs,  leur représentation  nécessite  un 
+
+espace  mémoire  non  négligeable.  Dans  le  cas  de  grands  réseaux  denses,  la  représentation 
+
+matricielle est plus économique  en  terme  d'espace  mémoire.  Pour des  raisons  de  simplicité nous 
+
+avons privilégié dans le  cadre de  ce travail  de recherche  une représentation sous forme  de  matrice 
+
+d'adjacence des réseaux  manipulés. 
+
+Dans  les  exemples  de  graphes  que  nous  avons  présentés jusqu'ici  dans  ce  chapitre  nous  avions 
+
+généralement un  lien  et  un  seul  entre deux nœuds  mais en général,  plusieurs types  d'interactions 
+
+sociales  prennent  place  au  sein  d'un  réseau  social  donné.  Par  exemple  si  on  considère  les 
+
+employés  d'une  entreprise  comme  un  réseau  social,  ce  réseau  est  le  siège  de  relations  de 
+
+collaboration professionnelle mais également aussi  d'autres relations comme des  relations d'aide, 
+
+de  conseil  etc.  En  fait  plusieurs  réseaux  sociaux  coexistent  au  sein  de  l'ensemble  social  que 
+
+représente l'entreprise considérée. L'ensemble des réseaux sociaux  existant au  niveau d'un même 
+
+système  social est  appelé  un  système  d'échange généralisé ou encore réseau social  multiplexe ou 
+
+multigraphe.  Le  logiciel  que  nous  prévoyons  de  réaliser  permettra de  modéliser et  de simuler  les 
+
+systèmes  d'échanges  généralisés.  Dans  le  paragraphe  suivant  nous  préciserons  la  problématique 
+
+que nous souhaitons résoudre dans  le  cadre de notre projet de recherche. 
+
+24 
+
+La problématique 
+
+Dans  le  cadre de  leurs  travaux  sur  les  réseaux sociaux,  les  sociologues ont à calculer et traiter de 
+
+nombreuses  informations  comme  les  différentes  valeurs  de  centralité,  de  prestige,  etc.  Pour  ce 
+
+faire ils s'appuient de plus en plus sur des  moyens informatiques. 
+
+De  plus,  pour  ajouter  plus  de  réalisme  dans  l'étude  de  réseaux  SOCiaux,  il  est  nécessaire  de 
+
+s'intéresser à toutes  les  relations  y compris les  relations  simultanées existant  au  sein  d'un  même 
+
+ensemble social et à l'interaction entre ces relations.  Par exemple, dans le  cas d'une entreprise, les 
+
+employés  peuvent  avoir  plusieurs  relations  simultanées  comme  des  relations  d'amitié,  de 
+
+collaboration  et  de  conseil.  JI  faut  donc  des  outils  permettant  de  manipuler  ces  réseaux 
+
+(ensembles  de  relations)  dans  lesquels  deux  nœuds  (par  exemple  deux  employés)  peuvent  être 
+
+reliés  par plusieurs  liens  (relations).  Nous  avons examiné de  nombreux  logiciels de  modélisation 
+
+et  de  simulation,  mais  il  apparait  que  les  outils  disponibles  actuellement  ne  permettent  à notre 
+
+connaissance  que  de  modéliser  une  seule  relation  sociale  à  la  fois,  nous  pouvons  notamment 
+
+prendre  le  cas  de  Netsim  qui  est  un  logiciel  de  simulation  de  réseaux  d'information  réalisé  par 
+
+Mélanie  Lord  à l'Université  du  Québec à  Montréal  dans  le  cadre  de  sa  maitrise  en  informatique 
+
+qui  permet de simuler des réseaux d'information mais qui  ne  traite qu'un seul  réseau à la  fois  [40], 
+
+et ne  prennent pas en compte les  interactions entre les relations.  Les outils que nous avons étudiés 
+
+et nos remarques à propos de chacun d'eux sont détaillés au  chapitre 6 de ce mémoire.  Sur la  base 
+
+de  ce  constat,  nous  pensons  qu'il  existe  un  besoin  d'un  outil  simple  d'usage  qui  permettrait 
+
+d'étudier  les  interactions  entres  différente  relations  dans  un  ensemble  social.  Cet  outil  aiderait  à 
+
+répondre  de  la  manière  la  plus  simple  possible  à  des  questions  qui  font  intervenir  plusieurs 
+
+relations  au  sein  d'un  groupe social  telles  que:  Comment évoluent  les  relations  d'amitié entre  un 
+
+groupe de  collègues de  bureau? Ou encore si  nous considérons  un  groupe d'usagers  de  Facebook 
+
+dont  une  partie est aussi  utilisateur de  Twitter, combien  de  temps  prendront  tous  les  membres du 
+
+groupe  pour  devenir  adeptes  de  Twitter?  Nous  pensons  que  l'étude  de  réseaux  sociaux  serait 
+
+grandement facilitée par l'existence d'une  plate-forme spécialisée dans  la  modélisation de réseaux 
+
+et  permettant  de  modéliser  simultanément  toutes  les  relations  dans  un  ensemble  social  afin  de 
+
+faire  une étude de  leurs  interactions.  Dans le  cadre de  ce travail  notre  but est d'apporter  un  début 
+
+de  solution  à  ce  problème  par  la  réalisation  d'une  plate-forme  de  simulation  de  réseaux  sociaux, 
+
+multiplexes. 
+
+25 
+
+Illustration  13: Exemple de réseau 
+comportant plusieurs relations 
+
+source site web Wikipédia 
+
+Maintenant  que  nous  avons  présenté  la  problématique  à  laquelle  nous  nous  attaquerons,  nous 
+
+allons passer en revue les objectifs que nous désirons atteindre. 
+
+Objectifs 
+
+L'objectif poursuivi  dans  le  cadre  de  ce  projet  de  recherche  est  de  proposer  une  plate-forme 
+
+permettant  de  réaliser  la  modélisation,  l'analyse,  la  simulation  et  la  visualisation  de  structures 
+
+relationnelles complexes comme des réseaux multiplexes.  Notre but est de  fournir aux chercheurs 
+
+en réseaux sociaux un  outilleur permettant dans le  cadre de  leurs travaux de  générer et manipuler 
+
+des réseaux  multiplexes afin de  pouvoir étudier de  façon  plus poussée les  différentes  interactions 
+
+au  sein  d'un  groupe  social.  Les  réseaux  multiplexes  sont  des  réseaux  au  sein  desquels  deux 
+
+nœuds  peuvent  être  reliés  par  plusieurs  liens  simultanément.  Nous  allons  donc  réaliser  un 
+
+interpréteur  en  langage  Java  destiné  à  exécuter  le  langage  spécialisé  dans  la  manipulation  de 
+
+réseaux sociaux que nous  avons conçu dans le cadre de ce projet de recherche.  Notre approche de 
+
+manipulation de  multigraphes consistera à traiter chaque type de relation dans  un  ensemble social 
+
+comme un  réseau à part entière et l'outil  que nous nous proposons de réaliser pennettra de  définir 
+
+plusieurs réseaux simultanément et de définir les  interactions entre ces réseaux. 
+
+26 
+
+Dans  ce  chapitre  nous  avons  présenté  quelques  concepts  utiles  du  domaine  des  réseaux  sociaux 
+
+ainsi  que  la  problématique à laquelle  nous  nous sommes  attaqués  dans notre projet de  recherche. 
+
+Dans  les  chapitres  suivants  nous  allons  présenter  la  solution  à  la  problématique  discutée  ci-haut 
+
+c'est  à  dire  le  langage  de  modélisation  de  réseaux  sociaux  et  l'interpréteur  pour  ce  langage, 
+
+SNSimulator.  Dans  le  chapitre  2  nous  allons  présenter  les  outils  qui  nous  ont  aidés  à  réaliser 
+
+SNSimu\ator.  Le  chapitre  3  sera  consacré  au  langage  interprété  par  SNSimulator  et  nous  y 
+
+présenterons  les  principales  instructions  de  ce  langage.  Le  chapitre  4  quant  à  lui  présente  le 
+
+fonctionnement  interne de  SNSimulator.  Dans  le  chapitre  5 nous  allons  présenter  un  exemple de 
+
+programmation  avec  SNSimulator  et  dans  le  chapitre  6  nous  ferons  une  revue  des  outils  de 
+
+simulation  et  de  modélisation  actuellement  disponibles  et  nous  les  évaluerons  par  rapport  à  la 
+
+problématique de  notre projet de  recherche et à notre outil  SNSimulator. 
+
+27 
+
+Chapitre 2: 
+
+La plateforme SNSimulator 
+
+Dans ce chapitre nous  allons présenter l'outil  de  modélisation et de  simulation de  réseaux  sociaux 
+
+que  nous  avons  réalisé.  Nous  appellerons  la plate-forme que  nous  avons  développé  SNSimulator 
+
+comme Social Networks Simulator.  Nous  allons commencer par examiner les  caractéristiques que 
+
+notre  outil  doit  satisfaire  afin  de  pouvoir  être  utilisé  pour  la  modélisation  de  réseaux  sociaux 
+
+multiplexes.  Ensuite  nous  présenterons  les  outils  dont  nous  nous  sommes  servis  pour  réaliser 
+
+SNSimulator. 
+
+Caractéristiques attendues de la plate-forme proposée 
+
+Nous cherchons à réaliser un  outil  informatique répondant aux  critères suivants: 
+
+Capacité à gérer plusieurs réseaux sociaux : 
+
+Notre  SNSimulator doit  pouvoir permettre  à  l'utilisateur de  définir  plusieurs  réseaux  définis  sur 
+
+les  mêmes  nœuds  et  pouvoir manipuler ces  réseaux.  L'utilisateur doit donc pouvoir accéder à ces 
+
+réseaux par leur nom. 
+
+Capacité à définir des règles: 
+
+L'usager doit  pouvoir définir des  règles s'appliquant à un  ou plusieurs dcs  réseaux  définis  dans  la 
+
+simulation. 
+
+Capacité à définir des propriétés: 
+
+L'usager doit pouvoir définir des propriétés pour les éléments de  la simulation. Notamment  il doit 
+
+être  possible de  définir des  propriétés aux  nœuds  et  aux liens  du  ou  des  réseaux  de  la simulation. 
+
+L'usager doit  également pouvoir affecter  des  valeurs  aux propriétés définies,  accéder aux  valeurs 
+
+et  les modifier. 
+
+Capacité à définir des fonctions: 
+
+28 
+
+L'usager  doit  pouvoir  définir  des  fonctions  afin  de  pouvoir  regrouper  plusieurs  actions  sur  les 
+
+éléments de  la  simulation ensemble.  Les  fonctions  doivent pouvoir être appelées à l'intérieur des 
+
+règles définies dans la simulation. 
+
+Capacité à définir des procédures: 
+
+Nous  souhaitons  également  permettre  à  l'usager  de  pouvOIr  définir  des  procédures.  Ces 
+
+procédures  peuvent  par exemple  permettre  de  regrouper  plusieurs  actions  sur  les  éléments  de  la 
+
+simulation.  Les  procédures  pourront  être  appelées  de  l'intérieur  des  règles.  La  principale 
+
+différence  entre  les  fonctions  et  les  procédures  sera  que  les  fonctions  retourneront  une  valeur 
+
+alors que les procédures non. 
+
+Capacité à définir des  variables: 
+
+SNSimulator devra permettre à l'usager de  définir des  variables  globales  ou  des  variables  locales 
+
+au  sein des fonctions ou des  procédures ou  des règles. 
+
+Capacité à définir des constantes: 
+
+SNSimulator devra également permettre à l'usager de définir des constantes globales ou  locales. 
+
+Langage facile à apprendre et à utiliser: 
+
+Le  langage  que  nous  allons  créer  devra  être  le  plus  proche  possible  du  langage  naturel  afin  de 
+
+pouvoir  être  utilisé  facilement  par  une  personne  n'ayant  aucune  formation  préalable  en 
+
+informatique. 
+
+Représentation des réseaux sociaux 
+
+Dans  le  cadre  de  la  réalisation  de  l'outil  SNSimulator,  nous  avons  choisi  d'utiliser  le  format  de 
+
+matrice d'incidence comme format par défaut des réseaux manipulés. 
+
+Dans  le  paragraphe précédent nous  avons  parlé  des  caractéristiques  que  nous  voulons  dOill1er  au 
+
+langage  SNSimulator. Dans  la  suite de  ce  chapitre  nous  allons  présenter les  principaux  outils qui 
+
+nous  ont aidé à réaliser SNSimulator. 
+
+29 
+
+Outils utilisés pour réaliser SNSimulator 
+
+SNSimulator  est  un  logiciel  réalisé  en  langage  Java.  Afin  de  pouvoir  réaliser  une  application 
+
+répondant  aux  caractéristiques  attendues  de  la  plate-forme  telles  que  précisées  précédemment, 
+
+nous  avons  utilisé  un  certain  nombre  d'outils  existants  notamment  Javacc,  la  librairie  Jung  et 
+
+l'enviroill1ement  de  développement 
+
+intégré  NetBeans.  Dans 
+
+les 
+
+lignes  qui  suivent  nous 
+
+présenterons de  manière plus détaillée chacun d'eux. 
+
+Javace: 
+
+Javacc  est  un  logiciel  libre  destiné  à permettre  la  construction  de  compilateurs  en  langage  Java. 
+
+Javacc  signifie Java  Compiler Compiler ou  compilateur de  compilateurs java.  Java.  Il  fournit  un 
+
+analyseur  syntaxique  et  un  analyseur  lexical  à  partir  de  la  description  du  langage  passée  en 
+
+paramètre. 
+
+Un  analyseur  lexical  ou  lexer est un  programme  informatique  qui  à partir de  la  description d'un 
+
+fichier  texte  en  entrée  ou  de  la  ligne  de  commande  est  capable  de  recoill1aitre  certains  mots 
+
+appelés  lexèmes.  Les  lexèmes  à  recoill1aitre  sont  définis  préalablement  dans  un  fichier  séparé 
+
+selon une syntaxe ou grammaire propre à l'analyseur lexical. 
+
+L'analyseur  syntaxique  ou  parser  comme  son  nom  l'indique  recoill1aÎt  la  syntaxe  d'un  langage. 
+
+Cette syntaxe est définie dans un  fichier texte passé en paramètre au parser. 
+
+L'analyseur syntaxique et l'analyseur lexical  coopèrent de  la  manière suivante:  Le  parser essaye 
+
+toujours  de  reCOill1aître  un  des  éléments syntaxiques  définis  dans  le  fichier de syntaxe.  Pour cela 
+il  appelle  l'analyseur  lexical  pour  obtenir  un  lexème.  Si  le  lexème  obtenu  correspond  à  un  dcs 
+
+éléments  syntaxiques  attendus  alors  le  parser appelle  de  nouveau  le  lexer afin  d'obtenir  un  autre 
+
+lexème.  Si  la  succession de  lexèmes  obtenus  ne  correspond  à  la  syntaxe  attendue  alors  le  parser 
+
+affiche un  message d'erreur. 
+
+30 
+
+JJTree: 
+
+JJTree  est  une  extension  au  logiciel  Javacc  permettant  à  partir  de  la  grammaire  du  langage  à 
+
+laquelle on a ajouté des annotations, de produire un arbre syntaxique abstrait. 
+
+Un  arbre  syntaxique  abstrait est  une  représentation  intermédiaire  de  la  syntaxe  d'un  programme 
+
+après  son  analyse  par  l'analyseur  syntaxique  et  avant  la  vérification  sémantique  eUou 
+
+la 
+
+production de code machine ou l'exécution dans  le  cas d'un interpréteur. 
+
+Jung: 
+
+Jung pour Java Universal  NetworklGraph  framework est  une librairie de visualisation  de graphes 
+
+écrite  en  Java.  Il  permet  la  visualisation  aussi  bien  de  graphes  orientés  que  de  graphes  non 
+
+orientés. Jung est disponible sous la  licence open source. 
+
+1,_ 
+
+.11 
+
+p. 
+
+'.~. 
+
+• 
+
+~.  "1" 
+
+""-
+
+...... - o· 
+
+h. JUNG L.)'out, 
+
+,,-"'""--...."!"·-· 
+
+'=-
+Illustration 14:  Visualisation d'un ~raphe avec JUNG 
+
+t~ 
+
+Source site web de la  librairie JUNG 
+
+NetBeans: 
+
+31 
+
+NetBeans  est  un  environnement de  développement  intégré (IDE)  open source  disponible sous  la 
+
+licence  Common  Developpement and  Distribution  Licence  (CDDL)  de  Sun  Microsystems.  Son 
+
+rôle est de faciliter la  programmation informatique notamment en langage Java. 
+
+Dans ce chapitre nous  avons  présenté les  caractéristiques  du  langage  SNSimulator et  nous avons 
+
+aussi  présenté  Javacc,  Jung  et  NetBeans  qui  sont  les  outils  dont  nous  nous  sommes  servis  pour 
+
+réaliser  SNSimulator.  Dans  le  chapitre  3  qui  suit  nous  allons  présenter  en  détail  le  langage 
+
+SNSimulator que nous avons conçu. 
+
+32 
+
+Chapitre 3 :
+ 
+
+Le  langage de SNSimulator:
+ 
+
+Le  langage  développé  pour  SNSimulator  est  inspiré  du  langage  ADA  et  du  langage  PL/SQL 
+
+d'Oracle.  Ces  deux  langages  ont  été choisis  comme base  de  travail  car  ils  sont plus  simples  que 
+
+plusieurs autres langages et sont donc selon nous plus faciles  à apprendre. 
+
+Chaque programme  SNSimulator est  constitué  de  deux  parties:  La  première  partie  contient  les 
+
+déclarations.  Elle  commence  avec  le  mot-clé  DECLARE et  se  termine  lorsque  la  seconde  partie 
+
+du  programme  commence  avec  le  mot-clé  BEGIN.  La  seconde  partie  contient  le  corps  du 
+
+programme.  La  seconde  partie  d'un  programme  SNSimulator contient les  instructions  à exécuter 
+
+avant et pendant  la simulation.  Cette partie commence par le  mot-clé  BEGIN et se  termine par le 
+
+mot-clé  END.  Dans  les  lignes  ci-dessous  nous  allons  examiner  successivement  la  section 
+
+déclaration et le corps des  programmes SNSimulator et nous  allons  préciser pour chacune de ces 
+
+deux parties les différents éléments qui la  composent. 
+
+Section déclaration 
+
+Dans  cette  partie  sont  définies  les  variables  globales,  les  constantes  globales,  les  fonctions,  les 
+
+procédures  et  les  règles.  La  partie  des  déclarations  contient  aussi  les  déclarations  des  réseaux 
+
+manipulés dans la simulation. 
+
+La  partie  déclaration d'un programme  SNSimulator commence par le  mot-clé DECLARE.  Cette 
+
+partie se  termine  lorsque  la seconde partie du  programme  commence avec  le  mot-clé BEGIN.  La 
+
+partie déclaration ne  possède donc pas de mot-clé de fin. 
+
+Exemple  de  section  déclaration  dans  un  programme  SNSimulator que j'ai  conçu  (le  programme 
+
+source est présenté de manière plus complète en annexe): 
+
+declare 
+
+simulation sim] 
+
+network test using C:IUsers,!franekIDoeumentslNetBeansProjeetsISNSimulatorliazegalJranek.dat 
+
+Junetion earre(x number) return number is 
+
+33 
+
+begin 
+
+return (x*x) 
+
+end 
+
+rule rI is 
+
+begin 
+
+for i in  I  ..  2 
+
+{oop 
+
+if(randomO> =0.8)  then 
+
+add link lienfrJ in test between testI and test2 
+
+end if 
+
+end {oop 
+
+end 
+
+begin 
+
+Les différents éléments qui  peuvent être déclarés dans la section déclaration sont les suivants: 
+
+Les variables: 
+
+SNSimulator permet à  l'utilisateur de  déclarer ses  propres  variables  par  le  mot-clé  VARlABLE.
+ 
+
+Les  valeurs  des  variables  peuvent  être  modifiées  par  l'utilisateur  durant  l'exécution  du
+ 
+
+programme.
+ 
+
+Exemple de déclaration de  variable:
+ 
+
+VARlABLE NUMBER test
+ 
+
+Autre exemple de déclaration de variable
+ 
+
+VARlABLE STRlNG test := "test"
+ 
+
+Le  premier exemple  présente  une  variable  déclarée  sans être  initialisée  alors  que  dans  le  second
+ 
+
+exemple la  variable est initialisée avec  la chaine de caractères "test".
+ 
+
+Dans  les  deux  exemples  les  deux  variables  sont  de  types  différents  NUMBER  et  STRlNG.
+ 
+
+SNSimulator possède trois types de données au  total:
+ 
+
+34 
+
+NUMBER pour les nombres, 
+
+STRING pour les chaines de caractères 
+
+BOOLEAN pour les booléens (valeurs  true pour vrai  ou  false  pour faux). 
+
+Les constantes: 
+
+À la différence des  variables,  les  constantes doivent être obligatoirement initialisées. 
+
+Exemple de déclaration de constante: 
+
+CONSTANT NUMBER test := 0 
+
+Les réseaux : 
+
+Les  réseaux dans  SNSimulator sont déclarés  avec  le  mot-clé  NETWORK.  Lors  de  la  déclaration 
+
+d'un  réseau,  l'utilisateur  doit  spécifier  un  fichier  dans  lequel  SNSimulator  doit  chercher  les 
+
+informations sur  le  réseau.  SNSimulator peut traiter par défaut les fichiers  contenant une matrice 
+
+décrivant le  réseau.  Il  sera relativement simple d'ajouter d'autres formats  de  réseau. 
+
+Exemple de déclaration de réseau: 
+
+NETWORK reseau l  USING c:\reseau l.dat 
+
+Le mot-clé USING permet de préciser le fichier à charger. 
+
+Les nœuds: 
+
+SNSimulator permet à l'usager de  déclarer des  nœuds  supplémentaires  dans  un  des  réseaux  déjà 
+
+déclarés.  Cette déclaration correspond à une  insertion du nœud dans  le  réseau.  Le  nom du  réseau 
+
+dans  lequel  doit être  inséré le  nœud  doit donc être obligatoirement précisé.  Le nom  du  nœud doit 
+
+aussi  être précisé. 
+
+Exemple de déclaration de nœud: 
+
+NODE noeud l  IN  reseaul 
+
+Les liens .' 
+
+35 
+
+Comme pour les  nœuds  l'usager peut déclarer un  lien dans  un  réseau.  Dans ce  cas-ci  l'usager doit
+ 
+
+préciser  également  les  deux  nœuds  entre  lesquels  insérer  le  lien.  L'usager  doit  aussi  préciser  le
+ 
+
+nom  du  lien.
+ 
+
+Exemple de déclaration de lien:
+ 
+
+LlNK lienliN reseaul  BETWEEN noeudl AND noeud2
+ 
+
+L'exemple crée un  lien appelé lienl  entre les  nœuds noeudl  et noeud2 dans le  réseau  reseaul.
+ 
+
+Les jonctions .' 
+
+Les  fonctions  sont  aussi  déclarées  dans  la  partie  déclaration  des  programmes  SNSimulator.  Une 
+
+fonction  est  caractérisée  par  son  nom.  La  fonction  peut  avoir  des  paramètres  ou  ne  pas  avoir  de 
+
+paramètres.  La fonction  doit obligatoirement avoir un  type de  retour.  La fonction  peut aussi  avoir 
+
+une  section déclaration. Toutes  les  variables et les  constantes déclarées dans  la  section déclaration 
+
+d'une  fonction  sont  considérées  comme  des  variables  et  constantes  locales  à  la  fonction. 
+
+Lorsqu'une  variable  ou  constante  locale  possède  le  même  nom  qu'une  variable  ou  constante 
+
+globale  alors  cette  variable  ou  cette  constante  locale  sera  utilisée  par  le  programme  à  la  place  de 
+
+la  variable  ou  de  la  constante  globale  chaque  fois  que  l'utilisateur  fera  référence  au  nom  de  la 
+
+variable  ou  de  la  fonction.  La  fonction  a  toujours  une  section  corps.  La  section  corps  de  la 
+
+fonction  commence  par  le  mot-clé  BEGIN  et  se  termine  par  le  mot-clé  END.  Les  instructions 
+
+permises entre le  mot-clé  BEGIN  et  le  mot-clé  END  dans  une  fonction  sont  les  mêmes que dans 
+
+le corps du  programme principal.  Les fonctions  sont déclarées avec le mot-clé FUNCTlüN. 
+
+Exemple de déclaration de fonction: 
+
+FUNcnüN carre (x  NUMBER) RETURN  NUMBER IS 
+
+DECLARE 
+
+BEGIN 
+
+END 
+
+Dans  l'exemple  ci-dessus  nous  déclarons  une  fonction  de  nom  carre  qui  prend  en  paramètre  un 
+
+nombre et  qui  retourne un  nombre.  Le corps de cette fonction  ne comprend aucune  instruction. 
+
+Exemple de fonctionnement des variables et constantes locales: 
+
+Les procédures: 
+
+36 
+
+Comme les  fonctions,  les  procédures sont déclarées dans  la section déclaration.  Une procédure ne 
+
+peut  avoir  le  même  nom  qu'une  fonction  et  vice-versa.  La  procédure  ne  peut  avoir  de  type  de 
+
+retour.  La  procédure  peut  avoir  des  paramètres  ou  pas.  La  procédure  peut  avoir  une  section 
+
+déclaration.  La  procédure  a  toujours  une  section  corps.  Les  procédures  sont  déclarées  avec  le 
+
+mot-clé PROCEDURE. 
+
+Exemple de déclaration de procédure: 
+
+PROCEDURE proc lOIS 
+
+BEGIN 
+
+END 
+
+La  procédure déclarée ne possède aucun paramètre et  ne contient pas de section déclaration. 
+
+Les règles: 
+
+Comme les  fonctions  et  les  procédures,  les règles  sont déclarées dans  la  section déclaration.  Une 
+
+règle ne  peut avoir le  même  nom qu'une fonction  ou qu'une procédure et vice-versa.  La  règle ne 
+
+peut avoir de  type  de retour.  La règle  ne peut avoir de paramètre.  La  règle peut avoir une  section 
+
+déclaration.  La  règle  a  toujours  une  section  corps.  Les  règles  sont  déclarées  avec  le  mot-clé 
+
+RULE.  Les  règles sont automatiquement exécutées à chaque pas de  temps.  Une règle ne peut être 
+
+appelée  par  l'utilisateur que  ce  soit  dans  une  procédure  ou  dans  une  fonction  ou  même  dans  le 
+
+corps  du  programme  principal.  Néanmoins  au  sein  d'une  règle  les  fonctions  et  procédures 
+
+déclarées peuvent être appelées. 
+
+Exemple de déclaration de règle: 
+
+RULE rulliS 
+
+DECLARE 
+
+BEGIN 
+
+END 
+
+La règle rull  possède une section de déclaration. 
+
+37 
+
+La simulation: 
+
+Un  nom  peut être attribué à la  simulation en cours dans  la  section déclaration.  Pour cela on  utilise 
+
+le mot-clé SlMULTION comme dans l'exemple ci-dessous: 
+
+SIMULATION sim 1 
+
+Fonctions prédéfinies: 
+
+Un  certain nombre  de  fonctions  sont définies  par  défaut dans  SNSimulator.  Nous  les  présentons 
+
+ci-dessous. 
+
+Fonction  « link_between»  :  cette  fonction  prend  deux  paramètres,  deux  noms  de  nœuds  d'un 
+
+même  réseau.  La  fonction  link  between  retourne  vrai  si  un  lien  existe  entre  les  deux  nœuds 
+
+passés en paramètre. 
+
+Fonction « random »  : cette  fonction  qui  ne  prend  aucun paramètre  retourne  une  valeur  aléatoire 
+
+comprise entre zéro et un. 
+
+Fonction « print» : cette fonction prend un  paramètre et imprime la  valeur du  paramètre à l'écran. 
+
+Fonction « racine»  : cette fonction  prend  un  paramètre et  retourne  la  racine carrée du  paramètre. 
+
+Propriétés prédéfinies: 
+
+11  existe également dans SNSimulator des  propriétés prédéfinies.  Les principales sont: 
+
+« nodes»:  propriété  définie  pour  chaque  réseau  déclaré  dans  un  programme  source  ou  passé  en 
+
+paramètre.  Il  contient  le  nombre de  nœuds du  réseau.  Cette propriété peut également être appelée 
+
+avec un  numéro de  nœud i pour accéder à ce  nœud de la manière suivante: nodes[i] 
+
+« links »:  propriété  définie  pour  chaque  réseau  déclaré  dans  un  programme  source  ou  passé  en 
+
+paramètre.  Il  contient  le  nombre  de  liens  du  réseau.  Cette  propriété  peut également être appelée 
+
+avec un  numéro de lien  i pour accéder à ce nœud de la  manière suivante: links[i] 
+
+38 
+
+« degree »:  propriété  définie  pour  chaque  nœud  d'un  réseau.  Il  contient  le  nombre  de  liens 
+
+adjacents à ce  nœud, c'est à dire  le degré du nœud. 
+
+Corps du programme 
+
+La  seconde  partie  d'un  programme  SNSimulator  contient  les  instructions  à  exécuter  avant  et 
+
+pendant la simulation.  Cette  partie commence par  le  mot-clé BEGIN  et se  termine  par le  mot-clé 
+
+END.  Entre  ces  deux  mots-clés  on  peut  retrouver  une  succession  d'instructions  qui  seront 
+
+exécutées dans l'ordre premier arrivé premier servi (FIFO). 
+
+Exemple de corps de programme SNSimulator: 
+
+BEGIN 
+
+END 
+
+Comme dans  l'exemple ci-dessus, le corps du programme peut ne contenir aucune instruction. 
+
+Autre exemple de corps de programme (tiré du  programme source présenté en annexe): 
+
+begin 
+
+add node franck in  test] 
+
+print("reseau]") 
+
+add node test]  in  test 
+
+add node test2 in  test 
+
+add link lientt in  test between test]  and test2 
+
+exit sim]  when  ((carre(2))==4) 
+
+add link lienfr]  in test between franck and testl 
+
+print(link_between(test. test], test. test2)) 
+
+print(random()) 
+
+print(random()) 
+
+if(test.test].degree==]) then 
+
+add link lienfr2  in  test between test2 and test l 
+end if 
+start siml 
+
+end 
+
+39 
+
+Les  différentes  instructions  permises entre  les  mots-clés  BEG IN  et  END  sont présentées dans  les 
+
+lignes qui  suivent: 
+
+Ajout de nœud: 
+
+SNSimulator permet  à  l'utilisateur  d'ajouter des  nœuds  dans  un  réseau  en  cours  d'exécution  du 
+
+programme.  Pour  cela  il  est  obligatoire  de  spécifier  le  réseau  dans  lequel  on  souhaite  ajouter  un 
+
+nœud  par son  nom ainsi  que  le  nom du  nœud  que  l'on souhaite ajouter.  Le  nœud  ajouté  peut être 
+
+utilisé dans  les  instructions  qui  suivent l'ajout.  Pour ajouter  un  nœud dans  un  réseau  on  utilise  le 
+
+mot-clé ADD suivi du  mot-clé NODE. 
+
+Exemple d'instruction d'ajout d'un nœud  dans  un  réseau: 
+
+ADD NODE noeud2 IN reseaul 
+
+Dans  cet exemple  le  nœud  noeud2  sera  ajouté dans  le  réseau  reseau 1.  Chaque  nœud  d'un  réseau 
+
+possède  reçoit  un  numéro  unique  attribué  par  SNSimulator  qui  correspond  à  l'ordre  d'insertion 
+
+des nœuds dans le  réseau. 
+
+Ajout de  liens: 
+
+Le  langage  de  SNSimulator  permet  d'ajouter des  liens  dans  un  réseau  en  cours  d'exécution  du 
+
+programme.  L'ajout  d'un  lien  nécessite  de  préciser  le  nom  du  réseau  dans  lequel  on  souhaite 
+
+ajouter le  lien.  Il  est aussi  nécessaire de  spécifier les nœuds entre  lesquels le lien doit être ajouté. 
+
+Pour ajouter un  lien dans  un  réseau on  utilise  le mot-clé ADD  suivi  du  mot-clé  LlNK.  L'ajout de 
+
+lien  en  cours  de  programme  est  similaire à la  déclaration  de  lien  dans  la  section  déclaration  du 
+
+programme. 
+
+Exemple d'ajout de  lien dans  un  réseau. 
+
+ADD LlNK lien2 IN  reseaul  BETWEEN noeudl  and nocud2 
+
+Dans  l'exemple  ci-dessus  nous  ajoutons  le  lien  lien2  dans  le  réseau  reseauJ  entre  les  nœuds 
+
+40 
+
+nœudJ  et nœud2. 
+
+Ajout de propriétés 
+
+Dans  le  cadre  de  l'étude  des  graphes  en  général  et  des  réseaux  sociaux  en  particulier,  il  est 
+
+souvent  nécessaire  de  pouvoir  associer  des  valeurs  à  des  nœuds  ou  des  liens  du  réseau.  Par 
+
+exemple  en  analyse  de  réseau  on  calcule  les  degrés  des  nœuds,  leur  centralité  etc.  Il  est  aussi 
+
+parfois utile de  pouvoir associer des  valeurs ou attributs  aux  liens du  réseau.  SNSimuJator permet 
+
+d'ajouter des propriétés aux  nœuds et/ou aux  liens des  réseaux déclarés dans  la simulation. 
+
+Pour ajouter une  propriété à un  lien  ou  un  nœud  d'un réseau,  on  utilise  le  mot-cJé ADD  suivi  du 
+
+mot-clé PROPERTY. 
+
+Exemple d'ajout de  propriété à un  nœud d'un réseau dans SNSimulator: 
+
+ADD PROPERTY propriete J FOR noeud J IN  reseau 1 
+
+Dans  l'exemple ci-dessus nous  définissons  une  propriété  appelée propriété  pour  le  nœud  noeudJ 
+
+du  réseau reseau J. 
+
+Accès aux valeurs des propriétés 
+
+Les  valeurs  des  propriétés  des  nœuds  ou  des  liens  peuvent  être  accédées  dans  les  différentes 
+
+instructions du  programme SNSimulator en utilisant  une notation pointée.  Par exemple  pour faire 
+
+référence à la propriété proprietel  définie dans  l'exemple précédenl sur le nœud noeudJ  du  réseau 
+
+reseau J on  utilisera la syntaxe suivanle  : 
+
+reseau J.noeud J. proprielel 
+
+Suppression de nœuds 
+
+SNSimulator  donne  la  possibilité  de  supprimer  un  nœud  d'un  réseau  durant  l'exécution  du
+ 
+
+programme.  Pour supprimer un  nœud  dans un  réseau on  utilise le mol-clé  DELETE suivi  du  mol­
+
+clé NODE.
+ 
+
+Exemple de suppression de nœud:
+ 
+
+
+
+DELETE NODE noeudl  IN  reseaul 
+
+Suppression de liens 
+
+41 
+
+Comme avec  les  nœuds, il  est également possible de  supprimer un  lien entre deux nœuds dans  un 
+
+réseau.  SNSimulator offre deux méthodes de suppression de liens: 
+
+Exemple de suppression avec le  nom du  lien:
+ 
+
+DELETE LINK Iinkl  IN  reseaul
+ 
+
+Exemple de suppression sans  le  nom du  lien:
+ 
+
+DELETE LINK IN  reseau 1 BETWEEN noeud 1 AND noeud2
+ 
+
+Comme  dans  les  deux  exemples  ci-dessus  le  montrent,  la  suppression  d'un  lien  sans  fournir  le 
+
+nom du  lien nécessite de préciser les noms des nœuds adjacents au  lien qu'on désire supprimer. 
+
+Suppression de propriété: 
+
+Pour supprimer  une  propriété  pour  un  objet  d'un  réseau  on  utilise  le  mot-clé  DELETE suivi  du
+ 
+
+mot-clé PROPERTY:
+ 
+
+Exemple de suppression de propriété dans  SNSimulator:
+ 
+
+DELETE PROPERTY propriete!  fOR noeudl  IN  reseaul
+ 
+
+Le  langage  de  SNSimulator  offre  un  ensemble  d'instructions  qui  permettent  d'organiser  et  de
+ 
+
+structurer les traitements.  Il  s'agit notamment des  boucles et des branchements conditionnels.
+ 
+
+Boucles: 
+
+Il  existe trois  types de boucles dans SNSimulator : une boucle inconditionnelle, la  boucle WHILE 
+
+et la  boucle fOR. 
+
+La  boucle  inconditionnelle  s'exécute  sans  fin.  Elle  ne  possède  aucune  condition  de  fin.  La 
+
+syntaxe de  la cette boucle est la suivante: 
+
+LOOP 
+
+Suite d'instructions à exécuter 
+
+END LOOP 
+
+42 
+
+La  boucle  WHILE est  une  boucle qui  s'exécute tant que  la  condition définie  est vraie.  Sa syntaxe 
+
+est la sui vante: 
+
+WHILE Condition 
+
+LOOP 
+
+Suite d'instructions à exécuter 
+
+END LOOP 
+
+La  condition  peut  être  n'importe  quelle  expression  à évaluer.  Elle  peut  porter par exemple sur la 
+
+valeur d'une variable ou d'une propriété d'un lien ou d'un nœud dans  un  des  réseaux définis. 
+
+La  boucle  FOR  est  une  boucle  qui  s'exécute un  nombre  prédéterminé  de  fois.  Sa  syntaxe est  la 
+
+suivante: 
+
+FOR i in  expression 1 ..  expression2 
+
+LOOP 
+
+Suite d'instructions à exécuter 
+
+END  LOOP 
+
+Dans  l'exemple ci-dessus la  boucle s'exécutera un  nombre de  fois  égal à la  valeur de expression2 
+moins  expression 1 arrondie à l'entier inférieur.  À la  différence de  la  boucle  WHILE  expressionl 
+
+et expression2 doivent être des  nombres. 
+
+Branchement conditionnel 
+
+SNSimulator permet  d'exécuter  une  suite  d'instructions  si  une  condition  est  vraie  et  d'exécuter 
+
+une  autre suite d'instructions si  la  condition n'est pas  vraie.  Cela est possible grâce aux  mots  clés 
+
+IF et ELSE.  La syntaxe de  l'instruction de branchement conditionnel est la suivante: 
+
+43 
+
+IF expression 1 THEN 
+
+Suite d'instructions à exécuter 
+
+ELSIF expression2  THEN 
+
+Suite d'instructions à exécuter 
+
+ELSIF expression3 THEN 
+
+Suite d'instructions à exécuter 
+
+ELSIF expressionN THEN 
+
+Suite d'instructions à exécuter 
+
+ELSE 
+
+Suite d'instructions à exécuter 
+
+END IF 
+
+Le  nombre  d'instructions  ELSIF  n'est  pas  limité  et  il  n'est  pas  obligatoire  qu'il  y  ait  une 
+
+instruction ELSIF. 
+
+Affectations de  variables 
+
+Les  valeurs  des  variables globales  ou  locales définies dans  le  programme peuvent être modifiées
+ 
+
+par l'intermédiaire des  instructions d'affectation.  Le symbole ":=" permet d'affecter à la  variable
+ 
+
+qui se  trouve à sa gauche la  valeur qui  se  trouve à sa droite.
+ 
+
+Exemple d'affectation de la  variable testl:
+ 
+
+testI  :=  123
+ 
+
+Appels de sous routines 
+
+Les  fonctions  et  procédures  définies  dans  la  section  déclaration  d'un  programme  SNSimulator 
+
+peuvent être appelées dans  le  programme principal ou alors  dans  une autre fonction  ou dans  une 
+
+autre procédure.  Les fonctions  et  procédures peuvent être définies avec des  paramètres et dans ce 
+
+cas el1es doivent être appelées avec des arguments correspondant aux paramètres déclarés. 
+
+Exemple d'appel de sous-routine dans SNSimuIator: 
+
+test: = carre (2) 
+
+44 
+
+Dans  l'exemple  ci-dessus  nous  affectons  à  la  variable  test  déclarée  précédemment  le  résultat  de 
+
+l'appel de la fonction carre avec comme paramètre le chiffre 2. 
+
+Instruction de retour d'une fonction 
+
+SNSimulator propose  une  instruction  permettant à l'usager de  spécifier la  valeur de  retour d'une
+ 
+
+fonction.  Cela se fait par le  mot-clé RETURN.
+ 
+
+Exemple d'instruction de retour de fonction dans SNSimulator:
+ 
+
+RETURN (x*x)
+ 
+
+Avec cette  instruction nous pouvons finaliser la déclaration de  la  fonction carre qui  devient:
+ 
+
+FUNCTION carre (x NUMBER) RETURN  NUMBER lS
+ 
+
+DECLARE
+ 
+
+BEGIN
+ 
+
+RETURN  (x*x)
+ 
+
+END
+ 
+
+Démarrage de la simulation 
+
+Le mot-clé START permet de déclencher la simulation.  La syntaxe de cette instruction est simple. 
+
+STARTsiml 
+
+L'instruction start doit normalement être la  dernière  instruction du  programme à exécuter car  une 
+
+fois  que la simulation est démarrée les autres instructions du programme ne sont plus exécutées. 
+
+Arrêt de la simulation 
+
+Le mot-clé EXIT permet de spécifier la  condition d'arrêt de la  simulation.  Sa syntaxe est: 
+
+EXIT siml  WHEN expression3 
+
+45 
+
+L'évaluation  de  l'expression  expression3  doit  être  une  valeur  booléenne.  L'instruction  EXIT  est 
+
+évaluée à chaque pas de simulation. 
+
+Commentaires 
+
+SNSimulator accepte deux  types  de  commentaires:  les  commentaires  uni  ligne qui  s'étendent sur 
+
+une  seule  ligne  et  les  commentaires  multi-lignes  qui  peuvent  s'étendre  sur  plusieurs  lignes.  Les 
+
+commentaires  uni  lignes sont indiqués par  le  symbole "--" au  début de  la  ligne de  commentaires 
+
+et  se  terminent à  la  fin  de  la  ligne.  Les  commentaires  multi  lignes  commencent  par  "/*"  et  se 
+
+terminent par "*f'. 
+
+Dans  ce  chapitre  nous  avons  présenté  le  langage  de  SNSimulator que  nous  avons  conçu  pour  la 
+
+modélisation et  la  simulation  de  réseaux  sociaux  multiplexes.  Ce  langage  se  veut  simple  afin  de 
+
+pouvoir  être  utilisé  facilement  par  une  personne  après  une  formation  minimale  en  informatique. 
+
+Dans  le  chapitre  suivant  nous  allons  aborder  le  fonctionnement  interne  de  SNSimulator et  nous 
+
+expliquerons comment SNSimulator exécute le  langage que nous  venons de présenter. 
+
+46 
+
+Chapitre 4 :
+ 
+
+Fonctionnement de SNSimulator
+ 
+
+Après  avoir présenté le  langage de  programmation SNSimulator dans  le  chapitre précédent,  nous 
+
+allons  dans  le  chapitre  actuel,  décrire  le  fonctionnement  interne  de  l'interpréteur  que  nous  avons 
+
+réalisé  afin d'exécuter notre nouveau  langage de programmation. Nous allons d'abord présenter le 
+
+traitement  des  paramètres  d'entrée  du  programme  SN Simulator  puis  nous  allons  parler  du 
+
+chargement  des  réseaux  dans  SNSimulator  et  en  enfin  nous  allons  expliquer  le  traitement  du 
+
+programme source par SNSimulator. 
+
+SNSimulator  est  un  programme  écrit  en  langage  Java.  11  s'exécute  à  partir  de  la  ligne  de 
+
+commande et ne possède pas d'interface graphique. 
+
+Comme  tout  programme java,  SNSimulator est  composé  de  classes java.  Les  principales  classes 
+
+java  constituant  SNSimulator  sont  la  classe  « Simulation »,  la  classe  « Interpreter »,  la  classe 
+
+« DirectedNetworks » et  la  classe « Main ».  La  classe  Main  est  la  première  classe  exécutée  lors 
+
+de  l'appel  de  SNSimulator.  Toutes  les  autres  classes  de  SNSimulator sont  exécutées par la  classe 
+
+Main.  SNSimulator  accepte  des  paramètres  lors  de  son  exécution.  Le  traitement  effectué  par 
+
+SNSimulator à partir des paramètres est abordé dans  le  paragraphe suivant. 
+
+Traitement des paramètres par SNSimulator 
+
+Les paramètres de SNSimulator peuvent être séparés en  deux groupes principaux:  Les paramètres 
+
+concernant les  réseaux à simuler et  les paramètres concernant le programme à exécuter. 
+
+L'utilisateur du programme SNSimulator a la possibilité de demander à ce que des descriptions de 
+
+réseaux  sociaux  soient  lues  et  chargées  en  mémoire  avant  même  l'exécution  de  la  simulation. 
+
+Pour  cela  il  faut  placer  la  chaine  de  caractères  "-n"  dans  la  liste  des  paramètres  passés  à 
+
+SNSimulator. 
+
+Cette chaine de  caractères doit  obligatoirement être suivie du  nom du  réseau à créer.  Le  nom du 
+
+réseau  peut être suivi  d'un chemin d'accès  vers  un  fichier contenant les  informations du  réseau à 
+
+47 
+
+charger  en  mémoire.  Si  l'utilisateur  ne  fournit  pas  une  adresse  de  fichier  valide  alors  un  réseau 
+
+vide sera créé en mémoire. 
+
+La  chaine  de  caractères  "-p"  permet  de  préciser  un  fichier  texte  contenant  des  instructions  à 
+
+exécuter  par  SNSimulator.  Ce  paramètre  est  suivi  du  chemin  d'accès  du  fichier  à  exécuter.  Si 
+
+aucun  fichier  à  exécuter  n'est  fournit,  SNSimulator affichera  simplement  les  réseaux  passés  en 
+
+paramètres. 
+
+Exemple d'appel de SNSimulator: 
+
+SNSimulator  -n  collaboration  ./cowork.dat 
+
+-n  conseil  ./advice.dat 
+
+-n  amitie  ./friend.dat  -p 
+
+programme. txt 
+
+Extrait de  la section de  SNSimulator qui  traite les paramètres: 
+
+boolean prog=false; 
+
+for(int k=O;k<args.length;k++) 
+
+( 
+
+if(args[k].equals("-n ")) (
+ 
+if(k= =(args. length-2))
+ 
+
+networks.AddNetwork(args[k+ J},  Il'');
+ 
+
+else{
+ 
+
+if((largs[k+2].equals("-n /'))  && (largs[k+2].equals("-p'')))
+ 
+
+networks.AddNetwork(args[k+J},args[k+2}),·
+ 
+
+else
+ 
+
+networks.AddNetwork(args[k+ J},  11/'); 
+
+}
+ 
+
+}
+ 
+
+else if(args[k].equals("-p /')){
+ 
+
+if(lprog){
+ 
+
+prog=true;
+ 
+
+try{
+ 
+
+program=new FiieReader(args[k+ I});
+ 
+
+} 
+
+catch(Exception e){
+ 
+
+System. out.println(e. toStringO),'
+ 
+
+}
+ 
+
+}
+ 
+
+else
+ 
+
+System.out.println("Only one programfile is allowed'');
+ 
+
+48 
+
+} 
+
+} 
+
+La  classe  Main  exécute  la  méthode AddNetworkO  de  la  classe  DirectedNetworks  qui  charge  en 
+
+mémoire  tous  les  réseaux  passés  en  paramètre  à  SNSimulator.  Dans  le  paragraphe  suivant  nous 
+
+allons  aborder le chargement en mémoire des réseaux transmis en paramètre. 
+
+Chargement de réseaux en mémoire 
+
+SNSimulator accepte trois  types de fichiers  de réseau: 
+
+a)  Les fichiers  texte contenant une matrice d'adjacence décrivant le  réseau à créer. 
+
+Afin  de  pouvoir manipuler les  graphes  de  manière  informatique,  il  est  nécessaire d'en avoir  une 
+
+représentation  mémoire.  Il  existe  deux  principaux  types  de  représentation  des  graphes  :  la 
+
+représentation par une matrice et la  représentation par une liste. 
+
+Les  représentations  matricielles  des  graphes  peuvent être séparées en  deux  groupes:  les  matrices 
+
+d'adjacence et les matrices d'incidence qui ont été définies au chapitre un. 
+
+49 
+
+1 1  0 0 1 0 
+1 0  1 0  1 0 
+0 1  0  1 0 0 
+0  0  1 0 1 1 
+1 1 0 1 0 0 
+0 0  0 1 0 0
+Illustration  16: Matrice
+
+d'adjacence 
+correspondante au graphe 
+précédent 
+
+Illustration  15:
+ 
+Exemple de Rraphe 
+
+Source site web Wikipédia 
+
+Ce format de fichier est le  format par défaut de SNSimulator. 
+
+GOOOOO':'  oOCOOCOOl~O)C~?:)'O)ooO:':OOC:O't')ll:O:j~J:ooo;:' 
+wOOOD01~OlC:;'DOO~lOOO..  1"'}.l)~;O".O 
+ooOtO)OC' 
+ooooOO:'OOOOl~lO  lOI:11~lOI)1:O·:O::Oi.:OtOO)Ol100~ 
+
+)Ol~»)OOOOOOOOOOO) 
+
+tlOC1)lO)OIOO:,O 
+
+_I:'O(lr:'O~l'JOOt:. 
+
+)10<)10i 
+
+'3 
+
+"  0 0 c  CI 0 ':
+
+., 0 "  1 0 0  c, 0 "  1 0  (1  0 l 
+
+., 0  )
+
+" 
+(1 0 0  (\ 
+
+i;\  0 0 : 0 0 .) 0 0 0 0 0 ,  1 : 0  ~  1  1) 
+
+l 
+.:0
+o  0) 0  {l  0  0 
+:;) 1 
+")1)0':'0 
+O~I:-l~(~_?OO<)  ~O:;'leo:,o'~·jOt._CO;'O 
+{,Ço)';O)C'o:,)ooo:i)O(\V)OOO:lC:O)COO  00000  '):OOOOO)oOOO~ 
+o 0 (\
+00  )Ot)~l)'::O(>::)O:)':-:~OOl:  o e lo : t : . lC l : ) ) )OQ · )O l I0 ' ) lO  
+O~O:'O~~~:1000:001)OOIOO":OvCl0C'C'~OO)C1~11:0:"1:')10 
+OQQIOO:11000f);1;'1";O"'OO"';lO':100C3:-001';OQl~  000 
+
+l  0 "  0  ~  v CI 
+
+.,  0 
+CI 0 0 1  CI
+
+; '00 '00 0  ... 
+
+::0
+:. 1 0 0 
+
+l 0 0  C· 0 0 0 J 
+
+:  1 l 0  0  1) 
+
+,:1 0  Cl 0 0 ')
+
+:1 0 0 1 0 
+
+j  ~  0 " 0 
+
+~  0 0 ,)
+
+J  ~  0: 
+
+::: 1 0 
+
+') 0 1 1 1  v  (' 0 ? 1 1 0  0  CI
+
+: 0 
+
+:)  1 
+
+1:1  ~ 
+
+.) 
+
+" 
+
+;:1
+
+:) 
+
+':.
+
+~, 
+
+~ 
+
+l
+
+~  1 l 
+
+,
+
+: 1 1  1  1. 0 1 ç.
+
+"
+1 0 1 0 0 
+
+,  1 1 C l .   C  •  Cl 1 :
+
+" 1 0 l 3  Co
+" 
+
+~ 
+
+:> 
+
+J  0 
+
+t;.":J)':-;l  1) 
+
+: 
+
+" 
+
+:il  0 : 
+
+:  <)  1 0  Ct  C  :
+
+"  0 
+
+':  vOl  C l )  :; 
+
+i)  ~ 
+
+i  1  ~
+l 1 0  ~  "  1 l
+;. 1 1 
+1 1 1 0 v 0  0 
+
+":':(:C'll:-<:OOOOCIQOlOl~lC'::'l)l)C~QOCl')O'l 
+,
+
+':'
+"  1 C " 0 0 1 0  ~  1 1 1  C' 1 l 0 1 0  1  C' 1 l I " " 0 l
+:
+(lOCI
+
+O~OOO('10 
+, 1 
+:-;; 
+1 0 l
+1 l 
+';1 1 0 ?
+l  Cl
+fJ 1 0 0 , 0 
+l 
+i 
+o :.
+l
+1 1 
+1;:;CllOOOe"~01l.101,,,Ô01~OIC.OO~ O~(ll0(10(1C'';lCl:)C1~':oaoo 
+OO)C'OOOOQO)OO~O  "0:.00000:010:00000000('1):11010):';:'010 
+:  Q  ~ 
+1 :  ~  1 0 0  D  0  o!!o 
+t 
+:0 
+1)
+-
+~  1 ;, 0 l 
+(1
+i 
+
+0 l 
+, 0  ~  0 0 0 : 0 0 0 
+:
+l
+l 
+
+J 
+-:: 0 0 l 
+: 1 0 l 1 l 0 1 0 :  1 0 :  C J 0 O l t " 1 1 0 0 :. 
+
+l  1 1 :  0 1 (. 1 ) 0 0 l  1) 
+0:1 
+, 
+l 
+~  0 l  " 
+~.  1 
+: 1  r  0 ;  ~  0 
+l 
+.j 
+
+: 0  ~  1 l  0 1 1 l 
+:
+l
+1 J 
+,~ 
+l 0 l 
+
+:. 
+') 
+l 0 
+l  0 
+JI  ~  1  1)
+)  1 0 :  0 0 
+:1  C  ~ 
+l 
+~  0 0 l  0 
+
+!  0  CI
+:>  C i l l  0 1 0 0  ,j  1) 0 "
+
+:.  0) 0  ~ ~  0 
+l
+,
+l.
+
+:
+l 0 1 1) 1 
+l  ~  "
+l
+l
+
+:'
+:'
+o :  l 
+.) 0  IJ  )  0 , 
+
+Ij  v .)  C·  0) 0 0 
+: 1 1 0 l
+
+'"  1  i
+co 0  CI
+l
+CI
+l
+t" 
+l
+~ 
+
+o  CI
+1  :  Q 1 0  ('1 
+
+l 0 l 1 1 0 1 1 0 0 0 0 :
+
+(1 0  1  ~ 
+IJ
+) 
+
+: 1 1  ~  1 e 0 " 
+
+CI 1 0 1 :'
+~  0 
+
+i  0 : 1 0 1 1 0 1 (
+
+l '   rJ 0 0 1 1 : 
+
+c'  1)  0  1)
+l 
+l
+
+l  1) 
+
+(1 
+l  0 1  ~ 
+
+'='  0 l 
+:'
+(1
+
+: 
+:  1  ~
+
+0 0 o. 
+
+.,  ~ 
+" 
+J
+
+l 0 l 1 l
+
+" 0 0 :. 
+
+.  1 
+:
+
+l 0 l  1) 
+
+::  0 
+: 
+
+"  0 
+)
+: 
+
+':i 
+
+'0  c;  C ) 
+
+:;i  0 0 :
+
+1 :
+i 
+
+:. 0  CI
+
+:' 
+
+:.  l 
+
+~  1 l 
+
+,
+
+:. 0 "
+
+1;1  ~ 
+:Jo 
+
+;,
+(1
+
+0)
+
+: 
+l
+
+, 
+
+lOCI
+
+,
+
+l
+:
+~ 
+
+•
+;
+
+:-
+
+) 
+
+" 
+
+l
+
+) 
+
+:. 
+
+l
+" 
+l 
+
+~ 
+
+) 
+
+j
+
+)
+
+,
+
+)
+
+Illustration  17: Exemple de fichier de  matrice 
+d'adjacence pouvant être traité par SNSimulator 
+
+b)  Les  fichiers  Pajek.  Ce format  de  fichier  qui  est  le  format  de  fichier  du  logiciel  d'analyse  de 
+
+réseau Pajek est traité par l'intermédiaire de la  librairie JUNG.  Les fichiers Pajek contiennent une 
+
+représentation  des  réseaux  sous  une  forme  pouvant  être  facilement  traduite  en  une  liste 
+
+d'incidence avec une liste des nœuds suivie par une liste des liens entre les  nœuds. 
+
+50 
+
+"'Vertl.Ce3  14 
+l  Il 
+2  13 
+3  h'! 
+4 
+:;,"2 
+S  :;';3 
+6  \H 
+7  H5 
+8  H6 
+9  ~,7 
+1::>  WB 
+1::'  H9 
+Il  SI 
+13  S2 
+li  54 
+"'E:dge~ 
+l 5 
+3 5 
+3 6 
+5 6 
+9  10 
+9  11 
+10  11 
+3  12 
+5  12 
+6  12 
+10  14 
+11  14 
+9  12 
+
+Illustration  18: Exemple de fichier PAJEK 
+
+Source site web de Pajek 
+
+c)  Les  fichiers  GraphML  sont  traités  grâce  à  la  librairie  Jung.  GraphML est  un  format  de 
+
+fichier  XML permettant de décrire des  graphes.  Le  format  GraphML est disponible  sous 
+
+licence open source. 
+
+A.inplegr.ph 
+
+(;cl..-t:'lC:'·'l.:'O  ~:-:.ft=:.;"J7:.:0-;') 
+<çr~;:':J.l  li:i.:,.·~;w;1/~!4;~-'.1.ça~~lr~lC9,e!1r'lCI1!l'·
+ 
+
+cb:1.:: 0 °::'~ ~ ..:Ilw~ ....~. c:ç/ ~: '1 i:cr...s-e'".w· t:}..c~'
+ 
+x,j :~:~~~:1:1: i~~.•I~.: t~  ;,1 lç: !;~..tl.  ~u~:::: aYl:1. c:qllCl.l:!
+ 
+
+'t::;.: II~: ~;~. ;:e;::'j:!'~~"';  .': :..inl:,,/: .t·i ç: !.~ .X!:'}
+ 
+
+(,;:~~:::  .G°-;- ~);~j~rnl~"C::l:tC:tj')
+ 
+
+..J")
+ 
+(::-:~!  :~" 
+<r.:~!  l;o-,:j'I)
+ 
+<:.:-:tl;·":"/) 
+(!".:~!  :::":1"!)
+ 
+<:.~!  !~":~'/)
+ 
+<:,,.1::·":S")
+ 
+C::tl:;:o":!'/)
+ 
+
+<:~~!  ~j":PJ)
+ 
+c:.::!  ~:;-'.:~'J)
+ 
+c::::!  :<l"'r~C"i)
+ 
+<e1;!  ~::!(!."::.j'  :~l..!t··~·,t)
+ 
+<ti;! ~:~rc-t:"'!ll'  tm:~:·':lÎ·,')
+ 
+(~.~?- =:-;:~t·":'".i·  :e:1~;:··~:·I)
+ 
+(td;t  ::~:ct.··~'S·  :ar~!:·':!.~·J)
+ 
+(t~;t  !:"l:CP·r.~·  :.l!~t:·':i·i)
+ 
+<tZit  !C1.:tt"":.P  te:~~:··~.t·/)
+ 
+<~;t  !:',;=CP~.!"  :.J:~e:··:!·,')
+ 
+(t-i;t  :~~rc~··rS  '..t:,,!:.·~1·/)
+ 
+
+(t-ijt  !:~:Ct··:l'  :..l:,,!:··~:·/)
+ 
+<!j;!  !-::::Ct··:~·  :!or-;!:·':;·,!)
+ 
+<!::~!  !:::C!·'::·  I;H·:!:··~;·!)
+ 
+(tii! =:-::Ct·'::'  ~:-;~:.'~.l(o',l)
+ 
+
+</'j:~P~I)
+ 
+<I,,:~;~.:'.i>
+ 
+
+Illustration  19: Exemple de  fichier  GraphJvfL 
+
+Source site web de  GraphML 
+
+51 
+
+Chaque  réseau  chargé  en  mémoire  est  enregistré  dans  la  classe  DirectedNetworks.  Cette  classe 
+
+regroupe  tous  les  réseaux  définis  dans  SNSimulator ainsi  que  plusieurs  méthodes  permettant  de 
+
+les  manipuler.  Les  réseaux  de  SNSimulator sont représentés  dans  la  classe  DirectedNetworks par 
+
+des  graphes  orientés. Tous  les  réseaux  créés  dans  SNSimulator  sont  donc  par  défaut des  réseaux 
+
+orientés. La classe DirectedNetworks contient plusieurs tables de hachage. 
+
+Une  table  de  hachage  est  une  structure  de  données  informatique  qui  contient  plusieurs  éléments 
+
+appelés  valeurs  ainsi  que  plusieurs  clés  permettant  d'accéder  aux  éléments  de  la  table.  Chaque 
+
+valeur est associée à une et une seule clé. 
+
+Ces  tables  de  hachage permettent par exemple  d'obtenir  un  réseau  à partir de  son  nom  ou  de  son 
+
+numéro  d'identification  car  chaque  réseau  reçoit  automatiquement  au  moment  de  sa  création  un 
+
+numéro  d'identification  qui  est  attribué  par  SNSimulator selon  l'ordre  de  création  des  réseaux: 
+
+Par  exemple  le  premier  réseau  passé  en  paramètre  ou  déclaré  dans  le  programme  source  à 
+
+exécuter reçoit le numéro un  et ainsi de suite.  La classe DirectedNetworks est  utilisée tout le  long 
+
+de  l'exécution  du  programme  SNSimulator:  lors  du  traitement  des  paramètres,  lorsqu'un  réseau 
+
+est déclaré  par  l'utilisateur dans  le  programme  source  et  chaque  fois  qu'une  action  est  effectuée 
+
+sur un  nœud ou  sur un  lien d'un réseau. 
+
+52 
+
+package  StreamTokenizer Tokenizer = null
+ 
+package  int lignes = 0
+ 
+packaoe lnt colonnes = 0
+ 
+package Inl Uens =0
+ 
+package Inti
+ 
+package inl unTabl.au(O....O..1= null
+ 
+packa9€  FlleReader Fichier = null 
+
+El DirectedNelworks 
+
+Anributtl'S 
+
+Op.r~tio(l:J 
+
+package Diroetedl,.tworks(  )
+ 
+public l'ool.an  Addl'.tNOr1«  String nam., Stnng Fllejddr.ss)
+ 
+public Int  add_voeortex(  String net'Nork_name)
+ 
+public Ver1ex  add_vM~x(  String netw'ork_name, String v~rto::x_name)
+ 
+pul'Iie V.rt.,  9.Lv.rt"1 Slnng n.tNor1<_nam•. String propertLnam•. String PlopertLvalue)
+ 
+public V~11ex  geLvertex( Sirino net'h'ork_name, String vertex_na me )
+ 
+public boolean  remove_....ertex(  String network_name, intw)
+ 
+public  boolean  remove_vertex(  Sllin~  net'Nork_name. Str'InÇJ  vertex_namo:)
+ 
+public bool.an  remove_edge( Strmg n.tworlcname, String ed;e_name)
+ 
+public bOOlean  remoye_eage, String network_name, St/lng OulNode, Slrin; InNode)
+ 
+publ eEdg.  ;.L.d;.( Slrlng n.twor1<_nam., String p,op."Y-flame, String prope"Y_valu.)
+ 
+pub~c  Ed;e  gel_edoe( Sirin; netNor1<_name, String adge_name)
+ 
+pubRc Ed;.  add_Edg.( SlI1n; networ1<_name, S  n; eaoe_name, Suin; OUlNoae, Strlno InNode)
+ 
+pubUc boole.n  S6Lyalt.Vloperty( SUIn; nelworlLnaml. SIrln; vertox_name, SVln; Plope"Y..n.me. Soing OloOII1Y_"lue )
+ 
+pubac boolean  S61_ld;e-property( S1r1n; nelwor1\..n.me, String eage_name. Suin; prope"Y_naml. Soing prope"Y_value)
+ 
+pubfic OlrecledSparseGl1lphcVertex, Eage>  ;eLnetNor1«  SlJ1ng networ1<_name)
+ 
+public DlrectedSparseGl1lphcVort... Edge>  geLnetwor1«  .nt neIwOfk..index)
+ 
+publiC ml  g.CnetNor1<_count(  )
+ 
+
+. 
+
+Illustration 20:  Diawamme UML  de  la classe DirectedNetworks 
+
+Lorsque  tous  les  paramètres  de  SNSimulator  sont  traités,  la  fonction  Main  exécute  la  classe 
+
+Interpreter qui  est l'analyseur syntaxique du langage présenté au chapitre trois.  Le fonctionnement 
+
+de cet analyseur syntaxique est abordé au  paragraphe ci-dessous, 
+
+53 
+
+Traitement du programme source à exécuter 
+
+Une fois  que  les  réseaux  passés  en  paramètres sont chargés en  mémoire,  la  classe  Interpreter de 
+
+SNSimulator effectue l'analyse syntaxique du programme source en paramètre. 
+
+L'analyseur syntaxique de SNSimulator essaie de reconnaître les  différents éléments de  la  syntaxe 
+
+du  langage.  L'élément syntaxique de  plus  haut niveau  est  GetSimulationDejinition qui  représente 
+
+le  progranune  source  à  traiter.  Le  GetSimulationDejinition  est  composé  soit  de  la  déclaration 
+
+d'une procédure, soit de la  déclaration d'une fonction,  soit d'un appel  de sous-routine, soit enfin 
+
+d'une  séquence  d'instructions.  Pour  reconnaître  le  GetSimulationDejinition,  SNSimulator  va 
+
+cssayer de reconnaître chacun de ses éléments constitutifs. 
+
+De 
+
+la  même  manière, 
+
+pour 
+
+reconnaître 
+
+chacun 
+
+des 
+
+éléments 
+
+constitutifs 
+
+du 
+
+GetSimulationDejinition,  SNSimulator  va  essayer  de  reconnaître  chacun  de  leurs  propres 
+
+constituants  syntaxiques.  Et  ainsi  de  suite  jusqu'aux  différents  tokens  ou  mots  composant  le 
+
+progranune source. 
+
+Lorsque SNSimulator réussit à reconnaître l'élément  GetSimulationDejinitiol1,  c'est à dire que  le 
+
+progranune  source  est  correct  selon  la  syntaxe,  SNSimulator  crée  un  arbre  syntaxique  abstrait 
+
+représentant  le programme source. 
+
+En linguistique, l'arbre syntaxique représente la structure syntaxique d'une phrase. 
+
+En  informatique,  l'arbre  syntaxique  abstrait  est  la  représentation  arborescente  de  la  structure 
+
+syntaxique d'un programme source écrit dans un certain langage de programmation. 
+
+54 
+
+IP 
+
+~ 
+l' 
+
+NPk 
+
+Jôo/\
+
+1 
+
+vP
+ 
+
+~ 
+
+[+~ast]  / \ 
+  
+
+v  VP 
+/""
+tk  VP 
+-~ 
+CP 
+
+V 
+
+thOug~~ 
+IP 
+
+C 
+that  ~ 
+
+Mary loved Bill 
+
+Illustration 21:  Exemple d'arbre syntaxique de 
+la phrase en anglais:  "John thought that Mary 
+loved Bill" 
+
+SVlnbol ~ 
+
+integer 
+
+input
+
+(4)~(J) 
+
+1 
+2 
+
+(l)  (5)~ 
+
+]  output 
+
+4  gcd
+
+5 
+
+i 
+
+~Oj 
+
+7\  ~ Wr" 
+
+(O)A 
+
+(5) 
+
+A5 )
+
+(5)  / /  I\:~ 
+
+(0)A A 
+
+(5) 
+
+(0) 
+
+(5) 
+
+Illustration 22: Exemple d'arbre syntaxique abstrait 
+d'un prof!.ramme informatique 
+
+(5) 
+
+(0) 
+
+(0) 
+
+(5) 
+
+55 
+
+Chaque  nœud  de  l'arbre  créé  par  SNSimulator  est  une  classe  java  qui  représente  un  élément 
+
+syntaxique reconnu.  La racine de cet arbre est la  classe ASTGetSimulationDefinition qui  comme 
+
+son nom l'indique correspond à GetSimulationDefinition. 
+
+~ASTGetSlmulationDeflnltion 
+
+Amib~~.5 
+
+~rr.:Of15 
+
+public  ASTGelSlmulalionOefinrtion( inl  Id  ) 
+publtc  ASTG~ISlmuI311(lnOefinrtion(  Int~rpll}l~r  p.lnlld ) 
+
+Operations Re<ie:ined F,om Slrr",.'ef,'ode 
+
+publl':  Objet!  JjtAccepti  InlerpreleMs~or  ~s~or.  Objet! data  )
+ 
+public  ObJ~:t  JjtAcctpti FunctlonVisrtorlntef1a.:t v;srtor  Object data)
+ 
+publiC  ObJect  lJtAi:cept(  ProœdUff:Vlsrtonnter1ace V1srtor.  abject data)
+ 
+public (Ibject  jjtAJ:cept(  Rul-:Visltorlnter1ace VISllof,  Otj~ct  data)
+ 
+publIC Objeo:l  jtA"epl( Ma nE:"cutlvnVlsrtonnle~m  ~S~  OOjet! daia 1
+ 
+
+~RfdeI'''e!l'''''''#C4e 
+
+pubne Olljl(t jtAcc~  1r11erfllelef\.ll~0!  ~s~or,  C<Ille(1 d.lt1  ) 
+puDlic O/lj/(\  ut'\<c'flll f<JlC1liWMsAOOnle~ace  "'~or,  OllIect data ) 
+pullI~  C1tjecl  JtAm~  ProcWeVBllorllllMace \15101. aOjeCl data 1 
+pulli: Olljed  jlAce~  lllieV!S1lotlnlertace oISior  OIlj!Cl data 1 
+p!J1li: OllIed jlAccep1( MailE.,/(ution\1sltonnlenae< ~!AaC,  Objecl dala) 
+
+Illustration 23: Diagramme UML de  la classe 
+ASTGetSimulationDe(inition 
+
+56 
+
+~ASTFunl;tlonD.cl:J.rltton 
+
+publiC  Sllin9FunCllonN3m~
+ 
+~ublt(  boolnn palamE-lêfSPrUtnt =bl,~
+ 
+
+pUb!l(  ASTfuncl1OnOecl3131ion( lnt  Id)
+ 
+pubir(  A.STFun-:llonOed313h.>n(  IIUlpl~t"'l  p./tlIld)
+ 
+
+~J:.on1 
+
+0"""<1:.-0,')$ R~~Itte<J  F!orn  S~~f;0d9 
+
+p:.Jbttt  ObJ':-CI  IJtAW':pT(  Interpro!':lerVlsrtor VlSJlor. CtbJêet data)
+ 
+publiC  ObJêet  1JtAct;ept( FunctlonVl$ltor1nter13Ce \IIsitor. ObJect dtlté'l  )
+ 
+pub:lc  ODject  JjtA(cept( Proce1ure\'lsltorlntertace VIsitaI. Objett Qa )
+ 
+pUbliC  Object  jJtA(Cepl( Rule'i1S11orlntêlfa,e \I1$ltOl. 
+pOOle:  ObJeCl  ltJ'<<tpt( MalnE'(eCuDOnVltmMterf.xe wltor. O~t data)
+ 
+
+J~(t  (I,1ta  1
+ 
+
+Cpefilf'lOlJ,l~IM(JFrom.vOtle 
+
+plA;Ic ObJett  ktAl."'ffpl( lI'ltt>lpletef"lASitOt  Sltof. Ob\eCI c1Jla  1
+ 
+putte OClfla  ]:tA«e-Pt( Funcoonvt'ItOf1rtMtace "'''IIOf, 00je« Qolta  )
+ 
+plA* ObJte1  ~«ptt  Proce"tnVlsltorh.eff;lct' "'111of, Clbje(t GMa )
+ 
+PUOO< OIllect  UtA<UPl( ~leno<.  _lX, 0<>10« am 1
+ 
+pldt ODject  ~!ACttfll(  MalnE.~(utIOnV'1'dtcwlntt:rtact 
+
+\m1t(Ji  O~I  d<na  ) 
+
+Illustration 24: Diagramme UML de  la classe 
+ASTFunctionDeclaration 
+
+Une  fois  que 
+
+l'arbre  syntaxique  abstrait  est  créé,  SNSimulator  le  parcours  afin  d'exécuter  les 
+
+instructions  du  programme  source.  Le  parcours  de  l'arbre syntaxique  s'effectue  selon  le  modèle 
+
+visi teur. 
+
+Le  modèle  visiteur  est  une  méthode de  traitement des  arbres  syntaxiques  abstraits  qui  consiste  à 
+
+faire  parcourir  l'arbre  syntaxique  par  une  classe  java  appelée  visiteur.  En  général  le  visiteur 
+
+effectue un  parcours en profondeur d'abord de J'arbre syntaxique (parcours depth-first) mais il  est 
+
+possible d'effectuer un ordre de parcours différent. 
+
+Le parcours en profondeur d'un arbre consiste à  visiter d'abord  tous  les nœuds fils  d'un  nœud  x de 
+
+J'arbre avant de  visiter le  nœud x, 
+
+Le  visiteur est  une  classe java qui  possède  une  méthode  visit pour chaque  élément syntaxique de 
+
+la grammaire utilisée. 
+
+Exemple de méthode de  la classe visiteur pour ['élément syntaxique  GetSimulationDefinition 
+
+public Object visi!(ASTGetSimu/ationDefinition node,  Object data)( 
+
+data  =  node.chi/drenAccept(this. data); 
+
+return data; 
+
+} 
+
+57 
+
+Dans  chaque  méthode  visit  de  la  classe  visiteur,  un  appel  de  la  méthode  childrenAccept  est 
+
+effectué.  La  méthode 
+
+childrenAccept  est  la  méthode  responsable  du  parcours  de  l'arbre 
+
+syntaxique abstrait. 
+
+Lors  du  parcours de l'arbre syntaxique abstrait,  le  visiteur exécute les  instructions de  la  méthode 
+
+visit  spécifique  pour  chaque  type  d'élément  syntaxique.  Étant  donné  que  nous  avons  choisi  de 
+
+réaliser  un  interpréteur,  ces  instructions  consistent  à  exécuter  les  instructions  du  programme 
+
+source. Dans le cas d'un compilateur, le visiteur produit le code machine. 
+
+public  ObJe-Cl  'risfl(Slmple+Jod", node.Objl?Cldala)
+ 
+publIC Ob]!!'c!  '.lslt(ASTGetSrmulahOnOenMion node  ObJeCT daTa)
+ 
+pull:lc  Obj~t1  ~lslttASTDecl3rationSHMn  node. ObJect dm)
+ 
+pulll!c Object  ",srl( ASTDe-cl3r3lions node-. ObJec! dalJ) 
+put,'lc  OU)",,'I  'rlsll(ASTProce.:lureDeclar:llion node. ObJetl da!a)
+ 
+public Oblect  ";$1(( ASTN",fwolkOeclalJoon noojo)  OD)!)Cl d3la)
+ 
+public  Ob)';!C!  ",iSIt(AS'TNod.,O.;,clafadon l'lOd..,.  Obj»c! data)
+ 
+public ObJ'W  '.Tsrt(ASTHodeSelOeclaf3I1on nç.de. Ob)!):c!  da13)
+ 
+DU!!U,  Ob]ect  ·.is~l(  A$TUnlDecl;naoon  node. ObJecl dala i
+ 
+PUb'IC  ObJecI  'r1~lt(  MTUnkSetD~cl3rJMnnod"'.  Ollj~cl data)
+ 
+put.:" Obj.,,[  vlSlt( ASTProp':lrt;Oeclarallon nDd",  Ot,)(ocl data)
+ 
+"ubilc ObJect  ',fsfl( ASTRuleDeclaralion node. Olliecl .jala)
+ 
+public ObJ,,"ct  ·tistt( ASTRulE'BQd"j Mde. Objec\ da\;))
+ 
+put)~ic  Object  ·tisH( ASTProcedureBodi node. ObjE'cl data)
+ 
+public ObJ~ct  't'isit( ....STfunclionDeclaratlon node. ObJec! dala)
+ 
+puulic ObJeo  "';slt(ASTFuncllonBod", node. Objec! da\;)l
+ 
+pul'hc  Object  ...sil( ASTV:l(iauleDeclaration node  Ob)'.ct dalJ )
+ 
+public Obj..."  "';slt(ASTConslantO ..clarahon nod... ObJect data)
+ 
+public Objec!  'ilslt(ASTIypeDeclarallOn nCode,  ObJecl dala)
+ 
+pullilc Objec!  ',jsil{ ASTBeç(:lEndBloc~  noo::'i, Qt'J"" dala)
+ 
+put!hc  Object  'f's:t(ASTS"'QuenceOfStalemenls nodo!:.  ObJ"Cl dala)
+ 
+public Obj",c!  "lSII(ASTStat"m"mnode, ObJecl dala)
+ 
+public  Ohj.,.C\  'iisll(ASTSuIHoutifleCall node, Ol:>Ject da!a)
+ 
+public OIJj.,et  .,sit(ASTAssj~nnlenlSlatem"nl  no'.1.., ObJacl dala)
+ 
+
+Illustration 25: Dia:;;ramme  UML de la classe visiteur 
+
+SNSimulator parcourt  l'arbre syntaxique  du  programme  source  à deux  reprises.  Lors du  premier 
+
+passage,  SNSimulator  exécute  toutes  les  instructions  de  déclaration  qu'il  rencontre.  Toutes  les 
+
+fonctions,  variables, procédures, règles sont donc créées lors de ce passage. 
+
+Lors du  second passage SNSimu!ator exécute toutes les autres instructions du programme source. 
+
+Lorsque SNSimulator rencontre l'instruction START il  démarre l'exécution de  la simulation. 
+
+58 
+
+Extrait de la description au  format BNF du  langage SNSimulator présentée en annexe 
+
+GetSimulationDefinition  ::=  (  ProcedureD  c!aralion  <EOF> 
+
+1  FUI1ClionDeciaration  <EOF> 
+
+SeQuenceOfStatemenl5 
+
+<EOF> 
+
+"CALL" 
+
+SubroutineCali 
+
+<EOF> 
+
+<EOF> 
+
+1 
+
+) 
+
+DeclarationSection ::= "DECLARE" Declarations 
+
+Declarations 
+
+(  VariableDeclaralion 
+
+ConslanlDeclaralion 
+
+FuncliQnDe  laration 
+
+NC1WOl'kDeclaration  1  NodeDeclaration  1  NodeSclDeclllration  1  LinkDecliHalion  1  LinkSetDeclaratioll 
+PropertvDeclaratiol1  Pme  dureDeelaration  RuieD  c1aralion  SimulaiionDeclaration) *
+ProcedureDeclaration  ::=  "PROCEDURE"  <SjDENTiFiER>  (  "("  '')''  1  "("  ParamclerList  '')'')
+ 
+
+1 
+
+1 
+
+1
+
+"IS" ProcedureBQdy
+ 
+NetworkDeclaration  ::=  "NETWORK"  <SjDENTiFIER>  (  "USING"  <FILE_ADDRESS>  F
+ 
+NodeDeclaration  ::= "NODE" <S  IDENTiFiER>  "IN"  <S  IDENTiFIER>
+ 
+
+Exécution de la simulation 
+
+11  existe  différents  types  de  simulation:  la  simulation  continue,  la  simulation  discrète  elle-même 
+
+séparée en simulation discrète synchrone et en simulation discrète asynchrone. 
+
+La  simulation  continue  est  basée  sur  la  modélisation  du  système  étudié  à  l'aide  d'équations 
+
+différentielles. 
+
+Dans  une simulation discrète le système simulé est  soumis à une  succession d'évènements  qui  le 
+
+modifient.  La simulation discrète se divise en deux grandes catégories: 
+
+Dans  une  simulation discrète  synchrone  on simule  à chaque fois  le  passage d'une  unité  de  temps 
+
+sur tout le système. 
+
+Dans  une  simulation  discrète  asynchrone  on  calcule  l'arrivée  du  prochain  événement,  et  on  ne 
+
+simule qu'événement par événement. 
+
+Enflll  la  simulation  par  agents  est  basée  sur  le  concept  d'agent.  Plutôt  que  de  simuler  les 
+
+événements qui affectent le système, dans la simulation par agents,  le  système est plutôt considéré 
+
+comme  un  ensemble  d'agents  autonomes.  Chaque  agent  possède  un  comportement  qui  lui  est 
+
+propre et qui est basé sur des règles qui  peuvent être différentes pour les autres agents du  système. 
+
+L'évolution du système simulé est le résultat du comportement de tous  les agents. 
+
+SNSimulator est un  simulateur discret asynchrone. 
+
+59 
+
+L'exécution  de  la  simulation  est  effectuée  par  la  classe java  Simulation.  La  classe  Simulation 
+
+contient plusieurs  tables  de  hachage qui  stockent  les  variables,  les  constantes,  les  procédures,  les 
+
+fonctions  et  les  règles  de  la  simulation.  Lorsque  la  simulation  démaITe,  la  classe  Simulation 
+
+exécute  une  boucle  qui  ne  s'aITête  que  lorsque  la  condition  précisée  dans  l'instruction  EXIT 
+
+WHEN est vraie. 
+
+Boucle exécutée lors de la simulation 
+
+public boolean startO{ 
+
+while(!end_oLsimulationOJ{ 
+
+rules=simulationJules. valuesO. iteratorO; 
+
+applyJulesO; 
+
+} 
+
+return true; 
+
+} 
+
+La  fonction  end_oCsimulation  est  une  fonction  qui  retoume  la  valeur  booléenne  vrai  lorsque  la 
+
+condition d'aITêt de la  simulation est atteinte. 
+
+Si  l'utilisateur n'a pas  spécifié de condition d'arrêt alors  la  boucle devient  une  boucle  infinie.  À 
+
+chaque  pas  de  la  boucle,  SNSimulator  exécute  toutes  les  règles  définies  dans  le  programme 
+
+source l'une après l'autre. Chaque pas de la boucle constitue un  pas de temps dans la simulation. 
+
+Une  fois  que  la  condition  d'aITêt  de  la  simulation  est  atteinte,  SNSimulator  affiche  tous  les 
+
+réseaux  sociaux  utilisés  comme  dans  les  exemples  de  visualisation  de  réseau  par  SNSimulator 
+
+présentés ci-dessous. 
+
+60 
+
+§  Simulation 
+
+Attributes 
+
+private  String  SirnName 
+
+Operations 
+
+public  String  get_SimName(  )
+ 
+public  void  set_SimName( String  name )
+ 
+package  Simulation( DirectedNetworks  nets)
+ 
+public  boolean  stal1(  )
+ 
+public  boolean  end_otsimulation(  )
+ 
+public  void  applLrules(  )
+ 
+
+Illustration 26: DiaRramme UML de la classe Simulation 
+
+Exemples de visualisation de réseau par SNSimulator 
+
+61 
+
+Illustration 27: Réseau d'amitié du cabinet d'avocats 
+décrit dans [277 
+
+62 
+
+Illustration 28: Réseau de conseil du  cabinet d'avocats 
+décrit dans (277 
+
+63 
+
+Illustration 29: Réseau de collaboration du  cabinet 
+d'avocats décrit dans !277 
+
+Dans  ce  chapitre  nous  avons  abordé  le  fonctionnement  interne  de  l'interpréteur  SNSimulator. 
+
+Nous  avons  examiné  le  traitement  des  paramètres,  du  programme  source  et  l'exécution  de  la 
+
+simulation.  Dans  le  prochain  chapitre  nous mettrons  le  langage  SNSimulator en  pratique  et  nous 
+
+allons  programmer une  fonction  permettant de  déterminer le  coefficient de corrélation entre deux 
+
+réseaux sociaux simultanés. 
+
+64 
+
+Chapitre 5 : 
+
+Utilisation du langage SNSimulator 
+
+Dans  ce  chapitre  nous  allons  mellre  en  pratique  SNSimulator.  Pour  cela  nous  allons  étudier 
+
+l'évolution  de  la  corrélation  entre  deux  réseaux.  Nous  allons  appliquer  à  chacun  des  réseaux  le 
+
+modèle de croissance de  réseaux  proposé par Newman,  Jin  et Girvan  dans  [16].  Dans  la  suite de 
+
+ce chapitre nous allons d'abord  présenter les réseaux  sur lesquels nous allons  travailler,  puis  nous 
+
+parlerons  du  modèle  de  croissance  de  réseaux  de  Newman,  Jin  et  Girvan.  En  troisième  partie 
+
+nous  allons  montrer  la  réalisation  du  modèle  de  croissance  de  réseaux  à  l'aide  de  SNSimulator. 
+
+Dans  la  dernière  partie de  ce  chapitre  nous  allons  présenter les  résultats  que  nous  avons  obtenus 
+
+et nous allons les  interpréter. 
+
+Réseaux utilisés 
+
+Dans  le  cadre de  celle application de  SNSimulator,  nous  avons  utilisé  les  résultats  de J'étude d'un 
+
+cabinet  d'avocats  de  la  Nouvelle-Angleterre  aux  États-Unis  d'Amérique  par  Emmanuel  Lazega 
+
+dans  [27].  Le personnel de  ce cabinet est constitué de 71  avocats. Ces avocats sont répartis  entre 
+
+36  associés et 35  collaborateurs.  Les  avocats du  cabinet pratiquent deux  domaines du  droit:  Le 
+
+contentieux  et le  conseil.  Le  conseil  regroupe  toutes  les  activités qui  ne  sont pas  du  domaine du 
+
+contentieux. 
+
+Dans  le  cadre de  son  étude sociologique,  Emmanuel  Lazega  a  observé trois relations  différentes 
+
+au  sein du  cabinet d'avocats:  Le  conseil  entre  avocats,  la  collaboration  et  l'amitié.  Pour réaliser 
+
+son  étude,  Emmanuel  Lazega  a  soumis  chaque  avocat  à  un  questionnaire  sociométrique  sur 
+
+l'existence ou non de relations entre la personne interrogée et les autres membres du cabinet. 
+
+Le  résultat  final  de  l'étude  est  constitué  de  trois  matrices  d'incidence,  une  pour  chaque  relation 
+
+étudiée, que nous allons exploiter dans les paragraphes suivants. 
+
+Le modèle d'évolution des réseaux sociaux de Newman, 
+Jin et Girvan 
+
+Emily M.  Jin,  Michelle Girvan et M.  E.  1.  Newman  ont proposé dans  [16]  un  modèle permettant 
+
+de  reproduire  les  processus  d'évolution  des  réseaux  sociaux.  Selon  eux  les  réseaux  sociaux 
+
+suivent un  certain nombre de règles: 
+
+65 
+
+1)	  Le  nombre  de  nœuds  des  réseaux  sociaux  peut  être  considéré  avec  une  approximation 
+
+acceptable  comme  fixe:  À la  différence  de  certains  types  de  réseaux  tels  que  le  World 
+
+Wide Web  dans  lesquels le  nombre de  nœuds du  réseau  croit au  fur  et à mesure du  temps 
+
+par l'addition de nouveaux nœuds et liens dans le réseau,  les réseaux sociaux sont souvent 
+
+constitués d'une population de taille fixe  car l'arrivée de nouveaux individus au  sein de  la 
+
+population considérée se fait  à un  rythme beaucoup plus faible  que,  par exemple, dans  le 
+
+cas du  World Wide Web. 
+
+2)	  Un  degré  limité:  Dans les réseaux  sociaux,  la probabilité pour qu'une  personne du  réseau 
+
+considéré  établisse  un  nouveau  lien  diminue  fortement  lorsque  cette  personne  possède 
+
+déjà des liens dont le  nombre approche d'une certaine valeur limite. 
+
+3)	  Regroupement de  nœuds:  La probabilité que deux  personnes du  réseau établissent un  lien 
+
+entre  eux  est  proportionnelle  au  nombre  de  personnes  avec  lesquelles  elles  ont  toutes 
+
+deux  un  lien (proportionnelle au  nombre d'amis communs) 
+
+4)	  Décroissance  des  relations:  La force  des  liens  du  réseau  peut diminuer avec  le  temps  et 
+
+des  liens  peuvent même  se  briser  mais  aussi  se  créer ce  qui  permet au  réseau  de  ne  pas 
+
+rester statique. 
+
+Dans  leur  article  les  auteurs  proposent  deux  modèles  qui  respectent  les  quatre  règles  que  nous 
+
+avons  présentées  ci-dessus.  Dans  le  cadre  de  ce  projet  de  recherche  nous  nous  sommes  surtout 
+
+intéressés au  premier des deux modèles et nous allons l'aborder dans les paragraphes suivants. 
+
+Le  modèle de  Newman, Jin et Girvan est fondé  sur la  probabilité que deux personnes d'un  réseau 
+
+se  rencontrent.  Cette  probabilité  doit  être  proportionnelle  à  la  fois  au  nombre  de  liens  entre 
+
+chacune des  deux personnes et  les  autres personnes du  réseau mais également  proportionnelle au 
+
+nombre  de  personnes  du  réseau  qui  ont  un  lien  à la  fois  avec  les  deux  individus  considérés.  Les 
+
+auteurs  proposent  deux  fonctions  dont  la  combinaison  permet  d'obtenir  une  distribution  de 
+
+probabilité qui satisfait aux conditions de proportionnalité énoncées: 
+
+a) La fonction  de Fermi 
+
+66 
+
+f(zi)=  l/(exp(l3(zi-zmax))+l). 
+
+Dans la  fonction  de Fermi  le  terme  zi  représente le  nombre de liens entre  l'individu  i et les  autres 
+
+membres  du  réseau  considéré.  zmax  est  le  nombre  maximal  de  liens  qu'un  individu  peut  avoir 
+
+conformément  à 
+
+la  règle  numéro  2  relative  au  degré  limité  que  nous  avons  présentée 
+
+précédemment.  L'élément  ~  de  la fonction  contrôle  la  vitesse  de  diminution  du  nombre  de  liens 
+
+d'un individu lorsqu'il approche de  la valeur zmax. 
+
+b)  La seconde fonction représente l'augmentation de  la  propension de deux  individus à établir des 
+
+liens  entre  eux  lorsqu'ils  ont  déjà  des  liens  avec  plusieurs  autres  individus  en  commun.  Les 
+
+auteurs de  l'article expriment cette fonction de la  manière suivante: 
+
+g(mij)=l-(l- pO)exp(-cxmij) 
+
+Dans cette  formule  mij  représente  le  nombre de  personnes  liées  à  la fois  aux  individus  i et j.  Le 
+
+terme pO  quant à  lui  représente la  probabilité d'établissement de  lien  lorsqu'il  n'y a personne dans 
+
+le  réseau  considéré  qui  a  des  liens  à  la  fois  avec  i  et  avec  j.  Le  terme  a  est  un  paramètre  qui 
+
+permet de contrôler l'intensité d'augmentation de  la  fonction g. 
+
+La  probabilité par unité de  temps que deux individus i et j  se rencontrent est donnée par: 
+
+pijO = f(zi)*f(zj)*g(mij) 
+
+Pour  respecter  la  règle  numéro  4  ci-dessus,  le  modèle  de  Newman,  Jin  et  Girvan  attribue  à 
+
+chaque lien une force qui diminue petit à  petit d'une valeur sij  donnée par 
+
+sij=exp(-K L1t) 
+
+lorsque les deux  individus i et j  reliés  par ce  lien  ne se  rencontrent pas.  Le  terme t.t représente  le 
+
+temps écoulé depuis  la  dernière  fois  que  les  deux  individus  reliés  par  un  lien  se  sont  rencontrés. 
+
+Le  terme  K  est  un  paramètre qui  permet de  contrôler la  valeur de  sij.  Dans le  modèle  lorsque les 
+
+individus i et j  se rencontrent de nouveau  la  force  du  lien entre  eux est réinitialisée avec la valeur 
+
+1.  S'il n'existait pas de lien entre i et j et que i et j se rencontrent, alors un  lien avec une force de  1 
+
+est  crée.  Les  auteurs  ont  défini  0.3  comme  valeur  minimale  de  force  pour  l'existence  d'un  lien. 
+
+Lorsque la  valeur de  la force  d'un  lien devient inférieure à 0.3, ce  lien est supprimé. 
+
+67 
+
+Pour  simuler leur  modèle  d'évolution  de  réseaux  sociaux,  Newman,  Jin  et  Girvan  ont  utilisé  la 
+
+méthode de Monte Carlo cinétique qui  fait  l'objet du  paragraphe suivant. 
+
+L'Algorithme de Monte Carlo cinétique 
+
+Les  algorithmes de  Monte  Carlo  sont  une  famille  d'algorithmes  basés  sur  l'utilisation  de  nombres 
+
+aléatoires.  L'algorithme  de  Monte  Carlo  cinétique  est  un  algorithme  permettant  la  simulation 
+
+informatique de  processus qui  se  reproduisent  avec  un  taux  connu.  L'algorithme de  Monte  Carlo 
+
+cinétique est très  utilisé pour simuler des réactions chimiques au  niveau  microscopique. 
+
+L'exécution de  l'algorithme de  Monte  Carlo  cinétique  pour  un  système  comprend  les  sept étapes 
+
+suivantes: 
+
+1)  On  note  to  le temps initial  du  système. 
+2)  Calculer  les  taux  d'occurTence  C  de  toutes  les  évolutions  possibles  du  système  pour 
+
+i=l,....., N avec  N  le  nombre total de transitions possibles. 
+
+état initial 
+
+états finaux 
+
+Illustration 30: Algorithme de 
+Monte  Carlo:  transitions du système 
+
+Source Wikipédia 
+
+68 
+
+3)  Calculer  Co,=L C le taux de transfelt total. 
+
+4)  Le  système  quitte  son  état  initial  au  bout  du  temps  T=  -ln(U)/Col où  U  est  un  nombre 
+
+choisi aléatoirement compris entre 0 et  1. 
+
+5)  On choisit un  second  nombre aléatoire  U'  compris entre 0  et  COl  qui  servira à déterminer 
+
+parmi  les transitions possibles du  système celle qui sera exécutée. 
+
+6)  Si  U'  est  compris  entre  0  et  fi  alors  le  système  transite  vers  J'état  1.  Si  U'  est  compris 
+
+entre fi et f  l+f2 alors  l'état 2 sera choisi. D'une manière générale, 
+
+Si  =  L~=l  r j 
+
+avec So=O  et si  U' est compris entre Si-I  et Si  alors la transition  i sera exécutée. 
+
+o 
+
+~Ol 
+
+Illustration 31: Algorithme de 
+Monte Carlo:  choix de  la  transition 
+à exécuter 
+
+Source Wikipédia 
+
+7)  Changer le temps en  tO+T et recommencer à  l'étape  1. 
+
+Réalisation du modèle de Newnlan, Jin et Girvan avec 
+SNSimulator 
+
+Nous  allons présenter dans  cette  partie  la  manière dont nous  avons créé  le  modèle  de  croissance 
+
+de réseaux sociaux de  Newman, Jin et Girvan avec le  langage que nous avons conçu. 
+
+Tout  d'abord  nous  allons  rappeler  les  principales  caractéristiques  du  modèle  que  nous  nous 
+
+proposons de réaliser: 
+
+a)  Une probabilité par unité de temps que deux individus i et j  se rencontrent: 
+
+69 
+
+pUO  =  f(zi)*f(zj)*g(mij)
+ 
+avec f(zi)  =  1/(exp(f3( zi- zmax)) + 1)
+ 
+et  g(mij)=l-(l- pO)exp(-Oimij)
+ 
+
+b)  Diminution de la  force des  liens par  sij =exp (- K .dl) 
+
+c)  Simulation par l'algorithme de Monte Carlo cinétique 
+
+Étant  donné  que  nous  avons  conçu  le  langage  SNSimulator  de  manière  à  ce  qu'il  soit  le  plus 
+
+simple possible, il  est relativement simple de  traduire  la  fonction  pij.  Pour cela nous avons besoin 
+
+des fonctions  fO  et gO.  Nous  avons aussi  besoin d'un  moyen de  déterminer le  nombre d'individus 
+
+ayant  des  liens  avec  deux  individus  donnés  dans  un  réseau.  Dans  le  cas  d'un  réseau  d'amitié,  il 
+
+s'agirait de déterminer le nombre d'amis communs à deux  individus. 
+
+Nous avons donc créé quatre fonctions dans SNSimulator, p,  f,  g et common_friends_number: 
+

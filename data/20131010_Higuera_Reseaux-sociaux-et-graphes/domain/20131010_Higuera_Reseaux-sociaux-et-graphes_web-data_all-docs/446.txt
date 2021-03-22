@@ -1,0 +1,119 @@
+https://pagesperso.g-scop.grenoble-inp.fr/~stehlikm/teaching/miashs/TD2-Arbres.pdf
+
+Réseaux sociaux et théorie des graphes
+
+TD2
+
+Exercice 1. Trouver tous les arbres à 6 sommets, à isomorphisme près.
+
+Exercice 2. Soit T un arbre comportant au moins trois sommets de degré 1. Montrer que
+T contient au moins un sommet de degré au moins 3.
+
+Exercice 3. Soit G le graphe de la grille 5 × 5, où les arêtes horizontales sont de poids 2
+et les arêtes verticales sont de poids 1 (voir la ﬁgure ci-dessous).
+
+Question 1. Quel est le poids d’un arbre couvrant de G de poids minimum ?
+Question 2. Quelle serait la réponse pour une grille n×n, toujours avec les arêtes verticales
+de poids 1 et les arêtes horizontales de poids 2 ?
+
+Exercice 4. Un document important, rédigé en français, doit être traduit en cinq autres
+langues : allemand, anglais, espagnol, italien et portugais. Parce qu’il est plus diﬃcile de
+trouver des traducteurs pour certaines langues que pour d’autres, certaines traductions
+sont plus chères que d’autres. Les coûts (en euros) sont indiqués dans la table ci-dessous.
+
+de/à
+fr.
+all.
+ang.
+it.
+port.
+esp.
+
+fr.
+∗
+90
+50
+70
+120
+80
+
+all.
+90
+∗
+60
+100
+150
+100
+
+ang.
+50
+60
+∗
+90
+130
+80
+
+it.
+70
+100
+90
+∗
+110
+70
+
+port.
+120
+150
+130
+110
+∗
+50
+
+esp.
+80
+100
+80
+70
+50
+∗
+
+On veut obtenir une version du document dans chaque langue à un coût total minimum.
+Question 1. Modéliser le problème comme un problème d’un arbre couvrant de poids
+minimum. Décrire clairement le graphe.
+Question 2. Quel est le coût minimum pour obtenir une version dans chaque langue ?
+
+1
+
+Exercice 5. Cet exercice présente un autre algorithme pour le problème de l’arbre cou-
+vrant minimal. Il s’agit de l’algorithme de Prim.
+
+Algorithme 1 : P rim(G, w)
+
+Entrées : Un graphe G et une fonction de poids w sur les arêtes.
+Sorties : Un ensemble d’arêtes A formant un arbre couvrant de poids minimum.
+début
+
+A ← ∅;
+Choisir arbitrairement un sommet s et le marquer;
+tant que il existe un sommet non-marqué adjacent à un sommet marqué faire
+
+Trouver un sommet y non-marqué, adjacent à un sommet marqué x,
+minimisant le poids de l’arête xy;
+A ← A ∪ {xy};
+Marquer y ;
+Retourner A ;
+
+Question 1. Appliquer cet algorithme au graphe pondéré suivant, en choisissant s=a à la
+première étape :
+
+Question 2. Démontrer que le graphe T retourné par l’algorithme Prim est un arbre
+couvrant de G.
+Question 3. Montrer par récurrence qu’à chaque étape de l’algorithme, il existe un arbre
+couvrant de poids minimum de G comportant les arêtes contenues dans l’ensemble A
+courant. On pourra utiliser le fait qu’ajouter une arête à un arbre crée nécessairement un
+cycle.
+Question 4. Calculer la complexité (dans le pire cas) de l’algorithme de Prim.
+
+2
+
+2a111132433455bcedfghi3

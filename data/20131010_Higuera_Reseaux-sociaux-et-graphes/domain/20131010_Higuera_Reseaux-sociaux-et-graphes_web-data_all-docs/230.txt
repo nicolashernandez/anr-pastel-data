@@ -1,0 +1,1650 @@
+https://f-origin.hypotheses.org/wp-content/blogs.dir/2996/files/2016/10/2016_gdr_workshop.pdf
+
+Table des matières
+
+Programme de la journée
+
+Laurent Beauguitte, Emmanuel Lazega et Rémi Louf, Approches
+
+disciplinaires : invariants et spécicités
+
+Claire Lagesse, Les centralités des villes révélées par leurs ré-
+
+seaux viaires
+
+Viera Rebolledo-Dhuin, Centralités dans le monde du livre au
+
+XIX siècle
+
+Marta Severo, Réseaux numériques et centralités
+
+3
+
+4
+
+22
+
+28
+
+33
+
+Cette journée d'études a été rendue possible grâce au soutien du GDR Ana-
+lyse de réseaux en SHS, de l'UMR IDEES et de l'Université de Rouen.
+Pour citer cette publication :
+Laurent Beauguitte (coord.), 2016, Réseaux et centralité(s), Rouen, Actes du
+premier workshop du GDR AR-SHS, http://arshs.hypotheses.org.
+
+2
+
+Programme de la journée d'études
+
+Discutant : Karl van Meter
+9h30 Accueil des participant.e.s
+10h- 11h Laurent Beauguitte (géographie - UMR IDEES, Rouen), Emma-
+nuel Lazega (sociologie - CSO, SciencesPo Paris) et Rémi Louf (physique -
+Center for Advanced Spatial Analysis, Londres) : Approches disciplinaires :
+invariants et spécicités
+11h- 12h Claire Lagesse (géomatique, physique - UMR 6049 ThéMA, Uni-
+versité Bourgogne - Franche-Comté, Besançon) : Les centralités des villes
+révélées par leurs réseaux viaires
+
+Pause déjeuner
+13h30-14h30 Christophe Prieur (informatique - ParisTech Telecom) : Cen-
+tralités et réseaux égo-centrés
+14h30-15h30 Viera Rebolledo-Dhuin (histoire - Université de Versailles-Saint-
+Quentin-en-Yvelines) : Centralités dans le monde du livre au XIXe siècle
+15h30-15h45 Pause
+15h45-16h45 Marta Severo (sciences de la communication - Université Paris
+Ouest Nanterre) : Réseaux numériques et centralités
+16h45-17h15 : Discussion et conclusion
+
+Comité d'organisation : L. Beauguitte, S. de Peindray, A. Geroy, D. le Luyer
+
+3
+
+L. Beauguitte, E. Lazega et R. Louf, Approches dis-
+ciplinaires : invariants et spécicités
+
+Il était initialement prévu l'écriture d'un texte à 3 disciplines et à 6 mains.
+Coordonner nos emplois du temps pour atteindre cet objectif n'a pas été pos-
+sible, ce qui suit est donc une juxtaposition de trois approches.
+
+Laurent Beauguitte, Réseaux géographiques et centralités
+
+Il ne saurait être question de proposer ici et dans le cadre de cette journée
+une synthèse exhaustive et actualisée relative à la notion de centralité dans
+l'analyse de réseaux en géographie. Il s'agit plus modestement de proposer
+quelques pistes de réexion susceptibles de favoriser le dialogue disciplinaire
+entre praticien.ne.s de l'analyse de réseaux. En eet, si de nombreuses dis-
+ciplines mobilisent la théorie des graphes pour étudier des phénomènes re-
+lationnels, la diversité des méthodes et des questions de recherche reste un
+obstacle majeur aux échanges. Les données varient d'une discipline à l'autre,
+les questions de recherche et les méthodes dièrent, et ce qui est central - sa-
+chant que toutes les disciplines proposent diérentes mesures de la centralité
+dans un réseau - pour un.e géographe ne n'est pas nécessairement pour un.e
+sociologue ou un.e informaticien.ne. Une première partie rappelle les deux
+grandes traditions de l'analyse géographique des réseaux 1, une deuxième
+partie examine les questions de recherche relatives à la centralité, enn une
+courte conclusion s'intéresse aux développements des 20 dernières années
+dans la géographie francophone, développements ayant bénéciés d'apports
+issus d'autres disciplines.
+
+Réseaux techniques & matrices de ux
+
+Les travaux géographiques mobilisant l'analyse de réseaux peuvent être
+divisés en deux grandes familles : des travaux s'intéressant à des réseaux
+techniques et matériels ; des travaux s'intéressant aux ux (humains, maté-
+riels ou immatériels) entre lieux. Les réseaux techniques présentent au moins
+deux caractéristiques distinctes par rapport aux réseaux sociaux : ils ont
+nécessairement une inscription spatiale (coordonnées précises pour les som-
+mets, tracé donné pour les liens) et ils servent à transporter une quantité
+donnée (de personnes, de biens, d'énergie etc). On aura donc aaire à des
+
+1. Une version plus détaillée est disponible en ligne à l'adresse http ://grou-
+
+pefmr.hypotheses.org/3740
+
+4
+
+réseaux le plus souvent valués et spatialement contraints. Leur étude et leur
+représentation diéreront donc, tout comme les logiciels utilisés (SIG).
+
+Deux ouvrages ont exercé une inuence majeure sur l'étude géographique
+des réseaux : une thèse, éditée en 1963 (Kansky, 1963, The structure of trans-
+portation networks) et un manuel édité en 1969 (Chorley et Haggett, 1969,
+Network analysis in geography). L'ouvrage de Kansky s'intéresse uniquement
+aux réseaux de transports dont les sommets et les lignes s'inscrivent sur le
+territoire - en excluant donc le transport aérien. Dans le manuel de Chorley
+et Haggett, la focalisation sur les graphes planaires reste prédominante, tout
+comme la prise en compte de la valuation des liens (distance, intensité, etc.).
+Kansky propose pour l'étude des réseaux une série d'indicateurs inspirés par
+les travaux du mathématicien Claude Berge : simples à calculer, prenant en
+compte des indicateurs basiques (nombre de liens, nombre de sommets, dis-
+tance, intensité des relations), ils restent aujourd'hui encore très largement
+utilisés.
+
+Les principales questions de recherche concernent l'accessibilité des som-
+mets, l'ecacité du réseau, sa vulnérabilité et son aménagement. Contraire-
+ment à la sociologie, il est en eet fréquent que l'analyse des réseaux tech-
+niques serve à préconiser la modication du réseau étudié (aspect applicatif
+fort), ce qui suppose la prise en compte des coûts associés (créer un tronçon de
+TGV a un coût largement supérieur à l'ajout d'un.e ami.e sur facebook. . .).
+À noter également que les réseaux techniques sont généralement et volon-
+tairement redondants (existence de plusieurs chemins entre sommets voire
+multiplexité des liens) an de gérer le mieux possible les aléas. Cette redon-
+dance rend les réseaux techniques plus complexes, plus coûteux mais permet
+un fonctionnement correct même en cas de perturbations récurrentes (cf le
+cas du métro parisien qui est dans les parties les plus denses un multigraphe
+non planaire).
+
+Le ux, dans le manuel devenu classique de Denise Pumain et Thérèse
+Saint-Julien est déni ainsi :  mesure d'interaction spatiale obtenue par
+l'addition de déplacements individuels ou de quantités matérielles échan-
+gées entre deux zones géographiques pour une durée donnée  (Pumain et
+Saint-Julien, 2001, p. 14 2). Contrairement à une certaine géographie clas-
+sique s'intéressant d'abord aux lieux, c'est ici l'interaction entre lieux qui
+est au centre des réexions. On peut distinguer trois types d'approches : les
+indicateurs obtenus en partant d'une matrice de ux origine - destination ;
+les méthodes visant à simplier les ux et enn les modèles cherchant à
+
+2. Denise Pumain et Thérèse Saint-Julien, 2001, Les interactions spatiales, Armand
+
+Colin.
+
+5
+
+les expliquer. Ces trois approches permettent de catégoriser les lieux et de
+déterminer leur centralité, absolue ou relative (cf infra).
+
+Centralité, accessibilité et résidus
+
+En ce qui concerne les réseaux techniques, les indices Kansky ne s'inté-
+ressent que de façon marginale à la centralité : il s'agit soit de mesures carac-
+térisant le réseau (diamètre, intensité moyenne), soit d'étudier la connectivité
+du réseau (existence d'un ou plusieurs circuits entre des sommets). L'un des
+articles mettant au c÷ur de sa problématique la centralité est celui de Mu-
+raco publié en 1972 3. De façon caractéristique, le terme même de centralité
+est peu employé, au bénéce de celui d'accessibilité. L'auteur étudie la si-
+tuation des principaux carrefours avant et après des aménagements routiers
+dans deux villes américaines de taille comparable. Son approche inclut des
+mesures sur le graphe binaire et valué, des circulations simulées et enn un
+classement des sommets issu d'une analyse factorielle (gure 1).
+
+Figure 1  Les indicateurs utilisés par Muraco, 1972
+
+Les questions d'accessibilité restent au c÷ur de nombreux travaux géogra-
+phiques, les études récentes cherchant à intégrer la multimodalité des som-
+mets et les approches multiniveaux. Le lien fort entre étude géographique
+des infrastructures et aménagement reste très présent, ce qui peut parfois
+poser des problèmes tant épistémologiques que politiques. L'aspect magique
+du réseau en terme de développement territorial - un nouvel axe étant tou-
+jours vendu aux acteurs en promettant des retombées économiques positives
+
+3. William A. Muraco, 1972, Intraurban accessibility, Economic Geography, 48(4) :
+
+388-405.
+
+6
+
+- est depuis longtemps dénoncé (Oner, 1993 4), mais la force idéologique du
+réseau saint-simonien reste très ancrée dans les représentations 5.
+
+Les méthodes d'analyse des ux ne sont pas centrées sur des réseaux
+techniques et présentent peu d'aspects applicatifs. La méthode des ux do-
+minants a été proposée par Nystuen et Dacey en 1961 6. Un lieu i est dit
+dominant par rapport à un lieu j si :
+
+ le ux le plus important émis par j est à destination de i ;
+ le volume total reçu par i est supérieur au volume total reçu par j.
+La méthode crée un arbre (ou une forêt) couvrant orienté (mais des lieux
+peuvent se retrouver isolés) et met en évidence des lieux dominés, des relais
+et des lieux dominants, que l'on peut donc considérer comme des lieux ayant
+une forte centralité (gure 2). Comme toute méthode, elle a ses limites : elle
+garde un seul ux pour tous les lieux or l'écart peut être important entre ces
+ux, et deux ux émis par un même lieu peuvent être très proches en volume.
+Les méthodes de ux majeurs sont un assouplissement de la méthode des ux
+dominants dans la mesure où l'on prend en compte soit les x premiers ux
+émis par lieu ; soit les ux représentant plus de x % du volume total, soit
+une subtile combinaison des deux.
+
+La famille des modèles gravitaires - ou d'interaction spatiale - cherche
+
+généralement à valider trois hypothèses complémentaires :
+
+ l'interaction entre deux lieux décroît quand la distance entre eux aug-
+
+mente ;
+
+ l'interaction entre deux lieux est fonction de leurs masses : à distance
+égale, les échanges sont plus importants entre deux lieux de masse
+plus importantes ;
+
+ l'interaction entre les lieux est fonction de l'appartenance à une même
+
+entité (politique, culturelle, linguistique etc.).
+
+Les cadres conceptuels peuvent être diérents : modèle économique (Zipf)
+et loi du moindre eort ; modèle psychologique (Hägerstrand) et connaissance
+plus grande des espaces proches ; modèle sociologique (Stouer) et rôle des
+opportunités interposées. L'un des apports majeurs de ces modèles est qu'ils
+permettent de mesurer des centralités relatives : que les gros pôles urbains
+attirent plus de population est somme toute logique mais examiner les résidus
+
+4. Jean-Marc Oner, 1993, Les  eets structurants  du transport : mythe politique,
+
+mystication scientique, Espace géographique, 22(3) : 233-242.
+
+5. Pierre Musso, 2003, Critique des réseaux, Presses universitaires de France.
+6. John D. Nystuen et Michael F. Dacey, 1961, A graph theory interpretation
+of nodal regions, Papers and Proceedings of the Regional Science Association, 7, p.
+29-42. Une lecture détaillée et critique de l'article est disponible ici
+: http ://grou-
+pefmr.hypotheses.org/3517
+
+7
+
+Figure 2  La méthode des ux dominants
+
+Extrait de Nystuen et Dacey, op. cit., 1961
+
+d'un modèle gravitaire permettra de déterminer si, compte tenu de leur taille,
+ces pôles attirent plus ou moins que prévu par le modèle. En eet, les mesures
+de centralité brutes se heurtent à des eets de taille importants et donnent
+des résultats souvent triviaux - les lieux les plus gros (quelle que soit l'unité
+de mesure employée, population, richesse etc.) sont presque toujours les plus
+centraux. . .
+
+Des questions et des pratiques qui évoluent
+
+Le tableau brièvement dressé ci-dessus est à la fois simpliste - il néglige
+par exemple les approches hétérodoxes d'un Hägerstrand - et daté. Depuis
+les années 90 en eet, les objets pris en charge et les méthodes mobilisées
+par l'analyse de réseaux en géographie ont connu des évolutions notables.
+L'intérêt pour l'échelle mondiale et pour la circulation des ux (transports,
+nance, migration etc.) a permis un renouveau des approches réticulaires.
+Le dialogue interdisciplinaire, avec la physique notamment, et de façon plus
+ténue avec la sociologie, a également favorisé ce renouvellement.
+
+En ce qui concerne les études des réseaux techniques, trois tendances
+
+récentes peuvent être signalées :
+
+8
+
+ la prise en compte du multiniveau pour calculer des accessibilités plus
+proches des pratiques réelles et prenant en compte l'intermodalité -
+utilisation de plusieurs réseaux lors des déplacements 7 ;
+
+ la diérenciation des eets spatiaux et des eets réseaux 8 ;
+ l'utilisation des outils de modélisation et de simulation (déplacements,
+gestion des risques). Ce dernier aspect était déjà présent chez Kansky
+ou Muraco mais il a été grandement facilité par le développement des
+logiciels et des capacités informatiques.
+
+Il faut également signaler l'impact des modèles développés en physique
+et en mathématiques à la n des années 90 9 avec deux tendances : les impor-
+tations, plus ou moins maîtrisées selon les auteur-e-s, de méthodes (chercher
+à déterminer si tel ou tel réseau est petit-monde et/ou sans échelle - les ré-
+seaux techniques obéissant rarement à ces modèles en raison des contraintes
+topographiques) et la substitution (études de réseaux techniques par les seuls
+physiciens, cf notamment Barthelemy, 2010 10).
+
+Emmanuel Lazega, Réseaux, centralités et statut social dans
+l'analyse de l'action collective
+
+Le statut social a des dimensions multiples et hétérogènes. L'une de ces
+dimensions est relationnelle : les diverses mesures de centralité en repré-
+sentent des indicateurs partiels. En sociologie néo-structurale, le statut social
+est considéré comme une infrastructure relationnelle de l'action collective,
+celle qui permet aux acteurs de percevoir et d'endogénéiser des diérencia-
+tions sociales verticales, en particulier dans l'action collective entre pairs.
+Trois dimensions de cette infrastructure relationnelle ont été travaillée par
+cette approche : la concentration du statut sur un nombre plus ou moins
+grand de membres (centralisation du système), l'hétérogénéité des dimen-
+sions du statut et le type de non congruence entre ces dimensions hétéro-
+gènes. Ce texte ne concerne que la première, la centralisation. Mon propos est
+de montrer que la mesure et la spécication du statut social sont plus com-
+
+7. Laurent Chapelon, 1996, Modélisation multi-échelles des réseaux de transport. Vers
+
+une plus grande précision de l'accessibilité, M@ppemonde, en ligne.
+
+8. Jean-François Gleyze, 2007, Eets spatiaux et eets réseau dans l'évaluation
+d'indicateurs sur les n÷uds d'un réseau d'infrastructure, Cybergeo, http ://cyber-
+geo.revues.org/5532
+
+9. César Ducruet et Laurent Beauguitte, 2014,  Spatial science and network science :
+Review and outcomes of a complex relationship , Networks and Spatial Economics (2014) :
+1-20
+
+10. Marc Barthelemy, 2010, Spatial networks, Physics Reports, 499(1), p. 1-101,
+
+http ://arxiv.org/abs/1010.0302
+
+9
+
+plexe qu'on ne le reconnaît d'habitude en analyse de réseaux sociaux lorsque
+ces derniers sont utilisés pour comprendre l'action collective. Il ne sut pas
+d'introduire une variable de centralité dans un modèle pour rendre compte
+des eets du statut social sur un processus social. Je donne un exemple
+concret de cette complexité de l'utilisation de la centralité (conjointement
+avec d'autres variables de statut, ici l'ancienneté, et d'une manière qui tient
+compte de la présence d'individus super-centraux dans le milieu étudié).
+
+Cet exemple est extrait d ?une enquête sur le fonctionnement du Tri-
+bunal de Commerce de Paris (2000-2005). Les acteurs individuels sont des
+juges ; le réseau social observé est un réseau de conseil (qui demande d'avis
+de qui) mesuré en longitudinal ; le processus social est l'apprentissage col-
+lectif : l'interprétation se centre sur les eets d'une controverse (autour de
+la punitivité des décisions) sur le fonctionnement d'une institution et sur
+les formes d'apprentissage collectif qu'on y observe ; des désaccords profonds
+entre juges (concernant cette punitivité) s'atténuent avec le temps et leurs
+décisions semblent converger (constat ethnographique) au fur et à mesure
+qu'ils demandent conseil à des  leaders épistémiques  qui deviennent de
+plus en plus centraux avec le temps ; la problématique est celle de l'eet
+ pur  , direct, des choix normatifs des acteurs sur leurs choix relation-
+nels (les collègues qui partagent les mêmes choix normatifs se consultent-ils
+davantage entre eux qu'il ne consultent des collègues aux choix normatifs dif-
+férents ?) ; l'analyse de l'eet des choix normatifs sur la dynamique du réseau
+de conseil montre l'importance de l'identication des acteurs super-centraux
+et du conformisme et de l'alignement du tribunal sur ces  leaders épisté-
+miques  ; dans ce cas, l'apprentissage collectif s'appuie sur le conformisme
+et l'alignement ; le constat est celui d'une absence d'eet  pur  et direct
+des normes sur le processus d'apprentissage collectif : l'eet des normes est
+médiatisé, entre autres, par la structure relationnelle.
+
+Extrait d'Emmanuel Lazega, Lise Mounier, Tom Snijders et Paola Tu-
+baro, 2008,  Réseaux et controverses : de l'eet des normes sur la dyna-
+mique des structures  , Revue française de sociologie, 49(3), Dynamique des
+réseaux sociaux, pp. 467-498 11.
+
+[. . .]
+L'eet spécique de la controverse normative sur l'évolution du
+
+réseau et sur l'apprentissage collectif
+
+Nous avons posé la question de savoir dans quelle mesure l'adhésion à
+une norme par un sous-groupe des juges constitue une force qui oriente l'évo-
+
+11. http://elazega.fr/publications/LMST%20RFS%202008.pdf
+
+10
+
+lution du réseau de conseil dans son ensemble. Pour étudier cette question, il
+faut une analyse où la variable dépendante est la structure du réseau, et où
+les variables indépendantes se réfèrent aux caractéristiques des acteurs qui en
+font partie. Conformément à notre problématique, deux types de variables
+indépendantes ont été introduits. D'une part, nous avons pris en compte
+des mesures de l'orientation normative des juges, permettant de repérer leur
+acceptation d'une norme particulière ; nous avons privilégié l'étude de la va-
+riable indiquant leur attitude punitive ou non punitive envers une entreprise
+accusée de pratiques illicites de dumping et de détournement de clientèle,
+en considérant qu'il s'agit d'un bon indicateur de leur vision du fonction-
+nement d'un marché libre - et, par là, du rôle attribué aux institutions qui
+sont chargées de le réguler. D'autre part, nous avons inclus aussi des eets
+d'attributs permettant de dénir les sous-groupes dont le tribunal se com-
+pose. Ceux-ci dépendent essentiellement du secteur d'activité professionnelle
+dont les juges sont issus, distinguant ceux qui proviennent du monde de la
+banque et de la nance de ceux issus d'entreprises du secteur non nancier.
+Cette distinction peut être combinée avec des diérences de domaine de spé-
+cialisation parmi les juges : en particulier, les banquiers-juristes, ayant des
+compétences reconnues en droit, se distinguent des banquiers sans formation
+juridique. Traditionnellement, rappelons-le, le secteur de la banque fournit
+au tribunal un nombre relativement élevé de juges ayant fait des études de
+droit, ce qui n'est pas le cas des autres secteurs de l'économie. Nous avons
+introduit également un certain nombre de variables de contrôle, certaines
+exogènes comme la coappartenance à une chambre et l'ancienneté dans le
+tribunal ; d'autres endogènes, reétant la manière dont les choix passés des
+acteurs exercent un eet sur l'évolution du réseau. Parmi celles-ci, notons les
+variables particulièrement importantes comme la réciprocité, la transitivité
+et la présence éventuelle de 3-cycles d'échange généralisé. [. . .]
+
+Sachant qu'une majorité de juges (54 sur 86, soit 63 %) se sont décla-
+rés punitifs, nous avons d'abord regardé si, en général, ils tendent à choisir
+comme conseillers ceux parmi eux qui ont une attitude punitive - sans consi-
+dérer, pour l'instant, leur appartenance à l'un des sous-groupes profession-
+nels dont le tribunal se compose. Le Tableau 1 représente deux modèles Siena
+estimés pour saisir l'impact de cette tendance sur l'évolution du réseau.
+
+Regardons d'abord le Modèle 1, en commençant par les eets structuraux,
+pour avoir une idée des propriétés générales de ce réseau. En laissant de côté
+l'eet de densité (qui constitue un indicateur de base de la structure d'un
+réseau, mesurant le nombre moyen de liens sortants et son développement
+dans le temps, et qui peut être interprété comme un intercept), les eets de
+
+11
+
+Tableau 1  Les juges sont-ils attirés par des conseillers non punitifs ?
+
+Variables
+indépendantes
+Paramètre de taux période 1
+Paramètre de taux période 2
+Densité
+Réciprocité
+Transitivité
+Popularité alter
+3-cycles d'échange généralisé
+Chambre
+Ancienneté alter
+Ancienneté ego
+Punitivité alter
+Punitivité ego
+Punitivité similarité
+Conseilles super-centraux
+punitifs alter
+Conseilles super-centraux
+non punitifs alter
+
+Modèle 1
+Paramètres
+
+Modèle 2
+Paramètres
+
+et erreurs-types
+
+et erreurs-types
+
+36,09 (13,67)
+19,75 (1,97)
+-2,17 (0,04)
+0,47 (0,11)
+0,18 (0,02)
+1,69 (0,34)
+-0,30 (0,05)
+0,62 (0,05)
+0,06 (0,01)
+-0,05 (0,01)
+-0,11 (0,05)
+0,03 (0,05)
+0,05 (0,05)
+
+26,38 (6,33)
+21,64 (2,25)
+-2,08 (0,05)
+0,48 (0,11)
+0,19 (0,02)
+0,10 (0,47)
+-0,29 (0,06)
+0,61 (0,05)
+0,05 (0,01)
+-0,05 (0,01)
+-0,08 (0,06)
+0,04 (0,05)
+0,04 (0,05)
+0,60 (0,12)
+
+0,67 (0,15)
+
+Le paramètre de taux représente la quantité de changements comptabilisés entre deux observations du réseau,
+à savoir la  vitesse de changement de la variable dépendante (le réseau), en distinguant les deux périodes
+(2000-2002 et 2002-2005). Les autres paramètres comparent des états diérents du réseau an que l'acteur puisse
+faire son choix (de conserver ses liens, d'en rajouter un ou d'en éliminer un). Plus un paramètre est élevé, plus
+l'eet auquel il est associé pèse sur le choix de l'acteur - plus, en conséquence, il contribue à orienter l'évolution
+du réseau au cours du temps. Entre ces paramètres, on peut distinguer des eets structuraux endogènes (ici, la
+densité et la réciprocité, qui doivent toujours être inclus dans un modèle Siena, ainsi que deux eets de clôture,
+notamment la transitivité et la présence de 3-cycles d'échange généralisé), l'eet de popularité du conseiller, et
+des variables exogènes, incluant des attributs des acteurs et des indicateurs de leur orientation normative (la
+punitivité). Les attributs d'acteurs inclus ici sont uniquement l'ancienneté au Tribunal et la co-appartenance de
+Chambre. L'ancienneté peut être dénie séparément pour ego (l'acteur qui choisit) et pour alter (l'acteur qui
+est choisi). Pour les 86 juges de la base utilisée ici, l'ancienneté varie entre 5 et 13 ans, avec une moyenne de
+8,81. La co-appartenance de Chambre est dénie comme une variable d'attribut de type dyadique (se référant à
+deux acteurs à la fois), changeante dans le temps et dichotomique. Pendant la première période, elle est égale
+à 1 si deux juges ont appartenu à la même Chambre au moins une fois entre 1992 et 2002, 0 sinon ; pendant
+la deuxième période, elle est égale à 1 si (au moins) une co-appartenance de Chambre a eu lieu entre 1992 et
+2005, 0 sinon. La punitivité (y compris pour les Conseillers super-centraux) est dénie pour alter (punitivité du
+conseiller). La catégorie des Conseillers super-centraux rend compte des individus qui, essentiellement en raison
+de leur position formelle dans le Tribunal, reçoivent un nombre de choix largement supérieur à la moyenne (voir
+note 21). Nous avons distingués ceux qui se sont déclarés punitifs (Conseillers super-centraux punitifs) de ceux
+qui se sont déclarés non punitifs (Conseillers super-centraux non punitifs). Les diérences d'activité entre les
+individus, à savoir, le nombre très variable de demandes de conseil émises par les uns et les autres (mais qui
+ne sont pas expliquées par le rôle formel des individus au sein du Tribunal), sont prises en compte avec des
+valeurs structurales, minimisant l'inuence sur l'évolution du réseau des membres dont l'activité est beaucoup
+plus élevée que la moyenne.
+
+réciprocité et de transitivité sont signicatifs et positifs. Ils s'interprètent,
+respectivement, comme une tendance des juges à demander conseil à ceux qui
+leur ont eux-mêmes demandé conseil (dans le passé), et à demander conseil
+
+12
+
+aux conseillers de leurs conseillers. L'eet 3-cycles négatif signale un eet de
+hiérarchie : les demandes de conseil s'adressent surtout à ceux qui sont  plus
+haut  que soi-même dans la hiérarchie. L'eet de popularité alter (popularité
+du conseiller) est positif, signicatif et fort : les juges tendent à demander de
+plus en plus conseil à ceux d'entre eux qui sont déjà très sollicités en tant que
+conseillers (eet que l'on peut rapprocher de celui recensé par la littérature
+sous le nom très général de preferential attachment eect). La dynamique du
+réseau renforce donc la hiérarchie existante, avec des acteurs très centraux
+qui deviennent de plus en plus centraux avec le temps (Lazega, Lemercier et
+Mounier, 2006).
+
+En ce qui concerne les variables exogènes, le paramètre de chambre po-
+sitif indique que les juges tendent à consulter de plus en plus ceux qui sont
+dans la même chambre (ou qui ont été dans la même chambre dans le passé
+récent). Le paramètre d'ancienneté alter (ancienneté du conseiller) positif et
+signicatif signale une tendance à demander de plus en plus conseil aux juges
+qui ont plus d'ancienneté au tribunal, tandis que le paramètre d'ancienneté
+ego (ancienneté du demandeur de conseil) négatif indique que les membres
+qui ont plus d'ancienneté consultent de moins en moins les autres. L'ancien-
+neté étant fortement corrélée avec la position formelle dans l'organisation du
+tribunal (le rôle de président de chambre, par exemple), la signicativité du
+paramètre d'ancienneté est un signe supplémentaire de l'impact de la hié-
+rarchie formelle de l'institution sur la structuration progressive du réseau de
+conseil.
+
+Venons-en maintenant au paramètre de  punitivité alter  (ou puni-
+tivité du conseiller), qui est au c÷ur du questionnement, car il mesure la
+propension des juges à choisir comme conseillers ceux qui, parmi eux, ont
+une attitude punitive. Le Modèle 1 montre que ce paramètre est négatif, ce
+qui semblerait indiquer une tendance généralisée des juges à choisir de plus en
+plus des conseillers non punitifs. Toutefois, la distribution des degrés dans ce
+réseau de conseil est très asymétrique, avec une large majorité de juges choi-
+sis comme conseillers par un petit nombre de collègues, tandis qu'une petite
+élite de juges très centraux (que nous appellerons les  conseillers super-
+centraux  pour une raison explicitée ci-dessous) reçoit un nombre très élevé
+de demandes de conseil, généralement en fonction de leur position formelle
+dans le tribunal (président, président de chambre, etc.). Or, ces acteurs très
+centraux sont susceptibles de produire un impact considérable sur l'évolu-
+tion du réseau (et, par là, sur les estimations). Cependant, Siena ne peut
+pas bien rendre compte de ce phénomène. Comme toute méthode statistique,
+Siena restitue une vision d'ensemble, en agrégeant le nombre de choix reçus
+
+13
+
+sur tous les acteurs (autrement dit, en les intégrant dans la moyenne). Par
+conséquent, lorsqu'un petit nombre d'acteurs très centraux a un compor-
+tement relationnel diérent des autres, les résultats obtenus ne sont guère
+représentatifs de tout le processus.
+
+Il était donc nécessaire de contrôler pour ces individus particuliers. À
+cette n, nous avons estimé le Modèle 2, qui inclut deux variables indicatrices
+permettant de contrôler l'eet du petit nombre de conseillers super-centraux
+très sollicités par les autres juges ; parmi eux, on distingue ceux qui se sont
+déclarés punitifs (variable conseillers super-centraux punitifs) de ceux qui se
+voient comme non punitifs (conseillers super-centraux non punitifs). L'eet
+alter pour ces deux paramètres est signicatif et positif, ce qui conrme que
+ces individus (cinq au total, dont un punitif et quatre non-punitifs) sont
+recherchés en tant que conseillers plus souvent qu'on ne le penserait sur la
+base des eets structuraux et des variables indépendantes considérées. Leur
+présence oriente donc l'évolution du réseau. Il est important de noter qu'en
+contrôlant pour la présence des conseillers super-centraux le paramètre de
+popularité alter devient non signicatif. Cela veut dire que la signicativité
+de ce paramètre, qui avait été constatée dans le Modèle 1, n'était en réalité
+due qu'à la présence des conseillers super-centraux. Ces cinq individus ont
+attiré de plus en plus de choix, et sont devenus de plus en plus centraux
+au cours du temps ; mais la popularité n'a pas joué un rôle aussi important
+pour les acteurs situés plus bas dans l'échelle hiérarchique. La hiérarchie que
+cet eet fait apparaître concerne donc uniquement le centre, et non pas la
+périphérie du réseau.
+
+De même, le paramètre de punitivité alter n'est pas signicatif dans le
+Modèle 2, contrairement à ce qui avait été observé dans le Modèle 1. Cela
+veut dire que les juges, en bonne partie punitifs, ne sont pas en général atti-
+rés vers des conseillers non punitifs ; l'eet qui avait été observé auparavant
+dépend exclusivement de la présence des conseillers super-centraux, et tra-
+duit uniquement le fait que ces derniers, en majorité non punitifs, reçoivent
+beaucoup de demandes de conseil.
+
+Les deux modèles montrent par ailleurs que l'eet de punitivité ego n'est
+pas signicatif, ce qui indique que les juges punitifs ne se distinguent pas des
+autres en ce qui concerne le nombre de demandes de conseil qu'ils émettent.
+L'eet de similarité n'est pas non plus signicatif, ce qui suggère que les
+ressemblances entre les juges ne constituent pas la force première guidant
+l'évolution de ce réseau : les juges punitifs n'ont pas une préférence nette
+pour des conseillers qui partagent leur orientation punitive, tout comme les
+juges non punitifs ne demandent pas conseil en priorité à des collègues égale-
+
+14
+
+ment non punitifs. Puisque les deux modèles ci-dessus aboutissent à la même
+conclusion, il s'ensuit que ces résultats sont indépendants de la présence des
+conseillers super-centraux.
+
+Dans l'ensemble, on voit apparaître une tendance générale des juges à de-
+mander conseil aux plus centraux d'entre eux (les conseillers super-centraux),
+plutôt que consulter ceux qui partagent leur propre orientation normative.
+Il s'ensuit que le processus d'apprentissage collectif dans cette institution se
+caractérise moins par la présence de sous-groupes en conit entre eux sur
+des questions de dénition d'une norme (en tout cas celle de la punitivité),
+que par une forme généralisée de conformisme organisationnel, de tendance
+à l'alignement sur les opinions de l'élite d'individus ayant un statut cognitif
+ou une autorité épistémique reconnue. La popularité apparente de l'attitude
+non punitive, que le Modèle 1 suggérait être en contradiction avec le constat
+qu'un grand nombre de juges se considérant punitifs, résulte en réalité de
+cette tendance au conformisme, étant donné l'orientation non punitive de la
+plupart des conseillers super-centraux.
+
+[. . .]
+En résumé, nous avons examiné la controverse liée à la punitivité des
+acteurs de cette institution, ainsi que la manière dont les divergences autour
+de cette question expliquent l'évolution du réseau. Dans un premier temps,
+les juges se sont déclarés en majorité punitifs mais ont aussi déclaré que,
+dans le cas d'espèce proposé, ils n'auraient pas pris une décision punitive.
+L'examen de ce paradoxe montre qu'il s'explique par le fait que ces acteurs
+sont de plus en plus attirés, dans leurs choix de conseillers, par des conseillers
+non punitifs. Il a en eet été ensuite possible d'aner ce résultat en isolant
+les membres d'une élite qui occupent des positions très centrales dans l'or-
+ganisation formelle et informelle du tribunal, tout en disposant d'une forte
+autorité sociale. Nous avons observé que l'élite est en majorité non punitive :
+une tension est donc apparue entre une population de juges largement puni-
+tifs et la pression vers l'adoption d'attitudes moins punitives en provenance
+des individus (appelés conseillers super-centraux) du haut de la hiérarchie
+formelle et sociale. L'apparente attractivité de la punitivité que nous avions
+initialement détectée subit en réalité l'eet croissant, sur six années, de la
+présence de cette petite élite très centrale sur l ?évolution du réseau dans
+son ensemble. Le phénomène observé correspond, en fait, à la diusion d'un
+conformisme normatif, les juges tendant à s'aligner, avec le temps, sur les
+opinions des membres de l'élite. Le processus d ?apprentissage collectif, véhi-
+culé par les relations de conseil, s'avère donc globalement favorable à l'élite
+de ces opinion leaders et à son orientation normative. 
+
+15
+
+Pour un exemple d'analyse de l'hétérogénéité et la non congruence des
+dimensions du statut d'un point de vue néo-structural, cruciales pour com-
+prendre l'inuence politique des acteurs d'un système, par exemple dans un
+processus régulatoire, voir Lazega (2001, The Collegial phenomenon, chapitre
+8 12).
+
+Annexe
+
+Rémi Louf, La centralité dans les réseaux en physique
+
+Bien que plusieurs dénitions de la centralité co-existent, l' intermédiarité
+est la centralité sur laquelle se penchent la plupart des articles écrit part
+des physiciens. L'intermédiarité mesure la propensité qu'a un n÷ud à se
+retrouver sur un plus court chemin entre d'autres n÷uds du graphe :
+
+(cid:88)
+
+i,k
+
+b (v) =
+
+1
+N
+
+σik(v)
+
+σik
+
+(1)
+
+où σik(v) est le nombre de plus courts chemins entre i et k qui passent
+par v et σik le nombre de plus court chemins entre i et k. N est le nombre
+de plus court chemins ainsi considérés.
+
+12. http
+
+://elazega.fr/wp-content/uploads/2012/10/Lazega-Collegial-Phenomenon-
+
+2001-Introduction.pdf
+
+16
+
+Faiblesses de la mesure d'intermédiarité
+
+L'intermédiarité donne la même importance aux chemins qui relient des
+n÷uds dans le voisinage immédiat du n÷ud considéré à ceux qui relient des
+n÷uds plus éloignés. Elle mélange donc une notion locale de centralité
+reétée par le degréet une notion globale, reliée à la structure à grande
+échelle du réseau.
+
+Ainsi, l'intermédiarité ne contient que peu d'information, puisqu'il existe
+généralement une corrélation très forte entre la valeur de l'intermédiarité b
+et le degré du n÷ud k selon la relation
+
+b (k) = k−η
+
+(2)
+
+où l'exposant η dépend du réseau considéré. Pour cette raison, la mesure
+decentralité est peu présente dans la litérature, à l'exception notable de la
+méthode Newmann-Girvan de détection de communauté 13 (qui consiste à
+enlever successivement les arrêtes ayant l'intermdédiarité la plus élevée) et
+des réseaux spatiaux.
+
+Pour pallier cette faiblesse, Pablo Jensen et ses collaborateurs proposent
+de séparer la composante locale (chemins entre plus proches voisins) et glo-
+bale de l'intermédiarité 14. Ils appellent cette dernière bridgeness br, dénie
+comme
+
+(cid:88)
+
+σik(v)
+
+σik
+
+(3)
+
+br (v) =
+
+1
+N
+
+i /∈NG(v),k /∈NG(v)
+
+où NG(v) est l'ensemble des n÷uds voisins de v. Ainsi dénie, la mesure
+de bridgeness n'est plus dictée par le degré du n÷ud considérée, et contient
+donc une information plus intéressante sur la structure du réseau. En parti-
+culier, elle permet d'identier les n÷uds qui se situent à l'intermédiaire entre
+plusieurs communautés locales.
+
+L'intermédiarité dans les réseaux spatiaux
+
+L'étude de l'intermédiarité ne devient vraiment intéressante que lorsque
+les contraintes spatiales deviennent importantes, c'est-à-dire dans les réseaux
+
+13. Michelle Girvan et Mark EJ Newman : Community structure in social and biological
+
+networks. Proceedings of the national academy of sciences, 99(12) :7821-7826, 2002.
+
+14. Pablo Jensen, Matteo Morini, Márton Karsai, Tommaso Venturini , Alessandro Ves-
+pignani , Mathieu Jacomy , Jean-Philippe Cointet , Pierre Mercklé et Eric Fleury : De-
+tecting global bridges in networks. Journal of Complex Networks, page cnv022, 2015.
+
+17
+
+spatiaux planaires ou quasi-planaires. Dans ce cas, la distibution des degrés
+est fortement piquée et les valeurs de l'intermédiarité dépendent fortement
+de la structure du réseau 15.
+
+Dans les réseaux spatiaux, tous les n÷uds ne sont pas créés égaux.
+Comme l'on peut le constater quotidiennement, certaines rues et intersec-
+tions sont plus fréquentées que d'autre. En pratique, il est important de
+comprendre comment la structure du graphe inuence la trac sur ce graphe.
+Dans la plupart des études publiées, et en l'absence d'autres informations,
+l'intermédiarité a été utilisée comme estimation du trac sur le graphe.
+
+Stratégies d'exploration
+
+Il est possible de dénir l'intermédiarité de plusieurs manières, selon le
+type de chemins que l'on considère. Mesurer l'intermédiarité revient en eet
+à demander à diérents individus de parcourir le graphe entre toutes les
+paires de n÷uds possibles. À chaque fois qu'un individu traverse un n÷ud
+(ou une arrête) on incrémente un compteur. La valeur de l'intermédiarité est
+obtenue en divisant ce compteur par le nombre total de trajets parcourus.
+
+Or, un individu parcourant le graphe partant du n÷ud s pour aller jus-
+qu'au n÷ud e peut emprunter des chemins diérents. Chacun de ces chemins
+correspondent à des stratégies de traversée du graphe diérentes, et à une
+connaissance diérente du graphe. À ces diérentes statégies sont associées
+diérentes dénitions de l'intermédiarité
+
+Intermédiarité traditionelle Si l'individu traversant le graphe en pos-
+sède une connaissance parfaite, la meilleure stratégie est d'utiliser le
+plus court chemin. Cela correspond à la dénition standard de l'in-
+termédiarité.
+
+Intermédiarité `navigateur' Si l'individu traversant le graphe ne connait
+
+que la position de sa destination, la meilleure stratégie est de s'orien-
+ter à chaque intersection en empruntant l'arrête dont la direction est
+la plus proche de la direction au n÷ud d'arrivée. Cela correspond à
+ce que l'on peut appeler l'intermédiarité navigateur 16.
+
+Intermédiarité `aléatoire' Si l'individu ne connait ni la structure du
+graphe, ni la direction au point d'arrivée, la seule stratégie possible
+
+15. Alain Barrat, Marc Barthélemy et Alessandro Vespignani : The eects of spatial
+constraints on the evolution of weighted complex networks. Journal of Statistical Mecha-
+nics : Theory and Experiment, 2005(05) :P05003 ; Marc Barthelemy : Spatial networks.
+Physics Reports, 499(1) :1-101, 2011.
+
+16. Sang Hoon Lee et Petter Holme : Exploring maps with greedy navigators. Physical
+
+review letters, 108(12) :128701, 2012.
+
+18
+
+est de s'orienter de manière aléatoire à chaque intersection. Cela cor-
+respond à ce que l'on peut appeler l'intermédiarité aléatoire 17.
+
+Les valeurs données par ces trois mesures sont évidemment corrélées,
+mais donnent toutefois une information diérente sur la structure du réseau
+et sa navigabilité. Il est important de signaler que les dénitions alternatives
+ont été très peu utilisées pour l'étude des réseaux spatiaux. Dans la suite,
+nous limiterons le propos à la dénition usuelle.
+
+Limites et améliorations
+
+Comme mentionné plus haut, l'intermédiarité est souvent utilisée comme
+une mesure du trac potentiel sur le graphe. L'idée est séduisante, mais elle
+se heurte à plusieurs écueils en pratique. Tout d'abord, l'intermédiarité ne
+tient pas compte de l'hétérogénéité du nombre d'individus par lieu de départ
+et par destination. En eet, tout les rues ne sont pas peuplées de façon
+uniforme, et les emplois ont tendance à se concentrer dans certaines régions
+de la ville. Cette diérence peut induire de grands écarts entre les valeurs
+d'intermédiarité et le trac réél. On peut néanmoins apporter une solution
+simple à ce problème en dénissant l'intermédiarité généralisée
+
+(cid:88)
+
+s(cid:54)=e(cid:54)=v
+
+bC (v) =
+
+1
+N
+
+σse (v)
+
+σse
+
+ω (s, e)
+
+(4)
+
+où ω (s, t) est le poids attribué au chemin entre s et e, ou encore le nombre
+
+d'individus se déplaçant de s à e.
+
+Le deuxième écueil vient du fait que les valeurs de l'intermédiarité dé-
+pendent fortement de la frontière choisie pour la système. Ainsi, on s'at-
+tendrait à ce que la répartition spatiale des valeurs d'intermédiarité change
+lorsque l'on considère la ville de Paris seule, ou Paris et sa banlieue. Il n'existe
+malheureusement pas d'étude sur ce sujet ; bien qu'intuitité, l'impact du
+choix des contours du système n'a jamais été quantié.
+
+Le dernier écueil est que l'on ne connait pas réellement la stratégie
+qu'adoptent les individus et que les intersections les plus empruntées en réa-
+lité sont diérentes de celles aux valeurs élevées d'intermédiarité. Utilisant
+des données de géo-localisation des taxis londoniens, Ed Manley a montré
+que les trajectoires empruntées ne sont ni les plus courtes, ni les plus simples
+(demandant le moins de changement de direction), ni celles qui à chaque
+
+17. Mark EJ Newman : A measure of betweenness centrality based on random walks.
+
+Social networks, 27(1) :39-54, 2005.
+
+19
+
+étape se rapprochent le plus possible de la destination au point d'arrivée 18.
+En comparant les valeurs d'intermédiarité théoriques et les nombres de pas-
+sage réels, on trouve une corrélation plus qu'imparfaite.
+
+Il donc assez clair que l'intermédiarité n'est pas une bonne estimation du
+trac sur le réseau. Les valeurs de l'intermédiarité prises dans l'absolu n'ont
+donc pas une interprétation claire. Il est cependant possible de construire
+des mesures intéressantes sur la notion d'intermédiarité.
+
+Mesures dérivées
+
+L'intermédiarité impact δb (e) de l'arrête e est dénie comme
+
+δb (e) =
+
+b (G) − b (G\{e})
+
+b (G)
+
+(5)
+
+où b (G) est la moyenne des valeurs d'intermédiarité mesurées sur le
+graphe G et b (G\{e}) est la moyenne des valeurs d'intermédiarité mesu-
+rées sur le graphe G moins l'arrête e 19. Les auteurs de l'étude montrent
+que la distribution de cette valeur dans les réseaux viaires produit deux pics
+distincts qui séparent les rues qui participent à un eort de densication du
+réseau de celles qui participent à un eort d'exploration. La formulation gé-
+néralisée de l'intermédiarité permet également de distinguer la composante
+locale de la composante globale de l'intermdédiarité. En eet, il est fort pos-
+sible qu'une route importante localement ne le soit pas du point de vue du
+pays entier. On peut par exemple dénir
+
+ω (s, e) = e−d(s,e)/δ
+
+(6)
+
+où d (s, e) est la distance entre s et e et δ l'étendue typique du voisinage
+considéré. En comparant la valeur de l'intermédiarité pour des valeurs de δ
+diérentesou mieux, en traçant les valeurs en fonction de δ, on peut analyser
+la structure à plusieurs échelles du réseau.
+
+Ainsi, dans la litérature de `physique', les mesures de centralité ont ren-
+contré un intérêt tardif. Cet intérêt s'est très vite éteint après que l'on se soit
+rendu compte que l'intermédiarité ne contenait pas plus d'information que
+
+18. EJ Manley , JD Addison et T Cheng : Shortest path or anchorbased route choice :
+a large-scale empirical analysis of minicab routing in london. Journal of Transport Geo-
+graphy, 43 :123-139, 2015.
+
+19. Emanuele Strano , Vincenzo Nicosia , Vito Latora , Sergio Porta et Marc Barthé-
+lemy : Elementary processes governing the evolution of road networks. Scientic reports,
+2, 2012.
+
+20
+
+le degré dans la plupart des graphes. Elle reste néanmoins pertinente dans
+l'étude des réseaux spatiaux, et si ses valeurs sont diciles à interpréter,
+l'intermédiarité peut donner naissance à de nouvelles mesures qui apportent
+une information riche sur la structure spatiale du graphe.
+
+21
+
+Claire Lagesse, Les centralités des villes révélées par
+leurs réseaux viaires
+
+Travail réalisé au sein de l'équipe MorphoCity, dirigée par Stéphane Douady
+
+et Philippe Bonnin.
+
+Introduction
+
+La science des réseaux complexes regorge d'outils (topologiques, statis-
+tiques. . .) pour extraire de l'information à partir de graphes. Ces graphes
+sont l'abstraction de systèmes variés. Celui que nous choisissons d'étudier
+ici est fondamentalement ancré dans l'espace et dans l'humain : il s'agit du
+réseau de nos rues, support de nos villes.
+
+Nous essayons de comprendre s'il est possible de retracer l'histoire et
+les usages d'un territoire en caractérisant le réseau viaire sur lequel il s'ap-
+puie. Pour cela, nous établissons une méthodologie d'analyse quantitative
+des graphes spatialisés. Celle-ci est pensée de manière à pouvoir s'appliquer
+à n'importe quel réseau possédant des coordonnées.
+
+Un réseau support de l'urbain
+
+La ville peut être décomposée en trois unités géométriques élémentaires :
+la ligne (le réseau viaire), la surface (les parcelles), le volume (les bâtiments).
+Parmi celles-ci, les bâtiments sont souvent détruits pour faire place à des
+constructions plus récentes ; les parcelles sont divisées, réunies ou redessi-
+nées pour satisfaire les transformations territoriales. Parmi ces éléments, le
+réseau viaire apparaît comme le plus pérenne : vecteur d'un accès indispen-
+sable, support du développement, son emprise est souvent renforcée. Nous le
+formalisons sous la forme d'un graphe : chaque intersection est un sommet
+et chaque tronçon de rue entre deux intersections est un arc.
+
+Nous nous émancipons de tous les concepts, idées et raisonnements liés
+à la rue en dénissant un nouvel objet, que nous avons appelé voie. La voie
+est pensée comme une ligne continue associée à une perspective, à l'image
+de la piste de réexion initiée par les travaux de syntaxe spatiale (Hillier,
+1976, 2007). Nous avons établi une paramétrisation précise et étudié plu-
+sieurs possibilités de construction avant de n'en sélectionner qu'une : la voie
+est construite à chaque sommet, indépendamment du sens de lecture du ré-
+seau, en associant les tronçons les plus alignés, en respectant un angle seuil
+
+22
+
+d'association de 60o (Lagesse, 2015). Nous obtenons ainsi un objet multi-
+échelle, pouvant traverser l'ensemble du graphe ou se limiter à une partie de
+celui-ci.
+
+Pour conserver l'idée de persistance dans le temps, notre méthode se
+concentre sur l'information structurelle minimale. Nous faisons abstraction
+dans nos recherches de tous les attributs non géométriques ou non topo-
+graphiques du réseau viaire. La voie est un objet purement morphologique.
+Nous cherchons à reconstruire a posteriori les informations qualitatives en
+identiant les voies qui participent à la structure centrale du graphe viaire.
+Les lignes du réseau viaire sur le territoire se construisent au l du temps
+pour relier des lieux dont l'accessibilité est jugée importante. L'objectif de
+la création de la voie est de retrouver ces grands alignements, qu'ils soient
+historiques, ou aménagés pour assurer une desserte optimale.
+
+Diérentes centralités pour diérentes époques
+
+Le réseau viaire peut être un élément révélateur de centralités sous sa
+forme laire si nous disposons des bons outils pour en lire la structure.
+Il se fond dans le paysage urbain, structurant autour de lui le découpage
+parcellaire et avec lui toute l'occupation du sol. Certains indicateurs per-
+mettent d'analyser l'inuence d'une voie sur l'ensemble de l'espace. Ainsi,
+nous construisons l'indicateur de closeness, en sommant pour chaque voie
+le nombre de tournants (ie changements de voie) nécessaires pour accéder à
+l'ensemble du graphe. Nous prenons l'inverse de cette somme, de façon à ce
+qu'une voie avec un indicateur fort de closeness permette d'accéder eca-
+cement à l'ensemble du réseau. Elle est alors considérée comme centrale au
+sens de cet indicateur.
+
+Au cours du temps, l'ajout de nouveaux éléments dans un graphe viaire
+se fait souvent en cohérence avec l'existant. Par ce processus de développe-
+ment, les nouvelles voies sont construites de façon à minimiser leurs distances
+topologiques avec de plus anciennes. Le squelette historique de la ville s'en
+trouve renforcé et ressort donc avec une forte centralité selon l'indicateur
+de closeness. Le nouveau réseau s'appuie sur sa structure : plus une voie
+est ancienne, plus elle est susceptible de desservir l'ensemble du territoire
+de manière optimale. La lecture des centralités du réseau viaire proposée
+ore un parallèle intéressant avec l'observation de la croissance des villes.
+Si nous prenons pour exemple le graphe viaire de Manaus (Brésil), nous
+observons que les données du développement de la ville entre 1895 et 2014
+correspondent aux résultats de l'indicateur appliqué aux voies : celles dont
+
+23
+
+la valeur de closeness est la plus importante correspondent aux quartiers les
+plus anciens (gure 3).
+
+Figure 3  Parallèle entre la croissance de la ville de Manaus et l'indicateur
+de closeness
+
+Cette théorie peut être repensée, notamment lors de la création de grandes
+structures planiées, construites explicitement pour desservir ecacement le
+territoire. C'est ainsi le cas du périphérique à Paris, dont la n de construc-
+tion date des années 1970, conçu pour desservir l'ensemble de la capitale et
+donc assurer des distances topologiques faibles avec le graphe de l'intramu-
+ros. En visualisant le résultat du calcul de l'indicateur de closeness sur le
+réseau de Paris, nous retrouvons avec une forte centralité les voies anciennes
+d'accès au centre ville (Huard, 2013), ses limites historiques et sa relation
+avec l'hydrographie (petite ceinture, bords de Seine), mais également des
+percements ainsi que le boulevard périphérique évoqué plus haut (gure 4).
+
+L'estimation faite avec l'indicateur de closeness sera également plus éloi-
+gnée de la dynamique de développement observée, lorsque la ville comprend
+des parties de son graphe entièrement planiées. Celles-ci sont souvent créées
+par extension unitaire, indépendamment du centre ancien. C'est le cas à Bar-
+celone, où la centralité de la vieille ville est moins importante que celle de la
+structure qui lui a été ajoutée selon les plans de Cerdà (gure 5). Cette partie
+du graphe a été pensée isolément de la structure ancienne, sans y accorder sa
+géométrie. Seules quelques voies s'introduisent dans ce territoire pré-existant
+
+24
+
+Figure 4  Indicateur de closeness calculé sur le graphe viaire de Paris
+
+dont la logique est en complète opposition : le centre de Barcelone est mé-
+diéval, et, par sa nature géométrique, peu accessible depuis l'extérieur. Cela
+peut s'interpréter comme une stratégie de protection.
+
+La closeness fait donc ressortir la partie du graphe la plus cohérente.
+Usuellement, les arcs qui viennent s'ajouter au réseau avec le temps privi-
+légient la cohérence avec les structures anciennes, et non entre eux (comme
+à Manaus, et la plupart du temps dans les villes médiévales). Ils renforcent
+ainsi la centralité du centre ancien. Mais il est également possible qu'un ajout
+planié d'un grand nombre d'arcs se détache des logiques géométriques pré-
+existantes pour imposer au graphe leur propre cohérence (comme à Barce-
+lone, et dans les villes à la structure majoritairement planiée).
+
+Diérentes centralités pour diérents parcours
+
+Considérons maintenant un autre type de centralité : celui lié au degré
+de chaque voie. Nous calculons le degré d'une voie en fonction du nombre
+d'autres voies qu'elle intersecte. En hiérarchisant les voies selon cet indicateur
+au sein du réseau viaire parisien, nous voyons diérents niveaux de lecture
+de la ville apparaître (gure 6). Les voies avec une forte valeur (les plus
+centrales au sens de l'indicateur de degré, en rouge) correspondent au réseau
+permettant une desserte ecace de l'espace : ce sont les rues empruntées
+pour accéder rapidement à une partie éloignée du territoire. À l'opposée, les
+
+25
+
+Figure 5  Indicateur de closeness calculé sur le graphe viaire de Barcelone
+
+voies avec une faible valeur (peu centrales, en bleu) sont celles qui assurent
+une desserte ne de l'espace.
+
+Figure 6  Indicateur de degré calculé sur le graphe viaire de Paris
+
+26
+
+Conclusion & Perspectives de recherche
+
+Les réseaux viaires portent en eux une topologie et une topographie qui
+n'est pas étrangère au lieu dans lesquels ils s'inscrivent. À travers la voie,
+objet générique construit, nous explorons comment la structure viaire et ses
+centralités peuvent être révélatrices de l'Histoire de la ville et des mobili-
+tés qu'elle abrite. La centralité liée à la closeness de la voie révèle ainsi la
+cohérence d'un espace, alors que celle liée au degré est, elle, révélatrice de
+l'utilisation du réseau.
+
+Étudier la ville à travers les lignes de ses rues ne peut être une démarche
+isolée, il est nécessaire pour comprendre un espace d'établir une collaboration
+constante avec les personnes travaillant sur le terrain. Elle nous permet de
+mieux lire les indicateurs calculés et d'en identier les limites. Il est donc
+important de ne pas oublier l'objet sur lequel nous travaillons au prot de
+sa structure mathématique si nous voulons le comprendre.
+
+Ces recherches ouvrent un champ de perspectives pluridisciplinaire lié
+à l'analyse historique des villes, ainsi qu'à l'étude des mobilités. Elles nous
+guident vers une meilleure compréhension des diérents types de dynamiques
+urbaines et de leurs liens avec les cohérences spatiales.
+
+Références
+
+Hillier, B., Leaman, A., Stansall, P., and Bedford, M. (1976). Space syn-
+
+tax. Environment and Planning B : Planning and Design, 3(2) :147-185.
+
+Hillier, B. and Vaughan, L. (2007). The city as one thing. Progress in
+
+Planning, 67(3) :205-230.
+
+Huard, M. (2013). Atlas Historique de Paris. http ://paris-atlas-historique.fr.
+Lagesse, C. (2015). Lire les Lignes de la Ville, Méthodologie de caracté-
+risation des réseaux spatiaux. Thèse de doctorat, Universite Paris Diderot-
+Paris VII.
+
+27
+
+Viera Rebolledo-Dhuin, Centralités dans le monde
+du livre au XIX siècle
+
+Au sein de ma thèse, fondée sur l'analyse des dossiers de faillites des
+libraires et éditeurs parisiens de 1830 à 1870, je souligne diérentes formes
+de centralité, entendue au sens large 20.
+
+La librairie apparaît tout d'abord particulièrement concentrée dans l'es-
+pace parisien. Deux espaces regroupent la majorité des libraires parisiens
+tout au long du XIXe siècle, le quartier Latin et le Palais Royal. À l'intérieur
+de ces arrondissements-cibles, les libraires se situent en priorité dans quatre
+quartiers administratifs, deux à deux limitrophes : ceux du Palais Royal et de
+Feydeau pour le IIe arrondissement ancien, ceux de la Monnaie et de l'École
+de Médecine en ce qui concerne la rive gauche de la Seine. Quelques rues
+seulement rassemblent la majorité des libraires : au Nord de Paris, les galeries
+de Bois et d'Orléans ainsi que les passages - et notamment celui des Panora-
+mas - à proximité des théâtres de boulevards ; de l'autre côté du euve, les
+quais Malaquais, Voltaire et surtout celui des Augustins, présentent une den-
+sité inégalée de libraires. À certains numéros du quai des Augustins, comme
+dans plusieurs rues adjacentes, formant le  village Saint-André des Arts ,
+plusieurs libraires tiennent enseigne dans le même immeuble 21. Cette forte
+polarisation s'explique notamment par la législation d'Ancien Régime 22 et
+la spécialisation économique des quartiers - persistant après l'abolition des
+
+20. Cette communication s'appuie sur diérents travaux d'ores et déjà publiés, acces-
+sibles gratuitement ou non, sur HAL ou sur CAIRN, et notamment :  L'espace parisien
+des libraires sous la monarchie de Juillet : des solidarités de métier ? , Revue d'histoire
+du XIXe siècle. Société d'histoire de la révolution de 1848 et des révolutions du XIXe
+siècle, vol. 2, no39, 2009, p. 37-57 ; La librairie et le crédit. Réseaux et métiers du livre à
+Paris (1830-1870), Thèse de doctorat en histoire, Université de Versailles-Saint-Quentin-
+en-Yvelines, 2011 ;  Les réseaux nanciers de quartier dans la librairie parisienne au
+XIXe siècle. Support et révélateur de la mobilité sociale et professionnelle , dans Laurent
+Beauguitte (dir.), Les réseaux dans le temps et dans l'espace. Actes de la deuxième journée
+d'étude du groupe fmr, HAL-SHS, 2013, p. 162-191 ;  De la circulation du papier dans la
+librairie à Paris au XIXe siècle ou les dynamiques du crédit inter-entreprises dans le secteur
+du livre , Entreprises et histoire, vol. 4, no77, 2014, p. 59-73 ;  Les libraires parisiens au
+XIXe siècle. Mobilités sociales et spatiales , Ethnologie française, vol. 1, no159, 2017.
+
+21. Pour une géographie plus détaillée du livre, voir : Viera Rebolledo-Dhuin,  L'espace
+
+parisien , op. cit.
+
+22. Sabine Juratic,  La librairie parisienne des Lumières, 1723-1789 , dans Frédéric
+Barbier (dir.), Paris, capitale des livres. Le monde des livres et de la presse à Paris, du
+Moyen Âge au XXe siècle, Paris, Paris bibliothèques / Presses universitaires de France,
+2007, vol. 1, p. 191-200.
+
+28
+
+corporations 23 -, la proximité des centres culturels et/ou la densité des ré-
+seaux de transport déterminant l'emplacement des entreprises éditoriales -
+de livres et de périodiques 24.
+
+À cette proximité géographique s'ajoute une proximité sociale entre les
+acteurs de ce secteur, favorable à l'émergence de conglomérats, sinon à celle
+de notables familles du livre monopolisant le marché. Héritiers des anciennes
+guildes, les métiers du livre donnent lieu à une économie non seulement lo-
+calisée mais également, fortement endogamique. Aussi, les libraires du XIXe
+siècle sont très souvent des parents issus des lignées de maîtres des anciennes
+corporations du livre 25 et, cette liation transparaît dans les modications
+de raisons sociales, accolant par un trait d'union le prénom du fondateur
+au nouveau patronyme (cf. Arthus-Bertrand, Firmin-Didot, etc.). De même
+que la date de fondation apposée sur les enseignes, cela garantit, pour les
+acheteurs, la qualité des produits proposés comme, pour les autorités de la
+Librairie, la moralité des vendeurs. De fait, le régime du brevet, instauré par
+le décret du 5 février 1810 - qui reste en vigueur jusqu'à l'avènement de la
+IIIe République -, laisse relativement peu de place aux nouveaux venus et,
+pour la Police du Bureau de la Librairie, chargée d'étudier les candidatures
+à la librairie, l'ancienneté des prédécesseurs et/ou des garants de moralité
+et de capacités agit comme cautions supplémentaires de celle des candidats.
+C'est ce qu'il s'agit d'étudier à une plus large échelle dans ce papier à tra-
+vers l'exploitation de la base de données des brevetés parisiens, Libredit, sur
+laquelle je reviendrai.
+
+23. Maurice Daumas et Jacques Payen (dir.), Évolution de la géographie industrielle de
+Paris et sa proche banlieue au XIXe siècle, Paris, Conservatoire national des arts et métiers
+École des hautes études en sciences sociales, 1976, vol. 3 ; Natacha Coquery,  Hôtel, luxe
+et société de cour : le marché aristocratique parisien au XVIIIe siècle , Histoire & Mesure,
+vol. 10, no3-4, p. 339-369, et Tenir boutique à Paris au XVIIIe siècle. Luxe et demi-luxe,
+Paris, Éd. du Comité des travaux historiques et scientiques, coll.  CTHS-histoire , no44,
+2011.
+
+24. Marie-Claire Boscq,  L'implantation des libraires à Paris (1815-1848) , dans Jean-
+Yves Mollier (dir.), Le commerce de la librairie en France au XIXe siècle : 1798-1914,
+Paris, IMEC éd. / Ed. de la MSH, coll.  In-octavo , 1997, p. 27-51 ; Françoise Parent-
+Lardeur, à Paris au temps de Balzac. Les cabinets de lecture à Paris, 1815-1830, 2e éd. rev.
+et augm., Paris, Éd. de l'École des hautes études en sciences sociales, coll.  Recherches
+d'histoire et de sciences sociales , no2, 1999 ; Gaël Mesnage,  De la rive gauche à la
+banlieue : l'imprimé dans Paris au XIXe siècle , Histoire et civilisation du livre. Revue
+internationale, vol. 5, 2009, p. 63-80.
+
+25. Nicole Felkay, Balzac et ses éditeurs, 1822-1837. Essai sur la librairie romantique,
+Paris, Promodis-Éditions du Cercle de la Librairie, coll.  Histoire du livre , no5, 1987,
+p. 32-33 ; Marie-Claire Boscq, Les libraires à Paris sous la monarchie constitutionnelle,
+Thèse de doctorat en histoire, Université de Versailles-Saint-Quentin-en-Yvelines, 2013.
+
+29
+
+Le monopole exercé par quelques familles du livre explique enn la no-
+tabilité de certains individus et par là-même leur popularité dans le nan-
+cement de la librairie. La récurrence, d'une faillite à l'autre, de plusieurs
+noms de créanciers témoigne de la spécialisation de ces acteurs faisant crédit
+aux libraires. Deux voire trois prols se dégagent au cours du siècle. Il y a
+d'abord les professionnels du livre - papetiers, imprimeurs et confrères - qui,
+exerçant un monopole au sein de leur marché, paraissent incontournables
+aux libraires-éditeurs. Ceux-là font avant tout des avances en marchandises
+et on observe, au l du siècle - et de l'industrialisation du livre -, un déplace-
+ment du nancement des libraires chaque fois plus en amont de la chaîne du
+livre, depuis les imprimeurs jusqu'aux papetiers notamment. En second lieu,
+certains libraires de la première moitié du XIXe siècle se spécialisent dans les
+opérations bancaires. De fait, quelques libraires-escompteurs drainent l'ar-
+gent de la banque, auprès de laquelle ils empruntent, depuis la rive droite
+de Paris, où se concentre la nance, jusqu'aux professionnels du livre, situés
+sur la rive gauche de la Seine. Ces libraires-escompteurs disparaissent, pour
+la plupart, au milieu du XIXe siècle, avec la crise des années 1847-1848. Dès
+lors, de véritables banquiers apparaissent. Par conséquent et en troisième
+lieu, les libraires-escompteurs de la veille abandonnent leur milieu d'origine
+et se spécialisent, sous le Second Empire, dans la banque tout en intégrant
+d'une part, la nance européenne grâce à d'heureuses alliances matrimoniales
+et en participant d'autre part, aux institutions économiques clefs, comme la
+Banque de France. Cela favorise l'ouverture de la Banque - et de la banque -,
+jusque-là réticente, aux gens du livre et ce, grâce à l'intermédiaire de quelques
+acteurs centraux acceptant de faire le relais d'un milieu à l'autre.
+
+Durant la première moitié du XIXe siècle - sinon, avant l'ouverture des
+succursales de la Banque de France, en 1836 -, seuls les commerçants - et a
+fortiori les libraires - de renom, ou ayant mené d'habiles politiques matrimo-
+niales, tel Bossange qui marie ses lles aux Baignères et Late, sont reçus
+à l'escompte de l'institut d'émission 26. Ainsi, en facilitant la circulation des
+eets au sein de leur clan, ceux-là participent à ce que Jean-Pierre Hirsch
+nomme l' ordre privé du crédit  27. Cependant, la plupart des libraires sont
+donc contraints de solliciter la bienveillance de leurs fournisseurs et/ou la
+chaine des escompteurs professionnels. Certains des fournisseurs, qui tirent
+des billets en échange des marchandises livrées, protent de leur surface
+
+26. Gaston Roulleau, Les règlements par eets de commerce en France et à l'étranger,
+
+Paris, Impr. Dubreuil, Frèrebeau et Cie, 1914.
+
+27. Jean-Pierre Hirsch, Les deux rêves du commerce. Entreprise et institution dans la
+région lilloise, 1780-1860, Paris, Éditions de l'École des Hautes Études en Sciences Sociales,
+coll.  Civilisations et sociétés , no82, 1991, p. 330-333.
+
+30
+
+commerciale pour développer leur surface nancière et se spécialiser dans
+l'escompte. Dès lors, ils n'ont pas seulement le monopole dans leur branche
+d'activité, mais ils apparaissent également comme des intermédiaires de cré-
+dit incontournables pour le fonctionnement des entreprises du livre et le com-
+merce parisien. Comme ils garantissent la circulation des eets de commerce
+auprès de leurs confrères sur des marchandises ou en hypothéquant des biens
+(im)mobiliers, ces escompteurs acquièrent un certain patrimoine qu'ils par-
+viennent à faire fructier, y compris socialement. Charles Schwartz, ls d'un
+ honnête portier , devient dès ses 13 ans commis en librairie à Paris. Neuf
+ans plus tard, en 1823, il s'y installe à son compte et reprends le fonds de la
+boutique de Pigoreau, alors célèbre pour sa Petite bibliographie biographico-
+romancière, et qui n'est autre que son futur beau-père. L'activité d'éditeur
+de Schwartz est relativement restreinte et dès la n des années 1840 il est,
+comme d'autres de ses congénères, exclusivement désigné de  banquier ,
+ ancien libraire ,  négociant ,  propriétaire  ou  rentier . Il cesse de
+publier et accède bientôt, avec la caution de trois banquiers à l'escompte de
+la Banque de France, peu avant de mourir 28.
+
+L'aliation à la Banque de France facilite la circulation du crédit et
+constitue une reconnaissance sociale et économique. Les eets de commerce,
+ou reconnaissances de dettes, qui s'échangent de mains en mains entre com-
+merçants aboutissent naturellement à la Banque de France, escompteur en
+dernier ressort. Faisant varier son taux d'escompte de 4 à 6%, l'institut
+d'émission est particulièrement regardant sur les endos, ou signatures, qu'il
+accepte. Seuls les eets revêtus de trois signatures renommées sont admis
+dans ses caisses et ne deviennent clients de la Banque que les commerçants
+qui bénécient du soutien de trois cautionnaires. Ainsi se met en place une
+pyramide d'intermédiaires de crédit, identiée par Lebaudy 29, et coiée par
+une élite commerçante. Malgré la politique d'ouverture menée - durant la
+seconde moitié du siècle - par la Banque sous pression du gouvernement,
+désireux de répondre aux deux crises de 1826-1830 et 1847-1848, les gens du
+livre ne représentent pas plus de 10% de la clientèle de l'institution d'émis-
+sion à la n du XIXe siècle 30. Aussi, le recrutement apparaît cooptatif. Au
+sein des 266 ches d'admission relatives aux gens du livre, quelques cer-
+ticateurs reviennent fréquemment pour soutenir leurs confrères désireux
+
+28. Les exemples de ce type sont nombreux : Viera Rebolledo-Dhuin, La librairie et le
+
+crédit, op. cit., voir en particulier les deux derniers chapitres.
+
+29. A. Lebaudy, Réexions sur la Banque générale du commerce et de l'industrie sous
+
+la raison Jacques Latte et Cie, Paris, impr. de P. Dupont, 1837.
+
+30. Archives de la Banque de France (désormais BdF) : 11199301. Voir : Viera Rebolledo-
+
+Dhuin,  De la circulation , op. cit.
+
+31
+
+d'obtenir un compte à la Banque. Baillière se porte garant à 23 reprises, Ha-
+chette cautionne 16 candidatures, Odent 15, Darblay 12, Masson ou encore
+Maunoury 11. Les papetiers Maunoury et Wol sont relativement isolés des
+autres hommes retenus : ils sont soutenus par des clients particuliers, tandis
+qu'ils se portent garants pour des candidats éloignés des autres cercles, à
+l'exception d'Achille Lemoine, Prioux et Charles Dunod qui sont également
+appuyés par Baillière, Odent et Hachette. Au sein du second groupe, Odent
+et Hachette, comme Baillière et Masson entretiennent des liens forts sous la
+IIIe République, tandis que Darblay est en relation avec l'ensemble des par-
+tenaires des précédents mais de manière plus discrète. Par ailleurs, Baillière
+paraît avoir une position centrale jusqu'aux années 1920, contrairement à
+Hachette qui s'eace au tournant du siècle. Cela s'explique par la position
+centrale des Baillière, père et ls, censeurs au sein du comité d'escompte de la
+Banque de France. Néanmoins, Jean-Baptiste Baillière obtient une ouverture
+de compte, grâce au soutien de Ledoux - qui lui cèdera son siège au comité
+d'escompte - et de Louis Hachette, reçu à l'institut d'émission en 1840 avec
+l'appui de son réseau personnel de notaires et de rentiers.
+
+Finalement, ma communication qui s'appuie sur mon travail de thèse et
+ses prolongements, s'attachera à souligner et comparer les diérentes formes
+de centralités, géographiques, sociales et nancières qui ont lieu dans le milieu
+du livre au XIXe siècle.
+
+32
+
+Marta Severo, Réseaux numériques et centralités en
+SIC
+
+Introduction
+
+Ces dernières années, l'analyse des réseaux est devenue très populaire
+chez les chercheuses et les chercheurs en sciences humaines et sociales. Sous
+cette étiquette, nous pouvons identier une série de techniques de traitement,
+visualisation et interprétation des données. Parmi les standards les plus re-
+connus, il y a l'usage des graphes comme outil de visualisation de réseaux et
+l'application des diérentes mesures statistiques tirées de l'analyse de graphes
+pour interpréter les relations entre les éléments en réseaux. Cependant, il faut
+reconnaitre que, d'une discipline à l'autre, des diérences importantes se sont
+imposées dans l'application de l'analyse de réseaux. Si par exemple en socio-
+logie cette technique est principalement employée pour analyser de manière
+quantitative la structure des relations sociales dans des groupes d'acteurs 31,
+en littérature, et en particulier dans les nouvelles recherches dans les cadre
+des humanités numériques, l'analyse de réseaux devient un outil visuel pour
+réinterpréter la structure d'un texte en se détachant de sa forme linéaire
+classique 32.
+
+Ce texte succinct vise à présenter l'approche de l'analyse de réseaux que
+j'ai développée dans le cadre des mes recherches en sciences de la communi-
+cation (SIC). En lien avec la thématique de la journée, une attention particu-
+lière est consacrée à l'emploi du concept de centralité. Le texte est organisé
+en trois parties. Dans une première partie, je présente brièvement la tech-
+nique de la cartographie du web qui permet de détecter et de reconstruire
+des réseaux numériques d'acteurs et qui est à la base d'enquêtes de terrain
+que j'ai récemment menée dans le secteur du patrimoine culturel. Dans une
+deuxième partie, je montre les traits particuliers de l'analyse des réseaux
+dans le cadre de ces travaux en SIC. En particulier, je montre comment
+un long travail ethnographique permet d'identier des nouvelles centralités
+entre les acteurs au delà de celles identiables par des mesures statistiques
+classiques. La troisième partie de l'article met l'accent sur le rôle que la re-
+présentation visuelle des réseaux, notamment sous forme de heatmap, peut
+jouer dans l'interprétation des relations entre les acteurs étudiés. L'analyse
+
+31. E. Lazega (1998), Réseaux sociaux et structures relationnelles, Editions PUF.
+32. F. Moretti (2011), Network theory, plot analysis, Stanford Literary Lab revue, 2.
+
+33
+
+s'appuie en particulier sur une étude des acteurs numériques du patrimoine
+culturel immatériel (PCI 33) menée entre 2012 et 2016 34.
+
+Cartographie du web et réseaux numériques
+
+Les sciences de la communication ont trouvé dans le numérique un ter-
+rain d'enquête idéal pour étudier certains des phénomènes qui sont au c÷ur
+de la discipline, comme par exemple l'analyse des ux de communication et
+des interactions entre les acteurs d'un secteur professionnel (individus, insti-
+tutions, associations, entreprises etc.) ou appartenant à une même commu-
+nauté. Cela a soulevé tout de suite le problème méthodologique de comment
+il était possible d'observer ces relations et de reconstruire les réseaux numé-
+riques d'acteurs mis en place dans ces nouveaux espaces sociaux. Diérentes
+solutions ont été adoptées. De nombreux chercheurs continuent à s'appuyer
+sur des méthodes classiques, principalement les entretiens et l'observation
+participante. D'autres mettent l'accent sur l'infrastructure technique en re-
+construisant les ux communicationnels à travers de la rétro-ingénierie des
+ux de données. Une troisième branche de chercheurs s'est eorcée à identier
+de nouvelles méthodes, dites numériques 35, plus adaptées à observer les phé-
+nomènes sociaux qui ont lieu sur ce nouveau support. Parmi ces méthodes
+numériques, la cartographie du web s'avère une méthode particulièrement
+adaptée pour l'étude des relations entre acteurs en prenant en compte à la
+fois leurs connexions et leur positionnement spatial. La cartographie du web
+s'appuie sur l'idée que les hyperliens peuvent servir de proxy de connexions
+sociales. En reliant leurs discours à d'autres discours en ligne, les auteur.e.s
+des sites web établissent des hiérarchies et des clusters 36. Le web ne consti-
+tue pas un réseau unique, mais un réseau de réseaux, un graphe où les zones
+
+33. Le patrimoine culturel immatériel est une catégorie patrimoniale, reconnue par une
+Convention de l'UNESCO établie en 2003, qui inclut toutes les formes d'expressions orales
+qu'une communauté reconnaît comme partie de son patrimoine.
+
+34. Certaines des réexions publiées ici ont été déjà publiées ailleurs notamment dans
+M. Severo et T. Venturini (2016),  Intangible Cultural Heritage Webs : comparing na-
+tional networks with digital methods , in New Media & Society, vol. 18, no8, 1616-1635 ;
+(2016),  Enjeux topologiques et topographiques de la cartographie du web : le cas du
+patrimoine culturel immatériel français , Réseaux, no1, 85-105 ; M. Severo et F. Comi-
+nelli (2015),  Mapping Intangible Cultural Heritage in France , Conference Proceedings
+Cultural Mapping : Debating Spaces and Places, Valletta, Malta, October.
+
+35. R. Rogers (2013), Digital Methods, MIT Press.
+36. D. Gibson et al. (1998)  Inferring Web communities from link topology , in Pro-
+ceedings of the ninth ACM conference on Hypertext and hypermedia : links, objects, time
+and spacestructure in hypermedia systems (HYPERTEXT '98), ACM, New York, NY,
+USA, 225-234.
+
+34
+
+densément connectées sont séparées par des espaces relativement vides, des
+trous structuraux (Burt, 1995 37). La plupart du temps, ces territoires cor-
+respondent aux communautés thématiques partageant les mêmes intérêts et
+points de vue.
+
+La cartographie du web peut être conduite avec diérents outils. Elle peut
+être réalisée de manière complètement automatisée avec des crawlers comme
+Issuecrawler qui, à partir d'une liste des sites web, génèrent un réseau d'hy-
+perliens en opérant des sélections automatiques pour inclure ou exclure les
+sites du réseau. Une deuxième possibilité est d'utiliser un crawler complète-
+ment manuel comme Navicrawler qui laisse entièrement la responsabilité de
+la sélection au chercheur. Enn, l'utilisation de crawlers semi-automatiques
+comme Hyphe donne priorité aux choix de la chercheuse mais permet égale-
+ment d'automatiser certaines actions. Quel que soit l'outil employé, le résul-
+tat nal sera toujours un graphe où les sommets sont des sites web (ou des
+sous-domaines de sites web dans le cas de Hyphe) et les arcs représentent les
+hyperliens entre les sites web concernés. En SIC, ce graphe devient intéres-
+sant si on considère les sites web comme équivalent aux acteurs sociaux qui
+les gèrent et les hyperliens comme représentatifs d'une relation, au moins de
+connaissance, entre ces acteurs.
+
+Il est important d'observer que, même si le résultat de trois techniques de
+crawl est toujours un graphe, la méthode avec laquelle il a été généré a des
+conséquences non négligeables sur les possibilités d'analyse que la chercheuse
+a par la suite. En eet, si le chercheur a fait recours à des méthodes automa-
+tisées de construction du corpus, il sera ensuite obligé à s'appuyer principa-
+lement sur des mesures quantitatives d'analyse structurelle des réseaux. Si,
+inversement, la chercheuse a choisi de manière manuelle les frontières de son
+corpus, elle a une connaissance approfondie de chaque sommet et elle peut
+conduire une démarche qualitative aussi dans l'analyse du graphe. Souvent
+le choix entre ces techniques est imposé par le type et la taille de l'objet
+qu'on veut étudier, cependant quelle que soit la technique adoptée, cela aura
+des eets sur l'interprétation des centralités dans l'analyse du corpus.
+
+Centralités dans des terrains numériques
+
+Une démarche qualitative basée sur l'emploi d'un crawler manuel ou
+semi-automatique s'avère souvent la plus adaptée à une investigation en
+SIC. En eet, la chercheuse intéressée par les dynamiques de communication
+
+37. R. S. Burt (1995), Structural Holes : The Social Structure of Competition, Cambridge
+
+Mass : Harvard University Press.
+
+35
+
+entre acteurs sociaux dans le milieu numérique ne peut pas se passer d'eec-
+tuer un long travail d'ethnographie pour connaître les acteurs concernés par
+l'étude et leur politique de communication, et pour pouvoir ensuite qualier
+le type de connexions entre ces acteurs. Le réseau numérique, et le graphe
+qui le représente, est alors le résultat de longues enquêtes de terrain pendant
+lesquelles l'équipe de recherche 38 analyse dans le détail chaque site web et
+décide selon des paramètres préétablis si le site est pertinent au pas. En s'ap-
+puyant sur ce type de démarche ethnographique, le chercheur peut identier
+des phénomènes de centralités diérentes de ce qu'il aurait décrit à travers
+des mesures statistiques de centralité. Nous pouvons considérer l'exemple de
+la cartographie du web des acteurs numériques du PCI en France 39. La taille
+large mais nie de l'objet d'étude a permis de reconstruire le réseau numé-
+rique correspondant à travers une démarche semi-automatique. Le graphe
+obtenu est constitué par 288 sommets.
+
+Le fait que la chercheuse ait une connaissance approfondie du corpus
+lui permet de s'appuyer sur l'interprétation de la représentation visuelle
+pour identier de manière plus approfondie des centralités. En eet, dans
+le graphe, la position des n÷uds dépend de leurs connexions. Le graphe a
+été spatialisé selon un algorithme de force-vecteur appelé Force Atlas 2 40.
+Cet algorithme fonctionne en attribuant une force répulsive aux n÷uds et
+une force attractive aux liens. L'algorithme modie la disposition des n÷uds
+jusqu'à une conguration qui garantit un équilibre des forces. Cet équilibre
+assure que si deux n÷uds sont reliés directement ou indirectement (connectés
+au même ensemble de n÷uds), alors ils seront aussi proches dans le graphe
+spatialisé. La proximité visuelle devient alors indicatrice d'une proximité thé-
+matique ou d'autre type. Pour ce qui concerne la taille des n÷uds, elle est
+proportionnelle à leur `visibilité', calculée sur le nombre de liens reçu par
+chaque n÷ud (degré entrant).
+
+En examinant le graphe (Figure 7) qui représente le réseau des acteurs
+du PCI par type, il n'est pas surprenant de constater que les acteurs le plus
+centraux sont les grandes institutions nationales. Cependant, le fait d'avoir
+
+38. Il est toujours mieux de ne pas travailler en solo.
+39. Les traditions orales et les pratiques culturelles sont créées et soutenues par des
+réseaux vastes et complexes d'institutions, associations, organisations non gouvernemen-
+tales, groupes et même de simples citoyens. Ces réseaux comprennent des dizaines, parfois
+des centaines d'acteurs, répartis dans plusieurs villes et régions et parfois dans diérents
+pays. La cartographie du web permet alors d'identier la myriade d'acteurs engagés dans
+la conservation des pratiques culturelles et d'en reconstruire les interactions.
+
+40. M. Jacomy et al.
+
+(2011)  ForceAtlas2, a graph layout algorithm for
+handy network visualization , Médialab whitepapers, http ://www.medialab.sciences-
+po.fr/en/publications-en/
+
+36
+
+construit le graphe à travers une démarche ethnographique nous permet de
+générer un deuxième graphe où on a supprimé les sites qui correspondent à
+la  couche supérieure  du web, où l'on retrouve des sites qui reçoivent un
+nombre important de liens de tout un ensemble de communautés thématiques
+et que l'on peut donc considérer comme faisant autorité sur le web national.
+Cette sélection ne vise pas simplement à exclure les sites qui ont le degré
+entrant le plus élevé mais aussi des sites avec un degré intermédiaire qui
+ont été inclus dans le premier corpus parce que faisant partie de la couche
+supérieure. Par ailleurs, cette démarche rend également possible de remplacer
+des sites web de la couche supérieure comme le site de l'Unesco ou le site
+du Ministère de la Culture avec la partie du site web (c'est à dire le sous-
+domaine) la plus pertinente par rapport au PCI.
+
+Si l'on trace un graphe (Figure 7) en omettant les acteurs de la couche
+supérieure du web, il est possible de mieux circonscrire une topologie de
+réseau du PCI, d'identier plus clairement les sous-ensembles de ce réseau
+et des nouvelles centralités pour chaque sous-ensemble. Par exemple, dans
+cette étude, il a été possible de retracer quatre sous-ensembles : les institu-
+tions centrales et des associations en charge du PCI (organismes nationaux) ;
+les acteurs de la recherche et valorisation ; les acteurs liés aux candidatures
+sur les listes de l'Unesco et les acteurs locaux. Ce type d'approche, fondé
+sur la combinaison entre analyse ethnographique et analyse topologique du
+graphe, a permis de poser l'accent sur certains acteurs qui, bien que ne pos-
+sèdent pas un degré entrant très élevé, jouent un rôle central dans ce réseau
+thématique en garantissant la connexion entre les sous-ensembles identiés.
+C'est notamment le cas du Département du pilotage de la recherche et de la
+politique scientique rattaché au ministère ( missionethnologie ), qui co-
+ordonne l'ensemble des initiatives nationales en matière de PCI, du Centre
+français du PCI ( CFPCI ) et la Maison des cultures du monde (MCM).
+Ces deux derniers acteurs ont été historiquement les principaux éléments fé-
+dérateurs du réseau du PCI en France ; elles assurent aujourd'hui un rôle de
+coordination entre le centre et la périphérie à travers diérentes actions.
+
+37
+
+Figure 7  Réseaux numériques des acteurs du PCI en France
+
+couche supérieure exclue
+
+Hypothèse de classication (couche supérieure exclue)
+
+Crawl de juillet 2015. La taille des n÷uds est proportionnelle au degré en-
+trant des sites. La couleur correspond au type d'acteur. Les points bleus
+représentent les institutions, les points verts les associations, et les rouges les
+individus et groupes.
+
+38
+
+Topologies des réseaux numériques
+
+Dans le cadre d'une démarche ethnographique en analyse de réseaux,
+comme celle décrite ci-dessus, où la chercheuse est portée à connaître de
+manière approfondie tous les acteurs, il devient faisable et intéressant d'ap-
+pliquer des catégorisations qualitatives et voir comment les catégories consi-
+dérées se répartissent dans le graphe. Dans le cas d'étude du PCI, les acteurs
+ont été manuellement catégorisés par type (institution, association, acteur
+individuel) et par échelle (international, national et local). Étant donné que
+les positions des n÷uds dans les graphes expriment leur connectivité, la pré-
+sence de plusieurs n÷uds du même type dans la même région du graphique
+est signicative. Elle permet de voir si les n÷uds se rassemblent par caté-
+gorie et de déduire la position relative des diérentes catégories. Même si le
+graphe n'est pas construit selon une projection géographique, la dichotomie
+centre/périphérie se révèle particulièrement adaptée pour analyser ce type
+de représentation topologique.
+
+Nous avons transformé les graphes en heatmaps 41. Dans une heatmap
+(Figure ??), les n÷uds des réseaux sont transformés en sources de lumière
+dont l'intensité est proportionnelle à la taille du n÷ud. Des seuils sont en-
+suite appliqués pour former des `courbes de niveau' de densité. Le résultat
+est une image pour chaque catégorie dans laquelle les zones plus claires cor-
+respondent aux régions du graphe avec la plus grande densité de n÷uds ap-
+partenant à cette catégorie. Cette technique, choisie pour rendre les patterns
+topologiques plus évidents, porte en même temps l'attention du chercheur
+sur des nouveaux sous-ensembles et par conséquent sur des nouvelles cen-
+tralités pertinentes pour chaque sous-ensemble. Par exemple, si on regarde
+la distribution des associations (en vert), on peut remarquer que les acteurs
+sont distribués sur toute la surface de la carte et on n'arrive pas à identier
+à un seul noyau à forte densité mais plusieurs ilôts dispersées. Ainsi, il est
+impossible à dire quelles sont les associations les plus centrales de manière
+globale, mais, à travers l'identication des frontières entre sites web, nous
+pouvons distinguer certains groupes de sites, comme le groupe Occitan (en
+bas de la carte) rassemblé autour de sites comme l'InOc-Aquitaine et l'Ins-
+titut d'Etudes Occitanes ou le groupe lié au compagnonnage (en haut de la
+carte) distribué autour des diérents sites des associations de compagnons
+( compagnon-de-devoir ) et l'Institut des métiers de l'art. De plus, dans
+le bas de la carte, on peut noter la galaxie des associations des musiques
+
+41. Cela
+
+a
+
+été
+
+obtenu à
+
+travers Heatgraph http ://tools.medialab.sciences-
+
+po.fr/heatgraph/
+
+39
+
+Figure 8  Heatgraph des réseaux numériques des acteurs du PCI en France
+par type
+
+La taille des labels est proportionnelle au degré entrant.
+
+traditionnelles, où la FAMDT (Fédération des Associations de Musiques et
+Danses Traditionnelles) s'impose comme autorité.
+
+Conclusion
+
+Dans ce texte, nous avons résumé ce que signie identier les centralités
+dans le cadre d'une démarche d'analyse de réseaux qui privilégie le travail
+ethnographique de connaissance des acteurs et l'identication de patterns
+visuels grâce à l'emploi de mesures statistiques de la centralité. Celles pré-
+
+40
+
+sentées ici veulent être simplement des pistes de réexions élaborées à partir
+de l'expérience pratique dans plusieurs enquêtes empiriques en SIC. La pro-
+chaine étape serait la comparaison entre les résultats obtenus par l'analyse
+visuelle des réseaux présentée ici et les traitements statistiques du même
+corpus.
+
+41
+
+

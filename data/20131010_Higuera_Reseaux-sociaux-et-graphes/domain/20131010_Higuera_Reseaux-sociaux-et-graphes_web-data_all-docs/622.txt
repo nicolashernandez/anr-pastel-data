@@ -1,0 +1,1665 @@
+https://www.irit.fr/~Nicolas.Verstaevel/memoire_verstaevel.pdf
+
+Augmentation de la cohérence descommunautés détectées dans desgraphes dynamiques par une approchemulti-agentMémoire de Master 2 RechercheIntelligence Artificielle, Intelligence collective, Interaction(IAICI)à l’Université Paul Sabatier - Toulouse IIIVERSTAEVEL NicolasLaboratoire d’accueil : Institut de Recherche en Informatique de Toulouse (IRIT)Responsables de stage : Amblard Frédéric, Cazabet RémyEquipe d’accueil : Systèmes Multi-Agents Coopératifs (SMAC)Mots-clés : Réseaux sociaux, détection de communautés, SMARésumé : L’analyse de réseaux sociaux est un outil qui s'impose dans de nombreusessciences. Un de ces outils spécifiques à l’analyse de réseaux sociaux est la détection decommunautés. De nombreux algorithmes de détection de communautés ont été développésmais beaucoup ont une approche statique, c'est à dire ne considèrent pas que l'ordred'apparition à une importance. De plus, ils posent le problème de la robustesse, car cesdifférents algorithmes proposent des résultats très différents.L'objectif de ce travail est de présenter une méthodologie permettant d'améliorer la cohérencedes communautés détectées en inscrivant dans un graphe des informations sur sadynamique grâce à une pondération des liens basés sur la topologie et la dynamique duréseau, et en renforçant, à l'aide de cette pondération, ses structures communautaires.Les résultats de la méthodologie développés tendent à confirmer son effet sur la cohérencedes communautés et montrent que non seulement, la dynamique est bien une sourced’informations, mais qu’elle peut aussi servir à créer de la connaissance en permettant lacréation de liens transitifs, et favorisant deux nouveaux types de communautés, l'une, locale,permettant de s'intéresser à la détection de communautés d'acteurs contemporains, l'autre,étendue, s'intéressant à la détection de communautés persistantes dans le temps.Augmentation de la cohérence des
+
+communautés détectés dans des graphes
+dynamiques par une approche multi-agent
+
+VERSTAEVEL Nicolas
+
+14 juin 2012
+
+Résumé
+
+L’analyse de réseaux sociaux est un outil qui s’impose dans de nom-
+breuses sciences. Un de ces outils spéciﬁques à l’analyse de réseaux sociaux
+est la détection de communautés. De nombreux algorithmes de détection de
+communautés ont été développés mais beaucoup ont une approche statique,
+c’est à dire ne considèrent pas que l’ordre d’apparition à une importance. De
+plus, ils posent le problème de la robustesse, car ces diﬀérents algorithmes
+proposent des résultats très diﬀérents. L’objectif de ce travail est de présen-
+ter une méthodologie permettant d’améliorer la cohérence des communautés
+détectées en inscrivant dans un graphe des informations sur sa dynamique
+grâce à une pondération des liens basés sur la topologie et la dynamique du
+réseau, et en renforçant, à l’aide de cette pondération, ses structures commu-
+nautaires. Les résultats de la méthodologie développés tendent à conﬁrmer
+son eﬀet sur la cohérence des communautés et montrent que non seulement,
+la dynamique est bien une source d’informations, mais qu’elle peut aussi ser-
+vir à créer de la connaissance en permettant la création de liens transitifs,
+et favorisant deux nouveaux types de communautés, l’une, locale, permet-
+tant de s’intéresser à la détection de communautés d’acteurs contemporains,
+l’autre, étendue, s’intéressant à la détection de communautés persistantes
+dans le temps.
+
+1
+
+Abstract
+
+Social network analysis(SNA) is a tool used in many sciences. One such
+tool speciﬁc to SNA is community detection. Many community detection
+algorithms have been developed but most of them have a static approach, ie
+do not consider the order of links appearance has important. In addition, they
+raise the problem of robustness, because these algorithms oﬀer very diﬀerent
+results. The objective of this work is to present a methodology to improve the
+coherence of detected communities by writing information on its dynamics
+in a graph, by weighting links based on the topology and dynamics of the
+network and strengthening, with these weights, its community structures.
+The results of the methodology developed tend to conﬁrm its eﬀects on the
+consistency of the community and show that not only the dynamics is a source
+of information, but it can also be used to create knowledge by allowing the
+creation of transitive links, and encouraging new kinds of communities, one
+local, to take an interest in community detection of contemporary actors, the
+other extended, with an interest in the detection of persistent communities
+over time.
+
+2
+
+Table des matières
+
+1 État de l’art
+
+8
+
+données
+
+1.1 Les évolutions d’un monde numérique : vers une science des
+8
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1.2 Les réseaux sociaux . . . . . . . . . . . . . . . . . . . . . . . .
+9
+1.3 Systèmes multi-agent et simulation sociale . . . . . . . . . . . 11
+1.4 Analyse de communautés . . . . . . . . . . . . . . . . . . . . . 11
+1.4.1 Algorithmes statiques . . . . . . . . . . . . . . . . . . . 14
+1.4.2 Algorithmes dynamiques . . . . . . . . . . . . . . . . . 14
+1.5 De l’intérêt de la dynamique . . . . . . . . . . . . . . . . . . . 14
+
+2 Méthode
+
+17
+2.1 Enjeux . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+. . . . . . . . . . 18
+2.2 Pondérer les relations grâce à la dynamique
+2.2.1
+Intervalles, période et graphe d’intervalle . . . . . . . . 18
+2.2.2 Valeur d’intérêt, déﬁnition et application . . . . . . . . 20
+2.2.3 Approche Multi-agent
+. . . . . . . . . . . . . . . . . . 20
+2.2.4 Graphe agrégé . . . . . . . . . . . . . . . . . . . . . . . 22
+2.2.5 Vers de nouveaux outils
+. . . . . . . . . . . . . . . . . 23
+2.2.6 Analyse de la méthode de pondération . . . . . . . . . 24
+Intérêt transitif
+. . . . . . . . . . . . . . . . . . . . . . . . . . 24
+2.3.1 Pourquoi la transitivité : prédiction de liens, liens man-
+
+2.3
+
+quants, résilience . . . . . . . . . . . . . . . . . . . . . 24
+2.3.2 Détection de liens transitifs et ﬁltrage de liens faibles . 25
+2.3.3 Le problème des "Hubs" . . . . . . . . . . . . . . . . . 26
+2.3.4 Fraction de contrôle et liens transitifs . . . . . . . . . . 27
+
+3
+
+2.3.5 Cohérence locale et cohérence étendue
+
+. . . . . . . . . 28
+2.4 Synthèse de la méthode . . . . . . . . . . . . . . . . . . . . . . 30
+
+3 Données
+
+32
+3.1
+IMDB . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
+3.2 Collaborations au sein de l’IRIT . . . . . . . . . . . . . . . . . 33
+
+4 Application de la méthode
+
+34
+4.1 Procédé d’expérimentation . . . . . . . . . . . . . . . . . . . . 34
+4.2 Statistiques de prédiction de liens . . . . . . . . . . . . . . . . 35
+4.3 Proﬁls d’activation . . . . . . . . . . . . . . . . . . . . . . . . 36
+4.4 Résultats de l’analyse de communauté
+. . . . . . . . . . . . . 36
+. . . . . . . . . . . . . . . . . . . . . . . . . 36
+4.4.1 Version 1
+. . . . . . . . . . . . . . . . . . . . . . . . . 37
+4.4.2 Version 2
+4.4.3 Version 3
+. . . . . . . . . . . . . . . . . . . . . . . . . 37
+Interprétation . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
+4.5.1 Première analyse . . . . . . . . . . . . . . . . . . . . . 37
+4.5.2 Analyse de la cohérence locale . . . . . . . . . . . . . . 38
+4.5.3 Analyse de la cohérence étendue . . . . . . . . . . . . . 39
+4.6 Synthèse . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39
+
+4.5
+
+5 Domaines d’applications et perspectives d’évolutions
+
+41
+5.1 Domaines d’applications . . . . . . . . . . . . . . . . . . . . . 41
+5.2 Perspectives d’évolutions . . . . . . . . . . . . . . . . . . . . . 42
+5.2.1 Améliorer la rationalité des acteurs . . . . . . . . . . . 42
+5.2.2 Améliorer le ﬁltrage des liens
+. . . . . . . . . . . . . . 43
+5.2.3 Vers un nouvel algorithme de détection de communauté 43
+
+6 Conclusion
+
+44
+
+4
+
+Remerciements
+
+Je remercie particulièrement Frédéric Amblard, tout d’abord d’avoir été
+mon encadrant pour la réalisation de ce projet et de m’avoir accordé sa
+conﬁance, mais aussi pour sa disponibilité, ses conseils, sa pédagogie et ses
+relectures, qui ont, pour beaucoup, contribué à la qualité de mes travaux.
+
+Je remercie tout aussi chaleureusement Remy Cazabet, qui a consacré
+beaucoup de temps à m’encadrer, pour son sens de la pédagogie et ses conseils
+toujours avisés, pour son sens critique qui pousse à l’excellence, mais aussi
+pour la sympathie dont il a su faire preuve.
+
+Je remercie tout les occupants du bureau 310 pour leur convivialité, leur
+
+bonne humeur, leur soutien et conseils tout au long de ce stage.
+
+Je remercie également tout les membres de l’équipe SMAC pour leur
+sympathie et leur accueil chaleureux et plus particulièrement la responsable
+Marie-Pierre Gleize, pour le soutien et l’encadrement qu’elle a su nous ap-
+porter avant et pendant ce stage.
+
+Enﬁn, je remercie celles et ceux, proches, famille, et inconnus(es) qui
+
+m’auront permis de m’épanouir dans mon travail.
+
+A tous, sincèrement.
+
+5
+
+Introduction
+
+Les thématiques de recherche de l’équipe SM AC (Systèmes Multi-Agent
+Coopératifs) au sein de l’IRIT portent sur la conception de systèmes infor-
+matiques et l’analyse d’organisations sociales robustes et pérennes évoluant
+de façon autonome pour s’adapter aux évolutions de leur environnement. Elle
+est le résultat d’un processus auto-organisationnel de chercheurs convergeant
+de plusieurs horizons : intelligence artiﬁcielle distribuée, systèmes distribués,
+simulations sociales, optimisation par recherche locale. Aujourd’hui conﬁr-
+mée par les faits, la problématique scientiﬁque de l’équipe SMAC s’inscrit
+dans une évolution de l’étude des systèmes naturels et artiﬁciels sous trois
+aspects, leur diversité, leur complexité et leur dynamique.
+
+C’est sur ce dernier aspect, la dynamique, qu’une partie de l’équipe tra-
+vaille sur l’analyse de réseaux sociaux pour permettre l’étude et la compré-
+hension des processus d’interaction entre agents et la détection de structures
+communautaires. De nombreux travaux [Amblard et al.(2011)] [Sueur et al.(2011)]
+[Quattrociocchi et al.(2010)] [Santoro et al.(2011)] ont déjà donnés lieu à des
+publications dans ce domaine et l’étude des réseaux sociaux a su s’imposer
+comme une science utile et nécessaire en sociologie, biologie ou encore en
+informatique.
+
+Les algorithmes de détection de communautés posent le problème de la
+robustesse. En eﬀet, les diﬀérents algorithmes oﬀrent des résultats très dif-
+férents [Cazabet et al.(2012)]. Ce problème vient soit de la nature des ap-
+proches, soit de leurs aspects non déterministes, qui font que pour un même
+algorithme, deux détections de communautés fourniront des résultats pou-
+vant être très diﬀérents. De plus, beaucoup travaillent sur des approches
+statiques, c’est à dire ne considèrent pas que l’ordre d’apparition des liens à
+une importance. Pour améliorer ces deux critères, deux solutions s’oﬀrent à
+
+6
+
+nous.
+
+La première est d’améliorer les algorithmes de détection de communautés.
+Cette solution nécessite une modiﬁcation de l’implémentation de ceux ci, mais
+aussi parfois, de leur fonctionnement. Il faut donc repenser de nouveaux al-
+gorithmes adaptés à l’analyse de réseaux dynamiques [Cazabet et al.(2011)].
+Cette solution nécessite donc une forte ingénierie logicielle et présuppose
+d’abandonner ou d’adapter les outils précédemment développés.
+
+La seconde est de faire un pré-traitement des graphes pour augmenter
+la cohésion des communautés en prenant en compte leur dynamique. En
+modiﬁant la structure du graphe, sans pour autant l’altérer, c’est à dire en
+renforçant les structures communautaires déjà existantes, on pourrait alors
+faciliter le processus de détection de communautés en augmentant la déﬁ-
+nition de celles-ci. Cette approche permettrait alors de continuer d’utiliser
+les outils développés pour une analyse statique sur un graphe modiﬁé par sa
+dynamique.
+
+L’objectif de ce stage est de concevoir une méthode permettant la prise
+en compte de la dynamique des réseaux sociaux et grâce à cette dernière,
+d’extraire des informations aﬁn de renforcer les structures communautaires
+au sein du réseau. La méthodologie devra donc permettre d’inscrire dans un
+graphe des informations sur sa dynamique aﬁn de permettre une meilleur dé-
+tection des communautés par les algorithmes classiques et mettre en évidence
+que la dynamique est une source d’information et qu’elle doit donc être prise
+en compte dans une analyse de réseau social.
+
+7
+
+Chapitre 1
+
+État de l’art
+
+1.1 Les évolutions d’un monde numérique : vers
+
+une science des données
+
+C’est maintenant une chose sûre, internet a révolutionné la manière dont
+nous communiquons. De cette facilité naît une profusion d’informations utiles,
+issues de ces interactions. L’engouement pour les réseaux sociaux tels que Fa-
+cebook ou Twitter est révélateur de ce changement. La ﬁgure 1.1 nous montre
+que le temps passé sur les réseaux sociaux aux USA entre 2007 et 2011 a consi-
+dérablement augmenté, mais ce résultat n’est pas propre aux USA puisque
+l’ont retrouve le même phénomène sur toutes les régions du monde. Pour
+preuve, selon un sondage IFOP du 15 novembre 2011, en France, 74,3% de
+la population des 18 ans et plus sont quotidiennement connectés à inter-
+net et 77% des internautes se déclarent membre d’au moins un réseau social.
+Chaque jour, ce sont des millions de personnes qui communiquent, échangent
+et interagissent oﬀrant un amas de données si conséquent qu’il nous faut en
+permanence développer de nouveaux outils pour en permettre l’exploitation.
+L’étude de ces données complexes n’est pas l’apanage d’une unique science
+mais le point de convergence de nombreux domaines tels que la physique, la
+biologie, la géographie ou encore l’informatique. Pour chacune de ces sciences,
+la nécessité d’analyser et traiter des quantités importantes de données en
+un temps limité se révèle devenir une véritable nécessité. Aussi l’étude de
+données complexes est source de synthèse et d’émergence d’outils d’analyse
+
+8
+
+Figure 1.1 – Augmentation du temps passé sur les réseaux sociaux aux USA
+depuis 2007
+
+issus de ces diﬀérents domaines.
+
+Un de ces outils, l’analyse de réseaux sociaux, est un exemple de cette
+
+convergence des sciences.
+
+1.2 Les réseaux sociaux
+
+L’analyse de réseaux sociaux est étudiée depuis les années 30. Originelle-
+ment développée pour la sociologie, cette science s’est diversiﬁée pour s’im-
+poser comme une science utile et nécessaire dans de nombreux domaines tels
+que la biologie, la géographie ou encore les technologies de l’information. Là
+où les approches traditionnelles de la sociologie s’intéressaient aux caracté-
+ristiques individuelles des individus, l’analyse des réseaux sociaux se propose
+d’étudier les relations entre acteurs au sein du réseau.
+
+L’analyse de réseaux sociaux se prête à une variété de réseaux allant
+du réseau d’amitié [Zachary(1977)](Figure 1.2), des réseaux de co-apparition
+[Knuth(1993)] ou encore d’interactions entre animaux [Lusseau et al.(2003)].
+
+9
+
+Figure 1.2 – Un exemple de réseau social : Réseau d’amitié du Zachary
+Karate Club
+
+Là où un ensemble d’acteurs interagissent, une modélisation de ces interac-
+tions sous la forme d’un réseau social est possible, ce qui en fait un outil
+pluridisciplinaire.
+
+L’analyse de réseaux sociaux s’appuie sur les acquis de la théorie des
+graphes [Scott(1988)] pour formaliser le réseau social comme un ensemble de
+nœuds et de liens où chaque nœud modélise un acteur et chaque lien une
+relation entre deux acteurs. Une valeur peut être aﬀectée à un lien et repré-
+sentera alors la force de celui-ci. Elle peut servir à représenter l’importance
+d’une relation, que ce soit en comptant simplement le nombre d’occurrences
+de cette relation, ou en prenant en compte d’autres processus de pondéra-
+tion (qualité de l’interaction, système d’évaluation, ...). A ce titre, l’analyse
+de réseaux sociaux dispose d’outils mathématiques issus directement de la
+théorie des graphes mais aussi d’outils et de techniques qui lui sont propres.
+On retrouvera donc dans l’analyse de réseaux sociaux des terminologies de la
+théorie des graphes telles que le degré, la force, ou le poids d’un lien. Elle est
+une science à part entière et hérite du formalisme de la théorie des graphes.
+
+10
+
+1.3 Systèmes multi-agent et simulation sociale
+
+La simulation sociale tend à reproduire ou analyser le comportement d’un
+ensemble d’individus. Les individus évoluent dans un environnement spéciﬁé
+et chaque individus disposent d’un ensemble de caractéristiques qu’il peut,
+ou non, avoir en commun avec les autres individus. Il répond à un ensemble
+de règles, qu’elles soient ﬁxées par le système (contraintes d’environnement),
+ou sociales (contraintes comportementales). L’approche multi-agent semble
+alors la plus adaptée à ce type de pratique. Un système multi-agent(SMA)
+est un système composé d’un ensemble d’agents, situés dans un certain envi-
+ronnement, et interagissant selon certaines relations. L’approche multi-agent
+permet alors de déﬁnir un ensemble d’agents, plus ou moins autonomes, ayant
+la capacité d’interagir ensemble et permet donc de simuler l’évolution du sys-
+tème.
+
+Depuis quelques temps, de nombreux modèles multi-agent sont dévelop-
+pés pour modéliser le vivant, notamment pour l’étude de comportements
+sociétaires [Thomas et al.(2002)].
+
+Plus récemment, ce type d’approche a été utilisé dans le cadre des ré-
+seaux sociaux pour de la détection de communautés [Cazabet et al.(2011)]
+où le réseau social est considéré comme l’environnement, chaque nœud étant
+un acteur, et les liens, la marque de leur interaction. Par exemple, dans
+[Cazabet et al.(2011)], les acteurs participent à la décision d’intégrer un nou-
+vel individu aux communautés dont ils font partis en tenant compte de leurs
+perceptions, ici leur voisinage. Ces approches montrent des résultats intéres-
+sants, permettent la simulation du comportement d’un grand nombre d’ac-
+teurs et oﬀrent l’avantage d’un système ouvert, ou un individu peut facile-
+ment être ajouté ou retiré sans nécessiter la refonte de l’analyse ou de la
+méthodologie.
+
+1.4 Analyse de communautés
+
+L’analyse de réseaux sociaux permet une approche sous deux aspects,
+
+l’une individus-centrée, l’autre s’intéressant aux structures sociétaires.
+
+L’approche individus-centrée propose d’étudier la manière dont les indi-
+
+11
+
+vidus établissent des relations. On s’intéresse alors à comprendre et à modé-
+liser, à l’aide de lois de distribution ou encore d’approches probabilistes, le
+comportement des acteurs. A l’aide de ces lois de distribution et propriétés,
+on peut alors simuler le comportement de groupes d’acteurs. Cette analyse
+repose sur des outils mathématiques et statistiques et s’appuie fortement sur
+la parenté avec la théorie des graphes pour formaliser les règles d’interactions
+qui prennent place dans un réseau social.
+
+Ce type d’approche oﬀre des résultats intéressants mais pose des pro-
+blèmes sur des systèmes où des stratégies locales entrent en jeu. Elle présup-
+pose qu’une majorité des acteurs répondent aux même règles d’interactions.
+Cet axiome fort ne semble pas adapté pour étudier des systèmes réels où
+chaque acteur établi sa propre stratégie d’interaction. Par exemple, il est
+possible qu’un acteur au sein d’un système sélectionne les personnes avec
+qui il interagit selon un critère de décision qui lui est propre (aﬀection, re-
+nommée, ...) et par conséquent, qu’il ne suive pas une loi mathématique.
+Aussi l’approche individus-centrée pose des problèmes d’interprétation et de
+plausibilité.
+
+La seconde approche tend elle à s’intéresser aux structures sociétaires,
+c’est à dire, à la manière dont des groupes d’individus vont interagir et à
+la détection de ces groupes. Ce procédé se nomme analyse de communautés.
+L’existence de zones plus densément connectées constitue une caractéristique
+que l’on retrouve dans de nombreux cas. L’analyse de communautés tend à
+rendre capable la détection de ces zones, nommées communautés. Elle utilise
+les propriétés topologiques du réseau, c’est à dire sa structure, pour détermi-
+ner si une structure communautaire existe.
+
+La détection de communautés a des applications diverses, souvent dé-
+pendantes de la nature du réseau. Il n’existe pas de déﬁnition formelle et
+unanime de ce qu’est une communauté et le terme "communauté" n’a de
+sens que celui que l’on lui prête. Il faut souvent contextualiser le domaine
+d’analyse aﬁn d’en comprendre le sens.
+
+Dans le cadre de l’analyse de réseaux sociaux, une communauté peut se
+voir comme un groupe d’individus qui ont tendance à plus agir ensemble
+qu’avec les autres. Par exemple, une communauté dans un graphe d’amitié
+désignera un groupe d’amis ou dans un graphe de collaboration, un groupe de
+
+12
+
+travail. La manière dont on détermine si un groupe est une communauté est
+fortement dépendante de l’algorithme utilisé, ce qui pose donc le problème
+de la robustesse. En eﬀet, de par leurs approches, diﬀérents algorithmes vont
+fournir des résultats très diﬀérents [Cazabet et al.(2012)]. Un même algo-
+rithme peut d’ailleurs lui même, de par son approche non déterministe, à
+chaque exécution, fournir des résultats diﬀérents. Ces diﬀérences de résultats
+rendent diﬃcile la comparaison des communautés détectées et il faut analy-
+ser les résultats des diﬀérents algorithmes pour déterminer ceux qui semblent
+les plus probants. Cette sensibilité à l’angle d’approche et au déterminisme
+explique aussi la profusion d’algorithmes qui ont été développés.
+
+Cependant, plus une structure communautaire est cohésive, c’est à dire
+bien distincte dans le réseau, plus elle sera bien détectée par les diﬀérents al-
+gorithmes. On pourra alors retrouver des communautés similaires détectées
+par chaque algorithmes. Ainsi, augmenter la cohésion des structures com-
+munautaires apparait naturellement comme une approche pertinente pour
+augmenter la qualité des communautés détectées. Cependant, l’augmenta-
+tion de cette cohésion doit se faire dans le respect de la topologie et ne doit
+pas altérer la structure du réseau et détecter des communautés qui n’auront
+pas de sens.
+
+Les enjeux de la détection de communauté sont majeurs, puisqu’ils per-
+mettent de favoriser la compréhension des processus d’interaction entre ac-
+teurs et trouvent des intérêts en économie, sociologie, biologie ou informa-
+tique. Elle sera par exemple en géographie utilisée pour identiﬁer des zones
+densément peuplées ou en biologie pour étudier le comportement sociétaire
+de groupes d’animaux. Elle devient même, à l’heure de l’avènement des ré-
+seaux sociaux, un enjeu majeur du marketing et de l’économie et est, en ce
+sens, un domaine porteur dans la recherche socio-économique.
+
+Parmi tous les algorithmes de détection de communautés, on distingue
+deux familles : ceux qui ont une approche statique et ceux qui ont une ap-
+proche dynamique.
+
+13
+
+1.4.1 Algorithmes statiques
+
+L’approche statique considère le réseau social comme un tout et ne s’in-
+téresse pas aux processus qui ont amenés à sa création. Elle considère que
+l’ordre dans lequel les liens apparaissent ne revêt pas d’importance dans la
+compréhension du réseau. C’est cette approche qui a donné la plus grande
+profusion d’algorithmes tels que [Blondel et al.(2008)], [Lancichinetti et al.(2011)],
+ou [Derényi et al.(2005)], avec, pour ces deux dernières méthodes, la particu-
+larité de gérer le recouvrement, c’est à dire, qu’un nœud appartienne à deux
+communautés distinctes. L’approche statique s’intéresse surtout à l’état ac-
+tuel d’un réseau et aux structures communautaires qui tiennent actuellement
+place.
+
+1.4.2 Algorithmes dynamiques
+
+L’approche dynamique quant à elle considère l’ordre d’apparition des
+liens comme une source d’information facilitant le processus de classiﬁca-
+tion en communautés. Sous cette approche, l’état courant d’un réseau est
+dépendant de l’évolution des interactions et détecter une communauté sans
+prendre compte de l’ordre dans lequel les liens sont apparus est du non sens.
+Par exemple, un lien peut avoir été fortement actif au début du réseau et
+avoir cesser son activité bien avant la ﬁn de sa construction. Cette cessation
+d’activité fait qu’il est diﬃcilement classable dans des communautés où les
+liens ont été plus fortement actifs en ﬁn de période. Aussi, la prise en compte
+de ce lien dans des communautés où tout les liens sont récents peut poser
+problème. On citera notamment les travaux de [Cazabet et al.(2011)] et de
+leur algorithme ILCD qui prend en compte la dynamique pour construire des
+communautés.
+
+1.5 De l’intérêt de la dynamique
+
+La plus part des outils développés pour l’analyse de réseaux sociaux
+adoptent une approche statique. Ces outils ont maintenant montré leur inté-
+rêt dans l’analyse de réseaux. Pourtant, ils ne semblent plus adaptés à l’étude
+
+14
+
+Figure 1.3 – Exemple de structures de communautés dans un graphe :
+deux partitions en communauté correspondant à deux échelles diﬀérentes
+sont représentées.
+
+des données réelles, où la dynamique apparait être devenue trop importante
+pour être négligée.
+
+La prise en compte de la dynamique naît d’abord d’un besoin d’étudier
+de nouveaux types de données. Là où il fallait précédemment réaliser de
+nombreux sondages, collecter et synthétiser les données, l’outil numérique
+nous permet d’acquérir quantités d’informations et ce, rapidement. De nos
+jours, il est courant de travailler sur des données collectées sur plus de 20 ans.
+Sur des périodes aussi longues, il est logique que les dynamiques d’interaction
+n’aient pas toujours été les mêmes. Les stratégies d’interaction ayant eu cours
+au début de la période ne sont pas les mêmes que celles qui ont pris cours à la
+ﬁn de la période. Par exemple, les dynamiques de publication d’un centre de
+recherche ont fortement évoluées. Cette évolution vient de la taille du centre,
+qui tend à augmenter, mais aussi de l’évolution des technologies qui rendent
+la publication plus facile et d’enjeux politiques. Aussi, les communautés qui
+
+15
+
+existaient dans les années 80 ne sont pas les mêmes que celles des années 2000.
+De nouveaux acteurs sont entrés dans le système, d’autre en sont sortis et
+de nouvelles dynamiques de publication se sont mises en place. De ce besoin
+de prendre en compte les diﬀérentes étapes dans l’évolution d’un réseau naît
+l’utilité de la dynamique, mais il n’est pas le seul.
+
+L’objet principal qui réside dans la dynamique, et donc l’objet de ce
+mémoire, est que l’étude de cette dynamique peut être une nouvelle source
+d’information complémentaire et sa prise en compte pourrait alors apporter
+une nouvelle vision sur les données collectées. Son objectif n’est pas de rem-
+placer une analyse statique mais bel et bien d’en être le complément. Ainsi,
+étudier les dynamiques d’un réseau c’est aussi améliorer la compréhension
+des résultats d’une approche statique.
+
+Dans tous les cas, l’approche de la dynamique n’en est qu’à ses débuts et
+
+révèle d’ors et déjà bien des promesses.
+
+16
+
+Chapitre 2
+
+Méthode
+
+2.1 Enjeux
+
+Nous avons vu qu’il existait une profusion d’outils et de méthodes por-
+tant sur l’analyse statique des réseaux mais que peu d’outils permettaient
+d’en aborder la dynamique. Nous avons vu que les résultats diﬀéraient d’un
+algorithme à l’autre. Il est donc intéressant de pouvoir améliorer la robustesse
+de ces algorithmes en proposant une méthode de pré-traitement du graphe
+pour renforcer sa cohésion. Récemment, des méthodes [Farkas et al.(2007)]
+[Radicchi et al.(2011)] ont mis en avant l’utilité, lorsque l’information est dis-
+ponible, de pondérer les relations d’un réseau social. En eﬀet, pondérer les
+relations, c’est à dire, mettre une valeur sur la force de cette relation, c’est
+permettre de les comparer, et donc, de décider laquelle est la plus importante
+pour un acteur. Cette prise en compte du poids permet aux algorithmes de
+détection de communautés d’augmenter la qualité et la robustesse de leurs
+résultats.
+
+L’objectif de ce mémoire est de proposer une approche permettant de
+faire porter des informations sur la dynamique d’un réseau sur un graphe qui
+serait ensuite exploitable par les méthodes d’analyse statique. L’idée derrière
+cette approche est de réussir à extraire de la dynamique une information sur
+la force d’une interaction entre deux acteurs et ainsi mettre en avant l’axiome
+énonçant que la dynamique est source de nouvelles connaissances.
+
+La méthodologie que nous présentons ici se propose d’extraire de la dy-
+
+17
+
+namique une information sur la force des liens, aﬁn de créer un réseau où
+les relations sont pondérées, et d’utiliser cette information pour améliorer les
+résultats des algorithmes de détection de communautés. Le second objectif
+est de mettre en avant la source d’information que peut être la dynamique
+d’un réseau social.
+
+2.2 Pondérer les relations grâce à la dynamique
+
+Fournir une information sur la qualité d’une interaction, être capable
+de la pondérer, c’est se rendre capable de diﬀérencier une interaction forte
+d’une interaction faible. Faire cette diﬀérenciation c’est permettre, lorsque la
+nécessité se présente de réaliser des césures sur les liens les plus faibles et donc
+de conserver et favoriser les liens forts. [Farkas et al.(2007)] ont montré que
+pondérer les relations permettait d’augmenter la qualité des communautés
+découvertes. L’idée ici est d’utiliser la dynamique du réseau comme seule
+information pour quantiﬁer les interactions entre acteurs et créer un nouveau
+réseau social pondéré.
+
+Cette section se propose donc d’expliciter la méthodologie que nous avons
+développée pour permettre une telle pondération. Elle déﬁnit l’ensemble des
+outils et techniques issus de l’étude de la dynamique du réseau.
+
+2.2.1
+
+Intervalles, période et graphe d’intervalle
+
+Étudier les dynamiques d’un réseau c’est étudier son existence et ses
+évolutions au cours du temps. Mais avant de s’intéresser à son étude, il faut
+d’abord porter attention à la forme que prennent les données à étudier.
+
+La nature des données inﬂuence fortement l’analyse du réseau social. Une
+des caractéristiques importantes est la fréquence avec laquelle ces données
+nous sont fournies, c’est à dire à quel rythme les données nous sont fournies.
+On déﬁnit i comme l’intervalle des données, c’est à dire, l’intervalle sur
+lequel porte un jeu de données. in désigne alors le ieme intervalle. Ici tous les
+in sont de même longueur et in+1 est successeur de in (Cette condition de
+même longueur n’est cependant pas nécessaire, mais ici, ce choix a été fait
+pour faciliter l’implémentation).
+
+18
+
+Figure 2.1 – Découpage de la période d’étude en intervalles
+
+Ici, la ﬂèche représente l’ensemble des données. Elles sont découpées en n
+blocs d’intervalles de longueur identique. Le ième bloc représente la ième
+acquisition de données. Les n blocs déﬁnissent une période d’étude, nommée
+T.
+
+n=0 in où N désigne le nombre
+d’intervalles. Ainsi, T représente l’intervalle global de notre étude. in peut
+s’exprimer en minutes, heures, années, ou toute unité temporelle.
+
+Soit T la période d’étude telle que T =(cid:80)N
+on aura (cid:107)i0(cid:107) = (cid:107)i1(cid:107) = ... = (cid:107)i9(cid:107) = 1 et T =(cid:80)9
+
+Par exemple, si l’on traite des données collectées annuellement sur 10 ans,
+n=0 1 = 10. T et i doivent être
+
+de même unité ici, l’an.
+
+Pour chaque in on déﬁnit G(in) le réseau social issu de la ieme capture
+de données. G(in) représente donc les interactions ayant eu cours au ime
+intervalle. Soit (cid:47) désigne l’antériorité, on a G(0) (cid:47) G(1) (cid:47) ... (cid:47) G(n − 1). On
+nomme G(in) le graphe d’intervalle in.
+
+A un jeu de données correspond donc N graphes d’intervalle, composés
+des interactions ayant pris place au cours de ce bloc de données. Étudier
+indépendamment chaque graphe d’intervalle permet l’étude des interactions
+ayant pris place localement (au sens temporel).
+
+Il est à noter que l’aspect dynamique de la méthode n’est pas à mélanger
+avec une approche déterministe. Ici aucune règle n’est extraite ou utilisée
+pour passer du graphe G(in) à G(in+1) et l’analyse de l’aspect dynamique du
+réseau ne s’intéresse pas à connaître l’existence ou l’approximation de telles
+règles mais tend à utiliser l’apparition et la disparition de liens pour rendre
+compte de ses dynamiques.
+
+19
+
+2.2.2 Valeur d’intérêt, déﬁnition et application
+
+On désire pondérer les relations de notre graphe d’intervalle en se basant
+uniquement sur la topologie du réseau. Pour un in, on connait pour un acteur
+A le nombre de personnes avec lequel A a interagi. En se basant sur ce
+nombre, c’est à dire, sur son nombre de voisins, on veut être capable de
+quantiﬁer chacune des relations que A a établit. Soit A et B deux acteurs
+tels que A, B ∈ G(in). On déﬁnit I(A, B) comme l’intérêt de A pour B.
+Sa méthode de calcul est dérivée de "l’acte de collaboration" déﬁni dans
+[Farkas et al.(2007)]. Chaque acteur possède un intérêt de 1 qu’il répartit
+entre les diﬀérents acteurs avec qui il est impliqué. Faute d’information sur
+la qualité des interactions, nous considérons ici qu’un acteur partage son
+intérêt équitablement entre ses voisins. Cela revient à considérer qu’un acteur
+va équitablement partager ses compétences avec les personnes avec qui il
+collabore. Ce processus n’a pas pour objectif de modéliser une réalité dans la
+manière dont l’agent considère ses collaborateurs. En eﬀet, puisque l’on désire
+montrer que l’usage seul de la dynamique permet l’extraction d’informations
+quantitatives, aucun processus cognitif n’intervient ici. Cependant, comme
+expliqué au chapitre 6 dans les perspectives, la méthode de calcul de l’intérêt
+pourra être modiﬁée pour faire intervenir un processus cognitif au sein de
+l’agent.
+
+Déﬁnition On appelle Valeur d’intérêt ou intérêt la valeur In(A, B) et
+In(A, B) = 1/N bV oisins(A) où N bV oisins(A) retourne le nombre de voisins
+de A dans G(in). On a InA, B (cid:54)= InB, A et ∃e(A, B) ⇒ ∃e(B, A).
+
+2.2.3 Approche Multi-agent
+
+L’objectif est de créer un graphe d’intérêt modélisant pour chaque nœud
+le sentiment de proximité/d’importance d’une relation avec son voisin, basé
+sur la valeur d’intérêt énoncée précédemment. On désire obtenir un réseau
+orienté où chaque lien existant dans le graphe G(in) entre deux agents A et
+B existe dans le nouveau réseau sous deux liens orientés de A vers B et de
+B vers A. Le lien A → B représente alors l’intérêt de A pour B. L’idée est
+donc de créer dynamiquement un graphe orienté, pondéré et agrégé G(T ) à
+
+20
+
+partir des graphes d’intervalle G(in) tel que G(T ) =(cid:83)
+
+On introduit alors le système multi-agent suivant :
+
+n=0..N G(in).
+
+Agents Chaque nœud est considéré comme un agent.
+
+Environnement L’environnement est un graphe dirigé où pour chaque
+lien,∃e(A, B) ⇒ ∃e(B, A). Chaque nœud perçoit son voisinage à rang 1. Il
+possède une mémoire temporelle lui permettant de connaître les liens actifs
+sur un intervalle temporel δt < T . Il a donc une connaissance du passé
+restreinte.
+
+Dynamiques Le système permet l’ajout de nœuds et de liens. L’ajout de
+nœuds et de liens sont indépendants du comportement des agents. Le système
+est régit par une horloge globale permettant la gestion des cycles. Passer de
+in à in+1 incrémente l’horloge de 1. Entre chaque tour d’horloge, le système
+charge les nouvelles interactions. C’est à dire, si l’on prend comme horloge les
+années de 1990 à 2000 avec un pas de 1 an, le système chargera les données de
+1990, puis les suivantes, et ce, année par année. Cette dynamique d’horloge
+dépend de la fréquence des données, c’est à dire de l’intervalle entre deux
+jeux de données.
+
+Actions L’agent peut pondérer un lien en fonction de ses perceptions et
+de sa mémoire. Un agent A qui collabore avec un agent B ﬁxera le poids de
+sa relation à I(A, B). L’agent peut demander à un de ses voisins la liste de
+ses voisins.
+
+Pour chaque G(in), les agents pondèrent les relations sortantes grâce à
+la valeur d’intérêt selon l’algorithme 1. On obtient alors un graphe G(I) où
+chaque lien est dirigé et pondéré.
+
+L’image 2.4 montre un exemple de pondération d’un lien entre deux agents
+A et B. Deux nouveaux liens dirigés sont construits et pondérés selon le
+voisinage de A et B.
+
+21
+
+Figure 2.2 – Principe de pondération des liens
+
+Algorithm 1 Pondération des liens sortants d’un nœud par un agent
+1: for all Node A ∈ G(in) do
+2:
+3:
+
+WG(in)(e) ← 1 ÷ N bV oisins(A) (cid:46) Ici, N bV oisins(A) renvoie les
+
+for all Edge e ∈ OU T (A) do
+
+voisins du nœud A, c’est à dire l’ensemble des liens actifs dans G(in)
+
+end for
+
+4:
+5: end for
+
+Déﬁnition On appelle Graphe sur l’intervalle n d’intérêt ou G(In)
+le graphe obtenu par cette méthode.
+
+2.2.4 Graphe agrégé
+
+Puisque l’on s’intéresse à l’étude de la dynamique sur T , il nous faut
+extraire des G2(in) un graphe reﬂétant l’intégralité des interactions ayant eu
+cours sur T .
+
+Soit G(T ) la concaténation (au sens topologique) des G(in), c’est à dire
+l’ajout des nœuds et liens de G(in) dans G(T ). G(T ) est appelé graphe agrégé.
+Chaque G(in) est chronologiquement ajouté à G(T ). Le graphe agrégé est
+créé selon l’algorithme 2. Il est donc le résultat d’une succession de fusions
+des graphes d’intervalle et donc, résultat d’une succession d’interactions. Il
+modélise l’intégralité des relations ayant eu cours sur la période T . Le poids
+d’un lien, déﬁnit par la fonction W (e) où e est un lien, est déﬁnit comme
+n=0 IG(in)(A, B),∀in ∈ T où A, B sont deux nœuds et n
+le nombre de graphes d’intervalles. Ainsi, un lien de G(T ) est la somme des
+intérêts pour chaque G(in).
+
+WG(T )(A, B) = (cid:80)N
+
+Déﬁnition On appelle Graphe d’intérêt le graphe obtenu par l’agréga-
+tion des graphes d’intervalle d’intérêt.
+
+22
+
+G(T ).addN ode(n)
+
+end if
+
+if n /∈ G(T ) then
+
+Algorithm 2 Fusion
+1: for all Node n ∈ G(in) do
+2:
+3:
+4:
+5: end for
+6: for all Edge e ∈ G(in) do
+7:
+8:
+9:
+10:
+11:
+12:
+13: end for
+
+if e /∈ G(T ) then
+
+else
+
+end if
+
+G(T ).addDirectedEdge(s, t)
+WG(T )(s, t) ← IG(in)(s, t)
+
+WG(T )(s, t) ← WG(T )(s, t) + IG(in)(s, t)
+
+2.2.5 Vers de nouveaux outils
+
+Grâce au processus de pondération des relations, on est amené à reconsi-
+dérer certaines valeurs dont le sens et l’intérêt dans le cadre de cette métho-
+dologie sont amenés à évoluer. C’est le cas de la force d’un nœud. La force
+d’un nœud est déﬁnie comme la somme de ses liens, c’est à dire, la somme du
+poids des liens qui entrent ou partent du nœud. On distingue ici deux types
+de forces d’un nœud : la force entrante déﬁnie comme la somme du poids
+des liens entrants, et la force sortante, déﬁnie comme la somme du poids des
+liens sortants.
+
+Ici, la force nous fournit un pseudo-indicateur de l’intérêt généré pour ou
+par une personne. La force entrante représente le niveau d’intérêt que l’agent
+génère pour les autres acteurs, alors que la force sortante nous fournit le
+niveau d’intérêt pour les autres acteurs. On distingue donc ici la réputation
+de l’acteur par sa force entrante, de son implication pour le système par la
+force sortante.
+
+Ainsi, un acteur avec une forte force entrante, mais une faible force sor-
+tante, est dissociable d’un acteur avec une faible force entrante mais une forte
+force sortante. Le premier indiquera alors un acteur sollicité dans le réseau,
+
+23
+
+lorsque le second indiquera un acteur sollicitant.
+
+Les applications et l’interprétation de ces valeurs ne prend alors sens que
+dans le cadre de l’analyse et dépendent a la fois du contexte et de la structure
+du graphe mais peuvent devenir de nouveaux outils pour sa compréhension.
+
+2.2.6 Analyse de la méthode de pondération
+
+Nous avons exposé une méthode avec approche multi-agent permettant la
+construction dynamique d’un graphe d’intérêt G(T ), quantiﬁant pour chaque
+acteur les relations qu’ils entretiennent. Grâce à ce graphe d’intérêt, on peut
+alors réaliser une analyse à l’aide des outils classiques de l’analyse de réseaux
+et notamment réaliser une détection de communautés sur graphe dirigé et
+pondéré.
+
+L’avantage de cette méthode est son aspect uniquement topologique. Elle
+met donc en évidence que la simple prise en compte de la modiﬁcation de
+la topologie du réseau social est source d’informations pour quantiﬁer les
+interactions.
+
+Les résultats de [Farkas et al.(2007)] et les résultats expérimentaux (voir
+chapitre 3 et 4), tendent à montrer que la prise en compte du poids des
+liens dans le processus de détection de communauté améliore la qualité des
+communautés détectées.
+
+Cependant, d’autres utilités peuvent être trouvées à ce graphe d’intérêt.
+Nous allons maintenant nous intéresser au phénomène d’"intérêt transitif" et
+à la mise en relation par transitivité d’acteurs.
+
+2.3 Intérêt transitif
+
+2.3.1 Pourquoi la transitivité : prédiction de liens, liens
+
+manquants, résilience
+
+Un des domaines de l’analyse de réseaux est tout ce qui a trait à la pré-
+diction de liens, la détection des liens manquants et l’étude de la résilience
+du réseau. L’utilité de ces études n’est plus à démontrer. Être capable d’anti-
+ciper l’évolution du réseau, les problèmes de données manquantes, ou encore,
+
+24
+
+renforcer son intégrité structurelle face à la disparition d’acteurs ou de liens
+est d’une utilité certaine. Sans être spéciﬁque à ce domaine, la méthodologie
+et les outils traités dans cette section peuvent être utiles.
+
+2.3.2 Détection de liens transitifs et ﬁltrage de liens
+
+faibles
+
+Un cas d’exemple : le cas des stagiaires Soit un acteur A qui accueille
+la même année deux stagiaires B et C sur deux thématiques similaires mais
+indépendantes. Le travail de A et B donne lieu à la rédaction d’un mémoire. Si
+on considère le graphe de collaboration, il existe donc une relation entre A et
+B ; de même pour le travail de A avec C. Considérons donc le graphe obtenu
+par ces trois acteurs. On a une relation entre A et B et entre A et C mais
+qu’en est-il de la relation entre B et C. Malgré l’absence de publications entre
+eux, n’existe-t-il pas un intérêt entre ces deux personnes, et par extension,
+un sentiment d’appartenir à la même communauté ? N’ont-il pas, au travers
+de leur responsable, communiqué et interagis ?
+
+En créant le graphe d’intérêt, B et C développent un intérêt de 1 pour
+A et A développe un intérêt de 0.5 pour B et C. Le graphe d’intérêt met
+donc en évidence l’existence d’un chemin entre B et C. L’idée est donc de
+modéliser cette transitivité en créant un lien entre B et C de poids 1 ∗ 0.5 et
+réciproquement pour C vers B. En ajoutant ce lien, on créé une clique entre
+A,B,C renforçant structurellement l’idée d’une communauté entre A, B et
+C. De plus, on fournit une indication sur la "force" de ce "sentiment" grâce
+à la valeur d’intérêt rendant possible de déterminer la proximité d’un nœud
+par rapport à une communauté.
+
+Enﬁn, si A vient à disparaître, l’ajout de ce lien transitif permettra à
+B et C de rester en interaction, renforçant ainsi la résilience du réseau. En
+eﬀet, puisqu’il existait auparavant une relation implicite entre B et C, la
+matérialiser en rajoutant un lien physique entre B et C permet de renforcer
+la solidité du réseau et, si A venait à disparaitre, laisse la possibilité à B et
+à C de conserver leur valeur d’intérêt.
+
+On propose alors de formuler cette transitivité :
+
+25
+
+Figure 2.3 – Intérêt transitif
+
+Déﬁnition de l’intérêt transitif Soit s, t ∈ N odes(G(T )), si ∃p ∈ N odes(G(T ))
+
+de s vers p et que son poids WG(T )(s, t) = WG(T )(s, p) ∗ WG(T )(p, t). De
+
+tel que p ∈ Out(S)(cid:84) In(t) alors ∃e ∈ Edges(G(T )) tel que e est un lien
+manière étendue, on a, ∀s, t ∈ N odes(G(T )), ∀p ∈ Out(S)(cid:84) In(t), alors
+WG(T )(s, t) =(cid:80)∀p WG(T )(s, p) ∗ WG(T )(p, t).
+
+∃e ∈ Edges(G(T )) tel que e est un lien de s vers p et que son poids
+
+L’application de ce principe permet l’ajout de tous les liens de transitivité
+mais tous ne sont pas forts (c’est à dire, tous ces poids n’ont pas une valeur
+"élevée" par rapport à un seuil ﬁxé). On propose donc de ne retenir que les
+liens forts aﬁn de ne garder que les liens (transitifs ou non) les plus signiﬁcatifs
+pour ne pas obtenir un graphe complet.
+
+Déﬁnition On appelle Filtrage le procédé qui, pour un seuil ﬁxé, tend à
+supprimer tous les liens faibles ( inférieurs stricts au seuil) , conformément à
+l’algorithme 3
+
+Le choix du seuil est dépendant du graphe et doit donc être choisi en
+conséquence. Une approche simple peut être de le choisir autour de la moyenne
+ou de l’écart type des valeurs d’intérêt.
+
+2.3.3 Le problème des "Hubs"
+
+Il existe au sein des réseaux sociaux une fraction de nœuds dont le de-
+gré est signiﬁcativement plus grand que la moyenne. Ces nœuds "hyper-
+
+26
+
+if W (e) < seuil then
+
+end if
+
+G.remove(e)
+
+Algorithm 3 Filtrage
+1: for all Edge e ∈ G do
+2:
+3:
+4:
+5: end for
+6: for all Node n ∈ G do
+7:
+8:
+9:
+10: end for
+
+G.remove(n)
+
+end if
+
+if Degree(n) = 0 then
+
+connectés" sont appelés "Hubs". Soit A un "hub" et B un nœud connecté à
+A. De par sa nature, A est connecté avec beaucoup de nœuds, donc par inté-
+rêt transitif, B sera connecté avec beaucoup de nœuds. L’hyper-connectivité
+des "Hubs" pose le problème des liens signiﬁcatifs. Connecter B avec tous
+les voisins de A n’est évidemment pas une solution. Il faudrait être capable
+d’identiﬁer quels voisins de A sont suﬃsamment signiﬁcatifs pour connecter
+B. De même, il faudrait être capable de déterminer pour B si sa relation avec
+A est plus importante que celle avec ses autres voisins.
+
+Nous avons vu précédemment que le ﬁltrage permet de ne retenir que les
+liens forts, mais ce ﬁltrage ne permet pas d’exclure les "Hubs" du processus
+de transitivité. Il faut donc être capable de déterminer localement si un lien
+est signiﬁcatif pour l’acteur par rapport à ses autres liens. Ainsi, un "Hub"
+aura tendance à avoir beaucoup de liens, mais peu seront signiﬁcatifs (ils
+auront tous des valeurs faibles), contrairement à un non "Hub". Pour cela,
+nous introduisons le concept énoncé par [Glattfelder et Battiston(2009)], les
+fractions de contrôle.
+
+2.3.4 Fraction de contrôle et liens transitifs
+
+Glattfelder dans [Glattfelder et Battiston(2009)] déﬁnit la fraction de contrôle
+
+Hij d’un lien par Hij = W 2
+
+ij.
+l=1 W 2
+
+Cette valeur, qui correspond à une normalisation des poids, a l’avantage
+
+ij/(cid:80)kin
+
+j
+
+27
+
+if PA(e) > seuil then
+
+for all Edge e where e.source == A do
+
+Algorithm 4 Transitivité d’interêt avec seuil ﬁxé
+1: for all Node A ∈ G(in) do
+2:
+3:
+4:
+5:
+6:
+7:
+8:
+9:
+10:
+11: end for
+
+if Pe.target(e2) > seuil then
+
+CreerLienT ransitif (A, e2.target)
+
+for all Edge e2 where e2.source == e.target do
+
+end if
+
+end for
+
+end if
+
+end for
+
+de favoriser les liens forts par rapport aux liens faibles. En s’intéressant en-
+suite au pourcentage de contrôle P que représente un lien, c’est à dire, le
+pourcentage que cette valeur représente par rapport à la somme des liens, on
+peut donc déterminer si, localement, un lien est signiﬁcatif.
+
+En ﬁxant alors une valeur de seuil de pourcentage, on se dote alors de
+la capacité de localement déﬁnir si un lien est important pour un agent.
+On introduit alors ce procédé pour corriger la méthode d’intérêt transitif et
+obtenir l’algorithme 4.
+
+2.3.5 Cohérence locale et cohérence étendue
+
+L’intérêt transitif nous permet de mettre en relation des acteurs qui,
+pour des raisons diverses, n’ont pas interagis mais s’inﬂuencent mutuellement.
+On désire mettre ce principe en application pour augmenter la cohérence
+temporelle des communautés détectées. Pour ce faire, on se doit de distinguer
+deux niveaux de cohérences temporelles, et par extension, deux types de
+communautés cohérentes temporellement.
+
+Cohérence locale Le premier type de cohérence que l’on souhaite ap-
+pliquer est la cohérence locale. On appelle Cohérence Locale la mise en
+relation d’acteurs contemporains, c’est à dire d’acteurs actifs sur un même
+
+28
+
+intervalle mais qui n’ont pas interagis ensemble.
+
+Ici, il s’agit d’identiﬁer des acteurs qui ont eu la possibilité d’interagir
+(puisque que contemporains) mais ne l’ont pas fait. Augmenter la cohérence
+locale d’une communauté, c’est regrouper des acteurs actifs sur la même pé-
+riode. On cherche ici à détecté des communautés d’acteurs contemporains,
+c’est à dire des communautés où les membres on tous été actifs à la même
+période. Considérons par exemple deux acteurs de cinéma A et B. A est
+un acteur des années 50, décédé en 80 et B est un acteur des années 90
+toujours vivant. Avec la cohérence locale, on désire rapprocher B d’une com-
+munauté d’acteurs des années 90 et A d’une communauté des années 50. Les
+communautés obtenues reﬂèteraient alors une réalité temporelle et non plus
+seulement topologique. Les membre d’une communauté on tous été actifs à
+la même période. Elle permet d’étudier l’existence de groupes communau-
+taires contemporains, au sens d’actifs en même temps et le terme commu-
+nauté prend alors le sens de groupe d’acteurs ayant mutuellement plus agis
+ensemble qu’avec le reste de la communauté sur une période donnée.
+
+On est amené à reconsidérer les méthodes In() et Out(). Dans le cadre
+de la cohérence locale, à l’instant i, In(node) et Out(node) désignent les
+voisins (respectivement entrants et sortants) actifs sur l’intervalle [ij; in] où
+j < n. Les valeurs n et j nous permettent de déﬁnir une fenêtre temporelle
+de cohérence, dont la taille déﬁnit si deux acteurs sont contemporains.
+
+Cohérence étendue Le second type de cohérence est dite étendue et se
+propose de regrouper des acteurs non contemporains, c’est à dire, non actifs
+durant la même période. Il s’agit ici d’identiﬁer des acteurs qui n’ont pas eu
+la possibilité d’interagir mais qui pour autant ont par transitivité travaillé
+avec les mêmes personnes. En reprenant l’exemple précédent, où A et B
+sont acteurs de deux périodes diﬀérentes, on désire étudier l’existence de
+communautés persistantes. Est-ce que la communauté formée par les acteurs
+des années 50 a continuée d’exister pour intégrer celle des années 90 ou, à
+contrario, s’agit-il de deux communautés complètement distinctes. Aussi, en
+mettant en relation des acteurs qui n’ont pas été contemporains, on permet
+à des communautés de perdurer dans le temps. L’idée est donc de rendre
+plus persistantes les communautés et mettant en relation des acteurs non
+
+29
+
+Figure 2.4 – Exemple de cohérence locale et étendue
+
+contemporains, mais partageant un intérêt fort.
+
+Dans le cadre de la cohérence locale, à l’instant i, In(node) et Out(node)
+désignent les voisins (respectivement entrants et sortants) actifs sur l’inter-
+valle [i0; ij] où i0 désigne Gi0.
+
+2.4 Synthèse de la méthode
+
+Nous proposons ici une méthode basée sur la dynamique du réseau, c’est
+à dire, ses évolutions topologiques, pour pondérer les relations entre acteurs.
+Grâce à la valeur d’intérêt obtenue, nous pouvons mettre en relation, par
+transitivité d’intérêt, des acteurs qui n’avaient pas établi de relation. Cette
+transitivité nous permet alors, soit de favoriser les connections entre acteurs
+contemporains, c’est à dire, actifs sur la même période, soit entre acteurs
+non contemporains. Ainsi elle nous rend capable d’étudier deux comporte-
+ments communautaires distincts. Le premier, avec la cohérence locale, étudie
+les communautés d’acteurs actifs à une même période. Le second, avec la
+cohérence étendue, étudie les communautés persistantes dans le temps.
+
+L’intérêt est qu’elle met en avant l’utilité de la dynamique comme source
+d’information sur la qualité des liens mais aussi qu’elle permet de favoriser
+la cohérence temporelle. [Wang et al.(2011)] ont montré que l’ajout de liens
+est préférable à leur suppression, car la suppression d’un lien à un eﬀet plus
+perturbant pour le réseau et, par conséquent, il est plus intéressant d’en
+
+30
+
+Figure 2.5 – Un exemple de pondération avec intérêt transitif
+
+ajouter, conﬁrmant ainsi que notre volonté d’ajouter des liens transitifs ne
+peut qu’améliorer les résultats de nos détections de communautés.
+
+On se propose donc de mettre cette méthode en pratique aﬁn d’étudier
+
+son inﬂuence sur la détection de communautés.
+
+31
+
+Chapitre 3
+
+Données
+
+3.1
+
+IMDB
+
+L’Internet Movie DataBase [IMDB] est une base de donnée en ligne sur
+le cinéma mondial et la télévision. Elle regroupe un grand nombre d’informa-
+tions concernant ﬁlms, acteurs, réalisateurs, et toute personne intervenant
+dans la création d’un ﬁlm, d’un téléﬁlm ou d’une série télévisée. A l’aide
+de cette base de donnée, on peut extraire un graphe de co-apparition où les
+nœuds sont des acteurs et deux acteurs A et B sont en interaction si et seule-
+ment si ils ont joué au moins une fois dans un même ﬁlm. Deux versions de
+ce graphe ont été générées :
+
+Version 1 : Ont été retenus uniquement les ﬁlms comptabilisant plus de
+1000 votes par les visiteurs, réalisés après 1980, où les acteurs apparaissent
+au moins 10 fois et les ﬁlms présentent au moins 2 acteurs, ce qui représente
+1019 nœuds et 19377 liens.
+
+Version 2 : Ont été retenus uniquement les ﬁlms comptabilisant plus de
+100000 votes et réalisés après 1980, soit 14194 nœuds pour 1070266 liens.
+
+32
+
+3.2 Collaborations au sein de l’IRIT
+
+L’IRIT (Institut de Recherche en Informatique de Toulouse) gère une
+base de données recensant toutes ses publications depuis les années 1970 soit
+3726 publications en Décembre 2011. On extrait de cette base le graphe de
+collaboration où un auteur est représenté par un nœuds et un lien entre deux
+acteurs existent si et seulement si ces deux acteurs ont publiés ensemble. Le
+graphe ainsi obtenu se compose de 2571 auteurs pour 18990 collaborations.
+
+33
+
+Chapitre 4
+
+Application de la méthode
+
+4.1 Procédé d’expérimentation
+
+L’implémentation et la paramétrisation de la méthode ont été réalisées
+
+sur les deux versions du graphe de co-apparition IMDB.
+
+L’étude des eﬀets et avantages de la méthode est réalisée sur le graphe
+de co-publication de l’IRIT. Aﬁn de concentrer l’étude sur les personnels
+internes à l’IRIT, on ﬁltre le graphe en ne retenant que les auteurs ayant au
+moins deux publications. Aﬁn de ne conserver que les liens les plus forts, on
+ﬁxe empiriquement le poids minimal d’un lien à 0.3 et la valeur minimale du
+pourcentage de contrôle à 10%. On s’intéressera dans un premier temps à la
+cohérence locale, puis, sous les mêmes conditions, à la cohérence étendue.
+
+On se propose d’étudier 3 versions de ce graphe :
+
+Version 1 Graphe de co-publication non pondéré sans intérêt transitif :
+2571 auteurs et 18990 collaborations.
+
+Version 2 Graphe de co-publication pondéré sans intérêt transitif : 2272
+auteurs et 9779 collaborations.
+
+Version 3 Graphe de co-publication pondéré avec intérêt transitif (cohé-
+rence locale) : 2272 auteurs et 10504 collaborations.
+
+Dans la version 2 et 3, le ﬁltrage des liens a diminuer le nombre de liens et
+
+34
+
+Figure 4.1 – Une vue de la Version 3 du graphe de co-publication de l’IRIT
+
+d’auteurs en supprimant tout les liens faibles et les auteurs devenus orphelins,
+c’est à dire sans relation, suite à ce ﬁltrage.
+
+Pour chacune de ces trois versions, on réalise plusieurs détections de com-
+
+munautés à l’aide de l’algorithme OSLOM [Lancichinetti et al.(2011)].
+
+4.2 Statistiques de prédiction de liens
+
+Avant de ne retenir que les liens forts, la méthode détecte 72456 liens d’in-
+térêts transitifs dont 1171 se réaliseront, c’est à dire que les auteurs impliqués
+dans ces liens transitifs publieront ensemble, soit 1.62%.
+
+Après ﬁltrage, la méthode ne conserve que 1020 dont 660 se réaliseront,
+soit 64.71%. On a donc plus de 98% des liens transitifs qui s’avèrent n’être
+que des liens faibles. Les 1020 liens transitifs représentent moins de 10% des
+
+35
+
+Figure 4.2 – Un exemple de proﬁl d’activation d’une communauté
+
+10504 collaborations.
+
+4.3 Proﬁls d’activation
+
+Pour étudier l’impact de la méthode sur la cohérence des communau-
+tés, il nous faut déﬁnir un nouvel outil d’analyse de communautés, le proﬁl
+d’activation.
+
+Pour une communauté donnée, le proﬁl d’activation est la courbe obtenue
+en relevant, à chaque intervalle, le nombre de liens internes à la communauté
+actifs dans l’intervalle (le nombre de liens entre deux acteurs de la commu-
+nauté), le nombre de liens externes (le nombre de liens entre un acteur de
+la communauté et un acteur externe). L’image 4.2 représente un exemple de
+proﬁl d’activation.
+
+4.4 Résultats de l’analyse de communauté
+
+Les résultats d’analyse de communauté présentés ci-dessous résultent de
+l’analyse de communautés par OSLOM[Lancichinetti et al.(2011)]. Ils sont
+représentatifs des résultats obtenus lors des diﬀérentes détections.
+
+4.4.1 Version 1
+
+– 241 communautés
+– 2079 nœuds classés
+– Nombre moyen de communautés par nœud : 1.06
+– Taille moyenne des communautés : 9.15
+– Degré entrant moyen des nœuds non classés : 1.20
+
+36
+
+– Degré sortant moyen des nœuds non classés : 1.38
+
+4.4.2 Version 2
+
+– 97 communautés
+– 1956 nœuds classés
+– Nombre moyen de communautés par nœud : 1.03
+– Taille moyenne des communautés : 20.8
+– Degré entrant moyen des nœuds non classés : 1.25
+– Degré sortant moyen des nœuds non classés : 1.52
+
+4.4.3 Version 3
+
+– 117 communautés
+– 2049 nœuds classés
+– Nombre moyen de communautés par nœud : 1.06
+– Taille moyenne des communautés : 18.65
+– Degré entrant moyen des nœuds non classés : 1.34
+– Degré sortant moyen des nœuds non classés : 2.08
+
+4.5
+
+Interprétation
+
+4.5.1 Première analyse
+
+On constate clairement que la prise en compte du poids a un eﬀet sur
+l’analyse de communautés. L’algorithme détecte moins de communautés,
+mais leur taille est plus grande. Proportionnellement, la version 2 classe plus
+de nœuds. On peut donc en déduire que la prise en compte du poids dans la
+détection de communautés améliore les qualités d’intégration de cette der-
+nière. On obtient donc moins de communautés, mais plus grandes.
+
+Entre la version 2 et la version 3, on constate une augmentation du nombre
+de nœuds classés, du nombre de communautés et une diminution de la taille
+de ces dernières. Ces résultats laissent à penser que l’ajout des liens transitifs
+a amélioré la spécialisation détectée précédemment. Intuitivement, on peut
+interpréter l’augmentation du nombre de communautés et la baisse de leur
+
+37
+
+Figure 4.3 – Exemple de communauté cohérente localement
+
+taille par la création de nouvelles communautés dont la découverte a été
+rendue possible par la création de liens transitifs.
+
+4.5.2 Analyse de la cohérence locale
+
+Après analyse et comparaison des diﬀérentes communautés obtenues, on
+
+peut mettre en avant trois résultats :
+
+– Sur les communautés déjà bien déﬁnies (où il existe peu de liens ex-
+ternes à la communauté), l’application de la méthode n’a qu’un faible
+eﬀet sur la cohérence. Cela provient du fait que la communauté ayant
+peu de connections vers l’extérieur, elle oﬀre peu de chance à l’intérêt
+transitif. Aussi, le peu de liens transitifs créés ne fait qu’augmenter la
+taille de la communauté.
+
+– Sur les communautés mal déﬁnies, l’application de la méthode provoque
+deux eﬀets : soit la cohérence de la communauté est augmentée et on
+constate sur le proﬁl d’activation l’apparition ou l’ampliﬁcation d’un
+pic de localité, soit l’explosion de la communauté au proﬁt d’autres.
+
+– Enﬁn, on constate l’apparition de nouvelles communautés cohérentes
+dont le proﬁl d’activation met en exergue un pic d’activité mettant en
+avant leur caractère temporel.
+
+38
+
+Figure 4.4 – Exemple de communauté à cohérence étendue
+
+L’image 4.3 fournit un exemple de communauté à cohérence locale bien
+
+déﬁnie.
+
+4.5.3 Analyse de la cohérence étendue
+
+Sous les mêmes conditions d’expérimentation, on constate pour la cohé-
+
+rence étendue :
+
+– Le même eﬀet sur les communautés déjà bien déﬁnies.
+– Sur les communautés mal déﬁnies, soit le lissage de la courbe d’ac-
+tivation au proﬁt d’une activation plus "plate", soit l’explosion de la
+communauté.
+
+– Enﬁn, l’apparition de nouvelles communautés cohérentes arborant un
+
+proﬁl d’activation lisse.
+
+L’image 4.4 fournit un exemple de communauté à cohérence étendue bien
+
+déﬁnie.
+
+4.6 Synthèse
+
+Nous avons appliqué la méthode au graphe de collaboration de l’IRIT
+sur lequel nous avons ensuite réalisé une analyse de communauté. Avec les
+résultats de l’analyse, nous avons dressé le proﬁl d’activation des commu-
+nautés obtenues aﬁn d’étudier les diﬀérences entre les trois versions. Nous
+avons déterminé que la méthode produisait trois types d’eﬀets : faible sur les
+
+39
+
+communautés bien déﬁnies, améliorant sur les communautés mal déﬁnies, et
+créatif pour les nouvelles communautés.
+
+L’application de la méthode conﬁrme un eﬀet sur la cohérence, qu’elle soit
+locale ou étendue. Elle conﬁrme l’idée que la dynamique des réseaux sociaux
+est source d’informations.
+
+Cependant, bien que signiﬁcatif, l’eﬀet n’est pas aussi fort qu’escomptai
+et soulève la question de la sensibilité à l’intérêt transitif d’un graphe. Le
+graphe de collaboration de l’IRIT se prête-t-il mieux à la transitivité que
+d’autres graphes ? Existe t-il des structures plus sensibles à la transitivité ?
+La méthode reste donc à appliquer à divers domaines pour en tester les limites
+et les forces.
+
+40
+
+Chapitre 5
+
+Domaines d’applications et
+perspectives d’évolutions
+
+5.1 Domaines d’applications
+
+La méthodologie présentée dans ce mémoire est applicable à tout système
+où un groupe plus ou moins important d’agents interagissent au cour du
+temps et où une étude des structures communautaires est intéressante.
+
+Ainsi, on peut appliquer cette méthodologie pour étudier l’évolution de
+structures communautaires au cours du temps en s’intéressant soit à la dé-
+couverte de communautés regroupant des acteurs contemporains, soit à la
+persistance de communautés dans le temps. Elle trouve donc des applica-
+tions dans des domaines telles que l’économie, la sociologie, ou encore, la
+biologie.
+
+Outre les aspects détection de communautés, la méthodologie présenté ici
+est applicable là où la construction d’un graphe orienté et pondéré est néces-
+saire. On peut par exemple, grâce à la méthode de pondération, réaliser une
+étude sur la circulation d’une information au sein d’un groupe, en considé-
+rant le poids des liens (après une simple normalisation) comme la probabilité
+d’interaction entre deux agents. Cette approche trouve donc des applications
+en marketing, épidémiologie ou encore dans l’étude de la circulation d’infor-
+mations au sein d’un système multi-agent.
+
+Enﬁn, la détection de liens transitifs permet la mise en relation d’acteurs
+
+41
+
+qui n’ont pas interagis mais partagent un intérêt commun. Cette mise en
+relation peut trouver son application dans des systèmes d’aide à la décision
+pour proposer, par exemple, à deux chercheurs partageant un même intérêt
+pour une troisième personne, de travailler ensemble. Aussi, elle trouve des
+applications dans tout domaine souhaitant favoriser les relations entre acteurs
+en proposant de nouveaux contacts. Cette approche trouve notamment des
+application en sociologie, et en aide à la décision.
+
+5.2 Perspectives d’évolutions
+
+5.2.1 Améliorer la rationalité des acteurs
+
+Une des principales perspectives d’évolution de la méthode se situe au
+niveau de la rationalité des agents lors du processus de pondération. Dans la
+méthode présentée, les agents pondèrent leur relation uniquement en fonction
+de la topologie de leur voisinage. Ici, aucun processus cognitif n’intervient ni
+ne prend compte de facteurs propres à l’agent.
+
+Une des pistes d’évolution serait d’augmenter la rationalité de l’agent en
+lui intégrant un processus de décision basé sur d’autres facteurs que la seule
+topologie. On peut par exemple utiliser un processus de notation de la qualité
+de l’interaction pour l’agent, intégrer des processus émotionnels ou autres
+facteurs internes à l’agent pour construire non pas un intérêt topologique
+seul, mais un réel intérêt de l’agent dans sa collaboration avec ses voisins.
+
+En augmentant ainsi la rationalité des acteurs, on pourrait alors plus
+facilement discriminer les interactions entre acteurs, détecter des situations
+de non intérêt commun (un agent A considère sa relation avec B comme
+importante alors que B la considère faible) et probablement augmenter la
+qualité des résultats de la détection de communauté en détectant non plus
+des communautés topologiques, mais des communautés d’intérêt réel. On
+peut notamment se rapprocher de l’approche faite dans le cadre du projet
+SocLab (http ://soclab.univ-tlse1.fr) et de sa représentation de la satisfaction
+des agents et de l’inﬂuence des interactions sur cette dernière.
+
+Un autre axe d’évolution serait le développement d’une méthode de dé-
+tection de communauté basée sur notre méthode. Intégrer directement le
+
+42
+
+processus de pondération et d’intérêt à une méthode de détection de com-
+munauté pourrait, à terme, améliorer la qualité des résultats et fournir un
+outil complet d’analyse de communautés.
+
+5.2.2 Améliorer le ﬁltrage des liens
+
+Dans la méthode présentée, nous ﬁltrons les liens avec un seuil empi-
+rique. Bien qu’eﬃcace, cette méthode ne permet pas de préserver la distri-
+bution des poids et peut alors sembler abusive. Des méthodes récemment
+développées[Radicchi et al.(2011)] proposent un ﬁltrage des poids permet-
+tant la conservation de la loi de distribution et de la topologie du réseau.
+L’implémentation d’une telle technique adaptée à notre méthodologie pour-
+rait alors présenter un intérêt certain dans cette méthode et pourrait alors
+en augmenter les résultats.
+
+5.2.3 Vers un nouvel algorithme de détection de com-
+
+munauté
+
+Notre méthode permet de classiﬁer les liens par force. En se basant sur
+cette valeur, nous pourrions alors développer un nouvel algorithme de détec-
+tion de communauté.
+
+En ﬁxant n pivots de communautés basés sur les n liens non connexes
+les plus forts, c’est à dire, n noyaux autours desquels construire nos n com-
+munautés, on pourrait alors construire n communautés où chaque commu-
+nauté regroupe les nœuds les plus proches, en terme de chemins pondérés.
+Cette approche présente l’avantage de regrouper des acteurs autours de rela-
+tions fortes et pourrait obtenir des résultats intéressants. Une autre méthode
+consisterait à créer un dendogramme en regroupant deux par deux les liens
+de poids les plus élevés. Reste alors à sélectionner le niveau de découpage
+approprié pour isoler les communautés.
+
+43
+
+Chapitre 6
+
+Conclusion
+
+Nous avons présenté dans ce mémoire une méthode originale proposant,
+à l’aide d’une approche multi-agent, d’extraire de l’information de la dyna-
+mique des réseaux sociaux. Elle nous permet d’obtenir un graphe orienté et
+pondéré sur lequel l’information de la dynamique a été reportée.
+
+Grâce à cette information, on a montré que l’on pouvait améliorer les
+résultats des détections de communautés en créant deux types de cohérence,
+locale et étendue. De ces deux types de cohérence découle deux types de
+communautés. L’une, la locale, tend à s’intéresser à des groupes d’acteurs
+actifs sur les mêmes périodes, et donc à étudier si des communautés existent
+de manière ponctuelle. Cette approche trouve par exemple un intérêt pour
+détecter si des coalitions ont pris place à certaines années. L’autre, étendue,
+tend à s’intéresser à la persistance de communautés dans le temps.
+
+L’application de la méthode à l’analyse du graphe de collaboration de
+l’IRIT nous a permis de mettre en avant l’eﬀet que produit notre méthode
+sur l’analyse de communautés. On constate alors que, de manière générale,
+la méthode améliore la cohérence des communautés détectées mais est peu
+eﬃcace sur des communautés bien déﬁnies.
+
+Les domaines d’application de la méthode sont divers et variés et ses
+perspectives d’évolutions de la méthode promettent d’apporter un gain de
+qualité et ouvre la voie à une nouvelle approche de la dynamique des réseaux.
+L’apport de ce mémoire est donc multiple. Il met en avant que la dyna-
+mique est une source certaine d’informations et ouvre la voie vers la détection
+
+44
+
+de nouveaux types de communautés. Le travail présenté ici reste donc à pour-
+suivre et à améliorer, mais il est un pas en avant dans la prise en compte de
+la dynamique dans l’analyse de réseaux sociaux.
+
+45
+
+Bibliographie
+
+[Amblard et al.(2011)] Amblard, F., Casteigts, A., Flocchini, P., Quattro-
+ciocchi, W. and Santoro, N., On the temporal analysis of scientiﬁc net-
+work evolution, in Proceedings the Third International Conference on
+Computational Aspects of Social Networks (CASoN 2011), Salamanca,
+Spain, CD-ROM, ISBN : 978-1-4577-1131-2
+
+[Blondel et al.(2008)] Vincent D. Blondel,Jean-Loup Guillaume, Renaud
+Lambiotte,Etienne Lefebvre Fast unfolding of communities in large net-
+works arXiv (2008) : 0803.0476.
+
+[Cazabet et al.(2010)] Remy Cazabet, Frédéric Amblard, H. Hanachi, De-
+tection of overlapping communities in dynamical social networks, Sym-
+posium on Social Intelligence and Networking, Minneapolis, Minnesota,
+USA, 20/08/2010-22/08/2010, Alex Pentland, Justin Zhan (Eds.), IEEE
+Computer Society - Conference Publishing Services, p. 309-314,
+2010
+
+[Cazabet et al.(2011)] Remy Cazabet, Frédéric Amblard, Simulate to De-
+tect : a Multi-agent System for Community Detection, IEEE/WIC/ACM
+International Conference on Intelligent Agent Technology (IAT 2011),
+Lyon, France, 22/08/2011-27/08/2011, IEEE Computer Society -
+Conference Publishing Services, p. 402-407, 2011.
+
+[Cazabet et al.(2012)] Cazabet Rémy, Leguistin Maud, Amblard Frédéric,
+Automated community detection on social networks : useful ? Eﬃcient ?
+asking the users, Workshop on Web-Intelligence & Communities (WI&C
+2012) (Lyon - France)
+
+[Derényi et al.(2005)] I. Derényi, G. Palla, T. Vicsek Clique percolation in
+
+random networks Phys. Rev. Lett. 94, 160202 (2005)
+
+46
+
+[Farkas et al.(2007)] I. J. Farkas, D. Ábel, G. Palla, T. Vicsek Weighted net-
+
+work modules New J. Phys. 9, 180 (2007)
+
+[Glattfelder et Battiston(2009)] J.B. Glattfelder and S. Battiston Backbone
+of complex networks of corporations : The ﬂow of control Physical Review
+E 80 (2009)
+
+[IMDB] Information
+
+courtesy
+
+of The
+
+Internet Movie Database
+
+(http ://www.imdb.com). Used with permission.
+
+[Knuth(1993)] D. E. Knuth, The Stanford GraphBase : A Platform for Com-
+
+binatorial Computing, Addison-Wesley, Reading, MA (1993).
+
+[Lancichinetti et al.(2011)] Lancichinetti A, Radicchi F, Ramasco JJ, Fortu-
+nato S (2011) Finding Statistically Signiﬁcant Communities in Networks.
+PLoS ONE 6(4) : e18961. doi :10.1371/journal.pone.0018961
+
+[Lusseau et al.(2003)] D. Lusseau, K. Schneider, O. J. Boisseau, P. Haase,
+E. Slooten, and S. M. Dawson, Behavioral Ecology and Sociobiology 54,
+396-405 (2003)
+
+[Palla et al.(2005)] Palla et. al., Clique Percolation Method (CPM) Nature
+
+435, 814-818 (2005)
+
+[Quattrociocchi et al.(2010)] Quattrociocchi W., Amblard F., Galeota E.,
+Selection in scientiﬁc networks, Social Network Analysis and Mining jour-
+nal (2010)
+
+[Radicchi et al.(2011)] F. Radicchi, J. J. Ramasco, S. Fortunato Informa-
+tion ﬁltering in weighted complex networks Physical Review E 83, 046101
+(2011)
+
+[Santoro et al.(2011)] Santoro, N., Quattrociocchi, W., Flocchini, P., Cas-
+teigts, A. and Amblard, F. Time-Varying Graphs and Social Network
+Analysis : Temporal Indicators and Metrics, in Social Network and Multi-
+Agent Systems Symposium (SNAMAS) @ Artiﬁcial Intelligence and Si-
+mulation of Behaviour Convention (AISB), York, UK, p.33-38, 2011
+
+[Scott(1988)] John Scott Social Network Analysis Sociology February 1988
+
+vol. 22 no. 1 109-127
+
+[Sueur et al.(2011)] Sueur C., Jacobs A., Amblard F., Petit O. and King A.J.,
+How can social network analysis improve the study of primate behavior ?,
+American Journal of Primatology, vol.71, p.1-17, 2011
+
+47
+
+[Thomas et al.(2002)] Vincent Thomas, Christine Bourjot, Vincent Che-
+vrier, Didier Desor MAS and RATS : Multi-agent simulation of social dif-
+ferentiation in rats’ groups International Workshop on Self-Organization
+and Evolution of Social Behaviour 10 p (2002)
+
+[Zachary(1977)] W. W. Zachary, An information ﬂow model for conﬂict and
+ﬁssion in small groups Journal of Anthropological Research 33, 452-473
+(1977).
+
+[Wang et al.(2011)] Dan Wang, Xiaolin Shi, Daniel A. McFarland, Jure Les-
+kovec. Measurement error in network data : a re-classiﬁcation. Social
+Networks. Forthcoming, July, 34 (3)(2011).
+
+48
+
+List of Algorithms
+
+1
+2
+3
+4
+
+Pondération des liens sortants d’un nœud par un agent . . . . 22
+Fusion . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23
+Filtrage
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+Transitivité d’interêt avec seuil ﬁxé . . . . . . . . . . . . . . . 28
+
+49
+
+Table des ﬁgures
+
+1.1 Augmentation du temps passé sur les réseaux sociaux aux USA
+depuis 2007 . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1.2 Un exemple de réseau social : Réseau d’amitié du Zachary
+
+9
+
+Karate Club . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+
+1.3 Exemple de structures de communautés dans un graphe : deux
+partitions en communauté correspondant à deux échelles dif-
+férentes sont représentées.
+
+. . . . . . . . . . . . . . . . . . . . 15
+
+2.1 Découpage de la période d’étude en intervalles . . . . . . . . . 19
+2.2 Principe de pondération des liens
+. . . . . . . . . . . . . . . . 22
+2.3
+. . . . . . . . . . . . . . . . . . . . . . . . . . 26
+2.4 Exemple de cohérence locale et étendue . . . . . . . . . . . . . 30
+2.5 Un exemple de pondération avec intérêt transitif . . . . . . . . 31
+
+Intérêt transitif
+
+4.1 Une vue de la Version 3 du graphe de co-publication de l’IRIT 35
+4.2 Un exemple de proﬁl d’activation d’une communauté . . . . . 36
+4.3 Exemple de communauté cohérente localement
+. . . . . . . . 38
+4.4 Exemple de communauté à cohérence étendue . . . . . . . . . 39
+
+50
+
+

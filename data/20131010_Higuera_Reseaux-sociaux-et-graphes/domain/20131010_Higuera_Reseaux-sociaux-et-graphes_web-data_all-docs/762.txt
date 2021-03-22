@@ -1,0 +1,1705 @@
+http://www.complexnetworks.fr/wp-content/uploads/2012/02/Blaise_Ngonmang_22-03-12.pdf
+
+Identication de communautés locales dans les reséaux
+
+sociaux
+
+Blaise NGONMANG
+
+L2TI- UP13 et LIRIMA/UMMISCO - UY1
+
+23 Mars 2012
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+1 / 64
+
+Plan
+
+1
+
+Introduction
+
+2 Détection de communautés globales
+
+3
+
+Identication de communautés locales
+
+4 Méthode de l'ajout simultané et de la proximité
+
+5 Méthode du balayage itératif
+
+6 Conclusion
+
+7 Bibliographie
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+2 / 64
+
+Introduction
+
+Plan
+
+1
+
+Introduction
+
+2 Détection de communautés globales
+
+3
+
+Identication de communautés locales
+
+4 Méthode de l'ajout simultané et de la proximité
+
+5 Méthode du balayage itératif
+
+6 Conclusion
+
+7 Bibliographie
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+3 / 64
+
+Introduction
+
+Introduction
+
+De nombreux systèmes complexes peuvent être modélisés par des
+réseaux
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+4 / 64
+
+Introduction
+
+Introduction
+
+De nombreux systèmes complexes peuvent être modélisés par des
+réseaux
+
+Un réseau est un ensemble de n÷uds (individus) reliés entre eux par
+des liens (relations)
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+4 / 64
+
+Introduction
+
+Introduction
+
+De nombreux systèmes complexes peuvent être modélisés par des
+réseaux
+
+Un réseau est un ensemble de n÷uds (individus) reliés entre eux par
+des liens (relations)
+Un réseau est donc un graphe mais:
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+4 / 64
+
+Introduction
+
+Introduction
+
+De nombreux systèmes complexes peuvent être modélisés par des
+réseaux
+
+Un réseau est un ensemble de n÷uds (individus) reliés entre eux par
+des liens (relations)
+Un réseau est donc un graphe mais:
+
+(cid:73) n÷uds porteurs d'attributs
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+4 / 64
+
+Introduction
+
+Introduction
+
+De nombreux systèmes complexes peuvent être modélisés par des
+réseaux
+
+Un réseau est un ensemble de n÷uds (individus) reliés entre eux par
+des liens (relations)
+Un réseau est donc un graphe mais:
+
+(cid:73) n÷uds porteurs d'attributs
+(cid:73) liens valués pouvant porter des données (messages)
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+4 / 64
+
+Introduction
+
+Introduction
+
+De nombreux systèmes complexes peuvent être modélisés par des
+réseaux
+
+Un réseau est un ensemble de n÷uds (individus) reliés entre eux par
+des liens (relations)
+Un réseau est donc un graphe mais:
+
+(cid:73) n÷uds porteurs d'attributs
+(cid:73) liens valués pouvant porter des données (messages)
+(cid:73) similarité entre deux n÷uds = f (attributs, liens)
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+4 / 64
+
+Introduction
+
+Introduction
+
+De nombreux systèmes complexes peuvent être modélisés par des
+réseaux
+
+Un réseau est un ensemble de n÷uds (individus) reliés entre eux par
+des liens (relations)
+Un réseau est donc un graphe mais:
+
+(cid:73) n÷uds porteurs d'attributs
+(cid:73) liens valués pouvant porter des données (messages)
+(cid:73) similarité entre deux n÷uds = f (attributs, liens)
+(cid:73) caractéristiques du réseau (eet petit monde, loi de puissance,
+
+clustering...)
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+4 / 64
+
+Introduction
+
+Introduction
+
+De nombreux systèmes complexes peuvent être modélisés par des
+réseaux
+
+Un réseau est un ensemble de n÷uds (individus) reliés entre eux par
+des liens (relations)
+Un réseau est donc un graphe mais:
+
+(cid:73) n÷uds porteurs d'attributs
+(cid:73) liens valués pouvant porter des données (messages)
+(cid:73) similarité entre deux n÷uds = f (attributs, liens)
+(cid:73) caractéristiques du réseau (eet petit monde, loi de puissance,
+
+clustering...)
+
+Plusieurs types d'analyses peuvent être eectuées sur les réseaux
+parmis lesquelles la décomposition en communautés
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+4 / 64
+
+Introduction
+
+Introduction
+
+De nombreux systèmes complexes peuvent être modélisés par des
+réseaux
+
+Un réseau est un ensemble de n÷uds (individus) reliés entre eux par
+des liens (relations)
+Un réseau est donc un graphe mais:
+
+(cid:73) n÷uds porteurs d'attributs
+(cid:73) liens valués pouvant porter des données (messages)
+(cid:73) similarité entre deux n÷uds = f (attributs, liens)
+(cid:73) caractéristiques du réseau (eet petit monde, loi de puissance,
+
+clustering...)
+
+Plusieurs types d'analyses peuvent être eectuées sur les réseaux
+parmis lesquelles la décomposition en communautés
+
+Nous nous intéressons ici à l'identication de la communauté locale
+d'un n÷ud.
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+4 / 64
+
+Exemples de réseaux
+
+Introduction
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+5 / 64
+
+Contexte
+
+Introduction
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+6 / 64
+
+Contexte
+
+Introduction
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+7 / 64
+
+Communautes
+
+Plan
+
+1
+
+Introduction
+
+2 Détection de communautés globales
+
+Dénitions
+Méthodes séparatives
+Méthodes agglomeratives
+Communautés recouvrantes
+
+3
+
+Identication de communautés locales
+
+4 Méthode de l'ajout simultané et de la proximité
+
+5 Méthode du balayage itératif
+
+6 Conclusion
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+8 / 64
+
+Denitions
+
+Communautes
+
+Denitions
+
+Dénition liée à la topologie du réseau :
+
+Groupes de sommets densément connectés.
+
+Peu de liens entre les groupes.
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+9 / 64
+
+Communautes
+
+Denitions
+
+Denitions
+
+Dénition liée à la topologie du réseau :
+
+Groupes de sommets densément connectés.
+Peu de liens entre les groupes.
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+10 / 64
+
+Méthodes séparatives
+
+Communautes Méthodes séparatives
+
+Au départ on a une seule communauté
+A chaque étape on essaye de séparer les communautés
+Exemple algorithme de Girvan et Newman
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+11 / 64
+
+Méthodes aglomeratives
+
+Communautes Méthodes agglomeratives
+
+Au départ on a autant de communautés que de noeuds
+A chaque étape on choisit 2 communautés à regrouper
+Exemple algorithme de louvain
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+12 / 64
+
+Communautes recouvrantes
+
+Communautes
+
+Recouvrantes
+
+Dans la réalité un individu appartient à plusieurs communautés
+
+Un contact Facebook a par exemple des camarades de classe et les
+membres de sa famille
+
+Exemple de méthode : percolation de cliques
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+13 / 64
+
+Discussion
+
+Communautes
+
+Recouvrantes
+
+Santo Fortunato a proposé en 2010 une revue assez complète des
+algorithmes de détection de communautés dans les graphes
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+14 / 64
+
+Discussion
+
+Communautes
+
+Recouvrantes
+
+Santo Fortunato a proposé en 2010 une revue assez complète des
+algorithmes de détection de communautés dans les graphes
+
+Supposition: structure complète du graphe connue
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+14 / 64
+
+Discussion
+
+Communautes
+
+Recouvrantes
+
+Santo Fortunato a proposé en 2010 une revue assez complète des
+algorithmes de détection de communautés dans les graphes
+
+Supposition: structure complète du graphe connue
+
+Impossible pour les très grands graphes (Web, Facebook,...)
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+14 / 64
+
+Discussion
+
+Communautes
+
+Recouvrantes
+
+Santo Fortunato a proposé en 2010 une revue assez complète des
+algorithmes de détection de communautés dans les graphes
+
+Supposition: structure complète du graphe connue
+
+Impossible pour les très grands graphes (Web, Facebook,...)
+
+=> Recherche de communautés locales autour d'un n÷ud: utilisation
+exclusive d'informations locales
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+14 / 64
+
+Identication locale
+
+Plan
+
+1
+
+Introduction
+
+2 Détection de communautés globales
+
+3
+
+Identication de communautés locales
+
+Dénition du problème
+Fonction de qualité de Clauset
+Fonction de qualité de Luo
+Méthode de Chen
+
+4 Méthode de l'ajout simultané et de la proximité
+
+5 Méthode du balayage itératif
+
+6 Conclusion
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+15 / 64
+
+Identication locale
+
+Dénitions
+
+Dénitions
+
+On part d'un n÷ud de départ
+
+A chaque instant on a une vue locale du réseau.
+
+Les n÷uds sont évalués un à un.
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+16 / 64
+
+Identication locale
+
+Dénitions
+
+Dénition
+
+Algorithme: identication de communautés locales
+
+Données: Un graphe R et un n÷ud de départ n0.
+Résultat: Un sous-graphe D qui représente la communauté locale de n0.
+Initialiser D avec n0
+Initialiser B avec n0
+Initialiser C avec l'ensemble vide
+Initialiser S avec les voisins de n0
+Q = 0
+Répéter
+
+pour chaque ni ∈ S faire
+
+calculer la qualité de ni par rapport à D
+
+i de qualité Q∗ qui maximise la qualité en départageant
+
+n pour
+Déterminer le n∗
+aléatoirement les ex-aequo.
+Si Q∗ > Q alors
+
+Ajouter n∗
+Mettre à jour B, S, C.
+
+i à D et le retirer de S.
+
+Fin si
+
+Jusqu'à (Q∗ <= Q)
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+17 / 64
+
+Identication locale Methode de Clauset
+
+Fonction de qualité de Clauset
+
+Idée: Les n÷uds situés à la Bordure de la communauté doivent avoir
+plus de liens avec les autres membres de leur communauté qu' avec
+l'extérieur.
+Fonction de qualité: R = Bin
+
+Bin+Bout
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+18 / 64
+
+Identication locale Methode de Luo
+
+Fonction de qualité de Luo
+
+Idée: Le rapport des liens internes sur les liens externes doit être grand
+(supérieur à 1).
+Fonction de qualité: M = Din
+Dout
+On a des communautés plus cohésives
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+19 / 64
+
+Identication locale Methode de Luo
+
+Limite: avec R et M, et l'algorithme présenté, des chaines de n÷uds
+reliés entre eux sont ajoutés systématiquement.
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+20 / 64
+
+Identication locale
+
+Chen
+
+Méthode de Chen
+
+Idée: insérer un n÷ud uniquement si L(cid:48)
+Fonction de qualité : L = Lin
+Lex
+Lin = Din|D| et Lex = Bout
+|B|
+Ajout d'une phase de conrmation pour maintenir ou non les n÷uds
+
+in > Lin et L(cid:48)
+
+ex < Lex
+
+L'ajout de O1 fait augmenter Lin mais sans changer Lex .
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+21 / 64
+
+Identication locale
+
+Chen
+
+Problème de la Méthode de Chen
+
+On Recherche la communauté du n÷ud 8.
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+22 / 64
+
+Identication locale
+
+Chen
+
+Problème de la Méthode de Chen
+
+Les n÷uds 7, 9 et 10 maximisent la fonction de qualité
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+23 / 64
+
+Identication locale
+
+Chen
+
+Problème de la Méthode de Chen
+
+Le choix aléatoire est porté sur le n÷ud 7.
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+24 / 64
+
+Identication locale
+
+Chen
+
+Problème de la Méthode de Chen
+
+Les n÷uds 5, 6, 9 et 10 maximisent la fonction de qualité
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+25 / 64
+
+Identication locale
+
+Chen
+
+Problème de la Méthode de Chen
+
+Le choix aléatoire est porté sur le n÷ud 5.
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+26 / 64
+
+Identication locale
+
+Chen
+
+Problème de la Méthode de Chen
+
+Les n÷uds de gauche sont tour à tour ajoutés
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+27 / 64
+
+Identication locale
+
+Chen
+
+Problème de la Méthode de Chen
+
+Les n÷uds de gauche sont tour à tour ajoutés
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+28 / 64
+
+Identication locale
+
+Chen
+
+Problème de la Méthode de Chen
+
+Le 8 n÷ud est expulsé.
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+29 / 64
+
+Proposition I
+
+Plan
+
+1
+
+Introduction
+
+2 Détection de communautés globales
+
+3
+
+Identication de communautés locales
+
+4 Méthode de l'ajout simultané et de la proximité
+
+5 Méthode du balayage itératif
+
+6 Conclusion
+
+7 Bibliographie
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+30 / 64
+
+Ajout simultané
+
+Proposition I
+
+Idée: modication de la méthode de Chen. Considérer l'ensemble D
+pour Lex et lorsque plusieurs n÷uds maximisent la fonction de qualité
+on les ajoute simultanément
+
+Rechercher les communautés recouvrantes sur le sous-graphe résultat
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+31 / 64
+
+Ajout simultané
+
+Proposition I
+
+Idée: modication de la méthode de Chen. Considérer l'ensemble D
+pour Lex et lorsque plusieurs n÷uds maximisent la fonction de qualité
+on les ajoute simultanément
+
+Rechercher les communautés recouvrantes sur le sous-graphe résultat
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+32 / 64
+
+Ajout simultané
+
+Proposition I
+
+Idée: modication de la méthode de Chen. Considérer l'ensemble D
+pour Lex et lorsque plusieurs n÷uds maximisent la fonction de qualité
+on les ajoute simultanément
+
+Rechercher les communautés recouvrantes sur le sous-graphe résultat
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+33 / 64
+
+Ajout simultané
+
+Proposition I
+
+Idée: modication de la méthode de Chen. Considérer l'ensemble D
+pour Lex et lorsque plusieurs n÷uds maximisent la fonction de qualité
+on les ajoute simultanément
+
+Rechercher les communautés recouvrantes sur le sous-graphe résultat
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+34 / 64
+
+Ajout simultané
+
+Proposition I
+
+Il y a des cas où l'algorithme ne trouvera pas de communauté
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+35 / 64
+
+Ajout simultané
+
+Proposition I
+
+Il y a des cas où l'algorithme ne trouvera pas de communauté
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+36 / 64
+
+Ajout simultané
+
+Proposition I
+
+Il y a des cas où l'algorithme ne trouvera pas de communauté
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+37 / 64
+
+Ajout simultané
+
+Proposition I
+
+Il y a des cas où l'algorithme ne trouvera pas de communauté
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+38 / 64
+
+Ajout simultané
+
+Proposition I
+
+Il y a des cas où l'algorithme ne trouvera pas de communauté
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+39 / 64
+
+Ajout simultané
+
+Proposition I
+
+Il y a des cas où l'algorithme ne trouvera pas de communauté
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+40 / 64
+
+Proximité
+
+Proposition I
+
+Idée: un n÷ud est plus susceptible d'appartenir à la communauté du
+n÷ud de départ si leur degré de séparation est faible.
+Fonction de qualité:
+|Γ(i)∩D|
+i∈D |Γ(i) ∩ S|(1 + di )
+(1+di )
+
+etTex =(cid:80)
+
+Tin =(cid:80)
+
+i∈D
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+41 / 64
+
+Proximité
+
+Proposition I
+
+Idée: un n÷ud est plus susceptible d'appartenir à la communauté du
+n÷ud de départ si leur degré de séparation est faible.
+Fonction de qualité:
+|Γ(i)∩D|
+i∈D |Γ(i) ∩ S|(1 + di )
+(1+di )
+
+etTex =(cid:80)
+
+Tin =(cid:80)
+
+i∈D
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+42 / 64
+
+Proximité
+
+Proposition I
+
+Idée: un n÷ud est plus susceptible d'appartenir à la communauté du
+n÷ud de départ si leur degré de séparation est faible.
+Fonction de qualité:
+|Γ(i)∩D|
+i∈D |Γ(i) ∩ S|(1 + di )
+(1+di )
+
+etTex =(cid:80)
+
+Tin =(cid:80)
+
+i∈D
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+43 / 64
+
+Proximité
+
+Proposition I
+
+Idée: un n÷ud est plus susceptible d'appartenir à la communauté du
+n÷ud de départ si leur degré de séparation est faible.
+Fonction de qualité:
+|Γ(i)∩D|
+i∈D |Γ(i) ∩ S|(1 + di )
+(1+di )
+
+etTex =(cid:80)
+
+Tin =(cid:80)
+
+i∈D
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+44 / 64
+
+Proximité
+
+Proposition I
+
+Idée: un n÷ud est plus susceptible d'appartenir à la communauté du
+n÷ud de départ si leur degré de séparation est faible.
+Fonction de qualité:
+|Γ(i)∩D|
+i∈D |Γ(i) ∩ S|(1 + di )
+(1+di )
+
+etTex =(cid:80)
+
+Tin =(cid:80)
+
+i∈D
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+45 / 64
+
+Proximité
+
+Proposition I
+
+Idée: un n÷ud est plus susceptible d'appartenir à la communauté du
+n÷ud de départ si leur degré de séparation est faible.
+Fonction de qualité:
+|Γ(i)∩D|
+i∈D |Γ(i) ∩ S|(1 + di )
+(1+di )
+
+etTex =(cid:80)
+
+Tin =(cid:80)
+
+i∈D
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+46 / 64
+
+Proximité
+
+Proposition I
+
+Idée: un n÷ud est plus susceptible d'appartenir à la communauté du
+n÷ud de départ si leur degré de séparation est faible.
+Fonction de qualité:
+|Γ(i)∩D|
+i∈D |Γ(i) ∩ S|(1 + di )
+(1+di )
+
+etTex =(cid:80)
+
+Tin =(cid:80)
+
+i∈D
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+47 / 64
+
+Comparaison avec Chen
+
+Proposition I
+
+Jeux de données NCAA Football 2000.
+
+115 équipes organisées en conférences
+
+Structure de communautés connue : les conférences.
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+48 / 64
+
+Identication de sous-communautés recouvrantes
+
+Proposition I
+
+Très souvent la communauté locale d'un individu contient plusieurs
+sous-structures
+
+Ces sous-structures présentent parfois des recouvrements
+
+Les amis Facebook par exemple peuvent être regroupés en famille,
+collègues, ...
+
+Un collègue peut aussi être de la famille
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+49 / 64
+
+Sous-communautés recouvrantes (Exemple 1)
+
+Proposition I
+
+Exemple sur jeu de données réel.
+Dans le graphe de co-auteurs dans le domaine des grands réseaux par
+exemple la communauté locale de M.E.J. Newman comporte plusieurs
+(5) sous-communautés.
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+50 / 64
+
+Sous-communautés recouvrantes (Exemple 2)
+
+Proposition I
+
+Exemple sur jeu de données réel.
+Jeux de données Skyrock (5 millions de noeuds). Communauté de
+Pompiers en majorité.
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+51 / 64
+
+Proposition II
+
+Plan
+
+1
+
+Introduction
+
+2 Détection de communautés globales
+
+3
+
+Identication de communautés locales
+
+4 Méthode de l'ajout simultané et de la proximité
+
+5 Méthode du balayage itératif
+
+6 Conclusion
+
+7 Bibliographie
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+52 / 64
+
+Contexte
+
+Proposition II
+
+L'algorithme précédent nécessite d'utiliser un algorithme de recherche
+de communautés recouvrantes
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+53 / 64
+
+Contexte
+
+Proposition II
+
+L'algorithme précédent nécessite d'utiliser un algorithme de recherche
+de communautés recouvrantes
+
+La complexité en temps des algorithmes de recherche de communautés
+recouvrantes actuels est élevée
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+53 / 64
+
+Contexte
+
+Proposition II
+
+L'algorithme précédent nécessite d'utiliser un algorithme de recherche
+de communautés recouvrantes
+
+La complexité en temps des algorithmes de recherche de communautés
+recouvrantes actuels est élevée
+
+Nous proposons une méthode qui permet d'identier directement les
+communautés locales recouvrantes
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+53 / 64
+
+Algorithme
+
+Proposition II
+
+Idée: lorsqu'un n÷ud se fait expulser lors de la recherche d'une
+communauté on vérie s'il est membre de cette sous-communauté
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+54 / 64
+
+Algorithme
+
+Proposition II
+
+Idée: lorsqu'un n÷ud se fait expulser lors de la recherche d'une
+communauté on vérie s'il est membre de cette sous-communauté
+On supprime les liens internes de la communauté trouvée
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+54 / 64
+
+Algorithme
+
+Proposition II
+
+Idée: lorsqu'un n÷ud se fait expulser lors de la recherche d'une
+communauté on vérie s'il est membre de cette sous-communauté
+On supprime les liens internes de la communauté trouvée
+On fait un balayage itératif de toutes les communautés voisines et on
+garde celles auxquelles le n÷ud de départ est "assez connecté"
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+54 / 64
+
+Evaluation
+
+Proposition II
+
+IMN: Information Mutuelle Normalisée
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+55 / 64
+
+Evaluation
+
+Proposition II
+
+IMN: Information Mutuelle Normalisée
+L'IMN permet d'évaluer les communautés obtenues
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+55 / 64
+
+Evaluation
+
+Proposition II
+
+IMN: Information Mutuelle Normalisée
+L'IMN permet d'évaluer les communautés obtenues
+Le Benchmark de Fortunato permet de générer des réseaux sociaux
+réalistes
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+55 / 64
+
+Evaluation
+
+Proposition II
+
+Jeu de données de co-occurences d'achats sur Amazon
+
+Un lien existe entre deux produit s'ils sont fréquement achetés
+ensemble
+
+Table: Communauté locale élargie du livre "Merlin Trilogy"
+
+Num.
+
+Membres
+
+description
+
+1
+
+2
+
+The Wicked Day (Arthurian Saga, Book 4)
+
+The Last Enchantment (Arthurian Saga, Bk. 3.)
+
+Saga du roi Arthur
+
+The Crystal Cave (Arthurian Saga, Book 1)
+
+The Sword in the Stone
+
+The Book of Merlyn
+
+The Once and Future King
+
+Merlin et Arthur
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+56 / 64
+
+Applications
+
+Proposition II
+
+Recommandation d'amis dans les réseaux sociaux : On recherche la
+communauté locale d'un individu et on lui propose comme nouveaux
+amis tous les membres de sa communauté locale avec lesquels il n'a
+pas encore de liens.
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+57 / 64
+
+Applications
+
+Proposition II
+
+Recommandation d'amis dans les réseaux sociaux : On recherche la
+communauté locale d'un individu et on lui propose comme nouveaux
+amis tous les membres de sa communauté locale avec lesquels il n'a
+pas encore de liens.
+
+Recommandation d'articles (news, produits, ...) dans les réseaux
+sociaux: On propose un membre d'une communauté des articles en
+fonction des choix des autres membres de la communauté.
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+57 / 64
+
+Applications
+
+Proposition II
+
+Recommandation d'amis dans les réseaux sociaux : On recherche la
+communauté locale d'un individu et on lui propose comme nouveaux
+amis tous les membres de sa communauté locale avec lesquels il n'a
+pas encore de liens.
+
+Recommandation d'articles (news, produits, ...) dans les réseaux
+sociaux: On propose un membre d'une communauté des articles en
+fonction des choix des autres membres de la communauté.
+
+Propagation d'épidédmies (ou diusion d'information) : La
+communauté locale d'un individu infecté donne une idée sur les
+personnes qu'il pourrait contaminer dans un réseau de contact (cercle
+d'inuence).
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+57 / 64
+
+Conclusion
+
+Plan
+
+1
+
+Introduction
+
+2 Détection de communautés globales
+
+3
+
+Identication de communautés locales
+
+4 Méthode de l'ajout simultané et de la proximité
+
+5 Méthode du balayage itératif
+
+6 Conclusion
+
+7 Bibliographie
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+58 / 64
+
+Conclusion et perspectives
+
+Conclusion
+
+Perspectives
+
+Carractériser les communautés découvertes
+
+Etudier la dynamique des communautés
+
+Utiliser le résultat pour faire de la recommendation
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+59 / 64
+
+Publications
+
+Conclusion
+
+Le travail de ce mémoire a donné lieu aux publications suivantes:
+
+Blaise NGONMANG, Maurice TCHUENTE, Emmanuel VIENNET.
+Identication de communautés locales dans les réseaux sociaux. AGS
+May 2011.
+
+Blaise NGONMANG, Maurice TCHUENTE, Emmanuel VIENNET.
+Recherche de communautés locales. FGG Juillet 2011.
+
+Blaise NGONMANG, Maurice TCHUENTE, Emmanuel VIENNET.
+Local community identication in socials networks. PPL 2012.
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+60 / 64
+
+Financement
+
+Conclusion
+
+Ce travail a été partiellement nancé par les projets:
+
+ANR Ex DEUSS
+
+DG-CIS CEDRES
+
+POFS du Fonds Francophone des Inforoutes.
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+61 / 64
+
+Bibliographie
+
+Plan
+
+1
+
+Introduction
+
+2 Détection de communautés globales
+
+3
+
+Identication de communautés locales
+
+4 Méthode de l'ajout simultané et de la proximité
+
+5 Méthode du balayage itératif
+
+6 Conclusion
+
+7 Bibliographie
+
+B NGONMANG (UP13 - UY1)
+
+Identication de communautés locales.
+
+23 Mars 2012
+
+62 / 64
+
+Bibliographie
+
+Bibliographie
+
+1 Blaise NGONMANG, Maurice TCHUENTE, Emmanuel VIENNET.
+
+Identication de communautés locales dans les réseaux sociaux. AGS May
+2011.
+
+2 A.Clauset. Finding local communities in network. Physical Review, 2005:
+
+026132.
+
+3 Bagrow, J. P. Evaluating local community methods in networks.
+
+J.STAT.MECH, 2008.
+
+4 Bollt, J. P. Bagrow and E. M. Local method for detecting communities.
+
+Physical Review, 2005: 233-239.
+
+5 Jiyang Chen, Osmar R. Zaine and Randy Goebel. Local Community
+
+Identication in Social Networks. ASONAM, 2009.
+
+6 Santo Fortunato. Community detection in graphs. Physics Reports 486,
+
+75-174 (2010)
+
+7 Blondel Vincent D., Guillaume Jean-Loup, Lambiotte Renaud, Lefebvre
+
+Etienne. Fast unfolding of communities in large networks. Journal of
+Statistical Mechanics: Theory and Experiment, Issue 10, pp. 10008 (2008).

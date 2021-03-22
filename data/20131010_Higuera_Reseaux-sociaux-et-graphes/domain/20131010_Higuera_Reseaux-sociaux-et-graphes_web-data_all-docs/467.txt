@@ -1,0 +1,1648 @@
+https://publications.polymtl.ca/658/1/2011_AhmedBelderrar.pdf
+
+UNIVERSIT´E DE MONTR´EAL
+
+EXTRACTION DES SOUS-GRAPHES : IDENTIFICATION DES
+
+MICROARCHITECTURES DANS LES LOGICIELS ´EVOLUTIFS ORIENT´ES OBJETS.
+
+AHMED BELDERRAR
+
+D´EPARTEMENT DE G´ENIE INFORMATIQUE ET G´ENIE LOGICIEL
+
+´ECOLE POLYTECHNIQUE DE MONTR´EAL
+
+M´EMOIRE PR´ESENT´E EN VUE DE L’OBTENTION
+
+DU DIPL ˆOME DE MAˆITRISE `ES SCIENCES APPLIQU´EES
+
+(G´ENIE INFORMATIQUE)
+
+AO ˆUT 2011
+
+c(cid:13) Ahmed Belderrar, 2011.
+
+UNIVERSIT´E DE MONTR´EAL
+
+´ECOLE POLYTECHNIQUE DE MONTR´EAL
+
+Ce m´emoire intitul´e :
+
+EXTRACTION DES SOUS-GRAPHES : IDENTIFICATION DES
+
+MICROARCHITECTURES DANS LES LOGICIELS ´EVOLUTIFS ORIENT´ES OBJETS.
+
+pr´esent´e par : BELDERRAR, Ahmed
+en vue de l’obtention du diplˆome de : Maˆıtrise `es Sciences Appliqu´ees
+a ´et´e dˆument accept´e par le jury d’examen constitu´e de :
+
+M. QUINTERO, Alejandro, Doct., pr´esident.
+M. ANTONIOL, Giuliano, Ph.D., membre et directeur de recherche.
+M. DESMARAIS, Michel C., Ph.D., membre.
+
+iii
+
+`A mes tr`es chers parents,
+ma femme et mes enfants. . .
+
+REMERCIEMENTS
+
+iv
+
+En premier lieu, je tiens `a remercier Monsieur le Professeur Giuliano Antoniol pour avoir
+accept´e et assur´e la direction de mes travaux, pour la qualit´e de son encadrement, et ses
+remarques pertinentes. Je suis tr`es reconnaissant de son savoir et son exp´erience partag´es, et
+de son soutien scientiﬁque.
+
+Je remercie aussi Monsieur Yann-Ga¨el Gu´eh´eneuc, de son aide, de ses commentaires, et de
+
+son outil Ptidej et son m´eta-mod`ele PADL pour les donn´ees utilis´ees dans ce travail.
+
+Je veux aussi adresser mes remerciements `a Monsieur Philippe Galinier, qui nous a aid´e `a
+
+valider notre algorithme.
+
+Je veux ´egalement exprimer mes sinc`eres remerciements, et t´emoigner de ma grande re-
+connaissance `a Monsieur Segla Kpodjedo pour son soutien, et qui par son exp´erience, m’a
+donn´e beaucoup de propositions tout au long de ce projet.
+
+Mes plus profonds remerciements vont `a ma femme. Tout au long de la p´eriode d’´etudes,
+elle m’a toujours soutenu, encourag´e et aid´e. Elle a su me donner toutes les chances pour
+r´eussir.
+
+La r´ealisation de ce travail s’appuie ´egalement sur le bon environnement de travail des
+laboratoires ”soccerlab”’ et ”Ptidej”. A ce titre, je tiens `a remercier tous ceux qui m’ont aid´e
+de pr`es ou de loin aﬁn d’achever ce travail, ainsi que je remercie toutes les personnes int´eress´ees
+par notre travail, en esp´erant qu’elles puissent trouver dans ce rapport des explications utiles
+pour leurs propres travaux.
+
+R´ESUM´E
+
+v
+
+Les d´eveloppeurs introduisent des nouvelles microarchitectures, et des microarchitectures
+non document´ees lorsqu’ils eﬀectuent des tˆaches d’´evolution sur les applications orient´ees
+objets. Nous nous int´eressons `a chercher la relation entre les microarchitectures et les pro-
+pri´et´es telles que la stabilit´e et les d´efauts. Nous proposons une nouvelle approche bas´ee
+sur l’extraction des sous-graphes, un nouvel algorithme, et un outil SGFinder permettant de
+recenser d’une mani`ere eﬃcace et exhaustive les microarchitectures dans le diagramme des
+classes des petits et moyens syst`emes orient´es objets. Une fois que nous ´enum´erons toutes
+les occurrences des microarchitectures, nous les exploitons pour identiﬁer leurs propri´et´es
+souhaitables, comme la stabilit´e, ou leurs propri´et´es ind´esirables, comme les changements
+et la pr´edisposition aux d´efauts. Nous avons eﬀectu´e une ´etude empirique pour v´eriﬁer la
+faisabilit´e de notre approche, en appliquant l’outil SGFinder sur le diagramme des classes de
+plusieurs versions de deux syst`emes orient´es objets Rhino et ArgoUml. Nous identiﬁons les
+microarchitectures les plus et les moins pr´edispos´ees aux d´efauts, et les plus et les moins pr´e-
+dispos´ees aux changements. Finalement, nous concluons que le nouvel outil SGFinder ouvre
+plusieurs voies pour d’autres ´eventuelles recherches.
+
+Mots-clefs : Microarchitectures, changements et d´efauts des logiciels, mainte-
+
+nance et ´evolution des logiciels.
+
+ABSTRACT
+
+vi
+
+Developers introduce novel and undocumented micro-architectures when performing evo-
+lution tasks on object-oriented applications. We are interested in understanding whether
+those organizations of classes and relations can bear, much like cataloged design and anti-
+patterns, potential harm or beneﬁt to an object-oriented application. We present SGFinder,
+a sub-graph mining approach and tool based on an eﬃcient enumeration technique to identify
+recurring micro-architectures in object-oriented class diagrams. Once SGFinder has detected
+instances of micro-architectures, we exploit these instances to identify their desirable proper-
+ties, such as stability, or unwanted properties, such as change or fault proneness. We perform
+a feasibility study of our approach by applying SGFinder on the reverse-engineered class
+diagrams of several releases of two Java applications: ArgoUML and Rhino. We characterize
+and highlight some of the most interesting micro-architectures, the most fault prone and the
+most stable, and conclude that SGFinder opens the way to further interesting studies.
+
+Keywords : Micro-architectures, software changes and faults, software mainte-
+
+nance and evolution.
+
+TABLE DES MATI`ERES
+
+vii
+
+D´EDICACE . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+iii
+
+REMERCIEMENTS . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+iv
+
+R´ESUM´E . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+v
+
+ABSTRACT . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . vi
+
+TABLE DES MATI`ERES . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . vii
+
+LISTE DES TABLEAUX . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+x
+
+LISTE DES FIGURES . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . xi
+
+LISTE DES ALGORITHMES . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . xiii
+
+LISTE DES ANNEXES . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . xiv
+
+LISTE DES SIGLES ET ABR´EVIATIONS . . . . . . . . . . . . . . . . . . . . . . . . xv
+
+CHAPITRE 1 INTRODUCTION . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1.1 Contexte . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1.2 Objectifs de la recherche . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1.3 Esquisse de la m´ethodologie . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1.4 Notations et notions de base en th´eorie des graphes et des ensembles
+. . . . .
+1.4.1 Les graphes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1.4.2 Les ensembles . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1.5 Organisation du m´emoire . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+1
+2
+4
+4
+5
+5
+7
+7
+
+2.1 Algorithmes de recensement des motifs de r´eseau et des sous-graphes
+
+CHAPITRE 2 REVUE DE LITT´ERATURE . . . . . . . . . . . . . . . . . . . . . . .
+8
+8
+. . . . .
+2.1.1 Algorithme NeMoFinder . . . . . . . . . . . . . . . . . . . . . . . . . .
+9
+2.1.2 Algorithme MFinder . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+2.1.3 Algorithme Pajek . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+2.1.4 Algorithme MAVisto . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+2.1.5 Algorithme FanMod . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+
+viii
+
+2.1.6 Algorithme Kavosh . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+. . . . . . . . . . . 13
+
+2.2 Patrons de conception, anti-patrons, et microarchitectures
+13subsection.2.2.1
+
+2.2.2 D´etection des patrons de conception . . . . . . . . . . . . . . . . . . . 14
+2.2.3 D´etection des anti-patrons . . . . . . . . . . . . . . . . . . . . . . . . . 15
+2.2.4 D´etection de certaines microarchitectures . . . . . . . . . . . . . . . . . 15
+2.3 Conclusion . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+
+CHAPITRE 3 ALGORITHME DE RECENSEMENT ET DE CLASSIFICATION DES
+
+SOUS-GRAPHES . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+3.1
+3.2 Algorithme
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+3.2.1 Voisinage (GenerateNeighborsSet) . . . . . . . . . . . . . . . . . . . . . 18
+3.2.2 G´en´eration des k-sous-ensembles ”GenerateKSubSetsAndValidate”(voir
+
+la section 2a)
+
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
+3.2.3 Connectivit´e . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23
+3.2.4 Classement
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
+3.3 Caract´erisation des sous-graphes . . . . . . . . . . . . . . . . . . . . . . . . . . 28
+3.3.1 Nombre des zones . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
+3.3.2 Rˆoles des classes
+3.3.3 Tunnels
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
+´Evolution des microarchitectures entre les versions . . . . . . . . . . . . 31
+3.3.4
+3.4 Conclusion . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
+
+CHAPITRE 4 VALIDATION EMPIRIQUE . . . . . . . . . . . . . . . . . . . . . . . 34
+4.1 Questions de recherche . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
+4.2 Objets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+4.2.1 Les donn´ees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
+4.3 Approche
+4.4 M´ethode d’analyse . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39
+4.4.1 Caract´eristiques des microarchitectures . . . . . . . . . . . . . . . . . . 39
+4.4.2 R´eponses aux questions de recherche . . . . . . . . . . . . . . . . . . . 40
+4.5 Conclusion . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42
+
+CHAPITRE 5 R´ESULTATS . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43
+
+5.1 QR1 : Applicabilit´e de l’outil SGFinder et la description des microarchitectures
+
+trouv´ees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43
+
+ix
+
+5.2 QR2 : Pr´edisposition des microarchitectures aux d´efauts
+5.3 QR3 : Pr´edisposition des microarchitectures aux changements
+5.4 Limites de validit´e
+
+5.1.1 Temps de calcul de l’outil SGFinder . . . . . . . . . . . . . . . . . . . . 46
+. . . . . . . . . . . . 50
+. . . . . . . . . 53
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 54
+5.4.1 Limite de validit´e de construction . . . . . . . . . . . . . . . . . . . . . 55
+5.4.2 Limite de validit´e interne . . . . . . . . . . . . . . . . . . . . . . . . . . 55
+5.4.3 Limite de validit´e externe
+. . . . . . . . . . . . . . . . . . . . . . . . . 56
+5.4.4 Limite de validit´e de la conclusion . . . . . . . . . . . . . . . . . . . . . 56
+5.5 Conclusion . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 56
+
+CHAPITRE 6 CONCLUSION . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 57
+6.1 Synth`ese des travaux . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 57
+6.2 Limitations de la solution propos´ee . . . . . . . . . . . . . . . . . . . . . . . . 58
+6.3 Am´eliorations futures . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 59
+
+R´EF´ERENCES . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 61
+
+ANNEXES . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 65
+
+LISTE DES TABLEAUX
+
+x
+
+Tableau 1.1
+Tableau 2.1
+
+Tableau 4.1
+Tableau 5.1
+
+Tableau 5.2
+
+Tableau 5.3
+
+Tableau 5.4
+
+Tableau 5.5
+
+Tableau 5.6
+
+Tableau 5.7
+
+. . . . . . . . . .
+
+3
+
+Coˆuts, eﬀorts, et temps de maintenance des logiciels.
+Limitation de l’algorithme FanMod sur le nombre d’´etiquettes attri-
+bu´ees aux arˆetes des motifs de r´eseau. . . . . . . . . . . . . . . . . . . . 12
+Sommaire des syst`emes orient´es objets
+. . . . . . . . . . . . . . . . . . 36
+Les microarchitectures trouv´ees dans les deux syst`emes Rhino et Ar-
+goUml (”Occ” est le nombre total des occurences des microarchitec-
+tures, ”Dif” est le nombre total des microarchitectures diﬀ´erentes). . . . 44
+Microarchitectures existant dans le syst`eme Rhino. Chaque ligne in-
+dique le r´esum´e en 5 chiﬀres : Min, Q1, M´ediane, Q3, Max . . . . . . . 45
+Microarchitectures existant dans le syst`eme ArgoUml. Chaque ligne
+indique le r´esum´e en 5 chiﬀres : Min, Q1, M´ediane, Q3, Max . . . . . . 46
+Microarchitectures existant dans les deux syst`emes Rhino et ArgoUml.
+Chaque ligne indique le r´esum´e en 5 chiﬀres : Min, Q1, M´ediane, Q3,
+Max . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 46
+Temps d’´execution de l’algorithme SGFinder sur les deux syst`emes
+Rhino et ArgoUml.
+Les microarchitectures les plus et les moins pr´edispos´ees aux d´efauts
+des deux syst`emes Rhino et ArgoUml. Chaque ligne indique le r´esum´e
+en 5 chiﬀres : Min, Q1, m´ediane, Q3, Max . . . . . . . . . . . . . . . . 50
+Les microarchitectures les plus et les moins pr´edispos´ees aux change-
+ments qui existent dans les deux syst`emes Rhino et ArgoUml. Chaque
+ligne indique le r´esum´e en 5 chiﬀres : Min, Q1, m´ediane, Q3, Max . . . 53
+
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . 48
+
+LISTE DES FIGURES
+
+xi
+
+Figure 3.1
+
+Figure 3.2
+Figure 3.3
+Figure 3.4
+Figure 3.5
+Figure 3.6
+Figure 3.7
+Figure 3.8
+
+Figure 3.9
+
+Figure 3.10
+Figure 3.11
+Figure 3.12
+Figure 3.13
+
+Figure 4.1
+Figure 5.1
+
+Figure 5.2
+
+Figure 5.3
+
+Figure 5.4
+
+Figure A.1
+
+Figure B.1
+Figure C.1
+
+Un sous-graphe extrait de la version 1.7R1 du syst`eme Rhino. Les som-
+mets repr´esentent les classes, et les arcs repr´esentent les relations entre
+les classes. La description des ´etiquettes sur les arcs est d´eﬁnie dans la
+section 4.2.1.
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+Sommets de la premi`ere couche de la liste des sommets voisins N 4(0). . 19
+Sommets de la deuxi`eme couche de la liste des sommets voisins N 4(0).
+20
+Sommets de la troisi`eme couche de la liste des sommets voisins N 4(0). . 20
+Sommets de la quatri`eme couche de la liste des sommets voisins N 4(0).
+21
+Connectivit´e d’un sous-ensemble de taille k = 5 . . . . . . . . . . . . . 26
+Matrices d’adjacences d’un graphe . . . . . . . . . . . . . . . . . . . . . 27
+Un sous-graphe extrait de la version 1.7R1 de l’application Rhino avec
+deux occurrences {2,4,5} et {7,1,3} d’ordre k = 3 . . . . . . . . . . . . 27
+Un graphe en ´etoile (les sous-graphes contenant le sommet 0 et de taille
+sup´erieure `a un, appartiennent `a la mˆeme zone) . . . . . . . . . . . . . 28
+Patron de conception fabrique . . . . . . . . . . . . . . . . . . . . . . . 29
+Illustration par l’outil SGViewer des rˆoles jou´es par des classes.
+. . . . 30
+. . . . . . . . . . 31
+Identiﬁcation des microarchitectures dans les tunnels
+Classiﬁcation des microarchitectures selon leurs ´evolutions entre les ver-
+sions d’un syst`eme orient´e objet.
+. . . . . . . . . . . . . . . . . . . . . 32
+Aper¸cu de la nouvelle approche . . . . . . . . . . . . . . . . . . . . . . 38
+Les microarchitectures les plus connect´ees de taille cinq dans les deux
+syst`emes Rhino et ArgoUml. . . . . . . . . . . . . . . . . . . . . . . . . 47
+Temps d’´execution de l’algorithme SGFinder sur les deux syst`emes
+Rhino et ArgoUml.
+Exemple d’une microarchitecture pr´edispos´ee aux d´efauts avec une pr´e-
+cision de P = 81% . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 52
+Exemple d’une microarchitecture sans d´efauts avec une pr´ecision P de
+30% . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 55
+Concepts de fr´equences. Pour le concept C1, il y a quatre occurrences,
+pour le concept C2, il y a deux occurrences, et pour le concept C3, il y
+a une seule occurrence. . . . . . . . . . . . . . . . . . . . . . . . . . . . 65
+´Elargissement d’un sous-graphe `a un autre sous-graphe . . . . . . . . . 67
+Un sous sous-graphe extrait de la version 1.7R1 de l’application Rhino.
+70
+
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . 49
+
+Figure C.2
+
+Figure D.1
+Figure D.2
+
+Fichier d’entr´ee de l’outil SGFinder bas´es sur le sous sous-graphe de la
+ﬁgure C.1. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 71
+Aper¸cu de la fenˆetre principale de SGViewer . . . . . . . . . . . . . . . 75
+Repr´esentation graphique des microarchitectures . . . . . . . . . . . . . 76
+
+xii
+
+LISTE DES ALGORITHMES
+
+xiii
+
+3.1 M´ethode principale de l’algorithme . . . . . . . . . . . . . . . . . . . . . . . . 17
+3.2 Voisinage
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
+3.3 G´en´erateur des sous ensembles de taille k . . . . . . . . . . . . . . . . . . . . . 24
+3.4 Connectivit´e . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
+3.5 Calcul des zones.
+3.6
+. . . . . . . . . . . . . . 31
+
+Identiﬁcation des microarchitectures dans les tunnels.
+
+LISTE DES ANNEXES
+
+xiv
+
+Annexe A
+Annexe B
+Annexe C
+Annexe D
+
+Concepts de fr´equences . . . . . . . . . . . . . . . . . . . . . . . . . . . 65
+Algorithme nauty . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 66
+Guide d’utilisation de SGFinder (Version 1.0)
+. . . . . . . . . . . . . . 69
+Guide d’utilisation de SGViewer . . . . . . . . . . . . . . . . . . . . . . 74
+
+LISTE DES SIGLES ET ABR´EVIATIONS
+
+xv
+
+SGFinder
+SGViewer
+OO
+mAs
+PADL
+Ptidej
+
+DP
+
+AP
+
+AST
+
+CSP
+nauty
+
+Q1, Q3
+
+M´ediane
+
+R´esum´e en 5 chiﬀres
+
+Engin d’´enum´eration des sous-graphes (Sub-Graph Finder).
+Engin de visualisation des sous-graphes (Sub-Graph Viewer).
+Orient´e objet.
+Microarchitectures.
+M´eta-mod`ele (Pattern and Abstract-level Description Language).
+Suite d’outils de r´etro-conception (Pattern Trace Identiﬁcation, Detec-
+tion, and Enhancement in Java).
+Un patron de conception est un concept permettant de d´ecrire des so-
+lutions standards pour r´esoudre des probl`emes r´ecurrents et sp´eciﬁques
+de conception dans des contextes bien pr´ecis.
+Les anti-patrons sont de “mauvaises” solutions `a des probl`emes r´ecur-
+rents de conception logicielle.
+Arbre syntaxique abstrait (AST est un arbre dont les nœuds internes
+marquent les op´erateurs, et dont les feuilles repr´esentent les op´erandes
+des op´erateurs.).
+Probl`emes de satisfaction de contraintes.
+Est un ensemble de fonctions permettant de d´eterminer le groupe d’au-
+tomorphismes d’un graphe. Il peut aussi fournir la matrice d’adjacence
+repr´esentant la forme canonique d’un graphe.
+Les quartiles permettent de s´eparer une s´erie des donn´ees en quatre
+groupes de mˆeme nombre d’´el´ements. Un quart des valeurs sont in-
+f´erieures au premier quartile Q1, et un autre quart des valeurs sont
+sup´erieures au troisi`eme quartile Q3.
+Lorsqu’on ordonne les valeurs d’une variable, la m´ediane est d´eﬁni par
+le point milieu de cette liste ordonn´ee (c’est-`a-dire que 50 % des valeurs
+sont sup´erieures `a la m´ediane et 50 % lui sont inf´erieures).
+est la repr´esentation d’une s´erie de donn´ees sous le format ”Min, Q1,
+M´ediane, Q3, Max”.
+
+1
+
+CHAPITRE 1
+
+INTRODUCTION
+
+Le travail pr´esent´e dans ce m´emoire est la mise en place d’une nouvelle approche et d’un
+outil SGFinder pour recenser des microarchitectures `a partir de diagramme des classes. Nous
+mod´elisons un diagramme des classes par un graphe orient´e et ´etiquet´e, et nous d´eﬁnissons
+une microarchitecture comme un sous-graphe induit par un sous-ensemble de classes. Cette
+technique de mod´elisation nous permet de recenser les sous-graphes d’un graphe orient´e et
+´etiquet´e au lieu de recenser les microarchitectures du diagramme des classes d’un syst`eme
+OO. Pour grouper les sous-graphes isomorphes dans leurs propres cat´egories, nous utilisons
+la librairie existante nauty (voir McKay, 1981). Notre outil SGFinder inclut une repr´esen-
+tation visuelle des sous-graphes correspondant aux microarchitectures. Cet outil permet un
+recensement eﬃcace des sous-graphes induits d’ordre pr´ed´eﬁni (nombre de sommets).
+
+Le concept de microarchitecture peut varier en fonc-
+D´eﬁnition de microarchitecture :
+tion du domaine ou du contexte de son utilisation. Pour le diagramme des classes d’un syst`eme
+orient´e objet, une microarchitecture est d´eﬁnie comme un ensemble de composants et de ses
+connecteurs. Autrement dit, cette microarchitecture comprend un ensemble de classes et de
+ses interactions (les relations entre les classes), o`u aucune des classes n’est isol´ee du reste des
+classes participantes `a cette microarchitecture.
+
+Nous utilisons l’outil SGFinder pour recenser des microarchitectures de taille trois, quatre
+et cinq sur plusieurs versions de deux syst`emes OO (Rhino et ArgoUml). Ensuite, nous
+reportons les d´etails concernant le nombre total de toutes les microarchitectures, et le nombre
+total des microarchitectures identiques. Aussi, nous identiﬁons les microarchitectures les plus
+et les moins pr´edispos´ees aux changements et aux d´efauts.
+
+Dans ce chapitre, nous commen¸cons par d´ecrire le contexte de notre projet de recherche,
+d´eﬁnir les ´el´ements de la probl´ematique, et les objectifs `a atteindre. Ainsi, nous pr´esentons la
+m´ethodologie utilis´ee pour r´epondre `a nos objectifs. Par la suite, nous rappelons bri`evement
+les notions de base en th´eorie des graphes et des ensembles. Finalement nous terminons par
+le plan d’organisation de ce m´emoire.
+
+2
+
+1.1 Contexte
+
+La mise en production d’un logiciel est l’aboutissement de plusieurs phases o`u diﬀ´erentes
+´equipes collaborent entre elles pour r´ealiser ce logiciel. Ces phases sont d´ecoup´ees selon un
+cycle bien d´etermin´e dans l’objectif de valider et de v´eriﬁer la conformit´e de ce logiciel avec les
+besoins et les exigences de l’utilisateur ﬁnal. Les erreurs commises durant le d´eveloppement,
+et/ou l’´evolution du logiciel peuvent engendrer des coˆuts tr`es ´elev´es lors de l’op´eration de
+maintenance apr`es sa livraison. En eﬀet, l’activit´e de maintenance est une phase importante
+et cruciale dans le cycle de vie d’un logiciel.
+
+Aujourd’hui, les ressources relatives `a la maintenance d’un logiciel et de la gestion de son
+´evolution repr´esentent plus de 50% des ressources du projet. En eﬀet, plusieurs ´etudes ont
+´et´e eﬀectu´ees pour d´eﬁnir ces ressources comme le budget, l’eﬀort, et le temps. Ces ressources
+sont r´ecapitul´ees dans le tableau 1.1.
+
+En industrie, les chefs de projets, les architectes logiciels, et les concepteurs consacrent une
+partie importante de leur temps `a la conception des syst`emes informatiques solides et stables.
+Donc, il est essentiel pour ces gestionnaires de bien g´erer la conception et la maintenabilit´e
+pour pouvoir maˆıtriser le coˆut de d´eveloppement des logiciels, et acc´el´erer leurs r´ealisations
+pour satisfaire les besoins de l’utilisateur ﬁnal.
+
+Les entreprises d´eveloppant des syst`emes informatiques cherchent d’un cˆot´e (i) des moyens
+et des nouvelles techniques pour assurer la qualit´e de leurs logiciels, et d’un autre cˆot´e (ii)
+des solutions pour r´eduire le coˆut des changements apport´es au code apr`es la livraison de
+leurs logiciels aux clients. Pour atteindre les deux objectifs vis´es par ces entreprises, il faut
+prendre en compte certains ´el´ements dont :
+
+i. Les d´eveloppeurs doivent comprendre le code, y compris la structure interne des classes
+
+et les relations entre elles, aﬁn d’eﬀectuer correctement les changements.
+
+ii. Pendant la phase de conception d´etaill´ee du logiciel, les concepteurs des classes ne
+doivent pas cr´eer des structures pr´edispos´ees aux d´efauts (bogues), ou qui peuvent
+cr´eer beaucoup de changements.
+
+´El´ements de la probl´ematique
+
+Apr`es la mise en œuvre des logiciels, des activit´es de maintenance seront ult´erieurement
+n´ecessaires pour corriger les bogues rencontr´es par les utilisateurs ﬁnaux, ajouter des nouvelles
+
+3
+
+Tableau 1.1 Coˆuts, eﬀorts, et temps de maintenance des logiciels.
+
+R´ef´erence
+
+(voir
+2009)
+
+Audibert,
+
+Ressource Description
+
+Coˆut
+
+Selon une ´etude eﬀectu´ee en 1986 aux ´Etats-Unis aupr`es
+de 55 entreprises indique que 53% du coˆut total de la
+r´ealisation d’un logiciel est r´eserv´e `a sa maintenance. Ce
+coˆut est r´eparti de la mani`ere suivante :
+– 34% de ce coˆut est attribu´e aux modiﬁcations des sp´e-
+
+ciﬁcations initiales (´evolution du logiciel).
+
+– 17% est aﬀect´e aux corrections des bogues.
+– 10% pour adapter le logiciel aux nouveaux utilisa-
+
+teurs, ou aux nouveaux environnements de travail.
+
+– Le reste du coˆut (39%) est reparti sur le contrˆole de la
+qualit´e, l’am´elioration de la performance du logiciel,
+et l’assistance aux utilisateurs.
+
+Jusqu’`a 90% du coˆut total du projet est consacr´e `a la
+maintenance d’un syst`eme existant, et `a son ´evolution.
+Environ 75% du budget est consomm´e pendant la phase
+de maintenance selon une ´etude eﬀectu´ee aupr`es de 1000
+compagnies.
+Le coˆut de maintenance peut consommer entre 60% et
+70% du budget de gestion et de fonctionnement du pro-
+jet.
+De 65% `a 75% de l’eﬀort logiciel est consacr´e `a la main-
+tenance des syst`emes.
+Selon une ´etude eﬀectu´ee aupr`es de 487 organisations,
+plus de 50% du temps total du projet est consacr´e `a la
+maintenance des syst`emes.
+
+(voir Erlikh, 2000;
+Moad, 1990)
+(voir
+1993)
+
+Eastwood,
+
+(voir Huﬀ, 1990;
+Port, 1988)
+
+(voir McKay, 1984)
+
+Lientz
+
+(voir
+Swanson, 1981)
+
+et
+
+Eﬀort
+
+Temps
+
+fonctionnalit´es, am´eliorer l’eﬃcacit´e, et adapter le code selon un nouvel environnement de
+travail. Ces travaux sont donc in´evitables pour augmenter la dur´ee de vie des logiciels.
+
+La taille du logiciel croˆıt au fur et `a mesure durant la phase de d´eveloppement des com-
+posants et leur int´egration pour produire la version ﬁnale du logiciel. Donc, les logiciels
+deviennent de plus en plus complexes, et par cons´equent, leur maintenance, et leur mise au
+point deviennent des tˆaches extrˆemement diﬃciles pour les d´eveloppeurs.
+
+Aﬁn d’eﬀectuer eﬃcacement les activit´es de maintenance, et avant de proc´eder `a n’importe
+quelle modiﬁcation, les responsables de la maintenance doivent comprendre l’objectif de leurs
+syst`emes OO, ainsi que les concepts repr´esent´es dans ces syst`emes. La compr´ehension com-
+
+4
+
+prend ´evidemment les diﬀ´erents choix qui ont ´et´e pris pendant les phases de conception et
+d’impl´ementation. Dans les syst`emes orient´es objets, les choix de conception comprennent la
+structure interne des classes et les relations entre elles. Par exemple, les patrons de conception
+(voir Gamma et al., 1994) sont des structures de classes permettant de d´ecrire des solutions
+standards `a des probl`emes de conception sp´eciﬁques et r´ecurrents dans des contextes bien
+pr´ecis. Ils sont con¸cus dans l’objectif de faire une conception plus souple, r´eutilisable et ro-
+buste, ainsi que am´eliorer la qualit´e des logiciels. Par contre, les anti-patterns (voir Brown
+et al., 1998) sont de ”mauvaises” solutions `a des probl`emes r´ecurrents de conception logicielle.
+
+Cependant, il y a des types de microarchitectures comme les patrons de conception et les
+anti-patterns qui ont ´et´e d´ej`a document´es. En eﬀet, certaines microarchitectures ne sont pas
+document´ees parce qu’elles sont m´econnues, ou bien leur domaine ou leur application sont
+sp´eciﬁques. Nous supposons que ces microarchitectures peuvent avoir des propri´et´es utiles,
+comme la stabilit´e, et les d´efauts (les bogues).
+
+Dans les syst`emes orient´es objets, la plupart des approches existantes se focalisent sur les
+patrons de conception, les anti-patterns et plus pr´ecis´ement sur une librairie d’abstraction de
+microarchitectures existantes (ex. patrons de conception (voir Gu´eh´eneuc et Antoniol, 2008)).
+
+1.2 Objectifs de la recherche
+
+L’objectif principal du travail pr´esent´e dans ce m´emoire est d’impl´ementer un algorithme
+et un outil eﬃcace permettant d’une part, de recenser toutes les microarchitectures d’une
+taille donn´ee, et d’autre part de regrouper les microarchitectures identiques. De plus, d’autres
+objectifs sont pris en consid´eration :
+
+i. Chercher la relation entre les microarchitectures et les propri´et´es telles que la stabilit´e
+
+et les d´efauts.
+
+ii. Tracer l’´evolution des microarchitectures entre les diﬀ´erentes versions d’un syst`eme OO.
+
+iii. Caract´eriser les microarchitectures (d´eﬁnir les rˆoles jou´es par les classes, et identiﬁer
+
+les microarchitectures dans les trois cˆot´es du tunnel 1) (voir la section 3.3).
+
+1.3 Esquisse de la m´ethodologie
+
+Pour atteindre les objectifs, tout d’abord le diagramme des classes d’un syst`eme orient´e
+
+objet est transform´e en un graphe orient´e et ´etiquet´e o`u :
+
+1. un tunnel est un ensemble de classes communes entre plusieurs versions
+
+5
+
+– Les classes sont repr´esent´ees par des sommets (nœuds).
+– Les relations entre les classes sont repr´esent´ees par des arcs.
+– Les ´etiquettes associ´ees aux arcs repr´esentent les relations simples (agr´egation, associa-
+
+tion, et h´eritage) et compos´ees.
+
+Avec cette technique, nous mod´elisons le probl`eme d’´enum´eration des microarchitectures
+
+comme un probl`eme d’´enum´eration des sous-graphes.
+
+Par la suite, nous impl´ementons un algorithme eﬃcace pour ´enum´erer toutes les microar-
+
+chitectures (sous-graphes) d’une taille trois, quatre, et cinq.
+
+Nous identiﬁons ensuite les classes bogu´ees et les classes modiﬁ´ees (voir la section 4.2.1), et
+nous les exploitons pour d´eterminer les microarchitectures les plus et les moins pr´edispos´ees
+aux d´efauts et aux changements.
+
+1.4 Notations et notions de base en th´eorie des graphes et des ensembles
+
+Aﬁn d’avoir une terminologie coh´erente, nous allons introduire les principaux concepts
+de graphes et d’ensembles que nous utiliserons dans l’algorithme d’´enum´eration des sous-
+graphes.
+
+1.4.1 Les graphes
+
+Un graphe orient´e et ´etiquet´e G est un quadruplet G(V, A, L, l) o`u :
+– V est un ensemble { v1, v2, .., vn } ﬁni non vide dont les ´el´ements sont appel´es sommets
+
+ou nœuds.
+
+– A est un ensemble { a1, a2, .., am } dont les ´el´ements sont appel´es arcs. Un arc a de
+l’ensemble A est d´eﬁni par une paire ordonn´ee de sommets. Lorsque a = (u, v), on dira
+que l’arc a va de u `a v. On dit aussi que u est l’extr´emit´e initiale et v est l’extr´emit´e
+ﬁnale de a.
+
+– L est un ensemble d’´etiquettes.
+– l : A → L est une fonction d’´etiquetage v´eriﬁant la condition suivante : ∀a ∈ A ⇒
+
+l(a) ∈ L.
+
+Deux sommets d’un graphe sont dits adjacents ou voisins s’il existe un arc qui les relie. Le
+nombre de sommets d’un graphe G est appel´e ordre de ce graphe, et on le note par |V |. La
+taille d’un graphe, not´ee |A| est le nombre de ses arcs.
+
+6
+
+Une chaˆıne µ = (v1, a1, v2, .., vp−1, ap, vp+1) est une suite de sommets dans laquelle deux
+´el´ements successifs quelconques sont reli´es par un arc. La longueur d’une chaˆıne est le nombre
+de sommets moins un et on la note par length(u) = p. La distance dist(u, v) entre deux
+sommets u et v est la longueur de la plus petite chaˆıne reliant ces deux sommets. Un graphe
+connexe G est un graphe dans lequel il existe au moins une chaˆıne µ = (u, .., v) entre toute
+paire de sommets u et v de V (G). Il est utile de noter qu’un graphe orient´e et ´etiquet´e peut
+ˆetre cyclique, et donc ce graphe peut avoir plusieurs chaˆınes entre deux sommets donn´ees.
+
+Un sous graphe partiel d’un graphe G est un graphe GS = (VS, AS, L, lS) compos´e de
+certains sommets de G et de certains arcs reliant ces sommets dans G. En eﬀet, le graphe
+GS = (VS, AS, L, lS) est un sous graphe partiel de G(V, A, L, l) ssi VS ⊂ V , AS ⊂ A∩(VS×VS),
+et la fonction d’´etiquetage lS : AS → L v´eriﬁe la condition suivante : ∀(a, b) ∈ AS, lS(a, b) =
+l(a, b).
+
+Un graphe G(cid:48)(V (cid:48), A(cid:48), L, l(cid:48)) est un sous-graphe induit d’un graphe G(V, A, L, l) si V (cid:48) est un
+sous-ensemble de V et si pour tout couple de sommets (u, v) de V (cid:48), le sommet u est connect´e
+au sommet v dans G(cid:48) si et seulement si le sommet u est connect´e au sommet v dans G, et
+l’´etiquette de l’arc (u, v) est la mˆeme dans G et G(cid:48). Autrement dit, le sous-graphe G(cid:48) est induit
+si V (cid:48) ⊂ V et A(cid:48) = {(u, v) ∈ A, u ∈ V (cid:48) ∧ v ∈ V (cid:48)}. De mˆeme, le sous-graphe G(cid:48)(V (cid:48), A(cid:48), L, l(cid:48)) est
+dit induit par le sous-ensemble des sommets V (cid:48) de V . Un k-sous-graphe est un sous-graphe
+induit d’ordre k.
+
+Deux sous-graphes GS = (VS, AS, L, lS) et GH = (VH, AH, L, lH) sont isomorphes s’ils sont
+identiques. Formellement, les deux sous-graphes GS et GH sont isomorphes si seulement si
+|VS| = |VH|, et s’il existe une fonction de bijection φ : VS → VH telle que, ∀(u, v) ∈ AS
+⇒(φ(u), φ(v)) ∈ AH. La d´ecision de l’existence d’un isomorphisme entre deux sous-graphes
+est un probl`eme NP-complet (voir Garey et Johnson, 1990).
+
+Une matrice d’adjacence M est une structure de donn´ees permettant de repr´esenter un
+graphe G. La matrice M est une matrice carr´ee ayant pour taille le nombre de sommets
+du graphe G. Le couple (i, j) d´esigne l’intersection de la ligne i et de la colonne j. Dans
+une matrice d’adjacence, les lignes et les colonnes repr´esentent les sommets du graphe. La
+valeur mij (cid:54)= 0 `a la position (i, j) signiﬁe que le sommet i est adjacent au sommet j, et elle
+repr´esente l’´etiquette sur l’arc reliant le sommet i et le sommet j. Donc, pour un graphe
+
+orient´e et ´etiquet´e, M = (mij) o`u mij =
+
+si (vi, vj) ∈ A
+sinon
+
+l(vi, vj),
+
+0,
+
+1.4.2 Les ensembles
+
+7
+
+Soit S un ensemble contenant n ´el´ements distincts et soit k un entier positif. Un k-sous-
+ensemble est une combinaison de k ´el´ements de l’ensemble S. Les k ´el´ements sont pris sans
+r´ep´etition et ne sont pas ordonn´es. Le nombre total des combinaisons possibles est donn´e par
+le coeﬃcient binomial suivant :
+
+(cid:32)
+
+(cid:33)
+
+n
+k
+
+C k
+
+n =
+
+=
+
+ n!
+
+k!(n−k)! ,
+0,
+
+si 0 ≤ k ≤ n
+sinon
+
+Exemple : les combinaisons de 2 ´el´ements pris dans {1, 2, 3, 4} sont {1, 2}, {1, 3}, {1, 4},
+{2, 3}, {2, 4}, {3, 4}. Donc, il y a 6 combinaisons possibles (C 2
+
+4 = 4!
+
+2!(4−2)! = 6).
+
+1.5 Organisation du m´emoire
+
+Ce m´emoire est compos´e de six chapitres. Ce premier chapitre d’introduction met en ´evi-
+dence le contexte de notre ´etude, les ´el´ements de la probl´ematique, la m´ethodologie, et le plan
+de ce m´emoire. Dans le deuxi`eme chapitre, nous pr´esentons une revue de litt´erature sur les
+travaux eﬀectu´es sur les algorithmes de recensement des sous-graphes (microarchitectures),
+et les types des microarchitectures trait´ees. Dans le troisi`eme chapitre, nous d´ecrivons la
+conception et l’impl´ementation de la technique propos´ee pour r´ealiser ce travail. Dans le qua-
+tri`eme chapitre, nous pr´esentons la validation empirique. Le cinqui`eme chapitre est consacr´e
+`a l’analyse et `a l’interpr´etation des r´esultats obtenus par la nouvelle technique. Finalement
+le dernier chapitre conclut ce m´emoire, r´ev`ele les limitations de notre travail, et pr´esente les
+travaux futurs.
+
+8
+
+CHAPITRE 2
+
+REVUE DE LITT´ERATURE
+
+Ce chapitre pr´esente une revue de litt´erature en deux parties sur les travaux r´ealis´es
+pr´ec´edemment. La premi`ere partie de cette revue de litt´erature est consacr´ee aux algorithmes
+de recensement des motifs de r´eseau 1 et des sous-graphes. La deuxi`eme partie est consacr´ee
+aux ´etudes eﬀectu´ees sur les patrons de conception, les anti-patrons, et les microarchitectures
+des syst`emes OO.
+
+2.1 Algorithmes de recensement des motifs de r´eseau et des sous-graphes
+
+Des travaux de recensement des motifs ont ´et´e r´ealis´es dans les diﬀ´erents domaines d’ap-
+plications comme les r´eseaux sociaux et les r´eseaux biologiques. Plus pr´ecis´ement, les r´eseaux
+d’interaction prot´eine-prot´eine (PPI), les r´eseaux g´en´etiques, et les r´eseaux m´etaboliques,
+sont les r´eseaux les plus largement ´etudi´es dans le domaine de la biologie (voir Milo et al.,
+2002; Batagelj et Mrvar, 2003; Schreiber et Schw¨obbermeyer, 2005; Sebastian, 2006; Razaghi
+et Kashani, 2009). En eﬀet, des techniques math´ematiques et informatiques sont appliqu´ees
+pour analyser et mod´eliser les donn´ees `a cause de la complexit´e de ces r´eseaux et de la quantit´e
+des donn´ees qu’ils contiennent. Pour permettre l’´etablissement d’un mod`ele math´ematique
+convenable pour l’analyse de ces r´eseaux complexes, il est n´ecessaire d’utiliser les notions
+de la th´eorie des graphes. Les ´el´ements d’un r´eseau en traitement sont repr´esent´es par des
+sommets (nœuds), et l’interaction entre eux sont repr´esent´es par des arcs ou des arˆetes. Les
+algorithmes peuvent ensuite ˆetre utilis´es pour analyser, simuler et visualiser le r´eseau trait´e.
+En eﬀet, des m´ethodes puissantes de calcul, permettant l’extraction des informations perti-
+nentes `a partir d’une grande quantit´e de donn´ees, doivent ˆetre d´evelopp´ees. Ces m´ethodes
+sont basses sur des algorithmes de recensement des motifs de r´eseau, qui sont tr`es coˆuteuses
+en temps d’ex´ecution et en consommation de m´emoire. Ces algorithmes sont soumis `a des
+restrictions sur la taille des motifs de r´eseau, et la taille et les types des r´eseaux trait´es.
+G´en´eralement, les algorithmes propos´es permettent soit d’´enum´erer exhaustivement tous les
+motifs de r´eseau (voir Milo et al., 2002; Schreiber et Schw¨obbermeyer, 2005; Sebastian, 2006;
+Razaghi et Kashani, 2009), ou ´enum´erer seulement les sous-graphes les plus fr´equents (voir
+Kuramochi et Karypis, 2004). Aussi, une autre caract´eristique pertinente pour l’´evaluation
+
+1. Dans les r´eseaux biologiques, Les motifs de r´eseau sont d´eﬁnis par des sous-graphes, qui se trouvent
+
+dans le r´eseau original beaucoup plus souvent que dans les r´eseaux randomis´es (voir Milo et al., 2002).
+
+9
+
+des algorithmes existants est la repr´esentation visuelle des r´esultats.
+
+Les algorithmes de recensement des motifs de r´eseau sont bas´es sur le mˆeme principe.
+
+Chaque algorithme impl´emente les trois tˆaches suivantes :
+
+1. Enum´eration : Chercher des motifs de r´eseau (sous-graphes) d’une taille donn´ee qui
+
+se trouvent dans un r´eseau original (graphe en entr´ee).
+
+2. Classement : Regrouper les sous-graphes identiques dans des cat´egories. La majorit´e
+des algorithmes (voir Milo et al., 2002; Sebastian, 2006; Razaghi et Kashani, 2009)
+utilise l’outil nauty (voir McKay, 1981) pour chercher la forme canonique de ces sous-
+graphes. La forme canonique est un code unique permettant de distinguer les sous-
+graphes isomorphes (identiques).
+
+3. Randomisation : G´en´erer des graphes al´eatoires pour s’assurer que les motifs retrouv´es
+caract´erisent bien les r´eseaux consid´er´es. Un motif est d´eﬁni par un petit sous-graphe
+connexe qui se trouve dans le r´eseau consid´er´e (original) avec une fr´equence plus ´elev´ee
+que dans les r´eseaux g´en´er´ees al´eatoirement (voir Milo et al., 2002). Le recensement et
+le classement sont eﬀectu´es de nouveau sur les graphes g´en´er´es al´eatoirement.
+
+Dans les sections suivantes, nous introduisons quelques algorithmes de recensement des
+sous-graphes ou motifs de r´eseaux. Pour chaque algorithme, nous mettons en exergue les
+raisons pour lesquelles il ne r´epond pas `a nos besoins.
+
+2.1.1 Algorithme NeMoFinder
+
+NeMoFinder est un algorithme propos´e par J. Chen et al (voir Chen et al., 2006) pour
+chercher les motifs de r´eseau qui sont r´ecurrents et uniques dans les r´eseaux d’interaction
+prot´eine-prot´eine (PPI). Ces r´eseaux PPI sont repr´esent´es par des graphes non orient´es et non
+´etiquet´es. En eﬀet, l’algorithme NeMoFinder est le premier algorithme utilis´e pour extraire
+les motifs de r´eseau d’une taille allant jusqu’`a 12 dans les levures Saccharomyces cerevisiae
+industrielles.
+
+L’algorithme NeMoFinder utilise une technique de recherche bas´ee sur les arbres r´ecurrents
+aﬁn de partitionner le r´eseau PPI en un ensemble de graphes. Premi`erement, il cherche les
+sous-graphes fr´equents de taille k dans le r´eseau PPI. Il commence par les arbres de taille 2,
+puis, il les ´elargit en ajoutant des sommets voisins aﬁn d’atteindre les tailles 3, 4, et ainsi de
+suite jusqu’`a obtenir la taille k. Par la suite, il utilise un algorithme bas´e sur les chaines de
+Markov (voir Maslov et Sneppen, 2002) pour g´en´erer des graphes al´eatoires en ´echangeant les
+
+10
+
+arˆetes al´eatoirement entre les sommets du graphe original. Chaque sommet dans le graphe
+al´eatoire contient le mˆeme nombre de sommets voisins que le sommet correspondant dans le
+graphe original. La proc´edure de recensement des sous-graphes dans les graphes al´eatoires
+est la mˆeme que dans le graphe original. Ensuite, l’algorithme NeMoFinder v´eriﬁe si les
+sous-graphes du graphe original sont des motifs de r´eseau.
+
+L’algorithme NeMoFinder ne peut traiter ni les graphes orient´es et ´etiquet´es, ni les boucles
+
+sur les sommets des graphes non orient´es.
+
+2.1.2 Algorithme MFinder
+
+L’algorithme MFinder (voir Milo et al., 2002) est le premier algorithme utilis´e pour ex-
+
+traire des motifs de r´eseau. Il fournit deux m´ethodes d’exploration qui sont :
+
+1. ´Enum´eration exhaustive des motifs de r´eseau.
+2. ´Enum´eration partielle de certains motifs de r´eseau. Le probl`eme du recensement ex-
+haustif est que le nombre des motifs croˆıt exponentiellement avec la taille du r´eseau
+consid´er´e, et la taille des motifs eux-mˆemes. Un algorithme d’approximation probabi-
+liste est utilis´e pour ´enum´erer certains motifs de r´eseau du r´eseau consid´er´e.
+
+L’algorithme MFinder commence par choisir une arˆete e. Donc, le premier motif de r´eseau
+est constitu´e des deux sommets de l’arˆete e. `A chaque it´eration, il ajoute un nouveau sommet
+situ´e `a l’extr´emit´e d’une arˆete reli´ee au motif de r´eseau g´en´er´e partiellement. Une fois que
+la taille du motif de r´eseau g´en´er´e atteint la taille d´esir´ee, il g´en`ere un code unique bas´e sur
+l’isomorphisme de ce motif de r´eseau. Le processus de g´en´eration des r´eseaux al´eatoires et de
+v´eriﬁcation des motifs de r´eseau est le mˆeme que l’algorithme NeMoFinder (voir la section
+2.1.1).
+
+L’algorithme MFinder a besoin de beaucoup de m´emoire pour explorer tous les motifs de
+r´eseau, ce qui entrave la recherche des motifs de r´eseau dans des r´eseaux de taille moyenne.
+
+2.1.3 Algorithme Pajek
+
+Pajek (voir Batagelj et Mrvar, 2003) est un outil d’analyse et de visualisation des grands
+r´eseaux. Il permet de chercher certains motifs de r´eseau fr´equents comme les t´etrades ayant
+certaines particularit´es, et les triades. Les triades et les t´etrades sont des sous-graphes de
+taille trois et quatre respectivement. Les triades peuvent ˆetre connect´es ou d´econnect´es, et
+leurs analyses proviennent de l’analyse des r´eseaux sociaux.
+
+11
+
+En eﬀet, le recensement des motifs de r´eseau par l’outil Pajek est limit´e aux motifs de
+
+r´eseau de taille trois (triades), et au certains motifs de r´eseau de taille quatre (t´etrades).
+
+2.1.4 Algorithme MAVisto
+
+MAVisto (voir Schreiber et Schw¨obbermeyer, 2005) est un outil d’exploration et de visua-
+lisation des motifs de r´eseau trouv´es dans les r´eseaux biologiques. Il fournit un algorithme
+de recherche des motifs, et diﬀ´erentes vues pour analyser et visualiser les motifs de r´eseau
+par une interface graphique. MAVisto est compatible avec le format Pajek-.net- (voir Bata-
+gelj et Mrvar, 2003), et le format GML (voir Himsolt, 1997). Il oﬀre un ´editeur graphique
+pour manipuler et cr´eer les r´eseaux. L’algorithme MAVisto cherche des motifs d’une taille
+particuli`ere, qui est donn´ee soit par le nombre de sommets, ou par le nombre d’arˆetes.
+
+L’algorithme MAVisto est particuli`erement lent pour recenser les motifs de r´eseau de taille
+trois. En eﬀet, pour un r´eseau de 672 sommets et 1277 arcs, l’algorithme s’ex´ecute en 13532.0
+secondes (environ 4 heures). Pour chercher des motifs de taille quatre d’un r´eseau social de
+67 sommet et 183 arcs, l’algorithme s’ex´ecute en 1492 secondes (environ 25 minutes).
+
+2.1.5 Algorithme FanMod
+
+FanMod (voir Sebastian, 2006) est un outil de recensement des motifs de r´eseau de taille
+comprise entre trois et huit sommets. L’outil FanMod ´enum`ere les motifs de r´eseau `a l’aide de
+l’algorithme Rand-ESU, ce qui rend la recherche des motifs plus rapide que les autres outils
+bas´es sur d’autres algorithmes (voir Milo et al., 2002). Il comprend une interface graphique
+pour faciliter la conﬁguration des param`etres de l’algorithme comme la taille des motifs de
+r´eseau. Les r´esultats peuvent ˆetre export´es en format HTML.
+
+Contrairement `a l’algorithme MFinder (voir Milo et al., 2002) qui commence par deux
+sommets d’une arˆete e, l’outil FanMod commence par un sommet u, puis il explore ses
+sommets successeurs ou pr´ed´ecesseurs non encore visit´es. Ensuite d’une mani`ere it´erative,
+l’algorithme FanMod cherche les sommets successeurs ou pr´ed´ecesseurs de chaque sommet
+visit´e pr´ec´edemment. La recherche en profondeur des successeurs ou pr´ed´ecesseurs s’arrˆete
+lorsque la distance entre le premier sommet et le dernier sommet successeurs ou pr´ed´ecesseurs
+est ´egal `a la taille d´esir´ee. Le processus de g´en´eration des r´eseaux al´eatoires et de v´eriﬁcation
+des motifs de r´eseau est le mˆeme que l’algorithme NeMoFinder (voir la section 2.1.1).
+
+L’outil FanMod est l’outil le plus rapide comparativement aux autres outils (voir Milo
+et al., 2002; Batagelj et Mrvar, 2003; Schreiber et Schw¨obbermeyer, 2005; Chen et al., 2006).
+
+12
+
+L’inconv´enient majeur de l’outil FanMod est la limitation du nombre d’´etiquettes attribu´ees
+au r´eseau consid´er´e (voir Rasche et Wernicke, 2006). Le tableau 2.1 montre le nombre d’´eti-
+quettes trait´e pour chaque taille de motif de r´eseau.
+
+Tableau 2.1 Limitation de l’algorithme FanMod sur le nombre d’´etiquettes attribu´ees aux
+arˆetes des motifs de r´eseau.
+
+Taille des motifs de r´eseau Nombre d’´etiquettes
+
+3
+4
+5
+6
+7
+8
+
+7
+7
+3
+3
+1
+1
+
+2.1.6 Algorithme Kavosh
+
+Kavosh (voir Razaghi et Kashani, 2009) est un algorithme de recensement exhaustif des
+motifs de r´eseau d’une taille allant jusqu’`a 12. Il permet d’explorer des graphes orient´es et
+non orient´es pour chercher des sous-graphes de taille k ≤ 12.
+
+Les sommets enfants d’un sommet quelconque sont d´eﬁnies par les sommets successeurs
+ou pr´ed´ecesseurs de ce sommet. Un niveau est d´eﬁni par les sommets enfants d’un sommet
+quelconque. L’algorithme Kavosh d´emarre du premier niveau qui contient le sommet u, et il
+descend niveau par niveau pour choisir un sommet enfant qui n’a pas ´et´e visit´e auparavant.
+Donc, la d´emarche de cet algorithme n’a pas `a prendre en consid´eration la notion de cyclicit´e
+du graphe. Cet algorithme est bas´e sur la m´ethode de ”revolving door ordering” (voir Kreher et
+Stinson, 1998) pour g´en´erer toutes les combinaisons possibles des sommets. Comme exemple,
+pour chercher des sous-graphes de taille k = 4, les combinaisons possibles (incluant le sommet
+u du premier niveau) sont :
+
+– 3 sommets du deuxi`eme niveau.
+– 2 sommets du deuxi`eme niveau, et 1 sommet du troisi`eme niveau.
+– 1 sommet du deuxi`eme niveau, et 2 sommets du troisi`eme niveau.
+– 1 sommet du deuxi`eme niveau, 1 sommet du troisi`eme niveau, et 1 sommet du quatri`eme
+
+niveau.
+
+L’outil Kavosh ne traite pas les graphes ´etiquet´es (orient´es ou non orient´es), et il consomme
+beaucoup de m´emoire pour stocker les sommets visit´es et non encore visit´es de l’arbre conte-
+nant le sommet racine u.
+
+13
+
+2.2 Patrons de conception, anti-patrons, et microarchitectures
+
+Plusieurs approches ont ´et´e propos´ees pour identiﬁer les microarchitectures similaires
+aux patrons de conception, et aux anti-patrons. G´en´eralement, ces approches sont bas´ees
+sur une biblioth`eque des structures connues pr´ealablement comme les patrons de conception
+(voir Kr¨amer et Prechelt, 1996; Seemann et von Gudenberg, 1998; Pettersson et L¨owe, 2006;
+Tsantalis et al., 2006), les anti-patrons (voir Brown et al., 1998), les plans (voir Rich et Waters,
+1990), et quelques structures de microarchitectures (voir Gu´eh´eneuc et Antoniol, 2008; Keller
+et al., 1999). En eﬀet, ces approches utilisent des techniques architecturales bas´ees soit sur
+l’appariement des sous-graphes, soit sur les propri´et´es associ´ees aux structures des motifs
+trait´es. Les algorithmes correspondants `a ces techniques, ont ´et´e d´evelopp´es pour chercher
+les structures des motifs pr´ed´eﬁnis dans le catalogue.
+
+En particulier, les approches propos´ees pour identiﬁer les patrons de conception (voir Pet-
+tersson et L¨owe, 2006), utilisent diﬀ´erentes techniques comme la m´eta-programmation, les
+graphes, la programmation logique, les algorithmes de reconnaissance de clich´es (voir Kr¨amer
+et Prechelt, 1996), les r´eseaux de raisonnement ﬂou (voir Niere et al., 2002; Jahnke et Z¨un-
+dorf, 1997), et les requˆetes interrogeant les bases de donn´ees contenant les mod`eles g´en´eriques
+des syst`emes OO (voir Kullbach et Winter, 1999).
+
+Les approches propos´ees pour sp´eciﬁer et d´etecter les anti-patrons sont bas´ees sur les
+techniques manuelles d’inspection du code source (voir Travassos, 1999), les techniques de
+visualisation (voir Dhambri. et al., 2008) pour aﬃcher et pr´esenter les r´esultats, les techniques
+de d´etections automatiques (voir Lanza. et Marinescu., 2006), et les techniques heuristiques
+et de mesures (voir Marinescu, 2004).
+
+Dans les sections suivantes, nous introduisons bri`evement quelques travaux majeurs pour
+d´etecter les patrons de conception, les anti-patrons, les plans, et d’autres types de microar-
+chitectures.
+
+2.2.1 D´etection des plans 2
+
+Rich and Waters (voir Rich et Waters, 1990) ont propos´e l’utilisation de la programmation
+par contraintes pour identiﬁer les plans2 du code source des programmes Cobol. Les syst`emes
+
+2. Un plan est un module ex´ecutable contenant le chemin d’acc`es logique produit par l’optimiseur DB2.
+Il peut ˆetre compos´e d’un ou plusieurs DBRMs et packages. Le plan est stock´e dans le r´epertoire DB2, et
+consult´e lorsque son programme est ex´ecut´e. Les informations sur le plan sont stock´ees dans le catalogue
+DB2.
+
+14
+
+Cobol sont mod´elis´es par des arbres syntaxiques abstraits (AST). Un plan est mod´elis´e par
+les sommets de l’arbre AST, et les relations entre elles sont repr´esent´ees par les contraintes
+comme les contrˆoles et les ﬂux de donn´ees. Le plan d’un code source est converti en un
+probl`eme de satisfaction de contraintes (CSP) dans lequel les sommets du plan repr´esentent
+les variables, les relations entre les sommets repr´esentent les contraintes entre les variables,
+et le code source de l’arbre syntaxique abstrait repr´esente le domaine des variables.
+
+2.2.2 D´etection des patrons de conception
+
+Kramer et Prechelt (voir Kr¨amer et Prechelt, 1996) ont propos´e une approche et d´eve-
+lopp´e un outil appel´e Pat pour chercher les instances des patrons de conception structurels
+Adapter, Bridge, Composite, Decoration, et Proxy. Ces patrons ont ´et´e mod´elis´es par l’outil
+de conception OMT (voir Rumbaugh et al., 1990) et convertis dans des formats de base de
+connaissances de r`egles en Prolog. Ensuite le code source est pars´e par l’outil Paradigm Plus
+pour d´ecrire sa base de faits en Prolog. Par la suite, des requˆetes sont eﬀectu´ees pour d´e-
+terminer la correspondance entre la base de faits du code source et les r`egles d´eﬁnissant les
+patrons de conception. L’outil Pat ne traite que des syst`emes ayant de 150 `a 300 classes, et
+il peut d´etecter plus que 53% des instances des patrons de conception.
+
+Seemann et al (voir Seemann et von Gudenberg, 1998) ont propos´e une approche pour d´e-
+tecter et distinguer les relations d’agr´egation et d’association entre les classes, et une technique
+bas´ee sur les graphes pour d´ecrire et identiﬁer les patrons de conception. La structure statique
+d’un syst`eme OO est repr´esent´ee par un graphe orient´e et ´etiquet´e. Ce graphe est compos´e
+de trois types de sommets et de six types d’arcs. Les sommets du graphe repr´esentent les
+classes, les interfaces et les m´ethodes. Les arcs entre les sommets repr´esentent les diﬀ´erentes re-
+lations entre les classes, les interfaces, et les m´ethodes (CLASS×CLASS, IN T ERF ACE×
+IN T ERF ACE, CLASS×IN T ERF ACE, CLASS×M ET HOD, M ET HOD×M ET HOD,
+M ET HOD × CLASS). Les etiquettes repr´esentent les types : appel ”Calls”, possession
+”Owns”, attributs, etc. Une technique de transformation de graphe est propos´ee pour d´etec-
+ter les sous-graphes repr´esentant les patrons de conception.
+
+Peterson et al (voir Pettersson et L¨owe, 2006) ont propos´e une technique bas´ee sur les
+graphes planaires 3. La technique de transformation d’un graphe repr´esentant un syst`eme
+OO `a un graphe planaire permet d’am´eliorer les performances de recherche des patrons de
+conception. Pour les graphes non planaires, une technique de ﬁltrage est utilis´ee aﬁn de
+
+3. Un graphe est planaire s’il accepte une repr´esentation planaire c’est-`a-dire une repr´esentation dans
+
+laquelle deux arcs (arˆetes) distinctes ne se croisent pas.
+
+15
+
+supprimer la majorit´e des arcs aﬀectant la planarit´e, et de r´eduire consid´erablement la taille
+du graphe. Cela permet ´evidement aussi de r´eduire le temps de recherche des patrons de
+conception. L’approche propos´ee peut d´etecter jusqu’`a 97% des instances des patrons de
+conception.
+
+Tsantalis et al. (voir Tsantalis et al., 2006) ont propos´e une approche bas´ee sur la similarit´e
+entre les sommets du graphe pour d´etecter les patrons de conception. L’approche propos´ee
+est capable de reconnaˆıtre les patrons de conception mˆeme si leur repr´esentation standard est
+modiﬁ´ee. L’approche propos´ee prend en consid´eration la relation d’h´eritage qui existe dans la
+plupart des patrons de conception pour r´eduire la taille du syst`eme trait´e, en le partitionnant
+en plusieurs sous-syst`emes sans perdre aucune information structurelle. Les diagrammes des
+classes des sous-syst`emes et des patrons de conceptions sont mod´elis´es par des matrices
+carr´ees. Les lignes et les colonnes de ces matrices repr´esentent les classes. Les ´el´ements de
+ces matrices indiquent la pr´esence ou l’absence des relations entre les classes. L’approche
+utilise un algorithme de similarit´e entre les matrices des sous-syst`emes et les matrices des
+patrons de conception pour chercher les patrons de conception dans chacun des sous-syst`emes
+s´epar´ement. L’algorithme de similarit´e calcule la matrice de scores (similarit´e) 4 pour v´eriﬁer
+la correspondance entre un patron de conception et les sous-syst`emes. Le taux de succ`es de
+cette approche de d´etection des patrons de conception est de 100%.
+
+2.2.3 D´etection des anti-patrons
+
+Brown (voir Brown et al., 1998) d´ecrit 40 anti-patrons, y compris le ”Blob” et le code
+”spaghetti”. Il a d´eﬁni les anti-patrons comme des mauvaises pratiques pour r´esoudre les
+probl`emes de conception. Ces mauvaises pratiques sont li´ees principalement aux comp´etences,
+et au manque d’exp´eriences des d´eveloppeurs, ainsi qu’une mauvaise application des patrons
+de conception. Les auteurs montrent comment d´etecter les anti-patrons, et ils pr´esentent aussi
+des solutions de ”refactorisation” pour chaque anti-patron pr´esent´e.
+
+2.2.4 D´etection de certaines microarchitectures
+
+Un nouvel environnement, appel´e SPOOL (voir Keller et al., 1999), a ´et´e introduit pour
+visualiser graphiquement la repr´esentation abstraite du code source. SPOOL pr´esente un
+environnement pour la r´etro-ing´enierie des composants de conception bas´e sur la descrip-
+tion structurelle des patrons de conception. Un patron de conception est mod´elis´e par une
+structure abstraite aﬁn de faciliter sa recherche dans le mod`ele abstrait du code source. La
+
+4. Une matrice de similarit´e est une matrice de scores qui expriment la similarit´e entre deux donn´ees.
+
+Deux matrices A et B sont similaires s’il existe une matrice inversible P tel que A = P BP −1
+
+16
+
+technique propos´ee permet de d´etecter manuellement, semi automatiquement, et automati-
+quement, les composants abstraits de conception `a l’aide des requˆetes d’interrogation sur le
+mod`ele abstrait du code source.
+
+DeMIMA (voir Gu´eh´eneuc et Antoniol, 2008) d´ecrit une approche semi-automatique, et
+une recherche structurelle bas´ee sur la programmation par contraintes avec explication pour
+identiﬁer les microarchitectures similaires `a des motifs de conception. De plus, cette technique
+assure la tra¸cabilit´e de ces microarchitectures entre l’impl´ementation et la conception. En
+eﬀet, cette technique comprend trois couches dans laquelle les deux premi`eres sont consacr´ees
+`a la r´ecup´eration du mod`ele abstrait du code source, et la derni`ere est consacr´ee `a la d´etection
+des patrons de conception dans le mod`ele abstrait. Le taux de succ`es de l’approche DeMIMA
+est de 100%.
+
+2.3 Conclusion
+
+Dans ce chapitre, nous avons discut´e quelques approches de recherche, dans les syst`emes
+OO, de certains types de microarchitectures pr´ed´eﬁnies comme les patrons de conception, les
+anti-patrons, et les plans. Cependant, notre technique de recherche des microarchitectures
+est similaire `a des travaux ant´erieurs de Tonella et Antoniol (voir Tonella et Antoniol, 2001),
+dans lequel une analyse conceptuelle a ´et´e utilis´ee pour d´eduire les patrons de conception
+d’un domaine sp´eciﬁque avec l’inspection manuelle du code source. Notre approche ´elimine
+compl`etement le probl`eme d’inspection manuelle du code source en s’appuyant sur la notion
+des sous-graphes fr´equents. De plus notre approche am´eliore l’´evolutivit´e via une technique
+eﬃcace de recensement des microarchitectures.
+
+Dans le chapitre suivant, nous pr´esentons un nouvel algorithme et un outil SGFinder qui
+ne se limitent ni `a une biblioth`eque contenant les microarchitectures connus pr´ealablement,
+ni `a un ensemble de r`egles pour d´etecter les instances des microarchitectures.
+
+CHAPITRE 3
+
+17
+
+ALGORITHME DE RECENSEMENT ET DE CLASSIFICATION DES
+
+SOUS-GRAPHES
+
+3.1 Introduction
+
+Nous avons mod´elis´e le diagramme des classes d’un syst`eme OO par un graphe orient´e
+et ´etiquet´e dont l’ensemble de ses sommets repr´esentent l’ensemble des classes, et dont les
+arcs repr´esentent les relations entre les classes. Nous consid´erons qu’une microarchitecture est
+´equivalente `a un sous-graphe. Donc, pour chercher les microarchitectures d’une taille donn´ee
+k, il faut chercher les sous-graphes d’ordre k.
+
+Dans ce chapitre, nous d´ecrivons en d´etails un nouvel algorithme eﬃcace permettant, d’une
+part, de recenser tous les sous-graphes existants dans un graphe orient´e et ´etiquet´e, et d’une
+autre part, de regrouper les sous-graphes identiques. L’outil mettant en ´evidence ce nouvel
+algorithme est nomm´e SGFinder.
+
+3.2 Algorithme
+
+Dans cette section, nous pr´esentons un nouvel algorithme permettant de recenser les
+sous-graphes d’ordre k (not´e k-sous-graphes) d’un graphe orient´e et ´etiquet´e G(V, A, L, l). Les
+sommets du graphe G sont num´erot´es par des nombres entiers positifs, uniques, et cons´ecutifs.
+
+Algorithme 3.1 M´ethode principale de l’algorithme
+Entr´ees : Un graphe G(VG, A, L, l) et un nombre positif k.
+1: for all vertex u ∈ V do
+2: Nku = GenerateNeighborsSet(u, k) ;
+3:
+4: GenerateKSubSetsAndValidate(Nku, u, VG0, 0) ;
+5:
+6: end for
+
+VG0 = {}
+
+V .Remove(u) ;
+
+L’id´ee principale de l’algorithme 3.1 est de :
+
+i. Chercher la liste des sommets voisins N k(u) d’un sommet donn´ee u de l’ensemble VG
+
+(GenerateNeighborsSet).
+
+ii. G´en´erer et valider des k-sous-ensembles (GenerateKSubSetsAndValidate).
+
+18
+
+(a) G´en´erer une combinaison d’un k-sous-ensemble S de la liste des sommets voisins
+
+N k(u).
+
+(b) Si le sous-graphe GS induit par le k-sous-ensemble S n’est pas connexe, aller `a (a).
+
+(c) Sinon, chercher la matrice d’adjacence canonique du sous-graphe GS, pour le
+mettre dans sa propre cat´egorie (voir la section 3.2.4). Il est utile de noter que
+chaque cat´egorie contient les sous-graphes isomorphes.
+
+(d) R´ep´eter les ´etapes pr´ec´edentes (a), (b), (c) jusqu’`a g´en´erer toutes les combinaisons
+
+possibles des k-sous-ensembles.
+
+iii. Lorsque tous les sous-graphes d’ordre k contenant notamment le sommet de d´epart
+u sont ´enum´er´es, nous retirons ce sommet u du graphe G pour ne pas dupliquer des
+sous-graphes dans les ´etapes suivantes (ligne 5).
+
+Aﬁn de chercher tous les sous-graphes d’ordre k du graphe G, nous suivons le mˆeme pro-
+
+cessus pour les autres sommets du graphe G.
+
+0
+
+1
+
+3
+
+1
+
+13
+
+12
+
+12
+
+1
+
+2
+
+12
+
+1
+
+1
+
+6
+
+7
+
+4
+
+1
+
+5
+
+Figure 3.1 Un sous-graphe extrait de la version 1.7R1 du syst`eme Rhino. Les sommets repr´e-
+sentent les classes, et les arcs repr´esentent les relations entre les classes. La description des
+´etiquettes sur les arcs est d´eﬁnie dans la section 4.2.1.
+
+3.2.1 Voisinage (GenerateNeighborsSet)
+
+L’id´ee principale de l’algorithme de voisinage est de parcourir le graphe orient´e et ´etiquet´e
+G(V, A, L, l) en largeur pour chercher d’une mani`ere it´erative la liste des sommets voisins
+d’un sommet donn´e u. Ce type de parcours consiste `a chercher d’une part, tous les sommets
+successeurs auxquels on peut acc´eder directement `a partir du sommet u, et d’autre part, tous
+les sommets pr´ed´ecesseurs depuis lesquels on peut arriver directement au sommet u, ensuite
+de chercher les sommets qui sont accessibles par le premier successeur ou pr´ed´ecesseur de u,
+et le deuxi`eme successeur ou pr´ed´ecesseur de u et ainsi de suite.
+
+En eﬀet, la recherche de la liste des sommets voisins consiste `a explorer les sommets voisins
+d’un graphe orient´e et ´etiquet´e G une couche `a la fois. La premi`ere couche contient le sommet
+de d´epart u, ensuite, la deuxi`eme couche contient les sommets voisins du sommet u, et la
+troisi`eme couche contient les sommets voisins de la deuxi`eme couche et ainsi de suite.
+
+19
+
+D’une mani`ere formelle, nous d´ecrivons les it´erations de recherche de la liste des sommets
+voisins d’un sommet donn´e u. Cette liste est not´e par N k(u) o`u k est l’ordre des sous-graphes.
+Nous notons aussi par Ni l’ensemble des sommets trouv´es `a la ieme couche. Donc, la liste des
+sommets voisins N k(u) est d´eﬁni par la formule suivante :
+
+
+
+N k(u) =(cid:83)k
+
+i=1 Ni(Ni−1) o`u
+
+N1 = {u}
+
+Ni(Ni−1) =(cid:83)
+
+v∈Ni−1
+
+N (v)
+
+N (v) = {w : (v, w) ∈ A(G) ∨ (w, v) ∈ A(G)}
+
+Les sommets de l’ensemble Ni du ieme couche sont ins´er´es dans la liste des sommets voisins
+N k(u) juste apr`es les sommets de Ni−1 du (i − 1)eme couche. Cet ordre, d’insertion des sous-
+ensembles Ni dans la liste des sommets voisins N k(u), est tr`es important pour optimiser
+l’algorithme de g´en´eration des k-sous-ensembles repr´esentant les sous-graphes d’ordre k. De
+plus, un sommet d´ej`a visit´e ne sera pas ins´er´e de nouveau dans l’ensemble des sommets Ni
+de la couche courante.
+
+Exemple : Prenons comme exemple le graphe orient´e et ´etiquet´e G d´eﬁnie dans la ﬁgure
+3.1. Dans cet exemple nous cherchons la liste des sommets voisins N 4(0) du sommet 0 avec
+k = 4.
+
+Premi`erement, nous parcourons le graphe G en largeur en partant du sommet 0 qui se
+
+trouve `a la couche 1. Donc, la liste des sommets voisins est : N 4(0) = {couche 1
+}.
+
+0
+
+0
+
+1
+
+3
+
+1
+
+13
+
+12
+
+12
+
+1
+
+2
+
+12
+
+1
+
+1
+
+6
+
+7
+
+4
+
+1
+
+5
+
+Figure 3.2 Sommets de la premi`ere couche de la liste des sommets voisins N 4(0).
+
+En eﬀet, si nous partons du sommet 0 pour chercher tous les sommets successeurs ou
+pr´ed´ecesseurs, nous trouvons seulement un sommet successeur qui est le sommet 3. Donc, la
+
+20
+
+liste des sommets voisins devient N 4(0) = {couche 1
+,
+
+0
+
+couche 2
+
+3
+
+}.
+
+0
+
+1
+
+3
+
+1
+
+13
+
+12
+
+12
+
+1
+
+2
+
+12
+
+1
+
+1
+
+6
+
+7
+
+4
+
+1
+
+5
+
+Figure 3.3 Sommets de la deuxi`eme couche de la liste des sommets voisins N 4(0).
+
+Dans la premi`ere couche, il n’y a plus de sommets qui sont directement accessibles `a partir
+du sommet 0. Donc, maintenant, il faut chercher les sommets qui sont accessibles `a partir de
+la deuxi`eme couche. Il s’agit donc de chercher les voisins du sommet 3. Dans ce cas, il y a
+seulement les deux sommets pr´ed´ecesseurs 1 et 2. Maintenant, la liste des sommets voisins
+devient N 4(0) = {couche 1
+
+couche 2
+,
+
+3
+
+couche 3
+
+1, 2 }.
+
+0
+
+,
+
+0
+
+1
+
+3
+
+1
+
+13
+
+12
+
+12
+
+1
+
+2
+
+12
+
+1
+
+1
+
+6
+
+7
+
+4
+
+1
+
+5
+
+Figure 3.4 Sommets de la troisi`eme couche de la liste des sommets voisins N 4(0).
+
+`A ce stade, il faut donc chercher les voisins des sommets 1 et 2. Nous commen¸cons par le
+premier sommet 1 qui a trois sommets successeurs 2, 3, et 6 et un seul sommet pr´ed´ecesseur
+7. Les sommets 2 et 3 ont d´ej`a ´et´e ins´er´es dans la liste des sommets voisins N 4(0), donc, nous
+ne devons pas les ajouter de nouveau dans N 4(0). Par contre, le deuxi`eme sommet 2 a trois
+sommets successeurs 1, 3, et 4, mais les sommets 1 et 3 sont d´ej`a pr´esents dans la liste N 4(0),
+donc il ne faut pas les ins´erer de nouveaux. Cependant dans cette couche, les seuls voisins `a
+ajouter sont les sommets 6,7, et 4. Donc, la liste des sommets voisins N 4(0) composant les
+sommets des sous-graphes d’ordre 4 est la suivante :
+
+N 4(0) = {couche 1
+,
+
+0
+
+couche 2
+,
+
+3
+
+couche 3
+1, 2 ,
+
+couche 4
+
+6, 7, 4 }.
+
+21
+
+0
+
+1
+
+3
+
+1
+
+13
+
+12
+
+12
+
+1
+
+2
+
+12
+
+1
+
+1
+
+6
+
+7
+
+4
+
+1
+
+5
+
+Figure 3.5 Sommets de la quatri`eme couche de la liste des sommets voisins N 4(0).
+
+Description de l’algorithme de voisinage ”GenerateNeighborsSet” (voir les algo-
+rithmes 3.1 et 3.2) : Essayons maintenant de passer `a l’impl´ementation de l’algorithme
+de voisinage (GenerateNeighborsSet). Nous utilisons une liste Nku pour stocker les sommets
+voisins du sommet u. Au d´ebut de l’algorithme 3.2, aucun sommet n’a ´et´e visit´e, il faut donc
+commencer par stocker le sommet de d´epart u par lequel nous allons commencer le parcours
+du graphe G. Donc, le sommet u est stock´e dans la liste Nku et dans la liste des sommets
+voisins de la premi`ere couche Ni (lignes 2 & 3).
+
+Ensuite nous cherchons les voisins de la ime couche Ni (lignes 6-13). La recherche des
+sommets voisins d’un sommet v se fait par l’interm´ediaire de la matrice d’adjacence M du
+graphe G. Une fois que nous d´ecouvrons tous les voisins de la ime couche Ni, nous les ajoutons
+dans la liste Nku (ligne 16). L’algorithme 3.2 s’arrˆete lorsqu’il trouve les sommets voisins de
+la (k − 1)me couche (ligne 4).
+
+Tous les sous-graphes incluant notamment le sommet u seront trouv´es. Par la suite, le
+sommet u sera retir´e du graphe G. Cela signiﬁe que la prochaine liste des sommets voisins ne
+contient pas le sommet u pour ´eviter la duplication des sous-graphes trouv´es. Le processus de
+recherche de la liste des sommets voisins N k(u) se r´ep`ete sur les sommets restants du graphe
+G non encore trait´es.
+
+3.2.2 G´en´eration des k-sous-ensembles ”GenerateKSubSetsAndValidate” (voir
+
+la section 2a)
+
+L’id´ee principale de l’algorithme SGFinder est de trouver les sous-graphes d’ordre k (o`u
+
+k est le nombre des sommets) comportant un sommet de d´epart u. Pour ce faire,
+
+1. Nous cherchons l’ensemble de tous les sommets voisins N k(u) du sommet u (voir la
+
+section 3.2.1).
+
+2. Cet ensemble N k(u) est utilis´e pour trouver toutes les combinaisons possibles des sous-
+
+ensembles des sommets de taille k (appel´e aussi k-sous-ensemble).
+
+Algorithme 3.2 Voisinage
+Entr´ees : Un sommet u de l’ensemble des sommets du graphe G(V, A, L, l).
+
+k est l’ordre des sous-graphes `a trouver.
+
+Sorties : Une liste Nku contenant les sommets voisins de u.
+
+# Joined(v, w) est une fonction qui retourne vraie si les deux sommets v et w sont
+connect´es.
+
+22
+
+for all v ∈ Ni do
+

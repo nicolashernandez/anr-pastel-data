@@ -1,0 +1,1003 @@
+https://journals.openedition.org/cybergeo/27460
+
+
+
+document.documentElement.className = 'js';
+
+
+Energie et acteurs : application de la méthode des graphes aux acteurs alsaciens
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Navigation – Plan du site
+
+Cybergeo : European Journal of Geography
+
+
+
+
+fr
+en
+es
+
+
+Accueil > Rubriques > Espace, Société, Territoire > 2016 > Energie et acteurs : application ...
+
+
+
+
+
+
+
+
+Chercher
+
+
+
+
+
+Sommaire - Document précédent - Document suivant
+
+Espace, Société, Territoire
+
+2016
+
+765
+Energie et acteurs : application de la méthode des graphes aux acteurs alsaciens
+
+Energy and actors: application of the graphs method on actors of the Alsace region
+
+ Sophie Buessler et Christiane Weber
+
+
+Résumé | Index | Plan | Notes de l’auteur | Texte | Bibliographie | Annexe | Notes | Citation | Auteurs
+
+Résumés
+Français English 
+
+Cet article s’insère dans le contexte actuel de la transition énergétique du point de vue de la réorganisation locale des acteurs de l’énergie. Il présente une méthode exploratoire pour cartographier de manière systématique le réseau d’acteurs de la scène énergétique en s’appuyant sur la méthode des graphes. La méthode s’applique aux acteurs alsaciens. L’acteur central est le pôle energivie.info. Huit acteurs communs à la région Alsace et aux deux principales collectivités (Eurométropole de Strasbourg et Mulhouse Alsace Agglomération) ont pu être répertoriés. La plupart de ces acteurs communs ont un rôle de diffusion de données et/ou de conseil, les autres sont des organes de représentation des métiers du secteur du bâtiment impliqués dans l’innovation et le développement. Chaque acteur a des missions différentes et complémentaires dans un paysage très dynamique.
+
+
+This article is consistent with the current of energetic transition context. It points out the reorganization of local energetic actors and presents an exploratory approach based on the graphs method for mapping, in a systematic way, the actors’ network involved in the local energetic scene. The application is running over the Alsace region (FR) and the central actor is the "Pôle energivie.info". Eight common actors of the Alsace region and of the two main communities (Eurométropole de Strasbourg and Mulhouse Alsace Agglomération) have been listed. Most of these common actors have a role of consultancy and/or data dissemination. The other actors are construction companies involved in energetic innovation and development. Each actor has different and complementary missions in a very dynamic landscape.
+Haut de page
+
+Entrées d’index
+
+Mots-clés :collectivité territoriale, énergie, énergie renouvelable, graphe, réseau, Alsace
+
+Keywords :energy, graph theory, network, renewable energies, territorial governanceHaut de page
+
+Plan
+Introduction
+Démarche méthodologique
+Notion de base en analyse de réseaux
+Le graphe : une méthode adaptée pour visualiser les relations entre acteurs
+Choix du logiciel et de l’algorithme
+Les étapes méthodologiques : de la construction d’une base de données adaptée à l’outil Gephi à la production des graphes
+Les acteurs de la scène énergétique en Alsace
+Etape 1 : Création de la BD1
+Choix des attributs
+Typologie
+Secteurs public ou privé 
+Localisation 
+Résultats de la BD1
+Etapes 2 et 3 : BD2, complément de la BD1
+Résultats et interprétations des graphes
+Résultat intermédiaire : étape BD1
+Résultat de l’étape finale
+Les partenaires communs de M2A, la Région Alsace et l’EMS
+Discussion : approche critique sur la méthode 
+ConclusionHaut de page
+
+
+Notes de l’auteur
+Cet article s’insère dans le cadre du projet PLAN-ER-Interreg IV (2012-2015) - un outil de SIG pour la planification des énergies renouvelables. Il a pu se finaliser dans le cadre de la thèse de l’auteur financé par l’Agence de l’Environnement et de la Maîtrise de l’Energie et la Région Alsace. Nous remercions aussi les membres anonymes du comité de lecture qui, grâce à leurs critiques, nous ont permis de clarifier notre propos.
+
+
+
+Texte intégral
+PDF Signaler ce document
+
+Introduction
+1Le rôle déterminant des acteurs du cycle énergétique a été beaucoup étudié en science économique et en géopolitique à un niveau mondial (Mérenne-Schoumaker, 2007), or la maîtrise de la demande énergétique et le développement des énergies renouvelables conduisent à étudier l’organisation des acteurs à un niveau plus local (Boxenbaum et al., 2013). En effet, depuis la création des lois Grenelle I et II, la planification énergétique, comprise ici comme une gestion à la fois de la réhabilitation thermique des bâtiments et du développement des énergies renouvelables (EnR), est prise en charge au sein des régions en concertation avec les acteurs concernés. En Alsace, ceci s’est concrétisé par la réalisation du Schéma Régional Climat Air Energie (SRCAE) officiellement lancé le 12 juillet 2010. Le schéma régional du climat, de l’air et de l’énergie est un document stratégique au service de tous les acteurs locaux concernés visant à réduire les émissions de gaz à effet de serre et la consommation d’énergie, à s’adapter au changement climatique et à améliorer la qualité de l’air aux horizons 2020 et 2050 et à développer la production d’énergies renouvelables (Région Alsace et Dreal, 2012). Pour cette étude, nous nous intéressons principalement aux axes qui concernent directement l’énergie, à savoir la maîtrise de la demande énergétique et le développement des énergies renouvelables. La démarche du SRCAE a impliqué près de 300 acteurs locaux, essentiellement des responsables des services de l’Etat et des collectivités. Ceux-ci ont réalisé, à leur niveau, des Plans Climat Energie Territoriaux (PCET) (Godinot, 2011) souvent avant la définition du SRCAE. Différents territoires alsaciens se sont ainsi engagés dans une démarche de Plan Climat Territorial : Mulhouse Alsace agglomération (M2A), depuis janvier 2007, les « Pays Thur Doller, Bruche Mossig Piémont » et Alsace du Nord (depuis octobre 2008), le Pays du Sundgau (mai 2009), etc. Côté Eurométropole de Strasbourg (EMS), anciennement Communauté Urbaine de Strasbourg, la démarche a été lancée en octobre 2008. 
+2Les collectivités à l’échelle de leurs agglomérations respectives sont certainement les mieux placées pour analyser la situation énergétique et mettre en place la transition énergétique (Duruisseau, 2014) dans un délai raisonnable et pour un maximum d’efficacité. Les villes ont, en effet, un rôle central et majeur à jouer dans la transition énergétique pour plusieurs raisons : (1) les agglomérations consomment près de « 70 % de l’énergie, essentiellement dans les bâtiments et les transports et contribuent à 70 % aux émissions de gaz carbonique » (Theys & Vialenc, 2014) ; (2) le modèle du réseau technique centralisé tend, depuis quelques années, à être remis en question au profit de systèmes alternatifs décentralisés le plus souvent à l’échelle d’un quartier ou d’un îlot (Coutard et Rutherford, 2009 ; Emelianoff et al., 2010) ; (3) la consommation d’énergie des logements existants (collectifs ou individuels) est le produit de la rencontre entre des pratiques sociales et des objets techniques, le tout orchestré par une décision et une gestion collective (Brisepierre, 2011) ; (4) chaque citadin, le plus souvent propriétaire, peut devenir un producteur d’énergie (électricité, chaleur), il faudrait donc veiller à l’intégrer dans la stratégie globale le plus tôt possible.
+3La tendance actuelle passe ainsi par une remise en cause des réseaux centralisés (centrale nucléaire, grande centrale hydroélectrique) et des acteurs nationaux au profit d’une décentralisation croissante des capacités d’action. Cette tendance s’observe sur les grandes agglomérations alsaciennes qui ont réalisé un PCET. L’EMS, par exemple, est devenu depuis le premier janvier 2015 autorité organisatrice de l’énergie pour l’ensemble des communes (28 communes essentiellement urbaines ou périurbaines). Elle doit, à ce titre, coordonner l’ensemble des réseaux de l’énergie et en faire une priorité. Ce remaniement énergétique affecte structurellement les acteurs. « Comme toujours dans ce type de contexte, des opportunités nouvelles apparaîtront, donneront leur chance à des acteurs nouveaux, et au contraire les acteurs existants insuffisamment mobiles disparaîtront » (Saint-André, 2008, p. 76). Les changements de paradigme énergétique constituent un sujet de recherche porteur pour étudier les processus en cours de la scène énergétique.
+4Dans ce contexte, l’objectif de cette étude est d’avoir une vision d’ensemble des relations entre les acteurs de la scène énergétique en différenciant ceux qui agissent directement ou indirectement dans la gestion énergétique, en tenant compte de leur niveau d’influence, de leurs différentes échelles d’activités (locale, régionale, étatique) et du nombre de partenaires qu’ils regroupent. Cette étude propose de répondre principalement aux questions suivantes : Qui sont les acteurs centraux de la scène énergétique alsacienne ? Quelles sont les relations partenariales entre les acteurs ? Comment se positionnent les différents acteurs et quel est le poids des agglomérations par rapport à la Région Alsace ? Cet article se focalise donc plus sur des aspects politiques que techniques, nous analyserons les acteurs de l’énergie communs à la Région Alsace et aux deux principales collectivités : l’Eurométropole de Strasbourg et Mulhouse Alsace Agglomération (M2A). Pour cette étude, la méthode des graphes a été retenue. L’approche par la théorie des graphes (Wasserman et Fraust, 1994) et les résultats préliminaires obtenus servent de support initial pour mieux visualiser la structure actuelle du réseau d’acteurs de l’énergie.
+5L’article se structure en quatre parties, tout d’abord la démarche méthodologique retenue qui explique la construction de la base de données en adéquation avec le logiciel utilisé. La seconde partie présente l’application de la méthode à notre cas d’étude (territoire alsacien), la partie suivante met en avant les résultats issus des différents graphes générés par le logiciel Gephi 0.8.2 beta (Bastian et al., 2009). La dernière partie est une approche critique de la méthode. 
+Démarche méthodologique
+Notion de base en analyse de réseaux
+6Un réseau est une structure composée de nœuds et de liens entre ces nœuds, souvent appelés arcs. Dans cette étude de cas, le réseau met en lien des « personnes morales ». C’est-à-dire « un groupe de personnes physiques réunis pour accomplir quelque chose en commun » (INSEE). Nous désignons ces personnes morales par le terme d’acteur. Donc, les nœuds sont les acteurs qui renvoient soit à un organisme, une société, un opérateur, une entreprise, une commune, une association ou une fédération. D’une manière générale, les liens entre des acteurs peuvent être analysés autour de trois aspects (Forsé, 2008) : (1) la nature des liens (pouvoir, échanges, conseil, etc.) ; (2) la réciprocité du lien (un lien peut être dit non-orienté, lorsque le sens des relations entre deux acteurs n’est pas pris en compte) ; (3) la fréquence des relations (rencontre une fois par mois, une fois par semestre, une fois par année). Cet article s’intéresse à la nature du lien du type partenarial. Il n’abordera pas l’aspect fréquence des relations en raison de manque de données. Est partenaire un acteur associé à un autre acteur. L’association peut être de diverse nature : financière, partenariale (adhésion, partenaire - par affiliation, ou - par convention ou filiale), appartenance à un réseau plus ou moins formel, membre d’un groupe ou d’une association. Le partenariat est un lien de réciprocité, par définition c’est un lien non-orienté.
+7Des phénomènes de grappes, ou aussi appelé « cluster », sont recherchés dans l’analyse de ces réseaux sociaux. Visibles dans les graphes, sous forme de nuages de points, ces grappes rassemblent des acteurs autour d’un ou de plusieurs acteurs principaux. Ces acteurs sont rassemblés, car ils ont des partenaires communs et très souvent des objectifs communs.
+Le graphe : une méthode adaptée pour visualiser les relations entre acteurs
+8Il existe différentes manières d’illustrer les relations entre acteurs : la méthode des cordes, les matrices et les graphes (Jégou et Maisonobe, 2013). Les modes de représentation des cordes ou des matrices aident à visualiser les relations dyadiques (deux à deux) et leur part relative. Le graphe permet d’observer les structures de relations. Il met en avant une collection de nœuds (les acteurs), reliés entre eux par des arêtes ou des arcs (les liens d’association). « Le graphe tient son nom du fait qu’on peut le transcrire sous forme de dessin […]. Forme de modélisation qui facilite l’analyse des réseaux dans leur morphologie, leurs relations et leurs évolutions, il est un outil de visualisation et de résolution de problèmes » (Bavoux et Chapelon, 2014, p. 275). Les graphes, générés par le logiciel, présentés dans le prochain paragraphe, ont l’avantage de satisfaire deux niveaux d’analyses différents : (1) au niveau des grappes : grâce à des algorithmes de « modularisation » des groupes d’acteurs partenaires peuvent être isolés en étant positionnés à proximité les uns des autres ; (2) au niveau des nœuds : pour lesquels des attributs spécifiques aux acteurs peuvent être sélectionnés (visualisation selon un code couleur) et une pondération appliquée selon le nombre de liens. 
+Choix du logiciel et de l’algorithme
+9Les réseaux d’acteurs ont été analysés avec le logiciel Gephi 0.8.2. Beta (Bastian et al., 2009) et la spatialisation des informations est obtenue à partir de l’algorithme Force Atlas 2 (Jacomy et al., 2014). Force Atlas 2 réalise une mise en forme dirigée en simulant un système physique d’application de champs de forces. Les acteurs se repoussent comme des aimants, tandis que les liens attirent les acteurs qu’ils relient comme des ressorts. Ces forces contraires (attraction/répulsion) créent un mouvement qui converge vers un état d’équilibre. Les acteurs connectés tendent ainsi à être positionnés à proximité les uns des autres, dans les mêmes régions de la figure. Les acteurs éloignés d’autres acteurs indiquent qu’ils ont peu de liens, à l’inverse, des organismes voisins ont des relations fortes. 
+
+
+1 Chaque algorithme de force dirigée repose sur des formules mathématiques : Fruchterman-Rheingold (a (...)
+
+10Le modèle attraction-répulsion de Force Atlas en (1, -1) se situe entre la formule développée par l’algorithme LinLog de Noack en (0,- 1) et l’algorithme de Fruchterman et Rheingold en (2, -1) (Ibid.).1 Le modèle Force Atlas confère une interprétation des graphes plus aboutie que la formule de LinLog de Noack et celle de Fruchterman et Rheingold.
+
+Les étapes méthodologiques : de la construction d’une base de données adaptée à l’outil Gephi à la production des graphes
+11Pour analyser des réseaux par la méthode des graphes, il est nécessaire d’importer dans Gephi deux tableaux. Le premier renseigne sur les acteurs (nœuds) et les attributs (labels) et le deuxième indique les liens entre les acteurs (source et target). Les liens sont comptabilisés à partir d’une matrice en O et 1 des liens entre acteurs. Pour construire ces deux tableaux, trois étapes sont nécessaires en amont (figure 1).
+
+Figure 1 : Démarche méthodologique en 5 étapesAgrandir Original (png, 767k)
+
+12La première étape consiste à identifier les principaux acteurs qui ont un lien avec le thème étudié. Pour cela il faut trouver une ou plusieurs occurrences de concentration des acteurs (conférences, réunions, colloques, rencontres) qui ont permis aux principaux acteurs de se retrouver pour discuter autour de la thématique choisie. Les noms des acteurs répertoriés et identifiés sont entrés dans une base de données (BD). Plusieurs attributs (quantitatif et qualitatif) peuvent accompagner la liste des acteurs ; comme la typologie, la localisation, la nature du lien. La typologie, par exemple, permet de caractériser les nœuds (ici les acteurs) selon des catégories diverses (champs de compétences, taille…).
+13Dans la deuxième étape, chaque acteur listé dans la BD1 fait l’objet d’une enquête via le Web pour collecter les acteurs associés (BD2). La plupart des acteurs (BD1) ont un site internet et une rubrique partenaire et/ou membre et/ou adhérent. Lorsque ce n’est pas le cas, l’acteur apparaît comme n’ayant pas de partenaire direct. Cependant il peut être cité à travers le site internet d’autres acteurs de la BD1. Par ailleurs, en dehors des sites internet il peut arriver que le chercheur ait connaissance de l’existence de partenariat entre acteurs, dans ce cas, on ne le prendra pas en compte, afin de ne pas créer un biais lié à un complément d’information par l’apport de la connaissance limitée et non exhaustive du chercheur. En conclusion, en dehors des sources documentaires initiales pour créer la BD1, la consultation des sites Internet est la seule source d’information utilisée pour créer le corpus des partenariats (BD2).
+14Dans la troisième étape, chaque acteur identifié dans la BD2 fait à son tour l’objet d’une recherche sur le Web. Cette étape sert à compléter les liens existants entre les acteurs de la BD2 et BD1 et entre tous les acteurs de la BD2.
+15L’avant dernière étape n’est pas forcément nécessaire, mais elle permet une validation des informations collectées. Le tableau de l’étape 3 est transformé en tableau binaire pour plusieurs raisons, cela permet à la fois (1) de valider les statistiques fournies automatiquement par l’outil Gephi, (2) en passant par le logiciel R Studio, à partir du tableau binaire d’obtenir aisément le tableau « source et target » en format Comma-separated values (sigle CSV) qui est le seul format lisible par Gephi.
+16La dernière étape consiste à importer les deux tableaux constitués (étapes 1 à 4) dans l’outil Gephi 0.8.2. beta : le premier renseigne sur les acteurs (nœuds) et les attributs (labels) et le deuxième tableau « source et target » indique les liens entre les acteurs. On peut analyser séparément les deux bases de données, la BD1 avec la liste des acteurs principaux et la BD finale avec la liste des acteurs principaux complétée par les acteurs partenaires. Trois types de graphes peuvent être construits. 
+17Le premier type de graphes dit avec partition (étape 5, « 5.1 ») peut être généré grâce au paramètre de partitionnement attributaire. Ce graphe regroupe les acteurs en fonction d’un attribut choisi. Par exemple, l’attribut « typologie » regroupe les acteurs en n groupes. Un pourcentage de représentation pour chaque groupe est fourni par l’outil. La taille des liens entre deux groupes dépend du nombre total de liens existants entre les acteurs de ces deux groupes. 
+18Le deuxième type de graphes dit sans partition (étape 5, « 5.2 ») positionne les acteurs en fonction de l’algorithme Force Atlas 2 et de paramètres spécifiques (filtre par plage de degré) qui peuvent générer des sous-graphes. L’outil offre ainsi la possibilité de segmenter les acteurs selon le nombre de liens ou la centralité d’un acteur. Par exemple, avec l’outil « filtre par plage de degré » les acteurs sont affichés en fonction du nombre de liens. Ainsi, on peut demander à visualiser uniquement les acteurs qui ont plus de 5 liens, on parle de partition de plage de degré 5 ; ou encore un autre sous-graphe peut afficher uniquement les partenaires directs d’un acteur, on parle alors de réseau égo-centré de profondeur 1. 
+19Enfin, l’outil Gephi 0.8.2. beta génère des graphes sans partition (étape 5, « 5.3 ») qui révèlent les liens entre acteurs appartenant à un ou plusieurs types d’un ou de plusieurs attributs spécifiques. Par exemple, si on ne veut pouvoir visualiser que des acteurs appartenant aux types « Administration territoriale » et « Economie » on joue sur les attributs de la « typologie » ; et si l’on ne veut qu’une requête géographique, on sélectionne l’attribut de « localisation ».
+20Pour tous ces graphes, des couleurs peuvent accompagner la lecture. Soit, des couleurs par attributs, soit des cartes d’intensité de la couleur au voisinage d’un nœud en fonction de la distance ou du poids des liens (dites cartes de chaleur).
+21La figure 2 illustre les propos de la dernière étape. 
+
+Figure 2 : Exemple général de construction et de lecture des graphesAgrandir Original (jpeg, 140k)
+
+22Le tableau E1 (nœuds) de la figure 2 présente cinq acteurs discriminés en trois groupes déterminés manuellement (A, B, C). Un seul acteur est labellisé A, les quatre autres se distribuent équitablement en B et C. On a donc 3 groupes d’acteurs selon leurs attributs. Dans le tableau E2 (liens), l’acteur « 1 » est mis en relation avec les quatre autres acteurs et l’acteur « 3 » est lié uniquement avec l’acteur « 4 ». Dans les graphes E3 et E4 ci-dessous la couleur désigne les caractéristiques typologiques de chaque acteur. 
+
+
+2 A noter que le défaut de Gephi 0.8.2 beta réside notamment dans la gestion des proportionnalités :  (...)
+
+23Le graphe E3 (graphe avec partition en fonction des attributs) met en évidence le poids des différents groupes en fonction du nombre d’acteur compris dans chaque typologie, les liens entre groupes ont également une épaisseur en fonction du nombre de lien entre les acteurs. Ainsi, le groupe A (en orange) comprend uniquement l’acteur « 1 » et a donc un poids plus faible (20 %) que les autres groupes B (40 %) et C (40 %) qui regroupent chacun deux acteurs2. Cependant, les liens convergeant vers le groupe A sont plus nombreux que le lien unique qui unit C et B. L’acteur A est en effet en lien avec les acteurs 2/B, 3/B, 4/C et 5/C.
+
+24Le graphe E4 (graphe sans partition) met en évidence le poids de chaque acteur en fonction du nombre de liens. On relève que l’acteur 1 (qui a quatre liens) a un poids plus important que les acteurs 3 et 4 (2 liens), eux-mêmes plus importants que les acteurs 5 et 2 (1 lien). 
+25Pour finir, le graphe E5 (graphe sans partition) présente la carte de chaleur du réseau égo-centré sur l’acteur 5. Ainsi, l’acteur 5 en rouge est en lien direct avec l’acteur 1 d’où la couleur orange. Les autres acteurs n’ont pas de relations directes avec l’acteur 5, ils sont donc représentés en blanc cassé.
+26La partie suivante applique ces étapes successives aux acteurs de la scène énergétique en Alsace.
+Les acteurs de la scène énergétique en Alsace
+27Dans cette partie, l’ensemble des étapes de la méthode est repris et les choix pour la constitution des bases de données sont expliqués et justifiés.
+Etape 1 : Création de la BD1
+
+
+3 Lois Grenelle I et II, respectivement du 3 août 2009 et du 12 juillet 2010. La gouvernance à 5 des  (...)
+
+28La BD1 a été construite sur la base des acteurs qui ont contribué à la réalisation du SRCAE et à ses annexes. Des cahiers techniques abordant différents sous-thèmes (bilan énergétique, énergies renouvelables, volet hydroélectricité, volet solaire, volet biomasse, etc.) ont complété l’élaboration du schéma. Ils ont été réalisés par différents acteurs. Cette liste est complétée par les acteurs membres de la Conférence Régionale de l’Energie en Alsace (CREA). « La principale spécificité de la CREA (2006), anciennement Groupe Technique Énergie Alsace - s’illustre dans un mode de gouvernance impliquant des associations et des organisations environnementales expertes – avant que les préconisations des lois « Grenelle » n’insistent en prônant le "dialogue à 5" »3 (Christen et al., 2013). Les acteurs de la CREA englobent à la fois des acteurs de l’énergie et des acteurs de l’atmosphère. Pour notre étude nous avons uniquement retenu les premiers. 
+
+Choix des attributs
+29Pour qualifier les acteurs, trois attributs ont été sélectionnés : (1) le type d’acteur (typologie) découpé en sept types (tableau 1), (2) une différenciation des acteurs du secteur public et du privé et (3) la localisation (nom de ville). Ces attributs sont décrits ci-dessous.
+Typologie
+30Les acteurs concernés directement et indirectement par l’énergie peuvent se regrouper selon différentes typologies. Le choix de la typologie est inspiré d’un document réalisé par le Comité d’Animation Territoire durable et Ecologie Industrielle (Abitbol et al., 2014). 
+Tableau 1 : Typologie des acteurs 
+
+
+
+TYPE
+
+
+ACTEURS
+
+
+
+
+Organisations internationales
+
+
+- Groupes internationaux d’experts sous l’égide de l’ONU : GIEC pour le changement climatique ;
+- Union Européenne 
+
+
+
+
+Administration centrale
+
+
+- État (ministères, délégations interministérielles (DATAR,…) ;
+- Opérateurs de l’Etat (BPI, services centraux de l’ADEME,…) 
+
+
+
+
+Administration territoriale
+
+
+Collectivités locales 
+- Conseils régionaux et Conseils généraux ; 
+- Communes et intercommunalités (Communauté de communes, Communauté d’agglomération, Communauté urbaine, Métropole) ; 
+- Etablissements publics de coopération intercommunale (EPCI) sans fiscalité propre (« Territoires de projet ») : Pays, Parc naturel régional (PNR) ;
+Services déconcentrés et Agences de l’Etat dans les territoires : 
+- Services déconcentrés de l’Etat : Préfecture & sous-préfecture, DREAL, DDT, … ;
+- Agences ou représentations territoriales : Directions régionales de l’ADEME, Agences de l’eau, Agences Régionales de Santé, antennes régionales de BPI France, Etablissement public d’aménagement (EPA),… ;
+- Instances de développement et d’aménagement territorial : Agence de développement économique,… 
+
+
+
+
+Economie
+
+
+- Entreprises : micro-entreprises (< 10 salariés), petites entreprises (PE < 50 salariés), entreprises moyennes (EM < 250), entreprises de taille intermédiaires (ETI < 5 000), grandes entreprises (GE > 5 000) ; 
+- Organismes consulaires (CCI, Chambre Agriculture, Chambre Métiers) ; 
+- Fédérations professionnelles sectorielles (BTP, Bâtiment, UIC) & Organisations patronales ou syndicats de salariés ; 
+- Associations d’entreprises : sur une ZI (d’entreprises, de gestion, d’aménagement...), sur une thématique, sur un secteur économique (ciment, agroalimentaire…) ;
+- Réseaux mixtes d’entreprises et de territoires : pôle de compétitivité, cluster technopôle, pôles territoriaux de coopération économique (PTCE) ; 
+- Experts et fonctions supports : assurances, banques, juristes… ; 
+- Experts conseils techniques : cabinets d’audit, bureaux d’études… ;
+
+
+
+
+Recherche 
+et formation
+
+
+- Recherche : Agence Nationale de la recherche (ANR), laboratoires de recherche… ; 
+- Formation initiale universités, écoles d’ingénieurs et de commerce, IUT, DUT… ; 
+- Formation continue : commissions paritaires nationales de l’emploi (CNPE), CNFPT, Afpa
+
+
+
+
+Associations 
+et agences 
+de diffusion
+
+
+- Agences d’urbanisme (ADEUS)
+- Associations de diffusion de données (ex : Association de surveillance pour la protection atmosphérique - Aspa)
+- Toutes Fédérations désignées comme association loi 1901
+
+
+
+
+Bailleurs 
+
+
+- Office public
+- Société anonyme
+- Bailleurs privés
+
+
+
+Source : D’après CATEI - Ecologie industrielle et territoriale : le guide pratique pour agir dans les territoires.
+31Cette typologie permet de séparer les acteurs par secteurs d’activités et de compétences : administration, économie, recherche, association, etc. 
+Secteurs public ou privé 
+32Les acteurs peuvent relever des secteurs public ou privé. « Le droit français distingue :- les personnes morales de droit public : l’État, les collectivités territoriales, les établissements publics... ;- les personnes morales de droit privé : les plus courantes étant les entreprises, les sociétés civiles, les groupements d’intérêt économique, les associations. Certaines personnes morales de droit privé sont chargées de la gestion d’un service public » (INSEE). Cet attribut est détaillé, car il peut présenter un intérêt lors de l’interprétation des graphes.
+Localisation 
+33Il est intéressant d’analyser les partenariats en fonction des données géographiques. Est-ce que les intensités des partenariats sont liées à la proximité géographique ? Cet attribut permet d’analyser cette relation. L’Alsace compte cinq villes importantes (du Nord au Sud) : Haguenau, Strasbourg, Sélestat, Colmar et Mulhouse (carte 1). 
+Résultats de la BD1
+34A l’étape 1, 42 acteurs ont été identifiés et complétés par leurs attributs. Le tableau 2 illustre un extrait de la BD1.
+Tableau 2 : Extrait BD1 - Acteurs principaux (Membres CREA « énergie » et contributions au SRCAE et/ou annexes)
+
+
+
+Id
+
+
+Nom acteur
+
+
+Abréviation
+
+
+Attribut 1
+Typologie
+
+
+Attribut 2
+Public/privé
+
+
+Attribut 3
+Localisation
+
+
+Justification
+
+
+BD
+
+
+
+
+3
+
+
+Direction régionale de l’environnement, de l’aménagement et du logement – Alsace
+
+
+DREAL
+
+
+Admin territoriale
+
+
+Public
+
+
+STRASBOURG
+
+
+Contribution SRCAE
+
+
+1
+
+
+
+
+4
+
+
+Ministère de l’écologie, de l’énergie, du développement durable et de la mer
+
+
+MEEDDM
+
+
+Admin centrale
+
+
+Public
+
+
+PARIS
+
+
+Contribution SRCAE
+
+
+1
+
+
+
+
+5
+
+
+Fédération Interprofessionnelle Forêt-Bois Alsace
+
+
+Fibois Alsace
+
+
+Association
+
+
+Privé
+
+
+SCHILTIGHEIM
+
+
+Contribution SRCAE
+
+
+1
+
+
+
+
+9
+
+
+Agence de développement et d’Urbanisme de l’Agglomération Strasbourgeoise
+
+
+ADEUS
+
+
+Association
+
+
+Privé
+
+
+STRASBOURG
+
+
+Contribution SRCAE
+
+
+1
+
+
+
+
+21
+
+
+Conseil Économique, Social et Environnement Régional
+
+
+CESER
+
+
+Admin territoriale
+
+
+Privé
+
+
+STRASBOURG
+
+
+Membre CREA
+
+
+1
+
+
+
+
+22
+
+
+Commission Régionale de conciliation et d’Indemnisation
+
+
+CRCI
+
+
+Economie
+
+
+Privé
+
+
+NANCY
+
+
+Membre CREA
+
+
+1
+
+
+
+Etapes 2 et 3 : BD2, complément de la BD1
+35A partir des 42 acteurs, la recherche web a permis de créer 392 nouveaux acteurs en lien direct avec les acteurs principaux.
+Résultats et interprétations des graphes
+36Les résultats des étapes présentées ci-dessus, sont illustrés ici selon les diverses étapes de constitution des informations et des analyses réalisées.
+37La première partie des résultats se focalise sur les partenariats existants entre les acteurs de BD1. La seconde partie interroge les liens entre tous les acteurs. 
+Résultat intermédiaire : étape BD1
+38Les résultats d’une partition opérée sur la BD1 selon l’attribut « typologie » des acteurs (tableau 1) permettent de visualiser les groupes d’acteurs en présence en Alsace (figure 3). 
+
+Figure 3 : Partitionnement par attribut « typologie » ; graphe généré avec Gephi 0.8.2 betaAgrandir Original (jpeg, 120k)
+
+39A partir du graphe de la figure 3, on peut constater que l’administration territoriale est l’acteur central du réseau. Son poids est important ; en effet, un tiers des acteurs identifiés dans la BD1 relève de l’administration territoriale. On y trouve trois grandes communautés urbaines : Communauté d’agglomération de Colmar (CAC), l'EMS et M2A. Ce type d’acteur (administration territoriale) a des liens importants avec les associations de diffusion de données. Les acteurs regroupés sous les labels « association » et « économie » représentent ensemble la moitié de l’effectif de la BD1. Les bailleurs sont absents et les acteurs de la typologie « économie » sont les plus éloignés de l’administration territoriale.
+
+Figure 4 : Résultat BD1 - Visualisation des 42 acteurs principaux (sans filtre) ; graphe généré avec Gephi 0.8.2 beta : Algorithme Force Atlas 2Agrandir Original (jpeg, 212k)
+
+40Le graphe (figure 4) représente le réseau d’acteurs issu de la BD1. Il apporte une explication à la faiblesse des poids et des liens des acteurs de l’administration centrale et internationale vis-à-vis de l’administration territoriale. Les acteurs de « l’administration territoriale » (en rouge sur le graphe) sont nombreux parce que tous les niveaux décisionnels sont représentés : conseils régionaux et conseils généraux du Bas-Rhin et du Haut-Rhin (CG67 et CG68), plusieurs communautés urbaines, les services déconcentrés de l’Etat, les agences ou représentations territoriales (Agence Locale de la Maîtrise de l’Energie - ALME, Mulhouse Sud Alsace). L’Union Européenne représente l’organisation internationale ; l’administration centrale est représentée par le Ministère de l’écologie, de l’énergie, du développement durable et de la mer, le Ministère de l’agriculture, de l’agroalimentaire et de la forêt et l’Agence de l’Environnement et de la Maîtrise de l’Energie au niveau national. 
+41La région Alsace et la direction régionale de l’environnement, de l’aménagement et du logement (DREAL – section énergie) sont au centre du réseau énergie. Trois autres acteurs ont de nombreux partenaires : l’association de surveillance pour la protection atmosphérique (ASPA), l’agence de l’environnement et de la maîtrise de l’énergie (ADEME Alsace) et energivie.info. Ces cinq acteurs ont plus de 14 liens chacun. La moyenne des liens est de 3,35 (141 relations partenariales pour 42 acteurs). Le pôle energivie.info compte à lui seul 29 liens. Les associations de diffusion de données ou de suivi sont nombreuses et fortement partenaires des administrations territoriales.
+42Certains acteurs n’ont pas de partenaires. C’est le cas de la commission régionale de conciliation et d’indemnisation, le syndicat du gaz du Haut-Rhin et Total gaz. Natural Power et Opale, qui sont des entreprises expertes dans les énergies renouvelables et principalement les énergies éoliennes, sont reliées entre elles mais n’ont pas de relations partenariales avec d’autres acteurs. Elles ont répondu à une commande de la région pour évaluer le potentiel de développement de l’éolien. Les commandes singulières public/privé expliquent que certaines entreprises n’ont pas forcément de liens soutenus avec les acteurs de la scène énergétique alsacienne. 
+43L’étude de l’attribut public/privé indique que 52 % des parties prenantes sont d’origine publique et 47 % d’origine privée. La répartition entre secteurs public/privé semble donc équilibrée. 
+Résultat de l’étape finale
+44Le graphe présenté en figure 5 montre les 930 liens existants entre les 434 acteurs répertoriés. Les paragraphes suivants interprètent les graphes et précisent le rôle et la place de certains acteurs importants de la scène énergétique alsacienne.
+
+Figure 5 : Résultat final - Partitionnement par attribut « typologie » ; graphe généré avec Gephi 0.8.2 betaAgrandir Original (jpeg, 168k)
+
+45D’après la figure 5, les acteurs de la typologie « économie » sont largement surreprésentés (55,53 % des acteurs appartiennent aux secteurs économie). Ils ont de nombreuses relations partenariales avec les acteurs de la typologie « association » et administration territoriale. Les associations sont toujours très en liens avec l’administration territoriale. L’administration centrale est éloignée de l’administration territoriale. Les bailleurs sont représentés, mais très peu nombreux. La recherche alsacienne sur le thème énergie est partenaire avec des organisations internationales, notamment allemandes.
+
+Figure 6 : Les relations partenariales entre acteurs de la scène énergétique en Alsace ; graphe généré avec Gephi 0.8.2 beta : algorithme Force Atlas 2Agrandir Original (jpeg, 200k)
+
+46Sur la figure 6, les acteurs des BD1 et BD2 sont respectivement en rouge et en bleu. La distinction des couleurs par BD permet de visualiser rapidement quels acteurs de la BD1 ont le plus de partenaires et/ou quel acteur a été le plus cité par des partenaires. 
+47Une observation macroscopique du graphe fait ressortir des « grappes » d’acteurs de la BD2 fortement connectées à un seul acteur de la BD1. Le phénomène de grappe s’applique ainsi à M2A, l’Agence de développement et d’Urbanisme de l’Agglomération Strasbourgeoise (ADEUS), l’ASPA, la fédération interprofessionnelle forêt-bois Alsace (Fibois Alsace), la Ligue pour la Protection des Oiseaux (LPO) et l’Union Française des Industriels Pétrolières (UFIP). 
+48La LPO appartient à la BD1, car il a contribué au schéma régional éolien pour la définition et la cartographie des enjeux relatifs à l’avifaune vis-à-vis des éoliennes (Région Alsace et Dreal, 2012, p. 281). Cet organisme contient de nombreux partenaires sans lien avec les autres acteurs et cela explique sa position éloignée dans le graphe et sa taille importante.
+49M2A a cité une centaine de partenaires, ce qui explique que la communauté d’agglomération ait pris un poids important par rapport à la figure 4, où elle avait encore le même poids que l’EMS. Pourquoi M2A a-t-elle une politique de communication si importante autour de ces partenaires du plan climat, alors que, visiblement, cela n’est pas pratique courante pour les autres grandes agglomérations de la région ? M2A promeut l’idée que « les collectivités entretiennent une relation directe avec tous les acteurs du territoire, de l’école jusqu’au entreprises et bailleurs sociaux. Ces caractéristiques les mettent en position d’impulser et de soutenir des initiatives locales et de mettre en cohérence une politique climatique » (Mulhouse Alsace Agglomération, 2010). Ainsi, son plan climat s’articule fortement autour de la mobilisation des acteurs locaux : « l’implication de tous les acteurs est indispensable (p.14), […] un levier pour mobiliser les différents acteurs concernés (p.14), […] mobiliser les acteurs autour d’un constat partagé (p.17), […] être mobilisateur des acteurs du territoire et des habitants (p. 23), […] augmenter la mobilisation et l’implication de la Collectivité et ses partenaires dans une démarche à forte lisibilité (p.24), […] l’énergie est aujourd’hui reliée à chaque composante du territoire et nécessite un outil technique, législatif et financier pour déterminer les acteurs et les échelles de la conception énergétique territoriale (p.28), […] le succès d’un Plan Climat Territorial passe par l’implication de tous (p.42), […] recueillir et faire connaître les innovations et les expériences de prise en compte des problématiques climat/énergie, mettre au point, dans une démarche partenariale, et diffuser des préconisations en termes de process de projets définissant les acteurs (p.46), […] le PCT doit être mobilisateur de tous les acteurs du territoire (p.52), […] cartographier les « acteurs locaux » du climat (p.63), […] la première tâche est de les identifier, de les réunir et de créer un réseau pour unir leurs forces (p.63), […] susciter l’intérêt de tous (p.63), […] l’agglomération souhaite fédérer l’ensemble des acteurs (communes, agricultures, futurs exploitants) afin d’apporter une solution globale sur son territoire (p.87) » (Mulhouse Alsace Agglomération, 2010). Ainsi, 104 partenaires se sont engagés dans la démarche « Plan climat ». Le graphe fait ressortir cette volonté partenariale de M2A, néanmoins il ne permet pas d’aller plus loin dans l’analyse de l’efficacité de cette démarche.
+50Le programme energivie.info et l’ASPA conservent un poids relativement important. energivie.info est l’acteur le plus au centre du graphe. Quel est la compétence d’energivie.info et comment expliquer son poids et sa position ? Energivie.info est une structure née en 2003 par la volonté de la Région Alsace et de l’Ademe pour développer les énergies renouvelables sur le territoire alsacien. C’est un réseau alsacien des Espace Info Energies pour le conseil aux particuliers, copropriétés, bailleurs privés et sociaux, collectivités et entreprises. C’est aussi l’animateur des plans climats. Ces missions expliquent sa position centrale (figure 6). La figure 7 a pour but d’analyser plus finement les partenaires de cet acteur important.
+
+Figure 7 : Les partenaires d’energivie.info. Avec energivie.info (a) ; sans energivie.info (b)Agrandir Original (jpeg, 152k)
+
+51La figure 7 (graphes a et b) présente le réseau égo-centré du pôle energivie.info avec une profondeur de 1. Energivie.info est en lien direct avec 52 partenaires. Il est partenaire de l’ensemble des types d’acteurs. Sur le graphe de droite (b), l’acteur central energivie.info n’est volontairement pas présent dans le graphe. Cela permet de mieux s’apercevoir que de nombreux acteurs de la typologie « économie » ne sont pas reliés à la grappe principale regroupant tous les autres groupes d’acteurs. Energivie.info a un rôle d’information, de diffusion et de conseil auprès de tous les groupes d’acteurs, il est manifestement un acteur pivot local de la transition énergétique.
+52D’autres questions émanent de la figure 6. Parmi les acteurs de l’administration, quels sont les acteurs centraux ? Quels sont les partenaires communs de l’EMS, M2A et la Région Alsace ? Les graphes des figures 8 et 9 permettent de répondre à ces questions.
+
+Figure 8 : Position des acteurs administratifs ; graphe généré avec Gephi 0.8.2 beta : Algorithme Force Atlas 2. Partition avec 3 typologies, administration internationale, centrale et territoriale / Carte 1 : Population des communes de la région AlsaceAgrandir Original (png, 750k)
+
+53La figure 8 présente les liens existants entre les acteurs appartenant à l’administration internationale, centrale et territoriale. Chaque acteur est localisé. Les acteurs des organismes internationaux sont très peu représentés. On remarque une séparation nette entre les acteurs de la région mulhousienne et strasbourgeoise. M2A affiche de nombreux partenariats avec les communes haut-rhinoises. Cela vient confirmer ses engagements « l’agglomération souhaite fédérer l’ensemble des acteurs (communes, agricultures, futurs exploitants) afin d’apporter une solution globale sur son territoire » (p.87)  (M2A, 2010). En termes de partenaires, M2A est complémentaire de la région Alsace puisqu’elle a créé de nombreux partenariats avec des acteurs spécifiques et locaux. Cela est certainement aussi le cas de l’EMS, mais celle-ci ne cite aucun partenaire, elle apparaît uniquement grâce aux liens d’autres acteurs qui l’ont désignée comme partenaire. Par conséquent, elle semble plus proche de la région Alsace avec qui elle partage de nombreux acteurs communs mais sans réel positionnement volontaire. 
+54La région Alsace se trouve au centre de la grappe avec l’ADEME, la DREAL et energivie.info. Les acteurs de l’administration centrale sont très reliés entre eux et avec les préfectures et les deux directions départementales des territoires (DDT), mais ils sont éloignés des communautés urbaines. Les villes et communautés urbaines de Colmar, Sélestat et Haguenau et la ville d’Erstein ne font pas partie de la grappe principale. 
+Les partenaires communs de M2A, la Région Alsace et l’EMS
+
+Figure 9 : Sous-graphes centrés sur trois acteurs alsaciens (a) M2A, (b) la Région Alsace et (c) l’EMS. Graphe généré avec Gephi 0.8.2 beta : Algorithme Force Atlas 2, Partition plage de degré 4Agrandir Original (jpeg, 148k)
+
+55L’analyse de la figure 9 et des trois sous-graphes (a, b, c) met en exergue 8 acteurs communs à M2A, la Région et l’EMS. D’après le tableau 3, la plupart des acteurs communs ont un rôle de diffusion de données et/ou de conseil (ASPA, energivie.info, l’Association régionale des organismes HLM d’Alsace – AREAL, l’association Alter Alsace Energies), les autres sont des organes de représentation des métiers du secteur du bâtiment et ont des missions différentes et complémentaires : cellule économique, défense des droits des corporations et recherche et innovations (Cellule économique du bâtiment et des travaux publics - CEBTP, Chambre de métier, Pôle de compétitivité Fibres-Energivie). Enfin, le dernier acteur commun est la DREAL, cette direction est le porte-parole des politiques Grenelle de l’Etat. Ces acteurs sont relativement anciens et leurs « missions énergie » ont évolué au cours du temps.
+Tableau 3 : Missions des acteurs communs à M2A, EMS et Région Alsace
+
+
+
+Acteurs 
+
+
+Missions (d’après les sites internet, rubrique qui sommes-nous ?)
+
+
+
+
+Association de surveillance pour la protection atmosphérique (Aspa)
+
+
+Créée juridiquement en 1977, sous la forme d’une association régie par le Code civil local, l’ASPA a déployé son réseau automatique de surveillance et son expertise à partir de 1980. Créée au départ pour mesurer la pollution industrielle dans l’agglomération strasbourgeoise et mettre en place des procédures d’alerte, l’ASPA assume aujourd’hui une mission d’information et d’alerte auprès des autorités administratives. Elle a également développé les outils indispensables pour assister ses partenaires dans la gestion transversale air, climat et énergie des plans climats. Par exemple, elle a mis au point des méthodes pour estimer les consommations et productions d'énergie.
+
+
+
+
+Association Alter Alsace Energies
+
+
+Alter Alsace Energies est une association créée en 1980 de droit local travaillant à la promotion de l’utilisation rationnelle de l’énergie et des énergies renouvelables (bois, énergie solaire thermique et photovoltaïque, microhydraulique,...). Elle travaille pour tous les publics, les particuliers, les collectivités, les établissements scolaires. 
+
+
+
+
+Energivie.info (Programme relais)
+
+
+Dès les années 90, la Région Alsace a été pionnière dans la réflexion et dans l’action en matière d’énergie. Elle a initié avec l’ADEME un programme novateur, centré sur le développement des énergies renouvelables : Alsace Energivie. Il s’est ensuite orienté vers l’efficacité énergétique, du bâtiment basse consommation à la maison à énergie positive. Le nom officiel du programme est ensuite devenu energivie.info (depuis 2003).
+
+
+
+
+Association régionale des organismes HLM d’Alsace (AREAL)
+
+
+La vocation de l’Association Régionale des Organismes HLM d’Alsace (AREAL), créée en 1981, est d’assurer la représentation territoriale du mouvement habitation à loyer modéré (HLM) régional auprès des pouvoirs publics et des partenaires locaux, ainsi que de contribuer au développement professionnel et à l’action inter organismes.
+
+
+
+
+Direction régionale de l’environnement, de l’aménagement et du logement
+(DREAL)
+
+
+« Dans le cadre de la réforme de l’État, le Conseil de modernisation des politiques publiques a décidé, en décembre 2007, la création d’un échelon régional unifié du Ministère du développement durable : la DREAL. Cette nouvelle structure régionale pilote les politiques de développement durable résultant notamment des engagements du Grenelle Environnement ainsi que celles du logement et de la ville. Les DREAL remplacent les Directions Régionales de l’Environnement (DIREN), les Directions Régionales de l’Equipement (DRE) et les Directions Régionales de l’Industrie, de la Recherche et de l’Environnement (DRIRE), dont elles reprennent les missions hormis le développement industriel et la métrologie. » (MEDDE, 2009)
+
+
+
+
+Cellule économique du bâtiment et des travaux publics
+(CEBTP)
+
+
+La CEBTP-Alsace est active depuis 1977. Elle collabore avec les 27 Cellules Economiques Régionales de la Construction (CERC) qui rassemblent l’ensemble des partenaires publics et privés de l’acte de construction. Missions des CERC : (1) Rapprocher les professions, les élus et l’administration ; (2) Éclairer les stratégies et les décisions économiques ; (3) Anticiper le développement de l’activité, des marchés et de l’emploi. 
+
+
+
+
+Chambre de métiers d’Alsace
+(ch métier)
+
+
+La Chambre de Métiers d’Alsace est l’interlocuteur officiel des pouvoirs publics, elle intervient en matière de législation de l’artisanat aussi bien par exemple dans le domaine du droit d’installation que dans celui de la protection du droit local. La Chambre de Métiers d’Alsace travaille de concert avec les organisations professionnelles et tout particulièrement avec les corporations, dont elle est une émanation.
+
+
+
+
+Pôle de compétitivité Fibres-Energivie
+
+
+Le Pôle de compétitivité Fibres-Energivie est issu de la fusion des Pôles Alsace Energivie et Fibres. Le Pôle de compétitivité Alsace Energivie a pour mission de développer des solutions innovantes pour améliorer l’efficacité énergétique des bâtiments, en neuf et en rénovation et pour généraliser à l’horizon de 2020 les bâtiments à énergie positive dans la construction neuve. Aujourd’hui, le Pôle de compétitivité Fibres-Energivie est le seul pôle de compétitivité dédié aux matériaux et au bâtiment durable. Le réseau compte près de 400 acteurs : entreprises, centres et laboratoires de recherche, organismes de formation. L’ensemble des maillons de la chaîne des filières du bâtiment y est représenté : les fabricants de matériaux, les industriels des systèmes constructifs et ceux des équipements énergétiques, les architectes et les bureaux d’études, les constructeurs, les spécialistes de l’exploitation et de la maintenance, la promotion immobilière.
+
+
+
+56Les différents graphes exposés dans cette partie ont mis en évidence un grand nombre de relations partenariales entre acteurs de la scène énergétique alsacienne. Les acteurs que l’on retrouve en tant que partenaires de la Région Alsace ou des deux principales collectivités locales sont l’Aspa, les associations Alter Alsace Energies et AREAL, les pôles de compétitivité Fibres-Energivie et energivie.info, la DREAL, la chambre des métiers et le CEBTP. Le pôle énergivie.info est un acteur alsacien très important, il est cité par de nombreux acteurs issus de typologies d’acteurs différentes. La partie suivante fait le point sur les avantages et inconvénients de cette méthode.
+Discussion : approche critique sur la méthode 
+57Notre analyse s’est surtout focalisée sur les partenaires communs aux collectivités M2A et EMS ainsi que de la Région Alsace. Cependant, les résultats des graphes permettent aussi de visualiser la place des acteurs économiques, parmi lesquels on trouve des fournisseurs et distributeurs d’énergie (le groupe électricité de Strasbourg (groupe és), Electricité de France (EDF), le groupe gaz distribution services (groupe GDS), énergie partagée, etc. La figure 5 montre que les acteurs de l’économie sont majoritairement représentés. Souvent sous la forme de syndicat, de groupement syndical, de fédération, de corporation, de chambre, etc. Ces acteurs interviennent dans des domaines variés, la forêt, le bois, l’électricité, la géothermie, le pétrole, la construction, le bâtiment, etc., mais, ils sont très rarement en lien direct avec les collectivités. Le graphe permet ainsi d’étudier dans le détail la place de nombreux autres acteurs que cet article ne détaille pas, comme par exemple, le Port Autonome de Strasbourg qui est un grand acteur au service du développement durable sur le territoire de Strasbourg. Cet acteur est présent sur le graphe. On le retrouve en tant que partenaire de l’ADEUS, l’agence de développement économique du Bas-Rhin (ADIRA), l’EMS, l’ASPA, l’INSA, l’agence de l’eau, le CCI Strasbourg du Bas-Rhin et la ville de Strasbourg. 
+58La construction de la base de données est une étape importante qui conditionne le résultat des graphes. Il est nécessaire de choisir un point d’entrée qui englobe le maximum d’acteurs du domaine à étudier. D’après nous, la Conférence Régionale de l’Energie en Alsace est un point d’entrée intéressant, car il rassemble les acteurs de différents secteurs (administrations, économie, recherche, associations, bailleurs). La comparaison de la BD1 avec la base de données complète donne des indications sur la stratégie partenariale des acteurs. Typiquement, entre M2A et l’EMS, la politique de communication autour du partenariat n’est pas mise en avant avec la même intensité, mais seul l’entretien permettrait de confirmer ou d’infirmer l’efficacité de la démarche partenariale des plans climat. 
+59Cette méthode propose une tentative d’objectivation des acteurs du domaine de l’énergie en Alsace. L’objectivité est mise en avant ici avec toutefois quelques retenues, car si l’information fournie par les sites web est déclarative et qualitative, elle n’est pas pour autant exhaustive et ne permet pas de quantifier la force et la nature du partenariat. Concernant l’exhaustivité par exemple, nous savons que l’association Idée Alsace mène une étude d’opportunité et de potentialités pour l’élaboration d’un projet d’écologie industrielle, en partenariat avec Sofies (consultant qui accompagne des acteurs publics et privés dans la mise en œuvre de solutions concrètes et innovantes visant à un usage responsable et optimisé des ressources naturelles), le Port Autonome de Strasbourg (PAS), l’EMS, la Région Alsace, l’ADEME, l'ADIRA, le Groupement des Usagers du Port (GUP) et le pôle Alsace Energivie. L’une des missions d'Idée Alsace consiste à établir un diagnostic des flux de matières et d’énergie des entreprises. Cette association qui mène des études d’énergie avec des industriels de toute l’Alsace n’est pas pour autant répertoriée parmi les acteurs de la scène énergétique. Nous avons pu les rencontrer et leur demander quel est d’après eux la raison de ce manque d’affichage sur le Web. Ils ont répondu agir pour le compte des collectivités sur des commandes spécifiques en lien avec des industriels qui ne sont pas mis en avant sur les sites des collectivités. D’autant plus que dans ce cas spécifique, l’EMS et la Région Alsace (acteur de la BD1), qui sont les deux acteurs à collaborer avec Idée Alsace, sont aussi les seules à ne pas communiquer via le Web sur leur partenaire. Cette méthode est donc de l’ordre du discours et dépend de la politique de communication. Les commandes des collectivités auprès des « bureaux d’études » ne sont jamais exposées sur les sites Web. Pourtant, ce sont bien les bureaux d’études qui établissent aujourd’hui la plupart des diagnostiques énergétiques pour aider les territoires à décider des stratégies énergétiques. Ainsi, les grands absents du graphe sont les bureaux d’études (même si certains sont listés, leur nombre est largement sous-estimé) mais cela s’explique, car il s’agit d’étude ponctuelle sur commande public et non de partenariat sur le temps long. 
+60Cette méthode de construction de graphe ne permet pas de visualiser les liens réels entre les acteurs. Elle ne dit rien sur la fréquence des rencontres et encore moins sur le sujet de la rencontre. Elle donne une vision macro des liens et forces en présence. Pour comprendre plus précisément « l’implication des acteurs dans des actions de développement local » (Bertacchini, 2012, p.47), une méthode micro, d’après enquête est plus appropriée. Des entretiens semi-directifs permettraient d’analyser, dans le détail, les stratégies des acteurs. Cependant, le questionnaire auto-administré ou l’entretien présentent un biais important, car ils ne représentent pas la vision de l’organisme dans son ensemble (personne morale), mais la connaissance d’une seule personne physique. Un moyen de lever ce biais serait d’utiliser la méthode des entretiens de groupe, mais cette solution impose encore plus de disponibilité de la part des acteurs. Sans passer par la phase d’analyse des graphes, l’entretien seul ne permettrait pas de rebondir sur les affirmations de l’individu, ou de les interroger plus précisément sur un acteur important que l’on aurait pu visualiser à travers les réseaux d’acteurs. Ainsi, la richesse de la méthode présentée dans cet article tient du fait que la cartographie par le graphe pourrait être complémentaire de l’entretien de groupe. Si elle se faisait en amont, elle permettrait d’aborder de manière plus systématique les focus group.
+61Parmi les choix des attributs, nous avions souhaité renseigner la compétence énergie de chaque acteur, c’est-à-dire préciser pour chaque acteur son aptitude à effectuer des actions importantes ou à instruire et réglementer dans le domaine de l’énergie avec quatre pondérations allant de (4) si l’acteur a une compétence très forte, (3) si l’acteur a une compétence forte, (2) si l’acteur a une compétence faible, (1) si l’acteur a une compétence très faible. Il s’avère que cela est difficile à réaliser. Nous avons aussi pensé à ajouter un attribut « date de création des organismes », afin d’analyser s’il existe un lien entre le poids, la place des acteurs et la date de création. La difficulté de cet attribut provient de la pluralité des dates, entre la date de création historique, la refonte de plusieurs acteurs en un, le changement de missions, etc., laquelle retenir ? Nous estimons qu’il est préférable d’analyser certains attributs après visualisation des graphes, à l’image du tableau 3, cela parait plus approprié et fait gagner du temps.
+62Actuellement, la méthode présentée s’applique de façon manuelle. Chaque site doit être visité l’un après l’autre. Cela est chronophage (environ trois semaines d’exploration), c’est un inconvénient de taille si l’on veut obtenir rapidement un graphe. Cependant, l’avantage c’est que le chercheur peut découvrir au fur et à mesure de sa progression le rôle et les missions des acteurs. La démarche est un processus d’apprentissage et de découverte des acteurs énergie. Un logiciel-robot nommé Le Navicrawler pourrait produire des graphes de l’ensemble des sites web sur lesquels le chercheur navigue. Cet outil explore automatiquement le web en suivant récursivement les hyperliens trouvés à partir d’une page pivot (Jacomy et Ghitalla, 2007). Cependant Le Navicrawler ne correspond pas à nos attentes, de plus de nombreux partenaires n’auraient pas été relevés, car ils n’apparaissaient pas en lien hypertexte. La méthode manuelle n’est pas très rapide, mais elle donne des résultats « objectifs » et relativement exhaustifs. La démarche peut parfaitement s’appliquer à d’autres territoires et à d’autres thématiques.
+63L’analyse est réalisée à un temps t et sur le territoire de la région Alsace, peut-être que dans deux ans, cinq ans et certainement dans vingt ans de nouveaux partenariats apparaîtront, de nouveaux acteurs ou programmes énergie émergeront. Cette étude pourrait être reconduite dans dix ans et nous pourrons analyser des évolutions structurelles dans le temps. Cela a un intérêt incontestable, surtout dans une époque marquée par un changement de paradigme énergétique. Quels acteurs gagnent en visibilité, en compétence ? Quels sont les nouveaux acteurs, ceux qui émergent, ceux qui perdent du poids ? Avec le redécoupage des régions, la Région Alsace sera-t-elle toujours pilote de programme d’envergure dans le domaine de l’énergie ? La fusion des régions introduira-t-elle des nouveaux « grands » acteurs sur la scène énergétique alsacienne ? Est-ce que la fusion des Régions rendra vaine toute comparaison de long terme ?
+Conclusion
+64Le choix des attributs permet une lecture à différentes échelles d’activités (locale, régionale, étatique). Les acteurs principaux de la scène énergétique sont nombreux. En effet, 42 acteurs du monde économique, associatif ou administratif public ont contribué directement à l’élaboration du SRCAE et/ou sont membres de la CREA secteur « énergie ». La plupart de ces acteurs ont de forts partenariats entre eux, surtout ceux issus de la Conférence Régionale de l’Energie en Alsace. Les organismes qui ont des compétences dans le domaine de l’énergie sont relativement nombreux et éclectiques et cela rend difficile la gouvernance de l’énergie.
+65Energivie.info est la structure de référence du domaine de l’énergie. Bien qu’elle n’ait que 10 ans d’âge, ce programme piloté par l’ADEME et la région, est en lien avec tous les secteurs (administration territoriale, économie, association, particuliers, etc.). Ainsi, l’Ademe et la Région Alsace sont les acteurs centraux de la scène énergétique alsacienne.
+66Mulhouse Alsace Agglomération (M2A) et l’Eurométropole de Strasbourg (EMS) sont les deux principales « communautés urbaines » à avoir une diversité de partenaires dans le domaine de l’énergie. En termes de partenaire, M2A est complémentaire à la région Alsace, puisqu’elle a créé de nombreux liens avec des acteurs spécifiques et locaux. 
+67Enfin, cette étude soulève d’ores et déjà la question de la place des résidents et la prise en compte de leurs visions et actions d’une part et des acteurs du bâtiment d’autre part dans les problématiques « climat-air-énergie ». Ces derniers, les urbanistes, architectes, aménageurs, promoteurs, bailleurs, bureaux d’études spécialisés dans les audits énergétiques sont également très peu représentés dans ce faisceau de relations. Ils apparaissent au travers du Pôle de compétitivité Fibres-Energivie (issu de la fusion des Pôles Alsace Energivie et Fibres) qui est le seul pôle de compétitivité dédié aux matériaux et au bâtiment durable. Le réseau compte près de 400 acteurs : entreprises, centres et laboratoires de recherche, organismes de formation. L’ensemble des maillons de la chaîne des filières du bâtiment y est représenté : les fabricants de matériaux, les industriels des systèmes constructifs et ceux des équipements énergétiques, les architectes et les bureaux d’études, les constructeurs, les spécialistes de l’exploitation et de la maintenance, la promotion immobilière.
+68Finalement, la méthode des graphes répond à notre objectif d’obtenir une vision d’ensemble des relations partenariales entre acteurs de la scène énergétique alsacienne. La méthode propose un essai de représentation des liens entre acteurs et une étape préliminaire à des entretiens semi-directifs pour les aborder de manière plus systématique et analyser les diverses stratégies des acteurs locaux. Un début d’enquête a confirmé le rôle prépondérant de la Région Alsace et de l’Ademe Alsace. Nous souhaitons analyser plus en détails l’efficacité de la politique de partenariat de M2A en matière de stratégie plan climat et approfondir la stratégie énergétique de l’EMS qui est devenue depuis le premier janvier 2015 autorité organisatrice de l’énergie pour l’ensemble des communes (28 communes essentiellement urbaines ou périurbaines). Nous souhaitons également focaliser notre analyse sur les stratégies des fournisseurs historiques pour maintenir une position locale favorable malgré l’émergence de nouveaux fournisseurs.
+Haut de page
+
+Bibliographie
+
+Abitbol L., Blavot C., Duret B., Georgeault L., Rault M., Valluis C., 2014, Écologie industrielle et territoriale : le guide pour agir dans les territoires, in : Delduc P. (dir.), CGDD : Commissariat Général au Développement Durable, coll. RéférenceS, décembre 2014, 208. 
+Bastian M., Heymann S., Jacomy M., 2009, "Gephi : An open source software for exploring and manipulating networks", ICWSM: International Conference on Web and Social Media [En ligne], Vol. 8, 07 juillet 2009. http://aaai.org/ocs/index.php/ICWSM/09/paper/view/154/1009
+Bavoux J.-J., Chapelon L., 2014, Dictionnaire d’analyse spatiale, Paris, Armand Colin, 607 p.
+Bertacchini P.Y., 2012, "Acteurs-réseau et Territoire-Système : modélisation pour l’évaluation du potentiel d’action locale", Revue int. d’intelligence économique, No.4, 33-54.
+Boxenbaum E., Laurent B., Lacoste A., 2013, Nouvelles énergies pour la ville du futur, Paris, Presses des Mines, 169 p.
+Brisepierre G., 2011, "Les conditions sociales et organisationnelles du changement des pratiques de consommation d’énergie dans l’habitat collectif", Thèse de doctorat, Université Paris Descartes, Vol. 2, 847 p.
+Christen G., Frank C., Hajek I., Hamman P., Jehling M., Wintz M., 2013, "Quels enjeux à l’introduction des énergies renouvelables ? Une analyse comparative Alsace/Rhénanie-Palatinat", Revue d’Allemagne et des Pays de langue allemande, No.45, 83-108.
+Coutard O., Rutherford J., 2009, "Les réseaux transformés par leurs marges : développement et ambivalence des techniques «  décentralisées  »", Flux, No.76-77, 6-13.
+Duruisseau K., 2014, "L’émergence du concept de transition énergétique. Quels apports de la géographie  ?" BSGLg : Bulletin de la Société Géographique de Liège [En ligne], Varia, article No.63, 01 novembre 2014, 21-34. http://popups.ulg.ac.be/0770-7576/index.php?id=3932
+Emelianoff C., Mor E., Chevalier J., 2010, Les villes face à la transition énergétique : quelles politiques locales ?, Programme de recherche "Repenser les villes dans une société post-carbone", Rapport final, Vol.1, Paris, Ministère de l’écologie, CGDD Délégation au développement durable, mission prospective, 112 p.
+Forsé M., 2008, "Définir et analyser les réseaux sociaux", Informations sociales, No.147, 10-19.
+Godinot S., 2011, "Les plans climat énergie territoriaux : voies d’appropriation du facteur 4 par les collectivités et les acteurs locaux  ?", Développement durable & territoires [En ligne], Vol.2, No.1, (mars 2011 – Facteur 4), 22 mai 2014.  https://developpementdurable.revues.org/8874 ; DOI : 10.4000/developpementdurable.8874
+Insee - Définitions et méthodes - Personne morale : http://www.insee.fr/fr/methodes/default.asp?page=definitions/personne-morale.htm
+Jacomy M., Ghitalla F., 2007, Méthodologies d’analyse de corpus en Sciences Humaines à l’aide du Navicrawler, Rapport final du programme TIC & Migrations, Fondation de la maison des sciences de l’Homme, 73 p.
+Jacomy M., Venturini T., Heymann S. et Bastian M., 2014,"ForceAtlas2, a continuous graph layout algorithm for handy network visualization designed for the Gephi software", PLoS ONE [En ligne], 10 juin 2014. http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0098679 DOI : 10.1371/journal.pone.0098679 
+Jégou L., Maisonobe M., 2013, "Les collaborations scientifiques mondiales, 1999-2008, une application web de géovisualisation", M@ppemonde : Revue trimestrielle sur l’image géographique et les formes du territoire, article No.12, tri. 4 http://mappemonde.mgm.fr/num40/fig13/fig13403.html
+MEDDE : Ministère de l’écologie, du développement durable et de l’énergie, 29 décembre 2009, "Les DREAL (directions régionales de l’environnement, de l’aménagement et du logement)". http://www.developpement-durable.gouv.fr/Pourquoi-la-DREAL,12610.html
+Mérenne-Schoumaker B., 2007, Géographie de l’énergie : Acteurs, lieux et enjeux, Paris, Belin Sup Géographie, 272 p.
+Mulhouse Alsace Agglomération (Service Développement Durable), 2010, Plan climat territorial de Mulhouse Alsace Agglomération, 95 p.
+Région Alsace et DREAL, 2012, "Schéma régional : document intégral", 187 p. http://www.alsace.developpement-durable.gouv.fr/IMG/pdf/3-rapport.pdf
+Région Alsace et DREAL, 2012, "Schéma régional climat air énergie Alsace : schéma régional éolien", 276-331. http://www.alsace.developpement-durable.gouv.fr/IMG/pdf/6-schema_regional_eolien.pdf
+Saint-André B., 2008, "L’énergie intelligente dans la ville durable : Perspectives d’évolution du métier d’énergéticien", Flux, No.74, 68-76.
+Theys J., Vidalenc É., 2013, Repenser les villes dans la société post carbone, Ministère de l’Ecologie-Ademe, Cahier de recherches, 298 p.
+Wasserman S., Faust K., 1994, Social Network Analysis: Methods and Applications, Cambridge, University Press, 825 p.
+Haut de page
+
+Annexe
+
+Abréviations 
+BD : Base de données
+EnR : énergies renouvelables
+PCET : Plan Climat-Energie territorial
+SRCAE : Schéma Régional Climat Air Energie
+Abréviations : acteurs
+ADEME : Agence De l’Environnement et de la Maîtrise de l’Energie
+ADEUS : Agence de Développement et d’Urbanisme de l’Agglomération Strasbourgeoise
+ADIRA : Agence de développement économique du Bas-Rhin 
+ALME : Agence Locale de la Maîtrise de l’Energie – Mulhouse Sud Alsace
+AREAL : Association Régionale des organismes HLM d’Alsace
+ASPA : Association de Surveillance pour la Protection Atmosphérique
+CEBTP : Cellule Economique du Bâtiment et des Travaux Publics
+CG67 : Conseil Général du Bas-Rhin 
+CG68 : Conseil Général du Haut-Rhin
+CREA : Conférence Régionale de l’Energie en Alsace
+DDT : Direction Départementale du Territoire
+DREAL : Direction Régionale de l’Environnement, de l’Aménagement et du Logement
+EMS : Eurométropole de Strasbourg
+Fibois Alsace : Fédération Interprofessionnelle forêt-Bois Alsace
+LPO : Ligue pour la Protection des Oiseaux
+M2A : Mulhouse Alsace Agglomération
+PAS : Port Autonome de Strasbourg
+UFIB : Union Française des Industriels Pétrolières
+Haut de page
+
+Notes
+1 Chaque algorithme de force dirigée repose sur des formules mathématiques : Fruchterman-Rheingold (a – r = 3), Force Atlas 2 (a – r = 2) et LinLog (a – r = 1). Où : a = attraction et r = répulsion
+2 A noter que le défaut de Gephi 0.8.2 beta réside notamment dans la gestion des proportionnalités : les tailles des groupes typologies « B » et « C » sont différentes alors qu’ils regroupent chacun deux acteurs. Dans la légende, « C » est positionné avant « B », cette hiérarchie arbitraire peut influencer la gestion graphique des proportionnalités.
+3 Lois Grenelle I et II, respectivement du 3 août 2009 et du 12 juillet 2010. La gouvernance à 5 des lois Grenelle vise à associer l’ensemble des partenaires économiques, sociaux, politiques et institutionnels dans la réflexion sur la transition énergétique, intégrant les collectifs associatifs, notamment de protection de l’environnement.Haut de page
+
+Table des illustrations
+
+
+
+
+
+
+Titre
+Figure 1 : Démarche méthodologique en 5 étapes
+
+
+URL
+http://journals.openedition.org/cybergeo/docannexe/image/27460/img-1.png
+
+
+Fichier
+image/png, 767k
+
+
+
+
+
+
+
+Titre
+Figure 2 : Exemple général de construction et de lecture des graphes
+
+
+URL
+http://journals.openedition.org/cybergeo/docannexe/image/27460/img-2.jpg
+
+
+Fichier
+image/jpeg, 140k
+
+
+
+
+
+
+
+Titre
+Figure 3 : Partitionnement par attribut « typologie » ; graphe généré avec Gephi 0.8.2 beta
+
+
+URL
+http://journals.openedition.org/cybergeo/docannexe/image/27460/img-3.jpg
+
+
+Fichier
+image/jpeg, 120k
+
+
+
+
+
+
+
+Titre
+Figure 4 : Résultat BD1 - Visualisation des 42 acteurs principaux (sans filtre) ; graphe généré avec Gephi 0.8.2 beta : Algorithme Force Atlas 2
+
+
+URL
+http://journals.openedition.org/cybergeo/docannexe/image/27460/img-4.jpg
+
+
+Fichier
+image/jpeg, 212k
+
+
+
+
+
+
+
+Titre
+Figure 5 : Résultat final - Partitionnement par attribut « typologie » ; graphe généré avec Gephi 0.8.2 beta
+
+
+URL
+http://journals.openedition.org/cybergeo/docannexe/image/27460/img-5.jpg
+
+
+Fichier
+image/jpeg, 168k
+
+
+
+
+
+
+
+Titre
+Figure 6 : Les relations partenariales entre acteurs de la scène énergétique en Alsace ; graphe généré avec Gephi 0.8.2 beta : algorithme Force Atlas 2
+
+
+URL
+http://journals.openedition.org/cybergeo/docannexe/image/27460/img-6.jpg
+
+
+Fichier
+image/jpeg, 200k
+
+
+
+
+
+
+
+Titre
+Figure 7 : Les partenaires d’energivie.info. Avec energivie.info (a) ; sans energivie.info (b)
+
+
+URL
+http://journals.openedition.org/cybergeo/docannexe/image/27460/img-7.jpg
+
+
+Fichier
+image/jpeg, 152k
+
+
+
+
+
+
+
+Titre
+Figure 8 : Position des acteurs administratifs ; graphe généré avec Gephi 0.8.2 beta : Algorithme Force Atlas 2. Partition avec 3 typologies, administration internationale, centrale et territoriale / Carte 1 : Population des communes de la région Alsace
+
+
+URL
+http://journals.openedition.org/cybergeo/docannexe/image/27460/img-8.png
+
+
+Fichier
+image/png, 750k
+
+
+
+
+
+
+
+Titre
+Figure 9 : Sous-graphes centrés sur trois acteurs alsaciens (a) M2A, (b) la Région Alsace et (c) l’EMS. Graphe généré avec Gephi 0.8.2 beta : Algorithme Force Atlas 2, Partition plage de degré 4
+
+
+URL
+http://journals.openedition.org/cybergeo/docannexe/image/27460/img-9.jpg
+
+
+Fichier
+image/jpeg, 148k
+
+
+Haut de page
+
+Pour citer cet article
+Référence électronique
+ Sophie Buessler et Christiane Weber, « Energie et acteurs : application de la méthode des graphes aux acteurs alsaciens », Cybergeo : European Journal of Geography [En ligne], Espace, Société, Territoire, document 765, mis en ligne le 22 janvier 2016, consulté le 05 septembre 2018. URL : http://journals.openedition.org/cybergeo/27460 ; DOI : 10.4000/cybergeo.27460 Haut de page
+
+Auteurs
+Sophie Buessler
+Laboratoire Image Ville Environnement UMR-7362 C.N.R.S./Université de Strasbourg, France Agence de l’Environnement et de la Maîtrise de l’Energie d’Angers (organisme financeur) Doctorante en géographiesophie.buessler@gmail.com
+Christiane Weber
+Laboratoire Image Ville Environnement UMR-7362 C.N.R.S./Université de Strasbourg, France Directrice de recherche au C.N.R.S. christiane.weber@live-cnrs.unistra.fr
+Articles du même auteur
+
+
+Mobilités actives et santé : apports et limites d’un protocole de mesure de la marche et du vélo combinant des capteurs de mouvements (GPS et accéléromètres) [Texte intégral]
+Article 707
+Paru dans Cybergeo : European Journal of Geography, Systèmes, Modélisation, Géostatistiques
+
+
+Les images satellites Spot multi-dates et la métrique spatiale dans l’étude du changement urbain et suburbain – Le cas de la basse vallée de la Bruche (Bas-Rhin, France) [Texte intégral]
+Article 439
+Paru dans Cybergeo : European Journal of Geography, Systèmes, Modélisation, Géostatistiques
+
+
+Processus de croissance et limites urbaines [Texte intégral]
+Article 158
+Paru dans Cybergeo : European Journal of Geography, Dossiers
+
+
+Potential model application and planning issues  [Texte intégral]
+Article 132
+Paru dans Cybergeo : European Journal of Geography, Dossiers
+
+Haut de page
+
+Droits d’auteur
+© CNRS-UMR Géographie-cités 8504Haut de page
+Sommaire - Document précédent - Document suivant
+
+Navigation
+
+Index
+
+Auteurs
+Mots-clés
+Index géographique de référence
+Années
+Langues  
+
+Anniversaire
+
+Les 20 ans de Cybergeo  
+
+
+Rubriques
+
+Politique, Culture, Représentations
+Espace, Société, Territoire
+Systèmes, Modélisation, Géostatistiques
+Epistémologie, Histoire de la Géographie, Didactique
+Cartographie, Imagerie, SIG
+Environnement, Nature, Paysage
+Aménagement, Urbanisme 
+Transversalités
+
+Science et Toile
+GeOpenMod - Modèles et logiciels
+Data papers
+Dossiers 
+Vie Scientifique
+
+Débats
+E-Topiques
+Revue de livres
+Éditoriaux 
+La Revue
+
+Le projet scientifique
+Qui sommes-nous ?
+Note aux auteurs
+Contacts
+Crédits
+Politiques de publication  
+
+
+
+
+Accès membres
+
+Login
+
+Mot de passe
+
+Se connecter
+Annuler    
+
+Suivez-nous
+
+
+
+  
+
+Lettres d’information
+
+La Lettre d’OpenEdition  
+
+Affiliations/partenaires
+
+
+  
+
+
+ISSN électronique 1278-3366
+Plan du site – Le projet scientifique – Qui sommes-nous ? – Note aux auteurs – Note aux auteurs – Contacts – Crédits  – Flux de syndication
+Nous adhérons à OpenEdition Journals – Édité avec Lodel – Accès réservé
+
+
+
+
+
+    // tracker methods like "setCustomDimension" should be called before "trackPageView"
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'pk.js'; s.parentNode.insertBefore(g,s);
+    })();
+   
+
+

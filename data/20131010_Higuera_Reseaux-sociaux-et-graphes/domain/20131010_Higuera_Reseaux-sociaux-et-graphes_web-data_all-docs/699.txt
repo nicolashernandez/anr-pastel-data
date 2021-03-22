@@ -1,0 +1,797 @@
+https://www.researchgate.net/profile/Allel_Hadjali/publication/280045484_Une_Approche_Skyline_pour_l%27Interrogation_de_Bases_de_Donnees_de_Graphes/links/5612761108ae400c16aec00c/Une-Approche-Skyline-pour-lInterrogation-de-Bases-de-Donnees-de-Graphes.pdf
+
+Une Approche Skyline pour l’Interrogation de Bases de
+
+Donn´ees de Graphes
+
+Katia Abbaci, Allel Hadjali, Ludovic Li´etard, Daniel Rocacher
+
+To cite this version:
+
+Katia Abbaci, Allel Hadjali, Ludovic Li´etard, Daniel Rocacher. Une Approche Skyline pour
+l’Interrogation de Bases de Donn´ees de Graphes. Atelier Graphes et Appariement d’Objets
+Complexes (GAOC) organis´e conjointement avec la avec 11`eme Conf´erence Internationale Fran-
+cophone sur l’Extraction et la Gestion des Connaissances (EGC), Jan 2011, France. pp.14-25,
+2011. <hal-00670669>
+
+HAL Id: hal-00670669
+
+https://hal.archives-ouvertes.fr/hal-00670669
+
+Submitted on 15 Feb 2012
+
+HAL is a multi-disciplinary open access
+archive for the deposit and dissemination of sci-
+entiﬁc research documents, whether they are pub-
+lished or not. The documents may come from
+teaching and research institutions in France or
+abroad, or from public or private research centers.
+
+L’archive ouverte pluridisciplinaire HAL, est
+destin´ee au d´epˆot et `a la diﬀusion de documents
+scientiﬁques de niveau recherche, publi´es ou non,
+´emanant des ´etablissements d’enseignement et de
+recherche fran¸cais ou ´etrangers, des laboratoires
+publics ou priv´es.
+
+Une Approche Skyline pour l’Interrogation de Bases de
+
+Données de Graphes
+Katia Abbaci∗, Allel Hadjali∗,
+
+Ludovic Liétard∗∗, Daniel Rocacher∗
+
+∗IRISA/ENSSAT
+
+∗∗IRISA/IUT
+
+Rue de Kérampont BP 80518 Lannion, France
+
+{Katia.Abbaci, Allel.Hadjali, Daniel.Rocacher}@enssat.fr
+
+Rue Edouard Branly BP 30219 Lannion, France
+
+Ludovic.Lietard@univ-rennes1.fr
+
+Résumé. La recherche de graphes similaires à une requête à graphe est l’un des
+problèmes fondamentaux des bases de données de graphes. Les approches exis-
+tantes traitant ce problème s’appuient, généralement, sur une seule mesure de
+similarité entre les structures de graphes. Dans cet article, nous proposons une
+approche permettant de rechercher les graphes similaires au graphe d’une re-
+quête où la similarité entre graphes n’est plus un scalaire unique mais un vecteur
+de scalaires. Pour cela, nous introduisons le concept de skyline par similarité
+d’une requête à graphe déﬁni par un sous-ensemble de graphes, de la base de
+données interrogée, qui sont les plus similaires à la requête au sens de Pareto.
+Une méthode pour rafﬁner le résultat de la recherche est aussi proposée en s’ap-
+puyant sur le critère de diversité entre les graphes.
+
+1 Introduction
+
+Les graphes sont devenus de plus en plus importants dans la modélisation des données
+structurées et complexes dans différentes domaines d’applications récentes : la bio-informatique
+(Hu et al., 2005), la reconnaissance de formes (Conte et al., 2004), les documents XML (Zhang
+et al., 2006), la chimie (Klinger et Austin, 2005), les réseaux sociaux (Cai et al., 2005), etc.
+Toutes ces applications indiquent l’importance et la large utilisation du paradigme des Bases
+de Données de Graphes (BDGs). D’une manière générale, on peut classer les requêtes adres-
+sées à une BDG en deux catégories (Zeng et al., 2009) : (1) la recherche de graphes fondée
+sur une relation d’inclusion et (2) la recherche de graphes par similarité. La première catégo-
+rie se compose en deux sous-problèmes suivants : (i) la recherche de sous-graphes : soit une
+BDG D = {g1, g2,··· , gn} et une requête à graphe q (dite requête sous-graphe), il s’agit de
+rechercher tous les graphes gi ∈ D tel que q est un sous-graphe de gi (i.e., q ⊆ gi) ; (ii) la
+recherche de super-graphes : soit une BDG D = {g1, g2,··· , gn} et une requête à graphe
+q (dite requête super-graphe), il s’agit de rechercher tous les graphes gi ∈ D tel que q est
+un super-graphe de gi (i.e., q ⊇ gi). Les deux sous-problèmes font appel à la procédure de
+vériﬁcation d’isomorphisme de sous-graphes, qui est NP-Complet. Ainsi, plusieurs approches
+
+Skyline par Similarité pour Répondre aux Requêtes à Graphe
+
+de traitement de requêtes à graphe, utilisant des techniques d’indexation, ont été développées
+pour réduire l’espace de recherche et résoudre efﬁcacement ces deux sous-problèmes (Chen
+et al., 2007; Zhang et al., 2007, 2009).
+
+Quant à la deuxième catégorie (i.e., recherche de graphes par similarité), qui consiste à
+rechercher tous les graphes d’une BDG structurellement similaires au graphe de la requête,
+est apparue comme une nouvelle tendance pour les raisons suivantes. Premièrement, de nom-
+breuses et réelles BDGs sont de nature bruitée et incomplète, d’où la nécessité d’un appa-
+riement approximatif de graphes. Deuxièmement, plusieurs applications modernes préfèrent
+les résultats d’un appariement approximatif plutôt que ceux d’un appariement exact car ils
+véhiculent davantage d’informations, comme ce qui pourrait être manquant ou superﬂu dans
+un graphe de requête ou dans une BDG. Ainsi, plusieurs approches ont été proposées pour
+répondre aux requêtes de recherche de graphes par similarité (ou simplement, requêtes par
+similarité). Voir (Yan et al., 2005; He et Singh, 2006; Tian et Patel, 2008; Shang et al., 2010).
+Le point commun entre toutes ces approches est l’utilisation d’une seule mesure pour éva-
+luer la similarité entre graphes. Toutefois, un graphe est une structure complexe et comprend
+une multitude de caractéristiques de base. Il est alors difﬁcile de donner une déﬁnition signiﬁ-
+cative de la similarité entre graphes en utilisant un seul scalaire.
+
+Dans cet article, nous préconisons que plusieurs indices sont nécessaires pour évaluer d’une
+manière signiﬁcative et efﬁcace la similarité entre graphes. Chaque indice est dédié à mesurer
+une distance (ou similarité) locale afférent à un aspect donné dans la structure du graphe. Ainsi,
+la similarité entre graphes est caractérisée par un vecteur de mesures de distances locales au lieu
+d’une seule mesure. De cette façon, on peut préserver l’information concernant la similarité sur
+différentes caractéristiques, lorsque l’on compare deux graphes.
+
+Nous proposons une nouvelle approche de traitement de requêtes par similarité en utili-
+sant la notion de skyline par similarité. D’une manière générale, le skyline par similarité d’une
+requête à graphe est déﬁni par le sous-ensemble des graphes de la BDG interrogée les plus
+similaires à la requête au sens de Pareto. L’idée est d’effectuer une comparaison multidimen-
+sionnelle entre graphes en termes de d mesures de distances locales et d’identiﬁer les graphes
+qui sont maximalement similaires au sens d’une relation de dominance par similarité. Les
+principales contributions de l’article sont :
+
+1. Nous introduisons la notion de similarité composée entre graphes (SCG) et déﬁnissons
+
+ensuite la relation de dominance par similarité entre graphes.
+
+2. En se basant sur cette relation de dominance, nous proposons une déﬁnition formelle du
+skyline par similarité entre graphes, i.e., les graphes de la base interrogée maximalement
+similaires au graphe de la requête au sens de Pareto.
+
+3. Pour réduire la taille du skyline, qui est souvent très importante, nous proposons une
+méthode permettant d’extraire un sous-ensemble de graphes qui est aussi divers que
+possible, mais dont la taille est raisonnable.
+
+L’article est structuré comme suit. La section 2 introduit quelques notions préliminaires.
+La section 3 discute quelques travaux apparentés. La section 4 décrit des mesures de calcul de
+similarité entre graphes déjà existantes et leur interprétations. Dans la section 5, nous intro-
+duisons la notion de skyline par similarité dédiée aux requêtes à graphe. La section 6 présente
+un exemple détaillé. Dans la section 7, nous proposons une méthode pour rafﬁner les résultats
+retournés dans le skyline. La section 8 conclut l’article.
+
+K.Abbaci et al.
+
+2 Notions préliminaires
+2.1 Rappel sur les requêtes skyline
+
+Les requêtes skyline (Borzsonyi et al., 2001) représentent un paradigme très populaire et
+puissant pour extraire des objets d’un ensemble de données multidimensionnel. Elles s’ap-
+puient sur le principe de dominance de Pareto qui peut être déﬁni comme suit :
+
+Déﬁnition 1. Soit r un ensemble de points multidimensionnels et p = (p1, p2, . . ., pd) et q
+= (q1, q2, . . ., qd) deux points de r. On dit que p domine (au sens de Pareto) q ssi sur chaque
+dimension pi ≤ qi (pour 1 ≤ i ≤ d) et sur au moins une dimension pj < qj.
+petite, meilleure elle est. On dit alors que p domine (est préféré à) q et on note p (cid:31) q.
+
+Par souci de simplicité et sans perte de généralité, nous supposons que plus la valeur pi est
+
+Déﬁnition 2. Le skyline de r est le sous-ensemble des points non-dominés par aucun autre
+
+point.
+
+Les requêtes skyline calculent donc l’ensemble des tuples optimaux au sens de Pareto dans
+
+une relation, i.e., les tuples qui sont dominés par aucun autre tuple dans la même relation.
+
+Exemple 1. Considérons une base de données contenant des informations sur des hôtels
+
+comme indiqué dans le tableau 1 (où la dimension d = 2).
+
+Hôtel
+H1
+H2
+H3
+
+Prix(e)
+
+Distance (Km)
+
+4.0
+3.0
+2.5
+
+150
+110
+240
+
+TAB. 1 – Exemple d’hôtels.
+
+Considérons une personne qui cherche un hôtel aussi proche que possible de la plage et
+ayant un prix faible. On peut vériﬁer que le skyline résultant S contient les hôtels H2 et H3,
+car H1 est dominé par H2.
+
+2.2 Quelques déﬁnitions de base
+
+Déﬁnition 3 (Graphe). Un graphe g est déﬁni par un quadruplet (V, E, L, l) où V est l’en-
+semble des nœuds, E est l’ensemble des arêtes, L est l’ensemble des étiquettes et l est la fonc-
+tion d’étiquetage qui met en correspondance chaque nœud ou arête avec une étiquette de L.
+
+Par souci de clarité, les graphes considérés sont étiquetés et non-orientés (différents nœuds
+peuvent avoir la même étiquette). La taille d’un graphe g est déﬁnie comme suit : |g| = |E(g)|
+(i.e., la taille d’un graphe est le nombre de ses arêtes).
+Déﬁnition 4 (Isomorphisme de graphes). Soit deux graphes g = (V, E, L, l) et g’ = (V’, E’,
+L’, l’), g est isomorphe à g’ (dénoté par g ≈ g(cid:48)) s’il existe une bijection f : V → V’, telle que
+
+1. ∀ v ∈ V, f(v) ∈ V’ et l(v) = l’(f(v)) ;
+2. ∀ (u, v) ∈ E, (f(u), f(v)) ∈ E’ et l(u, v) = l’(f(u), f(v)).
+Déﬁnition 5 (Isomorphisme de sous-graphes). Soit deux graphes g = (V, E, L, l) et g’ = (V’,
+E’, L’, l’), g est isomorphe de sous-graphes à g’ s’il existe une injection f : V → V’, telle que
+
+Skyline par Similarité pour Répondre aux Requêtes à Graphe
+
+1. ∀ v ∈ V, f(v) ∈ V’ et l(v) = l’(f(v)) ;
+2. ∀ (u, v) ∈ E, (f(u), f(v)) ∈ E’ et l(u, v) = l’(f(u), f(v)).
+Déﬁnition 6 (Sous-graphe v.s. super-graphe). Soit deux graphe g = (V, E, L, l) et g’ = (V’,
+E’, L’, l’), g est dit sous-graphe de g’ (ou g’ est un super-graphe de g), dénoté par g ⊆ g’ (ou
+g’ ⊇ g), s’il existe un isomorphisme de sous-graphes de g à g’.
+
+Déﬁnition 7 (Sous-graphe commun maximal, SCM). Soit deux graphes g1 et g2, le sous-
+graphe commun maximal de g1 et g2 est le plus grand sous-graphe connecté de g1 qui est
+isomorphe de sous-graphe à g2, dénoté par g’= SCM(g1, g2).
+
+3 Travaux apparentés
+
+L’étude présentée dans cet article peut être apparentée avec les travaux effectués dans les
+
+domaines des requêtes skyline et des requêtes de recherche de graphes par similarité.
+Requêtes skylines. Elles ont reçu l’attention de nombreux chercheurs. Plusieurs études ont été
+menées pour développer des algorithmes efﬁcaces et introduire des variantes pour les requêtes
+skyline (Pei et al., 2007; Yiu et Mamoulis, 2007; Khalefa et al., 2008; Hadjali et al., 2010).
+Pour autant que nous le sachions, il n’existe pas de travaux portant sur les requêtes skyline
+dans un contexte d’interrogation de BDGs, excepté, le travail de Zou et al. (2010) qui étudie
+les requêtes skyline dynamique dans le cadre d’un graphe de grande taille. Dans notre cas,
+c’est un autre type de skyline (i.e. skyline par similarité) sur un ensemble de graphes qui est
+étudié.
+Requêtes par similarité. Plusieurs approches ont été développées pour traiter les requêtes
+par similarité. Graﬁl (Yan et al., 2005) applique une recherche par similarité de sous-structures
+dans une BDG à large échelle. Il retourne tous les graphes de la base de données qui contiennent
+approximativement le graphe de la requête. C-Tree (He et Singh, 2006) est un autre outil pour
+la recherche par similarité de sous-graphes. Il est basé sur la distance d’édition entre la re-
+quête et les graphes candidats. Tale (Tian et Patel, 2008) propose une technique d’appariement
+innovante qui distingue les nœuds par leur importance dans la structure du graphe. Cette tech-
+nique met d’abord en correspondance les nœuds importants d’une requête à graphe, ensuite,
+elle étend progressivement ces correspondances. Récemment, Shang et al. (2010) ont proposé
+une technique répondant aux requêtes super-graphes où le problème de recherche par similarité
+de super-graphes est converti en un problème de détection de σ-sous-graphes manquants, où
+σ est un seuil de tolérance d’erreurs. Les deux approches C-Tree et Tale utilisent la distance
+d’édition pour mesurer la similarité entre graphes, tandis que les travaux réalisés par Yan et al.
+(2005) et Shang et al. (2010) utilisent la notion de sous-graphe commun maximal.
+
+Comme on peut le constater, toutes les approches proposées et dédiées aux requêtes par
+similarité utilisent un seul indice pour mesurer la similarité entre deux graphes. En procédant
+ainsi, la similarité entre deux graphes n’est pas entièrement capturée car des similitudes rela-
+tives à certaines caractéristiques du graphe pourraient être ignorées. Ceci est principalement
+dû au fait que chaque indice de similarité entre graphes peut être vu comme une mesure lo-
+cale qui exprime seulement une ressemblance au regard d’un seul aspect dans la structure des
+graphes (voir la section 4). Par comparaison avec les travaux ci-dessus, notre approche, d’une
+part, repose sur une mesure de similarité composée entre graphes, et d’autre part, retourne un
+ensemble de graphes dominants par similarité au sens de Pareto pour répondre à une requête.
+
+K.Abbaci et al.
+
+4 Similarité de graphes : une vue sémantiques
+
+Plusieurs modèles ont été proposés (Bunke, 1997; Bunke et Shearer, 1998; Wallis et al.,
+2001) pour mesurer la similarité (ou la distance) entre deux graphes. Ci-après, nous présentons
+les mesures les plus utilisées pour déterminer les similarités entre graphes1.
+
+4.1 La distance d’édition de graphes
+
+La distance d’édition de graphes (Bunke, 1997; He et Singh, 2006) se base sur les opé-
+rations d’édition de graphes nécessaires pour transformer un graphe en un autre. Générale-
+ment, l’ensemble d’opérations d’édition considéré inclut : l’insertion, la suppression et le ré-
+étiquetage de nœuds/d’arêtes. Chaque opération d’édition est associée à un coût (un nombre
+réel non négatif) en fonction de l’intensité de distorsion induite par la transformation. Soit
+e_op une opération d’édition et c(e_op) son coût. Le coût d’une séquence d’opérations d’édi-
+tion, s = e_op1, . . . , e_opn est donné par
+
+c(s) =(cid:80)n
+
+i=1 c(e_opi).
+
+En pratique, il est difﬁcile de déterminer le coût de chaque opération d’édition élémentaire.
+Par souci de simplicité, on considère, ici, coût est égale à une mesure de distance uniforme : la
+distance entre deux nœuds/arêtes est 1 si leurs étiquettes sont différentes ; 0 sinon.
+
+Déﬁnition 8 (Distance d’édition de graphes). La distance d’édition entre deux graphes g1
+et g2 est égale au coût minimal, résultante de toutes les séquences d’opérations d’édition pos-
+sibles, qui transforment g1 en g2, i.e.,
+
+DistEd(g1, g2) = mins∈E_opc(s)
+
+(1)
+
+où E_op dénote l’ensemble de toutes les séquences d’opérations d’édition possibles qui trans-
+forment g1 en g2. Plus DistEd(g1, g2) est faible, plus les deux graphes sont similaires. Cette
+mesure de distance s’applique à tout type de graphes sans aucune restriction.
+
+FIG. 1 – Exemple de graphes étiquetés.
+
+Exemple 2. Considérons les graphes étiquetés de la ﬁgure 1. La séquence d’opérations
+d’édition nécessaire pour transformer g1 en g2 est : (i) une suppression d’arêtes, i.e., l’arête
+(d, e), (ii) un ré-étiquetage d’arêtes, i.e., changer l’étiquette de l’arête (a, d) de 1 à 4, (iii) un
+ré-étiquetage de nœuds, i.e., changer l’étiquette du nœud d de d à e, (iv) une insertion d’arêtes
+
+1Par souci d’espace, l’analyse de la complexité du calcul de chaque mesure n’est pas abordée dans cet article.
+
+Skyline par Similarité pour Répondre aux Requêtes à Graphe
+
+i.e., l’arête (a, f) avec l’étiquette 1. En utilisant des mesures de distance uniformes, on peut
+vériﬁer que cette séquence est la meilleure (i.e., la minimale). Ainsi, DistEd(g1, g2) = 4.
+
+Dans le contexte d’interrogation de BDGs, cette mesure de distance nous renseigne sur les
+
+caractéristiques non partagées par un graphe cible de la BDG et le graphe de la requête.
+
+4.2 La distance basée sur le SCM
+
+Bunke et Shearer (1998) ont développé un autre type de mesures de similarité entre graphes
+
+qui est basée sur le sous-graphe commun maximal (SCM).
+
+Déﬁnition 9 (Similarité basée sur le SCM). Soit deux graphes g1 et g2, la similarité entre
+
+graphes basée sur le SCM est déﬁnie comme suit,
+
+SimSCM (g1, g2) = |SCM (g1,g2)|
+max(|g1|,|g2|),
+où |SCM(g1, g2)| dénote le nombre d’arêtes dans SCM(g1, g2).
+Plus le SCM de deux graphes est large, plus leur similarité est élevée. La mesure SimSCM
+est normalisée (i.e., 0 ≤ SimSCM (g1, g2) ≤ 1) car |SCM(g1, g2)| ≤ |max(g1, g2)|. Ainsi, la
+mesure de distance entre graphes, DistSCM , dérivée de SimSCM peut s’écrire :
+
+DistSCM (g1, g2) = 1 − SimSCM (g1, g2)
+
+(2)
+
+L’avantage principal de l’approche basée sur le SCM est la non utilisation de fonctions de
+
+coût, palliant ainsi l’inconvénient principal de l’approche basée sur la distance d’édition.
+
+Example 3. Reprenons l’exemple 2. La distance basée sur le SCM entre g1 et g2 est cal-
+culée comme suit. Premièrement, le SCM (g1, g2) est identiﬁé, voir la ﬁgure 2. Ensuite, par
+application de (2), nous obtenons
+
+DistSCM (g1, g2) = 1 − |SCM (g1,g2)|
+
+max(|g1|,|g2|) = 0.33,
+
+où |SCM(g1, g2)| = 4 et max(|g1| ,|g2|) = 6.
+
+FIG. 2 – SCM de g1 et g2.
+
+Dans le contexte d’interrogation de BDGs, le SCM de deux graphes véhicule de l’informa-
+
+tion sur les caractéristiques partagées par un graphe de la base interrogée et la requête.
+
+4.3 La distance basée sur l’UG
+
+La mesure de distance basée sur l’union de graphes (UG), proposée par Wallis et al. (2001),
+
+est basée sur le principe de l’union de graphes.
+
+K.Abbaci et al.
+
+Déﬁnition 10 (Similarité basée sur l’UG). Soit deux graphes g1 et g2, la similarité entre
+
+graphes basée sur l’union de graphes est déﬁnie comme suit,
+
+SimU G(g1, g2) =
+
+|SCM (g1,g2)|
+
+|g1|+|g2|−|SCM (g1,g2)|,
+
+où le dénominateur représente la taille de l’union des deux graphes selon une vue ensembliste2.
+Cette mesure de similarité est aussi normalisée et son comportement est assez proche de
+celui de SimSCM . Il est facile de voir que SimU G(g1, g2) ≤ SimSCM (g1, g2) (ce qui si-
+gniﬁe que SimU G est une mesure plus exigeante que SimSCM ). L’utilisation de l’union de
+graphes (Wallis et al., 2001) est motivée par le fait que les changements dans la taille du
+plus petit graphe qui préservent le SCM(g1, g2) constant ne sont pas pris en compte dans
+SimSCM (g1, g2), tandis que la mesure SimU G(g1, g2) prend en compte cette variante.
+
+La mesure de distance de graphes dérivée de SimU G s’écrit :
+DistU G(g1, g2) = 1 − SimU G(g1, g2)
+
+(3)
+
+Exemple 4. Reprenons encore une fois les graphes de l’exemple 2. Par application de (3),
+
+la distance basée sur l’UG entre g1 et g2 est
+|SCM (g1,g2)|
+
+DistU G(g1, g2) = 1 −
+
+|g1|+|g2|−|SCM (g1,g2)| = 0.50,
+
+où |SCM(g1, g2)| = 4 (voir l’example 3) et |g1| = |g2| = 6.
+
+Dans le cadre d’interrogation de BDGs, cette similarité donne également des informations
+
+sur les aspects communs entre un graphe de la base interrogée et le graphe de la requête.
+
+5 Skyline par similarité entre graphes
+
+Dans ce qui suit, nous supposons que la similarité entre graphes est une notion composée,
+
+i.e., un vecteur de mesures de distance.
+
+Déﬁnition 11 (Similarité composée entre graphes, SCG). Soit g et g’ deux graphes, une
+
+similarité composée entre g et g’ est un vecteur de mesures de distance locales, dénotée par
+
+SCG(g, g(cid:48)) = (Dist1(g, g(cid:48)), Dist2(g, g(cid:48)), . . . , Distd(g, g(cid:48))),
+
+où Disti(g, g(cid:48)), pour i = 1, . . ., d, représente une mesure de distance locale entre g et g’.
+
+Soit D = {g1, g2, . . . , gn} une BDG et q une requête par similarité. Pour répondre à q,
+l’idée est de procéder à une comparaison multidimensionnelle entre graphes en termes de d
+mesures de distance (locales) pour rechercher les graphes qui sont maximalement similaires à
+q au sens de la relation de dominance par similarité déﬁnie ci-dessous.
+
+Déﬁnition 12 (Relation de dominance par similarité). Soit une requête à graphe q et deux
+graphes g et g’, on dit que g’ est dominé par similarité par g dans le contexte de q, dénoté par
+g (cid:31)q g’, ssi les deux conditions suivantes sont vériﬁées :
+
+1. ∀i ∈ {1, . . . , d}, Disti(g, q) ≤ Disti(g(cid:48), q),
+2. ∃k ∈ {1, . . . , d}, Distk(g, q) < Distk(g(cid:48), q).
+2Cette mesure de similarité ressemble à l’indice de Jaccard utilisé pour mesurer la similarité entre deux ensembles
+
+A et B, i.e., J(A, B) = |A ∩ B| / |A ∪ B|.
+
+Skyline par Similarité pour Répondre aux Requêtes à Graphe
+
+Plus simplement, la relation g (cid:31)q g(cid:48) est vériﬁée si g n’est pas moins similaire à q que
+g’ dans toutes les dimensions et (strictement) plus similaire à q que g’ dans au moins une
+dimension. On peut observer que g est potentiellement plus intéressant que g’ comme graphe
+réponse. Par conséquent, l’ensemble des graphes les plus similaires à q sont ceux qui ne sont
+pas dominés (au sens de la déﬁnition 13). De tels graphes, appelés graphes optimaux au sens
+de Pareto, représentent ce que nous dénotons par le skyline de graphes par similarité (SGS) :
+
+SGS(D, q) = {g ∈ D| (cid:54) ∃g(cid:48) ∈ D, g(cid:48) (cid:31)q g}
+
+(4)
+
+où g(cid:48) (cid:31)q g signiﬁe que g est dominé par similarité par g’.
+
+Pour illustrer notre approche, nous présentons dans la section suivante un exemple où d
+= 3. SCG(g, q) est alors un vecteur de trois composantes exprimées en termes de mesures de
+distance locales décrites dans la section 4, i.e.,
+
+SCG(g, q) = (DistEd(g, q), DistSCM (g, q), DistU G(g, q)).
+
+FIG. 3 – La base de données D et le graphe requête q.
+
+6 Un exemple illustratif
+
+Soit D = {g1, g2, g3, g4, g5, g6} une BDG et q un requête par similarité (voir la ﬁgure 3).
+Aﬁn de retourner les réponses les plus intéressantes par rapport à q, on calcule le skyline de
+graphes par similarité SGS(D, q). Les valeurs de |SCM(gi, q)|, pour i =1, . . .,6, sont données
+dans le tableau 2 et les vecteurs de similarité entre graphes SCG(gi, q), pour i=1, . . .,6, sont
+résumés dans le tableau 3. Par application de (4), l’ensemble des graphes optimaux au sens de
+Pareto, i.e. le skyline de graphes par similarité, est donné par SGS(D, q) = {g1, g3, g4, g6}.
+Il est aisé de voir que g2 /∈ SGS(D, q) car il est dominé par g4 et g5 /∈ SGS(D, q) car
+il est dominé par g1. Les graphes de D maximalement similaires à q sont g1, g3, g4 et g6. En
+effet,
+
+K.Abbaci et al.
+
+Paire de graphes
+(g1, q)
+(g2, q)
+(g3, q)
+(g4, q)
+(g5, q)
+(g6, q)
+
+|SCM(gi, q)|
+
+4
+4
+3
+5
+5
+6
+
+TAB. 2 – Informations sur |SCM(gi, q)|.
+
+(g1, q)
+(g2, q)
+(g3, q)
+(g4, q)
+(g5, q)
+(g6, q)
+
+DistEd(gi, q)
+
+4
+3
+2
+3
+4
+4
+
+DistSCM (gi, q)
+
+0.33
+0.43
+0.50
+0.38
+0.44
+0.40
+
+DistU G(gi, q)
+
+0.50
+0.56
+0.67
+0.44
+0.50
+0.40
+
+TAB. 3 – Mesures de distance.
+
+– Le graphe g1 est le plus intéressant au regard de la mesure DistSCM . Cela est dû aux
+raisons suivantes : i) g1 satisfait un maximum de caractéristiques requises par q que
+d’autres graphes de même taille ; ii) g1 et q sont de même taille. Mais, g1 est le moins
+intéressant au regard des caractéristiques manquantes et superﬂues (i.e., DistEd).
+
+– Le graphe g3 est le meilleur au regard de la mesure DistEd. Cela signiﬁe, d’une part,
+qu’il est le plus intéressant au regard du nombre de désaccords avec q. D’autre part, g3
+est beaucoup moins satisfaisant au regard des concordances avec q au sens de SCM.
+– Le graphe g6 est le plus intéressant au regard de la mesure DistU G. Cela est dû au fait
+que g6 ⊃ q. Mais, c’est le moins intéressant au regard du critère basé sur les caractéris-
+tiques superﬂues (i.e., DistEd).
+
+– Le graphe g4 peut être considéré comme un bon compromis entre les trois mesures
+
+DistEd, DistSCM et DistU G.
+
+Examinons maintenant les résultats obtenus en utilisant seulement une seule mesure de
+similarité entre graphes. Si on s’intéresse aux k (= 3) meilleures réponses, g2 est retourné
+comme graphe candidat en utilisant l’approche basée sur la distance d’édition. Tandis qu’avec
+l’approche basée sur le skyline, g2 n’est pas retourné à l’utilisateur car g4 est meilleur.
+
+7 Rafﬁnement du Skyline
+
+Un des problèmes qui peut survenir lors du calcul de l’ensemble SGS (et d’un skyline en
+général) est sa taille qui est souvent très importante. D’un point de vue utilisateur, il est très
+souhaitable de disposer d’un critère pertinent permettant de sélectionner un sous-ensemble, de
+taille raisonnable, des graphes les plus intéressants parmi ceux du skyline SGS. Une solution à
+
+Skyline par Similarité pour Répondre aux Requêtes à Graphe
+
+ce problème est d’utiliser le critère de diversité (McSherry, 2002) pour sélectionner un sous-
+ensemble de graphes qui est aussi divers que possible, et ainsi fournir à l’utilisateur une image
+globale de l’ensemble des éléments de SGS.
+
+Soit S un sous-ensemble de SGS. La diversité de S signiﬁe que les graphes qu’il contient
+doivent être dissimilaires. L’objectif est d’extraire à partir de SGS un sous-ensemble S de taille
+k (k est un paramètre déﬁni par l’utilisateur) avec une diversité maximale. En s’inspirant des
+travaux de Kukkonen et Lampinen (2007), l’approche proposée déﬁnit la diversité de S (⊆
+SGS) de taille k par un vecteur Div(S) = (v1, v2, v3) tel que
+
+vi = min{Disti(g, g(cid:48))|g, g(cid:48) ∈ S},
+
+où, pour i=1, . . ., 3, Dist1 = DistEd, Dist2 = DistSCM et Dist3 = DistU G. La valeur vi
+exprime la diversité sur la ime dimension du sous-ensemble S.
+Aﬁn d’identiﬁer le sous-ensemble S, nous considérons tous les sous-ensembles S ⊆ SGS
+avec |S| = k comme candidats et appliquons les étapes suivantes :
+
+Étape 1. Pour chaque dimension i (i = 1, . . .,3), ordonner d’une manière décroissante tous
+les sous-ensembles candidats S selon leur diversité vi. Soit rangi(S) le rang de S au regard de
+la i`eme dimension. Rang de valeur 1 signiﬁe la meilleure valeur de diversité et rang de valeur
+M signiﬁe la plus mauvaise valeur de diversité (M est le nombre de sous-ensembles de taille k
+de l’ensemble SGS).
+
+Etape 2. Évaluer un candidat S par : val(S) =(cid:80)
+
+i=1,...,3 rangi(S).
+
+Le sous-ensemble minimisant la somme de ses positions dans tous les rangs est considéré
+comme le sous-ensemble ayant la diversité maximale. Ainsi, S est caractérisé par
+
+val(S) = minSval(S), où S ⊆ SGS et |S| = k.
+Exemple 5. Reprenons l’exemple donné dans la section 6 où le skyline SGS(D, q) =
+{g1, g3, g4, g6}. Supposons maintenant que l’utilisateur est intéressé par les k (=2) meilleurs
+graphes au regard du critère de la diversité. On peut facilement vériﬁer que l’ensemble de tous
+les candidats contient 6 sous-ensembles de taille k, voir le tableau 4.
+
+S1 = {g1, g3}
+S2 = {g1, g4}
+S3 = {g1, g6}
+S4 = {g3, g4}
+S5 = {g3, g6}
+S6 = {g4, g6}
+
+v1
+0.86
+0.83
+0.87
+0.80
+0.83
+0.75
+
+v2
+0.67
+0.50
+0.60
+0.62
+0.70
+0.50
+
+v3
+0.80
+0.60
+0.67
+0.73
+0.77
+0.61
+
+TAB. 4 – Candidats avec leur diversité.
+
+L’étape 1 et 2 conduisent aux résultats décrits dans le tableau 5 à partir duquel on peut voir
+
+que val(S1) est la valeur minimale. Ainsi, S = S1 = {g1, g3}.
+
+8 Conclusion
+
+Dans cet article, nous avons proposé une approche permettant la recherche de graphes par
+similarité. Le concept clé de cette approche est la notion de skyline de graphes par similarité.
+
+K.Abbaci et al.
+
+r1
+2
+3
+1
+4
+3
+5
+
+r2
+2
+5
+4
+3
+1
+5
+
+r3
+1
+6
+4
+3
+2
+5
+
+S1
+S2
+S3
+S4
+S5
+S6
+
+V al(Si) =(cid:80)
+
+i=1,··· ,3 ri
+
+5
+14
+9
+10
+6
+15
+
+TAB. 5 – Évaluation des Candidats (ri = rangi).
+
+Ce type de skyline permet l’extraction de tous les graphes de la base de données interrogée
+qui ne sont dominés par aucun autre graphe de la base au sens de la relation de dominance
+par similarité déﬁnie. Chaque graphe réponse est retourné à l’utilisateur avec un vecteur de
+scores montrant les différentes similarités correspondant aux différentes caractéristiques avec
+le graphe de la requête. Nous avons aussi montré comment sélectionner un sous-ensemble de
+diversité maximale à partir d’un skyline de graphes par similarité. Nous travaillons actuelle-
+ment sur l’implémentation de l’approche pour démontrer son efﬁcacité et sa pertinence.
+
+Références
+
+Borzsonyi, S., D. Kossmann, et K. Stocker (2001). The skyline operator. In Proc. of ICDE,
+
+pp. 421–430.
+
+Bunke, H. (1997). On a relation between graph edit distance and maximum common subgraph.
+
+Pattern Recogn. Letters 18 (9), 689–697.
+
+Bunke, H. et K. Shearer (1998). A graph distance metric based on the maximal common
+
+subgraph. Pattern Recogn. Letters 19 (3-4), 255–259.
+
+Cai, D., Z. Shao, X. He, X. Yan, et J. Han (2005). Community mining from multirelational
+
+networks. In Proc. of PPKDD, pp. 445–452.
+
+Chen, C., X. Yan, P. S. Yu, J. Han, D.-Q. Zhang, et X. Gu (2007). Towards Graph Containment
+
+Search and Indexing. In Proc. of VLDB, Vienna, Austria, pp. 926–937.
+
+Conte, D., P. Foggia, C. Sansone, et M. Vento (2004). Thirty years of graph matching in
+
+pattern recognition. Inter. J. of Pattern Recogn. and Art. Intell. 18 (3), 265–298.
+
+Hadjali, A., O. Pivert, et H. Prade (2010). Possibilistic contextual skylines with incomplete
+
+preferences. In Proc. of SoCPaR, Paris, France.
+
+He, H. et A. K. Singh (2006). Closure-tree: An index structure for graph queries. In Proc. of
+
+ICDE, pp. 38–54.
+
+Hu, H., Y. Hang, J. Han, et X. Zhou (2005). Mining coherent dense subgraphs across massive
+
+biological network for fonctional discovery. Bioinformatics 1(1), 1–9.
+
+Khalefa, M. E., M. F. Mokbel, et J. J. Levandoski (2008).
+
+incomplete data. In Proc. of ICDE, pp. 556–565.
+
+Skyline query processing for
+
+Skyline par Similarité pour Répondre aux Requêtes à Graphe
+
+Klinger, S. et J. Austin (2005). Chemical similarity searching using a neural graph matcher.
+
+In Proc. of ESANN, pp. 479–484.
+
+Kukkonen, S. et J. Lampinen (2007). Ranking-dominance and many-objective optimization.
+
+In IEEE Congress on Evolutionary Computation, pp. 3983–3990.
+
+McSherry, D. (2002). Diversity-conscious retrieval. In Proc. of ECCBR, pp. 219–233.
+Pei, J., B. Jiang, X. Lin, et Y. Yuan (2007). Probabilistic skylines on uncertain data. In Proc.
+
+of VLDB, pp. 15–26.
+
+Shang, H., K. Zhu, X. Lin, Y. Zhang, et R. Ichise (2010). Similarity search on supergraph
+
+containment. In Proc. of ICDE, pp. 637–648.
+
+Tian, Y. et J. M. Patel (2008). Tale : A tool for approximate large graph matching. In Proc. of
+
+ICDE, Cancun, Mexico, pp. 963–972.
+
+Wallis, W. D., P. Shoubridge, M. Kraetz, et D. Ray (2001). Graph distances using graph union.
+
+Pattern Recogn. Letters 22 (6-7), 701–704.
+
+Yan, X., P. S. Yu, et J. Han (2005). Substructure similarity search in graph databases. In Proc.
+
+of ACM SIGMOD, pp. 766–777.
+
+Yiu, M. L. et N. Mamoulis (2007). Efﬁcient processing of top-k dominating queries on multi-
+
+dimensional data. In Proc. of VLDB, pp. 483–494.
+
+Zeng, Z., A. Tung, J. Wang, J. Feng, et L. Zhou (2009). Comparing stars: On approximating
+
+graph edit distance. In Proc. of VLDB, pp. 25–36.
+
+Zhang, N., T. Özsu, I. Ilyas, et A. Aboulnaga (2006). Fix: Feature-based indexing technique
+
+for xml documents. In Proc. of VLDB, pp. 259–270.
+
+Zhang, S., M. Hu, et J. Yang (2007). Treepi: A novel graph indexing method.
+
+ICDE, pp. 966–975.
+
+In Proc. of
+
+Zhang, S., J. Z. Li, H. Gao, et Z. Zou (2009). A novel approach for efﬁcient supergraph query
+
+processing on graph databases. In Proc. of EDBT, pp. 204–215.
+
+Zou, L., L. Chen, M. T. Ozsu, et D. Zhao (2010). Dynamic skyline queries in large graphs. In
+
+Proc. of DASFAA, pp. 62–78.
+
+Summary
+
+One of the fundamental problems in graph databases is similarity search for graphs of
+interest. Existing approaches dealing with this problem rely on a single similarity measure
+between graph structures. In this paper, we suggest an approach allowing for searching similar
+graphs to a query graph where similarity between graphs is rather modelled by a vector of
+scalars than a unique scalar. To this end, we introduce the concept of similarity skyline of a
+query graph deﬁned by the subset of graphs of the target database that are the most similar
+to the query in a Pareto sense. A diversity-based method for reﬁning the retrieval result is
+proposed as well.
+
+

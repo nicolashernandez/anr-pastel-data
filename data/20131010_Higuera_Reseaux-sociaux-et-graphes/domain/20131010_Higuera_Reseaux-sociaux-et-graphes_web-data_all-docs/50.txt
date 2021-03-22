@@ -1,0 +1,428 @@
+http://fc.isima.fr/~beaudou/docs/article_cies.pdf
+
+Se repérer sans occuper trop d'espace.
+
+Résumé : Trouver son chemin en utilisant peu de ressources est un problème 
+récurrent de l'optimisation combinatoire. Deux stratégies extrêmes et opposées 
+sont de se promener aléatoirement dans notre espace (besoin de peu de ressource 
+mais un temps d'exécution potentiellement infini) ou de stocker une carte 
+détaillée afin de se repérer aisément et faire les bons choix pour parvenir à 
+son but (exécution rapide mais nécessité d'une mémoire importante). Le compromis 
+de ces stratégies consiste à accepter de l'imprécision pour alléger la quantité 
+d'information requise. Mais peut-on faire mieux ? 
+Dans le cadre de la théorie des graphes, nous proposons une approche valable 
+pour certains types de réseaux qui permet un traitement optimal du problème sans 
+nécessiter trop de ressources.
+
+Introduction
+
+Nous sommes régulièrement confrontés à la nécessité de trouver nos repères dans 
+un espace donné, afin d'atteindre un but que nous ne sommes pas toujours en 
+mesure de situer précisément à l'avance. Nous nous proposons de présenter 
+différentes méthodes plus ou moins efficaces pour résoudre ce problème 
+d'orientation dans certains espaces. Les espaces considérés sont multiples, du 
+réseau de transports urbains au réseau informatique ou même des satellites qui 
+doivent communiquer. La problématique est de trouver un chemin rapide vers le 
+destinataire de notre message sans avoir besoin de connaître entièrement le 
+réseau qui nous entoure. Afin de modéliser ce problème en s'abstrayant des 
+particularités spécifiques à chaque situation, nous extrayons les informations 
+essentielles et suffisantes grâce à la théorie des graphes, une théorie du 
+champs des mathématiques discrètes.
+
+Au sein de la communauté mathématique, il est possible de déterminer deux 
+branches spécifiques : les mathématiques dites discrètes, à opposer aux 
+mathématiques dites continues. Une classification selon d'autres critères est 
+bien entendu envisageable, mais c'est celle-ci qui nous intéresse ici.
+
+Il est assez commun de représenter les nombres sur une ligne, le plus souvent 
+dirigée vers la droite. Chaque point de cette droite correspond à un nombre réel 
+et entre deux tels nombres, il est toujours possible d'en trouver un troisième. 
+C'est l'approche continue. Dans le monde des mathématiques discrètes, nous nous 
+contentons de compter de un en un. Ainsi entre les nombres 1 et 2, il est 
+impossible de trouver un milieu. Telles des briques élémentaires, les nombres 
+peuvent ainsi être réduits jusqu'à ce 1 indivisible.
+
+Paradoxalement, cette branche des mathématiques qui pourrait sembler plus simple 
+au premier abord (d'aucun penserait qu'il y a alors « moins » de nombres à 
+considérer), fait surgir des problèmes souvent plus complexes que leurs 
+analogues continus, et bien souvent plus concrets. Nous pouvons ainsi arguer que 
+toute matière peut être décomposées en particules certes petites mais tout de 
+même indivisibles. Dans un verre, il est impossible d'ajouter une quantité 
+quelconque d'eau, on ne verse qu'un nombre entier de molécules H2O. 
+
+Un des champs d'étude de cette branche mathématique est la théorie des graphes. 
+Ce modèle polymorphe permet de synthétiser grâce à des outils simples les 
+informations de nombreux problèmes, en particulier dans le domaine de la 
+communication. En s'abstrayant de ces problèmes précis pour ne considérer que le 
+squelette commun sous-jacent (les graphes), la recherche a pu élaborer des 
+outils génériques qui résolvent ainsi des problèmes d'origines variées et dont 
+la ressemblance intrinsèque n'est pas toujours évidente.
+
+Après une brève introduction des termes et notions nécessaires de la théorie des 
+graphes, nous énoncerons le problème principal étudié et donnerons un bref 
+aperçu des différentes recherches menées récemment à ce sujet.
+
+I La théorie des graphes : bestiaire
+
+I-1 L'objet graphe formel
+
+Un graphe se définit sur un ensemble d'éléments discret, c'est-à-dire que l'on 
+peut les compter (dans notre exemple il s'agit des lettres de l'alphabet de 'a' 
+à 'g'). Sans information supplémentaire, il est difficile de s'avancer à 
+commenter une éventuelle structure de ces ensembles. 
+
+Nous allons donc ajouter une relation de 
+voisinage entre ces éléments. Pour toute 
+paire de sommet, nous décidons s'ils sont ou 
+non voisins. Si deux éléments sont voisins, 
+on dit qu'ils sont reliés par une arête. Sur 
+l'exemple ci-contre, les lettres 'a' et 'e' 
+sont reliées par une arête contrairement aux 
+lettres 'd' et 'g'.
+
+Afin de mieux visualiser ces objets, nous 
+sommes souvent amenés à représenter ces 
+graphes sur le plan (une feuille de papier). 
+Nous associons alors un point de le feuille pour chaque sommet du graphe et 
+relions par une ligne les sommets qui sont voisins. Une confusion courante 
+consiste à assimiler un graphe à sa représentation. Or, le graphe n'est rien 
+d'autre que l'entité abstraite constituée des sommets et de cette relation de 
+voisinage. Il peut être représenté par divers dessins tous différents les uns 
+des autres. On dit que ces dessins sont plusieurs représentations d'un même 
+graphe.
+
+I-2 Un modèle pour quoi ?
+
+Intéressons-nous aux objets du monde réels qui peuvent être représentés par des 
+graphes. 
+
+Dans un premier temps, le terme de voisinage nous fait penser à la notion 
+courante d'habitations voisines. Nous pouvons alors prendre comme ensemble de 
+sommets les habitations d'une ville. Les arêtes du graphe relient alors deux 
+sommets si les habitations correspondantes sont voisines. Nous verrons alors 
+sans doute apparaître des zones denses pour les immeubles où chaque appartement 
+est voisins de nombreux autres, tandis que les zones rurales feront apparaître 
+des maisons isolées qui ne sont reliées à aucune autre.
+
+Nous pouvons aussi, et c'est le modèle qui sera privilégié pour aborder le 
+problème du chemin, considérer les stations d'un réseau métropolitain comme les 
+sommets du graphe. Deux stations sont voisines si elles sont consécutives sur 
+une ligne de métro. Ainsi, dans le métro parisien, nous pouvons trouver une 
+arête entre les stations Corvisart et Glacière mais pas entre Glacière et place 
+d'Italie. Nous obtenons alors le graphe du réseau urbain. Ce graphe nous est 
+coutumier dans le sens où nous pouvons en observer une représentation à chaque 
+fois que nos pas nous entrainent dans une bouche de métro. Nous nous appuierons 
+sur un réseau de métro imaginaire de la ville de Nouméa.
+
+Nous donnons d'autres exemples. Considérez une compagnie aérienne ; la carte 
+représentant les lignes directes dont elle assure le fonctionnement est encore 
+une fois une représentation d'un graphe. Les sommets en sont les villes 
+desservies et les arêtes relient les villes de départ et d'arrivée de chacune 
+des lignes considérées. Structurellement, ces graphes possèdent généralement une 
+ville centrale qui dessert toute les villes de la périphérie. On parle alors de 
+structure en étoile.
+
+Pour les réseaux routiers, rien ne nous empêche de prendre les villes de France 
+comme sommets et de relier par un arêtes deux sommets dont les villes 
+correspondantes sont reliées par une route directe. Une représentation d'un tel 
+graphe se trouve dans tout bonne atlas routier.
+
+Les réseaux de transport se prêtent donc bien à ce genre de modélisation. Il en 
+va de même pour les réseaux de communication. Associons un sommet à chaque 
+satellite gravitant autour de notre planète et matérialisons par une arête le 
+fait que deux satellites puissent communiquer. De nouvelles questions commencent 
+alors à apparaître : est-il possible à l'aide de communications intermédiaires 
+d'envoyer un message de n'importe quel satellite A à n'importe quel satellite 
+B ?
+
+La chimie représente également un domaine riche pour la modélisation par les 
+graphes. Chaque molécule peut ainsi être associée à un graphe dont les sommets 
+sont les atomes et les arêtes correspondent aux liaisons inter-atomiques.
+
+Enfin, pour clore cet inventaire tronqué des domaines d'application de la 
+théorie des graphes, il convient de mentionner les graphes des réseaux sociaux. 
+Les sommets représentent alors des personnes et les arêtes modélisent des 
+relations d'amitié (Facebook), de filiation (arbres généalogiques), et tout 
+autre type d'interaction entre les personnes. L'émergence de ces modes de 
+fonctionnement a récemment ouvert un champs d'étude fascinant et riche en 
+surprises.
+
+Nous pouvons donc remarquer l'omniprésence de cette structure de graphe qui peut 
+potentiellement modéliser une infinité de choses au premier rang desquelles les 
+réseaux informatiques. Nous sommes alors en mesure d'observer certaines 
+propriétés de ces graphes. Mais le propre du chercheur en mathématiques est de 
+vouloir connaître les propriétés intrinsèques de ces objets, d'être en mesure de 
+les classifier et de pouvoir répondre à des questions difficiles pour chacune de 
+ces classes. Quelles sont ces questions ?
+
+I-3 Un modèle pourquoi ?
+
+Après avoir modélisé les données d'un problème par un graphe, il est important 
+de pouvoir énoncer la question posée en des termes correspondants. Nous donnons 
+dans les paragraphes suivants quelques exemples de questions courantes dans le 
+domaine des graphes.
+
+La majorité des problèmes de cheminement dans les réseaux, qu'il s'agisse de 
+transmettre un message dans un réseau de communication ou de trouver un chemin 
+de livraison dans un réseau de transports, peuvent être considérés comme la 
+recherche d'une suite de sommets voisins dans le graphe correspondant.
+
+Formellement un chemin entre un sommet x et un sommet y est une séquence finie 
+de sommets x0, x1... xn tels que x0 = x, xn = y et que deux sommets consécutifs xi 
+et xi+1 sont voisins dans le graphe. Nous verrons par la suite que nous pouvons 
+affiner encore ce problème en donnant une valeur à chaque chemin (coût ou 
+longueur) qu'il s'agira d'optimiser pour répondre à la question posée. Dans le 
+premier graphe donné en exemple la suite de sommets 'a','d','e','f' est un 
+chemin reliant 'a' à 'f'. 
+
+Ainsi, en modélisant le réseau du métro par un graphe, il est utile de connaître 
+un chemin entre les sommets représentant les stations de départ et d'arrivée 
+pour se repérer dans l'espace suburbain. 
+
+Nous pouvons aussi être amenés à quantifier la rigidité de certaines structures 
+chimiques. Considérons par exemple le graphe d'un réseau cristallin. Après avoir 
+ajouté des informations géométriques comme la longueur des arêtes reliant deux 
+sommets (qui représentent les atomes de la structure), il est naturel de 
+chercher à connaître le nombre de représentations différentes, de les comparer 
+avec celles connues expérimentalement. Une branche de la théorie des graphes 
+étudie également la rigidité de certaines configurations. Est-il possible de 
+déformer une structure de façon continue ? Les résultats obtenus sont fortement 
+corrélées avec la « dureté » du matériau correspondant. Pourrions-nous imaginer 
+un réseau optimal qui donnerait naissance à une matière aux propriétés encore 
+inconnues ? 
+
+Enfin, nous pouvons aussi citer les problèmes de représentation des graphes. La 
+question qui initia ces recherche est la suivante : quels sont les graphes qui 
+peuvent être représentés sur le plan sans croisements. Une réponse date des 
+années 30, et fut démontrée par Kuratowski. Il exhibe deux graphes simples 
+(respectivement cinq et six sommets) et démontre que tous les graphes qui ne 
+contiennent pas ces deux graphes comme sous-motif peuvent être représentés sans 
+croisement. Vous pouvez par exemple essayer de représenter sur une feuille de 
+papier, le graphe à cinq sommets dont chaque sommet est relié à tous les autres. 
+C'est impossible. Alors que faire de tous les autres graphes ? Le critère 
+naturel retenu pour quantifier cette non-planarité est le nombre minimum de 
+croisements nécessaires pour représenter un graphe sur le plan. Cette question a 
+du sens pour les producteurs de circuits imprimés. Chaque croisement sur de tels 
+objets représente un coût et un facteur de mauvais fonctionnement. Il est alors 
+primordial de minimiser ce nombre de croisement.
+
+Nous mentionnons pour finir une application anecdotique de la théorie des 
+graphes. La mairie de Grenoble a un jour demandé à un chercheur de la ville, 
+spécialiste des graphes, comment agencer les sens uniques du centre-ville pour 
+pousser les gens à utiliser les boulevards périphérique plutôt que les rues du 
+centre-ville.
+
+Dans cette communication, nous portons notre attention sur le premier problème 
+mentionné : afin de garder nos repères dans l'espace d'un graphe, nous devons 
+être en mesure de nous rendre d'un point de départ à un point d'arrivée. Comment 
+faire ?
+
+II Le problème du cheminement dans un graphe.
+
+II-1 Formalisation du problème.
+
+Nous allons nous adonner à une expérience de pensée. Imaginez que vous êtes dans 
+le métro nouméen. Il vous est impossible de communiquer avec les gens autour de 
+vous et vous devez vous rendre à la station St-Herblain. Les connaissances dont 
+vous disposez sont : le nom de la station où vous vous trouvez (par exemple 
+Baie de l'orphelinat), le nom des stations suivantes pour chaque train passant 
+dans votre station (au départ, La Tontouta, Nouville et Mont-Dore). Comment s'y 
+prendre pour trouver son chemin ?
+
+La modélisation de ce problème est aisée dans le 
+cadre de cette communication. Nous considérerons 
+le graphe dont les sommets sont les stations. 
+Nous devons alors rédiger les instructions pour 
+rejoindre la station St-Herblain à partir de la 
+station Baie de l'orphelinat sachant que la 
+structure du graphe n'est connue que localement 
+(un sommet ne connait que le nom de ses voisins). 
+
+Prenons d'abord connaissance des méthodes déjà 
+connues et comparons leur efficacité. 
+
+II-2 Méthodes existantes
+
+II-2-a L'exploration aléatoire
+
+Cette méthode revient à monter de façon complètement aléatoire dans un train et 
+de renouveler ce procédé à chaque station. Les instructions sont les suivantes.
+
+Tant que je ne suis pas arrivé faire
+  monter dans un train au hasard ;
+  vérifier si je suis arrivé ;
+fin Tant que
+
+Un exemple d'exécution donnerait le trajet suivant : Baie de l'orphelinat -> 
+Mont-Dore -> Hienghène -> Poum -> Mont-Dore -> Tjibaou -> Gurujele -> Baie des 
+citrons -> St-Herblain.
+
+L'avantage indéniable de cette méthode est qu'elle ne nécessite que très peu de 
+ressource pour être mise en place. En particulier, elle ne demande aucune 
+mémoire. Cependant, elle peut durer extrêmement longtemps et parfois ne jamais 
+se terminer. Ceci nous amène à évoquer deux critères primordiaux quant à 
+l'analyse de la complexité des méthodes. Nous distinguons la complexité en temps 
+de la complexité en mémoire. 
+
+Dans l'une nous quantifions le nombre d'étapes nécessaire avant la fin de la 
+méthode, dans l'autre, nous quantifions la quantité d'éléments à retenir au 
+cours de notre voyage souterrain. 
+
+En ce qui concerne la méthode aléatoire, la complexité en temps est 
+potentiellement infinie (il est possible que notre voyage nous fasse tourner en 
+rond sans jamais parvenir à notre objectif), et il est très peu probable de 
+
+prendre un chemin optimal vers notre destination. La complexité en mémoire est 
+quant à elle quasi nulle, nous ne retenons aucune information si ce n'est le nom 
+de notre destination.
+
+II-2-b L'exploration savante
+
+Dans ce cas précis, nous étudions le graphe en amont et « apprenons » par cœur 
+le meilleur chemin entre la station s1 et la station sn. Une fois dans le métro, 
+nous déroulons les instructions que nous avons apprises précédemment. La méthode 
+est alors la suivante
+
+calculer un meilleur chemin ;
+stocker en mémoire la liste L des stations à traverser dans l'ordre ;
+Tant que je ne suis pas arrivé faire
+  consulter la station suivante dans la liste L ;
+  monter dans le train correspondant ;
+  vérifier si je suis arrivé ;
+fin Tant que
+
+Dans ce cas, l'étude préalable nous permet de stocker la liste des stations 
+suivantes : Baie de l'orphelinat -> La Tontouta -> Pouembout -> St-Herblain. Il 
+suffit alors de faire les bons choix à chaque station.
+
+Le principal avantage de cette nouvelle est qu'elle permet d'utiliser un chemin 
+optimal pour aller à destination. Son inconvénient majeur réside dans la 
+quantité de mémoire et de calculs nécessaire.
+
+Cette méthode est elle plus complexe que la précédente ? La complexité en temps 
+est bien meilleure puisque nous nous dirigeons directement et sans détour vers 
+notre but. Par contre la complexité en mémoire est bien plus élevée que 
+précédemment, il faut en effet mémoriser la liste des stations à traverser.
+
+Ajoutons que cette méthode n'est pas très robuste. C'est-à-dire que si les 
+données en mémoires sont corrompues, une erreur ne peut pas être rattrapée. Nous 
+sommes alors perdus dans le réseau.
+
+II-3 Une nouvelle méthode
+
+Les deux méthodes extrêmes présentées ci-dessus ont chacune leur avantages et 
+inconvénients. Nous voulons alors alléger la mémoire de la deuxième méthode tout 
+en conservant l'optimalité du chemin choisi. Ceci est rendu possible pour 
+certains réseaux. Nous utilisons alors la notion de plongement isométrique dans 
+un graphes de Hamming. Nous définirons ces notions dans la partie suivante. 
+Concentrons-nous sur la méthode. Celle-ci nécessite de renommer les stations 
+avec des suites de chiffres de même longueur.
+
+L'exploration suivra alors les instructions suivantes.
+
+Tant que je ne suis pas arrivé faire
+  comparer la suite correspondant à la destination 
+    et les suites des stations voisines ;
+  décider facilement quel train me rapproche du but ;
+  monter dans un tel train ;
+  vérifier si je suis arrivé ;
+fin Tant que
+
+Le lourd travail de numérotage des stations est alors compensé par une 
+exploration rapide et robuste. Il est en effet très aisé de décider si telle ou 
+telle station me rapproche de mon objectif. Nous avons réuni l'efficacité 
+temporelle et l'efficacité en mémoire. Malheureusement, cette méthode n'est 
+applicable que pour les graphes isométriquement plongeable dans les graphes de 
+Hamming.
+
+II-3-a De nouvelles notions.
+
+Nous avons plusieurs fois associé la notion d'optimal aux chemins empruntés. 
+Cette notion fait référence à celle de plus court chemin qui repose sur une 
+distance entre les sommets.
+
+Comme indiqué plus haut, un chemin entre deux sommets x et y est une séquence 
+x0, x1... xn tels que x0 = x, xn = y et que deux sommets consécutifs xi et xi+1 sont 
+voisins dans le graphe. Nous associons à un tel chemin une longueur n. Il s'agit 
+du nombre d'arêtes traversées pour rejoindre y à partir de x. La distance entre 
+deux sommets x et y est définie comme la plus petite longueur des chemins 
+reliant x et y. Dans le premier graphe donné en exemple, les sommets 'c' et 'd' 
+sont à distance 2 : deux chemins les reliant réalisent cette longueur. 
+
+On dit alors qu'un graphe se plonge isométriquement dans un autre (plus grand) 
+s'il est possible d'associer à chaque sommet du premier graphe un sommet du 
+second de sorte que la distance entre les images de deux sommets dans le second 
+graphe est égale à la distance des deux sommets dans le premier.
+
+Ceci permet entre autre de conserver certaines propriétés des distances entre 
+deux tels graphes.
+
+Nous introduisons alors le concept de graphe de Hamming. Le graphe de Hamming de 
+dimension n sur un alphabet à k éléments est un graphe défini sur kn sommets qui 
+sont tous les n-uplets (a1, a2... an) où les ai valent 0, 1, ... ou k-1. Deux 
+sommets sont voisins si et seulement si leurs n-uplets respectifs diffèrent sur 
+une seule coordonnée.
+
+Une particularité des ces structures est que la distance entre deux sommets est 
+calculée facilement : il s'agit du nombre de coordonnées qui diffèrent. Ainsi, 
+les sommets 10121 et 11022 sont à distance 3.
+
+Dans un tel graphe, il suffit de calculer ainsi la distance entre le sommet 
+cible et les sommets voisins pour choisir le voisin le plus proche de la 
+destination. Ce calcul est immédiat.
+
+Cette particularité est préservées pour les graphes qui admettent un plongement 
+isométrique dans les graphes de Hamming.
+
+Pour toute cette large famille de graphes, nous bénéficions ainsi d'une méthode 
+rapide et robuste pour se repérer aisément.
+
+II-3-b Le travail des chercheurs
+
+Après avoir inventé cette méthode et trouvé son champs d'application, il faut 
+être en mesure de vérifier qu'un graphe quelconque admet un tel plongement dans 
+un graphe de Hamming. Vous l'aurez peut-être remarqué, le graphe modélisant le 
+réseau de Nouméa ne fait pas partie des heureux élus. Les applications pratiques 
+de cette théorie se trouvent surtout dans les réseaux de communication 
+informatique pour lesquels il est possible de choisir les connexions de façon 
+adéquate.
+
+Plusieurs caractérisation existent pour reconnaître de tels graphes. La plupart 
+d'entre elles sont algorithmique, c'est-à-dire qu'il s'agit de méthode qui 
+prennent un graphe et répondent oui ou non selon s'il est isométriquement 
+plongeable dans un graphe de Hamming. Ces méthodes fonctionnent comme des boîtes 
+noires et ne nous permettent pas toujours de dégager une structure visuelle de 
+ces graphes précis. C'est ce qui nous a amené à chercher de nouvelles 
+caractérisations structurelles de ces graphes. 
+
+Conclusion
+
+Ce travail de reconnaissance des graphes isométriquement plongeables dans un 
+graphe de Hamming donne naissance à de nombreuses autres questions. Nous en 
+énonçons quelques unes en guise de conclusion.
+
+Tout d'abord, il paraît naturel de se demander si cette méthode peut être 
+adaptée à des graphes qui ne se plongent pas isométriquement dans un graphe de 
+Hamming. La notion de distorsion apparaît alors. Après avoir quantifié la 
+distorsion d'un plongement d'un graphe, nous pouvons poser la question de savoir 
+à quelle point notre méthode est efficace en fonction de cette distorsion.
+
+Une autre question nait de la modularité des réseaux de communication modernes. 
+En effet, si nous ajoutons une station ou une ligne de métro, serons-nous en 
+mesure de leur donner de nouveaux numéros ? Devrons-nous renuméroter toutes les 
+stations existantes ? 
+
+Ces questions font l'objet de recherches actives à l'heure d'aujourd'hui.
+
+Références :
+
+ - Laurent BEAUDOU : Garder ses repères sans occuper trop d'espace. [en ligne] 
+http://www-fourier.ujf-grenoble.fr/~lbeaudou/docs/cies.pdf
+
+ - Laurent BEAUDOU, Sylvain GRAVIER et Kahina MESLEM : Isometric embeddings of 
+subdivided complete graphs in the hypercube. SIAM J. Discrete Math., 
+22:1226-1238, 2008.
+
+ 
+
+

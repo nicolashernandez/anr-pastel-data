@@ -1,0 +1,771 @@
+http://www.lirmm.fr/~lafourcade/TERM1/doit.php?list_encradants=1&amp;m1what=INFORMATIQUE
+
+
+
+TER_M1 2018
+
+
+
+
+
+
+
+
+
+page d'accueil &bullet; liste des sujets &bullet; 
+		liste des groupes
+		 &bullet; 
+		liste des encadrants
+		TER DE MASTER 1 en  - année 2017-18
+
+
+    login 
+    mdp 
+
+
+
+49 sujets proposés  A.Jean-Marie_1 ALaurent_1 Berard_1 boudet_1 chateau_1 chateau_2 delahaye_1 delahaye_2 e.bourreau_1 e.bourreau_2 e.bourreau_3 e.bourreau_4 e.bourreau_5 e.bourreau_6 e.bourreau_n ferber_1 ferber_2 ferber_3 hinde_1 huchard_1 lafourcade_2 lafourca_1 lafourca_3 learning_ind_trans learn_autoencoders leclere_1 meynard_1 mountaz_1 mountaz_2 mountaz_3 mountaz_4 mountaz_5 nebut_1 polystores pompidor_1 pompidor_2 puech_1 rgirou_1 rgirou_2 rgirou_3 seriai_1 seriai_2 seriai_3 seriai_4 strauss_1 strauss_2 strauss_3 tibermacin_1 villon_1
+1. Comment va le monde ?    Les D-TER  
+
+Identifiant :  pompidor_1_2017-18
+	&bullet;  Encadrant(s) :  pierre.pompidor@lirmm.fr
+	Résumé :  Le projet Comment va le monde ? vise à présenter de manière continue sur une carte du monde des marqueurs rouges, orange, verts suivant la teneur de l'actualité. Durant leur durée de vie, ces marqueurs sont cliquables et renvoient sur des articles/dépêches de presse.
+
+Ce projet se concentre sur les thématiques suivantes :
+* Extraction de connaissances / text mining
+* Architecture logicielle pour les applications web
+* Et un peu de visualisation de connaissances
+
+Voici les étapes (non séquentielles) du projet :
+
+* Travail d'analyse : lire des articles de recherche
+  o sur la polarisation de texte et notamment la gestion des formes négatives et des intensifieurs (adjectifs, adverbes) ;
+  o et plus anecdotiquement sur la façon de déterminer les coordonnées géographiques d'un lieu (la piste Wikipedia/DBpedia est sans doute efficace)
+* Création dun serveur (a priori directement avec Node.js) qui a plusieurs fonctions :
+  o récupération des articles de presse en flux continu ;
+  o si un toponyme (nom de lieu) principal peut-être associé à l'article :
+analyse des termes utilisés suivant leur polarité (connotation positive, neutre ou négative de ces termes) et calcul d'une polarisation globale ;
+(la polarisation doit prendre en compte les formes négatives / intensifieurs) ;
+  o stockage dans une base de données MongoDB des méta-informations sur l'article (uri, date, polarité, toponyme + coordonnées cartographiques) ;
+  o accès aux données pour l'application client (Angular) via des services web.
+* Création d'une application web Angular visualisant sur une carte les polarisations des articles sous la forme de marqueurs, et affichant le contenu des articles sélectionnés.
+
+Calibrage : 4 étudiants max
+
+Technologies : Architecture MEAN (MongoDB + Node.js + Angular)
+(Il est possible que d'autres technologies soient utilisées pour l'analyse linguistique)
+
+Pré-requis : avoir suivi l'UE Â« Présentation des données du web Â»
+(Avoir suivi une UE de texte n'est pas obligatoire mais peut être intéressant)Lien :  http://www.lirmm.fr/~pompidor/TER/sujet_TER_M1_AIGLE_DECOL_Pierre_Pompidor.pdf &bullet;  Dernière mise à jour :  2018-01-21 14:51:08
+	
+2. Extraction de relations sémantiques dans wikipedia    Les revenants  
+
+Identifiant :  lafourca_1_2017-18
+	&bullet;  Encadrant(s) :  lafourcade@lirmm.fr
+	Résumé :  L'informatisation des professions de santé et le développement du dossier médical personnalisé (DMP) entraîne une progression rapide du volume d'information médicale numérique. Les systèmes informatiques médicaux permettent de stocker de l'information (dossier médical, résultats d'examens complémentaires, images et comptes rendus radiologiques par exemple), d'y accéder en vue d'améliorer la prise en charge des patients, de découvrir de nouvelles informations ou de fournir une aide à la décision pour l'amélioration de la qualité des soins. Or, cette information est souvent consultée de façon individuelle et manuelle alors que le format numérique permettrait une analyse informatisée. L'information à exploiter est en grande partie sous forme textuelle et il s'agit alors de pouvoir extraire de façon automatique des données sémantiques. Le besoin de convertir toute cette information sous forme structurée est donc un enjeu majeur. Pour réaliser cette tâche il est nécessaire d'avoir une base de connaissance de spécialité structurée et dynamique (apprentissage permanent).
+
+Pour ce sujet de TER, il s'agira de travailler sur l'extraction de relations sémantiques (synonymie, hyperonymie, causatif, caractéristique..) à partir d'articles médicaux issus de l'encyclopédie Wikipedia et du site sur les maladies rares Orphanet. Cette extraction aura pour but de consolider un réseau lexico-sémantique de spécialité inclus dans le réseau de connaissance générale JeuxDeMots. Il faudra utiliser les ressources et travaux de recherches à votre disposition afin d'élaborer des algorithmes pertinents. Le travail sera composé des tâches suivantes:
+
+* état de l'art sur l'extraction de relations sémantiques à partir de textes non structurés.
+* récupérer les pages wikipédia (voire d'autres sites comme orphanet).
+* proposer un algorithme d'extraction de relations.
+* création d'une base de données susceptible d'être intégrée au réseau.
+
+Le langage de programmation utilisé sera au choix des étudiants.
+
+PS IMPORTANT :  Si les étudiants le désirent, sujet peut éventuellement être abordé via un autre domaine, par exemple, la "gastronomie", "aéronautique", etc?.Lien :  - &bullet;  Dernière mise à jour :  2018-01-21 14:50:23
+	
+3. Chasse aux triangles dans JeuxDeMots 
+
+Identifiant :  ALaurent_1_2017-18
+	&bullet;  Encadrant(s) :  laurent@lirmm.fr, mathieu.lafourcade@lirmm.fr, kevin.cousot@gmail.com, castelltort@lirmm.fr
+	Résumé :  JeuxDeMots est un jeu sérieux (Â« Game With A Purpose Â» - GWAP : jeu avec un but) qui vise à construire un réseau lexico-sémantique (un graphe avec 1 million de noeuds et 53 millions de relations). Les agents d'inférence de JeuxDeMots constituent globalement une intelligence artificielle qui opère sur cer grand volume de connaissances (de sens commun mais également expertes à plusieurs domaines) de façon à inférer de nouvelles relations. 
+
+Dans ce cadre, nous souhaitons retrouver dans le réseau les triangles permettant de fournir des exemples pour être capable par la suite de fournir des éléments d'explication pour certaines relations. Il s'agit donc de créer une combinaison entre un système à apprentissage par des exemples et un système d'inférence.
+
+Par exemple, il est ainsi possible de déduire que "voiture" a pour conséquence "mort" à partir de "voiture" ayant pour conséquence "accident" qui a pour conséquence "mort" (1 côté du triangle). OÃ¹ à l'inverse de produire l'explication de "peste" à conséquence "mort", en exhibant "peste" estun "maladie mortelle" et "maladie mortelle" conséquence "mort" (2 côtés du triangle).
+
+Le travail attendu consiste à :
+- prendre en main la base JeuxDeMots sous sa forme Â« bases de données NoSQL en graphes Â» et le langage de requête Cypher ;
+- Elaborer les requêtes Cypher permettant de retrouver les triangles dans le graphe JeuxDeMots ;
+- Tester et optimiser le passage des requêtes sur un serveur.
+
+Si le temps le permet :
+- Proposer des extensions pour recommander des portions du graphe oÃ¹ un triangle aurait dÃ» exister (ce qui permettra dÂenrichir le graphe).
+
+** Pas de prérequisLien :  https://cloud.lirmm.fr/index.php/s/kWV55XDJcHLtcgY &bullet;  Dernière mise à jour :  2017-10-24 11:02:13
+	
+4. Environnement de développement de bots pour JDM 
+
+Identifiant :  lafourcade_2_2017-18
+	&bullet;  Encadrant(s) :  mathieu.lafourcade@lirmm.fr, kevin.cousot@lirmm.fr
+	Résumé :  JeuxDeMots (www.jeuxdemots.org) est un jeu sérieux (Â« Game With A Purpose Â» - GWAP : jeu avec un but) qui vise à construire un réseau lexico-sémantique (un graphe avec 1 million de noeuds et 63 millions de relations). Plusieurs agents de JeuxDeMots constituent globalement une intelligence artificielle qui opère sur ce grand volume de connaissances (de sens commun mais également expertes à plusieurs domaines) de façon à inférer de nouvelles relations.
+
+L'objet de ce projet  de mettre en place un environnement de développement permettant à des joueurs d'écrire eux mêmes leurs robots (bots) d'inférence pouvant contribuer au réseau lexical de JDM. Par exemple, on pourra écrire des règles de la forme :
+
+      SI $x r_has_part plumes & $x r_agent-1 voler ALORS $x r_isa oiseau
+
+Les robots sÂaffronteront dans le réseau en fonction de la qualité de leurs inférences. Les relations proposées par les bots seront validées (ou pas) par la suite, rapportant (ou faisant perdre) des points (mini gamification).
+
+** Attendus : 
+* définir et implanter un mini langage de requête sémantiques  (Domain Specific Language)  sur le réseau JDM ;
+* définir et implanter un mini environnement web de développement de bots permettant  aux joueurs des les spécifier et les tester ;
+* gérer un "hall of fame" des robots les plus performants.
+
+** Références :
+M. Lafourcade, A. Joubert (2013). Bénéfices et limites de l'acquisition lexicale dans l'expérience JeuxDeMots. In: Gala, NÃºria et Michael Zock (dir.), Ressources Lexicales: Contenu, construction, utilisation, évaluation. 2013. Linguisticae Investigationes, Supplementa 30, John Benjamins, 364 pp. (pp. 187Â216).Lien :  - &bullet;  Dernière mise à jour :  2017-10-24 11:05:25
+	
+5. La théorie spectrale appliqué à la théorie des graphes 
+
+Identifiant :  rgirou_1_2017-18
+	&bullet;  Encadrant(s) :  rgirou@lirmm.fr, chateau@lirmm.fr
+	Résumé :  La théorie spectrale des graphes s'intéresse aux rapports entre les spectres des différentes matrices que l'on peut associer à un graphe et ses propriétés. C'est une branche de la théorie algébrique des graphes. On s'intéresse en général à la matrice d'adjacence et à la matrice laplacienne normalisée. (dixit Wikipédia). Dans ce projet, vous vous présenterez les grandes lignes de la théorie spectrale (force et faiblesse) par rapport à des approches plus algorithmiques.
+
+Prérequis : GoÃ»t pour la théorieLien :  - &bullet;  Dernière mise à jour :  2017-10-24 17:36:17
+	
+6. Complexité du jeu Tétris    Martinod  
+
+Identifiant :  rgirou_2_2017-18
+	&bullet;  Encadrant(s) :  rgirou@lirmm.fr, chateau@lirmm.fr
+	Résumé :  Le jeu Tétris est mondialement connu. Ici nous nous intéressons à la complexité et la (non)-approximation de ce problème. Et les résultats sont très surprenants. L'objectif du projet est de présenter les résultats obtenus sur ce problème.
+
+Prérequis : GoÃ»t pour la théorieLien :  - &bullet;  Dernière mise à jour :  2017-10-24 17:36:50
+	
+7. Isomorphisme de graphes    ISOM  
+
+Identifiant :  rgirou_3_2017-18
+	&bullet;  Encadrant(s) :  rgirou@lirmm.fr, chateau@lirmm.fr
+	Résumé :  Le problème qui consiste à déterminer si deux graphes sont isomorphes résiste à la classification depuis des décennies. En effet, on sait que c'est un problème de la classe NP, mais on ne connaît ni d'algorithme polynomial, ni de preuve de NP-complétude. On dispose cependant d'algorithmes polynomiaux dans certaines classes de graphes particulières (arbres, planaires, graphes de degré borné). Le projet aura pour but de faire un état des lieux de l'algorithmique autour de ce problème. 
+
+Prérequis : GoÃ»t pour la théorieLien :  - &bullet;  Dernière mise à jour :  2017-10-24 17:37:27
+	
+8. Un framework basé sur des algorithmes génétiques pour l'ingénierie des lignes de produits    Groupe 42  
+
+Identifiant :  nebut_1_2017-18
+	&bullet;  Encadrant(s) :  jessie.carbonnel@lirmm.fr, marianne.huchard@lirmm.fr, clementine.nebut@lirmm.fr
+	Résumé :  L'ingénierie des lignes de produits logiciels propose en général d'organiser les caractéristiques d'une ligne de produits dans un feature model précisant quelles caractéristiques sont obligatoires, facultatives, peuvent être choisies dans un ensemble de caractéristiques, etc.
+Parmi les manipulations classiques opérées sur les feature models, on trouve le calcul de leur union et de leur intersection. Ces opérations sont complexes à mettre en oeuvre.
+Pour la création de benchmarks pour tester de telles opérations, on procède en général manuellement : on part d'un feature model, et on essaie d'en créer une variante telle que l'intersection des deux features models soit non nulle, et que leur union ne se réduise pas à l'un des deux features models.
+Un groupe de TER de l'année dernière a travaillé à l'automatisation de cette tâche en utilisant un algorithme génétique. L'algorithme se base sur différents types de mutations et de croisements de feature models, et fait émerger des candidats pour la variante du feature model initial, avec pour fonction objectif le fait que leur union soit différente des deux features models et leur intersection non nulle. L'outil obtenu est spécifique à la fonction objectif choisie.
+L'objectif de ce TER est de développer un framework plus générique de génération de features models, dans lequel il est aisé de définir de nouvelles fonctions objectif, intra ou inter population. On pourra éventuellement envisager de pouvoir configurer les types de mutation et de croisement à utiliser. De nouveaux types de mutations et de croisements pourront également être modélisés et développés.
+
+Le TER se déroulera de la façon suivante :
+* étude de l'outil existant (développé en Java) et des techniques sous jacentes (algorithmes génétiques)
+* transformation de l'outil en un framework de génération de feature models, facilement paramétrable
+* validation du framework obtenu par l'étude d'a minima 2 paramétrages, dont le paramétrage correspondant à l'outil initialLien :  - &bullet;  Dernière mise à jour :  2017-11-02 20:14:08
+	
+9. Un outil collaboratif pour faire du séquençage en commun    MaFe  
+
+Identifiant :  chateau_1_2017-18
+	&bullet;  Encadrant(s) :  chateau@lirmm.fr, anna-sophie.fiston-lavier@umontpellier.fr
+	Résumé :  Les laboratoires travaillant sur les aspects génomiques ont de plus en plus besoin de données de séquençage. Pas seulement de façon massive, il peut s'agir de reséquencer ponctuellement un génome ou une portion de génome. Les plate-formes de séquençage utilisent du matériel coÃ»teux, dont il faut optimiser l'utilisation. Elles préfèrent s'occuper du séquençage de gros projets (avec de gros financements), et les petits projets sont souvent mis de côté. Un "flowcell" est un kit de séquençage permettant de séquencer jusqu'à xGb de données. Ces unités sont chères, et ont des prix dégressifs dont les petits projets ne profitent pas (voir par exemple :
+https://store.nanoporetech.com/flowcells.html)
+
+L'idée du projet est de mettre en place un outil de partage collaboratif d'information, oÃ¹ les chercheurs ayant des besoins en séquençage de volume limité pourraient mettre en commun les espaces "flowcell" dont ils ont besoin, se coordonner entre équipes géographiquement proches pour envoyer les échantillons au centre de séquençage disponible le plus proche, et prévoir des commandes collectives de matériel.
+
+Les étudiants auront donc comme tâches de :
+- déterminer le cahier des charges, en collaboration avec des utilisateurs de ce genre de services de séquençage
+- concevoir, à partir de l'analyse des besoins, l'outil collaboratif
+- mettre au point un prototype de type "application web" pour l'interface d'échange
+
+Prérequis : rigueur et curiositéLien :  - &bullet;  Dernière mise à jour :  2017-11-02 20:17:51
+	
+10. Bot Skype de gestion de connaissances    Anbu  
+
+Identifiant :  lafourca_3_2017-18
+	&bullet;  Encadrant(s) :  lafourcade@lirmm.fr, prince@lirmm.fr, cousot@lirmm.fr
+	Résumé :  On souhaite développer un bot Skype avec lequel l'utilisateur entreprendrait des pseudo conversations dans le but de consolider (augmenter et corriger) une base de connaissances (en l'occurrence, la base RezoJDM).
+
+Exemple de dialogue :
+Bot: est-ce qu'un hot-dog contient de la moutarde ?
+  User: oui, la plupart du temps
+  Bot: est-ce qu'un hot-dog contient des oignons grillés ?
+  User: oui c'est possible, surtout aux US
+  Bot: merci pour ces informations
+  User: un hot-dog c'est de la malbouffe
+  Bot: Ah? Ok, je vais retenir cela.
+
+Le bot en question doit être capable de poser des questions de façon intelligible et d'avoir un grande tolérance et capacité d'interprétation de ce que répond l'utilisateur. Le dialogue engagé doit être cohérent - on peut changer de sujet, mais on ne saute pas sans arrêt du coq à l'âne). Enfin, le bot doit être capable de répondre des question de type "pourquoi", par exemple :
+User: Pourquoi un tigre est dangereux ?
+  Bot: un tigre est dangereux car un tigre est un animal sauvage et un animal sauvage est dangereux.
+
+Prérequis :  aucun
+Liens : 
+bot skype - https://dev.skype.com/
+rezoJDM - http://www.jeuxdemots.org/jdm-about.php
+exemple d'interaction - http://www.jeuxdemots.org/rezo-ask.php?text=1Lien :  - &bullet;  Dernière mise à jour :  2018-01-21 14:49:34
+	
+11. Parallélisation sur la grille d'un algo d'apprentissage de relations sémantiques 
+
+Identifiant :  hinde_1_2017-18
+	&bullet;  Encadrant(s) :  hinde.bouziane@lirmm.fr, mathieu.lafourcade@lirmm.fr
+	Résumé :  Nous disposons d'un algorithme d'apprentissage de relations sémantiques basé sur les relations existantes dans le réseau lexical JeuxDeMots. De façon simplifiée, cette approche consiste lors de l'apprentissage à croiser les attributs du premier nÂud avec ceux du second nÂud et d'associer à chaque couple la relation sémantique présente dans le réseau entre les deux noeuds.
+
+La table générée est de grande taille, de lÂordre de plusieurs centaines de millions de lignes.
+
+L'idée est de distribuer cette table sur la grille, d'envoyer la même requête et ensuite de fusionner les résultats. Le temps global de traitement est donc le temps de la plus longue requête suivi du temps nécessaire pour la fusion. Il est donc impératif de distribuer de la façon la plus homogènes les lignes de la table de départ dans les tables sur la grille.
+
+L'objet de ce TER est donc d'écrire et dÂimplémenter un algo sur la grille un algorithme effectuant l'apprentissage avec une distribution homogène des résultats. Un second algo, dit dÂexploitation (qui met en oeuvre la fusion) sera également spécifié et implémenté. 
+
+Les données et les calculs seront à déployer sur une grille expérimentale Grid5000. La programmation se fera en utilisant une bibliothèque ou un framework pour le calcul parallèle distribué, comme MPI (Message Passing Interface), Hadoop, RPC (Remote Procedure Call) ou autre disponible sur Grid5000.
+
+Les références :
+
+* https://www.grid5000.fr/
+* https://static.googleusercontent.com/media/research.google.com/fr//archive/mapreduce-osdi04.pdf
+* http:www.jeuxdemots.orgLien :  - &bullet;  Dernière mise à jour :  2017-11-16 22:22:28
+	
+12. Deep Learning et Web Aspiration    BATIST  
+
+Identifiant :  villon_1_2017-18
+	&bullet;  Encadrant(s) :  sebastien.villon@lirmm.fr, marc.chaumont@lirmm.fr
+	Résumé :  Les méthodes de reconnaissances par deep learning reposent la plupart du temps sur des apprentissages supervisés.
+De tels apprentissage ont montré leur efficacité, mais demandent un investissement considérable pour créer la base d'apprentissage.
+L'objectif de ce stage est d'essayer de créer un réseau efficace nourri grâce aux images disponibles sur internet.
+Pour se faire, il faudra d'abord réussir à récupérer des informations et des images sur internet (automatiquement), parser, et classer ces informations.
+Il faudra ensuite construire une base de donnée d'apprentissage à l'aide de ces images, puis construire un réseau "deep learning" grâce à cette base de donnée.
+Enfin, il faudra mettre en place un protocole pour comparer les résultats de ce réseau avec celui des algorithmes déjà utilisés par notre équipe.
+
+Prerequis: Programmation web, intérêts dans data mining et data gathering, extraction de connaissance analyse de texte.
+
+Mots clefs : Web aspiration, Deep learning, Machine Learning
+
+Bibliographie :
+Torresani, L. (2014). Weakly supervised learning. In Computer Vision (pp. 883-885). Springer US. Villon, S. (2016, October). Coral reef fish detection and recognition in underwater videos by supervised machine learning: Comparison between Deep Learning and HOG+ SVM methods LeCun, Y., Bengio, Y., & Hinton, G. (2015). Deep learning. Nature, 521(7553), 436-444.Lien :  - &bullet;  Dernière mise à jour :  2017-11-14 16:04:53
+	
+13. Interaction distribuée 
+
+Identifiant :  mountaz_1_2017-18
+	&bullet;  Encadrant(s) :  mountaz.hascoet@lirmm.fr
+	Résumé :  Les environnements d'affichage émergents tels qu'affichages distribués, tables et murs interactifs nécessitent l'élargissement de certains modèles d'interaction. Le travail consistera à étudier et tester des techniques d'interaction dédiées à ces types d'affichage. A partir de cette étude, le but de ce travail consistera à élaborer une réflexion sur la modélisation des interactions continues en milieu distribué.Lien :  http://www.lirmm.fr/~mountaz/Ens/Ter/Id/ &bullet;  Dernière mise à jour :  2017-11-15 17:27:26
+	
+14. Cartographie des contes et histoires d'Europe 
+
+Identifiant :  mountaz_2_2017-18
+	&bullet;  Encadrant(s) :  mountaz.hascoet@lirmm.fr
+	Résumé :  Ce ter s'incrit dans la suite des projets de conception proposés dans l'ue d'ihm sur ce sujet. Il s'agira d'étoffer la conception dans une direction à discuter. Parmi les directions ouvertes : conception des modes d'interaction adaptés aux types de données temporelles et spatiales et composition de facettes de types différents notamment géographiques et temporelles. Ce ter sera l'occasion également de réaliser une maquette opérationnelle.Lien :  - &bullet;  Dernière mise à jour :  2017-11-15 17:28:01
+	
+15. Editeur de maquettes mixtes et de storyboard 
+
+Identifiant :  mountaz_3_2017-18
+	&bullet;  Encadrant(s) :  mountaz.hascoet@lirmm.fr
+	Résumé :  Ce ter s'incrit dans la suite des projets de conception proposés dans l'ue d'ihm sur ce sujet. Il s'agira d'étoffer la conception dans une direction à discuter. Parmi les directions ouvertes : chronogramme et interaction à facettes avec une bibliothèque diagrammes mixtes. Le ter sera l'occasion également de réaliser une maquette opérationnelle.Lien :  - &bullet;  Dernière mise à jour :  2017-11-15 17:28:54
+	
+16. Reconception d'un logiciel de présentation pour tablette 
+
+Identifiant :  mountaz_4_2017-18
+	&bullet;  Encadrant(s) :  mountaz.hascoet@lirmm.fr
+	Résumé :  Ce ter s'incrit dans la suite des projets de conception proposés dans l'ue d'ihm sur ce sujet. Il s'agira d'étoffer la conception dans une direction à discuter. Parmi les directions ouvertes : grammaire gestuelle et interaction avec les références croisées potentiellement distribuées. Ce ter sera l'occasion également de réaliser une maquette opérationnelle.Lien :  - &bullet;  Dernière mise à jour :  2017-11-15 17:29:41
+	
+17. Matching et comparaison visuelle de listes, de tables et de graphes 
+
+Identifiant :  mountaz_5_2017-18
+	&bullet;  Encadrant(s) :  mountaz.hascoet@lirmm.fr
+	Résumé :  Il s'agit de concevoir et de développer un outils permettant de comparer visuellement des listes, des tables et des graphes. Ce ter pourra sÂappuyer sur un projet existant qui permet la comparaison des collections d'éléments / noeuds / liens, et le matching des éléments entre eux de manière interactive et réversible. Les domaines d'applications sont nombreux et seront à choisir et discuter dans le début du TER: matching et comparaison de programmes similaires, gestion de version a posteriori, de méta-données, de sociogrammes, matching et comparaison de données biologiques, etc.Lien :  - &bullet;  Dernière mise à jour :  2017-11-15 17:30:13
+	
+18. Simulation permanente de flux inter-applications 
+
+Identifiant :  huchard_1_2017-18
+	&bullet;  Encadrant(s) :  marianne.huchard@lirmm.fr, bernard.georges@soprasteria.com
+	Résumé :  Le projet consiste à créer un/des outils permettant la simulation Â« permanente Â» de flux. On entend flux au sens large, cÂest à dire ce qui peut circuler dÂun point à un autre. Les applications imaginées aujourdÂhui sont des flux inter-applicatifs (fichiers, Web services) mais pourquoi pas la circulation urbaine, voire la circulation sanguine. En cible la création dÂun méta-modèle permettrait dÂadapter lÂoutil aux concepts visés.
+
+Dans un contexte de flux informatiques, lÂobjectif dÂutilisation est de pouvoir interagir avec les résultats de la simulation pour identifier par exemple :
+- les causes de goulets dÂétranglement, de dépassement de capacité,
+- les redondances de stockage,
+- les capacités de circuits alternatifs.
+
+Objectifs :
+
+Il s'agira de réaliser un POC de faisabilité sur les échanges inter-applicatifs. Un modèle courant de représentation dÂune architecture informatique comprend les couches Â« processus métier Â», Â« fonctionnel Â», Â« applicatif Â» et Â« technique Â». Le POC se restreint aux trois dernières couches, avec au niveau fonctionnel simplement le concept véhiculé.
+
+Ce POC doit démontrer :
+- La capacité de simulation Â« temps réel Â», avec adaptation de la vitesse de ce temps (ie quelle échelle de temps simule-t-on ?),
+- LÂinteraction avec la simulation, permettant dÂanalyser les goulets dÂétranglements révélés par celle-ci,
+- Si possible une modélisation adaptable à plusieurs contextes.
+
+La nouveauté consiste à intégrer, dans une application de gestion, une base de données Â« gros volumes Â» (pour stocker les résultats permanents de la simulation) couplée à une interface graphique riche. En effet les systèmes les plus proches, décisionnels, soit extraient des données en mode Â« batch Â» soit travaillent sur des données rafraichies à un rythme la plupart du temps quotidien.
+
+Outre la nouveauté technique, le progrès consiste à pouvoir intervenir Â« en temps réel Â» sur la simulation pour tester des hypothèses en fonction des problèmes détectés visuellement par la restitution graphique.
+
+Les incertitudes se situent :
+- Sur la souplesse du modèle, permettant dÂinclure de nouvelles caractéristiques (par exemple des phénomènes de distorsion / traduction / défaillance),
+- Sur les performances : quelle modélisation et quels algorithmes pour simuler en accéléré la vie dÂun système dÂinformation potentiellement complexe ?,
+- Finalement sur lÂintérêt du système : est-ce que la modélisation et la simulation permettent dÂanalyser correctement et suffisamment finement le système pour en tirer des leçons (Cf. plus haut pour les exemples possibles),Lien :  - &bullet;  Dernière mise à jour :  2017-11-19 18:53:09
+	
+19. Interrogation de polystores 
+
+Identifiant :  polystores_2017-18
+	&bullet;  Encadrant(s) :  ulliana@lirmm.fr, leclere@lirmm.fr
+	Résumé :  Un polystore est une fédération de diverses sources de données permettant un accès unifié aux données [1]. A lÂopposé des entrepôts de données, un polystore ne matérialise pas la fusion des diverses sources de données. Les données sont conservées dans leur format et système de stockage dÂorigine. Par contre, le polystore doit permettre de poser des requêtes sur cette fédération de sources comme si elles avaient été réellement fusionnées. 
+
+La définition de tels polystores passe donc par la donnée de Â« mappings Â» permettant dÂexprimer comment les données des différentes sources sont intégrées dans la vue unifiée du polystore. 
+Nous ferons lÂhypothèse que la base de connaissances exprimant la vue unifiée prend la forme d'un ensemble dÂatomes de la logique du premier ordre sans symbole de fonction représentant une formule conjonctive close existentiellement.
+
+Nous nous intéressons alors à permettre lÂinterrogation de tels polystores par des requêtes conjonctives. Comme nous ne disposons pas réellement de la base de connaissances unifiée, cela suppose de définir, dÂune part, des mécanismes de réécriture de la requête unifiée en un ensemble de requêtes Â« système-dépendant Â» quÂil faudra évaluer sur chaque source de données et, dÂautre part, des mécanismes dÂintégration des différentes réponses permettant de calculer la réponse unifiée.
+
+Dans un premier temps, nous ferons lÂhypothèse que le vocabulaire du polystore est partitionné par source de données, i.e. chaque prédicat du polystore ne peut être issu que dÂune unique source de données. Ainsi un atome de connaissance recherché dans le polystore ne peut être présent que dans une seule des sources fédérées par le polystore. Les seuls éléments dÂintégration entre les différentes sources de données sont donc les constantes partagées entre les sources. On suppose par ailleurs que lÂon dispose dÂun système unifié standard de nommage des individus, e.g. des IRI.
+
+LÂobjectif de ce travail est de définir et dÂévaluer différentes stratégie dÂinterrogation de tels polystores. Afin de valider les approches proposées, on expérimentera les différentes stratégies sur un polystore fédérant une base MongoDB et une base Sésame représentant le contenu dÂun catalogue documentaire. Pour ce faire, on exploitera lÂAPI Graal [2] dÂinterrogation de bases de connaissances.
+
+Les tâches à réaliser :
+- Définir des mappings dÂintégration de données clé-valeur, relationnelles et/ou triplets RDF dans un polystore
+- Définir des stratégies dÂinterrogation de polystore
+- Définir des mécanismes dÂinterrogation de "Key-Value System Â» (KVS) dans lÂAPI Graal et les instances sur MongoDB [3]. Graal possède déjà de tels mécanismes pour les TripleStore (eg. Sesame) et les SGBDR (e.g. PostSQL, MySQL et SQLlite). En particulier, on sÂintéressera à définir quels types de requêtes conjonctives sont exprimables sur un  KVS.
+- Mettre en oeuvre un polystore fédérant les connaissances dÂun catalogue documentaire. Les différentes notices du catalogue seront enregistrées dans MongoDB et les relations entre notices seront enregistrées dans un tripleStore.
+- Implanter et évaluer les différentes stratégies dÂinterrogation
+
+On pourra dans un second temps étendre ce travail en relâchant la contrainte de partition du vocabulaire du polystore par les sources ou en intégrant des ontologies au niveau de chaque source de données, voire même au niveau unifié.
+
+
+[1] M. Stonebracker, The case for polystores, ACM SIGMOD Blog, http://wp.sigmod.org/?p=1629
+
+[2] J.-F. Baget, M. Leclère, M.-L. Mugnier, S. Rocher, and C. Sipieter. Graal: A Toolkit for Query Answering with Existential Rules, in RuleML 2015 Conference, August 2015.  http://graphik-team.github.io/graal/
+
+[3] The MongoDB 3.4 Manual. https://docs.mongodb.com/manual/Lien :  http://wp.sigmod.org/?p=1629 &bullet;  Dernière mise à jour :  2017-11-20 17:16:19
+	
+20. Comparaison de méthodes de machine learning inductives et transductives sur des images satellitaires    CZZ  
+
+Identifiant :  learning_ind_trans_2017-18
+	&bullet;  Encadrant(s) :  ulliana@lirmm.fr
+	Résumé :  Encadrants : Dino IENCO (dino.ienco@teledetection.fr), Federico Ulliana (ulliana@lirmm.fr)
+
+Le but du TER est de comparer lÂefficacité de deux familles des méthodes de machine learning : ÂinductivesÂ et ÂtransductivesÂ. Les méthodes inductives construisent un modèle général de classification à partir dÂun jeu de données d'entraînement. Ce modèle est ensuite utilisé pour des prédictions. Ã lÂopposé, les méthodes transductives visent à permettre des prédictions sans passer par la difficile tâche de construction d'un modèle général.
+
+La comparaison des méthodes portera sur des tâches de classification dÂimages satellitaires [1] avec des métriques standard de classification (Accuracy, F-Measure, Kappa) qui seront observées en faisant varier à la fois les paramètres de modèles et à la fois la taille du jeu de données d'entraînement. La comparaison sera faite sur la base d'implémentations disponibles dans des bibliothèques logiciel libres. Il est également demandé de réaliser une interface graphique permettant une restitution intuitive des résultats des expériences.
+
+
+Liste des méthodes à comparer
+- Inductives: Random Forest, Support Vector Machine, Gradient Boosting Trees. Les algorithmes sont implémentés dans la bibliothèque Scikit-Learn (http://scikit-learn.org)
+-Transductives: PARW, CAMLP, OMNIProp . Les algorithmes sont implémentés dans la bibliothèque GBSSL (https://github.com/junliangma/gbssl)
+
+Metriques
+- Accuracy : % objets classifiés correctement (https://en.wikipedia.org/wiki/Confusion_matrix)
+- F-measure: Moyenne harmonique entre précision et rappel (https://en.wikipedia.org/wiki/F1_score)
+- Kappa: Mesure de correction de lÂerreur dÂun classifieur (https://fr.wikipedia.org/wiki/Kappa_de_Cohen)
+
+Datasets
+- Séries temporelle dÂimages satellitaire sur la Réunion
+- Séries temporelle dÂimages satellitaire sur le Bassin de Thau
+
+Interface permettant de visualiser les résultats des tests.
+
+
+Bibliographie
+
+[1] Ienco, Dino, et al. "Land Cover Classification via Multi-temporal Spatial Data by Recurrent Neural Networks."Lien :  https://pdfs.semanticscholar.org/0598/4ea3837d854f9fe3e06b9c3b34db23f29efb.pdf &bullet;  Dernière mise à jour :  2017-11-21 19:04:21
+	
+21. Développement d'une ligne de produits pour une application d'information liée à des lieux touristiques    Gigabyte  
+
+Identifiant :  seriai_1_2017-18
+	&bullet;  Encadrant(s) :  abdelhak.seriai@lirmm.fr, marianne.huchard@lirmm.fr
+	Résumé :  Mots clés : Ligne de produits logiciels, analyse du code, Java, Familiar, SPLOT, Pure::variant.  
+
+La mise en place dune ligne de produits logiciels permet de construire et de maintenir une famille de produits logiciels similaires en mettant en uvre des principes de réutilisation. Ces principes favorisent la réduction de leffort de développement et de maintenance, raccourcissent le temps de mise sur le marché et améliorent la qualité globale du logiciel.
+
+La migration de produits logiciels similaires vers une ligne de produits est devenue aujourdhui un besoin important de beaucoup dentreprises. Cette migration demande de comprendre les similitudes et les différences des produits existants qui sexpriment sous forme de caractéristiques (features).
+
+Dans ce TER, nous nous intéressons au problème de la construction dune ligne de produits logiciels à partir de lanalyse du code source de ses produits. Le travail à réaliser consiste à proposer un analyseur de code source Java pour identifier les éléments du code qui peuvent constituer limplémentation des caractéristiques (features) de la ligne de produits. Nous souhaitons également organiser les caractéristiques en un modèle de caractéristiques (Feaure Model).
+
+Les environnements qui seront utilisés dans le cadre de ce TER sont :
+-       SPLOT : http://www.splot-research.org/
+-       FAMILIAR: http://familiar-project.github.io/
+-       SPOON : http://spoon.gforge.inria.fr/
+-       Eclipse Java development tools (JDT) : Environnement danalyse de code source JavaLien :  - &bullet;  Dernière mise à jour :  2018-05-20 18:25:26
+	
+22. Ãvaluation de techniques de machine learning transductives avec pré-traitements su des corpus textuels 
+
+Identifiant :  learn_autoencoders_2017-18
+	&bullet;  Encadrant(s) :  ulliana@lirmm.fr, dino.ienco@teledetection.fr
+	Résumé :  Encadrants : Dino IENCO (dino.ienco@teledetection.fr), Federico Ulliana (ulliana@lirmm.fr)
+
+Le but du TER est dÂétudier lÂapport du pré-traitement des données textuels aux tâches de classification. Plus précisément, nous nous positionnons dans un contexte de classification semi-supervisée oÃ¹ les jeux des données d'entraînement contient très peu dÂexemples labellisés et une majorité dÂexemples non-labellisés. Nous considérons des pré-traitements réalisés avec des Âauto-encodersÂ de type ladder network [1]. Ces sont des méthodes dÂapprentissage profond semi-supervisées dont lÂobjectif est d'extraire une nouvelle représentation des données dÂentraînement, qui est plus compacte. Il sÂagit dÂévaluer les performances des classifieurs sur les données pré-traitées et non. Pour ce qui concerne les méthodes de classification, nous allons considérer des méthodes de classification transductive qui sont communément utilisées en fouille de texte [2]. 
+
+La comparaison des méthodes portera sur des tâches de classification de corpus textuels avec des métriques standard de classification (Accuracy, F-Measure, Kappa) qui seront observées en faisant varier à la fois les paramètres de modèles et à la fois la taille du jeu de données d'entraînement. La comparaison portera sur des algorithmes implémentés dans des bibliothèques logicielle libres. Il est également demandé de réaliser une interface graphique permettant une restitution intuitive des résultats des expériences.
+
+Liste des méthodes transductives à comparer
+- PARW, CAMLP, OMNIProp. Les algorithmes sont implémentés dans la bibliothèque GBSSL (https://github.com/junliangma/gbssl)
+- Implementation Auto-Encoder semi-supervisée à travers Keras (https://keras.io/)
+
+Métriques
+- Accuracy : % objets classifiés correctement (https://en.wikipedia.org/wiki/Confusion_matrix)
+- F-measure: Moyenne harmonique entre précision et rappel (https://en.wikipedia.org/wiki/F1_score)
+- Kappa: Mesure de correction de lÂerreur dÂun classifieur (https://fr.wikipedia.org/wiki/Kappa_de_Cohen)
+
+Datasets
+- Corpus de données textuels (i.e. IMDB, Reuters)
+Interface permettant de visualiser les résultats des tests.
+
+Bibliographie
+[1] Semi-Supervised Learning with Ladder Networks. Antti Rasmus, Harri Valpola, Mikko Honkala, Mathias Berglund, Tapani Raiko
+[2] S. Romeo, D. Ienco, A. Tagarelli: Knowledge-Based Representation for Transductive Multilingual Document Classification. ECIR 2015: 92-103Lien :  https://pdfs.semanticscholar.org/6d6e/c8367e5420298deadb2f1e446ddadb4259d5.pdf &bullet;  Dernière mise à jour :  2017-11-21 19:44:26
+	
+23. Refactoring dÂune Application Orientée Objet pour lÂOptimisation de lÂUtilisation des Ressources sur le Cloud 
+
+Identifiant :  seriai_2_2017-18
+	&bullet;  Encadrant(s) :  abdelhak.seriai@lirmm.fr, hinde.bouziane@lirmm.fr
+	Résumé :  Mots clés : Cloud, refactoring, applications orientées objet, Java, workflow, analyse du code. 
+
+LÂinformatique sur le nuage ou Â« Cloud Computing Â» fournit aux clients des ressources informatiques (matérielles ou logicielles) sous forme de services via Internet. Cette approche est caractérisée par sa nature élastique et son modèle de paiement (pay-as-you-go). Pour optimiser l'utilisation de ces ressources, un des exigences liées à ce type d'environnement est de configurer dynamiquement les applications pour réduire les coÃ»ts de leur déploiement. La configuration dynamique nécessite la capacité de déterminer quelles ressources sont utilisés, et quand et oÃ¹ elles sont utilisées. Ces informations peuvent être obtenues, par exemple, quand lÂarchitecture des applications déployées est décrite sous forme de workflows (flux de travail). En fait, plusieurs travaux reposent sur les workflows pour réduire les coÃ»ts d'exécution sur le cloud. 
+Cependant, pour exécuter une application OO sur le cloud, l'ensemble de l'application doit être déployé et toutes les ressources utilisées doivent être allouées pour tout le temps d'exécution. 
+
+Pour réduire les coÃ»ts d'exécution des applications orientées objet (OO), nous proposons dÂétudier dans le cadre de ce TER un processus visant à restructurer (refactroring) des applications basée sur le style architectural OO vers un style basé sur les workflows. Nous souhaitons sÂintéresser, particulièrement, à : 
+-    Construire le workflow en identifiant que chaque méthode du code OO représente une tâche primitive ou composite de ce workflow. 
+-    Extraire le flot de contrôle associé à la liste des tâches identifiées.
+-    Extraire le flot de données associé à la liste des tâches identifiées.
+-    En fonction de lÂavancement par rapport aux tâches précédentes, réaliser lÂencapsulation des tâches comme des services.
+-    En fonction de lÂavancement par rapport aux tâches précédentes, réaliser le déploiement de lÂapplication sur un cloud.
+
+Les étudiants qui travailleront sur ce TER bénéficieront des résultats de travaux déjà existants par rapport aux trois premiers objectifs (identification des tâches, extraction du flot de contrôle et extraction du flot de données). 
+
+Environnement de travail :
+-    SPOON : http://spoon.gforge.inria.fr/
+-    Eclipse Java development tools (JDT) : Environnement dÂanalyse de code source Java
+-    Cloud Microsoft Azur https://azure.microsoft.com/fr-fr/pricing/ (si lÂencapsulation des tâches comme des services sera réalisée).Lien :  - &bullet;  Dernière mise à jour :  2017-11-21 19:43:03
+	
+24. Réalisation dÂoutils dÂaide au développement pour C++   
+Inane  
+
+Identifiant :  delahaye_1_2017-18
+	&bullet;  Encadrant(s) :  david.delahaye@lirmm.fr
+	Résumé :  Le but de ce TER de Master M1 sera de recréer certaines fonctionnalités dÂIDE pour le langage C++. Celles-ci pourront inclure des fonctionnalités basiques telles que la création dÂaccesseurs simples, ou plus compliquées comme les fonctionnalités suivantes :
+
+* Faire des inclusions automatiques (et éventuellement minimales) selon les fonctions utilisées dans un programme C++ (que ce soit dans le répertoire courant ou dans les chemins des bibliothèques).
+* Recréer le Â« header Â» à la compilation à partir du fichier Â« .cpp Â». Ceci pose certains problèmes, étant donné que certaines informations sont spécifiques au Â« header Â». On pourra être amené à faire une sur-couche de C++. La création et la conservation de la documentation seront également à prendre en compte.
+* Créer un graphe visuel des appels de fonctions au sein dÂune classe, bibliothèque ou API.
+
+Le projet sera réalisé en C++, potentiellement avec lÂaide de quelques autres langages de script tels que Python.
+Prérequis :
+* Une bonne connaissance du langage C++ ;
+* Une bonne connaissance dÂoutils dÂanalyse syntaxique (comme Lex et Yacc, par exemple).Lien :  http://www.lirmm.fr/~delahaye/docs/cpp.pdf &bullet;  Dernière mise à jour :  2017-11-21 20:37:26
+	
+25. Amélioration des performances d'un logiciel existant : analyse et parallélisation 
+
+Identifiant :  Berard_1_2017-18
+	&bullet;  Encadrant(s) :  severine.berard@umontpellier.fr, eric.tannier@inria.fr
+	Résumé :  Dans le cadre d'un travail de recherche, un logiciel permettant d'effectuer de la reconstruction de génomes ancestraux a été implémenté. Les jeux de données à traiter sont de très grande taille et bien que l'algorithme soit de complexité quadratique, les temps d'exécution peuvent être rédhibitoires. Nous souhaitons donc améliorer les performances de ce logiciel en parallélisant les calculs qu'il effectue.
+
+** prérequis : goÃ»t pour la programmation, C++Lien :  http://www.pages-perso-severine-berard.univ-montp2.fr/Encadrements/TERM1_2017-18.pdf &bullet;  Dernière mise à jour :  2017-11-22 17:25:03
+	
+26. Wartbot : extension de la version sous Unity    TeamKurtRomainGuillaumeBenjamin  
+
+Identifiant :  ferber_1_2017-18
+	&bullet;  Encadrant(s) :  ferber@lirmm.fr
+	Résumé :  Le logiciel Warbot réalisé sous MadKit est un système de simulation de combats entre "robots". Il est destiné à valider des stratégies de coordination entre agents. Ce système est utilisé dans le cadre des module de programmation par agents du M1 d'informatique de Montpellier. 
+Une version sous Unity a été commencée lÂannée dernière, il sÂagit de lÂétendre tant dans les aspects de langage de description que sur certains aspects graphiques et dÂinterface H/M. 
+
+Prérequis: avoir suivi le module de programmation orienté agent (HMIN108), aimer programmer sur des moteurs de jeu comme UnityLien :  http://www.lirmm.fr/~ferber/TER/Warbot-Unity.htm &bullet;  Dernière mise à jour :  2017-11-23 14:49:06
+	
+27. Extension pour CogLogo (Cognitons sous NetLogo) / MetaCiv    Teutons  
+
+Identifiant :  ferber_2_2017-18
+	&bullet;  Encadrant(s) :  ferber@lirmm.fr
+	Résumé :  MetaCiv est une plate-forme de simulation et de jeux pour la conception et lÂanalyse de sociétés humaines en développement. Les agents utilisent une architecture à base de cognitons pour évoluer. 
+Une version de cette architecture a été transportée pour NetLogo, sous le nom de CogLogo) et il est donc maintenant possible de développer des Â« civilisations Â» de type Â« metaciv Â» en NetLogo ce qui simplifie la programmation pour des personnes habituées à NetLogo.
+
+Plusieurs tâches sont proposées dans ce TER:
+Développer un système de communication par envoi de message qui sÂintègre bien à CogLogo et à AGR
+Proposer et d'implémenter des framework portant sur la définition de situations dÂinteractions (échange, commerce, combat, propriété, diffusion culturelle, évolution technologique, création de villes) et de relations sociales dynamiques (groupes, rôles), en élargissant le modèle AGR.
+Tester ces fonctionnalités sur des modèles de simulation en liaison avec des archéologues.
+Prérequis: connaitre Java et NetLogo, avoir suivi le module de programmation orienté agent (HMIN108), aimer les simulation multi-agent et les jeux dÂévolution de sociétés.Lien :  http://www.lirmm.fr/~ferber/TER/metaciv_m1.htm &bullet;  Dernière mise à jour :  2017-11-23 14:50:18
+	
+28. Compilation de lisp en VM Java 
+
+Identifiant :  delahaye_2_2017-18
+	&bullet;  Encadrant(s) :  david.delahaye@lirmm.fr, mathieu.lafourcade@lirmm.fr
+	Résumé :  Le but de ce TER est de programmer un compilateur du language Common Lisp vers la machine virtuelle JAVA. Ce compilateur devra être programmé en Common Lisp.
+On s'assurera de pouvoir bootstrapper assez rapidement (quelques itérations) c'est-à-dire que la version n+1 du compilateur a été compilé par la version n et que l'environnement CLisp n'est plus nécessaire.
+
+Environnement Lisp : CLisp
+
+liens 
+https://www.cs.cmu.edu/Groups/AI/html/cltl/cltl2.htmlLien :  - &bullet;  Dernière mise à jour :  2017-11-26 13:57:45
+	
+29. Suppression des redondances dans les bases de connaissances 
+
+Identifiant :  leclere_1_2017-18
+	&bullet;  Encadrant(s) :  leclere@lirmm.fr
+	Résumé :  Ce TER met en Âuvre des connaissances en logique et en algorithmique et permet dÂaborder lÂun des domaines de lÂIA : la représentation de connaissances.
+
+ Une base de connaissances est une entité informatique permettant de regrouper de manière déclarative lÂensemble des connaissances relatives à un domaine spécifique et de raisonner sur ces connaissances,  en particulier de permettre de poser des requêtes complexes sur la base.  On distingue deux composants dans une base de connaissances : la base de faits BF (des connaissances particulières dédiées à la description dÂun ensemble dÂobservation du domaine considéré), la base de règles BR (ou ontologie, permettant de décrire les connaissances implicites du domaine).
+ De nombreux formalismes de représentation de connaissances ont été proposés pour définir de telles bases, mais la plupart peuvent se ramener à une représentation en logique des prédicats oÃ¹ les briques de base de la base (i.e. les faits, les hypothèses et conclusions de règles, et les requêtes) sont des conjonctions dÂatomes. LÂinterrogation dÂune telle base en posant une requête Q se ramenant alors à la mise en évidence de la conséquence logique BF, BR |= Q. 
+ Une stratégie de calcul des réponses à une requête est celle du chaînage avant. Cela consiste à calculer la base de faits saturée BF* obtenue en appliquant de manière itérative les règles de BR sur BF jusquÂà stabilité. Il ne reste plus alors quÂà regarder si les connaissances que cherche Q sont présentes dans la base BF*.
+ Pour des raisons dÂefficacité, il est préférable que les différents éléments dÂune base de connaissances ne contiennent pas de redondance, que ce soit dans la base de faits, dans la base de règles, dans la requête ou dans la base saturée. Par exemple lÂatome P(y,b) de la requête Q=Ex Ey (P(a,b) & P(a,x) & P(y,b) & Q(x)) est redondant et peut donc être supprimé. Ainsi on peut considérer de manière équivalente la requête QÂ = Ex (P(a,b) & P(a,x) & Q(x)) Q. On a bien QÂ équiv. Q .
+ LÂobjectif de ce projet est dÂétudier cette notion de redondance dans les bases de connaissances et de proposer des algorithmes dÂélimination des redondances. On pourra se faire la main sur le cadre propositionnel oÃ¹ les atomes de la base de faits, des règles et de la requête sont de simples symboles propositionnels (i.e. des variables booléeennes). Puis on sÂintéressera au cadre Datalog oÃ¹ les atomes de la base de faits sont des atomes de logique de premier ordre dont les termes sont des constantes ; les atomes des règles sont des atomes de logique premier ordre dont les termes sont des variables, et les variables de la conclusion doivent toutes apparaître dans lÂhypothèse ; les atomes des requêtes peuvent contenir des constantes et des variables. Enfin, on cherchera à étendre les résultats au cadre général des règles existentielles : la base de faits, la requête et les conclusions de règles peuvent contenir des variables existentielles.
+ Les méthodes proposées devront être validées par une implémentation et des expérimentations.Lien :  - &bullet;  Dernière mise à jour :  2017-11-27 10:07:07
+	
+30. Environnement d'Exécution et d'Evaluation 
+
+Identifiant :  meynard_1_2017-18
+	&bullet;  Encadrant(s) :  meynard@lirmm.fr
+	Résumé :  L'objectif du projet consiste à fournir une ou plusieurs solutions techniques permettant à des enseignants de disposer d'une plate-forme d'exécution et d'évaluation de programmes déposés par leurs étudiants. L'utilisation ou le développement de module Moodle (plateforme de l'ENT) est forcément à envisager.
+
+prérequis : un esprit curieux, une connaissance du Web,  l'envie de travaillerLien :  https://moodle.umontpellier.fr/course/view.php?id=8023 &bullet;  Dernière mise à jour :  2017-11-28 11:04:41
+	
+31. Utilisation d'une caméra pan-tilt-zoom pour du suivit d'objet    YMM  
+
+Identifiant :  strauss_1_2017-18
+	&bullet;  Encadrant(s) :  strauss@lirmm.fr
+	Résumé :  Voici une proposition de sujet TER.
+
+Ce projet concerne l'utilisation d'une caméra pan-tilt-zoom pour réaliser du suivit d'objet (ou de personne) par asservissement visuel.
+Le matériel utilisé pour réaliser ce projet ce compose d'une caméra PTZ commandée par une liaison RS485 et d'une carte de numérisation d'un signal vidéo.
+Il se déroulerait en trois temps.
+1/ prise en main du matériel : récupération de l'image sur ordinateur, commande des moteurs de la caméra.
+2/ implatation d'une méthode d'asservissement visuel basé sur les techniques de flot optique et transformation homographique
+3/ étude d'une méthode d'asservissement par apprentissage (méthode de Jurie)
+
+Le sujet de ce projet peut éventuellement évoluer en fonction de son avancée - e.g. évoluer vers l'asservissement visuel d'un des robots des projets robotique.
+
+Exemple d'un tel asservissement
+
+https://www.youtube.com/watch?v=GA8YYkhmOswLien :  - &bullet;  Dernière mise à jour :  2017-12-01 21:22:26
+	
+32. Réécriture en Node.JS dÂun plugIn pour faciliter lÂaccessibilité numérique des mal-voyants    Team Hasselhoff  
+
+Identifiant :  eric.bourreau_n_2017-18
+	&bullet;  Encadrant(s) :  eric.bourreau@univ-montp2.fr, meynard@lirmm.fr
+	Résumé :  LÂaccessibilité numérique est une des options méconnues du web. Seulement 10% des sites web sont réellement accessibles (RéfÂ : K. Cullen et al, LÂaccessibilité Web en Europe, 2010), et moins de 4% des sites des administrations (étude réalisée en 2014 par accessite-audit.com).
+Le sujet de ce TER est la réécriture from scratch, en node.JS, de la partie javascript d'un plugIn existant permettant d'adapter à la volée les couleurs des pages parcourues (ewpa.lirmm.fr ). La succession dÂinterventions et de changement dÂaxes du projet ont conduit à une architecture spaghetti, de moins en moins maintenable et évolutive. 
+Vous serez donc confronté lors de ce projet à la réalité quotidienne de l'informatique : l'obsolescence du code et la nécessaire réingénierie des concepts sous jacent. Une bonne expérience valorisable sur vos CVs !Lien :  http://www.lirmm.fr/~bourreau/TER/EWPAenNodeJS.pdf &bullet;  Dernière mise à jour :  2017-12-04 10:35:36
+	
+33. Comment va votre hôtel ? Création dÂune application dÂanalyse dÂavis (sur des hôtels) sous architecture MEAN    Charlies Angels  
+
+Identifiant :  pompidor_2_2017-18
+	&bullet;  Encadrant(s) :  pompidor@lirmm.fr
+	Résumé :  de connaissances.
+Spécifications fonctionnelles :
+Le but de cette application est dÂanalyser automatiquement (et sans doute plus ou moins approximativement via lÂanalyse de polarités) des avis textuels sur des hôtels pour ensuite Â« colorer Â» (en rouge, orange, vertÂ) les différents descripteurs des ontologies représentant ces différents hôtels (par exemple : accueil, chambre, matelas, rangements, climatisation, salle de bain, buffet, boissonsÂ) Un utilisateur pourra avoir trois profils (rôles) :
+* Un profil dÂadministrateur ;
+* Un profil dÂémetteur dÂavis ;
+* Un profil de gérant dÂhôtel.
+Le profil dÂadministrateur permet :
+* DÂinstancier une ontologie générale prédéfinie en une ontologie spécifique à un hôtel
+* DÂaccepter ou non les avis émis (on considérera que lÂapplication reçoit en continu de chaque hôtel la liste des réservations ce qui permettrait de filtrer les faux avis).
+Le profil dÂémetteur dÂavis permet :
+* DÂémettre un avis sous la forme dÂun texte (limité en nombre de caractères) ;
+un émetteur dÂavis doit obligatoirement indiquer son nom/prénom et la date de séjour dans lÂhôtel ce qui permettrait la vérification de la validité de son avis.
+Le profil de gérant dÂhôtel permet :
+*  De visualiser lÂontologie colorée de son hôtel.
+Ce profil est conditionné à la création dÂun compte (lÂidentifiant de lÂutilisateur est son adresse email).
+
+Spécifications organisationnelles et techniques :
+Calibrage : 4 étudiants max
+Technologies : Architecture MEAN (MongoDB + Node.js + Angular)
+(Il est possible que dÂautres technologies soient utilisées pour lÂanalyse linguistique)
+Pré-requis : avoir suivi lÂUE Â« Présentation des données du web Â»
+(Avoir suivi une UE de texte nÂest pas obligatoire mais peut être intéressant)Lien :  http://www.lirmm.fr/~pompidor/TER/sujet_TER_M1_AIGLE_DECOL_Pierre_Pompidor_2.pdf &bullet;  Dernière mise à jour :  2017-12-04 14:21:14
+	
+34. AlphaHexZero    Gamel Nicolas  
+
+Identifiant :  eric.bourreau_1_2017-18
+	&bullet;  Encadrant(s) :  eric.bourreau@univ-montp2.fr, mickael.montassier@lirmm.fr
+	Résumé :  Hex est un jeu combinatoire abstrait pour deux joueurs, proche du go, avec des hexagones, en 1 dimension.
+LÂarrivée du DeepLearning a révolutionné la programmation des algorithmes de jeu. Nous proposons de jouer (aux alchimistes ?) avec les ingrédients qui ont fait le succès de AlphaGoZero, sur le jeu de Hex. En effet, la résolution de Hex sur un plateau 10x10 est toujours un problème ouvert.Lien :  http://www.lirmm.fr/~bourreau/TER/AlphaHexZero.pdf &bullet;  Dernière mise à jour :  2017-12-07 12:02:24
+	
+35. Horizon    MOMA  
+
+Identifiant :  eric.bourreau_2_2017-18
+	&bullet;  Encadrant(s) :  eric.bourreau@univ-montp2.fr
+	Résumé :  Une part croissante de l'audience des sites d'information en ligne provient des algorithmes de tri des grands groupes de l'Internet (PageRank pour Google, EdgeRank pour Facebook, etc.).
+Ce projet s'inscrit dans une recherche universitaire et consiste à développer une application Facebook permettant de lire l'actualité. 
+Au  sein  de  l'application,  les  usagers seront  répartis  en différents sous-groupes. Chaque sous-groupe sera exposé à une interface ou un algorithme légèrement  différent  des autres  sous-groupes.  Ce  fonctionnement  permettra  de  se  rendre compte  de  l'impact  de  ces  variations  sur  le  taux  de  clic,  de  lecture,  de  partage  et  de commentaire,  et  donc  sur  le  cycle  de  vie  d'une  information  en  ligne,  mais  aussi  sur  les pratiques des usagers.Lien :  http://www.lirmm.fr/~bourreau/TER/Horizon.pdf &bullet;  Dernière mise à jour :  2017-12-07 12:10:17
+	
+36. Génération dÂinformation sur le trafic dans les graphes urbains    natdanai  
+
+Identifiant :  eric.bourreau_3_2017-18
+	&bullet;  Encadrant(s) :  eric.bourreau@univ-montp2.fr
+	Résumé :  Le  travail  du  TER  vise  à déterminer  les  informations  routières  dans  les  villes  denses.  Comme 
+données d'entrée, le graphe correspondant au plan de la ville sera fourni sous forme d'un ensemble 
+d'arcs avec des caractéristiques spécifiques correspondant à la longueur de l'arc, le nombre de voies, 
+la vitesse autorisée, les nÂuds d'origine et de destination, un tag id permettant de lier l'information 
+au SIG. La sortie sera un ensemble de valeurs ajoutées à chaque arc correspondant au trafic moyen 
+par tranches horaires.Lien :  http://www.lirmm.fr/~bourreau/TER/LabSticc.pdf &bullet;  Dernière mise à jour :  2017-12-07 12:36:52
+	
+37. Ouvertures et Finales sur Eternity II 
+
+Identifiant :  eric.bourreau_4_2017-18
+	&bullet;  Encadrant(s) :  eric.bourreau@univ-montp2.fr
+	Résumé :  Nous proposons dans ce sujet de résoudre Eternity.
+Pour cela nous allons précalculer off-line des ouvertures et des finales pour réduire le temps de résolution.
+Nous utiliserons des GPUs, du MapReduce sur un serveur Hadoop.Lien :  http://www.lirmm.fr/~bourreau/TER/OuverturesEtFinales.pdf &bullet;  Dernière mise à jour :  2017-12-07 15:17:07
+	
+38. Génération de données de tests avec un algorithme génétique    PF (Poney fier)  
+
+Identifiant :  chateau_2_2017-18
+	&bullet;  Encadrant(s) :  chateau@lirmm.fr, bourreau@lirmm.fr
+	Résumé :  Lorsque l'on met au point un outil, il est crucial de valider son efficacité grâce à des expérimentations sur des données pertinentes. Il n'est pas toujours possible de disposer de données réelles en quantité et en qualité suffisantes pour établir des statistiques significatives sur le comportement de l'outil. Le sujet de ce TER est en lien avec la génération automatique de jeux de tests.
+Pour réaliser des expérimentations, il faut particulièrement sÂassurer de la diversité des instances construites, pour couvrir l'essentiel des cas que l'on peut rencontrer en entrée. Nous avons proposé lors dÂun stage de M2 en 2015, lÂutilisation dÂalgorithmes génétiques pour gérer une population de solutions (plus ou moins diversifiée au départ) basé sur des métriques de dispersion. L'idée de l'algorithme génétique est de faire "évoluer" les individus de la population initiale via des mutations pour générer les individus d'une nouvelle génération, dont on sélectionne les meilleurs selon le critère choisi. Ici, le critère étudié est la diversité, représentée par la distance entre les individus dans la population.
+Nous avons depuis conçu plusieurs (méta)métriques en fonction de la représentation des solutions (distance de Hamming, distance dÂinsertion, centralité).
+Le but du TER est :
+- dans un premier temps, dÂexpérimenter ces distances sur un premier problème dÂéchafaudage de génomes, utile en bioinformatique. Ces métriques pourront être intra-individus (un double modèle au sein du génotype) ou inter-individus.
+- de généraliser et valider les résultats obtenus sur un autre problème, qui reste encore à définir.
+- de proposer, si le temps le permet, des optimisations de cet outil de diversification.Lien :  - &bullet;  Dernière mise à jour :  2017-12-07 21:52:37
+	
+39. Metabot : pour un jeu multi-agent générique    ImaginAigle  
+
+Identifiant :  ferber_3_2017-18
+	&bullet;  Encadrant(s) :  ferber@lirmm.fr
+	Résumé :  Une version de Warbot sous Unity a été commencée lÂannée dernière. Il sÂagit (comme pour le Warbot sous Java) dÂun système de simulation de combats entre Â« robots Â» simulés. Il est destiné à valider des stratégies de coordination entre agents. 
+Dans ce TER, il sÂagit de développer une version générique de Warbot (appelée Metabot) afin de pouvoir gérer dÂautres types de jeux (ex: jeux de survie ou de développement) tout en restant dans la logique dÂun jeu de programmeur multi-agent (il sÂagit toujours de définir l'IA d'un groupe d'unité). 
+
+Prérequis: avoir suivi le module de programmation orienté agent (HMIN108), aimer programmer sur des moteurs de jeu comme UnityLien :  http://www.lirmm.fr/~ferber/TER/metabot.htm &bullet;  Dernière mise à jour :  2017-12-07 22:15:16
+	
+40. Manipulation en réalité virtuelle    INVRTER  
+
+Identifiant :  strauss_2_2017-18
+	&bullet;  Encadrant(s) :  olivier.strauss@lirmm.fr, nancy.rodriguez@lirmm.fr
+	Résumé :  Les systèmes de réalité virtuelle immersifs pourraient être utilisés en réalité augmentée s'il était possible d'inclure une visualisation de la main dans l'environnement virtuel. Actuellement, pour réaliser cette tâche, on utilise plutot des controleurs (joysticks, data-gloves, leap motion, etc.).
+Dans ce projet, nous proposons d'étudier la possiblité d'utiliser la caméra incluse dans un casque de réalité virtuelle pour repérer, segmenter, et suivre la main de l'utilisateur, l'inclure dans le monde virtuel et, possiblement, d'en analyser la configuration, la pose et la position pour manipuler des objets virtuels.
+
+lien : https://www.google.fr/amp/s/www.seeker.com/amphtml/avegant-light-field-puts-augmented-reality-in-the-palm-of-your-hand-2316599059.htmlLien :  - &bullet;  Dernière mise à jour :  2017-12-11 10:55:54
+	
+41. Fake ? yes or no ?    Sosiji  
+
+Identifiant :  strauss_3_2017-18
+	&bullet;  Encadrant(s) :  strauss@lirmm.fr, vincent.itier@lirmm.fr
+	Résumé :  Les fake news deviennent notre environnement quotidien. Les réseaux sociaux en sont pleins. Souvent ces fake news sont associées a des fake pics, c'est a dire des photos qui ont été trafiquées pour en modifier le contenu informatif. L'exemple le plus connu est la disparition et la réapparition des dirigeants russes sur les photos officielles.
+
+image : https://goo.gl/images/cQLo5Y
+
+Si la retouche de photo à cette époque ne pouvait être réalisée que par des photographes expérimentés avec des résultats pas toujours convaincants, l'avenement du numérique a rendu cette manipulation à la portée de tous, souvent avec des résultats très réalistes.
+Nous travaillons actuellement sur des techniques permettant de détecter si une image a été, ou non, manipulée.
+Parmis les techniques envisagées, nous esperons utiliser une signature particulière des caméras permettant d'identifier l'appareil
+qui a été utilisé pour effectuer une prise de vue. Ce type de technique est déja utilisée par la CIA pour retrouver les créateurs de certaines photos criminelles.
+L'objet de ce projet est de s'interesser a ces techniques, dans un premier temps, puis de comparer certaines des méthodes de la littérature avec des méthodes que nous proposons.Lien :  - &bullet;  Dernière mise à jour :  2017-12-11 10:55:01
+	
+42. Application de coaching nutritionnel    OnPoint Tech  
+
+Identifiant :  boudet_1_2017-18
+	&bullet;  Encadrant(s) :  boudet@lirmm.fr, baert@lirmm.fr
+	Résumé :  MEDIPAD est un dispositif léger (à base dÂiPad) ayant permis de collecter des données cliniques concernant un grand nombre de sujets vis à vis de leurs comportements alimentaires. Ces données peuvent être croisées avec une base de données permettant de quantifier les données nutritionnelles de la plupart des aliments (Ciqual). En particulier, on sÂintéresse aux aminoacides ramifiés (BCAA for Branched-Chain Amino Acid) afin dÂétudier leur rôle dans le diabète et sa résistance à lÂinsuline.
+
+Actuellement, il manque un outil automatique de coaching nutritionnel. Ce problème, assez vieux en diététique, consiste à proposer un menu sur un certain horizon, respectant les bonnes pratiques recommandées par lÂOMS (vitamines, calories, lipides, Â en tout une vingtaine de critères). Attention, un ensemble de contraintes existent, sans être forcément explicitées, renforçant la difficulté de générer un menu réaliste (pas de chou-fleur au petit déjeuner ou de la graisse de phoque en Turquie par exemple).
+
+LÂapplication de coaching nutritionnel serait donc plutôt un correcteur de menus vis à vis du profil alimentaire dÂun individu. Ainsi par rapport à un profil personnalisé (dÂoÃ¹ Medipad), il faudrait faire des recommandations dÂévolution de menus (ou de nouveaux menus) tenant compte de critères particuliers (plus dÂOmega3, moins de calories, etc) pour passer par exemple dÂun régime hyperlipidique (trop gras) à un régime insulinogénique (maîtrisant sa glycémie) en fixant un taux cible de BCAA dans lÂensemble des aliments.
+
+Le travail a réalisé est assez vaste :
+- stabiliser, corriger et enrichir la base de données des aliments (par exemple en incluant la notion de portion, on ne peut proposer un menu oÃ¹ il faudrait manger 16kgs de tomates), idéalement à travers un site web ou une application,
+- exprimer les contraintes décrivant lÂensemble de règle à respecter, certaines pouvant être strictes, dÂautres pouvant être relâchées avec un système de pénalité à explorer,
+- dans le cas, oÃ¹ il nÂy a pas de solution réalisable, faire des propositions dÂajout dÂaliments pour aider le nutritionniste à trouver un menu adapté,
+- faire une application (web ou non), oÃ¹ le patient ou le nutritionniste donne un menu issu de Medipad et obtient une ou plusieurs suggestions de menu suivant les critères choisis (insulinogénitique, hypocaloriqueÂ)
+
+Nous disposons déjà de données patients (anonymisées bien sur), dÂune base dÂaliments (ciqual) et de vrais besoins utilisateurs (nutritionnistes).Lien :  - &bullet;  Dernière mise à jour :  2017-12-12 20:33:12
+	
+43. Jeu de stratégie orienté agent    Theclémaque  
+
+Identifiant :  puech_1_2017-18
+	&bullet;  Encadrant(s) :  william.puech@umontpellier.fr
+	Résumé :  Le joueur incarne un officier sur le champ de bataille. Il ne peut interagir avec ses troupes que par l'envoie de messages (via des messagers, des signaux lumineux/sonores) l'ordre étant crée par le joueur grâce à un interpréteur. De plus sa connaissance du champ de bataille ne se fait que par ses perceptions (visuelle, sonores...), le joueur peut s'appuyer sur une carte plus ou moins précise mais pour de plus amples informations il doit se fier aux données transmises par les messagers envoyés par les différents régiments. Un messager tué ou ne revenant pas dans les temps peut dès lors entraîner de grave conséquence dans le déroulement de la bataille surtout pour des régiments en-dehors du champ de perception du joueur.Lien :  - &bullet;  Dernière mise à jour :  2017-12-12 20:36:59
+	
+44. Implémentation dÂun outil de reconstruction de graphes dÂobjets des applications orientées objets. 
+
+Identifiant :  tibermacin_1_2017-18
+	&bullet;  Encadrant(s) :  tibermacin@lirmm.fr, zellagui@lirmm.fr
+	Résumé :  Le but de ce projet est dÂimplémenter un outil qui permet de reconstruire lÂarchitecture des systèmes orientés objets (écrit en Java). Cette architecture est un graphe dÂobjets dont les noeuds représentent des objets et les arêtes représentent les affectations des attributs des objets.
+
+Travail demandé : (LÂimplémentation doit se faire en utilisant Java et la librairie Spoon (http://spoon.gforge.inria.fr/))
+1. Implémentation dÂun algorithme de reconstruction du graphe dÂobjets en se basant sur la méthode définie dans le livre : Reverse Engineering of Object Oriented Code de Paolo Tonella.
+2. Implémentation dÂun algorithme de g ́en ́eration dÂarbre de dominance pour
+identifier les structures composites dans le graphe dÂobjets. LÂalgorithme à implémenter est celui de Tarjan-Languer.
+
+Prérequis : Bonnes connaissances en programmation Java.Lien :  - &bullet;  Dernière mise à jour :  2017-12-18 15:43:41
+	
+45. Une ligne de produits Logiciels dÂune Application Mobile    KMMV  
+
+Identifiant :  seriai_3_2017-18
+	&bullet;  Encadrant(s) :  abdelhak.seriai@lirmm.fr
+	Résumé :  ÂNe pas réinventer la roue, faire quelque chose de plus utileÂ1 est une recommandation générale qui peut être valable pour tous les domaines et pour tous les types dÂactivité. Transposé dans le domaine du génie logiciel, ce principe consiste à favoriser la réutilisation dÂartefacts logiciels existants pour le développement de nouveaux produits logiciels.
+
+LÂingénierie des lignes de produits logiciels sÂinspire de la production automobile et mécanique pour la fabrication de variantes dÂune même famille. Elle consiste en un ensemble dÂactivités permettant une réutilisation systématique dÂartefacts logiciels pour le développement dÂune famille de produits logiciels. Une famille de produits logiciels (ou une ligne de produits) est un ensemble de logiciels qui partagent un ensemble de caractéristiques qui peuvent être gérées de la même manière ou satisfont les besoins dÂun domaine métier donné.
+
+LÂingénierie des lignes de produits sÂappuie sur les caractéristiques communes et elle permet également de gérer la variabilité des membres de la même famille. Elle offre plusieurs avantages par rapport à lÂingénierie classique, qui consiste à développer un produit à la fois. Différentes études ont montré quÂà partir de la troisième variante développée, la productivité et la qualité peuvent être améliorées par un facteur de 10.
+
+LÂobjectif de ce TER est de réaliser une ligne de produits dÂune application mobile permettant de lier des personnes proposant des services avec dÂautres personnes ayant besoin de ce service. LÂexemple type de ce type dÂapplication est Uber.
+
+Les environnements qui seront utilisés dans le cadre de ce TER :
+- Android studio : https://fr.wikipedia.org/wiki/Android_Studio
+- FeatureHouse : http://www.infosun.fim.uni-passau.de/spl/apel/fh/
+- FeatureIDE : https://featureide.github.io/
+
+Quelques références:
+- [Benavides et al. 2010] David Benavides, Sergio Segura, et Antonio Ruiz-Â°Â©-Cortés. Automated analysis of feature models 20 years  later: A literature review. Inf. Syst., 35(6):615Â636, Septembre 2010.
+- [Krueger 2006] Charles W. Krueger. Introduction to the Emerging Practice of Software Product Line Development. Methods & Tools -Â­- Fall 2006. ISSN 1661-Â­- 402X. Volume 14, Number 3.
+- [Pohl et al. 2005] Klaus Pohl, GÃ¼nter BÃ¶ckle, and Frank J. van der Linden. Software Product Line 125 Engineering: Foundations, Principles and Techniques. Springer-Â­-
+Verlag New York, Inc., Secaucus, NJ, USA, 2005.
+- [Pohl et al. 2010] Klaus Pohl, Gnter Bckle, et Frank J. van der Linden. Software product line engineering: Foundations, principles and techniques. Springer Publishing Company, Incorporated, 2010.Lien :  - &bullet;  Dernière mise à jour :  2017-12-19 13:25:02
+	
+46. Application de gestion d'une machine à café    The MEANers  
+
+Identifiant :  Alain.Jean-Marie_1_2017-18
+	&bullet;  Encadrant(s) :  alain.jean-marie@inria.fr
+	Résumé :  La machine à café Inria du bâtiment 5 fonctionne avec un système de crédits. Les utilisateurs indiquent leur consommation sur une feuille. Inria souhaite remplacer cette feuille par une tablette. Il s'agit de réaliser tout le système: choix de la tablette, programmation de l'application, installation, test.
+
+L'application comportera une partie administrateur et une partie administrateur, permettant entre autres de gérer les crédits.
+Parmi les contraintes, il est nécessaire que l'utilisation soit aussi fluide que le système actuel. Il s'agit aussi que les données (crédits, données d'authentification) soient protégées contre les intrusions, les manipulations et le vol.
+
+Prérequis: aucunLien :  http://www-sop.inria.fr/members/Alain.Jean-Marie/Projects/cafe_montpellier.html &bullet;  Dernière mise à jour :  2017-12-28 10:53:53
+	
+47. Développement application Android en Réalité Augmentée   
+YF  
+
+Identifiant :  seriai_4_2017-18
+	&bullet;  Encadrant(s) :  abdelhak.seriai@lirmm.fr
+	Résumé :  Le projet que nous proposons consiste à réaliser une application Android présentant les différents lieux d'intérêts (monuments par exemple) de la ville de Montpellier (ou autres) en réalité augmentée.
+Pour cela:
+- Prévoir toutes les fonctionnalités de lÂapplication.
+- Choisir les bibliothèques de géolocalisation et de réalité augmentée.
+- Ãventuellement utliser diagramme UML.
+- Effectuer des tests graphiques (XML ...).
+- Créer lÂinterface graphique, créer un menu, boutons.
+- Utiliser Android studio et la bibliothèque de géolocalisation pour afficher la carte, détecter ma position.
+- Utiliser les différents sensors dÂAndroid.
+- Utilisation Google Maps/Earth(GPS,latitude,longitude,compas).
+- Concevoir la base de données quÂon utilisera avec lÂapplication. Concevoir les tables, les champs...
+- Mettre en place une base de données avec MYSQL avec Android pour effectuer des requêtes.
+- Implémentation monuments + historique monuments.
+- Vérifier que tout fonctionne correctement sur différents périphériques, différentes tailles dÂécran.
+- Réflexion options supplémentaires.
+- Réflexion sur une possible mise sur le marché et développement plus poussé de lÂapplicationLien :  - &bullet;  Dernière mise à jour :  2018-01-25 09:22:01
+	
+48. Bouliste Augmenté 
+
+Identifiant :  eric.bourreau_5_2017-18
+	&bullet;  Encadrant(s) :  eric.bourreau@univ-montp2.fr
+	Résumé :  Bientôt les vacances Â et ses parties de pétanque endiablées au camping.
+Il est temps de passer au XXIième siècle et de développer le compagnon idéal du boulisteÂ : lÂappli mobile qui compte les points et fait aussi double décimètre (en réalité augmentée, elle allume la boule la plus proche du cochonnet).
+Vous serez en charge de concevoir toutes les fonctionnalités nécessaires (décompte des points et des mènes, affichage des points de règlements, possibilité dÂorganiser un tournoi, etc), de les développer (site web dans un premier temps) et de les implémenter sur un smartphone.
+
+EncadrantÂ : Eric Bourreau
+EffectifÂ : 2 ou 4 personnesLien :  - &bullet;  Dernière mise à jour :  2018-02-17 17:39:42
+	
+49. Musée Sécurisé en Réalité Augmentée 
+
+Identifiant :  eric.bourreau_6_2017-18
+	&bullet;  Encadrant(s) :  eric.bourreau@univ-montp2.fr
+	Résumé :  La sécurité informatique est aujourdÂhui plus que jamais un problème majeur avec lÂaugmentation
+de la place que prennent les nouvelles technologies dans la vie dÂune grande partie
+de la population mondiale. Ces nouveaux modes de communication entraînent en effet une
+croissance indubitable du nombre dÂinformations privées se trouvant dans des lieux de stockage
+ou dÂéchange inadaptés de par leur manque de sécurité.
+CÂest dans ce contexte que lÂéquipe ICAR du Laboratoire dÂInformatique, de Robotique et
+de Microélectronique de Montpellier (LIRMM), et plus particulièrement William PUECH, a
+orienté ses travaux vers la sécurisation des transferts dÂimages au travers du chiffrement ou de
+lÂinsertion de données cachées dans des images "banalisées".
+Ainsi, afin de mettre en avant ces outils de sécurisation essentiels à la conservation dÂun
+environnement numérique sÃ»r et utilisable par tous, ce dernier nous a proposé la création, en
+partenariat avec la doctorante Pauline PUTEAUX, dÂun Musée Sécurisé en Réalité Augmentée
+dans le cadre de notre projet de lÂannée 2017-2018.Lien :  - &bullet;  Dernière mise à jour :  2018-02-17 17:47:35
+	43 encadrants encadrant
+	sujets proposés et pris (# étudiants / # encadrants)
+	encadrement à déclarer (quote-part) abdelhak.seriai@lirmm.fr  seriai_1 (4/2 = 2)  seriai_2  seriai_3 (5/1 = 5)  seriai_4 (2/1 = 2)  q.-p. = 9 × 3h alain.jean-marie@inria.fr  A.Jean-Marie_1 (4/1 = 4)  q.-p. = 4 × 3h anna-sophie.fiston-lavier@umontpellier.fr  chateau_1 (2/2 = 1)  q.-p. = 1 × 3h baert@lirmm.fr  boudet_1 (4/2 = 2)  q.-p. = 2 × 3h bernard.georges@soprasteria.com  huchard_1  boudet@lirmm.fr  boudet_1 (4/2 = 2)  q.-p. = 2 × 3h bourreau@lirmm.fr  chateau_2 (3/2 = 1.5)  q.-p. = 1.5 × 3h castelltort@lirmm.fr  ALaurent_1  chateau@lirmm.fr  rgirou_1  rgirou_2 (1/2 = 0.5)  rgirou_3 (2/2 = 1)  chateau_1 (2/2 = 1)  chateau_2 (3/2 = 1.5)  q.-p. = 4 × 3h clementine.nebut@lirmm.fr  nebut_1 (4/3 = 1.33)  q.-p. = 1.33 × 3h cousot@lirmm.fr  lafourca_3 (4/3 = 1.33)  q.-p. = 1.33 × 3h david.delahaye@lirmm.fr  delahaye_1 (3/1 = 3)  delahaye_2  q.-p. = 3 × 3h dino.ienco@teledetection.fr  learn_autoencoders  eric.bourreau@univ-montp2.fr  e.bourreau_n (2/2 = 1)  e.bourreau_1 (3/2 = 1.5)  e.bourreau_2 (4/1 = 4)  e.bourreau_3 (1/1 = 1)  e.bourreau_4  e.bourreau_5  e.bourreau_6  q.-p. = 7.5 × 3h eric.tannier@inria.fr  Berard_1  ferber@lirmm.fr  ferber_1 (4/1 = 4)  ferber_2 (4/1 = 4)  ferber_3 (4/1 = 4)  q.-p. = 12 × 3h hinde.bouziane@lirmm.fr  hinde_1  seriai_2  jessie.carbonnel@lirmm.fr  nebut_1 (4/3 = 1.33)  q.-p. = 1.33 × 3h kevin.cousot@gmail.com  ALaurent_1  kevin.cousot@lirmm.fr  lafourcade_2  lafourcade@lirmm.fr  lafourca_1 (4/1 = 4)  lafourca_3 (4/3 = 1.33)  q.-p. = 5.33 × 3h laurent@lirmm.fr  ALaurent_1  leclere@lirmm.fr  polystores  leclere_1  marc.chaumont@lirmm.fr  villon_1 (5/2 = 2.5)  q.-p. = 2.5 × 3h marianne.huchard@lirmm.fr  nebut_1 (4/3 = 1.33)  huchard_1  seriai_1 (4/2 = 2)  q.-p. = 3.33 × 3h mathieu.lafourcade@lirmm.fr  ALaurent_1  lafourcade_2  hinde_1  delahaye_2  meynard@lirmm.fr  meynard_1  e.bourreau_n (2/2 = 1)  q.-p. = 1 × 3h mickael.montassier@lirmm.fr  e.bourreau_1 (3/2 = 1.5)  q.-p. = 1.5 × 3h mountaz.hascoet@lirmm.fr  mountaz_1  mountaz_2  mountaz_3  mountaz_4  mountaz_5  nancy.rodriguez@lirmm.fr  strauss_2 (4/2 = 2)  q.-p. = 2 × 3h olivier.strauss@lirmm.fr  strauss_2 (4/2 = 2)  q.-p. = 2 × 3h pierre.pompidor@lirmm.fr  pompidor_1 (2/1 = 2)  q.-p. = 2 × 3h pompidor@lirmm.fr  pompidor_2 (4/1 = 4)  q.-p. = 4 × 3h prince@lirmm.fr  lafourca_3 (4/3 = 1.33)  q.-p. = 1.33 × 3h rgirou@lirmm.fr  rgirou_1  rgirou_2 (1/2 = 0.5)  rgirou_3 (2/2 = 1)  q.-p. = 1.5 × 3h sebastien.villon@lirmm.fr  villon_1 (5/2 = 2.5)  q.-p. = 2.5 × 3h severine.berard@umontpellier.fr  Berard_1  strauss@lirmm.fr  strauss_1 (3/1 = 3)  strauss_3 (4/2 = 2)  q.-p. = 5 × 3h tibermacin@lirmm.fr  tibermacin_1  ulliana@lirmm.fr  polystores  learning_ind_trans (3/1 = 3)  learn_autoencoders  q.-p. = 3 × 3h vincent.itier@lirmm.fr  strauss_3 (4/2 = 2)  q.-p. = 2 × 3h william.puech@umontpellier.fr  puech_1 (4/1 = 4)  q.-p. = 4 × 3h zellagui@lirmm.fr  tibermacin_1  93 étudiants encadrés
+page d'accueil &bullet; liste des sujets &bullet; 
+		liste des groupes
+		 &bullet; 
+		liste des encadrants
+		
+
+Mathieu Lafourcade, janvier 2018 (merci d'envoyer toute remarque ou question sur les TERs à
+    mathieu.lafourcade
+	avec comme sujet du mail "[TER_M1_2018] Question") - Merci à Mountaz qui est l'origine du contenu et du style de cette page.
+
+

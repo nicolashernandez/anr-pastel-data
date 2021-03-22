@@ -1,0 +1,752 @@
+https://halshs.archives-ouvertes.fr/docs/00/63/20/78/PDF/fmr8_calculs_matriciels_et_analyse_de_graphe.pdf
+
+Opérations matricielles et analyse de graphe
+
+Laurent Beauguitte, Pierre Beauguitte
+
+To cite this version:
+Laurent Beauguitte, Pierre Beauguitte. Opérations matricielles et analyse de graphe. 2011. <halshs-
+00632078>
+
+HAL Id: halshs-00632078
+
+https://halshs.archives-ouvertes.fr/halshs-00632078
+
+Submitted on 13 Oct 2011
+
+HAL is a multi-disciplinary open access
+archive for the deposit and dissemination of sci-
+entific research documents, whether they are pub-
+lished or not. The documents may come from
+teaching and research institutions in France or
+abroad, or from public or private research centers.
+
+L’archive ouverte pluridisciplinaire HAL, est
+destinée au dépôt et à la diffusion de documents
+scientifiques de niveau recherche, publiés ou non,
+émanant des établissements d’enseignement et de
+recherche français ou étrangers, des laboratoires
+publics ou privés.
+
+Opérations matricielles et analyse de graphe
+
+CNRS, UMR Géographie-cités, bl<at>parisgeo.cnrs.fr
+
+Laurent Beauguitte
+
+Pierre Beauguitte
+
+Université Paris Diderot Paris 7, pierrebeauguitte<at>gmail.com
+
+Automne 2011 - Version 1
+
+Introduction
+
+Un graphe peut se représenter sous trois formes principales : deux listes
+(une de sommets et une de liens), un graphe au sens strict et enﬁn une
+matrice d’adjacence où, conventionnellement, les origines sont en ligne et
+les destinations en colonne [4]. Cette dernière notation est nécessaire pour
+mesurer un grand nombre d’indicateurs utiles en analyse de réseaux.
+
+L’objectif de ce document du groupe fmr est de rappeler les bases du
+calcul matriciel et de montrer quels indicateurs elles permettent d’obtenir
+facilement. Toutes les opérations indiquées sont aisément reproductibles avec
+le logiciel libre et gratuit R (voir les programmes en annexe).
+
+1 Matrices
+
+1.1 Déﬁnitions et opérations matricielles de base
+
+Une matrice A de dimension m × n est un tableau de valeurs à m lignes
+et n colonnes. On note ai,j la valeur de l’élément situé à la i-ième ligne et
+j-ième colonne. Il est possible de multiplier une matrice A avec une matrice
+B si A est de dimension m× n et B de dimension n× p. Dans ce cas C = AB
+est la matrice de dimension m × p obtenue par
+
+(cid:88)
+
+1≤k≤n
+
+ci,j =
+
+ai,kbk,j
+
+L’élément ci,j est la somme des produits des éléments de la ligne i de
+A par ceux de la colonne j de B. Le tableau 1 détaille le principe de la
+multiplication matricielle.
+
+1
+
+Tableau 1 – Multiplication matricielle
+
+A
+
+2 1
+
+1 0
+3 2
+
+B
+
+ (cid:20)1 0
+
+2 3
+
+(cid:21) 2 × 1 + 1 × 2 2 × 0 + 1 × 3
+
+1 × 1 + 0 × 2 1 × 0 + 0 × 3
+3 × 1 + 2 × 2 3 × 0 + 2 × 3
+
+AB
+
+AB
+
+ 4 3
+
+
+
+1 0
+7 6
+
+Tableau 2 – Addition et soustraction de matrices de même dimension
+
+A
+
+0 1 2
+
+3 0 0
+4 2 0
+
+B
+
+ 5 0 1
+
+2 0 0
+1 1 4
+
+A + B
+
+ 5 1 3
+
+5 0 0
+5 3 4
+
+ −5 1
+
+A - B
+
+1
+0
+0
+1 −4
+
+1
+3
+
+
+
+Si m = p, alors BA existe et n’est en général pas égal à AB (la multipli-
+
+cation matricielle n’est pas commutative).
+
+Si l est un nombre, alors le produit lA est obtenu en multipliant chaque
+
+terme de A par l.
+
+L’addition et la soustraction sont déﬁnies pour des matrices de même
+dimension, simplement par l’addition ou la soustraction terme à terme (voir
+le tableau 2).
+La transposée d’une matrice m × n est la matrice n × m obtenue en
+permutant lignes et colonnes. On note AT la transposée de A. On dit qu’une
+matrice A est symétrique si AT = A.
+
+Une matrice diagonale est une matrice carrée où toutes les cases ai,j = 0
+si i (cid:54)= j. Formulée autrement, toutes les cases contiennent des 0, exceptée la
+diagonale.
+
+1.2 Vecteurs et valeurs propres
+
+Une matrice carrée n × n peut être vue comme une application linéaire
+sur les vecteurs de longueur n : on peut multiplier une telle matrice par un
+vecteur colonne, i.e. une matrice n × 1, et obtenir un nouveau vecteur. Une
+
+2
+
+Soit la matrice A suivante
+
+Sa transposée, notée AT , est
+
+0 1 1 0
+
+0 1 0 1
+
+
+1 0 0 0
+0 0 0 1
+1 0 1 0
+
+1 0 0 0
+1 0 0 1
+0 0 1 0
+
+matrice A possède toujours des vecteurs propres (eigenvectors), qui sont les
+vecteurs vi vériﬁant
+
+Avi = λivi,
+
+où λi est un nombre complexe 1
+
+Un vecteur propre est un vecteur dont la direction n’est pas aﬀectée par
+A. Ces vecteurs déﬁnissent en fait des axes invariants pour A. Le nombre λi
+est la valeur propre (eigenvalue) associée à vi. Si la matrice est symétrique,
+alors les valeurs propres sont réelles. Une valeur propre peut être nulle, ce
+qui est un cas problématique : tout l’axe du vecteur vi est « aplati » sur 0
+par A, c’est-à-dire que A « écrase » une dimension de l’espace 2.
+
+Si une même valeur propre λ est associée à plusieurs vecteurs propres
+indépendants (i.e. qui ne déﬁnissent pas les mêmes axes), le nombre de tels
+vecteurs est la multiplicité de λ, qu’on note m. Cependant, lorsqu’on énumère
+les valeurs propres d’une matrice, il est d’usage de faire apparaître m fois λ.
+À une matrice n × n, on associe donc les n nombres λi, 1 ≤ i ≤ n, qui ne
+sont pas nécessairement distincts deux à deux.
+
+Dans l’exemple de la ﬁgure 1, les vecteurs propres v1 et v2 déﬁnissent les
+droites D1 et D2, toutes deux invariantes pour A. Le fait que λ2 soit nulle
+indique que l’image de tout vecteur de D2 est le point (0, 0). Tout vecteur
+a son image sur la droite D1 : A transforme le plan (2 dimensions) en une
+droite (une dimension).
+
+Figure 1 – Vecteurs et valeurs propres
+
+A =
+
+(v1, λ1) =
+
+, 5
+
+(v2, λ2) =
+
+(cid:20)4 2
+
+(cid:21)
+
+2 1
+
+(cid:19)
+
+(cid:18)(cid:20)2
+(cid:21)
+
+1
+
+(cid:18)(cid:20) 1
+
+−2
+
+(cid:21)
+
+(cid:19)
+
+, 0
+
+La somme des valeurs propres est égale à la trace de la matrice, c’est-à-
+
+dire la somme des éléments de sa diagonale.
+
+1. C désigne l’ensemble des nombres complexes, c’est-à-dire l’ensemble des sommes et
+
+produits de nombres réels et du nombre imaginaire i (tel que i2 = −1).
+
+2. En termes mathématiques, l’image de tout l’axe du vecteur vi par A est le point 0.
+
+3
+
+D1D2Tableau 3 – Du graphe à la matrice laplacienne
+
+Graphe
+
+Matrice d’adjacence Matrice des degrés
+
+Matrice laplacienne
+
+
+
+A B C D
+0
+1
+1
+0
+
+1
+0
+1
+1
+
+0
+1
+0
+1
+
+A 0
+B 1
+C 0
+D 0
+
+
+
+
+
+A B C D
+0
+0
+0
+2
+
+0
+3
+0
+0
+
+0
+0
+2
+0
+
+A 1
+B 0
+C 0
+D 0
+
+
+
+
+
+A B
+1 −1
+0 −1
+
+A
+B −1
+C
+D 0 −1 −1
+
+C D
+0
+0
+3 −1 −1
+2 −1
+2
+
+
+
+L’existence de ces vecteurs et valeurs propres est un fait mathématique,
+mais les déterminer est un réel problème informatique quand les matrices
+sont de grandes dimensions [12].
+
+2 Matrices associées à un graphe
+
+Un graphe non valué G = (V, E) d’ordre n (nombre de sommets) peut
+être représenté par sa matrice d’adjacence A, une matrice carrée n × n où
+ai,j = 1 si (i, j) ∈ E, 0 sinon. Si G est simple, la diagonale est nulle. S’il est
+non orienté, A est symétrique.
+Soit G un graphe simple non valué, orienté ou non. On déﬁnit la matrice
+laplacienne (Laplacian matrix) L = D − A, où D est la matrice diagonale
+des degrés, telle que di,i est égal au degré (nombre de liens adjacents) du
+sommet i, noté δi. Donc
+
+ δi
+
+li,j =
+
+si i = j
+
+−1 si i (cid:54)= j, (i, j) ∈ E
+0
+
+sinon
+
+Dans le tableau 3, les étapes menant au calcul d’une matrice laplacienne
+
+d’un graphe simple, non orienté et non valué, sont détaillées.
+
+4
+
+3 Applications en analyse de réseau
+
+3.1 Opérations élémentaires
+
+Soit A la matrice d’adjacence d’un graphe orienté ou non, éventuellement
+i,j , élément de la matrice Ak = A × . . . × A, est égal
+avec boucles. Alors a(k)
+au nombre de chemins de longueur k (pouvant passer plusieurs fois par un
+même point) entre les sommets i et j du graphe. Ainsi, la longueur du plus
+court chemin entre i et j est le plus petit k tel que a(k)
+
+Dans le cas d’un graphe biparti, où V est partitionné en X (à m éléments)
+et Y (à n éléments), plutôt que de considérer la matrice d’adjacence de
+dimension (n+m)×(n+m), on peut s’intéresser à la matrice A de dimension
+m × n, où ai,j = 1 si (xi, yj) ∈ E. Cela revient à ne considérer que les liens
+existants entre les deux ensembles X et Y . Alors AAT est la matrice des
+cooccurrences en lignes (relatives à X), et AT A la matrice des cooccurrences
+en colonnes (relatives à Y ).
+
+i,j (cid:54)= 0.
+
+Soit le graphe biparti G suivant
+
+(cid:20) 1 2 3
+
+(cid:21)
+
+A 0 1 0
+B 1 1 0
+où est indiquée la participation de deux géographes A et B à trois col-
+
+loques de géographie 1, 2 et 3.
+
+En multipliant G par sa transposée GT , on obtient la matrice suivante
+
+A 1
+B 1
+et en multipliant GT par G, on obtient
+
+1
+2
+
+(cid:21)
+(cid:20) A B
+ 1 2 3
+
+
+
+1 1 0
+1 2 0
+0 0 0
+
+1
+2
+3
+Dans le premier cas, on obtient les données relatives aux géographes (A
+a participé à un colloque, B à 2, et ils étaient présents à un même colloque) ;
+dans le second, les données relatives aux colloques 3.
+
+3.2 Corrélation et régression de matrices
+
+La corrélation permet de mesurer la ressemblance entre deux matrices de
+même dimension 4, la régression explique (au sens statistique du terme) une
+matrice par une autre. Ainsi, des tests eﬀectués sur des matrices de similarité
+concernant les positions de vote à l’ONU durant la guerre froide montrent
+
+3. L’exemple donné ici est volontairement de taille minime. . . mais le principe reste
+
+évidemment le même quel que soit l’ordre du graphe.
+
+4. Lorsqu’il s’agit de matrices de similarités, on applique le test de Mantel.
+
+5
+
+que plus de 70% de l’information de la matrice au temps t + 1 s’explique par
+la structure de la matrice au temps t (Beauguitte, 2011[3]).
+
+3.3 Spectre d’un graphe (graph sprectra)
+
+La théorie spectrale des graphes s’intéresse aux spectres des matrices dé-
+crivant les graphes, qui sont simplement l’ensemble de leurs valeurs propres.
+On ne s’intéressera qu’aux matrices symétriques, donc aux graphes non orien-
+tés, aﬁn de manipuler des nombres réels. On ordonne les valeurs propres λi
+par ordre croissant, i.e. λ1 ≤ λ2 ≤ . . . ≤ λn. Le spectre est un invariant du
+graphe : si la numérotation des sommets change, la matrice d’adjacence va
+changer, mais pas ses valeurs propres.
+
+L’utilisation des spectres des matrices en analyse de réseau est récente
+(excepté l’indice de Bonacich, voir infra) et en plein développement. Les
+déﬁnitions proposées et les pistes jugées les plus prometteuses varient d’un
+auteur à l’autre 5. De plus, les applications sur des données empiriques restent
+essentiellement exploratoires. À notre connaissance, seuls les physiciens ont
+à ce jour mobilisé cet outil [1] [5]. Ceci s’explique sans doute par le caractère
+essentiellement non orienté des graphes étudiés par ces derniers : le spectre
+d’un graphe orienté est complexe, ce qui rend son utilisation diﬃcile. Seules
+quelques propriétés élémentaires sont présentées ici.
+
+Spectre de A
+
+L’eigenvector centrality est une mesure proposée par Bonacich [6]. Il s’agit
+d’une mesure plus ﬁne que le degré, pour laquelle la centralité xi du sommet
+vi est proportionnelle à la centralité des sommets adjacents. Cela peut s’écrire
+
+
+
+x1
+
+...
+xn
+
+(cid:88)
+
+1≤j≤n
+
+λxi =
+
+ai,jxj
+
+ou encore
+
+λx = Ax, où x =
+
+Donc les centralités sont données par un vecteur propre de A, précisément
+celui associé à la plus grande valeur propre λn. Quand G est connexe, cette
+valeur propre est de multiplicité 1, elle est donc associée à un unique vecteur
+propre.
+
+Selon Bonacich, l’avantage principal de cette mesure de centralité est de
+prendre en compte la structure générale du graphe. Dans un article plus
+récent, il a proposé une extension aux graphes signés et valués [7]. Dans la
+littérature, cet indice reste peu utilisé comparé aux indicateurs « classiques »
+(degré, intermédiarité. . . ).
+
+5. Ainsi, l’appellation de graphe laplacien désigne des objets diﬀérents en fonction des
+auteurs (voir [14], p.3). Pour simpliﬁer, il est possible d’utiliser trois matrices laplaciennes
+diﬀérentes, deux d’entre elles étant normalisées.
+
+6
+
+Figure 2 – Spectre du graphe et partition
+
+Sur les deux ﬁgures, les carrés et les ronds représentent les deux groupes créés suite à la
+scission du club de karaté Zachari (une base de données fréquemment utilisée en analyse
+de réseaux sociaux). À gauche, on voit la partition obtenue grâce à une classiﬁcation
+hiérarchique. Les sommets en vert clair ne sont assignés à aucun des deux blocs trouvés.
+À droite, la partition est obtenue grâce à un algorithme utilisant le spectre du graphe :
+seuls deux sommets se trouvent placés dans le « mauvais » bloc (ﬁgures tirées de [11]).
+
+Spectre de L
+
+λ1 est toujours nulle et la multiplicité de λ1 est le nombre de composantes
+connexes de G (voir notamment [13] p.74). Donc si une seule valeur propre
+est égale à 0, le graphe est connexe.
+
+Clustering spectral
+
+Les vecteurs propres d’une matrice déﬁnissent des axes invariants pour
+l’application déﬁnie par la matrice, donc un espace où cette application est
+« plus simple ». Un algorithme de clustering spectral est en fait un algorithme
+de clustering standard, k-means par exemple, mais appliqué aux vecteurs
+propres et non aux données elles-mêmes. Comme la structure de A est plus
+simple dans ce nouvel espace, les résultats sont meilleurs [2] [14].
+
+Newman a ainsi testé un algorithme basé sur le spectre du graphe concer-
+nant les données du club de karaté Zachari [11]. Comme le montre la ﬁgure
+2, la partition obtenue est plus ﬁdèle aux données empiriques que celle pro-
+venant d’une classiﬁcation hiérarchique.
+
+Limites
+
+L’utilisation du spectre du graphe est prometteuse mais certains inconvé-
+nients peuvent être soulignés. Il s’agit d’une méthode semble-t-il peu adap-
+tée pour comparer des graphes : plusieurs graphes peuvent partager le même
+spectre ; et une variation minime de la structure du graphe peut entraîner de
+très fortes variations du spectre correspondant (ces propriétés sont discutées
+dans [15]).
+
+7
+
+Le choix de la matrice laplacienne à utiliser est discuté, sachant que
+plus la distribution des degrés est hiérarchisée, plus les matrices laplaciennes
+diﬀèrent [14].
+
+Conclusion
+
+Les logiciels utilisés en analyse de réseau ont un aspect boîte noire qu’il
+est aisé de dissiper si l’on se rappelle quelques unes des propriétés ci-dessus.
+Ainsi, il n’est nul besoin d’un logiciel spécialisé pour déterminer des graphes
+de coappartenances (i.e. matrices de cooccurrences) à partir de graphes bi-
+partis. Le nombre de composantes connexes d’un graphe peut également être
+déterminé sans problème.
+
+La littérature récente en analyse des réseaux est marquée par une com-
+plexité croissante, qu’il s’agisse des méthodes de partitionnement utilisant
+le spectre du graphe ou des méthodes d’analyses statistiques des graphes.
+Maîtriser les quelques bases présentées ici peut faciliter la lecture d’ouvrages
+et d’articles récents, du moins l’espérons-nous.
+
+8
+
+A Calcul matriciel et analyse de graphe avec R
+
+Creér une matrice directement dans R se fait avec la fonction matrix. Elle
+s’utilise de la façon suivante : matrix(vec, ncol=k, byrow=TRUE) où vec
+est le vecteur de départ, k le nombre de colonnes et l’option byrow permet
+de savoir si la matrice est rangée par lignes ou par colonnes.
+
+Soit les 3 lignes de code suivantes :
+
+m<-c(1,2,3,4,5,6)
+mat1<-matrix(m, ncol=3, byrow=TRUE)
+mat2<-matrix(m, ncol=3, byrow=FALSE)
+
+(cid:20)1 2 3
+
+(cid:21)
+
+(cid:20)1 3 5
+
+(cid:21)
+
+On obtient mat1=
+Bien entendu, dans le cas de données à visée non pédagogique, la dé-
+marche la plus courante consiste à importer ses ﬁchiers dans R et à les
+transformer à l’aide de la commande as.matrix.
+
+et mat2=
+
+2 4 6
+
+4 5 6
+
+Le produit matriciel s’eﬀectue à l’aide de la commande %*%. Lorsque les
+deux matrices ont la même dimension, la commande * permet d’obtenir le
+produit terme à terme. Si le produit matriciel est impossible, R le signale
+(tableaux de tailles inadéquates).
+
+La transposée d’une matrice se calcule à l’aide de la commande t(x) où
+
+x est la matrice de départ.
+
+document fmr.
+
+Les scripts suivants permettent de reproduire toutes les opérations de ce
+
+#initialisation
+rm(list=ls())
+#création de la matrice
+m<-c(0,1,1,0,0,
+1,0,1,0,0,
+1,1,0,0,0,
+0,0,0,0,1,
+0,0,0,1,0)
+
+m<-matrix(m, ncol=5, byrow=TRUE)
+#matrice diagonale des degrés
+m1<-diag(colSums(m))
+#matrice laplacienne
+m2<-m1-m
+#valeurs et vecteurs propres
+eigen(m2)
+
+La fonction eigen renvoie un liste constituée du vecteur des valeurs propres
+($values) et de la matrice des vecteurs propres ($vectors) rangés en co-
+
+9
+
+lonnes. La fonction appliquée la matrice m2 ci-dessus fournit les résultats
+suivants :
+
+eigen(m2)
+$values
+[1] 3.000000e+00 3.000000e+00 2.000000e+00
+
+1.776357e-15 1.110223e-15
+
+$vectors
+
+[,3]
+
+[,4]
+
+[,1]
+0.0000000
+
+[,2]
+0.8164966
+
+0.7071068 -0.4082483
+0.0000000
+0.0000000
+
+[,5]
+[1,]
+0.0000000 -0.5773503 0.0000000
+[2,] -0.7071068 -0.4082483 0.0000000 -0.5773503 0.0000000
+0.0000000 -0.5773503 0.0000000
+[3,]
+[4,]
+0.0000000 0.7071068
+[5,]
+0.7071068 0.0000000 0.7071068
+L’écriture x e-k signiﬁe x.10−k, 1.776357e-15 et 1.110223e-15 désignent
+en réalité 0 : les algorithmes utilisés ne peuvent donner que des valeurs
+approchées. Le graphe m est donc constitué de deux composantes connexes.
+
+0.0000000 -0.7071068
+0.0000000
+
+#transformation d’un graphe biparti
+m2<-c(0,1,0,1,1,0)
+m2<-matrix(m2, ncol=3, byrow=TRUE)
+#co-appartenance en lignes
+affilrow<-m2%*%t(m2)
+affilrow
+#co-appartenance en colonnes
+affilcol<-t(m2)%*%m2
+affilcol
+
+10
+
+Références
+[1] R. Albert et A.L. Barabási : Statistical mechanics of complex net-
+
+works. Review of Modern Physics, 74(1):47–97, 2002.
+
+[2] B. Auffarth : Spectral graph clustering. Rapport technique, 2007.
+[3] L. Beauguitte : L’Assemblée générale de l’ONU de 1985 à nos jours :
+acteur et reﬂet du Système-Monde. Essai de géographie politique quan-
+titative. Thèse de doctorat, Université Paris Diderot Paris 7, 2011.
+
+[4] L. Beauguitte : Graphes, réseaux, réseaux sociaux : vocabu-
+laire et notation. Groupe fmr, 7p., 2010 (http ://halshs.archives-
+ouvertes.fr/FMR/fr/).
+
+[5] S. Boccaletti, V. Latora, Y. Moreno, M. Chavez et D.U.
+Hwang : Complex networks : Structure and dynamics. Physics Re-
+ports, 424(4-5):175–308, 2006.
+
+[6] P. Bonacich : Power and Centrality : A Family of Measures. The
+
+American Journal of Sociology, 92(5):1170–11852, 1987.
+
+[7] P. Bonacich : Some unique properties of eigenvector centrality. Social
+
+Networks, 29(4):555–564, 2007.
+
+[8] A.E. Brouwer et W.H. Haemers : Spectra of graphs. Springer, 2011.
+[9] F.R.K. Chung : Spectral graph theory. Numéro 92. American Mathe-
+
+matical Society, 1997.
+
+[10] E.M. Hagos : Some results on graph spectra. Linear algebra and its
+
+applications, 356(1-3):103–111, 2002.
+
+[11] M.E.J. Newman : Detecting community structure in networks. The
+European Physical Journal B-Condensed Matter and Complex Systems,
+38(2):321–330, 2004.
+
+[12] W. Richards et A. Seary : Eigen Analysis of Networks. Journal of
+
+Social Structures, 1(2), 2000.
+
+[13] P. Van Mieghem : Graph Spectra for Complex Networks. Cambridge
+
+University Press, 2011.
+
+[14] U. Von Luxburg : A Tutorial on Spectral Clustering. Statistics and
+
+Computing, 17(4):395–416, 2007.
+
+[15] R.C. Wilson et P. Zhu : A study of graph spectra for comparing
+
+graphs and trees. Pattern Recognition, 41(9):2833–2841, 2008.
+
+11
+
+

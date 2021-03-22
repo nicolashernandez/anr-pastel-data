@@ -1,0 +1,1245 @@
+http://books.openedition.org/cdf/529?lang=fr
+
+
+
+document.documentElement.className = 'js';
+
+
+
+
+
+Sciences des données : de la logique du premier ordre à la Toile - Sciences des données : de la logique du premier ordre à la Toile - Collège de France
+
+
+
+/** import CSS Openbarre **/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ Version classiqueVersion mobile 
+    
+6005 livres
+85 éditeurs
+auteurs
+ 
+
+
+
+
+
+Résultats par livre
+Résultats par chapitre 
+
+  
+
+
+  
+
+
+ Collège de France   
+
+
+
+Accueil
+Leçons inaugurales
+Leçons de clôture
+Conférences
+Philosophie de la connaissance
+Institut des civilisations    
+
+
+
+fr
+en
+es
+it
+de 
+
+ OpenEdition Books  >  Collège de France  >                                                                                                                                                                                                                                                                                                                                                          Leçons inaugurales                                                                                                                                                              >                                                                                                                                                                                                                                                                                                                                                          Sciences des données : de la logi...                                                                                                                                                              >                                                                                                                                  Sciences des données : de la logi...                                                                                                                  
+
+
+
+ Présentation de Serge Abiteboul  
+
+     
+
+   
+
+
+Sciences des données : de la logique du premier ordre à la Toile                                                                                                                                                                             | Serge Abiteboul  
+
+
+
+    
+
+
+
+Rechercher dans le livre
+
+
+  
+ Table des matières 
+ Citer Partager 
+ Cité par 
+ ORCID Info Ajouter à ORCID  
+
+Sciences des données : de la logique du premier ordre à la Toile
+Leçon inaugurale prononcée le jeudi 8 mars 2012. Chaire d’Informatique et sciences numériques
+         Serge Abiteboul  
+ Note de l’éditeur Texte Notes Auteur 
+
+Note de l’éditeur
+La chaire d’Informatique et sciences numériques du Collège de France reçoit le soutien de l’Institut national de recherche en informatique et en automatique (INRIA).Page du professeur sur le site du Collège de France et vidéo de la leçon inaugurale : http://www.college-de-france.fr/site/serge-abiteboul/index.htm  
+
+Texte intégral
+
+
+1Monsieur l’Administrateur,Mes chers collègues,Chers amis,
+2En cette journée internationale de la femme, j’aimerais dédier ma leçon inaugurale à l’étudiante en informatique, à l’étudiante en mathématiques ou en sciences qui est si rare sur nos campus. Elle est assise au premier rang. Elle pianote peut-être un SMS en s’aidant de ses deux pouces. Elle est peut-être la « Petite Poucette » de Michel Serres, qui m’offre une transition parfaite pour situer l’objet de la leçon : 
+Je ne connais pas d’être vivant, de cellule, tissu, organe, individu et peut-être même espèce, dont on ne puisse pas dire qu’il stocke de l’information, qu’il traite de l’information, qu’il émet et qu’il reçoit de l’information.Michel Serres
+
+
+1 Gérard Berry, Pourquoi et comment le monde devient numérique, Collège de France / Fayard, coll. « L (...)
+2 Gérard Berry, Penser, modéliser et maîtriser le calcul informatique, Collège de France / Fayard, co (...)
+
+3L’information stockée, traitée, échangée, est au cœur de l’activité des êtres vivants, des objets du monde, des associations humaines. Les systèmes informatiques, en nous aidant à gérer de l’information, représentée sous forme numérique, ont transformé nos vies en profondeur. Gérard Berry a déjà parlé dans sa leçon inaugurale de la numérisation de l’information1. Le sujet que j’ai le grand honneur d’aborder dans le cadre de la chaire d’Informatique et sciences numériques du Collège de France est la gestion d’informations numériques par des systèmes informatiques. J’espère que, dans la lignée de mes brillants prédécesseurs à cette chaire2, je saurai transmettre la richesse et la beauté de la science informatique, et participer ainsi à l’enseignement du « savoir en train de se faire ». 
+
+
+
+3 Nous entendons par langues « naturelles » des langues élaborées dans le temps par des groupes de lo (...)
+
+4Pour obtenir de l’information, nous pouvons interroger un système de gestion de bases de données. Pour ce faire, nous nous exprimons dans un langage informatique simple, peut-être graphique, peut-être même dans notre langue naturelle3. Le système traduit cette demande dans un langage formel. Par cela, nous entendons une syntaxe qui permet au système de préciser la demande de l’utilisateur, et une sémantique formelle qui donne un sens exact à cette syntaxe. La logique mathématique offre un tel langage formel. Nous évoquerons dans cette leçon les liens profonds entre ce que nous appellerons ici les sciences des données et la logique mathématique ou, plus précisément, la logique du premier ordre.
+
+5Aujourd’hui, c’est sur la Toile que l’utilisateur cherche le plus souvent de l’information. Si l’anglais est prédominant en informatique, le français est parfois plus précis, plus élégant. Je préfère résolument informatique (pour « science et technologie de l’information ») à computer science (trop limitatif) et courriel à email. Je préfère aussi le mot Toile à l’anglicisme plus commun, Web, parce que dans Toile, la référence à la toile d’araignée étymologique est si joliment complétée par le clin d’œil à la toile du peintre ou à la toile de cinéma. Le mot Toile nous permet aussi de dépasser la vision trop restrictive d’un support particulier, le World Wide Web, pour envisager plus généralement un monde de contenus interconnectés à l’échelle de la planète. Il m’arrivera pourtant d’utiliser le mot Web dans des expressions comme « Web sémantique ».
+6Nous considérerons les systèmes d’information de la Toile qui servent de point d’entrée vers des informations de nature globale. L’exemple le plus répandu d’un tel système est un moteur de recherche comme celui de Google, qui offre un index sur des milliards de documents de la Toile, et en quelque sorte permet de voir la Toile comme une base de données gigantesque. Un système de réseau social comme Facebook sert, lui, de point d’entrée vers les données personnelles de ses centaines de millions d’utilisateurs. 
+7Les systèmes d’information de la Toile, comme les systèmes de gestion de données centralisées, sont des médiateurs entre des individus intelligents peu soucieux de s’embarrasser de détails de programmation, et des objets physiques, comme les disques ou les clés USB. Nous nous intéressons donc à des systèmes intelligents qui gèrent de l’information, la comprennent et la mettent au service d’utilisateurs humains. Cette dernière phrase tient volontairement d’une vision anthropomorphique des systèmes informatiques. Nous interagissons avec des machines chaque jour un peu plus autonomes, des machines chaque jour de moins en moins distinguables des êtres humains. Si l’intelligence d’un système de gestion de bases de données est une étape modeste vers l’intelligence artificielle comme définie par Alan Turing, l’intelligence de la Toile est un questionnement récent, tant philosophique que scientifique. Nous parlerons dans cette leçon de l’apparition d’une connaissance collective nourrie de la mise en commun de grands volumes d’information, et nous imaginerons ce que pourra être la Toile de demain quand des millions, voire des milliards de machines interconnectées, raisonneront collectivement.
+8Cette leçon est organisée de la manière suivante. En premier lieu, nous visiterons quelques notions fondamentales sur les données, l’information et les connaissances. Dans un deuxième temps, nous parlerons de deux des plus belles réussites de l’informatique du xxe siècle :
+
+
+l’une concerne les données, avec les systèmes de gestion de bases de données relationnelles ;
+
+
+l’autre concerne l’information, avec les moteurs de recherche de la Toile.
+
+
+9Puis, nous considérerons deux grands défis du xxie siècle :
+
+
+comment faire émerger des connaissances collectives de la Toile ;
+
+
+comment passer à une « Toile des connaissances ».
+
+
+
+
+4 « Écoute Dave. Je vois bien que tu es très affecté par tout cela. Et je pense vraiment que tu devra (...)
+
+Look Dave, I can see you’re really upset about this. I honestly think you ought to sit down calmly, take a stress pill, and think things over4. HAL dans 2001 : A Space Odyssey.
+
+1. Données, information et connaissances
+
+
+5 Définir précisément ces notions n’est pas chose facile. Voir par exemple : Luciano Floridi, The Phi (...)
+
+10Des mesures de température relevées chaque jour dans une station météo, ce sont des données. Une courbe donnant l’évolution dans le temps de la température moyenne dans un lieu, c’est une information. Le fait que la température sur Terre augmente en fonction de l’activité humaine, c’est une connaissance. Ces trois notions sont très proches les unes des autres. Grossièrement, voici le sens que nous leur donnerons5 : 
+
+
+
+Une donnée est une description élémentaire, typiquement numérique pour nous, d’une réalité. C’est par exemple une observation ou une mesure.
+
+
+À partir de données collectées, de l’information est obtenue en organisant ces données, en les structurant pour en dégager du sens.
+
+
+En comprenant le sens de l’information, nous aboutissons à des connaissances, c’est-à-dire à des « faits » considérés comme vrais dans l’univers d’un locuteur, et à des « lois » (des règles logiques) de cet univers.
+
+
+11À la source de la représentation de données est le bit, une variable qui peut prendre la valeur 0 ou 1. Une donnée sera représentée par une séquence de bits. Par exemple, nous pouvons représenter la position d’un ascenseur dans un immeuble de six étages avec 3 bits : 000 pour le rez-de-chaussée, 001 pour le premier, etc., 110 pour le sixième (le nombre 6 en base 2). Nous représentons un caractère avec un octet, c’est-à-dire une séquence de 8 bits. (Il faut jusqu’à 4 octets par caractère pour certains alphabets et certains codages comme UTF-16.) Un texte peut être vu comme une suite d’octets. L’octet est la mesure élémentaire ; 103 octets forment un kilooctet ; 106 un mégaoctet ; 109 un gigaoctet ; 1012 un téraoctet ; etc. 
+12Une suite de bits prise au hasard a peu de chance d’avoir un sens. Intéressons-nous plutôt aux données auxquelles nous pouvons donner un sens. Considérons par exemple une séquence de bits qui représenterait le tableau suivant :
+
+
+
+Manon
+
+
+Imperial College
+
+
+Londres
+
+
+
+
+Pierre
+
+
+ENS
+
+
+Cachan
+
+
+
+
+Jérémie
+
+
+Mines de Paris
+
+
+Paris
+
+
+
+
+Marie
+
+
+ENS
+
+
+Cachan
+
+
+
+
+Myriam
+
+
+Paris 11
+
+
+Orsay
+
+
+
+13Un extraterrestre ne comprendrait sans doute rien à cette séquence de bits. Mais un programme, un éditeur de texte, a pu l’analyser et présenter ce tableau sous une forme qui nous est familière. 
+14Des données à l’information. Les entrées de ce tableau sont des chaînes de caractères. Pour l’instant, il s’agit de données. Maintenant, nous pouvons spécifier que la première colonne contient les prénoms de doctorants d’une école d’été à Cargèse en Corse, la deuxième, leur université, et la dernière, la ville qui héberge leur université. En recevant un sens, ces données sont devenues des informations. Nous noterons que l’absence de données aussi est informative. Par exemple, nous n’avons pas de ligne, « Philippe, ENS, Cachan ». C’est aussi une information ! 
+15De l’information aux connaissances. Ces informations muent en connaissances quand nous les introduisons dans un univers logique. Chaque ligne devient une affirmation, par exemple « Manon, étudiante à l’Imperial College à Londres, a suivi cette école d’été ». Et si, par exemple, nous savons aussi que « cette table contient la liste complète de tous les doctorants de cette école d’été » et que « tous les doctorants de Cachan en informatique ont suivi cette école », nous pouvons en déduire que, soit Philippe n’est pas doctorant à Cachan, soit il n’est pas inscrit en informatique. 
+16Nous sommes passés des données aux informations, et des informations aux connaissances. Évidemment les frontières entre ces concepts sont floues. Ce monde que nous cherchons à modéliser avec des connaissances est complexe et nous échappe en partie. Par exemple, si certains pensent que Manon est étudiante à l’Imperial College, d’autres peuvent croire que cette affirmation est fausse.
+Le stockage
+
+
+6 Ses données persistent après que l’ordinateur a été éteint.
+
+17Plusieurs types de supports permettent de stocker des données numériques, notamment : la mémoire flash, le disque optique (qui inclut les CD et les DVD), le disque dur (ou disque magnétique), la bande magnétique. Ces supports procurent de gros volumes de stockage « persistant6 » contrairement aux mémoires vives, ou RAM (Random Access Memory), faites de composants électroniques. 
+
+
+
+7 Les évolutions suivantes ont été observées approximativement jusqu’à présent. Concernant les capaci (...)
+
+18Nous allons fournir quelques chiffres pour fixer les idées. L’ordinateur sur lequel j’écris ce texte a une mémoire vive de quatre gigas et à la place d’un disque, pour stocker ses données persistantes, il utilise une centaine de gigas de mémoire flash, une nouvelle technologie plus rapide que le disque dur et aussi plus chère. Cela nous donne l’occasion de mentionner que la technologie ne cesse de se complexifier. Les chiffres bougent très vite pour ce qui est des matériels informatiques ; les prix baissent, les vitesses d’accès ou de transfert croissent ; les volumes augmentent7. Dans quelques années, un lecteur de ce texte sourira des quatre gigas de mémoire. 
+
+19Il ne faut pas non plus oublier que les données que nous utilisons se trouvent de moins en moins stockées localement sur notre ordinateur mais, de plus en plus, sur des machines connectées quelque part sur le réseau. Par exemple, le document qui me sert de brouillon pour écrire ce texte est sur Google Docs, stocké sur le disque d’une machine inconnue, dont la localisation m’est elle aussi inconnue. De ces données, nous dirons qu’elles sont « en nuages » (on the cloud). Fonctionnellement, il nous faudra donc distinguer l’accès à des données sur un réseau local très rapide, qui prendra quelques millisecondes, et l’accès via Internet à des données peut-être à l’autre bout du monde, qui pourra prendre une seconde ou plus. 
+20Ces aspects techniques permettent de comprendre ce qu’il est possible de réaliser, comment et à quel prix. Nous les avons volontairement quelque peu simplifiés pour faciliter leur compréhension. Et quelques mots à l’attention de ceux qui aiment se réfugier derrière « je ne comprends rien à l’informatique ». La vision de l’informatique véhiculée par les médias souffre d’une trop grande fascination pour le matériel et la programmation. À mon avis, il importe peu de comprendre les détails du fonctionnement très complexe d’un processeur ou d’une carte graphique. Il est par contre essentiel de maîtriser les bases de l’algorithmique et de sa mécanique du raisonnement. Il n’est pas non plus nécessaire de savoir programmer (même si une expérience de programmation avec un langage comme CAML – Categorical Abstract Machine Language – peut faciliter la compréhension de l’algorithmique). Pour des questions de performance, il peut être utile de comprendre où l’information que nous utilisons est stockée, en mémoire, sur disque ou sur le réseau. Surtout, il est indispensable de comprendre le sens de cette information, comment elle est représentée, comment elle est organisée.
+21Voici quelques chiffres à retenir : 
+
+
+
+Support de stockage
+
+
+Temps d’accès
+
+
+Taille
+
+
+
+
+Mémoire vive
+
+
+microsecondes
+
+
+gigaoctets (109)
+
+
+
+
+Disque dur
+
+
+millisecondes
+
+
+quelques centaines de gigaoctets au téra
+
+
+
+
+Réseau local
+
+
+millisecondes ou plus
+
+
+téraoctets (1012)
+
+
+
+
+La Toile
+
+
+décisecondes voire secondes
+
+
+Virtuellement ∞
+
+
+
+Mesurer les zettaoctets à la cuillère à café
+22En alignant les bits, nous pouvons représenter des informations. Nous pouvons stocker de plus en plus d’informations pour les retrouver à la demande, telle une sauvegarde quasi illimitée de notre mémoire personnelle.
+23Nous pouvons aller au-delà des dimensions déjà mentionnées en alignant les bits :
+
+
+
+kilo
+
+
+méga
+
+
+giga
+
+
+téra
+
+
+péta
+
+
+exa
+
+
+zetta
+
+
+yotta
+
+
+
+
+103
+
+
+106
+
+
+109
+
+
+1012
+
+
+1015
+
+
+1018
+
+
+1021
+
+
+1024
+
+
+
+
+
+8 http://michaelbrodie.com.
+
+24Discutons brièvement ces unités de mesures. Par exemple, cette leçon devrait peser quelques 100 000 octets, c’est-à-dire 100 kilooctets. Le kilooctet est une mesure « cool » car il est presque convenable de confondre 103 = 1000 et 210 = 1024, ce qui permet de passer facilement du système décimal, le plus commun, au système binaire, cher aux informaticiens. Une dizaine de Nocturnes de Chopin sur mon téléphone prennent 75 mégaoctets. La vidéo de la remise de diplôme de ma fille et ses quelques gigaoctets nous conduisent aux frontières du gigantisme. Selon les chiffres de Michael Brodie8, tous les livres jamais écrits ne demanderaient que 200 téraoctets en texte brut et la quantité de données produites par le collisionneur de particules du CERN en une minute est de l’ordre d’une centaine de pétaoctets. Pour représenter toutes les phrases jamais prononcées, il faudrait quelques exaoctets. Enfin, le zettaoctet, c’est l’ordre de grandeur du trafic annuel sur Internet de nos jours, et c’est aussi celui du stockage disponible (en comptant tous les disques, bandes magnétiques, CD, DVD du monde entier) :
+
+
+1 000 000 000 000 000 000 000 octets !
+
+25Le vertige des puissances de 10 ! Nous créons chaque année plus d’information que nous ne pouvons en stocker. Dans cette débauche d’information, deux problèmes surgissent : 
+
+
+Où trouver la bonne information dans cette masse ?
+
+
+Comment choisir ce que l’on veut conserver ?
+
+
+26Bien sûr, il faudrait détailler, tenir compte de la nature de ce qui est stocké. La part des images grossit très vite, notamment à cause de la meilleure résolution des caméras de vidéo-surveillance. Mais nous assistons aussi à une forte augmentation des contenus riches en sémantique, directement utilisables comme les bases de données et les métadonnées. La forme de l’information dans la plupart des exemples que nous avons pris est très simple. De l’information beaucoup plus complexe peut aussi être représentée numériquement comme celle contenue dans l’ADN d’une cellule vivante. D’une certaine façon, déterminer l’information mise en jeu dans un objet quelconque, depuis une bactérie jusqu’à un phénomène comme le cours des actions, ou le mouvement des planètes, est une étape essentielle pour comprendre cet objet. Mais cela tient d’autres sciences que l’informatique, comme la biologie, les mathématiques financières, ou l’astronomie. Une fois cette information obtenue, des machines peuvent la stocker, l’échanger, l’analyser, etc. Nous atteignons les sciences des données.
+27Après cette brève discussion sur la nature et le volume de l’information, tournons-nous vers les systèmes de bases de données qui ont véritablement fondé le domaine : les systèmes relationnels. 
+2. Les systèmes relationnels et la logique du premier ordre
+
+
+9 « La logique est le commencement de la sagesse, pas sa fin. »
+
+Logic is the beginning of wisdom, not the end9.Mr. Spock, Star Trek.
+
+28Nous parlerons dans cette partie de systèmes informatiques qui nous aident à gérer des données. Nous avons donc, d’un côté, un serveur de données quelque part sur la Toile, avec des disques et leurs pistes qui gardent précieusement des séquences de bits, des structures d’accès compliquées comme des index ou des arbres-B, des hiérarchies de mémoires avec leurs caches et, de l’autre, un utilisateur. Supposons que le serveur soit celui d’IMDb, qui gère une base de données sur le cinéma. Supposons que l’utilisateur, disons Alice, veuille savoir quels films ont été réalisés par Alfred Hitchcock. Pour ce faire, elle spécifie des mots-clés ou remplit les champs d’un formulaire proposé par IMDb. Sa question voyage depuis son navigateur jusqu’au serveur de données. Là, cette question est transformée en un programme, peut-être complexe, qui s’exécute pour obtenir la réponse. Ce programme, Alice n’a pas envie de l’écrire ; d’ailleurs, elle n’a pas à l’écrire.
+29Le système élémentaire qui permet de gérer des données est un système de fichiers. Un fichier est une séquence de bits qui peut représenter une chanson, une photo, une vidéo, un courriel, une lettre, un roman, etc. Votre ordinateur personnel et votre téléphone stockent leurs données dans des systèmes de fichiers. Et parfois, quand vous ne savez plus où vous avez mis quelque chose, vous faites des « recherches » dans ces systèmes de fichiers. C’est rudimentaire. Nous verrons pourtant qu’un moteur de recherche de la Toile ne fait pas autre chose, sinon qu’il le fait sur un système de fichiers à l’échelle de la planète. Dans cette partie, nous parlerons de systèmes qui gèrent aussi des données mais qui sont bien plus sophistiqués que les systèmes de fichiers, les systèmes de gestion de bases de données. Ce sont des logiciels complexes, résultats de dizaines d’années de recherche et de développement. Ils permettent à des individus ou à des programmes d’exprimer des requêtes pour interroger des bases de données ou pour les modifier. Nous nous focaliserons ici sur les plus répandus de ces systèmes, les systèmes relationnels, parmi lesquels nous trouvons des logiciels commerciaux très répandus, comme celui d’Oracle, et des logiciels gratuits très utilisés, comme MySQL. 
+Le calcul et l’algèbre relationnels
+
+
+10 Serge Abiteboul, Richard Hull et Victor Vianu, Foundations of Databases, Addison-Wesley, 1995 : htt (...)
+
+30Un système de gestion de bases de données sert de médiateur entre des individus et des machines. Pour mieux s’adapter aux individus, il doit organiser et présenter les données de façon intuitive. Il doit aussi proposer un langage, pour exprimer des requêtes, facilement utilisable par des êtres humains. Ces exigences forment le point de départ du modèle relationnel10 proposé par Ted Codd, un chercheur d’IBM, dans les années 1970. Des mathématiciens avaient développé à la fin du xixe siècle (bien avant l’invention de l’informatique et des bases de données) la logique du premier ordre, pour formaliser le langage des mathématiques. Codd a eu l’idée d’adapter cette logique pour définir un modèle de gestion de données, le modèle relationnel. 
+
+Figure 1. Une base de données relationnelle
+
+
+
+Film
+
+
+
+
+
+Séance
+
+
+
+
+
+
+Titre
+
+
+Réalisateur
+
+
+Acteur
+
+
+
+Titre
+
+
+Salle
+
+
+Heure
+
+
+
+
+Casablanca
+
+
+M. Curtiz
+
+
+Humphrey Bogart
+
+
+
+Casablanca
+
+
+Lucernaire
+
+
+19:00
+
+
+
+
+Casablanca
+
+
+M. Curtiz
+
+
+Peter Lorre
+
+
+
+Casablanca
+
+
+Studio
+
+
+20:00
+
+
+
+
+Les 400 coups
+
+
+F. Truffaut
+
+
+Jean-Pierre Léaud
+
+
+
+Star Wars
+
+
+Sel
+
+
+20:30
+
+
+
+
+Star Wars
+
+
+G. Lucas
+
+
+Harrison Ford
+
+
+
+Stars Wars
+
+
+Sel
+
+
+22:15
+
+
+
+31Dans le modèle relationnel, les données sont organisées en tableaux à deux dimensions que nous appellerons des relations. À la différence des mathématiciens, nous supposons les relations de taille finie. Comme illustration, nous utiliserons une base de données consistant en une relation Film et une relation Séance (figure 1). Une ligne de ces relations est appelée un n-uplet où n est le nombre de colonnes. Par exemple, 〈Star Wars, Sel, 22:15〉 est un 3-uplet, un triplet, dans la relation Séance. Les colonnes ont des noms, appelés attributs, comme Titre.
+32Les données sont interrogées en utilisant comme langage le calcul relationnel. Le calcul relationnel (très fortement inspiré de la logique du premier ordre) s’appuie sur des noms qui représentent des relations comme Film ou Séance, des entrées de ces relations comme « Star Wars », des variables comme t, h, et des symboles logiques, ⋀ (et), ⋁ (ou), ¬ (non), ⇒ (implique), ∃ (existe), ∀ (pour tout). Avec tout ça, des formules logiques peuvent être construites comme : 
+
+qHB = ∃ t, d ( Film(t, r, « Humphrey Bogart ») ⋀ Séance(t, s, h) )
+
+33Si cela vous paraît cryptique, en français, cela se lit : il existe un titre t et un réalisateur r tels que le n-uplet 〈 t, r, « Humphrey Bogart » 〉 se trouve dans la relation Film, et le n-uplet 〈 t, s, h 〉 dans Séance. Observez que s et h ne sont pas quantifiées dans la formule précédente ; nous dirons que ces deux variables sont libres. La formule qHB peut être vue comme une requête du calcul relationnel. Elle se lit alors : donnez-moi les salles s et les horaires h, s’il existe un réalisateur r et un titre t tels que... En d’autres termes, « Où et à quelle heure puis-je voir un film avec Humphrey Bogart ? ». Ce langage, le calcul relationnel, permet d’exprimer des questions dans une syntaxe qui évite les ambiguïtés de nos langues naturelles. Si elles pouvaient aimer, les machines aimeraient la simplicité, la précision du calcul relationnel. En pratique, elles utilisent le langage SQL (Structured Query Language) qui exprime différemment les mêmes questions. Par exemple, la question précédente s’exprime en SQL comme :
+
+select salle, heurefrom Film, Séancewhere Film.titre= Séance.titre and acteur= « Humphrey Bogart »
+
+
+
+11 SQL va plus loin que le calcul relationnel. Par exemple, il permet d’ordonner les résultats et d’ap (...)
+
+34C’est presque compréhensible, non ? Et qu’Alice s’exprime en français ou qu’elle utilise une interface graphique, le système transforme sa question en requête SQL11.
+
+35La question du calcul relationnel précédente (ou en SQL) précise bien ce qu’Alice demande. Cette question a un sens précis, une sémantique. Elle définit une réponse, un ensemble de n-uplets. Nous ne préciserons pas comment dans cette leçon. Ce que la question ne dit pas, c’est comment calculer la réponse. Pour le « comment », on utilise l’algèbre relationnelle introduite par Codd. Une étape importante consiste à transformer une question du calcul en une expression algébrique qui permet de calculer la réponse à cette question. 
+36L’algèbre relationnelle consiste en un petit nombre d’opérations de base qui, appliquées à des relations, produisent de nouvelles relations. Ces opérations peuvent être composées pour construire des expressions algébriques de plus en plus complexes. Pour répondre à la question qui nous sert d’exemple, il nous faudra trois opérations, la jointure, la sélection et la projection, que nous composerons dans l’expression suivante de l’algèbre relationnelle :
+
+EHB = Πsalle,heure (Πtitre (σacteur = « Humphrey Bogart »(Film)) ⋈ Salle)
+
+
+Figure 2. L’évaluation d’une requête algébriqueAgrandir Original (png, 111k)
+
+37Nous pourrons suivre l’évaluation de cette expression algébrique en figure 2. L’opération de sélection, dénotée σ, filtre une relation, ne gardant que les n-uplets satisfaisant une condition, ici acteur = « Humphrey Bogart ». L’opération de projection, dénotée Π, permet aussi de filtrer de l’information d’une relation mais cette fois en éliminant des colonnes. L’opération peut-être la plus exotique de l’algèbre, la jointure, dénotée ⋈, combine des n-uplets de deux relations. D’autres opérations non illustrées ici permettent de faire l’union et la différence entre deux relations ou de renommer des attributs. La puissance de l’algèbre relationnelle tient de la possibilité de composer ces opérations. C’est ce que nous avons fait dans l’expression algébrique EHB qui permet d’évaluer la réponse à la question qHB. 
+38Notre présentation est rapide mais il est important que le lecteur comprenne l’intérêt de l’algèbre. Il est relativement simple d’écrire un programme qui évalue la réponse à une question du calcul relationnel. Il est plus délicat d’obtenir un programme qui calcule cette réponse efficacement. L’algèbre relationnelle découpe le travail. Un programme particulier très efficace peut être utilisé pour chacune des opérations de l’algèbre ; le résultat est obtenu en composant ces programmes. L’efficacité provient notamment du fait que les opérations considèrent des ensembles de n-uplets plutôt que les n-uplets un à un. 
+39Codd a démontré le théorème suivant :
+
+Une question est exprimable en calcul relationnel si et seulement si elle peut être évaluée avec une expression de l’algèbre relationnelle, et il est simple de transformer une requête du calcul en une expression algébrique qui évalue cette requête.
+
+40Qu’avons-nous appris de Codd ? Pas grand-chose du point de vue des mathématiques. Le calcul relationnel est emprunté aux logiciens. Une algébrisation (légèrement différente) avait même déjà été proposée par Tarski. Mais d’un point de vue informatique, Codd a posé les bases de la médiation autour des données entre individus et machines. Grâce à son résultat, nous savons que nous pouvons exprimer une question en calcul relationnel, qu’un système peut traduire cette question en expression algébrique et calculer efficacement sa réponse. Pourtant, quand Codd proposa cette approche, la réaction des ingénieurs qui géraient alors de gros volumes de données et de grandes applications, fut unanime : « trop lent ! Ça ne passera pas à l’échelle ». Ils se trompaient. Pour traduire l’idée de Codd en une industrie de milliards de dollars, il manquait l’optimisation de requête. Après des années d’effort, les chercheurs sont parvenus à faire fonctionner les systèmes relationnels avec des temps de réponse acceptables. Avec ces systèmes, le développement d’applications gérant des données devenait beaucoup plus simple ; cela se traduisait par un accroissement considérable de la productivité des programmeurs d’applications gérant des gros volumes de données. 
+L’optimisation de requête
+41Il existe une infinité d’expressions algébriques qui évaluent une même requête. Bien qu’elles soient syntaxiquement différentes, elles définissent la même question. D’un point de vue sémantique, elles sont équivalentes. Optimiser une requête consiste à la transformer en une autre requête qui donne les mêmes réponses, mais qui soit la moins coûteuse possible (typiquement en temps). D’un point de vue pratique, il nous faut choisir un plan d’exécution, c’est-à-dire une expression algébrique avec des précisions sur l’algorithme à utiliser pour évaluer chacune des opérations. Un plan d’exécution, c’est quasiment un programme pour calculer la réponse. Un premier problème est que l’espace de recherche, c’est-à-dire l’espace dans lequel nous voulons trouver le plan d’exécution, est potentiellement gigantesque. Pour éviter de le parcourir entièrement, nous allons utiliser des heuristiques, c’est-à-dire des méthodes qui, si elles ne garantissent pas de trouver le plan optimal, donnent assez rapidement des plans satisfaisants. Ces heuristiques utilisent souvent des règles de bon sens comme « il faut réaliser les sélections le plus tôt possible ». L’autre difficulté est que pour choisir le plan le moins chronophage, l’optimiseur (c’est-à-dire le programme en charge de l’optimisation) doit être capable d’estimer le coût de chaque plan candidat, et c’est une tâche complexe à laquelle le système ne peut se permettre d’accorder trop de ressources. L’optimiseur fait donc « de son mieux ». Et typiquement, les optimiseurs de systèmes comme Oracle ou DB2 font des merveilles sur des requêtes simples. C’est bien moins glorieux pour les requêtes complexes, par exemple celles qui mettent en jeu des quantificateurs universels comme la question : quels sont les acteurs qui n’ont joué que dans des comédies ? Heureusement, en pratique, la plupart des questions posées sont simples. 
+42Sous-jacente à la discussion sur l’optimisation de requête est la question de la difficulté d’obtenir une certaine information. Nous rencontrons la notion de « complexité ». Depuis Gödel, nous savons qu’il est des propositions qui ne peuvent être ni démontrées ni réfutées, qu’il est des problèmes qui ne peuvent être résolus. Cette notion d’indécidabilité commence péniblement à arriver jusqu’au grand public. Ce même public ne voit dans le fait qu’une requête prend plus ou moins longtemps que des raisons purement techniques. Évidemment, le temps de calcul dépend de la puissance du serveur, de la vitesse du disque ou de la qualité de l’optimiseur. Mais au-delà de tels aspects, il est des tâches qui demandent intrinsèquement plus de temps que d’autres. Par exemple, nous pouvons afficher à l’écran le gogol, nombre consistant en un 1 suivi de 100 zéros, en quelques fractions de secondes, mais nous ne nous amuserions pas à afficher tous les nombres de 1 au gogol (1, 2, … 10100). Cela prendrait trop de temps. Même parmi les problèmes dont la réponse est courte (par exemple, « oui » ou « non »), il en est qui, bien que décidables, sont intrinsèquement bien plus complexes que d’autres ; il en est même que nous ne savons pas résoudre en temps raisonnable. Parfois, cette difficulté trouve même son utilité. Le système cryptographique RSA repose sur le fait que nous ne savons pas factoriser (en général) un très grand entier en nombres premiers, en un temps raisonnable, et qu’il est donc très difficile de décrypter un message sans en connaître la clé secrète. 
+43La complexité est un aspect particulièrement important pour le traitement de gros volumes de données. Pour une requête particulière, nous voulons savoir :
+
+
+quel temps il faut pour la réaliser (complexité en temps) ;
+
+
+quel espace-disque, ou quelle mémoire, est nécessaire (complexité en espace). 
+
+
+44Évidemment ces quantités dépendent de la taille de la base de données. Si la requête prend un temps t et que nous doublons la taille n de nos données, nous faut-il attendre le même temps (temps constant), le double de temps (temps linéaire en n), ou est-ce que le temps grandit de manière polynomiale (en nk où n est la taille des données) voire exponentielle (en kn) ? Ce n’est pas anodin : sur de gros volumes de données, une complexité en temps nk exigera une grosse puissance de calcul, et une complexité en kn sera rédhibitoire. 
+45Deux remarques nous permettent de préciser cette notion de complexité : 
+
+
+la complexité dans les données. En informatique, la complexité se mesure par la taille du problème, ici ce serait la taille des données plus la taille de la requête. Mais les requêtes étant typiquement nettement plus petites, il est bien plus instructif de ne considérer la complexité qu’en fonction de la taille des données. Nous parlerons de complexité dans les données.
+
+
+
+
+12 Pour ces complexités « faibles », le modèle de calcul précis est important. Nous parlons ici de cal (...)
+
+les bornes inférieure et supérieure. Si un programme répond à une requête en temps n2 dans la taille n des données, cela prouve seulement qu’il est possible d’y répondre en temps n2, ce qui donne une borne supérieure. Peut-être existe-t-il un autre programme qui calcule la réponse plus rapidement, peut-être en temps constant. Si nous pouvons montrer qu’un temps n⨉log(n) au minimum est nécessaire, cela donne une borne inférieure. Par exemple, pour calculer le nombre de n-uplets de la jointure entre deux relations, n⨉log(n) se trouve être à la fois une borne inférieure et supérieure12. 
+
+
+
+
+
+13 Un exemple de problème difficile dans NP est celui du voyageur de commerce : étant donné des villes (...)
+
+46De nombreuses classes de complexité ont été étudiées. Intuitivement, une classe de complexité regroupe tous les problèmes qui peuvent être résolus sans dépasser certaines ressources disponibles, typiquement le temps ou l’espace. Par exemple, vous avez peut-être entendu parler de la classe P, temps polynomial. Il s’agit de l’ensemble des problèmes qu’il est possible de résoudre dans un temps nk où n est la taille des données et k un entier arbitraire. Au-delà de P, nous atteignons les temps NP (non-déterministe polynomial13) et EXPTIME (temps exponentiel), des temps prohibitifs ? Pourtant, il faut relativiser. Les systèmes informatiques résolvent régulièrement des problèmes parmi les plus complexes de NP. Et, a contrario, pour 1,5 téraoctets de données, n3 est encore aujourd’hui hors d’atteinte, même en disposant de tous les ordinateurs de la planète. 
+
+47Avant de poursuivre sur d’autres aspects du modèle relationnel, interrogeons-nous sur les origines de l’énorme succès des systèmes relationnels :
+
+
+Les requêtes sont fondées sur le calcul relationnel, un langage logique, simple et compréhensible pour des humains surtout dans des variantes comme SQL. 
+
+
+Une requête du calcul relationnel est facilement traduisible en une expression de l’algèbre relationnelle simple à évaluer pour des machines. 
+
+
+Il est possible d’optimiser l’évaluation d’expressions de l’algèbre relationnelle car cette algèbre n’offre qu’un modèle de calcul limité. 
+
+
+Enfin, nous verrons que pour ce langage relativement limité, le parallélisme permet de passer à l’échelle de très grandes bases de données. 
+
+
+48Pour insister sur les deux derniers points qui sont essentiels, nous pourrions choisir d’attribuer aux bases de données le slogan : « ici on ne fait que des choses simples mais on les fait vite. » Nous allons voir que nous les faisons aussi en lien étroit avec la logique. 
+Logique et complexité
+49Il est des liens profonds entre des classes de complexité et des classes de problèmes exprimables dans des logiques. Ronald Fagin a par exemple montré que NP coïncidait avec « la logique existentielle du second ordre » (dans laquelle une variable représente un ensemble). Nous allons mentionner certains de ces liens. Même si nous allons essayer de gommer au maximum les détails techniques, cette discussion pourra paraître un peu ardue. Nous encourageons pourtant le lecteur à essayer de saisir la beauté de certains ponts entre la logique, que nous voyons ici comme le langage permettant aux êtres humains de dialoguer avec des machines, et les calculs que ces machines réalisent mécaniquement avec des ressources limitées. 
+50Les requêtes relationnelles sont évaluables en P. Cela suggère la question suivante : est-il possible d’exprimer avec le calcul relationnel tout ce qu’une machine pourrait calculer en temps polynomial ? Il se trouve que non ! La requête suivante est dans P mais n’est pas exprimable dans le calcul relationnel : étant donné un graphe G, et deux points a, f de ce graphe, existe-t-il un chemin de a à f ? Aussi surprenant que cela puisse paraître, si nous pouvons avec le calcul relationnel demander s’il existe un chemin de longueur 3 ou même k, pour un k fixé, il faudrait pour un chemin de longueur arbitraire une disjonction infinie : un chemin de longueur 1 ou 2 ou 3, etc. Pour corriger ce problème, nous pouvons ajouter au langage un mécanisme qui permette de réitérer une requête du calcul relationnel jusqu’à un point fixe. Par exemple, pour la requête précédente, partant de l’ensemble T = { a }, nous ajoutons à T les points que nous pouvons joindre à partir de T en suivant un arc de G, et ce tant que T grandit. Quand le point fixe est atteint, il ne reste plus qu’à vérifier si f est dans T. 
+
+
+14 Comme il y a un nombre fini d’états possibles, il est possible de détecter si le programme est entr (...)
+15 Serge Abiteboul et Victor Vianu, « Generic computation and its complexity », Proceedings of the 23r (...)
+16 Dans notre discussion, nous supposons que le domaine n’est pas ordonné. Le problème est différent s (...)
+
+51Le langage ainsi obtenu est appelé fixpoint. Comme les programmes ne font qu’ajouter des n-uplets dans des relations et n’inventent jamais de valeurs, la complexité reste dans P. Le langage obtenu, en autorisant les programmes à supprimer des n-uplets, est appelé while. Sa complexité est pspace : il peut être réalisé en utilisant un espace polynomial dans la taille des données. Un tel programme peut entrer dans une boucle, ne jamais s’arrêter14, et donc ne jamais atteindre de point fixe. Ces langages permettent d’exprimer des requêtes très complexes. Pourtant, belle déception : des requêtes hyper-simples ne sont pas exprimables en fixpoint, pas même en while. C’est le cas par exemple de la requête : est-ce que le graphe G a un nombre pair de nœuds ? J’ai longtemps travaillé dans ce domaine notamment avec mon collègue Victor Vianu (University of California, San Diego). Nous avons caractérisé ce qui peut être calculé avec ces langages. Nous avons notamment prouvé15 que fixpoint était égal à while si et seulement si P était égal à pspace, établissant ainsi un pont entre des logiques et des classes de complexité16.
+
+52Notons en passant que si pspace « a l’air » bien plus puissant que P, nous ne savons pas s’ils sont différents. Nous ne savons d’ailleurs pas non plus si P ≠ NP, le problème ouvert le plus célèbre de l’informatique. Si nos connaissances progressent en théorie de la complexité, de nombreux défis persistent, fascinants et difficiles. Et pour conclure cette discussion sur les liens entre logique et complexité, nous mentionnerons un autre problème ouvert : obtenir une logique qui capture exactement les requêtes dans P, intuitivement les requêtes auxquelles il est possible de répondre dans un temps raisonnable. En pratique, cela reviendrait à disposer d’un langage qui ne permettrait d’exprimer des requêtes que dans P, mais qui permettrait d’exprimer toutes les requêtes de P. S’il est probable qu’un tel langage serait de fait peu utilisable en pratique, le problème est si beau qui relie le logiquement exprimable et le rapidement calculable.
+53Et pour conclure cette partie, nous allons discuter deux aspects essentiels de la gestion de données : les transactions et le parallélisme.
+Transactions
+
+
+17 « Servir et protéger les données. »
+
+To serve and protect data17.Anonyme
+
+54La modernisation des chaînes de fabrication a été principalement causée, dans un premier temps, par l’électronique et l’automatique. Avant de s’imposer aussi dans la fabrication, l’informatique a profondément pénétré l’industrie en modifiant radicalement la manière dont des transactions, comme les commandes ou la paye, étaient gérées de manière automatique. Une transaction informatisée est la forme dématérialisée d’un contrat. Son coût peut se trouver incomparablement plus faible que celui d’une transaction réelle mettant en jeu des déplacements de personnes sur des échelles de temps bien plus longues. Avec des fonctionnalités considérablement élargies par le recours à l’informatique, les transactions se retrouvent au cœur de nombreuses applications qui ont largement contribué à populariser les systèmes relationnels comme, par exemple, les applications bancaires.
+
+
+18 Les applications qui tournent sur le système relationnel contiennent des bogues. Le système lui-mêm (...)
+
+55Les systèmes relationnels répondent aux besoins des transactions en supportant la notion de transaction relationnelle. Une transaction relationnelle garantit qu’une séquence d’opérations se réalise correctement, par exemple en empêchant qu’une somme d’argent ne s’évanouisse dans la nature (avec un compte en banque débité sans qu’un autre ne soit crédité). Même l’occurrence d’une panne18 ne doit pas pouvoir conduire à une exécution incorrecte. Il nous faut donc formaliser la notion d’« exécution correcte ». Évidemment, il serait impossible de le faire précisément s’il fallait tenir compte des millions de choses que font de tels systèmes. Mais l’informatique, comme les mathématiques, dispose d’un outil fantastique : l’« abstraction ». Nous pouvons considérer ce que fait un système relationnel sous l’angle des transactions relationnelles et des modifications qu’elles apportent aux données, en faisant abstraction de toutes les autres tâches qu’il réalise. Il devient alors possible de définir formellement la notion d’exécution correcte. 
+
+56Nous pouvons mentionner d’autres tâches que les systèmes relationnels accomplissent à côté de l’évaluation de requêtes et de la gestion de transactions relationnelles. Ils gèrent également :
+
+
+les contraintes d’intégrité (telles que « tout responsable de projet doit être enregistré dans la base des personnels »), 
+
+
+les déclencheurs ou triggers (tels que « si quelqu’un modifie la liste des utilisateurs, envoyer un message au responsable de la sécurité »), 
+
+
+les droits des utilisateurs (pour contrôler qui a le droit de lire ou de modifier quoi), 
+
+
+les vues (pour s’adapter aux besoins d’utilisateurs particuliers), 
+
+
+l’archivage (pour pouvoir garantir la pérennité des données), 
+
+
+le nettoyage des données (par exemple pour éliminer les doublons, les incohérences). 
+
+
+Parallélisme
+57Pour gérer de gros volumes de données, l’utilisation du parallélisme s’avère essentiel. De plus en plus, les machines sont multi-processeurs. Mais nous insisterons ici surtout sur l’utilisation de plusieurs machines travaillant simultanément sur une tâche commune. Ce type d’approches est particulièrement fondamental pour la Toile, qui met en jeu des volumes considérables d’information :
+
+
+
+
+19 Une grappe de serveurs ou une ferme de calcul (cluster en anglais) consiste en un regroupement d’or (...)
+
+parallélisme entre peut-être les dizaines, les centaines, voire les milliers de serveurs d’une « grappe19 » ;
+
+
+
+parallélisme entre les millions de serveurs de la Toile qui fonctionnent indépendamment mais interagissent en permanence.
+
+
+58Pour conclure cette partie, je donnerai deux exemples en guise d’illustration, afin de faire sentir au lecteur la puissance du parallélisme : 
+
+
+Plutôt que de regrouper les comptes de ses clients dans un centre informatique unique, une entreprise peut choisir de les laisser gérer par ses centres régionaux. Regrouper les données sur une machine unique, avec des performances comparables, exigerait un serveur très sophistiqué, donc plus cher. Notons aussi qu’une organisation distribuée s’accorde mieux à un management plus décentralisé de l’entreprise. 
+
+
+Deux types d’organisations sont possibles pour la diffusion de films. Dans une première, chaque film est conservé sur un serveur unique. Si le nombre de clients augmente ou si un film est trop populaire, le serveur est vite saturé. Dans une autre organisation, une architecture pair-à-pair, chaque machine est un pair, c’est-à-dire à la fois serveur et client. Si un pair demande un film, il peut stocker ce film et le transmettre plus tard à d’autres. Plus un film est populaire, plus il devient disponible sur un grand nombre de machines, et plus son téléchargement devient facile et rapide. 
+
+
+59Nous avons considéré dans cette partie la gestion de données dans des systèmes relationnels. Nous allons maintenant nous intéresser aux systèmes d’information de la Toile, et, pour commencer, aux plus répandus d’entre eux, les moteurs de recherche. 
+3. Les moteurs de recherche de la Toile 
+Internet : on ne sait pas ce qu’on y cherche mais on trouve tout ce qu’on ne cherche pas.Anne Roumanoff
+
+
+20 Sergueï Brin et Lawrence Page, « The anatomy of a large-scale hypertextual web search engine », Pro (...)
+21 Serge Abiteboul, Ioana Manolescu, Philippe Rigaux, Marie-Christine Rousset et Pierre Senellart, Web (...)
+
+60Le World Wide Web, introduit par Tim Berners-Lee et Robert Cailliau vers 1990, s’appuie sur des documents hypermédia. C’est la Toile à laquelle nous nous sommes si rapidement habitués. L’information est en langue naturelle et les textes vaguement structurés avec les balises HTML pour, par exemple, des titres ou des énumérations. Des ancres sur lesquelles l’internaute peut cliquer conduisent à d’autres pages HTML, mais aussi à des images, de la musique, des vidéos. Dans cette partie, nous allons parler d’un des plus beaux succès de la Toile, le moteur de recherche. Le moteur de recherche de la Toile nous permet de fuir la navigation fastidieuse sur le graphe des pages et le monde de l’hypertexte pour nous plonger dans une bibliothèque numérique universelle. Nous allons expliquer comment fonctionne un tel moteur. Le lecteur pourra trouver plus de détails dans l’article historique de Sergeï Brin et Lawrence Page20 ou dans notre ouvrage récent21.
+
+61Le moteur de recherche s’intéresse à une vision de la Toile comme bibliothèque universelle. L’internaute cherche une information. Même si la Toile n’a sûrement pas de réponses à toutes ses questions, cette information se trouve peut-être dans les masses d’informations et de connaissances véritablement extraordinaires réunies. Tels des enfants, nous nous émerveillons devant les dizaines de milliards de documents de la Toile. Mais un enfant apprend, depuis son plus jeune âge, à évaluer, classer, filtrer la masse considérable d’informations qu’il rencontre. Et nous ? Si le moteur de recherche ne nous aidait pas à nous focaliser sur un petit nombre de pages, que ferions-nous ? L’exploit technique, c’est de retrouver en un instant, grâce à son index, les pages de la Toile qui hébergent les mots demandés. La magie, c’est de proposer parmi les dizaines, voire les centaines de millions de pages possibles, les quelques pages qui contiennent si souvent ce que l’internaute recherche. Examinons tour à tour ces deux facettes des moteurs de recherche.
+Un index de la Toile
+La mission de Google : organiser les informations à l’échelle mondiale dans le but de les rendre accessibles et utiles à tous.Google
+62Un index de la Toile associe à chaque mot la liste des pages qui contiennent ce mot. Par exemple, une entrée dans cet index serait :
+
+Casablanca → http://www.imdb.com/title/tt0034583/, http://films.com/​Bogart/​,...
+
+qui indique que le mot « Casablanca » est présent notamment dans ces pages des sites IMDb et films.com. Si vous donnez au moteur de recherche plusieurs mots comme « Casablanca Bogart Bergman », il calculera la liste des pages de la Toile qui contiennent tous ces mots. 
+63Une sérieuse difficulté est la taille de cet index : des dizaines de téraoctets de données pour quelques milliards de pages. Un serveur d’un tel index rencontre deux problèmes de passage à l’échelle :
+
+
+Pour indexer plus de pages, le serveur a besoin de plus en plus de stockage pour garder l’index, et chaque requête devient de plus en plus coûteuse à évaluer.
+
+
+Si le nombre d’utilisateurs croît, le serveur reçoit de plus en plus de requêtes.
+
+
+64Dans les deux cas, le serveur est vite submergé. Pour résoudre ce problème, nous allons utiliser le parallélisme et une technique fondamentale de l’informatique, la technique du hachage. 
+65Pour illustrer la technique, nous allons utiliser K =10 machines M1, …, M10 et une fonction H qui, appliquée à un mot, retourne un entier choisi aléatoirement entre 1 et 10 (et qui retourne, pour un mot donné, à chaque fois le même entier). Cette fonction est appelée fonction de hachage. La responsabilité d’un mot w est donnée à la machine H(w). Supposons qu’un crawler (un programme qui parcourt la Toile en quête de pages) découvre le mot « France » sur une page d’URL p. L’entrée de l’index, qui dit que la page p contient ce mot, est stockée sur la machine H(« France »), disons M7. Les données de l’index sont donc partagées relativement équitablement entre les dix machines ce qui résout le premier problème. Supposons maintenant que quelqu’un veuille les données correspondant au mot « France », il interroge la machine M7. Les requêtes sont donc elles-aussi partagées relativement équitablement entre les dix machines, ce qui résout le second problème. Il nous faut évidemment réaliser un index sur chaque machine. Typiquement, nous pouvons là aussi utiliser une technique de hachage, centralisé cette fois. 
+
+
+22 Google appelle ses centres de données, des fermes. Le nombre de fermes et le nombre de processeurs  (...)
+
+66Maintenant si la taille des données que nous voulons indexer ou le nombre de clients grandissent, il suffit d’ajouter des machines. Par exemple, Google utilise des milliers de machines dans des « fermes22 » et disperse ses fermes aux quatre coins du monde. Le parallélisme nous a permis le passage à l’échelle. Vous avez dit brillant ?
+
+
+
+23 Ce problème fait partie de la classe AC0, c’est-à-dire la classe des problèmes que l’on peut résoud (...)
+
+67Pourquoi est-ce que cela marche ? Grâce au parallélisme. De manière générale, pouvons-nous prendre n’importe quel algorithme et l’accélérer à volonté en utilisant plus de machines ? La réponse est non ! Tous les problèmes ne sont pas aussi aisément parallélisables. Il se trouve que la gestion d’index est un problème très simple, très parallélisable23 (embarrassingly parallel). Nous pouvons donc sans frémir envisager d’indexer de plus en plus de pages, des dizaines de milliards ou plus. 
+
+Un point fixe et quelques algorithmes
+
+
+24 « Playboy : La devise de votre société est vraiment “Ne faites pas le mal” ? Brin : Oui, c’est vrai (...)
+
+Playboy: Is your company motto really “Don’t be evil”? Brin: Yes, it’s real. Playboy: Is it a written code? Brin: Yes. We have other rules, too. Page: We allow dogs, for example24. S. Brin et L. Page, fondateurs de Google. Interview dans le magazine Playboy, 2004. 
+
+68Le cœur du problème reste maintenant de choisir parmi les millions de pages qui contiennent les mots de la requête. C’est essentiel car un utilisateur ira rarement au-delà des dix ou vingt premiers résultats qui lui seront proposés. Au départ, les moteurs de recherche comme Alta Vista utilisaient, pour classer les pages, des techniques basées uniquement sur leurs contenus, comme dans les bibliothèques numériques traditionnelles. Une page était jugée plus intéressante si le terme apparaissait dans un titre, ou en caractère gras. Ces moteurs utilisaient des mesures statistiques du type TF-IDF (Term Frequency-Inverse Document Frequency) qui évaluent l’importance d’un terme dans un document relativement à un corpus de documents. Plus le terme est répété dans le document plus il « pèse ». Et, plus le terme est rare dans le corpus, plus il pèse. Ce genre de technique, qui marche bien sur de petits corpus, s’est avéré assez décevant pour la Toile. 
+
+
+25 Jon M. Kleinberg, « Authoritative sources in a hyperlinked environment », Journal of the ACM, vol.  (...)
+
+69Les jeunes créateurs de Google ont eu l’idée de baser l’ordre des pages sélectionnées sur une connaissance collective présente de manière implicite dans la masse des pages. Plus précisément, ils ont utilisé une technique classique en mathématiques, la marche aléatoire. C’est cette idée, inspirée de travaux antérieurs, notamment ceux de Jon Kleinberg25, qui est à l’origine de l’algorithme PageRank de Google, et du succès industriel de cette société, l’un des plus étonnants de l’histoire de l’humanité. 
+
+La marche aléatoire
+70Imaginez un « surfeur de la Toile ». Il part d’une page, disons la page www.inria.fr. Ensuite, il se balade sur la Toile en choisissant à chaque étape, au hasard, un des liens de la page, et il clique sur ce lien. Si la page n’a pas de lien, il choisit aléatoirement une page n’importe où sur la Toile. Et il continue encore et encore, pour toujours. Quelle est, à l’infini, la probabilité de se trouver sur une page précise ? C’est ce que nous définirons comme la popularité de cette page. Intuitivement, si une page est populaire (comme la page www.lemonde.fr), de nombreuses pages la référencent et la probabilité de se retrouver sur cette page est bien plus grande que de se retrouver sur une page d’une bloggeuse inconnue (comme Alice). S’agit-il a priori d’une définition abstraite, d’un joli concept de mathématiques totalement inutile ? Non. Car il se trouve qu’en pratique cette popularité correspond assez bien aux attentes des internautes. 
+71Reste à calculer cette popularité. Pour cela, nous allons la mettre en équation. Supposons que nous indexions dix milliards de pages. Nous les numérotons de 1 à N = dix milliards. Dans une approche classique en mathématiques, imaginons que nous connaissons déjà cette popularité. Nous disposons donc d’un vecteur pop, où pour chaque page i, pop[i] est la popularité de la page. (C’est la probabilité de se trouver sur cette page ; notons que Σi =1 à Npop[i] = 1.) Chaque page distribue disons 90 % de sa popularité équitablement entre toutes les pages vers laquelle elle pointe, et les 10 % qui restent entre toutes les pages indexées. Si une page est un cul-de-sac (elle ne conduit nulle part), elle partage toute sa popularité entre toutes les pages indexées. En ignorant quelques détails, cela nous conduit à une matrice Θ qui capture ces « échanges » de popularité et à une équation de point fixe :
+
+pop = Θ × pop,
+
+une notation bien compacte pour un système de dix milliards d’équations à dix milliards d’inconnues. Il se trouve que ce système a pour solution le vecteur des popularités. Et là, banco ! Une technique connue nous permet de calculer cette solution.
+Le point fixe
+72Dans l’absence d’autre information, partons du vecteur pop0 défini par pop0[i] = 1/N, c’est-à-dire que toutes les pages sont supposées également populaires. Et définissons :
+
+pop1 = Θ × pop0 ; pop2 = Θ × pop1 ; pop3 = Θ × pop2…
+
+73En poursuivant ce calcul, nous convergeons sur un point fixe qui se trouve être la solution de notre équation. Nous avons calculé le vecteur de popularité ! (Comme, en pratique, nous pouvons nous contenter de peu de précision, 6 ou 7 itérations suffisent.)
+
+
+26 Une matrice est creuse si la plupart de ses coefficients sont à zéro. Pour un milliard de pages, si (...)
+
+74Vous avez dit élémentaire ? Pas tant que ça. Même si la matrice est très « creuse26 », pour réaliser ce calcul efficacement avec des volumes de données pareils, il faut des algorithmes très sophistiqués, une ingénierie de fou. Ce n’est peut-être plus des mathématiques mais c’est de l’informatique de toute beauté. 
+
+Et pour conclure sur les moteurs de recherche
+
+
+27 Le PageRank de Google actuel utiliserait des dizaines de critères combinés dans une formule gardée  (...)
+
+75Nous avons présenté une version très simplifiée de ce qu’est un moteur de recherche. Les moteurs de recherche modernes combinent TF-IDF et la popularité des pages que nous venons de définir à bien d’autres critères pour choisir quelles pages classer en tête. Chaque jour, les moteurs de recherche sont plus sophistiqués27 pour mieux répondre aux attentes des internautes. Ils se compliquent ne serait-ce que pour contrer les attaques comme celles des « spamdexeurs » qui trichent pour apparaître plus hauts dans les résultats. Ils nous posent aussi des problèmes essentiels. Pour n’en citer que quelques-uns :
+
+
+
+L’interrogation de la Toile est basée sur des listes de mots-clés, une langue primitive quasiment sans grammaire. Il est sûrement possible de faire mieux.
+
+
+Une mesure qui privilégie la popularité des pages a pour effet d’encourager l’uniformité, les pages populaires devenant de plus en plus populaires et les autres sombrant dans l’anonymat. C’est certainement discutable tout comme le fait que la popularité utilisée par les moteurs de recherche actuels semble ignorer si la page est citée pour sa qualité (son exactitude) ou pas.
+
+
+Faut-il exclure des pages parce qu’elles sont racistes, vulgaires, fausses (pourquoi pas ?) ; pour favoriser un client ou ne pas déplaire à un gouvernement (au secours !) ?
+
+
+Enfin, il est quelque chose d’extrêmement embarrassant dans la puissance considérable que les moteurs de recherche ont de par leur contrôle de l’information, surtout dans un contexte de quasi-monopole (au moins en Europe). Devons-nous leur faire confiance sans comprendre le secret de leur classement ? Et pourquoi ce secret ?
+
+
+76Je me trouvais dans le groupe de recherche sur les systèmes d’information à Stanford en 1995 quand deux jeunes étudiants, Sergeï Brin et Lawrence Page y travaillaient sur le prototype du moteur de recherche Google. J’ai été tout de suite conquis par leur proposition d’utiliser la popularité des pages. Il m’a fallu par contre m’habituer à l’idée de garder l’index en mémoire. Une telle technique aurait été irréaliste quelques années plus tôt, car elle aurait conduit à utiliser un nombre improbable de machines très coûteuses. En 1995, la gestion de l’index en mémoire devenait envisageable avec un nombre raisonnable de machines bon marché. Cela illustre bien qu’en informatique, les champs du possible évoluent en permanence. 
+
+
+28 Serge Abiteboul, Mihai Preda et Grégory Cobena, « Adaptive on-line page importance computation », P (...)
+
+77De retour en France, j’ai conçu avec deux étudiants, Mihai Preda et Grégory Cobena, un algorithme pour calculer la popularité des pages28. Concevoir cet algorithme, prouver qu’il calcule bien le point fixe de l’équation, l’implémenter sur une grappe de machines, fixer les bogues, l’optimiser, expérimenter, atteindre le milliard de pages. Je n’avais jamais touché à de tels volumes de données. C’est une de mes plus fantastiques expériences de chercheur. 
+
+78Plusieurs sociétés se partageaient dans les années 1990 le marché des moteurs de recherche. Les utilisateurs allaient plébisciter le moteur de Google. Comme base à ce succès extraordinaire, nous pourrions mentionner une ingénierie exceptionnelle pour faire fonctionner des milliers de machines 24 heures sur 24, des modèles commerciaux révolutionnaires, des techniques de management originales fondées sur le culte de la créativité. Mais en ce qui me concerne, je préfère me rappeler qu’au début, il y avait juste un point fixe et quelques algorithmes. 
+4. Réseaux et connaissances collectives 
+Avoir ou ne pas avoir de réseau : that’s the question.Bruno Latour
+79L’écriture nous a permis d’« externaliser » en partie notre mémoire. L’imprimerie nous a permis de transmettre cette mémoire externe. La Toile a diminué considérablement les coûts de transmission de l’information. Surtout, elle a permis à chacun d’apporter sa contribution personnelle au patrimoine collectif (avec des réserves comme la fracture numérique, dont nous parlerons plus loin). La consommation passive d’informations du début de la Toile a ainsi cédé la place à des contributions actives par des internautes de plus en plus nombreux. Alice passe ses soirées sur Facebook à chatter avec une poignée d’amis quand son fils joue à World of Warcraft avec des copains du monde entier qu’il n’a jamais rencontrés « pour de vrai ». Elle publie son blog. Il twitte à longueur de journée. 
+80La Toile, c’est donc aussi une juxtaposition de milliards d’individus et de tous leurs réseaux. Après les réseaux de machines, les réseaux de contenus, nous atteignons les réseaux d’utilisateurs. Parmi les systèmes récents les plus répandus, nombreux sont ceux qui s’attachent à intensifier les échanges d’informations entre des individus à l’intérieur de leurs réseaux, depuis les jeux en ligne jusqu’aux logiciels de réseaux sociaux comme Facebook ou Google+. Les jeunes ont adopté avec passion les réseaux sociaux. Après un temps d’hésitation, les seniors, qui ont beaucoup de temps libre et peut-être la même envie de contacts sociaux, s’y engouffrent avec enthousiasme. 
+
+
+29 Raphaël Meltz, « Marc L. Genèse d’un buzz médiatique », Le Tigre, no 31, mars-avril 2009, p. 12-16. (...)
+
+81Ces nouveaux systèmes n’ont plus pour cible l’universalité de la Toile, mais les individus et les groupes plus ou moins bien définis auxquels ils appartiennent. Ils redéfinissent les distances entre ces individus et proposent d’autres proximités. Prenons une personne qui nous est inconnue. Il nous suffit d’un nom, et si le nom est trop commun, de quelques vagues indications, pour que sa vie se déroule devant nous. Pour peu que cette personne soit un peu visible sur la Toile, elle envahit notre vie, avec ce qu’elle publie, ce qui se dit d’elle, par ses mille liens avec les autres et les traces qu’elle laisse un peu partout. Il n’est même pas nécessaire que la « cible » soit célèbre29. Nous nageons dans ce qui pourrait être un paradis pour un biographe d’antan, ou peut-être un cauchemar, car a disparu la place du rêve. 
+
+
+
+30 Gloria Origgi, « Sagesse en réseaux : la passion d’évaluer », La Vie des idées, 30 septembre 2008 : (...)
+
+82Ces systèmes soulèvent un grand nombre de sujets de recherche, parfois à la frontière de l’informatique et de la sociologie. Nous allons insister ici sur un aspect particulièrement passionnant, l’émergence de connaissances collectives30. Plusieurs approches sont utilisées pour obtenir de telles connaissances : 
+
+
+
+La notation, par exemple, de produits ou d’entreprises par des internautes ; 
+
+
+L’évaluation de l’expertise des internautes ; 
+
+
+La recommandation, par exemple, de produits ; 
+
+
+La collaboration entre internautes pour réaliser collectivement une tâche qui les dépasse individuellement ;
+
+
+Le crowdsourcing, qui met des humains au service de systèmes informatiques.
+
+
+La notation
+83L’internaute est invité à noter d’autres internautes, des services, des produits, et participe ainsi à la construction d’une connaissance collective. Par exemple, eBay permet aux acheteurs de donner leur avis sur les vendeurs de sa plateforme (et réciproquement). Cela conduit à une fantastique incitation à fournir un excellent service au risque, sinon, d’être mal noté et de perdre des clients. Les systèmes fourmillent, qui utilisent les avis de leurs utilisateurs, comme ViaMichelin pour les restaurants ou AlloCiné pour les films. Notons que, dans ces deux cas, les critiques qui notaient jusqu’alors les restaurants ou les films perdent une forme de monopole. Des systèmes plus expérimentaux essaient d’extraire des connaissances plus fines que des notes, à partir d’avis textuels. Nous rencontrons là les difficultés à analyser des sentiments d’un texte. 
+84Ces systèmes de notation ont aussi leur place au niveau global de la Toile. Par exemple, le système de marque-pages Delicious propose aux internautes d’associer des mots-clés (de la sémantique) aux pages. Une mesure de popularité, comme celle discutée dans la partie précédente, peut aussi être vue comme tenant de la notation : une référence à une page est interprétée comme une note positive, une critique participant autant qu’une louange à la popularité d’une page. À ce propos, il a été dit qu’une société de service délivrait volontairement de mauvais services à certains de ses clients pour que ceux-ci en parlent sur la Toile et augmentent ainsi la popularité, donc la visibilité, de la société en question. Même si cette information non vérifiée n’est peut-être qu’une des légendes de la Toile, le fait que la popularité ignore le sens des références est dérangeant. En analysant les liens de la Toile suivant un système de notation plus riche (avec des notes négatives), ce biais pourrait être corrigé.
+L’évaluation de l’expertise
+
+
+31 Alban Galland, Serge Abiteboul, Amélie Marian et Pierre Senellart, « Corroborating information from (...)
+
+85Une technique essentielle pour évaluer la qualité d’une information est de déterminer la qualité de la source, la confiance que nous pouvons avoir dans les informations que cette source fournit en général. Pour illustrer ce type de techniques, nous mentionnerons un travail récent sur la corroboration31. Imaginons un système où des internautes introduisent des connaissances. Ils peuvent se tromper. Pourtant, s’ils ne faisaient que spécifier des connaissances positives comme « Alice possède une 2CV », rien ne pourrait empêcher le système de croire tout ce que disent les internautes, y compris toutes leurs erreurs. Pour que le système puisse commencer à douter, il faut que des internautes se contredisent, et pour cela, qu’ils se mettent à publier des informations négatives comme « Alice ne possède pas de BMW ». En général, les internautes ne veulent pas perdre de temps à entrer explicitement de telles informations, notamment parce que la liste des informations fausses est bien au-delà de l’accessible. Pourtant, les internautes publient des informations négatives sans le savoir. Par exemple, « Alice est née à Romorantin » indique qu’elle n’est pas née à Sèvres, du fait d’une « dépendance fonctionnelle », c’est-à-dire d’une loi que doivent satisfaire les données (ici, la loi qui spécifie qu’une personne ne peut pas être née à deux endroits distincts).
+
+86Dans le travail cité précédemment, nous utilisons les informations incluant des négations provenant de dépendances fonctionnelles. Nous estimons la véracité des connaissances, en déduisons les taux d’erreurs de chaque internaute, ce qui nous procure une meilleure estimation de la véracité des connaissances, d’où des taux d’erreurs plus précis pour chaque internaute, etc. Nous continuons ce processus jusqu’à atteindre un point fixe (un de plus). Ce travail illustre bien comment il est possible de dégager collectivement des connaissances. 
+87Comme la notation, l’évaluation de l’expertise a sa place sur la Toile. C’est en particulier le cas pour ce qui concerne les informations publiées par la presse. Des blogs, comme celui de Maître Eolas pour les affaires juridiques, font maintenant autorité. De simples internautes sont de plus en plus amenés à remplacer les journalistes, comme récemment en Tunisie ou en Syrie. Cela ne rend que plus crucial le besoin de croiser les informations, de les vérifier. Nous pouvons imaginer que demain des programmes participeront à déterminer les réputations en termes d’information dans cet espace-temps étourdissant de la Toile. 
+La recommandation
+88Un système comme Meetic utilise les données fournies par ses clients pour organiser des rencontres, pour les apparier. Un système comme Netflix recommande des films. Pour ce faire, ces systèmes réalisent typiquement des analyses statistiques dans le cadre classique très général de la fouille de données. Ils essaient de mettre en évidence des « proximités » entre clients dans Meetic, ou entre clients et produits dans Netflix. Ils peuvent regrouper des personnes parce qu’elles partagent les mêmes goûts, même si elles ne se sont jamais rencontrées, ou découvrir des affinités inattendues entre produits. L’exemple souvent cité est que les clients de couches-culottes achètent statistiquement beaucoup de bières. Les classifications des clients et des produits s’enrichissent donc mutuellement et participent ainsi à établir de nouvelles proximités entre individus et produits. 
+89De telles analyses sont réalisées à très grandes échelles par exemple par Amazon ou Google. Elles sont encore souvent mathématiquement peu fondées et leurs résultats sont rarement satisfaisants. Réaliser des analyses statistiques de qualité, sur des volumes de données de plus en plus grands, est un des défis du domaine de la gestion d’information. 
+La collaboration
+
+
+32 Wikipédia existe en 281 éditions et sa version anglaise a plus de 3 millions d’articles en juin 201 (...)
+
+90Wikipédia est un bel exemple d’édition coopérative. Un grand nombre d’internautes collaborent pour développer une encyclopédie. Tout le monde peut participer. Il est facile d’imaginer la cacophonie résultant des incompétences, des désaccords, des intérêts personnels. La tâche semble impossible. Pourtant, si la qualité de son contenu est parfois contestée, il est passionnant de voir la place considérable qu’a prise si rapidement Wikipédia dans la diffusion des connaissances32. Le recours à une foule d’auteurs a permis de dépasser la notion classique d’encyclopédie avec une couverture bien plus large. Nous trouvons de tout dans Wikipédia, depuis la biographie de Clémence Castel, une héroïne de Koh-Lanta, jusqu’à la preuve du Lemme de l’étoile, un résultat fondamental en théorie des langages. Les erreurs y sont nombreuses… Il y en a aussi dans les encyclopédies traditionnelles. 
+
+91Wikipédia est loin d’être le seul exemple de telles collaborations. Tout aussi étonnant est l’aboutissement des logiciels réalisés par des communautés de développeurs dans le cadre des logiciels libres, comme le système d’exploitation Linux. Et nous commençons à voir des communautés s’organiser pour construire des corpus de données ouvertes comme le Web des données (en anglais, linked data) du W3C (World Wide Web Consortium).
+Le crowdsourcing
+
+
+33 Les traductions trouvées sur la Toile, comme « externalisation ouverte », ne nous ont pas convaincu 
+34 Référence au « Turc mécanique », un automate joueur d’échecs de la fin du xviiie siècle, en réalité (...)
+35 Seth Cooper et al., « Predicting protein structures with a multiplayer online game », Nature, vol.  (...)
+
+92Nous utiliserons ici le terme anglais crowdsourcing33. Il s’agit de publier sur la Toile des problèmes que des programmes ne savent pas bien résoudre ; des internautes proposent alors des réponses, moyennant finance. Des systèmes comme le Mechanical Turk34 d’Amazon permettent de tels contacts. Les compétences de la foule ont été utilisées par exemple pour rechercher – sans succès – l’un des plus célèbres chercheurs du domaine des bases de données, Jim Gray, disparu avec son yacht au large des îles Farallon. Les internautes devaient observer des photos-satellite à la recherche d’indices. En utilisant un jeu vidéo, Foldit, des internautes sont en revanche arrivés à décoder la structure d’une enzyme proche de celle du virus du sida35. Ils ont réalisé ce qui bloquait experts et ordinateurs : comprendre comment cette enzyme se repliait dans un espace en trois dimensions pour construire sa structure. Le jeu se marie ici au réseau, dans le plus pur esprit des réseaux sociaux. 
+
+93L’originalité de tels dispositifs est que l’individu se retrouve au service d’un système informatique, qui l’utilise, par exemple, pour compléter sa base de connaissances ou résoudre des contradictions dans cette base.
+Le pouvoir des masses d’internautes
+
+
+36 « Les masses sont les véritables héros. »
+
+群众是真正的英雄36.Mao Tsé-Toung
+
+94Ces approches conduisent en général à résoudre des problèmes complexes d’analyse de données impliquant un grand nombre de personnes et de gros volumes d’information. L’évaluation de la « qualité » est au cœur du sujet : la qualité d’une information, la qualité d’une source (un internaute, un service). Et, de plus en plus, l’individu est au centre du dispositif, passivement par exemple via son profil, ou activement par exemple, en spécifiant ce qu’il sait, ce qu’il croit, ce qu’il aime.
+95Confronté à des systèmes s’attachant à construire une connaissance collective, l’internaute ignore le plus souvent quelles données ont été utilisées et ne comprend parfois pas comment le résultat a été obtenu. Il peut être alors amené à trouver les informations proposées, surprenantes, magiques, inquiétantes. La difficulté d’expliquer les résultats est une faiblesse souvent présente dans les approches que nous venons de discuter et qui en limite les usages.
+96Un autre problème sérieux de ces approches est lié aux atteintes à la confidentialité de l’information. Pour mieux servir leurs utilisateurs, ces systèmes doivent réunir le plus d’informations possibles sur eux. Un réseau social comme Facebook construit par exemple une base de connaissances sur chacun de ses clients. L’internaute est de plus en plus souvent amené à fournir des informations pour bénéficier de la gratuité de services. Les systèmes vont même jusqu’à s’échanger des informations sur leurs clients ; toujours pour mieux les servir ? Cela conduit à des conflits d’intérêts. Un système de réseau social doit choisir entre le besoin de protéger les données de ses clients (au risque, sinon, de les perdre) et son avidité naturelle pour les données confidentielles. De son côté, l’internaute aimerait bien que les informations le concernant restent le plus confidentielles possible mais il est aussi friand de services très personnalisés. 
+97Pour conclure cette partie, oublions temporairement ces problèmes pour nous émerveiller de voir des algorithmes faire surgir des informations disponibles sur la Toile des connaissances dont nous n’imaginions pas l’existence. Ceci nous conduit à un domaine plus ancien mais qui, avec la Toile, se découvre une nouvelle jeunesse : la gestion de connaissances. C’est le sujet de notre prochaine partie. 
+5. La Toile des connaissances
+
+
+37 « Mais de l’arbre de la connaissance du bien et du mal, tu n’en mangeras pas ; car, au jour que tu  (...)
+
+37תָּמוּת מֹות מִמֶּנּוּ אֲכָלְךָ בְּיֹום כִּי מִמֶּנּוּ תֹאכַל לֹא וָרָע טֹוב הַדַּעַת וּמֵעֵץ
+
+98Le domaine des bases de connaissances existait depuis longtemps quand est née la Toile. Mais si les bases de données étaient déjà alors une industrie florissante, les bases de connaissances peinaient à se faire une place au soleil. Cette place, elles sont en train de l’acquérir avec la Toile. 
+99La Toile des documents est fondée sur le fait que les gens aiment écrire, lire, dire, écouter du texte dans leur langue naturelle. Aujourd’hui, les internautes communiquent principalement entre eux à l’aide de texte. Pourquoi et comment passer à une Toile des connaissances ? Et tout d’abord, qu’est-ce que c’est ?
+Le Web sémantique
+100Dans sa forme la plus homéopathique, il s’agit d’expliquer le sens de documents textuels de la Toile, d’éléments qui les composent, ou, comme nous le verrons plus loin, de services informatiques disponibles sur la Toile (les services Web). Cela peut se faire en publiant des métadonnées, c’est-à-dire des données qui expliquent les données. Par exemple, pour le document que vous êtes en train de lire, nous pourrions publier : 
+
+auteur = Serge Abiteboulnature = leçon inauguraleinstitution = Collège de Francedate = mars 2012langue = français
+
+101À l’intérieur des documents, des étiquettes sémantiques peuvent aussi être attachées à des fragments constitutifs d’un texte pour les expliquer. Par exemple, accolée à la chaîne de caractères Woody Allen, l’étiquette dbpedia:Woody_Allen précise qu’il s’agit d’une personne référencée dans dbpedia, une base de connaissances très utilisée. Nous trouverons notamment dans cette ontologie qu’il s’agit du célèbre cinéaste qui a réalisé Manhattan. 
+102Les bases de connaissances comme dbpedia sont appelées des ontologies. En simplifiant, une ontologie se compose de phrases comme celles-ci :
+
+
+classes Personne, Réalisateur, Cinéaste
+
+
+Réalisateur sous classe de Personne
+
+
+Réalisateur synonyme de Cinéaste
+
+
+dbpedia:Woody_Allen est un Réalisateur 
+
+
+relation a_réalisé
+
+
+dbpedia:Woody_Allen a_réalisé film:Manhattan
+
+
+qui spécifient des classes d’objets (1), des inclusions ou des égalités entre classes (2, 3), l’appartenance d’un objet à une classe (4), des relations entre objets (5), des instances de ces relations (6). 
+103Utiliser un texte brut découvert sur la Toile sans explication s’apparente à utiliser les résultats d’une expérience scientifique en ignorant les conditions de sa réalisation, ses unités de mesure, etc. Des étiquettes introduites dans le texte, basées sur des ontologies, précisent le sens de ce texte, l’enrichissent en y ajoutant de la sémantique. Par exemple, l’étiquette dbpedia:Woody_Allen, attachée à une phrase, indique que la phrase parle de Woody Allen, un réalisateur, un cinéaste, une personne, et pas du musicien Allen Woody. Et cette phrase devient une réponse à la question sous forme de mots-clés « cinéaste Woody Allen Manhattan » même si elle ne contient ni le mot cinéaste ni le mot Manhattan. Par contre, une phrase parlant d’un séjour de Allen Woody (précisant qu’il s’agit du musicien dbpedia:Allen_Woody) à Manhattan ne serait pas comprise comme une réponse. L’ontologie permet donc de répondre de façon plus fine aux requêtes. 
+104Sur la Toile, n’importe qui peut publier ses propres ontologies. Des experts utilisent des terminologies spécifiques suivant leur langue, leur domaine, leur culture, etc. dans la pure tradition de tour de Babel. Cette diversité est une richesse mais elle complique la recherche de connaissances. La même information peut être représentée de multiples manières. Surtout, nous sommes sur la Toile et nous allons trouver des masses de faits erronés. Ce qui est encore plus compliqué à gérer, c’est que des sites peuvent publier des règles qui mettent en péril nos propres connaissances. Par exemple, qu’allons-nous faire si quelqu’un affirme que « Personne est un synonyme de Film » ? Si nous ne pouvons l’interdire, nous devons faire en sorte que cela ne pollue pas nos raisonnements. 
+105Cela conduit à toute une gamme de problèmes passionnants : comment utiliser des ontologies pour mieux répondre aux questions des internautes ? Comment « aligner » des ontologies, c’est-à-dire établir des liens entre leurs concepts et leurs relations, pour « intégrer » des informations venues de sources indépendantes ? Comment gérer les incohérences ? Comment évaluer la qualité des connaissances ? 
+De l’acquisition de connaissances 
+106Maintenant que nous comprenons l’intérêt de disposer de connaissances en plus de textes, la question difficile devient « comment acquérir ces connaissances ? ». Un expert chimiste va par exemple « entrer » dans une base (en utilisant un éditeur) ses connaissances sur les molécules qu’il étudie. Il a une raison objective de le faire : l’avancement de la science. Et ce genre de publication dans des bases de données contribue aujourd’hui à une visibilité scientifique au même titre que des publications dans des journaux scientifiques. Mais les mêmes individus qui aiment publier sur la Toile dans leur langue naturelle apprécient peu les contraintes d’un éditeur de connaissances. Les cas d’internautes entrant volontairement et gratuitement des connaissances dans un système restent rares et, le plus souvent, les tâches de construction de bases de connaissances sont laissées à des logiciels. 
+
+
+38 Johannes Hoffart, Fabian M. Suchanek, Klaus Berberich et Gerhard Weikum, YAGO2 : A Spatially and Te (...)
+
+107Prenons par exemple la base de connaissances Yago, développée à partir de la version anglaise de l’encyclopédie Wikipédia que nous avons déjà mentionnée. Wikipédia est au départ une collection de textes. Pour améliorer sa précision, ses éditeurs encouragent l’introduction de fragments de connaissances. (Allez sur la page Wikipédia de Woody Allen et cliquez sur l’onglet « Modifier » pour vous en convaincre.) C’était donc un excellent point de départ pour développer une « vraie » base de connaissances. Cette base, appelée Yago, a été construite à l’aide d’un logiciel développé à l’Institut Max Planck38. En 2011, Yago avait déjà 2 millions d’entités et 20 millions de relations entre ces entités. 
+
+108Si la Toile reste très largement dominée par le HTML et le texte, les bases de connaissances de demain sont déjà en construction à partir de l’énorme ressource que constitue la masse de documents textuels. Il s’agit essentiellement de comprendre les textes et d’en « extraire » des connaissances. La tâche est complexe parce qu’elle met en jeu la compréhension de la langue. Les extracteurs de connaissances font des erreurs et il est difficile de leur en vouloir : ils partent de textes qui fourmillent d’imprécisions, d’erreurs et de faits comme « Jérusalem est la capitale d’Israël » qui peuvent être controversés. L’intégration des connaissances de plusieurs sources est aussi délicate, comme l’est la vérification des connaissances obtenues. Tout cela met en jeu une gamme de techniques complexes, notamment les techniques de corroboration ou de crowdsourcing dont nous avons déjà parlé. 
+109Et demain ? À côté des documents textuels, il faut s’attendre à voir proliférer des millions de bases de données ou de connaissances, de toutes tailles, de toutes natures, de qualités variables, et des liens entre elles. Le problème aura peut-être changé mais resteront les questions fondamentales : où trouver une information spécifique et quel site est fiable ?
+Les services Web 
+110La publication de connaissances permet de mieux répondre aux requêtes. Elle rend surtout possible l’utilisation de la Toile par des machines. Prenons la requête très simple suivante : « qui a réalisé le film Manhattan ? ». Un utilisateur humain n’aura aucun mal à trouver la bonne réponse sur la Toile, par exemple en utilisant IMDb. Ce sera plus compliqué pour une machine. Par contre, un logiciel pourra dialoguer avec d’autres logiciels et comprendre des réponses comme : 
+
+( dbpedia:Woody_Allen, a_réalisé, film:Manhattan ).
+
+111Nous appellerons services Web des logiciels connectés à Internet dialoguant avec d’autres logiciels, s’échangeant des données structurées suivant les protocoles de la Toile. 
+112À la base de tout cela, nous trouvons des standards. Une anecdote nous permettra de souligner leur intérêt. Nous voulions utiliser un programme de classification de documents développé par des collègues. Pour pouvoir faire fonctionner ce logiciel, il fallait d’abord installer plusieurs librairies de programmes, certaines incompatibles avec notre environnement de développement. Le cauchemar habituel de l’installation de logiciel. Heureusement, quelqu’un a eu l’idée (pas si évidente au début des années 1990) d’utiliser le programme de classification comme service Web. Les collègues ont installé leur logiciel sur une machine connectée au réseau et quelques instants plus tard, nous pouvions utiliser le service. Sans les standards de la Toile, il nous aurait sans doute fallu des jours de travail frustrant et improductif. 
+113Mais revenons à notre cinéphile. Il utilise un service, disons TMLF, pour « TrouveMoiLeFilm ». Notre cinéphile précise (en s’appuyant sur des ontologies) ce qu’il veut : voir le film Manhattan. TMLF cherche pour lui des offres de ce film en vidéo à la demande en utilisant les descriptions de services de la Toile (aussi basées sur des ontologies). TMLF compare les prix, les prestations de chaque service, en tenant compte des abonnements de la personne, de ses préférences, notamment linguistiques, etc. Dans cette tâche, TMLF collabore avec d’autres services et échange avec eux des données, des connaissances. Et au final, TMLF peut démarrer le film sur la télévision familiale. La Toile, qui était l’apanage de l’être humain, s’est ainsi mise au service de services de la Toile, et les services de la Toile au service de tous.
+L’inférence
+114Comprendre le sens des données, répondre plus précisément aux requêtes, voilà des avantages apportés par les bases de connaissances. Mais le plus fascinant d’un point de vue technique est la possibilité de s’appuyer sur la logique pour inférer automatiquement de nouvelles connaissances. Pour expliquer cela, nous allons réexaminer la notion de fait. Nous avons rencontré jusqu’à présent des faits extensionnels, comme Séance(Star Wars, Sel, 22:15), qui correspondent à des n-uplets stockés dans la base de données. La base de données est donc dépositaire de tous les faits extensionnels du monde. Introduisons maintenant des connaissances sous forme de lois (de règles) comme : 
+
+SouhaiteVoir( Alice, t ) ← Film( t, Hitchcock, a ), not Vu( Alice, t )
+
+que l’on peut lire « si t est le titre d’un film d’Hitchcock, a un acteur de ce film, et si Alice n’a pas vu ce film, alors elle souhaiterait le voir ». À partir de telles règles et de faits comme « Psychose est un film d’Hitchcock » et Alice ne l’a pas vu, nous allons pouvoir inférer un fait comme « Alice souhaiterait voir le film Psychose », un fait qui n’est stocké dans aucune base de données. Nous parlerons de faits intentionnels. C’est ce genre de règles toutes simples qui permet à des logiciels de raisonner.
+
+
+39 Laurent Vieille, « Recursive axioms in deductive databases. The query/subquery approach », Expert D (...)
+
+115Observez que répondre à une requête est devenu plus compliqué. Il faut maintenant inférer des faits qui permettent d’inférer d’autres faits, ainsi de suite. Évidemment, il faut éviter d’inférer tous les faits possibles, car cela demanderait trop de temps et trop d’espace-mémoire ou de stockage. Parmi les plus beaux algorithmes du domaine, nous trouvons d’ailleurs des algorithmes inspirés de la programmation logique, qui permettent d’éviter d’inférer des faits inutilement39. Nous n’aurons pas le temps de les décrire dans cette leçon. 
+
+Penser global
+116L’inférence est essentielle dans le cadre d’une Toile des connaissances en devenir, notamment pour mieux répondre aux requêtes ou pour intégrer de l’information provenant de sources hétérogènes. Nous pouvons imaginer demain des millions, des milliards de systèmes qui échangent des connaissances, infèrent des connaissances. Il faut pourtant raison garder. Il ne s’agit pas ici de raisonnements très compliqués, comme par exemple ceux d’une démonstration mathématique, mais juste d’échanges d’informations. Se posent pourtant d’énormes défis techniques : comment raisonner avec de pareils volumes de connaissances ? Comment ne pas être simplement submergés par les faits inférés ? Comment garantir la qualité des informations ? Leur confidentialité ? Comment expliquer les faits obtenus ? 
+117Et puis notre environnement va changer. Il va nous falloir apprendre à vivre dans un monde où nous serons entourés de systèmes qui raisonnent, s’échangent des connaissances, interagissent avec nous. Comment cela va-t-il modifier notre manière même de savoir, de penser ? 
+Conclusion
+
+
+40 « Où est la sagesse que nous avons perdue dans la connaissance ? Où est cette connaissance que nous (...)
+
+Where is the wisdom we have lost in knowledge? Where is the knowledge we have lost in information40?T.S. Eliot
+
+118Le passage de biens concrets à des informations numériques relativement immatérielles permet de souligner une particularité fondamentale de l’informatique : l’informatique est une science de l’immatériel. En cela, elle diffère des sciences du matériel comme la physique, la chimie, les sciences de la vie et de la Terre, par les techniques et souvent les mathématiques qu’elle utilise. Cela induit, pour l’industrie informatique, ses propres particularités tant pour la fabrication, la distribution ou la maintenance des produits que pour les modèles commerciaux. C’est cette immatérialité que nous avons rencontrée presqu’à chaque page de cette leçon. 
+
+
+41 La neutralité est le principe qui garantit l’égalité de traitement de tous les flux de données sur  (...)
+42 Chris Anderson et Michael Wolff, « The Web is dead. Long live the Internet », Wired, septembre 2010 (...)
+
+119La Toile est multiforme. Elle vit sur un Internet que nous souhaiterions le plus neutre41 possible. Elle est omniprésente. Il est devenu quasi impossible de vivre sans : de trouver du travail, de travailler, de se loger, de gérer ses comptes bancaires, de faire partie d’une association, presque d’avoir des amis, etc. Nous sommes nombreux à partager la nostalgie du monde romantique, idéaliste, anarchiste, anarchique, de la Toile ouverte des débuts. La Toile évolue inexorablement vers des espaces plus fermés42 notamment sous la pression de la monétarisation des contenus. Elle reste à la fois la plus belle des dentelles, le tissu de toutes les connaissances humaines et le terreau des plus horribles fantasmes, de toutes les violences. Elle est aussi l’univers d’une croissance arrogante dans ses imprécisions et ses incohérences qui noient les perles d’humanité, et d’une alchimie improbable qui transforme la masse en qualité. 
+
+120Ce que nous avons appris de la Toile ces dernières années, c’est qu’au-delà d’une collection universelle de documents, elle offrait une gamme infinie d’applications à inventer. Nous avons vu arriver le Web des téléphones « intelligents », que nous sommes nombreux à avoir adoptés avec enthousiasme tout en nous inquiétant de leurs aspects anxiogènes. Même s’il partage des protocoles informatiques avec la Toile classique, ce monde est souvent en contradiction avec la philosophie d’une Toile « libre, gratuite et universelle », les applications payantes devenant la norme. Nous avons parlé du Web des réseaux sociaux et du Web sémantique. Si nous avions eu plus de temps, nous aurions considéré le Web des objets et de l’intelligence ambiante qui a transformé le commerce avec les RFID (Radio Frequency IDentification) et dont on nous promet qu’il va « révolutionner » notre habitat. Et nous assistons au fantastique succès du Web des mondes virtuels, notamment avec les jeux vidéo. 
+121Si nous avons essayé d’éviter une présentation béatement optimiste des technologies de gestion de données, nous avons beaucoup insisté dans ce texte sur les succès technologiques, notamment dans le contexte de la Toile. Nous évoquerons brièvement certains écueils, en essayant de mettre en évidence les sujets de recherche qu’ils suggèrent. 
+Éviter la noyade dans un océan de données
+122Cela a été un des fils conducteurs de cette leçon. Un des grands défis des années à venir est de développer les technologies qui permettront de trouver, évaluer, valider, vérifier, hiérarchiser l’information pour aider l’internaute à obtenir « la bonne information, au bon moment ». Cela implique de poursuivre les recherches dans des domaines comme l’évaluation de la réputation, la recommandation, ou la personnalisation.
+Accès à l’information pour tous
+
+
+43 En France, en 2009, 40 % de la population n’utilisait jamais l’informatique (source : CREDOC).
+
+123Des « fractures numériques » existent. La fracture générationnelle, grossièrement, entre ceux qui sont nés avant et après Internet, tend à disparaître avec des objets comme l’iPad. La fracture entre urbains et ruraux pourrait disparaître facilement avec un peu de volonté politique, les ruraux adoptant ces nouvelles technologies avec au moins autant d’appétit que les citadins. Les fractures sociales43 et Nord-Sud sont autrement plus préoccupantes. L’informatique peut aider à les réduire avec des logiciels toujours plus simples à utiliser, des logiciels surtout libres. Mais il s’agit d’abord d’un problème d’éducation. En France, nous assistons à des progrès en matière d’enseignement de l’informatique. Le chemin encore à parcourir reste considérable. Il faut aussi que la bibliothèque gratuite du coin de la rue cède la place à la bibliothèque numérique, gratuite et universelle, de la Toile. L’utopie est devenue réalisable : l’accès, pour tous, à toute la culture et à toutes les connaissances. 
+
+Démocratie ou pas
+124La Toile et les systèmes informatiques peuvent se mettre au service des gouvernants pour « fliquer » les citoyens, voire les opprimer. Ils peuvent aussi permettre d’établir une démocratie des contre-pouvoirs avec des réseaux de militants qui contrôlent, surveillent, dénoncent, et notent les pouvoirs publics et, par là-même, contribuent à améliorer le fonctionnement de la démocratie. Les choix sont principalement politiques mais les scientifiques ont un rôle à jouer dans l’établissement de ces contre-pouvoirs. Il s’agit en particulier de développer les technologies permettant de contrôler les puissants : les États, les multinationales.
+Et la vie privée ?
+125Nous prenons de plus en plus conscience des risques que nous courrons à disperser sur la Toile des informations que nous voudrions garder confidentielles. L’un des risques les plus aigus est peut-être l’usurpation d’identité. C’est le rôle de la science de développer les outils qui nous permettent, en s’appuyant sur des lois qui protègent les données personnelles, de regagner le contrôle sur notre information. Il s’agit bien sûr pour les gouvernements de légiférer, mais il est important que nous nous accordions aussi sur une éthique de la protection de la vie privée.
+Pour des individus meilleurs ou pires ? 
+
+
+44 Nicholas Carr, « Is Google making us stupid ? », The Atlantic, juillet/août 2008 : http://www.theat (...)
+
+126Est-ce que les outils informatiques nous rendent plus heureux ? Plus intelligents ? Plus productifs ? Le rapprochement des distances avec certains peut-il devenir la cause de l’éloignement des autres, au risque d’enfermer l’individu dans des communautés aliénantes ? Au contact de toute cette virtualité, y a-t-il un risque de perdre tout contact avec la « vraie » vie ? Est-ce qu’une rencontre est moins vraie sur la Toile qu’au bistrot du coin ? Et, peut-être, la mère de toutes les questions : allons-nous utiliser ces outils pour ne plus penser44 ou, au contraire, pour mieux penser et être plus créatifs ?
+
+127Les réponses à ces questions dépendent beaucoup des nouveaux outils informatiques qui restent à inventer avec, peut-être plus encore qu’avant, la préoccupation de mieux servir les utilisateurs, et pourquoi pas, de les rendre meilleurs. D’un point de vue technique, un des défis est de pouvoir offrir à l’individu tous les avantages des systèmes de la Toile les plus avancés, notamment les réseaux sociaux ou les systèmes de recommandation, sans qu’il ait besoin d’aliéner le contrôle des informations qui le concernent, comme c’est trop le cas aujourd’hui. Un autre défi est d’améliorer la production collective de connaissances. Il faut aussi nous permettre de mieux utiliser toutes ces connaissances dans nos prises de décisions, en les intégrant mieux dans les outils logiciels que nous utilisons au quotidien comme le téléphone, le courrier ou l’agenda électronique.
+
+
+45 « Il est difficile de faire des prévisions, surtout pour l’avenir. »
+
+Prediction is very difficult, especially about the future45.Niels Bohr
+
+Et demain ?
+128Sous la pression de jeunes pousses très dynamiques et de jeunes géants comme Facebook ou Google, les technologies de la Toile se sont développées très rapidement. Comme souvent en informatique, des solutions ont été bricolées « vite fait mal fait » (quick and dirty). Si le domaine de la gestion de données montre aujourd’hui un dynamisme étincelant, il tient pourtant encore de la forêt vierge quand nous atteignons la Toile : il n’est pas aisé d’en dresser l’état de l’art ; il n’est pas simple de l’enseigner ; il n’est pas évident de prévoir quelles tendances seront amenées à durer. Les bases logiques, qui faisaient la beauté du modèle relationnel, se présentent encore dans le désordre pour ce qui est de la Toile. Une solution globale est à inventer. Les liens avec la logique, la théorie de la complexité, la théorie des langages et des automates, sont à revisiter. De nouvelles théories sont sans doute à établir. Les systèmes que nous utilisons sont à améliorer ; de nouvelles fonctionnalités sont à inventer. Un vaste programme ! 
+129Il n’est pas possible, ni souhaitable, de renoncer à la Toile comme il n’a pas été possible de refuser l’écriture ou l’imprimerie. Et malgré tous les écueils de la Toile, je veux continuer à croire qu’elle participera à féconder un meilleur futur. Quant aux aspects plus techniques, je me hasarderai à prédire que la prochaine étape des sciences des données, que l’on retiendra, a déjà commencé : c’est la Toile des connaissances. Elle a déjà été annoncée plusieurs fois. Elle arrive lentement, mais elle arrive vraiment. 
+130Des données à l’information, et de l’information aux connaissances, le cheminement est naturel. 
+Remerciements : Nous tenons à remercier le Collège de France, l’INRIA ainsi que le Conseil de recherche européen, via le projet Webdam sur « Foundations of Web data Management ». Nous tenons aussi à remercier Martín Abadi, Jérémie Abiteboul, Manon Abiteboul, Gilles Dowek, Emmanuelle Fleury, Laurent Fribourg, Sophie Gamerman, Bernadette Goldstein, Florence Hachez-Leroy, Tova Milo, Marie-Christine Rousset, Luc Segoufin, Pierre Senellart et Victor Vianu pour leurs commentaires sur ce texte.   
+
+Notes
+1 Gérard Berry, Pourquoi et comment le monde devient numérique, Collège de France / Fayard, coll. « Leçons inaugurales », no 197, 2008.
+2 Gérard Berry, Penser, modéliser et maîtriser le calcul informatique, Collège de France / Fayard, coll. « Leçons inaugurales », no 208, 2010. Martin Abadi, La Sécurité informatique, Collège de France / Fayard, no 219, 2011, doi : 10.4000/lecons-cdf.443.
+3 Nous entendons par langues « naturelles » des langues élaborées dans le temps par des groupes de locuteurs, comme le français ou l’anglais. Ceci est moins en opposition avec des langues « construites » comme l’espéranto, qu’avec des langages formels comme la logique du premier ordre, SQL ou Java.
+4 « Écoute Dave. Je vois bien que tu es très affecté par tout cela. Et je pense vraiment que tu devrais reprendre tes esprits, prendre un calmant et essayer de faire le point. »
+5 Définir précisément ces notions n’est pas chose facile. Voir par exemple : Luciano Floridi, The Philosophy of Information, Oxford University Press, 2011.
+6 Ses données persistent après que l’ordinateur a été éteint.
+7 Les évolutions suivantes ont été observées approximativement jusqu’à présent. Concernant les capacités de stockage, la densité de mémoire des disques durs double chaque année (loi de Kryder). Quant aux circuits, la densité de transistors sur une puce de silicium double tous les deux ans (loi de Moore). 
+8 http://michaelbrodie.com.
+9 « La logique est le commencement de la sagesse, pas sa fin. »
+10 Serge Abiteboul, Richard Hull et Victor Vianu, Foundations of Databases, Addison-Wesley, 1995 : http://webdam.inria.fr/Alice. Michael Benedikt et Pierre Senellart, « Databases », in E. K. Blum et A. V. Aho (dir.), Computer Science. The Hardware, Software and Heart of It, Springer-Verlag, 2012, p. 169-229, doi : 10.1007/978-1-4614-1168-0_10.
+11 SQL va plus loin que le calcul relationnel. Par exemple, il permet d’ordonner les résultats et d’appliquer des fonctions simples comme la somme ou la moyenne.
+12 Pour ces complexités « faibles », le modèle de calcul précis est important. Nous parlons ici de calcul sur des machines RAM. 
+13 Un exemple de problème difficile dans NP est celui du voyageur de commerce : étant donné des villes, des routes entre ces villes, et les longueurs de ces routes, comment trouver le plus court chemin pour relier toutes les villes.
+14 Comme il y a un nombre fini d’états possibles, il est possible de détecter si le programme est entré dans une boucle, mais au prix d’un travail supplémentaire. 
+15 Serge Abiteboul et Victor Vianu, « Generic computation and its complexity », Proceedings of the 23rd annual ACM symposium on theory of computing, New York, ACM, 1991, p. 209-219, doi : 10.1145/103418.103444.
+16 Dans notre discussion, nous supposons que le domaine n’est pas ordonné. Le problème est différent si nous considérons que le domaine est ordonné. Vardi a montré que fixpoint permet de calculer exactement toutes les requêtes dans P, et que while exprime exactement les requêtes dans pspace.
+17 « Servir et protéger les données. »
+18 Les applications qui tournent sur le système relationnel contiennent des bogues. Le système lui-même contient ses propres bogues. Enfin, les matériels peuvent dysfonctionner.
+19 Une grappe de serveurs ou une ferme de calcul (cluster en anglais) consiste en un regroupement d’ordinateurs, appelés nœuds, qui collaborent pour résoudre un problème particulier.
+20 Sergueï Brin et Lawrence Page, « The anatomy of a large-scale hypertextual web search engine », Proceedings of the 7th International Conference on World Wide Web, Amsterdam, Elsevier, 1998 ; Computer Networks and ISDN Systems, vol. 30, no 1-7, 1998, p. 107-117, doi : 10.1016/S0169-7552(98)00110-X.
+21 Serge Abiteboul, Ioana Manolescu, Philippe Rigaux, Marie-Christine Rousset et Pierre Senellart, Web Data Management, Cambridge University Press, 2011 : http://webdam.inria.fr/Jorge. 
+22 Google appelle ses centres de données, des fermes. Le nombre de fermes et le nombre de processeurs dans chaque ferme sont secrets. On parle de dizaines de fermes et des sources du début des années 2000 attribuaient à la plus grande ferme 6000 processeurs. 
+23 Ce problème fait partie de la classe AC0, c’est-à-dire la classe des problèmes que l’on peut résoudre avec des circuits de profondeur constante et un nombre de portes ET et OU polynomial dans la taille de l’entrée. L’évaluation de requêtes de l’algèbre relationnelle est d’ailleurs dans sa totalité dans AC0.
+24 « Playboy : La devise de votre société est vraiment “Ne faites pas le mal” ? Brin : Oui, c’est vrai. Playboy : Est-ce un code écrit ? Brin : Oui. Nous avons d’autres règles, aussi. Page : Nous acceptons les chiens, par exemple. »
+25 Jon M. Kleinberg, « Authoritative sources in a hyperlinked environment », Journal of the ACM, vol. 46, no 5, 1999, p. 604-632, doi : 10.1145/324133.324140. 
+26 Une matrice est creuse si la plupart de ses coefficients sont à zéro. Pour un milliard de pages, si chaque page a une trentaine de liens en moyenne, la matrice a environ 30 milliards d’entrées non vides sur un milliard de milliards d’entrées. Elle est très creuse. Mais, même dans une représentation optimisée, elle reste gigantesque. 
+27 Le PageRank de Google actuel utiliserait des dizaines de critères combinés dans une formule gardée secrète.
+28 Serge Abiteboul, Mihai Preda et Grégory Cobena, « Adaptive on-line page importance computation », Proceedings of the 12th International Conference on World Wide Web, New York, ACM, 2003, doi : 10.1145/775152.775192.
+29 Raphaël Meltz, « Marc L. Genèse d’un buzz médiatique », Le Tigre, no 31, mars-avril 2009, p. 12-16. Voir aussi : http://www.le-tigre.net/Marc-L.html.
+30 Gloria Origgi, « Sagesse en réseaux : la passion d’évaluer », La Vie des idées, 30 septembre 2008 : http://www.laviedesidees.fr/Sagesse-en-reseaux-la-passion-d.html.
+31 Alban Galland, Serge Abiteboul, Amélie Marian et Pierre Senellart, « Corroborating information from disagreeing views », Proceedings of the 3rd ACM International Conference on Web Search and Data Mining, New York, ACM, 2010, p. 131-140, doi : 10.1145/1718487.1718504.
+32 Wikipédia existe en 281 éditions et sa version anglaise a plus de 3 millions d’articles en juin 2011 (source : Wikipédia).
+33 Les traductions trouvées sur la Toile, comme « externalisation ouverte », ne nous ont pas convaincu.
+34 Référence au « Turc mécanique », un automate joueur d’échecs de la fin du xviiie siècle, en réalité un canular. 
+35 Seth Cooper et al., « Predicting protein structures with a multiplayer online game », Nature, vol. 466, 2010, p. 756-760, doi : 10.1038/nature09304.
+36 « Les masses sont les véritables héros. »
+37 « Mais de l’arbre de la connaissance du bien et du mal, tu n’en mangeras pas ; car, au jour que tu en mangeras, tu mourras certainement. » Genèse 2:17.
+38 Johannes Hoffart, Fabian M. Suchanek, Klaus Berberich et Gerhard Weikum, YAGO2 : A Spatially and Temporally Enhanced Knowledge Base from Wikipedia, Max-Planck-Institut für Informatik, novembre 2010 : www.mpi-inf.mpg.de/yago-naga/yago.
+39 Laurent Vieille, « Recursive axioms in deductive databases. The query/subquery approach », Expert Database Conference, 1986, p. 253-267.
+40 « Où est la sagesse que nous avons perdue dans la connaissance ? Où est cette connaissance que nous avons perdue en information ? »
+41 La neutralité est le principe qui garantit l’égalité de traitement de tous les flux de données sur Internet. Ce principe exclut toute discrimination à l’égard de la source, de la destination ou du contenu de l’information transmise sur le réseau (source : Wikipédia).
+42 Chris Anderson et Michael Wolff, « The Web is dead. Long live the Internet », Wired, septembre 2010 : www.wired.com.
+43 En France, en 2009, 40 % de la population n’utilisait jamais l’informatique (source : CREDOC).
+44 Nicholas Carr, « Is Google making us stupid ? », The Atlantic, juillet/août 2008 : http://www.theatlantic.com/magazine/archive/2008/07/is-google-making-us-stupid/6868/
+45 « Il est difficile de faire des prévisions, surtout pour l’avenir. » 
+
+Table des illustrations
+
+
+
+ 
+
+Titre
+Figure 2. L’évaluation d’une requête algébrique 
+
+URL
+http://books.openedition.org/cdf/docannexe/image/529/img-1.png 
+
+Fichier
+image/png, 111k    
+
+Auteur
+
+ Serge Abiteboul   
+
+© Collège de France, 2012
+Conditions d’utilisation : http://www.openedition.org/6540 
+
+
+
+ Présentation de Serge Abiteboul  
+   
+
+     
+
+
+Lire
+
+ Accès ouvert  Liseuse  ePub  PDF du livre  PDF du chapitre 
+  Freemium  Offert par Le Mans Université 
+  
+  
+
+Sciences des données : de la logique du premier ordre à la Toile
+Leçon inaugurale prononcée le jeudi 8 mars 2012
+                         Serge Abiteboul 
+…  
+
+                                    Vous pouvez suggérer l'acquisition de la version électronique de ce livre à Le Mans Université en utilisant le formulaire ci-dessous.                            
+Merci, nous transmettrons rapidement votre demande à votre bibliothèque.
+
+
+Votre nom (*)
+
+
+Votre affiliation
+
+
+Votre courriel (*)
+
+
+Message complémentaire (facultatif)   
+
+
+
+   
+
+Acheter
+
+Volume papierPlace des librairesleslibraires.frDecitreMollatamazon.fr
+ ePub / PDF
+  
+Sciences des données : de la logique du premier ordre à la Toile
+Leçon inaugurale prononcée le jeudi 8 mars 2012
+                         Serge Abiteboul  
+
+Référence électronique du chapitre
+
+Format OpenEdition APA MLA 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ABITEBOUL, Serge. Sciences des données : de la logique du premier ordre à la Toile : Leçon inaugurale prononcée le jeudi 8 mars 2012. Chaire d’Informatique et sciences numériques In :  Sciences des données : de la logique du premier ordre à la Toile : Leçon inaugurale prononcée le jeudi 8 mars 2012 [en ligne]. Paris : Collège de France, 2012 (généré le 05 septembre 2018). Disponible sur Internet : <http://books.openedition.org/cdf/529>. ISBN : 9782722601710. DOI : 10.4000/books.cdf.529.                
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            Abiteboul, S. 2012. Sciences des données : de la logique du premier ordre à la Toile : Leçon inaugurale prononcée le jeudi 8 mars 2012. Chaire d’Informatique et sciences numériques. In  Sciences des données : de la logique du premier ordre à la Toile : Leçon inaugurale prononcée le jeudi 8 mars 2012. Paris : Collège de France. doi :10.4000/books.cdf.529                
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                Abiteboul, Serge. “Sciences des données : de la logique du premier ordre à la Toile : Leçon inaugurale prononcée le jeudi 8 mars 2012. Chaire d’Informatique et sciences numériques”. Abiteboul, Serge. Sciences des données : de la logique du premier ordre à la Toile : Leçon inaugurale prononcée le jeudi 8 mars 2012. Paris : Collège de France, 2012. Web. <http://books.openedition.org/cdf/529>.                 
+
+Référence électronique du livre
+
+Format OpenEdition APA MLA 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ABITEBOUL, Serge. Sciences des données : de la logique du premier ordre à la Toile : Leçon inaugurale prononcée le jeudi 8 mars 2012. Nouvelle édition [en ligne]. Paris : Collège de France, 2012 (généré le 05 septembre 2018). Disponible sur Internet : <http://books.openedition.org/cdf/506>. ISBN : 9782722601710. DOI : 10.4000/books.cdf.506.                
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  Abiteboul, S. 2012. Sciences des données : de la logique du premier ordre à la Toile : Leçon inaugurale prononcée le jeudi 8 mars 2012. Paris : Collège de France. doi :10.4000/books.cdf.506            
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      Abiteboul, Serge. Sciences des données : de la logique du premier ordre à la Toile : Leçon inaugurale prononcée le jeudi 8 mars 2012. Paris : Collège de France, 2012. Web. <http://books.openedition.org/cdf/506>.             
+Compatible avec Zotero 
+  
+  
+
+Sciences des données : de la logique du premier ordre à la Toile
+Leçon inaugurale prononcée le jeudi 8 mars 2012
+                         Serge Abiteboul 
+…
+Sciences des données : de la logique du premier ordre à la Toile
+Leçon inaugurale prononcée le jeudi 8 mars 2012. Chaire d’Informatique et sciences numériques
+                         Serge Abiteboul   
+
+Partager
+ Partager l’URL Partager par courrier Intégrer 
+                URL : 
+              
+TwitterFacebookGoogle + 
+
+Merci, votre message a été envoyé.
+
+
+Votre nom
+
+Votre courriel (*)
+
+
+Courriel du destinataire (*)
+
+
+Votre message   
+
+
+
+  
+
+
+Taille :
+ petit (500x375 px) Moyen (800x600 px) Grand (1024x768 px)  
+Collez le code html suivant pour intégrer ce livre sur votre site. <iframe src="http://books.openedition.org/cdf/529?format=embed" style="padding:5px;border:2px solid #ddd;" width="500" height="375"></iframe>    
+
+
+
+
+
+  Collège de France   
+
+
+
+Plan du site
+
+Collections
+                      
+ Leçons inaugurales 
+ Leçons de clôture 
+ Conférences 
+ Philosophie de la connaissance 
+ Institut des civilisations   
+Tous les livres
+Accéder aux livres
+                      
+ Par                                 auteurs 
+ Par                                 personnes citées 
+ Par                                 mots clés 
+ Par                                 géographique 
+ Par                                 thématique 
+ Par                                 dossiers 
+ Par                                 collections et séries   
+                                                                Présentation                                                                                                                                                                                                                                                                                                                
+                      
+  Les publications du Collège de France    
+                                                                Informations                                                                                                                                                                                                                                                                                                                
+                      
+  Contact    
+Accès réservé  
+
+                                        Suivez-nous                                    
+
+ 
+Courriel :publications@college-de-france.fr
+URL :http://www.college-de-france.fr/site/publications/index.htm
+Adresse :                                        11, place Marcelin Berthelot                                                                                                                        75231                                         Paris                                         Cedex 05                                         France                                         
+  
+Catalogue
+Auteurs
+Éditeurs
+Dossiers
+Extraits  
+  OpenEdition est un portail de ressources électroniques en sciences humaines et sociales.
+
+OpenEdition Journals
+OpenEdition Books
+Hypothèses
+Calenda  OpenEdition Freemium   
+
+
+
+
+
+
+    if (document.cookie.indexOf("__cookiealert=1") !== -1) {
+      UserVoice.push(['addTrigger', { mode: 'contact', trigger_position: 'bottom-right' }]);
+    }
+     
+    // tracker methods like "setCustomDimension" should be called before "trackPageView"
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'pk.js'; s.parentNode.insertBefore(g,s);
+    })();
+   
+
+

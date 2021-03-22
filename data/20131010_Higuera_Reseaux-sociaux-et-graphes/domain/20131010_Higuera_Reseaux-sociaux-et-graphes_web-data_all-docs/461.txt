@@ -1,0 +1,9848 @@
+https://perso.univ-rennes1.fr/philippe.roux/enseignement/graphes/cours2.pdf
+
+Th´eorie des graphes
+
+DUT Informatique, semestre 2
+
+Version 2.0
+
+3 f´evrier 2014
+
+Ph. Roux
+
+2009-2014
+
+2
+
+Table des mati`eres
+
+Table des mati`eres
+
+2
+
+3
+
+3
+5
+Origines historiques . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+7
+1
+Diﬀ´erentes notions de graphes . . . . . . . . . . . . . . . . . . . . . .
+Relations binaires . . . . . . . . . . . . . . . . . . . . . . . . .
+1.1
+7
+Relation dans un ensemble . . . . . . . . . . . . . . . . . . . . 16
+1.2
+Graphes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
+1.3
+Autres types de graphes
+1.4
+. . . . . . . . . . . . . . . . . . . . . 23
+1.5
+Quelques probl`emes courants de th´eorie des graphes
+. . . . . 30
+Chemins dans un graphe . . . . . . . . . . . . . . . . . . . . . . . . . 35
+D´eﬁnitions et premiers exemples . . . . . . . . . . . . . . . . . 35
+2.1
+graphes Euleriens et Hamiltoniens . . . . . . . . . . . . . . . . 37
+2.2
+2.3
+Parcours de graphes orient´es . . . . . . . . . . . . . . . . . . . 46
+Probl`emes d’optimisation pour des graphes valu´es . . . . . . . . . . . 54
+Arbre couvrant optimal
+3.1
+. . . . . . . . . . . . . . . . . . . . . 54
+Probl`eme du plus court chemin . . . . . . . . . . . . . . . . . 56
+3.2
+Ordonnancement et gestion de projet . . . . . . . . . . . . . . 64
+3.3
+3.4
+Flots dans les r´eseaux . . . . . . . . . . . . . . . . . . . . . . 70
+Notions de th´eorie des langages
+. . . . . . . . . . . . . . . . . . . . . 81
+Alphabets, langages et grammaires formelles . . . . . . . . . . 81
+4.1
+Langages r´eguliers et automates Finis . . . . . . . . . . . . . . 86
+4.2
+4.3
+Langages alg´ebriques . . . . . . . . . . . . . . . . . . . . . . . 98
+5 Metanet . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 100
+. . . . . . . . . . . . . . . . . . 100
+L’´editeur de graphes metanet
+. . . . . . . . . . . . 104
+Chargement d’un graphe dans Scicoslab
+Variable de type graph dans Scicoslab
+. . . . . . . . . . . . . 106
+Quelques fonctions pour les graphes . . . . . . . . . . . . . . . 112
+Exercices
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . 116
+
+5.1
+5.2
+5.3
+5.4
+5.5
+
+4
+
+Avertissement
+
+Pour bien utiliser ce polycopi´e, il faut le lire au fur et `a mesure de l’avancement
+du cours magistral, et prendre le temps de refaire les exercices types qui y sont
+propos´es.
+
+• Les d´eﬁnitions et th´eor`emes sont num´erot´es suivant le mˆeme ordre que dans
+
+le cours magistral.
+Th´eor`eme 0.0.0 les th´eor`emes apparaissent toujours dans un cadre gris´e comme
+celui-ci et sont en g´en´eral suivis de leur d´emonstration, signal´ee par une barre dans
+la marge et un (cid:3) `a la ﬁn comme ci-dessous :
+Preuve : D´ebut de la d´emonstration . . .
+
+. . .ﬁn de la d´emonstration
+
+(cid:3)
+
+• La table des mati`eres et l’index (`a la ﬁn du document) permettent de retrou-
+
+ver une notion pr´ecise dans ce polycopi´e.
+
+• Les m´ethodes et techniques qui seront approfondies en TD sont signal´ees par
+
+un cadre (sans couleurs)
+
+• Des exercices types corrig´es, r´edig´es comme vous devriez le faire en DS, sont
+
+signal´es par le symbole :
+
+• Les erreurs et les confusions les plus fr´equentes sont signal´ees dans des cadres
+
+
+
+rouges avec le symbole :
+
+• Vous ˆetes libre de r´eutiliser le contenu de ce document sous les termes de la
+
+licence CC-BY-NC-SA [11]
+
+
+
+Bibliographie
+
+Liste des Exercices
+
+120
+
+121
+
+3
+
+4
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+Origines historiques
+
+Les math´ematiques fournissent de puissants outils pour mod´eliser des probl`emes
+
+de toutes sortes :
+
+• les structures bool´eennes pour les probl`emes de logique (∧, ∨, ¬, =⇒, . . .)
+• les ensembles pour repr´esenter des collections d’objets N, R, R2 , Mp,n(R) . . .
+• les fonctions, d´eriv´ees, int´egrales pour r´ealiser des calculs . . .
+
+Mais ses outils sont insuﬃsants, mˆeme `a notre niveau, pour pouvoir mod´eliser
+des probl`emes d’apparence pourtant assez simple. Un bon exemple de ce type de
+probl`eme peut ˆetre trouv´e dans le domaine des bases de donn´ees :
+≪ comment mod´eliser les liens entre des objets pris dans diﬀ´erents ensembles ? ≫
+
+Pour cela nous avons besoin d’un nouveau type d’objet math´ematiques : les
+
+graphes.
+
+Par rapport aux autres th´eories math´ematiques ´etudi´ees `a l’IUT, la th´eorie des
+graphes est assez r´ecente. L’article consid´er´e comme fondateur de la th´eorie des
+graphes fut pr´esent´e par le math´ematicien suisse Leonhard Euler `a l’Acad´emie de
+Saint P´etersbourg en 1735, puis publi´e en 1741, et traitait du probl`eme des sept
+ponts de K¨onigsberg. Le probl`eme consistait `a trouver une promenade `a partir d’un
+point donn´e qui fasse revenir `a ce point en passant une fois et une seule par chacun
+des sept ponts de la ville de K¨onigsberg.
+
+Au milieu du XIX i`eme, c’est le ≪ th´eor`eme des quatre couleurs ≫ qui va po-
+pulariser dans le monde des math´ematiques cette th´eorie peu connue jusque l`a.
+Ce th´eor`eme aﬃrme qu’on a besoin que de quatre couleurs diﬀ´erentes pour colo-
+rier n’importe quelle carte g´eographique de telle sorte que deux r´egions limitrophes
+(ayant toute une fronti`ere commune) re¸coivent toujours deux couleurs distinctes.
+Le r´esultat fut conjectur´e en 1852 par Francis Guthrie, int´eress´e par la coloration
+de la carte des r´egions d’Angleterre, mais ne fˆut d´emontr´e qu’en 1976 par deux
+Am´ericains Kenneth Appel et Wolfgang Haken. Leur d´emonstration de ce th´eor`eme
+fut la premi`ere `a utiliser un ordinateur pour ´etudier les 1478 cas particulier aux
+quels se ram`ene le probl`eme des quatre couleurs critiques ce qui n´ecessita plus de
+1200 heures de calcul !
+
+C’est donc au XX i`eme que cette th´eorie va connaˆıtre son v´eritable essor avec
+l’utilisation croissante dans la vie quotidienne des r´eseaux dont il faut optimiser
+l’utilisation constamment :
+
+• r´eseaux de transport routier, transport d’eau, d’´electricit´e
+• r´eseaux de transport de donn´ees (r´eseau de t´el´ephonie ﬁxe, GSM, wiﬁ . . .)
+• r´eseaux d’informations (bases de donn´ees, web, r´eseaux sociaux . . .)
+
+Cette th´eorie est devenue fondamentale en informatique car elle fournit de nombreux
+algorithmes pour r´esoudre des probl`emes complexes repr´esent´es par des graphes de
+tr`es grande taille (plusieurs centaines, milliers,. . . de sommets et d’arcs !).
+
+Figure 1 – les 7 ponts de K¨onigsberg
+
+Figure 2 – une carte g´eographique colori´ee avec 4 couleurs seulement
+
+5
+
+6
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+1 Diﬀ´erentes notions de graphes
+
+1.1 Relations binaires
+
+La notion de graphe repose avant tout sur la notion de relation binaire, pour
+
+l’introduire nous allons commencer par prendre un exemple de la vie courante.
+
+ 1.1 Emploi du temps Un emploi du temps met en relation des jours (ou des
+cr´eneaux horaires) et des mati`eres (et ´eventuellement des enseignants, des salles
+. . .) :
+
+Lundi Mardi Mercredi
+Archi Syst`eme
+Algo
+Archi
+Algo
+
+Syst`eme Anglais
+
+Archi
+
+Algo
+
+Algo
+
+Jeudi Vendredi Samedi Dimanche
+Maths
+
+EC
+Algo
+EC
+
+EGO
+EGO
+Maths
+Maths
+
+On est donc en pr´esence de deux ensembles de donn´ees dans cet exemple : les jours
+de la semaine et Les mati`eres enseign´ees. Mais il y a une donn´ee suppl´ementaire
+qu’on ne peut pas repr´esenter par un ensemble : la relation qui existe entre les jours
+et les mati`eres. On peux l’exprimer simplement par la phrase :
+
+≪ une mati`ere est en relation avec les jours de la semaine o`u elle est enseign´ee ≫
+
+On peut essayer de repr´esenter ces liens sur un diagramme en les repr´esentant par
+des ﬂ`eches comme sur la ﬁgure FIG.3. On se rend alors facilement compte qu’on ne
+peut pas mod´eliser ces liens en utilisant des fonctions ou des applications d’un des
+ensembles vers l’autre. On a besoin d’une notion plus g´en´erale . . .
+
+Mati`eres
+
+Sport
+
+Archi
+
+Algo
+
+Syst`eme
+
+Anglais
+
+EC
+
+EGO
+
+Maths
+
+R
+
+Jours
+
+Lundi
+
+Mardi
+
+Mercredi
+
+Jeudi
+
+V endredi
+
+Samedi
+
+Dimanche
+
+Figure 3 – Relations entre les mati`eres et les o`u elles sont enseign´ees
+
+D´eﬁnition 1.1 (Relation binaire) Soient E et F deux ensembles alors
+
+• ≪ R est une relation de E vers F ≫ si R est la donn´ee d’un triplet d’ensembles
+
+(E, F, U) tel que U ⊂ E × F .
+
+• On dit que ≪ x est en relation avec y ≫ si et seulement si (x, y) ∈ U ce qui
+
+sera not´e xRy
+
+• Au contraire si ≪ x n’est pas en relation avec y ≫ on ´ecrira x 6Ry
+• On repr´esentera une relation R = (E, F, U) par un diagramme sagittal (ou
+
+diagramme ﬂ´ech´e) pour cela :
+— on dessine les diagrammes de Venn des ensembles E et F
+— chaque couple (x, y) ∈ U est repr´esent´e par une ﬂ`eche allant de x `a y
+
+Pour des raisons pratiques on utilisera le vocabulaire suivant pour d´esigner les
+diﬀ´erents ensembles associ´ees `a la d´eﬁnition de relation binaire :
+
+D´eﬁnition 1.2 (Lexique de la th´eorie des graphes)
+Pour une relation R, d´eﬁnie par le triplet (E, F, U), telle que xRy on dira :
+
+• E est l’ensemble de d´epart, F celui d’arriv´e et U celui des arcs.
+• x est le pr´ed´ecesseur de y, on dit aussi l’origine de (x, y)
+• l’ensemble des pr´ed´ecesseurs de y est Γ−(y)
+• d−(y) = CardΓ−(y) est le degr´e entrant en y
+• le domaine de R : DR = {x ∈ E | ∃y ∈ F,
+• y est le successeur de x, on dit aussi l’extr´emit´e de (x, y)
+• l’ensemble des successeurs de x est Γ+(x)
+• d+(x) = CardΓ+(x) est le degr´e sortant de x
+• l’image de R : ImR = {y ∈ F | ∃x ∈ E,
+
+(x, y) ∈ U}
+
+(x, y) ∈ U}
+
+Il est tr`es facile de retenir le sens de certaines de ces notions en pensant `a la
+repr´esentation graphique de la relation par un diagramme sagittal (ensembles de
+d´epart et d’arriv´e, successeurs, pr´ed´ecesseur) Mais d’autres sont moins faciles `a
+retenir (domaine, image, degr´e). Il faut donc bien retenir ces d´eﬁnitions d`es main-
+tenant.
+
+ 1.2 Exprimer ces diﬀ´erents ensembles pour la relation de la FIG.3
+
+• D´epart :E = {Sport; Archi; Algo; . . . ; Maths}
+• Arriv´ee :F = {Lundi; Mardi; Mercredi; . . . ; Dimanche}
+• Arcs :U = {(Archi, Lundi); (Archi, Mardi); . . . ; (Maths, V endredi)}
+• Domaine :DR = E \ {sport}
+• Image :ImR = F \ {Samedi; Dimanche}
+• Γ+(Maths) = {Jeudi; V endredi} =⇒ d+(Maths) = 2
+• Γ−(Jeudi) = {Maths; EC; Algo} =⇒ d−(Jeudi) = 3
+• . . .
+
+7
+
+8
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+On peut aussi rapprocher ce vocabulaire du vocabulaire utilis´es pour les fonctions
+
+et applications qui sont en fait des cas particuliers de relations !
+
+ 1.3 Cas des fonctions et applications reprendre les d´eﬁnitions du cours de
+th´eorie des ensembles concernant les fonctions et applications du point de vue des
+relations binaires :
+
+Fonctions une fonction f : E −→ F est une relation
+
+xRy ⇐⇒ f (x) = y
+
+R´eciproquement, une relation R est une fonction si chaque ´el´ement de E `a au
+plus un successeur
+
+∀x ∈ E, Card(Γ+(x)) ≤ 1 ⇐⇒ ∀x ∈ E, d+(x) ≤ 1
+
+Applications Une relation R : E −→ F est une application si et seulement si :
+
+• R est une fonction
+• Son domaine de d´eﬁnition est ´egal `a E
+ce qui s’exprime en langage des relations binaires par
+
+∀x ∈ E, Card(Γ+(x)) = 1 ⇐⇒ ∀x ∈ E, d+(x) = 1
+
+Application injective surjective, bijective Soit f : E −→ F une application,
+
+on dit que f est
+• injective si chaque ´el´ement de F `a au plus un pr´ed´ecesseur
+
+∀y ∈ F, Card(Γ−(y)) ≤ 1 ⇐⇒ ∀y ∈ F, d−(y) ≤ 1
+
+• surjective si chaque ´el´ement de F `a au moins un pr´ed´ecesseur
+
+∀y ∈ F, Card(Γ−(y)) ≥ 1 ⇐⇒ ∀y ∈ F, d−(y) ≥ 1
+
+• bijective si elle est injective et surjective
+
+∀y ∈ F, Card(Γ−(y)) = 1 ⇐⇒ ∀y ∈ F, d−(y) = 1
+
+ Ces d´eﬁnitions ont une grande importance en base de donn´ees, elles sont direc-
+tement li´ees aux cardinalit´es qui apparaissent dans un MCD. Elles permettent
+d’expliquer pourquoi :
+
+• Une relation fonctionnelle qui apparaˆıt dans un MCD n’aura pas de table
+
+propre
+
+ 1.4 Reconnaˆıtre `a partir des diagramme sagittaux les d´eﬁnitions
+pr´ec´edentes :
+
+reconnaˆıtre les fonctions et les applications des autres relations :
+
+h
+
+E
+
+1
+
+2
+
+3
+
+4
+
+F
+
+a
+
+b
+
+c
+
+d
+
+e
+
+g
+
+F
+
+a
+
+b
+
+c
+
+d
+
+e
+
+E
+
+1
+
+2
+
+3
+
+4
+
+5
+
+f
+
+F
+
+a
+
+b
+
+c
+
+d
+
+E
+
+1
+
+2
+
+3
+
+4
+
+5
+
+• g et f sont des fonctions
+• f est une application mais pas g (car d+(5) = 0 ou encore Dg = E \ {5} 6=
+
+E)
+
+• et h n’est pas une fonction (car d+(5) = 2) donc pas une application
+
+reconnaˆıtre injectivit´e, surjectivit´e et bijectivit´e :
+
+f1
+
+E
+
+1
+
+2
+
+3
+
+4
+
+F
+
+a
+
+b
+
+c
+
+d
+
+e
+
+f2
+
+F
+
+a
+
+b
+
+c
+
+d
+
+E
+
+1
+
+2
+
+3
+
+4
+
+5
+
+f3
+
+F
+
+a
+
+b
+
+c
+
+d
+
+e
+
+E
+
+1
+
+2
+
+3
+
+4
+
+5
+
+ce sont bien des applications et :
+• f1 est injective mais pas surjective (`a cause de d−(e) = 0)
+• f2 est surjective mais pas injective (`a cause de d−(d) = 2)
+• seule f3 est bijective
+
+• Une relation bijective ne devrait jamais apparaˆıtre dans un MCD
+
+On retrouve sur ces exemples les r´esultats du th´eor`eme suivant :
+
+Th´eor`eme 1.3
+Soient E, F des ensembles ﬁnis et f : E −→ F une application alors
+
+• si f est injective alors Card(E) ≤ Card(F )
+• si f est surjective alors Card(E) ≥ Card(F )
+• si f est bijective alors Card(E) = Card(F )
+
+9
+
+10
+
+Le diagramme sagittal permet de d´etecter de nombreuses propri´et´es d’une re-
+lation binaire, `a condition qu’il n’y ait pas trop d’arc ni d’´el´ements. Pour pou-
+voir analyser les propri´et´es de graphes de grandes tailles nous avons besoin d’une
+repr´esentation qui permette de faire des calculs : une matrice.
+
+D´eﬁnition 1.4 (matrice d’adjacence)
+Soient E = {x1; x2; . . . ; xp}, F = {y1; y2; . . . ; yn} et R = (E, F, U) une relation
+alors on appelle matrice d’adjacence de R la matrice bool´eenne MR ∈ Mp,n(B) telle
+que
+
+MR = (mi,j) avec mi,j =(cid:26) 1
+
+0 sinon
+
+ Pour pouvoir ´ecrire la matrice d’adjacence d’une relation il faut avoir choisi
+un ordre pour les ´el´ements des ensembles E et F (il sont num´erot´es x1, x2, . . .
+pour E et y1, y2, . . . pour F ). Ce choix est arbitraire, mais il n’est pas indiqu´e dans
+la matrice d’adjacence ! On prendra donc (sauf mention contraire) l’ordre
+lexicographique pour ordonner les ´el´ements de E et F . Une fois qu’on a
+ordonn´e les ´el´ements des ensembles E et F chaque relation est repr´esent´ee par une
+matrice et chaque matrice repr´esente une relation
+
+ 1.5 Repr´esentation d’une relation `a l’aide d’une Matrice d’adjacence
+Comme il n’y a pas `a priori d’ordre sur les ´el´ements d’un ensemble il faut souvent
+faire attention pour remplir la matrice d’adjacence `a partir d’un diagramme sagittal
+o`u les ´el´ements ne sont pas forc´ement class´e dans l’ordre lexicographique 1. Ici on
+choisit l’ordre lexicographique pour l’ensemble des mati`eres mais pas pour l’ensemble
+des jours (o`u il y a un ordre plus naturel) ce qui donne :
+
+R
+
+Mati`eres
+
+Sport
+
+Archi
+
+Algo
+
+Syst`eme
+
+Anglais
+
+EC
+
+EGO
+
+M aths
+
+Jours
+
+Lundi
+
+M ardi
+
+M ercredi
+
+J eudi
+
+V endredi
+
+Samedi
+
+Dimanche
+
+−→
+
+
+
+1 0 1 1 0 0 0
+0 0 1 0 0 0 0
+1 1 0 0 0 0 0
+1 0 1 1 0 0 0
+0 0 0 1 0 0 0
+0 0 0 0 1 0 0
+0 0 0 1 1 0 0
+0 0 0 0 0 0 0
+0 1 0 0 0 0 0
+
+
+
+Algo
+Anglais
+Archi
+Algo
+EC
+EGO
+M aths
+Sport
+Syst`eme
+
+
+
+lundi mardi mercredi
+
+jeudi
+
+vendredi
+
+samedi dimanche
+
+1
+0
+1
+1
+0
+0
+0
+0
+0
+
+0
+0
+1
+0
+0
+0
+0
+0
+1
+
+1
+1
+0
+1
+0
+0
+0
+0
+0
+
+1
+0
+0
+1
+1
+0
+1
+0
+0
+
+0
+0
+0
+0
+0
+1
+1
+0
+0
+
+0
+0
+0
+0
+0
+0
+0
+0
+0
+
+0
+0
+0
+0
+0
+0
+0
+0
+0
+
+
+
+
+
+• les lignes correspondent aux ´el´ements de l’ensemble de d´epart
+• les colonnes correspondent aux ´el´ements de l’ensemble de arriv´ee
+
+Le d´efaut de la matrice d’adja-
+cence est quelle contient beaucoup de
+0. D’un point de vue
+informatique
+cela repr´esente un gaspillage de place
+m´emoire. C’est pourquoi on repr´esente
+parfois ces matrices sous forme de ≪ ma-
+trice creuse ≫ , c’est `a dire en donnant
+seulement la position de chaque coeﬃ-
+cient non-nul de la matrice (ainsi que sa
+taille). C’est la repr´esentation qui est uti-
+lis´ee en base de donn´ees pour repr´esenter
+la table associ´ee `a un TA. Dans le cas de
+la relation repr´esent´ee FIG.3 la matrice
+d’adjacence sera repr´esent´ee comme ci-
+contre :
+
+i
+
+1
+1
+1
+2
+3
+3
+4
+4
+4
+5
+6
+7
+7
+9
+
+j mij
+1
+1
+1
+3
+1
+4
+3
+1
+1
+1
+1
+2
+1
+1
+1
+3
+4
+1
+1
+4
+1
+5
+1
+4
+1
+5
+2
+1
+
+La matrice d’adjacence permet de faire de nombreux calculs, comme par exemples
+
+compte le nombre de relations entre deux ensembles.
+
+Th´eor`eme 1.5 (Nombres de relations entre 2 ensembles)
+Si E et F sont des ensembles ﬁnis alors le nombre de relations de E vers F est
+
+Preuve : Il suﬃt de compter le nombre de Matrices d’adjacences :
+
+2Card(E×F ) = 2Card(E)×Card(F )
+
+• la matrice d’adjacence est de taille Card(E) × Card(F )
+• Chaque case peut ˆetre remplie de 2 mani`eres 0 ou 1
+• On a donc au total
+
+2 × 2 × · · · × 2
+
+= 2Card(E)×Card(F ) possibilit´es
+
+Card(E)×Card(F ) r´ep´etitions
+
+|
+
+{z
+
+}
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+si
+
+(xi, yj) ∈ U
+
+On se rappellera que dans la matrice d’adjacence :
+
+Pour mieux comprendre la matrice d’adjacence on peut y faire apparaˆıtre les
+
+´el´ements des ensembles E et F
+
+(cid:3)
+
+1. ¸ca ne donnerait pas forc´ement un diagramme tr`es lisible
+
+partir de relations connues. Commen¸cons par la composition des relations.
+
+11
+
+12
+
+Mais surtout la matrice d’adjacence permet de calculer de nouvelles relations `a
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+D´eﬁnition 1.6 (Composition de relations) Soient R1 = (E, F, U1) et R2 =
+(F, G, U2) 2 relations alors on appelle T = R2 ◦ R1 = (E, G, U) la relation dont les
+arcs sont :
+
+U = {(x, z) ∈ E × G | ∃y ∈ F,
+
+(x, y) ∈ U1 et (y, z) ∈ U2}
+
+ 1.6 composition de deux relations T = R2 ◦ R1 il y a un arc joignant
+un ´el´ement de E et un ´el´ement de G dans le diagramme de la relation T si on
+trouve dans les diagrammes de R1 et R2 un chemin entre ces ´el´ements passant par
+un ´el´ement de F :
+
+R1
+
+F
+
+a
+
+b
+
+c
+
+d
+
+e
+
+E
+
+1
+
+2
+
+3
+
+4
+
+5
+
+R2
+
+G
+
+α
+
+β
+
+γ
+
+δ
+
+ε
+
+F
+
+a
+
+b
+
+c
+
+d
+
+e
+
+T
+
+E
+
+1
+
+2
+
+3
+
+4
+
+5
+
+G
+
+α
+
+β
+
+γ
+
+δ
+
+ε
+
+Figure 4 – Composition de relations
+
+La composition de deux relations correspond au produit matriciel des matrices d’ad-
+jacence.
+
+Th´eor`eme 1.7
+Si E, F, G sont des ensembles ﬁnis alors la matrice d’adjacence de T = R2 ◦ R1 est
+donn´ee par le produit matriciel suivant :
+
+MT = MR2◦R1 = MR1 × MR2
+
+Ce produit matriciel est eﬀectu´e avec les op´erations de l’alg`ebre de Boole binaire !
+
+Preuve : On note
+
+E = {x1; . . . ; xp};
+
+F = {y1; . . . ; yl}; G = {z1; . . . ; zn}
+
+On peut d´ej`a remarquer que la relation compos´ee T va de E vers G
+
+T = R2 ◦ R1 : E
+
+R1−→ F
+
+R2−→ G
+
+donc sa matrice doit ˆetre de taille p×n ce qui correspond bien `a la taille du r´esultat du
+produit matriciel MR1 × MR2. Ensuite en reprenant la formule du produit matriciel :
+
+MT (i, j) =
+
+lXk=1
+
+MR1(i, k) × MR2(k, l)
+
+13
+
+la somme et le produit sont faits dans l’alg`ebre de Boole binaire B donc il suﬃt
+qu’un seul des termes du produit soit non-nul (´egal `a 1) pour que MT (i, j) = 1 cela
+veut dire qu’il existe k tel que MR1(i, k) = 1 et MR2(k, l) = 1. Cela revient `a dire
+qu’il existe un arcs (xi, yk) dans R1 et un autre (yk, zj) dans R2, il y a donc bien un
+arc (xi, zj) dans T (cid:3)
+
+ Attention `a l’ordre des termes dans le produit matriciel, la matrice d’adjacence
+
+de R2 ◦ R1 est MR1 × MR2 et pas MR2 × MR1 !
+
+ 1.7 V´eriﬁer que la matrice MR1 × MR2 est bien la matrice d’adjacence
+de MT FIG.4
+
+0 0 0 0 0
+1 1 0 0 0
+0 0 1 0 0
+0 0 0 1 1
+0 0 0 0 0
+
+
+
+
+
+
+
+1 1 0 0 0
+1 1 0 0 0
+0 0 1 0 0
+0 0 0 1 1
+0 0 0 0 0
+
+
+
+MR1 =
+
+, MR2 =
+
+MT =
+
+0 1 0 0 0
+0 1 0 0 0
+0 0 1 0 0
+0 0 0 1 1
+0 0 0 0 1
+
+
+
+
+
+La deuxi`eme formule matriciel qu’il faut connaˆıtre est celle sur la r´eciproque
+
+d’une relation.
+
+D´eﬁnition 1.8 (R´eciproque d’une relation) Soit R = (E, F, U) une relation
+alors on appelle la relation r´eciproque de R, not´ee R−1 = (F, E, U ′), la relation
+dont les arcs sont :
+
+U ′ = {(y, x) ∈ F × E | (x, y) ∈ U}
+
+ 1.8 Calculer la r´eciproque de la relation R
+calculer la r´eciproque d’une relation revient `a inverser le sens des ﬂ`eches sur le
+diagramme sagittal :
+
+R1
+
+F
+
+a
+
+b
+
+c
+
+d
+
+e
+
+E
+
+1
+
+2
+
+3
+
+4
+
+5
+
+R−1
+
+1
+
+F
+
+a
+
+b
+
+c
+
+d
+
+e
+
+E
+
+1
+
+2
+
+3
+
+4
+
+5
+
+R−1
+
+1
+
+E
+
+1
+
+2
+
+3
+
+4
+
+5
+
+F
+
+a
+
+b
+
+c
+
+d
+
+e
+
+La encore, on a une formule qui permet de calculer la matrice d’adjacence de la
+r´eciproque `a partir de la matrice d’adjacence de la relation de d´epart.
+
+Th´eor`eme 1.9 Si E, F sont des ensembles ﬁnis alors la matrice d’adjacence de
+R−1 est la transpos´ee de la matrice d’adjacence de R :
+
+MR−1 = tMR
+
+14
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+Preuve : On a dit que dans la matrice d’adjacence les lignes correspondent aux
+´el´ements de l’ensemble de d´epart et les colonnes aux ´el´ements de l’ensemble d’arriv´e.
+Pour ´echanger les rˆoles des ensembles de d´epart et d’arriv´e il suﬃt donc d’´echanger
+les rˆoles des lignes et des colonnes de la matrice d’adjacence ce qui revient `a trans-
+poser cette matrice. (cid:3)
+
+ 1.9 Calculer la matrice d’adjacence de la r´eciproque de la relation
+R1
+
+MR1 =
+
+=⇒ MR−1
+
+1
+
+=
+
+
+
+0 1 0 0 0
+0 1 0 0 0
+0 0 1 0 0
+0 0 0 1 1
+0 0 0 0 1
+
+
+
+0 0 0 0 0
+1 1 0 0 0
+0 0 1 0 0
+0 0 0 1 0
+0 0 0 1 1
+
+
+
+
+
+ Attention, la matrice d’adjacence de la r´eciproque d’une relation n’est pas l’in-
+
+verse de la matrice d’adjacence de la relation de d´epart :
+
+MR−1 6= (MR)−1
+
+D’ailleurs l’inverse d’une matrice d’adjacence n’existe pas forc´ement alors que la
+r´eciproque existe toujours.
+
+ Les produits matriciels qui apparaissent dans ce cours sont fait en utilisant les
+op´erations + et × de l’alg`ebre de Boole binaire B ce qui ne donne pas le mˆeme
+r´esultat que s’ils sont fait avec les op´erations + et × de R . Par exemple dans M5(B)
+on a
+
+alors que dans M5(R) on a
+
+MS × MR =
+
+
+MS × MR =
+
+0 0 0 0 0
+1 1 0 0 0
+0 0 1 0 0
+0 0 0 1 0
+0 0 0 1 1
+
+0 0 0 0 0
+1 1 0 0 0
+0 0 1 0 0
+0 0 0 1 0
+0 0 0 1 1
+
+
+
+
+×
+×
+
+0 1 0 0 0
+0 1 0 0 0
+0 0 1 0 0
+0 0 0 1 1
+0 0 0 0 1
+
+0 1 0 0 0
+0 1 0 0 0
+0 0 1 0 0
+0 0 0 1 1
+0 0 0 0 1
+
+
+
+
+=
+
+
+=
+
+0 0 0 0 0
+0 1 0 0 0
+0 0 1 0 0
+0 0 0 1 1
+0 0 0 1 1
+
+0 0 0 0 0
+0 2 0 0 0
+0 0 1 0 0
+0 0 0 1 1
+0 0 0 1 2
+
+
+
+
+quand on fait les calculs dans R le nombre obtenu en position (i, j) dans la matrices
+donne le nombre de mani`eres de construire l’arc (i, j) dans la relation R ◦ S .
+
+1.2 Relation dans un ensemble
+
+Les d´eﬁnitions de la partie pr´ec´edente s’appliquent bien entendu aussi dans le
+cas o`u l’ensemble de d´epart et l’ensemble d’arriv´e d’une relation sont les mˆemes,
+dans ce cas on parle de relation dans un ensemble que l’on peut repr´esenter par une
+matrice d’adjacence ou par diﬀ´erents diagrammes sagittaux.
+
+ 1.10 Diagramme sagittal d’une relation R avec un ou deux ensembles
+
+E
+
+1
+
+2
+
+3
+
+4
+
+R
+
+E
+
+1
+
+2
+
+3
+
+4
+
+MR =
+
+0 0 0 0
+1 1 0 0
+1 1 1 1
+1 1 1 0
+
+ 1
+
+2
+
+3
+
+4
+
+dans ce cas on s’int´eresse souvent aux quatre propri´et´es suivantes qui jouent un
+
+rˆole tr`es important en th´eorie des graphes.
+
+D´eﬁnition 1.10 Soit R une relation dans un ensemble E alors on dit que R est
+
+• R´eﬂexive si ∀x ∈ E xRx
+• Sym´etrique si ∀x, y ∈ E, xRy ⇐⇒ yRx
+• Anti-sym´etrique si ∀x, y ∈ E, xRy et yRx =⇒ x = y
+• Transitive si ∀x, y, z ∈ E, xRy et yRz =⇒ xRz on dit que R est
+
+Il est assez facile de se repr´esenter ces d´eﬁnitions sur un diagramme sagittal `a un
+ensemble de la relation.
+
+Proposition 1.11 (caract´erisation par le diagramme sagittal)
+Soit R une relation dans un ensemble E alors R est
+
+• R´eﬂexive si tout ´el´ement de S poss`ede une boucle,
+• Sym´etrique si tous les arcs sont `a double sens,
+• Anti-sym´etrique si aucun arc n’est `a double sens,
+• Transitive si pour chaque couple d’arcs adjacents le “raccourci” est aussi un
+
+arc du graphe.
+
+ Pour l’anti-sym´etrie et la sym´etrie on ne tient pas compte des boucles, c’est pour
+cette raison que Anti-sym´etrique n’est pas la n´egation logique de sym´etrique. Il
+existe donc des relations qui sont anti-sym´etrique et sym´etrique ou, au contraire ni
+anti-sym´etrique ni sym´etrique !
+
+15
+
+16
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+ 1.11 Modiﬁer la relation R pour qu’elle soit, successivement, R´eﬂexive,
+Anti-sym´etrique, Sym´etrique
+
+1
+
+2
+
+3
+
+4
+
+1
+
+2
+
+3
+
+4
+
+1
+
+2
+
+3
+
+4
+
+R´eﬂexif
+
+Anti-sym´etrique
+
+Sym´etrique
+
+On pourrait croire que la relation R est d´ej`a transitive, pourtant il n’en est rien,
+mais trouver ce qu’il faut ajouter au graphe pour la rendre transitive demande beau-
+coup plus de calculs . . . C’est l`a que la matrice d’adjacence va nous aider !
+
+Proposition 1.12 (caract´erisation par la matrice d’adjacence)
+Soit R une relation dans un ensemble E de matrice d’adjacence M alors R est :
+
+• R´eﬂexive si M = M + Idn (Idn = matrice identit´e de taille n)
+• Sym´etrique si M = tM ( tM = transpos´ee de la matrice M)
+• Anti-sym´etrique M ∗ tM + Idn = Idn (∗ = produit terme `a terme des
+
+matrices)
+
+• Transitive M 2 + M = M (M 2 = M × M produit matriciel)
+
+Preuve :
+
+• M +Idn ajoute des ≪ 1 ≫ sur la diagonale qui correspondent donc `a des boucles
+
+sur chaque sommet, donc si M = M + Idn on a d´ej`a toutes les boucles.
+
+• M = tM signiﬁe que Mij = 1 =⇒ Mji = 1 donc chaque arc de i vers j on
+
+doit avoir un arc de j vers i
+
+• M ∗ tM + Idn = Idn signiﬁe que M ∗ tM `a tous ces coeﬃcients nuls sauf sur
+la diagonale ´eventuellement (puis qu’on rajoute Idn). Donc si Mij = 1 =⇒
+Mji = 0 pour que le produit terme `a terme donne un z´ero dans la case (i, j)
+de la matrice (et aussi dans la case (j, i))
+
+• Soit R la relation associ´ee au graphe G et M sa matrice d’adjacence alors
+M 2 est la matrice d’adjacence de la relation R ◦ R. Les ≪ 1 ≫ de cette matrice
+correspondent donc `a des arcs compos´es de deux arcs adjacents du graphe
+G. Si ces arcs sont d´ej`a dans G, les ≪ 1 ≫ correspondant sont d´ej`a dans la
+matrice M et on a bien que M 2 + M = M.
+
+(cid:3)
+
+1
+
+2
+
+3
+
+4
+
+car M 2 + M =
+
+0 0 0 0
+1 1 0 0
+1 1 1 1
+1 1 1 1
+
+ 6=
+
+0 0 0 0
+1 1 0 0
+1 1 1 1
+1 1 1 0
+
+
+
+On verra plus loin comment rendre un graphe transitif en ajoutant des arcs (cf.
+fermeture transitive).
+
+Ces propri´et´es sont `a la base de relations que vous utilisez d´ej`a depuis vos
+premi`eres ´etudes de math´ematiques : les relations d’´equivalences et les relations
+d’ordre.
+
+D´eﬁnition 1.13 (relation d’´equivalence)
+Soit R = (E, E, A) une relation dans un ensemble E alors R est une ≪ relation
+d’´equivalence ≫ si et seulement si elle est
+
+• R´eﬂexive,
+• Sym´etrique,
+• Transitive.
+
+Dans ce cas on appelle ≪ classe d’´equivalence de x ≫ le sous ensemble de E :
+
+Cl(x) = {y ∈ E | xRy}
+
+L’ensemble des classes d’´equivalences de R est not´e E/R et appel´e ≪ ensemble quo-
+tient de E par R ≫.
+
+ 1.13 Exemples de relations d’´equivalences
+
+• l’´egalit´e dans un ensemble E car
+
+— ∀x ∈ E, x = x
+— ∀x, y ∈ E, x = y ⇐⇒ y = x
+— ∀x, y, z ∈ E, x = y et y = z ⇐⇒ x = z
+• pour x0 ∈ I un intervalle de R, la relation
+
+f ∼
+x0
+
+g dans l’ensemble E = {f : I → R|f application}
+
+est une relation l’´equivalence car
+— ∀f ∈ E, f ∼
+x0
+
+f
+
+— ∀f, g ∈ E, f ∼
+x0
+
+— ∀f, g, h ∈ E, f ∼
+x0
+
+g ⇐⇒ g ∼
+x0
+g et g ∼
+x0
+
+f
+
+h ⇐⇒ f ∼
+x0
+
+h
+
+• Sur l’ensemble E = {Janvier ; F´evrier ; Mars ;Avril ; Mai ; Juin ; Juillet ; Aoˆut}
+
+on consid`ere la relation :
+
+mois1Rmois2 ⇐⇒ mois1 et mois2 s’´ecrivent avec le mˆeme nombre de lettres
+
+ 1.12 Modiﬁer la relation R pour qu’elle soit transitive
+
+en eﬀet si mois1, mois2 et mois3 s’´ecrivent avec n1, n2 et n3 lettres on a
+
+17
+
+18
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+— mois1Rmois1 car n1 = n1
+— si mois1Rmois2 donc n1 = n2 donc n2 = n1 donc mois2Rmois1 et in-
+
+versement
+
+— si mois1Rmois2 et mois2Rmois3 alors n1 = n2 = n3 donc n1 = n3 et
+
+mois1Rmois3
+
+donc c’est bien une relation d’´equivalence. Son diagramme sagittal est repr´esent´e
+ci-dessous avec les classes d’´equivalences et l’ensemble quotient E/R. Sur cet
+exemple on comprend facilement que les classe d’´equivalence repr´esentent en
+fait des parties du graphe isol´ees les unes des autres.
+
+RE/
+
+Cl(Janvier)
+
+Cl(Mai)
+
+Cl(Avril)
+
+Cl(Mars)
+
+E
+
+Janvier
+
+Février
+
+Juillet
+
+Mai
+
+Avril
+
+Aout
+
+Juin
+
+Mars
+
+Proposition 1.14 Si R est une relation d’´equivalence sur E alors
+
+• ∀x ∈ E, Cl(x) 6= ∅ ( car x ∈ Cl(x)).
+• ∀(x, y) ∈ E2, xRy ⇐⇒ Cl(x) = Cl(y).
+• ∀x ∈ E, ∪
+x∈E
+
+Cl(x) = E.
+
+L’ensemble des classes d’´equivalences de R (i.e. E/R) forment une partition de E.
+
+Il ne faut pas confondre les relations d’´equivalence avec les relations d’ordre.
+
+D´eﬁnition 1.15 (relation d’ordre)
+Soit R = (E, E, A) une relation dans un ensemble E alors R est une ≪ relation
+d’ordre ≫ si et seulement si elle est
+
+• R´eﬂexive,
+• Anti-sym´etrique,
+• Transitive.
+
+On dit qu’une relation R est une relation d’ordre total sur S si en plus :
+
+∀(x, y) ∈ E2, xRy ou yRx
+
+dans le cas contraire on parle de relation d’ordre partiel.
+
+On repr´esente souvent les relations d’ordre par un diagramme plus simple que le
+diagramme sagittal habituel.
+
+Proposition 1.16 (Diagramme de Hasse) Soit R = (E, E, A) une relation
+d’ordre, on peut repr´esenter cette relation par un ≪ diagramme de Hasse ≫ qui est
+un diagramme sagittal dans lequel
+
+• on positionne les sommets du plus petit au plus grand (au sens de R)
+• on omet toutes les boucles (sous-entendues par r´eﬂexivit´e)
+• on ne trace pas les raccourcis (sous-entendus par transitivit´e)
+• on ne met pas de sens aux arcs (sous-entendus par anti-sym´etrie) par conven-
+
+tion la relation va de bas en haut ou de gauche `a droite
+
+ 1.14 exemples de relations d’ordre
+
+• la relation ≤ sur un ensemble de nombres E = N, Z, Q, R
+
+— ∀x ∈ E, x ≤ x
+— ∀x, y ∈ E, x ≤ y et y ≤ x =⇒ x = y
+— ∀x, y, z ∈ E, x ≤ y et y ≤ z =⇒ x ≤ z
+son diagramme de Hasse (sur N par exemple) montre que c’est une relation
+d’ordre total :
+
+0
+
+1
+
+2
+
+3
+
+. . .
+
+• La relation ⊂ sur les parties d’un ensemble P(E)
+
+— ∀A ⊂ E, A ⊂ A
+— ∀A, B ⊂ E, A ⊂ B et B ⊂ A
+
+=⇒ A = B
+
+— ∀A, B, D ⊂ E,
+
+A ⊂ B et B ⊂ D =⇒ A ⊂ D
+
+{a; b; c}
+
+{a; b}
+
+{a; c}
+
+{b; c}
+
+de Hasse
+
+diagramme
+
+son
+(sur
+P({a, b, c}) par exemple) montre que
+ce n’est pas une relation d’ordre total
+(en g´en´eral, pourtant il y a un plus
+grand ´el´ement ({a; b; c}) et un plus
+petit ´el´ement (∅) dans P({a, b, c})
+pour cette relation.
+
+{a}
+
+{b}
+
+{c}
+
+∅
+
+• La relation a|b ⇐⇒ ≪ a divise b ≫ sur N∗
+
+— ∀a ∈ N∗, a|a
+— ∀a, b ∈ N∗, a|b et b|a =⇒ a = b
+— ∀a, b, c ∈ N∗, a|b et b|c =⇒ a|c
+son diagramme de Hasse est beau-
+coup plus compliqu´e que les deux rela-
+tions pr´ec´edentes, il y a un plus petit
+´el´ement (1) mais pas de plus grand
+´el´ement :
+
+	
+
+
+
+:
+
+:
+
+
+
+>
+
+
+
+
+
+R
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+
+
+>
+
+
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+:
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+
+
+.
+
+.
+
+.
+
+.
+
+.
+
+
+
+-
+
+-
+
+-
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+~
+
+.
+
+.
+
+.
+
+.
+
+ 
+
+.
+
+.
+
+.
+
+.
+
+.
+
+*
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+R
+
+.
+
+z
+
+.
+.
+
+ 
+
+: : :
+
+~
+
+
+
+z
+
+
+
+z
+
+
+
+19
+
+20
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+1.3 Graphes
+
+Dans la suite nous appellerons “graphe orient´e ” une relation dans un ensemble.
+
+D´eﬁnition 1.17 (Graphe orient´e) Un graphe orient´e G est la donn´ee d’un
+couple d’ensembles (S, A) tels que A ⊂ S × S de telle sorte que G peut ˆetre vu
+comme la relation binaire R = (S, S, A) entre l’ensemble S et lui mˆeme. On appel-
+lera aussi :
+
+sommets du graphe les ´el´ements x ∈ S
+
+arcs du graphe les ´el´ements (x, y) ∈ A
+degr´e d’un sommet somme des degr´es entrants et sortant d(x) = d+(x) + d−(x)
+ordre du graphe le nombre de sommets n = Card(S)
+
+taille du graphe le nombre d’arcs m = Card(A)
+
+boucle tout arc de la forme (x, x), c’est `a dire dont l’origine est aussi son extr´emit´e
+
+arcs adjacents deux arcs de la forme (x, y) et (y, z), c’est `a dire dont l’origine de
+
+l’un est l’extr´emit´e de l’autre.
+
+Comme pour les relations binaires, G poss`ede une matrice d’adjacence MG qui est
+une matrice carr´ee MG ∈ Mn(B) (o`u n = Card(S)) et peux ˆetre repr´esent´e par un
+diagramme sagittal `a un seul ensemble.
+
+ 1.15 Construire le graphe G = (S, A) suivant
+
+S = {1; 2; 3; 4} A = {(2, 1); (2, 2); (3, 1); (3, 2); (3, 3); (3, 4); (4, 1); (4, 2); (4, 3)}
+
+ce graphe est d’ordre n = 4 et de taille m = 9
+
+1
+
+2
+
+3
+
+4
+
+M =
+
+0 0 0 0
+1 1 0 0
+1 1 1 1
+1 1 1 0
+
+
+
+
+
+Dans ce cours on ne consid´erera pas de
+graphes avec des liens multiples, c’est `a
+dire avec plusieurs arcs (x, y) diﬀ´erents !
+Ce type de graphes est appel´e ≪ graphe
+multiple ≫
+
+1
+
+2
+
+D´eﬁnition 1.18 (listes d’adjacence) Soit G = (S, A) un graphe orient´e d’ordre
+n et de taille m dont les sommets x1; x2; . . . xn sont ordonn´es. Le graphe G peut ˆetre
+repr´esent´e par des listes d’adjacence (LS, T S) qui sont d´eﬁnies par :
+
+• LS = liste de longueur m appel´ee ≪ liste des successeurs ≫, elle contient les
+successeurs du sommet 1 (rang´e dans l’ordre croissant) puis du sommet 2
+. . .et si un sommet n’a pas de successeur on passe au sommet suivant.
+
+• T S = liste de longueur n+1 appel´ee ≪ liste des tˆetes successeurs ≫ qui indique
+
+la position du premier successeur de chaque sommet dans LS
+
+la liste T S est d´eﬁnie comme suit :
+
+• T S(1) = 1
+• pour x ∈ S
+
+— si x `a des successeurs alors T S(x) = num´ero de la case de LS du premier
+
+successeur de x
+
+— sinon T S(x) = T S(x + 1)
+
+• T S(n + 1) = m + 1
+
+ 1.16 Repr´esenter le graphe G par des listes d’adjacence
+
+1
+
+2
+
+3
+
+4
+
+2 → 3 - → 4 -
+4 1
+
+2 1
+
+2 3
+
+LS = 1
+
+- →
+2 3
+
+T S = 1 1
+
+3 7
+2 3 4
+
+1
+
+10
+
+La liste des ≪ tˆete successeurs ≫ est une liste de pointeurs qui permettent de faire
+apparaˆıtre la liste des successeurs de chaque sommet dans ≫liste des successeurs ≫.
+Par exemple, en faisant apparaˆıtre ces liens de T S vers LS (rouge ci-dessus) on
+retrouve facilement la liste des arcs (et toute la structure du graphe) `a partir des
+listes d’adjacence :
+
+• 1 n’a pas de successeurs
+• les successeurs de 2 sont 1 et 2 ce qui donne les arcs (2, 1) et (2, 2)
+• les successeurs de 3 sont 1, 2, 3 et 4 ce qui donne les arcs (3, 1), (3, 2), (3, 3), (3, 4)
+• les successeurs de 4 sont 1, 2 et 3 ce qui donne les arcs (4, 1), (4, 2) et (4, 3)
+
+ Les listes d’adjacences occupent une place m´emoire de taille n + m + 1 c’est
+le minimum d’informations pour repr´esenter un graphe compar´e `a la matrice
+d’adjacence occupe une place n2 et la liste des arcs occupe une place 2m
+
+Le fait que l’ensemble de d´epart et d’arriv´e de la relation associ´ee au graphe soient
+les mˆemes impose une contrainte, sur les degr´es des sommets, appel´ee ≪ lemme des
+poign´ees de mains ≫.
+
+21
+
+22
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+Th´eor`eme 1.19 (Lemme des poign´ees de mains) Soit G = (S, A) un graphe
+de taille m alors les sommes des degr´es entrants et sortants des sommets de G sont
+´egales au nombre d’arcs
+
+d+(x) =Xx∈S
+
+d−(x) = m
+
+Xx∈S
+d(x) =Xx∈S
+
+Xx∈S
+
+en cons´equence la somme des degr´es est ´egale au double de nombre d’arcs
+
+d+(x) +Xx∈S
+
+d−(x) = 2m
+
+Preuve : chaque arc (x, y) compte deux fois dans la somme des degr´es : une fois
+dans d+(x) et une fois dans d−(y), d’o`u le r´esultat :
+
+Xx∈S
+
+d+(x) =Xx∈S
+
+d−(x) =
+
+mXi=1
+
+1 = m =⇒Xx∈S
+
+d(x) =Xx∈S
+
+d+(x) +Xx∈S
+
+d−(x) = 2m (cid:3)
+
+ 1.17 V´eriﬁer le lemme des poign´ees de mains sur le graphe G de
+taille 9
+
+1
+
+2
+
+3
+
+4
+
+d+(s) d−(s) d(s)
+
+3
+3
+2
+1
+9
+
+3
+5
+6
+4
+18
+
+s
+1
+2
+3
+4
+
+0
+2
+4
+3
+
+P 9
+
+D´eﬁnition 1.20 (arbre) Un arbre est un graphe orient´e G = (S, A) tel que :
+• un seul sommet de G n’a pas de pr´ed´ecesseur, c’est la racine de l’arbre,
+• tous les autres sommets ont exactement 1 pr´ed´ecesseur
+
+On appellera
+
+≪ racine de l’arbre ≫ le seul sommet de G qui n’a pas de pr´ed´ecesseur,
+
+≪ feuilles de l’arbre ≫ les sommets qui n’ont pas de successeur,
+
+≪ nœuds de l’arbre ≫ tous les autres sommets,
+
+≪ branche de l’arbre ≫ tout chemin de la racine vers une feuille,
+
+≪ descendant de x ≫ les successeurs de x,
+
+≪ ascendant de x ≫ le pr´ed´ecesseur de x,
+
+Lorsque chaque sommet `a au plus 2 successeurs on parle aussi d’arbre binaire.
+
+ Un graphe d’ordre n qui est un arbre peut ˆetre repr´esent´e avec seulement n places
+m´emoire ! C’est beaucoup moins que pour un graphe quelconque, qui n´ecessite
+une place m´emoire n + m + 1 en utilisant les listes d’adjacence ou n2 cases m´emoire
+avec une matrice d’adjacence.
+
+Proposition 1.21 (liste des pr´ed´ecesseurs) Un arbre `a n sommets peut ˆetre
+d´eﬁnit par une liste de n ´el´ements, appel´e liste des pr´ed´ecesseurs, qui contient le
+pr´ed´ecesseur de chaque sommet (o`u 0 pour la racine de l’arbre) :
+
+∀y ∈ S, pred(y) =(cid:26) ∅
+
+si
+
+y est la racine de G
+
+x tel que (x, y) ∈ A sinon
+
+ 1.18 Repr´esenter l’arbre ci-dessous par une liste de pr´ed´ecesseurs
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+
+9
+
+10
+
+11
+
+12
+
+13
+
+14
+
+15
+
+1 2
+
+2 3 3
+
+• P red = 0 1
+• la racine du graphe est le sommet 1
+• les feuilles sont les sommets 8, 14, 12, 6 et 15
+• une branche de l’arbre C = (1, 2, 5, 9, 12) (chemin de la racine jusqu’`a 12)
+
+9 10 11
+
+4 5
+
+7 9
+
+13
+
+1.4 Autres types de graphes
+
+On rencontrera d’autres d´eﬁnitions de graphes, qui sont des cas particulier de
+celle vue dans la partie pr´ec´edente, qui permettent de mod´eliser des probl`emes
+concrets avec des graphes plus simples. Le premier exemple est celui des arbres
+
+Pour traiter le cas de plusieurs sommets sans pr´ed´ecesseurs (qu’on rencontrera lors
+du parcours d’un graphe) on parlera plus g´en´eralement de forˆet.
+
+D´eﬁnition 1.22 (forˆet) Un graphe G = (S, A) compos´e de plusieurs sous-graphes
+qui sont tous des arbres est appel´ee forˆet. Comme pour un arbre la structure d’une
+forˆet peut ˆetre enti`erement reconstruite par la liste des pr´ed´ecesseurs, il y aura juste
+plusieurs sommets x ∈ S tels que pred(x) = 0.
+
+23
+
+24
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+On verra aussi des graphes o`u le sens des arcs n’a pas de signiﬁcation, on parle dans
+ce cas de graphe non-orient´e.
+
+Passons ensuite au cas o`u les boucles n’ont pas de signiﬁcation, on parle dans ce
+
+cas de graphe simple.
+
+D´eﬁnition 1.23 (graphe non-orient´e) Un graphe non-orient´e G est un couple
+d’ensembles (S, A) o`u A est un ensemble de parties de S ayant 1 ou 2 ´el´ements :
+
+D´eﬁnition 1.24 (graphe simple) Un graphe simple G est un graphe sans boucles.
+
+A ⊂ {B ∈ P(S)|Card(B) = 1 ou 2}
+
+ Un graphe simple peut ˆetre orient´e ou non-orient´e !
+
+On appellera
+
+• S l’ensemble des sommets de G
+• A l’ensemble des arˆetes de G
+
+La relation R associ´ee au graphe G est la relation de S dans S contenant tous les
+arcs (x, y) correspondant `a chaque arˆete {x; y}. Math´ematiquement cela correspond
+`a une relation R d´eﬁnie par :
+
+ou encore
+
+R = (S, S, eA) avec eA = {(x, y) ∈ S2|{x; y} ∈ A}
+
+xRy ⇐⇒ {x; y} ∈ A
+
+On repr´esentera un graphe non-orient´e par un diagramme sagittal o`u l’on ne met
+pas de sens aux ﬂ`eches et par la matrice d’adjacence de R.
+
+ 1.19 Repr´esenter la matrice d’adjacence et l’ensemble des arˆetes du
+graphe non-orient´e G suivant
+
+A = {{1; 2}; {1; 3}; {2; 3}; {1; 4}; {2; 4}; {3; 4}; {2}; {3}}
+
+1
+
+2
+
+3
+
+4
+
+M =
+
+0 1 1 1
+1 1 1 1
+1 1 1 1
+1 1 1 0
+
+
+
+ La relation associ´ee `a un graphe non-orient´e est forc´ement sym´etrique, donc sa
+
+matrice d’adjacence sera forc´ement sym´etrique.
+
+Dans un graphe non-orient´e les notions de successeurs/pr´ed´ecesseur ou de degr´es
+entrant/sortant n’ont plus de signiﬁcation. Cela cr´ee un pi`ege au niveau du lemme
+des poign´ees de mains.
+
+d’arˆetes qu’on peut compter sur le diagramme saggital, en particulier
+
+ Dans un graphe non-orient´e G = (S, A) le degr´e d’un sommet est ´egal au nombre
+de telle sorte que le lemme des poign´ees de mains reste vrai :Px∈S d(x) = 2m
+
+Chaque boucle compte deux fois dans le degr´e du sommet consid´er´e !
+
+ 1.20 Exemples de graphes simples calculer la liste des arˆetes/arcs et la
+matrice d’adjacence des graphes suivants :
+
+graphe simple orient´e
+
+A = {(1; 2); (1; 3); (2; 3); (1; 4); (2; 4); (3; 4); (4; 3)}
+
+1
+
+2
+
+3
+
+4
+
+M =
+
+0 0 0 0
+1 0 0 0
+1 1 0 1
+1 1 1 0
+
+
+
+graphe simple non-orient´e
+
+A = {{1; 2}; {1; 3}; {2; 3}; {1; 4}; {2; 4}; {3; 4}}
+
+1
+
+2
+
+3
+
+4
+
+M =
+
+0 1 1 1
+1 0 1 1
+1 1 0 1
+1 1 1 0
+
+
+
+Dans les applications de la th´eorie des graphes les arcs repr´esentent souvent des
+donn´ees num´eriques (valeur d’un ﬂux, une dur´ee,. . .) on a donc besoins de d´eﬁnir
+des graphes valu´es (i.e. avec des valeurs num´erique associ´ees `a chaque arc ou arˆete).
+
+D´eﬁnition 1.25 (graphe valu´e) Un graphe valu´e G = (S, A, ν) est un graphe
+(S, A) (orient´e ou non-orient´e) muni d’une application ν : A −→ R Le graphe peut
+ˆetre repr´esent´e par la matrice des valuations :
+
+W ∈ Mn(R) telleque Wi,j =(cid:26)
+
+∞ si
+ν((xi, yj)) si
+
+(xi, yj) /∈ A
+(xi, yj) ∈ A
+
+Pour un graphe valu´e on ajoutera sur le diagramme sagittal les valuations de chaque
+arc ou arˆete.
+
+25
+
+26
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+ 1.21 Exemple de graphes valu´es calculer la matrice d’adjacence et la ma-
+trice des valuations des graphes suivants :
+
+3
+
+2
+
+−2
+
+−1
+
+1
+
+−1
+
+4
+
+4
+
+2
+
+−1
+
+4
+
+graphe valu´e orient´e
+
+W =
+et M =
+
+∞ ∞ ∞ ∞
+−2
+3 ∞ ∞
+4 −1
+4
+2
+−1 −1 −1 ∞
+
+
+
+0 0 0 0
+1 1 0 0
+1 1 1 1
+1 1 1 0
+
+
+
+3
+
+−1
+
+3
+
+2
+
+graphe valu´e non-orient´e
+4
+3
+4 −1
+2
+2 ∞
+
+∞ −2
+−2 −1
+3
+4 −1
+
+4 −1
+
+W =
+et M =
+
+0 1 1 1
+1 1 1 1
+1 1 1 1
+1 1 1 0
+
+
+
+
+
+−2
+
+−1
+
+1
+
+−1
+
+4
+
+4
+
+2
+
+4
+
+3
+
+−1
+
+orient´e `a 3 sommets
+
+non-orient´e `a 4 sommets
+
+1
+
+2
+
+3
+
+2
+
+1
+
+3
+
+4
+
+2
+
+3
+
+1
+
+4
+
+5
+
+non-orient´e et simple `a 5 sommets
+
+Il y a deux mani`eres de prendre ≪ une partie d’un graphe ≫ suivant qu’on ´elimine
+des sommets ou des arcs/arˆetes, ce sont les d´eﬁnitions de sous-graphes et graphe
+partiel.
+
+D´eﬁnition 1.27 (sous-graphe et graphe partiel) Soit G = (S, A) un graphe
+(orient´e ou pas) alors
+
+• un graphe partiel de G est un graphe G′ ayant pour sommets tous les som-
+mets de G et pour arcs/arˆetes seulement un sous-ensemble de A, ce qui
+s’´ecrit :
+
+G′ = (S, A′)
+
+avec A′ ⊂ A
+
+• un sous-graphe de G est un graphe G′ ayant pour sommets un sous-
+ensemble S′ des sommets de G et en ne conservant que les arcs/arˆetes
+joignant les sommets de S′ ce qui s’´ecrit :
+
+G′ = (S′, A′)
+
+avec
+
+S′ ⊂ S
+
+et A′ = {(x, y) ∈ A|x ∈ S′ et y ∈ S′}
+
+ 1.23 graphe partiel de G induit par A′ = A \ {(2, 2); (3, 2); (4, 3)}
+
+2
+
+3
+
+4
+
+1
+
+2
+
+3
+
+4
+
+On rencontrera dans les applications de la th´eorie des graphes plusieurs types de
+
+valuations associ´ees aux arcs d’un graphe : poids, longueur, coˆut, capacit´e,. . .
+
+1
+
+ Dans un graphe valu´e il faut obligatoirement d´e-doubler les arcs `a double sens
+
+pour pouvoir indiquer les deux valuations !
+
+D´eﬁnition 1.26 (graphe complet) On appelle ≪ graphe complet `a n sommets ≫,
+souvent not´e Kn, le graphe d’ordre n ayant le plus d’arcs/arˆetes possibles.
+
+ 1.22 Dessiner les graphes complets
+
+27
+
+28
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+ 1.24 sous-graphe de G induit par S′ = {1; 2; 4}
+
+1.5 Quelques probl`emes courants de th´eorie des graphes
+
+2
+
+4
+
+1
+
+4
+
+1
+
+2
+
+3
+
+en supprimant le sommet 3 on supprime les arcs {(3, 1); (3, 2); (3, 3); (3, 4); (4, 3)}.
+
+deux exemples importants de sous-graphe et de graphe partiel sont les cliques et les
+stables :
+
+D´eﬁnition 1.28 (clique et stable) Soit G = (S, A) un graphe (orient´e ou pas)
+alors
+
+• une clique est un sous-graphe complet de G
+• un stable est un sous-graphe de G sans arcs/arˆetes
+
+la recherche du plus grand stable ou de la plus grande clique d’un graphe est un
+probl`eme tr`es important en th´eorie des graphes
+
+ 1.25 Trouver le plus grand stable et la plus grande clique d’un graphe
+
+7
+
+5
+
+2
+
+3
+
+1
+
+8
+
+4
+
+6
+
+7
+
+5
+
+2
+
+3
+
+1
+
+8
+
+4
+
+6
+
+Dans la graphe G l’ensemble de sommets {1; 5; 7} induit une clique maximale
+
+alors que {2; 4; 5} induit un stable maximal (il y en a d’autres).
+
+29
+
+Les notions pr´ec´edentes jouent un rˆole fondamental dans un certain nombre de
+probl`emes ≪ type ≫ de th´eorie des graphes. Nous allons en donner quelques uns en
+exemple.
+
+D´eﬁnition 1.29 (coloriage d’un graphe) Soit G = (S, A) un graphe simple
+non-orient´e, colorier le graphe G consiste `a assigner une couleur (ou un nombre) `a
+chaque sommet du graphe de telle sorte que deux sommets reli´ees par un arc/arˆete
+aient des couleurs diﬀ´erentes en utilisant le moins de couleurs possibles. Le
+nombre minimal de couleur est appel´e γ(G) =nombre chromatique du graphe G.
+
+De mˆeme colorier les arˆetes du graphe G consiste `a assigner une couleur (ou
+un nombre) `a chaque arˆete du graphe de telle sorte que deux arˆetes reli´ees `a un
+mˆeme sommet aient des couleurs diﬀ´erentes en utilisant le moins de couleurs
+possibles. Le nombre minimal de couleur est appel´e γ′(G) =indice chromatique du
+graphe G.
+
+L’algorithme ≪ glouton ≫est le plus simple pour colorier un graphe :
+
+✬
+
+fonction G = Coloriage(G)
+
+couleur courante = 1
+pour tout x sommet de G faire
+
+✩
+
+V = liste des voisins de x
+couleur = plus petite couleur non encore utilis´ee dans V
+si couleur ≤ couleur courante alors colorier x avec cette couleur
+
+sinon incr´ementer la couleur courante et colorier x avec
+
+Il existe un autre algorithme int´eressant pour colorier un graphe : l’algorithme de
+Welsh-Powell. Cet algorithme est plus compliqu´e mais souvent moins long `a mettre
+
+ﬁn
+
+ﬁn faire
+
+✫
+en œuvre.✬
+
+fonction G = Welsh(G)
+
+✪
+✩
+
+L = liste des sommets class´es dans l’ordre d´ecroissant de leur degr´e
+couleur courante = 0
+tant que L 6= ∅ faire
+
+incr´ementer la couleur courante
+Colorier s le premier sommet de L avec la couleur courante
+´eliminer s de L
+V = liste des voisins de s
+pour tout x dans L faire
+
+si x /∈ V alors colorier x avec la couleur courante
+
+ajouter les voisins de x `a V
+
+ﬁn
+
+ﬁn faire
+´eliminer les sommets colori´es de L
+
+ﬁn faire
+
+30
+
+✫
+
+✪
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+Attention, les deux algorithmes ne donne pas toujours le nombre minimal de cou-
+leurs ! L’algorithme Glouton peut ˆetre am´elior´e en traitant les sommets dans l’ordre
+d´ecroissant de leur degr´e (comme dans l’algorithme de Welsh-Powell). Enﬁn notons
+que la structure du graphe impose certaines contraintes sur le nombre chromatique :
+
+• les sommets d’une mˆeme clique doivent ˆetre colori´es d’une couleur diﬀ´erente
+• les sommets d’un mˆeme stable peuvent tous ˆetre colori´es de la mˆeme cou-
+
+leur
+
+cela permet d’encadrer le nombre Chromatique de G :
+
+• obtenir un coloriage `a k couleurs permet d’aﬃrmer que γ(G) ≤ k
+• trouver une clique `a k sommets permet d’aﬃrmer que γ(G) ≥ k
+
+Le coloriage d’un graphe permet de r´esoudre de nombreux probl`emes d’incom-
+
+patibilit´e.
+
+ 1.26 Un probl`eme de coloriage
+Dans un groupe de TP de 14 ´etudiants on doit former des groupes de PPP de
+quelques ´etudiants en faisant en sorte que les ´etudiants d’un mˆeme groupe ne s’en-
+tendent pas trop mal. On connaˆıt pour chaque ´etudiant les membres du groupe avec
+lesquels il ne s’entend pas :
+
+l’´etudiant
+ne s’entend
+
+pas avec
+l’´etudiant
+ne s’entend
+
+1
+
+3 ;5 ;
+9 ;12
+
+8
+
+2 ;5 ;6 ;
+
+pas avec
+
+11 ;13 ;14
+
+2
+
+3
+
+5 ;6 ;7 ;
+8 ;12
+
+1 ;4 ;5 ;
+10 ;11
+
+9
+
+1 ;5 ;
+7 ;12
+
+10
+3 ;4 ;
+11 ;14
+
+4
+
+3 ;10
+14
+11
+
+3 ;5 ;8 ;
+10 ;14
+
+5
+
+6
+
+1 ;2 ;3 ;7 ;
+8 ;9 ;11
+
+2 ;8 ;
+12 ;13
+
+12
+
+1 ;2 ;6 ;
+
+7 ;9
+
+13
+6 ;8 ;
+6 ;8 ;
+
+7
+
+2 ;5 ;
+9 ;12
+14
+
+4 ;8 ;10 ;
+11 ;13
+
+On repr´esente la situation par un graphe simple non-orient´e o`u les sommets repr´esentent
+les ´etudiants. On trace une arˆete quand deux ´etudiants ne s’entendent pas :
+
+12
+
+6
+
+9
+
+7
+
+2
+
+1
+
+3
+
+5
+
+11
+
+10
+
+4
+
+8
+
+13
+
+14
+
+Pour trouver comment former les groupes il suﬃt de colorier le graphe (chaque
+couleur constituera un groupe). Suivant l’algorithme utilis´e on trouve plusieurs so-
+lutions `a 4 groupes :
+
+12
+
+1
+
+9
+
+7
+
+5
+
+11
+
+10
+
+3
+
+4
+
+12
+
+1
+
+9
+
+7
+
+5
+
+11
+
+10
+
+2
+
+6
+
+8
+
+13
+
+2
+
+14
+
+6
+
+8
+
+13
+
+3
+
+4
+
+14
+
+Coloriage avec l’algorithme glouton :
+
+• s = 1, d(s) = 4, couleur bleu
+• s = 2, d(s) = 5, couleur bleu
+• s = 3, d(s) = 5, couleur vert
+• s = 4, d(s) = 3, couleur bleu
+• s = 5, d(s) = 7, couleur cyan
+• s = 6, d(s) = 4, couleur vert
+• s = 7, d(s) = 4, couleur vert
+• s = 8, d(s) = 6, couleur rouge
+• s = 9, d(s) = 4, couleur rouge
+• s = 10, d(s) = 4, couleur cyan
+• s = 11, d(s) = 5, couleur bleu
+• s = 12, d(s) = 5, couleur cyan
+• s = 13, d(s) = 3, couleur bleu
+• s = 14, d(s) = 5, couleur vert
+
+avec l’algorithme de Welsh-Powell :
+• s = 5, d(s) = 5, couleur bleu
+
+ainsi que les sommets = [14 ;12],
+
+• s = 8, d(s) = 4, couleur vert
+
+ainsi que les sommets = [3 ;7],
+
+• s = 2, d(s) = 6, couleur cyan
+et les sommets = [11 ;9 ;13 ;4],
+• s = 6, d(s) = 5, couleur rouge
+
+ainsi que les sommets = [10 ;1],
+
+Si dans l’algorithme glouton on prend
+les sommets dans l’ordre d´ecroissant de
+leur degr´e on trouverai le mˆeme r´esultat
+qu’avec l’algorithme de Welsh-Powell.
+
+En cherchant un peu, on peut voir qu’il n’est pas possible de trouver une solution
+
+`a 3 groupes.
+
+Les notions de graphe complet, de stable et de clique jouent un rˆole tr`es important
+dans le coloriage d’un graphe. Mais ce probl`eme est aussi reli´e `a un autre probl`eme
+d’apparence plus complexe : le probl`eme des graphes planaires.
+
+D´eﬁnition 1.30 (graphe planaire) Un graphe G = (S, A) est dit planaire s’il
+existe un diagramme sagittal de ce graphe o`u aucun arc/arˆetes n’en coupe d’autre.
+
+ 1.27 Rendre le graphe suivant planaire il faut d´eplacer les sommets 2 et
+4
+
+3
+
+2
+
+4
+
+1
+
+5
+
+3
+
+2
+
+4
+
+1
+
+5
+
+Est-ce encore possible si on ajoute l’arˆete {2; 5} au graphe ?
+
+31
+
+32
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+✬
+
+fonction G = planaire(G)
+
+tant que G n’est pas planaire faire
+
+pour tout x sommet de G faire
+
+V = liste des voisins de x
+M = barycentre des sommets de V
+si on diminue le nombre d’intersections d’arcs
+
+alors placer x en M
+
+ﬁn
+
+ﬁn faire
+
+ﬁn faire
+
+✫
+
+✩
+
+✪
+
+Le th´eor`eme suivant fait le lien entre graphe planaire et coloriage d’un graphe.
+
+Th´eor`eme 1.31 (des quatre couleurs)
+Tout graphe planaire peut ˆetre colori´e avec au plus quatre couleurs
+
+ Un graphe ayant pour nombre chromatique γ(G) = 5 ne peut donc pas ˆetre
+planaire. Mais attention, la r´eciproque de ce th´eor`eme est fausse : un graphe
+avec γ(G) = 4 n’est pas forc´ement planaire !
+
+Ce probl`emes a de nombreuses applications pratiques. Par exemple en ´electronique,
+on peut repr´esenter un circuit imprim´e par un graphe non-orient´e dont les sommets
+sont des composants ´electroniques et les arˆetes sont des pistes en cuivre. Si le graphe
+est planaire on pourra graver le circuit imprim´e sur une seule face. Dans le cas
+contraire on devra utiliser un circuit ≪ bicouche ≫ ou des ≪ straps ≫ qui fragilisent
+le circuit. Dans un autre domaine, lorsqu’on repr´esente un r´eseau informatique,
+mieux vaut repr´esenter la situation par un graphe planaire quand c’est possible.
+Cela permet de mieux rep´erer les parties d’un r´eseau qui peuvent se retrouver isol´ees
+lorsqu’une connexion est coup´e.
+
+La caract´erisation des graphes planaires `a ´et´e obtenue vers 1928 :
+
+Th´eor`eme 1.32 (Kuratowski)
+un graphe ﬁni est planaire si et seulement si il ne contient pas de sous-graphe qui
+est une expansion de K5 (la clique `a 5 sommets) ou K3,3 (le graphe complet biparti
+`a 3+3 sommets)
+
+1
+
+2
+
+3
+
+1
+
+2
+
+3
+
+4
+
+5
+
+4
+
+5
+
+6
+
+Figure 5 – les graphes K5 et K3,3
+
+Pour ceux qui aiment jouer, allez voir le site [5]. But du jeu : rendre des graphes
+de plus en plus complexe planaires. Un petit algorithme pour vous aider `a rendre
+un graphe planaire dans ce jeu :
+
+33
+
+34
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+cycle dans un graphe non-orient´e un chemin simple ﬁnissant `a sont point de d´epart
+
+∀x, y ∈ S,
+
+2 Chemins dans un graphe
+
+2.1 D´eﬁnitions et premiers exemples
+
+La majeure partie des probl`emes mod´elis´es en th´eorie des graphes repose sur la
+notion de chemin. Cette notion est tout `a fait intuitive, mais nous allons lui donner
+un sens math´ematique tr`es pr´ecis.
+
+D´eﬁnition 2.1 (chemin) Soit G = (S, A) un graphe orient´e (resp. non-orient´e)
+alors un chemin (resp. une chaˆıne) dans G est une liste de sommets C =
+(x0, x1, x2, . . . , xk) telle qu’il existe un arc (resp. une arˆete) entre chaque couple
+de sommets successifs de C. Ce qui s’´ecrit :
+
+• si G = (S, A) est orient´e alors ∀i = 0, 1, . . . k − 1 (xi, xi+1) ∈ A
+• si G = (S, A) est non-orient´e alors ∀i = 0, 1, . . . k − 1 {xi, xi+1} ∈ A
+
+On appellera
+
+longueur du chemin le nombre d’arcs/arˆetes du chemin
+
+chemin/chaˆıne simple un chemin/chaˆıne dont tous les arcs/arˆetes sont diﬀ´erents
+
+chemin/chaˆıne ´el´ementaire un chemin/chaˆıne dont
+
+tous les sommets sont
+diﬀ´erents sauf peut ˆetre le d´epart et l’arriv´ee (pour autoriser les circuits/-
+cycles)
+
+circuit dans un graphe orient´e un chemin simple ﬁnissant `a sont point de d´epart
+
+La notion intuitive de chemin correspond donc plutˆot `a celle de chemin/chaˆıne simple
+ou ´el´ementaire. Heureusement le lemme suivant nous assure qu’on peut toujours s’y
+ramener.
+
+Th´eor`eme 2.2 (lemme de K¨onig) Soient x et y deux sommets distincts d’un
+graphe G. S’il existe un chemin de G reliant x `a y alors il existe un chemin
+´el´ementaire de x `a y.
+
+Preuve : On consid`ere un chemin de x `a y qui n’est pas ´el´ementaire, il passe donc
+deux fois par un mˆeme sommet s, on est donc dans la situation suivante :
+
+C = (x, x1, . . . , s, . . . , s
+
+, . . . , xn−1, y)
+
+`a supprimer
+
+| {z }
+
+la partie qu’on a supprim´e est un cycle/circuit. Ensuite il suﬃt de recommencer tant
+que le chemin n’est pas ´el´ementaire. (cid:3)
+
+Les circuits les plus simples sont les boucles et les doubles ﬂ`eches :
+
+• une boucle (x, x) est le plus court circuit possible
+• une double ﬂ`eche correspondant `a deux arcs (x, y) et (y, x) donne
+
+aussi un circuit (x, y, x)
+
+le chemin C = (x) est de longueur nulle ! Il ne correspond donc `a aucun
+arc (c’est coh´erent puisque la boucle (x, x) 6= C) on parle alors plutˆot de
+chemin ≪ nul ≫.
+
+
+
+ 2.1 Dire si les chemins du graphe suivant sont simple, ´el´ementaire,
+circuit(cycle)et donner leur longueur
+
+6
+
+5
+
+3
+
+8
+
+7
+
+4
+
+•(8, 4, 4) : chemin simple
+
+mais pas ´el´ementaire, longueur 2
+
+•(1; 4; 3; 5; 8; 1) : circuit ´el´ementaire
+
+et simple, longueur 5
+
+•(1; 4; 7; 6; 2) : chemin ´el´ementaire
+
+et simple, longueur 4
+
+•(7; 6; 2; 1; 4; 3; 5; 8; 1; 4; 7) : circuit
+
+2
+La notion de longueur de chemin nous permet ensuite de d´eﬁnir la notion de distance
+dans un graphe.
+
+ni simple ni ´el´ementaire, longueur 10
+
+1
+
+D´eﬁnition 2.3 (distance et diam`etre) Dans un graphe G = (S, A) on appelle
+
+distance d’un sommet `a un autre la longueur du plus court chemin d’un sommet `a
+
+l’autre, ou ∞ s’il n’y a pas de tel chemin :
+
+d(x, y) =
+
+k
+
+si
+
+∞ sinon
+
+plus court chemin de x vers y
+est de longueur k
+
+diam`etre du graphe la plus grande distance entre deux sommets
+
+ Dans un graphe non-orient´e d(x, y) = d(y, x) mais ce n’est pas forc´ement vrai
+dans un graphe non-orient´e ! `A noter aussi, la distance d’un sommet `a lui mˆeme
+est toujours nulle (d(x, x) = 0) puisque le chemin ≪ nul ≫ (C = (x)) va de x `a x !
+
+ 2.2 Calculer les distances de d(1, 8) et d(8, 1) et le diam`etre du graphe
+
+6
+
+2
+
+5
+
+3
+
+8
+
+7
+
+4
+
+1
+
+d(8, 1) = 1
+
+d(1, 8) = 4
+
+Dans cet exemple nous sommes oblig´e de calculer tous les chemins possibles pour
+ˆetre sˆur de trouver le plus court/long ce qui mˆeme sur un petit graphe est vite tr`es
+diﬃcile ! Nous consacrerons (plus loin) un chapitre entier de ce cours au probl`eme
+de la recherche du plus court chemin dans un graphe.
+
+35
+
+36
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+2.2
+
+graphes Euleriens et Hamiltoniens
+
+Nous allons maintenant revenir sur le probl`eme `a l’origine de la th´eorie des
+
+graphes.
+
+D´eﬁnition 2.4 (graphe Eulerien et Hamiltonien) Soit G = (S, A) un graphe,
+on dit que
+
+• G est Eulerien s’il existe un circuit/cycle C = (x0, x1, . . . x0) passant par tous
+
+les arc/arˆetes du graphe
+
+• G est semi-Eulerien s’il existe un chemin C = (x0, x1, . . . xk) (x0 6= xk)
+
+passant par tous les arc/arˆetes du graphe
+
+• G est Hamiltonien s’il existe un circuit/cycle C = (x0, x1, . . . x0) passant par
+
+tous les sommets du graphe
+
+• G est semi-Hamiltonien s’il existe un chemin C = (x0, x1, . . . xk) (x0 6= xk)
+
+passant par tous les sommets du graphe
+
+un cycle ou chemin C du graphe correspondant `a `a l’une de ces d´eﬁnitions sera
+appel´e suivant le cas :
+cycle Eulerien, chemin semi-Eulerien, cycle Hamiltonien, chemin semi-Hamiltonien
+
+ 2.3 Probl`eme des sept ponts de K¨onigsberg
+La ville de K¨onigsberg (aujourd’hui Kaliningrad en Russie) est construite sur l’es-
+tuaire de la Pregel et englobe deux ˆıles. Six ponts relient le continent `a l’une ou
+l’autre des deux ˆıles elles mˆemes reli´ees par septi`eme pont (voir aussi le plan FIG.1
+dessin´e par Euler dans [4]). Euler aimant se promener sur ces ponts se posa un jour
+la question suivante :
+≪ existe-t-il une promenade dans les rues de K¨onigsberg permettant, `a partir d’un
+point de d´epart au choix, de passer une et une seule fois par chaque pont, et de
+revenir `a son point de d´epart ? ≫
+
+On peut repr´esenter la situation par les graphes ci-dessous suivant que les ponts
+sont mod´elis´es par les arˆetes 2 (les sommets repr´esentent les 2 ˆıles et les berges) ou
+par les sommets (les arˆetes connectent deux ponts ayant une berge commune) :
+
+B
+
+A
+
+C
+
+D
+
+2
+
+1
+
+4
+
+3
+
+5
+
+7
+
+6
+
+R´esoudre le probl`eme revient `a trouver un cycle Eulerien pour le premier graphe,
+Hamiltonien pour le second graphe. En utilisant la premi`ere mod´elisation, Euler `a
+d´ecouvert que ce probl`eme n’avait pas de solution.
+
+Th´eor`eme 2.5 (d’Euler) Soit G = (S, A) un graphe connexe alors
+
+• si G est orient´e alors G est Eulerien si et seulement si pour tout sommet le
+
+degr´e sortant est ´egal au degr´e entrant :
+
+∀x ∈ S,
+
+d+(x) = d−(x)
+
+• si G est non-orient´e alors G est Eulerien si et seulement si pour tout sommet
+
+est de degr´e pair :
+
+∀x ∈ S,
+
+∃k ∈ N, d(x) = 2k
+
+Dans tous les cas (G orient´es ou pas) si seulement deux sommets ne v´eriﬁent pas
+les conditions pr´ec´edentes alors G est semi-Eulerien.
+
+Si on applique ce th´eor`eme au premier graphe (non-orient´e) repr´esentant les sept
+pont de K¨onigsberg on voit que les quatre sommets A, B, C, D sont de degr´e impair,
+il n’existe donc pas de cycle Eulerien dans ce graphe.
+
+ Savoir si un graphe est Eulerien est assez facile (et trouver un cycle Eulerien n’est
+en g´en´eral pas tr`es dur), par contre savoir si un graphe est Hamiltonien est un
+probl`eme plus complexe, en particulier la question de trouver un cycle Hamiltonien
+minimal est connu sous le nom de :
+
+probl`eme du voyageur de commerce
+
+Figure 6 – plan de la ville de K¨onigsberg
+
+37
+
+2. Attention, il s’agit d’un multigraphe !
+
+38
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+Preuve : Raisonnons sur un sommet x quelconque du graphe :
+
+Pour qu’il existe un cycle Eulerien il faut
+qu’en chaque sommet lorsqu’on arrive par
+un arc/arˆete on puisse repartir par un
+autre arc/arˆete. Suivant que le graphe
+est orient´e ou pas on obtient donc que
+d+(x) = d−(x) ou d(x) pair (si le graphe
+est non-orient´e).
+
+Au contraire si un sommet est de degr´e im-
+pair alors il constitue forc´ement un ≪ cul
+de sac≪ ce qui empˆeche l’existence d’un
+cycle. Par contre si seulement deux som-
+mets sont de degr´e impair il peuvent servir
+de point de d´epart et d’arriv´e d’un chemin
+passant par tous les arcs/arˆetes du graphe,
+le graphe est donc semi-Eulerien.
+
+deuxi`eme
+passage
+
+premier
+passage
+
+x
+
+x
+
+?
+
+Inversement si chaque sommet est de degr´e pair on raisonne par r´ecurrence sur
+
+le nombre de sommets pour d´emontrer le th´eor`eme :
+
+• un graphe `a n = 1 seul sommet est ´evidement Eulerien !
+• pour un graphe `a n sommets on consid`ere le graphe partiel H constitu´e des
+arcs/arˆetes en dehors du circuit/cycle φ0 (`a ´eventuellement un seul sommet
+et sans arc/arˆete) qui a donc strictement moins de n sommets. Les sommets
+de H v´eriﬁent encore la propri´et´e sur les degr´es puisque quand on enl`eve le
+circuit/cycle
+— si G est orient´e on enl`eve on enl`eve 1 arc entrant et 1 arc sortant pour
+
+chaque sommet donc les degr´es entrant et sortant restent ´egaux,
+
+— si G est non-orient´e on enl`eve 2 arˆetes incidentes pour chaque sommet
+
+donc le degr´e reste pair,
+
+Par induction chaque composante connexe
+de H est un graphe Eul´erien, et admet
+donc un circuit/cycle Eul´erien φi. Pour
+reconstruire un cycle eul´erien sur G,
+il
+nous suﬃt de fusionner les circuits/cycles
+trouv´es sur H avec le circuit/cycle enlev´e
+au d´ebut. Dans l’exemple ci-contre, une
+fois φ0 enlev´e du graphe on trouve un cir-
+cuit Eulerien φ2 et un autre semi-Eulerien
+φ1. Il ne reste plus qu’`a les connecter pour
+retrouver le circuit
+
+(cid:3)
+
+7
+
+φ1
+
+2
+
+1
+
+φ0
+
+3
+
+4
+
+5
+
+6
+
+φ2
+
+φ = (2, 7, 1, 2, 3, 4, 5, 6, 4
+
+, 1
+)
+
+|
+
+φ2
+
+| {z }
+{z
+
+φ0
+
+}
+
+Proposition 2.6 Soit G un graphe non-orient´e, si G n’est pas (semi-)Eulerien on
+peut le transformer en un graphe (semi-)Eulerien en lui ajoutant des arcs/arˆetes
+voir, ´eventuellement, des sommets.
+
+Preuve : Le probl`eme est de modiﬁer le degr´e des sommets de degr´e impair. On
+se contente de d´emontrer le r´esultat dans le cas des graphes non-orient´es. Soit x, y
+deux sommets de degr´e impair :
+
+• s’il n’y a pas d’arˆete entre x et y alors on en ajoute une arˆete entre x et y
+
+leurs degr´es sont augment´es de 1 et deviennent pairs
+
+• s’il y a d´ej`a une arˆete entre x et y alors on ajoute un sommet z et deux
+arˆetes entre x et z et entre y et z, les degr´es de x et y sont augment´es de 1
+et deviennent pairs, alors que z est de degr´e 2 donc pair
+
+on recommence jusqu’`a ce qu’il n’y ait plus de sommet de degr´e impair (comme vu
+en TD, le nombre de sommets de degr´e impair est pair donc on y arrivera).
+
+La mˆeme d´emonstration marche dans le cas o`u G est orient´e en consid´erants les
+
+sommets tels que d+(x) 6= d−(x) et en leur ajoutant des arcs (bien orient´es). (cid:3)
+
+ 2.4 (contre-)exemples de graphes (semi-)Eulerien
+
+le premier graphe est non-Eulerien (sommets de degr´e 3), en lui ajoutant 1 som-
+met et 2 arˆetes il devient semi-Eulerien, et en ajoutant encore 2 arˆetes il devient
+Eulerien (sommets de degr´e 4).
+
+Une notion associ´ee `a celle de chemin est la notion de connexit´e.
+
+D´eﬁnition 2.7 (connexit´e) Soit G = (S, A) un graphe tel que pour tout couple de
+sommets (x, y) il existe un chemin de x vers y :
+
+∀x, y ∈ S,
+
+∃xi ∈ S, i = 0, . . . , k, c = (x0, . . . , xk)chemin G et [x0 = x et xk = y]
+
+alors on dira que
+
+• G est connexe si G est non-orient´e
+• G est fortement connexe si G est orient´e
+
+On appelle aussi composante (fortement) connexe un sous-graphe de G de taille
+maximale qui est (fortement) connexe.
+
+Trouver les composantes connexes d’un graphe est assez facile visuellement (si celui-
+ci est planaire) mais trouver les composantes fortement connexes est plus diﬃcile.
+On pourra utiliser l’algorithme suivant :
+
+39
+
+40
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+✬
+
+fonction G = composantes fortement connexe(G)
+
+tant que tous les sommets de G ne sont pas marqu´es faire
+
+✩
+
+ 2.7 Calcul de la fermeture transitive via la matrice d’adjacence :
+
+V = premier sommet non-marqu´e
+tant que tous les sommets de V ne sont pas marqu´es faire
+
+marquer x premier sommet non-marqu´e de V
+si ∃un cycle C passant par x
+
+alors ajouter les sommets de C `a V
+
+ﬁn
+
+ﬁn faire
+V est une composante fortement connexe de G
+
+✪
+
+ﬁn faire
+
+✫
+
+ 2.5 trouver les composantes (fortement) connexes des graphes sui-
+vants
+
+1
+
+2
+
+4
+
+3
+
+5
+
+6
+
+8
+
+7
+
+1
+
+2
+
+4
+
+3
+
+5
+
+6
+
+8
+
+7
+
+La notion de chemin dans un graphe est directement reli´ee `a la notion de transitivit´e
+que nous avons d´ej`a ´evoqu´ee. Rendre un graphe transitif alors qu’il ne l’est pas
+consiste `a ajouter des arcs raccourcis de chemins existants. Cela s’appelle prendre
+la ≪ fermeture transitive ≫ du graphe.
+
+D´eﬁnition 2.8 (fermeture transitive) On appelle fermeture transitive d’un
+graphe G = (S, A) le plus petit graphe G∗ transitif et ≪ contenant ≫ G (c’est `a
+dire tel que G soit un graphe partiel de G∗ = (S, B) avec A ⊂ B).
+
+ 2.6 Calculer la fermeture transitive du graphe
+
+3
+
+2
+
+4
+
+1
+
+5
+
+6
+
+3
+
+2
+
+4
+
+1
+
+5
+
+6
+
+La fermeture transitive d’un graphe peut ˆetre obtenue `a partir de la matrice d’ad-
+jacence.
+
+Th´eor`eme 2.9 (fermeture transitive) Soit G = (S, A) un graphe de matrice
+d’adjacence M et de fermeture transitive G∗ alors la matrice d’adjacence M ∗ de G∗
+v´eriﬁe
+
+3
+
+2
+
+4
+
+1
+
+5
+
+6
+
+M =
+
+0 0 0 0 0 0
+0 0 1 0 0 0
+0 1 0 1 0 0
+1 0 0 0 0 0
+1 0 0 1 0 1
+0 0 0 0 0 0
+
+
+
+,
+
+
+
+M + M 2 =
+
+
+
+0 0 0 0 0 0
+0 1 1 1 0 0
+1 1 1 1 0 0
+1 0 0 0 0 0
+1 0 0 1 0 1
+0 0 0 0 0 0
+
+
+
+, M ∗ = M + M 2 + M 3 =
+
+0 0 0 0 0 0
+1 1 1 1 0 0
+1 1 1 1 0 0
+1 0 0 0 0 0
+1 0 0 1 0 1
+0 0 0 0 0 0
+
+
+
+,
+
+
+
+car M ∗ + M 4 =
+
+0 0 0 0 0 0
+1 1 1 1 0 0
+1 1 1 1 0 0
+1 0 0 0 0 0
+1 0 0 1 0 1
+0 0 0 0 0 0
+
+
+
+
+
+= M ∗ donc plus de changement apr`es.
+
+Preuve : Soit R la relation associ´ee au graphe G et M sa matrice d’adjacence
+alors :
+
+• M k est la matrice d’adjacence de la relation R ◦ R ◦ · · · ◦ R
+
+|
+
+k compositions
+
+{z
+
+}
+
+donc chaque ≪ 1 ≫ de cette matrice repr´esente une suite de k arcs adjacents
+dans le graphe de G.
+
+• Lorsqu’on additionne les diﬀ´erentes matrices M k (au sens de l’addition des
+bool´eens) on ajoute donc des ≪ 1 ≫ dans la matrice M qui correspondent
+`a des arcs n’existant pas dans le graphe de G mais qui sont des ≪ raccour-
+k=1 M k va contenir tous
+
+les raccourcis possibles dans G en plus des arcs d´ej`a dans G.
+
+cis ≫ dans ce graphe. On en d´eduit donc que M ∗ =P∞
+ont d´ej`a ´et´e ajout´e dans la somme M ∗ =PK
+
+fait le chemin ´el´ementaire le plus long possible dans G.
+
+• Il reste `a voir qu’au bout d’un moment tous les ≪ 1 ≫ dans la matrice M K+1
+k=1 M k. Cela arrive d`es qu’on a
+
+M ∗ =
+
+M k
+
+(cid:3)
+
+∞Xk=1
+
+o`u la somme (au sens de l’alg`ebre de boole binaire) est en fait une somme ﬁnie.
+
+On rencontrera aussi les deux notions suivantes :
+
+41
+
+42
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+D´eﬁnition 2.10 Graphes τ -´equivalents et τ -minimaux deux graphes orient´es G1 et
+G2 sont dits τ -´equivalents s’ils ont la mˆeme fermeture transitive :
+
+G1τ G2 ⇐⇒ G∗
+
+1 = G∗
+
+2
+
+Un graphe est dit τ -minimal si aucun graphe partiel de G n’a la mˆeme fermeture
+transitive que G
+
+∀ G′ graphe partiel de G, G′∗ 6= G∗
+
+On remarquera que :
+
+Proposition 2.11 τ est une relation d’´equivalence sur l’ensemble des graphes.
+
+Preuve :
+
+• τ r´eﬂexive car G∗ = G∗
+• τ sym´etrique car G∗
+• τ transitive car G∗
+
+1 = G∗
+
+2 ⇐⇒ G∗
+
+2 = G∗
+1
+
+1 = G∗
+
+2 et G∗
+
+2 = G∗
+
+3 =⇒ G∗
+
+1 = G∗
+3
+
+(cid:3)
+
+La fermeture transitive est un outil de calcul assez puissant en th´eorie des
+graphes. Par exemple elle permet de rep´erer les composantes (fortement-)connexe
+d’un graphe.
+
+Proposition 2.12 Soit G un graphe et G∗ sa fermeture transitive, le sous-graphe
+induit sur G∗ par une composante (fortement-)connexe est un graphe complet.
+
+La fermeture transitive permet aussi de rep´erer l’absence de circuits dans un graphe.
+
+Proposition 2.13 Un graphe G = (S, A) est sans circuit si la relation R∗ associ´ee
+`a sa fermeture transitive G∗ est une relation d’ordre.
+
+Les graphes orient´es sans circuits poss`edent des propri´et´es sp´eciﬁque, en parti-
+culier il y a dans un graphe sans circuit une notion de hi´erarchie entre les sommets.
+C’est ce qu’on appelle la d´ecomposition en niveaux ou aussi un ≪ tri topologique ≫.
+
+Proposition 2.14 (d´ecomposition en niveau) Si G est un graphe sans circuit
+alors on peut d´eﬁnir pour chaque sommet un niveau de la mani`ere suivante :
+
+• Les sommets sans pr´ed´ecesseurs sont de niveau 0
+• tout sommet x a un niveau sup´erieur aux niveaux de ses pr´ed´ecesseurs :
+
+niveau(x) = max
+y∈Γ−(x)
+
+niveau(y) + 1
+
+On peut ensuite re-dessiner le graphe G en disposant les sommets de gauche `a droite
+dans l’ordre croissant des niveaux.
+
+ Si G poss`ede un circuit C = (x0, x1, . . . , xn−1, x0) il ne peut pas avoir de niveau
+
+puisque dans ce cas on aurait :
+
+niveau(x0) < niveau(x1) < · · · < niveau(xn−1) < niveau(x0)
+
+Pour d´ecomposer en niveau un graphe G on utilisera l’algorithme suivant :
+
+✩
+
+✪
+
+✬
+
+fonction niveau = decomp niveau(G)
+n = nombre de sommets du graphe
+niveau = matrice nulle de taille 1 × n
+degre = matrice de taille 1 × n contenant les degr´es entrants d−(x)
+tant que tous les sommets ne sont pas marqu´es faire
+
+L = liste des sommets non-marqu´es de degr´e entrant nul
+pour tout x ∈ L faire
+
+pour tout y successeur de x dans G faire
+
+si niveau(y) < niveau(x) + 1
+
+alors niveau(y) = niveau(x) + 1
+
+ﬁn
+degre(y) = degre(y) − 1 (revient `a ´eliminer l’arc (x, y))
+
+ﬁn faire
+
+ﬁn faire
+on marque les sommets de L
+
+ﬁn faire
+
+✫
+
+Cette technique nous resservira plus loin dans la recherche des chemins les plus
+
+courts dans un graphe, il faut donc savoir d´ecomposer un graphe en niveaux.
+
+ 2.8 D´ecomposition en niveau d’un graphe sans circuit :
+
+8
+
+4
+
+6
+
+7
+
+5
+
+3
+
+2
+
+1
+
+• d−(5) = 0 donc niveau 0 et on
+
+´elimine (5, 3)
+
+• d−(3) = 0 donc niveau 1 et on
+
+´elimine (3, 1), (3, 4), (3, 6)
+
+• d−(6) = 0 donc niveau 2 et on
+
+´elimine (6, 4), (6, 8), (6, 7)
+
+• d−(4) = d−(7) = 0 donc niveau 3
+
+et on ´elimine (4, 8), (7, 1), (7, 8)
+
+• . . .
+
+au ﬁnal niveau = 4
+
+5 1 3
+
+0 2
+
+3 6 et on peut redessiner le graphe :
+
+5
+
+3
+
+6
+
+4
+
+7
+
+1
+
+8
+
+2
+
+ Le graphe associ´e `a une relation d’ordre admet une d´ecomposition en niveaux (si
+on ne tient pas compte des boucles). Faire le diagramme de Hasse d’une relation
+d’ordre revient `a re-dessiner le graphe en disposant les sommets du graphe dans
+l’ordre croissant des niveaux calcul´es.
+
+43
+
+44
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+Un cas tr`es important de graphe sans circuit est le cas des arbres car dans
+un arbre il est tr`es facile de retrouver un chemin entre la racine et un sommet
+quelconque :
+
+Th´eor`eme 2.15 Soit G = (S, A) un arbre de racine r, alors pour tout sommet x il
+existe un unique chemin de x vers r.
+
+Preuve : Pour d´emontrer ce th´eor`eme il suﬃt d’indiquer comment construire ce
+chemin. Pour trouver ce chemin il suﬃt de ≪ remonter ≫ le long d’une branche en
+lisant la liste des pr´ed´ecesseurs. Le pr´ed´ecesseur d’un sommet dans l’arbre ´etant `a
+chaque fois unique il n’y pas de choix et donc le chemin trouv´e est bien unique (cid:3)
+
+Cette d´emonstration nous donne directement un algorithme pour calculer le che-
+
+2.3 Parcours de graphes orient´es
+
+Le parcours d’un graphe est un probl`eme type de th´eorie des graphes auquel
+
+peuvent se ramener de nombreux autres probl`emes d’algorithmique.
+
+D´eﬁnition 2.16 (parcours d’un graphe) Soit G = (S, A) un graphe et x ∈ S
+un sommet, un parcours du graphe G `a partir de x est une visite de chaque
+sommet accessible depuis x. Le r´esultat d’un parcours est un ensemble de
+chemins partants de x allant vers les sommets accessibles depuis x. Un parcours
+peut ˆetre repr´esent´e par sous-graphe de G qui est un arbre de racine x (ou
+une forˆet si certains sommets de G ne sont pas accessibles depuis x).
+
+min entre la racine et un sommet de l’arbre :
+
+✬
+
+fonction C = chemin arbre(G, x)
+
+P = liste des pr´ed´ecesseurs de l’arbre G
+si P (x) = ∅ alors C = (x)
+
+sinon C = (chemin arbre(G, P (x)), x)
+
+ﬁn
+
+✫
+
+✩
+
+✪
+
+D’un point de vue algorithmique, un parcours correspond `a la proc´edure suivante :
+
+✬
+
+proc´edure parcours(G, x)
+
+L = liste des sommets `a traiter (vide au d´epart)
+mettre x dans L (d´ebut du traitement de x)
+tant que L 6= ∅ faire
+
+sortir le 1er sommet y de L (y en cours de traitement)
+V = successeurs non trait´es de y
+pour tout z ∈ V faire
+
+mettre z dans L (d´ebut du traitement de z)
+
+ﬁn faire
+ﬁn du traitement de y
+
+ﬁn faire
+
+✫
+
+`a chaque ´etape de la boucle tant que un seul sommet y est trait´e qui engendre le
+d´ebut du traitement d’un ou plusieurs autre sommets . . .
+On peut d´eﬁnir un ordre de parcours en num´erotant `a un endroit pr´ecis de la
+boucle tant que le sommet y en cours de traitement.
+
+✩
+
+✪
+
+Les algorithmes de type ≪ glouton ≫ qui consistent `a traiter chaque sommet du
+graphe peuvent souvent ˆetre ´ecrit en utilisant en utilisant le mod`ele d’un parcours
+(ce qui parfois conduit `a des am´eliorations de l’algorithme). On peut par exemple
+voir les algorithmes de coloriage de graphes ou de d´ecomposition en niveau sous
+forme de parcours de graphes (reprendre l’algorithme de Weslh sous cet angle).
+
+ Lors du parcours d’un graphe G, au cours du traitement d’un sommet x
+celui-ci doit ˆetre marqu´e, selon le moment o`u l’on d´ecide de marquer le
+sommet (en d´ebut ou en ﬁn de traitement), l’ordre dans lequel on d´ecide de traiter
+les successeurs de ce sommet (par ordre de num´ero croissant ou d´ecroissant par
+exemple), on obtiendra des parcours tr`es diﬀ´erents.
+
+Dans la pratique on s’int´eressera surtout `a r´ecup´erer la liste des pr´ed´ecesseurs
+
+correspondant `a l’arbre de parcours obtenu.
+
+45
+
+46
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+ Les parcours que nous allons ´etudier s’appliquent aussi aux graphes non-orient´es,
+
+Dans ce cas on consid`ere que les arˆetes sont des arcs `a double sens.
+
+Commen¸cons par ´etudier un premier type de parcours : le parcours en largeur.
+
+D´eﬁnition 2.17 (parcours en largeur) Soit G = (S, A) un graphe et x ∈ S un
+sommet, un parcours en largeur du graphe G `a partir de x est un parcours dans
+lequel un sommet y est marqu´e avant le d´ebut de traitement de ses successeurs.
+
+Si on veut r´ecup´erer la liste des pr´ed´ecesseurs P qui permet de retrouver l’arbre de
+parcours en largeur depuis le sommet x on utilisera l’algorithme suivant :
+
+✬
+
+✫
+
+fonction P = parcours largeur(G, x)
+
+L = ﬁle des sommets `a traiter
+P = liste des pr´ed´ecesseurs de l’arbre de parcours
+marquer le sommet x et le mettre dans L
+tant que L 6= ∅ faire
+
+sortir le 1er sommet y de L
+V = successeurs non trait´es de y
+pour tout z ∈ V faire
+
+marquer z; P (z) = y
+mettre z `a la ﬁn de L
+
+ﬁn faire
+
+ﬁn faire
+
+✩
+
+✪
+
+ La liste L des sommets `a traiter est l’exemple type d’une ﬁle de type
+
+FIFO 3 :
+• on ajoute les ´el´ements ≪ par le bas ≫ de la ﬁle
+• on retire les ´el´ements ≪ par le haut ≫ de la ﬁle
+
+ 2.9 Parcours du graphe G en largeur, par ordre croissant des som-
+mets, depuis le sommet 8 :
+
+8
+
+5
+
+2
+
+4
+
+6
+
+1
+
+10
+
+9
+
+3. First In, First Out
+
+3
+
+7
+
+Donne l’arbre de parcours :
+
+8
+
+10
+
+2
+
+9
+
+4
+
+7
+
+P = 7
+
+10 7 2
+
+4 7
+
+9 0
+
+10 8
+
+D´etail de l’algorithme :
+
+5
+
+1
+
+3
+
+6
+
+x
+8
+10
+2
+9
+4
+7
+5
+1
+3
+6
+
+Γ+(x)
+{10}
+{2 ;9}
+{4 ;8 ;9}
+
+{7}
+{5 ;8}
+
+marqu´es
+[8 ;10]
+
+[8 ;10 ;2 ;9]
+[8 ;10 ;2 ;9 ;4]
+[8 ;10 ;2 ;9 ;4 ;7]
+[8 ;10 ;2 ;9 ;4 ;7 ;5]
+
+L
+[10]
+[2 ;9]
+[9 ;4]
+[4 ;7]
+[7 ;5]
+
+{1 ;2 ;3 ;4 ;6} [8 ;10 ;2 ;9 ;4 ;7 ;5 ;1 ;3 ;6]
+[8 ;10 ;2 ;9 ;4 ;7 ;5 ;1 ;3 ;6]
+[8 ;10 ;2 ;9 ;4 ;7 ;5 ;1 ;3 ;6]
+[8 ;10 ;2 ;9 ;4 ;7 ;5 ;1 ;3 ;6]
+[8 ;10 ;2 ;9 ;4 ;7 ;5 ;1 ;3 ;6]
+
+{8}
+{3}
+{5 ;6}
+{1 ;4 ;5}
+
+[5 ;1 ;3 ;6]
+[1 ;3 ;6]
+[3 ;6]
+[6]
+[ ]
+
+L’ordre de parcours des sommets du graphes est donn´e par la liste des sommets
+marqu´es : [8; 10; 2; 9; 4; 7; 5; 1; 3; 6] qu’on retrouve facilement sur l’arbre :
+
+8(1)
+
+10(2)
+
+2(3)
+
+4(5)
+
+9(4)
+
+7(6)
+
+5(7)
+
+1(8)
+
+3(9)
+
+6(10)
+
+Le parcours en largeur est tr`es utile pour trouver les distances depuis un sommet
+donn´e dans un graphe.
+
+Th´eor`eme 2.18 (parcours en largeur et distances) Soit G = (S, A) un
+graphe et x un sommet, alors les niveaux des sommets dans le parcours en largeur
+depuis le sommet x sont exactement les distances de x `a ces sommets.
+
+Preuve : La d´emonstration se fait par r´ecurrence
+
+• la racine de l’arbre est de niveau 0 et on a bien d(x, x) = 0
+• par hypoth`ese pour tous les sommets y de niveau k on a bien d(x, y) = k,
+examinons maintenant la distance `a x d’un successeur z d’un des sommets
+y :
+— son niveau est k + 1 (successeur de y de niveau k)
+— sa distance `a x v´eriﬁe d(x, z) ≥ d(x, y) + d(y, z) = k + 1
+
+47
+
+48
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+— si sa distance `a x v´eriﬁait d(x, z) < k + 1 il y aurait alors un autre chemin
+
+Cet algorithme admet aussi une formulation r´ecursive plus simple `a programmer :
+
+de x `a z dans le graphe (x, . . . , y′, z) mais alors
+
+d(x, z) ≤ d(x, y′) + d(y′, z) =⇒ d(x, y′) ≤ d(x, z) − d(y′, z) < k
+
+donc z est le successeur d’un sommet de niveau < k et z aurait du ˆetre
+trait´e au pire au niveau k et pas au niveau k + 1 ! Donc d(x, z) ≤ k + 1
+
+conclusion d(x, z) = k + 1 (cid:3)
+
+ 2.10 Calcul des distances du sommet 8 dans G
+
+8
+
+10
+
+2
+
+9
+
+4
+
+7
+
+Distances = 4
+
+2 4
+
+3 4
+
+4 3 0
+
+2 1
+
+5
+
+1
+
+3
+
+6
+
+Passons maintenant au parcours en profondeur :
+
+D´eﬁnition 2.19 (parcours en profondeur) Soit G = (S, A) un graphe et x ∈ S
+un sommet, un parcours en profondeur du graphe G `a partir de x est un parcours
+dans lequel un sommet y n’est marqu´e qu’apr`es le d´ebut du traitement de ses suc-
+cesseurs
+
+Comme pour le parcours en largeur on peut ´ecrire pr´ecis´ement l’algorithme permet-
+tant de r´ecup´erer l’arbre de parcours en profondeur :
+
+✬
+
+fonction P = parcours profondeur(G, x)
+
+L = [x] (Pile des sommets `a traiter)
+P = liste des pr´ed´ecesseurs de l’arbre de parcours
+tant que L 6= ∅ faire
+
+sortir le 1er sommet y de L
+V = successeurs non trait´es de y
+pour tout z ∈ V faire
+
+P (z) = y
+mettre z au d´ebut de L
+
+ﬁn faire
+marquer le sommet y
+
+ﬁn faire
+
+✫
+
+✩
+
+✪
+
+✬
+
+fonction P = parcours profondeur(G, x)
+marquer x (d´ebut du traitement de x)
+V = successeurs non trait´es de x
+pour tout y ∈ V faire
+
+P (y) = x
+P = parcours profondeur(G, y)
+
+ﬁn faire
+ﬁn du traitement de x
+
+✫
+
+✩
+
+✪
+
+ 2.11 Parcours du graphe G en profondeur, par ordre d´ecroissant des
+sommets, depuis le sommet 8 :
+
+8
+
+5
+
+2
+
+4
+
+6
+
+1
+
+3
+
+7
+
+10
+
+9
+
+Donne l’arbre de parcours :
+
+8
+
+10
+
+9
+
+7
+
+P = 6 7 1
+
+6 6
+
+7 9
+
+0 10 8
+
+5
+
+4
+
+1
+
+3
+
+6
+
+2
+
+ Le parcours en profondeur ne permet pas de calculer les distances depuis un
+sommet ! Au contraire le parcours en profondeur essaye de construire les chemins
+les plus long possibles depuis un sommet donn´e.
+
+ La liste L des sommets `a traiter est l’exemple type d’une Pile de type
+
+LIFO 4 :
+• on ajoute les ´el´ements ≪ par le haut ≫ de la pile
+• on retire les ´el´ements ≪ par le haut ≫ de la pile
+
+4. Last In, First Out
+
+49
+
+50
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+D´eﬁnition 2.20 (num´erotation pr´eﬁxe et suﬃxe) On appelle num´erotation
+pr´eﬁxe et num´erotation suﬃxe les num´erotations des sommets du graphe corres-
+pondants `a l’ordre de traitement des sommets du graphe lors du parcours en pro-
+fondeur suivant qu’on num´erote un sommet avant ou apr`es le traitement de ses
+
+successeurs : ✬
+
+fonction P = parcours profondeur(G, x)
+
+marquer x
+num´erotation pr´eﬁxe de x
+V = successeurs non trait´es de x
+pour tout y ∈ V faire
+
+P (y) = x
+P = parcours profondeur(G, y)
+
+ﬁn faire
+num´erotation suﬃxe de x
+
+✫
+
+✩
+
+✪
+
+D´eﬁnition 2.21 (classiﬁcation des arcs) le parcours en profondeur d’un graphe
+G depuis le sommet x permet de d´eﬁnir quatre types d’arc :
+
+arcs couvrants : les arcs retenus pour le parcours en profondeur
+
+arcs directs : les arcs n’appartenant pas au parcours en profondeur mais reliant
+
+un sommet `a un descendant
+
+arcs r´etrograde : les arcs n’appartenant pas au parcours en profondeur mais re-
+
+liant un sommet `a un ascendant (ou `a lui mˆeme)
+
+arcs traversiers : les arcs n’appartenant pas au parcours en profondeur mais re-
+
+liant deux branches distinctes de l’arbre
+
+ 2.13 Classement des arcs du graphe G d’apr`es le parcours en pro-
+fondeur, par ordre d´ecroissant des sommets, depuis le sommet 8 :
+
+ 2.12 num´erotation des sommets dans le parcours en profondeur :
+num´erotation pr´eﬁxe = 8 10
+
+6 5 4
+
+9 7
+
+1 3
+
+2
+
+8(1)
+
+10(2)
+
+9(3)
+
+7(4)
+
+6(5)
+
+5(6)
+
+8
+
+10
+
+9
+
+7
+
+4(7)
+
+1(8)
+
+3(9)
+
+2(10)
+
+num´erotation suﬃxe = 4 6 3
+
+2 1
+
+5 7
+
+10 8 9
+
+8(10)
+
+10(9)
+
+9(8)
+
+7(7)
+
+6(5)
+
+5(1)
+
+4(2)
+
+1(4)
+
+3(3)
+
+2(6)
+
+6
+
+2
+
+3
+
+5
+
+4
+
+1
+
+3
+
+7
+
+arcs couvrants :
+
+arcs directs :
+
+arcs r´etrograde :
+
+arcs traversiers :
+
+8
+
+5
+
+2
+
+4
+
+6
+
+1
+
+10
+
+9
+
+Le parcours en profondeur sert, entre autre, `a classer les arcs en diﬀ´erentes cat´egories.
+
+51
+
+52
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+Cette classiﬁcation permet de d´etecter des circuits dans un graphe.
+
+3 Probl`emes d’optimisation pour des graphes valu´es
+
+Th´eor`eme 2.22 (d´etection des circuits) Dans un graphe G = (S, A) et x un
+sommet. Si dans le parcours en profondeur de G `a partir de x il existe un arc
+r´etrographe alors il existe au moins un circuit dans le graphe G.
+
+Preuve : Soit (y, z) un arc r´etrograde du graphe G (lors du parcours depuis x).
+Soit y = z et alors cet arc est une boucle qui est le plus simple des circuits. Sinon il
+existe un chemin dans l’arbre de parcours qui va de x `a y passant par z, donc on a
+un chemin C ′ de z `a y qui permet de construire un circuit C ′′ :
+
+3.1 Arbre couvrant optimal
+
+Dans le cas des graphes non-orient´es on s’int´eresse aussi aux arbres couvrants :
+
+D´eﬁnition 3.1 (arbre couvrant) Soit G = (S, A) un graphe on appelle ≪ arbre
+couvrant de G ≫un graphe G′ = S, A′) graphe partiel de G qui est un arbre.
+
+De nombreux probl`emes associ´es aux graphes valu´es peuvent ˆetre r´esolus par la
+recherche d’un arbre couvrant de poids minimal.
+
+C = (x, . . . , z, . . . . . . . . . , y
+
+C ′ =chemin de z `a y
+
+|
+
+{z
+
+) =⇒ C ′′ = (y, z, . . . , y
+
+)est un circuit de G
+
+C ′
+
+| {z }
+
+Proposition 3.2 Soit G = (S, A, ν) un graphe non-orient´e et valu´e parmi tous les
+
+arbres couvrant de G il en existe un G′ = (S, A′) telle que P{x;y}∈A′ ν({x; y}) (la
+
+somme des poids des arˆetes de G′) soit maximale (resp. minimale) . On appelle cet
+arbre l’ arbre couvrant de G de poids maximal (resp. minimal) .
+
+}
+
+(cid:3)
+
+ 2.14 Exemple de d´etection de circuit du graphe G d’apr`es le parcours
+en profondeur, par ordre d´ecroissant des sommets, depuis le sommet 8 :
+
+8
+
+10
+
+9
+
+7
+
+5
+
+4
+
+1
+
+3
+
+6
+
+2
+
+• l’arc r´etrograde (5, 8) permet de retrouver le circuit :(8, 10, 9, 7, 6, 5, 8)
+• l’arc r´etrograde (3, 6) permet de retrouver le circuit :(3, 6, 1, 3)
+
+8
+
+5
+
+2
+
+4
+
+6
+
+1
+
+10
+
+9
+
+3
+
+7
+
+53
+
+Cet arbre peut ˆetre obtenu par l’algorithme de Kruskal ou l’algorithme de Prim. `A
+chaque fois on part d’un sommet quelconque (1par exemple) et suivant l’algorithme :
+Algorithme de Prim consiste `a construire l’arbre en prenant choisissant `a chaque
+´etape une arˆete joignant les sommets connect´es `a l’arbre aux autres sommets
+en prenant l’arˆete de poids optimal (maximal ou minimal suivant le cas )
+
+✬
+
+fonction T = prim(G)
+
+poids = poids total de l’arbre couvrant (initialis´e `a 0)
+marquer le sommet 1
+tant que il reste des sommets non-marqu´es
+
+faire
+
+{x; y} = arˆete de coˆut minimal joignant un sommet
+
+marqu´e x et un sommet non-marqu´e y
+
+marquer le sommet y et ajouter l’arˆete {x; y} `a T
+poids = poids + W (x, y)
+
+✩
+
+✪
+✩
+
+Algorithme de Kruskal consiste `a balayer les arˆetes tri´ees dans l’ordre (croissant
+ou nd´ecroissant suivant le cas) et `a choisir l’arˆete si les sommets ne sont pas
+
+ﬁn faire
+
+✫
+d´ej`a connect´es :✬
+
+fonction T = Kruskal(G)
+
+initialisation poids = poids total de l’arbre couvrant (initialis´e `a 0)
+pour chaque sommet x ∈ S faire
+
+E(x) = { sommets connect´es `a x} = {x} ﬁn faire
+
+traitement
+pour chaque arˆete (x, y) ∈ A (par ordre de poids d´ecroissant) faire
+
+si E(x) 6= E(y) alors ajouter l’arˆete (x, y) `a l’arbre T
+
+poids = poids + W (x, y)
+F = E(x) ∪ E(y)
+pour chaque sommet z ∈ F faire
+
+E(z) = F
+
+ﬁn faire
+
+ﬁn
+ﬁn faire
+
+✫
+
+54
+
+✪
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+Quelques deux exemples pour voir le fonctionnement de ces algorithmes :
+
+3.2 Probl`eme du plus court chemin
+
+ 3.1 Arbre couvrant de poids minimal avec l’algorithme de Prim
+
+1
+
+7
+
+3
+
+4
+
+9
+
+3
+
+7
+
+2
+
+1
+
+4
+
+8
+
+3
+
+4
+
+6
+
+5
+
+5
+
+6
+
+sommets
+marqu´es
+
+1
+1,2
+
+1,2,4
+
+arˆetes
+
+sortantes
+
+poids
+
+minimal
+
+{1; 2} {1; 3} {1; 5}
+
+{1; 3} {1; 5}
+
+{2; 3} {2; 5} {2; 4}
+{1; 3} {2; 3} {4; 3}
+
+{1; 5} {2; 5} {4; 5} {4; 6}
+
+1,2,4,3
+
+{1; 5} {2; 5} {4; 5}
+
+1,2,4,3,5
+
+{3; 6} {4; 6} {5; 6}
+
+{3; 6} {4; 6}
+
+Poids total de l’arbre = 16
+
+4
+1
+
+3
+
+3
+
+5
+
+1
+
+4
+
+2
+
+3
+
+1
+
+5
+
+4
+
+5
+
+3
+
+6
+
+3
+
+P red = 0 1
+
+4 2
+
+2 5
+
+ 3.2 Arbre couvrant de poids maximal avec l’algorithme de Kruskal
+
+• arˆete {5, 3} ⇒ poids=0+17
+• arˆete {3, 1} ⇒ poids=17+16
+• arˆete {2, 3} ⇒ poids=33+15
+• arˆete {1, 5} 1 et 5 d´ej`a connect´es
+• arˆete {4, 2} ⇒ poids=48+9
+• arˆete {5, 4} 5 et 4 d´ej`a connect´es
+• arˆete {2, 5} 2 et 5 d´ej`a connect´es
+• Poids total de l’arbre = 57
+
+5
+
+17
+
+3
+
+15
+
+16
+
+2
+
+1
+
+3
+
+15
+
+16
+
+17
+
+5
+
+1
+
+9
+
+11
+
+4
+
+2
+
+9
+
+4
+
+3
+
+7
+
+P red = 3 3
+
+5 2
+
+0
+
+ Dans le cas d’un graphe non-orient´e, un arbre peut ˆetre repr´esent´e de nombreuse
+mani`eres. Chaque sommet peut en eﬀet ˆetre positionn´e comme racine de l’arbre :
+
+5
+
+17
+
+3
+
+15
+
+16
+
+2
+
+1
+
+P red = 3
+
+3
+
+5
+
+2
+
+0
+
+9
+
+4
+
+P red = 0
+
+1
+
+16
+
+3
+
+15
+17
+
+1
+
+3
+
+2
+
+9
+
+4
+
+3
+
+2
+
+5
+
+Le probl`eme d’optimisation suivant est celui du chemin optimal, il intervient
+directement dans le fonctionnement des routeurs d’un r´eseau informatique(protocole
+OSPF par exemple). Nous avons d´ej`a ´etudi´e cette question dans la partie 2.1 de ce
+cours, o`u nous avons d´eﬁni la longueur des chemins. Ici nous avons besoin d’´etudier
+une notion plus g´en´erale de longueur qui puisse ˆetre appliqu´ee `a un graphe valu´e.
+
+D´eﬁnition 3.3 (longueur et distance) Dans un graphe orient´e valu´e G =
+(S, A, f ) on appellera longueur d’un chemin C = (x0, x1, . . . , xp−1, xp) relativement
+`a f la valeur
+
+Longueurf (C) =
+
+f (xi, xi+1)
+
+p−1Xi=0
+
+on appellera distance de x `a y par rapport `a f la longueur (relativement `a f ) du
+plus court chemin de x `a y
+
+Distmin(x, y) = min
+
+C=(x,...,y)
+
+Longueurf (C), et Distmax(x, y) = max
+
+C=(x,...,y)
+
+Longueurf (C)
+
+Ces d´eﬁnitions g´en´eralisent les d´eﬁnitions de longueur et distance dans un graphe
+orient´e (mais non-valu´e). On retrouve la d´eﬁnition de la partie 2.1 en prenant la
+valuation f (x, y) = 1, ∀(x, y) ∈ A (tous les arcs sont de longueur 1).
+
+Proposition 3.4 (existence du chemin optimal) Dans un graphe orient´e valu´e
+G = (S, A, f ) il existe un plus court (resp. long) chemin entre tout couple de sommets
+si et seulement si il n’existe pas de circuit de longueur n´egative (resp. positive)
+relativement `a f .
+
+Preuve :
+
+Supposons qu’il existe un circuit (z0, z1, . . . , z0) dans
+le graphe et notons sa longueur (relativement `a f )
+
+l =P f (zi, zi+1). Alors on peut trouver deux sommets
+
+x, y tel qu’un chemin optimal (de longueur L relative-
+ment `a f ) entre ces deux sommets passe par un des
+sommets zi (prendre x = z0 !) ce chemin s’´ecrit donc
+C = (x, . . . , z0, . . . , y). Dans ce cas en rajoutant autant
+de tours de circuits qu’on le souhaite on obtient un nou-
+veau chemin
+
+Ck = (x, . . . , z0, . . . , z0
+
+, . . . , z0, . . . , z0
+
+, . . . , y) ⇒ Lk = L+k× Xi=0,...
+}
+
+|
+
+{z
+
+1er tour
+
+ki`eme tour
+
+|
+
+{z
+
+}
+
+en faisant tendre k → ∞ on obtient, selon le signe de l, que la longueur de Ck tend
+vers ±∞. Il ne peut donc pas exister de distance minimale entre x et y si l < 0 et
+il ne peut donc pas exister de distance maximale entre x et y si l > 0. (cid:3)
+
+z3
+
+f (z2, z0)
+
+x
+
+z0
+
+f (z1, z2)
+
+y
+
+f (z0, z1)
+
+z1
+
+f (zi, zi+1)! = L+k×l
+
+55
+
+56
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+La premier algorithme pour calculer les distances minimales consiste `a calculer
+toutes les distances entres couples de sommets (i, j) en essayant de les diminuer en
+passant par un autre sommet k. C’est l’algorithme de Floyd-Warshall-Roy.
+
+D´eﬁnition 3.5 (algorithme de Floyd-Warshall-Roy) Dans un graphe orient´e
+valu´e G = (S, A, f ), d’ordre n et de taille m. L’algorithme de Floyd-Warshall calcule
+deux matrices de taille n × n
+
+• Dist matrice des distances telle que Dist(x, y) = distance optimale de x `a y
+• P red matrice des pr´ed´ecesseurs telle que P red(x, y) = pr´ed´ecesseur de y dans
+
+le chemin optimal depuis x
+
+Pour le plus court chemin l’algorithme s’´ecrit :
+
+✬
+
+fonction [Dist, P red] = FLOYD(G)
+
+Initialisation :
+n = nombre de sommets de G
+Dist = matrice des poids relativement `a f
+
+initialis´ee `a 0 sur la diagonale Dist(s, s) = 0, ∀s = 1, . . . , n
+
+P red = matrice des pr´ed´ecesseurs initialis´ee `a
+
+P red(i, j) = i si l’arc (i, j) existe, 0 sinon
+
+Traitement :
+pour z = 1 jusqu’`a n faire
+
+pour x = 1 jusqu’`a n faire
+
+pour y = 1 jusqu’`a n faire
+
+si Dist(x, z) + Dist(z, y) < Dist(x, y)
+
+alors modiﬁer Dist(x, y) et P red(x, y) = P red(z, y)
+
+ﬁn
+ﬁn faire
+
+ﬁn faire
+
+ﬁn faire
+
+✫
+
+ 3.3 Appliquer l’algorithme de Floyd-Warshall-Roy pour trouver les
+plus courts chemins du graphe :
+
+1
+
+3
+
+6
+
+−2
+
+0
+
+2
+
+1
+
+5
+
+11
+
+2
+
+19
+
+9
+
+15
+
+11
+
+4
+
+16
+
+3
+
+Ce graphe poss`ede une valuation n´egative (f (4, 1) = −2) et des circuits de lon-
+gueur positive (comme (1, 6, 5, 1)). En particulier il n’y a pas de chemins les plus
+
+✩
+
+✪
+
+Dist3 =
+
+P red =
+
+ L’algorithme de Floyd-Warshall-Roy fonctionne sur tous les graphes mais a deux
+
+d´efauts :
+• son temps de calcul est tr`es long (∼ n3) et il consomme beaucoup de
+
+m´emoire
+
+• il calcule l’ensemble des distances entre tout couple de sommets alors
+qu’on peut souvent se contenter des distance depuis un sommet par-
+ticulier
+
+57
+
+58
+
+long dans ce graphe.
+
+• ´etape k = 0
+
+• ´etape k = 4
+
+Dist0 =
+
+Dist4 =
+
+0 ∞ ∞ ∞ ∞ 3
+∞ 0
+11 ∞
+1
+15
+∞ ∞ 0
+16 ∞ ∞
+−2 ∞ ∞ 0
+2 ∞
+0 ∞ ∞ ∞ 0 ∞
+∞ 9
+0
+
+11 ∞ 19
+
+• ´etape k = 1
+
+• ´etape k = 5
+
+
+
+
+
+
+Dist1 =
+
+0 ∞ ∞ ∞ ∞ 3
+∞ 0
+11 ∞
+1
+15
+∞ ∞ 0
+16 ∞ ∞
+−2 ∞ ∞ 0
+1
+2
+0 ∞ ∞ ∞ 0
+3
+∞ 9
+11 ∞ 19
+0
+
+• ´etape k = 2
+
+Dist2 =
+
+• ´etape k = 3
+
+0 ∞ ∞ ∞ ∞ 3
+∞ 0
+11 ∞
+1
+15
+16 ∞ ∞
+∞ ∞ 0
+−2 ∞ ∞ 0
+2
+1
+0 ∞ ∞ ∞ 0
+3
+∞ 9
+11 10 19
+0
+
+0 ∞ ∞ ∞ ∞ 3
+∞ 0
+11 ∞
+1
+15
+16 ∞ ∞
+∞ ∞ 0
+−2 ∞ ∞ 0
+1
+2
+0 ∞ ∞ ∞ 0
+3
+∞ 9
+0
+11 10 19
+
+
+
+
+
+
+Dist5 =
+
+• ´etape k = 6
+
+Dist6 =
+
+
+
+
+
+
+0
+
+3
+
+0 ∞ ∞ ∞ ∞ 3
+−1
+1
+15
+2
+14 ∞ 0
+16 18 17
+−2 ∞ ∞ 0
+1
+2
+0 ∞ ∞ ∞ 0
+3
+8
+11 10 12
+0
+
+9
+
+0
+
+3
+
+0 ∞ ∞ ∞ ∞ 3
+−1
+1
+15
+2
+14 ∞ 0
+16 18 17
+−2 ∞ ∞ 0
+2
+1
+0 ∞ ∞ ∞ 0
+3
+8
+11 10 12
+0
+
+9
+
+12 14 13 15
+0
+−1
+13
+0
+3
+14 26
+0
+−2 10 12
+0
+8
+
+3
+1
+2
+16 18 17
+1
+0
+12 14 13
+3
+0
+9
+
+2
+0
+11 10 12
+
+
+
+
+
+0 6 6 2 4 1
+4 0 6 2 4 1
+4 6 0 3 4 1
+4 6 6 0 4 1
+5 6 6 2 0 1
+4 6 6 2 4 0
+
+
+
+• la liste des pr´ed´ecesseurs corres-
+
+pondante est
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+Les d´efauts de l’algorithme de Floyd-Warshall-Roy, nous obligent `a chercher d’autres
+algorithmes moins coˆuteux. Le premier d’entre eux est l’algorithme de Bellman-Ford.
+
+D´eﬁnition 3.6 (algorithme de Bellman-Ford-Kalaba) Soit un graphe orient´e
+valu´e G = (S, A, f ), d’ordre n et de taille m, et x un sommet de G. L’algorithme de
+Bellman calcule deux matrices de taille 1 × n
+
+• Dist matrice des distances telle que Dist(y) = distance optimale de x `a y
+• P red matrice des pr´ed´ecesseurs telle que P red(y) = pr´ed´ecesseur de y dans
+
+le chemin optimal depuis x
+
+Pour le plus court chemin l’algorithme s’´ecrit :
+
+✬
+
+✫
+
+fonction [Dist, P red] = BELLMAN(G, s)
+
+Initialisation : n = nombre de sommets de G
+P red = tableau des pr´ed´ecesseurs initialis´e `a 0
+Dist = tableau des distances initialis´e `a +∞ (sauf Dist(s) = 0)
+W = matrice des poids des arcs (∞ si l’arc n’existe pas)
+Traitement : k = 1
+tant que k ≤ n et il y a eu des modiﬁcations `a l’´etape pr´ec´edente faire
+
+pour tout sommet x faire
+
+pour tout y successeur de x faire
+
+si Dist(x) + W (x, y) < Dist(y)
+
+alors modiﬁer Dist(y) et P red(y) = x
+
+ﬁn
+
+ﬁn faire
+
+ﬁn faire
+k = k + 1
+
+ﬁn faire
+
+ 3.4 Appliquer l’algorithme de Bellman-Ford-Kalaba : pour trouver les
+plus courts chemins du graphe G depuis le sommet 2 et faire apparaˆıtre l’arbre de
+parcours sur le graphe
+
+k
+0
+1
+1
+2
+2
+
+Dist
+4
+
+3
+
+5
+
+6
+
+1
+
+2
+
+x
+1
+0 ∞ 0 ∞ ∞ ∞ ∞ 0
+11 ∞ 0
+2 ∞ 0
+3 ∞ 4
+0
+4
+1
+0
+3
+4
+3
+6
+4
+0
+−2
+1
+
+15
+15
+15
+13
+
+-1
+-1
+-1
+
+1
+1
+1
+1
+
+2
+2
+
+Pred
+2 3 4
+0 0 0
+0 2 2
+0 2 2
+0 2 2
+0 6 2
+
+5 6
+0 0
+2 0
+4 0
+4 1
+4 1
+4
+
+3
+
+6
+
+0
+
+2
+
+1
+
+5
+
+11
+
+2
+
+19
+
+9
+
+15
+
+11
+
+59
+
+16
+
+3
+
+✩
+
+✪
+
+ l’algorithme de Bellman-Ford fonctionne sur tout les graphes mais a un
+temps de calcul encore relativement long (∼ n2 × m ≈ n3) mais consomme
+moins de m´emoire.
+
+L’algorithme de Bellman-Ford-Kalaba reste encore coˆuteux et complexe. Dans de
+nombreux cas on peut simpliﬁer la recherche d’un chemin optimal `a condition que
+le graphe poss`ede certaines propri´et´es. Le premier exemple d’une telle situation
+est l’algorithme de Dijkstra, que l’on peut utiliser pour la recherche de chemins
+minimaux dans un graphe `a valuations positives.
+
+D´eﬁnition 3.7 (algorithme de Dijkstra-Moore) Soit un graphe orient´e valu´e
+G = (S, A, f ), d’ordre n et de taille m, et x un sommet de G. L’algorithme de
+Dijkstra calcule deux matrices de taille 1 × n
+
+• Dist matrice des distances telle que Dist(y) = distance optimale de x `a y
+• P red matrice des pr´ed´ecesseurs telle que P red(y) = pr´ed´ecesseur de y dans
+
+le chemin optimal depuis x
+
+Pour le plus court chemin l’algorithme s’´ecrit :
+
+✩
+
+✬
+
+fonction [Dist, P red] = DIJKSTRA(G, s)
+
+Initialisation :
+n = nombre de sommets de G
+P red = tableau des pr´ed´ecesseurs initialis´e `a 0
+Dist = tableau des distances initialis´e `a +∞ (sauf Dist(s) = 0)
+W = matrice des poids des arcs (∞ si l’arc n’existe pas)
+C = {1; 2; . . . ; n} (liste des sommets restant `a traiter)
+D = ∅ (liste des sommets d´ej`a trait´es)
+Traitement :
+tant que C 6= ∅ faire
+
+x = sommet de C le plus proche de s
+retirer x de C et le mettre dans D
+pour tout sommet y ∈ C faire
+
+si Dist(x) + W (x, y) < Dist(y)
+
+alors modiﬁer Dist(y) et P red(y) = x
+
+ﬁn
+
+ﬁn faire
+
+ﬁn faire
+
+✫
+
+✪
+ L’algorithme de Dijkstra a un temps d’ex´ecution assez rapide (∼ n2) mais a
+
+deux d´efauts :
+• il ne s’applique qu’aux graphes `a valuations positives
+• il ne marche que pour trouver les plus courts chemins
+
+Preuve : L’algorithme de Dijkstra est bas´e sur le fait qu’`a chaque ´etape de l’al-
+gorithme, pour tout ´el´ement x de C, Dist(x) est la plus petit distance de s `a x.
+L’eﬃcacit´e de l’algorithme de Dijkstra peut donc se d´emontrer par r´ecurrence :
+
+60
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+• hypoth`ese de r´ecurrence Pk `a une ´etape k de l’algorithme : ≪ pour tout
+
+´el´ement x de D, Dist(x) est la plus petit distance de s `a x ≫
+
+• P0 est vraie : D = {s} et Dist(s) = 0 (par initialisation) est bien minimale.
+• Pk ⇒ Pk+1 `a l’´etape k de l’algorithme les distances dans Dist sont mini-
+males. Soit x le k + 1i`eme sommet trait´e par l’algorithme, x est ajout´e `a D.
+Supposons qu’il existe un plus court
+chemin de la source `a x passant par
+y /∈ D, on aurait donc :
+
+x
+
+Dist(s, y) + Dist(y, x) ≤ Dist(s, x)
+
+si les valuations sont toutes positives
+Dist(y, x) ≥ 0 d’o`u l’on tire que
+Dist(s, y) ≤ Dist(s, x). On aurait
+donc du traiter y avant x dans l’algo-
+rithme ! ! ! Ce qui n’est pas possible.
+
+C
+
+s
+
+Dist(y, x)
+
+y
+
+(cid:3)
+L’algorithme de Dijkstra ne peut pas ˆetre utilis´e sur le graphe G `a cause de la
+valuation n´egative f (4, 1) = −2. Si on change cette valuation en un nombre positif
+on peut alors calculer les distances par l’algorithme de Dijkstra.
+
+ 3.5 Appliquer l’algorithme de Dijkstra-Moore sur le graphe GD pour
+calculer les chemins les plus courts depuis le sommet 6
+
+1
+
+3
+
+6
+
+2
+
+0
+
+2
+
+1
+
+5
+
+11
+
+2
+
+19
+
+9
+
+15
+
+11
+
+4
+
+16
+
+3
+
+D
+x
+{}
+0
+{6}
+6
+{6 ;2}
+2
+{6 ;2 ;4}
+4
+{6 ;2 ;4 ;3}
+3
+{6 ;2 ;4 ;3 ;1}
+1
+5 {6 ;2 ;4 ;3 ;1 ;5}
+
+Dist
+3
+
+5
+
+4
+
+1
+
+2
+
+C
+
+6
+{1 ;2 ;3 ;4 ;5 ;6} ∞ ∞ ∞ ∞ ∞ 0
+11 ∞ 19 0
+{1 ;2 ;3 ;4 ;5} ∞ 9
+{1 ;3 ;4 ;5} ∞ 9
+19 0
+11 10
+{1 ;3 ;5}
+12 0
+11 10
+9
+{1 ;5}
+9
+11 10
+12 0
+{5}
+12 0
+11 10
+9
+{}
+9
+11 10
+12 0
+
+12
+12
+12
+12
+
+Pred
+3 4
+0 0
+6 0
+6 2
+6 2
+6 2
+6 2
+6 2
+
+1 2
+0 0
+0 6
+0 6
+4 6
+4 6
+4 6
+4 6
+
+5 6
+0 0
+6 0
+6 0
+4 0
+4 0
+4 0
+4 0
+
+ 3.6 contre-exemple pour l’algorithme de Dijkstra pour des valua-
+tions n´egatives Pour le graphe suivant il est facile de voir que Dist = 0 2
+4
+
+contrairement `a ce que donne l’algorithme de Dijkstra :
+
+3
+
+1
+
+-2
+
+4
+
+2
+
+3
+
+D
+s
+{}
+0
+{1}
+1
+{1 ;2}
+2
+3 {1 ;2 ;3}
+
+Dist
+2
+
+Pred
+
+3
+
+1
+
+C
+
+1 2
+{1 ;2 ;3} 0 ∞ ∞ 0 0
+{2 ;3}
+0 1
+{3}
+0 1
+{}
+0 1
+
+4
+4
+4
+
+3
+3
+3
+
+0
+0
+0
+
+3
+0
+1
+1
+1
+
+ Le protocole de routage OSPF (Open Shortest Path First), de type “link
+state”, utilise l’algorithme de Dijkstra pour calculer le chemin optimal dans un
+r´eseau.
+
+De mˆeme pour un graphe d´ecomposable en niveaux, quelque soit ses valuations
+et quelque soit le type de chemin recherch´e, on pourra utiliser un autre algorithme :
+l’algorithme de Bellman-Kalaba.
+
+D´eﬁnition 3.8 (algorithme de Bellman simpliﬁ´e) Soit un graphe orient´e
+valu´e G = (S, A, f ), d’ordre n et de taille m, et x un sommet de G. L’algorithme de
+Bellman simpliﬁ´e calcule deux matrices de taille 1 × n
+
+• Dist matrice des distances telle que Dist(y) = distance optimale de x `a y
+• P red matrice des pr´ed´ecesseurs telle que P red(y) = pr´ed´ecesseur de y dans
+
+le chemin optimal depuis x
+
+Pour le plus court chemin l’algorithme s’´ecrit :
+
+✩
+
+✬
+
+fonction [Dist, P red] = BELLMAN SIMPLE(G, s)
+
+Initialisation :
+P red = tableau des pr´ed´ecesseurs initialis´e `a 0
+Dist = tableau des distances initialis´e `a +∞ (sauf Dist(s) = 0)
+W = matrice des poids des arcs (∞ si l’arc n’existe pas)
+Faire la d´ecomposition en niveau de G
+Traitement :
+pour tout k = niveau(s) + 1 jusqu’`a niveau maximum faire
+
+pour tout sommet x du niveau k faire
+
+pour tout sommet y pr´ed´ecesseur de x faire
+
+si Dist(y) + W (y, x) < Dist(x)
+
+alors modiﬁer Dist(x) et P red(x) = y
+
+ﬁn
+
+ﬁn faire
+
+ﬁn faire
+
+ﬁn faire
+
+✫
+ l’algorithme de Bellman simpliﬁ´e a un temps d’ex´ecution assez rapide (∼ n2)
+mais ne s’applique qu’aux graphes d´ecomposable en niveaux (donc sans cir-
+cuits)
+
+✪
+
+61
+
+62
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+On ne peut pas appliquer l’algorithme de Bellman simpliﬁ´e sur le graphe de
+d´epart `a cause des circuits (6, 3, 4, 1, 6), (6, 5, 1, 6),. . .. Si on inverse l’arc (1, 6) on
+aura plus aucun circuit et l`a on peut appliquer notre algorithme.
+
+ 3.7 Appliquer l’algorithme de Bellman simpliﬁ´e sur le graphe GK pour
+calculer les chemins les plus courts depuis le sommet 2
+
+1
+
+3
+
+6
+
+−2
+
+0
+
+2
+
+1
+
+5
+
+11
+
+2
+
+19
+
+9
+
+15
+
+11
+
+la d´ecomposition en niveaux donne :
+
+6
+
+9
+
+ce qui donne :
+
+3
+
+16
+
+11
+
+11
+
+2
+
+15
+
+3
+
+1
+
+19
+
+−2
+
+4
+
+2
+
+5
+
+4
+
+16
+
+3
+
+0
+
+1
+
+Dist
+4
+
+3
+
+2
+
+6
+
+1
+
+5
+
+niv
+1
+1 ∞ 0 ∞ ∞ ∞ ∞ 0
+15 ∞ ∞ ∞ 0
+2 ∞ 0
+1 ∞ ∞ 0
+3 ∞ 0
+15
+3 ∞ 0
+4 ∞ 0
+1
+15
+3 ∞ 4
+5
+0
+15
+1
+
+-1
+
+Pred
+
+2 3
+0 0
+0 2
+0 2
+0 2
+0 2
+
+4 5 6
+0 0 0
+0 0 0
+2 0 0
+2 4 0
+2 4 0
+
+ Les algorithmes de Floyd-Warshall-Kalaba et de Bellman (mais pas l’algorithme
+de Dijkstra) permettent aussi de calculer les chemins de longueur maximale
+dans un graphe. Dans ce cas il suﬃt de faire les modiﬁcations suivantes dans les
+algorithmes donn´ees :
+
+• changer Dist(y)+W (y, x) < Dist(x) en Dist(y)+W (y, x) > Dist(x)
+
+dans les conditionnelles
+
+• initialiser les distances `a −∞ au lieu de `a +∞
+
+Dans la pratique la liste P red calcul´e par ces diﬀ´erents algorithmes correspond
+
+`a la table de routage d´ecrivant les meilleurs chemins.
+
+3.3 Ordonnancement et gestion de projet
+
+La planiﬁcation d’un projet regroupe l’ensemble des m´ethodes permettant de
+trouver l’organisation optimale du projet (dur´ee minimale, identiﬁcation des tˆaches
+critiques, . . .). Ce probl`eme peut ˆetre mod´elis´e `a l’aide d’un r´eseau PERT (≪ pro-
+ject evaluation and review technique ≫) et r´esolu `a l’aide de la th´eorie des graphes.
+Historiquement le PERT a ´et´e cr´e´e en 1956 `a la demande de la marine am´ericaine,
+pour planiﬁer la dur´ee de son programme de construction de missiles balistiques
+nucl´eaires miniaturis´es Polaris (qui n´ecessitait l’intervention de 9000 sous-traitants
+et 250 fournisseurs) aﬁn de rattraper le retard en mati`ere de balistique, apr`es le choc
+de la ≪ crise de Spoutnik ≫, par rapport `a l’URSS. L’utilisation de la th´eorie des
+graphes a permis de r´eduire la dur´ee du projet `a 4 ans alors que le d´elai initial ´etait
+estim´e `a 7 ans !
+
+D´eﬁnition 3.9 (projet) un projet P est constitu´e par :
+
+• un ensemble de tˆaches `a r´ealiser (Ai)i=1,...,n avec, pour chaque tˆache, une date
+
+de commencement ti et une dur´ee di,
+
+• un ensemble de ≪ contraintes ≫ sur les tˆaches du projets, contraintes qui
+peuvent s’exprimer par des in´egalit´es faisant intervenir les dates (ti)i=1,...,n
+et les dur´ees (di)i=1,...,n
+
+Trouver un ordonnancement pour le projet consister `a calculer, `a partir des dur´ees
+(di)i=1,...,n, des dates de commencement (ti)i=1,...,n qui soient compatibles avec les
+contraintes du projet.
+
+ 3.8 un exemple de projet et de contraintes : On le pr´esente en g´en´eral
+sous forme d’un tableau :
+
+Tˆaches Op´erations et contraintes
+
+Dur´ee en
+
+jours
+
+1
+2
+3
+
+4
+5
+6
+
+7
+
+D´ebut du projet
+aucune contrainte
+commence au plus tˆot 1 jour apr`es le d´ebut du projet
+commence au plus tard 8 jours apr`es le d´ebut de (4)
+commence au plus tˆot 1 jours apr`es la ﬁn de (2)
+commence au plus tˆot 1 jours avant la ﬁn de (2)
+commence au plus tˆot apr`es le d´ebut de (4) et apr`es la
+ﬁn de (5)
+Fin projet
+
+0
+11
+5
+
+8
+5
+4
+
+0
+
+Il est diﬃcile de concevoir un planning directement `a partir d’une liste de contraintes,
+par exemple :
+
+• l’ordonnancement
+
+i
+ti
+
+1 2
+0 1
+
+4
+
+3
+6
+14 13 11 16
+
+5
+
+7
+21
+
+est compatible
+
+t1
+
+t2
+
+t5
+
+t4
+
+t3
+
+t6
+
+t7
+
+0
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+
+9 10 11 12 13 14 15 16 17 18 19 20 21 22
+
+63
+
+64
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+i
+ti
+
+t3
+
+1 2
+0 0
+
+3
+4
+5 12
+
+6
+
+5
+7
+10 14 20
+
+n’est pas compatible
+
+t5
+
+t4
+
+t6
+
+t7
+
+• l’ordonnancement
+
+t1 t2
+
+|{z}
+
+1
+
+2
+
+3
+
+4
+
+0
+car on doit avoir plus de 5 jours entre le d´ebut de la tˆache 5 et le d´ebut de la
+tˆache 6
+
+9 10 11 12 13 14 15 16 17 18 19 20 21 22
+
+7
+
+5
+
+8
+
+6
+
+Pour rendre tout cela plus lisible nous allons traduire les contraintes sous forme
+d’in´egalit´es entre les dates de commencement de chaque tˆache. Il faudra pour cela
+bien identiﬁer les diﬀ´erents types de contrainte que l’on rencontre.
+
+Proposition 3.10 (type de contraintes) On traduira les diﬀ´erentes contraintes
+en in´egalit´es de la mani`ere suivante :
+
+contrainte au plus tˆot ≪ Aj commence au plus tˆot δ apr`es le d´ebut de Ai ≫
+
+tj − ti ≥ δ
+
+contrainte au plus tard ≪ Aj commence au plus tard δ apr`es le d´ebut de Ai ≫
+
+tj − ti ≤ δ ⇐⇒ ti − tj ≥ −δ
+
+contraintes implicites ≪ toute tˆache Ai doit d´emarrer au plus tˆot au d´ebut du
+
+projet (A1) et ﬁnir au plus tard `a la ﬁn du projet (An) ≫
+
+ti − t1 ≥ 0
+
+et
+
+tn − ti ≥ di
+
+ 3.9 Traduire les contraintes du projet en in´equations :On essaie de
+traduduire chaque contrainte par une in´egalit´e de la forme tj − ti ≥ δ
+
+contraintes
+(3) commence au plus tˆot 1 jour apr`es le d´ebut de (1)
+(3) commence au plus tard 8 jours apr`es le d´ebut de (4)
+(4) commence au plus tˆot 1 jours apr`es la ﬁn de (2)
+(5) commence au plus tˆot 1 jours avant la ﬁn de (2)
+(6) commence au plus tˆot apr`es le d´ebut de (4)
+(6) commence au plus tˆot apr`es la ﬁn de (5)
+
+´equation
+t3 − t1 ≥ 1
+t4 − t3 ≥ −8
+
+t4 − t2 ≥ 11 + 1 = 12
+t5 − t2 ≥ 11 − 1 = 10
+
+t6 − t4 ≥ 0
+
+t6 − t5 ≥ d5 = 5
+
+`A partir des ´equations obtenues on va pouvoir repr´esenter ce projet par un graphe
+orient´e et valu´e.
+D´eﬁnition 3.11 (graphe potentiel-tˆache, r´eseau PERT) On associe `a un
+probl`eme d’ordonnancement un graphe orient´e et valu´e G = (S, A, f ) tel que :
+• Chaque tˆache Ai du projet sera repr´esent´e par un sommet xi du graphe
+• chaque contrainte tj − ti ≥ d du projet sera repr´esent´ee par un arc (xi, xj) de
+
+valuation f (xi, xj) = d
+
+On ajoutera ´eventuellement des contraintes implicites pour que chaque tˆache dans
+le graphe appartienne `a au moins un chemin reliant la tˆache de d´ebut de projet et
+celle de ﬁn de projet.
+
+ 3.10 Repr´esenter le projet par un graphe :
+
+3
+
+2
+
+1
+
+0
+
+1
+
+5
+
+0
+
+5
+
+−8
+
+12
+
+10
+
+4
+
+5
+
+8
+
+6
+
+4
+
+7
+
+ici on a du ajouter deux arcs correspondant `a des contraintes implicites :
+
+• l’arc (1, 2) avec le poids 0 ⇐⇒ t2 − t1 ≥ 0 (A2 d´ebute apr`es le d´ebut)
+• l’arc (6, 7) avec le poids 4 ⇐⇒ t7 − t6 ≥ d6 = 4 (A7 commence au plus tˆot `a
+
+la ﬁn de A6)
+
+ Les valuations du graphe potentiel-tˆache peuvent tr`es bien ˆetre n´egatives.
+Les contraintes ≪ au plus tard ≫ feront apparaˆıtre des circuits dans le graphe
+potentiel-tˆache.
+
+Th´eor`eme 3.12 (ordonnancement au plus tˆot) L’ordonnancement au plus tˆot
+d’un projet consiste `a trouver les dates de commencement (ti)i=1,...,n de chaque tˆache
+telles que le projet soit ﬁni le plus rapidement possible. Pour calculer cet ordon-
+nancement il suﬃt de calculer les chemins les plus longs dans le graphe G
+(relativement `a f ) depuis le sommet correspondant au d´ebut du projet. Les distances
+obtenues donnent les dates de commencement de chaque tˆache :
+
+ti = Dist(xi), ∀i = 1, . . . , n
+
+Si xn correspond `a la tˆache de ﬁn du projet alors la dur´ee totale du projet est tn.
+
+ 3.11 Calculer l’ordonnancement au plus tˆot : ici le graphe de G ne
+poss`ede pas de circuits on peut utiliser l’algorithme de Bellman simpliﬁ´e (le graphe
+est d´ej`a d´ecompos´e en niveaux) ce qui donne :
+
+Dist
+4
+
+2
+
+7
+
+3
+
+5
+
+6
+
+1
+1
+0 -∞ -∞ -∞ -∞ -∞ -∞ 0
+-∞ -∞ -∞ -∞ 0
+0
+-∞ -∞ 0
+12
+0
+-∞ 0
+15
+12
+0
+0
+12
+15
+20
+0
+
+10
+10
+10
+
+0
+0
+0
+0
+
+1
+1
+1
+1
+
+Pred
+
+2 3 4
+0 0 0
+1 1 0
+1 1 2
+1 1 2
+1 1 2
+
+5 6
+0 0
+0 0
+2 0
+2 5
+2 5
+
+7
+0
+0
+0
+0
+4
+
+niv
+0
+1
+2
+3
+4
+
+65
+
+66
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+La dur´ee minimale de r´ealisation du projet est donc de 20 jours qui correspond `a
+l’ordonnancement :
+
+on en d´eduit l’ordonnancement au plus tard pour la dur´ee T = 22 :
+
+i
+ti
+
+1 2
+0 0
+
+4
+
+3
+5
+1 12 10
+
+6
+7
+15 20
+
+ Lorsqu’il n’y a pas de circuits dans le graphe on peut utiliser l’algorithme de
+Bellman simpliﬁ´e pour calculer l’ordonnancement correspondant. Dans les autres
+cas il faudra utiliser l’algorithme de Bellman g´en´eral !
+
+Th´eor`eme 3.13 (ordonnancement au plus tard) Pour une dur´ee T , l’ordon-
+nancement au plus tard d’un projet consiste `a trouver les dates les plus tardives de
+commencement (ti)i=1,...,n de chaque tˆache telles que la dur´ee du projet soit au maxi-
+mum de T . Pour calculer cet ordonnancement il suﬃt de calculer les chemins les
+plus longs dans le graphe r´eciproque G−1 (toujours relativement `a f ) depuis
+le sommet correspondant `a la ﬁn du projet. Les distances obtenues donnent le temps
+restant `a partir du commencement d’une tˆache jusqu’`a la ﬁn du projet, en d’autres
+termes la tˆache i doit d´emarrer au plus tard `a la date :
+
+ti = T − Dist(xi), ∀i = 1, . . . , n
+
+ 3.12 Calculer l’ordonnancement au plus tard pour T = 22 jours : on
+calcule d’abord le graphe r´eciproque de G (en conservant les poids des arcs)
+
+7
+
+4
+
+8
+
+6
+
+5
+
+0
+
+5
+
+4
+
+−8
+
+3
+
+12
+
+5
+
+10
+
+2
+
+1
+
+0
+
+1
+
+on calcule les chemins les plus longs depuis le sommet 7 (avec l’algorithme de Bell-
+man simpliﬁ´e puisque G−1 est d´ecompos´e en niveaux) :
+
+2
+
+5
+
+6
+
+Dist
+4
+
+niv
+0
+1
+2
+3
+4
+
+3
+
+7
+1
+-∞ -∞ -∞ -∞ -∞ -∞ 0
+-∞ -∞ -∞ -∞ -∞ 4
+0
+-∞ -∞ -∞ 8
+0
+4
+-∞ 20
+0
+4
+8
+20
+20
+8
+4
+0
+
+9
+9
+9
+
+5
+5
+
+Pred
+
+3 4
+0 0
+0 0
+0 7
+7 7
+7 7
+
+5 6 7
+0 0 0
+0 7 0
+6 7 0
+6 7 0
+6 7 0
+
+1 2
+0 0
+0 0
+0 0
+0 4
+2 4
+
+i
+
+Dist(i)
+
+ti = T − Dist(i)
+
+1
+2
+20 20
+2
+2
+
+4
+8
+
+6
+3
+5
+4
+17 14 12 18
+
+5
+9
+
+7
+0
+22
+
+ Si le graphe G n’a pas de circuits alors il en va de mˆeme pour le graphe r´eciproque
+G−1. On peut donc utiliser l’algorithme de Bellman simpliﬁ´e pour calculer ces
+ordonnancements, mais attention, les niveaux de G et G−1 ne sont pas forc´ement
+les mˆemes !
+
+Les ordonnancements au plus tˆot et au plus tard permettent de visualiser les tˆaches
+les plus critiques du projet, pour lesquelles on ne peut pas prendre de retard sans
+r´epercution sur la date de ﬁn du projet.
+
+Th´eor`eme 3.14 (chemin critique) Si T est la dur´ee minimale du projet (calcul´ee
+via l’ordonnancement au plus tˆot) le chemin le plus long depuis la tˆache de d´ebut
+de projet jusqu’`a celle de ﬁn de projet est appel´e chemin critique tout retard sur
+la r´ealisation d’une des tˆache de ce chemin critique entraˆıne un allongement de
+la dur´ee du projet. Pour les autres sommet du graphe potentiel-tˆache il existe une
+marge sur la dur´ee de r´ealisation de la tˆache, marge d´eﬁnie par :
+
+marge =≪ date de d´ebut pour l’ordonnancement au plus tard
+
+− date de d´ebut pour l’ordonnancement au plus tˆot ≫
+
+ 3.13 Repr´esenter le chemin critique et calculer les marges pour T =
+22 : le chemin critique (1, 2, 4, 7) s’obtient donc en faisant apparaˆıtre l’arbre de
+parcours correspondant `a la liste de pr´ed´ecesseurs calcul´ee avec l’ordonnancement
+au plus tˆot : P red = 0 1
+
+1 2 2
+
+5 4
+
+3
+
+2
+
+1
+
+0
+
+1
+
+5
+
+0
+
+5
+
+−8
+
+12
+
+10
+
+4
+
+5
+
+8
+
+6
+
+4
+
+7
+
+On a donc une marge sur la r´ealisation des tˆaches 3 et 6 mais pas pour les tˆaches
+2,4 et 5 comme le montre le calcul des marges :
+
+67
+
+68
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+i
+
+au plus tˆot
+au plus tard
+
+marge
+
+3
+1 2
+0 0
+1
+2 2 17
+2 2 16
+
+6
+
+5
+
+4
+7
+12 10 15 20
+14 12 18 22
+2
+2
+
+2
+
+3
+
+La marge est donc au minimum de 2 jours (normal puisqu’on a ﬁx´ee une dur´ee
+T = 22 alors que la dur´ee minimale est de 20 jours). En cas de besoin (absences,
+probl`emes tecniques,. . .) on pourra donc prendre des ressources sur la r´ealisation de
+la tˆache 3 pour aider sur les autres tˆaches critiques.
+
+ Il peut y avoir plusieurs chemins critiques dans un graphe potentiel tˆache.
+
+D´eﬁnition 3.15 (contrainte redondante) On dira qu’une contrainte d’un projet
+est redondante si dans le r´eseau PERT G = (S, A, f ) associ´e elle correspond `a un
+arc (xi, xj) tel qu’il existe un chemin de xi `a xj de longueur δ (relativement `a f )
+telle que f (xi, xj) < δ.
+
+ 3.14 Ajout d’une contrainte redondante au projet : si on ajoute la
+contrainte :
+
+La tache (2) doit commencer au plus tˆot 1 semaine avant la tˆache (6)
+
+on obtient un nouveau graphe :
+
+3
+
+2
+
+1
+
+0
+
+1
+
+5
+
+0
+
+5
+
+−8
+
+12
+
+10
+
+4
+
+7
+
+5
+
+8
+
+6
+
+4
+
+7
+
+pourtant on comprend bien que cette contrainte est inutile puisque la tˆache 2 doit de
+toute fa¸con d´emarrer au moins 15 jours avant la tˆache 6 `a cause du chemin (2, 5, 6).
+Dans la pratique de nombreuses contraintes implicites sont ignor´ees car redondantes.
+
+3.4 Flots dans les r´eseaux
+
+L’une des applications les plus importantes de la th´eorie des graphes est l’opti-
+misation des ﬂots dans les r´eseaux. Pour ´etudier ce probl`eme il faut d’abord d´eﬁnir
+ce qu’est un r´eseau de transport.
+
+D´eﬁnition 3.16 (r´eseau de transport) Un r´eseau de transport est un quadruplet
+(G, s, t, C) o`u
+
+• G = (S, A) est un graphe orient´e simple
+• s est un sommet sans pr´ed´ecesseur appel´e ≪ source ≫
+• t est un sommet sans successeur appel´e ≪ puits ≫
+• C : A −→ R+ est une valuation positive de G appel´ee ≪ capacit´e ≫
+
+pour un ensemble de sommets W ⊂ S on notera
+arcs entrants en W : l’ensemble d’arcs W − = {(x, y) ∈ A|x /∈ W et y ∈ W }
+arcs sortants de W : l’ensemble d’arcs W + = {(x, y) ∈ A|x ∈ W et y /∈ W }
+si W = {z} est un singleton on notera ces ensembles simplement z+ et z−.
+
+Le r´eseau de transport va donc servir de support `a ≪ un ﬂot ≫. Ce ﬂot est en fait
+une seconde valuation attach´ee au graphe repr´esentant le r´eseau.
+
+D´eﬁnition 3.17 (ﬂot) Soit (G, s, t, C) un r´eseau de transport, alors un ﬂot sur ce
+graphe G = (S, A) est une valuation positive f : A −→ R+ qui v´eriﬁe :
+
+• le ﬂot ne d´epasse pas la capacit´e
+
+∀(x, y) ∈ A, 0 ≤ f (x, y) ≤ C(x, y)
+
+• la loi des nœuds
+
+f (x, z) = X(z,y)∈z−
+
+f (z, y)
+
+Pour tout sommet z on appelle :
+
+∀z ∈ S \ {s; t}, X(x,z)∈z+
+ﬂot entrant en z : la quantit´e f −(z) = X(x,z)∈z−
+ﬂot sortant de z : la quantit´e f +(z) = X(z,y)∈z+
+
+Et on dira que le ﬂot f sur l’arc (x, y) est :
+
+f (x, z)
+
+f (z, y)
+
+satur´e :
+
+si f (x, y) = C(x, y)
+
+nul : si f (x, y) = 0
+
+La contrainte la plus importante pour un ﬂot est la loi des nœuds. Elle a ´et´e pos´ee
+par le physicien allemand Gustav Kirchhoﬀ en 1845, lorsqu’il a ´etabli les r`egles de
+calcul des intensit´es des courants dans un circuit ´electrique. Elle exprime simplement
+la conservation du ﬂux :≪ le ﬂux entrant= le ﬂux sortant ≫.
+
+69
+
+70
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+ 3.15 Repr´esenter un r´eseau de transport et un ﬂot sur un diagramme
+sagittal :
+
+4
+
+26, 16
+
+15, 2
+
+30, 18
+
+1 =⇒
+
+8, 0
+
+3
+
+10, 8
+
+7
+
+14, 10
+
+=⇒ 2
+
+30, 20
+
+10, 10
+
+11, 2
+
+12, 8
+
+6
+
+20, 10
+
+5
+
+• la source est le sommet 1 et le puits est le sommet 2
+• sur chaque arc
+
+— le premier nombre indique la capacit´e
+— le second nombre indique le ﬂot
+par exemple l’arc (3, 7) `a une capacit´e C(3, 7) = 10 et un ﬂot f (3, 7) = 8
+
+• le ﬂot de l’arc (6, 3) est satur´e et le ﬂot de l’arc (4, 6) est nul
+• pour W = {5; 6}
+
+— W − = {(1, 6); (4, 6)} mais ne contient pas (6, 5) !
+— W + = {(6, 3); (5, 7); (5, 2)}
+
+• la loi des nœuds se v´eriﬁe en chaque sommet, par exemple pour 3
+
+— f −(3) = 10 car 3− = {(6, 3)}
+— f +(3) = 8 + 2 = 10 car 3+ = {(3, 4); (3, 7)}
+
+ 3.16 Exemples concrets de r´eseaux de transport et de ﬂot : on peut
+facilement mod´eliser les r´eseaux qu’on rencontre dans la vie courante par un graphe
+orient´e comportant une source et un puits, une capacit´e et un ﬂot :
+
+r´eseau ´electrique : les arcs sont des lignes ´electriques, les ﬂots des quantit´es de
+courant, les sources sont les centrales (hydrauliques, nucl´eaire, ´eoliennes, `a
+charbon,. . .) o`u est produite l’´electricit´e, les puits sont des endroits o`u l’´electricit´e
+est consomm´ee, les capacit´es repr´esentent l’intensit´e du courant `a partir de la-
+quelle une ligne va fondre !
+
+r´eseau de distribution de l’eau : les arcs sont des canalisations, les ﬂots des
+quantit´es d’eau, les capacit´es le d´ebit maximal d’une canalisation, les sources
+peuvent ˆetre des nappes phr´eatiques, des barrages . . ., les puits sont des endroits
+o`u l’eau est rejet´e, une station d’´epuration dans le meilleur des cas !
+
+r´eseau informatique : les arcs peuvent repr´esenter des cˆables de transmission
+(cˆables ´ethernet, cˆables t´el´ephoniques, ﬁbre optique, o`u le vide pour le wiﬁ !),
+les ﬂots sont des quantit´es d’information, les capacit´es le d´ebit maximal d’une
+connexion (Mo/s), les sommets sont des routeurs, la source une machine
+´emettant des informations (un mail par exemple), le puits la machine des-
+tinataire de ces informations,
+
+r´eseau routier : les arcs sont des routes, les ﬂots des quantit´es de voitures, les
+sommets des carrefours, les capacit´es le nombre de voitures `a partir duquel il
+va se former un bouchon, les sources les endroits d’o`u partent les v´ehicules
+(la zone P´egase par exemple), les puits les endroits o`u vont les voitures (mai-
+son/appartement des gens partant de la zone P´egase).
+
+Le vocabulaire utilis´e dans ce chapitre est donc directement h´erit´e de termes utilis´es
+dans chacun des r´eseaux que nous rencontrons dans la vie courante.
+
+ il existe des d´eﬁnitions plus g´en´erales de ﬂots et de r´eseau de transport.
+Par exemple, dans certaines r´ef´erence, on parle parfois de r´eseaux de trans-
+port avec plusieurs sources ou plusieurs puits. On pourra toujours, dans ces
+cas, se ramener `a la d´eﬁnition de ce cours (source et puits unique) en ajoutant :
+• une source s′ et des arcs vers toutes les autres sources du probl`eme (s′, si)
+
+C(si, x) = C(s′, si))
+• un puits t′ et des arcs depuis toutes les autres puits du probl`eme (tj, t′) avec
+
+avec une capacit´e ´egale `a celle sortant de si (P(si,x)∈s+
+une capacit´e ´egale `a celle entrant en tj (P(x,tj )∈t−
+
+Dans d’autres d´eﬁnitions le r´eseau de transport est muni de deux capacit´es
+Cmax et Cmin (´eventuellement n´egatives) avec un ﬂot v´eriﬁant (en plus de la loi des
+nœuds) :
+
+i
+
+C(x, tj) = C(tj, t′))
+
+j
+
+∀(x, y) ∈ A, Cmin(x, y) ≤ f (x, y) ≤ Cmax(x, y)
+
+si Cmin v´eriﬁe la loi des nœuds on peut se ramener au cas trait´e dans ce cours en
+rempla¸cant :
+
+• les capacit´es Cmin et Cmax par une capacit´e d´eﬁnie par
+
+∀(x, y) ∈ A, C(x, y) = Cmax(x, y) − Cmin(x, y)
+
+• le ﬂot f par un nouveau ﬂot ˜f d´eﬁni par
+
+∀(x, y) ∈ A,
+
+˜f (x, y) = f (x, y) − Cmin(x, y)
+
+Dans les probl`emes de r´eseau de transport les ﬂots entrants et sortants d’un
+ensemble de sommets jouent un rˆole tr`es important, ce qui nous am`ene `a d´eﬁnir la
+notion de coupe.
+
+D´eﬁnition 3.18 (coupe) Soit (G, s, t, C) un r´eseau de transport, une coupe est un
+ensemble de sommets contenant la source :
+
+On appelle capacit´e de la coupe W la quantit´e :
+
+W ⊂ S, s ∈ W
+
+CW = X(x,y)∈W +
+
+C(x, y)
+
+Une coupe est donc un ensemble qui ≪ coupe ≫ en deux le graphe avec d’un cot´e
+la source et de l’autre le puits. La coupe permet de d´eﬁnir la valeur du ﬂot, c’est
+`a dire la quantit´e qui a ´et´e transport´e de la source jusqu’au puits. La capacit´e des
+diﬀ´erentes coupes impose une limite maximale au ﬂot dans un r´eseau de transport.
+
+71
+
+72
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+Proposition 3.19 (Lemme de la coupe) Soit (G, s, t, C) un r´eseau de transport
+et f un ﬂot sur ce r´eseau alors pour toute coupe W on a
+
+f +(s) = X(x,y)∈W +
+
+f (x, y) − X(x,y)∈W −
+
+f (x, y) = f −(t)
+
+cette valeur est appel´ee valeur du ﬂot f est not´ee V (f ) et pour toute coupe on a
+
+V (f ) ≤ CW
+
+Preuve : la d´emonstration se fait par r´ecurrence sur le nombre de sommets de la
+coupe
+au d´epart W = {s} : donc s− = ∅ car s n’a pas de pr´ed´ecesseur
+
+W ′ = W ∪ {z} : on ajoute un sommet z `a une coupe plus petite W
+
+= f +(s) par d´eﬁnition
+
+f +(s) = X(x,y)∈s+
+f (x, y)
+}
+{z
+|
+ X(x,y)∈W ′+
+f (x, y) − X(x,y)∈W ′−
+= X(x,y)∈W +
+f (x, y) + X(z,y)∈z+
+= X(x,y)∈W +
+f (x, y) − X(x,y)∈W −
+|
+
+= X(x,y)∈s+
+f (x, y)
+f (z, y) − X(x,y)∈W −
++ X(z,y)∈z+
+f (x, y)
+|
+}
+
+= f +(s) pour la coupe W
+
+= f +(s)
+
+{z
+
+f (x, y) − X(x,y)∈s−
+f (x, y)
+}
+{z
+
+= 0 car s− = ∅
+
+|
+
+f (x, y) + X(x,z)∈z−
+f (z, y) − X(x,z)∈z−
+
+= 0 d’apr`es loi des nœuds
+
+{z
+
+f (x, z)
+f (x, z)
+}
+
+attention, lors du passage de la premi`ere `a la deuxi`eme ligne du calcul il faut
+remarquer que :
+• certains arcs (z, y) /∈ W ′− mais dans ce cas (z, y) ∈ z+ et (z, y) ∈ W − et
+
+les deux termes f (z, y) s’annulent mutuellement dans la somme,
+
+• certains arcs (x, z) /∈ W ′+ mais dans ce cas (x, z) ∈ z− et (x, z) ∈ W + et
+
+les deux termes f (x, z) s’annulent mutuellement dans la somme,
+
+ce qui justiﬁe l’´egalit´e ﬁnale.
+
+pour la derni`ere coupe W = S \ {t} : comme t+ = ∅ (car t n’a pas de succes-
+
+seur) on a :
+
+f +(s) = X(x,y)∈W +
+f (x, y)
+}
+{z
+
+= f −(t) car W + = t−
+
+|
+
+−  X(x,y)∈W −
+f (x, y)
+}
+{z
+|
+
+= 0 car t n’a pas de successeur
+
+= f −(t)
+
+on peut donc d´eﬁnir la valeur du ﬂot comme ´etant V (f ) = f +(s) = f −(t). Il ne reste
+plus qu’`a justiﬁer que la valeur du ﬂot est major´e par la capacit´e de chaque coupe.
+Ce dernier r´esultat d´ecoule du contrˆole du ﬂot par les capacit´es, en eﬀet pour une
+coupe W :
+
+−f (x, y)
+f (x, y) + X(x,y)∈W −
+V (f ) = X(x,y)∈W +
+0 
++ X(x,y)∈W −
+C(x, y)
+≤ X(x,y)∈W +
+}
+{z
+}
+{z
+|
+|
+
+car f (x, y) ≤ C(x, y)
+
+car −f (x, y) ≤ 0
+
+= CW
+
+(cid:3)
+
+ Dans certains ouvrages sur les ﬂots, on ajoute au graphe un arc ﬁctif, partant
+du puits t pour rejoindre la source s, avec la valuation f (s, t) = V (f ), de telle
+sorte que s et t v´eriﬁent aussi la loi des nœuds.
+
+ 3.17 Calcul du ﬂot et coupe minimale :
+
+4
+
+W4
+
+W4
+
+26, 16
+
+15, 2
+
+30, 18
+
+1 =⇒
+
+8, 0
+
+3
+
+10, 8
+
+7
+
+14, 10
+
+=⇒ 2
+
+30, 20
+
+10, 10
+
+11, 2
+
+12, 8
+
+6
+
+20, 10
+
+5
+
+V (f ) = 36
+
+la valeur du ﬂot actuel est de 36 (sur l’arc ﬁctif ≪ de retour ≫) :
+
+V (f ) = 36 = f +(1) = 16 + 20 = f −(2) = 18 + 10 + 8
+
+il y a plusieurs coupes de capacit´e minimale CW = 56 :
+
+W1 = {1}, W2 = {1; 6}, W3 = {1; 3; 6}, W4 = {1; 3; 4; 5; 6; 7}
+
+Le ﬂot maximum est donc limit´e par la coupe ≪ minimale ≫ du r´eseau. Le
+th´eor`eme suivant aﬃrme que le ﬂot maximum `a justement pour valeur la capa-
+cit´e de la coupe ≪ minimale ≫. Ce th´eor`eme a ´et´e ´enonc´e par en 1956 par P. Elias,
+A. Feinstein et C.E. Shannon, et (ind´ependamment) par L.R. Ford, Jr. et D.R.
+Fulkerson.
+
+73
+
+74
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+Th´eor`eme 3.20 (ﬂot-max/coupe-min)
+Soit (G, s, t, C) un r´eseau de transport alors il existe un ﬂot f sur ce r´eseau tel que
+
+V (f ) = min
+
+coupe W
+
+CW
+
+La d´emonstration de Ford et Fulkerson conduit `a un proc´ed´e algorithmique qui per-
+met, en partant d’un ﬂot donn´ee (le ﬂot nul f (x, y) = 0 par exemple), de l’augmenter
+jusqu’`a la valeur maximale donn´ee par la capacit´e d’une coupe minimale ! C’est ce
+proc´ed´e que nous allons ´etudier maintenant. L’id´ee de Ford et Fulkerson est qu’il y
+a deux mani`eres d’augmenter le ﬂot dans un r´eseau entre deux sommets voisins x
+et y :
+
+• si (x, y) ∈ A et f (x, y) < C(x, y) alors on peut augmenter le ﬂot de x vers y
+
+de C(x, y) − f (x, y) sur cet arc
+
+• si (y, x) ∈ A et f (y, x) > 0 alors on peut diminuer le ﬂot jusqu’`a 0 de y vers
+
+x ce qui revient `a augmenter le ﬂot de x vers y
+
+Ainsi pour pouvoir augmenter le ﬂot il suﬃt de trouver une suite de sommets du
+graphe allant de la source au puits et le long de laquelle on puisse augmenter le ﬂot,
+c’est ce qu’on va appeler une chaˆıne augmentante.
+
+D´eﬁnition 3.21 (chaˆıne augmentante) Dans un r´eseau de transport (G, s, t, C)
+muni d’un ﬂot f on appelle augmentation du ﬂot de x vers y la quantit´e :
+
+∆(x, y) = max (C(x, y) − f (x, y), f (y, x))
+
+Une chaˆıne augmentante est une suite de sommets C = (x0, x1, . . . , xp) dans G
+telle que :
+
+• C est chemin du graphe de la source s jusqu’au puits t dans le graphe G
+
+consid´er´e comme un graphe non-orient´e :
+
+x0 = s, xp = t, et [∀i = 0, . . . , p − 1,
+
+(xi, xi+1) ∈ A ou (xi+1, xi) ∈ A]
+
+• l’augmentation du ﬂot de s vers t le long de C est strictement positive :
+
+∆C = min
+
+i=0,...,p−1
+
+∆(xi, xi+1) > 0
+
+ 3.18 Chaˆıne augmentante (1; 4; 2) avec ∆ = 10 = min(10, 12) :
+
+4
+
+pour la chaˆıne (1; 4; 2), ∆ = 10
+
+26, 16
+
+15, 2
+
+30, 18
+
+1 =⇒
+
+8, 0
+
+3
+
+10, 8
+
+7
+
+14, 10
+
+=⇒ 2
+
+30, 20
+
+10, 10
+
+11, 2
+
+12, 8
+
+6
+
+20, 10
+
+5
+
+75
+
+Le long d’une telle chaˆıne on peut augmenter le ﬂot d’une quantit´e ∆C.
+
+Proposition 3.22 Dans un r´eseau de transport (G, s, t, C) muni d’un ﬂot f , s’il
+existe une chaˆıne augmentante C = (x0, x1, . . . , xp) dans G alors on peut d´eﬁnir un
+nouveau ﬂot ˜f sur le r´eseau par :
+
+˜f (x, y) =
+
+qui v´eriﬁe V ( ˜f ) = V (f ) + ∆C
+
+f (x, y) = f (x, y) + ∆C
+f (x, y) = f (x, y) − ∆C
+
+si
+si
+
+(x, y) = (xi, xi+1) ∈ A
+(x, y) = (xi+1, xi) ∈ A
+
+f (x, y) sinon
+
+Preuve : On v´eriﬁe facilement que ˜f est bien un ﬂot, d’abord le nouveau ﬂot ˜f ne
+d´epasse pas la capacit´e et reste positif :
+
+• si(xi, xi+1) ∈ A alors
+
+˜f (xi, xi+1) = f (xi, xi+1) + ∆C > f (xi, xi+1) + 0 ≥ 0
+
+et
+
+˜f (xi, xi+1) = f (xi, xi+1)+∆C ≤ f (xi, xi+1)+C(xi, xi+1)−f (xi, xi+1) = C(xi, xi+1)
+
+• si (xi+1, xi) ∈ A alors
+
+˜f (xi+1, xi) = f (xi+1, xi) − ∆C > f (xi+1, xi) − f (xi+1, xi) = 0
+
+et
+
+˜f (xi, xi+1) = f (xi, xi+1) − ∆C < f (xi, xi+1) − 0 ≤ C(xi, xi+1)
+
+• sinon ˜f (x, y) = f (x, y) reste compris entre 0 et C(x, y)
+Ensuite ˜f v´eriﬁe bien la loi des nœuds. Soit xi un sommet de la chaˆıne augmen-
+tante la v´eriﬁcation est simple sur un diagramme mais peut ˆetre compliqu´ee `a ´ecrire :
+
+inchang´e
+
+xi+1
+
+inchang´e
+
+xi+1
+
+˜f (xi, xi+1)
+
+xi
+
+= f (xi, xi+1) + ∆C
+
+inchang´e
+
+˜f (xi−1, xi)
+
+= f (xi−1, xi) + ∆C
+
+xi−1
+
+˜f (xi−1, xi)
+
+= f (xi−1, xi) + ∆C
+
+xi−1
+
+˜f (xi, xi+1)
+
+xi
+
+= f (xi, xi+1) − ∆C
+
+inchang´e
+
+• Dans le premier cas si (xi−1, xi) et (xi, xi+1) ∈ A, ˜f −(xi) = ˜f +(xi) car :
+
+˜f −(xi) = X(x,xi)∈x−
+
+i
+
+˜f (x, xi) = X(x,xi)∈x−
+
+i
+x6=xi−1
+
+76
+
+f (x, xi)
+
++(f (xi−1, xi) + ∆C) = f −(xi)+∆C
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+ 3.19 Construction du ﬂot maximum avec l’algorithme de Ford-Fulkerson :
+au d´epart le ﬂot est V (f ) = 36 on cherche des chaˆınes augmentantes de la source
+au puits en commen¸cant par chercher des chemins sans arcs satur´es :
+
+4
+
+pour la chaˆıne (1; 4; 2), ∆ = 10
+
+26, 16
+
+15, 2
+
+30, 18
+
+. . .
+
+1 =⇒
+
+8, 0
+
+3
+
+10, 8
+
+7
+
+14, 10
+
+=⇒ 2
+
++(f (xi, xi+1) + ∆C) = f +(xi)+∆C
+
+• Dans le second cas si (xi−1, xi) ∈ A et (xi+1, xi) ∈ A, ˜f −(xi) = ˜f +(xi) car
+
+˜f +(xi) = X(xi,x)∈x+
+
+i
+
+i
+x6=xi+1
+
+˜f (x, xi) = X(xi,x)∈x+
+f (xi, x)
+˜f (x, xi) = X(x,xi)∈x−
+f (x, xi)
+˜f (xi, x) = X(xi,x)∈x+
+
+x6=xi−1,xi+1
+
+i
+
+i
+
+˜f −(xi) = X(x,xi)∈x−
+
+i
+
+˜f +(xi) = X(xi,x)∈x+
+
+i
+
+· · · + (f (xi−1, xi) + ∆C) + (f (xi, xi+1) − ∆C) = f −(xi) + 0
+
+f (xi, x) = f +(xi) car xi+1, xi−1 /∈ x+
+
+i
+
+• on d´emontre de mˆeme que ˜f −(xi) = ˜f +(xi) quand (xi, xi−1) ∈ A et (xi+1, xi) ∈
+
+A et quand (xi, xi−1) ∈ A et (xi+1, xi) ∈ A . . .
+
+enﬁn le ﬂot `a bien ´et´e augment´e de ∆C puisque pour s (premier sommet de la chaˆıne
+augmentante) on a :
+
+V ( ˜f ) = ˜f (s) = X(s,y)∈s+
+= X(s,y)∈s+
+
+˜f (s, y) = X(s,y)∈s+,y6=x1
+|
+f (s, y) + ∆C = f +(s) + ∆C = V (f ) + ∆C
+
+f (s, y) + f (s, x1) + ∆C
+{z
+}
+
+˜f (s,x1)
+
+(cid:3)
+
+On en d´eduit facilement l’algorithme de Ford-Fulkerson pour calculer le ﬂot
+
+maximum sur un r´eseau de transport.
+
+Th´eor`eme 3.23 (algorithme de Ford-Fulkerson) Dans un r´eseau de transport
+(G, s, t, C), on obtient un ﬂot maximum en partant de n’importe ﬂot f , l’augmentant
+de ∆C pour chaque chaˆıne augmentante C du r´eseau. Ce qui donne l’algorithme :
+
+fonction f = Ford Fulkerson(G, s, t, C, f )
+f = ﬂot de d´epart (´eventuellement nul)
+tant que ∃C chaˆıne augmentante faire
+
+augmenter f de ∆C le long de C
+
+✬
+
+ﬁn faire
+
+✫
+
+✩
+
+✪
+
+Pour comprendre le mieux est d’appliquer cet algorithme sur un exemple.
+
+30, 20
+
+10, 10
+
+11, 2
+
+12, 8
+
+20, 10
+
+5
+
+6
+
+4
+
+pour la chaˆıne (1; 6; 5; 2), ∆ = 4
+
+26, 26
+
+15, 2
+
+30, 28
+
+1 =⇒
+
+8, 0
+
+3
+
+10, 8
+
+7
+
+14, 10
+
+=⇒ 2
+
+30, 20
+
+10, 10
+
+11, 2
+
+12, 8
+
+20, 10
+
+5
+
+6
+
+4
+
+pour la chaˆıne (1; 6; 5; 7; 2), ∆ = 4
+
+26, 26
+
+15, 2
+
+30, 28
+
+1 =⇒
+
+8, 0
+
+3
+
+10, 8
+
+7
+
+14, 10
+
+=⇒ 2
+
+30, 24
+
+10, 10
+
+11, 2
+
+12, 12
+
+6
+
+20, 14
+
+5
+
+`A partir de maintenant on ne trouve plus de chaˆıne augmentant qui soit un chemin
+de la source au puits, on est donc oblig´e de prendre un ou des arcs `a contre-sens
+
+77
+
+78
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+pour trouver d’autre chaˆıne augmentante :
+
+4
+
+pour la chaˆıne (1; 6; 5; 7; 3; 4; 2), ∆ = 2
+
+26, 26
+
+15, 2
+
+30, 28
+
+1 =⇒
+
+8, 0
+
+3
+
+10, 8
+
+7
+
+14, 14
+
+=⇒ 2
+
+30, 28
+
+10, 10
+
+11, 6
+
+12, 12
+
+20, 18
+
+5
+
+6
+
+4
+
+`a la ﬁn le ﬂot est bien de 56
+
+26, 26
+
+15, 4
+
+30, 30
+
+1 =⇒
+
+8, 0
+
+3
+
+10, 6
+
+7
+
+14, 14
+
+=⇒ 2
+
+30, 30
+
+10, 10
+
+11, 8
+
+12, 12
+
+6
+
+20, 20
+
+5
+
+ `A chaque fois qu’on modiﬁe le ﬂot le long d’une chaˆıne augmentante qui est un
+`A la ﬁn il
+
+faut ´eventuellement ≪ d´etourner ≫ le ﬂot de certains points
+
+chemin de la source ou puits on sature un arc.
+
+d’engorgement ce qui peut rendre nul le ﬂot sur un arc.
+Enﬁn sur le dernier diagramme les coupes minimales apparaissent clairement, ce
+sont des ensembles de sommets tels que le ﬂux sortant est satur´e (arcs en rouges)
+et le ﬂux entrant est nul (arcs en noir) !
+
+ 3.20 rep´erage des coupes minimales sur le ﬂot maximum
+il y a trois coupes minimales de capacit´e 56
+
+W0 = {1}, W1 = {1; 6}, W2 = {1; 3; 4; 5; 6; 7}
+
+4
+
+26, 26
+
+15, 4
+
+30, 30
+
+W2
+
+1 =⇒
+
+8, 0
+
+3
+
+10, 6
+
+7
+
+14, 14
+
+=⇒ 2
+
+30, 30
+
+10, 10
+
+11, 8
+
+12, 12
+
+W1
+
+6
+
+20, 20
+
+5
+
+Preuve : th´eor`eme de Ford-Fulkerson Consid´erons une coupe minimale W ,
+il y a forc´ement un arc, entre cette coupe et le reste des sommets, dont le ﬂot est
+soit nul soit satur´e. Il doit aussi exister un chemin de s `a t passant par cet arc qui
+est une chaˆıne augmentante (sinon il existerait une coupe de capacit´e plus faible
+strictement plus petite que W ). Augmenter le ﬂot va donc tendre `a saturer cet arc
+(si on le prend dans le sens direct) ou `a le vider (si on le prend `a contre-sens) :
+
+W
+
+s ⇒
+
+C1, f1
+
+C2, f2
+
+W
+
+W
+
+⇒ t
+
+s ⇒
+
+W
+
+⇒ t
+
+C1, C1
+
+C2, 0
+
+(cid:3)
+
+ Le protocole de routage IP appel´e RIP (Routing Information Protocol), de type
+“distance vector”, est bas´e sur l’algorithme de Ford-Fulkerson. Chaque routeur
+communique aux autres la distance avec un r´eseau donn´e en comptant le nombre de
+sauts et diﬀuse toute sa table de routage. Ce protocole (maintenant assez ancien)
+est limit´e `a 15 sauts et ne prend pas en compte la qualit´e des transmissions.
+
+79
+
+80
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+4 Notions de th´eorie des langages
+
+Nous allons terminer ce cours avec un des prolongements de la th´eorie des graphes
+ayant le plus d’applications en informatiques : la th´eorie des langages. La th´eorie des
+langages permet, par exemple, de mod´eliser les langages de programmation et de les
+analyser. Elle s’est donc d´evelopp´ee `a partir des ann´ees 50 accompagnant les progr`es
+de l’´electronique puis de l’informatique. Cette th´eorie a permis de construire de
+nombreux outils d’analyse lexicale et syntaxique, comme yacc et lex, qui permettent
+de g´en´erer un interpr´eteur/compilateur pour un langage de programmation d´eﬁnit
+de mani`ere formelle.
+
+4.1 Alphabets, langages et grammaires formelles
+
+Il faut commencer par donner une d´eﬁnition pr´ecise d’un langage.
+
+D´eﬁnition 4.1 (Langage formel) Un langage L, d´eﬁni sur un alphabet Σ, est un
+ensemble de mots (´eventuellement vides) obtenus par concat´enation des ´el´ements de
+l’alphabet Σ. Pour ˆetre plus pr´ecis :
+
+un alphabet Σ est un ensemble de symboles ≪ ´el´ementaires ≫,
+
+un mot sur Σ est une suite de symboles appartenant `a Σ (on dit aussi lex`eme),
+
+la concat´enation · est l’op´eration qui permet de fabriquer des mots `a partir d’un
+
+alphabet Σ en les juxtaposant,
+
+la longueur d’un mot est le nombre de symboles qui le compose,
+
+le mot vide est not´e ǫ est le seul mot de longueur nulle |ǫ| = 0.
+
+ En cons´equence un ≪ mot ≫ au sens de la th´eorie des langages peut correspondre
+
+`a ce que nous appellerions une ≪ phrase ≫.
+
+ 4.1 Exemples de langages simples quelques exemples tir´es des cours de
+math´ematiques :
+
+les entiers naturels N forment un langage sur l’alphabet
+
+Σ = {0; 1; 2; 3; 4; 5; 5; 6; 7; 8; 9}
+
+• 54321 ∈ N est un mot de longueur 5
+• mais 01234 n’est pas un mot de ce langage, car l’´ecriture d’un entier ne
+
+commence jamais par 0 !
+
+les expressions bool´eennes du cours de th´eorie des ensembles (semestre 1) forment
+
+un langage sur l’alphabet
+
+{V rai; F aux; ∧; ∨; ¬; =⇒; ⇐⇒; [; ]; P ; Q; R}
+
+• [P =⇒ Q] ⇐⇒ [¬P ∧ Q] est un mot de ce langage (de longueur 12)
+• par contre P [=⇒ ¬Q] n’est pas un mot de ce langage, car le parenth´esage
+
+n’est pas valide
+
+expressions arithm´etiques d´eﬁnies dans Q forment un langage sur l’alphabet
+
+{0; 1; 2; 3; 4; 5; 5; 6; 7; 8; 9; +; ×; −; /; [; ]}
+
+• [56 − 34] × [1 + 2] est un mot de ce langage de longueur 13
+• −[123/456] + [789/[10 − 2 × 5]] n’est pas un mot de ce langage `a cause de
+
+la division par 0 !
+
+ Attention un symbole de l’alphabet peut ˆetre compos´e de plusieurs caract`eres !
+Il faut donc faire attention `a la d´eﬁnition du langage, qui peut ˆetre ambigu¨e. Par
+exemple si on consid`ere le langage de tous les mots possibles sur l’alphabet
+Σ = {a; b; ab} alors il existe une ambigu¨ıt´e sur la nature du mot aab qui peut
+ˆetre vu comme a.a.b ou comme a.ab ! En particulier on ne peut pas savoir si c’est
+un mot de longueur 2 ou 3 !
+La notion de symbole ≪ ´el´ementaire ≫, qui apparaˆıt dans la d´eﬁnition de l’alphabet,
+doit donc ˆetre comprise dans le sens qu’aucun symbole de l’alphabet ne peut ˆetre
+d´ecompos´e en symboles appartenant eux aussi `a l’alphabet.
+
+Cette diﬃcult´e apparaˆıt directement dans l’analyse des langages de programma-
+tion dans le processus d’identiﬁcation des variables utilisateur. Par exemple dans la
+premi`ere d´eﬁnition du langage ALGOL (ﬁn des ann´ees 50) les mots cl´es n’´etaient
+pas interdits pour les noms de variables. On pouvait donc ´ecrire :
+if else = then then if = else else then = if;
+Cela a vite ´et´e abandonn´e (`a l’´epoque, la th´eorie des langages et des automates
+n’´etait pas tr`es avanc´ee...).
+
+On peut fabriquer des langages `a partir d’autres langages plus simple en utilisant
+quelques op´erations de base.
+D´eﬁnition 4.2 (op´erations sur les langages) `A partir de langages L, L1, L2,
+sur un alphabet Σ, on peut construire de nouveaux langages sur Σ en utilisant
+
+les op´eration de base sur les ensembles union, intersection, compl´ement
+
+L1 ∪ L2,
+
+L1 ∩ L2,
+
+L
+
+la concat´enation d´eﬁnie par L1.L2 = {w = u.v|u ∈ L1 et v ∈ L2}
+l’´el´evation `a la puissance d´eﬁnie par r´ecurrence avec
+
+∀n ≥ 0, Ln = Ln−1.L
+
+et
+
+L0 = {ǫ}
+
+la fermeture de Kleene L∗ =
+
+Ln en particulier
+
+∞
+∪
+n=0
+
+Σ∗ est l’ensemble de tous les mots possibles sur l’alphabet Σ
+
+On notera aussi L+ =
+
+∞
+∪
+n=1
+
+Ln
+
+ 4.2 D´eﬁnir des langages sur l’alphabet Σ = {1; 2; 3} `a partir de
+
+L1 = {x ∈ Σ∗|x pair}, L2 = {x ∈ Σ∗|x ≤ 20}, L3 = {1; 3}
+
+alors L1 = {2; 12; 22; 32; 112; 122; 132; . . .}
+
+81
+
+82
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+• L1 = {x ∈ Σ∗|x impair}
+
+• L1 ∩ L2 = {2; 12}
+
+Retrouver la grammaire `a partir du langage :
+
+soit le langage contenant tous les noms des ﬁches d’exercice du cours de maths :
+
+• L+
+
+1 = L1 mais L∗
+
+1 = L1 ∪ {ǫ}
+
+• L1 ∪ L2 = L1 ∪ {1; 3; 11; 13}
+
+• L2 = {1; 2; 3; 11; 12; 13}
+
+• Σ∗L3 = {x ∈ Σ∗|x impair} = L1
+
+ Un langage L sur Σ est donc forc´ement un sous-ensemble de Σ∗ : L ⊂ Σ∗.
+
+Grammaire formelle
+
+Pour pouvoir repr´esenter la construction des mots d’un langage, on a besoin de
+formaliser leurs r`egles de construction d’une mani`ere simple. Pour cela nous avons
+besoin d’introduire le concept de grammaire.
+
+D´eﬁnition 4.3 (Grammaire formelle) Une grammaire formelle (ou, simple-
+ment, grammaire) est constitu´ee des quatre objets suivants :
+
+• un ensemble ﬁni de symboles V appel´e ≪ vocabulaire ≫ (contenant l’alphabet
+
+Σ du langage) form´e de 2 sous ensembles V = T ∪ N :
+— des symboles terminaux T = Σ ∪ {ǫ}, not´es conventionnellement par des
+
+minuscules,
+
+— des symboles non-terminaux N, not´es conventionnellement par des ma-
+
+juscules,
+
+• Un ´el´ement de l’ensemble des non-terminaux, appel´e ≪ axiome ≫, not´e conven-
+
+tionnellement S0,
+
+• Un ensemble de ≪ r`egles ≫ de la forme α → β o`u α est un non-terminal et β
+
+une concat´enation de terminaux et de non-terminaux
+
+pour des raisons de commodit´e on acceptera les simpliﬁcations suivantes dans
+l’´ecriture des r`egles :
+
+[α → β; α → γ] ⇐⇒ α → β|γ
+
+ 4.3 Exemple de grammaires formelles
+
+identiﬁer un langage `a partir de la grammaire :
+
+on consid`ere la grammaire formelle sur l’alphabet Σ = {a; b; c} :
+• l’ensemble de symboles V = {a; b; c; S0; S1}
+• symboles terminaux : a, b, c
+• un axiome S0
+• et les r`egles
+analysons les mots que l’on peut former avec ce langage
+• d’apr`es la premi`ere r`egle a est un mot du langage
+• les trois autre r`egles permettent de former des mots du type b . . . bc
+ce langage est donc en fait {a; c; bc; bbc; bbbc; . . .}. On aurait pu aussi ´ecrire les
+r`egles de cette grammaire sous la forme :
+
+S1 → bS1;
+
+S0 → S1;
+
+S0 → a;
+
+S1 → c
+
+S0 → a|S1;
+
+S1 → bS1|c
+
+T D1.pdf, T P 1.pdf,
+
+. . . , T D9.pdf, T P 9.pdf
+
+peut ˆetre formalis´e par une grammaire en posant :
+• l’alphabet Σ = {T ; D; P ; 1; . . . ; 9; .; p; d; f }
+• on ajoute un axiome S0
+• et les r`egles S0 → T DS1|T P S1;
+
+S1 → 1S2|2S2|3S2|4S2|5S2|6S2|7S2|8S2|9S2; S2 → .pdf
+
+• et l’ensemble de symboles V = {T ; D; P ; 1; . . . ; 9; .; p; d; f ; S0; S1; S2}
+
+ Pour d´ecrire les r`egles d’un langage on utilisera dans le vocabulaire (en plus
+de l’alphabet) le mot vide ǫ. En particulier la r`egle F → ǫ permet d’´ecrire
+simplement que l’´ecriture d’un mot est ﬁnie.
+
+C’est un linguiste am´ericain, Noam Chomsky, qui a le premier d´egag´e la notion
+de grammaire formelle, dans les ann´ees 50. Il en a propos´e une classiﬁcation appel´ee
+de nos jours hi´erarchie de Chomsky.
+
+D´eﬁnition 4.4 (hi´erarchie de Chomsky) Soit L un langage formel, sur un al-
+phabet Σ = {a; b; . . .}, d´eﬁni par un vocabulaire V = N ∪ T (T = Σ ∪ {ǫ} sous-
+ensemble des terminaux N = T ) et un ensemble de r`egles R. Le langage L appartient
+`a l’une des 4 cat´egories (de la plus restrictive `a la plus large) suivantes :
+
+Les langages de type 3, ou langages rationnels :
+
+ce sont les langages d´eﬁnis par une grammaire lin´eaire `a gauche (resp. droite),
+grammaire dont chaque membre droit (resp. gauche) de r`egle commence par
+un non-terminal. En d’autres termes r`egles doivent pouvoir s’´ecrire sous la
+forme :
+avec A, B ∈ N, a ∈ T = Σ ∪ {ǫ}
+
+lin´eaire `a gauche : A → aB|a
+
+lin´eaire `a droite : A → Ba|a
+
+Les langages de type 2, ou langages alg´ebriques :
+
+ce sont les langages d´eﬁnis par une grammaire formelle hors-contexte, gram-
+maire dont les r`egles doivent pouvoir s’´ecrire sous la forme :
+A → a|aBb avec A, B ∈ N, a, b ∈ T = Σ ∪ {ǫ}
+
+Les langages de type 1, ou langages contextuels :
+
+ce sont les langages d´eﬁnis par une grammaire contextuelle, grammaire dont
+les r`egles doivent pouvoir s’´ecrire sous les formes des grammaires de type 2 ou
+3 ou : αAβ → αγβ avec A ∈ N, α, β, γ ∈ V, γ 6= ǫ
+
+Les langages de type 0, ou langages r´ecursivement ´enum´erables :
+
+Cet ensemble inclut tous les langages d´eﬁnis par une grammaire formelle.
+
+α → β,
+
+α ∈ N, β 6= ǫ
+
+ Une grammaire de type i + 1 est forc´ement aussi de type i mais une grammaire
+
+´ecrite sous la forme de type i peut en fait ˆetre une grammaire de type i + 1 !
+
+83
+
+84
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+ 4.4 Exemples de grammaires de types 3 ´ecrite sous la forme d’une
+grammaire de type 2 : les expressions logiques
+On a d´ej`a dit que le langage des expressions logiques, qu’on rencontre en calcul des
+pr´edicats 5, peut ˆetre formalis´ee par un langage sur l’alphabet
+
+Σ = {V rai; F aux; ∧; ∨; ¬; =⇒; ⇐⇒; [ ; ]; P ; Q; R}
+
+essayons d’´ecrire la grammaire de ce langage. Pour cel`a il faut ajouter des ´etats Si
+`a l’alphabet Σ et expliquer comment on obtient un mot du langage par concat´enation
+des symboles de Σ :
+
+• on d´emarre de l’axiome S1
+• on indique les r`egles d’utilisation du et du ou et du non :
+
+S1 → S1 ∨ S1|S1 ∧ S1|¬S1|S1 =⇒ S1|S1 ⇐⇒ S1
+
+• une expression se termine par une variable P, Q, R ou une valeur V rai ou
+
+F aux :
+
+S1 → V rai|F aux|P |Q|R
+
+• on a donc identiﬁ´e V rai, F aux, P, Q, R comme terminaux de cette gram-
+
+maire.
+
+Telle qu’elle cette grammaire est de type 2 mais elle peut ˆetre r´e´ecrite sous forme
+d’une grammaire de type 3 en rajoutant des ´etats :
+
+• on part d’un axiome S1 :
+
+S1 → V rai S2|F aux S2|P S2|Q S2|R S2|¬S1
+
+• on peut terminer le mot en d´ecidant que S2 peut ˆetre remplac´e par le ǫ ou
+
+ajouter un op´erateur binaire
+
+S2 → ∨ S3| ∧ S3| =⇒ S3| ⇐⇒ S3|ǫ
+
+• si on a ajout´e un op´erateur binaire on est oblig´e d’ajouter un symbole de l’al-
+phabet (non vide) donc ensuite il faut revenir `a l’´etat terminal S2 en ajoutant
+un symbole correspondant `a une variable ou un bool´een :
+
+S3 → V rai S2|F aux S2|P S2|Q S2|R S2| ¬ S3
+
+• le seul symbole terminal est donc S2
+
+la grammaire est donc lin´eaire `a droite et donc le langage est de type 3.
+
+4.2 Langages r´eguliers et automates Finis
+
+Dans l’ensemble des langages sur un alphabet Σ l’ensemble des langages r´eguliers
+
+joue un rˆole tr`es important.
+
+D´eﬁnition 4.5 (Langages r´eguliers)
+L’ensemble R des langages r´eguliers sur Σ est le plus petit ensemble tel que
+
+• ∅ ∈ R et {ǫ} ∈ R
+• ∀a ∈ Σ {a} ∈ R
+• ∀A, B ∈ R A ∪ B, A.B, A∗ ∈ R
+
+Les langages r´eguliers peuvent donc ˆetre construit `a partir d’un alphabet en
+utilisant uniquement des op´erations simples (r´eunion, concat´enation, fermeture de
+Kleene).
+
+Th´eor`eme 4.6 (expression r´eguli`ere)
+Une expression r´eguli`ere est une expression form´ee `a partir des symboles Σ ∪ {ǫ},
+des r`egles 6de r´eunion (|), concat´enation (termes accol´es !), puissance ( 2, 3, . . . ) et
+fermeture de Kleene ( ∗ et +), le tout ´eventuellement parenth´es´e.
+
+R est langage r´egulier ⇐⇒ R peut ˆetre repr´esent´e par une expression r´eguli`ere.
+
+ 4.5 Exemple d’expressions r´eguli`eres
+
+d´ecrire les ´el´ements d’un langage repr´esent´e par une expression r´eguli`ere
+
+sur l’alphabet Σ = {a; b; c}
+• a∗ = {ǫ; a; aa; aaa; . . .}
+• (a|b)∗ = {ǫ; a; b; ab; ba; aab; aba; abb; baa; bab; bba; bbb; . . .}
+• ab∗ = {a; ab; abb; abbb; . . .}
+• a|b∗c = {a; c; bc; bbc; bbbc; . . .} et nous avons plus haut que ce langage est
+
+bien d´ecrit par une grammaire de type 3
+
+S0 → a|S1;
+trouver une expression r´eguli`ere pour d´ecrire un langage
+
+S1 → bS1|c
+
+exemple avec l’alphabet des caract`eres Σ = {a; b; . . . ; z; A; B; . . . ; Z; 0; . . . 9; .}
+• L’ensemble des ﬁches pdf du cours de th´eorie des graphes (TD1 `a TD9 et
+
+TP1 `a TP9) peut ˆetre d´ecrit par l’expression r´eguli`ere
+
+T(D|P)(1|2|3|4|5|6|7|8|9).pdf
+
+• si on veut d´ecrire dans une mˆeme expression r´eguli`ere les diﬀ´erentes ver-
+sions du polycopi´e (les ﬁchiers cours.pdf et cours2.pdf ) en plus des ﬁches
+de TD et TP alors on peut construire une autre expression r´eguli`ere :
+
+(cours(ǫ|2).pdf)|(T(D|P)(1|2|3|4|5|6|7|8|9).pdf)
+
+• les ﬁchiers scilab associ´es `a chaque TP peuvent ˆetre d´ecrit par l’expression
+
+r´eguli`ere suivante
+
+(TP(1|2|3|4|5|6|7|8|9).sce)|(exo(1|2|3|4|5|6|7|8|9)(0|1|2|3|4|5|6|7|8|9)∗G.graph)
+
+5. si on se limite `a 3 propositions P, Q, R
+
+6. par ordre de priorit´e croissante
+
+85
+
+86
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+ Les expressions r´eguli`eres sont tr`es importantes, en syst`eme elle permettent se
+simpliﬁer le traitement des ﬁchiers en grande quantit´e. Il existe de nombreuses
+impl´ementation des expressions r´eguli`eres dans diﬀ´erents langages, par exemple, en
+Bourne shell on peut utiliser grep. Pour rechercher les ﬁches de TD/TP du cours
+dans un r´epertoire il suﬃra de faire :
+ls | grep -e ’^T[DP][1-9].pdf’
+
+de mˆeme pour rechercher les ﬁchiers graphes :
+ls | grep -e ’^exo[1-9][0-9]*G.graph’
+
+ les ´etats d’un automate correspondent grosso-modo aux ´el´ements non-terminaux
+du vocabulaire dans la grammaire du langage L associ´e `a ceci-pr`es que :
+• un non-terminal A de la grammaire admettant une r`egle de d´erivation A → ǫ
+
+deviendra un ´etat ﬁnal de l’automate A
+
+• on ajoutera des ´etats terminaux (B ici) `a l’automate A pour repr´esenter
+les r`egles de d´erivation du type A → a comme si on avait les r`egles A →
+aB, B → ǫ
+
+On trouve aussi des
+remplacements dans un ﬁchier
+
+fonctions comme sed qui permettent de faire des
+:
+
+r´eguli`eres
+
+en utilisant des
+
+expressions
+
+sed -e ’s/regex1\(regex2\)regex3/\1/g’ fichier.txt
+
+cette commande substitue (option s), dans tout (option ”global” g) le ﬁchier
+(fichier.txt), les groupes de la forme regex1\(regex2\)regex3 par uniquement
+regex2 (symbolis´e par \1 ) On retrouve le mˆeme genres de fonctionnalit´es en php
+avec preg_match, pour utiliser des expressions r´eguli`eres dans des ´editeurs de texte
+comme notepad++ on pourra lire [6] . . .
+
+Pour construire des expressions r´eguli`eres correspondant `a des langages com-
+plexes il faut passer par un graphe permettant de repr´esenter simplement le langage
+et qu’on appelle un automate.
+
+D´eﬁnition 4.7 (Automate `a nombre ﬁni d’´etats)
+Un automate ﬁni est un quintuplet A = (E, Σ, δ, I, F ) o`u :
+
+• Σ est un ensemble (non-vide) de symboles appel´e alphabet
+• E est un ensemble (non-vide) dont les ´el´ements sont appel´es ´etats
+• δ : E × Σ ∪ {ǫ} −→ E est appel´ee fonction de transition
+• I ⊂ E un ensemble (non-vide) d’´etat appel´es ´etats initiaux
+• F ⊂ E un ensemble (non-vide) d’´etat appel´es les ´etats acceptant (terminaux)
+
+On repr´esente A par le graphe d’un r´eseau de transport G = (E, U, δ) avec :
+
+• pour sommets l’ensemble E des ´etats
+• pour arcs l’ensemble des couples (x, y) ∈ U ⊂ E × E tels que
+
+∃w ∈ Σ ∪ {ǫ},
+
+δ(x, w) = y (donc δ(x, w) est bien d´eﬁnie)
+
+• pour valuation C(x, y) = {w|y = δ(x, w)}
+• plusieurs sources donn´ees par l’ensemble I des ´etats initiaux
+• plusieurs puits donn´ees par l’ensemble F des ´etats acceptant
+
+Les ´etats initiaux sont indiqu´es par des ﬂ`eches, les ﬁnaux par des doubles cercles.
+`A chaque chemin d’une source vers un puits de G on fait correspondre un mot
+obtenus en concat´enant les symboles appartenant aux valuations des arcs du chemin
+dans l’ordre de parcours. Le langage associ´e `a un automate A est l’ensemble des
+mots obtenus en consid´erant tous les chemins possibles d’une source vers un puits.
+
+ 4.6 Premiers automates. Les automates permettent de repr´esenter un lan-
+gage d’une mani`ere plus explicite qu’une expression r´eguli`ere et moins formelle
+qu’une grammaire. Il est donc tr`es utile de pouvoir faire le lien entre un automate et
+le langage associ´e, soit sous forme d’expression r´eguli`eres soit sous forme de gram-
+maire :
+
+•
+
+•
+
+•
+
+a
+
+a
+
+S0
+
+S0
+
+S0
+
+b
+
+b
+
+S1
+
+a
+
+S1
+
+le langage a∗ est d´ecrit par la r`egle S0 → aS0|ǫ
+le symbole terminal est a et l’axiome S0. Il sera
+repr´esent´e par l’automate ci-contre. L’axiome S0
+est l’´etat initial et ﬁnal de l’automate
+
+le langage a∗b consiste `a enchaˆıner un mot de a∗
+puis le symbole b. Au niveau de la grammaire cela
+correspond aux r`egles S0 → aS0|b les symboles ter-
+minaux sont a, b et l’axiome S0. Il sera repr´esent´e
+par l’automate ci-contre. L’axiome S0 est l’´etat ini-
+tial et S1 l’´etat ﬁnal de l’automate
+De mˆeme pour le langage ba∗ mais on inverse
+l’ordre des transitions. le langage est donc d´ecrit
+par les r`egles S0 → bS1; S1 → aS1|ǫ avec les
+symboles terminaux a, b et l’axiome S0. Il sera
+repr´esent´e par l’automate ci-contre o`u l’axiome S0
+est l’´etat initial et S1 l’´etat ﬁnal de l’automate
+
+• pour le langage a∗bba∗ il suﬃt maintenant de concat´ener les automates des
+
+langages a∗b et ba∗ ce qui donne :
+
+a
+
+S0
+
+b
+
+S1
+
+b
+
+S2
+
+a
+
+le langage est donc d´ecrit par les r`egles S0 → aS0|bS1; S1 → bS2; S2 →
+aS2|ǫ; les symboles terminaux sont a, b et l’axiome S0. L’axiome S0 est l’´etat
+initial et S2 l’´etat ﬁnal de l’automate.
+
+• De mˆeme le langage ba∗a∗b peut ˆetre repr´esent´e par l’automate :
+
+87
+
+88
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+S0
+
+b
+
+S1
+
+ǫ
+
+S2
+
+b
+
+S3
+
+a
+
+a
+
+les ´etats S1 et S2 ´etant tr`es similaires on peut les regrouper en un seul (et
+supprimer la transition par le mot vide) :
+
+S0
+
+b
+
+S1
+
+b
+
+S2
+
+a
+
+cela revient `a ´ecrire que ba∗a∗b = ba∗b. On en d´eduit que le langage est d´ecrit
+par les r`egles S0 → bS1; S1 → aS1|bS2; S2|ǫ avec les symboles terminaux a, b
+et l’axiome S0. L’axiome S0 est l’´etat initial et S2 l’´etat ﬁnal de l’automate.
+• pour le langage a∗b|ba∗ il suﬃt d’ajouter un ´etat qui permet de choisir si on
+
+veut aller vers l’automate de a∗b ou vers celui de ba∗ :
+
+ǫ
+
+S4
+
+ǫ
+
+a
+
+S1
+
+S0
+
+b
+
+b
+
+a
+
+S3
+
+S2
+
+On en d´eduit que le langage associ´e est d´ecrit par les r`egles
+
+S0 → aS0|bS2; S1 → bS3; S3 → aS3|ǫ; S4 → S1|S2; S2 → ǫ
+
+avec les symboles terminaux : a, b et l’axiome S4. L’axiome S4 est l’´etat initial
+et S2, S3 sont les ´etats ﬁnaux de l’automate.
+
+• pour le langage (a∗b)∗ il faut ajouter un ´etat `a la fois initial et ﬁnal qui va
+
+accepter le mot vide et permettre de ≪ boucler ≫ sur les mots de a∗b :
+
+S2
+
+ǫ
+
+a
+
+S0
+
+ǫ
+
+b
+
+S1
+
+ce langage est donc d´ecrit par les r`egles S0 → aS0|bS1; S1 → S2; S2 → S0|ǫ;
+les symboles terminaux ´etant a, b et l’axiome S2 qui est donc l’´etat initial et
+aussi l’´etat ﬁnal de l’automate.
+
+• pour le langage (a∗b)+ il faut supprimer le mot vide de (a∗b)∗ ce qui peut se
+
+faire en changeant juste l’´etat ﬁnal :
+
+89
+
+S2
+
+ǫ
+
+a
+
+S0
+
+ǫ
+
+b
+
+S1
+
+le langage est donc d´ecrit par les mˆemes r`egles que (a∗b)∗ :
+
+S0 → aS0|bS1; S1 → S2|ǫ; S2 → S0;
+
+mais cette fois L’axiome S2 n’est que l’´etat initial alors que S1 est l’´etat ﬁnal.
+
+ Un langage donn´ee peut ˆetre repr´esent´e par des automates en apparence
+
+diﬀ´erents ! Par exemple le langage ba∗a∗b a ´et´e repr´esent´e par l’automate :
+
+S0
+
+b
+
+S1
+
+ǫ
+
+S2
+
+b
+
+S3
+
+a
+
+a
+a
+
+qui peut ˆetre simpliﬁ´e en :
+
+S0
+
+b
+
+S1
+
+b
+
+S3
+
+a
+
+On parle alors d’automates ´equivalent. Simpliﬁer un automate consiste `a lui
+enlever des ´etats ou des transitions sans changer le langage auquel il est associ´e !
+
+Ces diﬀ´erents exemples montrent qu’on peut facilement construire un automate `a
+partir d’automate plus simples en utilisant les op´erations de base sur les langages
+concat´enation (.) r´eunion (|) et ´etoile de Kleene ( ∗ ou +).
+
+Th´eor`eme 4.8 (Th´eor`eme de Kleene)
+L’ensemble des langages qui peuvent ˆetre mod´elis´es par un automate ﬁni est exacte-
+ment l’ensemble des langages de type 3, c’est `a dire l’ensemble des langages r´eguliers
+(donc qui peuvent ˆetre d´ecrits par une expression r´eguli`ere). V´eriﬁer qu’un mot ap-
+partient bien `a un langage de type 3 s’appelle faire l’analyse lexicale.
+
+ 4.7 Construire l’automate d’un langage.
+Le langage des expressions bool´eennes (sans parenth´esage) d´eﬁnit par la grammaire :
+S1 → S1 ∨ S1|S1 ∧ S1|¬S1|S1 =⇒ S1|S1 ⇐⇒ S1|V rai|F aux|P |Q|R
+peut aussi ˆetre repr´esent´e par un automate, Pour cela il est plus facile de partir de
+la grammaire mise sous forme lin´eaire `a gauche :
+
+S1 → V rai S2|F aux S2|P S2|Q S2|R S2|¬S1
+S2 → ∨ S3| ∧ S3| =⇒ S3| ⇐⇒ S3|ǫ
+S3 → V rai S2|F aux S2|P S2|Q S2|R S2| ¬ S3
+
+90
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+¬
+
+S1
+
+V ; F ; P ; Q; R
+
+S2
+
+∨; ∧; =⇒; ⇐⇒
+
+¬
+
+S3
+
+V ; F ; P ; Q; R
+
+S1 est donc l’´etat initial et S2 est l’´etat ﬁnal.
+
+L’automate permet de v´eriﬁer facilement si un mot appartient ou pas au langage
+associ´e puisque chaque mot correspond `a un chemin depuis un ´etat initial jusqu’`a un
+´etat ﬁnal. Tester si un mot appartient `a un langage s’appelle faire l’analyse lexicale
+du langage
+
+ 4.8 Analyse lexicale
+
+• le mot P =⇒ Q ⇐⇒ ¬P ∧Q est bien dans le langage L car il peut ˆetre obtenu
+
+par le chemin :
+
+(S1, S2, S3, S2, S3, S3, S2, S3, S2)
+
+• le mot P =⇒ Q ⇐⇒ ¬ ∧ Q n’appartient pas au langage L car on ne peut
+pas atteindre un ´etat ﬁnal en partant de l’´etat initial, on bloque apr`es P =⇒
+Q ⇐⇒ ¬ . . . car on arrive en S3 et on ne peut pas rajouter le connecteur ∧
+
+(S1, S2, S3, S2, S3, S3, ???)
+
+ En langage C, le programme Lex permet de faire l’analyseur lexical d’un langage
+de type 3 `a partir de sa description formelle (sa grammaire). Il existe aussi une
+version GNU de Lex appel´ee Flex.
+
+L’automate d’un langage permet de construire facilement une expression r´eguli`ere
+du langage par ce qu’on appelle l’algorithme de Moore. Cet algorithme consiste `a
+simpliﬁer l’automate, en supprimant un ´etat `a chaque ´etape, jusqu’`a ce qu’il n’ait
+plus que deux ´etats (un initial et l’autre ﬁnal) pour se ramener `a un automate avec
+juste un ´etat initial, un ´etat ﬁnal li´es par un arc.
+
+Proposition 4.9 (calcul d’expression r´eguli`ere) Soit un automate ﬁni A =
+(E, Σ, δ, I, F ) pour calculer l’expression r´eguli`ere correspondant au langage L as-
+soci´e `a A on cherche `a ´eliminer pas `a pas les sommets et les transitions suivant 2
+r`egles :
+
+1. supprimer les ´etats interm´ediaires
+
+b
+
+a
+
+A
+
+c
+
+X
+
+B
+
+−→ A
+
+ab∗c
+X
+
+2. supprimer les transissions multiples apparus apr`es l’´etape 1
+
+a
+
+A
+
+B
+
+−→ A
+
+a|b
+
+B
+
+B
+
+b
+
+`a la ﬁn on doit aboutir `a un automate de la forme suivante dont l’expression
+r´eguli`ere associ´ee est a∗bc∗
+
+a
+
+A
+
+c
+
+b
+
+B
+
+−→
+
+A
+
+a∗bc∗
+
+B
+
+ce qui donne l’algorithme
+
+✬
+
+fonction regex = automate vers regex(A )
+
+simpliﬁer A pour qu’il n’ait qu’un seul ´etat initial/ﬁnal
+tant que A poss`ede au moins un ´etats non-ﬁnal et non-initial faire
+
+✩
+
+X = un ´etat non-ﬁnal et non-initial de A
+pour tout A, B ´etats de A adjacents `a X faire
+
+simpliﬁer A suivant la r`egle 1) :
+•cr´eer la transition A → B
+•supprimer les transitions A → X et X → B
+
+ﬁn faire
+supprimer X de l’automate
+simpliﬁer les arc multiples suivant la r`egle 2)
+
+ﬁn faire
+simpliﬁer les ´eventuelles boucles restantes dans A
+suivant la r`egle 3)
+
+ﬁn faire
+regex = valeur de l’unique transition de A (r`egle 3)
+
+✪
+✫
+ Selon l’automate utilis´e pour d´ecrire le langage on ne trouvera pas la mˆeme
+
+expression r´eguli`ere !
+
+91
+
+92
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+ 4.9 calculer une expression r´eguli`ere du langage
+On commence par se ramener `a un ´etat initial/ﬁnal
+
+a
+
+C
+
+ǫ
+
+ǫ
+
+A
+
+ǫ
+
+ǫ
+
+A
+
+a
+
+ǫ
+
+C
+
+E
+
+ǫ
+
+ab
+
+B
+
+D
+
+ab
+
+B
+
+D
+
+a; b
+
+a; b
+
+puis on d´eroule l’algorithme (peut importe l’ordre dans lequel on choisit les sommets)
+
+E
+
+ǫ
+
+ab
+
+B
+
+D
+
+A
+
+ǫ
+
+a∗
+
+a; b
+
+a∗
+
+E
+
+A
+
+ab
+
+ǫ
+
+B
+
+a; b
+
+`a la ﬁn on arrive `a seulement deux ´etats (un initial un ﬁnal) :
+
+A
+
+a∗
+
+(a|b)∗ab
+
+E
+
+A
+
+a∗|((a|b)∗ab)
+
+E
+
+l’expression r´eguli`ere est donc a∗|((a|b)∗ab)
+
+ Si l’automate de d´epart `a plusieurs ´etats ﬁnaux, les remplacer par un seul ´etat
+
+ﬁnal connect´e aux pr´ec´edents par des transition vides ǫ.
+
+ 4.10 Trouver l’expression r´eguli`ere du langage des expressions bool´eennes
+Reprenons le langage des expressions bool´eennes (sans parenth´esage) associ´e `a l’au-
+tomate :
+
+¬
+
+V ; F ; P ; Q; R
+
+S1
+
+S2
+
+∨; ∧; =⇒; ⇐⇒
+
+¬
+
+S3
+
+V ; F ; P ; Q; R
+
+la partie de l’automate entre S2 et S3 peut ˆetre vue comme une ”boucle” sur S2o`u
+l’on r´ep´eterait le motif (∨|∧| =⇒ | ⇐⇒)(¬)∗(V |F |P |Q|R). Ceci permet de construire
+un automate ´equivalent mais avec moins d’´etats :
+
+¬
+
+S1
+
+(∨| ∧ | =⇒ | ⇐⇒)(¬)∗(V |F |P |Q|R)
+
+V ; F ; P ; Q; R
+
+S2
+
+Sur ce nouvel automate on peut remarquer que chaque boucle va correspondre `a
+une fermeture de Kleene, dans l’expression r´eguli`ere associ´ee, qui entourent le motif
+apparaissant sur la transition S1 → S2. Ici il n’est pas diﬃcile de trouver que le
+langage associ´e est d´eﬁni par :
+
+(¬)∗
+
+boucle S1
+
+(V |F |P |Q|R)
+
+arc S1 → S2 (cid:16)(∨| ∧ | =⇒ | ⇐⇒)(¬)∗(V |F |P |Q|R) (cid:17)∗
+{z
+}
+ Les ´etats initiaux et ﬁnaux de l’automate peuvent ˆetre le mˆeme ´etat !
+
+|{z}
+
+}
+
+|
+
+boucle S2
+
+{z
+
+|
+
+93
+
+94
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+Pour de nombreux probl`emes, on a en plus besoin d’imposer aux automates qu’on
+manipule d’ˆetre d´eterministe. C’est `a dire qu’`a partir d’un ´etat donn´e l’´etat dans
+lequel on va se retrouver ensuite ne d´epend que de l’unit´e lexicale suivante, et pas
+d’un choix fait par hasard (d’o`u le nom ”d´eterministe”).
+
+D´eﬁnition 4.10 (Automate d´eterministe)
+Un automate ﬁni A = (E, Σ, δ, I, F ) est dit d´eterministe si il existe un unique ´etat
+initial et si pour tout mot du langage associ´e il existe un unique chemin de l’´etat
+initial vers un ´etat ﬁnal.
+
+ 4.11 Automate non-d´eterministe : on consid`ere le langage :
+
+L = {w|w ﬁnit par ≪ ab ≫ ou ne contenient que des ≪ a ≫}
+
+il contient exactement tous les mots du langage a∗ et du langage (a|b)∗ab donc il peut
+((a|b)∗ab)|a∗. Si on veut construire un
+ˆetre repr´esent´e par l’expression r´eguli`ere :
+automate correspondant il suﬃt d’assembler les deux automates de a∗ et (a|b)∗ab en
+ajoutant un ´etat inital unique et des transition vides ǫ :
+
+a
+
+a
+a
+
+C
+
+ab
+
+B
+
+D
+
+A
+
+a; b
+
+C
+
+ab
+
+B
+
+D
+
+ǫ
+
+ǫ
+
+a; b
+
+ceci permet de trouver une grammaire lin´eaire `a droite pour ce langage :
+
+A → B|C
+
+B → a.B|b.B|D
+
+D → ab
+
+C → a.C|ǫ
+
+mais il est diﬃcile de savoir si un mot est accept´e par le langage : pour un mot
+
+commen¸cant par a faut-il de A aller vers C ou vers B ?
+
+ un automate d´eterministe ne peut pas contenir plusieurs transitions avec le
+mˆeme symbole depuis un sommet donn´e. De mˆeme une transition avec le mot
+vide ǫ depuis un sommet n’est possible que s’il n’y a qu’une seule transition depuis
+ce sommet. Enﬁn il ne peut pas y avoir plusieurs ´etats initiaux.
+
+Quand on fabrique un automate `a partir d’automates plus simple il est pratique
+d’utiliser des transition par le mot vide ǫ mais alors l’automate obtenu n’est en
+g´en´eral plus d´eterministe. On dispose d’une m´ethode pour rendre n’importe quel
+automate d´eterministe.
+
+Proposition 4.11 (rendre un automate d´eterministe)
+Pour rendre un automate ﬁni A = (E, Σ, δ, I, F ) d´eterministe on commence par :
+• ajouter un ´etat initial unique avec des transitions vides vers les ´etats initiaux
+
+de d´epart
+
+• ´eliminer les transitions multiples Si → abSj en ajoutant un ´etat Sk pour les
+
+remplacer par les transitions Sj → aSk et Sk → bSj
+
+• ´eliminer les transitions vides Si → ǫSj et ajouter pour chaque transition
+Sj → aSk la transition Si → aSk (des ´etats peuvent devenir initiaux ou
+ﬁnaux `a cette ´etape)
+
+ensuite pour chaque S ⊂ E et a ∈ Σ on calcule l’ensemble T ⊂ E des ´etats pour
+lesquels il existe une transition Si → aTj. Le nouvel automate d´eterministe acceptant
+le mˆeme langage que A est alors A ′ = (E′, Σ, δ′, I ′, F ′) o`u
+
+• E′ = {S ⊂ E| il existe des transition δ′ de S vers un autre ´etat de E′ }
+• δ′(S, a) = T ⇐⇒ ∃Si, Tj ∈ E,
+• I ′ = {S ⊂ E|∃S0 ∈ I, S0 ∈ S}
+• F ′ = {S ⊂ E|∃Sf ∈ F, Sf ∈ F }
+
+δ(Si, a) = Tj
+
+ 4.12 Rendre un automate d´eterministe
+On commence par v´eriﬁer qu’il n’y a qu’un seul ´etat initial puis on enl`eve les tran-
+sitions multiples et les transitions vides :
+ajouter un nouvel ´etat initial
+
+d´ecomposer la transition B → abD
+
+´eliminer la transition A → ǫB
+
+´eliminer la transition A → ǫC
+
+On a maintenant un ´etat initial A et trois ´etats ﬁnaux A, C et E. On applique ensuite
+la proc´edure pour calculer les nouveaux ´etats en utilisant un tableau. On commence
+
+95
+
+96
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+par placer le singleton contenant l’´etat initial dans la ﬁle des ensembles `a traiter et
+on calcule les ensembles d’´etats qu’on peut atteindre pour chaque transition possible.
+On ajoute les nouveaux ensembles obtenus `a la File . . .sur cet exemple on obtient :
+
+File
+{A}
+
+{C; B; D}
+
+{B}
+
+{B; E}
+{B; D}
+
+a
+
+b
+
+{C; B; D}
+{C; B; D} {B; E}
+
+{B}
+
+{B; D}
+{B; D}
+{B; D}
+
+{B}
+{B}
+
+{B; E}
+
+Il ne reste plus qu’`a repr´esenter le nouvel automate, normalement l’automate poss`ede
+un seul ´etat initial A et tous les ´etats contenant A, C ou E sont des ´etats ﬁnaux
+soient A, CBD et BE :
+
+CBD
+
+b
+
+BE
+
+a
+
+a
+
+A
+
+b
+
+b
+
+a
+
+b
+
+b
+
+a
+
+B
+
+BD
+
+a
+
+ La m´ethode pour rendre un automate d´eterministe consiste donc `a ajouter des
+´etats `a l’automate, ces ´etats correspondent `a des ensembles d’´etats de l’automate
+de d´epart.
+
+4.3 Langages alg´ebriques
+
+L’exemple le plus simple de Langage de type 2, dans la hi´erarchie de Chomsky,
+
+est celui des expressions bien parenth´es´ees.
+
+ 4.13 expressions bool´eennes avec parenth´esage : on peut expliquer le
+parenth´esage d’une expression bool´een en ajoutant `a la grammaire :
+S1 → V rai S2|F aux S2|P S2|Q S2|R S2|¬S1
+S2 → ∨ S3| ∧ S3| =⇒ S3| ⇐⇒ S3|ǫ
+S3 → V rai S2|F aux S2|P S2|Q S2|R S2| ¬ S3
+les deux symboles [ et ] et les r`egles
+
+S1 → [ S1 ];
+
+S3 → [ S3 ];
+
+mais il est impossible d’´ecrire ces r`egles sous la forme d’une grammaire lin´eaire `a
+gauche (ou `a droite). Ce langage est donc de type 2.
+
+ Un langage de type 2 peut ˆetre repr´esent´e par un automate plus complexe appel´e
+automate `a pile. V´eriﬁer qu’un mot appartient bien `a un langage de type 2
+s’appelle faire l’analyse syntaxique.
+
+Pour montrer qu’un langage n’est pas rationnel il ne suﬃt de l’´ecrire avec des
+r`egles de d´erivation de la forme A → aBb, mais montrer que ces r`egles ne peuvent
+pas se simpliﬁer. Un outil tr`es utile pour s’en sortir dans ce cas est le th´eor`eme
+ci-dessous appel´e lemme de l’´etoile
+
+Th´eor`eme 4.12 (lemme de l’´etoile)
+Soit L un langage rationnel. Il existe un entier K tel que tout mot w de L de longueur
+|w| ≥ K poss`ede une factorisation w = xyz telle que
+
+• 0 < |xy| ≤ K et
+• xykz ∈ L pour tout entier k ≥ 0.
+
+en d’autre termes si L est r´egulier alors xy+z ⊂ L.
+
+Preuve : Le th´eor`eme n’a d’int´erˆet que si L contient une inﬁnit´e de mots (sinon il
+existe un mot de longueur maximale max{|w| | w ∈ L} et il suﬃt de prendre K = 0,
+x = y = ǫ et z = w de telle sorte que :
+
+xykz = ǫǫkw = w ∈ L
+
+Pour un langage contenant une inﬁnit´e de mots mais d´ecrit par une grammaire
+formelle ﬁnie. Soit n le nombre de symboles non-terminaux du langage L, alors il
+existe un mot w de longueur l ≥ K = n + 1 : w = a1 . . . ai . . . al
+Pour v´eriﬁer que ce mot appartient au langage on a besoin d’utiliser l r`egles de
+d´erivations, on passe donc au moins 2 fois par le mˆeme non terminal puisque l > n :
+
+S0 a0−→ S1
+
+ai−→ Si
+
+ai+1−→ Si+1 −→ . . .
+
+aj−→ Si −→ . . . −→ al
+
+donc le mot w poss`ede un motif que l’on peut r´ep´eter k fois (k quelconque) en
+r´eutilisant la suite de d´erivations Si −→ . . . −→aj Si
+
+97
+
+w = a1 . . . ai
+
+| {z }=x
+
+|
+
+=y
+
+{z
+
+}
+
+|
+
+=z
+
+{z
+
+}
+
+ai+1 . . . aj
+
+aj+1 . . . al
+
+=⇒ a1 . . . ai
+
+(ai+1 . . . aj)k
+
+aj+1 . . . al
+
+= xykz ∈ L
+
+| {z }=x
+
+98
+
+|
+
+=yk
+
+{z
+
+}
+
+|
+
+=z
+
+{z
+
+}
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+il reste `a v´eriﬁer que |xy| ≤ K, c’est ´evident puisque le non-terminal r´ep´et´e ne peut
+pas l’ˆetre `a la derni`ere d´erivation qui donne forc´ement un terminal. (cid:3)
+
+Le lemme de l’´etoile permet de montrer facilement par l’absurde qu’un langage
+
+ne peut pas ˆetre r´egulier.
+
+ 4.14 Montrer qu’un langage avec parenth´esage n’est pas r´egulier
+Soit un langage L s’´ecrivant avec pour grammaire
+
+Σ = {a; (; )},
+
+I = {S}
+
+S → (S)|aS|ǫ
+
+qui contient des mots bien parenth´es´es comme :
+
+(a),
+
+(a(a)),
+
+(a(a)aa((a))(aaa)),
+
+((((a)))a((a))), . . .
+
+soit K la valeur du lemme de l’´etoile et w un mot du langage L, quitte a lui ajouter
+des parenth`eses par la r`egle S → (S) on peut se ramener `a ce qu’il commence par
+K − 2 parenth`eses :
+
+w = (. . . . . . (
+
+K − 2 parenth`eses
+
+| {z }
+
+a
+
+K − 2 parenth`eses
+
+) . . . . . . )
+
+| {z }
+
+= (. . . . . . (
+
+x
+
+| {z }
+{z
+|
+
+longueur=K
+
+a)
+
+|{z}=y
+
+) . . . . . . )
+
+| {z }
+
+z
+
+}
+
+de telle sorte que z ne contient que K − 3 parenth`eses et xy est de longueur K, mais
+alors on aurait que
+
+5 Metanet
+
+Pour illustrer ce cours de Th´eorie des graphes nous utiliserons en TP le logiciel
+
+Scilab et sa boˆıte `a outils d´edi´ee aux graphes : Metanet.
+
+ L’´editeur de graphes Metanet a subit des changements tr`es importants entre les
+versions 4 et 5 de Scilab qui ne le rendent pas encore totalement fonctionnel pour
+la version 5. Dans ce cours Nous utiliserons `a la place le logiciel Scicoslab qui
+est un clone de la version 4 de Scilab [10].
+
+Pour l’utilisation de Scicoslab en TP reportez vous aux documents suivants dispo-
+nible sur le site [7]
+
+• un tutoriel g´en´eral sur Scicoslab [8]
+• un tutoriel particulier pour metanet [9]
+
+5.1 L’´editeur de graphes metanet
+
+Scicoslab poss`ede une interface graphique sp´ecialement d´edi´ee `a la manipulation
+des graphes metanet. Nous allons voir comment l’utiliser pour construire un graphe :
+
+1. Lancer l’´editeur de graphes avec la commande
+
+w′ = (. . . . . . (
+
+a) . . . . . . a)
+
+x
+
+| {z }
+
+|
+
+yk
+
+{z
+
+) . . . . . . )
+
+| {z }
+
+z
+
+}
+
+alors que ce mot est mal parenth´es´e puisqu’il contient K − 2 parenth`eses ouvrantes
+et K − 2 + k parenth`eses fermantes ! D’o`u la contradiction.
+
+∈ L
+
+--> edit_graph()
+
+une nouvelle fenˆetre s’ouvre alors :
+
+ La plupart des langages de programmation, sans ˆetre `a proprement parler des
+langages alg´ebriques, en sont assez proches pour que les techniques d’analyse des
+langages alg´ebriques s’y adaptent. En langage C, le programme Yacc (acronyme de
+Yet Another Compiler Compiler) permet de faire l’analyseur syntaxique (parser en
+anglais) d’un langage de type 2 `a partir de sa description formelle. Il existe aussi
+une version GNU de yacc appel´ee Bison.
+
+99
+
+100
+
+2. Avant de commencer on peut avoir besoin de param´etrer le comportement de
+cette fenˆetre. Dans le menu graph de cette fenˆetre choisir l’onglet settings
+permet de param´etrer la taille des sommets et l’´epaisseur des arcs qui seront
+dessin´es. Mais surtout le dernier param`etre “ is graph directed” permet de
+d´eﬁnir le type de graphe qu’on va faire : orient´e (yes) ou non-orient´e (no) :
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+de mˆeme l’onglet options permet de choisir l’information qui sera indiqu´ee `a
+proximit´e d’un sommet (node en anglais) ou d’un arc. Je vous conseille de choi-
+sir pour le champ Nodes le param`etre number pour aﬃcher automatiquement
+son num´ero `a cot´e de chaque sommet :
+
+4. Une fois le graphe saisi vous pouvez modiﬁer la position des sommets pour que
+les arcs ne cachent pas les informations aﬃch´ees en utilisant la fonction Move
+Node du menu edit. Faire un clic gauche sur un sommet puis le d´eplacer avec
+la souris. Refaire un clic gauche `a la nouvelle place d´esir´ee (le sommets et les
+arcs qui y sont attach´es se d´eplacent en mˆeme temps que la souris).
+
+3. Ensuite on peut commencer la construction du graphe. Pour cela nous allons
+utiliser les fonctionnalit´es du menu edit. Pour cr´eer les sommets choisir New
+Node, `a chaque clic gauche vous cr´eez un nouveau sommet `a l’endroit du clic
+le num´ero du nouveau sommet est incr´ement´e `a chaque clic (et s’aﬃche si on
+l’a sp´eciﬁ´e via l’onglet options du menu graph). Pour cr´eer les arcs choisir
+New Arc, faire un clic gauche sur un sommet existant, pour d´eﬁnir l’origine,
+puis un autre clic gauche sur un sommet existant, pour d´eﬁnir l’extr´emit´e de
+l’arc. L’arc s’aﬃche avec ou sans ﬂ`eche suivant que le graphe est orient´e ou
+pas (cela a ´et´e sp´eciﬁ´e via l’onglet settings du menu graph).
+
+5. Avant de pouvoir sauver le graphe, il faut indiquer `a Scicoslab comment
+compl´eter un grand nombre d’informations relatives au graphe (couleurs des
+arcs et sommets, noms des sommets , etc. . .) en utilisant des valeurs par d´efaut.
+pour cela il faut choisir Give default names dans l’onglet edit et cliquer sur
+yes dans la fenˆetre qui apparaˆıt ensuite :
+
+101
+
+102
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+DUT Informatique
+
+Th´eorie des graphes
+
+Math´ematiques
+
+6. Vous pouvez maintenant sauver le graphe en utilisant le menu SaveAs dans
+l’onglet graph et choisir, dans la boite de dialogue qui apparaˆıt, un nom de
+ﬁchier avec l’extension *.graph pour sauver le graphe :
+
+Ce ﬁchier sera cr´e´e dans le r´epertoire que vous choisirez (r´epertoire courant
+par d´efaut) et contiendra toute la structure du graphe et va ˆetre utilis´e dans
+la console de Scicoslab pour eﬀectuer divers calculs sur le graphe.
+
+ si vous n’avez pas cliqu´e sur le menu Give default names `a l’´etape pr´ec´edente
+vous ne pourrez pas sauver le graphe et vous aurez le message d’erreur suivant :
+
+5.2 Chargement d’un graphe dans Scicoslab
+
+Nous venons de sauver la structure d’un graphe, cr´e´e avec metanet, dans un
+ﬁchier *.graph, inversement nous pouvons charger la structure d’un graphe dans
+Scicoslab `a partir de ﬁchier *.graph. Pour charger le graphe, contenu dans le ﬁ-
+chier G.graph, dans l’environnement de travail il suﬃt maintenant d’appeler la
+commande :
+
+--> G=load_graph(’G.graph’);
+
+La commande G= sert `a stocker le contenu du ﬁchier G.graph dans la variable Scicos-
+lab G (mais on aurait pu choisir tout autre nom de variable valide 7 comme graphe
+ou monpremiergraphe . . .).
+
+ Pour que cela il faut que le ﬁchier *.graph se trouve dans le r´epertoire courant
+
+de Scicoslab , sinon vous aurez une erreur lors du chargement du graphe :
+
+-->G=load_graph(’G.graph’)
+
+!--error 9999
+
+Graph file "./G.graph" does not exist
+at line
+

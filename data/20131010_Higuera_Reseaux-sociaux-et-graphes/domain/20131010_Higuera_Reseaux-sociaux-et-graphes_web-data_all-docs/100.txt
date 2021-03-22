@@ -1,0 +1,1092 @@
+http://mariamalek.free.fr/HTML-IAD/seminaire1.pdf
+
+Analyse des r´eseaux sociaux
+Les mesures globales
+Les mesures locales
+Graphes Bipartis & R´eseaux sociaux
+Analyse de communaut´es
+Autres Probl`emes d’analyse r´eseaux sociaux
+
+Introduction `a l’Analyse des R´eseaux Sociaux
+
+(ARS)
+
+Maria Malek
+
+18 mars 2010
+
+Maria Malek
+
+Introduction `a l’Analyse des R´eseaux Sociaux
+
+Analyse des r´eseaux sociaux
+Les mesures globales
+Les mesures locales
+Graphes Bipartis & R´eseaux sociaux
+Analyse de communaut´es
+Autres Probl`emes d’analyse r´eseaux sociaux
+
+Analyse des r´eseaux sociaux
+
+D´eﬁnition
+Propri´et´es
+Utilisation & Applications
+
+Les mesures globales
+
+Les mesures locales
+
+Graphes Bipartis & R´eseaux sociaux
+
+Analyse de communaut´es
+
+Autres Probl`emes d’analyse r´eseaux sociaux
+
+Maria Malek
+
+Introduction `a l’Analyse des R´eseaux Sociaux
+
+Analyse des r´eseaux sociaux
+Les mesures globales
+Les mesures locales
+Graphes Bipartis & R´eseaux sociaux
+Analyse de communaut´es
+Autres Probl`emes d’analyse r´eseaux sociaux
+
+D´eﬁnition
+Propri´et´es
+Utilisation & Applications
+
+Analyse des r´eseaux sociaux
+
+(cid:73) Etude des entit´es sociales (les personnes dans les organisations
+
+qu’on appelle acteurs), leurs interactions et leurs relations ;
+
+(cid:73) Mod´elisation par un graphe :
+
+(cid:73) un nœud repr´esente un acteur,
+(cid:73) un lien repr´esente une relation.
+
+http ://mastersofmedia.hum.uva.nl/2009/09/14/a-review-of-taken-out-of-context/
+
+Introduction `a l’Analyse des R´eseaux Sociaux
+
+Maria Malek
+
+source :
+
+Analyse des r´eseaux sociaux
+Les mesures globales
+Les mesures locales
+Graphes Bipartis & R´eseaux sociaux
+Analyse de communaut´es
+Autres Probl`emes d’analyse r´eseaux sociaux
+
+D´eﬁnition
+Propri´et´es
+Utilisation & Applications
+
+D´eﬁnition et repr´esentation d’un graphe
+
+(cid:73) Un graphe (non orient´e) G est d´eﬁni par :
+
+(cid:73) Un ensemble X de sommets, Un ensemble E d’arˆetes.
+(cid:73) Degr´e d’un sommet : nombre d’arˆetes incidentes `a X.
+(cid:73) Repr´esentation par la matrice d’adjacence :
+
+1
+0
+1
+1
+0
+
+2
+1
+0
+1
+1
+
+3
+1
+1
+0
+0
+
+4
+0
+1
+0
+0
+
+1
+2
+3
+4
+
+Maria Malek
+
+Introduction `a l’Analyse des R´eseaux Sociaux
+
+Analyse des r´eseaux sociaux
+Les mesures globales
+Les mesures locales
+Graphes Bipartis & R´eseaux sociaux
+Analyse de communaut´es
+Autres Probl`emes d’analyse r´eseaux sociaux
+
+D´eﬁnition
+Propri´et´es
+Utilisation & Applications
+
+R´eseautage social
+
+(cid:73) Ensemble des moyens mis en œuvre pour relier des personnes
+
+(physiques comme morales) entre elles.
+
+(cid:73) Applications informatiques qui servent `a constituer un r´eseau
+
+social : Web social (facebook, twitter, etc.)
+
+(cid:73) Relier des amis, des associ´es, ou d’autres individus employant
+ensemble une vari´et´e d’outils (entreprise, logiciels, sites Web,
+etc.).
+
+(cid:73) Objectifs :
+
+(cid:73) gestion des carri`eres professionnelles (coaching professionnel),
+(cid:73) distribution et la visibilit´e artistique,
+(cid:73) gestion des contacts personnels (site de rencontres sur
+
+Internet, sites d’anciens ´el`eves, site de relations amicales).
+
+Maria Malek
+
+Introduction `a l’Analyse des R´eseaux Sociaux
+
+Analyse des r´eseaux sociaux
+Les mesures globales
+Les mesures locales
+Graphes Bipartis & R´eseaux sociaux
+Analyse de communaut´es
+Autres Probl`emes d’analyse r´eseaux sociaux
+
+D´eﬁnition
+Propri´et´es
+Utilisation & Applications
+
+R´eseautage social - Exemple
+
+source : http ://datamining.typepad.com/data mining/2007/04/twitter social .html
+
+Maria Malek
+
+Introduction `a l’Analyse des R´eseaux Sociaux
+
+Analyse des r´eseaux sociaux
+Les mesures globales
+Les mesures locales
+Graphes Bipartis & R´eseaux sociaux
+Analyse de communaut´es
+Autres Probl`emes d’analyse r´eseaux sociaux
+
+D´eﬁnition
+Propri´et´es
+Utilisation & Applications
+
+Propri´et´es des r´eseaux sociaux
+
+Grandes tailles : |X| > 103
+Le diam`etre du r´eseau : (le plus long chemin entre deux nœuds)
+
+est de longueur born´ee.
+
+(cid:73) Propri´et´e du petit monde issue des ´etudes
+
+sociologiques 6 degr´es de s´eparation selon l’exp´erience du petit monde de
+Stanley Milgram 1967.
+
+La transitivit´e dans le r´eseau : l’ami de mon ami est mon ami.
+
+(cid:73) Mesure du taux de clustering suivant :
+3 ∗ nombre de triangles dans le r´eseau
+nombre de triples connect´es de nœuds
+
+C =
+
+La distribution des degr´es
+
+: nombre de nœuds connect´es `a un
+
+nœud donn´e ob´eit `a la distribution de degr´es en loi
+de puissance.
+La probabilit´e pour un nœud d’avoir k voisins est : P(k) = k−γ
+
+Maria Malek
+
+Introduction `a l’Analyse des R´eseaux Sociaux
+
+Analyse des r´eseaux sociaux
+Les mesures globales
+Les mesures locales
+Graphes Bipartis & R´eseaux sociaux
+Analyse de communaut´es
+Autres Probl`emes d’analyse r´eseaux sociaux
+
+D´eﬁnition
+Propri´et´es
+Utilisation & Applications
+
+Utilisation des r´eseaux sociaux
+
+(cid:73) D´ecrire les interactions entre les entit´es sociales.
+
+(cid:73) Analyse des interactions dans les mails, les forums de
+
+discussions, les r´eseaux professionnels, etc.
+
+(cid:73) Mod´eliser les liens entre un ensemble de pages Web
+
+(cid:73) le Web est une soci´et´e virtuelle (un r´eseau social virtuel), o`u
+
+chaque page est consid´er´ee comme un acteur social et chaque
+hyperlien est une relation.
+
+(cid:73) Analyse des citations exprim´ees dans les r´ef´erences
+
+bibliographiques :
+
+(cid:73) D´ecouvrir des similarit´es entre ces documents outre les mesure
+
+fond´ees sur le contenu,
+
+(cid:73) Exemple d’application : d´eﬁnir des centres d’aﬃnit´es entre les
+
+auteurs, etc.
+
+Maria Malek
+
+Introduction `a l’Analyse des R´eseaux Sociaux
+
+Analyse des r´eseaux sociaux
+Les mesures globales
+Les mesures locales
+Graphes Bipartis & R´eseaux sociaux
+Analyse de communaut´es
+Autres Probl`emes d’analyse r´eseaux sociaux
+
+D´eﬁnition
+Propri´et´es
+Utilisation & Applications
+
+Mod´elisation S´emantique
+
+(cid:73) Stocker au niveau des acteurs (nœuds) les information
+
+concernant le proﬁl utilisateur ;
+
+(cid:73) Stocker au niveau de lien une plusieurs informations : types de
+
+communication (email, etc), nombre ou fr´equence
+d’interaction, la dur´ee, nombre de participants, etc.
+
+Maria Malek
+
+Introduction `a l’Analyse des R´eseaux Sociaux
+
+Analyse des r´eseaux sociaux
+Les mesures globales
+Les mesures locales
+Graphes Bipartis & R´eseaux sociaux
+Analyse de communaut´es
+Autres Probl`emes d’analyse r´eseaux sociaux
+
+D´eﬁnition
+Propri´et´es
+Utilisation & Applications
+
+Domaines d’application
+
+(cid:73) ´Etudier des propri´et´es de la structure et son rˆole ainsi que la
+
+position et le prestige de chaque acteur social
+
+(cid:73) le marketing viral,
+(cid:73) d´etection des nœuds faibles (ou ponts) dans un r´eseau (virus
+
+informatiques, terrorisme, etc.),
+
+(cid:73) tri des r´esultats d’un moteur de recherche ( le fameux
+
+PageRank).
+
+(cid:73) Recherche des diﬀ´erents types de sous-graphes : les
+
+communaut´es form´ees par des groupes d’acteurs ayant des
+int´erˆets commun.
+
+(cid:73) isoler les groupes de densit´es ´elev´ees.
+
+(cid:73) ´Elaboration de recommandations (algorithmes d’exploration
+
+de chemins, d’analyse de degr´es) :
+
+(cid:73) Trouver un expert dans un domaine donn´e,
+(cid:73) Sugg´erer des produits `a vendre, proposer un ami, etc.
+
+Maria Malek
+
+Introduction `a l’Analyse des R´eseaux Sociaux
+
+Analyse des r´eseaux sociaux
+Les mesures globales
+Les mesures locales
+Graphes Bipartis & R´eseaux sociaux
+Analyse de communaut´es
+Autres Probl`emes d’analyse r´eseaux sociaux
+
+Les mesures globales
+
+(cid:73) La densit´e du graphe : permet de d´ecrire la connectivit´e `a
+
+l’int´erieur du graphe repr´esentant le r´eseau :
+
+D =
+
+m
+
+n∗(n−1)
+
+2
+
+o`u m ´etant le nombre de liens dans le graphe, n ´etant le
+nombre de nœuds,
+
+(cid:73) La distance g´eod´esique entre deux nœuds est le plus court
+
+chemin entre les deux nœuds.
+
+(cid:73) La distance moyenne d’un graphe connect´e est ´egale `a la
+moyenne des distances g´eod´esiques entre toutes les pairs
+d’acteurs.
+
+(cid:73) Le diam`etre d’un graphe connect´e est ´egal `a la distance
+
+g´eod´esique maximale au sein d’un groupe.
+
+Maria Malek
+
+Introduction `a l’Analyse des R´eseaux Sociaux
+
+Analyse des r´eseaux sociaux
+Les mesures globales
+Les mesures locales
+Graphes Bipartis & R´eseaux sociaux
+Analyse de communaut´es
+Autres Probl`emes d’analyse r´eseaux sociaux
+
+Quelques graphes de terrain
+
+Table: Exemples analys´es dans [12]
+
+Graphe
+Internet
+
+Web
+
+Acteurs
+
+Co-publication
+Co-occurrence
+
+Prot´eines
+
+Nœuds
+Routeurs
+
+Pages
+Acteurs
+Auteurs
+
+Mots
+
+Prot´eines
+
+Liens
+
+Liaisons de donn´ees
+
+Hyperliens
+Mˆeme ﬁlm
+Co-signature
+Mˆeme phrase
+
+Inﬂuence
+
+Jeu de donn´ees
+http ://www.isi.edu/div7/scan/mercator/maps.html.
+http ://snap.stanford.edu/data/web-NotreDame.html
+http ://www.imdb.com/.
+http ://arxiv.org/.
+http ://www.tniv.info/bible/
+http ://www.nd.edu/ networks
+
+Maria Malek
+
+Introduction `a l’Analyse des R´eseaux Sociaux
+
+Analyse des r´eseaux sociaux
+Les mesures globales
+Les mesures locales
+Graphes Bipartis & R´eseaux sociaux
+Analyse de communaut´es
+Autres Probl`emes d’analyse r´eseaux sociaux
+
+Quelques graphes de terrain : Mesures
+
+Table: Exemples analys´es dans [12]
+
+Graph
+Internet
+
+Web
+
+Acteurs
+
+Co-publication
+Co-occurrence
+
+Prot´eines
+
+|X|
+75885
+325729
+392340
+16401
+9297
+2113
+
+|E|
+357317
+1090108
+15038083
+
+29552
+392066
+2203
+
+densit´e
+1.2e-4
+2.1e-5
+1.9e-4
+2.2e-4
+9.1e-3
+9.9e-4
+
+d
+
+5.80
+
+7
+3.6
+7.18
+2.13
+6.74
+
+γ
+2.5
+2.3
+2.2
+2.4
+1.8
+2.4
+
+cc
+
+0.171
+0.466
+0.785
+0.638
+0.822
+0.153
+
+Maria Malek
+
+Introduction `a l’Analyse des R´eseaux Sociaux
+
+Analyse des r´eseaux sociaux
+Les mesures globales
+Les mesures locales
+Graphes Bipartis & R´eseaux sociaux
+Analyse de communaut´es
+Autres Probl`emes d’analyse r´eseaux sociaux
+
+Mesures locales : Degr´e de centralit´e
+
+(cid:73) Acteur central est l’acteur le plus actif de point de vue
+
+communication,
+
+(cid:73) Graphe non dirig´e, contenant n nœuds, d(i) ´etant le degr´e du
+
+nœud i :
+
+CD(i) =
+
+d(i)
+n − 1
+
+(cid:73) Graphe dirig´e, contenant n nœuds, do(i) ´etant le degr´e (liens
+
+sortants) du nœud i :
+
+C(cid:48)
+D(i) =
+
+do(i)
+n − 1
+
+Maria Malek
+
+Introduction `a l’Analyse des R´eseaux Sociaux
+
+Analyse des r´eseaux sociaux
+Les mesures globales
+Les mesures locales
+Graphes Bipartis & R´eseaux sociaux
+Analyse de communaut´es
+Autres Probl`emes d’analyse r´eseaux sociaux
+
+Mesures locales : Centralit´e de proximit´e
+
+(cid:73) La notion de centralit´e utilise la distance.
+(cid:73) Acteur central est l’acteur qui communique facilement avec
+
+les autres,
+
+(cid:73) d(i, j) est la distance entre deux acteurs mesur´ee en nombre
+
+minimal de liens.
+
+(cid:73) Graphe non dirig´e, contenant n nœuds :
+
+n − 1(cid:80)n
+
+j=1 d(i, j)
+
+CC (i) =
+
+(cid:73) Graphe dirig´e La distance doit prendre en compte les sens des
+
+liens.
+
+Maria Malek
+
+Introduction `a l’Analyse des R´eseaux Sociaux
+
+Analyse des r´eseaux sociaux
+Les mesures globales
+Les mesures locales
+Graphes Bipartis & R´eseaux sociaux
+Analyse de communaut´es
+Autres Probl`emes d’analyse r´eseaux sociaux
+
+Centralit´e d’interm´ediarit´e-1
+
+(cid:73) Deux nœuds non adjacents k & j qui se communiquent et si le
+
+nœud i se trouve sur le chemin de communication : i est un
+acteur it´erm´ediaire.
+
+(cid:80)
+
+j<k
+
+pjk (i)
+
+pjk
+
+(cid:73) CB (i) =
+
+source :http ://en.wikipedia.org/wiki/Centrality
+
+(cid:73) pjk le nombre des chemins les plus cours entre j et k,
+(cid:73) pjk (i) le nombre des chemins les plus cours entre j et k
+
+passant par i.
+
+Maria Malek
+
+Introduction `a l’Analyse des R´eseaux Sociaux
+
+Analyse des r´eseaux sociaux
+Les mesures globales
+Les mesures locales
+Graphes Bipartis & R´eseaux sociaux
+Analyse de communaut´es
+Autres Probl`emes d’analyse r´eseaux sociaux
+
+Centralit´e d’interm´ediarit´e-2
+
+(cid:73) Graphe dirig´e :
+
+(cid:80)
+
+j<k
+
+(n − 1)(n − 2)
+
+pjk (i)
+
+pjk
+
+C(cid:48)
+B (i) =
+
+Maria Malek
+
+Introduction `a l’Analyse des R´eseaux Sociaux
+
+Analyse des r´eseaux sociaux
+Les mesures globales
+Les mesures locales
+Graphes Bipartis & R´eseaux sociaux
+Analyse de communaut´es
+Autres Probl`emes d’analyse r´eseaux sociaux
+
+Illustration des mesures de centralit´e
+
+http ://www.orgnet.com/sna.html
+
+source :
+
+Maria Malek
+
+Introduction `a l’Analyse des R´eseaux Sociaux
+
+Analyse des r´eseaux sociaux
+Les mesures globales
+Les mesures locales
+Graphes Bipartis & R´eseaux sociaux
+Analyse de communaut´es
+Autres Probl`emes d’analyse r´eseaux sociaux
+
+Le prestige
+
+(cid:73) Le prestige d’un acteur est mesur´e par les liens entrants.
+(cid:73) Les mesures :
+
+(cid:73) le degr´e de prestige,
+(cid:73) le prestige de proximit´e,
+(cid:73) le prestige de tri (rank prestige).
+
+Maria Malek
+
+Introduction `a l’Analyse des R´eseaux Sociaux
+
+Analyse des r´eseaux sociaux
+Les mesures globales
+Les mesures locales
+Graphes Bipartis & R´eseaux sociaux
+Analyse de communaut´es
+Autres Probl`emes d’analyse r´eseaux sociaux
+
+Le prestige - mesures
+
+(cid:73) Le degr´e :
+
+(cid:73) La proximit´e :
+
+PD(i) =
+
+dI (i)
+n − 1
+
+(cid:73) Ii est l’ensemble d’acteurs qui atteignent l’acteur i : il existe un
+
+chemin de j vers i.
+
+(cid:73) d(j, i) le chemin le plus court de j vers i.
+
+(cid:80)
+
+d(j,i)
+|Ii|
+
+(cid:73) La distance moyenne est
+
+j∈Ii
+
+(cid:73) Le prestige de proximit´e : Pp(i) =
+
+n−1(cid:80)
+|Ii |
+j∈Ii
+|Ii |
+
+d(j,i)
+
+Maria Malek
+
+Introduction `a l’Analyse des R´eseaux Sociaux
+
+Analyse des r´eseaux sociaux
+Les mesures globales
+Les mesures locales
+Graphes Bipartis & R´eseaux sociaux
+Analyse de communaut´es
+Autres Probl`emes d’analyse r´eseaux sociaux
+
+”Rank Prestige”
+
+(cid:73) Consid´erons la r´eputation des personnes choisissant l’acteur i
+(cid:73) PR (i) = A1i PR (1) + A2i PR (2) + .. + Ani PR (n)
+
+(cid:73) Aij vaut 1 si i pointe vers j,sinon 0.
+(cid:73) On pose P le vecteur contenant les valeurs de tri :
+
+P = (PR (1), PR (2), .., PR (n))T
+
+(cid:73) A est la matrice exprimant la propri´et´e adjacente
+
+P = AT P
+
+.
+
+(cid:73) Recherche de valeurs propres de AT .
+
+Maria Malek
+
+Introduction `a l’Analyse des R´eseaux Sociaux
+
+Analyse des r´eseaux sociaux
+Les mesures globales
+Les mesures locales
+Graphes Bipartis & R´eseaux sociaux
+Analyse de communaut´es
+Autres Probl`emes d’analyse r´eseaux sociaux
+
+Graphes Bipartites : syst`eme de recommandation
+
+(cid:73) Recommandation de produits = pr´ediction de liens dans le
+
+graphe biparti [2].
+
+Maria Malek
+
+Introduction `a l’Analyse des R´eseaux Sociaux
+
+Analyse des r´eseaux sociaux
+Les mesures globales
+Les mesures locales
+Graphes Bipartis & R´eseaux sociaux
+Analyse de communaut´es
+Autres Probl`emes d’analyse r´eseaux sociaux
+
+Graphes Bipartis : Exemple
+
+source : Graphe de transactions durant un mois sur un site de musique en-ligne
+
+Maria Malek
+
+Introduction `a l’Analyse des R´eseaux Sociaux
+
+Analyse des r´eseaux sociaux
+Les mesures globales
+Les mesures locales
+Graphes Bipartis & R´eseaux sociaux
+Analyse de communaut´es
+Autres Probl`emes d’analyse r´eseaux sociaux
+
+Communaut´e : d´eﬁnition
+
+(cid:73) Un sous-graphe dont les nœuds sont plus li´es entre eux
+
+qu’avec d’autres nœuds.
+
+(cid:73) Exemples : un ensemble de pages web traitant un mˆeme
+
+th`eme, un ensemble d’amis, un ensemble de g`enes d´edi´es `a
+une mˆeme fonction, etc.
+
+Maria Malek
+
+Introduction `a l’Analyse des R´eseaux Sociaux
+
+Analyse des r´eseaux sociaux
+Les mesures globales
+Les mesures locales
+Graphes Bipartis & R´eseaux sociaux
+Analyse de communaut´es
+Autres Probl`emes d’analyse r´eseaux sociaux
+
+Recherche de communaut´es
+
+(cid:73) Recherche de communaut´es : partitionnement du r´eseau
+
+social en N communaut´es.
+
+(cid:73) Approches agglom´eratives : au d´ebut, chaque nœud est
+
+(cid:80)
+
+s∈π ( ls
+
+2L )2)
+
+consid´er´e comme une communaut´e. Puis, on regroupe les
+petites communaut´es sur la base de leur proximit´e [4].
+
+(cid:73) Modularit´e : crit`ere de qualit´e d’un partitionnement du graphe
+(cid:73) Q(π) =
+(cid:73) L est le nombre de liens total dans le r´eseau, ds est la somme
+des degr´es des nœuds dans la partition s, ls est le nombre de
+liens dans s.
+
+L − ( ds
+
+(cid:73) Approches s´epartives : recherche des composantes connexes du
+
+graphe en retirant progressivement des liens.
+
+Maria Malek
+
+Introduction `a l’Analyse des R´eseaux Sociaux
+
+Analyse des r´eseaux sociaux
+Les mesures globales
+Les mesures locales
+Graphes Bipartis & R´eseaux sociaux
+Analyse de communaut´es
+Autres Probl`emes d’analyse r´eseaux sociaux
+
+Algorithme agglom´eratif
+
+Maria Malek
+
+Introduction `a l’Analyse des R´eseaux Sociaux
+
+Analyse des r´eseaux sociaux
+Les mesures globales
+Les mesures locales
+Graphes Bipartis & R´eseaux sociaux
+Analyse de communaut´es
+Autres Probl`emes d’analyse r´eseaux sociaux
+
+Approche s´eparative
+
+(cid:73) Approche bas´ee sur le calcul de la centralit´e d’interm´ediarit´e de
+
+liens [20].
+
+(cid:73) R´ep´eter
+
+(cid:73) Calculer les interm´ediarit´es de tous les liens,
+(cid:73) Couper le lien avec l’interm´ediarit´e maximale
+
+(cid:73) jusqu’`a ce qu’il ait plus de liens.
+
+Maria Malek
+
+Introduction `a l’Analyse des R´eseaux Sociaux
+
+Analyse des r´eseaux sociaux
+Les mesures globales
+Les mesures locales
+Graphes Bipartis & R´eseaux sociaux
+Analyse de communaut´es
+Autres Probl`emes d’analyse r´eseaux sociaux
+
+ARS : Autres Probl`emes d’analyse
+
+(cid:73) Probl´ematique des liens
+
+(cid:73) Liens cach´e : origine : information manquante, dissimulation
+
+d’information.
+
+(cid:73) Compl´etion de liens [11].
+(cid:73) Liens alarmants : lines normaux ou anormaux.
+
+(cid:73) Evolution du r´eseau
+
+(cid:73) Pr´ediction de liens.
+(cid:73) Evolution des param`etres des r´eseaux : diam`etre d´ecroissant et
+
+densiﬁcation des degr´es dans des r´eseaux de co-citations.
+
+(cid:73) Evolution des communaut´es par taille et des communaut´es de
+
+th`emes.
+
+Maria Malek
+
+Introduction `a l’Analyse des R´eseaux Sociaux
+
+Analyse des r´eseaux sociaux
+Les mesures globales
+Les mesures locales
+Graphes Bipartis & R´eseaux sociaux
+Analyse de communaut´es
+Autres Probl`emes d’analyse r´eseaux sociaux
+
+Bibliographie I
+
+Ecole d’´et´e web intelligence.
+
+In WI09. Universit´e de Lyon, 2009.
+
+Nesserine Benchettara, Rushed Kanawati, and C´eline Rouveirol.
+
+Calcul de recommendation par pr´ediction de liens dans un graphe biparti.
+
+In Actes de l’ateiler sur l’apprentissage et graphes pour les syst ?mes complexes (plate-forme AFIA 2009),
+Hammemt, Tunisie, Mai 2009.
+
+C. Berge.
+
+Graphes.
+
+Gauther-Villars, 1983.
+
+Vincent D. Blondel, Jean-Loup Guillaume, Renaud Lambiotte, and Etienne Lefebvre.
+
+Fast unfolding of community hierarchies in large networks.
+
+CoRR, abs/0803.0476, 2008.
+
+Maria Malek
+
+Introduction `a l’Analyse des R´eseaux Sociaux
+
+Analyse des r´eseaux sociaux
+Les mesures globales
+Les mesures locales
+Graphes Bipartis & R´eseaux sociaux
+Analyse de communaut´es
+Autres Probl`emes d’analyse r´eseaux sociaux
+
+Bibliographie II
+
+S. P. Borgatti, M. G. Everett, and L. C. Freeman.
+
+Ucinet for Windows : Software for Social Network Analysis, 2002.
+
+G. Ereteo, F Gando, M. Buﬀa, and P. Grohan.
+
+Analyse des r´eseaux sociaux et web s´emantique : un ´etat de l’art.
+
+Technical report, Projet ISICIL (ANR), 2009.
+
+M. G. Everett and S. P. Borgatti.
+
+The centrality of groups and classes.
+
+Journal of Mathematical Sociology, 23(3) :181–201, 1999.
+
+J-C. Fournier.
+
+Th´eorie de Graphes et applications.
+
+Lavoisier, 2006.
+
+Maria Malek
+
+Introduction `a l’Analyse des R´eseaux Sociaux
+
+Analyse des r´eseaux sociaux
+Les mesures globales
+Les mesures locales
+Graphes Bipartis & R´eseaux sociaux
+Analyse de communaut´es
+Autres Probl`emes d’analyse r´eseaux sociaux
+
+Bibliographie III
+
+Linton C. Freeman.
+
+A set of measures of centrality based on betweenness.
+
+Sociometry, 40(1) :35–41, 1977.
+
+Linton C. Freeman.
+
+Centrality in social networks : Conceptual clariﬁcation.
+
+Social Networks, 1(3) :215–239, 1979.
+
+A Goldenberg, J. Kubica, P. Komarek, A. Moore, and J. Schneider.
+
+A comparaison of statistical and machine learning algorithms on the task of link completion.
+
+In Proceedings of the KDD workshop on link analysis for detecting complex Behavior, August 2003.
+
+Jean-Loup Guillaume and Matthieur Latapy.
+
+Bipartite graphs as models of complex networks. 371, pages, 2006.
+
+Physica A, 37(1) :795–813, 2006.
+
+Maria Malek
+
+Introduction `a l’Analyse des R´eseaux Sociaux
+
+Analyse des r´eseaux sociaux
+Les mesures globales
+Les mesures locales
+Graphes Bipartis & R´eseaux sociaux
+Analyse de communaut´es
+Autres Probl`emes d’analyse r´eseaux sociaux
+
+Bibliographie IV
+
+Rushed Kanawati and C´eline Rouveirol.
+
+Pr´ediction des liens dans les r´eseaux sociaux.
+
+In Tutoriel EGC, 2010.
+
+Bing Liu.
+
+Web Data Mining : Exploring Hyperlinks, Contents, and Usage Data.
+
+Data-Centric Systems and Applications. Springer, 2007.
+
+Jean loup Guillaume and Matthieur Latapy.
+
+Bipartite structure of all complex networks.
+
+Information processing letters, 90 :215–221, 2004.
+
+P. Mika.
+
+Bootstrapping the foaf-web : An experiment in social network mining, 2004.
+
+Maria Malek
+
+Introduction `a l’Analyse des R´eseaux Sociaux
+
+Analyse des r´eseaux sociaux
+Les mesures globales
+Les mesures locales
+Graphes Bipartis & R´eseaux sociaux
+Analyse de communaut´es
+Autres Probl`emes d’analyse r´eseaux sociaux
+
+Bibliographie V
+
+Peter Mika.
+
+Flink : Semantic web technology for the extraction and analysis of social networks.
+
+Web Semantics : Science, Services and Agents on the World Wide Web, 3(2-3) :211–223, October 2005.
+
+Peter Mika.
+
+Ontologies are us : A uniﬁed model of social networks and semantics.
+
+In International Semantic Web Conference, LNCS, pages 522–536. Springer, 2005.
+
+M. E. J. Newman.
+

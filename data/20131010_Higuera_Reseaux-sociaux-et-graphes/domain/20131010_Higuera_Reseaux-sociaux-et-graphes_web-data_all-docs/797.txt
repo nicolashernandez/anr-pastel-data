@@ -1,0 +1,284 @@
+http://www.labri.fr/perso/acasteig/teaching/iut/graphes/graphes-semaine6.pdf
+
+Graphes – TD 5 : Probl`emes (cid:28) diﬃciles (cid:29)
+
+——————————————————————
+
+On passe en revue quelques probl`emes diﬃciles (au sens de la complexit´e algorithmique). Ces probl`emes
+sont tr`es utilis´es et donc tr`es ´etudi´es aussi. Il y en a beaucoup d’autres, y compris en dehors du domaine
+des graphes. Mais ceux-ci sont faciles `a manipuler intuitivement et ils vous donneront une bonne id´ee de
+la raison pour laquelle un probl`eme diﬃcile ... est diﬃcile !
+
+1 Coloration (minimale)
+
+Colorier un graphe consiste `a attribuer une couleur (ou un entier) `a
+chaque sommet. Une coloration est dire propre si toute paire de sommet
+voisins a une couleur diﬀ´erente. Le nombre minimal de couleur qu’il faut
+pour colorier proprement un graphe est-appel´e nombre chromatique du
+graphe. Etant donn´e un nombre x, on dit qu’un graphe est x-coloriable
+si son nombre chromatique est inf´erieur ou ´egal `a x. Quel est le nombre
+chromatique du graphe ci-contre ?
+
+f
+
+a
+
+e
+
+c
+
+b
+
+d
+
+La coloration est tr`es utilis´ee pour r´esoudre des probl`emes d’optimisation de ressources en pr´esence
+
+de conﬂits.
+
+Exercice 1. L’ensemble des ´etudiants du d´epartement informatique doit passer les examens de ﬁn de
+semestre. Il y a 6 ´epreuves `a passer (e1, ..., e6) et 5 groupes d’´etudiants (g1, ..., g5). Tous les groupes ne
+sont pas concern´es par chaque ´epreuve. Le tableau ci-dessous r´esume les ´epreuves que chaque groupe doit
+passer :
+
+e1
+g1 X
+g2
+g3 X
+g4 X
+g5
+
+e2
+
+e4
+
+e3
+X
+
+X X X
+X
+
+X
+
+X
+
+X
+
+e5
+X
+
+X
+
+e6
+
+X
+X
+
+X
+
+Question 1.1. Combien de cr´eneaux d’examen faut-il au minimum pour faire passer tous les examens
+(en parall´elisant ce qui peut l’ˆetre). On mod´elisera la donn´ee du probl`eme par un graphe dont les sommets
+sont les ´epreuves et les arˆetes sont les conﬂits entre ´epreuves. D´eterminez les arˆetes et r´eduisez le probl`eme
+`a un probl`eme de coloration. (Note : en g´en´eral, la vraie diﬃcult´e consiste `a reconnaitre qu’il s’agit d’un
+probl`eme de coloration en r´eﬂ´echissant `a un probl`eme.. souvenez-vous en pour l’examen).
+
+e2
+
+e1
+
+e3
+
+e6
+
+e4
+
+e5
+
+Question 1.2. D´ecrivez, de mani`ere informelle, la strat´egie que vous avez utilis´e pour minimiser le
+nombre de couleurs.
+
+Question 1.3. Le graphe ci-contre est-il 4-coloriable ?
+
+1
+
+2 Probl`emes de couverture et de couplage
+
+Cette cat´egorie comporte plusieurs probl`emes qui consistent tous `a s´electionner un sous-ensemble de
+
+sommets ou d’arˆetes jouant un rˆole particulier pour les autres.
+
+2.1 Couplage (maximum)
+
+Le probl`eme du couplage (matching, en anglais) consiste `a s´electionner
+un sous-ensemble d’arˆetes tel que chaque sommet est incident `a au plus
+une arˆete. Dans l’id´eal, on cherche `a maximiser l’ensemble, de sorte
+que chaque sommet soit “couvert” par une arˆete (impossible si n est
+impair). Exemple d’application : aﬀectation de tˆaches `a des employ´es
+ou de processus `a des processeurs (graphes bipartis) ; choix de binˆome
+pour un projet, etc.
+
+2.2 Ensemble dominant (minimum)
+
+Le probl`eme de l’ensemble dominant (dominating set, en anglais) con-
+siste `a s´electionner un sous-ensemble de sommets tel que chaque sommet
+du graphe est soit dans l’ensemble, soit voisin d’un ´el´ement de l’ensem-
+ble. L’exemple ci-contre montre un ensemble dominant de taille 3. Cet
+ensemble est valide, mais pas optimal. Par exemple on aurait pu se
+contenter de l’ensemble {c, d}. Exemple d’application : choix de l’em-
+placement des ´ecoles, des casernes de pompiers, etc. ; choix des noeuds
+relais dans un r´eseau sans-ﬁl (dans ce cas, on pourra exiger que l’ensem-
+ble dominant soit aussi connexe).
+
+2.3 Ensemble ind´ependent (maximum)
+
+Le probl`eme de l’ensemble ind´ependent (ind´ependent set, en anglais,
+aussi appel´e stable en fran¸cais ou en anglais) consiste `a s´electionner un
+sous-ensemble de sommets qui ne sont voisins d’aucun autre sommet
+dans l’ensemble. Un exemple trivial est l’ensemble vide ∅. Un autre
+exemple est {a}, ou encore {a, d}. On cherche g´en´eralement `a maximiser
+la taille de l’ensemble. Existe-il un ensemble ind´ependent de taille 3 ci-
+contre ? Exemple d’application : combien de bavard peut-on accueillir
+sans les mettre cˆote `a cˆote :)
+
+2.4 (cid:28) Vertex cover (cid:29) (minimum)
+
+Aussi appel´e probl`eme de couverture de sommets, ce probl`eme est mal
+nomm´e puisqu’il consiste en fait `a couvrir des arˆetes. Pr´ecis´ement,
+il s’agit de s´electionner un sous-ensemble de sommets tel que chaque
+arˆete du graphe est incidente `a au moins l’un d’entre eux. On cherche
+g´en´eralement `a minimiser la taille de cet ensemble. L’exemple ci-contre
+est-il optimal ? Exemple d’application : combien de personnes faut-il
+interroger pour cartographier un r´eseau social ? Quels routeurs faut-il
+sonder pour intercepter tout le traﬃc d’un r´eseau.
+
+f
+
+f
+
+f
+
+f
+
+a
+
+a
+
+a
+
+a
+
+e
+
+e
+
+e
+
+e
+
+c
+
+b
+
+c
+
+b
+
+c
+
+b
+
+c
+
+b
+
+d
+
+d
+
+d
+
+d
+
+Question 1.4. Chercher une solution optimale pour chacun de ces probl`emes (un graphe par probl`eme).
+
+2
+
+3 Recherche de clique (maximale)
+
+Une clique est un sous-ensemble de sommets qui forme un graphe
+complet. Quelques exemples de cliques dans le graphe ci-contre sont
+{a},{a, d}, ou {a, d, c, f}. On cherche g´en´eralement `a trouver une clique
+de taille maximale. Exemple d’application : choisir une recette avec le
+plus d’ingr´edients (compatibles) possibles ; trouver des communaut´es
+dans les r´eseaux sociaux. Mais le principal int´erˆet de ce probl`eme est
+qu’il a de nombreuses connexions avec les autres probl`emes et il est tr`es
+intuitif.
+
+c
+
+b
+
+d
+
+a
+
+e
+
+f
+
+Question 1.5. Vous ouvrez votre frigidaire et y trouvez les ingr´edients suivants. Comme vous ˆetes tr`es
+t´em´eraire, vous entreprenez d’indiquer ceux d’entre eux qui sont compatibles (par une arˆete). Il faut que
+vous ´epatiez vos invit´es en faisant une recette sophistiqu´ee. Combien d’´el´ements peut-elle comporter au
+maximum ?
+
+Question 1.6. Trouvez une connexion entre la recherche de clique et la coloration. Puis entre la recherche
+de stable (synonyme : ensemble ind´ependent) et la coloration. Puis entre la recherche de stable et la
+recherche de clique.
+
+Question 1.7. Si l’on vous donnait une fonction magique qui sait calculer un stable maximum, comment
+l’utiliseriez-vous pour trouver une clique maximum ?
+
+3
+
+Planniﬁcation d’examen (coloration de graphe)
+
+e2
+
+e1
+
+e3
+
+e6
+
+e4
+
+e5
+
+8h-10h : e1,e2
+10h-12h : e5,e6
+14h-16h : e3
+16h-18h : e4
+
+Arnaud Casteigts
+
+Th´eorie des graphes
+
+4
+
+Planarit´e d’un graphe
+
+Possibilit´e de repr´esenter le graphe sans croisement (en 2D).
+
+Ex :
+
+→ Theor`eme des 4 couleurs : n’importe quel graphe planaire peut ˆetre colori´e en
+utilisant 4 couleurs seulement. Conjectur´e en 1852. Prouv´e seulement en 1976 ! En
+utilisant un programme informatique qui d´ecline les 1478 cas possibles. Aucune preuve
+qui ne fasse pas appel `a l’ordinateur n’a ´et´e d´ecouverte jusqu’ici.
+
+Arnaud Casteigts
+
+Th´eorie des graphes
+
+6
+
+

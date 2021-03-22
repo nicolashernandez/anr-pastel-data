@@ -1,0 +1,313 @@
+http://rug.mnhn.fr/semin-r/PDF/semin-R_network_LBeauguitte_240513.pdf
+
+L’analyse de réseaux avec R
+
+Un état des lieux
+
+Laurent Beauguitte
+
+Groupe fmr (ﬂux, matrices, réseaux)
+
+24 mai 2013
+
+Laurent Beauguitte (Groupe fmr)
+
+Analyse de réseaux avec R
+
+24 mai 2013
+
+1 / 19
+
+Petit rappel
+
+L’analyse de réseaux c’est soit
+
+l’analyse d’un objet matériel fait de points et de lignes (réseau
+technique, réseau routier, voies ferrées etc.) ;
+l’analyse d’un phénomène relationnel entre des entités symbolisés par
+des points et des lignes (graphe lexical, réseau social, lien entre
+entreprises, entre États etc.).
+
+Les points (sommets) et les lignes (liens) peuvent avoir des attributs
+(qualitatifs et/ou quantitatifs).
+
+Laurent Beauguitte (Groupe fmr)
+
+Analyse de réseaux avec R
+
+24 mai 2013
+
+2 / 19
+
+Petit rappel
+
+De nombreux types de réseaux existent et notamment
+
+graphe orienté ou non orienté
+graphe valué (lien porteur d’une intensité)
+graphe avec boucle (lien d’un sommet vers lui-même)
+multigraphe (plusieurs types de liens entre les sommets)
+graphe planaire (deux liens ne peuvent pas se croiser)
+graphe biparti (liens entre deux groupes de sommets diﬀérents)
+
+Laurent Beauguitte (Groupe fmr)
+
+Analyse de réseaux avec R
+
+24 mai 2013
+
+3 / 19
+
+Petit rappel
+
+Plusieurs types de réseaux et plusieurs disciplines (liste non exhaustive)
+
+sociologie : graphes le plus souvent orientés et de taille limitée
+physique : graphes « complexes », le plus souvent non orientés
+écologie : graphes le plus souvent bipartis (proie - prédateur ; plante -
+pollinisateur)
+géographie : graphes le plus souvent techniques et planaires
+
+Le vocabulaire et les méthodes diﬀérent d’une discipline à l’autre. . .
+
+Laurent Beauguitte (Groupe fmr)
+
+Analyse de réseaux avec R
+
+24 mai 2013
+
+4 / 19
+
+R et les réseaux
+
+46 packages contenant le terme network dans leur titre ou leur description
+sur CRAN (recherche faite le 12 avril 2013)
+
+Laurent Beauguitte (Groupe fmr)
+
+Analyse de réseaux avec R
+
+24 mai 2013
+
+5 / 19
+
+Cinq grandes catégories
+
+les généralistes
+les spécialistes
+les adaptables
+les inutiles & inutilisables
+les morts
+
+Laurent Beauguitte (Groupe fmr)
+
+Analyse de réseaux avec R
+
+24 mai 2013
+
+6 / 19
+
+Packages généralistes
+
+Deux packages généralistes et non compatibles
+
+igraph
+package développé par des informaticiens & des physiciens
+très nombreuses mesures issues de la sociologie et de la physique
+objet igraph
+
+statnet
+ensemble de packages développé par des sociologues
+nombreuses mesures issues de la sociologie et de la physique et modèles
+statistiques (ERGM - Exponential Random Graph Model)
+objet network
+
+Dans les deux cas, site internet, documentation, tutoriaux et mailing list
+
+Laurent Beauguitte (Groupe fmr)
+
+Analyse de réseaux avec R
+
+24 mai 2013
+
+7 / 19
+
+Lequel choisir ?
+igraph
+importation des données plus simple
+résultats présentés de façon parfois peu lisibles
+plus d’indicateurs disponibles
+sortie graphique par défaut laide & fausse 3D
+statnet
+(un peu) moins d’indicateurs
+importation moins aisée (attributs)
+modèles statistiques
+vraie 3D
+
+Utilisez les deux. . .
+
+Laurent Beauguitte (Groupe fmr)
+
+Analyse de réseaux avec R
+
+24 mai 2013
+
+8 / 19
+
+Un exemple : propriétés du graphe
+
+statnet
+
+igraph
+
+Laurent Beauguitte (Groupe fmr)
+
+Analyse de réseaux avec R
+
+24 mai 2013
+
+9 / 19
+
+statnet
+
+igraph
+
+Packages spécialisés
+
+package QuACN : analyse de réseaux complexes et biologiques (mesures
+très spéciﬁques)
+package bipartite : analyse de réseaux bipartis, développé par des
+écologues
+package enaR : analyse de réseaux écologiques (procédures MatLab)
+package tnet : analyse de réseaux valués (simples et bipartis)
+package egonet : analyse de réseaux personnels
+package intergraph : transforme les objets network (statnet) en
+objet igraph et vice versa (mais pas les graphes bipartis. . .)
+
+Laurent Beauguitte (Groupe fmr)
+
+Analyse de réseaux avec R
+
+24 mai 2013
+
+11 / 19
+
+Packages adaptables
+
+Packages non conçus pour l’analyse de réseaux mais qu’il est possible de
+détourner. . .
+Analyse de réseau -> calcul matriciel
+
+Laurent Beauguitte (Groupe fmr)
+
+Analyse de réseaux avec R
+
+24 mai 2013
+
+12 / 19
+
+Packages inutiles & inutilisables
+
+Inutilisables : documentation incomplète et/ou incompréhensible
+(blockmodeling)
+Inutiles : non multiplateforme, maintenance non assurée
+(InteractiveIgraph)
+
+Laurent Beauguitte (Groupe fmr)
+
+Analyse de réseaux avec R
+
+24 mai 2013
+
+13 / 19
+
+Packages morts
+
+Un des vrais problèmes concernant la portabilité de R (requête Google "was
+removed from the CRAN repository" : 26 000 résultats. . .)
+Packages récemment disparus : biGraph, Rgraphviz, graphComp
+Capacité à maintenir le package en fonction des changements de version de
+R et des packages parents
+
+Laurent Beauguitte (Groupe fmr)
+
+Analyse de réseaux avec R
+
+24 mai 2013
+
+14 / 19
+
+Avantages
+
+Ceux de R en général. . .
+Rapidité (diﬀérente selon les packages)
+Utilisation de scripts
+Très grande variété des analyses possibles
+
+Laurent Beauguitte (Groupe fmr)
+
+Analyse de réseaux avec R
+
+24 mai 2013
+
+15 / 19
+
+Inconvénients
+
+Packages diﬀérents utilisant des objets diﬀérents. Diﬃcile de jongler entre
+eux.
+igraph : objet igraph ; statnet : objet network ; tnet : objet matrix
+etc.
+Pas de package dédié à l’analyse des graphes planaires !
+Mortalité élevée des packages
+Visualisation correcte pour du travail exploratoire
+Visualisation insuﬃsante comme outil de communication
+
+Laurent Beauguitte (Groupe fmr)
+
+Analyse de réseaux avec R
+
+24 mai 2013
+
+16 / 19
+
+Visualisation par défaut
+
+statnet
+
+igraph
+
+Laurent Beauguitte (Groupe fmr)
+
+Analyse de réseaux avec R
+
+24 mai 2013
+
+17 / 19
+
+Visualisation avec (petit) script
+
+Laurent Beauguitte (Groupe fmr)
+
+Analyse de réseaux avec R
+
+24 mai 2013
+
+18 / 19
+
+Ressources
+
+http ://statnet.csde.washington.edu/
+http ://igraph.sourceforge.net/
+http ://groupefmr.hypotheses.org/, voir notamment le billet « Analyse de
+réseaux avec R : des ressources gratuites pour un logiciel libre ! »
+
+Laurent Beauguitte (Groupe fmr)
+
+Analyse de réseaux avec R
+
+24 mai 2013
+
+19 / 19
+
+

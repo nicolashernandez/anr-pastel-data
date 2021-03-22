@@ -1,0 +1,1293 @@
+http://iml.univ-mrs.fr/~reboul/HERMES2010.pdf
+
+D´etection de communaut´es, disjointes ou
+
+chevauchantes, dans les r´eseaux
+
+Jean-Baptiste Angelelli, Alain Gu´enoche et Laurence Reboul
+
+IML, 163 Av. de Luminy, 13288 Marseille cedex 9
+
+guenoche@iml.univ-mrs.fr
+
+R´esum´e : Dans les grands r´eseaux, la d´etection de sous-ensembles de sommets plus dens´ement connect´es
+que d’autres, appel´es des communaut´es, est un probl`eme que l’on retrouve dans plusieurs disciplines -
+Biologie (r´eseaux d’interactions entre prot´eines), Informatique (recherche d’informations sur le Web),
+mais aussi, Recherche Op´erationnelle (d´etermination d’´equipes), Sociologie (groupes dans des r´eseaux
+sociaux). Ces communaut´es jouent un rˆole important dans l’organisation ou la structuration des r´eseaux.
+De fait, il s’agit de d´eterminer des classes dans un graphe. Ce probl`eme est donc fortement li´e `a celui du
+partitionnement, avec la sp´eciﬁcit´e suivante : suivant l’usage que l’on veut faire de ces communaut´es, les
+classes peuvent (doivent) ˆetre disjointes ou non. En Biologie, o`u l’on analyse les r´eseaux d’interactions
+prot´eine-prot´eine pour, entre autres, pr´edire leurs fonctions, nombreuses sont celles qui ont plusieurs
+fonctions et dans ce cas il est raisonnable de construire non pas une partition, mais un recouvrement,
+c’est-`a-dire un syst`eme de classes chevauchantes. Il en est de mˆeme dans les r´eseaux sociaux, o`u les
+individus peuvent appartenir `a plusieurs groupes.
+
+Ainsi, les m´ethodes traditionnelles en Classiﬁcation peuvent ˆetre utilis´ees ; en particulier les m´ethodes
+de construction d’une partition des sommets du graphe qui maximisent un certain crit`ere. Parmi les
+nombreux crit`eres qui ´evaluent la qualit´e d’une partition, nous ne faisons ici r´ef´erence qu’`a la notion de
+modularit´e introduite par Newman.
+
+Malheureusement, son optimisation sur l’ensemble de toutes les partitions des sommets d’un graphe
+est un probl`eme NP-diﬃcile ; il en est ´evidemment de mˆeme pour les recouvrements. Il faut donc utiliser
+des m´ethodes heuristiques, d`es lors que les graphes ´etudi´es sont de grande taille. Dans ce chapitre, nous
+proposons deux nouvelles m´ethodes approch´ees, l’une pour les partitions, l’autre pour les recouvrements,
+qui permettent d’optimiser la modularit´e. Elles sont bas´ees sur un processus qui part d’un syst`eme de
+classes initiales chevauchantes et converge vers un syst`eme de classes. Pour les partitions, une m´ethode
+de fusion-ﬁssion de classes est r´ealis´ee, jusqu’`a ce que les classes courantes ne soient plus chevauchantes ;
+pour les recouvrements, seule la partie fusion est appliqu´ee. Une ´etude de performances, dans laquelle nos
+m´ethodes et leurs variantes sont compar´ees `a d’autres algorithmes, sur des graphes simul´es, atteste de
+leur pertinence.
+
+Mots cl´es : D´etection de communaut´es, modularit´e, partitionnement, classes chevauchantes, opti-
+
+misation combinatoire, heuristique.
+
+1 Introduction
+
+Les grands r´eseaux permettent de d´ecrire des syst`emes complexes issus de diﬀ´erents domaines. Aﬁn
+d’´etudier et de comprendre la structure des relations entre leurs entit´es, on les mod´elise g´en´eralement
+par des graphes, c’est-`a-dire par un ensemble de sommets (les entit´es du r´eseau) et d’arˆetes (les relations
+entre ces entit´es). Ainsi, en Biologie, un r´eseau d’interactions prot´eine-prot´eine (IPP), sp´eciﬁque d’une
+esp`ece, est un graphe dont les sommets sont des prot´eines et les arˆetes leurs ´eventuelles interactions,
+
+1
+
+qui correspondent `a des contacts physiques `a un moment donn´e, dans un ou plusieurs tissus [FAC+05,
+SLM+04]. En Sociologie, les graphes repr´esentent des individus li´es par des relations sociales [WS05],
+telles que l’amiti´e [Zac77] ou les relations de travail [New01]. En Informatique, le r´eseau Web consiste en
+un ensemble de pages connect´ees par des hyperliens [KL01].
+
+L’existence dans un r´eseau de communaut´es correspond `a la pr´esence de groupes de sommets plus
+fortement connect´es entre eux que vers les autres sommets du graphe ; ce sont des classes connexes,
+qui ont une densit´e plus forte que le graphe en son entier. L’identiﬁcation de ce type de structure est
+int´eressante `a plusieurs points de vues. D’une part, elle existe dans de nombreux r´eseaux r´eels et, la
+plupart du temps, elle a une signiﬁcation concr`ete en termes d’organisation. Dans les r´eseaux IPP par
+exemple, les communaut´es correspondent g´en´eralement `a des ensembles de prot´eines qui collaborent `a une
+mˆeme fonction cellulaire. De ce fait, les m´ethodes de d´etection de communaut´es sont un outil pr´ecieux
+pour la pr´ediction fonctionnelle [BCM+03, BHG04]. Dans les r´eseaux sociaux, les communaut´es peuvent
+repr´esenter des groupes d’individus ayant des int´erˆets communs, des activit´es communes, comme les
+fameuses co-publications, qui placent tout informaticien plus ou moins loin de Erd¨os [MW03]. Dans le
+Web, les groupes de pages ou de sites fortement connect´es traitent souvent de th`emes apparent´es [KL01]
+et la d´etection de ces communaut´es permet d’am´eliorer les moteurs de recherche [FLGC02].
+
+Les m´ethodes de d´etection de communaut´es ont fait l’objet de nombreux travaux, depuis l’article
+fondateur de Girvan et Newman [GN02]. La plupart d’entre elles consistent `a d´eterminer une partition
+des sommets du graphe optimisant un certain crit`ere de qualit´e d’un partitionnement, d´eﬁni `a partir de
+la structure du graphe (voir [BE05] pour un aper¸cu des crit`eres utilis´es). La modularit´e est un crit`ere
+tr`es naturel, car tr`es proche de la d´eﬁnition des communaut´es ; voir [GGW07] et [FB07] pour une ´etude
+d´etaill´ee et critique de cette notion. Ce crit`ere indique `a quel point une partition des sommets du graphe
+correspond `a ses communaut´es. De fa¸con informelle, la modularit´e d’une partition mesure la diﬀ´erence
+entre la proportion d’arˆetes internes aux classes et la mˆeme quantit´e, sous l’hypoth`ese que le graphe
+n’est pas structur´e en communaut´es. Maximiser la modularit´e conduit g´en´eralement `a des partitions
+pertinentes sur les graphes r´eels [NG04, DA05, CNM04].
+
+L’inconv´enient majeur de ce crit`ere, comme de la plupart des crit`eres de qualit´e utilis´es, est que son
+optimisation sur l’ensemble des partitions des sommets est un probl`eme NP-diﬃcile [BDG+08]. De ce
+fait, l’optimum est impossible `a calculer en un temps raisonnable, d`es lors que les graphes sont de grande
+taille. On a donc recours `a des m´ethodes d’optimisation approch´ees conduisant, en temps et espace
+polynomiaux, `a des partitions que l’on esp`ere proches de l’optimum.
+
+Les heuristiques les plus r´epandues sont bas´ees sur les principes de la classiﬁcation hi´erarchique. On
+
+retrouve :
+
+– les m´ethodes ascendantes (agglom´eratives) [New04, DMn04, PL06, CNM04, WT07] : partant de la
+partition atomique (ensemble des singletons), on r´eunit deux classes `a chaque it´eration. Les classes
+`a fusionner sont celles qui promettent une modularit´e maximum ;
+
+– les m´ethodes descendantes (de subdivision) [NG04, New06, WS05], dans lesquelles on part du graphe
+entier. A chaque it´eration, on scinde une classe en deux sous-classes disjointes suivant des principes
+similaires.
+
+Dans l’un ou l’autre cas, l’algorithme produit une hi´erarchie de communaut´es, et l’on retient une partition
+`a nombre de classes voulu, ou compos´ee de classes qui maximisent la modularit´e. C’est un proc´ed´e tr`es
+g´en´eral qui peut s’appliquer `a bien d’autres crit`eres. Alternativement, d’autres approches bas´ees sur le
+recuit simul´e [RB06, GSPA04] ou l’optimisation extrˆemale [DA05] reposent sur une optimisation plus
+directe du crit`ere.
+
+Les m´ethodes pr´ec´edemment cit´ees ont l’avantage d’ˆetre eﬃcaces et de s’appliquer `a de grands graphes.
+Mais elles produisent des partitions en classes disjointes, ce qui n’est pas toujours d´esir´e ni justiﬁ´e. En
+particulier dans les r´eseaux sociaux, o`u un individu peut appartenir `a plusieurs groupes (de travail ou de
+relation). De mˆeme en Biologie et dans les graphes IPP, dans lesquels on cherche `a identiﬁer des classes
+fonctionnelles. En eﬀet, de nombreuses prot´eines ont plusieurs fonctions suivant les diﬀ´erents tissus, et
+
+2
+
+l’aﬀectation `a une classe unique n’est pas justiﬁable. C’est pourquoi nous nous posons le probl`eme de
+construire, toujours par optimisation de la modularit´e, soit des partitions strictes, soit des partitions en
+classes chevauchantes, aussi appel´ees des syst`emes de classes.
+
+Les syst`emes de classes chevauchantes sont apparus dans les ann´ees 80 par le biais d’´etudes th´eoriques
+sur des familles de distances, pour une revue voir [BB07]. Hormis le cas des pyramides [Did86], tr`es li´ees
+`a l’existence d’un ordre total sur les sommets, l’application de ces mod`eles `a des donn´ees r´eelles n’a pas
+connu le mˆeme succ`es que les m´ethodes hi´erarchiques, ou celles de partitionnement.
+
+Dans ce texte, nous d´eveloppons une approche uniﬁ´ee pour la construction de syst`emes de classes qui
+cherchent `a maximiser la modularit´e. Dans le second paragraphe, nous montrons comment la modularit´e
+de Newman, d´eﬁnie sur les partitions strictes, s’´etend aux syst`emes de classes. Ce faisant, nous d´eﬁnissons
+un crit`ere ´equivalent, qui est `a valeurs enti`eres et permet de mat´erialiser les fusions ou ﬁssions de classes.
+Dans le troisi`eme paragraphe, nous d´eveloppons un algorithme de fusion-ﬁssion adapt´e `a la recherche de
+partitions strictes, qui est bas´e sur un recouvrement initial particulier des sommets du graphe. Dans le
+paragraphe suivant, nous l’´etendons aux classes chevauchantes, en n’appliquant plus que les op´erations
+de fusion, et en partant de recouvrements initiaux diﬀ´erents. Les performances des algorithmes sont
+compar´ees `a celles d’autres m´ethodes d’optimisation de la modularit´e, sur des graphes al´eatoires qui
+poss`edent des communaut´es et/ou des classes chevauchantes connues.
+
+2 La modularit´e des partitions et des recouvrements
+
+Consid´erons un graphe simple, connexe, sans boucle, non orient´e et non pond´er´e G = (V, E) `a |V | = n
+sommets et |E| = m arˆetes. Soit P = {V1, V2, ..Vp} une partition de V en p classes. L’objectif ´etant de
+d´etecter les communaut´es de G, nous allons rechercher une partition de modularit´e ´elev´ee, en temps
+et espace polynomiaux. De fa¸con plus pr´ecise, la modularit´e d’une partition est la diﬀ´erence entre la
+proportion d’arˆetes internes aux classes et cette mˆeme quantit´e pour une partition al´eatoire du graphe
+ayant des classes de mˆeme cardinalit´e ; c’est l’´ecart entre ce qui est observ´e et ce qui est dˆu au hasard.
+Plus formellement, soit eij le pourcentage d’arˆetes ayant une extr´emit´e dans la classe Vi et l’autre dans
+la classe Vj :
+
+La probabilit´e qu’une arˆete tir´ee au hasard ait une extr´emit´e dans la classe Vi est alors :
+
+et la modularit´e de la partition P est d´eﬁnie par :
+
+eij
+
+eij = |E ∩ (Vi × Vj)|/m.
+ai = eii + 1/2!j!=i
+M(P ) = !i=1..p
+
+i ).
+(eii − a2
+
+Cette formule a ´et´e remani´ee de plusieurs fa¸cons ´equivalentes dans la litt´erature (voir par exemple
+[DA05] et [New06]). Dans la suite, nous nous r´ef´erons `a la formule donn´ee dans l’´equation (18) de [New06] :
+
+M(P ) =
+
+1
+2m
+
+n!x=1
+
+n!y=1"Axy −
+
+dxdy
+
+2m #αxy,
+
+o`u (Axy) est la matrice d’adjacence de G, dx est le degr´e du sommet x et αxy est la matrice carr´ee d’ordre
+n telle que
+
+αxy =$ 1 si les sommets x et y appartiennent `a une mˆeme classe de P
+
+0 sinon.
+
+(3)
+
+3
+
+(1)
+
+(2)
+
+Bien que M d´epende de G, et α de P , nous ne les mentionnons pas dans les notations.
+
+La modularit´e est une fonction croissante de la densit´e des arˆetes `a l’int´erieur des classes ; elle est
+comprise entre -1 et 1. Elle permet en outre de comparer plusieurs partitions sur un mˆeme graphe et elle
+est, `a ce titre, fr´equemment utilis´ee pour comparer les algorithmes de partitionnement d’un graphe donn´e.
+Bien ´evidemment, elle sert de crit`ere `a maximiser pour trouver la meilleure partition en communaut´es
+de G, du point de vue de la modularit´e. Malheureusement, la maximisation de (2) sur l’ensemble des
+partitions de V est un probl`eme NP-diﬃcile, si bien que la partition solution ne peut g´en´eralement
+pas ˆetre obtenue pour les grands graphes. Pour pallier ce probl`eme, de nombreuses heuristiques ont ´et´e
+propos´ees. Nous ´etablissons tout d’abord un crit`ere ´equivalent, qui conduit `a une valeur enti`ere du crit`ere
+`a optimiser. Il est fond´e sur une simple reformulation de (2) :
+
+M(P ) =
+
+1
+
+2m% n!x=1"Axx −
+
+d2
+x
+
+2m#αxx + 2
+
+n!x=2
+
+x−1!y=1"Axy −
+
+dxdy
+
+2m #αxy&.
+
+En remarquant que Axx = 0 et αxx = 1, nous avons :
+
+o`u
+
+et
+
+K(G) = −
+
+1
+4m2
+
+M(P ) = K(G) +
+
+1
+2m2
+
+Bxyαxy,
+
+x−1!y=1
+n!x=2
+n!x=1
+
+d2
+x
+
+(4)
+
+(5)
+
+(6)
+
+(7)
+Les quantit´es K(G) et Bxy sont des caract´eristiques intrins`eques de G qui ne d´ependent pas de P . A
+
+Bxy = 2mAxy − dxdy.
+
+l’inverse, αxy ne d´epend que de P . Lorsque la relation α est transitive et d´esigne une partition P ,
+
+Q(α) = Q(P ) = 2m2M(P ) + 1/2 !x∈1..n
+
+d2
+x.
+
+Q(P ) est donc proportionnelle `a la modularit´e M, `a une constante pr`es, qui ne d´epend que du graphe G.
+Optimiser M(P ) sur l’ensemble des partitions de V revient donc `a optimiser le crit`ere :
+
+o`u Bxy et αxy sont d´eﬁnis respectivement par (7) et (3).
+
+Q(P ) =
+
+n!x=2
+
+x−1!y=1
+
+Bxyαxy,
+
+(8)
+
+Cette formulation permet de mieux comprendre le comportement de la modularit´e Q :
+– Q est `a valeurs enti`eres, puisque c’est la somme des poids des paires r´eunies ; ceci correspond `a un
+
+gain en m´emoire non n´egligeable ;
+
+vrement ;
+
+– la matrice α est d´eﬁnie pour tout syst`eme de classes, qu’il s’agisse d’une partition ou d’un recou-
+
+– lorsque deux classes Vi et Vj sont fusionn´ees, seules sont modiﬁ´ees les valeurs αxy telles que les
+´el´ements x ∈ Vi et y ∈ Vj sont nouvellement r´eunis. Ainsi, on ajoute `a la modularit´e Q la somme
+des valeurs Bxy correspondantes. La modularit´e croˆıt si et seulement si cette somme est positive ;
+
+4
+
+– Q est born´ee sup´erieurement par la somme des valeurs positives de B :
+
+Qmax =!x!=y
+
+Bxy.
+
+Ainsi Qmax est atteint pour tout syst`eme de classes au sein duquel les classes sont exclusivement
+constitu´ees par les paires (x, y) `a valeurs positives ou nulles dans B, comme les cliques maximales
+ou les arˆetes.
+
+Nous proposons dans les deux paragraphes suivants des algorithmes qui fournissent des solutions
+
+approch´ees au probl`eme d’optimisation de (8).
+
+3 M´ethode de partitionnement
+
+L’algorithme pr´esent´e dans [New04] pour maximiser la modularit´e des partitions strictes est constitu´e
+de deux phases. Dans la premi`ere, le point de d´epart est l’ensemble des singletons. Cette partition, dite
+atomique, est de modularit´e nulle puisqu’il n’y a pas d’arˆetes internes. A chaque ´etape, et tant que la mo-
+dularit´e croˆıt, deux classes, telles que la partition r´esultante oﬀre un gain de modularit´e maximum, sont
+r´eunies. L’algorithme s’arrˆete lorsque les classes ne peuvent plus ˆetre fusionn´ees sans faire d´ecroˆıtre la mo-
+dularit´e. Dans une seconde phase, Newman applique une proc´edure de transfert qui permet d’augmenter
+la modularit´e et aboutit `a une partition qui n’est plus dans la hi´erarchie.
+
+Nous nous inspirons de la premi`ere phase qui correspond `a la m´ethode de Ward [War63]. Elle a
+l’avantage de ﬁxer automatiquement le nombre de classes, mais l’inconv´enient de partir de la valeur
+minimale de la modularit´e Q et d’ˆetre tributaire des choix faits aux premi`eres it´erations puisque elle ne
+revient sur ces choix que dans la seconde phase.
+
+Nous explorons la voie qui consiste `a partir du maximum Qmax, donc d’un syst`eme de classes qui
+contient toutes les arˆetes (de poids positif dans B). Nous avons tout d’abord ´ecart´e les cliques et pris le
+recouvrement de V par toutes les arˆetes, R(0) = {(x, y)|Bxy ≥ 0}, qui fournit une solution optimale (en
+recouvrement) du probl`eme d’optimisation. Nous convergeons vers une partition en construisant une suite
+de recouvrements {R(0), R(1), . . . , R(t), . . .} jusqu’`a obtenir une partition P de V telle que Q(P ) soit aussi
+proche que possible de Qmax. A chaque ´etape, nous essayons de fusionner ou de scinder it´erativement les
+paires de communaut´es chevauchantes de R(t).
+
+3.1 Fusions et/ou ﬁssions de classes
+
+C’est une heuristique qui combine les deux types d’approches, ascendantes et descendantes. L’algo-
+rithme est bas´e sur un processus it´eratif de fusion-ﬁssion, c’est-`a-dire qu’`a chaque ´etape soit on r´eunit
+deux classes, soit on les s´epare, en attribuant `a l’une ou l’autre les ´el´ements de leur intersection1. On part
+d’un recouvrement particulier du graphe, correspondant `a toutes ses arˆetes, recouvrement qui maximise
+la modularit´e et qui va donc d´ecroˆıtre au ﬁl des it´erations. A chaque ´etape t de l’algorithme, on choisit
+la paire de classes et l’op´eration - fusion ou ﬁssion - conduisant `a la baisse de modularit´e la plus faible,
+qui fournit donc le recouvrement R(t+1) de valeur maximum parmi toutes les fusions ou ﬁssions ´etudi´ees.
+Plus pr´ecis´ement, pour tout couple (Vi, Vj) de classes de R(t) tel que Vi ∩ Vj &= ∅, on commence par
+´etablir les classes r´esultant de la fusion et de la ﬁssion de ces deux classes :
+– la fusion est le simple remplacement des deux classes par leur union ;
+– la ﬁssion consiste `a remplacer les deux classes par V $i et V $j telles que
+
+1Cette m´ethode n’a rien `a voir avec la m´etaheuristique de fusion-ﬁssion d´evelopp´ee par C.E. Bichot dans ce livre.
+
+Vi ∪ Vj = V $i ∪ V $j
+
+(i)
+(ii) Vi\Vj ⊂ V $i, Vj\Vi ⊂ V !
+j .
+
+5
+
+On calcule ensuite la modularit´e r´esultant de ces op´erations :
+
+Vi ∪ Vj sont nouvellement r´eunis ;
+
+– dans le cas d’une fusion, elle porte uniquement sur les paires de sommets (x, y) telles que (x, y) ∈
+– dans le cas d’une ﬁssion, elle porte sur les arˆetes inter-classes de Vi × Vj.
+
+Alors que la fusion de Vi et Vj est unique, il y a beaucoup de ﬁssions possibles, autant que de bi-partitions
+de Vi ∩ Vj. Calculer la meilleure ﬁssion en deux classes est un probl`eme NP-diﬃcile [BLM+06]. Suite `a
+un grand nombre de simulations, d´ecrites dans le paragraphe suivant, nous avons retenu deux proc´edures
+approch´ees :
+
+aﬀect´e `a V $i (resp. V $j ) ;
+
+– (P 1) : Soit x un ´el´ement de Vi ∩ Vj et Mi(x) (resp. Mj(x)) sa contribution `a la modularit´e de la
+classe Vi (resp. Vj) : Mi(x) =’y∈Vi
+Bxy. Si Mi(x) > Mj(x) (resp. Mj(x) > Mi(x)), alors x est
+– (P 2) : On utilise la m´ethode de bi-partitionnement propos´ee dans [New06]. La subdivision Vi ∪ Vj
+est r´ealis´ee en eﬀectuant une d´ecomposition spectrale correspondant au laplacien du sous-graphe
+induit par la classe. Cette subdivision est r´ealis´ee suivant les composantes (positives ou n´egatives)
+du vecteur propre principal de cette matrice.
+
+Remarque 1 Une am´elioration de la partition ﬁnale atteinte par notre algorithme peut ˆetre obtenue via
+une optimisation locale suppl´ementaire du crit`ere de modularit´e. En particulier, on peut appliquer une
+m´ethode de descente, comme l’algorithme de Kernighan-Lin propos´e dans [KL70], deux partitions ´etant
+d´eﬁnies comme voisines d`es lors que chacune est obtenue `a partir de l’autre, en d´epla¸cant un seul sommet
+d’une communaut´e `a une autre.
+
+3.2 Complexit´e de l’algorithme
+
+Soit (At)t≥0 la s´equence repr´esentant le nombre de classes `a l’´etape t de l’algorithme. Puisqu’une
+fusion remplace deux classes par une seule et qu’une ﬁssion remplace deux classes par deux autres,
+At ≤A 0 ≤ m. A l’´etape 0, des communaut´es sont les arˆetes, donc le nombre de paires de communaut´es
+chevauchantes est born´e par 2δ × m, oˆu δ est le degr´e maximum du graphe.
+A chaque ´etape, on doit calculer les coˆuts de fusion et ﬁssion des nouvelles communaut´es (une ou
+deux selon l’op´eration faite) avec chacune des communaut´es existantes (au plus m). Chaque op´eration
+prend un temps de l’ordre de O(n2). Puisqu’il y a O(δm) ´etapes, l’ensemble de l’algorithme est parcouru
+en un temps de l’ordre de O(δn2m2). Cependant, la plupart des graphes r´eels sont des graphes peu
+denses, ce qui signiﬁe que m = O(n). Dans de tels cas, l’algorithme et parcouru dans un temps de l’ordre
+de O(δ2n4). De plus, on utilise une liste pour garder en m´emoire le d´etail des paires de communaut´es
+chevauchantes. Cette liste utilise un espace de l’ordre de O(δm). On doit aussi garder en m´emoire chaque
+communaut´e. Puisqu’une communaut´e contient au plus n sommets et que At ≤ m, l’algorithme utilise
+pour cela un espace de l’ordre de O(nm). Le calcul des coˆuts associ´es `a une fusion et `a une ﬁssion n´ecessite
+O(n2) op´erations, mais seul le r´esultat (et non le d´etail de chaque calcul) est conserv´e en m´emoire, donc
+l’ensemble de l’algorithme utilise un espace de l’ordre de O(δm) + O(nm) + O(n2). Puisque nous avons
+δ ≤ n ≤ m, la complexit´e en espace de l’algorithme est de l’ordre de O(nm), ce qui correspond `a O(n2)
+pour les graphes peu denses.
+
+3.3 Simulations
+
+Nous avons compar´e les performances de notre algorithme, FF1 et FF2 pour les m´ethodes (P1) et
+(P2), `a celles de deux heuristiques classiques, l’algorithme hi´erarchique (G) d´ecrit en introduction et
+l’algorithme spectral (S) d’optimisation de la modularit´e, propos´es par Newman dans [New04] et [New06]
+respectivement.
+
+6
+
+Les graphes
+
+Les graphes poss´edant une structure en communaut´es plus ou moins naturelles sont engendr´es par
+le protocole de Newman [New04]. Chaque graphe contient 128 sommets, r´epartis en 4 classes de 32
+´el´ements. Soit zin (resp. zout) le degr´e moyen intra-communaut´es (resp. extra-communaut´es), avec la
+contrainte z = zin + zout = 16. Ainsi zout est le seul param`etre du processus de g´en´eration ; il implique
+la valeur de zin qui ﬁxe les probabilit´es pin et pout des arˆetes intra et inter-classes. Le param`etre zout
+contrˆole le degr´e de s´eparation des communaut´es : une valeur faible de zout conduit `a des graphes ayant
+beaucoup d’arˆetes internes et peu d’arˆetes externes, de sorte que les communaut´es sont faciles `a d´etecter
+dans ce cas. La diﬃcult´e du probl`eme de partitionnement croˆıt `a mesure que zout est plus ´elev´e.
+
+Les crit`eres
+
+1
+
+On note P ref =(P ref
+
+partition trouv´ee par un des algorithmes. Pour ´evaluer la qualit´e de P , nous mesurons la similarit´e entre
+P et P ref `a l’aide de diﬀ´erentes mesures :
+
+4 ) la partition de r´ef´erence du graphe ´etudi´e et P = (P1, . . . , PK) la
+
+, . . . , P ref
+
+Le quotient de modularit´e : Puisque les algorithmes ´etudi´es sont suppos´es optimiser la modularit´e,
+il paraˆıt naturel de s’y r´ef´erer comme mesure de performance. Cependant, il n’est pas prouv´e que la
+partition de r´ef´erence r´ealise le maximum global de la modularit´e ; nous utiliserons donc le quotient :
+
+Qr"P, P ref# = Q(P )
+
+Q(P ref )
+
+Le taux de sommets bien class´es : Une mesure de performance plus qualitative de P est le pourcentage
+de sommets bien class´es relativement `a P ref . On sait que ce crit`ere a des inconv´enients (voir [DDGA06]).
+En particulier, alors que sa signiﬁcation est claire lorsque K = 4, il ne peut pas ˆetre facilement transpos´e
+au cas g´en´eral. Nous proposons ici une formule alternative. Elle est obtenue en compl´etant la partition
+ayant le plus petit nombre de communaut´es par des classes vides et en r´ealisant tout d’abord une bijection
+entre les classes de r´ef´erence et les classes calcul´ees :
+
+N BC"P, P ref# =
+
+1
+|V |
+
+max
+σ∈S
+
+max(K,4)!k=1
+
+|Pk ∩ P ref
+
+σ
+
+|,
+
+o`u S est l’ensemble de toutes les permutations σ de {1, . . . , max(K, 4)}.
+L’indice de Rand corrig´e : L’indice de Rand mesure une similitude entre deux partitions d’un mˆeme
+ensemble. Il repr´esente le taux de paires simultan´ement r´eunies ou s´epar´ees dans les deux partitions. Pour
+obtenir un indice d’esp´erance nulle sur des partitions al´eatoires, Hubert & Arabie, [HA85] ont ´etabli un
+indice, d´enomm´e the Rand index corrected by chance.
+
+En notant r le nombre de paires de sommets jointes dans les deux partitions P et P ref et π(P ) (resp.
+π(P ref )) le nombre de paires de classes jointes dans P (resp. P ref ), l’indice de Rand corrig´e est d´eﬁni
+par :
+
+I"P, P ref# = r − E(r)
+M(r) − E(r) ,
+
+E(r) =
+
+2π(P )π(P ref )
+
+n(n − 1)
+
+and M(r) =
+
+1
+
+2"|π(P )| + |π(P ref )|# .
+
+o`u
+
+R´esultats
+
+Pour chaque valeur de zout, on tire au hasard un graphe selon les probabilit´es pin et pout. Nous
+appliquons ensuite les algorithmes FF1, FF2, G, S et calculons les crit`eres de qualit´e ci-dessus de la
+
+7
+
+partition P obtenue. Les ﬁgures 1 `a 3 donnent, pour chaque algorithme, les valeurs moyennes obtenues
+sur 100 graphes.
+
+n
+o
+
+i
+t
+i
+t
+r
+a
+p
+
+ 
+l
+
+a
+
+i
+t
+i
+
+n
+
+i
+ 
+f
+
+o
+
+l
+
+ 
+y
+t
+i
+r
+a
+u
+d
+o
+m
+/
+y
+t
+i
+r
+a
+u
+d
+o
+m
+
+l
+
+ 3.5
+
+ 3
+
+ 2.5
+
+ 2
+
+ 1.5
+
+ 1
+
+FF1
+FF2
+G
+S
+
+ 0.5
+
+ 0
+
+ 2
+
+ 4
+
+ 6
+zout
+
+ 8
+
+ 10
+
+ 12
+
+Fig. 1 – Quotient de modularit´e des partitions obtenues par les algorithmes FF1, FF2, G et S, en fonction
+du degr´e ext´erieur moyen.
+
+En premier lieu, on constate sur la ﬁgure 1 que le ratio moyen de modularit´e des partitions obtenues
+par les algorithmes d´epasse 1, d`es que zout > 8. Cela signiﬁe que la modularit´e de ces partitions (et donc
+en particulier la modularit´e optimale) est plus grande que la modularit´e de la partition de r´ef´erence en
+quatre classes. On se heurte ici `a une diﬃcult´e li´ee au processus de test ; il faudrait connaˆıtre la valeur
+optimale. A d´efaut, on compare la partition trouv´ee et la partition initiale. Pour que le processus de
+comparaison soit pertinent, il faut que les partitions optimales et initiales soient les mˆemes, ce qui est le
+cas lorsque zout ≤ 8. La ﬁgure 1 montre que cela n’est plus vrai d`es lors que zout est sup´erieur `a 8. Dans
+la suite, seuls les r´esultats obtenus lorsque zout ≤ 8 seront consid´er´es comme pertinents. A l’exception
+de S, le quotient de modularit´e est presque le mˆeme pour tous les algorithmes dans cet intervalle ; il est
+l´eg`erement meilleur pour FF1.
+
+Les ﬁgures 2, et 3 montrent clairement que la performance des algorithmes d´ecroˆıt lorsque zout aug-
+mente de 0 `a 8. Ce r´esultat est pr´evisible, dans la mesure o`u la connectivit´e inter-communaut´es augmente
+avec zout, conduisant `a un probl`eme de partitionnement de plus en plus d´elicat. N´eanmoins, FF1 et,
+dans une moindre mesure, FF2 sont plus performants que G et S, ce dernier algorithme ´etant le moins
+performant de tous.
+
+8
+
+s
+t
+n
+e
+m
+e
+e
+
+l
+
+ 
+
+d
+e
+
+l
+
+i
+f
+i
+s
+s
+a
+c
+ 
+y
+l
+t
+c
+e
+r
+r
+o
+c
+ 
+f
+
+ 
+
+o
+n
+o
+
+i
+t
+c
+a
+r
+f
+
+ 1
+
+ 0.9
+
+ 0.8
+
+ 0.7
+
+ 0.6
+
+ 0.5
+
+ 0.4
+
+ 0.3
+
+ 0.2
+
+ 0
+
+FF1
+FF2
+G
+S
+
+ 2
+
+ 4
+
+ 6
+zout
+
+ 8
+
+ 10
+
+ 12
+
+Fig. 2 – Taux de sommets bien class´es par FF1, FF2, G et S, en fonction de la diﬃcult´e du probl`eme de
+partitionnement.
+
+4 M´ethode de recouvrement
+
+Nous avons justiﬁ´e le recours aux classes chevauchantes dans le cas de la Biologie et des r´eseaux d’in-
+teractions prot´eine-prot´eine ; donnons un exemple. La prot´eine alpha-cristalline humaine est `a la fois un
+composant structural du cristallin et elle est impliqu´ee dans la r´eponse au choc thermique, lorsqu’elle est
+exprim´ee dans d’autres tissus. Ces prot´eines qualiﬁ´ees de multifonctionnelles ou ”moonlighting proteins”
+(to moonlight = cumuler deux emplois) permettent de comprendre la complexit´e de certains ph´enotypes
+ou les eﬀets secondaires de certaines drogues. Si l’on cherche `a d´eterminer des classes fonctionnelles, il
+est injustiﬁ´e d’aﬀecter chaque prot´eine `a une seule classe.
+
+Mieux, nous avons entrepris un programme de recherche pour la d´etection de ces prot´eines multi-
+fonctionnelles [BGB09]. Il fait suite `a plusieurs tentatives pour construire des classes chevauchantes par
+d’autres approches. La premi`ere rel`eve de la classiﬁcation par densit´e, dans laquelle on d´eﬁnit une fonc-
+tion de densit´e en chaque sommet du graphe. Celle-ci correspond aux taux d’arˆetes ou de triangles dans
+un voisinage plus ou moins grand autour de chaque sommet. La strat´egie g´en´erale consiste `a construire les
+classes autour des maxima locaux de cette fonction de densit´e. L’aﬀectation se fait de proche en proche,
+tant qu’il n’y a pas ambigu¨ıt´e. Les classes se d´eveloppent en parall`ele autour de ces noyaux et un sommet
+adjacent `a une seule classe courante lui est attribu´e. Mais s’il est adjacent `a plusieurs classes, on a le
+choix entre l’aﬀectation `a une seule d’entre elles, celle `a laquelle il est le plus connect´e, ou `a toutes, cr´eant
+ainsi des classes chevauchantes.
+
+9
+
+ 1
+
+ 0.9
+
+ 0.8
+
+ 0.7
+
+ 0.6
+
+ 0.5
+
+ 0.4
+
+ 0.3
+
+ 0.2
+
+ 0.1
+
+x
+e
+d
+n
+
+i
+ 
+
+d
+n
+a
+r
+ 
+d
+e
+
+t
+c
+e
+r
+r
+o
+c
+
+FF1
+FF2
+G
+S
+
+ 0
+
+ 0
+
+ 2
+
+ 4
+
+ 6
+
+zout
+
+ 8
+
+ 10
+
+ 12
+
+Fig. 3 – Indice de Rand corrig´e des partitions obtenues par les algorithmes FF1, FF2, G et S.
+
+Cette m´ethode avait ´et´e ´elabor´ee dans le cadre de la th`ese de T. Colombo [Col04, CG07] et reprise
+dans un article de L. Denœud et al. [DCGH05]. Plusieurs fonctions de densit´e ont ´et´e test´ees et les
+r´esultats pratiques, sur des graphes dont les arˆetes correspondent `a la relation d’orthologie entre g`enes2,
+sont assez satisfaisants. Mais sur les graphes d’interactions, qui sont tr`es peu denses, ils n’´etaient gu`ere
+encourageants. C’est pourquoi nous avons ´etendu la m´ethode de partitionnement d´evelopp´ee ci-dessus `a
+la construction de classes chevauchantes.
+
+4.1 Algorithme de fusion
+
+Nous avons vu que la formule de modularit´e Q permet d’´etendre le processus hi´erarchique ascendant,
+en partant d’un syst`eme de classes chevauchantes. De fait, en partant de tout syst`eme de classes et en
+appliquant uniquement des fusions, on aboutit `a des classes qui seront n´ecessairement chevauchantes, si
+le syst`eme initial l’est. Deux syst`emes initiaux ont d’abord ´et´e ´etudi´es :
+
+– les cliques maximales du graphe. Dans la mesure o`u elles sont ´enum´erables en un temps raisonnable,
+elles constituent un syst`eme de classes chevauchantes dont la modularit´e est ´egale `a Qmax. Toute
+op´eration de fusion fera d´ecroˆıtre Q ;
+
+– les arˆetes du graphe. Avec les arˆetes du graphe, on part de la mˆeme valeur de modularit´e Qmax
+qu’avec les cliques. Naturellement, le processus de fusion commence par reconstruire certaines
+
+2Deux g`enes pris dans deux esp`eces sont dit orthologues s’ils sont h´erit´es d’un g`ene ancestral commun sans ´ev´enement
+
+de duplication.
+
+10
+
+cliques, dans la mesure o`u la fusion des arˆetes (x, y) et (y, z) ne coˆute rien si (x, z) est ´egalement
+une arˆete. D`es que l’algorithme ne trouve plus une paire de classes Vi et Vj telle que ∀x ∈ Vi,∀y ∈
+Vj, (x, y) ∈ E, la modularit´e commence `a d´ecroˆıtre.
+L’eﬃcacit´e de l’algorithme ascendant d´epend du nombre de classes initiales, puisque celui-ci d´etermine le
+nombre d’it´erations. En partant des cliques ou des arˆetes, un grand nombre d’it´erations est eﬀectu´e. Pour
+r´eduire le nombre de classes de d´epart, les listes d’adjacence ont ´et´e utilis´ees, sans r´esultats satisfaisants.
+Un syst`eme de cliques centr´ees a alors ´et´e d´eﬁni comme suit.
+
+Une clique, la plus grande possible, est construite en chaque sommet x du graphe. Cette op´eration
+est r´ealis´ee par un algorithme polynomial appliqu´e en chaque sommet qui r´ealise, en un nombre d’´etapes
+born´e par n, une clique contenant x qui est maximale, sans ˆetre forc´ement de cardinal maximum dans
+l’ensemble des cliques contenant x. La proc´edure, d´etaill´ee dans l’algorithme ci-dessous, consiste `a ajouter
+les sommets dans l’ordre des degr´es relatifs, tant qu’ils r´ealisent une clique.
+
+Algorithm 1 Calcule l’ensemble des cliques centr´ees
+1: /* C contient l’ensemble des cliques centr´ees */
+2: C ← {}
+3: /* boucle principale */
+4: for all x ∈ V do
+
+/* construit la clique centr´ee en x */
+for all y ∈ Lx do
+
+Cx ←{ x}
+Lx ← liste des voisins de x
+for all y ∈ Lx do
+´evaluer le degr´e de y dans le sous-graphe restreint `a Lx
+end for
+
+5:
+6:
+7:
+8:
+9:
+10: Trier Lx dans l’ordre d´ecroissant des degr´es relatifs
+11:
+12:
+13:
+14:
+15:
+16:
+17:
+18:
+19:
+end if
+20:
+21: end for
+
+if ∀z ∈ Cx, (y, z) ∈ E then
+end if
+end for
+/* archivage */
+if Cx n’est pas dans C then
+
+Cx ← y
+
+C ← Cx
+
+Tout au long de la proc´edure de fusion, la modularit´e des diﬀ´erents syst`emes de classes varie, soit de
+fa¸con monotone d´ecroissante (cliques maximales, arˆetes), soit de fa¸con croissante puis d´ecroissante (cliques
+centr´ees). Dans la fusion pr´ec´edente, `a chaque it´eration, les classes r´eunies sont celles qui permettent de
+maximiser la modularit´e Q(α) du syst`eme de classes r´esultant. La fusion de deux classes Vi et Vj entraˆıne
+leur suppression et l’apparition d’une nouvelle classe Vi ∪ Vj. Deux modiﬁcations ont ´et´e apport´ees :
+
+– ce choix de la paire de classes fusionn´ees entraˆıne un eﬀet de chaˆıne, c’est-`a-dire le rattachement
+des ´el´ements un `a un `a des classes de plus en plus grandes. Pour pallier ce d´efaut pr´ejudiciable `a
+l’attribution de fonctions aux classes, nous avons modiﬁ´e la r`egle de choix : les deux classes r´eunies
+sont celles pour lesquelles la valeur moyenne de variation de modularit´e est maximum. Ceci favorise
+la fusion de petites classes et l’eﬀet de chaˆıne a fortement baiss´e ;
+
+– pour obtenir des classes chevauchantes manipulables, le processus de fusion est stopp´e, pour ne
+pas aboutir `a une seule classe, de surcroˆıt de modularit´e faible. Des crit`eres d’arrˆet ont donc ´et´e
+introduits, comme de ﬁxer le nombre de classes voulues, ou de borner sup´erieurement les cardinaux
+
+11
+
+Cliques max.
+F P
+0,04
+0,05
+0,08
+0,09
+
+N BC M ult
+0,66
+0,85
+0,98
+1,00
+
+27
+35
+42
+44
+
+pi
+0,15
+0,20
+0,25
+0,30
+
+Arˆetes
+
+Cliques centr´ees
+
+Ret N BC M ult
+0,96
+0,84
+0,98
+1,00
+
+0,60
+0,76
+0,88
+0,97
+
+25
+31
+36
+40
+
+F P
+0,03
+0,02
+0,02
+0,03
+
+Ret N BC M ult
+0,61
+0,77
+0,87
+0,97
+
+0,86
+0,90
+0,94
+0,95
+
+29
+31
+36
+39
+
+F P
+0,19
+0,16
+0,19
+0,20
+
+Ret
+0,59
+0,66
+0,73
+0,78
+
+Tab. 1 – Valeurs moyennes des crit`eres sur 100 graphes al´eatoires cr´e´es suivant le premier jeu
+
+des classes.
+
+4.2 Simulations
+
+Pour v´eriﬁer que cette m´ethode retrouve bien les syst`emes de classes chevauchantes et les sommets
+multiples, class´es plusieurs fois, nous avons cr´e´e trois types des graphes al´eatoires dont les classes sont
+repr´esent´ees par des carr´es dans la Fig. 4 :
+
+– le premier jeu (`a gauche) est constitu´e de graphes `a 200 sommets r´epartis en 4 classes disjointes
+de 50 ´el´ements, plus une classe compos´ee de 10 ´el´ements pris dans chacune de ces classes, soit 40
+´el´ements ;
+
+– le second jeu (au milieu) est fait de graphes `a 210 sommets r´epartis dans 5 classes de 50 ´el´ements ;
+les quatre premi`eres sont parfaitement s´epar´ees et la cinqui`eme est faite de 10 ´el´ements pris dans
+chacune d’elles, plus 10 sommets qui lui sont propres ;
+
+– le troisi`eme jeu (`a droite) est compos´e de graphes `a 210 sommets ´egalement. Les quatre premi`eres
+classes sont disjointes et ont 45 sommets ; la cinqui`eme est constitu´ee de 5 sommets pris dans chaque
+classe (20 dans les intersections) et de 30 sommets sp´eciﬁques.
+
+40
+
+40
+
+10 10
+10 10
+
+40
+
+40
+
+40
+
+40
+
+10
+
+10
+
+10
+
+10
+
+10
+
+40
+
+40
+
+40
+
+40
+
+5
+
+5
+
+30
+
+5
+
+5
+
+40
+
+40
+
+Fig. 4 : Diagrammes de trois jeux de graphes pour les simulations
+
+Dans ces cinq classes, nous tirons au hasard des arˆetes avec une probabilit´e pi et nous obtenons ainsi
+des graphes qui pr´esentent des communaut´es plus ou moins denses. Sur ces graphes, nous appliquons
+l’algorithme de fusion, `a partir des arˆetes, des cliques maximales ou des cliques centr´ees, jusqu’`a obtenir
+5 classes, que nous comparons aux classes initales, `a l’aide de 4 crit`eres :
+
+– N BC, le taux d’´el´ements bien class´es qui, comme pr´ec´edemment, appartiennent `a la fois `a une
+
+classe calcul´ee et `a sa classe de r´ef´erence ;
+
+– M ult, le nombre d’´el´ements multiples, class´es au moins 2 fois ;
+– F P , le taux de faux positifs, ´el´ements class´es plusieurs fois, alors qu’ils sont initialement dans une
+
+seule classe ;
+
+– Ret, le taux d’´el´ements multiples retrouv´es (`a juste titre), class´es initialement plusieurs fois.
+
+Pour ces graphes, les r´esultats sont prometteurs.
+
+12
+
+Cliques max.
+F P
+0,22
+0,24
+0,25
+0,21
+
+N BC M ult
+0,54
+0,87
+0,99
+1,00
+
+29
+46
+53
+51
+
+pi
+0,15
+0,20
+0,25
+0,30
+
+Arˆetes
+
+Cliques centr´ees
+
+Ret N BC M ult
+0,57
+0,87
+0,99
+1,00
+
+0,49
+0,70
+0,87
+0,96
+
+27
+37
+44
+48
+
+F P
+0,23
+0,22
+0,20
+0,20
+
+Ret N BC M ult
+0,52
+0,72
+0,87
+0,96
+
+0,86
+0,94
+0,96
+0,97
+
+37
+41
+42
+41
+
+F P
+0,26
+0,24
+0,21
+0,17
+
+Ret
+0,68
+0,79
+0,82
+0,85
+
+Tab. 2 – Valeurs moyennes des crit`eres sur 100 graphes al´eatoires cr´e´es suivant le deuxi`eme jeu
+
+Cliques max.
+F P
+0,48
+0,40
+0,31
+0,21
+
+N BC M ult
+0,75
+0,97
+1,00
+1,00
+
+27
+32
+29
+25
+
+pi
+0,15
+0,20
+0,25
+0,30
+
+Arˆetes
+
+Cliques centr´ees
+
+Ret N BC M ult
+0,71
+0,95
+0,99
+1,00
+
+0,71
+0,94
+1,00
+1,00
+
+27
+33
+30
+26
+
+F P
+0,49
+0,43
+0,33
+0,24
+
+Ret N BC M ult
+0,68
+0,94
+1,00
+1,00
+
+0,95
+0,97
+0,98
+0,98
+
+26
+23
+22
+22
+
+F P
+0,40
+0,34
+0,26
+0,22
+
+Ret
+0,77
+0,78
+0,83
+0,84
+
+Tab. 3 – Valeurs moyennes des crit`eres sur 100 graphes al´eatoires cr´e´es suivant le troisi`eme jeu
+
+Sur le premier jeu (tableau 1), les simulations montrent que les classes sont mieux retrouv´ees en partant
+des cliques que des autres syst`emes de classes. Elles sont correctement identiﬁ´ees quand pi > 20% et les
+taux de faux positifs et de sommets multiples retrouv´es sont acceptables.
+
+Les simulations avec le deuxi`eme jeu de graphes (tableau 2) montrent que les classes initiales sont
+retrouv´ees de fa¸con eﬃcace `a partir des cliques centr´ees et que le nombre d’´el´ements multiples est correct.
+Mais le taux de faux positifs devient important, mˆeme s’il reste born´e `a 25% pour les trois syst`emes de
+classes initiaux. Les cliques centr´ees sont les plus eﬃcaces des trois pour pi = 15%, et permettent de
+d´etecter un nombre correct d’´el´ements multiples, malgr´e quelques erreurs.
+
+Le troisi`eme jeu de simulation (tableau 3) engendre les probl`emes les plus diﬃciles. Les trois syst`emes
+test´es retrouvent correctement les classes initiales d`es que pi ≥ 20%. Le nombre d’´el´ements multiples est
+bien pr´edit par les cliques centr´ees, mais ces ´el´ements ne sont pas parfaitement identiﬁ´es.
+
+5 Conclusion
+
+Nous avons essentiellement ´etudi´e l’usage du crit`ere de modularit´e dans la d´etection de classes de forte
+densit´e d’arˆetes, pour des graphes ainsi structur´es. Nous avons pr´esent´e des algorithmes d’optimisation
+de la modularit´e pour la d´etection de communaut´es disjointes ou chevauchantes dans un graphe. Plutˆot
+que de s’en tenir `a la valeur du crit`ere sur quelques graphes publics, nous avons ´etabli des protocoles de
+simulation qui permettent de mesurer l’eﬃcacit´e des algorithmes et de comparer les r´esultats en moyenne.
+Ce travail nous a amen´es `a choisir des crit`eres de qualit´e d’un partitionnement. Les comparaisons faites
+sur des graphes cr´e´es al´eatoirement nous permettent d’attester de leurs performances quant `a la d´etection
+de communaut´es, lorsqu’elles existent. Pour les partitions, la m´ethode de fusion/ﬁssion s’av`ere l´eg`erement
+meilleure que les algorithmes classiques. Pour les recouvrements, en plus des simulations qui ont montr´e
+que l’on pouvait partir d’un syst`eme r´eduit de classes chevauchantes, en quantit´e born´ee par le nombre
+de sommets, nous avons appliqu´e la m´ethode `a un grand graphe, celui des interactions des prot´eines
+humaines.
+
+Un r´eseau d’interactions de haute qualit´e compos´e de 27276 interactions pour 9596 prot´eines a ´et´e
+
+13
+
+extrait de la base de donn´ees APID (bioinfow.dep.usal.es/apid/). Au sein de ce r´eseau, chaque prot´eine
+interagit en moyenne avec 7, 8 autres. C’est pour traiter ce r´eseau que nous avons test´e le syst`eme
+des cliques centr´ees. Nous avons limit´e les classes `a 200 prot´eines, aﬁn d’´eviter la formation de classes
+trop importantes pour que leurs prot´eines partagent une fonction biologique commune ; la hi´erarchie
+permet de passer de 5372 cliques initiales `a 77 classes. La recherche des fonctions majoritaires dans ces
+classes, extraites de Gene Ontology, appliqu´ee aux prot´eines multiples, a permis de retrouver jusqu’`a 76%
+des prot´eines connues comme multifonctionnelles et d’en d´etecter d’autres, en proposant des fonctions
+jusqu’alors inconnues [BGB09].
+
+Ce travail de d´etection de prot´eines multifonctionnelles se poursuit dans le cadre d’un projet soutenu
+par l’ANR. L’une des diﬃcult´es inh´erentes `a la m´ethode est qu’elle propose beaucoup de sommets dans les
+intersections des classes chevauchantes. Pour chacune, il faut rechercher les fonctions qui sont majoritaires
+dans les classes et v´eriﬁer si elles sont connues, voire plausibles. Ce sont des tˆaches qui rel`event de
+connaissances biologiques. Ceci souligne une des diﬃcult´es majeures de ce travail : la qualit´e des classes
+se mesure `a leur homog´en´eit´e fonctionnelle, information qui ne ﬁgure pas dans le r´eseau.
+
+Remerciements
+
+C’est grˆace `a Christine Brun (CNRS, Marseille) que nous nous sommes int´eress´es au probl`eme de
+la d´etection de classes chevauchantes, et c’est Emmanuelle Becker (TAGC, Marseille) qui a conduit les
+applications aux r´eseaux d’interactions entre prot´eines. Ce travail a ´et´e ﬁnanci`erement soutenu par l’ACI
+IMPBio, le GDR RO puis le PEPS 2008-2009 du D´epartement ST2I du CNRS.
+
+R´ef´erences
+
+[BB07]
+
+F. Brucker and JP. Barth´elemy. El´ements de classiﬁcation : aspects combinatoires et algo-
+rithmiques. Herm`es, Paris, 2007.
+
+[BCM+03] C. Brun, F. Chevenet, D. Martin, J. Wojcik, A. Gu´enoche, and B. Jacq. Functional classi-

@@ -1,0 +1,1627 @@
+http://projets-ceri.univ-avignon.fr/projets/proj1516/p06/Rapport-Semestre1.pdf
+
+N
+
+T
+
+E
+
+R
+
+C
+E
+D ’ E N S E I G N E M E N T
+E T D E R E C H E R C H E
+E N I N F O R M A T I Q U E
+
+Master Informatique
+Spécialité ILSEN & RISM
+UE Projet
+
+>>> Traitement des réseaux signés
+
+Jihan Menioui, Hajar Ezzraidy & Ayoub Hajjar
+
+12 janvier 2016
+
+CERI - LIA
+
+339 chemin des Meinajariès
+
+84911 AVIGNON Cedex 9
+
+BP 1228
+
+France
+
+Tél. +33 (0)4 90 84 35 00
+Fax +33 (0)4 90 84 35 01
+http://ceri.univ-avignon.fr
+
+Traitement des réseaux signés
+
+Table des matières
+Résumé
+
+1 Introduction
+
+1.1 Contexte général . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1.1.1 Qu’est ce qu’un réseau ? . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1.1.2 Représentation des réseaux . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1.2 Présentation de la problématique . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1.3 Objectifs de l’étude . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1.4 Conduite de projet . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1.5 Organisation de la communication intra-groupe . . . . . . . . . . . . . . . . . . . .
+
+2 Concepts de base et notations
+
+2.1 Notions générales sur les graphes . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+2.2 Graphe pondéré . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+2.3 Graphe orienté . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+2.4 Graphe signé . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Statut social . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+2.4.1 Équilibre structurel
+2.4.2
+
+3 Mesures de centralité
+
+3.1 Mesures existantes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.1.1 Centralité de degré . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.1.2 Centralité spectrale . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.1.3 Centralité de Katz . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.1.4 Centralité PageRank
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.1.5 Centralité d’intermédiarité
+. . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.1.6 Centralité de proximité . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.2 Extensions pour les graphes signés . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.2.1 Centralité de degré . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.2.2 Centralité Intermédiaire
+. . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.2.3 Centralité de proximité . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+4 Visualisation des graphes
+
+4.1 Algorithmes de spatialisation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.2 Algorithme de Fruchterman-Reingold . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.2.1 Algorithme de la nouvelle méthode . . . . . . . . . . . . . . . . . . . . . . .
+4.2.2 Déﬁnition des variables et méthodes . . . . . . . . . . . . . . . . . . . . . .
+4.2.3 Algorithme . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.2.4 Exemple . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+4.3 Adaptation aux réseaux signés
+
+5 Environnement de travail
+
+5.1 Gephi . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+5.2 Langage R . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+5.3 Latex . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+6 Conclusion et perspective
+
+Références
+
+2 / 36
+
+3
+
+4
+4
+4
+4
+4
+5
+6
+6
+
+9
+9
+10
+12
+13
+13
+15
+
+16
+16
+16
+17
+19
+20
+21
+22
+23
+23
+24
+24
+
+26
+26
+26
+26
+27
+27
+29
+31
+
+33
+33
+33
+34
+
+35
+
+36
+
+Traitement des réseaux signés
+
+Résumé
+
+Ce rapport a été réalisé dans le cadre d’un projet de première année de Master au sein du
+Centre d’Enseignement et de Recherche en Informatique (CERI) d’Avignon, pour approfondir nos
+connaissances dans le domaine informatique, en vue d’améliorer l’esprit du travail en groupe et de
+prendre contact avec le milieu de la recherche.
+
+Nous avons été aimablement accueillies par le CERI d’Avignon en tant que jeunes ingénieurs en
+
+informatique, ce qui nous a permis de mettre en pratique nos savoirs.
+
+Le travail présenté dans ce rapport est le fruit de 3 mois d’eﬀorts. Nous avons eﬀectué un état
+de l’art des mesures de centralités d’un graphe, et proposé plusieurs extensions pour les graphes
+signés. Nous avons également étudié un algorithme de spécialisation standard, permettant d’aﬃcher
+des graphes sous forme lisible, et avons également proposé une extension aux graphes signés.
+
+Ce projet est proposé et encadré par Vincent LABATUT et Rosa FIGUEIREDO, tous les deux
+
+enseignants-chercheurs au Laboratoire Informatique d’Avignon (LIA).
+
+Mots-clés : mesures de centralité, graphes signés, spatialisation, Gephi, R.
+
+3 / 36
+
+Traitement des réseaux signés
+
+1 Introduction
+1.1 Contexte général
+1.1.1 Qu’est ce qu’un réseau ?
+
+Le terme générique réseau déﬁnit un ensemble d’entités interconnectées les unes avec les autres.
+Un réseau permet ainsi de faire circuler des éléments matériels ou immatériels entre chacune de ces
+entités selon des règles bien déﬁnies.
+
+La notion de réseau est utilisée dans diﬀérents domaines :
+• La médecine (réseaux neuronaux, réseaux sanguins,. . .)
+• L’informatique (Internet par exemple)
+• L’électrotechnique (réseau électrique)
+• L’économie (réseaux de collaborations)
+Exemple : la ﬁgure ci-dessus représente un exemple de réseau de la page Facebook de la marque
+
+H&M, où les nœuds sont représentés par des noms et les liens par des ﬂèches grises.
+
+Figure 1 – Un exemple de réseau.
+
+1.1.2 Représentation des réseaux
+
+Un réseau se modélise naturellement avec le concept mathématique de graphe. Dans le reste de
+ce document, on utilisera ces deux termes de façon interchangeable. La représentation graphique la
+plus courante des réseaux est la représentation nœud-lien. Cette représentation a l’avantage d’être
+familière à la majorité des chercheurs. Cependant, elle souﬀre de problèmes de lisibilité lorsque les
+réseaux représentés sont soit grands (un nombre important de nœuds), soit denses (un nombre
+important de liens). Ces problèmes de passage à l’échelle sont d’autant plus importants que les
+données à analyser sont de plus en plus nombreuses ; ils sont devenus rédhibitoires avec l’apparition
+des réseaux sociaux en ligne qui sont à la fois grands et (relativement) denses.
+
+1.2 Présentation de la problématique
+
+Dans notre travail, on s’intéresse principalement à la notion de réseau signé, qui signiﬁe que
+chacun de ses liens est désigné comme étant positif ou négatif. Ils sont utilisés pour modéliser
+
+4 / 36
+
+Traitement des réseaux signés
+
+Figure 2 – Topologique.
+
+de nombreux systèmes du monde réel, par exemple un réseau social dans lequel les liens positifs
+représentent des relations d’amitié tandis que les négatifs correspondent à des relations d’inimitié.
+L’analyse des réseaux à grande échelle et notamment des réseaux sociaux est de nos jours un déﬁ
+majeur pour chercher des informations utiles comme l’identiﬁcation des acteurs les plus importants
+pour certains critères donnés. Un grand nombre de mesures topologiques existent pour décrire les
+graphes non-signés : densité, modularité, centralité d’un nœud ou d’un lien, etc. De nombreux outils
+ont été créés pour calculer ces mesures, et ainsi étudier les graphes. Cependant, ces mesures n’ont
+pas toutes été généralisées aux réseaux signés, et le cas échéant, implémentées.
+
+Il en va de même pour les algorithmes de spatialisation, qui permettent d’acquérir une intuition
+sur le réseau étudié, mais ne permettent actuellement pas d’exploiter l’information encodée dans les
+signes des réseaux signés.
+
+1.3 Objectifs de l’étude
+
+L’objectif général de notre travail est de fournir des outils permettant de caractériser des noeuds
+dans des réseaux signés en termes de centralité, et de spatialiser de façon lisible des réseaux signés.
+Ces outils devront s’intégrer dans les plateformes Gephi et R, qui sont des outils standard dans
+l’analyse de réseau. Gephi est un logiciel de visualisation programmé en Java, qui permet aussi de
+faire des calculs simples sur les réseaux, et pouvant être étendu via un système de plugins. igraph est
+une bibliothèque du langage R permettant de réaliser des traitements sur les graphes, et également de
+faire un peu de visualisation. Nous avons identiﬁé des sous-objectifs distincts pour chaque semestre.
+Premier semestre. L’objectif du premier semestre est d’aborder les outils existant pour les
+réseaux non-signés, et de les adapter aux réseaux signés. Il s’agit d’eﬀectuer un état de l’art des
+principales mesures de centralités existantes pour les réseaux non-signés, aﬁn de se familiariser avec
+elles et de les appliquer à des exemples simples. Ensuite, nous devons adapter ces mesures aux réseaux
+signés. Du côté de la spatialisation, il s’agit d’étudier un algorithme de spatialisation standard destiné
+aux réseaux non-signés, et de proposer des modiﬁcations permettant de l’appliquer aux réseaux signés.
+Second semestre. Lors du second semestre, l’objectif est d’implémenter les modiﬁcations proposées
+lors du premier semestre. Il s’agit de se familiariser avec les API proposées par les outils sélectionnés,
+puis de mettre en oeuvre les notions théoriques traitées lors du premier semestre. Le travail sera
+probablement incrémental, et nécessitera de tester les implémentations pour ensuite éventuellement
+modiﬁer les déﬁnitions théoriques des outils, et par conséquent adapter les implémentations.
+
+5 / 36
+
+Traitement des réseaux signés
+
+1.4 Conduite de projet
+
+Cycle de vie du projet. Nous allons adopter une méthode agile comme un processus de déve-
+loppement du projet, c’est une méthode itérative et incrémentale. Nous avons opté pour ce choix car
+il y aura plein de changements et rectiﬁcations tout au long du projet. Les tâches vont s’eﬀectuer
+petit à petit, par ordre de priorité, avec des phases de contrôle et d’échange avec le client (i.e. le
+tuteur). Le projet sera divisé en parties dans lequel nous aurons décidé d’eﬀectuer telles ou telles
+tâches : chaque partie se complète.
+
+Planiﬁcation du projet. La durée de ce projet s’étale sur huit mois (2 semestres). Nous avons
+établi un plan prévisionnel sur lequel s’est basé le processus du travail durant cette période, et qui
+ﬁxera les échéances à respecter pour arriver au bout des attentes. Le diagramme suivant permet
+de visualiser l’enchaînement et la durée des diﬀérentes tâches pendant toute la durée du premier
+semestre Figure 3 (Annexe).
+
+1.5 Organisation de la communication intra-groupe
+
+Pour organiser la communication au sein de notre équipe, en plus du partage des documents en
+réseaux interne, on a utilis Trello qui est un outil de gestion des tickets agile, pour le partage des
+tâches et le suivi des étapes de développement du projet.
+
+Réunions. Aﬁn de garantir une communication eﬃcace et structurée entre les membres de
+l’équipe de travail, on a procédé à des réunions formalisées et programmées après chaque itération
+du projet aﬁn de valider les réalisations eﬀectuées avant de passer aux étapes suivantes, avec des
+séances de brainstorming. Chaque réunion a été suivie d’un compte rendu indiquant les actions
+décidées.
+
+Travail collaboratif. Trello permet d’éclater le projet en un certain nombre de tâches et d’actions,
+qu’on a la possibilité de dispatcher entre les diﬀérents participants au projet, il suﬃt de créer les
+listes appropriées et ensuite, le projet se réalise tranquillement. Le stress disparaît et on y gagne plus
+en eﬃcacité.
+
+6 / 36
+
+Traitement des réseaux signés
+
+Figure 3 – Planning.
+
+7 / 36
+
+Traitement des réseaux signés
+
+Figure 4 – Trello.
+
+8 / 36
+
+Traitement des réseaux signés
+
+Concepts de base et notations
+
+2
+2.1 Notions générales sur les graphes
+
+Dans cette sous-section, nous décrivons la notion de graphe, ainsi que les concepts les plus
+
+basiques relatifs aux graphes.
+
+Graphe, sommet et arête. Un graphe simple, ou juste graphe, est un couple (V, E) tel que V
+est l’ensemble non-vide des sommets et E l’ensemble des arêtes. Il faut noter que des graphes plus
+complexes peuvent être déﬁnis, qui sont détaillés dans les sous-sections suivantes.
+Une arête est elle-même une paire de sommets, i.e. un ensemble de deux sommets. Formellement,
+on a donc e = {u, v}, avec u, v ∈ V et e ∈ P2(V ), où P2(V ) représente l’ensemble de toutes les
+paires de sommets possibles. Lorsque les deux extrémités d’une arête sont identiques, on parle de
+boucle.
+
+La notion de graphe [1] est une structure combinatoire permettant de représenter de nombreuses
+situations rencontrées dans des applications faisant intervenir des mathématiques discrètes et néces-
+sitant une solution informatique. Circuits électriques, réseaux de transport (ferrés, routiers, aériens),
+réseaux d’ordinateurs, ordonnancement d’un ensemble de tâches sont les principaux domaines d’ap-
+plication où la structure de graphe intervient.
+
+Exemple : G = (V, E) ; V = {1, 2, 3, 4} ; E = {e1, e2, e3, e4} avec e1 = {1, 2}
+
+Figure 5 – Exemple d’un graphe.
+
+Voisinage. Deux sommets u et v d’un graphe sont voisins ou adjacents s’ils ont au moins une
+arête incidente en commun, i.e. {u, v} ∈ E. On appelle voisinage N(u) d’un sommet u l’ensemble
+de ses voisins : N(u) = {v ∈ V : {u, v} ∈ E}.
+
+Exemple : dans la Figure 5 :
+• 1 et 4 sont deux sommets voisins ou adjacents.
+• Le voisinage de 1 est {2, 3, 4}.
+Arêtes adjacentes. Deux arêtes d’un graphe sont adjacentes si elles ont au moins un sommet
+
+en commun.
+
+Degré. Le degré d’un sommet u , noté d(u) , correspond au nombre d’arêtes adjacentes à u, i.e.
+
+9 / 36
+
+Traitement des réseaux signés
+
+à la cardinalité de son voisinage : d(u) = |N(u)|. Dans la Figure 5, on a : d(3) = 2.
+
+Dans un graphe simple, on a la propriété suivante : X
+
+d(u) = 2|E|.
+
+u∈V
+
+Chaîne et cycle. Une chaîne est une liste ordonnée de sommets telle que chaque sommet de
+la liste est adjacent au suivant. La longueur d’une chaîne correspond au nombre d’arêtes qui la
+constitue. Lorsque le sommet initial et le sommet ﬁnal de la liste sont le même sommet, la chaîne
+est un cycle.
+
+Chemin et circuit. Un chemin est une succession d’arcs telle que l’extrémité de chacun (sauf le
+dernier) est l’origine du suivant. Le nombre d’arêtes qui composent un chemin est appelé la longueur
+du chemin. Un chemin est dit fermé quand son premier et son dernier noeuds sont le même noeud.
+Un circuit est un chemin fermé dont les arêtes sont toutes distinctes.
+
+Distance géodésique. La distance géodésique entre deux sommets, ou plus simplement distance,
+est la longueur du plus court chemin qui relie ces deux sommets. Le diamètre d’un graphe est la plus
+grande distance mesurée entre deux sommets quelconque du graphe.
+
+Matrice d’adjacence. Il s’agit d’une représentation matricielle d’un graphe. Pour un graphe G
+à n sommets, cette matrice notée A est de dimension n × n. C’est donc une matrice carrée, telle
+que ses lignes et ses colonnes identiﬁent les sommets du graphe. Chacun de ses éléments prend une
+valeur binaire et représente la présence (valeur 1) ou l’absence (valeur 0) d’une arête. Chaque élément
+non-diagonal aij représente l’arête entre le sommet i et le sommet j, tandis que chaque élément
+diagonal aii représente une boucle sur le sommet i.
+
+En prenant le graphe suivant on obtient la matrice :
+
+Figure 6 – graphe pour la matrice adjacence.
+
+
+
+A =
+
+
+
+0 1 0 0
+1 1 1 1
+0 1 0 1
+0 1 1 0
+
+2.2 Graphe pondéré
+
+Un graphe pondéré est un graphe dont chaque arête est étiquetée par un nombres réel positif ou
+
+nuls. Ces nombres sont appelés les poids des arêtes.
+
+10 / 36
+
+Traitement des réseaux signés
+
+La plupart des concepts déjà déﬁnis pour les graphes simples restent valides. Cependant, de
+
+nouveaux concepts apparaissent, pour tenir compte des poids.
+
+Force. La force d’un sommet est...
+Coût d’une chaîne. Il s’agit de la somme des poids des arêtes qui composent la chaîne.
+Chaîne la moins coûteuse. Parmi les chaînes reliant deux sommets donnés, la moins coûteuse
+
+est celle dont le coût est minimal.
+
+Distance pondérée. ...
+
+Figure 7 – Exemple de graphe pondéré.
+
+Matrice d’adjacence. Dans le cas d’un graphe pondéré, la matrice d’adjacence est entière, et
+
+non plus binaire, ce qui lui permet de représenter le poids des arêtes.
+
+Exemple : pour le graphe de la ﬁgure xxxx
+
+Figure 8 – Exemple de graphe pondéré.
+
+11 / 36
+
+Traitement des réseaux signés
+
+
+
+A =
+
+
+
+2
+0
+2
+0
+3 15
+2
+0
+0
+0
+
+0
+0
+3
+0
+15 2
+0 13
+0
+9
+0
+0
+13 9
+0
+
+2.3 Graphe orienté
+
+En donnant une direction aux arêtes d’un graphe, on obtient un digraphe (ou graphe orienté)
+G = (V, E). Le mot digraphe est la contraction de l’expression anglaise directed graph. Dans un
+graphe orienté, on parle d’arc e ∈ E et non plus d’arête. Un arc e = (u, v) est un couple de sommets
+u et v, donc par rapport à un graphe non-orienté, l’ordre des sommets est pris en compte. On dit
+que l’arc va de u à v. On dit aussi que u est l’extrémité initiale (aussi appelée origine, ou source)
+tandis que v est l’extrémité ﬁnale (ou destination, ou cible) de e.
+
+Figure 9 – Graphe orienté et non orienté.
+
+Comme pour les graphes pondérés, certains concepts de bases ont besoin d’être révisés pour être
+
+utilisables dans un graphe orienté.
+
+Voisinages entrant et sortant. En raison de l’aspect asymétrique des arcs, on distingue main-
+tenant deux types de voisinage : entrant et sortant. Le voisinage entrant Nin(u) regroupe tous les
+noeuds qui sont les sources d’arcs aboutissant au noeud u, i.e. Nin(u) = {v ∈ V : (v, u) ∈ E}. Au
+contraire, le voisinage sortant Nout(u) regroupe tous les noeuds qui sont les cibles d’arcs partant du
+noeud u, i.e. Nout(u) = {v ∈ V : (u, v) ∈ E}.
+
+Degrés entrant et sortant. Le degré étant par déﬁnition la cardinalité du voisinage, on va là
+aussi distinguer un degré entrant din et un degré sortant dout, tels que : dout(u) = |Nout(u)| et
+din(u) = |Nin(u)|. Si on ignore l’orientation des arcs, on retrouve le degré, aussi appelé ici degré
+total, et on a la relation suivante : d(u) = dout(u) + din(u).
+
+Chaîne/cycle ou chemin/circuit orientés. ...
+Distance orientée. ...
+Matrices d’adjacence. Dans la matrice d’adjacence, la valeur binaire aij représente maintenant
+la présence d’un lien allant du noeud i vers j. À la diﬀérence des graphes simples, cette matrice
+peut donc maintenant être asymétrique, car l’élément aij n’est plus forcément égal à aji en raison
+de l’orientation des liens.
+
+Il faut noter que la notion de graphe orienté et celle de graphe pondéré peuvent tout à fait
+se combiner, ce qui produit des graphes orientés pondérés, pour lesquels les diﬀérentes déﬁnitions
+données précédemment s’appliquent toutes, et même se combinent. On a alors les concepts de force
+entrante, force sortante, distance pondérée orientée, etc.
+
+12 / 36
+
+Traitement des réseaux signés
+
+2.4 Graphe signé
+
+Dans un graphe signé, chaque arête est étiquetée par un signe positif (+) ou négatif (−). Intui-
+tivement, un signe positif représente une relation favorable entre deux sommets, tandis qu’un signe
+négatif représente une relation défavorable.
+
+Figure 10 – Graphe signé.
+
+À la diﬀérence des graphes pondérés et orientés, il existe plusieurs façons d’interpréter un graphe
+signé. Ces interprétations ne changent pas les notions de voisinage, degré et matrice d’adjacence,
+mais elles aﬀectent celles de chemin et de distance. Nous déﬁnissons d’abord les premières, avant de
+revenir sur les secondes.
+
+Voisinage signé. Dans un graphe signé, on distingue deux types de voisinages : positif et négatif.
+Le voisinage positif N +(u) contient les voisins connectés par une arête positive, tandis que le
+voisinage négatif N +(u) contient les voisins connectés par une arête négative.
+
+Degré signé. Puisqu’on distingue deux voisinages, on doit aussi distinguer deux degrés : positif
+et négatif. Le degré positif est la cardinalité du voisinage positif d+(u) = |N +(u)|, tandis que le
+degré négatif est la celle du voisinage négatif d−(u) = |N−(u)|.
+
+Matrice d’adjacence signée. La matrice d’adjacence n’est plus binaire : chaque élément peut
+prendre une valeur dans −1; 0; +1, aﬁn de représenter respectivement la présence d’une arête négatif,
+l’absence d’arête, et la présence d’une arête positive.
+Alternativement, il peut parfois être pratique de distinguer deux matrices d’adjacence : la matrice
+positive A+, qui ne contient que des liens positifs, et la matrice négative A−, qui ne contient que
+des liens négatifs. Notez qu’on a A = A+ + A−.
+
+Les deux interprétations possibles des relations signées sont :
+• Lien aﬀectif : amitié (+) et inimitié (−) ;
+• Relation d’ordre : supériorité (+) et infériorité (−).
+Dans les réseaux signés cette théorie est traduite par un triangle.
+Mais le problème c’est lorsque on observe un réseau signé qui pressente soit la relation ami/ennemi
+
+ou le statut social comment on peut mesurer la cohérence entre ces individu.
+
+Pour contourner ce problème on a utilisé une théorie des sciences sociales pour déterminer ce qui
+
+est une relation cohérente.
+
+A ce stade on a recoure à deux théories :
+
+1-Théorie de l’équilibre social quand on parle des relations ami/ennemi.
+2-Théorie du statut social lorsqu’on parle des statuts.
+
+Dans la suite de cette partie, on détaille ces deux interprétation, et on propose des adaptations
+appropriées pour les notions de plus court chemin et de distance, qui seront nécessaires plus tard lors
+de la déﬁnition de mesures de centralité pour graphes signés.
+
+2.4.1 Équilibre structurel
+
+Cette théorie examine les relations d’ami/ennemi dans les graphes signés non-orientés. Ces rela-
+
+tions sont équilibrées si elles respectent les règles suivantes :
+
+13 / 36
+
+Traitement des réseaux signés
+
+• L’ami de mon ami est mon ami
+• L’ami de mon ennemi est mon ennemi
+• L’ennemi de mon ennemi est mon ami
+• L’ennemi de mon ami est mon ennemi
+Nous démontrons une représentation graphique de la théorie de l’équilibre structurel ou l’amitié
+est représenter par un signe (+) et la relation d’ennemi est représenter par un signe (-). Les triangles
+qui respecte cette théorie sont considérées comme équilibré et les triangles qui sont incompatibles à
+cette théorie sont déséquilibrés.
+
+En général, un triangle est équilibré si seulement si le produit des valeurs de ces arêtes sont
+
+Exemple : les triangles en haut sont tous équilibrés par contre les triangles en dessous sont tous
+
+positives.
+
+déséquilibrés.
+
+Figure 11 – Exemple d’équilibre et déséquilibre structurel .
+
+On peut généraliser cette théorie sur des graphes autre que les triangles. Dans ce cas si tous les
+cycles du graphe sont équilibré c’est à dire le produit de leurs arêtes est positive,alors le graphe est
+équilibré.
+
+On peut maintenant généraliser les notions de plus court chemin et de distance à ce type de
+
+graphes signés.
+
+Plus court chemin. On a réﬂéchi en premier temps de calculer le plus court chemin en prenant
+en considération juste le nombre des liens positifs, cet à dire pour aller d’un nœud i vers un nœud
+j on prend le chemin ou il y a le minimum de nombre des liens positifs pour arriver au nœud de
+destination j. Le problème rencontré est que si on a seulement des liens négatifs, à ce moment on ne
+peux plus calculer le plus court chemin. Pour pallier ce problème, on propose une autre alternative.
+Notre alternative est que, pour chaque nœud de départ, on va calculer le nombre de liens positifs
+et négatifs de tous les chemins qui amènent à destination. Après, on considère comme chemin le plus
+court celui qui possède le plus grand nombre de liens positifs et le plus petit nombre de lien négatifs.
+Ci-dessous on donne un exemple de calcul du chemin le plus court :
+
+Figure 12 – Graphe signé.
+
+14 / 36
+
+Traitement des réseaux signés
+
+positif
+
+1
+1
+0
+2
+
+négatif
+
+1
+1
+3
+1
+
+chemin
+bcd
+bad
+bcad
+bacd
+
+Dans cet exemple (premier graphe à gauche dans la 12) on a essayé de retirer tous les chemins
+possibles pour aller du nœud b vers le nœud d ,donc d’après le tableau le chemin le plus court est
+bacd.
+
+Distance signée. La distance géodésique sur un réseau signé dist(u, v), entre deux noeuds u et
+
+v, est calculé en utilisant la formule ci-dessous :
+
+dist(u, v) = moy2
+1 + moy2−
+
++
+
+(1)
+
+où moy+ est la moyenne des liens positifs dans le chemin, et moy− celle des liens négatifs.
+
+2.4.2 Statut social
+
+Cette théorie permet de présenter le statut d’un individu vis à vis ses voisins dans un graphe signé
+
+orienté. On peut résumer cette notion comme suit :
+
+Si x a un statut supérieur à celui de Y et Y a un statut supérieur à celui de z, alors X doit avoir
+
+un statut supérieur à Z.
+
+droite est équilibré.
+
+Exemple : dans l’exemple ci dessous le triangle à gauche est considéré déséquilibrer et celui à
+
+Figure 13 – Exemple de statut.
+
+On peut généraliser cette théorie sur des graphes autre que les triangles, dans un cycle de n
+nœuds, où N-1 consécutive arcs sont positifs et le dernier arc est négative, la théorie de statut social
+considère le cycle équilibrée.
+
+On peut maintenant généraliser les notions de plus court chemin et de distance à ce type de
+
+graphes signés.
+
+Plus court chemin. Le chemin le plus court est celui avec le nombre minimal des liens avec un
+
+poids maximal.
+
+Distance signée. On prend le poids moyen du chemin le plus court.
+
+15 / 36
+
+Traitement des réseaux signés
+
+3 Mesures de centralité
+
+Le calcul de centralité est depuis plusieurs décennies une problématique importante dans le
+domaine de l’analyse des réseaux .La centralité est une notion qui permet de rendre compte de
+la popularité ou visibilité d’un nœud (exemple d’un acteur dans un groupe) au sein d’un réseaux.
+
+Dans ce qui suit, nous décrivons quelques mesures de centralité dans les graphes en provenance
+de l’analyse des réseaux. Nous commençons par les mesures existants, après nous devons faire les
+extensions pour les graphes signés.
+
+3.1 Mesures existantes
+3.1.1 Centralité de degré
+
+La centralité de degré [3] permet de classer les sommets d’un graphe selon le nombre de
+connexions en eﬀet, le sommet ayant le nombre de connexion le plus élevé est celui le point le
+plus important du graphe.
+
+Soient u le sommet et CD(u) son degré de centralité. Pour un graphe non orienté, on a :
+
+CD(v) = d(v)
+
+(2)
+
+Figure 14 – Graphe pour le degré de centralité.
+
+Exemple : Dans cet exemple le degré de centralité pour le nœud v1 est CD(4) = d(4) = 3.
+Pour un graphe orienté :
+
+CDout(v) = dout(v)
+CDin(v) = din(v)
+
+CD(v) = din(v) + dout(v)
+
+avec :
+• din : Le degré de centralité entrant qui donne l’importance à un noeud.
+• dout : Le degré de centralité sortant qui marque la sociabilité d’un noeud.
+• din + dout : On ignore la direction.
+Exemple :dans le graphe ci-dessus le degré de centralité du nœud 2 est :
+
+CDin(2) = din(2) = 2
+CDout(2) = dout(2) = 0
+
+(3)
+(4)
+(5)
+
+Normalisation. La mesure de degré de centralité ne permet pas de comparer des valeurs de
+centralité dans un réseau (Facebook , Twitter ...), pour contourner ce problème, on normalise le
+degré de centralité, et plusieurs approches sont possibles.
+
+16 / 36
+
+Traitement des réseaux signés
+
+Figure 15 – Graphe orienté pour le degré de centralité .
+
+Normalisation simple :
+
+CDnorm(u) = d(u)
+n − 1
+
+avec n le nombre des nœuds dans le graphe. Normalisation par le degré maximal :
+
+CDmax(u) =
+
+d(u)
+
+maxv∈V d(v)
+
+Normalisation par la somme des degrés :
+
+CDsum(u) = d(u)X
+
+= d(u)
+2|E| = d(u)
+2m
+
+d(v)
+
+v∈V
+
+Exemple : Prenant le même graphe Figure 5 on obtient :
+
+CDnorm(1) = d(1)
+
+4−1 = 1
+
+3.1.2 Centralité spectrale
+
+(6)
+
+(7)
+
+(8)
+
+La centralité d’un nœud doit étre déterminée par la centralité des nœuds auxquels il est connecté.
+Dans un réseau social, cela correspond à l’idée qu’un acteur est d’autant plus important qu’il est
+connecté à des acteurs qui sont eux même importants. Il s’agit en fait d’une extension de la centralité
+du degré dans laquelle on ne donne pas le même poids aux nœuds voisins. Pour la mise en œuvre de
+ce principe, on considère la centralité d’un nœud comme étant dépendante de la combinaison linéaire
+des centralités de ses nœuds voisins.
+
+nX
+
+j=1
+
+nX
+
+j=1
+
+CEin(vi) = 1
+
+λ
+
+17 / 36
+
+On déﬁnit :
+
+On peut écrire :
+
+CE(vi) = 1
+
+λ
+
+aijCE(vi)
+
+(9)
+
+avec λ constante. On note CE = (CE(v1), CE(v2), ......, CE(vn))T le vecteur de centralités.
+
+(10)
+Dans le cas ou le graphe est orienté, chaque nœud possède deux centralité spectrale : une par
+rapport aux liens sortants et une par rapport aux liens rentrants. Elles sont données respectivement
+par les équations suivantes :
+
+λCE = AT CE
+
+aijCEin(vi)
+
+(11)
+
+Traitement des réseaux signés
+
+CEout(vi) = 1
+
+λ
+
+nX
+
+j=1
+
+aijCEout(vi)
+
+(12)
+
+Théorème Perron-Frobenius. Soit A ∈ Rn×n la matrice d’adjacence du graphe, telle que Aij
+une matrice à coeﬃcients positifs ou nulles, il existe un nombre réel positif (valeur propre) λ tel que
+λmax est la valeur propre maximale de Aij, et toute autre valeur de Aij est inférieure à λmax.
+En outre, il existe un vecteur propre correspondant v = (v1, v2, ..., vn) de Aij avec valeur propre
+λmax telle que vi > 0.
+
+Par conséquent : pour avoir la valeur de centralité qui correspond à tous les noeuds les plus
+importants dans un graphe, nous pouvons calculer plusieurs vecteurs propres de Aij puis sélectionner
+le vecteur propre associé à la plus grande valeur propre. par ailleurs, le vecteur propre associé à la
+plus grande valeur propre renvoie uniquement des valeurs positives ou nulles ce qui est une contrainte
+portant sur la notion de mesure de centralité.
+
+Figure 16 – Graphe pour le vecteur propre .
+
+Exemple : Selon le premier graphe de la ﬁgure 16 la matrice d’adjacence est présenté comme suit :
+
+En se basant sur l’équation λCE = A · CE on doit résoudre (A − λI) · CE = 0
+
+Supposant CE = [u1, u2, u3]T
+
+
+
+A =
+
+1 0 1
+0 1 0
+
+ 0 1 0
+ 0 − λ
+
+0 − λ
+
+1
+
+1
+0
+
+1
+
+
+
+ u1
+
+u2
+u3
+
+0
+0
+
+ 0
+
+ =
+ = 0
+
+0
+1
+
+0
+1
+
+0 − λ
+
+ 0 − λ
+
+1
+0
+
+Puisque CE 6= [0, 0, 0]T alors :
+1
+
+det(A − λI) =
+
+0 − λ
+
+
+
+ u1
+
+u2
+u3
+
+ =
+ 0
+
+0
+0
+
+
+
+2
+
+propre correspondant :
+1
+0 − √
+1
+
+ 0 − √
+ u1
+
+CE =
+
+1
+0
+
+=
+ 1/2√
+
+2
+
+0
+1
+0 − √
+
+2
+
+
+
+2/2
+1/2
+
+u2
+u3
+
+18 / 36
+
+0 − λ
+Or,les solutions de l’équation sont :(−√
+
+1
+
+√
+2, 0, +
+
+2)
+
+De façon équivalente : (−λ)(λ2 − 1) − 1(−λ) = 2λ − λ3 = λ(2 − λ2) = 0
+
+Après on choisis le plus grand nombre propre dans notre cas
+
+√
+
+2 en suite Nous calculons le vecteur
+
+Traitement des réseaux signés
+
+Exemple : Pour le deuxième graphe de la ﬁgure 16 , la matrice adjacence est :
+
+
+
+A =
+
+
+
+0 1 0 1 0
+1 0 1 1 1
+0 1 0 1 0
+1 1 1 0 0
+0 1 0 0 0
+
+Les valeurs propre de cette matrice sont (−1.74,−1.27, 0.00, +0.33, +2.68) , donc la valeur maxi-
+
+mal du valeur propre est : 2.68 .Le vecteur propre correspond à cette valeur propre est :
+
+
+
+
+
+0.4119
+0.5825
+0.4119
+0.5237
+0.2169
+
+CE =
+
+Basé sur le vecteur propre ,le nœud V 2 est le nœud le plus central.
+
+3.1.3 Centralité de Katz
+
+La centralité de Katz est une généralisation de la centralité de degré. Celle-ci mesure le nombre
+de voisins directs, alors que la centralité de Katz mesure le nombre de tous les nœuds connectés
+par un chemin tout en pénalisant les contributions de nœuds éloignés. Mathématiquement, elle est
+déﬁnie par :
+
+nX
+
+j=1
+
+CK = α
+
+aijCK(vi) + β
+
+(13)
+
+(14)
+
+avec α constante et β le terme évitant d’avoir un zéro comme valeur de centralité.
+
+On peut écrire :
+
+Ainsi :
+
+CK = αAT · CK + βI
+
+(15)
+Nous noterons que la centralité de PageRank n’est en réalité qu’une variante de la centralité
+spectrale , variante qui commence d’abord par modiﬁer la matrice d’adjacence initiale avant de
+calculer son vecteur propre dominant.
+
+CK = βI(I − αAT )−1
+
+Exemple : Prenant la ﬁgure 14 , la matrice adjacence est :
+
+
+
+A =
+
+0 1 1 1 0
+1 0 1 1 1
+1 1 0 1 0
+1 1 1 0 0
+0 1 1 0 0
+
+ = AT
+
+Les valeurs propre de cette matrice sont (−1.68,−1.0,−1.0, +0.35, +3.32) , donc la valeur maxi-
+mal du valeur propre est λ = 3.32 .Nous supposons que α = 0.25 < 1/λ et β = 0.2 .La centralité
+de Katz est :
+
+19 / 36
+
+Traitement des réseaux signés
+
+CK = βI(I − αAT )−1 =
+
+
+
+1.14
+1.31
+1.31
+1.14
+0.85
+
+
+
+Ainsi, les nœuds V 2, V 3 ont les plus hautes centralités de Katz.
+
+3.1.4 Centralité PageRank
+
+C’est l’un des algorithmes d’analyse de liens qui a le plus marqué le domaine de la recherche
+d’information sur le Web. C’est notamment grâce à cet algorithme que le moteur de recherche de
+Google a connu le succès qu’il a aujourd’hui.
+
+Une fois un nœud devient autorité (haute centralité) il passe sa centralité vers ces voisins,ceci
+est moins souhaitable. Pour éviter ce problème on peut diviser la valeur de la centralité passé par le
+nombre de liens sortants de ce nœud de telle sorte que chaque voisin connecté obtient une fraction
+de centralité du nœud source.
+
+Si dout(j) 6= 0 :
+
+CG(vi) = α
+
+nX
+
+j=1
+
+CG(vj)
+dout(j) + β
+
+aij
+
+(16)
+
+En supposant que tous les nœuds ont des degrés positifs (dout
+
+j > 0) , l’équation peut être
+
+reformulé sous forme de matrice :
+
+CG = αAT D−1CG + βI
+
+(17)
+
+Figure 17 – Graphe pour PageRank.
+
+Nous noterons que la centralité de PageRank n’est en réalité qu’une variante de la centralité
+spectrale , variante qui commence d’abord par modiﬁer la matrice d’adjacence initiale avant de
+calculer son vecteur propre dominant.
+
+Exemple : Pour le graphe de la ﬁgure , la matrice d’adjacence est présenté tel que :
+
+
+
+A =
+
+
+
+0 1 0 1 1
+1 0 1 0 1
+0 1 0 1 1
+1 0 1 0 0
+1 1 1 0 0
+
+Nous supposons α = 0, 95 < 1 et β = 0.1. Alors les valeurs du Pagerank sont :
+
+20 / 36
+
+Traitement des réseaux signés
+
+
+
+2.14
+2.13
+2.14
+1.45
+2.13
+
+
+
+CG = β(I − αAT D−1)−1.I =
+
+3.1.5 Centralité d’intermédiarité
+
+La centralité d’intermédiarité (ou betweenness, en anglais) mesure le nombre de fois où un
+agent est l’intermédiaire sur le plus court chemin entre deux autres. Il s’agit donc du niveau de
+médiation d’un agent sur les transferts d ’information entre deux autres agents. Cette mesure paraît
+particulièrement appropriée dans l’étude du pouvoir dans les réseaux de communication parce que
+l’intermédiation permet la manipulation de l’information transmise.
+
+La centralité peut être déﬁnie comme la probabilité qu’une information transmise entre deux
+
+nœuds passe par un nœud donné.
+
+Une autre façon de regarder la centralité (voir l’importance du nœud). On calcule le nombre de
+chemins les plus courts entre les autres nœud qui passent par (vi), le calcule de centralité intermé-
+diaire est le même pour les graphes orientés ou non, comme déﬁnit par ci-dessous :
+
+CB(u) = X
+
+u6= v6=w
+
+σvw(u)
+σvw
+
+(18)
+
+Avec σvw est le nombre de courts chemins allant de v à w et σvw(u) est le nombre de plus courts
+chemins allant de v à w en passant par u .
+
+La centralité d’intermédiarité doit être normalisée à ﬁn d’être comparables entre les réseaux. Pour
+normaliser centralité intermédiarité, il faut calculer la valeur maximale qui peut avoir. La centralité
+intermédiarité atteint sa valeur maximale lorsque le nœud u est sur tous les plus courts chemins de
+v à w pour toute paire (v, w), c’est-à-dire, ∀(v, w), u 6= v 6= w, σvw(u)
+
+= 1
+
+σvw
+
+Figure 18 – Exemple d’un graphe.
+
+Par exemple, sur la ﬁgure 13 le nœud v1 est présent dans le plus court chemin entre les autres
+
+paires de nœuds. Ainsi, la valeur maximale est :
+
+21 / 36
+
+Traitement des réseaux signés
+
+P
+
+vi6= v6=w
+
+=P
+
+σvw(vi)
+
+σvw
+
+vi6= v6=w 1 = 2
+
+!
+
+ 
+
+n − 1
+
+2
+
+= (n − 1)(n − 2)
+
+La centralité intermédiarité peut être divisée par sa valeur maximale pour obtenir l’intermédiarité
+
+normalisée :
+
+ 
+
+CBnorm(vi) = CB(vi)
+n − 1
+2
+
+2
+
+!
+
+(19)
+
+Dans la centralité intermédiare (équation 16), nous calculons le plus courts chemins entre toutes
+les paires de nœuds pour deduire la valeur de la centralité intermédiare. Si un algorithme tels que
+Dijkstra est utilisé, il doit être exécuté pour tous les nœuds, parce que cet algorithme calcule le
+chemin le plus court à partir d’un nœud unique pour toutes les autres nœuds.
+
+Exemple : pour la ﬁgure 3.1, la centralité intermédiare normalisé du nœud v 1 est presenté comme
+
+suit :
+
+CB(vi) = 2
+
+CB(vi) = 1
+
+centralité est 2
+
+!
+
+!
+
+  8
+  8
+
+2
+
+2
+
+Depuis tous les chemins qui passent par toute paire (v,w) ;v1 6= v 6= w à travers le nœud v1, la
+
+De même, la centralité intermédiaire pour toute autre nœud dans ce graphique est égal à 0.
+
+Figure 19 – Graphe pour centralité intermédiaire.
+
+Exemple : d’après le graphe de la ﬁgure 13 la centralité intermédiaire du nœud v1 est nulle comme
+
+il n y a aucun court chemin qui passe à travers le nœud v1 :
+
+• CB(v2) = 2 ∗ ((1/1) + (1/1) + (2/2) + (1/2) + 0 + 0) = 2 ∗ 3.5 = 7
+• CB(v3) = 2 ∗ (0 + 0 + (1/2) + 0 + (1/2) + 0) = 2 ∗ 1 = 2
+• CB(v3) = CB(v4) = 2 ∗ 1 = 2
+• CB(v5) = 2 × (0 + 0 + 0 + 0 + 0 + (1/2)) = 2 ∗ 0.5 = 1
+
+3.1.6 Centralité de proximité
+
+La centralité de proximité (ou closeness, en anglais) est une mesure de centralité globale déﬁnie
+via le calcul de distance séparant un nœud des autres nœuds du graphe. Dans un réseau social, cette
+mesure exprime la notion d’eﬀort : un acteur ayant une grande valeur de centralité de proximité est
+capable de contacter la majorité des acteurs du réseau avec un minimum d’eﬀort, c’est-à-dire de
+distance à parcourir dans le réseau (ou le plus court chemin) en prenant en compte les liens directs
+et indirects et ceci dans le but de minimiser le nombre d’intermédiaire ce qui permet de s’échapper
+
+22 / 36
+
+Traitement des réseaux signés
+
+à leur contrôle relatif à chaque passage. Cette mesure permet de déceler les cas particuliers d’agents
+qui, même peu connecté au réseau, sont centraux parce que relié à plusieurs agents centraux de la
+structure. cette mesure est déﬁnit pour les graphes orientés et non orientés dans la suite.
+
+La centralité de proximité est déﬁni par l’équation suivante, pour un graphe non-orienté :
+
+P
+
+CC(u) = 1
+I u
+
+(20)
+
+avec I u = 1
+n−1
+Dans le cas où le graphe est orienté, chaque nœud possède alors deux mesures de centralité de
+
+u6=v dist(u, v) est la distance moyenne entre u et tous les autres nœuds.
+
+proximité : une par rapport aux liens sortants et une par rapport aux liens entrants.
+
+CCin(u) = 1
+I u
+CCout(u) = 1
+I u
+
+Exemple : pour la ﬁgure 14 les calcules de centralité de proximité sont les suivantes :
+• CC(v1) = 1/((1 + 2 + 2 + 3)/4) = 0.5
+• CC(v2) = 1/((1 + 1 + 1 + 2)/4) = 0.8
+• CC(v3) = CC(v4) = 1/((1 + 1 + 2 + 2)/4) = 0.66
+• CC(v5) = 1/((1 + 1 + 2 + 3)/4) = 0.57
+Le nœud v2 a la plus grande centralité de proximité.
+
+(21)
+
+(22)
+
+3.2 Extensions pour les graphes signés
+
+Dans cette section on essayera d’étendre les mesures de centralité déjà étudiées dans la partie
+précédente pour les graphes signés, et comme on a deux approches à traiter (équilibre structurel et
+statut social), on va utiliser deux catégorie de graphe : Graphe orienté et signé Graphe non orienté
+et signé
+
+3.2.1 Centralité de degré
+
+Pour un graphe signé non-orienté. Le degré de centralité permet de classer les nœuds selon le
+nombre d’ami ou d’ennemi qu’ils ont, a cet eﬀet pour chaque nœud on calcule le degré de centralité
+positif et négatif,Mathématiquement parlant le degré de centralité est déﬁnit comme suit :
+
+CD+(u) = d+(u)
+
+(23)
+
+CD−(u) = d−(u)
+
+(24)
+Dans ce cas l’importance d’un nœud diﬀérent ; on peut considérer dans un graphe qu’un nœud est
+important s’il possède la plus forte centralité de degré positif par exemple (dans les réseaux sociaux
+le noeud qui possède un grand nombre d’ami et celui le plus important dans le réseaux) En outre , on
+peut considérer qu’un noeud est important s’il possède la plus forte centralité de degré négatif par
+exemple (si on considère un réseau d entreprise , la compagnie qui a un grand nombre de concurrent
+est considérer comme la plus importante dans le réseau)
+
+Pour un graphe signé orienté. Le même principe est utilisé quand on parle du principe de
+statut ou le degré de centralité dans ce cas permet de savoir le statut d’un nœud par rapport à
+ces voisins.Dans cette approche le degré de centralité peut être calculer en prenant en compte la
+direction de l’arc ainsi que son signe alors 4 calculs de degré son possible pour chaque nœud.
+
+23 / 36
+
+Traitement des réseaux signés
+
+CD+
+
+in(u) = d+
+
+in(u)
+
+CD+
+
+out(u) = d+
+
+out(u)
+
+CD−
+
+in(u) = d−
+
+in(u)
+
+(25)
+
+(26)
+
+(27)
+
+(28)
+Mais à ce niveau là on peut fusionner de notion si un arc entrant vers un nœud est positive et
+un autre sortant négatif , c’est à dire ce nœud dans les 2 cas à un statut supérieur de son voisin .
+
+out(u)
+
+CD−
+
+out(u) = d−
+
+3.2.2 Centralité Intermédiaire
+
+La centralité intermédiaire est calculé de la même façon pour les graphe orienté et non-orienté
+comme on a déjà mentionné dans le chapitre précédent, par contre l’interprétation de ces mesures
+diﬀère selon le concept qu’on traite, équilibre structurel ou statut social.
+
+Le calcule de la centralité va prendre en considération seulement les signes des graphes , chaque
+nœud possède alors deux mesures de centralité intermédiaire : une par rapport aux liens positifs et
+une par rapport aux liens négatifs. par contre la distance utilisé est diﬀérente dépend du graphe
+orienté ou non orienté comme on a déjà déﬁnit dans la parie des réseaux signés
+
+La centralité intermédiaire d’un nœud est déﬁnie formellement par :
+
+CB+(u) = X
+CB−(u) = X
+
+u6= v6=w
+
+σvw(u)
+σvw
+σvw(u)
+σvw
+
+(29)
+
+(30)
+
+u6= v6=w
+
+Dans le cas d’équilibre structurel l’importance d’un nœud dépend du nombre de plus court chemin
+qui passe à travers lui ,c’est à dire au niveau de ce nœud on trouve de nombreuses interactions des
+autres nœud non adjacents qui dépend de lui.
+
+A ce niveau ce nœud est considéré être le plus important par rapport à ces voisins
+
+Dans le cas du statut social un nœud à un statut important si on trouve de nombreuses interac-
+
+tions des autres nœuds non adjacents qui dépend de lui .
+
+A ce niveau ce nœud est considéré avoir un statut plus important par rapport à ces voisins
+
+3.2.3 Centralité de proximité
+
+Pour un graphe signé non orienté. Un nœud ayant une grande valeur de centralité de proxi-
+mité positif a une position stratégique dans le graphe puisqu’il est capable de contacter facilement
+un grand nombre d’amis avec un minimum d’eﬀort (l’eﬀort ici est relatif à la taille des chemins).
+
+une centralié de proximité négatif importante d’ un nœud détermine la position d’un ennemi par
+rapport à ces ennemis dans un graphe ,A cet eﬀet un ennemi peut contacter un grand nombre d’
+ennemi facilement à condition d’avoir un ami en commun à tous les ennemis pour s’assurer que
+
+24 / 36
+
+Traitement des réseaux signés
+
+l’information peut circuler entre les ennemis.
+
+Dans ce cas , chaque nœud possède alors deux mesures de centralité de proximité : une par
+
+rapport aux liens positifs et une par rapport aux liens négatifs.
+
+L’équation nécessite le calcule du chemin le plus court donc on va utiliser le calcule déjà déﬁnit
+
+précédemment pour les graphe signé non-orienté.
+
+Pour un graphe signé orienté. La centralité de proximité dans ce type des graphes permet de
+
+déterminer le statut d’un nœud par rapport à ces voisins globalement proche les un des autres.
+Chaque nœud possède 4 mesures de centralité de proximité : Une par rapport aux liens sortants, une
+par rapport aux liens entrants,une par rapport aux liens positifs et une par rapport aux liens négatifs.
+
+CC+(u) = 1
+I u
+CC−(u) = 1
+I u
+
+CC+(u) = 1
+I u
+CC−(u) = 1
+I u
+CCin(u) = 1
+I u
+CCout(u) = 1
+I u
+
+(31)
+
+(32)
+
+(33)
+
+(34)
+
+(35)
+
+(36)
+
+L’équation nécessite le calcule du chemin le plus court donc on va utiliser le calcule déjà déﬁnit
+
+précédemment pour les graphe signé orienté.
+
+On peut considérer le nœud centrale d’un graphe est celui qui possède une centralité de proximité
+positif et sortante importante ou négatif et entrante importante ,c’est à dire le nœud qui a le plus
+grand statut par rapport à ces voisins
+
+25 / 36
+
+Traitement des réseaux signés
+
+4 Visualisation des graphes
+
+Dans cette section nous allons présenter l’importance de bien représenter des graphes. Nous allons
+rappeler d’abord à quoi correspond un graphe, et surtout à quoi sa représentation peut servir. Puis,
+nous allons expliquer à quoi correspond un outil de visualisation de graphes, en montrant diﬀérentes
+solutions existantes. Ensuite, nous allons présenter l’algorithme retenu et donner un exemple de son
+déroulement. Enﬁn, nous proposerons une extension de cet algorithme pour les réseaux signés.
+
+4.1 Algorithmes de spatialisation
+
+On sait déjà qu’un graphe est un ensemble de points, dont certaines paires sont directement
+reliées par un ou plusieurs liens. Leur représentation graphique consiste alors à visualiser la structure
+des relations entre ces entités, sous une forme ou sous un autre.
+
+Mais quel est l’intérêt de bien visualiser les graphes ? Par exemple le graphe va permettre de
+déterminer rapidement quelles sont les interactions entre utilisateurs. Grâce à ce rendu visuel, il sera
+possible de comprendre ces interactions et de déterminer des ensembles de groupes, regroupant des
+objets ayant des intérêts communs.
+
+L’application d’un algorithme mathématique de spatialisation permet d’optimiser la répartition
+des données dans l’espace tout en limitant les superpositions des noeuds et le croisements des liens.
+On peut citer deux grandes familles d’algorithmes de visualisation des graphes :
+• La première famille concerne les algorithmes fondés sur des propriétés mathématiques. Plus
+• La deuxième famille est plus récente, elle concerne notamment les algorithmes de dessin fondés
+sur les forces (en anglais : Force-based ou Force-directed algorithms). Cette famille est quant
+à elle fondée sur des analogies issues de la physique.
+
+précisément, ces algorithmes reposent sur les techniques issues de l’analyse de données,
+
+Les algorithmes à base de forces permettent de faciliter la visualisation des graphes et non l’analyse
+de données. Les algorithmes de dessin de graphes basé sur les forces permettent de positionner les
+nœuds d’un graphe pour faciliter sa visualisation en utilisant un système de force appliqués entre
+les nœuds et les arcs. Les nœuds peuvent être considérés comme des particules de même charge qui
+se repoussent et les arcs peuvent être assimilés à des ressorts qui tendent à rapprocher les nœuds
+voisins. Ces algorithmes cherchent alors à minimiser l’énergie du système en déplaçant les nœuds.
+
+L’algorithme Eades est l’un des premiers algorithmes de visiualisation des graphes qui déﬁnit pré-
+cisément l’idée de forces répulsives et de forces attractives. Les forces attractives sont alors calculées
+pour les nœuds voisins et les forces répulsives sont calculées pour toutes les paires de nœuds. A
+chaque itération, tous les nœuds sont déplacés simultanément. L’algorithme fait la somme des forces
+appliquées puis déplace les nœuds suivant des régles de physique classique jusqu’à trouver un état
+stable. limitation de cet algorithme : la force d’attraction déﬁnie par Eades ne correspond pas à celle
+d’un ressort.
+
+4.2 Algorithme de Fruchterman-Reingold
+
+c’est Fruchterman et Reigold qui utiliseront les premiers l’analogie du ressort. Les forces sont
+alors calculées en ayant recours a la loi de Hooke qui permet de déﬁnir l’élasticité d’un ressort.
+La loi de Hooke permet d’évaluer le comportement des solides soumis a une déformation de faible
+amplitude. C’est une loi élastique linéaire.ce qui signiﬁe « telle extension, telle force », ou bien en
+termes modernes « l’allongement est proportionnel à la force ». Hooke désirait obtenir une théorie des
+ressorts, en soumettant ces derniers à des forces croissantes successives. déﬁnition prise de wikipedia
+
+4.2.1 Algorithme de la nouvelle méthode
+
+On a deux principaux principes : -Les nœuds liés par une arrête doivent être dessiné à proximité
+
+-Cependant les nœuds ne doivent pas être dessiné très proche l’un des autres
+
+26 / 36
+
+Traitement des réseaux signés
+
+Tout d’abord les nœuds sont placés dans un cadre qui à deux axes , un axe y et un autre x ,
+chaque nœud a donc deux valeurs qui permettent de déﬁnir sa position dans ce cadre. Pour savoir à
+quelle distance les nœuds devraient être placés dépend de combien de nœuds il y a dans un graphe,
+et de l’espace disponible A. c’est sur ce principe que l’algorithme se base pour calculer la position
+de chaque nœud : en calculant les forces répulsives et attractives mais aussi limité les déplacements
+dans le cadre ou le graphe est positionné. et ainsi trouver un juste équilibre entre ces éléments. pour
+ce faire nous allons dans un premier lieu déﬁnir toutes les variables de l’algorithme , ensuite décrire
+l’algorithme et introduire un exemple qui permettra d’illustrer l’algorithme et mieux comprendre son
+fonctionnement et enﬁn adapter ces idées aux réseaux signés .
+
+4.2.2 Déﬁnition des variables et méthodes
+
+cadre.,
+
+• A : l’aire où est placé le graphe. est calculé en multipliant la largeur L par la hauteur H du
+• n : nombre de nœuds |V | d’un graphe G.
+• k : distance idéale entre les sommets
+• fa(x) : fonction pour calculer les forces attractives
+• fr(x) : fonction pour calculer les forces répulsives
+• −−−→
+P osv : vecteur de la position d’un nœud V du graphe G .
+• −→∆ : diﬀérence des positions de deux nœuds d’un graphe G
+• ||−→∆|| : est la distance qui sépare deux nœuds u et v.
+• −−−→
+Repv : vecteur des forces répulsives
+• −−→
+Attv : vecteur des forces attractives
+• −−−→
+Depv :est le vecteur de déplacement du nœud v , est calculé en additionnant les forces répulsives
+avec les forces attractives
+• P OSv(x) : position de v par apport à l’axe X .
+• P OSv(y) : position de v par apport à l’axe Y .
+• Cool : est une fonction qui permet que diminuer la température . c’est à dire que le déplacement
+d’un sommet est limité à une valeur maximal et cette valeur maximal se réduit avec le temps
+( t ) . ce qui va permettre de stabiliser les nœuds .
+
+4.2.3 Algorithme
+
+A := H *L ;
+
+27 / 36
+
+Traitement des réseaux signés
+
+q A
+
+n ;
+
+k :=
+Data : G = (V, E)
+Result : graphe bien structuré
+// Initialisation

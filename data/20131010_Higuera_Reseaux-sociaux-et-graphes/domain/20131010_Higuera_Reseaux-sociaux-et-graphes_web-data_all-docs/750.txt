@@ -1,0 +1,4803 @@
+http://www.archipel.uqam.ca/5265/1/M12693.pdf
+
+UNIVERSITÉ DU QUÉBEC À MONTRÉAL 
+
+UTILISATION  D'UNE ONTOLOGIE ET DU  RÉSEAU  SOCIAL FACEBOOK POUR LA 
+
+MODÉLISATION DU CONTEXTE POUR LES APPLICATIONS  MOBILES 
+
+DÉPENDANTES DU  CONTEXTE 
+
+MÉMOIRE 
+
+PRÉSENTÉ 
+
+COMME EXIGENCE PARTIELLE 
+
+DE LA MAÎTRISE EN  INFORMA TIQUE 
+
+PAR 
+
+AHMED SAlO LOUBIRI 
+
+NOVEMBRE 2012 
+
+UNIVERSITÉ DU QUÉBEC À MONTRÉAL 
+
+Service des bibliothèques 
+
+· 
+
+A vertissenient 
+
+La diffusion de ce mémoire  se fait dans le' respect des droits de son auteur, qui a signé 
+le  formulaire  Autorisation de  reproduire. et de  diffuser un  travail de  recherche de. cycles 
+supérieurs (SDU-522- Rév.01-2006).  Cette autorisation stipule que  <<conformément à 
+l'article  11  du  Règlement  no  8 des  études  de  cycles  supérieurs, [l'auteur]  concède  à 
+l'Université  du  Québec  à  Montréal  une  licence  non  exclusive  d'utilisation  et  de . 
+publication  ~e la  totalité  ou  d'une  partie  importante  de  [son] .travail  de  recherche  pour 
+des  fins  pédagogiques  et  non  commerciales.  Plus  précisément,  [l'auteur]  autorise 
+l'Université du Québec à Montréal à reproduire, diffuser, prêter, distribuer ou vendre des  .· 
+copies  de. [son] travail de  recherche  à  des fins  non  commerciales  sur quelque support 
+que ce soit, y compris l'Internet.  Cette licence et cette autorisation n'entraînent pas une 
+renonciation  de [la] part [de  l'auteur] à  [ses] droits  moraux ni à [ses] droits de propriété 
+intellectuelle.  Sauf  entente  contraire,  [l'auteur]  conserve  la  liberté  de  diffuser  et  de 
+commercialiser ou non ce travail dont [il] possède un exemplaire .. >> 
+
+REMERCIEMENTS 
+
+Je  tiens  à  remercier  sincèrement  toutes  les  personnes  qui  m'ont  appo1té  leur  aide  et qui 
+
+ont  contribué  à  l'élaboration  de  ce  mémoire  ainsi qu 'à  la  réussite  de  ce  formidab le  cursus 
+
+univers itaire. 
+
+Je  souhaite,  en  prem1er  lieu,  adresser  mes  remerciements  les  plus  cha leureux  à  mon 
+
+directeur de  recherche, Monsieur Obaid  Abdellatif,  pour m' avoir donné  la chance de  réaliser 
+
+ce  travail  et s'être toujours  montré  à  l'écoute  et très  disponible  tout au  long  de  la réalisation 
+
+de  ce  mémoire.  Il  a toute  ma  reconnaissance  pour  l'inspiration,  l'aide et  le temps  qu'il  a  bien 
+
+vou lu  me consacrer et sans lui , ce mémoire n'aurait jamais vu le jour. 
+
+Mes  remerciements  s'adressent  également  à  ma  cod irectrice  Madame  Fatiha  Sadat  pour 
+
+sa généros ité et son suivi  rigoureux. 
+
+J'exprime ma  gratitude à tous  les  professeurs  de  1 ' UQAM qui  m'ont accompagné  pendant 
+
+ces  années  et  m'ont  permis  d'avo ir  une  formation  de  qualité.  Je  remercie  notamment  mes 
+
+deux  directeurs  de  programme,  Monsieur  Étienne  Gagnon  et  Monsieur  Roger  Villemaire, 
+
+pour  leur  encadrement  rigoureux.  Je  remercie  aussi  Monsieur  Petko  Valtchev,  directeur  de 
+
+mon 
+
+laborato ire  de 
+
+recherche,  pour  sa  disponibilité  et  ses  précieux  conseils  et 
+
+reco mmandations. 
+
+Je  tiens aussi  à remercier tout l'ensemble du  personnel  de  I'UQAM, surtout Madame  Lise 
+
+Arsenault et Madame Louise Tremb lay  pour leur soutien tout au  long de  la  maitrise. 
+
+Je  remercie  également  Madame  Cynthia  Li sée,  pour  m'avo ir  appris  les  règles  et  les 
+
+techniques  de  recherche  et surtout d'avo ir  eu  la  gentillesse de  lire et  réviser  la  bibliographie 
+
+et la qualité de  la  langue de ce mémoire. 
+
+iii 
+
+J'adresse  autant  mes  plus  sincères  remerc iements  à  mes  parents  et  ma  fa mille  pour  to us 
+
+les sacrifices consentis  afin  de  me  donner  les  moyens  d'avo ir  cette  form ation et  leur soutien 
+
+tout au long de ces dures années d'études . 
+
+Enfin, je remercie  tous  mes  proches  et  amis,  qui  m'ont  touj ours  soutenu  et  encouragé  au 
+
+co urs de  la  réali sation de ce travail , ainsi que tout ceux qui  ont  contribué de  près  ou de  lo in  à 
+
+l' é laboration de ce mémo ire. 
+
+TABLE DES  MATIÈRES 
+
+LISTE DES  FIGU RES  ..... ................ ....... ............... ... ... ......... ............ ................ ............................... .. ..  vii 
+
+LISTE DES  TABLEAUX .. .......... ....................... .......... ........ ....... ... ... .......... ....... .. .... ....... ... ... ...... .... ... .... ix 
+
+RÉSUMÉ ... ..... ... .. ....... ....... ........ ... .... ...................... ... .. ......... .. ..... .... ............ ... ..... .. ... .. .. ..... .......... .... ... .... . x 
+
+CHAPITRE I 
+INTRODUCTION ...... ....... ........................ .......................... ....... ..... ........................................................ 1 
+
+1.1 . Problématique ... .................. ... ............ .. .................. ... ............ .... ........................................................ 2 
+
+1.2. Objectifs ......... .......... .................... .... .... ....... .... ... ... .... .............. ......... .................. ................... ... .... ... .. 3 
+
+1.3 . Méthodologie ... ....................................... ............ ............ .... ....... ................ .... .. .. ... .... ........................ 3 
+
+1.4. Organisation du  mémoire ........................ ......... ............. ................................. ............ .... ........... ....... .4 
+
+CHAPITRE Il 
+CONCEPTS  DE BASE ............ ....... .... ....... ... ... ........................... ............ ..... ... .. ...... ... ... .... ..... ...... .. .. .. .. ... . 6 
+
+2.1. La notion de contexte .. ............... ......... ....... ............. ...... ... ... ... ... ... ... ..... .. ... ....................... .. .. ... ..... .. ... 6 
+
+2.2.  Les systèmes  dépendants du  contexte .... ......... .... ...... ..... ..... ..... .. .................... .... ... ............................ 7 
+
+2.3.  Les  réseaux  sociaux ... ......... ....... ... .. ... ................ ............ .......... .... ......................... ... ........ ....... .......... 8 
+
+2.4.  Les ontologies ....... ..... .................... .............................. ...... ........ ...... ........... ..... .. .. ............ .. ......... ... ... 8 
+
+2.5.  Langages et outils de conception des ontologies .............. ........... ..... ........................ ....................... 12 
+
+CHAPITRE JJl 
+ÉTAT DE L'ART ....................... ............................................ .. .. .... ... ...... .... ... ... ..... .. .. .. ................ ...... ... 14 
+
+3 .1 . Introduction ..... .. ............... .. ........... ............................................................ ... ... ................................ 14 
+
+3.2. Quelques modèles  existants .. .................................................. .... .. ... ....... ... ... .... ... .... .... .. .. .. ... .. ........ 16 
+
+3.2.1. Le  Service-Oriented Context-Aware Middleware (SOCAM) [15]  .... ... .... ... ... ..... ............... 16 
+
+3.2.2.  Le  modèle Context Broker Architecture (CoBrA) [ 1 0] ......... .............. ... .......................... ... 19 
+
+3.2.3 . Context-Awarness Sub-Structure (CASS) [18] ........ ..... ............ .............................. .. ....... ... 22 
+
+3.2.4.  Le projet Hydrogène  [19] ........ .... .. ............................... .............................................. ......... 24 
+
+3.2.5.  Architecture Smart-M3  [20] .. .. .... .. ....... .................. .............................. .... ... .... ........... .... ..... 26 
+
+CHAPITRE IV 
+ARCHITECTURE ... ............ ....................... ........................... .... ...... ... ... .. .. ....... ......... .. .. ..... ........ ... ........ 29 
+
+4.1.  Introduction .............. ...... ... .... ....... ..... .... ...... .... ... ....... .. ............... ....................... ....... ......... ....... ...... . 29 
+
+4.2. Architecture proposée ........ .... ............... .. .. ................................................ .................................. .. .. 30 
+
+4.2.1 . La couche Capteurs ......... ....................................... ................ .... .......... .................... ........... 31 
+
+4.2.2.  Le  middleware ............... ... .. .. ........................................................ ... ...... ....... ... ....... ............. 32 
+
+v 
+
+4.2.2. 1.  La  couche de collection des données ...................................... ... ...................... .. ..... 32 
+
+4.2.2.2.  La couche de filtrage des  données .. ............. .. .... ... .. .. ... .. ... .. ........................... .... .. .. . 33 
+
+4.2.2.3. La couche de traitement des données .... .. .. .. ...... ....... ... .. ... .. .. ..... .. ..... .. ........... .... ..... 33 
+
+4.2.2.4. Modul e d' in fé rence .. .. ........................................ ... ... .. ............... ... .... ... .... .. ... ... .... .. . 34 
+
+4.2.2.5. La base de connaissance du  contexte .............. .. ......... .... ... ...... .. ... .. .. ..... .. ... .... ... ..... 34 
+
+4.2.2.6. Le raisonneur .......... .... ....... .............. ... ........................... ...... .. ... .... ... .... .... ... .. ... .... ... 35 
+
+4.2.2.7.  La couche de gestion du contexte .. .. ............................ .. ........ ....... ...... ... ......... .. .. .... 36 
+
+4.2.2.8.  Le  module de  correspondance de  contexte ......... .. .... ... ..... ..... ..... .. .... .. .. ...... ........... . 36 
+
+4.2.3. Les serv ices du contexte .. ... .......... ............. .. ..... .. ................. ...... .... ..... .. ......... ... ..... .. ............ 36 
+
+4.3. Plan de validation de  l'architecture .. ........... ........ .................. .. ................... .. ... .. ......... ........ ....... .. .. .. 37 
+
+CHAP ITRE V 
+MODÉLISATION  DE L'ONTOLOGIE FACEBOOK .......... ........ .. ........... .. .. .... ... ... .. .. ................. .. .... . 38 
+
+5.1 . Introduction .... ...... .... .... ....... .. .. .. ... ... ...... .. .... ..... .. ........................ ......... .... ... .... ..... .. ..... .. ... .. ....... .. ..... 38 
+
+5.2.  Contexte social et réseaux sociaux en li gne,  cas de Facebook .... ..................................... .. ...... .. .. .. 39 
+
+5.2. 1. Les  liens .... .......... ...... ..... ... .... ... ....... .. .... ... ... .. ................ .......... ..... .. .. .. .... .. ....... ......... .. ....... . .40 
+
+5.2.2.  Les événements ... ........... ............. .. .... .. .......... ..... .... ....... ... .... ... ..... ...... ........ ......... .. .. ... ... .... . .40 
+
+5.2.3.  Les  préférences ......... ... ... ..... .. ........... .. .... ..... .... ..... ..... .. ..... ... .... ... ............ ........... .. ......... .. ... .. 40 
+
+5.2.4. Les emplacements .. ..... .. .. ........... ... .. ... .. ....... ... ........ .... .. .. ............ .... .............. .. ....... ..... ......... 4 1 
+
+5.2.5.  La présence en  li gne ... .... ................. ... ... .. .... ... ... ...... .. .. .. .. ... ... .. ... .......... .. ......... .. .... .. ....... ... . .4 1 
+
+5.2.6.  La personnali té .. ....... .. .... ... ...... .... .. ... ...... ..... .... .. .. .... ......... .. ... ........ .. .... ........... ..... .. .. ........... .41 
+
+5.2.7.  Le  marquage .. ...... ........... ........ ....... ........ .. ....... ... .. ....... .. ... .. .. ..... .. ............. .. ... ... .... .... ........... .42 
+
+5.3.  Le  graphe Facebook ............ .. ..... ... ..................... ... .... .. .. .. ........ ....... ..... ..... .. ..................... ... .... .. ... ... .42 
+
+5.3. 1. Le protocole Open Graph .... .... .. ...... ... ... ............ .... .. ........... ..... .. .... ...... .. .. .... ... .......... .......... .42 
+
+5.3.2.  Le Graphe Socia1 ..... .......... ... .... ... .. ... ..... .. ..... .. ..... ...... ...... ... ... .... .. ... .. ... ... ............... .. ........... .43 
+
+5.4. L'onto logie de Facebook .. .. .... ... .... ... ....................... ... ..... ...... .. ... .... ... ............... ... ... ... ... .... ...... .. ...... .45 
+
+5.4.1. Modél isation de l'ontologie ..... ... ..... ...... ...... .. ..... ... ............. .... .. ... .. .. ..... ... ... ... ... .... ... ... ....... . .45 
+
+5.4.1.1 . Les objets de Facebook ...... .. .. .. .. .................. ...... ........ .. .. ......... ...... .. .. .. .. ............. .. ....... .46 
+
+5.4.1.2.  Les  propri étés  des objets ............ .. ...... ..... .... .. ..... .. ... .. ......... .. ......... .... ................. .. ........ 48 
+
+5.4. 1.3 . Les relations .............. .... ....... .... ... .... ... .. ........ .. .. ........... ... .. ... ... ......... ... ... ............. ..... .... .49 
+
+5.4 .1 .4.  L'onto logie .... ... .. ..... ..... .. .... .. .... .. ............ .... ........ ........ .......... ... ... ...... .......... .. ................ 51 
+
+CHAPITRE VI 
+MODÉLISATION DU  CONTEXTE ... .... .... .. ........ .... .. .. .............. .. .... ... ... ........ .. .... ... .......... ..... .. ........... . 53 
+
+6.1.  Introduction .. ... .......... ... ....... ... .... ...... .. ...... .......... .. ... ... .. ... ............. .. ... ... .... .... ..... ... ..... ....... ... .... ., .. .... 53 
+
+6.2. Conception de l'onto logie du  contexte ................... .............. .. ... ..... ..... ........... ... .... .............. .. ......... . 53 
+
+6.2.1 . Étape A:  Ontologie de haut niveau (01) .... ..... .. ............... ... ......................... .. ... .......... ., ...... 54 
+
+YI 
+
+6.2.2. Étape B:  Extension de  l'ontologie de  haut niveau  par les concepts du  domaine ...... ... ... ..... 57 
+
+6.2.3. Étape C:  Couplage de  l'ontologie du  contexte et de  l'ontologie Facebook ..... .. .. .. ... ..... .. .. .. 60 
+
+6.2.4 . Étape 0: Raisonnement et inférence du  contexte ............ ........ .... ..... .... ............................... 63 
+
+6.3.  Raisonnement onto logique ........ ..... .. .... .......... .. ..... ....... ................................ ... ........... ..................... 63 
+
+6.4.  Simulation des règles d'inférence .......... .. .................................. .. ..................... .... ...... .. .................. 67 
+
+CHAPITRE VII 
+CONCLUSION ............. ... ....... .. .............. ... ..................... .. ....... .. .......... ....... .... ..... ............... ........ ... ... ... .. 72 
+
+RÉFÉRENCES ............. ........................ ... .... ... ......... ....... ......... ...... .. .. ... ... ... .... ... ........... ... ....... .... ..... ...... 74 
+
+LISTE DES FIGURES 
+
+Figure 
+
+Page 
+
+2.1  Catégorisation de  Guarino pour les  ontologies  .... .. .................... ...................... .. .................. . 12 
+
+3.1  Architectu re SOCAM  .. ... .................... .... .... ... .................. ......................... .... ... ......... .......... ... 17 
+
+3.2  Ontologie du  modèle de contexte SOCAM .. .. .. .. .... ................................ .......... ...... ................ 18 
+
+3.3  Architecture CoBrA ........................... ..... .... .. .................. ............... ......... ... .. .... ...... ................ 20 
+
+3.4  Architecture CASS ......... ............ ...... ................ ........ .... .. ... ...... ... ....... .................... ................ . 22 
+
+3.5  Modèle de contexte CASS .... .... ................................................ .. .. .. ....................................... 23 
+
+3.6  Architecture Hydrogène ................. .. ... .. .. .. ........ .... ............... .... ............................ ... .... .... ....... 24 
+
+3.7  Modèle de contexte Hydrogène ....... ... ....... .. ........ ..................................... ... .. ..... .. ... ... .. ... .. ..... 25 
+
+3.8  Architecture Smart-3 ...... ................ ... ...... .... ... ....... ........ ...... .......... .... ...... ............................... 26 
+
+3.9  Modèle d'onto logie Smart-3 ...... ................................. ...... .... ... .. ... .. ... .... .. ..... .......... ... .... .. .. .. .. . 28 
+
+4. 1  Architectu re de notre système dépendant au contexte proposé ............. .. ........ ...... .... ......... .... 30 
+
+5.1  Open  Graph de  Facebook ..................... ................ ................ .. .. ...... ............ .................... ........ 43 
+
+5.2  Graphe Social des  réseaux d'amis de  Facebook généré par touchgraphe.net ... ........ .. .. ......... 44 
+
+5.3  Capture écran  des classes de  Facebook sous  Protégé .. .. .. .... .. .. .. .............. .............................. .48 
+
+5.4  Capture d'écran  Les  re lations so us Protégé ............................................................ .... ........... 5 1 
+
+5.5  Ontologie de  Facebook ... ......... ................. ... , ................................ ... ..... .................. ... .. ........ .. 52 
+
+6.1  Approche de modélisation du  contexte . .. .................. ., .................. ............ ..... .............. .......... 55 
+
+6.2  Ontologie du  haut niveau  se  basant sur CONON .................. .. .. , ........................................... 56 
+
+6.3  Classification des différents états physiologiques ..... .. .. ........ ......... .... .. ............ .... .. ............ .. .. 58 
+
+6.4  Classification des appareils ... ... .... .... ... ... .............. ..... .... ... ..... ... ............ ..... ... ... ... .... .. ... .. .... ... .. 59 
+
+6.5  Ontologie du  domaine ....... ................................ ................... ... ............. ........... ..... ......... ....... .. 61 
+
+6.6  Ontologie du  contexte ................................... ..................... ... ... ............ ...... : .... .... ...... .... .... ..... 62 
+
+6.7  Classification des  personnes selon  l'âge .... .... ...................... .. .. .. .... .................. .............. ......... 65 
+
+6.8  Règles défin issant les  niveaux de température corporelle de  l' utilisateur .............. ................ 66 
+
+6.9  RèJ?;les d' inférence des  niveaux  de glycémie de l' utilisateur.  ................................................ 67 
+
+6.10  Capture d'écran - Initiation de  la description d'un  individu ... .. .......................... .. .... .. .. .......... 68 
+
+6.11  Indi vidu  Ahmed après  inférence ................... .. .. .................. .. ................................................. 69 
+
+6. 12  Initiation de l'indi vi du  Fana ..... : .... .... .......... ........ ... ............ ...... ................ .............. .. .... .......... 70 
+
+6. 13  Individu Fana  après  inférence ........... .. ....... ................. ................ ....................... ... ................. 70 
+
+LISTE DES TABLEAUX 
+
+Tableau 
+
+Page 
+
+5.1  Objets de  Facebook ........................................................................................................................................... 47 
+
+5.2 
+
+Propriétés des objets de  Facebook ................................................................................................................ 49 
+
+5.3  Relations entre les objets de  Facebook ....................................................................................................... 50 
+
+RÉSUMÉ 
+
+L' informatique  dépendante  du  contexte  est  un  paradigme  de  l' informatique qui  tient  en 
+
+considération les éléments de l'environnement d' une entité (utili sateur, périphérique,  etc.). 
+
+Ce  paradi gme,  qui  prend  une  place  de  plus  en  plus  importante  grâce  au déve loppement 
+rapide des technologies  mobiles,  a mené à la  mi se  en place de diffé rentes  architectu res  et de 
+divers modèles qui  fo urnissent  l' information sur  le contexte. 
+
+Au niveau des  architectures  plusieurs so lutions ont été proposées  mais présentent tout de 
+même certaines  limites  notamment,  au  niveau de la modéli sati on du  contexte.  De nombreux 
+modèles  ont  été  proposés  dépendamment  des  taches  à  réali ser,  mais  se  concentrent  sur  les 
+capteurs  phys iques  comme  source  principales  des  données  de  contexte  et  ignorent  les 
+informati ons  qu ' on  pourrait  acquérir  de  la  fo uille  des  diffé rents  profi ls  en  ligne  d' un 
+uti 1 i sateu r. 
+
+Dans  ce  travail ,  nous  proposons  une  architecture  middleware  pour  le  traitement  et  la 
+gestion  des  info rmations  du  contexte  pour  un  usager  mobile  en  exploitant  les  données  de 
+Facebook  comme  source  d' info rmati ons  de  contexte.  Ainsi,  nous  analysons  le  réseau 
+Facebook et  le  représentons sous forme de modèle ontologique.  Nous fusionnons, ce  modèle 
+avec  une  ontologie  du  contexte  relative  à  une  simple  application  du  domaine  médical.  Le 
+modèle obtenu  constitue notre solution  proposée  pour  l'exploitation des  données disponibles 
+sur  les  réseaux en ligne dans la modéli sation d'un  contexte médical simplifi é. 
+
+Mots-clés :  informatique  mobile,  modélisation  du  contexte,  application  dépendantes  du 
+contexte, architecture midd leware,  réseaux sociaux, modé lisation de  l' onto logie,  ontologie du 
+contexte. 
+
+CHAPITRE I 
+
+INTRODUCTION 
+
+L ' informatique  mobile  se  repose  s ur  les  appareils  portatifs  et  les  réseaux  sans  fil s.  Cette 
+
+techno logie  permet  à  1' utili sateur  d 'exécuter  des  tâches  info rm atiques  et  d ' accéder  à 
+
+l' info rmation  à  n' im porte  quel  endro it  et  n' im porte  que l  moment.  Durant  ces  derni ères 
+
+années,  l' info rmatique  mobile  a  remarquab lement  participé  à  l' amé li oration  de  la  vie 
+
+qu otidienne  des  personnes  en  leur  permetta nt  de  fa ire  différents  traitements  et  d' avo ir  un 
+
+accès  permane nt  à  l' info rm ation  indé pendamment  de  leurs  déplacements.  La  mobilité  des 
+
+utilisateurs  et des  périphériques  a  donné  naissance à un  nouveau  paradi gme  en  info rmatique 
+
+appe lé  informatique sensib le au contexte ou info rm atique dépendante du  contexte. 
+
+Le déve loppement rapide des technologies de communication mobile, en l' occurrence des 
+
+réseaux  et  appareils,  et 
+
+leur  capacité  et  perfo rm ance  a  engendré  une  augmentation 
+
+exponentie lle  de  son  utilisation.  Le  marché  des  téléphones  mobiles  intelligents  (smart 
+
+p hones)  et  des  tablettes  a  connu  une  explosion  des  ventes  dans  les  dernières  années.  Ces 
+
+machines sont devenues auj ourd ' hui  quas i ind ispensables à la vie de to us  les j ours. 
+
+Les télépho nes  intelligents disposent actuellement de me illeures capac ités de traitement et 
+
+une  meilleure  connectivité,  leur  permettant d 'exécuter des tâches  de  plus  en  plus  complexes 
+
+et d' intégrer de  nouve lles fo nctionnalités. 
+
+Les  app lications  mob iles  sont  des  logiciels  qui  offrent  à  1 'uti lisateur  différe nts  services 
+
+offerts  par  l' appl ication  comme  la  messagerie  instantanée,  la  téléphonie  IP,  la  commande à 
+
+distance  d'appareils  et  autres  traitements  dont  certains  peuvent  dépendre  du  contexte  de 
+
+l' utilisateur de  l' apparei l. 
+
+2 
+
+Une  nouvelle génération d'applications  mobiles a donc vu  le j our comme conséquence de 
+
+l'évolution  de  ces  technologies. Il  s'agit  des  app lications  mobiles  dépendantes  au  contexte. 
+
+Ces  app lications  offrent  des  services  mieux  adaptés  à  la  situation  de  l' utili sateur  et  qui 
+
+ti ennent  compte  de  certains  caractéristiques  contextuelles  telles  que  ses  préférences 
+
+personnelles, 
+
+son  environnement  physique, 
+
+son  emplacement  géographique, 
+
+ses 
+
+déplacements,  etc. 
+
+1.1  Problématique 
+
+Les  différentes  avancées  dans  le  domaine  de  l' informatique  mobile  ont  conduit  au 
+
+développement  de  systèmes  dépendants  du  contexte.  L' objectif de  ces  systèmes  étant  de 
+
+fournir  des  informations  qui  dépendent  de  l'environnement  de  l' utilisateur  afi n d'améliorer 
+
+son interaction avec  l' apparei l mobile. 
+
+De  ce fait, plusieurs architectures  ont  été proposées et divers modèles  de contexte ont  été 
+
+développés.  Cependant,  nous  pouvons  identifier  les  difficultés  suivantes  par  rappo1t  à  la 
+
+modélisation et l' utili sation des don nées du  contexte, dont: 
+
+• 
+
+• 
+
+Absence de formalisme et d' intelligence; 
+
+Non exploitation des  réseaux  soc iaux en li gne : les  modèles  de contexte existants  ne 
+
+tiennent  pas  compte  de  la  grande  quantité  d' informations  contextue lles  qui  existent 
+
+déjà dans  les  réseaux sociaux en  ligne tels que Facebook 1
+
+; 
+
+•  Non-intégration  des  modèles  d' intelligence  (en  particulier  ceux  basés  sur  les 
+
+ontologies)  dans  les  réseaux  sociaux  en  ligne  dans  la  modélisation  du  contexte:  il 
+
+n' existe  pas  de  grands  travaux  de  représentation  des  réseaux  soc iaux  sous  forme 
+
+ontologique pour des fins d' intégration dans  les  modèles de contexte; 
+
+•  Absence  de  lien en  ligne  entre  ces  informations  et  les  applications  dépendantes  du 
+
+contexte  les  plus  utiles  (telles  que  les  applications  médicales.  En  effet, 
+
+il  existe 
+
+plusieurs app lications dans  le domaine médical, mais elles  ne font pas  le lien  entre les 
+
+1  https:/ /www.facebook.com 
+
+- - - - - --
+
+informations  sur  le  patient  et  son  médecin  traitant,  lesq uelles 
+
+informations  se 
+
+trouvent déjà en  grande partie dans  les profils des réseaux sociaux comme Facebook. 
+
+3 
+
+1.2 Objectifs 
+
+Afin  de remédier aux problèmes soulevés dans  la problématique, nous  nous sommes fi xés 
+
+les objectifs su ivants pour la  réalisation de notre mémoire : 
+
+•  Création d'un modèle de contexte relatif au  domaine d' app lication, en  1 'occurrence le 
+
+domaine médical ; 
+
+•  Uti li sation des ontologies pour la représentation  du  contexte; 
+
+• 
+
+Présentation  d'une  architecture  dépendante  du  contexte  capable  de  gérer  les 
+
+informations captées et de les fournir à des applications mobiles; 
+
+•  Couplage de  l' environnement de  l' utilisateur avec des  informat ions tirées des réseau x 
+
+sociaux en  ligne comme Facebook; 
+
+•  Uti lisation dans le cadre d'une app li cation  simp le  dans  le domaine médical  qui  utilise 
+
+des données physiologiques mesurées pas  le biais de capteurs corporels; 
+
+•  Étab li ssement de  liens entre  les  profils  Facebook d ' un  utilisateur et son  médecin  en 
+
+vue de réagir aux changements des données physiologiques captées; 
+
+•  Définition  d' un  ensemble  de  réactions  dépendantes  du  contexte  physiologique  et 
+
+spatio-temporel de l'uti lisateur. (Non  réalisé) 
+
+1.3  Méthodologie 
+
+Pour  notre  travail,  nous  allons  adopter  une  méthodologie  qui  est  basée  sur 
+
+la 
+
+forma lisation  de  la notion  d'ontologie  et son  emploi  dans  le  cas d ' une  app lication  autour de 
+
+1 'env ironnement Face book.  Cette méthodologie s'articule autour des éléments suivants  : 
+
+•  Étude des infrastructures dépendantes du  contexte par une revue de  la  littérature des 
+
+systèmes déjà existants; 
+
+4 
+
+•  Conceptio n d ' un e architecture de gestio n des info rmations du  contexte inspirée des 
+
+modèles existants et des diffé rentes critiques de ces modèles; 
+
+•  Étudier la structu re du  réseau social en ligne Facebook: ses obj ets et les relations 
+
+entre eux; 
+
+•  Conceptio n d ' une onto logie qui représente  les éléments de Facebook et les re lations 
+
+entre ces éléments; 
+
+•  Cho ix d' un e onto logie de contexte de haut ni veau qui  représente  les concepts 
+
+généraux  indépendants du doma ine; 
+
+•  Extension de  l'onto logie de hau t ni veau avec  les concepts du  doma ine  cho isi. Nous 
+
+développerons notre  modèle dans  le cad re  médical; 
+
+• 
+
+Intégratio n de  l' onto logie du  domaine et de  l' ontologie de Facebook afi n d' avo ir un 
+
+modè le de contexte général ; 
+
+• 
+
+• 
+
+• 
+
+Implémentation du  modè le du  contexte avec Protégé2  comme outil  d' éd ition des 
+
+ontologies; 
+
+Défi nition des règles de raisonnement pour l' infé rence du contexte; 
+
+Simulatio n du  raisonnement onto logique et des règles d' infé rence . 
+
+1.4 Organisation du  mémoire 
+
+Notre mémoire est organisé de  la manière sui vante  : 
+
+Le  premier chapitre  présente  les  notions  de  base  de  notre  travail.  A insi,  nous  définiron s 
+
+la  notion  de  contexte  et  les  systèmes  dépendants  du  contexte.  Nous  introdui rons  les 
+
+onto logies,  comme  outil  de  représentation  des  conna issances  contextue lles.  No us 
+
+les 
+
+défi ni ro ns,  délimitero ns  leurs  domaines  d' utilisation  et déterminerons  leurs  caractéristiques, 
+
+leurs critères de conception et leur class ification; 
+
+2  htt p:// protege.sta nfo rd .edu 
+
+5 
+
+Le  chapitre  II  est  un  état  de  l' ati.  C'est  une  revue  de  littérature  des  infrastructures 
+
+dépendantes du contexte existantes. Nous donnerons plusieurs classifications poss ibles de ces 
+
+infrastructu res.  No us  présenterons  quelques  systèmes  existants  tout  en  analysant  leurs 
+
+architectures et  leurs modè les de contexte; 
+
+Dans  le  chapitre  III  nous  suggérerons  notre  propre  architecture  en  nous  basant  sur  les 
+
+exemples  exposés  dans  la  revue  la  littérature  et  l'analyse  des  avantages  et  limi tes  de  ces 
+
+systèmes; 
+
+Le chapitre IV est  un  chapitre de  réali sation. No us  parlerons des  réseaux  soc iaux en  ligne 
+
+et  des  avantages  de  leur  utilisation  pour  des  systèmes  dépendants  du  contexte.  No us 
+
+prendrons  Facebook  comme  exemple.  Nous  analyserons  son  architecture,  les  objets  qui  le 
+
+constituent  et  les  relations  entre  eux .  N ous  représenterons  cette  architecture  sous  forme 
+
+d'ontologie que nous implémenterons sur un  éditeur  d' ontologies (Protégé); 
+
+A  travers  le  chapitre  V ,  nous  expliquerons  notre  approche  pour  la  conception  d' un 
+
+modèle  de  contexte  pour  le  doma ine  médical.  Nous  intégrerons  ce  modè le  avec  l' onto logie 
+
+développée  pour  Facebook  afin  de  l'enrichir  avec  les  info rmations  disponibles  de  ce  réseau 
+
+socia l  en  ligne .  Enfin,  nous  définirons  des  règles  d ' inférence  pour  ce  modèle  de  contexte, 
+
+qu ' on testera par la suite. 
+
+CHAPITRE II 
+
+CONCEPTS DE BASE 
+
+2.1  La notion de contexte 
+
+La notion du  contexte a été utili sée en linguistique et psychologie avant d'être adoptée en 
+
+informatique,  mais a aussi une origine  lointaine et une  longue histoire en philosophie [1].  La 
+
+mobilité a donné  une  dimension importante au  contexte qui  a touché à de nombreux champs 
+
+d'application en informatique comme  1 ' informatique  ubiquitaire,  1' intelligence  artificielle,  le 
+
+traitement de  la  langue naturelle,  l' interaction personne-machine et  la sécurité  informatique, 
+
+etc. 
+
+Il  existe plusieurs définiti ons du  contexte,  qui  varient selon le domaine d' utilisation et de 
+
+l'objectif final de son application.  La définiti on courante la plus utili sée est celle de Dey et al. 
+
+[2] qui  définit  le  contexte comme étant  : 
+
+« Toute  information  qui peut être  utilisée  pour  caractériser  la ..situation  d'une 
+entité.  Une  entité  est  une  p lace,  une  personne,  un  ou  objet  qui  est  considéré 
+pertinent  à  l 'interaction  entre  un  utilisateur  et  une  application, 
+incluant 
+l 'utilisateur et l 'application eux-mêmes » [Notre traduction] . 
+
+Une  défini tion  plus  générale  a  été  proposée  par  Zainol  et  Nakata  [ 1]  qui  considère 
+
+« qu 'une  inf ormation est dite de  contexte quand elle désigne  une  situation  qui est pertinente 
+pour l'interaction entre l 'utilisateur et l 'environnement de  l'application » [Notre traduction]. 
+
+7 
+
+2.2 Les systèmes dépendants du contexte 
+
+Les  systèmes  dépendants  du  contexte  ont  été  largement  étudiés  en  informatique  et 
+
+plusieurs ont tentés de définir cette catégorie d'applications. 
+
+Dans  [3],  les  auteurs affirment qu'en  informatique dépendante du  contexte,  un  utilisateur 
+
+«doit  être  capable  d'accomplir facilement  une  action  qui  peut possiblement  inclure  une 
+
+coopération  et  une  collaboration  avec  d'autres  utilisateurs  en  utilisant  de  multiples 
+
+périphériques  et  réseaux  alors  qu'il  se  déplace  dans  l 'environnement »  [Notre  traduction]. 
+
+Les  périphériques  et  applications  doivent  alors  s'adapter  automatiquement  aux  besoins 
+
+courants de 1 ' uti 1 isateur. 
+
+Les  auteurs  de  [1]  proposent  une  défi nition  des  systèmes  sensibles  au  contexte  qUI 
+
+« permettent  aux  périphériques  d 'exploiter  leurs  informations  environnantes  et  d 'adapter 
+
+leur  comportement  selon  la  situation  actuelle  de  1 'utilisateur»  [Notre  traduction].  La 
+
+situation  actuelle  de  l' utili sateur  caractérise  donc  son  contexte.  Afin  de  pouvoir  fournir 
+
+l' information  appropriée,  et  donc  pertinente,  à  l' utilisateur,  les  systèmes  ont  besoin  de 
+
+collecter et d ' uti 1 iser des  informations de contexte. 
+
+Une  définition  plus  généraliste  a  été  proposée  dans  [2].  Les  auteurs  affirment  qu ' un 
+
+système  est  dépendant  au  contexte  «s 'il  utilise  le  contexte pour fournir  une  information 
+
+pertinente  ou/et  des  services  à  1 'utilisateur,  où  la  pertinence  dépend  de  la  tâche  de 
+
+l'utilisateur»  [Notre  traduction].  Cette définition  est  étroitement  liée  à  celle que  les  mêmes 
+
+auteurs  ont  proposée  pour  définir  le  contexte.  Nous  pouvons  remarquer  que  ces  auteurs 
+
+utilisent la « pertinence» qui  reste  une notion subjective et peu  tangible. 
+
+Les  systèmes  dépendants  du  contexte  ont  besoin  de  collecter  différentes  informations 
+
+relatives  au  contexte  de  l' utilisateur  à  partir  de  diverses  sources  afin  de  s'adapter  à  sa 
+
+situation ou  même  ses  intentions. Ces sources peuvent être distribuées et souvent n'ont  pas de 
+
+relations ou  de  liens de connexions directes entre elles. 
+
+8 
+
+Les  applications  sensibles  au  contexte,  permettent  d' améliorer  l' interaction  personne(cid:173)
+
+machine  et  n'ont  pas  beso in  d' une  intervention  humaine  pour  s'adapter  au  contexte  de 
+
+1' uti 1 isateur. 
+
+Il  est alors  très  important  de définir  et  modéliser  le contexte de  l' utilisateur  afi n d'offri r 
+
+une  information  de  contexte  aux  systèmes  dépendants  du  contexte.  Cette  démarche  nous 
+
+pousse  à  concevo ir  des  modèles  susceptibles  de  représenter  les  différe ntes  composantes  du 
+
+contexte  et  les  relations qui  existent  entre elles.  La plus prometteuse  de ces  méthodes  repose 
+
+sur  les ontologies. 
+
+2.3 Les réseaux sociaux 
+
+Les  réseaux  soc1aux  en  ligne  ont  envahi  la  toile  au  cours  de  ces  dernières  années, 
+déclenchant  un  phénomène  sans  précédent.  Ces  réseaux  comme  Twitter3ou  Facebook 
+
+grandissent  d' une  manière  exponentielle  en  termes  de  nombre  d' utilisateurs.  Ces  services 
+
+permettent aux personnes  de créer des  liens virtuels avec d'autres  utilisateurs et de maintenir 
+
+des  relations  défini ssant  un  réseau.  Vu  la  popularité  des  réseaux  soc iaux  et  le  nombre 
+
+important des  utili sateurs, il  est primordial d' étudier leurs structures et fonctionnement. 
+
+L' analyse  de  ces  réseaux  peut  nous  conduire  à  des  rés ultats  intéressants  puisqu ' ils 
+
+contiennent  un  nombre  important  de  données  personnelles  et  d' info rmations  sur 
+
+les 
+
+utilisateurs et leurs relati ons soc iales  en li gne.  L' aspect le plus intéressant des  ces  réseaux est 
+
+qu ' il s peuvent représenter un  vrai refl et des  relations sociales. Les  personnes  interconnectées 
+
+sur  un  réseau social sont souvent des  personnes qui  ont des  liens fa miliaux ou qu i fréq uentent 
+
+le même travail, éco le, association ou qui  partagent les  mêmes  pass ions ou visions politiques. 
+
+2.4 Les ontologies 
+
+Comme nous avons  basé notre travail  sur 1 ' approche onto logiq ue pour  la modélisation du 
+
+contexte,  nous  défi nissons  ci-dessous  les  ontologies  et  nous  présentons  leurs  domaines 
+
+3  https://twitte r.com/ 
+
+- -- - ------, 
+
+9 
+
+d' utilisation,  leurs  caractéri stiques,  leurs  class ifications  amst  que  les  critères  de 
+
+leur 
+
+conception. 
+
+L'origine du  terme ontologie vient de la philosophie.  Il  s' agit de l'étude de ce qui  existe: 
+
+l'être,  ses  modalités  et  ses  propriétés.  Cette  branche  est  considérée  comme  partie  de  la 
+
+métaphys ique.  Cependant, 
+
+longtemps, 
+
+la  notion  d'ontologie  a  suscité 
+
+l' intérêt  des 
+
+académiciens dans d'autres domaines tels que la lingui stique et suttout 1 ' info rmatique. 
+
+En  informatique,  une  définition  fréquente  est  celle de  Gruber [4]  qui  définit  l' ontologie 
+
+comme  étant  «une spécification  explicite  d 'une conceptualisation » [Notre traduction].  Plus 
+
+explicitement,  l'ontologie  est  la  représentation  des  obj ets  d' un  domai ne  donné  et  les 
+
+différentes relations qui  existent entre ces  obj ets. Les ontologies se basent  sur  un  vocabulaire 
+
+prédéfini  qui  rend  cette représentation formelle. 
+
+Les  ontologies  sont  alors très  importantes  pour  la  représentation des  connaissances  d' un 
+
+domaine  donné.  Elles  offrent,  en  plus,  un  langage  fo rmel.  Les  ontologies  sont  nécessaires 
+
+pour  le partage des  connaissances. 
+
+Les  ontologies  sont  utilisées  dans  diffé rents  domaines  de  l' informatique,  et  ce, 
+
+particulièrement  en intelligence artificielle (TA), où elles  permettent  de fo urnir des  structures 
+
+pour  faciliter  la représentation des  connaissances  et  le processus d' infé rence.  Les  ontologies 
+
+ont  été  utilisées  dans  l' ingénierie  de  la  connaissance,  l' apprenti ssage  automatique  et  auss i 
+
+pour  la désambiguïsation dan s  le traitement  automatique  du  langage  [5].  Les  onto logies  ont 
+
+été  auss i  utiles  dans  la  recherche  d' info rmati on  et  la  fouille  de  texte.  Dans  l' ingénierie 
+
+logicielle,  les ontologies fo urnissent des supp01ts  intéressants pour  le développement logiciel. 
+
+Avec  l'émergence  du  Web  sémantique,  les  ontologies  jouent  un  rôle  crucial  dans  ce 
+
+domaine.  Elles  permettent  de  structurer  les 
+
+informations  du  modèle  sémantique  et  de 
+
+supporter  l' interopérabilité.  Le  Web sémantique dépend  essentiell ement  de  l' intégration  des 
+
+données sémantiques qui dépendent de la dispon ibilité d' une ontologie [6] . 
+
+Une  ontologie est  constituée  généralement  de  concepts  (les  différents  objets  et  classes), 
+
+leurs attributs (propriétés, caractéristiques) et les  relations qui  les  lient. 
+
+10 
+
+Les  principales caractéri stiques des ontologies sont [7] : 
+
+•  Formelles : elles  sont  exprimées  dans  une  langue  qui  a  une  syntaxe  bien définie  et 
+
+compréhensible  par  la  machine  de  faço n  à  ce  qu 'elles  puissent  être  traitées 
+
+automatiquement  par  les  programmes  appropriés.  Les  onto logies  permettent  le 
+
+raisonnement logique et supportent des  règles  d' inférence.  Contrairement au modèle 
+
+relationnel (ER) et UML qui  sont  des  langages  semi-formels,  les  ontologies  peuvent 
+
+être directement traitées par la machine. 
+
+•  Lisibles  p ar  les  humains : autre  que  les  programmes  info rmatiques,  les  onto logies 
+
+peuvent être comprises et développées  par les  info rmaticiens. 
+
+•  Vastes  :  les  ontologies  couvrent  largement 
+
+les  champs  de  connatssance  d' un 
+
+domaine donné. 
+
+•  Partageables  :  les  ontologies  sont  relativement  fac iles  à  combiner  et  à  fusionner 
+
+même  si elles  sont  développées  séparément.  Les  onto logies  permettent  à  diffé rents 
+
+systèmes  hétérogènes de  partager diverses  info rmations. 
+
+Les  perfo rmances des  systèmes  basés sur les ontologies dépendent fo t1ement de la qualité 
+
+de  la  concepti on  du  modèle  ontologique.  Afin  d'améliorer  la  conception  de  ces  modèles, 
+
+certains  chercheurs  [8]  ont  essayé  de  mettre  en  place  un  processus  de  développement  des 
+
+ontologies ainsi que certains critères de conception. 
+
+Pour  le  processus  [8],  le  développement  des  ontologies  obéit  à  une  méthodologie 
+
+défini ssant  les  étapes et les  règles à suivre.  Les  activités énoncées sont,  dans l'ordre  : l'étude 
+
+de fai sabilité,  1 'acquisition des  connaissances,  la spécification des exigences de 1 'ontologie et 
+
+final ement  la définiti on de cycle de vie de  l'ontologie et  les  ressources  humaines  nécessaires 
+
+pour ce projet d'ontologie qu 'on appell e la phase de plan. 
+
+Concernant  les  critères  de  conception  des  ontologies,  Gruber  [4] considère  qu ' ils 
+
+dépendent de  1 'objectif fi nal de leur développement et propose  un  ensemble de critères  pour 
+
+qui  sont comme suit : 
+
+Il 
+
+•  Clarté:  les  termes  de  l'ontologie  doivent être  définis  de  manière  claire,  objective  et 
+
+complète. 
+
+C'est-à-dire,  que 
+
+la  définiti on  des 
+
+termes  do it  être  effi cacement 
+
+communiquée  par  l'onto logie  et  qu ' un  prédicat  doit  être  défini  par  des  conditions 
+
+« nécessaires et suffi santes». 
+
+•  Cohérence  :  les  onto logies  do ive nt  inférer  des  faits  qui  sont  cohérents  avec  la 
+
+définiti on 
+
+informelle  de  1' onto logie.  Les  classes  et 
+
+les  relations  du  modè le 
+
+onto logique doivent suivre un e certaine  logique. 
+
+•  Extensibilité : nous  pensons que  l'extensibilité est  l' une  des caractéristiques  maj eures 
+
+des  onto logies .  Gruber  définit  l'extensibilité  de  l'onto logie  comme  étant  le  fa it 
+
+«d 'être en mesure de définir  de  nouveaux termes pour une utilisation spéciale basée 
+
+sur  le  vocabulaire  d 'une  ontologie  existante  sans  pour  autant  avoir  recours  à  la 
+
+révision des définitions existantes » [Notre tradu ction]. 
+
+•  Biais  d'encodage  minimal :  les  onto logies  sont  souvent  partagées  par  des  sources 
+
+hétérogènes et dont les  langages de  programmation diffèrent d' un  système à  un  autre. 
+
+De  ce  fa it, et afin  qu 'elles  so ient  compréhensibles et tra itables  par tous  les  systèmes, 
+
+les 
+
+onto logies 
+
+doivent 
+
+être 
+
+déve loppées 
+
+indépend amment 
+
+des 
+
+langages 
+
+d ' implémentation. 
+
+•  Engagement ontologique  minimal : l'engagement d' une  ontologie  do it  être  minimi sé 
+
+en  se  contentant  juste  d'éno ncer  les  principes  liés  à  un  domaine  donné,  et  ce  en 
+
+défini ssant juste  les termes essentiels du  vocabul aire  et en év itant  ceux  qui  sont  hors 
+
+domaine. 
+
+Les  onto logies  sont  différentes  et  peuvent  être  c lass ifiées  selon  leurs  n1 veaux  de 
+
+généralité représentés par la F igure 2. 1 ci-dessous [9]  : 
+
+• 
+
+• 
+
+Les ontologies de  haut-niveau (top-leve! ou upper-leve! ontologies)  : représentent des 
+
+concepts  généraux  et  universels,  qui  ne  dépendent  pas  d' un  domaine  particulier.  Par 
+
+exemp le,  une date. 
+
+Les ontologies du domaine : sont des onto logies de mo ind re p01tée que  les ontologies 
+
+de  haut-niveau.  Elles  spéc ialisent  les  onto logies  de  haut-n iveau  en  représentant  des 
+
+concepts  liés  à  un  domaine donné comme  l' ontologie pour  les  soins de  santé (health 
+
+care domain ontology). 
+
+12 
+
+•  Les  ontologies  de  tâche:  elles  spéciali sent  aussi  les  ontologies  de  haut-niveau  en 
+
+décri vant une tâche ou un  événement générique comme la vente. 
+
+•  Les  ontologies  d'application:  sont plus restreintes  que les  ontologies  du  domaine ou 
+
+de  tâche  et  décrivent  des  concepts qui  sont  propres  d' un  domaine  mais aussi d' une 
+
+tâche particulière. 
+
+Ontologies  de  haut-niveau 
+
+Ontologies du  domaine 
+
+Ontologie de tache 
+
+Ontologie d'a pplication 
+
+Figure 2.1  : Catégorisation de  Guarino pour les onto log ies [9]. 
+
+2.5 Langages et outils de conception des  ontologies 
+
+Il  existe  plusieurs 
+Description Framework )4
+
+langages  pour  la  défini tion  des  ontologies  dont:  RDF  (Resource 
+
+,  RDFS (RDF Schema )5
+
+,  et OWL (Web  Ontology Language t 
+
+4  http://www. w3 .org/ RDF/ 
+5  http://www. w3 .org/TR/rdf-schema/ 
+6  http ://www.w3 .org/TR/ow l-features/ 
+
+13 
+
+Dans  notre  projet,  nous avons  choisi  de travailler avec  le  langage  OWL  pour  les  différents 
+
+avantages qu ' il  nous fourni  [10]: 
+
+•  OWL est le langage  le plus express if parmi  les autres énoncés  précédemment; 
+
+•  OWL  nous  permet de  raj outer des  contraintes  de  cardinalités sur  les  classes, ce  qui 
+
+n' est pas  possible avec RDF, RDFs et RDFa.; 
+
+•  OWL  supporte  la  réutilisation,  le  mappage  (fusion,  alignement,  intégration)  et 
+
+l' interopérabilité de  l' ontologie. Ce  qui  est 
+
+important  dans  notre cas,  pui sque  nous 
+
+envisageons d' enrichir une ontologie existante avec celle que nous avons développés; 
+
+• 
+
+JI  existe  divers  outils  disponibles  pour  l' intégration  des  ontologies  OWL  dans  le 
+
+développement des applications logicie lles tel  que Protégé. 
+
+Pour  l'outil  d' éditi on  des  ontologies,  nous  avons  choisi  de  travailler  avec  le  logiciel 
+
+Protégé qui  est  un  éditeur  libre  déve loppé en Java par  l'Université de Stanford et  qui  est  un 
+
+des  plus populaires dans le domaine. 
+
+Nous  avons  choisi  cet  outil  pour  son  extensibilité,  sa  flexibilité  et  la  convivialité  des 
+
+interfaces  d' utilisation.  De  plus,  il  offre  la  possibilité  de  le  combiner  avec  un  moteur 
+
+d' inférence. 
+
+CHAPITRE III 
+
+ÉTAT DE L'ART 
+
+3.1  Introduction 
+
+La  mobilité  a  pri s  une  place  très  importante  dans  la  recherche  en  info rmatique,  et 
+
+les 
+
+systèmes  Dépendants  du  contexte  suscitent  désormais  un 
+
+intérêt  maj eur  au  sein  de  la 
+
+communauté des chercheurs. 
+
+Durant  la  dernière  décennie,  de  nombreuses  infrastructures  dépendantes  du  contexte  ont 
+
+été  déve loppées  pour  gérer  ces  systèmes.  Cependant,  ces  infrastructures  diffè rent  beaucoup 
+
+dans  leurs architectures et  leurs  implémentations.  E lles dé pendent des exigences des systèmes 
+
+et du  processus d'acqui sition, de transformation et de traitement de  l' info rmation de contexte. 
+
+Ces  systèmes  sont  différents  non  seul ement  dans  1' archi tecture,  qui  est  généralement 
+
+organi sée en couches,  ma is aussi du modèle du  contexte adopté. 
+
+En  se  basant  sur  la  méthode  d'acqui sition  de  l' information,  on  peut  distinguer  trois 
+
+approches  [1 1]:  l 'acquisition directe, 
+
+l' utilisation du  middleware et  l' utilisation des serveurs 
+
+de  contexte : 
+
+a)  L' acquisition  directe  consiste  à  récupérer  directement 
+
+les 
+
+info rmations  des 
+
+capteurs  de  la  pa1t  du  client  mobile. Les  pilotes des capteurs  sont  installés  dans  le 
+
+client et les capte urs sont souvent  intégrés dans  le périphérique. 
+
+b)  L'approche  du  middleware  est  la  plus  souvent  uti lisée.  E lle  se  base  sur  une 
+
+architecture  organisée  en  couches  et  permet 
+
+l'uti lisation  des  méthodes 
+
+d'encapsulation.  Les  avantages de  cette approche  sont certainement  la  gestion  de 
+
+l' hétérogéné ité de l' information et l'extensibilité fac ile du  système. 
+
+15 
+
+c)  L'utilisation  du  serveur de  contexte étend  l' approche du  middleware et  permet  au 
+
+client  d'accéder  à  des  sources  de  données  distantes  et di stribuées.  Cette  structure 
+
+permet  d'all éger  la  charge  du  traitement  de  l'appare il  mobile  et  d'avoir  de 
+
+meilleures performances pour la gestion  du contexte. 
+
+D ' un  autre  côté,  en  se  basant  sur  la  coordination  des  composantes  et des  processus dans 
+
+ces applications, on peut distinguer deux approches différe ntes:  le  modèle dit de vvidget, et  le 
+
+modèle  de blackboard  [12]. 
+
+Le  modèle  widget  permet  aux applications  d' accéder  aux  informations  du  contexte  par 
+
+une  requête directe à  un  w idget  particulier qui  constitue  un  intermédiaire entre  une sou rce de 
+
+données et une  application. Un  widget est « une petite  application  multimédia  interactive qui 
+
+peut  être  trouvée  dans  les  appareils  mobiles »  [13]  [Notre  traduction].  Ces  app lications 
+
+doivent  s' inscrire  auprès  du  widget  pour  pouvoir  accéder  à  ces  infor mations.  Cependant, 
+
+l'i nscription  et  la  dés inscription  des  applications  auprès  des  w idgets  est  mo in s  robuste  et 
+
+mo ins fl exible en cas de changement rapide du  contexte. 
+
+Le  modèle  blackboard permet aux  applications  d ' accéder  aux  info rmations  du  contexte 
+
+pas  le  biais d' une  inscription à  un  é lément central isé qui  est le  blackboard.  Cet é lément gère 
+
+le  traitement  interne  des  informations  et  notifie  l' application  quand  un  événement  prédéfi ni 
+
+se  produit.  Le  blackboard  est  un  modèle  dont  1 'architecture  est  centrée  sur  les  données. 
+
+L ' avantage  de  ce  modèle  est  la  facilité  d 'aj outer  ou  échanger  des  capteurs  ainsi  qu ' une 
+
+confi guration fl exible pour les changements dynamiques . 
+
+Les  infrastructures différèrent aussi  par  leur modèle de contexte.  Le  modèle  du  contexte 
+
+est  une  composante  maj eure  des  systèmes dépendants du  contexte. E lle  permet de  modé li ser, 
+
+définir et interpréter le  contexte. On peut les classer en  trois catégories [ 14]:  1 'approche axée 
+
+sur l 'application, 1 'approche axée sur le modèle et 1 'approche basée sur les ontologies : 
+
+16 
+
+a)  Le  modèle  axé  sur  1 'application  modéli se 
+
+le  contexte  pour  des  applications 
+
+spécifi ques.  C'est-à-dire,  que  le  contexte est  représenté  par  un  modèle  uniforme qui 
+
+n'est  pas  extensible  ou  applicable  par  d'autres  ressources.  De  ce  fait,  ce  modèle 
+
+souffre d' une fa ible express ivité et offre un  fo rmali sme limité. 
+
+b)  L'approche  basée  sur  le  modèle  modélise  le  contexte  en  le  représentant  par  des 
+
+modèles  conceptuels  graphiques  ou  orientés-obj et  tels  que 
+
+le  modèle  entité(cid:173)
+
+assoc iation  ou  UML.  Le  modèle  du  contexte  est  représenté  en  utilisant  des 
+
+diagrammes et des  bases de données  relationnelles. 
+
+c)  L'approche basée  sur les  ontologies  utilise  les  ontologies  pour  la représentati on du 
+
+contexte  et  pour  le  partage  des  connaissances  entre  les  sources  di stribuées  de 
+
+données.  Les  ontologies  défini ssent  les  concepts  et  les  relati ons  entre  eux.  Elles 
+
+offrent une alternative  très  intéressante pour  la modélisation du  contexte  grâce  à leur 
+
+fo1ie expressivité,  leur  extensibilité  faci le  et  les  techniques  de  raisonnement  qu' on 
+
+peut  y  appliquer.  Les  ontologies  permettent  aussi  de  surpasser  le  problème 
+
+d' hétérogénéité  des  sources  d' information.  Ces  modèles  utilisent  le  langage  OWL 
+(Web  Ontpolgy Language)7  pour  la définiti on des onto logies. 
+
+3.2 Quelques modèles existants 
+
+Nous énumérons ci-dessous certaines  de ces architectures. 
+
+3.2.1  Le Service-Oriented Context-Aware Middleware (SOCAM) 1151 
+
+SOCAM  est  une  architecture  introduite  qui  fo urnit  les  info rmations  de  contexte  aux 
+
+services  mobiles  dépendants  du  contexte.  SOCAM est une architecture  en  midd leware qui se 
+
+base  sur  l' approche  orientée  services.  Cette  approche  permet  aux  applications  d' intégrer 
+
+plusieurs services en ligne pour  leurs  doma ines  spéc ifi ques de contexte. 
+
+Le  midd leware  offre  la  possibi lité  d' intégrer  et  de  réuti liser  aisément  des  composantes 
+
+dans  le  système  telles  que  des  nouveaux  capteurs.  Il  permet  aussi  de  faire  abstraction  de 
+
+7 www.w3.orgfi'R/owl-features 
+
+17 
+
+1 ' hétérogénéité des  sources  de  données. Ce système consiste en  des  composantes  organisées 
+
+en  modules qui  permettent d' effectuer des tâches spécifiques.  Ces modules communiquent et 
+
+interagissent  entre  eux  et  permettent  d'acquérir  les  informations  du  contexte  à  partir  de 
+
+différentes  sources  distribuées,  de  traiter et d' inférer  le  contexte en  se basant sur  un  module 
+
+de  raisonnement et de  livrer  l' information  du  contexte aux  services  du  contexte  locali sés  en 
+
+haut de  l' architecture. 
+
+Context-aware application 
+
+,_ 
+Cl>r---- - -- - - - (  
+Ë 
+~--+---c. 
+,_ 
+Cl) ;: ~============::::: 
+
+Context reasoner 
+
+Data  flow 
+
+• 
+
+1111 
+-..·······--·····-..... 
+
+Internai context provider 
+
+Figure 3.1  :  Architecture SOCAM  [15, fig  1] 
+
+L'architecture  est  organisée  en  trois  couches (F igure  3.1)  :  la  couche  de  captage  du 
+
+contexte,  le middleware et la couche des applications dépendantes du contexte : 
+
+La couche de captage est constituée des différents capteurs utilisés pour saisir les données 
+
+du  contexte.  Ces  capteurs  peuvent  être  physiques  comme  un  GPS  ou  un  détecteur  de 
+
+mouvement, ou virtuels comme un  service Web. 
+
+a)  La  couche  Middleware  est  constituée  des  différents  modules.  Les  fournisseurs  du 
+
+contexte  récupèrent  les  données  de  différentes  sources  de  contexte  constituées  des 
+
+capteurs  physiques  et  des  capteurs  virtuels.  Le fournisseur  du  contexte  s'enregistre 
+
+alors dans  un  registre de  services afin  d'être  intégré à  la plateforme. Les fournisseurs 
+
+du  contexte  peuvent  être  externes  ou 
+
+internes.  Ils  permettent  notamment  de 
+
+représenter  les  données  capturées  sous  forme  de  description  OWL.  L ' interprétateur 
+
+18 
+
+du contexte est un  autre module du  système qui  permet de traiter  le  contexte  à  l'aide 
+
+d ' un  raisonnement logique. La fonction de ce module est d'inférer le contexte de haut 
+
+niveau à partir des informations de contexte de  bas niveau comme la géo-locali sation. 
+
+Ce module est composé d' un  raisonneur et une base de  connaissance du contexte. Le 
+
+raisonneur est constitué des  règles d' inférence qui  sont prédéfinies  par  les experts du 
+
+domaine en  forme de  logique de premier ordre. La base de  connaissances du contexte 
+
+contient  les  ontologies  du  contexte  et  leurs  instances.  Le  middleware  contient  aussi 
+
+une  base  de  données  du  contexte  où  sont  stockés  les  ontologies  du  contexte  et  un 
+
+historique  des  contextes  inférés  précédemment.  Le  service  de  localisation  des 
+
+services est le  module qui  permet aux clients de  localiser  les fournisseurs du  contexte 
+
+et les interprétateurs du contexte pour un  domaine donné. 
+
+b)  La  couche  supérieure  est  la  couche  d'applications  dépendantes  du  contexte.  Elle 
+
+contient  des  serveurs  d'applications  dépendantes  du  contexte  qui  demandent  les 
+
+informations du contexte en  s' inscrivant au service de  localisation des services. 
+
+Figure 3.2: Ontologie du  modèle de  contexte SOCAM [15, fig 2] 
+
+19 
+
+Pour  le  modèle  du  contexte  (Figure  3.2),  les  auteurs  adoptent  l'approche  basée  sur  les 
+
+ontologies  qui  permet  une  description  sémantique  du  contexte.  Le  lat1gage  utilisé  pour  la 
+
+description  des  ontologies  est  OWL.  La  conception  des  ontologies  est  fa ite  d' une  manière 
+
+hiérarchique sur  deux niveaux qui  rédu it la taille et la complexité de l'ontologie. L'ontologie 
+
+de  haut  niveau  définit  les  concepts  généraux tels  que  : personne,  localisation,  activité  et 
+
+entité computationnelle.  L'ontologie spécifique au domaine est  un  ensembl e d'onto logies  de 
+
+bas  niveau  qui  représentent  les  concepts  généraux  dans  chaque  sous-domaine  et  leurs 
+
+propriétés. 
+
+Deux  ontologies  de domaine  spécifique ont  été développées  : maison  avec  89  classes  et 
+
+156  propriétés  et véhicule avec  32  classes  et  57  propriétés. Ce  système fo urnit des  résultats 
+
+acceptables  en termes  de  vitesse du  traitement et du  nombre de requêtes  tra itées. Cependant, 
+
+les  performances  de  1 ' interprétateur  avec 
+
+le  raisonnement  ontologique  sont  moins 
+
+intéressantes qu 'avec des  règles  prédéfinies  par le déve loppeur.  Le raisonnement onto logique 
+
+devrait être allégé afin  de permettre à la plateforme de fournir de meilleurs résultats. 
+
+3.2.2 Le modèle Context Broker Architecture (CoBrA) 1101 
+
+CoBrA est une architecture centralisée basée sur  l'agent.  Un agent est une entité physique 
+
+ou virtuelle qui  accompli  des taches  spécifiques  en agissant  dans un  envi ro nnement : détecter 
+
+de états, communiquer avec d'autres agents dans un  environnement distribué, etc. [1 6]. 
+
+Cette  approche  permet à  divers agents  di stribués  d' être  regroupés  sous  un  même  modèle  de 
+
+contexte qui  leur  permet de partager leurs  informations via une infrastructure (F igure 3 .3). 
+
+L'architecture contient les éléments suivants  : 
+
+•  L'agent  de  contexte  « Context  broker »  est  l'élément  central  de  l'architecture,  il 
+
+permet de gérer le madel de contexte pour  les diffé rents  agents  et périphériques qui  y 
+
+sont connectés.  Chaque  agent  permet d' obtenir des  informations du  contexte  à partir 
+
+des  capteurs  ainsi que  d'autres  agents,  et  les  transformer  en  un  modèle  de contexte 
+
+forme l afi n qu' ils  puissent être  partagés  par  tous  les  agents. Les  agents peuvent être 
+
+des  applications  mobiles.  L' agent  de  contexte  est  composé  de  quatre  mod ules 
+
+pnnc1paux:  la  base  de  connaissance  du  contexte,  le  module  de  raisonnement,  le 
+
+module d 'acquisition et le module de  gestion de  la confidentialité. 
+
+20 
+
+Information Servers 
+(Exchange Server, iCal, 
+
+YahooGroups,  etc.) 
+
+Semantic Web & 
+
+Web  Services 
+
+(RDF,  DAML+OIL & OWL) 
+
+:::, 
+
+r--
+
+Data base 
+(MySQL) 
+
+Context-Aware  Deviees 
+
+Context-Aware Agents 
+
+am· 0 Biuetooth 
+
+Context Broker 
+
+Context 
+
+koowledge  bose ~ Context 
+
+Reosoni ng  Engi.ne 
+
+Ethernet 
+
+Contcxt 
+
+Acqoi. .s'i lon  Module 
+
+>C( 
+
+... 
+#} 
+
+1 • 
+
+·. 
+
+Smart Tag  Sensors 
+
+(Radio  Frequency  Identification) 
+
+Environ ment Sensors 
+
+(Xanboo & XlO  technology) 
+
+~ 
+.:1 
+~ 
+Deviee & Gadget Sensors 
+(Java  Ring,  SmartCard  etc.) 
+
+Figure 3.3: Architecture CoBrA  (10, fig!]. 
+
+•  La  base  de  connaissance  du  contexte  contient  le  modè le  de  contexte  de  chaque 
+
+domaine  et  comporte  l' ontologie  du  domaine,  les  heuristiques  du  domaine 
+
+(les 
+
+entités  clés  du  domaine  et  les  relations  entre  elles)  et  la  politique  de  confidentialité 
+
+des agents. 
+
+•  L'ontologie du  domaine  est  un  ensemble  de  concepts  et  de  relations  entre  eux  dans 
+
+un  domaine  spécifié.  Les  heuristiques  du  domaine  servent  à  résoudre  les  problèmes 
+
+de  cohérence. La politique de  confidentialité  des agents  définit  les  informations  qui 
+
+peuvent être partagées par chaque agent. 
+
+•  La  base  des  connaissances  du  contexte  est  reliée  au  module  de  raisonnement, 
+
+responsable  de  l' inférence  de  l'information  du  contexte  et  composé  de  trois  sous 
+
+2 1 
+
+modul es  qui  sont  le module de raisonnement du contexte,  le module de raisonnement 
+
+de l 'ontologie et le module du  maintien de la connaissance. 
+
+•  Le  module  de  raisonnement  du  contexte  est  responsable  du  raisonnement  sur  un 
+
+domaine donné à travers des  règles  logiques d' inférence. Le module de  raisonnement 
+
+de l 'ontologie agit par rapport aux contraintes sur  les  relations entre les concepts dans 
+
+l'ontologie  du  domaine.  Le  module  de  maintien  de 
+
+la  connaissance  vérifie 
+
+l' uniformité des  informations de la base de connaissance du  contexte. 
+
+•  Le  module  d'acquisition  de  contexte  est  le  middleware  qui  permet  de  récupérer  les 
+
+informations de contexte de bas niveau à partir des  divers capteurs.  Ce  module a une 
+
+architecture  en  deux  couches :  les  capteurs  du  contexte  et  1' interprétateur  du 
+
+contexte.  Les  capteurs,  physiques  ou  viJt uels,  fourni ssent 
+
+les 
+
+informations  du 
+
+contexte.  L' interprétateur du  contexte récupère ces  informations et les  interprète. 
+
+•  Le  module  de  gestion  de la confidentialité est  responsable  de  la  communication du 
+
+Context Broker  avec  les  autres  agents en défini ssant  des  protoco les  de transmi ss ion 
+
+appropriés. 
+
+•  Pour  le  modèle  de  contexte,  CoBrA se  base  sur  l'approche  axée  sur  les  ontologies . 
+
+CoBrA-Ont  [1 7]  est  un  ensemble  d' ontologies  exprimées  dans  le  langage  OWL  et 
+
+qui  définissent  les  concepts  et  les  relations  qui  les  lient  dans chaque  domaine.  Cet 
+
+ensemble  contient  41  classes  et  36  propriétés  qui  sont  catégorisées  selon  des 
+
+domaines  distincts :  places,  agents,  contexte  de  locali sation  des  agents  et  contexte 
+
+d'activité des agents. 
+
+CoBrA  est une  infrastructure intéressante  mais qui  a certaines  limites.  L'architecture est 
+
+composée de plusieurs modules comportant eux-mêmes d'autres  sous-modul es, ce qui  ralentit 
+
+la  vitesse  de  traitement  de  1' info rmation  [ 17].  De  plus,  certains  modules  comme  les 
+
+heuristiques  du  domaine et le module de maintien de  la connaissance jouent  le même rôle de 
+
+maintien  de  la  cohérence  de  la  base  de  con naissances  du  contexte.  Pour  le  modèle  du 
+
+contexte l'ontologie développée, CoBrA-ONT n'est pas assez élaborée pour couvrir de vastes 
+
+contextes.  CoBrA  offre  cependant  un  haut  niveau  de  confidentialité  et  de  sécurité  pour 
+
+l'échange des  informations grâce au  module de  politique de confidentialité des agents . 
+
+22 
+
+3.2.3 Context-Awarness Sub-Structure (CASS)  [18] 
+
+CASS est  un  middleware (Figure 3.4) orienté vers  le serveur.  Il  est structuré en  différents 
+
+modules:  l' interprétateur, le  récupérateur du contexte,  le  module des  règles,  l'écouteur des 
+
+capteurs et la base de  données. 
+
+Hand·held computer 
+
+~to b ileC ontextChann e~ 
+
+1  LocationFinde~ 
+
+1  Cha n1gelistener 1 
+
+"-
+_,. 
+
+/ 
+...... 
+
+CASS  lliddleware 
+
+Interpreter 
+
+conte xtRetriev er 
+
+RuleEngine 
+
+Sens orliste n er 
+
+§ 
+
+Data base 
+
+Sens or  node 
+
+/ ..... 
+
+Sens or 
+
+Sens or 
+
+1 
+
+1 
+
+1 
+
+1 
+
+Figure 3.4 : Architecture CASS  [ 18]. 
+
+La  conception  du  système  est  faite  selon  un  modèle  UML  (Figure  3 .5)  où  les  modules 
+
+sont représentés  sous  forme  de classes.  L'écouteur des  capteurs  reçoit  les  mises à jour de  la 
+
+pa1t des  nœuds  de capteurs et enregistre  les  informations  du  contexte  reçues  dans  la  base  de 
+
+données.  L'écouteur des  capteurs  est relié à  l' écouteur des  changements  qui  est responsable 
+
+de  communiquer aux  périphériques  le  changement de  contexte.  Le récupérateur du  contexte 
+
+récupère  les données stockées dans la base de données. 
+
+SensorListener  1 
+
+1  Conte:x.tRetriever  1 
+
+1  LocationFinder 1 
+
+1  Interpreter  1 
+
+~ ..... l ..... ,~ 
+1 Eo~Oy ~ 1 RoleEogioe 1 
+1  Person  1  J , ..  ,
+
+1  Sensor  1 
+
+f; ').L'  4 
+
+1 ~bi.Cootextehaooel
+
+23 
+
+l 
+
+RetrievaiEng ine  1 
+
+1  Action Eng ine  1 
+
+~htSensor 1 
+
+1 TaggingEngine  J 
+
+1  TempSensor  1 
+
+SoundSensor  1 
+
+Figure 3.5: Modè le de  contexte CASS [ 18]. 
+
+Le  système  uti li se  une  base  de  données  relationnelle  où  sont  stockées  le  contexte,  les 
+
+données util isateurs, les connaissances du domaine et les  règles d' inférence. 
+
+L' infé rence du contexte dans l' infrastructure  CASS se fa it à l'aide du  module d'inférence 
+
+et  la base de  connaissances.  Le  module d 'inférence  uti li se  une technique de  chaînage  avant. 
+
+Cette technique d' inte lligence artific ielle consiste  à  utili ser des faits  pour  en inférer d'autres, 
+
+ceux-ci  sont  à  leur  to ur  utilisés  pour  dédui re  de  nouvelles  conclu sions.  La  base  de 
+
+connaissances  contient  les  règles de production.  Ell e est stockée  sous  formes  de  tab les  dans 
+
+la base de don nées relationnelle. 
+
+Les  li mites  de  ce  système  consistent  dans  le  modèle  orienté-objet  pour  la  gestion  du 
+
+contexte. Ce  modèle n'est pas fac ilement extensible et offre une expressivité  lim itée.  De plus, 
+
+l'accès  aux  bases  de  données  relationnelles  s' avère  couteux  en  termes  de  temps;  ce  qu i 
+
+influence négativement les performances de  1' infrastructure. 
+
+3.2.4 Le projet Hydrogène [19] 
+
+Ce  projet  est  une  plateforme  de  contexte  disposée  en  couches.  Afin  de  séparer  les 
+
+traitements et les tâches effectués,  une architecture (Figure 2.6) sur 3  niveaux a été proposée : 
+
+couche d 'adaptation, couche de gestion et couche application. 
+
+24 
+
+-----~~---~------~----------------
+
+Application 
+
+Application Layer 
+
+Management Layer 
+
+Adaptor Layer 
+
+ttl 
+
+Figure 3.6 : Architecture Hydrogène [ 19]. 
+
+La couche d'adaptation  récupère  les  données  du  contexte à  partir des  différents  capteurs 
+
+organisés par domaine:  localisation (position),  utilisateur, réseau, etc. 
+
+La couche de gestion  contient  la composante principale de  l'architecture appelée serveur 
+
+de  contexte.  Le  serveur  de  contexte  permet  aux  app lications  de  s' inscrire  aux  différentes 
+
+sources  de  contexte. 
+
+Il  enregistre  toutes  les  données  du  contexte  récupérées  de  la  couche 
+
+d ' adaptation.  Cette  couche  utilise  une  communication  pair  à  pair  pour  s' approvisionner  et 
+
+partager les  informations du  contexte. 
+
+La  couche  app lication  contient  les  applications  qui  sont  inscrites  dans  l' infrastructure 
+
+pour acquérir les  informations du  contexte.  L'application peut s'inscrire au  contexte de  deux 
+
+façons  possibles  : synchrone ou asynchrone. 
+
+25 
+
+Context 
+
+LocaiContext 
+
+Re mot eConte xt 
+
+O .. n 
+
+ContextObject 
+
+TimeConte xt 
+
+DeviceConte xt 
+
+NetworkContext 
+
+1 
+
+LocationContext 
+
+· -············-·········-···---·  . . .  ---
+
+UserContext 
+
+1
+
+F igure 3.7: Modèle de  contexte Hydrogène [19]. 
+
+Pour le  modèle de contexte, cette infrastructure se repose sur un  modèle entité-association 
+
+(Figure  3 .7)  qui  distingue  entre  le  contexte  local  et  le  contexte  à  distance.  Ce  contexte 
+
+(c lasse) est constitué du contexte local  et du contexte à distance, qui  contiennent des objets de 
+
+contexte.  Ces  objets  de  contexte  sont  une  spécialisation  des  cinq  types  d' informations  de 
+
+contexte  fournies  par 
+
+les  capteurs: 
+
+la  date, 
+
+l'emplacement, 
+
+le  périphérique  (type, 
+
+caractéristiques,  etc.),  l'utilisateur  et  le  réseau.  Cette  composante  permet  la  conversion  des 
+
+informations de contexte en dom1ées XML. 
+
+Les  avantages  de  cette  plateforme  sont  la  structure en  couches  qui  permet de séparer  les 
+
+tâches  comme  l'accès  aux  données  et  la  récupération  des  données  par  l'application.  La 
+
+couche  de  gestion  permet  d'éviter  l'accès  multiple  à  une  seule  source  de  données  par  les 
+
+26 
+
+applications.  La localisation de  la structure  dans l'appareil  mobile lui-même permet d'év iter 
+
+les  problèmes  de déconnection . La communication pair  à pair permet d'év iter le recours à un 
+
+serveur  central.  Les  limites  de  cette  architecture  résident  dans  son  incapacité  à  enregistrer 
+
+1 ' historique des  contextes; ce qui  ne permet  pas  le recours à des algorithmes  d'apprentissage 
+
+afin  d'améliorer  le  traitement  du  contexte.  Le  modèle  entité-association  adopté  est  moins 
+
+expressif que le modèle ontologique. 
+
+3.2.5 Architecture Smart-M3 [20] 
+
+C' est une infrastructure pour  les  espaces  intelligents de code source  libre de  Noki a.  Cette 
+
+architecture  repose  sur  le  modèle  blackboard  et  un  madel de  contexte  basé  sur  l'approche 
+
+ontologique.  L'élément  central  de  cette  architecture  est  la  composante  de  courtage 
+
+sémantique  (Sematic 
+
+Information  Broker  ou  SIE ).  Les  processeurs  de  connaissance 
+
+(Knowledge Processor ou KP) , quant à eux, accèdent et traitent  l' informati on. 
+
+A pp licatio n 
+
+SIB 
+
+Sen sor KPs 
+P rofile K Ps 
+D eviee  1-<:Ps 
+
+Ca len dar K Ps 
+GPS K Ps 
+We b  seNice KPs 
+
+Context Provi ders 
+
+Figure 3.8 : Architecture Smart-3  [20]. 
+
+L ' architecture (Figure 3.8) est composée des éléments suivants : 
+
+27 
+
+a)  Fournisseurs  de  contexte  (co ntext  prov ider):  donnent  les  info rmatio ns  atomiques 
+
+concernant  le contexte de  l' utilisateur  qui  peuvent être des données de  bas niveau ou 
+
+des données du  service Web. 
+
+b)  Interpréteur  du  type  des  donnés  de  contexte :  les  données  brutes  issues  de  di verses 
+
+sources hétérogènes doivent être converties en données sémantiques  qui  peuvent être 
+
+utilisées par les différents serv ices. 
+
+c)  Raisonneur  et  interpréteur des  règles  du  contexte : cette  parti e  est  chargée  d ' infé rer 
+
+de  nouvelles données de haut ni veau à  partir des informations atomiques du  contexte. 
+
+Ces règles  sont défini es par les déve loppe urs de processeurs d ' information. 
+
+d)  Ontologies  :  représentent  les  données 
+
+issues  des  fou rn isse urs  de  contexte  et  cell e 
+
+inférées  par le raisonneur. 
+
+e)  Règles  d 'inf érence :  sont  nécessaires  au  processus  d' inférence  du  ra isonneur.  Ces 
+
+règles  se  basent  sur  la  logique  et  défini ssent  la  manière  d' infére r  l'acti vité  de 
+
+l' utilisateur  à  partir  des  info rmations  du  contexte  données  par  le  fo urni sseur  du 
+
+contexte (KP). 
+
+Le modè le de contexte (Figure 3 .9) de cette infrastructure est  basé sur  les o ntologies.  Le 
+
+contexte de l' utilisateur  peut être divisé en deux parties: contexte atomique et contexte inféré. 
+
+28 
+
+Domain 
+lnclepeodant 
+Context 
+Ontology 
+
+0 
+
+0 
+
+0 
+
+• 
+
+0 
+
+0 
+
+0 
+
+0 
+
+-------------------.---------- - --~---------~--------
+
+0 
+
+0 
+
+• 
+
+Home  automation domain 
+
+. ' 
+..... 
+' 
+Offiœ domaa'\ 
+'  : ; 
+Health domain----;:.·  ·  • 
+Other domains 
+
+:  :  ·" "  • 
+
+: ~ .. ~ ' . ~  ~ . 
+
+'• 
+
+' 
+
+0 
+
+0 
+
+Domain 
+Specifie 
+Ontology 
+
+:--4 - ~ . 
+
+Figure 3.9 : Modèle d'ontologie Smart-3  [20] 
+
+Le contexte atomique est représenté par les données du contexte obtenues directement des 
+
+fournisseurs  d' informations  du  contexte  (date,  localisation,  appareil).  Le  contexte  inféré est 
+
+composé 
+
+des 
+
+informations  déduites  des  données  de  contexte  (activité,  occupation, 
+
+association). 
+
+Le  modèle  ontologique  est divisé  en  deux  pat1ies  :  les  ontologies  de  haut  niveau  et  les 
+
+ontologies  du  domaine.  Le  contexte  de  l' utilisateur  est  représenté  par  six  concepts:  temps, 
+
+emplacement, périphérique, activité, occupation et association. 
+
+L'architecture  Smart-M3  en  s'appuyant  sur  le  modèle  blackboard,  est 
+
+flexible  aux 
+
+changements dynamiques de  l'environnement de  l' utilisateur. Le modèle de contexte permet 
+
+de  supporter  les  sources  d' information  hétérogènes  et  offre  l' extensibilité  et  flexibilité  du 
+
+système  ainsi  qu'une  forte  expressiv ité.  Les  limites  de  ce  modèle  consistent au  maintien  de 
+
+cohérence de  la SIB. 
+
+CHAPITRE IV 
+
+ARCHITECTURE 
+
+4.1 Introduction 
+
+En  vue  d'offrir  une  information  pertinente  et  adaptée  au  changement  dynamique  de 
+
+l' environnement de  l' utilisateur,  les  applications  mobiles  sollicitent des  services sensibles  au 
+
+contexte qui  suscitent un  grand  intérêt de  recherche. 
+
+Un  service  dépendant  du  contexte  est  capable  d'aller  chercher  et  acquérir  des 
+
+informations  de  différentes  sources,  de  les  interpréter et  en  inférer  le  contexte  courant  d' un 
+
+utilisateur.  Pour  arriver  à  cet  objectif,  nous  devons  développer  une  infrastructure  complète 
+
+qui  permet de faire  les différentes tâches d' une  manière efficace et rapide. 
+
+La comp lexité de  ces traitements  et les  différentes  étapes  nécessaires  à  l'obtention  d'une 
+
+information  du  contexte,  nous  mènent  à  modé li ser  une  architecture  contenant  de  différents 
+
+services et composantes qui  communiquent et interagissent entre eux. 
+
+Par  conséquent,  nous  proposons  un  middleware  qui  inclut  des  modules  indépendants 
+
+capables d'acquérir des  informations de différentes  sources  et de  les  traiter afin  d' en  déduire 
+
+le contexte et le fournir aux serveurs appropriés. 
+
+Dans  ce  chapitre, nous  présentons  le  middleware  proposé. Nous  exposons  ces  différents 
+
+modules en précisant leurs rôles respectifs et en  détai llant leur fonctionnent. 
+
+4.2 Architecture proposée 
+
+Nous présentons  une  infrastructure  inspirée  des  concepts  présentés  dans  l'état de  l'art  et 
+
+composée  de  tro is  principaux  niveaux  (F igure  4. 1 ).  La  couche  capteur  qui  contient  les 
+
+capteurs  susceptibles  de  fo urnir  des  informations  du  contexte.  La  couche  middl eware  est 
+
+30 
+
+responsable de  la récupération et du  traitement  des  informations. Et enfin,  la couche service 
+
+de contexte qui  so llicitent  le middleware afin  d'obtenir des  informations du  contexte. 
+
+Serviœs de ~ntex!e  .  e· . ' 
+.  6 
+
+c.\ 
+CJ 
+
+$f1 
+
+~liddleware 
+
+C;()uçhe èle gestion 
+
+Module d'inférence 
+
+(""· - R-ai_$00_ 00':_.J_r _ ) 
+
+a 
+
+6.,5~ <!e 
+
+OOnM eS él!l 
+001\lfill(lti)S 
+
+Cap!eu.1fs 
+
+F igure 4.1  : Architecture de notre système dépendant au contexte proposé. 
+
+3 1 
+
+4.2.1  La couche capteurs 
+
+C'est  la  couche  qui  contient  toutes  les  sources  de  données  qu1  peuvent  fo urnir  des 
+
+informations utiles pour le contexte. 
+
+On  peut di stinguer trois types de capteurs  [11]: 
+
+•  Les  capteurs  physiques  qui  sont  plus  fréquents  et  disponibles  et  fo urnissent 
+
+généralement des  données  brutes.  Pour  les applications dépendantes  du  contexte,  le 
+
+plus  important  capteur  est ce lui  de  la  localisation (G PS)  mais on peut  inclure aussi 
+
+d'autres  capteurs physiques. 
+
+•  Les capteurs virtuels qui  sont  di sponibles essentiellement à travers les  services  Web. 
+
+Par  exemple  on  peut  connaître  la  température  en  accédant  en  li gne  à  un  site  de 
+
+météo,  on  peut  aussi  détecter  l'activité  de  l' utili sateur  par  sa  présence  dans  les 
+
+réseaux sociaux (en ligne) ou en accédant à son agenda électronique. 
+
+•  Les  capteurs 
+
+logiques  qui  combinent 
+
+les  deux  types  de  capteurs  énumérés 
+
+précédemment afin  d'en dériver l' information du  contexte en utilisant  la logique. 
+
+Dans  notre  travail,  nous  exploiterons  les  capteurs  corporels comme  capte urs  phys iques. 
+
+Ces  capteurs  corporels  sont  des  petites  composantes  attachées  dans  diffé rentes  région  du 
+
+corps de  l' utilisateur  et qui  fo urnissent des  interfaces  de communication entre cet  utili sateur 
+
+et  un  système distant  [21].  Ce  système est  implémenté à l' intérieur de l'appareil  mobile dans 
+
+notre  cas.  Cette  configuration  permet  de  connecter  tous  les  capteurs  afin  de  construi re  un 
+
+réseau de  capteurs  corporels  «Body Sensor  Network » et afin  de  collecter  les  informations 
+
+d'une  manière  centralisée.  Les  capteurs  peuvent  être  interconnectés  par  des  technologies 
+
+comme le Zigbee,  le Blutooth  et le Wifi (IEEE 802. 11 ). Ces mêmes  technologies  peuvent être 
+
+utilisées  pour la transmi ss ion des données vers  l'appareil  mob ile.  Nous pouvons aussi utili ser 
+
+comme capteurs  de données  physiologiques des  apparei ls de mesures  comme le thermomètre 
+
+pour  la température, le tensiomètre pour la press ion artérielle et le glucomètre pour  le taux de 
+
+glycém ie.  De  cette  faço n,  les  capteurs  sont  utili sés  d' une  manière  occasionnelle  et  ne  sont 
+
+plus  continuellement attachés  au  corps de  l' utilisateur.  Cependant, ces  appareils  doivent être 
+
+équ ipés d'une des technologies citées  plus  haut pour pouvoir envoyer les données au  mob il e. 
+
+32 
+
+Le  captage  des  données  peut  se  faire  d' une  façon  manuelle,  c'est-à-dire  au  moment  des 
+
+prises  de  mesures  faites  par  l' utilisateur  lui-même  (dans  le  cas  d' une  pri se  sanguine  pour  la 
+
+glycémie  par  exemple),  ou  d' une  faço n  automatique  par  le  réseau  de  capteurs  (température 
+
+corporell e,  rythme  cardiaque).  La  fréquence  du  captage  automatique  est  défi nie  et 
+
+programmée selon les  beso ins médicaux de chaque utilisateur. 
+
+N ous  utili sons  aussi Facebook  comme  capteur  virtuel.  Les  données  de  cette  plateforme 
+
+sont  collectées  d' une  manière  dynamique  et  envoyées  a  la  base  de  connaissance  a  chaque 
+
+traitement. 
+
+4.2.2 Le middleware 
+
+N otre  middleware est  structuré en couches superposées qui  di visent  le  processus en sous(cid:173)
+
+étapes  dépendamment  de  la  tâche  à  réaliser  (F igure  4.1 ).  La  disposition  en  couches  permet 
+
+d 'organiser les processus de gestion de  l' information et  la génération du contexte. 
+
+Le  middleware  a  pour  but  de  transformer  les  données  fournies  par  diffé rentes  sources 
+
+hétérogènes en une  information de contexte  utilisable par les serv ices dépendants au contexte. 
+
+Depui s  leur  acquisition  à  partir  de  di vers  capteurs,  les  données  sui vent  un  processus 
+
+prédéfini.  L' info rmation  est  tout  d ' abord  récupérée,  ensuite  filtrée,  traitée, 
+
+inférée  et 
+
+finalem ent fournie  au service approprié. L'architecture  du  middleware est  ainsi organi sée en 
+
+co uches qui  effectuent des tâches spécifiques  : 
+
+4.2.2.1  La couche de collection des données 
+
+C' est  la  couche  respo nsable  de  la  récupération  des  données  des  différents  capteurs.  Elle 
+
+fournit  un  ensembl e  d' interfaces  et  méthodes  abstra ites  qui  utili sent  les  pilotes  pour  les 
+
+capteurs physiques et les APis pour  les capteurs phys iques et  implémente des requêtes afin  de 
+
+récupérer  les  données.  Cette  couche  do it  s' enregistrer  à  une  autre  composante  du  système 
+
+appelée  module  de  correspondance  « Context  Matcher»  pour  qu 'elle  puisse  détecter 
+
+l' ensemble  des  capteurs.  Ce  mécan isme  faci lite 
+
+l' ajout  de  nouveaux  capteurs  ou 
+
+la 
+
+modification  de capteurs  déj à  existants. Dans  notre application,  nous  avo ns  déc idé  de  placer 
+
+33 
+
+cette  couche  dans  l'appareil  mobile.  Ainsi,  la  collection  des  données  se  fa it  à  travers  les 
+
+technologies  de communication énumérées dans  la section précédente.  Cette  étape  implique 
+
+aussi  la  mi se  en place  de  mécanismes  de  collection de  données  qui  tiennent  en compte  les 
+
+diffé rentes  limites  des  appareils mobiles  comme  la capac ité de stockage  et l' autonomie de la 
+
+batterie.  Quelq ues  recherches ont été menées dans le but de présenter des  techniques effi caces 
+
+de collecte des  données à parti r réseau de capteurs sans-fil  (22] (23 ]. 
+
+4.2.2.2 La couche de filtrage des données 
+
+Les  données  captées  et  ensuite  récupérées  peuvent  contenir  des  erreurs  de  mesures 
+
+(bruits). Les  capteurs  peuvent fournir  des  données  erronées  ou des  données  qui  sont  inuti les 
+
+pour les  services du  contexte.  Afin  d' améliorer la qualité  des  données qui  seront fo urnies à la 
+
+couche supérieure et dans le but d'économi ser nos  ressources,  nous avons ajouté cette couche 
+
+à  notre  architecture.  Elle  sera  liée  à  une  base  de  données  qui  contient  1 'ensembl e  des 
+
+contraintes  sur  les  données. Ces  contraintes  sont  prédéfini es  par le  programmeur  et  peuvent 
+
+être modifiées ou mises à jour d' une manière manuelle ou dynamique. 
+
+4.2.2.3 La couche de  traitement des données 
+
+Les  données  reçues  de  la  couche de filtrage  sont  issues  de diverses sources  distribuées et 
+
+sont  donc  hétérogènes.  Les  données  sont  aussi très  techniques  puisqu 'elles  représentent  des 
+
+valeurs  numériques  avec  des  unités  de  mesures  diffé rentes.  Ces  données  sont  donc  non 
+
+appropriées  et  non  compréhensibles  pour  les  services  dépendants  au  contexte.  Alors,  la 
+
+couche de traitement des  données  est  responsable de  la transformation de toutes  les  données 
+
+captées  dans un  langage formel, partageable et qui  peut  fo urnir des  données  utilisables  par la 
+
+couche suivante. 
+
+Les  don nées  reçues  dans différents  fo rmats  sont  transformées  à  des  descriptions OWL. 
+
+Cette  opération  nécessite  la  mise  en  place  d' un  système  qu i en  prem ier temps  convertit  les 
+
+données  brutes en documents XML contenant une description complète de la mesure incluant 
+
+sa  source,  sa  valeur  et  l'heure  de  la  capture.  Ces  documents  XML  seront  par  la  suite 
+
+automatiquement transformés  en  descriptions  OWL  (Individuals).  Plusieurs  mécanismes  de 
+
+transformation sont disponibles dont celui proposé dans [24]. 
+
+Ces descriptions sont par la suite uti lisées par le  module d ' inférence. 
+
+34 
+
+4.2.2.4 Module d'inférence 
+
+Cette  couche  est  responsable  d' inférer  le  contexte  à  partir  données  récupérées  de  la 
+
+couche précédente  en  utilisant  le  raisonnement  logique.  E lle  permet  d 'élever  l' information  à 
+
+un  niveau  supérieur  d'abstraction.  L ' information  du  contexte  peut  être  c lassée  sur  deux 
+
+nivaux dépendamment de son niveau d 'abstraction. 
+
+On  peut  di stinguer  l' information  de  bas  niveau  déduite  d' une  simple  donnée  brute 
+
+capturée comme la température, le niveau de luminos ité, etc . Cependant, cette information est 
+
+très  souvent  insuffisante.  A lors  e lle  est combinée  avec  d 'autres  informations  capturées  afi n 
+
+d' en  déduire  une  information  de  contexte plus  pertinente.  Par exempl e,  un  utili sateur  qui  est 
+
+chez lui  peut être  dans  le jardin ou  couché dans  la chambre, ce qui  n'est pas du  tout le  même 
+
+contexte. L'information de localisation (GPS) nous permet simplement de savo ir qu' il  est à la 
+
+maison . Par contre, en  utilisant d' autres capteurs, comme le  thermomètre  pour la température 
+
+ou  un  micro  pour le  niveau  de  son,  combinés avec  la  localisation  une  déduction  plus  précise 
+
+du  contexte. 
+
+Autre  que  dériver  le  contexte  de  haut  niveau  du  contexte  bas  niveau,  les  tâches de  cette 
+
+couche  consistent aussi à interroger  la  base  de  données  du  contexte  et  vérifier  la  cohérence 
+
+des  informations  du  contexte  [25].  La  couche  d' inférence  encapsule  .divers  modules  qui 
+
+permettent  la réalisation de ces tâches. 
+
+4.2.2.5 La base de connaissance du contexte 
+
+Cette  composante  assure 
+
+l' interrogation  et 
+
+la  modification  des  connaissances 
+
+contextuelles.  Elle  contient  les  ontologies du  contexte d' un  domai ne  donné  et ses  instances. 
+
+Ces  ontologies  re présentent  les  objets,  les  relations  qui  existent entre  eux  et  leurs  instances. 
+
+35 
+
+Le  modèle  ontologique  a  été  préféré  aux  autres  approches  pui squ ' il  fo urnit  une  fo rte 
+
+expressivité  qui  permet  de  spécifier  les  concepts  et  leurs  re lations  et  qu ' il  fo urnit  une 
+
+fo rma li sation des obj ets du monde rée ls dans un  langage compréhensible par  la machine [11]. 
+
+Les  ontologies  sont  aussi  extensibles  et  permettent  de  raj outer  d' autres  concepts  ou  d 'être 
+
+couplées  avec  d' autres  ontologies.  De  plus,  nous  pouvons  y  appliquer  des  techniques  de 
+
+raisonnement dont l' utilité est décrite dans la section suivante . 
+
+Les  instances  des  ontologies  peuvent  être  prédéfini es  par  1 'expert  du  doma ine  et  sont 
+
+alors  sauvegardées dans  la  base a insi que  les  onto logies  lors  de  l' initi ation du  système.  Ell es 
+
+peuvent  aussi  être  récupérées  de  la  couche  précédente  en  cas  de  données  fo urnies  par  les 
+
+capteurs. Elles sont alors chargées dans la base pendant 1 'exécution du  système  [1 5]. 
+
+4.2.2.6 Le raisonneur 
+
+Le  ra isonneur  est  le  module  res po nsable  de  l' inférence  des  info rmations  de  contexte  de 
+
+bas  ni veau (contexte di rect) à des info rmati ons de contexte de  haut  niveau de complexité.  Les 
+
+raisonneurs  utili sent  un  modèle  de  logique  de  premier ordre  et  un  raisonnement  basé  sur  les 
+
+règles, c'est-à-dire que tous les contextes sont re présentés sous  la fo rme d'express ion logiques 
+
+de  premier ordre  [25].  Ces règles d' infé rence  prédéfi nies  sont  spécifi ées  et  intégrées dans  le 
+
+système  par  le  programmeur.  Cependant,  et  compte  tenu  de  l' hétérogénéité  des  di verses 
+
+sources  de  données  et  des  applications,  le  module  de  raisonnement  doit  intégrer  différents 
+
+raisonneurs et d'autres mécani smes de  ra isonnement [26].  Ce module doit supporter et défini r 
+
+l'ensemble  des  APis  de  raisonneurs  et  permettre  d' intégrer  et  de  modifie r  fac ilement  les 
+
+raisonneurs. 
+
+Autre  que  1' inférence  des  info rmations  du  contexte  le  raisonneur a  la  tâche  de  vérifier et 
+
+mainteni r la cohérence des informations du contexte et résoudre les conflits contextuels . 
+
+36 
+
+4.2.2.7 La couche de gestion du contexte 
+
+C ' est la  derni ère  couche  du  midd leware.  Elle  constitue  la  passerelle  entre  les  serv ices du 
+
+contexte  et  le  middleware.  Cette  couche  stocke  les  info rmations  du  contexte  et constitue  un 
+
+outil  de  courtage  pour  permettre  la  récupération  des  ces  informations  par  les  serv ices  du 
+
+contexte.  Cette  couche  est  aussi  reliée au  module  de  correspondance,  décrit  ci-dessous.  La 
+
+couche  de  gestion du  contexte  est  composée d' interfaces  qui  sont capables de fa ire  la  liaison 
+
+entre l' information du contexte et l'appli cation correspondante. 
+
+4.2.2.8 Le module de correspondance de contexte 
+
+Ce  modul e  (auss i  appelé  Context  Matcher)  est  responsable  de  la  loca lisation  et  de  la 
+
+gestion  des  so urces  du  contexte.  Il  utili se  un  mécani sme  de  correspondance  pour  trouver  les 
+
+sources  du  contexte  dont  le  servi ce  a  beso in .  Pour  cet  effet,  ce  module  est  connecté  à  la 
+
+couche de co llection. Il  sert à  localiser  les capteurs  appropriés. Le  module  de correspondance 
+
+interagit  auss i  avec  la  couche  de  gestion  du  contexte  qui  lui  fo urni t  les  informati ons  du 
+
+contexte qu ' elle pourvoit. 
+
+4.2.3 Les services du contexte 
+
+Ce sont  les différe nts serv ices qui  sont dépendants du  co ntexte.  Ces services, qui  peuvent 
+
+être  auss i des  applicati ons,  ont  beso in  de  s ' approv isionner  en  info rmations  du  contexte  afi n 
+
+qu' il s  s' adaptent  à  la  situation  actue lle  de  l' util isateur  et  son  environnement.  Les  serveurs 
+
+demandent  les  informations  du  contexte  qui  leur  sont  nécessaires  par  le  bia is  du  Context 
+
+matcher. Ce dernier,  trouve  les  capteurs  correspondants  et  communique  les  informations  du 
+
+service de contexte en question à  la couche de gestion, qui  à  son to ur fo urni t l' info rmation de 
+
+contexte  de  haut  ni veau  à  ce  serv ice  de  contexte.  Dans  notre  proj et,  nous  trava illons  une 
+
+application mob il e. Cette application  serait en mesure  de  réagir aux  inform ations de contexte 
+
+fo urn ies  par la couche de gestion . 
+
+--~-~~---
+
+4.3 Plan de validation de l'architecture 
+
+Nous proposons le  plan suivant pour la validation de  1 ' architecture présentée ci-dessus : 
+
+37 
+
+Implémentation du  middleware et de ses  différents  modules (dans  un  environnement 
+
+JAVA par exemple) 
+
+Développer  un  prototype  de  réseau  de  capteurs  corporels  (body  sensors  network) 
+
+incluant  ceux  évoqués  dans  notre  mémoire  en 
+
+l' occurrence : 
+
+thermomètre, 
+
+glucomètre, tensiomètre, oximétre. 
+
+Développer  un  prototype  d' application  mobile  (sur  environnement  Androïde  par 
+
+exemp le)  qui 
+
+fournit 
+
+les 
+
+interfaces  nécessaires  pour 
+
+la  communication  avec 
+
+l'utilisateur,  le  réseau  de  capteurs  et  le  middleware).  Cette  application  offre  aussi  la 
+
+connexion  sur  le  réseau  Facebook en  tant que  capteur virtuel  permettant  la  collecte 
+
+des 
+
+informations  de  contexte  sur  ce  réseau  d' une  manière  dynamique  (la 
+
+configuration  de  l' application  inclut  une  interface  permettant  à  l' utilisateur  de 
+
+connecter cette app lication à son compte Facebook personnel). 
+
+Développer  des  services  de  contexte  utilisant  les  informations  fourn ies  par  le 
+
+middelware. 
+
+Intégrer  les  ontologies  et  les  règles  d ' inférence  dans  le  middelware  en  permettant 
+
+l' interaction avec le  module de traitement et le  module de gestion du  contexte. 
+
+Effectuer  des  simu lations  dans  différentes  situations  (contextes)  et  évaluer  les 
+
+performances  de  notre  architecture  (les  performances  incluent  le  temps  d' exécution, 
+
+le  raisonnement  sur  le  contexte,  la  détermination  du  contexte  et  les  scénarios  de 
+
+réaction  selon  le contexte). 
+
+CHAPITRE V 
+
+MODÉLISATION DE L'ONTOLOGIE FACEBOOK 
+
+5.1  Introduction 
+
+D ' un  point  de  vue  centré  sur  l' utilisateur,  le  contexte  social  est  l'environnement  de  cet 
+
+utilisateur,  c'est-à-d ire  tout  ce  qu i  l'entoure  et  qui  influence  son  compo1tement  ou  ses 
+
+préférences  (27].  Le contexte socia l d' un  utilisateur peut  inclu re  ses  re lations et contacts,  son 
+
+humeur,  ses  préférences,  ses  habitudes  et  plus  encore.  Le  contexte  social  est  alors  très 
+
+important pour définir le contexte d' un  utilisateur. 
+
+Nous  avo ns  déj à  souligné  que  certai ns  modèles  de  contexte  tels  que  CONON  [ 15]., 
+
+CobraOnt  [10] ,  SmartM  [20]  ont  négligé  le  contexte  social  de  l' utili sateur  qui  devrait  être 
+
+une entité à  part entière du  modè le du  contexte. Les systèmes dépendants  du  contexte doivent 
+
+tenir  compte  du  contexte  social  d' un  utilisateur  afin  d' améliorer  ses  interactions  avec  les 
+
+périphériques. 
+
+De  ce  fa it,  nous  avo ns  travaillé  sur  cet  aspect  du  contexte  et  dévelop pé  un  modèle 
+
+capable  de  no us  fo urnir  des  info rmations  sur  le  contexte  social  en  ligne  de  l' utilisateur.  Ce 
+
+modèle sera  intégré, dans le prochai n chapitre,  dans un  modè le de contexte afi n de  l' enrichir. 
+
+Dans ce chapitre,  nous présentons  notre réa li sation qu i consiste en : 
+
+• 
+
+• 
+
+L ' étude  des  fonctionna lités  de  Facebook  et  leur  éventuelle  exp loitation  pour  le 
+
+contexte de l'uti lisateur. 
+
+L'analyse de 1 'architecture du réseau Face book. 
+
+39 
+
+•  L'extraction des  éléments de Facebook, c'est-à-dire  les obj ets qui  le composent et les 
+
+relations entre ces obj ets. 
+
+•  La conception d' un  modèle ontologique représentant ces obj ets et ces  relations.  Cette 
+
+forme  nous  permettra  de  faire  un  lien  entre  Facebook  et  l' ontologie  du  domaine 
+
+médical que nous allons présenter dans le chapitre suivant. 
+
+•  L' implantation sur Protégé du  modèle ontologique obtenu . 
+
+5.2 Contexte social et réseaux sociaux en ligne,  cas de Facebook 
+
+Nous  pouvons  analyser  les  réseaux  sociaux  afin  d'y  extraire  des  info rmations  sur  le 
+
+contexte  social  d' un  utilisateur,  ses  préférences,  ainsi  que  ses  données  personnelles.  Ces 
+
+info rmations  enri chi ssent  notre  modèle  de  contexte  et  améli orent  les  perfo rmances  des 
+
+systèmes dépendant du  contexte. Nous analysons ci-dessous le réseau Facebook. 
+
+Le réseau Facebook, avec ses  800 000  utili sateurs actifs 8est auj ourd ' hui  le plus populaire 
+
+de  tous  les  réseaux  sociaux.  De  ce  fa it,  il  est  le  réseau  le  plus  prometteur  à  étudier  et 
+
+analyser.  Indépendamment  des  relations  entre  les  utili sateurs,  Facebook  est  une  source  très 
+
+riche en  info rmations personnelles  : nom, prénom, date de  naissance, emai l, adresse,  date de 
+
+naissance,  éco le,  employeur,  état  matrimonial,  orientation  politique  et  bien  d' autres ...  La 
+
+co llecte et  l'analyse  de ces données  peut  nous amener à cerner  le  profil  d' un  utili sateur  afin 
+
+de lui  fournir une information qui  lui  correspond  le mieux. Ces techniques  sont  utili sées pour 
+
+le  marketing mais peuvent aussi être utilisées dans le cadre de  la définiti on du  contexte d' un 
+
+utilisateur. 
+
+Nous  avons  alors  analysé  ce  réseau  et  modélisé  l'ontologie  qui  représente  ces  obj ets. 
+
+Nous avons utilisé les différentes informations disponibles sur ce réseau social pour y extraire 
+
+celle  qui  peuvent  être  exploitées  pour  notre  modèle  de  contexte  présenté  dans  le  prochain 
+
+chapitre. Les  liens entre les  utili sateurs de la plateforme nous permettent de représenter leurs 
+
+différentes  relations  sous  forme  de  graphes.  Ce  modèle  graphiq ue  forme l  nous  permet  de 
+
+fa ire  le lien entre l' onto logie du  domaine  médical et les éléments de Facebook. 
+
+8http://newsroom. fb .com/content/defil ul t.aspx?NewsAreald=22  visitée le 28/02/201 2 
+
+Les  diverses  fonctionnalités  de  Facebook  sont  une  riche  so urce  de  données  sur  le 
+
+contexte  et  nous  fournissent  les  informations  ci-dessous.  Nous  avons  énuméré  tous  les 
+
+é léments  et  non  seulement  ceux  que  nous  avons  utilisé  pour  permettre  leur  utili sation  dans 
+
+40 
+
+d'autres travaux de recherche. 
+
+5.2.1  Les liens 
+
+Les relations  en  ligne  sont  importantes  puisqu 'elles  sont  souvent  basées  sur  les  relations 
+
+du  monde  réel  [28] . Les relations  d'amitié  sur Facebook sont  bilatérales, ce qui  nous  mène à 
+
+croire  que  la  représentativité  de  ces  liens  est  très  élevée.  De  plus,  Facebook  nous  permet de 
+
+différe ncier  le  genre  de  relation  entre  les  utilisateurs  en  définissant  les  liens  de  parenté 
+
+familiale,  les camarades de  bureau et les différe ntes affi liations. Nous auri ons pu exp loiter cet 
+
+aspect  pour  tracer des  liens  biologiques  entre  différents  patients  ou  pour  la  réaction  aux  cas 
+
+d ' urge nces  médicales. 
+
+5.2.2 Les événements 
+
+Facebook permet de  planifier la  part ic ipation  à des événements  en y  inc luant  l'adresse de 
+
+la  place,  l' heure  de  début  et  l'heure  de  fin  de  chaque événement.  Facebook perm et aussi  de 
+
+dresser  une  liste  des  personnes  qui  part icipent  à  un  même  événement.  Ceci  nous  permet 
+
+d'anticiper  sur  le  contexte  de  l' utili sateur.  Nous  avons  utili sé  cet  élément  pour  déduire 
+
+l' emplacement et l' occupation  de  l' utilisateur. 
+
+5.2.3 Les  préférences 
+
+E n  plus  des  informations  personnelles  comme  éq uipe  favo rite,  athlète  favor i,  religion, 
+
+orientation  politique,  la  fonctio nnalité  like de Facebook  permet d' avoir  des  informations  sur 
+
+les  préférences de  l'uti lisateur comme ses artistes favoris, ses restaurants ou clubs favoris,  ses 
+
+marques de vêtement préférées. 
+
+Facebook  nous  permet  ainsi  d'avoir  une  meilleure  idée  sur  les  préférences  et  les 
+
+41 
+
+intentions de l' utilisateur  [29]. 
+
+5.2.4 Les emplacements 
+
+La  fonction Checkin  permet  à  un  utili sateur  de  marquer son emplacement  sur  son profi l 
+
+Facebook.  Cette fonction définit  la  localisation de  l' utili sateur,  la date et  l' heure de  la visite 
+
+ainsi  que  les  personnes  qui  se  trouvent  dans  le  même  endroit  et  les  liens  entre  elles.  Cet 
+
+as pect  est  exploité  pour  définir  l' emplacement  du  pati ent  et  sa  proximité  par  rapport  à 
+
+d' autres  personnes de son réseau. 
+
+5.2.5 La présence en  ligne 
+
+Le module de chat peut  nous permettre de détecter la présence  en ligne d' un  utilisateur à 
+
+partir  de  la  messagerie  instantanée.  Nous  pouvons  par  la  suite  déduire  l' occupation  de 
+
+l' utilisateur  et  sa  disponibilité.  La  présence  en  li gne  a  fait  l' objet  de  quelques  recherches 
+
+comme le proj et Online Presence  [30]  qui  modélise  une onto logie afin  de mettre en place  un 
+
+modèle commun  de présence en ligne sur tous les  réseaux sociaux. 
+
+5.2.6 La personnalité 
+
+Analyser la personnalité de l' utili sateur  est essentiel dans le modèle d' utilisateur [31].  La 
+
+manière d' utiliser des  réseaux sociaux reflète  la personnalité dans le monde réel.  En se basant 
+
+sur  Facebook  et  en  analysant  l' interaction de  l' utilisateur  avec  ce  réseau  social,  comme  le 
+
+nombre d' ami s, le nombre de publications sur  son mur, nous pouvons infére r sa  personnalité. 
+
+Ce  paramètre  pourrait  être  utilisé  dans  le  cadre  d' une  application  médicale  relative  à  la 
+
+psychologie. 
+
+42 
+
+5.2.7 Le marquage 
+
+Le  marquage  des  photos  sur  Facebook  nous  permet  de  défin ir  les  liens  entre  les 
+
+utilisateurs tout en fournissant  le lieu et la date de 1 'événement.  Ces  liens peuvent nous aider 
+
+à capter des  informations sur  les  personnes  dans  l' environnement social de  l' utilisateur  dans 
+
+la vie réelle.  Cet élément a aussi été utilisé  pour avoir l'emplacement de l' utili sateur. 
+
+5.3 Le graphe Facebook 
+
+Les  relations entre utili sateurs peuvent  être  représentées  sous fo rmes  de graphes  dont  les 
+
+nœuds sont  les  utilisateurs  et  les  arcs  les  relations qui  les  relient.  Facebook ne connecte pas 
+
+seulement  les  utilisateurs  mais  connecte  aussi  des  obj ets  et  des  modul es  extérieurs  à  ces 
+
+personnes.  Ces  connexions  sont  modélisées  par  le  Graphe  Social  (Social  Graph)  9  et  le 
+protocole Open Graph 10
+
+. 
+
+5.3.1  Le protocole Open  Graph 
+
+Le Protocole Open Graphe permet à  Facebook d' intégrer des  obj ets  extérieurs, d'avo ir  la 
+
+même  fonctionnalité  que  les  objets  du  site  et  de  le  connecter au graphe  (figure  4.1).  Cette 
+
+fo nctionnalité  a  permis  à  Facebook  de  connecter  des  millions  d'obj ets  sous  une  seule 
+
+platefonne. Le  Open Graph  représente  les  connecti ons de Facebook aux obj ets  extérieurs du 
+
+site  sous la forme d' un  graphe comportant des  millions de nœuds. 
+
+9https :1 /developers. facebook .com/ socialdes ign/ 
+10hitps ://devc lopers. faccbook.com/docs/opengraph/ 
+
+43 
+
+Figure 5.1  : Open Graph  de  Facebook. 
+
+(Source http:/ /deve lopers. face book.com/docs/opengraph/) 
+
+5.3.2 Le Graphe Social 
+
+Le  graphe  social  (Figure  5.2)  est  le  noyau  de  la  plateforme  Facebook,  réseau  soc ial  en 
+
+ligne.  Les  connexions  entre  les  utili sateurs  sont  l'élément  le  plus  important  du  réseau.  Il s 
+
+permette nt  de  représenter  les  relations  sous  entre  les  objets  sous  fo rmes  de  graphes.  Les 
+
+objets sont les utilisateurs, les événements,  les  pages,  les  photos,  les groupes,  les applications, 
+
+etc.  Les  connexions  sont 
+
+les 
+
+li ens  d'amitié  entre  les  utilisateurs, 
+
+les  marquages,  les 
+
+inscriptions, etc. 
+
+Les  personnes  (profi ls)  de  Facebook  sont  interconnectées.  Ces  éléments  permettent 
+
+d' avo ir  une meilleure  vue du  modèle  utilisateur et l'exploitation de ses données nous offre  la 
+
+possibilité  d'en  extraire  des  informations  pertinentes  de  son  contexte.  Il  serait  alors 
+
+intéressant  de  modéliser  le  graphe  social  de  Facebook  afin  de  le  rend re  profitable  pour  les 
+
+systèmes dépendants du  contexte. 
+
+44 
+
+~.~~a. 
+
+M~Jro 
+
+,::::::::;, y 
+
+lss.am  S 
+
+. .  AJ:ir:ne.CI Sa 
+~' 
+~ FonFon 
+
+(j 
+
+t~ 
+
+~~ÎI 
+slra'r.i'der; b 
+""'-" 
+
+• '"': 
+
+'l'"'" 
+4-~W ·! 
+
+Figure 5.2 :  Graphe Social des  réseaux d'am is de Facebook généré par touchgraphe. net. 11 
+
+11  http://touchgraph.net 
+
+45 
+
+No us avons utilisé un  générateur de  graphes en ligne Touchgraphe.net  pour l' affi chage du 
+
+graphe  qu i  représente  les  re lations  en  li gne  d' un  utilisateur  donné.  Ce  graphe  pourrait  être 
+
+exploité  pour  des  modèles de  contexte  qui  prennent  en  compte  les  relations  d' un  utilisateur. 
+
+No us  n' avo ns  pas  pris  en  considération  cet  aspect  dans  notre  modèle.  Cependant,  cela 
+
+pourrait être réali sé dans d ' autres champs d'applicati ons. 
+
+5.4 L'ontologie de Facebook 
+
+A près  avo ir  opté  pour  le  modèle  de  contexte  basé  sur  les  onto logies,  nous  avo ns  alors 
+
+représenté  le  modè le  de Facebook sou s fo rme  onto logique.  Dans  notre  réa li sation,  nous nous 
+
+concentrerons  sur  les  obj ets  internes du  réseau  social Facebook.  Nous  définirons  un  modè le 
+
+global  pour  représenter  les  différents  obj ets  et  les  relations  qui 
+
+les  lient.  L ' ontologie 
+
+Facebook j ouera  un  rô le  important  dans  la  définiti on  du  model de  contexte.  Pour  le  langage 
+
+et  l'outil  d'édition des onto logies, nous avons utili sé res pectivement OWL et Protégé. 
+
+5.4.1  Modélisation de l'ontologie 
+
+Facebook nous permet de modéliser son architecture par deux approches différentes : 
+
+• 
+
+• 
+
+La  première consiste à déréférencer  les URls du graphe de Facebook à partir d' un 
+
+URL d' un compte  utilisateur. 
+
+La  deuxième  consiste  à  utiliser  le  G raph  API  de  Facebook  afin  de  concevo ir  le 
+
+modèle  onto logique  de  ce  réseau  social. 
+
+L'API  est  access ible  à  1 ' adresse 
+
+https :/idevelopers.facebook.com/docs/referencc/api  et  décrit 
+
+tous 
+
+les  objets  de 
+
+Facebook a insi que  les connexions qui  existent entre eux.  Le Graph  API nous  perm et 
+
+non seulement de défi ni r les obj ets et les re lations mais aussi  les propriétés de chaq ue 
+
+obj et. 
+
+-
+
+- - - - - - -
+
+-
+
+--- - - - - - - - - - - - --
+
+-
+
+-
+
+-
+
+-
+
+- - - - - - - - - - - - - - --
+
+-
+
+-
+
+-
+
+- - - - --
+
+46 
+
+Nous  avons  opté  po ur  la  deuxième  méthode  po ur  sa  simplicité  et  la  précision  des 
+
+informati ons qui  y sont énoncées. No us avons eu reco urs à la première méthode pour des fi ns 
+
+de vérification de  l'exactitude et de la cohérence des info rmations dégagées. 
+
+L 'analyse du Graph  API de Facebook nous permet de dégager  les obj ets (classes) et leurs 
+
+pro priétés,  et  leurs  connexions  que  no us  énumérons  ci-dessous.  No us  avo ns,  par  la  sui te, 
+
+conçu  un  modèle  relatif  à  ces  éléments  sous  forme  d'onto logie.  Finalement  nous  avons 
+
+implémenté  l'ontologie  sur  Protégé.  No us  avons  j oint  des  captures  d'écrans  de  cette 
+
+implémentation pour chaque élément. 
+
+5.4.1.1 Les objets de Facebook 
+
+Nous  nous  sommes  basé  sur  la  description  des  o bj ets  fo urni e  par  Facebook  à  partir  de 
+
+1 'adresse  mentionnée  c i-dess us. No us  avons  parcouru  chaque  obj et  et  dégagé  ses  propriétés 
+
+décrites  par  des  tableaux  incluant  leurs  propriétés,  leur  description  et  les  permiss ions  qui  y 
+
+sont affectées. Facebook fo urnit aussi les connexions relatives à chaque obj et. 
+
+Les  obj ets  de  Facebook,  dégagés  après  notre  analyse,  sont  représentés  dans  le  Ta bleau 
+
+5.1. 
+
+- - - - -- - - - - - - -
+
+- -
+
+- - - - - - -- - - - - - - - - - - - - - - - - -- - - - - -
+
+Friendrequest  Demande d'ajout envoyé  par un  utilisateur à un  autre. 
+
+47 
+
+Table 5.1  : Obj ets de Facebook. 
+
+Description 
+Elément central de  la structure de Facebook. 
+Pages et app lications Facebook appartenant à  l' utili sateur. 
+Page des fans . 
+Album s regroupant différentes  photos d' un  utilisateur. 
+
+Applications développées sur Facebook. 
+Inscription de la localisation courante de l' utilisateur sur son 
+mur. 
+
+Evénements programmés. 
+Page  principale de la plateforme à travers laquelle 
+l' utilisateur peut visualiser les activités de ses amis. 
+Listes d'amis crées par l' utili sateur. 
+
+Groupes de personnes  partageant un  intérêt commun. 
+Mur personnel d' un  utili sateur où on peut trouver les 
+inscriptions qui  lui  ont été destinées et  les  inscriptions qu ' il 
+soumet. 
+Boîte de réception de la messagerie de Facebbok. 
+
+Boîte d'envoie de la messagerie de Facebook. 
+
+Articles  personnels d' un  utilisateur. 
+Notifications que l' utilisateur reçoit de la part de la 
+plateforme d' une activité dans laquelle il  est impliqué. 
+In scriptions d' un  utili sateur sur  son mur ou le mur d' un  ami . 
+Une inscription peut être  une photo,  une vidéo,  un statut 
+(message texte) ou un  lien. 
+Photo Face book (enregistrée sur  la plateforme)  postée par un 
+utilisateur. 
+Vidéo Facebook (enregistrée sur la plateforme)  postée par un 
+utilisateur 
+Message texte posté par utilisateur. 
+Lien vers un  site ou obj et externe de Facebook posté par un 
+utilisateur. 
+
+Check-In 
+
+Friendlists 
+
+Nom 
+User 
+Account 
+Page 
+Album 
+
+Objet 
+Utilisateur 
+Compte 
+Page 
+Albums 
+photo 
+Applications  Application 
+Marquage 
+de 
+localisation 
+Evénement 
+Fil 
+d'actualité 
+Listes 
+d'amis 
+Demandes 
+d'ajout 
+Groupes 
+Mur 
+
+Group 
+Feed 
+
+Event 
+Home 
+
+l n box 
+
+Boîte de 
+réception 
+Boîte 
+d'envoi 
+Note 
+Notification  Notification 
+
+Out box 
+
+Note 
+
+In seri pt ion 
+
+Post 
+
+Photo 
+
+Vidéo 
+
+Statut 
+Lien 
+
+Photo 
+
+Video 
+
+Status 
+Link 
+
+Clftss nlerarcny: post 
+
+WB lillE! 
+
+48 
+
+.-:  e Th ing 
+
+.,  e account 
+f  e page 
+L · e application 
+e album 
+
+'  e checkin 
+' · .. e event 
+: ..  e teed 
+'· ··etriendlists 
+
+··•friendrequests 
+
+··· ·•group 
+·•home 
+:  e inbox 
+:. ..  e note 
+
+· e  notification 
+
+L  e outbox 
+-. .• post 
+
+;  e photo 
+f  e status 
+e videe 
+
+: ...  e user 
+
+Figure 5.3 : Capture écran des classes de  Facebook sous  Protégé. 
+
+Les  classes  de  l'ontologie  que  nous  avons  développée  avec  Protégé  sont  représentées 
+
+dans  la  figure  5.3. Nous  pouvons  voir la hiérarchie  de  ces obj ets  à travers  cette  implantation 
+
+des  classes  sur  Protégé.  Ainsi  Page  et Application  sont  des  sous  classes  de Account.  Une 
+
+publication (post)  est soit une photo (photo),  soit une vidéo (video) , soit un  statut (status). 
+
+5.4.1.2 Les propriétés des objets 
+
+Notre  analyse  de  Facebook  nous  a  perm1s  de  dégager  les  propriétés  des  objets.  Ces 
+
+propriétés sont représentées dans le tableau 4.2 . 
+
+Table 5.2 : Propriétés des obj ets de Facebook. 
+
+49 
+
+Objet 
+
+Propriétés 
+
+Utili sateur 
+
+id,  description,  lien  personnel,  localisation,  nom,  prénom,  intimité 
+
+(privacy),  type,  catégorie,  biographie,  date  de  naissance,  sexe,  nom 
+
+d' utili sateur,  adresse  courriel,  éducation,  ville  d'origine,  intéressé  par, 
+
+citations,  orientation politique,  religion, langue. 
+
+Page 
+
+id, nom, catégorie, lien, admini strateur, locali sation, téléphone. 
+
+Album  photo 
+
+id, description,  lien, locali sation, nom, intimité (privacy), type. 
+
+Application 
+
+id, catégorie,  compagnie,  nom, description. 
+
+Marquage de 
+
+id, localisation, marquages, date de création 
+
+localisation 
+
+Evénement 
+
+id,  nom,  description,  localisation,  créateurs,  vi sibilité,  date  et  heure  de 
+
+début, date et heure de fin . 
+
+Listes d'ami s 
+
+id, nom, type. 
+
+Groupe 
+
+Note 
+
+Photo 
+
+Vidéo 
+
+Statut 
+
+Lien 
+
+id, nom, description, lien, version, intimité. 
+
+id, message, sujet, date de création. 
+
+id,  nom,  source,  date  de  création,  hauteur,  largeur,  marquqges,  date  de 
+
+mi se en ligne. 
+
+id, nom, description, date de création, date de mi se en jour, marquages. 
+
+id, message, date de création, marquages. 
+
+id, URL, date de création, message. 
+
+5.4.1.3 Les relations 
+
+Les  relations ( Object Properties) entre les obj ets de Face book sont représentées dans le 
+
+tableau 5.3 . 
+
+Table 5.3  :  Relations entre les objets de  Facebook. 
+
+50 
+
+Propriété d'objet 
+
+Domaine 
+
+submits 
+
+isPartOf 
+
+ownsAlbum 
+
+attends 
+
+placedAt 
+
+sends 
+
+hasAccount 
+
+hasFeed 
+
+hasHome 
+
+haslnbox 
+
+hasOutbox 
+
+hasLists 
+
+hasNote 
+
+notifie dEy 
+
+shares 
+
+processesHome 
+
+processesFeed 
+
+creates 
+
+includes 
+
+submitAppPost 
+
+hasAppHome 
+
+hasAppFeed 
+
+hasWall 
+
+User 
+
+User 
+
+User 
+
+User 
+
+User 
+
+User 
+
+User 
+
+User 
+
+User 
+
+User 
+
+User 
+
+User 
+
+User 
+
+User 
+
+Page 
+
+Page 
+
+Page 
+
+Page 
+
+Groupe 
+
+App lication 
+
+Application 
+
+Application 
+
+Event 
+
+Rang 
+
+Post 
+
+Group 
+
+Album 
+
+Event 
+
+Chee kin 
+
+Friendrequests 
+
+Account 
+
+Feed 
+
+Home 
+
+In box 
+
+Out box 
+
+Friendlists 
+
+Note 
+
+Notification 
+
+Post 
+
+Home 
+
+Feed 
+
+Events 
+
+Feed 
+
+Post 
+
+Home 
+
+Feed 
+
+Feed 
+
+Notre implantation de ces re lations  sur Protégé est représentée dans  la figure 5.4. 
+
+Object properl'{ hierarchy: topObjectProperty 
+
+ID8l!IIBI 
+
+ill 
+
+51 
+
+.,.  • topObjectProperty 
+
+:···• appearson 
+,-· • assessedBy 
+
+,.  ·• communicateBy 
+
+• creates 
+
+·  • engagedln 
+• happensln 
+
+includes 
+isPartOf 
+locatedln 
+
+'··  ·• hasAccount 
+'··  • ha.sFeed 
+· • hasFriend 
+• hasHome 
+· • hasPhysiState 
+· • holds 
+· •
+•
+!· •
+··• ownsAibum 
+··• ownsCompEnt 
+···• processFeed 
+··• processHome 
+··•
+recieves 
+·· • settledAt 
+··• share 
+··• situatedln 
+·· • submits 
+·· • subscribesOn 
+··• uses 
+'···• writes 
+
+Figure 5.4 : Capture d'écran  Les  relations sous  Protégé. 
+
+5.4.1.4 L'ontologie 
+
+Finalement,  l'analyse  des  objets,  de  leurs  propriétés  ainsi  que  les  liens  entre  eux  nous  a 
+
+permis  de  modéliser  l'onto logie  présentée  dans 
+
+la  figure  5.5.  Cette  figure  est  une 
+
+reproduction  du  modèle  ontologique  obtenu  par  Protégé.  Nous  avons  repris  ce  modèle 
+
+manuellement  puisque  l'outil  de  visualisation  graphique  sur  Protégé  a  une  vis ibilité  limitée 
+
+qui  ne permet pas de voir  les  relations entre les  objets. 
+
+52 
+
+(  Notification 
+
+( 
+
+Note 
+
+(  Chee kin 
+
+Group 
+
+Figure 5.5 : Onto logie de Facebook. 
+
+Nous  po uvo ns  remarquer  que  l' utili sateur  est  l'élément  princ ipa l  de  la  structure  de 
+
+Facebook et  que  tous  les autres  obj ets y sont connectés.  Nous  n'avons  pas  mis  les  propriétés 
+
+des di ffé rentes classes pour a lléger le schéma. 
+
+CHAPITRE VI 
+
+MODÉLISATION DU CONTEXTE 
+
+6.1  Introduction 
+
+Après  avo ir  modéli sé  la structure de Facebook  sous fo rme d'ontologie,  nous allons dans 
+
+ce  chapitre,  expliquer  notre  technique  pour  la  conception d' un  modèle  de  contexte  général. 
+
+Ce  modèle inclut l' intégration de l'ontologie de Facebook et l'ontologie du  domaine médical. 
+
+La  modéli sation  du  contexte  est  « la  spécification  des  entités  et  les  relations  entre  ces 
+
+entités qui sont nécessaires à la description du contexte»  [Notre  traduction]  [32]. Le  modèle 
+
+de contexte couvre les  besoins fonctionnels  du  système. 
+
+Nous  avons  modélisé  une  ontologie  du  contexte.  Nous  avons  fa it  l' intégration de  cette 
+
+ontologie  avec  celle  développée  dans  le  chapitre  précédant  pour  le  réseau social  Facebook. 
+
+Nous  avons  implémenté  l'ontologie  résultante  avec  Protégé  et  nous  y  avons  appliqué 
+
+différentes règles d' inférence. 
+
+Ce  chapitre  décrit  notre  approche  de  la  construction de  l'ontologie  expliquée  étape  par 
+
+étape.  Nous  présentons  les  règles  d' inférence  applicables  à  notre  modèle  et  nous  avons 
+
+effectuons quelques  simulations pour tester le bon fonctionnement de ces règles. 
+
+6.2 Conception de l'ontologie du contexte 
+
+Dans  le chapitre 5, nous avons justifié le choix de  l' onto logie pour modéliser le contexte. 
+
+Le  développement  des  onto logies  obéit  à  une certaine  méthodologie qu i défi nit  les  étapes  et 
+
+54 
+
+les  règles  à  suivre  pendant  le  processus  [8].  Pour  une  bonne  modélisation,  il  faudrait  aussi 
+
+déterminer le volume de l'ontologie et son niveau de spécificité. 
+
+Pour  l'approche ontologique,  nous  pouvons  utiliser des ontologies,  entières  ou  partie lles, 
+
+développées  précédemment.  Les ontologies de haut niveau (upper ontologies) sont celles qui 
+
+sont  le  plus  souvent  utilisées  puisqu 'elles  offren~ des  concepts  universels,  indépendants  du 
+
+domaine  et qui  sont flexibles  à  une  adaptation  pour  différentes  applications  qui  ne  réalisent 
+
+pas forcément les mêmes traitements et n'appartiennent pas au  même domaine . 
+
+Nous travaillons sur  la  modélisation du  contexte pour une  simple application  du  domaine 
+
+médical  qui  utilise  des  informations  sur  l'état  physiologique  de  l' utilisateur  et  capable  de 
+
+réagir en  fonction  de cet état et d'autres éléments qui  caractérisent le  contexte de l' utilisateur. 
+
+Nous  utilisons  l'ontologie  de  Facebook  pour  enrichir  notre  modè le  de  contexte  avec  des 
+
+données triées de cette plateforme. 
+
+Nous  avons  décidé  d' utiliser  l'ontologie CONON  comme  ontologie  de  haut  niveau  pour 
+
+notre  modèle.  Nous étendrons cette onto logie avec  les  concepts  relatifs  au  domaine  médical. 
+
+Nous  intégrerons  l'ontologie  obtenue  avec  celle  que  nous  avons  développée  précédemment 
+
+pour modéliser les éléments de Facebook afin  d 'avo ir  un  modèle global capable de supporter 
+
+les règles d' inférence . Cette approche est représentée dans la figure 6.1. 
+
+Nous  partons  alors  de  l'onto logie  de  haut  niveau  CONON (01)  comme  point de  départ. 
+
+On  y  ajoute  les  concepts  du  domaine  médical  pour  obtenir  une  onto logie  ( 02).  Cette 
+
+ontologie  est  couplée  avec  l'ontologie  de  Facebook  (03)  afin  d' obtenir  notre  modèle  de 
+
+contexte (04). Ce modèle  permet la déduction du contexte au  moyen des règles d' inférences. 
+
+Nous avons réalisé cette ontologie en plusieurs étapes. 
+
+6.2.1  Étape A:  Ontologie de haut niveau (01) 
+
+L'ontologie  de  haut  niveau  CONON est  un  modèle générique  qui  présente  un  ensemble 
+
+d' entités  de  haut  niveau  et  qui  offre  une  forte  extensibilité  et  capacité  d' adaptation  à 
+
+différents domaines spécifiques. 
+
+55 
+
+(A) 
+
+0 1 
+
+Ontolog ie  de haut niveau 
+
+CONON 
+
+(B) 
+
+Extension 
+
+Concepts d u domain e 
+
+médica le 
+
+02 
+
+(8') 
+
+Ontologie CONON 
+
+app liq uée au  domaine 
+
+médica l 
+
+03 
+
+Ontolog ie Faœbook 
+
+(C) 
+
+Intégra~on 
+
+(C') 
+
+04 
+
+Ontolog ie du contexte 
+
+(D) 
+
+In férence 
+
+(D') 
+
+ContextE 
+
+Figure 6.1  : Approche de modé lisation du contexte. 
+
+- -- - -- - - - - - -- - -- - - - -- - - - - - -- - - - - - - - - - -- - - -- - -- - -- - - - -- - - - -
+
+56 
+
+L'ontologie  représentée  par  la  fi gure  6.2  est  basée  sur  les  concepts  suivants  : Personne, 
+
+Activité,  Entité  Computationnelle  et Localisation.  Ces  concepts  sont reliés  entre  eux  par  des 
+
+relations  (Object  Properties).  Une  activité  se  déroule  (locatedln)  dans  une  loca lisation  et 
+
+utilise  une  entité  computationnell e.  Une  personne  est  propriétaire  (ownsCompEnt)  d' une 
+
+entité  computationnelle,  est  engagée  (engagedln)  dans  une  activité,  est  située  (situatedln) 
+
+dans une localisation, et possède (ownCompEnt)  une entité computationnelle. 
+
+~~(--~L-----1 
+
+Figure 6.2  : Ontologie du  haut niveau se  basant sur CONON . 
+
+Pour des  besoins d'application,  nous  avons  ajouté  un  nouveau  concept générique (Time) 
+
+pour  fournir  la  date  et  l' heure.  Ce  concept  est  lié  au  concept  (Activity)  par  la  relation  se 
+
+déroule à (happensAt). 
+
+Les  concepts  généraux  de  l' ontologie  contiennent  des  sous  entités  ou  sous  classes  qui 
+
+présentent  des  extens ions  de  plus  haute  spécificité  et  fac ilitent  l' intégration  des  concepts 
+
+propres  au  domaine.  OWL permet  la  structuration  des  éléments  de  manière  hiérarchique  par 
+
+la  notion  subClasseOf  Ainsi,  la  localisation  est  divisée  en  espace  intérieur  (lndoor)  et 
+
+extérieur  ( Outdoor).  L'élément  Activité  (Activity)  distingue  entre  les  activités  programmées 
+
+(SchedualedActivity)  et  activités  déduites  (DeducedActivity).  L'entité  computationnelle 
+
+(Computationa!Entity )  peut  être  un  périphérique  (Deviee),  un  réseau (Network),  un  service 
+
+(Service) ou une application (Applications). 
+
+57 
+
+6.2.2 Étape B:  Extension de l' ontologie de haut niveau pa r  les  concepts du domain e 
+
+Nous  avons  auss i  choisi  de  concevo ir  notre  modè le  de  contexte  à  une  application 
+
+médicale  simple.  L'étape  suivante  est  donc  de  déve lopper  notre  modèle  de  contexte  en 
+
+étendant  l'ontologie  de  haut  niveau  par  des  concepts  relatifs  au do maine  médica l.  De  plus, 
+
+nous  devons  prendre  en considération  dans  notre  modéli sation  les  règles  d' inférence  qu ' on 
+
+souhaiterait exécuter. 
+
+Dans  notre  approche  de  modélisation  nous avons  pris en considération deux  paramètres 
+
+importants pour cette  procédure. Le  raisonnement  nécessite d' importantes  ressources et  il  est 
+
+préférable  de  minimiser  le  plus  possible  ces  délais  de  traitement  [33].  Le  domaine  méd ical 
+
+contient  des  terminologies  spéc ifiques  que  nous  avons  respectées  dans  notre  modélisation. 
+
+L' utili sation des terminologies  médicales  spécifi ques est  un  excellent  point de départ pour la 
+
+construction  des  ontologies  [34].  Pour  cela,  nous  avons  utili sé  un  thésaurus  de  vocabulaire 
+médical,  Medical  Subject  Headings  (Mesh)12
+
+,  de  la  bibliothèque  nationale  améri caine  de 
+
+médecine.  Mesh  fo urnit  un  ensemble  de  termes  médicaux  et  leur  description,  tout  en  les 
+
+organi sant d' une manière hiérarchique. 
+
+La meilleure  façon de concevo ir des  ontologies  serait  une approche hybride  qui  combine 
+
+les  deux  approches  classiques  de  modéli sation  des  ontologies  (approche  ascendante  et 
+
+approche  descendante)  [34].  Nous  avons  opté  pour  cette  méthode  dans  notre  approche  de 
+
+conception de l'ontologie du  contexte. 
+
+12  http:/ /www.n lm.nih .gov/ mesh/ 
+
+58 
+
+Ainsi, nous avons déterminé  les données  corporelles  à capter : la température corporelle, 
+
+le  poul s,  la glycémie,  la tension  artérielle,  etc.  Nous  les  avons classées  sous  un  super-classe 
+
+Physiologica!State qui  pourrait contenir d' autres catégories. 
+
+La  hiérarchisation  du  concept  Physiologica!State  et  ses  différentes  sous-classes  est 
+
+représentée  dans  la Figure  6.3 . Pour  chaque état  physiologique, nous avons défini  des  sous(cid:173)
+
+classes.  Pour  la glycémie,  il  pourrait  y avoir  une glycémie  normale, une  hypoglycémie, une 
+
+hypoglycémie sévère, une hyperglycémie ou une hyperglycémie sévère.  Pour  la température 
+
+corporelle, elle  peut  être  normale, élevée ou très  élevée.  Pour  la tension, on peut défi nir  les 
+
+états de tension  normale, pré-hypertension, hypertension, hypertension sévère,  hypotension et 
+
+hypotension sévère.  Les états sévères  nécessitent une réaction d' urgence. 
+
+Physiolog icStat e 
+
+~/1\ 
+
+BloodPressure) 
+
+BloodSugar 
+
+BodyTem perature 
+
+( 
+
+N ormaiFeve r 
+
+1'1 armaiT en si on 
+
+NormaiG iycem ia 
+
+) 
+
+High Feve r 
+
+Prehyp erte nstion 
+
+Critic allyH ig hFever 
+
+Hype rten si on 
+
+=:> 
+
+Hypergly cem ia 
+
+Hypoglycemia 
+
+Hypotensio n 
+
+Critica llyHyperg lycem ia 
+
+CritcallyHy pert ensio n 
+
+Cr itica llyHypoglyce mia 
+
+CriticallyHypo ten !ti on 
+
+Légen de 
+
+- - -)JI!> 
+
+So us-Cl asse 
+
+Figure 6.3 : Classification des  différents  états phys iologiques. 
+
+- - - --- - - - - - - -- - -- - - - - - - - -
+
+- - - - - - - -
+
+-- -- - --
+
+- - - - - - - - -- - - - -- - -- -- - - -- - - - ,  
+
+59 
+
+Nous  avons  aussi organisé  le  conc ept Deviee  en  catégori sant  les  appareils  par  type:  les 
+
+appareil s  de  communication  (téléphone  mobil e)  et  appareils  médicaux  (tensiomètre, 
+
+thermomètre,  glucomètre,  oxymètre,  etc.)  qui  agissent  comme  capteur  pour  la  mes ure  des 
+
+données corporelles.  Cette classificatio n est représentée par la Figure 6.4. 
+
+Cependant,  les  valeurs  définissant  le  domaine  des  valeurs  de  chac un  des  états  physiques 
+
+varient  d' un  genre  à  un  autre  (homme,  femme),  d' une  catégorie  d ' âge  à  une  autre  (enfa nt, 
+
+adulte,  personne  âgée)  et  de  l'état  de  santé  de  l' utili sateur  (personne  norma le,  personne 
+
+diabétique, etc. ). Nous avons alors défini  ces concepts qui  sont reliés à la classe Persan. 
+
+Dev iee 
+
+1 
+-~  = Mo bile Ph one ) 
+
+Thermometer  _) 
+
+(  Med ica iDev ice  ) 
+
+Ca m mun icatio nD evice 
+
+Glucometer 
+
+Oxim et er 
+
+B lood Pressu rel\·lo nit or 
+
+Légende 
+
+-----')o•  Sous- Classe 
+
+Figure 6.4 : Class ification  des  appare ils. 
+
+------ ~---- - - -
+
+60 
+
+Les  relations  qui  existent  entre  ces  concepts  du  domaine  ont  été  modé lisées.  Un  état 
+
+physique  est  capturé  par  (assessedBy)  un  appareil  médical.  U ne  personne  a  un~ catégorie 
+
+d'âge et un  genre et un  état physiologique. 
+
+La  fi gure  6.5  montre  l'ontologie  résultante  (B ')  de  l'adaptation  de  l'ontologie  de  haut 
+
+niveau à nos besoins pour une simple application médicale. 
+
+6.2.3  Étape C:  Couplage de l'ontologie du contexte et de l'ontologie Facebook 
+
+No us  devons  coupler  l'ontologie,  précédemment  déve loppées  pour Facebook, avec  notre 
+
+ontologie du contexte  médical. 
+
+Le couplage entre  deux  ontologies  ve ut  dire  « trouver les  relations  qui existent entre ces 
+
+deux  ontologies»  [Notre  traduction]  [35]  de  faço n  à  ce  qu 'elles  représentent  une  ontologie 
+
+unique  et  cohérente. Ce couplage  pourra it  être  une  fusion,  un  alignement ou  une  intégration 
+
+[36].  Dans notre cas,  il  s'agit de l' intégratio n qui  est le procédé de génération d' une onto logie 
+
+unique dans un  seul  suj et à partir de deux ou plusieurs ontologies de suj ets différents. 
+
+No us avo ns fa it cette  intégration d ' une faço n manue lle.  Les deux ontologies à un ifi er sont 
+
+assez  simpl es  et  ne  nécessitent  pas  le  recours  à  des  méthodes  d ' intégration  automatique  ou 
+
+semi-automatiques.  L'onto logie résultante (C ' ) est tracée par la fi gure 6.6. 
+
+No us  avons  aj outé  une  superclasse qui  regroupe tous  les  profil s  en  li gne d' un  utilisateur, 
+
+OnlineSocialContext  qui  est  reli ée  à  Persan.  Le  choix  d'aj outer  cette  entité  a  pour  but  de 
+
+faciliter n' importe quelle extension future  par d 'autres réseaux en ligne. 
+
+1 
+
+l _
+
+_
+
+_
+
+_  _ 
+
+- - - - - - - - - - - - - - - - - - - -------------------------------------------------------------------------------------------------
+
+Appliclltions  ~ 
+
+/ 
+
+1/ 
+
+/ 
+
+61 
+
+CommunicationOe\'ice 
+
+Thermom~tN  ) 
+
+Glucometer 
+
+Oximeter 
+
+Elood?r~sstireMonrtor 
+
+Ol'msCOmpEnt 
+
+ha§lhysState 
+
+assessedBy 
+
+NormaiG~Œmla 
+
+Hyperg~·cemio 
+
+) 
+
+) 
+
+Critic<'li~Hyperglycemh!l 
+
+Cnt1callyHypoglyœmia 
+
+l égende 
+
+-----:)-
+
+Scus-d~:s9.! 
+
+~PropnêtE 
+
+Figure 6.5:  Ontologie du  domaine. 
+
+Nous  avons  comparé  chaque  concept  des  deux  ontologies  en  vue  de  trouver  des 
+
+correspondances potentielles.  Par exemple,  la classe Event de l' onto logie Facebook (03) peut 
+
+être  une  sous  classe  de  ScheduledActivityde  l'ontologie  du  domaine  médical  (02)  (un 
+
+événement qui  est confirmé sur Facebook est une activité  programmée). Les classes Checkin 
+
+(03)  et Location  (02)  sont aussi  liées par la relation ProceedsAt. 
+
+62 
+
+( 
+
+ScheduledActoity) 1  uses 
+
+happen$ln 
+
+engagedl 
+
+r-----'--"'m~uatelln 
+
+PerSDn 
+
+(  UnkedlnProfile 
+
+llorm~JG~cem~ 
+
+Hyperg~temie 
+
+) 
+
+Hypog~cerria 
+
+Cntic.l'lyHype~lycerTia 
+
+~ Sous·Offi51' 
+
+~ Propn~e 
+
+hasfeed 
+
+Home 
+
+Feed 
+
+Etc •. 
+
+Figure 6.6  : Ontologie du  contexte. 
+
+Par ailleurs,  certa ines  propriétés  du  profil  Facebook (FacebookProfil)  pourraient  être  les 
+
+mêmes propriétés de  la classe Persan (adresse,  nom, prénom, anniversaire, etc.).  No us avons 
+
+choisi  de  les  la isser  sous  une  seule  classe  afin  d 'év iter  une  redondance  dans  l'ontologie 
+
+uniq ue rés ultante (04). 
+
+-
+
+- - - - - - -- - -- - - - - - - - - - -
+
+63 
+
+6.2.4 Étape D:  Raisonnement et inférence du contexte 
+
+Le  choix  de  l'approche  onto logique  dans  la  modélisation  du  contexte  éta it  motivé  par  la 
+
+possibilité  d'appliquer du  raisonnement  sur  le  modèle.  En  effet,  le  raisonneur  peut j ouer  le 
+
+rôle  de  c lassificateur  en  inféra nt  la  hiérarchie  des  classes.  Le  raisonneur  est  responsable  de 
+
+vérifier  la  cohérence  de  l'ontologie.  De  plus,  le  raisonneur  aide  à  déduire  (inférer)  un 
+
+contexte  de  haut  ni veau  à  partir  d' un  ensemble  de  données  brutes  captées  (i nformations  de 
+
+bas  ni veau).  Par  exemple,  pour  déduire  l'état  d' hyperglycémie  pour  une  personne,  il  faut 
+
+qu ' un  ensemble de conditions soient  vérifiées .  Ces conditions  sont défi nies  par un  ensemble 
+
+de données captées (âge, genre,  taux de glycémie,  etc.). 
+
+Le raisonnement est  important pour une bonne exploitation de  l' onto logie et  peut être  fa it 
+
+sur  deux  ni veaux  ou  de  deux  manières  diffé rentes, on  parle  du  ra isonnement  onto logique  et 
+
+des  règles  d' inférence définies  par  le  développeur.  Le  ra isonnement onto logi que est exécuté 
+
+par des  règles  intégrées dans  la sémantique d' OWL.  Les  règles d ' infé rence sont un  ensemble 
+
+de règles  défini es  par le développeur afin  de dédui re  le contexte de haut niveau. 
+
+6.3 Raisonnement ontologique 
+
+Les  ontologies  développées  en  OWL  intègrent  des  règles  logiques  internes  qui  sont 
+
+défini es  par  la  sémantique  du  langage .  Ce  raisonnement  permet  de  déduire  certa ins  fa its 
+
+relatifs  à  la  hiérarchie  de  l' ontologie :  vérifier  si  une  classe  est  une  sous  c lasse  d' une  autre 
+
+classe  ou si un  individu  (une  instance)  placé  dans  une  classe  ap partient  à d'autres  classes en 
+
+même temps. 
+
+Par  exemple,  Thermometer  et  une  sous  classe  de  Computationa!Entity  puisque 
+
+Medica!Device  est  une  sous  classe  de  Computationa!Entity  et  Thermometer  est  une  sous 
+
+c lasse de Medica!Device  (SubclasseOJ). 
+
+OWL permet auss i de dissocier les classes (disj ointWith) . Par exemple les classes Child et 
+
+Adult  et Elderly  sont  toutes  di sj ointes.  Une  personne  peut  seulement  être  dans  une  et  une 
+
+seule catégorie d'âge. 
+
+64 
+
+La  propriété  located/n  entre  Computationa!Entity  et  Location  est  auss i  une  propriété 
+
+inverse  (lnverseO.fJ  c'est-à-dire  un  mobile  est  situé  dans  une  maison,  la  maison contient  le 
+
+téléphone mobile [37]. 
+
+Dans  la  version  de  Protégé  que  nous  avons  utilisé  ( 4. 1.0),  il  est  poss ible  de  voir  la 
+
+nouvelle  hiérarchie  de  classes  après  avoir  exécuté  le  raisonneur.  La  hiérarchie  initiale  est 
+
+appelée assertedhierarchy et la hiérarchie inférée est appelée  inferredhierarchy. 
+
+L' inférence  du  contexte  est  la  déduction  d' un  contexte  implicite  à  partir  de  données 
+
+implicites.  Il  s' agit  de  définir  le  contexte  de  haut  niveau à  pa11ir  de  données  brutes  captés 
+
+dites  données  atomiques.  Cette  inférence  peut  être  réali sée  grâce  aux  règles  d' inférence  qui 
+
+peuvent  être  associées  à  l'ontologie  et exécutées  par  le  raisonneur.  Ces  règles  sont  défi ni es 
+
+par  le  programmeur  après  avo ir  modélisé  le  contexte  et  terminé  l' implémentation  de 
+
+1 'ontologie. 
+
+La définition de ces  règles  nécess ite  le choix d' un  langage de  règles,  d' un outil  d' édition 
+des  règles  et d' un  raisonneur.  Pour définir ces  règles  nous avons utilisé le langage SWRL 13 et 
+
+l' éditeur  de  règles  SWRL  fo urni  par  Protégé  ainsi  que  RacerProTG  qui  est  une  version 
+
+gratuite  acer  ro  , 
+14 
+
+.  R 
+
+p 
+
+Les règles de  la logique descriptive peuvent être [38]: 
+
+a)  Des  règles  déductives:  permettent  de  déduire  un  fait  à  partir  d' un  ensemble  de 
+
+cond itions. 
+
+b)  Des  règles  réactives:  permettent d' exécuter une action si un  ensemble de  conditions 
+
+sont vérifiées. 
+
+Les  valeurs  normales  des  paramètres  phys iologiques  dépendent  d' une catégorie  à une autre . 
+
+Nous  avons  alors classé  les  ind ividus  (Persan)  par  catégorie  d'âge  (Child,  Adult,  Elderly) . 
+
+Les règles permettant de classifier une  personne sont : 
+
+Si une personne a moins de 16  ans alors c'est un  enfant (Chi ld). 
+
+13  htt p:/ /www.w3 .org/Submission/SWRL/ 
+14  http :// www.ra ce r-syste ms.com/ 
+
+Si  un e personne a entre  16 et 66 ans a lors c'est un  adule (Adult). 
+
+Si un e personne a plus de 66  ans alors c' est une vielle personne (Eiderly). 
+
+65 
+
+Ru les 
+Ir---------------------- ·- ----- ----
+~~rson(_?p) , _h~~Age{?p ,  ?_x) ,_greaterTha_!'l(_?x,_ ~~) -> ~~d~ry(?p) 
+r--
+i  Person(?p), hasAge(?p, ?x),  greaterThan(?x, 16), lessThan{?x, 66) -> 
+1 jAdult(?p) 
+Person(?p), hasAge(?p, ?x),  les~!han(?x,  16)_::-_ Chilt!(?p) 
+
+1
+
+Figure 6. 7 : Class ificat ion des  personnes selon l'âge. 
+
+Cette  c lass ification  se  fa it  par,  greaterThan  et lessThan  qui  sont  des  fo nctions  intégrées 
+
+(Built-Ins) de  SWRL qui  permettent  d'effectuer des  comparaisons  numériqu es . La fi gure  6.7 
+
+est  une  capture  d 'écran, dans  Protégé,  des règles défini es  dans  le  but  de  classer  les  indi vidus 
+
+(Persan) par catégori e d'âge (Child,  Adult, Eider/y). 
+
+La  température  corporelle  ne  dépend  pas  du  genre  ou  de  la  catégo rie  d'âge  de  la 
+
+personne.  U ne  température  corporelle  norma le  (Norma!Fever),  é levée  (HighFever)  ou  très 
+
+é levée (CriticallyHighFever) est déduite de  la  manière sui vante: 
+
+Si un e personne a  une température corpore lle plus é levée que 39 degrés alors c'est 
+
+un e température très élevée. 
+
+Si une personne a  une température entre  38 et 39 degrés a lors c'est une température 
+
+élevée. 
+
+Si une personne a une température  corporelle  mo ins élevée que 38 degrés alors c'est 
+
+une température norm ale. 
+
+•·  ;.-; 
+
+Ru les 
+
+~..__..,___ 
+
+!Person(?p}, hasFeverValue(?p, ?tv), greaterThan(?fv, 38), 
+~ ssThan(?x, 391  -~H~hFever(? e_L  __ .  ___ --·  . _ _ 
+P'erson(?p),  hasFeverValue(?p, ?tv), greaterThan(?fv, 39)  ->· 
+CriticallyHightFever(?p) 
+
+son(?p),  ha.sFeverValue(?p, ?tv), greaterThan(?tv, 36), 
+sThan(?tv, 38 ) ->  NormaiFever(?p) 
+
+--------
+
+66 
+
+_ 
+
+- - -
+
+Figure 6.8:  Règles définissant les niveaux de température  corporelle de  l'utili sateur. 
+
+La  fi gure  6. 8  est  une  capture  d' écran  des  règles  qui  permettent  de  déduire  l' état 
+
+phys iologique de la personne afin  de réagir en fonction de ce contexte. 
+
+Le  taux  de  glycémie  varie  selon  l'état  de  santé  de  la  personne  (personne  normale, 
+
+personne  diabétique),  le  genre,  la  catégorie  d' âge  et  l' horaire  de  prise  de  sang  (le  matin  à 
+
+jeun,  le  soir  après  le  repas).  Les  règles  suivantes  s'appliquent  sur  un  homme  âgé  (v ieille 
+
+personne) et diabétique ayant pris la mesure du taux de glycémie le matin . C'est-à-dire: 
+
+Si  la  personne  est  un  homme  vieux  et  diabétique  et  la  prise  de  sang  a  été  faite  le 
+
+matin  et le taux de glycémie est moins de 0.7g/l alors c'est une hypoglycémie sévère. 
+
+Si  la  personne  est  un  homme  vieux  et  diabétique  et  la  prise  de  sang  a  été  fa ite  le 
+
+matin et le taux de glycémie est entre 0.7g/l et 0.8g/1 alors c' est une hypoglycémi e. 
+
+Si  la  personne  est  un  homme  vieux  et  diabétique  et  la  prise  de  sang  a  été  fa ite  le 
+
+mati n  et  le  taux  de  glycémie  est  entre  0.8g/l  et  1. 1 g/1 alors  c'est  une  glycémie 
+
+normale. 
+
+Si  la  personne  est  un  homme  vieux  et  diabétique  et  la  prise  de  sang  a  été  faite  le 
+
+matin  et le taux de glycémie est entre  1.1 g/1 et 1.3g/1 alors c'est une hyperglycémie. 
+
+Si  la  personne  est  un  homme  vieux  et  diabétique  et  la  prise  de  sang  a  été  fa ite  le 
+
+matin et le taux de glycémie est plus de  1.3 g/l alors c'est une hyperglycémie  sévère. 
+
+La figure 6.9  est une capture d'écran sur Protégé des  règles énoncées ci-dessus. 
+
+--- - · - - - - - - - - - -- - -- - - - - - -
+
+67 
+
+((!jQ@  1 
+
+J! Diabete(?p), Eldery(?p), Male(?p),  Time(?t) ,  hasBioodSugarValue(?p, 
+1 i?sv), hasTime(?t, ?time),  greaterThan(?sv, 0.8) ,  lessThan(?sv, 1 .1 ), 
+il stringEquallgnoreCase(?time, "morning") ->  NormaiGiycemia(?p) 
+i.Diabete(?p), Eldery(?p), Male(?p), TI-~e(?t), hasBioodS~garvalue(?p, 
+1i?sv),  hasTime(?t, ?time), lessThan(?sv, 0.7) , 
+jstringEquallgnoreCase(?time ,  " morning") -> 
+!CriticallyHypoglycemia(?p) · 
+1 ·----------------------------------------------------------------------------------------------------------------------------------
+II Diabete(?p), Eldery(?p),  Male(?p) ,  Time(?t), hasBioodSugarValue(?p, 
+1 ;?sv),  hasTime(?t, ?time),  greaterThan(?sv, 1.1), lessThan(?sv,  1.3). 
+!stringEquallgnoreCase(?time, "morning") ->  Hyperglycemia(?p) 
+1-;;;~~~~e(?~}.  ~l~e-;;(? p), M·;Ï~(?~):  TI~~(?~). ha~BI ~od SugarV~Iue(?;, 
+j?sv), hasnme(?t,  ?time), greaterThan(?sv,  1.3), 
+istringEquallgnoreCase(?time ,  " morning") -> 
+! lC::_~~~~<I.1!t_':IYP.!:!JI.!Yt::=_I!I!_<~__(_?El __ ___ 
+!Diabete(?p), Eldery(?p), Male(?p), Time(?t) ,  hasBioodSugarValue(?p, 
+!?sv),  hasTime(?t, ?time). greaterThan(?sv, 0.7) ,  lessThan(?sv,  0 .8) , 
+; stri!lgEq~allgnoreCase(?tim!:_•  "morning") ->  Hypog_lycemia(?p) 
+
+-== =  = - _ 
+
+i  ---------
+
+Figure 6.9: Règles d' inférence des niveaux de glycémie de  l'utilisateur. 
+
+Nous avons  procédé de  la  même  manière  pour  établir  les  règles  en  variant  le genre  de  la 
+
+personne,  sa  catégorie  d'âge,  son  état  de  santé,  les  valeurs  de  la  capture  de  glycémie  et  la 
+
+période de !a j ournée de  la prise de  la valeur (matin, soir). 
+
+6.4 Simulation des règles d'inférence 
+
+Nous  avons  effectué  quelques  simulations  sur  Protégé  afin  de  s'assurer  du 
+
+fonctionnement correct des règles d' inférences. A insi,  nous avons peuplé 1 'ontologie avec des 
+
+individus (Jndividuals),  nous avons défini  les  propriétés  de ces  individus et nous avons  lancé 
+
+le  moteur d'inférence. 
+
+Nous avons défini une personne (Ahmed) avec  les  propriétés suivantes : 
+
+Age =  20 ans. 
+
+Genre =  male. 
+
+- - - - -- - - -
+
+68 
+
+Temperature corporelle= 40. 
+
+Nous  avons  rentré  manuellement  cet  individu  sur  Protégé  sans  « Individuals » et  nous 
+
+avons  défini  de  la  même  manière  ses  propriétés  avec  « Property Assertion »  en  rentrant  la 
+
+propriété et sa valeur. 
+
+La  figure  6.10  ci-dessous  représente  une  capture  écran  de  l' initiation  d' un  individu 
+
+(Ahmed) et ses propriétés. 
+
++ AAJne{! nasseu! ~male"'"SI1ng 
++ M~hasAge20 
++An mec 1'Jpi!- Ferson 
++lrtd;v:O.\.i:!l. Ahmed 
+
+! ht<~( 
+ltP~rson . 
+! '""''·''"'~ 
+i 
+II•Hrt•l~:·-··1.-t,,:·;~ ~ 0 
+
+.ft:, 
+
+t<.:,••o~t•:,~.-:.~m 
+
+, 
+!;  • huFeverVillue  40 
+
+~ .•. !'"'"'"''"~·' 
+l~~~h.nSexe "male~·Hstrlng 
+r·  :::::~:::::.: .. ~.·:~:~:.~~0 
+
+;  • nuAge  20 
+
+1 
+
+u@ !a 
+
+0 
+c 
+
+Figure 6.10  :  Capture d'écran- Initiation de la description d'un  individu . 
+
+Nous avons  par la suite  lancé le moteur d' inférence RacerPro. Après cette opération nous 
+
+pouvons vérifier la classification  de  l' individu  selon  les  propriétés qu ' on  lui  a  attribué. Nous 
+
+avons  procédé à  cette  vérification  par  la  nouvelle  description  de  l' individu  après  inférence. 
+
+Comme  le  montre  la  figure  6.11  qui  est une capture d'écran  de Protégé de  l' individu Ahmed 
+
+après  l' inférence.  Ahmed est  classé  sous  Adult, Male  et  CriticallyHightFever  (température 
+
+corporelle très élevée). 
+
+Nous  avons  aussi  défini  une  deuxième  personne  (Fana)  avec  des  propriétés  différentes. 
+
+Les propriétés attri buées à Fana sont ainsi : 
+
+69 
+
+Age= 10  ans. 
+
+Genre = fe ma le. 
+
+Temperature corporelle= 37. 
+
+La fi gure 5. 12 représente  l' initiation de  l' indiv idu  (Fana) et ses  propriétés que nous avo ns 
+
+saisies d' une faço n manuelle. 
+
+(~~;;;;;ï~1J:~t~ ~bt~,~ 
+
+l~Jt*· 
+-~--~!!!.~~--'-=:==-~===]:. ,/·~~m~v~s-~~ -~-~-~~-.. 
+
+t  Amine 
+t  Fana 
+
+j' ~~~~.~ -r~~;~··l 
+
+'"*'": m"'m~wz[i~ .. :.~•-,• •. •.,----------------------------m 
+
+!: 
+;; 
+,, 
+t 
+~~ 
+
++ Anmed nasFever'Value 40 
++ MlllOO hasSexe "male"''·stnng 
++ Allmed hasAJe 20 
++ Ahmed  Type  Persan 
+t :~CiVii:!Uai. Ahmed 
+
+t CrHicallyHgh\Fever 
+
+t t.131e 
+
+''"''"'";."() 
+
+'''"""""''"'0 
+
+• nasFeverv;alut  40 
+• huSeu  "m<ale",.string 
+• nu Age  20 
+
+Figure 6.11  Individu Ahmed après  inférence. 
+
+No us  avons  par  la  suite  lancé  le  moteur  d' inférence. Après  l' inférence, Fana  est classée 
+
+sous Child, Female et NormalFever (température  normale).  La fi gure  6. 13  montre  l' individu 
+
+Fana après le lancement du  moteur d ' inférence. 
+
+Les simulations  précédentes démontrent que  l' inférence nous donne des  résultats corrects 
+
+et pro uve que  les  règ les d ' inférence ont été convenablement défi nies et implémentées. 
+
++ Ahmed 
++ Amine 
+1
+
+i·-~··· 
+
+1 
+
+Fouoo 5 uses of Fa 
+
+Y +Fana 
+
++Fana hasAge "10"' .. il1t 
++Fana hasSel\e "female•'Aslnng 
++Fana hasFeverValue 37 
++Fana l)'pe Person 
+
+u!:loif 
+
+ji 
+il 
+li 
+Il 
+'l 
+!1 
+ii 
+
+j _,,. 
+
+1·,,.,0 
+[• Person 
+
+Il 
+Il 
+d 
+
+1 i ~ ..... , •1~-.. ~-~" 0 
+
+70 
+
+u!:IS!DI  ct!J:Ji.l@ffiUÇI 
+
+u!#!ija 
+
+• hasAge  "10"AA!nt 
+
+·-~-~ sse xe  ''fe_rl_lale_''"':~rl ng 
+• huFe verVilue  37 
+
+Figure 6.12 
+
+In itiation de l'individu  Fana. 
+
+r ~.!.!TU!> litt  ~ W•1l~liot{~41 1 
+l.ft.§U ,,i-Q. 
+
+1-;_ 
+
+! 
+
+t Fana hasAge ""t0"'"'1nt 
+t Fana hasSe.~e "femalt'""'5lnng 
++ Fana hasfevervatue 37 
++Fana  l'fp~ Ferson 
++ indi~k.lu~r: Fana 
+
+,  :
+
+tl 
+
+--···-·---···--··-·-----·-- ··-···-------- ,[;;;,;:,~:;;-~~::·,:-
+
+llJM3F§L,;.;,\ii.J 
+
+'! :~:~~::·;:":~~:~:~nt 
+[ ; • has Se:<e  "temate"~"strlng 
+
+• huFeverValue  37 
+
+Figure 6.13 : Individu  Fana après  inférence. 
+
+71 
+
+Les  autres  règles  d'inférence  ont  été  développées  de  la  même  manière  et  sur  le  même 
+
+principe  afin  d'avoir  une  modèle  qui  couvre  tous  les  cas  possibles  pour  chaque  état 
+
+physiologique.  Cependant,  dans 
+
+le  cas  d'une  application  réelle  de  notre  modèle, 
+
+le 
+
+peuplement  de  l'ontologie  se  fait  automatiquement  et  la  définition  des  propriétés  se  fait  à 
+
+travers  l' extraction  de  ces  données  de  Facebook  ou  la  réception  des  informations  des 
+
+capteurs. 
+
+CHAPITRE VII 
+
+CONCLUSION 
+
+Nous  avons  présenté  un  modè le  de  contexte qui  utili se  les  informations  du  réseau  soc ial 
+
+en  ligne Facebook. Nous avons  présenté une architecture  middleware dépendante du  contexte 
+
+formée de  modules interconnectés et effectuant des traitements différents. 
+
+Dans  l'architecture  introduite,  nous  avons  proposé des  amé liorations  en se  basant sur  les 
+
+systèmes existants en ajoutant un  module de filtrage  pour l' interception des  données erronées 
+
+et une couche de gestion  responsable de  la communication entre  le  middleware et les serv ices 
+
+du contexte. 
+
+Nous  avons  démontré  l' utilité  et  l' apport des  réseaux  sociaux  en  ligne  dan s  la  définition 
+
+du  contexte de l' utilisate ur dans le cadre d' une application du domaine méd ical. 
+
+Dans  l'ana lyse  des  informations  de  contexte  fournies  par  Facebook,  nous  avo ns  extrait 
+
+des  informations  pour  les  intégrer à  une ontologie g lobale et  l' avons appliquée  dans  le  cadre 
+
+d'une application  médica le simple en  y  intégrant  le modè le de Facebook. 
+
+Ce  couplage  entre  ces  deux  é léments  nous  a  permis  d'exp loiter  les  informations  à 
+
+l'intérieur du  réseau  Facebook. Nous avons  défini  différents  contextes  de  l' utilisateur  par  le 
+
+moyen de règles d'inférences que nous avons testées avec succès. 
+
+Nous  avons  pu  réaliser  presque  tous  les  objectifs  définis  dans  le  cadre  de  ce  mémoire. 
+
+Cependant, et faute  de temps,  nous  n'avons  pas  pu  faire  une  implémentation  comp lète  d' une 
+
+application  capable d ' aller chercher des  informations de Facebook et  des  différents  capteurs 
+
+et  de  réagi r  dépendamment  du  contexte  déduit.  Cet  aspect  reste  donc  à  compl éter  dans  le 
+
+73 
+
+futur,  sur  quoi  nous  avons  l'intention  de  travailler.  Nous  avons  auss i  négligé  l' aspect 
+
+d'évolutivité  de  la  plateforme  Facebook.  Il  serait  intéressant  de  déve lopper  un  mécanisme 
+
+permettant  de  mettre  à  jour  d' une  manière  dynamique  le  modèle  ontologique  dés  que 
+
+l' architecture de Facebook subisse des changements. 
+
+Ce travail  nous a présenté quelques défi s intéressants au niveau de la modéli sation de 
+
+Facebook: 
+
+•  Cette  plateforme  offre  une  API  à  partir  de  laquell e  nous  avons  pu  construire  notre 
+
+modèle.  Cependant, cette API  ne décrit  pas  entièrement  les éléments de la plateforme 
+
+et nous avons investi  plus de temps pour  la réali sation de cette tâche. 
+
+•  La  version  4.1 .0  de  Protégé  que  nous  avons  utilisée,  ne  fournit  pas  un  éditeur  de 
+
+règles  d' inférence  développé.  L' éditeur  disponible  est  très  simple  et  les  règles 
+
+doivent  être décrites  manuellement.  De  plus, cet éditeur  ne  permet pas  1' insertion de 
+
+plus de  105  règles,  une limite plus petite que le nombre de règles que nous avons. 
+
+Dans  une  perspective  de  déve loppement  futur,  nous  prévoyons  implémenter  une 
+
+application complète  qui  utilise  notre  modèle de contexte.  Nous  pouvons  auss i développer 
+
+un  programme  de  fo uille  automatique  de  Facebook  qui  pourrait  extraire  les  données 
+
+nécessaires  à  notre  application.  Au  niveau  du  modèle,  nous  suggérons  d' utiliser  d'autres 
+
+réseaux sociaux en  ligne pour enrichir le modèle de contexte et obtenir d'autres  informations 
+
+qui  ne  sont  pas  di sponibles  sur  Facebook.  Enfin,  nous  pouvons  proposer  d' utiliser  les 
+
+info rmations de Facebook pour  des  modèles de contexte relatifs  à des  domaines  autres  que le 
+
+domaine médical expérimenté dans ce trava il. 
+
+Ce travail  a été très  enrichissant  et  nous a permis de travailler sur  un  suj et de l'heure et a 
+
+ouvert des  perspectives et des problématiques  intéressantes dans le futur. 
+
+-~l 
+
+RÉFÉRENCES 
+
+[1] 
+
+Zurai ni  Zainol  and  Keiichi  Nakata.  2010.  "Generic  context  onto logy  modelling:  A 
+
+review  and  framework".  In  2nd International  Conference  on  Computer  Technology 
+
+and Development (!CCTD 201 0),  Piscataway, NJ: IEEE, p. 126-130. 
+
+[2] 
+
+Anind  K.  Dey,  Gregory  D.  Abowd,  and  Daniel  Salber.  2001.  "A  conceptual 
+
+framework  and  a  toolkit  for  supporting  the  rapid  prototyping  of  context-aware 
+
+app lications". Human-Computer Interaction, vo l.  16, no 2,  p.  97-166. 
+
+[3] 
+
+M . Mohsin Saleemi, Natalia Diaz Rodriguez, Johan  Lilius, and  Ivan Parres. 20 11 . "A 
+
+framework  for  context-aware  app lications  for  sm art  spa ces".  In  Proceedings  of the 
+
+Il th  international conference  and 4th  international conference  on Smart .spa ces  and 
+
+next  generation  wired/wirele.s.s  networking  (NEW2AN'Jl/ruSMART'll),  Sergey 
+
+Balandin,  Yevgeni  Koucheryavy,  and  Honglin  Hu  (Eds.).  Berlin,  Heidelberg: 
+
+Springer-Verlag, Lecture Notes in  Computer Science, vo l.  6869, p.  14-25. 
+
+[ 4] 
+
+Thomas  R.  Gruber.  1995.  "Toward  princip les  for  the  design  of onto logies  used  for 
+
+knowledge  sharin g".  International  Journal  of Human-Computer  Studie.s  - Special 
+
+issue:  the  rote  of forma!  ontology  in  the  information  technology,  vol.  43,  no  5-6  p. 
+
+907-928. 
+
+[5] 
+
+Joachim  Kleb  and  Raphael  Volz.  2009.  "Ontology  based  entity disambiguation  w ith 
+natural  language  patterns".  In  4'11  International  Conference  on  Digital  Information 
+
+Management (!CDIM 2009), Piscataway, NJ : IEEE, p.1-8 . 
+
+[6] 
+
+Kaushal  Giri.  20 Il.  "Role  of ontology  in  semantic  web".  DES/DOC  Journal  of 
+
+Library & Information Technology, vo l.  31, no 2, p . . 116-120. 
+
+[7] 
+
+Kaveh  Bazargan.  2004.  "Le  rôle  des  ontologies  de  domaine  dans  la  conception  des 
+
+interfaces  de  navigation  pour  des  collections  en  ligne  de  musées :  évaluation  et 
+
+proposition".  Mémoire  de  DEA  en  Management  et  Technologies  des  Systèmes 
+
+d'Information 
+
+(MATIS),  Genève,  Université  de  Genève.  Retrieved 
+
+from 
+
+http ://c ui . unige . ch/~bazargan/PDF/Rapport-KB-DEA-MA TIS .pdf  (accessed  may 10, 
+
+2012). 
+
+75 
+
+[8] 
+
+M.  Poveda-Villal6n, M . Carmen  Swirez-Figueroa,  R. Garcia-Castro,  and  A. G6mez(cid:173)
+
+Pérez. 201 O.  "A  Context Ontology  for  Mobile Environments".  In  Proceedings  of the 
+
+Second  Workshop  on  Context  Information  and  Ontologies  (CIA02010),  Tilburg 
+
+University,  The  Netherlands :  CEUR-WS.org,  vol.  626.  Retrieved  from  http://ceur(cid:173)
+
+ws.org/Vol-626/regular3.pdf(may  10, 2010). 
+
+[9] 
+
+Nico la Guarino . 1998.  "Formai Ontology  in  Information  Systems".  In  Proceedings of 
+
+the  First  International  Conference  on  Forma!  On'tology  in  Information  Systems 
+
+(FOIS '98).  Amsterdam,  The  Netherlands: 
+
+lOS  Press.  Retrieved 
+
+from 
+
+http: //www.loa.istc.cnr.it/Papers/FOIS98.pdf (may  10, 20 12) 
+
+[1 0] 
+
+Harry  Chen, Tim  Finin,  and  Anupam  Joshi . 2003.  "An  Ontology for  Context-Aware 
+
+Pervasive  Computing Environments" . The Knowledge  Engineering Review,  vol.  18, 
+
+no  3,  p.  197-207.  Retrieved  from  http: /lebiquity.umbc.edu/paper/html/ id/60/An(cid:173)
+
+Ontology-for-Context-Aware-Pervasive-Computing-Environments  (accessed  may  9, 
+
+2012). 
+
+[Il]  Matthias  Baldauf,  Schahram  Dustdar,  and  Florian  Rosenberg.  2007.  "A  survey  on 
+
+context  aware  systems".  lnt.  J.  Ad  Hoc  Ubiquitous  Comput.  2,  4  (June  2007),  263 -
+
+277. 
+
+[12] 
+
+Philipp Gutheim.  2011.  "An ontology-based context inference service for mobile 
+
+applications in  next-generation  networks". IEEE Communications Magazine, vol.  49, 
+
+no  1,  p. 60-66. 
+
+[13] 
+
+Jean  Le  Feuvre,  Cyri l  Concolato,  and  Jean-Claude  Dufourd.  2009.  "Widgets 
+
+mobility". In Proceedings of the  6th International Conference on Mob ile Technology, 
+
+76 
+
+Application  &  Systems  (Mobility  '09).  New  York,  NY,  USA:  ACM,  Artic le  25  ,  4 
+
+pages. 
+
+[14] 
+
+Xu  Ying  and  Xu  Fu-yuan.  2006.  "Research  on  Context  Modeling  Based  on 
+
+Ontology".  In  CIMCA 
+
+'06  Proceedings  of  the  International  Conference  on 
+
+Computational Inteligence for Mode !ling  Control and Automation  and International 
+
+Conference  on  Intelligent  Agents  Web  Technologies  and International  Commerce . 
+
+Washington, DC, USA: IEEE Computer Society,  p.  188-196. 
+
+[15] 
+
+Tao  Gu,  Hung  Keng  Pung,  and  Da  Qing  Zhang.  2005 .  "  A  service-oriented 
+
+middleware for  building context-aware services". Journal of Network and Computer 
+
+Applications, vol.  28, no  1, p.  1-18. 
+
+[16]  Michael  Wooldridge  and  Nick  R.  Jennings.  1995.  "Intelligent  agents:  theory  and 
+
+practice".  The Knowledge Engineering Review, vol.  10, no  2, p.  115-152. 
+
+[17] 
+
+Harry Chen.  2003.  "An Intelligent Broker Architecture for Context-Aware  Systems" . 
+
+PhD.  Dissertation.  Baltimore, MD, USA  : University of Maryland Baltimore County. 
+
+Retrieved 
+
+from 
+
+http: //citeseerx.ist.psu.edu/viewdoc/download?doi=l 0.1.1.13.3938&rep=rep 1 &type= 
+
+pdf.  (accessed may 8,  2012) 
+
+[18] 
+
+Patrick Fahy and  Siobhan  Clarke.  2004.  "CASS-a middleware for  mobile  context(cid:173)
+
+aware  applications" ,  paper  presented  at  Workshop  on  Context  Awareness,  MobiSys 
+
+2004,  Boston,  Massachusetts,  USA, 
+
+June 
+
+6, 
+
+2004.  Retrieved 
+
+from 
+
+http: //vvww .si gmobi le.org/mobi svs/2 004/context  awarencss/papers/cass J 2f.pdf 
+
+(accessed may 9, 2012) 
+
+[19] 
+
+Thomas  Hofer,  Wieland  Schwinger,  Mario  Pichler,  Gerhard  Leonhartsberger,  Josef 
+
+Altmann,  and  Werner Retschitzegger.  2003.  "Context-awareness  on  mobile deviees -
+
+the  hydrogen  approach".  In  Proceedings  of the  36th  Annual  Hawaii  International 
+
+Conference  on  System  Sciences  (HICSS 
+
+'03),  Wash ington,  DC,  USA :  IEEE 
+
+Computer Society, Track 9- vo l.  9,  10  pages. 
+
+77 
+
+[20] 
+
+Natalia  Diaz  Rodri guez.  2011.  "A  Framework  for  Context-Aware  Applications  fo r 
+
+Sma11 Spaces".  In  IEEEIIPSJ 11 th International Symposium on Applications and the 
+
+Internet (SAINT) , 2011 , Was hington, DC, USA : IEEE Computer Soc iety, p. 2 18-22 1. 
+
+[2 1] 
+
+Andrew  D.  Jurik  and  A lfred  C .  Weaver.  2009.  "Body  Sen sors:  Wireless  Access  to 
+
+Phys iological Data" .IEEE Software,  vo l.  26, no  1, p. 7 1-73 . 
+
+[22] 
+
+Hai  Van  Luu  and  Xueyan  Tang.  2011.  "An  Effi cient  Multi-path  Data  Co llection 
+
+Scheme  in  Wire less  Sensor  Networks".  lnProceedings  of  the  31st  International 
+
+Conference  on  Distributed  Computing Systems  Workshops,  Washington,  DC,  USA  : 
+
+IEEE Computer Society,  p. 198-207. 
+
+[23 ] 
+
+B i lei  Romdhani,  Dominique  Ba11he l,  and  Fabrice  Va lois.  20 Il. "Routing  fo r  Data(cid:173)
+
+Collection  in  Heterogeneous  Wireless  Sensor  Networks" .  In  IEEE  73rd  Vehicular 
+
+Technology Conference (VTC Spring),  Pi scataway, NJ : IEEE, p.  1-5, 
+
+[24] 
+
+Pham  Thi  Thu  Thuy,  Youn g-Koo  Lee,  and  Sung  Yo un g  Lee.  2009.  "DTD20WL: 
+
+automatic transforming XML documents  into  OWL onto logy".  ln  Proceedings of  the 
+
+2nd  International  Conf erence  on  Interaction  Sciences:  Information  Technology, 
+
+Culture and Human  (ICIS '09) . New York, NY, USA: ACM, p.  125- 13 1. 
+
+[25] 
+
+Shanping  Li,  Zhaohui  Yang,  and  Xin  Lin .  2005  "RTCR:  a  soft  real-time  context 
+
+reasoner, "  In  Second  International  Conference  on  Embedded  Software  and 
+
+Systems(ICESS '05), Washington, DC, USA : IEEE Computer Society, p. 386-391. 
+
+[26] 
+
+Hung  Quoc  Ngo,  Anjum  Shehzad,  Kim  Anh  Pham  Ngoc,  S.Y.  Lee,  and  Manwoo 
+
+Jeon.  2005.  "Research  issues  in  the  development  of  context-aware  middleware 
+
+archi tectures" .  In  Proceedings  of  the  11 th  IEEE  International  Conference  on 
+
+Embedded  and  Real-Time  Computing  Systems  and  Applications  RTCSA 
+
+'05, 
+
+Washington, DC, USA : IEEE Computer Society, p. 459- 462 . 
+
+[27] 
+
+Gu  Jun-Zhong.  2009."Contexte  Aware  Computing". Journal  of East  China Normal 
+
+University (Natural Science), vol.  5, p. 1-20. 
+
+- - -
+
+- - - -
+
+78 
+
+[28] 
+
+Kyle  Chard,  Kri s  Bubendorfer,  Simon  Caton,  and  Omer Rana. 2011.  "Social  Cloud 
+
+Computing:  A  Vision for  Socially Motivated  Resource  Sharing".  IEEE  Transactions 
+
+on Services Computing, preprint. 
+
+(29] 
+
+Salma  Noor  and  Kirk  Martinez.  2009.  "Using  social  data  as  context  for  making 
+
+recommendations:  an  ontology based  approach" . In  Proceedings  ofthe l st  Workshop 
+
+on Context, Information and Ontologies(CIAO '09),  Jose Manuel  Gomez-Perez, Peter 
+
+Haase,  Marcel  Tilly,  and  Paul  Warren  (Eds.).  New  York, NY,  USA:  ACM,  Article 
+
+No.  7. 
+
+[30)  Milan  Stankovic.  2008."Modeling  Online  Presence",  In  Proceedings  of the  First 
+
+Social  Data  on  the  Web  Workshop,  Karlsruhe,  Germany,  October  27,  CEUR 
+
+Workshop 
+
+Proceedings. 
+
+Retrieved 
+
+. fromh ttp://mi lsta n.net/papers/Raper2.pdf 
+
+(accessedmay 24). 
+
+[31] 
+
+Alvaro  Ortigosa,  Jose  Ignacio  Quiroga,  and  Rosa  M.Carro.  20 Il.  "Jnferring  user 
+
+personality  in  social  networks:  A  case  study  in  Facebook".  Inllth  International 
+
+Conference  on  Intelligent Systems  Design  and Applications  (ISDA) ,Piscataway, NJ: 
+
+IEEE,p.  563-568 . 
+
+[32] 
+
+Anusuriya  Devaraju  and  Simon  Hoh.  2008.  "Ontology-based  context  modeling  for 
+
+user-centered  Context-aware  Services  Platform".  In  International  Symposium  on 
+
+Information Technology (ITSim 2008) , Piscataway, NJ: IEEE, vol.  2,  p.  1-7. 
+
+[33] 
+
+Feruzan  Ay.2007. 
+
+"Context  Mode ling  and  Reasoning  using  Ontologies". 
+
+Unpublished  work.  Retrieved 
+
+from  http://ww w. Ronnuki.de/cmaruo/cmaruo.pdf 
+
+(accessed may 24, 2012). 
+
+[34) 
+
+Alan  Jovic,  Marin  Prcela,  and  Dragan  Gamberger.  2007.  "Ontologies  in  Medical 
+
+Knowledge Representation".  In  Proceedings of the  29th International Conference  on 
+
+Information Tech nology Interfaces  (!TI 2007),  Piscataway, NJ : IEEE, p.  535-540. 
+
+[35] 
+
+Jérôme  Euzenat  and  Petko  Valtchev.  2003."An  lntegrative  proximity  measure  for 
+
+ontology alignement", ln Proceedings of the  l st International  Workshop on Semantic 
+
+79 
+
+Integration 
+
+(ISWC-2003),  CEUR-WS.org,  vol.  82,  p. 33-38.  Retrieved 
+
+from 
+
+lillJ2 :1/ceur-ws.onz!V ol -82/SI  paper  06.Q.Q.f (accessed may 24, 20 12) 
+
+[36] 
+
+Namyoun  Choi,  11-Yeol  Song,  and  Hyoil  Han .  2006.  "A  survey  on  ontology 
+
+mapping" . ACM SIGMOD Record, vol. 35, no  3, p.  34-41. 
+
+[37] 
+
+Xiao  Hang  Wang,  Da Qing Zhang,  Tao  Gu,  and  Hung  Keng  Pung.2004.  "Ontology 
+
+based  context  modeling  and  reasoning  using  OWL".  In  Proceedings  of the  Second 
+
+IEEE Annual Conference on  Pervasive Computing and Communications  Workshops, 
+
+Washington DC : IEEE Computer Society,p.  18-22. 
+
+[38] 
+
+Petko  Valtchev.  Automne  20ll.''Thème  5  La  couche  logique  et  inférenti elle:  les 
+
+règles". Notes du cours DIC938I 
+
+

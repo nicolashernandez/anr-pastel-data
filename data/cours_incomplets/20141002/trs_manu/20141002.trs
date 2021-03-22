@@ -1,0 +1,2150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Trans SYSTEM "trans-14.dtd">
+<Trans audio_filename="20141002" version="3" version_date="170615">
+<Speakers>
+<Speaker id="spk23" name="Locuteur 1" check="no" type="male" dialect="native" accent="" scope="local"/>
+</Speakers>
+<Episode>
+<Section type="report" startTime="0" endTime="3643.675">
+<Turn startTime="0.0" speaker="spk23" endTime="1617.397" mode="planned" fidelity="high" channel="studio">
+<Sync time="0.0"/>
+on va parler de d'une structure de données, une nouvelles structure de données.
+<Sync time="4.557"/>
+une structure de données, c'est quelque chose qui permet de stocker de l'information
+<Sync time="8.994"/>
+et cette structure, qui s'appelle les tableaux, c'est
+<Sync time="12.918"/>
+elle sera très très importante, notamment quand vous aurez
+<Sync time="16.786"/>
+à faire votre projet.
+<Sync time="19.466"/>
+puisqu'elle permet de stocker euh un grand nombre d'informations d'une manière très
+<Sync time="24.28"/>
+euh compacte en termes d'écriture euh algorithmique.
+<Sync time="28.955"/>
+donc ce qu'on va présenter aujourd'hui, c'est comment on le met en pratique, comment ça marche
+<Sync time="33.593"/>
+du () dans () d'un point de vue algorithmique mais aussi d'un point de vue euh plus pratique
+<Sync time="38.033"/>
+euh 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ point de vue de du javascript
+<Sync time="42.732"/>
+ce qui va nous intéresser beaucoup, c'est comment on fait pour construire des tableaux à plusieurs dimensions parce que
+<Sync time="48.364"/>
+stocker un tableau à une dimension, ça permet de stocker
+<Sync time="51.696"/>
+un texte ou s() ça permet de stocker éventuellement un son
+<Sync time="56.402"/>
+mais dès qu'on veut stocker des images ou des choses un peu plus compliquées, ben on a envie d'avoir des tableaux
+<Sync time="61.808"/>
+qui représentent au moins des informations euh sous forme rectangulaire. donc on va voir comment on peut faire pour stocker ce genre d'informations
+<Sync time="68.779"/>
+et puis on parlera de parcours de tableaux et d'algorithmie qu'il y a derrière les tableaux.
+<Sync time="74.137"/>
+euh pour commencer donc voilà le plan :
+<Sync time="76.351"/>
+on va introduire euh ce que c'est qu'un tableau
+<Sync time="80.103"/>
+et puis on va faire deux introduction finalement.
+<Sync time="82.468"/>
+une introduction euh qui est dans la vie réelle ;
+<Sync time="85.008"/>
+pourquoi on a besoin de tableaux
+<Sync time="87.426"/>
+et puis euh on va voir qu'en informatique, c'est pas tout à fait
+<Sync time="92.189"/>
+le même besoin.
+<Sync time="93.603"/>
+donc on répondra à ces deux questions en introduction
+<Sync time="98.345"/>
+pour ensuite définir les tableaux,
+<Sync time="101.127"/>
+voir comment on déclare un tableau en tant que variable type tableau,
+<Sync time="105.268"/>
+voir comment on les utilise ; donc ça, ce sera tout un tas de de petites fonctions qu'on vous donnera.
+<Sync time="111.567"/>
+et puis la partie finalement la p() qui vous intéressera le plus, c'est la partie
+<Sync time="116.642"/>
+où on va chercher à aller plus loin
+<Sync time="119.958"/>
+et construire ce qu'on appelle les tableaux dynamiques. donc ça, vous aurez la définition euh d() dans cette partie-là.
+<Sync time="126.731"/>
+on parlera de tableaux à deux dimensions,
+<Sync time="130.109"/>
+on parlera de tableaux associatifs et on parlera d'algorithmique.
+<Sync time="133.039"/>
+sur les 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ donc c'est vraiment une partie euh cette euh cinquième partie est complète
+<Sync time="137.432"/>
+et
+<Sync time="138.055"/>
+et très intéressante pour vous.
+<Sync time="140.550"/>
+bon
+<Sync time="141.922"/>
+en introduction, je vous () juste vous passer cette petite image
+<Sync time="145.896"/>
+où vous avez des tableaux.
+<Sync time="147.903"/>
+la joconde,
+<Sync time="148.908"/>
+tout le monde dit que c'est un tableau.
+<Sync time="152.124"/>
+ce que vous avez d() ce que j'ai derrière mon dos
+<Sync time="154.315"/>
+tout le monde dit que c'est un tableau.
+<Sync time="157.658"/>
+ça,
+<Sync time="159.151"/>
+c'est la table périodique des éléments
+<Sync time="161.198"/>
+c'est un tableau qui rep() qui permet de stocker
+<Sync time="164.451"/>
+une information.
+<Sync time="166.088"/>
+et puis euh ça, c'est aussi un tableau
+<Sync time="169.826"/>
+parce que ça donne un classement
+<Sync time="171.840"/>
+le classement de la star academy
+<Sync time="175.369"/>
+voilà, c'est un tableau
+<Sync time="176.805"/>
+un tableau avec des informations.
+<Sync time="179.796"/>
+bon est-ce () ça c'est ce qui
+<Sync time="181.619"/>
+c'est ce qui permet de travailler dans la vie, mais
+<Sync time="183.841"/>
+ce qui va nous rapprocher de l'*informatique, c'est euh
+<Sync time="186.988"/>
+c'est plutôt les les deux tableaux d'en bas,
+<Sync time="189.362"/>
+ceux qui permettent de stocker une information.
+<Sync time="192.783"/>
+donc un tableau b() en informatique, c'est pas ce qu'il y a au-dessus.
+<Sync time="195.793"/>
+*un tableau en informatique, c'est c'est plus proche de ce qu'il y a en dessous.
+<Sync time="200.957"/>
+voilà, donc un tableau dans la vie
+<Sync time="204.625"/>
+dans la vie réelle euh
+<Sync time="206.747"/>
+c'est c'est une suite
+<Sync time="210.080"/>
+c'est un outil pardon qui permet de structurer des informations qu'on souhaite garder en tête.
+<Sync time="216.930"/>
+voilà
+<Sync time="217.545"/>
+donc si on le l'a structurée, cette information, sous forme d'un tableau à deux dimensions ou une dimension, c'est parce qu'on a envie de tra() de travailler sur cette information.
+<Sync time="228.085"/>
+et encore une fois, dans la vie
+<Sync time="230.701"/>
+cette structuration sous forme de tableau est tellement importante qu'on a inventé des outils pour la manipuler et les outils, vous les connaissez tous
+<Sync time="237.882"/>
+ça s'appelle des tableurs ; c'est excel.
+<Sync time="240.341"/>
+voilà, c'est ça.
+<Sync time="243.007"/>
+ben des outils comme ça, vous en avez tous utilisé
+<Sync time="245.605"/>
+si vous en avez pas utilisé, rassurez-vous : vous en utiliserez en c deux i.
+<Sync time="249.129"/>
+c'est des outils qui permettent de travailler sur des tableaux
+<Sync time="252.514"/>
+et à partir d'une information stockée sous forme de colonne,
+<Sync time="255.422"/>
+on peut traverser des courbes, et cetera et cetera.
+<Sync time="259.055"/>
+voilà s() là, c'est la vie réelle.
+<Sync time="263.181"/>
+en informatique,
+<Sync time="267.040"/>
+c'est plus simple que ça.
+<Sync time="269.025"/>
+en informatique, on va se moquer de ce qui est stocké dans le tableau
+<Sync time="273.355"/>
+on va juste se dire que c'est un outil qui permet de stocker une information, qu'elle soit structurée ou pas structurée.
+<Sync time="282.131"/>
+donc on se moque de ce qu'on a appelé le tableau abstrait de la vie réelle,
+<Sync time="287.470"/>
+mais on va juste stocker une information de manière linéaire.
+<Sync time="291.076"/>
+on va demander à réserver un certain nombre de cases
+<Sync time="293.637"/>
+successives en mémoire pour stocker une information qui peut être complexes ou pas.
+<Sync time="299.692"/>
+donc
+<Sync time="300.51"/>
+concrètement, un in() tableau
+<Sync time="302.703"/>
+en informatique, c'est une réservation de plusieurs cases successives en mémoire.
+<Sync time="308.988"/>
+on a déjà vu ça euh la réservation, le stockage d'une variable, en fait euh s() c'est ni plus ni moins qu'une variable
+<Sync time="314.536"/>
+qui prend plus de place que les autres.
+<Sync time="318.380"/>
+alors c'est un peu plus que ça en informatique,
+<Sync time="320.251"/>
+mais on verra ça p() plus tard. donc en illustration, voilà la mémoire
+<Sync time="323.917"/>
+vous avez déjà vu cette petite image :
+<Sync time="326.908"/>
+c'est la barrette mémoire,
+<Sync time="328.407"/>
+organisée sous forme de petits interrupteurs, et puis on avait vu que c'était organisé sous forme de petites cases mémoire aussi.
+<Sync time="336.910"/>
+alors là j'ai une petite vidéo
+<Sync time="338.792"/>
+pour vous prouver que
+<Sync time="340.64"/>
+il y a un lien entre les tableaux qu'on va créer en informatique
+<Sync time="344.301"/>
+par ce petit euh algorithme-là,
+<Sync time="347.087"/>
+on crée un tableau. alors le tableau, il s'appelle global, c'est un tableau parce que on l'a défini comme ça.
+<Sync time="352.455"/>
+on reviendra sur cette notation p() plus tard, mais je veux juste vous montrer que
+<Sync time="356.886"/>
+si on n() regarde la mémoire utilisée par firefox quand on crée
+<Sync time="362.007"/>
+le les tableaux, ben vous allez voir que ça augmente
+<Sync time="365.042"/>
+donc là on est euh on utilise trois cents mégaoctets
+<Sync time="368.946"/>
+de mémoire ; s() c'est ce chiffre-là qu'il faut regarder
+<Sync time="371.349"/>
+et puis avec ce petit programme-là,
+<Sync time="373.6"/>
+on crée plein de tableaux différents, donc on crée un tableau qui augmente,
+<Sync time="377.529"/>
+dont la taille augmente, et puis on en recrée, on en recrée, on en recrée
+<Sync time="380.398"/>
+euh toutes les vingt millisecondes on crée un nouveau tableau de dix mille cases.
+<Sync time="386.517"/>
+voilà ce que fait ce programme
+<Sync time="389.068"/>
+ben si vous regardez bien
+<Sync time="391.074"/>
+la mémoire qu'on utilise
+<Sync time="393.026"/>
+augmente
+<Sync time="393.948"/>
+tout simplement parce que il y a un lien
+<Sync time="395.813"/>
+entre la petite barrette mémoire que je vous ai montrée
+<Sync time="398.538"/>
+qui est une mémoire physique
+<Sync time="400.889"/>
+et puis le petit programme qu'on va qu'on va créer, qui euh va
+<Sync time="404.318"/>
+demander à réserver des choses dans cette mémoire physique. donc
+<Sync time="407.642"/>
+toutes les vingt millisecondes, il demande de réserver dix mille cases
+<Sync time="410.645"/>
+ça fait beaucoup de cases de réservées, mais il y a de la place en mémoire hein
+<Sync time="414.413"/>
+on est on est rarement limité par la
+<Sync time="417.035"/>
+l'empreinte mémoire, sauf si on fait pas attention.
+<Sync time="420.317"/>
+donc voilà, je pense qu'à un moment ça s'arrête
+<Sync time="422.593"/>
+ça s'arrête avant que mon ordinateur explose
+<Sync time="425.277"/>
+mais vous ()
+<Sync time="426.733"/>
+si vous faites pas attention, il faut quand même faire 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+
+<Sync time="428.859"/>
+faire quand même voir que ça augmente assez vite.
+<Sync time="432.567"/>
+bon
+<Sync time="433.409"/>
+je crois que je je vais jusqu'à
+<Sync time="435.524"/>
+un giga dans la vidéo mais on peut s'arrêter là, croyez-moi
+<Sync time="438.533"/>
+si je laisse tourner mon programme,
+<Sync time="440.290"/>
+à un moment
+<Sync time="442.528"/>
+l'ordinateur n'explose pas, rassurez-vous
+<Sync time="444.819"/>
+mais euh il bloque ;
+<Sync time="447.450"/>
+et ça c'est pas normal.
+<Sync time="452.034"/>
+bon
+<Sync time="453.16"/>
+la suite
+<Sync time="454.881"/>
+qu'est-ce que c'est qu'un tableau en informatique ?
+<Sync time="457.911"/>
+bah c'est un nouveau type
+<Sync time="460.309"/>
+de variable
+<Sync time="462.728"/>
+qui va s'appeler tableau de
+<Sync time="464.877"/>
+un certain nombre de cases qu'on veut réserver
+<Sync time="468.111"/>
+d'un certain type.
+<Sync time="471.630"/>
+évidemment, le nombre total d'interrupteurs nécessaires pour stocker
+<Sync time="476.161"/>
+l'ensemble du tableau
+<Sync time="477.929"/>
+va dépendre du nombre de cases qu'on veut créer dans le tableau,
+<Sync time="481.73"/>
+mais aussi du type de ce qu'on veut mettre dans chaque case.
+<Sync time="487.130"/>
+donc on a besoin de préciser les deux choses : nombre de cases
+<Sync time="490.205"/>
+et type de ce qu'on veut mettre dans chaque case.
+<Sync time="495.374"/>
+voilà
+<Sync time="495.987"/>
+et et euh donc qu'est-ce qu'on voit ici ?
+<Sync time="498.982"/>
+on voit que a et b sont des entiers, t un tableau de sept cases d'entiers
+<Sync time="503.768"/>
+ça, ce que j'ai écrit en français : remplir les trois premières cases de t avec les valeurs douze, trois et sept,
+<Sync time="509.895"/>
+on verra comment ça s'écrit dans le langage algorithmique un peu plus tard,
+<Sync time="514.096"/>
+mais qu'est-ce que ça fait ce petit programme-là ? ben tout simplement en mémoire,
+<Sync time="519.540"/>
+ça crée des associations entre les noms
+<Sync time="522.059"/>
+de variables a
+<Sync time="524.515"/>
+et une case mémoire
+<Sync time="525.846"/>
+qui va stocker un entier, ça on l'a déjà vu
+<Sync time="528.531"/>
+il y aura une case mémoi() u() une variable b associée à une case mémoire
+<Sync time="533.922"/>
+et il y aura une variable t
+<Sync time="535.694"/>
+associée à
+<Sync time="537.412"/>
+cette fois-ci un ensemble de cases mémoires.
+<Sync time="541.857"/>
+l'avantage, c'est ce que je peux utiliser le *nom le nom t
+<Sync time="545.258"/>
+pour accéder à n'importe quel de ces () à n'importe laquelle de ces cases.
+<Sync time="549.842"/>
+donc le le () remplir les trois premières cases avec douze, trois et sept, je saurai le faire
+<Sync time="554.103"/>
+je saurai lire et écrire dans le tableau ; ça c'est important.
+<Sync time="557.504"/>
+et je saurai lire n'importe quelle case
+<Sync time="560.391"/>
+aussi vite que je sais lire n'im() d() je sais lire une variable.
+<Sync time="564.381"/>
+ça, c'est ce qui définit
+<Sync time="566.990"/>
+le tableau.
+<Sync time="568.077"/>
+un accès cons() en temps constant à chacune de ces cases.
+<Sync time="573.273"/>
+voilà, donc un tableau en informatique
+<Sync time="575.959"/>
+c'est une structure de données linéaires, parce que ça suit la la mémoire,
+<Sync time="582.013"/>
+qui permet de stocker un ensemble d'éléments.
+<Sync time="585.924"/>
+il y a rien de plus compliqué () il y a rien de plus simple euh
+<Sync time="589.204"/>
+non il y a rien de plus compliqué que ça.
+<Sync time="593.070"/>
+la particularité, c'est que ces éléments sont stockés de manière contiguë en mémoire
+<Sync time="597.843"/>
+c'est pour ça qu'on peut
+<Sync time="599.172"/>
+avoir une méthode
+<Sync time="600.852"/>
+d'accès en temps constant, c'est parce qu'on sait où trouver les le dixième élément du tableau
+<Sync time="605.999"/>
+en faisant un tout petit calcul.
+<Sync time="607.925"/>
+donc on accède
+<Sync time="609.218"/>
+à un élément du tableau en donnant son indice,
+<Sync time="611.612"/>
+qui est un entier
+<Sync time="614.010"/>
+sachant que par euh convention,
+<Sync time="617.598"/>
+l'élément qui est dans la première case, il est à l'indice zéro
+<Sync time="621.059"/>
+comme pour les chaînes de caractères.
+<Sync time="626.275"/>
+voilà
+<Sync time="626.787"/>
+donc en langage algorithmique, ça se traduit par un nouveau type de données
+<Sync time="629.985"/>
+qui pourra être attribué à une variable ;
+<Sync time="632.074"/>
+c'est le type tableau de quelque chose
+<Sync time="634.897"/>
+tableau de x case
+<Sync time="636.884"/>
+de
+<Sync time="638.03"/>
+x 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ y type
+<Sync time="640.270"/>
+voilà un exemple, donc un tableau de six cases de réels
+<Sync time="642.747"/>
+et ça c'écrira comme ça.
+<Sync time="646.587"/>
+ça, c'est comment comment on déclare
+<Sync time="648.409"/>
+un tableau.
+<Sync time="655.640"/>
+notez juste le tableau de six cases hein, c'est pas la peine de de noter plus, c'est dans la partie déclaration.
+<Sync time="661.749"/>
+c'est bon ?
+<Sync time="665.690"/>
+alors ce qui est important, c'est d'être capable de remplir le tableau
+<Sync time="670.564"/>
+et plus précisément, ce qu'on va vouloir, c'est lire et écrire dans s() n'importe quel
+<Sync time="675.498"/>
+dans n'importe laquelle des cases du tableau.
+<Sync time="679.721"/>
+donc
+<Sync time="682.280"/>
+ce que j'avais euh déjà plus ou moins dit, c'est que à chaque case on associait un indice.
+<Sync time="688.947"/>
+bah finalement, chaque case on peut y accéder de manière indépendante
+<Sync time="692.449"/>
+et chaque case représente une sorte de variable
+<Sync time="695.443"/>
+qui va s'appeler
+<Sync time="696.532"/>
+t entre crochets le numéro de la case.
+<Sync time="700.680"/>
+et on peut lire ou modifier n'importe quelle case,
+<Sync time="703.534"/>
+comme on le fait pour une variable.
+<Sync time="706.036"/>
+*alors voilà un exemple :
+<Sync time="707.123"/>
+si je veux calculer la moyenne,
+<Sync time="709.212"/>
+je peux mettre
+<Sync time="710.398"/>
+la valeur cinq
+<Sync time="711.729"/>
+dans la case
+<Sync time="712.840"/>
+d'indice zéro
+<Sync time="714.220"/>
+donc remplir la première case du tableau avec la valeur cinq,
+<Sync time="717.228"/>
+remplir la deuxième case du tableau avec la valeur deux
+<Sync time="721.435"/>
+et puis ensuite je peux lire
+<Sync time="724.203"/>
+la première case du tableau,
+<Sync time="726.525"/>
+lire la deuxième case du tableau comme j'aurais fait pour des variables,
+<Sync time="730.719"/>
+les utiliser comme des variables
+<Sync time="732.927"/>
+dans le cadre d'un dans le cadre d'une expression.
+<Sync time="736.425"/>
+donc là, je calcule la moyenne des deux premières valeurs du tableau.
+<Sync time="739.072"/>
+évidemment
+<Sync time="740.12"/>
+c'est pas fait pour stocker deux variables, un tableau ;
+<Sync time="742.553"/>
+c'est fait pour stocker des centaines voire des milliers de variables.
+<Sync time="745.877"/>
+c'est là qu'on trouve () qu'on commence à voir l'intérêt des tableaux
+<Sync time="750.935"/>
+donc quelques fonctions utiles pour manipuler les tableaux :
+<Sync time="756.578"/>
+ben très vite, on a() on aura envie de savoir combien il y a de cases dans le tableau
+<Sync time="761.313"/>
+ben pour ça, il y a une manière
+<Sync time="762.996"/>
+il y a il y a une fonction qui retourne la taille du tableau.
+<Sync time="767.299"/>
+c'est la fonction taille
+<Sync time="769.385"/>
+qui prend en entrée un tableau, et qui renvoie un entier.
+<Sync time="773.700"/>
+alors c'est () ça s'écrira taille de t et ce sera un entier
+<Sync time="779.185"/>
+il y a
+<Sync time="779.738"/>
+plein d'autres fonctions
+<Sync time="781.539"/>
+pour manipuler les tableaux, je vais pas les décrire en détail
+<Sync time="785.409"/>
+mais vous les retrouvez sur l'interface dans l'onglet memento
+<Sync time="789.375"/>
+et les fonctions importantes que vous allez voir, c'est par exemple afficher un tableau
+<Sync time="794.27"/>
+d'une manière un petit peu jolie s() un petit peu jolie euh quand le tableau sera à deux dimensions.
+<Sync time="801.341"/>
+euh celle-là elle s() elle est quand même vraiment
+<Sync time="804.287"/>
+importante aussi, c'est le tableau
+<Sync time="806.522"/>
+si ça contient des nombres
+<Sync time="809.204"/>
+eh ben on peut tracer une courbe avec ces nombres
+<Sync time="812.337"/>
+et il y a une fonction qui fait ça, qui s'appelle afficher courbe.
+<Sync time="816.994"/>
+et puis euh il y a tout un tas de fonctions pour trier les tableaux, pour les renverser, pour en extraire une sous-partie et cetera
+<Sync time="824.438"/>
+je vais pas les détailler, mais euh
+<Sync time="827.02"/>
+si vous allez sur le memento, non seulement vous avez cette liste-là mais vous avez
+<Sync time="831.383"/>
+une description de la fonction
+<Sync time="833.040"/>
+et un exemple à chaque fois.
+<Sync time="839.280"/>
+alors il y a des e() erreurs à ne pas commettre quand on manipule des tableaux
+<Sync time="845.16"/>
+les tableaux, ce sont des ti() ils sont de type tableau de un certain nombre de cases d'un certain type
+<Sync time="850.822"/>
+donc faut pas mélanger
+<Sync time="852.276"/>
+le type d'une case du tableau
+<Sync time="854.677"/>
+avec le tableau ;
+<Sync time="855.940"/>
+il faut pas mélanger
+<Sync time="857.525"/>
+le type des indices
+<Sync time="859.785"/>
+des cases
+<Sync time="861.198"/>
+qui sont des entiers
+<Sync time="862.302"/>
+avec les cases du tableau ou avec
+<Sync time="865.317"/>
+le type du tableau
+<Sync time="866.640"/>
+donc il y a euh toutes les erreurs qu'on peut commettre
+<Sync time="869.522"/>
+viennent de là.
+<Sync time="870.93"/>
+par exemple, si mon tableau
+<Sync time="872.952"/>
+c'est un tableau de quelque chose
+<Sync time="875.325"/>
+j'ai pas le droit d'écrire ça.
+<Sync time="876.87"/>
+j'ai pas le droit de stocker
+<Sync time="879.208"/>
+euh j'ai pas le droit de dire que euh mon tableau prend la valeur trois,
+<Sync time="883.597"/>
+puisque trois n'est pas de type tableau de quelque chose.
+<Sync time="887.901"/>
+pour la même raison, j'ai pas le droit d'écrire : mon tableau reçoit mon tableau entre crochets de, puisque mon tableau entre crochets de est de type
+<Sync time="895.501"/>
+par exemple entier, c'est de type () du type de ce qui est stocké dans une case du tableau
+<Sync time="900.504"/>
+donc j'ai pas le droit de l'attribuer à un tableau.
+<Sync time="904.571"/>
+j'ai pas le droit de faire le contraire, évidemment
+<Sync time="907.056"/>
+j'ai pas le droit de mettre
+<Sync time="908.265"/>
+un tableau de quelque chose
+<Sync time="910.132"/>
+dans quelque chose.
+<Sync time="915.650"/>
+autrement dit euh j'ai pas le droit de confondre une cellule du du tableau et le tableau ;
+<Sync time="920.306"/>
+j'ai pas le droit de confondre aussi une cellule du tableau avec un indice
+<Sync time="923.926"/>
+du tableau
+<Sync time="925.767"/>
+donc au() autrement dit, j'ai pas le droit d'écrire ça :
+<Sync time="928.149"/>
+mon tableau de indice reçoit indice
+<Sync time="932.345"/>
+si euh
+<Sync time="934.125"/>
+le tableau n'est pas un tableau qui stocke des entiers.
+<Sync time="937.707"/>
+voilà, donc je n'ai le droit de l'écrire que si
+<Sync time="940.072"/>
+mon tableau est un tableau d'entiers ;
+<Sync time="943.926"/>
+ça, ce sont les erreurs typiques. autre erreur typique :
+<Sync time="947.672"/>
+c'est que le tableau il est défini
+<Sync time="949.741"/>
+et il contient un certain nombre de cases
+<Sync time="954.437"/>
+ben si je me mets à l'explorer dans une case qui existe pas, ça pose un problème.
+<Sync time="960.009"/>
+en javascript,
+<Sync time="962.019"/>
+on aura le droit de le faire
+<Sync time="964.95"/>
+mais la case
+<Sync time="966.414"/>
+qui n'existe pas, elle sera pas définie.
+<Sync time="968.75"/>
+donc j'aurai un risque d'erreur
+<Sync time="971.357"/>
+qui ne sera pas une erreur de syntaxe, 
+<Sync time="973.406"/>
+mais qui sera un bug informatique.
+<Sync time="976.031"/>
+*autrement dit, le calcul que je ferai avec cette valeur,
+<Sync time="978.793"/>
+sera un calcul faux
+<Sync time="980.085"/>
+mais ne me produira pas d'erreurs.
+<Sync time="982.221"/>
+dans d'autres langages,
+<Sync time="983.881"/>
+explorer un tableau hors de ses limites, ça produit une erreur
+<Sync time="989.755"/>
+voire ça n'en produit pas.
+<Sync time="992.332"/>
+et euh
+<Sync time="995.208"/>
+en c par exemple, un langage euh de bas niveau qui s'appelle le c,
+<Sync time="1000.076"/>
+il est possible d'explorer un tableau à l'é() à l'extérieur de son domaine de définition
+<Sync time="1006.631"/>
+mais c'est tellement pas sécurisé que c'est euh une source d'attaque pour de des tonnes d'application sur le les réseaux.
+<Sync time="1014.238"/>
+pour être plus clair :
+<Sync time="1017.810"/>
+lorsque le programmeur n'a pas fait attention à ce que son tableau pouvait être exploré
+<Sync time="1022.492"/>
+hors des limites du tableau,
+<Sync time="1026.056"/>
+bah c'est une c'est une faille possible
+<Sync time="1028.368"/>
+pour un pour un hacker euh bien avisé qui va attaquer le système,
+<Sync time="1032.589"/>
+euh faire planter l'application qui a été programmée par le programmeur et prendre la main sur l'ordinateur
+<Sync time="1040.870"/>
+à distance. bon, bref non je me s() je me suis embrouillé
+<Sync time="1043.378"/>
+bref
+<Sync time="1044.050"/>
+c'est une s() c'était
+<Sync time="1046.383"/>
+c'est une grande source d'erreurs, ça
+<Sync time="1048.697"/>
+et une une grande faille informatique
+<Sync time="1051.111"/>
+le fait de pouvoir explorer un un tableau dans () hors de son domaine de *définition.
+<Sync time="1054.492"/>
+autrement dit,
+<Sync time="1057.157"/>
+j'ai pas le droit d'écrire ça parce que
+<Sync time="1059.160"/>
+euh le tableau ne contient que vingt cases
+<Sync time="1061.382"/>
+donc il y a pas de case d'indice s() quarante-sept
+<Sync time="1064.220"/>
+j'ai pas le droit d'écrire cette boucle-là
+<Sync time="1067.99"/>
+parce que le tableau ne commence pas à moins un
+<Sync time="1071.19"/>
+donc il y a pas de case moins un
+<Sync time="1072.8"/>
+et puis il y a pas non plus de case numéro vingt puisque s'il fait vingt cases
+<Sync time="1076.077"/>
+et que la première est numérotée par zéro,
+<Sync time="1078.697"/>
+alors ça s'arrête à dix-neuf.
+<Sync time="1080.809"/>
+ok ?
+<Sync time="1083.205"/>
+donc ça c'est un
+<Sync time="1084.823"/>
+c'est un vr() il y a un vrai problème
+<Sync time="1087.045"/>
+là-dessus
+<Sync time="1090.312"/>
+dans la partie algorithmique,
+<Sync time="1093.83"/>
+on va
+<Sync time="1095.713"/>
+on va faire attention à ça.
+<Sync time="1098.373"/>
+toutes les cases vont 
+<Event desc="bb" type="noise" extent="instantaneous"/>
+ contiennent des éléments du même type
+<Sync time="1102.182"/>
+donc qui seront le type du tableau. ça, ça va être dans la partie algorithmique parce qu'on définira des tableaux de x cases
+<Sync time="1108.270"/>
+de
+<Sync time="1108.900"/>
+un type
+<Sync time="1110.129"/>
+et le type sera fixé.
+<Sync time="1112.076"/>
+sachez tout de même qu'en javascript,
+<Sync time="1114.634"/>
+on n'est pas limité à ça ; on peut stocker dans une case un entier, dans une autre case une chaîne de caractères. c'est une particularité des tableaux en javascript
+<Sync time="1122.457"/>
+et c'est une particularité de de des tableaux dans des langages modernes, finalement. il y a une euh
+<Sync time="1128.113"/>
+plu() 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ on *appellera ça une pluripotence, *enfin
+<Sync time="1131.412"/>
+on peut stocker plusieurs 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ des choses de plusieurs types différents
+<Sync time="1134.753"/>
+dans des cases différentes ;
+<Sync time="1136.191"/>
+on se l'interdira.
+<Sync time="1141.120"/>
+la deuxième ligne, là, on va lever la contrainte un peu plus tard. mais pour le moment
+<Sync time="1145.560"/>
+toutes les cases seront des entiers.
+<Sync time="1148.068"/>
+tous les indices des cases
+<Sync time="1149.976"/>
+seront des entiers.
+<Sync time="1151.818"/>
+ça c'est important
+<Sync time="1153.559"/>
+c'est important de garder ça en tête, vous allez voir () vous allez tout de suite comprendre pourquoi.
+<Sync time="1158.779"/>
+euh parce que si on associe ça
+<Sync time="1160.848"/>
+à cette troisième contrainte, il y a pas de trous dans la numérotation.
+<Sync time="1167.400"/>
+alors ce qu'on sait, c'est que s() dès qu'on connaît la dernière case du tableau, la case de plus grand indice,
+<Sync time="1173.634"/>
+on connaît la taille du tableau ; connaît le nombre d'éléments du tableau dès qu'on connaît
+<Sync time="1177.8"/>
+l'indice de la plus grande case du tableau.
+<Sync time="1182.858"/>
+c'est important
+<Sync time="1184.144"/>
+de le savoir s() parce que c'est important de connaître rapidement () d'avoir une méthode efficace pour calculer la taille du tableau.
+<Sync time="1190.064"/>
+si on a des trous dans la numérotation,
+<Sync time="1192.640"/>
+si on a des cases qui ne sont pas réservées en mémoire avec des trous dans la numérotation, ben
+<Sync time="1196.534"/>
+on n'est
+<Sync time="1197.209"/>
+plus euh capable de calculer la taille du tableau aussi facilement.
+<Sync time="1202.463"/>
+donc ça coûte plus cher
+<Sync time="1203.834"/>
+et ça pose des problèmes algorithmiques.
+<Sync time="1209.35"/>
+donc euh cette contrainte-là,
+<Sync time="1212.240"/>
+on on l'a déjà rappelée.
+<Sync time="1215.373"/>
+ce qu'il faut retenir et ce qu'il faut noter, c'est ça
+<Sync time="1218.228"/>
+c'est quand on parle de tableau, ou quand on écrit mon tab de i
+<Sync time="1222.303"/>
+il y a trois types qui sont mis en jeu :
+<Sync time="1225.337"/>
+le type de i qui est un entier, forcément
+<Sync time="1228.428"/>
+le type de chaque cellule du tableau t
+<Sync time="1232.569"/>
+et le type de mon tab, qui est un tableau de quelque chose.
+<Sync time="1238.361"/>
+donc trois types différents,
+<Sync time="1239.793"/>
+et faut bien retenir ça
+<Sync time="1242.169"/>
+quand vous l() avez à définir un tableau, il faut juste retenir qu'il y a trois types qui sont mis en jeu
+<Sync time="1246.923"/>
+et ne pas mélanger ces trois types.
+<Sync time="1264.392"/>
+c'est bon ?
+<Sync time="1276.970"/>
+alors
+<Sync time="1279.657"/>
+quand on respecte toutes les contraintes que j'ai décrites,
+<Sync time="1286.015"/>
+que les cases sont contiguës,
+<Sync time="1289.421"/>
+qu'elles sont bien réservées en mémoire,
+<Sync time="1293.420"/>
+alors on arrive euh on on a un vrai intérêt du tableau, qui est () on a un accès en temps constant à chaque case du tableau
+<Sync time="1301.298"/>
+cet accès est
+<Sync time="1303.017"/>
+très rapide
+<Sync time="1304.777"/>
+très *rapide donc en temps constant
+<Sync time="1306.562"/>
+ind() et indépendant de la case qu'on souhaite lire
+<Sync time="1309.227"/>
+ça coûte aussi cher de lire la case d'indice zéro que de lire la case d'indice dix mille.
+<Sync time="1319.191"/>
+donc euh
+<Sync time="1320.836"/>
+pourquoi on sait faire ça ? ben tout simplement, comme les cases sont contiguës en mémoire,
+<Sync time="1326.790"/>
+ben c'est facile d'avoir l'adresse mémoire connaiss() connaissant la première case, c'est facile d'avoir l'adresse mémoire de la case dix mille
+<Sync time="1333.156"/>
+en faisant un tout petit calcul
+<Sync time="1336.337"/>
+qu'on a là
+<Sync time="1339.221"/>
+donc
+<Sync time="1340.020"/>
+connaissant l'adresse mémoire de la case indice zéro,
+<Sync time="1343.193"/>
+qui est par exemple cent vingt-quatre mille cinq cent soixante-dix-huit ;
+<Sync time="1347.870"/>
+sachant aussi que
+<Sync time="1349.715"/>
+dans chaque case je stocke des nombres euh on va dire des nombres réels
+<Sync time="1355.083"/>
+qui occupent
+<Sync time="1356.131"/>
+quatre cases mémoire
+<Sync time="1360.940"/>
+alors c'est très facile euh de savoir à quelle adresse mémoire se trouvera la case d'indice dix, il suffit de faire ce calcul-là :
+<Sync time="1368.075"/>
+douze mille quatre s() cent vingt-quatre mille cinq cent soixante-dix-huit plus dix fois
+<Sync time="1372.722"/>
+l() l'occupation de la case égale cent vingt-quatre mille six cent dix-huit,
+<Sync time="1376.911"/>
+qui est l'adresse mémoire où je vais retrouver la case d'indice dix.
+<Sync time="1383.180"/>
+autrement dit,
+<Sync time="1385.454"/>
+pour accéder à cette case-là
+<Sync time="1387.383"/>
+connaissant cette adresse-là, il suffit de faire un tout petit calcul
+<Sync time="1391.216"/>
+une somme un produit.
+<Sync time="1392.834"/>
+et ce sera toujours une somme un produit, quelle que soit la case.
+<Sync time="1396.020"/>
+donc ça coûte aussi cher
+<Sync time="1397.578"/>
+d'avoir accès à la case dix que d'avoir accès à la case dix mille.
+<Sync time="1402.063"/>
+et c'est un vrai intérêt des tableaux, hein
+<Sync time="1405.648"/>
+par rapport à d'autres structures de données.
+<Sync time="1408.789"/>
+alors en javascript,
+<Sync time="1410.552"/>
+c'est un petit peu différent
+<Sync time="1412.956"/>
+puisqu'en javascript, on ne précise pas le type
+<Sync time="1418.304"/>
+on ne précise pas le type des éléments et on précise pas non plus le nombre d'éléments qu'on va stocker.
+<Sync time="1424.864"/>
+donc pour déclarer un tableau,
+<Sync time="1427.310"/>
+vide
+<Sync time="1428.803"/>
+sans rien
+<Sync time="1431.673"/>
+on a deux deux possibilités :
+<Sync time="1434.358"/>
+variable t
+<Sync time="1435.931"/>
+égale
+<Sync time="1437.495"/>
+
+<Event desc="en" type="language" extent="begin"/>
+new array
+<Event desc="en" type="language" extent="end"/>
+
+<Sync time="1439.400"/>
+ça c'est la première possibilité.
+<Sync time="1441.488"/>
+la peu() la possibilité que je préconise, c'est la deuxième :
+<Sync time="1445.259"/>
+variable t égale crochet rien crochet.
+<Sync time="1450.134"/>
+gardez en tête que un tableau, c'est
+<Sync time="1452.465"/>
+des crochets
+<Sync time="1453.721"/>
+avec des valeurs à l'intérieur.
+<Sync time="1455.46"/>
+donc pour créer un k()
+<Sync time="1456.662"/>
+tableau vide, il suffit de mettre des crochets avec rien du tout.
+<Sync time="1461.483"/>
+gardez bien cette notation-là en tête, c'est celle que je vous conseille d'utiliser.
+<Sync time="1468.070"/>
+si on veut mettre des valeurs à l'intérieur du tableau,
+<Sync time="1471.039"/>
+si on veut commencer à le remplir
+<Sync time="1473.609"/>
+ben il suffit de mettre des choses entre les crochets, séparées par des virgules
+<Sync time="1478.164"/>
+c'est pour ça qu'avoir une seule notation, c'est c'est bien.
+<Sync time="1481.586"/>
+donc pour déclarer
+<Sync time="1482.897"/>
+un tableau,
+<Sync time="1484.560"/>
+on utilise var
+<Sync time="1486.094"/>
+t égale
+<Sync time="1487.587"/>
+crochet
+<Sync time="1488.970"/>
+des valeurs éventuellement
+<Sync time="1490.59"/>
+fermez les crochets.
+<Sync time="1503.836"/>
+c'est bon ?
+<Sync time="1506.538"/>
+nan ?
+<Sync time="1519.240"/>
+on passe
+<Sync time="1522.579"/>
+alors voilà un exemple
+<Sync time="1524.605"/>
+en javascript
+<Sync time="1526.245"/>
+où on va déclarer
+<Sync time="1528.057"/>
+un tableau
+<Sync time="1529.235"/>
+on va pouvoir remplir la case d'indice zéro
+<Sync time="1532.210"/>
+on va pouvoir remplir la case d'indice mille
+<Sync time="1540.220"/>
+et puis, si vous regardez bien ce qui est affiché par les deux premières lignes, c'est () on chronomètre
+<Sync time="1545.042"/>
+il y a une fonction qui chronomètre un certain type d'instruction
+<Sync time="1548.626"/>
+donc quand on fait
+<Sync time="1550.636"/>
+euh combien de fois ? un million de fois
+<Sync time="1553.095"/>
+un accès à la case zéro,
+<Sync time="1555.360"/>
+ça prend soixante-quatre millisecondes
+<Sync time="1558.557"/>
+
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ si on le fait s() un million de fois, c'est parce que c'est un accès très très rapide
+<Sync time="1562.577"/>
+et qu'on n'est pas capable de voir en dessous de un milliseconde.
+<Sync time="1565.760"/>
+donc soixante-quatre millisecondes
+<Sync time="1567.971"/>
+pour accéder à la case
+<Sync time="1570.941"/>
+d'indice zéro
+<Sync time="1572.510"/>
+soixante-quatre milli() soixante-cinq millisecondes, donc autrement dit la même chose
+<Sync time="1577.520"/>
+pour accéder un million de fois à la case d'indice mille.
+<Sync time="1584.420"/>
+ça illustre le fait qu'on a un accès en temps constant à chacune des cases du tableau.
+<Sync time="1591.696"/>
+alors bizarrement,
+<Sync time="1594.38"/>
+si je cherche à accéder
+<Sync time="1596.187"/>
+à la case numéro euh
+<Sync time="1599.63"/>
+i
+<Sync time="1600.82"/>
+pour i allant de zéro à un million,
+<Sync time="1604.213"/>
+ben ça coûte un petit peu plus cher.
+<Sync time="1609.194"/>
+à votre avis, pourquoi ça coûte plus cher ?
+<Sync time="1611.644"/>
+ça coûte à peu près dix fois plus cher.
+<Sync time="1614.140"/>
+vous avez une idée ?
+<Sync time="1616.884"/>
+oui ?
+</Turn>
+<Turn startTime="1617.397" endTime="1620.620">
+<Sync time="1617.397"/>
+
+<Event desc="conv" type="noise" extent="instantaneous"/>
+
+</Turn>
+<Turn startTime="1620.620" speaker="spk23" endTime="1621.43" mode="spontaneous" fidelity="high" channel="studio">
+<Sync time="1620.620"/>
+pardon ?
+</Turn>
+<Turn mode="spontaneous" fidelity="high" startTime="1621.43" endTime="1624.255">
+<Sync time="1621.430"/>
+
+<Event desc="conv" type="noise" extent="instantaneous"/>
+
+</Turn>
+<Turn speaker="spk23" mode="spontaneous" fidelity="high" channel="studio" startTime="1624.255" endTime="1625.077">
+<Sync time="1624.255"/>
+j'entends pas
+</Turn>
+<Turn startTime="1625.077" endTime="1628.981">
+<Sync time="1625.077"/>
+
+<Event desc="conv" type="noise" extent="instantaneous"/>
+
+</Turn>
+<Turn startTime="1628.981" speaker="spk23" endTime="2244.510" mode="planned" fidelity="high" channel="studio">
+<Sync time="1628.981"/>
+
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ on n'a jamais précisé la taille du tableau
+<Sync time="1631.840"/>
+donc n() rien n'interdit d'avoir un tableau de taille mille
+<Sync time="1635.616"/>
+mais en fait, t'as raison
+<Sync time="1638.052"/>
+c'est c'est exactement ça.
+<Sync time="1640.351"/>
+par défaut, le () en javascript, le tableau
+<Sync time="1643.395"/>
+on le crée, il est vide
+<Sync time="1647.111"/>
+donc la mémoire n'est pas réservée.
+<Sync time="1651.870"/>
+quand j'écris t entre crochets
+<Sync time="1654.469"/>
+zéro égale un
+<Sync time="1656.374"/>
+c'est là que je commence à réserver une case en mémoire
+<Sync time="1659.081"/>
+pour stocker mon tableau, j'ai besoin d'une case en mémoire
+<Sync time="1661.953"/>
+parce qu'elle est numérotée
+<Sync time="1663.85"/>
+par l'indice zéro.
+<Sync time="1666.278"/>
+quand je crée la deuxième,
+<Sync time="1668.892"/>
+quand j'écris la deuxième ligne,
+<Sync time="1671.989"/>
+je dis
+<Sync time="1673.581"/>
+à l'ordinateur j'ai besoin de m()
+<Sync time="1676.537"/>
+mille euh mille une cases pour stocker mon tableau.
+<Sync time="1680.612"/>
+donc la taille du tableau après cette deuxième ligne
+<Sync time="1683.685"/>
+fera plus une case, mais fera mille une cases.
+<Sync time="1686.552"/>
+donc il y a un processus un peu lourd de réservations
+<Sync time="1690.288"/>
+de mille cases
+<Sync time="1691.864"/>
+successives en mémoire.
+<Sync time="1694.520"/>
+c'est pas si évident que ça à trouver
+<Sync time="1698.391"/>
+bon mais qu'est-ce que je fais en() ensuite ?
+<Sync time="1701.720"/>
+bah là j'ai réservé mon tableau de mille cases, et puis j'essaye de () au bout d'un moment j'essaye de mettre quelque chose dans la mille unième case.
+<Sync time="1710.040"/>
+eh bah je crée un processus un peu lourd, qui va réserver en mémoire
+<Sync time="1713.46"/>
+la place pour stocker un tableau de mille une cases.
+<Sync time="1717.390"/>
+et puis je le fais encore une fois pour la mille deuxième case, la mille troisième case et je le fais jusqu'à la case numéro un million.
+<Sync time="1726.273"/>
+donc j'ai
+<Sync time="1728.310"/>
+à peu près un million de fois un processus de réservation en mémoire, et ça ça coûte cher
+<Sync time="1733.221"/>
+ça coûte la différence qu'il y a entre l'accès mémoire simple et puis l'accès avec réservation de la mémoire
+<Sync time="1738.797"/>
+qu'on a là.
+<Sync time="1741.481"/>
+bon
+<Sync time="1743.096"/>
+bah on en vient
+<Sync time="1745.225"/>
+exactement à ça.
+<Sync time="1747.569"/>
+qu'est-ce que j'ai fait là ?
+<Sync time="1752.280"/>
+j'ai déjà m() m() mis le doigt sur la différence entre les tableaux en javascript
+<Sync time="1759.313"/>
+qui sont
+<Sync time="1760.200"/>
+comme euh le nom euh que vous voyez là, dynamiques,
+<Sync time="1763.995"/>
+et les tableaux qu'on avait présentés jusque-là, qu'on appelait statiques.
+<Sync time="1768.021"/>
+c'est quoi la différence ?
+<Sync time="1769.576"/>
+ben dans un cas, on précise le nombre de cases et on n'a pas le droit de sortir de l'ensemble de définition
+<Sync time="1778.430"/>
+donc ça, c'est euh le caractère statique du tableau ;
+<Sync time="1782.062"/>
+dans certains cas
+<Sync time="1784.522"/>
+et dans beaucoup de cas d'ailleurs,
+<Sync time="1786.424"/>
+on connaît pas forcément à l'avance le nombre de cases dont on va avoir besoin
+<Sync time="1790.676"/>
+donc il peut être utile
+<Sync time="1792.510"/>
+de rajouter des cases au cours de l'exécution de l'algorithme.
+<Sync time="1796.698"/>
+les tableaux qui permettent de faire ça s'appelle les tableaux dynamiques.
+<Sync time="1806.419"/>
+voilà
+<Sync time="1807.157"/>
+autrement dit, qu'est-ce qui se passe ?
+<Sync time="1809.024"/>
+quand une case n'existe pas,
+<Sync time="1810.890"/>
+j'essaye de créer la case numéro
+<Sync time="1813.141"/>
+mille un, elle n'existe pas : qu'est-ce qui se passe ?
+<Sync time="1821.795"/>
+eh ben 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+
+<Sync time="1823.760"/>
+on a un tableau de mille cases,
+<Sync time="1826.609"/>
+on veut rajouter une case :
+<Sync time="1828.608"/>
+si on n'a pas de chance,
+<Sync time="1831.090"/>
+il y a des () la case est déjà occupée par une autre variable
+<Sync time="1834.407"/>
+donc je suis obligé de trouver en mémoire
+<Sync time="1836.920"/>
+un espace de mille une case
+<Sync time="1839.807"/>
+qui me permettra de stocker tout mon tableau
+<Sync time="1842.325"/>
+avec des cases de manière contiguë, sinon je perds tout l'intérêt des tableaux.
+<Sync time="1847.178"/>
+donc le processus lourd, c'est : on recherche
+<Sync time="1849.665"/>
+un espace avec mille une places,
+<Sync time="1852.720"/>
+on recopie l'ensemble du tableau
+<Sync time="1856.488"/>
+case par case à un autre endroit
+<Sync time="1861.662"/>
+et puis on on modifie
+<Sync time="1864.013"/>
+la valeur euh l'adresse mémoire du début du tableau.
+<Sync time="1867.252"/>
+donc voilà ce processus lourd.
+<Sync time="1873.422"/>
+<Background time="1873.422" type="speech" level="high"/>
+ça change un peu les notations :
+<Sync time="1875.900"/>
+dans le langage algorithmique, on précisera plus le nombre de cases
+<Sync time="1878.850"/>
+donc on dira que c'est un tableau d'entiers, et pas un tableau de x cases d'entiers.
+<Sync time="1884.771"/>
+en javascript, ça change rien puisque les tableaux sont par défaut des tableaux dynamiques.
+<Sync time="1892.294"/>
+il y a un peu de bruit, là !
+<Sync time="1898.854"/>
+bon, voilà un exemple :
+<Sync time="1903.691"/>
+donc
+<Sync time="1904.420"/>
+on crée un tableau avec un certain nombre de cases préremplies
+<Sync time="1908.513"/>
+quand j'affiche le tableau
+<Sync time="1910.281"/>
+avec ri() écrire t
+<Sync time="1912.106"/>
+j'obtiens le tableau
+<Sync time="1913.690"/>
+tel que je l'ai rempli.
+<Sync time="1916.683"/>
+si je calcule la taille du tableau,
+<Sync time="1918.95"/>
+il me renvoie quatre
+<Sync time="1920.370"/>
+j'ai bien quatre éléments dans le tableau.
+<Sync time="1927.643"/>
+imaginons que je veuille () que je mette maintenant quelque chose dans la case d'indice dix
+<Sync time="1933.381"/>
+ce qui se passe, c'est simple :
+<Sync time="1935.262"/>
+il va chercher un endroit où il y a dix cases mémoire
+<Sync time="1938.58"/>
+il remplit la case d'indice dix, il re-remplit les premières cases avec les val() les anciennes valeurs
+<Sync time="1944.120"/>
+et le nouveau tableau renvoyé, c'est ce tableau
+<Sync time="1946.949"/>
+qui contient onze cases
+<Sync time="1949.487"/>
+remplies de la manière suivante.
+<Sync time="1951.172"/>
+et ça se voit si on l'affiche : écrire t, ça affiche le tableau composé de un virgule cinq, un virgule sept, deux virgule trois, quatre,
+<Sync time="1959.384"/>
+des cases qui ne contiennent rien,
+<Sync time="1961.630"/>
+donc c'est toutes les virgules avec rien à l'intérieur et la dernière case contient un virgule neuf.
+<Sync time="1966.337"/>
+si on raffiche la taille du tableau, c'est bien
+<Sync time="1968.832"/>
+onze
+<Sync time="1971.076"/>
+tableau numéroté de zéro à dix.
+<Sync time="1975.554"/>
+d'accord ? donc ça coûte cher.
+<Sync time="1977.040"/>
+ça coûte cher de rajouter ces cases
+<Sync time="1978.970"/>
+et on l'a vu sur euh l'exemple où on chronométrait le les temps.
+<Sync time="1989.640"/>
+voilà
+<Sync time="1990.295"/>
+euh juste j'attire votre attention sur le fait que la case est créée
+<Sync time="1994.09"/>
+mais comme a priori il y a rien à mettre à l'intérieur, elle est créée et elle est laissée vide.
+<Sync time="2000.101"/>
+donc quand elle sera affichée, elle sera affichée comme une case vide
+<Sync time="2004.540"/>
+mais elle existe, hein
+<Sync time="2005.852"/>
+elle existe, ça se voit
+<Sync time="2007.121"/>
+dans la taille.
+<Sync time="2008.72"/>
+bon, ça c'était la première chose, j'avais dit : pour aller plus loin, on va aller () on va voir plusieurs petites choses.
+<Sync time="2015.106"/>
+maintenant pour aller plus loin,
+<Sync time="2017.5"/>
+on va voir les tableaux à deux dimensions.
+<Sync time="2021.168"/>
+donc si vous avez suivi jusqu'à présent,
+<Sync time="2024.505"/>
+un tableau informatique
+<Sync time="2026.635"/>
+c'est une réservation d'un espace linéaire
+<Sync time="2030.773"/>
+qui permet de stocker un ensemble
+<Sync time="2032.759"/>
+une suite de valeurs
+<Sync time="2034.273"/>
+un ensemble de valeurs
+<Sync time="2036.138"/>
+sur une ligne.
+<Sync time="2040.020"/>
+c'est associé à un vecteur
+<Sync time="2042.562"/>
+en mathématiques.
+<Sync time="2046.090"/>
+si maintenant on veut stocker une matrice,
+<Sync time="2049.438"/>
+l'analogue d'une matrice en mathématiques,
+<Sync time="2052.230"/>
+c'est un tableau ce qu'on veut s() un tableau de valeurs qu'on veut stocker.
+<Sync time="2055.344"/>
+comment on fait pour stocker ce tableau de valeurs
+<Sync time="2058.440"/>
+en informatique ?
+<Sync time="2062.152"/>
+ben
+<Sync time="2063.875"/>
+la réponse est simple :
+<Sync time="2068.100"/>
+en informatique, on ne peut stocker que des vecteurs de valeurs
+<Sync time="2071.895"/>
+donc il faut se débrouiller
+<Sync time="2074.260"/>
+pour stocker un tableau de valeurs
+<Sync time="2076.397"/>
+uniquement avec des vecteurs de valeurs
+<Sync time="2079.290"/>
+uniquement avec des vecteurs, pardon
+<Sync time="2081.095"/>
+tableau de valeurs uniquement avec des vecteurs.
+<Sync time="2083.006"/>
+il y a deux manières de s'en sortir
+<Sync time="2085.631"/>
+et on va présenter les deux.
+<Sync time="2091.090"/>
+soit
+<Sync time="2092.255"/>
+on renumérote
+<Sync time="2094.850"/>
+les cases
+<Sync time="2096.345"/>
+pou() du du tableau à deux dimensions pour en faire un tableau à une dimension,
+<Sync time="2101.246"/>
+soit on invente
+<Sync time="2103.020"/>
+un autre type de valeurs qui sera stocké par le tableau
+<Sync time="2110.490"/>
+et on va juste utiliser le fait que finalement
+<Sync time="2114.227"/>
+écrire un tableau de valeurs,
+<Sync time="2116.43"/>
+c'est uniquement une représentation graphique
+<Sync time="2119.61"/>
+de d'un ensemble de données
+<Sync time="2121.877"/>
+qu'on qu'on aurait très bien pu représenter sur une ligne.
+<Sync time="2127.346"/>
+voilà
+<Sync time="2128.920"/>
+donc deux méthodes pour s'en sortir
+<Sync time="2131.092"/>
+donc pour stocker des valeurs à deux dimensions dans une mémoire à une dimension :
+<Sync time="2135.319"/>
+soit on renumérote
+<Sync time="2139.315"/>
+les lignes et les colonnes,
+<Sync time="2141.310"/>
+soit on revoit la définition d'un tableau à deux dimensions.
+<Sync time="2148.233"/>
+première méthode :
+<Sync time="2151.489"/>
+comment je fais pour renuméroter
+<Sync time="2154.541"/>
+mes cases d'un tableau à deux dimensions ? donc
+<Sync time="2159.281"/>
+j'ai des lignes, ça c'est zéro virgule zéro, un virgule zéro, deux virgule zéro, trois virgule zéro et cetera et cetera.
+<Sync time="2166.768"/>
+comment je fais pour renuméroter
+<Sync time="2169.474"/>
+toutes ces cases-là ? ben c'est simple, il suffit
+<Sync time="2171.951"/>
+de dire que ça c'est la case d'indice zéro,
+<Sync time="2174.083"/>
+ça c'est la case d'indice un, d'indice deux, d'indice trois, d'indice quatre, d'indice cinq, d'indice six, d'indice sept, d'indice huit
+<Sync time="2180.393"/>
+et puis de repartir à la ligne
+<Sync time="2182.230"/>
+et de dire que celle-là, au lieu de s'appeler un, elle s'appelle neuf
+<Sync time="2185.65"/>
+et celle-là, au lieu de s'appeler un virgule un, elle s'appelle dix,
+<Sync time="2190.087"/>
+onze, douze, treize, quatorze, et cetera et cetera. donc en gros, pour avoir un tableau
+<Sync time="2194.795"/>
+à une dimension quand on a un tableau à deux dimensions,
+<Sync time="2198.035"/>
+il suffit de mettre les lignes
+<Sync time="2199.571"/>
+au bout les unes des autres.
+<Sync time="2201.066"/>
+ça donne ça :
+<Sync time="2204.598"/>
+donc la ca() les cases euh seront numérotées comme ça.
+<Sync time="2209.910"/>
+alors il y a u() un petit calcul très simple
+<Sync time="2213.66"/>
+pour passer de quatre virgule huit
+<Sync time="2215.520"/>
+à quarante-quatre :
+<Sync time="2217.545"/>
+est-ce que vous le connai() est-ce que vous l'imaginez ?
+<Sync time="2219.919"/>
+comment je fais pour avoir quarante-quatre
+<Sync time="2222.075"/>
+sachant que j'ai quatre
+<Sync time="2224.272"/>
+en ligne et huit en colonne ?
+<Sync time="2226.710"/>
+vous l'avez pas ?
+<Sync time="2234.725"/>
+il est simple, le calcul
+<Sync time="2240.510"/>
+comment j'utilise le quatre et le huit
+<Sync time="2242.984"/>
+pour obtenir quarante-quatre ?
+</Turn>
+<Turn startTime="2244.510" endTime="2247.806">
+<Sync time="2244.510"/>
+
+<Event desc="conv" type="noise" extent="instantaneous"/>
+
+</Turn>
+<Turn speaker="spk23" mode="spontaneous" fidelity="high" channel="studio" startTime="2247.806" endTime="2248.441">
+<Sync time="2247.806"/>
+pardon ?
+</Turn>
+<Turn mode="spontaneous" fidelity="high" startTime="2248.441" endTime="2250.860">
+<Sync time="2248.441"/>
+
+<Event desc="conv" type="noise" extent="instantaneous"/>
+
+</Turn>
+<Turn startTime="2250.860" speaker="spk23" endTime="3482.571" mode="planned" fidelity="high" channel="studio">
+<Sync time="2250.860"/>
+c'est ça
+<Sync time="2253.299"/>
+la réponse, c'est
+<Sync time="2255.52"/>
+pour avoir le quarante-huit,
+<Sync time="2257.946"/>
+je prends le quatre,
+<Sync time="2259.507"/>
+je multiplie par le nombre de colonnes,
+<Sync time="2261.514"/>
+c'est-à-dire neuf ici
+<Sync time="2262.968"/>
+et j'ajoute huit
+<Sync time="2264.155"/>
+quatre fois neuf plus huit, ça fait bien quarante-quatre.
+<Sync time="2268.743"/>
+autrement dit, pour passer
+<Sync time="2270.465"/>
+d'une case d'indice i j
+<Sync time="2272.690"/>
+au numéro
+<Sync time="2273.830"/>
+d'un tableau linéaire, il suffit de connaître le nombre de colonnes
+<Sync time="2278.673"/>
+de la
+<Sync time="2279.533"/>
+de la représentation graphique de mes données.
+<Sync time="2285.180"/>
+donc si la largeur du () le nombre de colonnes du tableau c'est l,
+<Sync time="2289.984"/>
+la valeur s()
+<Sync time="2290.927"/>
+de la case x y sera stockée dans un tableau
+<Sync time="2294.785"/>
+linéaire
+<Sync time="2296.055"/>
+à la () à l'indice x fois l plus y,
+<Sync time="2299.885"/>
+et la formule est relativement simple finalement.
+<Sync time="2303.647"/>
+donc ça c'est la première méthode pour s'en sortir
+<Sync time="2307.228"/>
+c'est la première méthode pour stocker
+<Sync time="2310.751"/>
+dans un tableau
+<Sync time="2312.198"/>
+à
+<Sync time="2314.309"/>
+une dimension un tableau à deux dimensions.
+<Sync time="2319.279"/>
+alors comment je fais ?
+<Sync time="2320.390"/>
+juste euh toute petite remarque : comment je fais pour revenir
+<Sync time="2323.226"/>
+à x y ?
+<Sync time="2324.642"/>
+comment je fais pour passer de quarante-quatre à x y maintenant ?
+<Sync time="2328.370"/>
+à votre avis ?
+<Sync time="2336.462"/>
+je l'ai pas je l'ai pas écrit.
+<Sync time="2341.120"/>
+mais f() c'est des mo() bon je vous donne la réponse : c'est des modulo.
+<Sync time="2344.869"/>
+quarante-quatre modulo neuf, ça fait huit.
+<Sync time="2350.220"/>
+quarante-quatre divisé en tiers par neuf, ça fait quatre.
+<Sync time="2356.390"/>
+autrement dit, on peut passer
+<Sync time="2357.926"/>
+de i () du couple x y à la case, mais on s() peut aussi passer de la case au couple x y,
+<Sync time="2363.74"/>
+à condition de connaître la largeur du tableau.
+<Sync time="2369.226"/>
+deuxième manière
+<Sync time="2371.294"/>
+de stocker un tableau à deux dimensions
+<Sync time="2373.949"/>
+dans un espace à une dimension
+<Sync time="2378.090"/>
+elle est ()
+<Sync time="2378.908"/>
+sont deux () ce sont deux méthodes aussi valables l'une que l'autre hein.
+<Sync time="2383.520"/>
+elles sont aussi valables l'une que l'autre, moi je préfère celle-là
+<Sync time="2386.940"/>
+mais j'ai aucun a priori sur les sur les deux ; je préfère utiliser cette manière de représenter les choses.
+<Sync time="2392.350"/>
+donc comment je fais
+<Sync time="2394.748"/>
+pour revoir la définition ? ben
+<Sync time="2397.260"/>
+j'oublie que c'est un tableau à deux dimensions
+<Sync time="2401.402"/>
+et je me dis que les lignes,
+<Sync time="2404.886"/>
+ce sont des () *les lignes, c'est un te() c'est un tableau
+<Sync time="2408.520"/>
+je crée un 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ ligne
+<Sync time="2412.756"/>
+qui contiendra un tableau.
+<Sync time="2416.430"/>
+donc un tableau à deux dimensions, c'est un tableau dont les cases contiennent des tableaux
+<Sync time="2423.922"/>
+donc on a revu la définition d'un tableau à deux dimensions, c'est un tableau de tableaux.
+<Sync time="2429.226"/>
+et évidemment, celle-là elle est bien parce que c'est assez facile ensuite de faire des tableaux à trois dimensions
+<Sync time="2434.474"/>
+qui seront des tableaux
+<Sync time="2435.910"/>
+dont les cases contiendront des tableaux,
+<Sync time="2438.12"/>
+dont les cases contiendront des tableaux.
+<Sync time="2442.040"/>
+euh des tableaux de tableaux de tableaux
+<Sync time="2443.980"/>
+et on peut faire ça pour n'importe quelle dimension.
+<Sync time="2448.589"/>
+donc voilà, on est () on en est là et puis après ben les tab() les renumérotations, elles sont faciles.
+<Sync time="2453.483"/>
+pour avoi() accéder à la case
+<Sync time="2455.861"/>
+d'indice
+<Sync time="2457.409"/>
+euh d'une de l'ancien indice deux trois, bah je vais
+<Sync time="2461.582"/>
+dans le premier tableau,
+<Sync time="2463.137"/>
+case indices deux ;
+<Sync time="2465.138"/>
+et dans ce tableau-là, je vais récupérer la case d'indice trois.
+<Sync time="2468.299"/>
+ça c'écrit comme ça
+<Sync time="2472.504"/>
+donc un tableau
+<Sync time="2473.918"/>
+à deux dimensions s() *ça peut être défini comme un tableau de lignes, chaque ligne étant un tableau, c'est ce que j'ai déjà dit.
+<Sync time="2478.725"/>
+la valeur stockée en position x y
+<Sync time="2481.908"/>
+correspond donc à la valeur d'indice x dans le tableau
+<Sync time="2485.226"/>
+t entre crochets y.
+<Sync time="2487.497"/>
+et ça s'écrira : t entre crochets y entre crochets x.
+<Sync time="2490.483"/>
+c'est pour ça que j'aime bien cette notation-là, c'est parce qu'elle est relativement proche
+<Sync time="2494.361"/>
+de la notation euh des tableaux à deux dimensions qu'on () dont on a l'habitude.
+<Sync time="2499.781"/>
+c'était entre t() crochets x, entre crochets y
+<Sync time="2502.703"/>
+on n'a plus besoin de connaître la largeur du tableau :
+<Sync time="2506.200"/>
+là elle elle n'intervient plus, la largeur du tableau.
+<Sync time="2510.218"/>
+en fait là où c'est euh
+<Sync time="2512.170"/>
+un peu *sioux encore, c'est que les tableaux
+<Sync time="2515.933"/>
+ne sont même pas obligés d'être de la même taille.
+<Sync time="2521.690"/>
+donc on s'abstrait de de cette connaissance, et c'est pour ça que c'est à mon sens un peu plus intéressant.
+<Sync time="2526.583"/>
+donc voilà un exemple de définition d'un tableau à deux dimensions :
+<Sync time="2530.127"/>
+donc c'est un tableau t
+<Sync time="2532.874"/>
+qui débute là
+<Sync time="2534.04"/>
+et qui se termine là,
+<Sync time="2535.845"/>
+dont la première case contient le tableau un cinq, la deuxième case contient le tableau sept neuf, la troisième case contient le *tableau trois quatre
+<Sync time="2543.164"/>
+si je l'affiche,
+<Sync time="2545.155"/>
+ça me donne ce tableau-là.
+<Sync time="2550.403"/>
+ok ?
+<Sync time="2552.660"/>
+euh je vous ai () peut-être que je peux vous laisser un peu noter
+<Sync time="2556.947"/>
+voilà, je vous laisse un peu noter
+<Sync time="2562.479"/>
+clairement, ça vous en aurez besoin pour votre projet.
+<Sync time="2568.264"/>
+c'est important de savoir
+<Sync time="2570.461"/>
+écrire convenablement un tableau et savoir utiliser convenablement un tableau.
+<Sync time="2588.322"/>
+c'est bon ?
+<Sync time="2628.271"/>
+*allez, on passe à la suite ?
+<Sync time="2640.050"/>
+on a
+<Sync time="2641.605"/>
+dans les tableaux
+<Sync time="2643.181"/>
+dynamiques, on a supprimé une contrainte qui était que la taille des tableaux était fixée.
+<Sync time="2649.421"/>
+là maintenant, on va supprimer la contrainte que les indices
+<Sync time="2653.23"/>
+des cases du tableau sont forcément des entiers qui se suivent.
+<Sync time="2657.767"/>
+*et
+<Sync time="2658.361"/>
+enlever cette contrainte,
+<Sync time="2660.717"/>
+c'est créer un nouveau type de tableaux qui s'appellent les tableaux associatifs.
+<Sync time="2667.055"/>
+donc ça, ce sont des t()
+<Sync time="2668.511"/>
+ce sont des tableaux
+<Sync time="2669.860"/>
+qui sont là pour associer
+<Sync time="2672.998"/>
+une clé
+<Sync time="2674.431"/>
+qui peut être n'importe quoi
+<Sync time="2676.365"/>
+à une valeur.
+<Sync time="2681.628"/>
+donc euh
+<Sync time="2683.266"/>
+les tableaux associatifs sont sont des tableaux dont les indices seront des chaînes de caractères ; la d() la différence sera là.
+<Sync time="2690.602"/>
+autrement dit, j'aurai le droit de sto() d'écrire des choses comme ça : la note entre crochets
+<Sync time="2696.625"/>
+de damien, c'est quinze.
+<Sync time="2700.310"/>
+et on parle de tableau associatif parce que finalement ça associe la valeur quinze
+<Sync time="2705.918"/>
+au nom damien.
+<Sync time="2709.42"/>
+donc damien, c'est la clé de l'association et quinze, c'est la valeur de l'association.
+<Sync time="2714.817"/>
+alors ça, s() si on définit ça en informatique, c'est parce que
+<Sync time="2718.430"/>
+on a envie d'avoir des sortes de bases de données ;
+<Sync time="2721.114"/>
+*des bases de données qui associent des clés à des valeurs
+<Sync time="2726.118"/>
+des clés explicites à des valeurs.
+<Sync time="2733.026"/>
+c'est bon ?
+<Sync time="2740.473"/>
+il y a un exemple tout de suite, hein.
+<Sync time="2744.842"/>
+alors
+<Sync time="2747.423"/>
+c'est bien, maintenant on a associé des clés à des valeurs.
+<Sync time="2750.389"/>
+ce qui était bien dans les entiers, c'est que les entiers on pouvait les les énumérer.
+<Sync time="2754.270"/>
+les chaînes de caractères, c'est fini ; une chaîne de caractères, ça s'énumère pas.
+<Sync time="2758.071"/>
+autrement dit, entre deux chaînes de caractères
+<Sync time="2761.081"/>
+par ordre lexicographique,
+<Sync time="2763.034"/>
+on pourra toujours trouver une chaîne de caractères qu'on pourra intercaler.
+<Sync time="2770.470"/>
+hein ?
+<Sync time="2774.650"/>
+donc entre entre chien
+<Sync time="2777.251"/>
+au singulier et chien au pluriel
+<Sync time="2780.979"/>
+on peut toujours intercaler chienne.
+<Sync time="2784.870"/>
+et entre chienne et euh chien au pluriel, on pourra intercaler chienne au v() au pluriel.
+<Sync time="2789.906"/>
+donc entre chaque mot, entre chaque chaîne de caractères, on peut intercaler
+<Sync time="2793.407"/>
+une ch() *une autre chaîne de caractères
+<Sync time="2796.817"/>
+ça, ça suffit pour dire que
+<Sync time="2798.777"/>
+on pourra pas énumérer l'ensemble des chaînes de caractères.
+<Sync time="2803.670"/>
+donc ça pose des problèmes, vu qu'on peut plus énumérer les choses
+<Sync time="2807.300"/>
+on peut plus euh c'est c'est plus difficile de les compter
+<Sync time="2811.375"/>
+notamment com() la la la question : combien de cases contient un tableau associatif ?
+<Sync time="2816.900"/>
+ben là où
+<Sync time="2818.559"/>
+quand les indices étaient des entiers, on pouvait se baser sur la dernière case remplie, c'est plus possible
+<Sync time="2823.060"/>
+parce qu'on sait pas combien de cases sont remplies avant ;
+<Sync time="2825.356"/>
+on sait même pas quelle est la dernière case remplie.
+<Sync time="2831.580"/>
+puis la deuxième question, c'est
+<Sync time="2834.998"/>
+jus()
+<Sync time="2836.578"/>
+je l'*avais pas dit, mais pour parcourir un tableau, la case adaptée c'est une boucle pour :
+<Sync time="2841.064"/>
+quand ce sont des () les indices sont des entiers, on fait une boucle pour pour i allant de zéro à la dernière case du tableau.
+<Sync time="2848.552"/>
+ben ces boucles pour, là
+<Sync time="2850.252"/>
+elles marchent plus
+<Sync time="2853.074"/>
+puisqu'on n'a plus la notion d'indices qui se suivent,
+<Sync time="2857.705"/>
+donc c'est compliqué.
+<Sync time="2859.395"/>
+ce sont deux questions compliquées
+<Sync time="2861.574"/>
+et pour y répondre,
+<Sync time="2865.800"/>
+eh ben avant d'y répondre, je vais redonner la définition, vous allez voir :
+<Sync time="2870.090"/>
+dans la déclaration algorithmique,
+<Sync time="2872.094"/>
+au lieu de tableau, on parlera () on écrira tableau associatif
+<Sync time="2875.520"/>
+d'entiers.
+<Sync time="2880.178"/>
+en javascript, ça changera rien puisque les tableaux
+<Sync time="2883.296"/>
+sont à la fois dynamiques
+<Sync time="2884.634"/>
+et associatifs.
+<Sync time="2888.780"/>
+ça dépendra de ce que j'utilise comme indice.
+<Sync time="2896.130"/>
+dans le langage algorithmique et dans le langage javascript, on aura le droit d'écrire t entre crochets chaîne de caractères
+<Sync time="2902.780"/>
+reçoit telle valeur
+<Sync time="2905.250"/>
+donc () ou égale telle valeur en javascript.
+<Sync time="2908.185"/>
+et on aura le droit
+<Sync time="2909.810"/>
+d'accéder à cette case-là
+<Sync time="2912.315"/>
+en lecture et en écriture.
+<Sync time="2921.880"/>
+donc autrement dit, s() c'est une structure qui existait déjà.
+<Sync time="2925.930"/>
+on l'a juste décrite et on a () j'ai juste per() je vous ai juste permis de l'utiliser, en gros
+<Sync time="2931.436"/>
+en vous donnant
+<Sync time="2933.34"/>
+cette ligne-là.
+<Sync time="2940.440"/>
+*alors il y a un exemple, hein
+<Sync time="2942.467"/>
+euh non
+<Sync time="2943.646"/>
+euh je l'ai pas encore
+<Sync time="2960.520"/>
+c'est bon ?
+<Sync time="2962.099"/>
+bon
+<Sync time="2964.070"/>
+bah on n'a toujours pas résolu notre problème :
+<Sync time="2965.935"/>
+combien il y a de cases dans un tableau associatif ?
+<Sync time="2971.964"/>
+bah la taille, c'est quoi ?
+<Sync time="2976.570"/>
+on va revoir la définition : la définition de la taille d'un tableau qui () dont les cases sont indicées par des entiers, c'était *le
+<Sync time="2983.990"/>
+un moins () un plus
+<Sync time="2986.910"/>
+l'indice de la dernière case occupée.
+<Sync time="2990.165"/>
+on revoit cette définition ; maintenant on a() on dira que la taille d'un tableau
+<Sync time="2993.789"/>
+c'est le nombre d'éléments effectivement stockés dans le tableau.
+<Sync time="3001.240"/>
+en javascript, il y a pas de fonction simple qui va renvoyer la taille du tableau
+<Sync time="3006.970"/>
+donc dès qu'on voudra travailler avec un tableau associatif,
+<Sync time="3010.366"/>
+il faudra
+<Sync time="3011.368"/>
+oublier
+<Sync time="3012.987"/>
+qu'on a besoin de sa taille ; faudra trouver des méthodes qui oublient qu'il y a p() pa() () k() qui euh s'abstraient de la taille du tableau.
+<Sync time="3022.039"/>
+voilà
+<Sync time="3023.515"/>
+voilà un exemple
+<Sync time="3025.448"/>
+donc je crée le tableau t
+<Sync time="3027.167"/>
+c'est un tableau associatif,
+<Sync time="3029.418"/>
+j'écris t entre crochets damien égale quinze, c entre crochets jérémy égale onze ;
+<Sync time="3034.020"/>
+il a eu une meilleure note que moi
+<Sync time="3036.820"/>
+je peux accéder à ces notes
+<Sync time="3039.160"/>
+et pourtant quand j'éc() j'essaye d'écrire la taille du tableau, vous voyez bien que ma fonction taille
+<Sync time="3044.690"/>
+ou la fonction taille de javascript, elle marche plus.
+<Sync time="3048.710"/>
+pour lui, j'ai rien de stocké dans le tableau parce que il s'est basée sur la dernière case
+<Sync time="3053.017"/>
+sur l'indice entier de la dernière case occupée, qui n'existe pas.
+<Sync time="3063.230"/>
+pour définir la taille, il faudra le parcourir ;
+<Sync time="3066.050"/>
+et pour le parcourir,
+<Sync time="3068.266"/>
+il faudra inventer une nouvelle type () un nouveau type de boucle
+<Sync time="3072.390"/>
+donc nouvelle structure de contrôle
+<Sync time="3075.140"/>
+ici
+<Sync time="3076.041"/>
+nouvelle boucle
+<Sync time="3077.535"/>
+qui n'est
+<Sync time="3078.436"/>
+utilisable que pour parcourir les tableaux associatifs.
+<Sync time="3085.330"/>
+donc euh l() la boucle s'écrit ()
+<Sync time="3089.611"/>
+ce qu'on veut, c'est parcourir tout le tableau
+<Sync time="3091.850"/>
+donc toutes les clés du tableau,
+<Sync time="3095.810"/>
+on veut pouvoir faire quelque chose.
+<Sync time="3097.600"/>
+donc ça s'écrit comme ça :
+<Sync time="3099.074"/>
+pour tout clé dans t,
+<Sync time="3100.813"/>
+faire
+<Sync time="3101.829"/>
+des instructions
+<Sync time="3104.405"/>
+qui peuvent utiliser
+<Sync time="3108.198"/>
+euh clé
+<Sync time="3110.970"/>
+qui sera une variable et qui prendra successivement
+<Sync time="3113.409"/>
+toutes les clés possibles stockées dans le tableau.
+<Sync time="3116.65"/>
+donc ça prendra successivement damien
+<Sync time="3119.191"/>
+et jérémy
+<Sync time="3120.482"/>
+dans le tableau t qu'on a écrit.
+<Sync time="3122.468"/>
+donc ça, c'est l'écriture algorithmique ;
+<Sync time="3124.843"/>
+l'écriture javascript, c'est celle-là.
+<Sync time="3130.643"/>
+donc toutes les clés sont parcourues
+<Sync time="3134.911"/>
+dans un certain ordre.
+<Sync time="3137.430"/>
+ça aurait pu () on aurait pu imaginer que c'est l'ordre lexicographique
+<Sync time="3141.56"/>
+parce que les clés, on pourrait les trier par ordre lexicographique.
+<Sync time="3146.130"/>
+c'est pas ce qui est choisi
+<Sync time="3148.299"/>
+parce que ça coûterait cher de trier le tableau à chaque fois qu'on met une clé.
+<Sync time="3152.900"/>
+donc l'ordre qui est choisi, c'est l'ordre de création des clés.
+<Sync time="3158.920"/>
+donc on parcourt le tableau dans l'ordre de création de des cases du tableau
+<Sync time="3163.905"/>
+avec cette boucle pour
+<Sync time="3166.590"/>
+une nouvelle boucle pour.
+<Sync time="3168.001"/>
+donc euh en javascript, c'est for clé in t ;
+<Sync time="3171.035"/>
+c'est la traduction presque littérale de ça.
+<Sync time="3176.828"/>
+voilà un exemple
+<Sync time="3180.227"/>
+donc je crée mon tableau,
+<Sync time="3181.870"/>
+j'ajoute une personne, anne, qui a eu treize
+<Sync time="3184.937"/>
+quand je parcours
+<Sync time="3186.897"/>
+tout mon tableau,
+<Sync time="3190.420"/>
+je peux écrire que damien
+<Sync time="3192.710"/>
+a eu
+<Sync time="3194.122"/>
+la valeur de la case, donc j'a() j'attire votre attention sur le fait que clé
+<Sync time="3197.945"/>
+et t de clé sont utilisables dans la boucle.
+<Sync time="3202.924"/>
+voilà
+<Sync time="3205.320"/>
+donc ça, c'est une méthode de parcours du tableau.
+<Sync time="3210.110"/>
+la fonction taille, elle n'existe plus
+<Sync time="3212.935"/>
+mais ça, ça nous permet quand même de ré() 
+<Event desc="bg" type="noise" extent="instantaneous"/>
+ de décrire ou d'imaginer une manière de calculer la taille du tableau.
+<Sync time="3220.156"/>
+pour calculer la taille du tableau, il suffit d'ajouter un compteur
+<Sync time="3224.060"/>
+dans cette boucle
+<Sync time="3225.146"/>
+pour tout.
+<Sync time="3226.795"/>
+ce que j'ai fait ici :
+<Sync time="3227.878"/>
+j'ajoute un compteur que j'incrémente à chaque élément de boucle ;
+<Sync time="3231.110"/>
+pour toutes les clés dans t, j'incrémente le compteur
+<Sync time="3233.918"/>
+donc à la fin
+<Sync time="3235.169"/>
+j'aurai le nombre d'éléments stockés dans le tableau :
+<Sync time="3238.170"/>
+c'est trois.
+<Sync time="3239.954"/>
+donc c'est une manière d'avoir la taille du tableau.
+<Sync time="3248.090"/>
+on continue ?
+<Sync time="3254.417"/>
+donc je mettrai pas les
+<Sync time="3255.918"/>
+les transparents
+<Sync time="3257.130"/>
+mais je mettrai les exemples à tester.
+<Sync time="3270.825"/>
+bon
+<Sync time="3271.441"/>
+pour aller plus loin, on va faire un petit peu d'algorithmique sur les tableaux.
+<Sync time="3276.041"/>
+et une des tâches classiques
+<Sync time="3278.377"/>
+de l'algorithmique sur les tableaux, c'est de rechercher si est un élément appartient au tableau ou pas.
+<Sync time="3283.944"/>
+les tableaux contiennent un ensemble de valeurs
+<Sync time="3286.156"/>
+on a juste envie de savoir si une certaine valeur
+<Sync time="3289.231"/>
+appartient au tableau
+<Sync time="3291.104"/>
+et si elle appartient au tableau, dans quelle ca() elle () dans quelle case elle se trouve.
+<Sync time="3298.518"/>
+donc on aura
+<Sync time="3300.067"/>
+finalement deux situations :
+<Sync time="3303.504"/>
+soit
+<Sync time="3305.828"/>
+on a un tableau
+<Sync time="3307.237"/>
+non trié,
+<Sync time="3308.610"/>
+soit on a un tableau trié,
+<Sync time="3311.218"/>
+et puis on va essayer de réfléchir à comment on fait pour rechercher un élément dans le tableau.
+<Sync time="3315.906"/>
+donc je () j'ai un tableau qui s'appelle mon tab, de n cases, je cherche un élément x.
+<Sync time="3323.341"/>
+par exemple dans ce tableau-là, je recherche le nombre treize. alors il se trouve que le nombre treize n'y figure pas.
+<Sync time="3328.668"/>
+comment ça va se passer ?
+<Sync time="3331.360"/>
+le seul moyen de chercher un élément dans un tableau, c'est de parcourir
+<Sync time="3335.99"/>
+les é() les cases du tableau jusqu'à trouver
+<Sync time="3339.063"/>
+l'élément.
+<Sync time="3340.890"/>
+et j()
+<Sync time="3341.609"/>
+l'élément ne sera pas dans le tableau
+<Sync time="3344.522"/>
+si à la fin du parcours du tableau, je l'ai pas trouvé.
+<Sync time="3348.830"/>
+voilà. donc comment ça marche ? ben je parcours le tableau,
+<Sync time="3351.867"/>
+j'arrive au bout
+<Sync time="3352.935"/>
+j'ai pas trouvé treize
+<Sync time="3354.47"/>
+donc je réponds : je n'ai pas trouvé treize.
+<Sync time="3357.232"/>
+il y aura un algorithme, *je vous donnerai l'algorithme qui permet de de faire ce calcul.
+<Sync time="3363.920"/>
+la question est un petit peu différente
+<Sync time="3367.740"/>
+quand le tableau est trié.
+<Sync time="3373.030"/>
+elle est un petit peu différente
+<Sync time="3375.510"/>
+parce que la méthode que j'ai décrite jusque-là, on peut l'arrêter un tout petit peu avant.
+<Sync time="3380.894"/>
+si je s() cherche treize, ben je peux parcourir le tableau
+<Sync time="3385.170"/>
+et puis là, je peux () si le tableau est trié et que je vois quatorze,
+<Sync time="3388.940"/>
+et qu'avant j'ai pas vu treize, ben c'est que treize n'est pas dans le tableau.
+<Sync time="3394.936"/>
+donc la boucle
+<Sync time="3396.421"/>
+la première méthode, c'est () la boucle, je peux l'arrêter avant
+<Sync time="3399.110"/>
+et ça fait gagner un peu de temps.
+<Sync time="3404.720"/>
+mais on peut faire beaucoup, beaucoup mieux.
+<Sync time="3407.21"/>
+est-ce que vous avez une idée
+<Sync time="3408.831"/>
+de comment on peut faire beaucoup mieux ?
+<Sync time="3420.560"/>
+il y a un mot-clé
+<Sync time="3428.820"/>
+le mot-clé, c'est le jeu du plus ou moins.u
+<Sync time="3434.850"/>
+pour le ch() pour chech() pour chercher treize dans le tableau,
+<Sync time="3437.615"/>
+la méthode très efficace pour le faire,
+<Sync time="3440.333"/>
+c'est de se se poser la question : le treize, il est soit dans la première moitié du tableau,
+<Sync time="3445.281"/>
+soit dans la deuxième moitié du tableau.
+<Sync time="3448.995"/>
+comment je sais s'il est dans la première moitié du tableau ou dans la deuxième moitié du tableau ? ben il suffit de regarder
+<Sync time="3455.610"/>
+l'élément qui est au milieu et de le comparer à treize.
+<Sync time="3460.913"/>
+donc en regardant
+<Sync time="3464.050"/>
+en comparant treize à neuf,
+<Sync time="3466.335"/>
+je vais savoir que comme le milieu est plus petit que treize
+<Sync time="3469.875"/>
+le treize se *trouve forcément dans la deuxième moitié du tableau.
+<Sync time="3473.230"/>
+et puis cette ce test-là, on peut le refaire avec l'autre moitié du tableau : donc je compare à douze, je sais qu'il est après
+<Sync time="3478.556"/>
+je compare à quinze, je sais qu'il est avant
+<Sync time="3480.708"/>
+je compare à quatorze
+</Turn>
+<Turn startTime="3482.571" endTime="3483.64">
+<Sync time="3482.571"/>
+
+<Event desc="rire en fond" type="noise" extent="instantaneous"/>
+
+</Turn>
+<Turn speaker="spk23" mode="planned" fidelity="high" channel="studio" startTime="3483.64" endTime="3643.675">
+<Sync time="3483.64"/>
+et là j'ai plus que deux cases
+<Sync time="3486.431"/>
+on peut même s'arrêter à une case
+<Sync time="3497.790"/>
+le treize est dans le tableau
+<Sync time="3501.390"/>
+si c'est douze ou si c'est quatorze ; et puis si on s'arrête à une case, on peut même conclure directement.
+<Sync time="3506.7"/>
+donc on a des algori() cet algorithme est très, très efficace puisqu'il met
+<Sync time="3510.507"/>
+beaucoup moins d'opérations, beaucoup moins de tests pour trouver euh pour répondre à la question.
+<Sync time="3517.114"/>
+la première version s'écrit comme ça,
+<Sync time="3519.769"/>
+avec une boucle
+<Sync time="3521.059"/>
+qui va parcourir tout le tableau.
+<Sync time="3526.550"/>
+donc tant qu'on l'a pas trouvé, on continue
+<Sync time="3529.664"/>
+et on continue au pire jusqu'à la taille du tableau.
+<Sync time="3534.190"/>
+en javascript, ça s'écrira comme ça :
+<Sync time="3550.300"/>
+si le tableau est trié,
+<Sync time="3554.115"/>
+on peut même euh
+<Sync time="3556.249"/>
+enlever la variable trouver.
+<Sync time="3560.310"/>
+vous aurez ces exemples-là
+<Sync time="3562.412"/>
+au moins en javascript, donc vous pourrez les regarder
+<Sync time="3565.463"/>
+mais croyez-moi, c'est un petit peu plus efficace que l'autre, mais ça gagne pas
+<Sync time="3569.452"/>
+ça gagne pas beaucoup de d'opérations.
+<Sync time="3574.320"/>
+la
+<Sync time="3575.856"/>
+troisième
+<Sync time="3578.550"/>
+implémentation, c'est celle-là
+<Sync time="3581.774"/>
+où on va se servir
+<Sync time="3584.003"/>
+du milieu comme euh valeur de comparaison, on va chercher s'il est avant le milieu ou après le milieu
+<Sync time="3590.373"/>
+et selon ce test-là,
+<Sync time="3591.992"/>
+on considérera la première moitié du tableau ou la deuxième moitié du tableau.
+<Sync time="3596.330"/>
+cette boucle-là, on l'arrête
+<Sync time="3599.690"/>
+dès que la fin est égale euh au début, donc dès qu'on tombe sur un tableau à une case.
+<Sync time="3606.260"/>
+et celle-là, elle est très rapide.
+<Sync time="3607.797"/>
+en k() comment elle est très rapide ?
+<Sync time="3610.670"/>
+bah il suffit de connaître le nombre de découpages dont on va avoir besoin pour un tableau de taille n
+<Sync time="3615.241"/>
+de découpages en deux pour arriver à la bonne solution.
+<Sync time="3619.040"/>
+ce nombre-là, c'est
+<Sync time="3620.743"/>
+le logarithme en base deux
+<Sync time="3622.890"/>
+de n. c'est euh
+<Sync time="3625.105"/>
+une dichotomie à chaque fois.
+<Sync time="3627.966"/>
+donc
+<Sync time="3628.722"/>
+on coupe le tableau en deux
+<Sync time="3631.100"/>
+et il faut : logarithme en base deux, découpage
+<Sync time="3633.804"/>
+en deux
+<Sync time="3635.269"/>
+pour tomber
+<Sync time="3636.240"/>
+pour partir d'un tableau de n cases
+<Sync time="3638.320"/>
+et arriver à un tableau de une case.
+</Turn>
+</Section>
+</Episode>
+</Trans>

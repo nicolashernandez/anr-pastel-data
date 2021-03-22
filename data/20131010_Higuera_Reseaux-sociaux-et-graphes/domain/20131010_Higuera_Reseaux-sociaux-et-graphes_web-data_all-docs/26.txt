@@ -1,0 +1,2997 @@
+http://cmatias.perso.math.cnrs.fr/Docs/Cours_Stats_Graphes.pdf
+
+Notes de cours : Analyse statistique de graphes
+
+M2 Universit´e Pierre et Marie Curie
+
+Catherine Matias
+
+Warning : ce document contient certainement des erreurs et des impr´ecisions.
+
+N’h´esitez pas `a me les signaler.
+
+1
+
+Table des mati`eres
+
+1 Introduction aux graphes
+
+. . . . . . . . . . . . . . . . . . . . . . . .
+1.1 Les r´eseaux / Les graphes
+1.2 Repr´esentation visuelle . . . . . . . . . . . . . . . . . . . . . . . . . .
+1.3 Stockage informatique
+. . . . . . . . . . . . . . . . . . . . . . . . . .
+1.3.1 Les matrices d’adjacence . . . . . . . . . . . . . . . . . . . . .
+1.3.2 Les listes d’arˆetes . . . . . . . . . . . . . . . . . . . . . . . . .
+1.4 Le mod`ele G(n, p) et graphes remarquables . . . . . . . . . . . . . . .
+
+4
+4
+7
+7
+7
+9
+9
+
+2 Statistiques descriptives sur les graphes
+
+11
+2.1 Degr´es . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+2.1.1 Distribution marginale des degr´es . . . . . . . . . . . . . . . . 11
+2.1.2 Mod`eles de conﬁguration . . . . . . . . . . . . . . . . . . . . . 12
+2.1.3 Corr´elations entre degr´es . . . . . . . . . . . . . . . . . . . . . 14
+2.2 Densit´e, clustering, transitivit´e . . . . . . . . . . . . . . . . . . . . . . 15
+2.3 Motifs . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+2.4 Distance, diam`etre . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+2.5 Autres descripteurs . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+2.6
+. . . . . . . . . . . . . . . . . . . . 19
+. . . . . . . . . 19
+21
+
+´Echantillonnage dans les graphes
+2.6.1 Exemples d’´echantillonnages dans les graphes
+2.6.2 Exemple d’impact de l’´echantillonnage : estimation des degr´es
+
+3 Spectral Clustering : d´etection de communaut´es
+
+3.1.1
+3.1.2 Diﬀ´erents graphes de similarit´e
+
+22
+3.1 Graphes de similarit´e . . . . . . . . . . . . . . . . . . . . . . . . . . . 23
+Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23
+. . . . . . . . . . . . . . . . . 23
+3.2 Matrices laplaciennes de graphe . . . . . . . . . . . . . . . . . . . . . 24
+3.2.1 Laplacien non normalis´e . . . . . . . . . . . . . . . . . . . . . 25
+3.2.2 Laplaciens normalis´es . . . . . . . . . . . . . . . . . . . . . . . 27
+3.3 Algorithmes de clustering spectral . . . . . . . . . . . . . . . . . . . . 29
+
+2
+
+3.4 Exemples jouets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
+3.5 Commentaires pratiques
+. . . . . . . . . . . . . . . . . . . . . . . . . 32
+
+4 Mod`eles de graphes al´eatoires et classiﬁcation des nœuds
+
+4.1 Deux mod`eles de graphes (sans liens avec la classiﬁcation)
+
+34
+. . . . . . 34
+4.1.1 Les mod`eles exponentiels de graphes al´eatoires . . . . . . . . . 34
+. . . . . . . . . . . . . . . . . . . . . 36
+4.1.2 Attachement pr´ef´erentiel
+4.2 G´en´eralit´es sur les mod`eles `a variables latentes . . . . . . . . . . . . . 36
+4.2.1 D´eﬁnitions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
+4.2.2 Estimation des param`etres . . . . . . . . . . . . . . . . . . . . 37
+4.3 Espaces latents continus (pour graphes binaires) . . . . . . . . . . . . 39
+4.3.1 Mod`ele de Hoﬀ et al. . . . . . . . . . . . . . . . . . . . . . . . 39
+4.3.2 Version classiﬁante du mod`ele . . . . . . . . . . . . . . . . . . 40
+4.3.3 Choix de la dimension de l’espace latent
+. . . . . . . . . . . . 40
+
+4.4 Espaces latents discrets : Mod`eles `a blocs stochastiques (stochastic
+
+block model)
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
+4.4.1 Le mod`ele . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
+4.4.2 L’algorithme EM . . . . . . . . . . . . . . . . . . . . . . . . . . 43
+4.4.3 Estimation des param`etres par approximation variationnelle
+
+de EM . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 47
+S´election de mod`eles . . . . . . . . . . . . . . . . . . . . . . . 51
+
+4.4.4
+
+3
+
+Chapitre 1
+
+Introduction aux graphes
+
+Quelques r´ef´erences bibliographiques (ces notes en font un usage immod´er´e)
+
+• G´en´erales : Kolaczyk (2009); Kolaczyk and Cs´ardi (2014) ;
+• Chapitres 1 et 2 : Albert and Barab´asi (2002) ;
+• Chapitre 3 sur le spectral clustering : von Luxburg (2007).
+
+1.1 Les r´eseaux / Les graphes
+
+D´eﬁnition. R´eseau = ensemble d’entit´es en interaction versus graphe = repr´esentation
+math´ematique du r´eseau.
+
+Exemple de r´eseaux ’physiques’. Internet (routeurs et ordinateurs connect´es par
+des cˆables ethernet ou des liaisons wiﬁ) ; r´eseau ´electrique ; r´eseau routier ; r´eseau
+a´erien ; . . .
+Exemple de r´eseaux virtuels. World wide web (nœuds sont les pages html et les
+arˆetes sont les hyperliens) ; r´eseau d’amis Facebook ; r´eseau de co-publications de
+chercheurs ; food-web en ´ecologie ; . . .
+
+Dans la suite, on s’int´eresse uniquement aux graphes simples : un ensemble de
+
+nœuds (ou sommets), li´es par des arˆetes (ou arcs), sans liens doubles ni boucles.
+
+Vocabulaire. Un graphe G = (V, E) est compos´e d’un ensemble V = {1, . . . , n}
+de nœuds (vertices en anglais) et d’un ensemble E d’arˆetes (edges en anglais) avec
+{i, j} ∈ E s’il y a une arˆete entre les nœuds i et j dans le graphe. On dit que l’arˆete
+e = {i, j} ∈ E est issue de i (ou de j).
+Le nombre de nœuds n est l’ordre du graphe tandis que son nombre d’arˆetes |E| est
+appel´e taille du graphe.
+
+4
+
+Un graphe est dirig´e (ou orient´e) lorsque ses arˆetes le sont i.e. lorsque l’arˆete (i, j)
+est diﬀ´erente de l’arˆete (j, i). Il est non dirig´e sinon.
+Les graphes simples n’ont pas de boucles (i.e. (i, i) n’est jamais une arˆete). Ils
+peuvent ˆetre binaires : une arˆete est pr´esente (1) ou absente (0), ou valu´es : les
+arˆetes pr´esentes sont alors munies d’une valeur (poids). Noter qu’un graphe binaire
+est un cas particulier de graphe valu´e o`u toutes les arˆetes pr´esentes ont le poids 1.
+• Un graphe simple sur n nœuds poss`ede au plus n(n − 1)/2
+
+Remarques.
+
+arˆetes s’il est non dirig´e et n(n − 1) arˆetes s’il est dirig´e.
+• Les graphes biparties sont tels que V = V1 ∪ V2 avec V1 ∩ V2 = ∅ et les arˆetes
+e = {u, v} ∈ E sont telles que u ∈ V1, v ∈ V2. Tout ce qui suit se g´en´eralise
+facilement `a ce cas. Les graphes simples que l’on consid`ere ici sont parfois
+dits uniparties.
+
+`A partir de mesures d’interactions {Cij}1≤i,j≤n entre individus, on peut d´eﬁnir
+une valeur sym´etris´ee et normalis´ee des interactions `a partir du coeﬃcient de Jac-
+card.
+
+D´eﬁnition. (Jaccard coeﬃcient ou index de Jaccard). Il s’agit d’une mesure de
+similarit´e sym´etrique et normalis´ee entre ´el´ements, d´eﬁnie `a partir de valeurs d’in-
+teractions Cij entre les individus, par
+
+JACij = JACji =
+
+k(cid:54)=j Cik +(cid:80)
+(cid:80)
+
+Cij + Cji
+
+.
+
+k(cid:54)=i Cjk
+
+Cet index sert parfois `a construire des graphes valu´es et non dirig´es entre un
+
+ensemble d’entit´es.
+
+D´eﬁnition (Chemins, connexit´e, cycles). Un chemin dans G = (V, E) (non orient´e)
+entre i, j ∈ V est une suite d’arˆetes e1, . . . , ek ∈ E telle que
+
+• pour tout 1 ≤ t ≤ k − 1, les arˆetes et et et+1 partagent un nœud dans V ;
+• e1 est issue de i ;
+• et est issue de j.
+
+Un cycle est un chemin d’un nœud i `a lui mˆeme (dans G).
+Une composante connexe de G = (V, E) est un sous-ensemble C = {v1, . . . , vk} ⊂ V
+tel que pour tous vi, vj ∈ C, il existe un chemin dans G de vi `a vj.
+Un graphe G = (V, E) est dit connexe s’il poss`ede une unique composante connexe
+(i.e. pour tous i, j ∈ V , il existe un chemin de i `a j dans G).
+Remarques.
+
+• Dans un graphe orient´e, on peut d´eﬁnir la notion de chemin
+orient´e entre i et j. Il se peut alors qu’il existe un chemin orient´e de i vers j
+sans chemin orient´e de j vers i. De mˆeme il peut exister un chemin de i vers
+j sans chemin orient de i vers j.
+
+5
+
+• La connexit´e d’un graphe dirig´e est d´eﬁnie `a partir des chemins non dirig´es.
+
+Proposition 1.1. Tout graphe peut ˆetre d´ecompos´e en un unique ensemble de com-
+posantes connexes (maximales). Le nombre de composantes connexes d’un graphe
+est sup´erieur ou ´egal `a n − |E|.
+Preuve. On v´eriﬁe facilement que si |E| = 0 alors il y a n composantes connexes.
+De mˆeme si |E| = 1 on a exactement n− 1 composantes connexes. Par induction sur
+le nombre d’arˆetes : supposons que G = (V, E) est un graphe avec c composantes
+connexes tel que c ≥ n−|E|. On ajoute une arˆete `a G pour fabriquer G(cid:48) = (V, E(cid:48)) et
+on note c(cid:48) le nombre de composantes connexes de G(cid:48). Alors soit c(cid:48) = c (l’arˆete ajout´ee
+relie deux nœuds qui sont d´ej`a dans la mˆeme composante connexe), soit c(cid:48) = c − 1
+(l’arˆete ajout´ee relie deux composantes connexes entre elles pour n’en cr´eer plus
+qu’une). Dans le premier cas on a c(cid:48) = c ≥ n − |E| ≥ n − |E| − 1 = n − |E(cid:48)|. Dans
+le second cas, on a c(cid:48) = c − 1 ≥ n − |E| − 1 = n − (|E| + 1) = n − |E(cid:48)|. La relation
+est toujours v´eriﬁ´ee.
+D´eﬁnition (Voisinage, degr´es). Les voisins de i ∈ V sont les nœuds j ∈ V tels que
+{i, j} ∈ E. On note
+
+V(i) = {j ∈ V ;{i, j} ∈ E}.
+
+Le degr´e di d’un nœud i du graphe G est le nombre de voisins de i dans G. C’est
+donc le cardinal |V(i)| du voisinage de i dans G.
+Si G est un graphe dirig´e, on peut d´eﬁnir le degr´e sortant dout
+din
+i du nœud i.
+Le degr´e moyen d’un graphe est d´eﬁni par
+
+et le degr´e entrant
+
+i
+
+(cid:88)
+
+i∈V
+
+di.
+
+¯d =
+
+1
+|V |
+
+Dans un graphe orient´e, les degr´es moyens sortants et entrants sont n´ecessairement
+´egaux
+
+(cid:88)
+Proposition 1.2. Dans un graphe G = (V, E) on a(cid:80)
+i∈V
+i∈V di = 2|E|. En particulier,
+
+i = ¯dout :=
+din
+
+(cid:88)
+
+1
+|V |
+
+1
+|V |
+
+¯din :=
+
+dout
+i
+
+.
+
+i∈V
+
+la somme des degr´es d’un graphe est toujours paire.
+
+Remarque. La suite des degr´es (d1, . . . , dn) d’un graphe est tr`es contrainte. En
+fait Erd˝os and Gallai (1961) ont montr´e la propri´et´e suivante (voir aussi Berge,
+1976, Chapitre 6, Th´eor`eme 4). Quitte `a r´e-ordonner (d1, . . . , dn) de sorte que d1 ≥
+d2 ≥ ··· ≥ dn, une condition n´ecessaire et suﬃsante pour que (d1, . . . , dn) soit la
+
+6
+
+r´ealisation de la s´equence des degr´es d’un graphe est que pour tout 1 ≤ k ≤ n − 1
+on ait
+
+k(cid:88)
+
+n(cid:88)
+
+di ≤ k(k − 1) +
+
+min(k, di).
+
+i=1
+
+i=k+1
+
+1.2 Repr´esentation visuelle
+
+On repr´esente les nœuds et les arˆetes sans accorder d’importance `a la position
+d’un nœud dans l’espace. Les nœuds ont des labels qui peuvent ou non ˆetre sp´eciﬁ´es
+sur la repr´esentation.
+
+Attention, la repr´esentation visuelle d’un graphe est tr`es trompeuse ! Les exemples
+
+de la Figure 1.1 sont tir´es du livre Kolaczyk and Cs´ardi (2014).
+
+La question de la visualisation et de la repr´esentation d’un graphe est donc tr`es
+importante. Il faut garder `a l’esprit que pour les grands graphes, la repr´esentation
+est toujours biais´ee.
+
+Remarque. Un graphe est dit planaire lorsque l’on peut le repr´esenter dans le plan
+sans qu’aucune arˆete n’en croise une autre. Dans ce cours, on ne s’int´eresse pas `a
+cette propri´et´e.
+
+1.3 Stockage informatique
+
+1.3.1 Les matrices d’adjacence
+D´eﬁnition. Un graphe G = (V, E) binaire sur un ensemble V = {1, . . . , n} de
+nœuds peut-ˆetre repr´esent´e par sa matrice d’adjacence (binaire) A = (Aij)1≤i,j≤n
+o`u
+
+(cid:26) 1
+
+si {i, j} ∈ E,
+
+Aij =
+
+0 sinon.
+
+Lorsque le graphe est non dirig´e, la matrice A est sym´etrique. Si le graphe est simple
+on pose Aii = 0 pour tout i. Si le graphe est valu´e, on peut consid´erer une matrice
+d’adjacence valu´ee
+
+si l’arˆete est pr´esente entre i et j et de poids wij,
+sinon.
+
+(cid:26) wij
+
+0
+
+Aij =
+
+(cid:88)
+
+j;j(cid:54)=i
+
+di =
+
+Proposition 1.3. Les degr´es s’obtiennent `a partir de la matrice d’adjacence via des
+sommes en ligne ou en colonne
+
+(cid:88)
+
+j;j(cid:54)=i
+
+(cid:88)
+
+j;j(cid:54)=i
+
+Aij;
+
+din
+i =
+
+Aji.
+
+Aij (cas non dirig´e) ;
+
+dout
+i =
+
+7
+
+Figure 1.1 – Chaque ligne contient deux repr´esentations diﬀ´erentes d’un mˆeme
+r´eseau (tir´e de Kolaczyk and Cs´ardi (2014)). En haut : Cube {1, . . . , 5}3, en bas un
+r´eseau de blogs.
+
+8
+
+
+1, e(cid:48)
+
+2
+
+arˆete ? Par exemple, les nœuds de fort degr´es sont-ils reli´es entre eux ou sont-ils
+reli´es `a des nœuds de faible degr´e ?
+
+On consid`ere la distribution des variables (Di, Dj) lorsque {i, j} ∈ E. Lorsque le
+graphe est non dirig´e, il faut faire attention car {i, j} et {j, i} repr´esentent la mˆeme
+arˆete.
+D´eﬁnition. (Distribution empirique de (Di, Dj) pour {i, j} ∈ E). Soit G = (V, E)
+un graphe non dirig´e. Pour tout 1 ≤ k ≤ l, soit N (k, l) le nombre d’arˆetes de
+e = {i, j} ∈ E telles que di = k, dj = l ou di = l, dj = k. Alors la distribution
+empirique de (Di, Dj) pour {i, j} ∈ E ou fr´equence de paire de degr´es est donn´ee
+par
+
+ N (k, l)/(2|E|)
+
+N (l, k)/(2|E|)
+N (kk)/|E|
+
+si k < l,
+si k > l,
+si k = l.
+
+∀(k, l) ≥ 1,
+
+fkl =
+
+C’est une distribution sym´etrique.
+
+Exemple de fr´equence de paires de degr´es.. Le graphe de la Figure 2.1 a
+pour suite de degr´es (4, 2, 3, 1, 0, 1, 1) soit une distribution empirique des degr´es
+f0 = 1/7, f1 = 3/7, f2 = f3 = f4 = 1/7. La fr´equence empirique des paires de degr´es
+est donn´ee par f1,4 = f4,1 = 1/6, f1,3 = f3,1 = 1/12 = f2,3 = f3,2 = f4,2 = f2,4 =
+f3,4 = f4,3 et tous les autres fk,l valent 0.
+
+On peut repr´esenter cette distribution par un carr´e de taille dmax o`u dmax =
+max(di) et la cellule (k, l) indique la valeur fk,l (en niveaux de couleur par exemple).
+
+2.2 Densit´e, clustering, transitivit´e
+
+Les amis de mes amis sont mes amis. L’organisation des r´eseaux en cliques ou
+quasi-cliques est une caract´eristique int´eressante. Elle est captur´ee par les coeﬃcients
+
+15
+
+Figure 2.1 – Exemple de graphe.
+
+d´eﬁnis dans cette section. Comme pour les degr´es, il s’agit de regarder l’environne-
+ment local, en incluant cette fois les voisins `a distance 2.
+
+D´eﬁnition. La densit´e d’un graphe G = (V, E) est d´eﬁnie par
+
+den(G) =
+
+|E|
+
+|V |(|V | − 1)/2
+
+=
+
+¯D
+
+(|V | − 1)
+
+.
+
+Cette quantit´e, comprise entre 0 et 1, traduit `a quel point le graphe G ressemble
+
+ou pas `a une clique. Il s’agit du degr´e moyen ¯D `a constante multiplicative pr`es.
+
+On peut d´eﬁnir une densit´e locale en consid´erant un sous-graphe H ⊂ G. Un cas
+int´eressant est obtenu pour Hi, le sous-graphe induit construit `a partir des voisins
+d’un nœud i ∈ V , i.e. le sous-graphe Hi = (Vi, Ei) o`u Vi est l’ensemble des voisins
+de i dans G et Ei l’ensemble des arˆetes {j, k} ∈ E telles que j, k ∈ Vi.
+D´eﬁnition. On note Di le degr´e du nœud i et |Ei| le nombre d’arˆetes qui connectent
+les voisins de i entre eux (i.e. Ei est l’ensemble des arˆetes du sous-graphe construit sur
+les voisins de i). On d´eﬁnit le coeﬃcient Ci de clustering du nœud i et le coeﬃcient
+¯C de clustering global par
+
+(cid:40) 2|Ei|
+
+Di(Di−1)
+0
+
+Ci =
+
+si Di ≥ 2
+sinon
+
+,
+
+¯C =
+
+1
+|V |
+
+(cid:88)
+
+i∈V
+
+Ci.
+
+On ﬁxe un nœud i avec Di voisins. Si toutes les arˆetes possibles entre ces voisins
+existent, on obtient Di(Di − 1)/2 arˆetes. Dans ce cas, le rapport 2Ei/Di(Di − 1)
+vaut 1. Sinon, ce rapport est positif, mais inf´erieur `a 1.
+Ainsi, on a
+
+0 ≤ ¯C ≤ 1,
+
+16
+
+1234567avec ¯C = 0 ssi chaque nœud est tel qu’aucun de ses voisins ne sont reli´es par une
+arˆete (le graphe ne contient aucun triangle, mais peut contenir des cycles de longueur
+sup´erieure ou ´egale `a 4) et ¯C = 1 ssi deux arˆetes adjacentes dans le graphe forment
+toujours un triangle.
+
+Le coeﬃcient de clustering global est reli´e `a la densit´e des triangles parmi les
+paires de relations dans le graphe. Les triangles traduisent les relations de transiti-
+vit´e : importance par exemple dans les r´eseaux sociaux, etc. On peut aussi mesurer
+directement cette densit´e des triangles par le coeﬃcient de transitivit´e.
+
+D´eﬁnition (transitivit´e). On d´eﬁnit le coeﬃcient de transitivit´e par
+
+T =
+
+(cid:93) triangles
+
+(cid:93) triplets de nœuds connect´es
+
+.
+
+Remarque. Dans la d´eﬁnition pr´ec´edente, par triplet de nœuds connect´es, on en-
+tend un ensemble de 3 nœuds tels que le sous-graphe induit par ces 3 nœuds est
+connexe. Pour un arbre, on a ¯C = 0 = T . Mais on peut avoir des petites valeurs de
+¯C ou T et contenir des cycles (donc ne pas ˆetre un arbre).
+
+deux voisins d’un nœud i soient connect´es vaut p. Donc en moyenne, E(2|Ei|(cid:12)(cid:12)Di) =
+
+Dans G(n, p), puisque toutes les arˆetes sont ind´ependantes, la probabilit´e que
+
+pDi(Di−1) ce qui donne E(Ci) = p et E( ¯C) = p (cid:39) E(Di)/n (cid:39) ¯d/n. En cons´equence,
+dans G(n, p), le rapport ¯c/ ¯d doit ˆetre de l’ordre de 1/n. Dans les graphes r´eels, on
+observe plutˆot un rapport constant.
+
+2.3 Motifs
+D´eﬁnition. Soient G = (V, E) et G(cid:48) = (V (cid:48), E(cid:48)) deux graphes. On dit que
+
+• G(cid:48) est un sous-graphe de G (et on note G(cid:48) ⊂ G) si V (cid:48) ⊂ V et E(cid:48) ⊂ E.
+• G(cid:48) est un sous-graphe induit de G lorsque G(cid:48) ⊂ G et E(cid:48) contient toutes les
+arˆetes {i, j} ∈ E telles que i, j ∈ V (cid:48).
+• G et G(cid:48) sont isomorphes si il existe une bijection φ : V → V (cid:48) telle que
+{i, j} ∈ E ssi {φ(i), φ(j)} ∈ E(cid:48).
+
+Un motif m d’un graphe G est un sous-graphe induit de G. Chercher les oc-
+currences de m dans G c’est chercher tous les sous-graphes induits de G qui sont
+isomorphes `a m.
+Exemple de motifs. Triangles K3, cliques Kk, k-stars, cycles de longueur k, . . . .
+On peut ensuite chercher `a caract´eriser le nombre d’occurrences d’un motif ob-
+serv´e par rapport au nombre attendu sous une hypoth`ese nulle H0 (le mod`ele nul
+
+17
+
+est obtenu par simulations ou par un mod`ele d´eﬁni analytiquement). Et r´epondre
+ainsi `a la question : le nombre d’occurrences de ce motif est-il trop faible ou trop
+grand dans ce graphe ? (par rapport au mod`ele attendu).
+
+2.4 Distance, diam`etre
+D´eﬁnition. La longueur d’un chemin e1, . . . , ek ∈ E dans G = (V, E) est le nombre
+d’arˆetes qui le composent (ici k).
+Si deux nœuds i, j sont connect´es dans G, alors la distance (cid:96)ij entre i et j est la
+longueur du plus court chemin qui les relie dans le graphe. Si les deux nœuds ne
+sont pas connect´es dans G alors (cid:96)ij = +∞.
+La longueur moyenne des chemins est d´eﬁnie par
+
+n(cid:88)
+
+n(cid:88)
+
+i=1
+
+j=1
+
+(cid:88)
+
+i,j;i<j
+
+(cid:96)ij.
+
+¯(cid:96) =
+
+1
+
+n(n − 1)
+
+(cid:96)ij =
+
+2
+
+n(n − 1)
+
+Le diam`etre d’un graphe G est la plus grande distance entre deux nœuds du graphe
+
+diam(G) = max{(cid:96)ij; i, j ∈ V }.
+
+Cette quantit´e n’est ﬁnie que pour les graphes connexes.
+
+Propri´et´e petit monde (small-world property). La propri´et´e (cid:28) petit monde (cid:29) tra-
+duit le fait que dans certains r´eseaux mˆeme tr`es grands, la distance entre deux nœuds
+pris au hasard reste relativement petite. Ainsi, Stanley Milgram (1967) ´etudie un
+r´eseau social de connaissances entre personnes aux USA et conclu au ph´enom`ene
+des (cid:28) six degrees of separation (cid:29) `a savoir la valeur typique de (cid:96)ij dans ce r´eseau est
+´egale `a 6. D’autres r´eseaux exhibent cette propri´et´e de petit monde : le r´eseau des
+acteurs Holywoodiens reli´es par leur co-apparition dans un ﬁlm est caract´eris´e par
+¯(cid:96) = 3.
+
+Pour G(n, p), on peut montrer que la valeur typique de (cid:96)ij est de l’ordre de
+
+log(n), donc les graphes G(n, p) sont des graphes petit monde.
+
+2.5 Autres descripteurs
+
+Composante connexe g´eante. Soit G = (V, E) un graphe et C une composante
+connexe de ce graphe. La taille relative de C est d´eﬁnie par |C|/|V | (nombre de
+nœuds de la composante sur nombre de nœuds total). Soit (Gn)n≥1 une suite de
+graphes telle que Gn est un graphe `a n nœuds et (Cn)n≥1 suite croissante (Cn ⊂ Cn+1)
+
+18
+
+telle que Cn est une composante connexe de Gn. Alors Cn est dite g´eante si sa taille
+relative |Cn|/n ne tend pas vers 0 lorsque n devient grand.
+
+Dans G(n, p), il existe des ph´enom`enes de transition de phase que nous n’abor-
+
+derons pas dans ce cours.
+
+Repr´esentations visuelles avanc´ees. Souvent, les donn´ees ne sont pas unique-
+ment de type relationnelles, et on peut disposer de covariables sur les individus qui
+composent le graphe. Ces covariables peuvent ˆetre incluses dans la repr´esentation,
+par exemple en jouant sur la couleur (covariable cat´egorielle) ou la taille (covariable
+quantitative) des nœuds.
+
+Par contre, si on travaille sur des graphes simples, on n’introduit pas diﬀ´erents
+
+types de liens (`a part dans l’orientation) entre les nœuds.
+
+2.6
+
+´Echantillonnage dans les graphes
+
+Le graphe observ´e G est souvent un ´echantillon d’un graphe plus grand, non
+
+observ´e, not´e G(cid:63). Deux types de questions peuvent apparaˆıtre :
+
+1. Dans quelle mesure les caract´eristiques de G sont-elles une bonne approxi-
+
+mation des caract´eristiques de G(cid:63) lorsque la taille de G grandit ?
+
+2. Lorsque l’on peut choisir le mode d’´echantillonnage, quel type d’´echantillonnage
+
+est `a privil´egier ?
+
+La questions 1 est diﬃcile et peu de r´eponses existent. Quant `a la question
+2, cela d´epend du probl`eme que l’on se pose. Il convient de s´electionner un mode
+d’´echantillonnage qui soit en ad´equation avec la question de recherche sous-jacente.
+
+2.6.1 Exemples d’´echantillonnages dans les graphes
+
+Il existe diﬀ´erents types d’´echantillonnage, on d´ecrit ici uniquement les plus
+utilis´es et leurs principales caract´eristiques. Dans la suite, on note G = (V, E) un
+graphe observ´e qui est un ´echantillon d’un graphe plus grand et inconnu not´e G(cid:63) =
+(V (cid:63), E(cid:63)), poss´edant |V (cid:63)| = n(cid:63) nœuds.
+
+´Echantillonnages par sous-graphe induit et sous-graphe incident. L’´echan-
+tillonnage par sous-graphe induit est obtenu comme suit : on tire n individus au
+hasard et sans remise parmi les n(cid:63) nœuds existants et on observe les liens entre ces
+nœuds.
+
+19
+
+Exemples. R´eseaux sociaux ’classiques’ o`u on s´electionne des individus (au sein
+d’un groupe) et on les interroge sur leurs relations (amiti´es, . . . ).
+
+L’inconv´enient majeur est que si l’on ´echantillonne ainsi dans un grand graphe
+
+(ex Facebook) on obtient un graphe essentiellement vide !
+
+L’´echantillonnage par sous-graphe incident consiste en : on tire m arˆetes au
+hasard et sans remise parmi les m(cid:63) arˆetes existantes, chaque nœud incident `a une
+arˆete est inclus dans le graphe.
+
+Exemples. On a une base de donn´ees d’´echanges d’email ou d’appels t´el´ephoniques
+entre individus dont on extrait des entr´ees.
+
+Avantages et inconv´enients de l’´echantillonnage incident :
+
+• aucun nœud isol´e dans ce graphe ;
+• potentiellement les degr´es obtenus sont tr`es faibles car on tire peu d’arˆetes
+
+incidentes aux mˆemes nœuds.
+
+´Echantillonnages ’link tracing’. Le principe g´en´eral est le suivant : on tire n
+individus au hasard et sans remise parmi les n(cid:63) nœuds existants, puis on suit un
+sous-ensemble d’arˆetes `a partir de ces nœuds.
+
+Dans l’´echantillonnage ´egocentrique : on observe tous les liens incidents aux
+
+nœuds initiaux. Puis 2 variantes sont possibles : inclusion ou pas des nœuds suppl´ementaires
+incidents. (En g´en´eral, on ne les inclue pas).
+
+Exemples. On r´ealise un sondage dans une population o`u on demande aux indi-
+vidus de dire avec combien de personnes ils sont amis. On note ou pas le nom des
+amis (version avec ou sans inclusion des nœuds suppl´ementaires incidents).
+
+L’´echantillonnage Boule de neige (Snowball sampling) est un ´echantillonnage
+´egocentrique it´er´e. Initialement, on a un ensemble V0 de nœuds dont on observe les
+arˆetes incidentes. Les nouveaux nœuds incidents `a ces arˆetes sont not´es V1, puis on
+observe toutes les arˆetes incidentes `a V1 ∪ V0. Les nouveaux nœuds incidents sont
+not´es V2, etc . . . . On arrˆete soit lorsque le nouvel ensemble Vk est vide, soit apr`es
+un nombre K d’it´erations. Le graphe ﬁnal est tel que V = V0 ∪ V1 ∪ ··· ∪ VK et les
+arˆetes sont toutes les arˆetes de G(cid:63) incidentes `a des nœuds de V .
+
+Exemples. Certains sondages en sciences sociales ; Web crawling ; . . .
+
+´Echantillonnages ’Traceroute sampling’. On tire un ensemble de nœuds ’sour-
+ces’ S et un ensemble de nœuds ’cibles’ T dans V (cid:63) \ S. Pour chaque paire (si, tj),
+on s´electionne un chemin dans G(cid:63) de si `a tj : tous les nœuds et toutes les arˆetes sur
+ces chemins sont inclus.
+
+20
+
+Exemples. Sondages de la topologie d’internet.
+
+Ce type d’´echantillonnage n´ecessite d’ˆetre capable de s´electionner (eﬃcacement)
+
+les chemins entre 2 nœuds.
+
+2.6.2 Exemple d’impact de l’´echantillonnage : estimation
+
+des degr´es
+
+On va voir l’impact du type d’´echantillonnage sur une statistique tr`es simple du
+
+graphe : la suite des degr´es.
+
+Supposons que l’on connaˆıt le nombre total de nœuds n(cid:63) de G(cid:63) (hypoth`ese sou-
+vent satisfaite). On s’int´eresse `a la distribution des degr´es dans le graphe `a travers
+le vecteur N(cid:63) = (N (cid:63)
+k est le nombre de nœuds de degr´e k et M
+le degr´e maximal dans G(cid:63). (On a M ≤ n(cid:63) − 1 mais en pratique M (cid:28) n(cid:63)).
+
+M ) o`u N (cid:63)
+
+0 , N (cid:63)
+
+1 , . . . , N (cid:63)
+
+On observe un ´echantillon G du vrai graphe G(cid:63) avec n nœuds et les comptages
+N = (N0, N1, . . . , NM ). Quel est le lien entre N et N(cid:63) ? Pour un ´echantillonnage
+´egocentrique, on peut dire : chaque nœud de G(cid:63) a la probabilit´e p = n/n(cid:63) d’ˆetre
+pr´esent dans G. Dans ce cas, on a la relation
+
+E(N) = pN(cid:63)
+
+et le vrai nombre N (cid:63)
+
+k de nœuds de degr´e k s’estime par ˆNk = Nkn(cid:63)/n
+
+Dans les autres cas, les comptages observ´es N sont ´egalement biais´es mais pas de
+fa¸con aussi simple. Par exemple, dans l’´echantillonnage boule de neige, dans V1 il y
+a plus de nœuds de grand degr´e que pris au hasard. Dans certains cas, si on connaˆıt
+M , on peut corriger les comptages observ´es N. Voir Zhang et al. (2015) pour plus
+de d´etails.
+
+21
+
+Chapitre 3
+
+Spectral Clustering : d´etection de
+communaut´es
+
+Ce chapitre utilise en grande partie l’article de von Luxburg (2007).
+L’analyse de grands graphes passe souvent par un r´esum´e de l’information, par
+exemple `a travers un partitionnement (clustering) des nœuds du graphe : on va alors
+chercher `a grouper les individus en classes (cid:28) homog`enes (cid:29), i.e. les individus dans la
+mˆeme classe se comportent de fa¸con similaire au sein du graphe.
+
+Nous verrons plusieurs fa¸cons de faire du partitionnement des nœuds d’un graphe
+dans ce cours. Ce chapitre s’int´eresse au clustering spectral, qui est une technique
+de partitionnement qui d´etecte des nœuds tr`es connect´es entre eux. En ce sens, le
+clustering spectral est adapt´e `a la recherche de communaut´es dans des graphes (une
+communaut´e est un groupe de nœuds qui forme une quasi-clique, i.e. qui sont tr`es
+connect´es entre eux).
+
+L’heuristique du spectral clustering est simple : si le graphe est compos´e de
+communaut´es, alors il existe une permutation des lignes et des colonnes de la matrice
+d’adjacence pour laquelle cette matrice est presque diagonale par blocs. Il suﬃt donc
+de chercher `a diagonaliser la matrice d’adjacence pour trouver cette permutation.
+
+Le spectral clustering est une technique de partitionnement utilis´ee de fa¸con plus
+large que dans la simple analyse de graphes : on va voir qu’il peut-ˆetre utilis´e sur
+un tableau de donn´ees classique, par exemple comme une alternative `a l’algorithme
+de k-means, `a partir du graphe de similarit´e des donn´ees.
+
+Les caract´eristiques du spectral clustering sont
+
+• classiﬁcation adapt´ee `a la recherche de communaut´es (exclusivement) ;
+• qui n’est pas fond´ee sur un mod`ele probabiliste ;
+• mais qui a l’avantage de fonctionner sur de tr`es grands graphes.
+
+Dans tout ce chapitre, on ne consid`ere que des graphes non dirig´es (les arˆetes
+
+22
+
+repr´esentent des similarit´es ou des distances et sont donc sym´etriques).
+
+3.1 Graphes de similarit´e
+
+3.1.1
+
+Introduction
+
+On dispose d’un tableau de donn´ees classique de taille n × p, i.e. n observa-
+tions x1, . . . , xn avec xi ∈ Rp de dimension p. On va faire de la classiﬁcation (non
+supervis´ee) de cet ensemble de n points. Les techniques les plus classiquement uti-
+lis´ees sont les k-means ou la classiﬁcation hi´erarchique. Elles sont souvent fond´ees
+sur une notion de similarit´e sij ≥ 0 (inversement proportionnelle `a la distance)
+entre chaque paire d’observations xi, xj. `A partir d’une notion de similarit´e entre
+les vecteurs {xi}i≤n, on peut d´eﬁnir un graphe G = (V, E) avec V = {v1, . . . , vn}
+ensemble des nœuds du graphe et e = {vi, vj} est une arˆete du graphe si la simi-
+larit´e sij entre xi, xj est plus grande qu’un certain seuil. Le graphe G peut ˆetre
+binaire (sij ≥ s =⇒ {vi, vj} ∈ E et sij < s =⇒ {vi, vj} /∈ E) ou valu´e
+(sij ≥ s =⇒ {vi, vj} ∈ E et l’arˆete porte la valeur sij, sinon l’arˆete n’est pas
+pr´esente).
+
+Le probl`eme de clustering des points x1, . . . , xn peut ˆetre reformul´e comme un
+probl`eme de partitionnement du graphe de similarit´e o`u l’on cherche des groupes
+de nœuds tels que les connections intra-groupes sont importantes (les vecteurs qui
+correspondent aux nœuds du groupe sont tr`es similaires entre eux) et tels que les
+connections inter-groupes sont faibles (peu de similarit´e entre les vecteurs qui cor-
+respondent `a des nœuds de groupes diﬀ´erents).
+
+Il y a diﬀ´erentes fa¸cons de d´eﬁnir un graphe de similarit´e comme on le verra dans
+
+la prochaine section.
+
+3.1.2 Diﬀ´erents graphes de similarit´e
+
+On consid`ere un ensemble de n observations x1, . . . , xn avec xi ∈ Rp et on dispose
+d’une mesure de similarit´e sij ≥ 0 (l’inverse d’une distance dij) entre chaque paire
+d’observations xi, xj. On va construire diﬀ´erents graphes de similarit´e G = (V, E)
+avec V = {v1, . . . , vn}.
+
+D´eﬁnition (Graphe de similarit´e dense.). On peut d´eﬁnir la similarit´e entre les
+vecteurs {xj} `a travers les voisinages dans Rp (et donc la distance entre les points),
+par exemple ∀i (cid:54)= j on pose sij = exp(−(cid:107)xi − xj(cid:107)2/(2σ2)) pour un certain σ2 > 0
+qui contrˆole la taille des voisinages dans Rp et sii = 0. Dans le cas de similarit´es
+strictement positives, on peut construire un graphe valu´e dense (toutes les arˆetes
+
+23
+
+sont pr´esentes) `a partir des sij. Ainsi, tous les nœuds vi, vj avec i (cid:54)= j sont connect´es
+et le poids de l’arˆete {vi, vj} est sij > 0. Le graphe ainsi construit est dense.
+
+D´eﬁnition (Graphe de -voisinage.). On ﬁxe un seuil  > 0 et on connecte tous les
+nœuds vi, vj tels que sij ≥  (distance entre les vecteurs xi, xj en-dessous du seuil).
+Le graphe ainsi construit est binaire.
+
+D´eﬁnition (Graphe des k plus proches voisins.). On commence par d´eﬁnir un
+graphe orient´e ˜G = (V, ˜E). Si xj est l’un des k plus proches voisins de xi (i.e.
+dij est parmi les k plus petits ´el´ements de {dil; l (cid:54)= i} ou sij est parmi les k plus
+grands ´el´ements de {sil; l (cid:54)= i}) alors on cr´ee une arˆete (orient´ee) de vi vers vj, i.e.
+(vi, vj) ∈ ˜E.
+
+`A partir de ce graphe orient´e ˜G, on peut d´eﬁnir G = (V, E) non orient´e de deux
+
+fa¸cons diﬀ´erentes :
+
+• Soit {vi, vj} ∈ E d`es que (vi, vj) ∈ ˜E ou (vj, vi) ∈ ˜E (graphe des k plus
+proches voisins) ;
+• Soit {vi, vj} ∈ E d`es que (vi, vj) ∈ ˜E et (vj, vi) ∈ ˜E (graphe des k plus
+proches voisins mutuels).
+
+Les arˆetes sont ensuite munies de leur poids sij pour former un graphe valu´e.
+
+Remarques.
+
+• Le graphe des k plus proches voisins est une sorte de com-
+promis entre le graphe dense et le graphe de -voisinage : ´etape de seuillage
+qui r´eduit le bruit (comme pour le -voisinage) mais on garde les valeurs des
+arˆetes sij les plus grandes (contrairement au -voisinage).
+
+• Le choix du graphe de similarit´e entre les vecteurs xi inﬂue sur le r´esultat
+du partitionnement que l’on obtient sur les points. Mais on ne sait pas quel
+choix est meilleur a priori.
+
+• Dans le cadre de ce cours, on dispose d’un graphe (binaire ou valu´e), qui est
+d´ej`a construit et qui d´eﬁnit les relations entre nos entit´es. On appliquera le
+spectral clustering sur ce graphe.
+
+3.2 Matrices laplaciennes de graphe
+
+Pour des raisons de robustesse, le clustering spectral ne diagonalise pas la matrice
+d’adajcence du graphe mais plutˆot une version normalis´ee de celui-ci : une matrice
+laplacienne du graphe (de similarit´e) G. Il y a plusieurs d´eﬁnitions de matrices
+laplaciennes d’un graphe, ici nous n’en consid´ererons certaines.
+
+Dans la suite, G est un graphe valu´e et non dirig´e, de matrice d’adjacence valu´ee
+A (taille n× n) dont les entr´ees sont positives Aij ≥ 0 (il faut penser que les Aij sont
+
+24
+
+(d1, . . . , dn), avec di est le degr´e valu´e du nœud i dans G, i.e. di =(cid:80)
+
+des similarit´es). On note D la matrice diagonale (de taille n) dont la diagonale vaut
+j Aji
+est la somme des poids des arˆetes issues de i. (Le cas d’un graphe binaire est un cas
+particulier du cas g´en´eral que l’on d´ecrit ici).
+
+j Aij =(cid:80)
+
+Pour tout vecteur (colonne) u ∈ Rn, on note u
+
+le vecteur (ligne) transpos´e de u.
+On note 1 le vecteur dont toutes les coordonn´ees valent 1 et I la matrice identit´e. Les
+valeurs propres d’une matrice seront ordonn´ees de fa¸con croissante (en respectant
+les multiplicit´es). Ainsi, les ’k premiers vecteurs propres’ d´esignent les k vecteurs
+propres associ´es aux k plus petites valeurs propres.
+
+(cid:124)
+
+Rappels : une matrice L sym´etrique r´eelle est diagonalisable dans une base or-
+thogonale de vecteurs propres et poss`ede n valeurs propres r´eelles. Si la matrice est
+en plus positive (i.e. pour tout u ∈ Rn, on a u
+Lu ≥ 0) alors les valeurs propres sont
+positives.
+
+(cid:124)
+
+Nous commen¸cons par d´eﬁnir la matrice laplacienne de graphe la plus simple et
+par donner ses propri´et´es spectrales (i.e. valeurs propres et vecteurs propres associ´es).
+
+3.2.1 Laplacien non normalis´e
+
+D´eﬁnition. On d´eﬁnit la matrice laplacienne non normalis´ee L d’un graphe par
+
+L = D − A.
+
+Proposition 3.1 (Spectre de L). La matrice L v´eriﬁe les propri´et´es suivantes
+
+1. Pour tout vecteur u ∈ Rn on a
+
+n(cid:88)
+
+i,j=1
+
+(cid:124)
+
+u
+
+Lu =
+
+1
+2
+
+Aij(ui − uj)2.
+
+(3.1)
+
+2. L est une matrice sym´etrique et positive.
+
+3. La plus petite valeur propre de L est 0 de vecteur propre associ´e 1.
+4. L poss`ede n valeurs propres r´eelles positives, not´ees 0 = λ1 ≤ λ2 ≤ ··· ≤ λn.
+
+D´emonstration. Par d´eﬁnition de L = D − A et de la matrice D on a ∀u ∈ Rn,
+
+n(cid:88)
+(cid:88)
+
+i=1
+
+i di −(cid:88)
+n(cid:88)
+
+i,j
+
+uiAijuj
+
+(cid:17)
+
+uiujAij +
+
+dju2
+j
+
+i,j
+
+j=1
+
+(cid:124)
+u
+
+Lu = u
+
+(cid:124)
+
+Du − u
+
+(cid:124)
+
+Au =
+
+u2
+
+(cid:16) n(cid:88)
+(cid:88)
+
+i=1
+
+=
+
+=
+
+1
+2
+
+1
+2
+
+i − 2
+
+diu2
+
+Aij(ui − uj)2,
+
+i,j
+
+25
+
+(car(cid:80)
+
+j Aij = di et(cid:80)
+
+i Aij = dj). Ceci prouve le point 1.
+
+Comme D et A sont sym´etriques, la matrice L = D−A l’est aussi. D’apr`es (3.1),
+on a pour tout u ∈ Rn, u
+Lu ≥ 0, donc L est positive. En cons´equence, ses valeurs
+(cid:124)
+propres sont r´eelles et positives, on les note λ1 ≤ λ2 ≤ ··· ≤ λn. Enﬁn, par d´eﬁnition
+de L, on voit que 1 est un vecteur propre, associ´e `a la valeur propre 0 (puisque
+
+(cid:80)
+
+i Aij = di).
+
+Remarques.
+
+1. La d´eﬁnition de L est inchang´ee si on modiﬁe la diagonale de A
+(tant que D est toujours d´eﬁni comme la matrice diagonale dont les entr´ees
+sont la somme des lignes de A). On peut le voir `a partir de la d´eﬁnition
+L = D− A ou `a partir de l’´equation (3.1). En particulier si on a (cid:28) oubli´e (cid:29) de
+mettre une diagonale nulle sur A (par exemple `a partir de la fonction de
+similarit´e exp vue plus haut), cela n’aura pas d’impact sur L (ni sur son
+spectre).
+
+2. Attention : cette remarque n’est pas du tout valable pour les laplaciens qui
+vont suivre ! Donc il est pr´ef´erable de bien faire attention `a la diagonale de
+A.
+
+Proposition 3.2 (Nombre de composantes connexes de G et spectre de L). Soit
+G un graphe valu´e dont les poids des arˆetes sont positifs et L la matrice lapla-
+cienne non normalis´ee associ´ee. Alors la multiplicit´e de 0 en tant que valeur propre
+de L est exactement le nombre de composantes connexes du graphe G. Si on note
+C1, . . . , Ck ⊂ {v1, . . . , vn} ces composantes connexes et 1C1, . . . , 1Ck les vecteurs in-
+dicatrices des composantes (d´eﬁnis par 1Cl(i) = 1 si vi ∈ Cl et 1Cl(i) = 0 sinon),
+alors l’espace propre associ´e `a la valeur propre 0 est engendr´e par 1C1, . . . , 1Ck.
+
+D´emonstration. On commence par consid´erer le cas k = 1 d’une seule composante
+connexe dans le graphe. Si u ∈ Rn est un vecteur propre de L associ´e `a la valeur
+propre 0, on a Lu = 0 et d’apr`es (3.1),
+
+(cid:88)
+
+(cid:124)
+u
+
+Lu = 0 =
+
+Aij(ui − uj)2.
+
+i,j
+
+Puisque Ai,j ≥ 0, la somme est nulle seulement si tous ses termes sont nuls, ie
+seulement si pour tout 1 ≤ i, j ≤ n on a Aij(ui−uj)2 = 0. Si l’arˆete {vi, vj} ∈ E alors
+le poids Aij est non nul et n´ecessairement ui = uj. Donc le vecteur propre u ∈ Rn est
+constant sur les coordonn´ees correspondant `a des nœuds connect´es dans le graphe.
+Par d´eﬁnition d’une composante connexe (tous les nœuds dans la composante sont
+connect´es), et puisqu’on a une seule composante connexe (cas k = 1), on a ui = cte
+pour tout i ∈ {1, . . . , n}. Donc u est proportionnel `a 1, i.e. le vecteur 1 engendre
+l’espace propre associ´e `a la valeur propre 0.
+
+26
+
+Si k ≥ 2. Soient C1, . . . , Ck ⊂ {v1, . . . , vn} les composantes connexes du graphe
+G. Sans perte de g´en´eralit´e, on peut supposer que les nœuds de V sont ordonn´es
+selon la composante `a laquelle ils appartiennent. Alors, la matrice d’adjacence A a
+une forme diagonale par blocs (puisque si vi, vj ne sont pas dans la mˆeme composante
+connexe, alors Aij = 0). En cons´equence, L = D − A a aussi une forme diagonale
+par blocs
+
+
+
+L =
+
+ .
+
+L1
+
+L2
+
+. . .
+
+Lk
+
+Chacun des blocs Li (de taille ni × ni) est une matrice laplacienne, associ´e au sous-
+graphe Gi = (Ci, Ei) ⊂ G induit par la i-`eme composante connexe Ci (de cardinal
+ni) de G. L’ensemble des valeurs propres de L (= spectre de L) est la r´eunion des
+spectres de chaque Li et les vecteurs propres correspondants sont form´es par les
+vecteurs propres de Li, augment´es de coordonn´ees nulles aux positions des autres
+blocs. Comme pour chaque sous-graphe Gi, on a une seule composante connexe, le
+r´esultat pr´ec´edent nous dit que l’espace propre associ´e `a la valeur propre 0 de Li est
+engendr´e par 1Ci (dans Rni). On obtient donc que l’espace propre associ´e `a la valeur
+propre 0 de L est engendr´e par les vecteurs 1C1, . . . , 1Ck (en tant que vecteurs de
+Rn cette fois).
+
+Remarque. L’´etude du spectre du laplacien d’un graphe permet donc de d´eterminer
+simplement le nombre de composantes connexes de ce graphe.
+
+Le laplacien L est int´eressant car on peut faire facilement des calculs de spectre
+et comprendre ce qui se passe. Cependant pour le clustering il ne donne pas les
+meilleurs r´esultats num´eriques possibles et on lui pr´ef`ere des versions normalis´ees.
+
+3.2.2 Laplaciens normalis´es
+
+D´eﬁnition. On consid`ere une matrice laplacienne normalis´ee d´eﬁnie par
+
+LN = I − D−1/2AD−1/2.
+
+NB : dans la litt´erature, il existe d’autres d´eﬁnitions de laplacien normalis´e.
+
+Rappels.
+
+• Comme D est une matrice diagonale, la matrice D−1/2 est une
+√
+matrice dont les ´el´ements diagonaux valent 1/
+di (ce n’est pas vrai si D
+n’est pas diagonale !).
+
+27
+
+• La multiplication `a gauche par une matrice diagonale revient `a multiplier les
+vecteurs lignes de la matrice, tandis qu’une multiplication `a droite multiplie
+les vecteurs colonnes. Ainsi, D−1/2AD−1/2 est la matrice dont chaque entr´ee
+
+i, j vaut Aij/(cid:112)didj. Ainsi,
+
+1
+
+LN =
+
+. . . − Aij√
+didj
+1
+
+ .
+
+C’est une matrice sym´etrique (puisque A l’est et D est diagonale).
+
+Proposition 3.3 (Spectre de LN ). La matrice laplacienne normalis´ee v´eriﬁe les
+propri´et´es suivantes :
+
+1. Pour tout u ∈ Rn,
+
+(cid:88)
+
+1≤i,j≤n
+
+Aij
+
+(cid:124)
+u
+
+LN u =
+
+1
+2
+
+(cid:16) ui√
+
+di
+
+(cid:17)2
+
+.
+
+− uj(cid:112)dj
+
+2. 0 est valeur propre de LN , de vecteur propre associ´e D1/21.
+
+3. La matrice LN est une matrice positive qui poss`ede n valeurs propres r´eelles
+
+positives.
+
+D´emonstration. Soit u ∈ Rn, on a
+
+i Aij = di. On a donc prouv´e le point 1.
+
+On a LN D1/21 = D1/21−D−1/2A1 = D1/21−D−1/2(d1, . . . , dn)
+(cid:124)
+0, donc 0 est valeur propre de LN associ´e au vecteur propre D1/21.
+
+= D1/2(1−1) =
+
+D’apr`es le point 1, LN est positive donc ses valeurs propres sont r´eelles et posi-
+
+tives.
+
+La multiplicit´e de la valeur propre 0 du laplacien normalis´e est reli´ee au nombre
+
+de composantes connexes du graphe.
+
+28
+
+(cid:124)
+u
+
+(cid:124)
+LN u = u
+
+(I − D−1/2AD−1/2)u =
+
+(cid:16) n(cid:88)
+(cid:88)
+
+i=1
+
+=
+
+1
+2
+
+1
+2
+
+i − 2uiuj
+u2
+
+(cid:16) ui√
+
+di
+
+Aij
+
+1≤i,j≤n
+
+Aij(cid:112)didj
+− uj(cid:112)dj
+
+car(cid:80)
+
+=
+
+j Aij = di et(cid:80)
+
+Aij(cid:112)didj
+
+uiuj
+
+i − (cid:88)
+(cid:17)
+
+1≤i,j≤n
+
+u2
+
+u2
+j
+
+n(cid:88)
+n(cid:88)
+(cid:17)2
+
+j=1
+
+i=1
+
++
+
+,
+
+Proposition 3.4 (Nombre de composantes connexes de G et spectre de LN ). Soit
+G un graphe valu´e dont les poids des arˆetes sont positifs et LN la matrice laplacienne
+normalis´ee d´eﬁnie ci-dessus. Alors la multiplicit´e de la valeur propre 0 de LN est
+´egale au nombre de composantes connexes du graphe G. Si on note C1, . . . , Ck ⊂
+{v1, . . . , vn} ces composantes connexes et 1C1, . . . , 1Ck les vecteurs indicatrices des
+composantes (d´eﬁnis par 1Cl(i) = 1 si vi ∈ Cl et 1Cl(i) = 0 sinon), alors l’espace
+propre associ´e `a la valeur propre 0 est engendr´e par D1/21C1, . . . , D1/21Ck.
+
+D´emonstration. En exercice.
+
+Remarques.
+
+• En pratique, on s’int´eresse couramment `a des graphes qui n’ont
+qu’une seule composante connexe (s’il y en a plusieurs, autant les ´etudier
+s´epar´ement). Dans ce cas, on sait que 0 est valeur propre de multiplicit´e 1
+et que l’espace propre associ´e est engendr´e par le vecteur D1/21 : pas tr`es
+int´eressant. L’´etude du spectre n’apporte rien de plus sur cette question.
+
+• On utilise le spectre du laplacien de la fa¸con suivante : on s’int´eresse aux
+k premiers vecteurs propres de LN : c’est similaire `a une ACP (analyse en
+composantes principales) ou du MDS (multi-dimensional scaling). Dans ce
+nouvel espace, les points initiaux (nœuds du graphe) sont mieux s´epar´es et
+un simple clustering (type k-means) donne de bons r´esultats.
+
+Enﬁn, on d´eﬁnit ´egalement
+
+Labs = D−1/2AD−1/2 = I − LN .
+
+Cette matrice Labs a exactement les mˆemes vecteurs propres que LN . Si on note
+0 = λ1 ≤ λ2 ≤ ··· ≤ λn les valeurs propres de LN alors les valeurs propres de Labs
+sont 1 − λn ≤ . . . ≤ 1 − λ2 ≤ 1 − λ1 = 1. Attention : dans L, LN ce sont les petites
+valeurs propres qui contiennent l’information int´eressante alors que pour Labs on va
+voir que ce sont les grandes valeurs propres, en valeur absolue !
+
+3.3 Algorithmes de clustering spectral
+
+Tout comme il existe de nombreuses d´eﬁnitions de la matrice laplacienne d’un
+graphe, il existe de nombreux algorithmes de clustering spectral. Nous en verrons
+uniquement 2 : l’algorithme de spectral clustering normalis´e qui utilise LN (Algo-
+rithme 3.1) et l’absolute spectral clustering fond´e sur Labs (Algorithme 3.2).
+Le principe du spectral clustering est donc de transformer les observations de
+d´epart xi ∈ Rp, 1 ≤ i ≤ n en un nouvel ensemble de points yi ∈ Rk, 1 ≤ i ≤ n (=les
+
+29
+
+Algorithm 3.1: Spectral clustering normalis´e de Ng et al. (2001)
+//Entr´ee : A de taille n × n d’entr´ees positives, nombre k de clusters
+//Sortie : Clusters C1, . . . , Ck qui partitionnent {1, . . . , n}
+Calculer la matrice laplacienne normalis´ee LN
+Calculer les k vecteurs propres u1, . . . , uk associ´es aux plus petites valeurs
+propres de LN
+Former la matrice U de taille n × k dont les colonnes sont u1, . . . , uk
+Former la matrice T de taille n × k en normalisant les lignes de U
+
+pour avoir une norme euclidienne 1 (i.e. tij = uij/(cid:112)(cid:80)
+
+k u2
+Cr´eer des clusters C1, . . . , Ck sur les n lignes de T par k-means
+
+ik)
+
+Algorithm 3.2: Absolute Spectral clustering de Rohe et al. (2011).
+//Entr´ee : A de taille n × n d’entr´ees positives, nombre k de clusters
+//Sortie : Clusters C1, . . . , Ck qui partitionnent {1, . . . , n}
+Calculer la matrice laplacienne Labs
+Calculer les k vecteurs propres u1, . . . , uk de Labs associ´es aux k plus
+grandes valeurs propres en valeur absolue
+Former la matrice U de taille n × k dont les colonnes sont u1, . . . , uk
+Cr´eer des clusters C1, . . . , Ck sur les n lignes de U par k-means
+
+lignes de la matrice U ), via un graphe de similarit´e, la matrice laplacienne associ´ee et
+ses k premiers vecteurs propres. Les propri´et´es de ces matrices laplaciennes font que
+ce nouvel ensemble de points yi est facilement classiﬁable en k groupes (un simple
+algorithme k-means suﬃt `a bien s´eparer ces nouveaux points).
+
+Si le graphe de d´epart a k composantes connexes, les k premiers vecteurs propres
+u1, . . . , uk engendrent l’espace propre associ´e `a la valeur propre 0, et on a vu que cet
+espace est engendr´e par les vecteurs indicatrices 1C1, . . . , 1Ck. Si on applique l’algo-
+rithme des k-means sur les lignes de U avec k groupes, on retrouve exactement les
+composantes connexes C1, . . . , Ck. Par analogie, lorsqu’on a une seule composante
+connexe, les algorithmes de spectral clustering vont donner un partitionnement des
+nœuds du graphe en un ensemble de ’presque composantes connexes’ ou plus exac-
+tement, de communaut´es.
+
+Le spectral clustering en valeur absolue a une propri´et´e suppl´ementaire : il va
+chercher des structures de type biparties dans le graphe. Il tend `a mettre dans le
+mˆeme groupe des nœuds qui partagent beaucoup de voisins.
+
+30
+
+3.4 Exemples jouets
+
+On consid`ere ici le cas de quelques graphes remarquables : on ´etudie leur spectre
+(avec L au lieu de LN ou de Labs car les calculs sont plus simples) et on essaye de
+voir l’impact sur le principe du clustering.
+
+Proposition 3.5.
+
+1. Soit Kn le graphe complet sur n nœuds, alors les valeurs
+propres du laplacien L associ´e sont : 0 de multiplicit´e 1 et n de multiplicit´e
+n − 1.
+
+2. Soient i, j deux nœuds de degr´e 1 qui partagent le mˆeme voisin k dans le
+graphe G. Alors le vecteur u ∈ Rn d´eﬁni par ui = 1, uj = −1 et ul = 0 pour
+tout l ∈ {1, . . . , n} \ {i, j} est un vecteur propre du laplacien L associ´e `a la
+valeur propre 1.
+
+3. Soit Sn le graphe en ´etoile sur n nœuds, alors les valeurs propres du laplacien
+L associ´e sont : 0 de multiplicit´e 1, 1 de multiplicit´e n− 2 et n de multiplicit´e
+1.
+
+λ > 0, alors u est orthogonal `a 1, i.e.(cid:80)n
+supposer u1 (cid:54)= 0 et on a u1 = −(cid:80)n
+
+D´emonstration. 1. Kn est connexe donc 0 est valeur propre de multiplicit´e 1, associ´ee
+au vecteur propre 1. Soit u ∈ Rn un vecteur propre associ´e `a une valeur propre
+i=1 ui = 0. Sans perte de g´en´eralit´e, on peut
+i=2 ui (cid:54)= 0. De plus, le laplacien L de Kn v´eriﬁe
+
+Lij = −1 si i (cid:54)= j et Lii = n − 1. On obtient alors
+
+n(cid:88)
+
+L1iui = (n − 1)u1 − n(cid:88)
+
+i=1
+
+i=2
+
+(Lu)1 =
+
+ui = nu1.
+
+Donc si u est un vecteur propre pour la valeur propre λ, on a λu1 = (Lu)1 = nu1.
+Donc n est la seule autre valeur propre (elle a la multiplicit´e n − 1 et est associ´e `a
+n’importe quel vecteur orthogonal `a 1).
+2. Quitte `a r´eordonner les nœuds du graphe, on peut ´ecrire le laplacien sous la forme
+
+
+
+L =
+
+ .
+
+0 −1 0 . . . 0
+1 −1 0 . . . 0
+(cid:63) (cid:63) (cid:63)
+
+1
+0
+−1 −1 dk
+0
+(cid:63)
+...
+0
+
+0
+...
+0
+
+(cid:63)
+(cid:63)
+
+(cid:63)(cid:63)
+
+(cid:124)
+Alors, le vecteur u
+propre 1.
+
+= (1,−1, 0, . . . , 0) est un vecteur propre associ´e `a la valeur
+
+31
+
+3. On consid`ere `a pr´esent le graphe en ´etoile Sn. Il est connexe donc 0 est valeur
+propre de multiplicit´e 1, associ´ee au vecteur propre 1. On num´erote 1 le nœud au
+centre de l’´etoile et de 2 `a n les nœuds au bout des branches. En appliquant le
+r´esultat du point 2 pour les noeuds (i, i + 1) pour i allant de 2 `a n − 1 (ce sont des
+nœuds de degr´e 1 qui partagent le nœud 1 en commun), on obtient (n-2) vecteurs
+u(i) associ´es `a la valeur propre 1. On v´eriﬁe qu’ils sont lin´eairement ind´ependants
+
+(´ecrire(cid:80)n−1
+Enﬁn pour trouver la derni`ere valeur propre λ, on utilise T r(L) = (cid:80)n
+
+i=2 αiu(i) = 0 et voir que n´ecessairement αi = 0).
+
+i=1 λi =
+λ+0+(n−2). Or T r(L) = (n−1)+1×(n−1) = 2n−2, donc λ = T r(L)−n+2 = n.
+(Le vecteur propre correspondant est n´ecessairement constant sur les indices i allant
+de 2 `a n et orthogonal `a 1, on peut d´eduire facilement sa forme).
+
+Cons´equences.
+
+• Le r´esultat pour Kn indique que si on fait un clustering des lignes de U avec
+k > 1 groupes, on n’obtient rien qui fasse du sens. C’est normal puisqu’il n’y
+a qu’une seule communaut´e dans Kn.
+• Pour Sn, le clustering spectral trouve soit une seule communaut´e, soit n − 1
+communaut´es : le nœud central associ´e `a un nœud au hasard, puis chaque
+autre nœud tout seul.
+
+Proposition 3.6.
+
+1. Un graphe est bipartie si et seulement si le spectre de Labs
+
+est sym´etrique.
+
+2. Un graphe connexe est bipartie si et seulement si λmin(Labs) = −λmax(Labs).
+
+D´emonstration. Admis.
+
+Cons´equences. On comprend que l’absolute spectral clustering qui regarde les
+plus grandes valeurs propres en valeur absolue va capturer les structures de type
+bipartie.
+
+3.5 Commentaires pratiques
+
+• Le choix de la fonction de similarit´e (quand on part de donn´ees non graphe)
+
+doit d´ependre du type de donn´ees.
+
+• Une diﬀ´erence importante entre le graphe d’-voisinage et les graphes des k
+plus proches voisins (simple ou mutuel) est l’adaptation locale du voisinage
+des seconds : les tailles de voisinage sont diﬀ´erentes en fonction des r´egions
+de l’espace (plus grandes dans les r´egions peu denses, plus petites dans les
+r´egions plus denses).
+
+32
+
+• Le graphe des k plus proches voisins mutuel tend `a connecter entre eux des
+points dans des r´egions de densit´e constante (comme la version simple) mais
+ne connecte pas entre elles des r´egions proches mais de densit´e diﬀ´erente. En
+ce sens, c’est un compromis entre -voisinage et k plus proches voisins simple.
+• Les graphes des k plus proches voisins sont plus faciles `a manipuler que le
+graphe construit avec une similarit´e gaussienne (qui lui est dense). Il peuvent
+donc ˆetre pr´ef´erables ; mais attention `a la perte d’information : on peut par
+exemple avoir plus de composantes connexes dans ces graphes que de clusters
+d´esir´es !
+
+• Recommandations empiriques pour les choix des param`etres :
+
+— prendre k de l’ordre de log(n) pour le graphe des k-plus proches voi-
+sins simple et plus grand (sans r`egle explicite) pour le graphe des k-plus
+proches voisins mutuel. Il faut de toute fa¸con regarder le nombre de com-
+posantes connexes obtenues, le comparer au nombre de clusters voulus et
+ajuster en cons´equence.
+
+— prendre  tel que le graphe r´esultant soit connect´e.
+— pas de bonne r`egle pour le choix de σ dans la similarit´e gaussienne.
+
+• On a vu que si le graphe a p composantes connexes, alors l’espace propre
+associ´e `a la valeur propre 0 a pour dimension p et est engendr´e par les indi-
+catrices des clusters. Cependant, la sortie d’un algorithme de d´ecomposition
+spectrale est n’importe quelle base orthogonale de vecteurs propres de cet
+espace (i.e. pas forc´ement la base des vecteurs d’indicatrices mais une base
+issue d’une combinaison lin´eaire de celle-ci). Par contre, le k-means sur ces
+vecteurs permet d’obtenir simplement les clusters. (En fait, la matrice U n’a
+que k lignes diﬀ´erentes, on peut faire le clustering visuellement).
+
+• Le choix du nombre de clusters k est un probl`eme r´ecurrent du clustering. Ici,
+pas de mod`ele probabiliste donc pas de crit`ere type BIC ou reposant sur une
+vraisemblance mais on peut utiliser d’autres crit`eres ad-hoc type ’similarit´e
+intra-groupes et inter-groupes’. Une technique courante consiste `a utiliser
+l’heuristique du ’trou des valeurs propres’ (eigengap) : on choisit le nombre
+de clusters k par
+
+ˆk = Argmax
+1≤j≤n−1
+
+λj+1(LN ) − λj(LN ).
+
+Rem : il n’y a pas d’´equivalent pour Labs.
+
+33
+
+Chapitre 4
+
+Mod`eles de graphes al´eatoires et
+classiﬁcation des nœuds
+
+Nous avons d´ej`a vu le mod`ele G(n, p) et constat´e qu’il s’ajustait mal sur les
+r´eseaux r´eels observ´es (hypoth`eses d’ind´ependance entre les arˆetes et uniformit´e de
+la probabilit´e de connection dans le graphe trop restrictives).
+
+On commence par pr´esenter 2 mod`eles qui apparaissent souvent dans la litt´erature
+et qui ne sont pas li´es `a un point de vue type classiﬁcation des nœuds. Le reste de ce
+chapitre sera consacr´e aux mod`eles probabilistes de classiﬁcation des noeuds d’un
+graphe.
+
+4.1 Deux mod`eles de graphes (sans liens avec la
+
+classiﬁcation)
+
+4.1.1 Les mod`eles exponentiels de graphes al´eatoires
+
+Il s’agit d’un mod`ele qui s’inspire naturellement de la famille de mod`eles expo-
+
+nentiels.
+D´eﬁnition. Soit n ≥ 1 un entier. On note An l’ensemble des matrices d’adjacence
+binaires (sym´etriques ou non) de taille n×n et pour tout A ∈ An, soit S(A) ∈ Rp un
+vecteur de statistiques du graphe associ´e. Le mod`ele exponentiel de graphe associ´e
+au vecteur de statistiques S et not´e ERGM(S) est d´eﬁni par la famille de lois de
+probabilit´es {Pθ}θ∈Rp d´eﬁnies sur l’ensemble An par
+
+(cid:16)
+
+(cid:17)
+
+avec c(θ) =(cid:80)
+
+∀θ ∈ Rp,∀A ∈ An, Pθ(A) =
+
+1
+
+c(θ)
+
+exp
+
+(cid:124)
+
+θ
+
+S(A)
+
+,
+
+A∈An
+
+(cid:124)
+
+exp(θ
+
+S(A)) une constante de normalisation.
+
+34
+
+Dans ce mod`ele, S(A) devient automatiquement un vecteur de statistiques ex-
+haustives du mod`ele. Tous les graphes ayant la mˆeme valeur observ´ee de S ont la
+mˆeme probabilit´e d’occurrence sour ERGM(S). En pratique, S(A) peut contenir le
+nombre d’arˆetes, de triangles, de k-stars, . . . ou encore des covariables du mod`ele.
+
+Dans la suite, on utilise des notations de graphe non dirig´e mais tout est g´en´eralisable
+
+au cas des graphes dirig´es.
+Exemple . Soit S0(A) = vec(A) = vec((Aij)1≤i<j≤n) alors le ERGM(S0) correspon-
+dant v´eriﬁe
+
+(cid:88)
+
+Pθ(A) ∝ exp(
+
+θijAij),
+
+i<j
+
+o`u ∝ signiﬁe ’proportionnel `a’. C’est un mod`ele de variables al´eatoires Aij ind´ependantes
+non identiquement distribu´ees avec Ai,j ∼ B(pij) et pij = exp(θij)/(1 + exp(θij)).
+C’est un mod`ele qui a autant de param`etres que d’observations, donc pas tr`es pra-
+tique.
+Si on impose la contrainte θij = θ pour tout i, j, alors on obtient le mod`ele d’Erd¨os-
+R´enyi
+
+Pθ(A) ∝ exp(θS1(A)),
+
+o`u S1(A) =(cid:80)
+Si S(A) = (S1(A), S2(A)) avec S1 comme ci-dessus et S2(A) = (cid:80)
+Soit k ≥ 1 et Sk(A) le nombre de k-stars du graphe A et T (A) =(cid:80)
+
+i,j Aij est le nombre d’arˆetes du mod`ele et ˆp = S1(A)/[n(n − 1)/2].
+i,j,k AijAik alors
+les variables (Aij)i<j sont non ind´ependantes et on n’a pas d’expression analytique
+pour l’EMV.
+
+ijk AijAikAjk le
+nombre de triangles. Dans les Markov random graph, on utilise S = (S1, . . . , Sn−1, T ).
+En pratique, aller jusque k = n − 1 est beaucoup trop grand et on se contente de
+k << n − 1 pour la plupart des ERGM courants.
+
+Probl`emes du ERGM.
+
+• La constante c(θ) n’est pas calculable. Les m´ethodes d’estimation sont bas´ees
+sur des m´ethodes MCMC avec par exemple un ´echantillonneur de Gibbs pour
+supprimer le probl`eme de la constante inconnue.
+
+• La maximisation de la vraisemblance reste un pbm diﬃcile, et en fait mal
+pos´e : ces mod`eles sont souvent ’d´eg´en´er´es’ au sens o`u cette loi concentre sa
+masse sur le graphe complet ou le graphe vide, ou un m´elange des deux.
+
+Dans ce cours, je d´econseille fortement l’usage des ERGMs.
+
+35
+
+4.1.2 Attachement pr´ef´erentiel
+
+Il s’agit d’un mod`ele dynamique d’´evolution des graphes, qui illustre le concept
+
+Rich get richer.
+
+Principe : on commence avec un petit graphe initial G0 = (V0, E0) et la suite de
+degr´es associ´es (d1,0, . . . , d|V0|,0) ; on fabrique une suite croissante de graphes Gt =
+(Vt, Et). Pour cela, on it`ere les ´etapes suivantes pour chaque t ≥ 1,
+• un nouveau nœud it de degr´e m ≥ 1 est ajout´e au r´eseau et Vt = Vt−1∪{it} =
+V0 ∪ {i1, . . . , it}.
+• Ce nouveau nœud se connecte avec m nœuds existants qui sont choisis chacun
+avec probabilit´e dj,t−1/(2|Et−1|) o`u dj,t est le degr´e du nœud j au temps t et
+2|Et| la somme totale des degr´es au temps t (attachement pr´ef´erentiel aux
+nœuds de degr´es les plus ´elev´es),
+• On met `a jour les degr´es dj,t pour j ∈ Vt.
+A l’it´eration T , le graphe poss`ede donc |V0| + T nœuds et |E0| + T m arˆetes.
+
+Avantages et inconv´enients.
+
+• C’est un model g´en´eratif dynamique.
+• Il permet d’expliquer la loi de puissance des degr´es : `a la limite (T → ∞) et
+sous certaines conditions, la distribution des degr´es du graphe suit une loi de
+puissance.
+
+• Probl`eme du choix des param`etres G0, m, Tf inal. Impact de ce choix sur le
+
+graphe obtenu ?
+
+• D’un point de vue statistique, ce n’est pas un mod`ele qu’on peut ajuster sur
+
+les donn´ees.
+
+4.2 G´en´eralit´es sur les mod`eles `a variables latentes
+
+4.2.1 D´eﬁnitions
+
+Les mod`eles `a variables latentes (ie non observ´ees) supposent l’existence d’une
+variable al´eatoire (latente) associ´ee `a chaque observation et qui caract´erise la distri-
+bution de cette observation. Cette variable latente peut ˆetre soit `a valeurs continues,
+soit `a valeurs discr`etes (ﬁnies). Dans ce dernier cas, on obtient naturellement une
+classiﬁcation des observations en fonction de la valeur latente. Ainsi, dans un mod`ele
+`a variables latentes, on dispose d’une suite d’observations (Xi)1≤i≤n et on suppose
+qu’il existe des variables latentes (non observ´ees) (Zi)1≤i≤n telles que la loi de Xi
+conditionnelle aux (Zj)1≤j≤n ne d´epend que de Zi. Pour des raisons de commodit´e,
+on suppose mˆeme le plus souvent que la loi des (Xi)1≤i≤n sachant les (Zi)1≤i≤n est
+
+36
+
+le produit des lois de chaque Xi conditionnelle `a Zi uniquement. On fait ainsi une
+hypoth`ese d’ind´ependance conditionnelle des observations.
+
+P((Xi)1≤i≤n|(Zi)1≤i≤n) =
+
+P(Xi|Zi).
+
+n(cid:89)
+
+i=1
+
+Lorsque les (Zi)1≤i≤n sont ind´ependantes, on obtient alors que les (Xi)1≤i≤n sont
+aussi des variables ind´ependantes (mais non identiquement distribu´ees). Il s’agit des
+mod`eles de m´elange (ﬁnis lorsque les Zi sont `a valeurs ﬁnies). Lorsque les (Zi)1≤i≤n
+forment une chaˆıne de Markov, alors les (Xi)1≤i≤n ne sont plus ind´ependantes (seule-
+ment conditionnellement ind´ependantes) et on obtient les chaˆınes de Markov cach´ees.
+
+Lorsqu’on observe un graphe al´eatoire, on a vu que l’on dispose en fait d’un
+ensemble de variables (Aij)1≤i,j≤n (binaires ou valu´ees). La mod´elisation par va-
+riables latentes na¨ıve consisterait `a supposer l’existence de variables non observ´ees
+(Zij)1≤i,j≤n qui caract´erisent la distribution des (Aij)1≤i,j≤n. Cette approche est na¨ıve
+car elle ne tient pas compte du fait que la donn´ee Aij est une caract´erisation du lien
+entre les individus i et j. Il est en fait plus naturel d’envisager qu’il existe des
+variables latentes (Zi)1≤i≤n qui caract´erisent les individus et que la variable Aij de
+relation entre i et j a une distribution qui est caract´eris´ee par la valeur de Zi et de Zj.
+
+Dans toute la suite, on va donc supposer qu’il existe des variables (Zi)1≤i≤n
+ind´ependantes et identiquement distribu´ees (iid), `a valeurs continues ou discr`etes et
+ﬁnies, telles que la loi conditionnelle des (Aij)1≤i,j≤n sachant les (Zi)1≤i≤n v´eriﬁe
+
+P((Aij)1≤i,j≤n|(Zi)1≤i≤n) =
+
+P(Aij|Zi, Zj).
+
+(cid:89)
+
+1≤i,j≤n
+
+Il faut remarquer que mˆeme si les Zi sont ind´ependantes, les Aij ne le sont plus
+du tout : la structure de d´ependance entre les variables al´eatoires est compliqu´ee
+par le fait que par exemple Aij et Aik d´ependent tout les deux de la mˆeme variable
+latente Zi (voir Figure 4.1).
+
+4.2.2 Estimation des param`etres
+
+Consid´erons la vraisemblance d’un mod`ele `a variables latentes : la distribution
+des (Aij)1≤i,j≤n n’est donn´ee que conditionnellement aux variables latentes (Zi)1≤i≤n,
+
+37
+
+Z1 Z2
+
+··· Zi
+
+··· Zj
+
+··· Zn−1 Zn
+
+A12 ··· A1n
+
+···
+
+Aij
+
+··· An−2,n−1 An−1,n
+
+Figure 4.1 – D´ependances entre les variables d’un mod`ele `a variables latentes pour
+graphes.
+
+on ´ecrit donc
+
+(cid:90)
+(cid:90)
+Pθ(Zi = zi) ×(cid:89)
+
+. . .
+
+z1
+
+zn
+
+(cid:90)
+
+(cid:90)
+
+n(cid:89)
+
+L(θ) =Pθ((Aij)1≤i,j≤n) =
+
+Pθ((Aij)1≤i,j≤n, Z1 = z1, . . . , Zn = zn)dz1 . . . dzn
+
+=
+
+. . .
+
+Pθ(Aij|Zi = zi, Zj = zj)dz1 . . . dzn.
+
+z1
+
+zn
+
+i=1
+
+i,j
+
+En pratique, si les Zi sont `a valeurs dans {1, . . . , Q}, les int´egrales ci-dessus sont des
+sommes et on a Qn termes `a sommer. Lorsque n n’est pas tr`es petit (n ≥ 10), cette
+somme n’est pas accessible num´eriquement en un temps raisonnable. Si les Zi sont `a
+valeurs continues, on peut approcher les int´egrales en les discr´etisant (par exemple
+sur Q points) et le probl`eme reste exactement le mˆeme.
+
+Dans un mod`ele `a variables latentes, il n’est pas possible (en g´en´eral) de faire un
+calcul eﬃcace de la vraisemblance. L’estimation des param`etres se fait g´en´eralement
+en utilisant l’algorithme EM (expectation-maximization) qui approche l’estimateur
+du maximum de vraisemblance.
+
+L’algorithme EM. L’algorithme EM (expectation-maximization) est un algorithme
+it´eratif qui permet de maximiser (localement) la vraisemblance dans des mod`eles `a
+donn´ees manquantes (typiquement, les mod`eles `a variables latentes sont des mod`eles
+`a donn´ees manquantes).
+
+Supposons que l’on ait un mod`ele avec donn´ees observ´ees X1:n et donn´ees man-
+quantes (ie non observ´ees) S1:n. On appelle donn´ees compl`etes l’ensemble des va-
+riables (S1:n, X1:n).
+
+Le principe de l’algorithme EM est le suivant :
+
+• On part d’une valeur initiale θ0 du param`etre,
+• `A l’it´eration k, on eﬀectue les deux ´etapes
+— Expectation : on calcule Q(θ, θk) := Eθk(log Pθ(S1:n, X1:n)|X1:n).
+— Maximization : on maximise θk+1 := Argmaxθ Q(θ, θk).
+• Arrˆet lorsque δ := (cid:107)θk+1− θk(cid:107)/(cid:107)θk(cid:107) ≤  ou un nombre maximum d’it´erations
+est atteint.
+
+38
+
+`A chaque it´eration, la vraisemblance (observ´ee) augmente. En eﬀet, par construc-
+
+tion on sait que Q(θk+1, θk) ≥ Q(θk, θk), i.e :
+
+(cid:20)
+(cid:90)
+(cid:90)
+
+log
+
+Sn
+
+Sn
+
+0 ≤Eθk
+
+= log
+
+= log
+
+(cid:21)
+
+(cid:12)(cid:12)(cid:12)X1:n
+
+Pθk+1(S1:n, X1:n)
+Pθk(S1:n, X1:n)
+Pθk+1(S1:n = s1:n, X1:n)
+Pθk(S1:n = s1:n, X1:n)
+Pθk+1(s1:n, X1:n)
+
+Pθk(X1:n)
+
+ds1 . . . dsn = log
+
+Pθk+1(X1:n)
+Pθk(X1:n)
+
+.
+
+(cid:20)Pθk+1(S1:n, X1:n)
+
+Pθk(S1:n, X1:n)
+
+(cid:21)
+
+(cid:12)(cid:12)(cid:12)X1:n
+
+≤
+
+Ineg. Jensen
+
+log Eθk
+
+Pθk(S1:n = s1:n|X1:n)ds1 . . . dsn
+
+Ainsi, Pθk+1(X1:n) ≥ Pθk(X1:n).
+
+Donc l’algorithme EM converge (quand le nombre d’it´erations augmente) vers un
+maximum local de la vraisemblance. En lan¸cant l’algorithme avec plusieurs initiali-
+sations, on devrait atteindre le maximum global.
+
+L’algorithme EM est particuli`erement adapt´e au cas o`u les variables latentes sont
+`a valeurs ﬁnies. Nous reviendrons sur son application dans le cadre du mod`ele `a
+blocs stochastiques.
+
+4.3 Espaces latents continus (pour graphes binaires)
+
+Les mod`eles `a espaces latents continus n’ont ´et´e d´evelopp´es que pour les graphes
+
+binaires.
+
+4.3.1 Mod`ele de Hoﬀ et al.
+
+Le mod`ele de Hoﬀ et al. (2002) a ´et´e propos´e pour ´etudier des r´eseaux sociaux.
+Dans ce mod`ele, les variables latentes sont i.i.d. `a valeurs dans Rq qui repr´esente
+un espace social. La proximit´e des individus dans cet espace induit une plus grande
+probabilit´e de connexion dans le graphe. Ainsi, seule la position relative des variables
+latentes entres elles est importante pour le mod`ele (et pas leur position absolue).
+
+On consid`ere un graphe binaire non dirig´e (Aij)1≤i,j≤n et (possiblement) des
+vecteurs de covariables xij ∈ Rs sur chaque relation (i, j). On utilise un mod`ele de
+r´egression logistique
+
+logit(P(Aij = 1|Zi, Zj, xij)) =
+
+P(Aij = 1|Zi, Zj, xij)
+1 − P(Aij = 1|Zi, Zj, xij)
+
+= α + β
+
+(cid:124)
+
+xij − (cid:107)Zi − Zj(cid:107),
+
+o`u (cid:107) · (cid:107) est la norme euclidienne dans l’espace latent Rq. Les param`etres du mod`ele
+sont (α, β) ∈ R × Rs. On peut remplacer norme euclidienne par n’importe quelle
+distance.
+
+39
+
+Il faut remarquer que les variables {Zi}i ne peuvent ˆetre reconstitu´ees qu’`a ro-
+tation, sym´etrie axiale et translation pr`es. En eﬀet, chacune de ces op´erations laisse
+l’ensemble des distances ((cid:107)Zi − Zj(cid:107))i,j inchang´e et donc ne modiﬁe pas le mod`ele.
+On appelle conﬁgurations ´equivalentes deux ensembles {Zi}i et {Z(cid:48)
+i}i qui induisent
+les mˆemes valeurs de distances ((cid:107)Zi − Zj(cid:107))i,j = ((cid:107)Z(cid:48)
+
+i − Z(cid:48)
+
+j(cid:107))i,j.
+
+Ainsi, pour des valeurs des param`etres (α, β) ﬁx´ees, deux conﬁgurations ´equivalentes
+
+{Zi}i et {Z(cid:48)
+si α et β sont ﬁx´es alors si on a deux ensembles de conﬁguration {Zi}i et {Z(cid:48)
+induisent la mˆeme loi alors les conﬁgurations sont ´equivalentes.
+
+i}i induisent la mˆeme distribution sur les observations, et r´eciproquement,
+i}i qui
+
+Estimation des param`etres et des variables latentes. Le package latentnet
+propose une m´ethode d’estimation bay´esienne des param`etres et des positions la-
+tentes. Voir TP pour plus de d´etails.
+
+4.3.2 Version classiﬁante du mod`ele
+
+Dans le mod`ele pr´ec´edent, les nœuds du graphe ne sont pas naturellement clas-
+siﬁ´es en groupes qui permettent de les interpr´eter. On peut obtenir une telle clas-
+siﬁcation en combinant l’approche avec un mod`ele de m´elange sur les variables
+latentes (Handcock et al., 2007).
+
+Ainsi, on suppose que les variables latentes Zi ∈ Rq sont en fait g´en´er´ees selon
+un mod`ele de m´elange de lois gaussiennes multi-dimensionnelles Nq(mk, σ2
+kId) avec
+1 ≤ k ≤ K, de proportions πk, 1 ≤ k ≤ K, de moyennes diﬀ´erentes (mk, 1 ≤ k ≤ K)
+et des matrices de covariance sph´eriques (σ2
+
+kId).
+
+Le choix du nombre de clusters K se fait automatiquement dans ce cadre bay´esien :
+
+on place une loi a priori sur K et on estime par le maximum a posteriori.
+
+4.3.3 Choix de la dimension de l’espace latent
+
+En pratique, il n’existe aucun m´ethode permettant de choisir la dimension q de
+l’espace latent (attention, cette dimension n’est pas le nombre de clusters K de la
+m´ethode de Handcock et al. (2007) !).
+
+Les logiciels sont impl´ement´es avec q = 2 (ou 3) mais rien ne permet d’aﬃrmer
+
+que ce choix est pertinent, ni qu’il n’a pas un impact majeur sur les r´esultats.
+
+40
+
+4.4 Espaces latents discrets : Mod`eles `a blocs sto-
+
+chastiques (stochastic block model)
+
+4.4.1 Le mod`ele
+
+Dans cette section, les variables latentes Z := {Z1, . . . , Zn} sont i.i.d. `a valeurs
+ﬁnies dans {1, . . . , Q} et de loi π = (π1, . . . , πQ). Il sera parfois pratique de voir
+plutˆot Zi comme un vecteur de taille Q de la forme Zi = (Zi1, . . . , ZiQ) dont les
+coordonn´ees sont dans {0, 1}, somment `a 1 et tel que Zi est de loi multinomiale
+M(1, π).
+
+On va d´ecrire le mod`ele `a blocs stochatiques (SBM) dans le cadre d’un graphe
+non dirig´e mais les notations se g´en´eralisent facilement au cas dirig´e. On consid`ere
+donc la matrice d’adjacence d’un graphe non dirig´e A := {Aij}1≤i<j≤n constitu´e de
+variables al´eatoires Aij ∈ A (cas binaire ou valu´e), qui caract´erisent les relations
+entre les nœuds i et j.
+Comme pr´ec´edemment, conditionellement aux variables latentes Z = {Zi}1≤i≤n,
+les variables A = {Aij}i,j sont ind´ependantes et la distribution de chaque Aij ne
+d´epend que de Zi et Zj. On note F (·; γZiZj ) cette distribution conditionnelle, o`u
+γ = (γq(cid:96))1≤q,(cid:96)≤Q est appel´e param`etre de connectivit´e. C’est une matrice sym´etrique
+dans le cas d’un graphe non dirig´e puisque γq(cid:96) = γ(cid:96)q. Le param`etre γq(cid:96) d´ecrit la loi
+des interactions entre des nœuds des groupes q et (cid:96).
+
+Ainsi, le mod`ele `a blocs stochastiques est caract´eris´e par
+
+· P(A|Z) =(cid:81)
+
+· Z = Z1, . . . , Zn variables latentes i.i.d. de loi π sur {1, . . . , Q},
+· A = {Aij}i,j ensemble d’observations `a valeurs dans A,
+P(Aij|Zi, Zj) (ind´ependance conditionnelle),
+· ∀i, j et ∀1 ≤ q, (cid:96) ≤ Q, on a Aij|{Zi = q, Zj = (cid:96)} ∼ F (·; γq(cid:96)).
+
+i,j
+
+On va distinguer `a pr´esent le SBM binaire (apparu d`es le d´ebut des ann´ees 80
+
+en Sciences Sociales) du cas valu´e (beaucoup plus r´ecent).
+
+Dans le cas binaire, la loi conditionnelle de Aij sachant Zi, Zj est simplement
+
+une loi de Bernoulli B(γZiZj ). Ainsi,
+
+∀y ∈ {0, 1}, F (y; γ) = γy(1 − γ)1−y.
+
+Pour les graphes valu´es, on peut utiliser pour mod´eliser la loi conditionnelle de
+Aij sachant Zi, Zj n’importe quelle loi param´etrique qui d´epend seulement de Zi, Zj
+(ex : Poisson, Gaussienne, Laplace, . . . ). Cependant, si cette loi est absolument
+continue par rapport `a la mesure de Lebesgue, on r´ecup`ere un graphe valu´e dense,
+
+41
+
+ce qui n’est pas toujours ad´equat. Pour pallier ce probl`eme, on introduit un m´elange
+avec une masse de Dirac en 0 (not´ee δ0(·)) qui mod´elise les arˆetes absentes. Ainsi,
+
+∀y ∈ A, F (y; γ) = αG(y, η) + (1 − α)δ0(y),
+
+o`u le param`etre de connectivit´e γ = (α, η) avec α ∈ [0, 1] et G(·, η) est la loi
+conditionnelle sur les valeurs des arˆetes pr´esentes.
+
+Pour des raisons d’identiﬁabilit´e, il est pr´ef´erable de restreindre G `a ˆetre une loi
+absolument continue en 0. En eﬀet, dans le cas contraire, on ne peut pas identiﬁer
+α. Si G est absolument continue en 0, alors on a αq(cid:96) = 1− P(Yij = 0|Zi = q, Zj = (cid:96)).
+Si on veut utiliser une loi de Poisson par exemple, on utilise pour G la loi de Poisson
+tronqu´ee en 0. Les valeurs nulles de Yij sont ainsi dues uniquement `a la masse
+de Dirac δ0 et on obtient une loi dite (cid:28) `a inﬂation (cid:29) ou (cid:28) `a d´eﬂation (cid:29) de z´eros.
+L’avantage ´etant que la densit´e du graphe n’est pas n´ecessairement li´ee `a la valeur
+moyenne des arˆetes pr´esentes.
+
+Si tous les αq(cid:96) valent 1, le graphe est dense (toutes les arˆetes sont pr´esentes).
+Ainsi les αq(cid:96) sont des param`etres de densit´e du graphe. Si tous les αq(cid:96) valent 0, on
+obtient un graphe vide (ie sans arˆetes), ce qui n’est pas tr`es int´eressant.
+Lorsque la loi G(·, η) est une masse de Dirac en 1 (ind´ependante de η), on re-
+trouve le SBM binaire. Le seul param`etre de la loi conditionnelle est alors α. Les cas
+classiques pour le choix de G sont : une loi de Poisson tronqu´ee en 0, une gaussienne
+(multivari´ee), etc.
+
+Dans le cas non binaire, on peut (pour des raisons de parcimonie), supposer que
+tous les αq(cid:96) sont constants (´egaux `a un certain α ﬁx´e). Alors, la densit´e des arˆetes
+est homog`ene dans le graphe, seule leur intensit´e (ie la valeur de Aij) va varier en
+fonction des groupes (q, (cid:96)).
+
+Dans la suite, on note le param`etre global du mod`ele θ = (π, γ) = (π, α, η) =
+
+((π1, . . . , πQ); (αq(cid:96))q,(cid:96); (ηq(cid:96))q,(cid:96)). La vraisemblance du mod`ele s’´ecrit
+
+Pθ(A) =
+
+=
+
+=
+
+z1=1
+
+Q(cid:88)
+Q(cid:88)
+Q(cid:88)
+
+z1=1
+
+zn=1
+
+Q(cid:88)
+Q(cid:88)
+Q(cid:88)
+n(cid:88)
+
+zn=1
+
+. . .
+
+. . .
+
+. . .
+
+Q(cid:88)
+
+q=1
+
+i=1
+
+(cid:17)
+
+Pθ(A, Z1 = z1, . . . , Zn = zn)
+
+(cid:16) n(cid:89)
+(cid:16) Q(cid:89)
+
+i=1
+
+i,j
+
+πzi
+
+(cid:17) ×(cid:16)(cid:89)
+(cid:17) ×(cid:16) (cid:89)
+n(cid:89)
+(cid:88)
+(cid:88)
+
+πziq
+q
+
+F (Aij; γzizj )
+
+(cid:89)
+
+1≤q,(cid:96)≤Q
+
+i,j
+
+42
+
+(cid:17)
+
+,
+
+F (Aij; γq(cid:96))ziqzj(cid:96)
+
+z1=1
+
+zn=1
+
+q=1
+
+i=1
+
+1≤q,(cid:96)≤Q
+
+i,j
+
+et la log-vraisemblance des donn´ees compl`etes s’´ecrit simplement
+
+log Pθ(A, Z) =
+
+Ziq log πq +
+
+ZiqZj(cid:96) log F (Aij; γq(cid:96)).
+
+(4.1)
+
+Cas particulier : aﬃliation (planted partition model). Liens avec la d´etection
+de communaut´e. Lorsque le param`etre de connectivit´e γ ne prend que deux va-
+leurs diﬀ´erentes : une valeur intra-groupes et une valeur inter-groupes, on parle de
+mod`ele d’aﬃliation (ou parfois, dans le cas binaire, de ’planted partition model’). Il
+s’agit d’un sous-mod`ele o`u on contraint :
+
+(cid:26) γin
+
+γout
+
+∀1 ≤ q, (cid:96) ≤ Q,
+
+γq(cid:96) =
+
+lorsque q = (cid:96),
+lorsque q (cid:54)= (cid:96).
+
+(4.2)
+
+Dans le cas d’un graphe binaire, sous un mod`ele d’aﬃliation, si on suppose en
+plus que γin (cid:29) γout, la classiﬁcation des nœuds induite par le mod`ele correspond
+exactement `a une d´etection de communaut´es : on cherche des groupes de nœuds
+fortement connect´es entre eux. Dans un mod`ele d’aﬃliation avec γout (cid:29) γin, on va
+au contraire chercher des structures de type ’multi-parties’.
+
+Dans le cas g´en´eral (pas aﬃliation), on r´ecup`ere avec SBM une classiﬁcation des
+nœuds en groupes de nœuds qui ’se connectent de la mˆeme fa¸con’ aux autres groupes.
+C’est un type de classiﬁcation beaucoup moins contraint que la simple d´etection de
+communaut´es. Ces diﬀ´erences sont illustr´ees sur l’exemple jouet de la Figure 4.2.
+
+Figure 4.2 – Exemple jouet de structures de classiﬁcation diﬀ´erentes (couleurs
+gris/noir) obtenues `a partir du mˆeme graphe. `A gauche, le r´esultat d’une m´ethode
+de d´etection de communaut´es ou d’une m´ethode SBM. `A droite, une classiﬁca-
+tion qui pourrait ´egalement ˆetre obtenue `a partir du SBM mais pas `a partir de
+la d´etection de communaut´es : les hubs forment un premier groupe tandis que les
+nœuds ’p´eriph´eriques’ forment le second. Cette seconde classiﬁcation ne peut pas
+s’obtenir avec du clustering spectral (ni normalis´e ni absolu).
+
+4.4.2 L’algorithme EM
+
+Nous avons vu qu’une fa¸con d’approcher le maximum de vraisemblance dans un
+mod`ele `a variables latentes est d’utiliser l’algorithme EM. Cependant, l’´etape E de
+l’algorithme requiert de pouvoir calculer facilement la loi des observations {Aij}i,j
+sachant les variables latentes {Zi}i. C’est le cas par exemple pour des mod`eles de
+m´elange ﬁnis classiques (pas sur des graphes), ou dans les mod`eles de Markov cach´es.
+
+43
+
+Dans le cas de variables latentes sur des graphes o`u chaque observation Aij d´epend
+de deux variables latentes Zi, Zj ce n’est plus possible.
+
+Digression sur les mod`eles graphiques et les d´ependances conditionnelles.
+Un mod`ele graphique est un mod`ele probabiliste dans lequel un graphe repr´esente
+la structure de d´ependance de la distribution d’un ensemble de variables al´eatoires.
+Il existe deux types de mod`eles graphiques : les mod`eles dirig´es (o`u le graphe de
+d´ependances est dirig´e) et les mod`eles non dirig´es (ou le graphe de d´ependances est
+non dirig´e). On pourra se r´ef´erer `a Lauritzen (1996) ou au chapitre 8 de Bishop (2006)
+pour en savoir plus. On aura besoin ´egalement de deux d´eﬁnitions pr´eliminaires.
+D´eﬁnition. Dans un graphe dirig´e, les parents d’un nœud j ∈ V sont tous les
+nœuds i ∈ V tels qu’il existe une arˆete orient´ee de i vers j. Les descendants du
+nœud i ∈ V sont tous les nœuds j ∈ V tels qu’il existe un chemin orient´e de i vers
+j.
+
+Soit P une distribution sur X V et G = (V, E) un graphe tel que
+• l’ensemble V = {1, . . . , p} des nœuds indexe un ensemble de variables al´eatoires
+{Xi}i∈V `a valeurs dans X p,
+• L’ensemble des arˆetes E d´ecrit les relations de d´ependance entre les v.a.
+{Xi}i∈V sous la loi P (plus de d´etails ci-dessous).
+Dans un mod`ele graphique, on a
+• Soit G est un graphe acyclique et dirig´e (DAG), alors P se factorise selon G
+ie on a
+
+P({Xi}i∈V ) =
+
+P(Xi|pa(Xi,G)),
+
+(cid:89)
+
+i∈V
+
+o`u pa(Xi,G) sont les variables parents de Xi dans G.
+• Soit G est non dirig´e, alors pour tout {i, j} /∈ E, on a Xi ⊥⊥ Xj
+XV \{i,j} repr´esente toutes les autres variables sauf Xi, Xj ; ie
+
+(cid:12)(cid:12) XV \{i,j} o`u
+
+P(Xi, Xj|XV \{i,j}) = P(Xi|XV \{i,j})P(Xj|XV \{i,j}).
+
+Une formulation ´equivalente et que l’on utilise fr´equemment est
+
+P(Xi|Xj; XV \{i,j}) = P(Xi|XV \{i,j}).
+
+Exemples.
+
+• R´eseaux bay´esiens (mod`ele graphique dirig´e). Ex : Chaˆınes de
+
+Markov, ou chaˆınes de Markov cach´ees (voir Figure 4.3).
+
+• Champs de Markov (mod`ele non dirig´e).
+• Mod`eles graphiques gaussiens (mod`ele non dirig´e).
+
+44
+
+S1
+
+X1
+
+S1
+
+X1
+
+···
+···
+
+···
+···
+
+Sk−1
+
+Sk
+
+Sk+1
+
+Xk−1 Xk Xk+1
+
+Sk−1
+
+Sk
+
+Sk+1
+
+Xk−1 Xk Xk+1
+
+···
+···
+
+···
+···
+
+Sn
+
+Xn
+
+Sn
+
+Xn
+
+Figure 4.3 – Graphe acyclique dirig´e (haut) et graphe moral (bas) correspondant
+`a un mod`ele de Markov cach´e.
+
+Remarques.
+
+• Attention : la terminologie (cid:28) mod`ele graphique (cid:29) n’a rien `a voir
+avec des donn´ees organis´ees sous forme de graphes. Les variables al´eatoires Xi
+ne traduisent pas (a priori) des interactions entre des entit´es. Le graphe est
+un objet abstrait qui structure la d´ependance entre les variables al´eatoires.
+• Si P se factorise selon un DAG G, alors G n’est pas unique en g´en´eral.
+Ex : sans contrainte sur P, on a P(X1, X2, X3) = P(X3|X1, X2)P(X2|X1)P(X1) =
+P(Xσ(3)|Xσ(1), Xσ(2))P(Xσ(2)|Xσ(1))P(Xσ(1)), pour toute permutation σ (voir
+Figure 4.4).
+
+σ(1)
+
+σ(2)
+
+σ(3)
+
+Figure 4.4 – DAG qui factorise n’importe quelle distribution sur 3 variables. Ici σ
+est n’importe quelle permutation de {1, 2, 3}.
+
+Dans un mod`ele graphique, lorsque la structure de d´ependance est repr´esent´ee
+par un graphe acyclique dirig´e, on construit le graphe moral associ´e au DAG G.
+C’est un graphe non dirig´e, qui est obtenu `a partir de G en (cid:28) mariant (cid:29) les parents
+(i.e. on relie les parents par des arˆetes) puis en retirant les directions des arˆetes (voir
+Figure 4.3 pour un exemple dans le cas des chaˆınes de Markov cach´ees). Lorsque le
+graphe G est non dirig´e, il est ´egal `a son graphe moral.
+
+Proposition 4.1 (Propri´et´es d’ind´ependance). Dans un mod`ele graphique caract´eris´e
+par un graphe G = (V, E), on a
+
+• Si G est un DAG, alors conditionnellement `a ses parents (dans G), une va-
+riable est ind´ependante de ses non-descendants (dans G). Autrement dit, si
+
+45
+
+on note desc(Xi,G) l’ensemble des descendants de Xi dans G et si K est un
+sous-ensemble de V tel que K ∩ desc(Xi,G) = ∅, alors
+
+P(Xi|pa(Xi,G),{Xk}k∈K) = P(Xi|pa(Xi,G)).
+
+• Soient I, J, K des sous ensembles disjoints de V . Alors dans le graphe moral
+associ´e `a G, si tous les chemins de I `a J passent par K, alors {Xi}i∈I ⊥⊥
+{Xj}j∈J
+
+(cid:12)(cid:12) {Xk}k∈K.
+
+Exemple . On consid`ere le DAG et le graphe moral associ´e repr´esent´es `a la Fi-
+gure 4.5. On a par exemple
+
+• X1 et X3 sont ind´ependantes ;
+• Sachant X2, les variables X1 et X3 ne sont pas ind´ependantes ;
+• Sachant X2, la variable X5 est ind´ependante de X1, X3, X4 ;
+• X2 est ind´ependante de X6 sachant X5 ;
+• Sachant X5, la variable X6 est ind´ependante de X1, X2, X3, X4 ;
+• X1 est ind´ependante de X4 sachant X2 ;
+• . . .
+
+X1
+
+X4
+
+X1
+
+X4
+
+X2
+
+X2
+
+X3
+
+X5
+
+X6
+
+X3
+
+X5
+
+X6
+
+Figure 4.5 – Exemple de DAG (gauche) et graphe moral associ´e (droite).
+
+Exemple d’application. On se place dans le mod`ele de chaˆıne de Markov cach´e
+illustr´e `a la Figure 4.3. Par conditionnement, on peut ´ecrire
+P(S1, . . . , Sn|X1, . . . , Xn) = P(Sn|Sn−1, . . . , S1, X1, . . . Xn)P(Sn−1, . . . , S1|X1, . . . Xn).
+
+D’apr`es le graphe moral (ou le DAG), on a
+
+P(Sn|Sn−1, . . . , S1, X1, . . . Xn) = P(Sn|Sn−1, Xn)
+
+et ainsi
+
+P(S1, . . . , Sn|X1, . . . , Xn) = P(Sn|Sn−1, Xn)P(Sn−1, . . . , S1|X1, . . . Xn)
+
+On proc`ede r´ecursivement en utilisant la propri´et´e suivante (qui d´ecoule du graphe
+moral ou du DAG)
+
+P(Sk|Sk−1, . . . , S1, X1, . . . Xn) = P(Sk|Sk−1, Xk, . . . Xn)
+
+46
+
+et on obtient au ﬁnal
+
+P(S1, . . . , Sn|X1, . . . , Xn) =
+
+n(cid:89)
+
+k=2
+
+P(Sk|Sk−1, Xk, . . . Xn) × P(S1|X1).
+
+Ainsi, la loi des variables latentes sachant les observations est celle d’une chaˆıne de
+Markov (inhomog`ene). La forme factoris´ee de cette loi la rend ais´ement manipulable.
+
+Retour sur les mod`eles `a variables latentes pour graphes. L’algorithme
+EM requiert de pouvoir calculer facilement la loi des variables latentes sachant les
+observations. Nous allons voir sur la Figure 4.6 pourquoi cette distribution n’a pas
+une structure simple. En eﬀet, la ﬁgure de gauche montre le DAG associ´e `a un
+mod`ele de graphes avec variables latentes et `a droite, son graphe moral associ´e.
+Dans ce dernier, on voit que sachant les observations, on a toujours des d´ependances
+entre les variables Zi (pr´esence de chemins entre Zi et Zj que l’on ne peut pas
+(cid:28) bloquer (cid:29) avec les variables observ´ees). Ainsi, la distribution des Zi sachant les
+Aij n’est pas factoris´ee ! (Alors que c’est le cas pour un mod`ele de m´elange, pour les
+HMMs, etc). C’est cette propri´et´e qui empˆeche d’appliquer l’algorithme EM ici.
+
+A12
+
+A12
+
+Z1
+
+Z2
+
+Z1
+
+Z2
+
+A13
+
+Z3
+
+A23
+
+A13
+
+Z3
+
+A23
+
+Figure 4.6 – `A gauche : DAG d’un mod`ele `a variable latentes pour un graphe
+(n = 3). `A droite : graphe moral associ´e.
+
+Nous allons nous int´eresser `a une strat´egie d’approximation variationnelle qui
+
+permet de pallier ce probl`eme.
+
+4.4.3 Estimation des param`etres par approximation varia-
+
+tionnelle de EM
+
+La raison qui empˆeche l’utilisation de l’algorithme EM dans notre cadre est le
+fait que la loi des variables latentes {Zi}i sachant les observations {Aij}ij n’est
+pas factoris´ee. Une solution naturelle consiste `a remplacer cette loi par la meilleure
+approximation possible dans la classe des lois factoris´ees. C’est le principe de l’ap-
+proximation variationnelle. Pour l’expliquer, nous allons d’abord revenir sur le prin-
+cipe d´etaill´e de l’algorithme EM, en le pr´esentant avec un point de vue l´eg`erement
+diﬀ´erent.
+
+47
+
+La log-vraisemblance des observations peut se d´ecomposer sous la forme
+
+LA(θ) := log Pθ(A) = log Pθ(A, Z) − log Pθ(Z|A).
+
+Si Q est une distribution de probabilit´e sur l’ensemble des variables {Zi}i, on peut
+prendre l’esp´erance par rapport `a Q de chaque cˆot´e de l’´egalit´e pr´ec´edente et on
+obtient
+
+LA(θ) = EQ(log Pθ(A, Z)) − EQ(log Pθ(Z|A)).
+
+En notant H(Q) l’entropie de la loi Q et KL(Q(cid:107)Pθ(Z|A)) la divergence de Kullback-
+Leibler entre les lois Q et Pθ(Z|A), c’est-`a-dire
+
+H(Q) = −(cid:88)
+(cid:88)
+
+z
+
+Q(z) log Q(z) = −EQ(log Q(Z))
+Q(Z)
+Pθ(Z|A)
+
+Q(z)
+Pθ(z|A)
+
+= EQ
+
+(cid:16)
+
+log
+
+Q(z) log
+
+(cid:17)
+
+,
+
+KL(Q(cid:107)Pθ(Z|A)) =
+
+on obtient alors l’´egalit´e suivante
+
+z
+
+LA(θ) = EQ(log Pθ(A, Z)) + H(Q) + KL(Q(cid:107)Pθ(Z|A)).
+
+(4.3)
+Partant de cette relation (4.3), l’algorithme EM (qui cherche `a maximiser LA(θ))
+consiste `a it´erer les deux ´etapes suivantes. `A partir de la valeur courante du pa-
+ram`etre θ(t), on eﬀectue
+θ(t)(A, Z)) + H(Q) par rapport `a
+• E-step : on maximise la quantit´e EQ(log P
+Q. D’apr`es (4.3), puisque LA(θ(t)) ne d´epend pas de Q, c’est ´equivalent `a
+minimiser KL(Q(cid:107)P
+θ(t)(Z|A)) par rapport `a Q. La solution optimale est donc
+θ(t)(Z|A) pour la valeur courante du param`etre θ(t) ;
+la loi conditionnelle P
+• M-step : on garde `a pr´esent Q ﬁx´e et on maximise la quantit´e EQ(log Pθ(A, Z))+
+H(Q) par rapport `a θ. Puisque Q ne d´epend pas de θ, c’est ´equivalent `a
+maximiser l’esp´erance conditionnelle EQ(log Pθ(A, Z)) par rapport `a θ. Avec
+notre choix de Q, cette quantit´e est exactement l’esp´erance conditionnelle de
+la log-vraisemblance des donn´ees compl`etes, sachant les observations, sous le
+θ(t)(log Pθ(A, Z)|A) que l’on maximise en θ. En eﬀet,
+param`etre courant, ie E
+(cid:88)
+on a
+θ(t)(log Pθ(A, Z)|A).
+
+θ(t)(Z|A) log Pθ(A, Z)
+
+Q(Z) log Pθ(A, Z) =
+
+EQ(log Pθ(A, Z)) =
+
+(cid:88)
+
+=E
+
+P
+
+Z
+
+Z
+
+Comme on l’a vu pr´ec´edemment, maximiser cette quantit´e par rapport `a θ
+va automatiquement accroˆıtre la log-vraisemblance des observations LA(θ)
+parce que le terme de divergence de Kullback-Leibler est ´egal `a 0 ici par
+l’´etape E !
+
+48
+
+Lorsque la vraie loi Pθ(Z|A) n’est pas manipulable (par exemple parce que ce
+n’est pas une loi factoris´ee), la solution exacte du E-step ne peut pas ˆetre calcul´ee.
+Dans l’approximation variationnelle, au lieu de calculer la solution exacte `a l’´etape
+E, on va chercher une solution optimale dans une classe restreinte de distributions,
+par exemple dans la classe des lois factoris´ees (et l’´etape M reste inchang´ee mais
+utilise la solution approch´ee Q de l’´etape dite VE pour variational-expectation).
+
+Au ﬁnal, on peut remarquer en reprenant (4.3) et en utilisant le fait qu’une
+divergence de Kullback-Leibler est toujours positive (par l’in´egalit´e de Jensen), qu’on
+a la borne inf´erieure suivante
+
+LA(θ) ≥ EQ(log Pθ(A, Z)) + H(Q) := J (Q, θ).
+
+(4.4)
+
+Ainsi, l’approximation variationnelle optimise une borne inf´erieure de la log-vraisemblance
+(J (Q, θ) optimis´ee d’abord en Q puis en θ). On n’a aucune garantie d’approcher
+l’estimateur de maximum de vraisemblance avec cette proc´edure. En g´en´eral, on ne
+l’approche d’ailleurs pas. Dans le cas particulier du SBM, cette proc´edure fonctionne
+cependant tr`es bien empiriquement et il existe ´egalement des r´esultats th´eoriques
+qui justiﬁent son utilisation.
+
+Ainsi, dans le cas du mod`ele `a blocs stochastiques, on prend donc pour Q une
+
+loi factoris´ee (i.e. marginales ind´ependantes)
+
+n(cid:89)
+o`u τiq = Qi(Zi = q) = EQ(Ziq), avec(cid:80)
+
+Q(Z) =
+
+Qi(Zi) =
+
+i=1
+
+n(cid:89)
+
+Q(cid:89)
+
+i=1
+
+q=1
+
+τ Ziq
+iq
+
+,
+
+q τiq = 1 pour tout i.
+
+L’approximation variationnelle est parfois appel´ee approximation champ moyen
+parce que tout se passe comme si dans l’approximation de la loi conditionnelle de Zi
+sachant les observations, toutes les autres variables {Zjq}j(cid:54)=i,q ´etaient ﬁx´ees `a leur
+moyennes (conditionnelles) τjq. Les param`etres τiq sont appel´es param`etres variation-
+nels. Ils repr´esentent l’approximation de la probabilit´e que le nœud i appartienne au
+groupe q. `A la ﬁn de l’algorithme VEM (pour variational expectation maximization),
+on peut utiliser un maximum a posteriori pour retrouver les groupes latents et faire
+la classiﬁcation
+
+∀1 ≤ i ≤ n,
+
+ˆZi = Argmax
+1≤q≤Q
+
+τiq.
+
+Calculs dans le cas SBM. On va entrer dans les d´etails de l’impl´ementation de
+VEM dans le cas du SBM. On reprend l’expression (4.1) de la log-vraisemblance des
+donn´ees compl`etes
+
+log Pθ(A, Z) =
+
+ZiqZj(cid:96) log F (Aij; γq(cid:96)).
+
+Q(cid:88)
+
+n(cid:88)
+
+q=1
+
+i=1
+
+Ziq log πq +
+
+49
+
+(cid:88)
+
+(cid:88)
+
+1≤q,(cid:96)≤Q
+
+i,j
+
+En prenant l’esp´erance par rapport `a la loi Q de cette quantit´e, puisque EQ(ZiqZj(cid:96)) =
+τiqτj(cid:96) (propri´et´e d’ind´ependance sous la loi Q) et EQ(Ziq) = τiq (par d´eﬁnition), on
+obtient l’expression suivante
+
+EQ(log Pθ(A, Z)) =
+
+τiq log πq +
+
+τiqτj(cid:96) log F (Aij; γq(cid:96)).
+
+Q(cid:88)
+
+n(cid:88)
+
+(cid:88)
+
+(cid:88)
+
+1≤q,(cid:96)≤Q
+
+i,j
+
+Ainsi, la quantit´e qui nous int´eresse est
+
+q=1
+
+i=1
+
+J (Q, θ) = EQ(log Pθ(A, Z)) + H(Q)
+
+Q(cid:88)
+
+n(cid:88)
+
+q=1
+
+i=1
+
+(cid:16) πq
+
+(cid:17)
+
+τiq
+
+(cid:88)
+
+(cid:88)
+
+1≤q,(cid:96)≤Q
+
+i,j
+
+=
+
+τiq log
+
++
+
+τiqτj(cid:96) log F (Aij; γq(cid:96)),
+
+et on alterne une maximisation de J par rapport aux τiq avec une maximisation par
+rapport aux param`etres θ = (π, γ).
+
+les contraintes ∀i,(cid:80)
+
+Ainsi, `a l’´etape E, on maximise cette quantit´e par rapport aux param`etres varia-
+tionnels τiq pour une valeur θ ﬁx´ee. En cherchant les points critiques (ne pas oublier
+q τiq = 1), on obtient que la solution ˆτ = {ˆτiq}i,q v´eriﬁe une
+
+´equation de point ﬁxe
+
+∀1 ≤ i ≤ n,∀1 ≤ q ≤ Q,
+
+ˆτiq ∝ πq
+
+(cid:89)
+
+Q(cid:89)
+
+[F (Aij; γq(cid:96))]ˆτj(cid:96),
+
+o`u ∝ signiﬁe ’proportionnel `a’ (la constante est obtenue `a partir de la contrainte de
+oi de probabilit´e !).
+
+j
+
+(cid:96)=1
+
+`A l’´etape M, on doit maximiser en θ = (π, γ) cette mˆeme quantit´e. Concernant
+
+la maximisation par rapport aux πq, on obtient facilement
+
+(Ne pas oublier la contrainte(cid:80)
+
+∀1 ≤ q ≤ Q,
+
+ˆπq =
+
+1
+n
+
+τiq.
+
+q ˆπq = 1). Pour ce qui est de la maximisation en les
+γq(cid:96), cela d´epend de la famille de lois F (·; γ) que l’on consid`ere. Prenons le cas simple
+d’un graphe binaire (non dirig´e) o`u F (·; γ) est une loi de Bernoulli de param`etre α.
+Alors on doit maximiser par rapport aux αq(cid:96) la quantit´e,
+
+n(cid:88)
+
+i=1
+
+(cid:88)
+(cid:88)
+(cid:88)
+(cid:88)
+
+i<j
+
+1≤q,(cid:96)≤Q
+
+=
+
+1≤q,(cid:96)≤Q
+
+i<j
+
+τiqτj(cid:96) log[αAij
+
+(cid:104)
+
+q(cid:96) (1 − αq(cid:96))1−Aij ]
+Aij log αq(cid:96) + (1 − Aij) log(1 − αq(cid:96))
+
+(cid:105)
+
+.
+
+τiqτj(cid:96)
+
+50
+
+La solution s’obtient simplement avec
+
+ˆαq(cid:96) =
+
+.
+
+i(cid:54)=j τiqτj(cid:96)Aij
+
+i(cid:54)=j τiqτj(cid:96)
+
+(cid:80)
+(cid:80)
+
+(cid:80)
+(cid:80)
+
+Il s’agit de la fr´equence moyenne des arˆetes entre les groupes q, (cid:96). En fait, puisque
+chaque τiq estime la probabilit´e que le nœud i appartienne au groupe q, on estime les
+param`etres d’interaction γql en utilisant les interactions Aij pond´er´ees par le poids
+τiqτj(cid:96). Par exemple si on veut estimer la valeur moyenne de la loi conditionnelle
+G(·; ηq(cid:96)), not´ee mq(cid:96) on trouvera en cherchant les points critiques de la quantit´e `a
+maximiser
+
+ˆmq(cid:96) =
+
+i(cid:54)=j τiqτj(cid:96)Aij
+i(cid:54)=j τiqτj(cid:96)1Aij(cid:54)=0
+
+.
+
+(Attention ici pour estimer la moyenne de la loi conditionnelle G(·; ηq(cid:96)), on ne prend
+en compte que les arˆetes pr´esentes, c’est-`a-dire Aij (cid:54)= 0).
+
+4.4.4 S´election de mod`eles
+
+La plupart du temps le nombre de classes Q est inconnu et doit ˆetre estim´e
+`a partir des donn´ees. `A partir de l’algorithme VEM, on peut utiliser le crit`ere ICL
+(integrated classiﬁcation likelihood). C’est un crit`ere p´enalis´e, analogue du BIC mais
+au lieu de prendre la log-vraisemblance des observations (qui est inconnue ici) on
+utilise l’esp´erance de log-vraisemblance des donn´ees compl`etes sous l’approximation
+variationelle. Ainsi, pour chaque valeur du nombre de groupes Q, on obtient via
+l’algorithme VEM ajust´e avec Q groupes, la quantit´e
+E ˆQ(log P(A, Z; ˆθ)).
+
+Ici, ˆQ, ˆθ sont les quantit´es obtenues `a la ﬁn des it´erations de VEM (ou plus pr´ecis´ement
+`a la ﬁn de la meilleure it´eration de VEM quand on a fait plusieurs initialisations, ce
+qui est recommand´e).
+
+L`a encore, l’expression de la p´enalit´e va d´ependre du choix de la famille de lois
+
+F (·; γ) que l’on consid`ere. La forme g´en´erale du crit`ere est
+
+ICL(Q) := E ˆQ(log P(A, Z; ˆθ)) − 1
+2
+
+(Q − 1) log n − 1
+2
+
+dim(γ) log
+
+n(n − 1)
+
+2
+
+,
+
+o`u dim(γ) est la dimension du param`etre γ = (α, η).
+
+Par exemple, dans le cas d’un graphe binaire, on a γ = (αql)q,(cid:96) est de dimension
+Q(Q + 1)/2. Si F (·; γ) est le m´elange entre une Dirac en 0 et une loi de Poisson
+(tronqu´ee en 0), de param`etre η, on obtient γ = (αq(cid:96), ηq(cid:96))q,(cid:96) qui est de dimension
+
+51
+
+Q(Q + 1). Si par souci de parcimonie on a impos´e que les param`etres de densit´e du
+graphe αq(cid:96) sont constants pour tous les groupes q, (cid:96) alors on a γ = (α; (ηq(cid:96))q,(cid:96)) qui
+est de dimension 1 + Q(Q + 1)/2.
+Noter que dans l’expression de l’ICL, le premier terme de p´enalit´e 1/2(Q−1) log n
+p´enalise pour le param`etre π = (πq)1≤q≤Q (de dimension Q − 1) et qui porte sur
+n variables Z1, . . . , Zn ; tandis que le second terme vient p´enaliser le param`etre
+d’interaction γ et se fonde lui sur n(n − 1)/2 observations, `a savoir les {Ai,j}i<j.
+
+Finalement, on va s´electionner le nombre de groupes Q en se ﬁxant une borne
+
+Qmax et en utilisant
+
+ˆQ = Argmax
+1≤Q≤Qmax
+
+ICL(Q).
+
+Aucun r´esultat th´eorique n’existe sur les propri´et´es asymptotiques de ce crit`ere, mais
+ses performances empiriques sont tr`es bonnes.
+
+52
+
+Bibliographie
+
+Albert, R. and A.-L. Barab´asi (2002, Jan). Statistical mechanics of complex net-
+
+works. Rev. Mod. Phys. 74, 47–97.
+
+Berge, C. (1976). Graphs and hypergraphs (revised ed.). North-Holland Publishing
+Co., Amsterdam-London ; American Elsevier Publishing Co., Inc., New York.
+Translated from the French by Edward Minieka, North-Holland Mathematical
+Library, Vol. 6.
+
+Bishop, C. M. (2006). Pattern recognition and machine learning. Information Science
+
+and Statistics. Springer, New York.
+
+Erd˝os, P. and T. Gallai (1961). Graphs with points of prescribed degree. (Graphen
+
+mit Punkten vorgeschriebenen Grades.). Mat. Lapok 11, 264–274.
+
+Handcock, M., A. Raftery, and J. Tantrum (2007). Model-based clustering for so-
+cial networks. Journal of the Royal Statistical Society : Series A (Statistics in
+Society) 170 (2), 301–54.
+
+Hoﬀ, P., A. Raftery, and M. Handcock (2002). Latent space approaches to social
+
+network analysis. J. Amer. Statist. Assoc. 97 (460), 1090–98.
+
+Kolaczyk, E. D. (2009). Statistical Analysis of Network Data : Methods and Models.
+
+Springer.
+
+Kolaczyk, E. D. and G. Cs´ardi (2014). Statistical analysis of network data with R.
+
+Use R ! Springer, New York.
+
+Lauritzen, S. L. (1996). Graphical models, Volume 17 of Oxford Statistical Science
+Series. The Clarendon Press, Oxford University Press, New York. Oxford Science
+Publications.
+
+Ng, A. Y., M. I. Jordan, and Y. Weiss (2001). On spectral clustering : Analysis and
+an algorithm. In Advances in neural information processing systems, pp. 849–856.
+MIT Press.
+
+53
+
+Rohe, K., S. Chatterjee, and B. Yu (2011). Spectral clustering and the high-
+
+dimensional stochastic blockmodel. Annals of Statistics 39 (4), 1878–1915.
+
+von Luxburg, U. (2007). A tutorial on spectral clustering. Statistics and Compu-
+
+ting 17 (4), 395–416.
+
+Zhang, Y., E. Kolaczyk, and B. Spencer (2015). Estimating network degree dis-
+tributions under sampling : An inverse problem, with applications to monitoring
+social media networks. The Annals of Applied Statistics 9 (1), 166–199.
+
+54
+
+

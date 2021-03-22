@@ -1,0 +1,1065 @@
+https://brunl01.users.greyc.fr/ENSEIGNEMENT/COURS/graphes.pdf
+
+Math´ematiques pour l’informatique
+
+´El´ements de th´eorie des graphes
+
+Cours bas´e sur le livre Graph theory de Harary
+
+Luc Brun
+
+1 / 46
+
+Plan
+
+Les graphes et le reste du monde
+
+Notations
+
+Blocks
+
+Arbres
+
+Connexit´e
+
+Line Graph
+
+Couverture
+
+Graphes planaires
+
+2 / 46
+
+Les ponts de Konigsberg
+
+(cid:73) Un des premier probl`emes de graphes, pos´e et r´esolu par Euler
+
+(1707-1782) en 1736.
+
+(cid:73) Peut on, partant d’un point quelconque (rive ou ile) parcourir les 7 ponts
+
+une fois et une seule et revenir `a son point de d´epart.
+
+(cid:73) Euler a ´et´e le premier `a abstraire ce probl`eme en termes de points
+
+abstraits (les sommets) reli´es par des lignes (les arˆetes).
+
+(cid:73) Il a montr´e que la proposition est vraie pour un graphe quelconque si et
+
+seulement si chaque sommet est incident `a un nombre pair d’arˆetes.
+
+3 / 46
+
+Les r´eseaux ´electriques
+
+(cid:73) Kirchhoﬀ a introduit en 1847 une analyse des circuits ´electriques par
+
+l’´etude de leurs graphes sous jascent.
+
+(cid:73) Il a notamment montr´e en raisonnant sur le graphe que pour retrouver
+
+l’intensit´e ´electrique dans chaque branche du circuit, il n’´etait pas utile de
+consid´erer s´epar´ement chaque cycle mais que l’on pouvait utiliser un arbre
+recouvrant.
+
+(cid:73) Cette m´ethode est maintenant un standard.
+
+4 / 46
+
+Chimie
+
+(cid:73) En 1857 Cayley c’est int´eress´e `a l’´enum´eration de tous les alkanes de la
+
+forme CnH2n+2.
+
+(cid:73) Il a formul´e le probl`eme en termes de graphes : Trouver tous les arbres de
+
+p sommets dont les sommets sont de degr´e 1 ou 4.
+
+(cid:73) Jordan en 1882 a red´ecouvert les arbres qu’il a d´eﬁni comme des objets
+
+purements math´ematiques.
+
+5 / 46
+
+Le jeux d’Hamilton
+
+(cid:73) William Hamilton (1730-1803) `a vendu pour 25 guinn´ees `a un fabriquant
+
+de jeu, un jeu de plateau bas´e sur dod´ecahedre de 20 sommets, chaque
+sommet repr´esentant une ville.
+
+(cid:73) Le joueur doit trouver un chemin (autour du monde) lui permettant de
+
+passer par chaque ville exactement une fois.
+
+(cid:73) Le jeux ne c’est quasiment pas vendu...
+
+6 / 46
+
+Les graphes aujourd’hui
+
+(cid:73) Les graphes sont `a la fois une structure de donn´ee informatique et un outil
+
+math´ematique abstrait avec de nombreuses applications en :
+
+(cid:73) chimie (chemoinformatique) et biochimie (g´enomique),
+(cid:73) g´enie ´electrique et th´eorie des codes,
+(cid:73) r´eseaux informatiques, urbains, sociaux,. . .
+
+(cid:73) Internet,
+(cid:73) Google,
+(cid:73) Facebook,. . .
+
+(cid:73) recherche op´erationelle (transport)
+(cid:73) D´eﬁnir l’apport de la th´eorie des graphes `a la soci´et´e actuelle `a
+
+approximativement autant de sens que celle de tenter de d´eﬁnir celle des
+math´ematiques tout enti`eres.
+
+7 / 46
+
+D´eﬁnition
+
+(cid:73) Un graphe G = (V , E ) est d´eﬁni par un ensemble V de sommets
+
+(vertex/node) et un ensemble E de paires non ordonn´ees de sommets
+distincts.
+
+(cid:73) Chaque paire e = {u, v} de sommets est une arˆete (edge) de G .
+(cid:73) On ´ecrira e = uv et dira que u et v sont adjacents.
+(cid:73) On dira que l’arˆete e et le sommet u sont incidents (idem pour e et v ).
+(cid:73) Si deux arˆetes sont incidentes `a un mˆeme sommet on dira qu’elles sont
+
+adjacentes.
+
+(cid:73) Un graphe avec p sommets et q arˆetes sera nomm´e un (p, q) graphe.
+
+8 / 46
+
+Premi`eres vari´et´es de graphes
+
+(cid:73) Un multigraphe est un graphe dans lequel deux sommets peuvent ˆetre
+
+joints par plusieurs arˆetes.
+
+(cid:73) Un pseudo graphe est un multigraphe comportant ´egalement des boucles
+
+(i.e. des arˆetes connectant un sommet `a lui mˆeme).
+
+(cid:73) Un graphe dirig´e (ou digraphe) est un ensemble de sommets V muni d’un
+ensemble de paires ordonn´ees de sommets distincts d´eﬁnissant ces arˆetes.
+
+(cid:73) Les arˆetes d’un digraphe sont commun´ement appell´ees des arcs.
+(cid:73) Un graphe orient´e D = (V , E ) est un digraphe tel que
+
+(u, v ) ∈ E ⇒ (v , u) (cid:54)∈ E .
+
+(cid:73) Un graphe est labelis´e lorsque chacun de ces sommets est attach´e `a une
+
+valeur distincte.
+
+9 / 46
+
+Isomorphisme
+
+(cid:73) Deux graphes G1 = (V1, E1) et G2 = (V2, E2) sont dits isomorphes
+
+(G1 ∼= G2) lorsqu’il existe une bijection f de V1 dans V2 telle que uv ∈ E1
+ssi f (u)f (v ) ∈ E2.
+
+(cid:73) Un invariant d’un graphe est une quantit´e qui a la mˆeme valeur pour deux
+graphes isomorphes (nombre de sommets, d’arˆetes, degr´e des sommets. . .).
+
+(cid:73) Question ouverte : Peut on trouver un ensemble d’invariants qui
+
+caract´erise un graphe `a un isomorphisme prˆet ?
+
+10 / 46
+
+Sous graphes
+
+(cid:73) Un sous graphe de G = (V , E ) est un graphe dont les sommets et arˆetes
+sont respectivements inclues dans V et E . Si G1 est un sous graphe de G ,
+G est un supergraphe de G1.
+
+(cid:73) Un sous graphe recouvrant de G est un sous graphe de G contenant tous
+
+ses sommets.
+
+(cid:73) Pour tout ensemble S ⊂ V , le sous graphe induit < S > de G est le plus
+
+grand sous graphe de G restreint aux sommets S. Donc une arˆete
+appartient `a < S > ssi elle appartient `a G .
+
+11 / 46
+
+Op´erations ´elementaires sur les graphes
+
+(cid:73) La suppression d’un sommet d’un graphe G = (V , E ) G − v est d´eﬁni par
+le sous graphe de G d´eﬁnit sur V − {v} sommets et poss´edant toutes les
+arˆetes E `a l’exception de celles incidentes `a v .
+
+(cid:73) La suppression d’une arˆete G − e est d´eﬁnie par le couple (V , E − {e})
+(cid:73) La contraction d’une arˆete e = uv , G (cid:48) = G /e est d´eﬁnie par un pseudo
+graphe G (cid:48) = (V (cid:48), E (cid:48)) avec V (cid:48) = V − {u, v} ∪ {x}, x (cid:54)∈ V et un ensemble
+d’arˆetes poss´edant toutes les arˆetes e(cid:48) = u(cid:48)v(cid:48), u(cid:48) (cid:54)= u, v(cid:48) (cid:54)= v de E et o`u
+toutes les arˆetes uv(cid:48) et u(cid:48)v ont ´et´e substitu´ees par xv(cid:48) et u(cid:48)x.
+
+(cid:73) L’addition de l’arˆete e est d´eﬁnie comme le plus petit super graphe de G
+
+contenant e.
+
+12 / 46
+
+Chemins
+
+(cid:73) Un chemin(walk) est une suite de sommets 2 `a 2 adjacents.
+P = v1 . . . , vn,∀i ∈ {1, . . . , n − 1}vi vi+1 ∈ E
+
+Le chemin est ferm´e si v0 = vn et ouvert sinon. v1v2v4v2v3 est un chemin
+(cid:73) Une chemin simple(trail) est un chemin ne passant pas deux fois par la
+
+mˆeme arˆete. v1v2v4v5v2v3 est un chemin simple
+
+(cid:73) Un chemin ´el´ementaire (path) est un chemin ne passant pas deux fois
+
+par un mˆeme sommet (et donc deux fois par la mˆeme arˆete). v1v2v3 est un
+chemin ´el´ementaire.
+(cid:73) Un chemin ´el´ementaire ferm´e, avec n ≥ 3 est appel´e un cycle. v2v3v4v2 est
+
+un cycle.
+
+13 / 46
+
+connexit´e
+
+(cid:73) Un chemin et un cycle de longueur n sont respectivement not´es Pn et Cn
+(cid:73) Un graphe est connexe si toute paire de sommet peut ˆetre reli´ee par un
+
+chemin ´elementaire.
+
+(cid:73) Un sous graphe connexe maximal est appell´e une composante connexe
+(cid:73) Le graphe complet Kp est le graphe de p sommets tous adjacents entre
+
+eux.
+
+(cid:73) La longueur d’un chemin est d´eﬁnie par son nombre d’arˆetes
+(cid:73) La distance d(u, v ) entre deux sommets u et v est d´eﬁnie comme le plus
+
+court chemin joignant u et v si ils sont connect´es (d(u, v ) = ∞ sinon).
+(cid:73) La distance ainsi d´eﬁnie est une m´etrique : d(u, v ) ≥ 0 avec d(u, v ) = 0
+
+ssi u = v , d(u, v ) = d(v , u) et d(u, v ) ≤ d(u, w ) + d(w , v )
+
+(cid:73) Le carr´e de G , G 2 est d´eﬁni sur le mˆeme ensemble de sommets que G . Ses
+
+arˆetes sont d´eﬁnies par E 2 = {uv | d(u, v ) ≤ 2}. On d´eﬁni de mˆeme
+G 3, G 4 . . . .
+
+14 / 46
+
+Degr´es
+
+(cid:73) Le degr´e d’un sommet vi , not´e di ou deg (vi ) correspond au nombre
+
+d’arˆetes incidentes `a vi .
+
+(cid:73) Chaque arˆete ´etant incidente `a deux sommets on a (Euler) :
+
+(cid:88)
+
+v∈V
+
+deg (v ) = 2|E|
+
+(cid:73) Le degr´e minimum d’un graphe G est not´e δ(G ) et son degr´e maximum
+
+∆(G ).
+
+(cid:73) Si δ(G ) = ∆(G ) = r , on dit que le graphe est r´egulier de degr´e r .
+
+15 / 46
+
+Graphe biparti
+
+(cid:73) Un graphe biparti est un graphe dont l’ensemble des sommets V peut
+
+ˆetre partitionn´e en deux sous ensembles V1 et V2 tels que toute arˆete E de
+G connecte V1 `a V2.
+
+(cid:73) Si chaque sommet de V1 est adjacent `a tous les sommets de V2 et vice
+
+versa on parle de graphe biparti complet. Si |V1| = m et |V2| = n, un tel
+graphe est appel´e Km,n. Clairement Km,n a mn arˆetes.
+
+(cid:73) Theorˆeme : Un graphe est biparti ssi tous ses cycles sont pairs.
+
+16 / 46
+
+Op´erations sur les graphes
+
+(cid:73) Soient G1 et G2 deux graphes avec V1 ∩ V2 = ∅
+(cid:73) L’union de G1 et G2, G1 ∪ G2 est le graphe d´eﬁni sur V1 ∪ V2 avec
+
+l’ensemble d’arˆetes E1 ∪ E2.
+
+(cid:73) La jointure de G1 et G2, G1 + G2 est le graphe G1 ∪ G2 auquel on ajoute
+
+l’ensemble des arˆetes reliant V1 `a V2.
+
+(cid:73) Le graphe produit G1 × G2 a pour ensemble de sommets V1 × V2 . On dira
+que (u = (u1, u2) est adjacent `a v = (v1, v2) dans G1 × G2 ssi : u1 = v1 et
+u2v2 ∈ E2 ou u2 = v2 et u1v1 ∈ E1.
+
+(cid:73) La composition de G1 et G2, G1[G2] a ´egalement V1 × V2 comme ensemble
+
+de sommets , mais u est adjacent `a v ssi u1v1 ∈ E1 ou u1 = v1 et
+u2v2 ∈ E2. Bien sur G1[G2] (cid:54)= G2[G1].
+
+17 / 46
+
+D´eﬁnitions
+
+(cid:73) Un point d’articulation(cutpoint) est un sommet dont la suppression
+
+modiﬁe le nombre de composantes connexes du graphe.
+
+(cid:73) Un Pont (bridge) est une arˆete dont la suppression modiﬁe le nombre de
+
+composantes connexes du graphe.
+
+(cid:73) Un graphe non s´eparable est connexe et n’a pas de point d’articulation.
+(cid:73) Un block est un sous graphe non sp´erable de taille maximale. Si G est non
+
+s´eparable on dit ´egalement qu’il est un block.
+
+18 / 46
+
+Caract´erisation des points d’articulation
+
+(cid:73) Th´eorˆeme : Soit v un sommet d’un graphe connexe G . Les propositions
+
+suivantes sont ´equivalentes :
+
+1. v est un point d’articulation de G ,
+2. Il existe deux points u et w distincts de v tels que tout chemin de u `a w
+3. Il existe une partition de l’ensemble de sommets V − {v} en deux sous
+
+passe par v .
+ensembles U et W tel que pour tout u ∈ U et w ∈ W , v appartient `a tout
+chemin de u `a w .
+
+19 / 46
+
+Caract´erisation des ponts
+
+(cid:73) Th´eorˆeme : Soit e une arˆete d’un graphe connexe G . Les propositions
+
+suivantes sont ´equivalentes :
+
+1. e est un pont de G ,
+2. e appartient `a aucun cycle de G ,
+3. Il existe deux sommets u et v tels que e appartient `a tout chemin joignant
+
+4. Il existe une partition de V en deux sous ensembles U et W tel que pour
+
+u et v .
+tout u ∈ U et w ∈ W , e appartient `a tout chemin de u `a w .
+
+20 / 46
+
+D´eﬁnitions
+
+(cid:73) Un graphe acyclique est un graphe ne poss`edant pas de cycle,
+(cid:73) Un arbre est un graphe acyclique connexe,
+(cid:73) Un graphe acyclique non connexe est une forˆet. Donc toute composante
+
+connexe d’une forˆet est un arbre.
+
+21 / 46
+
+Caract´erisation des arbres
+
+(cid:73) Les propositions suivantes sont ´equivalentes pour un graphe G :
+
+1. G est un arbre,
+2. Tout couple de sommets de G est li´e par un chemin ´el´ementaire unique,
+3. G est connexe et |V| = |E| + 1,
+4. G est acyclique et |V| = |E| + 1,
+5. G est acyclique et si deux sommets non adjacents de G sont reli´es par une
+6. G est connexe, n’est pas Kp, p ≥ 3 et si deux sommets non adjacents de G
+7. G n’est pas K3 ∪ K1 ni K3 ∪ K2, |V| = |E| + 1 et si deux sommets non
+
+sont reli´es par une arˆete e, alors G + e a exactement 1 cycle,
+
+arˆete e, alors G + e a exactement 1 cycle,
+
+adjacents de G sont reli´es par une arˆete e, alors G + e a exactement 1 cycle,
+
+22 / 46
+
+Centres et centro¨ıdes
+
+(cid:73) L’excentricit´e e(v ) d’un sommet v dans un graphe connect´e est d´eﬁnie
+
+par maxu∈V d(u, v ).
+
+(cid:73) Le rayon r (G ) d’un graphe est son excentricit´e minimale. Son excentricit´e
+
+maximale correspond au diam`etre.
+
+(cid:73) Un sommet v est central si e(v ) = r (v ).
+(cid:73) Une branche T (cid:48) d’un sommet u d’un arbre T est un sous arbre maximal
+de T contenant u tel que le degr´e de u dans T (cid:48) est ´egal `a 1. Le nombre
+de branches d’un sommet u est donc deg (u). Le poids d’une branche est
+son nombre d’arˆetes.
+
+(cid:73) Le poids d’un sommet est le poids maximum de ses branches.
+(cid:73) Un sommet est appell´e un centro¨ıde de l’arbre T si son poids est
+
+minimum.
+
+23 / 46
+
+Propri´et´es
+
+(cid:73) Tout arbre a un centre compos´e d’un ou deux sommets adjacents,
+(cid:73) Tout arbre a un centro¨ıde compos´e d’un ou deux sommets adjacents.
+
+24 / 46
+
+Op´erateurs de bord et cobord
+
+sur
+
+Z
+2Z .
+
+(cid:73) Soit un graphe G = (V , E ). On consid`ere les espaces vetoriels sur V et E
+
+(cid:73) Une 0 chaˆıne est une combinaison formelle de sommets :(cid:80)n
+(cid:73) Une 1 chaˆıne est une combinaison lin´eraire d’arˆetes :(cid:80)n
+
+i=1 i vi .
+
+(cid:73) L’op´erateur de bord ∂ envoie les 1 chaˆınes sur les 0 chaˆınes :
+
+i=1 i ei .
+
+(cid:73) L’op´erateur de cobord δ envoie les 0 chaˆınes sur les 1 chaˆınes :
+
+1. ∂ est lin´eaire,
+2. ∂uv = u + v
+
+2. δv =(cid:80)
+
+1. δ est lin´eaire,
+
+vi∈V i vi , o`u i = 1 si v est incident `a e.
+
+25 / 46
+
+Bases de cycles
+
+(cid:73) Une 1 chaˆıne de bord 0 est un vecteur de cycle et peut se voir comme un
+
+ensemble arˆete-disjoint de cycles.
+
+(cid:73) L’ensemble des vecteurs de cycles forme un espace vectoriel sur
+
+l’espace des cycles.
+
+Z
+2Z appell´e
+
+(cid:73) Une base de cycles est une base de cet espace vectoriel.
+(cid:73) La taille d’une base de cycle est d´eﬁnie comme la somme des tailles de
+
+chacuns de ces cycles.
+
+(cid:73) L’union des bases de taille minimale consitue l’ensemble des cycles
+
+´el´ementaires d’un graphe.
+
+26 / 46
+
+Coupes et cocycles
+
+(cid:73) Une coupe d’un graphe connexe est un ensemble d’arˆetes dont la
+
+suppression deconnecte le graphe.
+
+(cid:73) Un cocycle est une coupe minimale
+(cid:73) Un cobord de G est un cobord d’une 0 chaˆıne de G .
+(cid:73) Le cobord d’un ensemble U ⊂ V est l’ensemble des arˆetes reliant un
+
+sommet de U `a un sommet de V − U. Tout cobord est donc une coupe et
+un cocycle est un cobord non vide de taille minimale.
+
+(cid:73) L’ensemble des cobords de G est appel´e l’espace des cocyles e forme un
+
+espace vectoriel.
+
+(cid:73) Une base de cycle peut se construire en consid´erant un arbre recouvrant de
+G et l’ensemble des cycles form´es en ajoutant une arˆete de E − ET `a T .
+
+(cid:73) Le co arbre T ∗ d’un arbre recouvrant T de G est un arbre recouvrant
+
+form´e de l’ensemble des arˆetes de G n’appartenant pas `a T
+
+(cid:73) Une base de cocycle peut ˆetre construire en ajoutant chaque arˆete de T `a
+
+T ∗.
+
+27 / 46
+
+Example
+
+(cid:73) Graphe G
+
+(cid:73) arbres recouvrant T et T ∗
+(cid:73) Base de Cocylcles
+
+28 / 46
+
+Connexit´e au sens des sommets et des arˆetes
+
+(cid:73) La connexit´e de G au sens des sommets κ(G ) est le nombre minimal de
+
+sommets que l’on peut supprimer avant de deconnecter le graphe ou
+d’obtenir un graphe trivial.
+
+(cid:73) La connexit´e de G au sens des arˆetes, λ(G ) est le nombre minimal
+
+d’arˆetes que l’on peut supprimer de G sans le deconnecter ou obtenir un
+graphe trivial.
+
+(cid:73) Question : κ(Kp) =?, λ(Kp) =?.
+(cid:73) On a [Whitney]
+
+κ(G ) ≤ λ(G ) ≤ δ(G )
+
+δ(G ) : degr´e minimimum de G .
+
+29 / 46
+
+Th´eorˆeme de Menger et ses variations
+
+(cid:73) Deux chemins de u `a v sont dits disjoints (ou sommet-disjoint) si ils ne
+
+partagent pas d’autres sommets que u et v . Ils sont dits arˆete disjoints si
+ils ne partagent pas d’arˆete.
+
+(cid:73) Un sous graphe S s´epare u et v , si u et v sont dans diﬀ´erentes
+
+composantes connexes de G − S.
+
+(cid:73) Th´eorˆeme 1 : Le nombre minimum de sommets s´eparant deux sommets
+
+non adjacents s et t est le nombre maximum de chemins disjoints entre s
+et t.
+
+(cid:73) Th´eorˆeme 2 : Pour tout couple de sommets, le nombre maximum de
+chemins arˆete-disjoint jhoignant ces deux points est ´egal au nombre
+minimum d’arˆetes qui les s´eparent.
+
+30 / 46
+
+Application aux ﬂots
+
+(cid:73) Dans tout r´eseau o`u il existe un chemin de s `a t, le ﬂot maximum de s `a t
+
+est ´egal `a la capacit´e de la coupe minimum.
+
+31 / 46
+
+Graphe d’intersection
+
+S. Le graphe d’intersection de F , Ω(F ) a pour ensemble de sommets
+{S1, . . . , Sn}, deux sommets Si et Sj , i (cid:54)= j ´etant adjacents ssi Si ∩ Sj
+
+(cid:73) Soit S un ensemble et F = {S1, . . . , Sn} une famille de sous ensembles de
+(cid:54)= ∅.
+(cid:73) Un graphe G est un graphe d’intersection si il existe F tel que G ∼= Ω(F ).
+(cid:73) Proposition : Tout graphe est un graphe d’intersection (considerez
+(cid:73) Soit G = (V , E ), consid´erons chaque arˆete uv ∈ E comme un ensemble
+
+Si = {vi} ∪ {vi vj ∈ E}).
+{u, v}. Le graphe de lignes de G , L(G ) est ´egal `a Ω(E ).
+
+(cid:73) Les sommets de L(G ) sont les arˆetes de G ,
+(cid:73) Deux arˆetes sont adjacentes dans L(G ) si elles sont incidentes `a un sommet
+
+commun dans G .
+
+32 / 46
+
+Propri´et´es
+
+(cid:73) Un point d’articulation de L(G ) est un pont de G et inversement.
+(cid:73) Un graphe G v´eriﬁe G = L(G ) ssi G est un cycle.
+(cid:73) Soient G et G (cid:48) deux graphes connexes dont les graphes de lignes sont
+
+isomorphes. Alors G ∼= G (cid:48) a moins que l’un soit ´egal `a K3 et l’autre `a K1,3.
+
+33 / 46
+
+Couverture
+
+(cid:73) Un sommet et une arˆete se couvrent si ils sont incidents,
+(cid:73) Un ensemble de sommet couvrant l’ensembre des arˆetes d’un graphe est
+
+appel´e une couverture de sommets (ou transversale)
+
+(cid:73) Un ensemble d’arˆetes couvrant tous les sommets est appel´e une
+
+couverture d’arˆete
+
+(cid:73) Le plus petit nombre de sommets de toute couverture de sommet est
+
+appel´e le nombre de couverture de sommet α0(G ) ou α0
+
+(cid:73) De mˆeme, Le plus petit nombre d’arˆete de toute couverture d’arˆete est
+
+appel´e le nombre de couverture d’arˆete, α1(G ) ou α1.
+
+(cid:73) Par exemple α0(Kp) = p − 1, α1(Kp) = [(p + 1)/2].
+(cid:73) Une couverture est dite minimum si elle comporte α0 (resp. α1) sommets
+
+(resp. arˆetes). Notez qu’une couverture peut ˆetre minimale sans ˆetre
+minimum.
+
+34 / 46
+
+Ensembles independants
+
+(cid:73) Un ensemble de sommets S est dit ind´ependant si aucune couple de
+
+sommets de S n’est adjacent. Le plus grand nombre de sommets
+ind´ependant est not´e β0(G ) ou β0.
+
+(cid:73) De mˆeme, un ensemble d’arˆetes est dit ind´ependant si aucun couple
+
+d’arˆetes d’un tel ensemble n’est incident `a un mˆeme sommet (adjacent
+dans L(G )). Le plus grand nombre d’arˆetes ind´ependante est not´e β1(G )
+ou β1.
+
+(cid:73) Prop : Si S est une couverture de sommets V − S est un ensemble
+
+ind´ependant.
+
+(cid:73) Th´eorˆeme [Gallai 1959] : α0 + β0 = |V| = α1 + β1.
+
+35 / 46
+
+Example
+
+Couverture de sommets
+
+Ensemble maximum de sommets ind´ependants
+
+α0 = 5
+
+β0 = 3
+
+Couverture d’arˆetes
+
+Ensemble maximum d’arˆetes ind´ependantes
+
+α1 = 4
+
+β1 = 4
+
+36 / 46
+
+D´eﬁnitions
+
+(cid:73) Un graphe est dit plong´e sur une surface S lorsqu’il peut ˆetre trac´e sur S
+
+sans que deux arˆetes se croisent.
+
+(cid:73) Un graphe est dit planaire si il peut ˆetre plong´e dans le plan.
+(cid:73) Un graphe planaire induit la d´eﬁnition de r´egions du plan d´elimit´ees par
+des arˆetes. Ces r´egions sont appell´ees des faces. L’ensemble des faces est
+not´e F .
+
+(cid:73) Toutes les faces d’un graphe correspondent `a une r´egion ﬁnie sauf une
+
+appel´e la face ext´erieure ou inﬁnie.
+
+37 / 46
+
+Propri´et´es
+
+(cid:73) Le nombre de sommets, arˆetes et faces d’un graphe planaire sont reli´es par
+
+la relation d’Euler :
+
+|V| − |E| + |F| = 2
+
+(cid:73) Cette formule ce g´en´eralise `a d’autres types de surface :
+
+|V| − |E| + |F| = χ
+
+o`u χ est appel´e la caract´eristique d’Euler (ou Euler-Poincar´e) de la surface.
+(cid:73) Th´eorˆeme[Kuratowski] : Un graphe planaire est un graphe qui ne contient
+
+pas de sous graphes hom´eomorphes (contractibles) en K5 ou K3,3.
+
+38 / 46
+
+Graphe Dual
+
+(cid:73) Le dual g´eom´etrique d’un graphe G , not´e G est construit :
+
+i
+y
+
+y
+
+y
+
+39 / 46
+
+Graphe Dual
+
+(cid:73) Le dual g´eom´etrique d’un graphe G , not´e G est construit :
+
+(cid:73) En cr´eant un sommet de G pour chaque face de G ,
+
+i
+y
+
+y
+
+y
+
+39 / 46
+
+Graphe Dual
+
+i
+y
+
+de G .
+
+y
+
+(cid:73) Le dual g´eom´etrique d’un graphe G , not´e G est construit :
+
+(cid:73) En cr´eant un sommet de G pour chaque face de G ,
+(cid:73) Une arˆete entre deux sommets de G pour chaque arˆeete s´eparant deux faces
+
+y
+
+39 / 46
+
+Propri´et´es
+
+(cid:73) L’op´erateur dual est une involution :G = G
+(cid:73) On a une correspondance 1 − 1 entre les arˆetes de G et G
+(cid:73) Une boucle de G est un pont de G et vice versa.
+(cid:73) Toute contraction dans G implique une suppression dans G
+(cid:73) Toute suppression dans G implique une contraction dans G
+
+40 / 46
+
+Graphes et plongements
+
+(cid:73) Utilise on toutes les propri´et´es du plan ?
+
+(cid:54)=
+
+=
+
+41 / 46
+
+1122345311223453Les cartes combinatoires
+
+(cid:73) D´eﬁnitions de base
+
+(cid:73) Ensemble D
+(cid:73) Permutation : application bijective de D dans D
+
+42 / 46
+
+Les cartes combinatoires
+
+(cid:73) D´eﬁnitions de base
+
+(cid:73) Ensemble D
+(cid:73) Permutation : application bijective de D dans D
+
+(cid:73) Orbites de b dans D suivant π
+
+< π > (b) = {b, π(b), π2(b), . . . , πn(b)}
+
+avec n ≤ |D|.
+
+42 / 46
+
+Les cartes combinatoires
+
+(cid:73) D´eﬁnitions de base
+
+(cid:73) Ensemble D
+(cid:73) Permutation : application bijective de D dans D
+
+(cid:73) Orbites de b dans D suivant π
+
+(bp)
+
+42 / 46
+
+< π > (b) = {b, π(b), π2(b), . . . , πn(b)}
+
+avec n ≤ |D|.
+
+(cid:73) D´ecomposition en cycles : π∗(b) restriction de π `a < π > (b).
+
+∗
+
+∗
+
+π = π
+
+(b1) . . . , π
+
+Cartes Combinatoires : Les arˆetes
+
+(cid:73) G = (D, σ, α)
+
+i
+y
+
+y
+
+y
+
+(cid:73) Chaque arˆete est d´ecoup´ee en deux demis arˆetes appel´ees brins.
+
+43 / 46
+
+Cartes Combinatoires : Les arˆetes
+
+(cid:73)
+−1
+
+i
+y
+
+(cid:73) G = (D, σ, α)
+
+y
+
+y
+
+(cid:73)
+
+1
+
+(cid:73) Les deux brins d’une mˆeme arˆete sont li´es par une involution α :
+
+α(1) = −1, α(−1) = 1
+
+43 / 46
+
+Cartes Combinatoires : Les arˆetes
+
+(cid:73) G = (D, σ, α)
+
+(cid:74)
+
+(cid:73)
+−1
+
+i
+y
+
+2
+
+(cid:74)−4
+
+4
+
+y
+
+(cid:78)5
+(cid:72)
+
+6
+
+(cid:73)
+
+(cid:74)−2
+
+y
+
+(cid:78)−5
+(cid:73)
+(cid:72)−6
+
+1
+
+(cid:73)
+
+(cid:74)−3
+
+3
+
+D = {−6, . . . ,−1, 1, . . . , 6}
+∀b ∈ D α(b) = −b
+
+α = (1,−1)(2,−2)(3,−3)(4,−4)(5,−5)(6,−6)
+
+43 / 46
+
+Les sommets
+
+i
+y
+
+y
+(cid:78)−5
+(cid:74)−3 (cid:72)−6
+(cid:73)
+
+1
+
+y
+
+(cid:73) Les sommets sont cod´es par les cycles de σ.
+
+44 / 46
+
+Les sommets
+
+i
+y
+
+y
+
+'$
+y
+(cid:74)−3 (cid:72)−6&%
+
+(cid:78)−5
+(cid:73)
+
+(cid:78)
+
+1
+
+(cid:73) σ∗(b) correspond `a la suite de brins rencontr´es en tournant dans le sens
+
+positif autour du sommet contenant b.
+
+∗
+
+(1) = (1,−5,−3,−6)
+
+σ
+
+44 / 46
+
+Les sommets
+
+(cid:73)
+−1
+
+i
+y
+
+(cid:73)
+
+(cid:74)−3
+
+3
+
+y
+
+(cid:78)−5
+(cid:73)
+(cid:72)−6
+
+1
+
+(cid:74)
+
+2
+
+(cid:74)−4
+
+4
+
+y
+
+(cid:78)5
+(cid:72)
+
+6
+
+(cid:73)
+
+(cid:74)−2
+
+σ = (1,−5,−3,−6)(6, 4, 5,−2)(2,−1)(3,−4)
+
+44 / 46
+
+Dual d’une carte combinatoire
+
+(cid:73) Si G = (D, σ, α) alors G = (D, ϕ = σ ◦ α, α).
+(cid:73) Les cycles de ϕ codent les faces de la carte (et donc les sommets de la
+
+carte duale).
+
+ϕ = (−2,−1,−5)(−4, 5,−3)(4, 3,−6)(2, 6, 1)
+
+(cid:73)−1
+(cid:72) −5
+(cid:78) 5
+(cid:73)
+−3
+
+i
+y
+(cid:73)
+(cid:72) −6(cid:78) 6
+(cid:73)
+
+y
+
+(cid:74)−2
+
+(cid:74)
+−4
+
+(cid:74)
+
+4
+
+(cid:74)
+
+2
+
+3
+
+1
+
+y
+
+45 / 46
+
+R´ef´erences
+
+(cid:73) Graph theory, Hararyn Addison-Wesley publishing,
+(cid:73) Alg`ebre moderne et th´eorie des graphes, B. Roy, eds. Dunod,
+(cid:73) Graph theory, W.T. Tutte, Encyclopedia of mathematics and its
+
+applications.
+
+46 / 46
+
+

@@ -1,0 +1,2355 @@
+http://test.egc.asso.fr/wp-content/uploads/egc2011_atelier_gaoc.pdf
+
+Actes du 2nd Atelier
+
+GAOC
+
+Graphes et
+
+Appariement d’Objets
+
+Complexes
+
+En conjonction avec EGC 2011
+
+25 Janvier 2011
+
+Brest
+
+ 
+
+Graphes et
+
+Appariement d’Objets Complexes
+
+Contexte et Objectifs
+
+Les applications telles que les biblioth`eques num´eriques, les syst`emes de m´ediation ou les ar-
+chitectures `a base de services Web produisent des masses de donn´ees g´en´erant un grand nombre
+de mod`eles. Ces mod`eles sont destin´es `a ˆetre stock´es dans l’objectif d’ˆetre accessibles pour des
+utilisateurs (clients) exprimant un besoin sp´eciﬁque, traduit totalement ou en partie `a l’aide
+d’une requˆete. Ils d´ecrivent des objets complexes tels que les documents, les processus m´etiers ou
+les ontologies relatives `a des domaines de connaissances, et sont de ce fait h´et´erog`enes et riches
+du point de vue s´emantique. Actuellement, la plupart des applications utilisant de tels mod`eles
+se basent sur une repr´esentation sous forme de diagrammes ou graphes dont l’acc`es se d´ecline par
+un processus d’appariement qui s’appuie uniquement sur des propri´et´es de structures (topolo-
+giques). La repr´esentation sous forme de graphes devient complexe d`es qu’elle tente de capturer
+toute la s´emantique du mod`ele qu’elle repr´esente. Par cons´equent, les probl`emes d’appariement
+de ces graphes deviennent diﬃciles `a r´esoudre.
+
+Par ailleurs, l’appariement de graphes est connu dans la litt´erature des graphes sous le nom de
+« graph matching problem ». Ce probl`eme est diﬃcile. Plusieurs algorithmes et heuristiques ont
+´et´e d´evelopp´es pour des matching exacts (isomorphisme) ou inexacts (placement, plongement,.)
+sur des familles de graphes ou des graphes quelconques. Le but de cet atelier est de r´eunir diﬀ´e-
+rentes communaut´es de chercheurs acad´emiques ou industriels travaillant sur des probl`emes de
+matching et d’appariement de mod`eles de graphes. Des discussions auront lieu sur les aspects
+th´eoriques et appliqu´es de ces probl`emes, et prolongeront les discussions initi´ees lors du premier
+atelier GAOC ayant eu lieu en 2010.
+
+Th`emes
+
+Les th´ematiques de l’atelier sont les suivantes :
+– appariement de graphes et services Web
+– appariement de graphes et documents XML, RDF,.
+– appariement de graphes et Web s´emantique
+– appariement de graphes et ontologies
+– appariement approximatif/ﬂou de graphes
+– fouille de graphes
+– isomorphisme/homomorphisme de graphes
+– plongement /placement de graphes
+– r´esolution de requˆetes `a graphes
+– etc.
+
+ii
+
+Comit´es
+
+Responsables de l’atelier
+
+Allel Hadjali, ENSSAT/IRISA, Universit´e de Rennes 1, France
+Karen Pinel-Sauvagnat, IRIT, Universit´e de Toulouse 3, France
+
+Comit´e de programme
+
+Boutheina Ben Yaghlane Ben Slimen, LARODEC, Tunis
+Mokrane Bouzeghoub, PRISM - Universit´e de Versailles
+Sylvie Calabretto, LIRIS - INSA de Lyon
+Madalina Croitoru, LIRMM Universit´e de Montpellier
+Khalil Drira, LAAS, Toulouse
+Eric Duchˆene, LIESP - Universit´e Claude Bernard, Lyon
+Brice Eﬀantin, LIESP - Universit´e Claude Bernard, Lyon
+Daniela Grigori, PRISM - Universit´e de Versailles
+Mohand-Said Hacid, LIRIS - Universit´e Claude Bernard, Lyon
+Mohammed Haddad, LIESP - Universit´e Claude Bernard, Lyon
+Allel Hadjali, IRISA - Universit´e de Rennes 1
+Hamamache Kheddouci, LIESP - Universit´e Claude Bernard, Lyon
+Ludovic Li´etard, IRISA - Universit´e de Rennes 1
+Guy Melan¸con, LABRI - Universit´e de Bordeaux 1
+Laurent Miclet, IRISA - Universit´e de Rennes 1
+Gabriella Pasi, Universit´e de Milan, Italie
+Jean-Marc Petit, LIRIS - INSA de Lyon
+Daniel Rocacher, IRISA - Universit´e de Rennes 1
+Karen Pinel-Sauvagnat, IRIT - Universit´e Paul Sabatier, Toulouse
+Hamida Seba, LIESP - Universit´e Claude Bernard, Lyon
+
+iii
+
+Table des mati`eres
+
+Conf´erence invit´ee : Proportions analogiques de s´equences et d’arbres. D´eﬁnitions,
+algorithmes et applications
+
+A. Ben Hassena, L. Miclet
+
+1
+
+Programmation lin´eaire en nombres entiers pour la recherche d’isomorphisme de
+sous-graphe : Application `a la recherche de symboles graphiques
+
+Pierre Le Bodic, Pierre H´eroux, S´ebastien Adam, Yves Lecourtier
+
+Une Approche Skyline pour l’Interrogation de Bases de Donn´ees de Graphes
+
+Katia Abbaci, Allel Hadjali, Ludovic Li´etard, Daniel Rocacher
+
+Adding Preferences to Semantic Process Model Matchmaking
+
+Fernando Lemos, Ahmed Gater, Daniela Grigori, Mokrane Bouzeghoub
+
+Une approche d’alignement s´emantique de concepts complexes d’ontologies
+
+Myriam Lamolle, Chan Le Duc, Rim Touhami
+
+Gestion du conﬂit dans l’appariement des ontologies
+
+Amira Essaid, Boutheina Ben Yaghlane, Arnaud Martin
+
+2
+
+14
+
+26
+
+38
+
+50
+
+iv
+
+ 
+
+Proportions analogiques de séquences et d’arbres.
+
+Déﬁnitions, algorithmes et applications.
+
+Anouar Ben Hassena
+
+Laurent Miclet
+
+IRISA, Rennes
+
+laurent.miclet@enssat.fr,
+
+anouar.ben_hassena@inria.fr
+
+Résumé. En intelligence artiﬁcielle, l’analogie est une technique de raisonne-
+ment empirique utilisée pour la résolution de problèmes, le traitement du lan-
+gage, l’apprentissage, etc. Cette présentation traite de la proportion analogique
+(une analogie forte) entre quatre séquences, et entre quatre arbres. On présentera
+les déﬁnitions et les algorithmes qui permettent de mesurer le degré d’analogie
+et de résoudre des équations analogiques dans les domaines des séquences et
+des arbres. On donnera aussi une application à l’analyse syntaxiques de phrases
+extraites du corpus Penn Wall Street Journal Treebank.
+
+Summary. In Artiﬁcial Intelligence, analogy is used as a non exact reasoning
+technique to solve problems, for natural language processing, for learning clas-
+siﬁcation rules, etc. We focus in this paper on the matching by analogical pro-
+portion of sequences and trees. We ﬁrstly give deﬁnitions and algorithms which
+deal with the analogical proportion between four sequences, and between four
+trees. Secondly, we present an application to the learning of the syntactic tree
+(parsing) of a sentence. As an experiment, we measure the performance of our
+parser on a corpus extracted from the Penn Wall Street Journal Treebank.
+
+1Programmation linéaire en nombres entiers pour la
+
+recherche d’isomorphisme de sous-graphe :
+
+Application à la recherche de symboles graphiques
+
+Pierre Le Bodic∗, Pierre Héroux ∗∗
+Sébastien Adam ∗∗, Yves Lecourtier ∗∗
+
+∗Université de Paris-Sud - LRI UMR 8623 , F-91405 Orsay cedex
+∗∗Université de Rouen - LITIS , F-76800 Saint-Etienne du Rouvray
+
+Pierre.Lebodic@lri.fr
+
+Prénom.Nom@univ-rouen.fr
+
+http://www.litislab.eu
+
+Résumé. Cet article propose une approche basée sur la programmation
+linéaire en nombres entiers pour la recherche d’isomorphisme de sous-
+graphes. L’originalité de l’approche réside dans la prise en compte d’un
+étiquetage du graphe par des vecteurs numériques pour lesquels les mé-
+thodes traditionnelles sont inopérantes. Cette approche est appliquée à
+la localisation de symboles dans des documents graphiques décrits par
+graphes d’adjacence de régions étiquetés par descripteurs de formes et
+des caractéristiques exprimant des relations géométriques. La globalité
+de l’approche est évaluée sur une base de documents synthétiques. Les
+résultats obtenus sont prometteurs.
+
+1
+
+Introduction
+Les graphes étiquetés sont des structures de données appréciées pour leur aptitude
+à représenter des entités complexes. Au sein d’une représentation à base de graphe,
+les nœuds et leurs étiquettes décrivent des objets ou des parties tandis que les arcs
+représentent les relations entretenues entre les objets. En raison de la généricité intrin-
+sèque des représentations à base de graphes, et grâce à l’augmentation de la puissance
+de calcul des ordinateurs, les représentations structurelles sont devenues de plus en
+plus utilisées dans de nombreux domaines d’application tels que la biologie, la chimie,
+l’analyse d’images de document ou la reconnaissance de symboles. Une conséquence de
+l’usage intensif des représentations à base de graphes est un intérêt croissant pour les
+problématiques scientiﬁques associées que sont la fouille de graphes, la classiﬁcation de
+graphes (supervisée ou non) ou la recherche d’isomorphisme.
+
+Cet article aborde le problème de la recherche d’isomorphisme de sous-graphe et
+propose une application dans le cadre de la détection de symboles dans des documents
+graphiques. En exploitant des graphes de régions adjacentes attribués pour représen-
+ter les documents et les symboles, nous présentons un nouveau cadre pour la recherche
+
+2Recherche d’isomorphisme par PLNE
+
+d’isomorphisme de sous-graphe aﬁn de trouver les instances de symboles dans les docu-
+ments. Ce nouveau cadre modélise l’isomorphisme de sous-graphe comme un problème
+d’optimisation formulé comme un Programme Linéaire en Nombres Entiers (PLNE).
+La formulation proposée vise à trouver une correspondance exacte du point de vue de
+la topologie du graphe, tout en tolérant les erreurs du point de vue des étiquettes des
+nœuds et des arcs. Le problème est résolu par les méthodes d’optimisation combina-
+toire implémentées par des solveurs tels que, par exemple, SYMPHONY 1 qui est décrit
+dans Ralphs et Güzelsoy (2005).
+
+Le système de recherche de symboles, dans sa globalité, est évalué sur un ensemble
+de 200 documents synthétiques contenant 5609 occurrences de symboles provenant de
+16 classes. Ces documents sont produits par l’application décrite dans Delalandre et al.
+(2008).
+
+Le reste de cet article est organisé de la façon suivante. En section 2, nous présentons
+succinctement le processus permettant d’extraire les représentations structurelles des
+images de documents et de symboles. La section 3 présente la modélisation du problème
+de recherche d’isomorphisme par un programme linéaire en nombres entiers. En section
+4, nous décrivons le protocole expérimental, les bases de données utilisées et les résultats
+obtenus lors de l’évaluation de l’approche, avant de dresser en section 5 les conclusions
+et de présenter quelques voies permettant de poursuivre ce travail.
+
+2 Représentations structurelles
+
+La détection de symboles est un des problèmes relevant de l’analyse d’image de
+document. Il s’agit de trouver l’emplacement de certains symboles dans une image de
+document. Ce type de problèmes revêt une diﬃculté supérieure à celui de la reconnais-
+sance de symboles isolés dans le sens où il est nécessaire de simultanément segmenter
+et reconnaître le symbole. De fait, si la littérature abordant la reconnaissance de sym-
+boles est abondante, très peu d’approches sont proposées pour la détection de symboles
+(Rusiñol et al. (2009)). Dans cet article, nous présentons un système visant la détec-
+tion de symboles dans un contexte particulier. Tout comme les travaux décrits dans
+Lladós et al. (2001), l’approche proposée s’appuie sur deux niveaux. Le premier niveau
+permet l’extraction d’une représentation structurelle à base de graphes d’adjacence de
+régions. Le second niveau vise à trouver les occurrences du graphe modèle représentant
+le symbole au sein du graphe représentant le document.
+
+Nous décrivons, dans cette section, le premier niveau de l’approche proposée. Nous-
+traitons des images de documents techniques (images binaires) où la composante blanche
+est associée au fond tandis que les composantes noires correspondent à la partie gra-
+phique. La segmentation de telles images peut être obtenue par étiquetage des com-
+posantes. Cependant, aﬁn d’obtenir une représentation ﬁne des relations d’adjacence
+pour chaque paire de régions, l’image binaire est soumise à une squelettisation. On fait
+alors correspondre à chaque composante blanche de cette image squelettisée un nœud
+dans le graphe en construction. Par ailleurs, un parcours des branches du squelette est
+exploité pour déterminer les relations d’adjacence entre les régions deux à deux. Cette
+
+1. http://www.coin-or.org/SYMPHONY/
+
+3P. Le Bodic et al.
+
+(a) Image originale
+
+Squelette
+
+(b)
+l’image (a)
+
+de
+
+(c)
+Composantes
+connexes de l’image
+(b)
+
+(d) Graphe
+cence de régions
+
+d’adja-
+
+Fig. 1 – Création du graphe d’adjacence de régions
+
+relation d’adjacence est matérialisée par la création d’un arc entre les nœuds associés
+aux régions correspondantes. La ﬁgure 1 illustre, sur un extrait d’image de document,
+le processus de construction du graphe d’adjacence de régions.
+
+Aﬁn de caractériser les nœuds représentant les régions et de préciser la nature
+des relations d’adjacence, le graphe est étiqueté. Plusieurs types de caractéristiques
+ont été proposées dans la littérature pour décrire les formes et les relations spatiales.
+Parmi les descripteurs de formes, les moments de Zernike proposés dans Teague (1980)
+permettent d’atteindre de bonnes performances lors de la reconnaissance de formes
+soumises à des transformations aﬃnes ou des dégradations. Un vecteur de caractéris-
+tiques composé des 24 premiers moments de Zernike extraits de chaque composantes
+connexes et caractérisant la forme est donc utilisé pour étiqueter les nœuds correspon-
+dants dans le graphe. Le graphe construit est dirigé et les attributs aﬀectés aux arcs
+(source → destination) sont :
+
+– une caractéristique liée au rapport des surfaces des composantes associées aux
+
+nœuds source et destination ;s
+
+A(destination)
+
+A(destination) + A(source)
+
+– une caractéristique liée à la distance entre les centres de gravité des régions as-
+
+sociées aux nœuds origine et destination.
+
+pA(source) + A(destination)
+
+de(gsource, gdestination)
+
+Au ﬁnal, on obtient un graphe G = (V, E, Lv, LE) où V et E ⊆ V × V sont
+respectivement les ensembles de nœuds représentant les régions et d’arcs représentant
+les relations d’adjacence entre les régions. Lv et LE sont les fonctions d’étiquetage des
+nœuds et des arcs.
+
+– LV : V → Rd, permet une description de la forme de la région associée.
+– LE : E → R2, permet une description de la relation d’adjacence.
+Du fait de la réciprocité de la relation d’adjacence, l’existence d’un arc ij implique
+l’existence d’un arc ji. Si l’étiquetage de ces arcs est identique du point de vue de la
+
+4Recherche d’isomorphisme par PLNE
+
+caractéristique relative à la distance entre les centres de gravité des régions, chaque
+arc apporte une information diﬀérente sur la caractéristique relative au rapport des
+surfaces.
+Un graphe d’adjacence de régions G est construit de la façon décrite précédemment
+à partir de l’image d’un document complet. La même méthode d’extraction est utilisée
+pour construire un graphe d’adjacence de régions S décrivant le symbole modèle. Dès
+lors, la détection des occurrences du symbole associé à S au sein du plan associé
+au graphe G se ramène à un problème de recherche d’isomorphismes de sous-graphe
+tolérante aux erreurs dans le sens où, du fait du bruit présent sur les images ou résultant
+de l’extraction, l’étiquetage des nœuds et des arcs peut diﬀérer entre le graphe décrivant
+le symbole isolé et ses diﬀérentes occurrences au sein du graphe décrivant le document.
+Le recherche d’isomorphisme de sous-graphe est un problème connu pour être NP-
+complet Garey et Johnson (1979). Un des algorithmes faisant référence en la matière
+est l’algorithme d’Ullman, proposé dans Ullmann (1976). Cet algorithme permet une
+exploration de la combinatoire tout en permettant une réduction signiﬁcative de la
+complexité par un principe de retour arrière. Un certain nombre d’articles ont proposé
+des algorithmes avec des complexités moindres exploitant certaines contraintes. C’est
+le cas des algorithmes proposés dans Hopcroft et Wong (1974) ou Cordella et al. (1999).
+D’autres approches telles que celle proposée dans Messmer et Bunke (1998) s’appuient
+sur un prétraitement de l’ensemble des graphes modèles. Certaines de ces approches
+sont des approches exactes. Les autres sont tolérantes aux erreurs. Les unes comme
+les autres imposent toutefois un étiquetage nominal des nœuds et des arcs du graphe.
+Leur utilisation pour traiter des graphes étiquetés par des attributs numériques est
+alors soumise à une étape préalable visant à transformer ces attributs numériques
+en attributs nominaux. Cette étape est généralement eﬀectuée via une discrétisation
+ou une classiﬁcation des attributs numériques. Cependant, une partie importante de
+l’information portée par les attributs numériques est alors perdue.
+
+Nous n’avons pas connaissance d’algorithme permettant la recherche d’isomor-
+phisme tolérant aux erreurs et apte à traiter directement des graphes où les nœuds
+et les arcs peuvent être étiquetés par des valeurs numériques vectorielles.
+
+La section suivante présente la contribution principale de cet article, à savoir, un
+nouveau formalisme basé sur la programmation linéaire en nombres entiers pour la
+recherche d’isomorphismes de sous-graphe tolérante aux erreurs en présence de graphes
+étiquetés avec des valeurs numériques vectorielles, ce qui, à notre connaissance, présente
+une forte originalité.
+
+3 Formulation 0-1 de l’isomorphisme de sous-graphe
+3.1 Programmation linéaire en nombres entiers
+
+Nous utilisons un programme linéaire en nombres entiers. Un programme linéaire
+
+en nombres entiers se présente sous la forme générique suivante :
+
+min
+
+x
+
+ctx
+
+(1)
+
+5P. Le Bodic et al.
+
+Fig. 2 – Illustration de la mise en correspondance des nœuds et des arcs
+
+sous la contrainte Ax ≤ b
+x ∈ C ⊆ Zn
+
+(2)
+(3)
+Dans cette formulation, c ∈ Rn, A ∈ Rn.m, b ∈ Rm sont les données du problème.
+Ce programme mathématique déﬁnit un ensemble de solutions pour le problème mo-
+délisé. La solution est un vecteur x de n variables, appartenant à Z dans le cas de
+la programmation en nombres entiers (3). Les variables permettent d’exprimer des
+contraintes linéaires (2). Une solution valide pour le problème est un vecteur x tel que
+les contraintes (2) et (3) sont respectées. Une telle solution est dite réalisable. Trouver
+une solution optimale consiste alors à minimiser la fonction objectif (1) sur l’ensemble
+des solutions réalisables.
+
+3.2 Modélisation de la recherche d’isomorphismes de sous-graphe
+
+de deux sortes et illustrées sur la ﬁgure 2 :
+
+La modélisation que nous proposons n’utilise que des variables binaires. Elles sont
+– pour chaque nœud i ∈ VS et pour chaque nœud k ∈ VG, il existe une variable
+xi,k telle que xi,k = 1 si les nœuds i et k sont mis en correspondance et xi,k = 0
+sinon.
+– pour chaque arc ij ∈ ES et pour chaque arc kl ∈ EG, il existe une variable yij,kl
+telle que yij,kl = 1 si les arcs ij et kl sont mis en correspondance et yij,kl = 0
+sinon.
+Étant donnés S = (VS , ES) et G = (VG, EG), supposons qu’on connaisse une distance
+dV : VS × VG → R+ et une distance dE : ES × EG → R+. Considérons deux nœuds
+i ∈ VS et k ∈ VG. La mise en correspondance de i à k (xi,k = 1) présente un coût de
+dV (i, k) alors que le fait de ne pas les associer (xi,k = 0) présente un coût nul. Ce coût
+peut donc être noté dV (i, k) ∗ xi,k. De même le coût d’association des arcs ij ∈ ES et
+kl ∈ EG peut être écrit dE(ij, kl) ∗ yij,kl. Il nous est alors possible d’écrire la fonction
+objectif qui vise à minimiser la somme des distances entre les éléments appariés :
+
+dE(ij, kl) ∗ yij,kl
+
+(4)
+
+X
+
+X
+
+i∈VS
+
+k∈VG
+
+min
+
+x,y
+
+dV (i, k) ∗ xi,k + X
+
+X
+
+ij∈ES
+
+kl∈EG
+
+6Recherche d’isomorphisme par PLNE
+
+Les contraintes du programme linéaire sont les suivantes :
+– Chaque nœud de S doit être mis en correspondance avec un unique nœud de G.
+
+X
+
+k∈VG
+
+xi,k = 1 ∀i ∈ VS
+
+X
+
+kl∈EG
+
+X
+
+i∈VS
+
+yij,kl = 1 ∀ij ∈ VS
+
+xi,k ≤ 1 ∀k ∈ VG
+
+(5)
+
+(6)
+
+(7)
+
+– Chaque arc de S doit être mis en correspondance avec un unique arc de G.
+
+– Chaque nœud de G doit être associé à au plus un nœud de S.
+
+– Si deux nœuds i ∈ VS et k ∈ VG sont mis en correspondance, un arc ayant i pour
+
+origine doit être mis en correspondance avec un arc ayant k pour origine.
+
+yij,kl = xi,k ∀k ∈ VG,∀ij ∈ ES
+
+(8)
+
+– Si deux nœuds j ∈ VS et l ∈ VG sont mis en correspondance, un arc ayant j pour
+destination doit être mis en correspondance avec un arc ayant l pour destination.
+
+yij,kl = xj,l ∀l ∈ VG,∀ij ∈ ES
+
+(9)
+
+X
+
+kl∈EG
+
+X
+
+kl∈EG
+
+– Enﬁn, nous précisons les contraintes indiquant que les variables du problème sont
+
+des variables binaires.
+
+xi,k ∈ {0, 1} ∀i ∈ VS ,∀k ∈ VG
+
+yij,kl ∈ {0, 1} ∀ij ∈ ES ,∀kl ∈ EG
+
+(10)
+
+(11)
+
+Les équations (4) à (11) forment le programme linéaire en nombres entiers utilisé
+pour résoudre la recherche d’isomorphisme. Toutes les solutions réalisables, celles qui
+satisfont les contraintes (5) à (11), correspondent toutes à un isomorphisme, cependant
+celle qui optimise la fonction objectif est celle pour laquelle le coût d’association est le
+plus faible.
+
+Dès lors que la recherche d’isomorphisme est modélisée sous la forme d’un pro-
+gramme linéaire qu’il est possible de résoudre en utilisant un solveur mathématique.
+Dans cette étude, nous utilisons un solveur disponible sous licence CPL appelé SYM-
+PHONY décrit dans Ralphs et Güzelsoy (2005). Dans la section suivante, nous présen-
+tons les expérimentations réalisées et discutons des résultats obtenus.
+
+7P. Le Bodic et al.
+
+Fig. 3 – Exemples d’images de la base floorplans correspondant à diﬀérents fonds
+de plan
+
+4 Évaluation
+4.1 Présentation des données
+
+Les données utilisées pour évaluer l’approche proposée sont extraites de la base
+floorplans 2. Cette base est constituée de données synthétiques représentant diﬀé-
+rentes dispositions de symboles placés sur 10 fonds de plans architecturaux. Notre
+évaluation se base sur 200 images synthétiques de plans architecturaux correspondant
+aux 20 premières dispositions proposées pour chacun des fonds. Des exemples de ces
+images sont donnés sur la ﬁgure 3.
+
+La tâche associée à cette base de données consiste à retrouver les occurrences des
+
+16 symboles modèles présentés sur la ﬁgure 4.
+
+Dans un premier temps, nous avons extrait la représentation structurelle de chacun
+
+des plans comme décrit en section 2.
+
+Grâce à une interface graphique développée pour l’occasion, il a été possible de
+constituer une vérité terrain pour la recherche d’isomorphisme de sous-graphe en iden-
+tiﬁant au sein des 200 représentations structurelles les sous-graphes correspondant à
+des occurrences de symboles. Nous avons ainsi pu identiﬁer que la base de plans conte-
+nait 5609 occurrences de symboles, soit environ 28 symboles par document en moyenne.
+Les sous-graphes correspondant aux symboles contenaient en moyenne 4 nœuds et 7
+arcs. En comparaison, les représentations structurelles des plans complets contiennent
+en moyenne 121 nœuds et 525 arcs.
+
+2. http://mathieu.delalandre.free.fr/projects/sesyd/
+
+8Recherche d’isomorphisme par PLNE
+
+A
+
+I
+
+B
+
+J
+
+C
+
+K
+
+D
+
+L
+
+E
+
+M
+
+F
+
+N
+
+G
+
+O
+
+H
+
+P
+
+Fig. 4 – Modèles des symboles recherchés
+
+4.2 Mesures de performance
+
+À l’issue de la résolution par le solveur du programme linéaire en nombres entiers,
+nous disposons d’une proposition d’appariement entre le graphe représentant le symbole
+et celui représentant le plan en examinant lesquelles des variables xik et yij,kl ont été
+mises à 1. Pour juger de la pertinence de cette proposition, il faut la comparer à la
+vérité terrain établie. Cette comparaison peut donner lieu à diﬀérents cas de ﬁgure :
+
+– Dans le meilleur des cas, l’appariement proposé correspond exactement à celui
+
+de la vérité terrain (noté =)
+d’autres ne correspondent pas. (noté ≈)
+
+– Certains des appariements proposés correspondent à la vérité terrain, alors que
+– Aucun des appariements proposés ne correspond à la vérité terrain (noté 6=).
+– Aucune proposition d’appariement n’est proposée. Ce cas de ﬁgure intervient
+lorsqu’aucune solution ne remplit les contraintes, c’est à dire qu’il n’existe pas de
+solution réalisable (noté ∅).
+
+Dans le cas d’une proposition erronée d’isomorphisme, il convient de distinguer le
+cas où le symbole recherché est en réalité absent du document (noté 6= |−), auquel
+cas l’erreur est naturelle, du cas où le symbole est eﬀectivement présent dans la vérité
+terrain (noté 6= |+).
+
+Par ailleurs, si le solveur permet de retrouver la solution qui minimise la fonction
+objectif, il est possible de rechercher plusieurs occurrences en relançant une nouvelle
+recherche dans laquelle sera exclue la solution déjà trouvée, et ainsi de suite. Il est
+ainsi possible de rechercher plusieurs isomorphismes. Bien que d’autres conﬁgurations
+soient possibles, compte-tenu du contexte applicatif, lors de la recherche d’un nouvel
+isomorphisme, nous excluons des solutions possibles tout isomorphisme dans lequel
+apparaît un nœud déjà apparié dans un isomorphisme précédent.
+
+4.3 Recherche d’une unique occurrence
+
+Dans une première expérimentation, nous avons recherché, dans chacun des plans,
+l’isomorphisme de coût minimal pour chacun des symboles modèles. Les résultats quan-
+
+9P. Le Bodic et al.
+
+Symbole
+
+A
+B
+C
+D
+E
+F
+G
+H
+I
+J
+K
+L
+M
+N
+O
+P
+
+Total
+
+=
+88
+48
+56
+0
+112
+96
+51
+40
+114
+170
+154
+123
+85
+179
+124
+172
+1612
+
+≈
+3
+72
+72
+11
+0
+34
+21
+128
+0
+2
+30
+0
+6
+0
+0
+1
+380
+
+6= |+ 6= |− ∅
+0
+15
+40
+0
+0
+72
+0
+49
+0
+0
+0
+0
+0
+79
+0
+20
+0
+62
+20
+0
+0
+16
+0
+0
+0
+0
+1
+0
+0
+59
+0
+20
+413
+0
+
+94
+40
+0
+140
+88
+70
+49
+12
+24
+8
+0
+77
+109
+20
+17
+7
+755
+
+Tab. 1 – Résultats de la recherche d’une occurrence de symbole par plan
+
+titatifs sont présentés dans le tableau 1. Globalement, ces résultats indiquent que sur les
+3200 occurrences recherchées, 1612 correspondent exactement à des symboles présents
+sur les plans, 380 correspondent partiellement (au moins 1 nœud apparié à bon escient
+et au moins un nœud apparié à mauvais escient). 755 recherches ont été eﬀectuées alors
+que le symbole n’était pas présent dans le plan. Finalement, le système n’a produit de
+véritables erreurs (6= |+) que dans 453 des 2445 cas où un symbole pouvait être trouvé.
+On remarque également que les deux dernières colonnes du tableau indiquent que le
+système a toujours proposé une solution réalisable lors de la recherche d’une unique
+occurrence.
+
+Le tableau 1 révèle également des disparités entre des classes proposant de bons
+résultats (par exemple les classes E, M et N) et d’autres pour lesquelles les résultats sont
+très faibles (classes C, D et G). Deux explications peuvent être données. Concernant
+les classes C et D, la représentation en graphe d’adjacence de régions n’est pas adaptée
+à ces symboles qui ne présentent que deux régions blanches non adjacentes (cf. Fig. 4C
+et 4D). Le graphe correspondant est donc restreint à deux nœuds non reliés par un arc.
+De ce fait, il n’existe pas de contrainte topologique pour l’appariement ce qui conduit
+à de nombreuses erreurs. Concernant la classe G, on peut observer que le symbole
+correspondant est complètement inclus dans celui de la classe F, ce qui, là aussi, est
+source de confusions.
+
+4.4 Recherche de plusieurs occurrences
+
+Étant donnés les résultats obtenus lors de la recherche d’une unique occurrence et
+considérant le fait qu’un même symbole est susceptible d’apparaître à plusieurs reprises
+
+10Recherche d’isomorphisme par PLNE
+
+Symbole
+
+A
+B
+C
+D
+E
+F
+G
+H
+I
+J
+K
+L
+M
+N
+O
+P
+
+Total
+
+=
+210
+157
+158
+19
+112
+104
+98
+40
+397
+233
+473
+132
+90
+180
+467
+648
+3518
+
+≈
+7
+131
+669
+61
+0
+46
+110
+168
+6
+2
+427
+0
+6
+0
+0
+3
+
+1636
+
+6= |+ 6= |−
+2090
+328
+166
+2367
+6849
+1882
+8386
+1092
+5325
+892
+2642
+3615
+6784
+2935
+1063
+954
+1080
+8438
+6257
+1706
+60383
+
+0
+0
+126
+32
+1368
+503
+987
+0
+0
+18
+1899
+311
+8712
+
+∅
+7365
+7179
+442
+442
+4563
+8958
+7024
+6145
+1445
+6327
+7050
+8914
+8824
+1364
+1377
+7332
+84751
+
+rappel
+0,88
+0,96
+0,98
+0,80
+1,00
+1,00
+1,00
+1,00
+0,93
+0,92
+0,83
+1,00
+1,00
+1,00
+0,92
+0,86
+
+précision
+
+0,08
+0,10
+0,09
+0,01
+0,02
+0,14
+0,07
+0,05
+0,05
+0,06
+0,30
+0,12
+0,08
+0,02
+0,05
+0,24
+
+Tab. 2 – Résultats de la recherche de 50 occurrences de symbole par plan
+
+sur un même document, nous avons souhaité évaluer la recherche de plusieurs isomor-
+phismes. Compte-tenu du fait qu’une composante connexe ne peut appartenir qu’à un
+seul symbole, nous avons, dans cette expérimentation, paramétré la recherche de telle
+sorte que soit exclu des solutions réalisables tout isomorphisme faisant apparaître un
+nœud déjà apparié dans un isomorphisme précédent.
+
+Le tableau 2 présente les résultats d’une recherche de 50 occurrences de chaque
+symbole modèle pour chacun des 200 plans de la base floorplans. Dans ce tableau,
+les colonnes 6= |− et ∅ indiquent respectivement le nombre d’erreurs et de recherches
+infructueuses pour cause d’absence de solution réalisable sachant que toutes les oc-
+currences réellement présentes ont été trouvées précédemment. Il ne s’agit donc pas
+à proprement parler d’erreur. Même s’il persiste, comme dans le cas de la recherche
+d’une unique occurrence, des disparités entre classes, globalement, on retrouve exac-
+tement 3518 (62,7%) et partiellement 1636 (29,2%) des 5609 occurrences de symboles
+réellement présentes dans les documents. En estimant qu’une correspondance partielle
+suﬃt à considérer que l’occurrence du symbole est détectée, on atteint un rappel de
+92%.
+
+Ces bons résultats doivent cependant être tempérés. En eﬀet, un nombre non négli-
+geable de fausses détections sont opérées avant d’avoir retrouvé la dernière occurrence
+réelle du symbole cherché (colonne 6= |+). Parallèlement, en l’état actuel, notre système
+n’est pas en mesure de déterminer le nombre de symboles de chaque type présents sur
+un plan. De ce fait, dans cette expérimentation, nous avons volontairement choisi une
+valeur importante du nombre de détections à proposer au regard du nombre de sym-
+boles réellement présents (recherche de 50 occurrences par type de symbole pour chaque
+plan) sans que cela soit suﬃsant pour les retrouver tous (rappel < 1). Mais, a contra-
+
+11P. Le Bodic et al.
+
+rio, cela a conduit le système à proposer des occurrences possibles alors que toutes les
+occurrences réelles avaient déjà été trouvées (colonne 6= |−). Enﬁn, la recherche s’est
+dans certains cas interrompue d’elle-même lorsqu’il n’existait plus de solution réalisable
+(colonne ∅). Compte-tenu de ce nombre important de fausses détections, la recherche
+de 50 occurrences de chaque symbole pour chaque plan a aboutit à un rappel de 92%
+pour une précision de 7%. Nos travaux futurs s’emploieront à proposer des compromis
+précision/rappel permettant de proposer des modes de fonctionnement intermédiaires
+en adaptant le nombre d’occurrences cherchées.
+
+5 Conclusion
+
+Dans cet article, nous présentons une approche pour la recherche d’isomorphisme
+exact de sous-graphe tolérant aux erreurs basée sur une programmation linéaire en
+nombres entiers. Cette approche est implantée grâce l’utilisation d’un solveur libre et
+appliquée à la recherche d’occurrences de symbole dans des documents architecturaux
+en utilisant des représentations à partir de graphe pour décrire aussi bien le plan que
+les symboles à chercher.
+
+Les expérimentations réalisées sur des bases publiques montrent des performances
+intéressantes. En eﬀet, lors de la recherche d’une occurrence de symbole, si celui-ci
+est eﬀectivement présent, une de ses occurrences est retrouvée au moins partiellement
+dans plus de 80% des cas. De même, lors de recherche de multiples occurrences, les
+symboles sont localisés dans plus de 60% des cas exactement et dans presque 30% des
+cas partiellement.
+
+Cependant, ce taux de rappel est obtenu au détriment d’une précision relativement
+faible. En eﬀet, notre système ne permet pas en l’état de déterminer automatiquement le
+nombre d’occurrences à localiser, et si certaines occurrences sont trouvées tardivement,
+de nombreuses fausses détections sont expliquées par le fait bon nombre de recherches
+sont lancées sans qu’il n’y ait plus de nouveaux symboles à retrouver.
+
+Nous envisageons de mener une étude qui permettrait de palier cette carence. Pour
+ce faire, nous projetons d’établir une étude statistique sur la valeur des coûts des isomor-
+phismes (valeur de la fonction objectif). De cette façon, nous pourrions pour chaque
+classe de symbole établir des valeurs seuils de la fonction objectif qui permettraient
+éventuellement de prendre des décisions de rejet des isomorphismes associés à un coût
+supérieur.
+
+Références
+Cordella, L. P., P. Foggia, C. Sansone, et M. Vento (1999). Performance evaluation of
+the vf graph matching algorithm. In Proccedings of the International Conference on
+Image Analysis and Processing, pp. 1172–1177.
+
+Delalandre, M., T. Pridmore, E. Valveny, H. Locteau, et E. Trupin (2008). Building
+synthetic graphical documents for performance evaluation. In Graphics Recognition.
+Recent Advances and New Opportunities, Volume 5046 of Lecture Notes in Computer
+Science, pp. 288–298.
+
+12Recherche d’isomorphisme par PLNE
+
+Garey, M. R. et D. S. Johnson (1979). Computers and Intractability : A Guide to the
+
+Theory of NP-Completeness. Freeman & co.
+
+Hopcroft, J. et J. Wong (1974). Linear time algorithm for isomorphism of planar
+graphs. In Proceedings of the sixth annual ACM Symp. Theory of Computing, pp.
+172–184.
+
+Lladós, J., E. Martí, et J. J. Villanueva (2001). Symbol recognition by error-tolerant
+subgraph matching between region adjacency graphs. IEEE Transactions on Pattern
+Analysis and Machine Intelligence 23(10), 1137–1143.
+
+Messmer, B. T. et H. Bunke (1998). A new algorithm for error-tolerant subgraph
+isomorphism detection. IEEE Transactions on Pattern Analysis and Machine Inte-
+ligence 20(5), 493–504.
+
+Ralphs, T. K. et M. Güzelsoy (2005). The Next Wave in Computing, Optimization,
+and Decision Technologies, Volume 29 of Operations Research/Computer Science
+Interfaces Series, Chapter The Symphony Callable Library for Mixed Integer Pro-
+gramming, pp. 61–76. Springer US.
+
+Rusiñol, M., J. Lladós, et G. Sánchez (2009). Symbol spotting in vectorized technical
+drawings throug a lookup table of region strings. Pattern Analysis and Applications.
+Teague, M. (1980). Image analysis via the general theory of moments. Journal of the
+
+Optical Society of America 70(8), 920–930.
+
+Ullmann, J. R. (1976). An algorithm for subgraph isomorphism. Journal of the
+
+ACM 23(1), 31–42.
+
+Summary
+
+This paper proposes an approach based on integer linear programming to solve the
+subgraph isomorphism problem. This approach is able to handle graphs labeled with
+numerical feature vectors for which traditional methods can not be used. This approach
+is applied for symbol localization in technical document images decribed with region
+adjacency graphs labeled with shape descriptors and feature vectors describing geo-
+metric relations. The whole approach is evaluated on a synthetic document database.
+Preliminary results are encouraging.
+
+13Une Approche Skyline pour l’Interrogation de Bases de
+
+Données de Graphes
+Katia Abbaci∗, Allel Hadjali∗,
+
+Ludovic Liétard∗∗, Daniel Rocacher∗
+
+∗IRISA/ENSSAT
+
+∗∗IRISA/IUT
+
+Rue de Kérampont BP 80518 Lannion, France
+
+{Katia.Abbaci, Allel.Hadjali, Daniel.Rocacher}@enssat.fr
+
+Rue Edouard Branly BP 30219 Lannion, France
+
+Ludovic.Lietard@univ-rennes1.fr
+
+Résumé. La recherche de graphes similaires à une requête à graphe constitue
+l’un des problèmes fondamentaux dans les bases de données de graphes. Les ap-
+proches existantes traitant ce problème s’appuient, généralement, sur une seule
+mesure de similarité entre les structures de graphes. Dans cet article, nous pro-
+posons une approche permettant de rechercher les graphes similaires au graphe
+d’une requête où la similarité entre graphes n’est plus un scalaire unique mais
+un vecteur de scalaires. Pour cela, nous introduisons le concept de skyline par
+similarité d’une requête à graphe déﬁni par un sous-ensemble de graphes, de la
+base de données interrogée, qui sont les plus similaires à la requête au sens de
+Pareto. Une méthode permettant de rafﬁner le résultat de la recherche est aussi
+proposée en s’appuyant sur le critère de diversité entre graphes.
+
+1
+
+Introduction
+
+Les graphes sont devenus de plus en plus importants dans la modélisation des données
+structurées et complexes dans différents domaines d’applications récents : la bio-informatique
+(Hu et al., 2005), la reconnaissance de formes (Conte et al., 2004), les documents XML (Zhang
+et al., 2006), la chimie (Klinger et Austin, 2005), les réseaux sociaux (Cai et al., 2005), etc.
+Toutes ces applications indiquent l’importance et la large utilisation du paradigme des Bases de
+Données de Graphes (BDGs). D’une manière générale, on peut classer les requêtes adressées
+à une BDG en deux catégories (Zeng et al., 2009) : (1) la recherche de graphes fondée sur
+une relation d’inclusion et (2) la recherche de graphes par similarité. La première catégorie
+se compose de deux sous-problèmes suivants : (i) la recherche de sous-graphes : soit une
+BDG D = {g1, g2,··· , gn} et une requête à graphe q (dite requête sous-graphe), il s’agit de
+rechercher tous les graphes gi ∈ D tel que q est un sous-graphe de gi (i.e., q ⊆ gi) ; (ii) la
+recherche de super-graphes : soit une BDG D = {g1, g2,··· , gn} et une requête à graphe
+q (dite requête super-graphe), il s’agit de rechercher tous les graphes gi ∈ D tel que q est
+un super-graphe de gi (i.e., q ⊇ gi). Les deux sous-problèmes font appel à la procédure de
+vériﬁcation d’isomorphisme de sous-graphes, qui est NP-Complet. Ainsi, plusieurs approches
+
+14Skyline pour l’Interrogation de Bases de Données de Graphes
+
+de traitement de requêtes à graphe, utilisant des techniques d’indexation, ont été développées
+pour réduire l’espace de recherche et résoudre efﬁcacement ces deux sous-problèmes (Chen
+et al., 2007; Yan et al., 2004; Zhang et al., 2007, 2009).
+
+Quant à la deuxième catégorie (i.e., la recherche de graphes par similarité), qui consiste
+à rechercher tous les graphes d’une BDG structurellement similaires au graphe de la requête,
+est apparue comme une nouvelle tendance pour les raisons suivantes. Premièrement, de nom-
+breuses et réelles BDGs sont de nature bruitée et incomplète, d’où la nécessité d’un appa-
+riement approximatif de graphes. Deuxièmement, plusieurs applications modernes préfèrent
+les résultats d’un appariement approximatif plutôt que ceux d’un appariement exact car ils
+véhiculent davantage d’informations, comme ce qui pourrait être manquant ou superﬂu dans
+un graphe de requête ou dans une BDG. Ainsi, plusieurs approches ont été proposées pour
+répondre aux requêtes de recherche de graphes par similarité (ou simplement, requêtes par
+similarité). Voir (Yan et al., 2005; He et Singh, 2006; Tian et Patel, 2008; Shang et al., 2010).
+Le point commun entre toutes ces approches est l’utilisation d’une seule mesure pour éva-
+luer la similarité entre graphes. Toutefois, un graphe est une structure complexe et comprend
+une multitude de caractéristiques de base. Il est alors difﬁcile de donner une déﬁnition signiﬁ-
+cative de la similarité entre graphes en utilisant un seul scalaire.
+
+Dans cet article, nous préconisons que plusieurs indices sont nécessaires pour évaluer d’une
+manière signiﬁcative et efﬁcace la similarité entre graphes. Chaque indice est dédié à mesurer
+une distance (ou similarité) locale afférente à un aspect donné dans la structure du graphe.
+Ainsi, la similarité entre graphes est caractérisée par un vecteur de mesures de distances lo-
+cales au lieu d’une seule mesure. De cette façon, on peut préserver l’information concernant la
+similarité sur différentes caractéristiques, lorsque l’on compare deux graphes.
+
+Nous proposons une nouvelle approche de traitement de requêtes par similarité en utili-
+sant la notion de skyline par similarité. D’une manière générale, le skyline par similarité d’une
+requête à graphe est déﬁni par le sous-ensemble des graphes de la BDG interrogée les plus
+similaires à la requête au sens de Pareto. L’idée est d’effectuer une comparaison multidimen-
+sionnelle entre graphes en termes de d mesures de distances locales et d’identiﬁer les graphes
+qui sont maximalement similaires au sens d’une relation de dominance par similarité. Les
+principales contributions de l’article sont :
+
+1. Nous introduisons la notion de similarité composée entre graphes (SCG) et déﬁnissons
+
+ensuite la relation de dominance par similarité entre graphes.
+
+2. En se basant sur cette relation de dominance, nous proposons une déﬁnition formelle du
+skyline de graphes par similarité, i.e., les graphes de la base interrogée maximalement
+similaires au graphe de la requête au sens de Pareto.
+
+3. Pour réduire la taille du skyline, qui est souvent très importante, nous proposons une
+méthode permettant d’extraire un sous-ensemble de graphes qui est aussi divers que
+possible, mais dont la taille est raisonnable.
+
+L’article est structuré comme suit. La section 2 introduit quelques notions préliminaires.
+La section 3 discute quelques travaux apparentés. La section 4 décrit certaines mesures de si-
+milarité entre graphes et leurs interprétations. Dans la section 5, nous introduisons la notion de
+skyline par similarité dédiée aux requêtes à graphe. La section 6 présente un exemple détaillé.
+Dans la section 7, nous proposons une méthode pour rafﬁner les résultats retournés dans le
+skyline. La section 8 conclut l’article.
+
+15K.Abbaci et al.
+
+2 Notions préliminaires
+2.1 Rappel sur les requêtes skyline
+
+Les requêtes skyline (Borzsonyi et al., 2001) représentent un paradigme très populaire
+et puissant pour extraire des objets d’un ensemble de données multidimensionnelles. Elles
+s’appuient sur le principe de dominance de Pareto qui peut être déﬁni comme suit :
+
+Déﬁnition 1. Soit r un ensemble de points multidimensionnels et p = (p1, p2, . . ., pd) et q
+= (q1, q2, . . ., qd) deux points de r. On dit que p domine (au sens de Pareto) q ssi sur chaque
+dimension pi ≤ qi (pour 1 ≤ i ≤ d) et sur au moins une dimension pj < qj.
+petite, meilleure elle est. On dit alors que p domine (est préféré à) q et on note p (cid:31) q.
+
+Par souci de simplicité et sans perte de généralité, nous supposons que plus la valeur pi est
+
+Déﬁnition 2. Le skyline de r est le sous-ensemble de r des points non-dominés par aucun
+
+autre point de r.
+
+Les requêtes skyline calculent donc l’ensemble des tuples optimaux au sens de Pareto dans
+
+une relation, i.e., les tuples qui ne sont dominés par aucun autre tuple de la même relation.
+
+Exemple 1. Considérons une base de données contenant des informations sur des hôtels
+
+comme indiqué dans le tableau 1 (où la dimension d = 2).
+
+Hôtel
+H1
+H2
+H3
+
+Prix(e)
+
+Distance (Km)
+
+4.0
+3.0
+2.5
+
+150
+110
+240
+
+TAB. 1 – Exemple d’hôtels.
+
+Considérons une personne qui cherche un hôtel aussi proche que possible de la plage et
+ayant un prix faible. On peut vériﬁer que le skyline résultant S contient les hôtels H2 et H3,
+car H1 est dominé par H2.
+
+2.2 Quelques déﬁnitions de base
+
+Déﬁnition 3 (Graphe). Un graphe g est déﬁni par un quadruplet (V, E, L, l) où V est l’en-
+semble des nœuds, E est l’ensemble des arêtes, L est l’ensemble des étiquettes et l est la fonc-
+tion d’étiquetage qui met en correspondance chaque nœud ou arête avec une étiquette de L.
+
+Par souci de clarité, les graphes considérés sont étiquetés et non-orientés (différents nœuds
+peuvent avoir la même étiquette). La taille d’un graphe g est déﬁnie comme suit : |g| = |E(g)|
+(i.e., la taille d’un graphe est le nombre de ses arêtes).
+Déﬁnition 4 (Isomorphisme de graphes). Soit deux graphes g = (V, E, L, l) et g’ = (V’, E’,
+L’, l’), g est isomorphe à g’ (dénoté par g ≈ g(cid:48)) s’il existe une bijection f : V → V’, telle que
+
+1. ∀ v ∈ V, f(v) ∈ V’ et l(v) = l’(f(v)) ;
+2. ∀ (u, v) ∈ E, (f(u), f(v)) ∈ E’ et l(u, v) = l’(f(u), f(v)).
+Déﬁnition 5 (Isomorphisme de sous-graphes). Soit deux graphes g = (V, E, L, l) et g’ = (V’,
+
+E’, L’, l’), g est isomorphe de sous-graphe à g’ s’il existe une injection f : V → V’, telle que
+
+16Skyline pour l’Interrogation de Bases de Données de Graphes
+
+1. ∀ v ∈ V, f(v) ∈ V’ et l(v) = l’(f(v)) ;
+2. ∀ (u, v) ∈ E, (f(u), f(v)) ∈ E’ et l(u, v) = l’(f(u), f(v)).
+Déﬁnition 6 (Sous-graphe v.s. super-graphe). Soit deux graphe g = (V, E, L, l) et g’ = (V’,
+E’, L’, l’), g est dit sous-graphe de g’ (ou g’ est un super-graphe de g), dénoté par g ⊆ g’ (ou
+g’ ⊇ g), s’il existe un isomorphisme de sous-graphes de g à g’.
+
+Déﬁnition 7 (Sous-graphe commun maximal, SCM). Soit deux graphes g1 et g2, le sous-
+graphe commun maximal de g1 et g2 est le plus grand sous-graphe connexe de g1 qui est
+isomorphe de sous-graphe à g2, dénoté par g’= SCM(g1, g2).
+
+3 Travaux apparentés
+
+L’étude présentée dans cet article peut être apparentée avec les travaux effectués dans les
+
+domaines des requêtes skyline et des requêtes de recherche de graphes par similarité.
+Requêtes skylines. Durant ces dernières années, les requêtes skylines ont reçu l’attention de
+nombreux chercheurs. Plusieurs études ont été menées pour développer des algorithmes efﬁ-
+caces et introduire des variantes pour les requêtes skyline (Pei et al., 2007; Yiu et Mamoulis,
+2007; Khalefa et al., 2008; Hadjali et al., 2010). Pour autant que nous le sachions, il n’existe
+pas de travaux portant sur les requêtes skyline dans un contexte d’interrogation de BDGs, ex-
+cepté, le travail de Zou et al. (2010) qui étudie les requêtes skyline dynamique dans le cadre
+d’un graphe de grande taille. Dans notre cas, c’est un autre type de skyline (i.e. skyline par
+similarité) sur un ensemble de graphes qui est étudié.
+Requêtes par similarité. Plusieurs approches ont été développées pour traiter les requêtes
+par similarité. Graﬁl (Yan et al., 2005) applique une recherche par similarité de sous-structures
+dans une BDG à large échelle. Il retourne tous les graphes de la base de données qui contiennent
+approximativement le graphe de la requête. C-Tree (He et Singh, 2006) est un autre outil de
+recherche par similarité de sous-graphes. Il est basé sur la distance d’édition entre la requête
+et les graphes candidats. Tale (Tian et Patel, 2008) propose une technique d’appariement in-
+novante qui distingue les nœuds par leur importance dans la structure des graphes. Cette tech-
+nique met d’abord en correspondance les nœuds importants d’une requête à graphe, ensuite,
+elle étend progressivement ces correspondances. Récemment, Shang et al. (2010) ont proposé
+une technique répondant aux requêtes super-graphes où le problème de recherche par similarité
+de super-graphes est converti en un problème de détection de σ-sous-graphes manquants, où
+σ est un seuil de tolérance d’erreurs. Les deux approches C-Tree et Tale utilisent la distance
+d’édition pour mesurer la similarité entre graphes, tandis que les travaux réalisés par Yan et al.
+(2005) et Shang et al. (2010) utilisent la notion de sous-graphe commun maximal.
+
+Comme on peut le constater, toutes les approches proposées et dédiées aux requêtes par
+similarité utilisent un seul indice pour mesurer la similarité entre deux graphes. En procédant
+ainsi, la similarité entre deux graphes n’est pas entièrement capturée car des similitudes rela-
+tives à certaines caractéristiques du graphe pourraient être ignorées. Ceci est principalement
+dû au fait que chaque indice de similarité entre graphes peut être vu comme une mesure lo-
+cale qui exprime seulement une ressemblance au regard d’un seul aspect dans la structure des
+graphes (voir la section 4). Par comparaison avec les travaux ci-dessus, notre approche, d’une
+part, repose sur une mesure de similarité composée entre graphes, et d’autre part, retourne un
+ensemble de graphes dominants par similarité au sens de Pareto pour répondre à une requête.
+
+17K.Abbaci et al.
+
+4 Similarité de graphes : une vue sémantique
+
+Plusieurs modèles ont été proposés (Bunke, 1997; Bunke et Shearer, 1998; Wallis et al.,
+2001) pour mesurer la similarité (ou la distance) entre deux graphes. Ci-après, nous présentons
+les mesures les plus utilisées pour déterminer les similarités entre graphes1.
+
+4.1 La distance d’édition de graphes
+
+La distance d’édition de graphes (Bunke, 1997; He et Singh, 2006) se base sur les opé-
+rations d’édition de graphes nécessaires pour transformer un graphe en un autre. Générale-
+ment, l’ensemble d’opérations d’édition considéré inclut : l’insertion, la suppression et le ré-
+étiquetage de nœuds/d’arêtes. Chaque opération d’édition est associée à un coût (un nombre
+réel non négatif) en fonction de l’intensité de distorsion induite par la transformation. Soit
+e_op une opération d’édition et c(e_op) son coût. Le coût d’une séquence d’opérations d’édi-
+tion, s = e_op1, . . . , e_opn est donné par
+
+c(s) =(cid:80)n
+
+i=1 c(e_opi).
+
+En pratique, il est difﬁcile de déterminer le coût de chaque opération d’édition élémentaire.
+Par souci de simplicité, on considère, ici, ce coût égal à une mesure de distance uniforme : la
+distance entre deux nœuds/arêtes est 1 si leurs étiquettes sont différentes ; 0 sinon.
+
+Déﬁnition 8 (Distance d’édition de graphes). La distance d’édition entre deux graphes g1 et
+g2 est égale au coût minimal, résultant de toutes les séquences d’opérations d’édition possibles,
+qui transforment g1 en g2, i.e.,
+
+DistEd(g1, g2) = mins∈E_opc(s)
+
+(1)
+
+où E_op dénote l’ensemble de toutes les séquences d’opérations d’édition possibles qui trans-
+forment g1 en g2. Plus DistEd(g1, g2) est faible, plus les deux graphes sont similaires. Cette
+mesure de distance s’applique à tout type de graphes sans aucune restriction.
+
+FIG. 1 – Exemple de graphes étiquetés.
+
+Exemple 2. Considérons les graphes étiquetés de la ﬁgure 1. La séquence d’opérations
+d’édition nécessaire pour transformer g1 en g2 est : (i) une suppression d’arêtes, i.e., l’arête
+(d, e), (ii) un ré-étiquetage d’arêtes, i.e., changer l’étiquette de l’arête (a, d) de 1 à 4, (iii) un
+ré-étiquetage de nœuds, i.e., changer l’étiquette du nœud d de d à e, (iv) une insertion d’arêtes
+
+1Par souci d’espace, l’analyse de la complexité du calcul de chaque mesure n’est pas abordée dans cet article.
+
+18Skyline pour l’Interrogation de Bases de Données de Graphes
+
+i.e., l’arête (a, f) avec l’étiquette 1. En utilisant des mesures de distance uniformes, on peut
+vériﬁer que cette séquence est la meilleure (i.e., la minimale). Ainsi, DistEd(g1, g2) = 4.
+
+Dans le contexte d’interrogation de BDGs, cette mesure de distance nous renseigne sur les
+
+caractéristiques non partagées par un graphe cible de la BDG et le graphe de la requête.
+
+4.2 La distance basée sur le SCM
+
+Bunke et Shearer (1998) ont développé un autre type de mesures de similarité entre graphes
+
+qui est basée sur le sous-graphe commun maximal (SCM).
+
+Déﬁnition 9 (Similarité basée sur le SCM). Soit deux graphes g1 et g2, la similarité entre
+
+graphes basée sur le SCM est déﬁnie comme suit,
+
+SimSCM (g1, g2) = |SCM (g1,g2)|
+max(|g1|,|g2|),
+où |SCM(g1, g2)| dénote le nombre d’arêtes dans SCM(g1, g2).
+Plus le SCM de deux graphes est large, plus leur similarité est élevée. La mesure SimSCM
+est normalisée (i.e., 0 ≤ SimSCM (g1, g2) ≤ 1) car |SCM(g1, g2)| ≤ max(|g1| ,|g2|). Ainsi, la
+mesure de distance entre graphes, DistSCM , dérivée de SimSCM peut s’écrire :
+
+DistSCM (g1, g2) = 1 − SimSCM (g1, g2)
+
+(2)
+
+L’avantage principal de l’approche basée sur le SCM est la non-utilisation de fonctions de
+
+coût, palliant ainsi l’inconvénient principal de l’approche basée sur la distance d’édition.
+
+Example 3. Reprenons l’exemple 2. La distance basée sur le SCM entre g1 et g2 est cal-
+culée comme suit. Premièrement, le SCM (g1, g2) est identiﬁé, voir la ﬁgure 2. Ensuite, par
+application de (2), nous obtenons
+
+DistSCM (g1, g2) = 1 − |SCM (g1,g2)|
+
+max(|g1|,|g2|) = 0.33,
+
+où |SCM(g1, g2)| = 4 et max(|g1| ,|g2|) = 6.
+
+FIG. 2 – SCM de g1 et g2.
+
+Dans le contexte d’interrogation de BDGs, le SCM de deux graphes véhicule de l’informa-
+
+tion sur les caractéristiques partagées par un graphe de la base interrogée et la requête.
+
+4.3 La distance basée sur l’UG
+
+La mesure de distance basée sur l’union de graphes (UG), proposée par Wallis et al. (2001),
+
+est basée sur le principe de l’union de graphes.
+
+19K.Abbaci et al.
+
+Déﬁnition 10 (Similarité basée sur l’UG). Soit deux graphes g1 et g2, la similarité entre
+
+graphes basée sur l’union de graphes est déﬁnie comme suit,
+
+SimU G(g1, g2) =
+
+|SCM (g1,g2)|
+
+|g1|+|g2|−|SCM (g1,g2)|,
+
+où le dénominateur représente la taille de l’union des deux graphes selon une vue ensembliste2.
+Cette mesure de similarité est aussi normalisée et son comportement est assez proche de
+celui de SimSCM . Il est facile de voir que SimU G(g1, g2) ≤ SimSCM (g1, g2) (ce qui si-
+gniﬁe que SimU G est une mesure plus exigeante que SimSCM ). L’utilisation de l’union de
+graphes (Wallis et al., 2001) est motivée par le fait que les changements dans la taille du
+plus petit graphe qui préservent le SCM(g1, g2) constant ne sont pas pris en compte dans
+SimSCM (g1, g2), tandis que la mesure SimU G(g1, g2) prend en compte cette variante.
+
+La mesure de distance de graphes dérivée de SimU G s’écrit :
+DistU G(g1, g2) = 1 − SimU G(g1, g2)
+
+(3)
+
+Exemple 4. Reprenons encore une fois les graphes de l’exemple 2. Par application de (3),
+
+la distance basée sur l’UG entre g1 et g2 est
+|SCM (g1,g2)|
+
+DistU G(g1, g2) = 1 −
+
+|g1|+|g2|−|SCM (g1,g2)| = 0.50,
+
+où |SCM(g1, g2)| = 4 (voir l’example 3) et |g1| = |g2| = 6.
+
+Dans le cadre d’interrogation de BDGs, cette similarité donne également des informations
+
+sur les aspects communs entre un graphe de la base interrogée et le graphe de la requête.
+
+5 Skyline de graphes par similarité
+
+Dans ce qui suit, nous supposons que la similarité entre graphes est une notion composée,
+
+i.e., un vecteur de mesures de distances.
+
+Déﬁnition 11 (Similarité composée entre graphes, SCG). Soit g et g’ deux graphes, une
+
+similarité composée entre g et g’ est un vecteur de mesures de distances locales, dénotée par
+
+SCG(g, g(cid:48)) = (Dist1(g, g(cid:48)), Dist2(g, g(cid:48)), . . . , Distd(g, g(cid:48))),
+
+où Disti(g, g(cid:48)), pour i = 1, . . ., d, représente une mesure de distance locale entre g et g’.
+
+Soit D = {g1, g2, . . . , gn} une BDG et q une requête par similarité. Pour répondre à q,
+l’idée est de procéder à une comparaison multidimensionnelle entre graphes en termes de d
+mesures de distances (locales) pour rechercher les graphes qui sont maximalement similaires
+à q au sens de la relation de dominance par similarité déﬁnie ci-dessous.
+
+Déﬁnition 12 (Relation de dominance par similarité). Soit une requête à graphe q et deux
+graphes g et g’, on dit que g’ est dominé par similarité par g dans le contexte de q, dénoté par
+g (cid:31)q g’, ssi les deux conditions suivantes sont vériﬁées :
+
+1. ∀i ∈ {1, . . . , d}, Disti(g, q) ≤ Disti(g(cid:48), q),
+2. ∃k ∈ {1, . . . , d}, Distk(g, q) < Distk(g(cid:48), q).
+2Cette mesure de similarité ressemble à l’indice de Jaccard utilisé pour mesurer la similarité entre deux ensembles
+
+A et B, i.e., J(A, B) = |A ∩ B| / |A ∪ B|.
+
+20Skyline pour l’Interrogation de Bases de Données de Graphes
+
+Plus simplement, la relation g (cid:31)q g(cid:48) est vériﬁée si g n’est pas moins similaire à q que
+g(cid:48) dans toutes les dimensions et (strictement) plus similaire à q que g(cid:48) dans au moins une
+dimension. On peut observer que g est potentiellement plus intéressant que g(cid:48) comme graphe
+réponse. Par conséquent, l’ensemble des graphes les plus similaires à q sont ceux qui ne sont
+pas dominés (au sens de la déﬁnition 13). De tels graphes, appelés graphes optimaux au sens
+de Pareto, représentent ce que nous dénotons par le skyline de graphes par similarité (SGS) :
+
+SGS(D, q) = {g ∈ D| (cid:54) ∃g(cid:48) ∈ D, g(cid:48) (cid:31)q g}
+
+(4)
+
+où g(cid:48) (cid:31)q g signiﬁe que g est dominé par similarité par g(cid:48) dans le contexte de q.
+
+Pour illustrer notre approche, nous présentons dans la section suivante un exemple où d =
+3. SCG(g, q) est alors un vecteur de trois composantes exprimées en termes de mesures de
+distances locales décrites dans la section 4, i.e.,
+
+SCG(g, q) = (DistEd(g, q), DistSCM (g, q), DistU G(g, q)).
+
+FIG. 3 – La base de données D et le graphe requête q.
+
+6 Un exemple illustratif
+
+Soit D = {g1, g2, g3, g4, g5, g6} une BDG et q un requête par similarité (voir la ﬁgure
+3). Aﬁn de retourner les réponses les plus intéressantes à q, on calcule le skyline de graphes
+par similarité SGS(D, q). Les valeurs de |SCM(gi, q)|, pour i =1, . . .,6, sont données dans le
+tableau 2 et les vecteurs de similarité entre graphes SCG(gi, q), pour i=1, . . .,6, sont résumés
+dans le tableau 3. Par application de (4), l’ensemble des graphes optimaux au sens de Pareto,
+i.e. le skyline de graphes par similarité, est donné par SGS(D, q) = {g1, g3, g4, g6}.
+Il est aisé de voir que g2 /∈ SGS(D, q) car il est dominé par g4 et g5 /∈ SGS(D, q) car
+il est dominé par g1. Les graphes de D maximalement similaires à q sont g1, g3, g4 et g6. En
+effet,
+
+21K.Abbaci et al.
+
+Paire de graphes
+(g1, q)
+(g2, q)
+(g3, q)
+(g4, q)
+(g5, q)
+(g6, q)
+
+|SCM(gi, q)|
+
+4
+4
+3
+5
+5
+6
+
+TAB. 2 – Informations sur |SCM(gi, q)|.
+
+(g1, q)
+(g2, q)
+(g3, q)
+(g4, q)
+(g5, q)
+(g6, q)
+
+DistEd(gi, q)
+
+4
+3
+2
+3
+4
+4
+
+DistSCM (gi, q)
+
+0.33
+0.43
+0.50
+0.38
+0.44
+0.40
+
+DistU G(gi, q)
+
+0.50
+0.56
+0.67
+0.44
+0.50
+0.40
+
+TAB. 3 – Mesures de distance.
+
+– Le graphe g1 est le plus intéressant au regard de la mesure DistSCM . Cela est dû aux
+raisons suivantes : i) g1 satisfait un maximum de caractéristiques requises par q que
+d’autres graphes de même taille ; ii) g1 et q sont de même taille. Mais, g1 est le moins
+intéressant au regard des caractéristiques manquantes et superﬂues (i.e., DistEd).
+
+– Le graphe g3 est le meilleur au regard de la mesure DistEd. Cela signiﬁe, d’une part,
+qu’il est le plus intéressant au regard du nombre de désaccords avec q. D’autre part, g3
+est beaucoup moins satisfaisant au regard des concordances avec q au sens de SCM.
+– Le graphe g6 est le plus intéressant au regard de la mesure DistU G. Cela est dû au fait
+que g6 ⊃ q. Mais, c’est le moins intéressant au regard du critère basé sur les caractéris-
+tiques superﬂues (i.e., DistEd).
+
+– Le graphe g4 peut être considéré comme un bon compromis entre les trois mesures
+
+DistEd, DistSCM et DistU G.
+
+Examinons maintenant les résultats obtenus en utilisant seulement une seule mesure de
+similarité entre graphes. Si on s’intéresse aux k (= 3) meilleures réponses, g2 est retourné
+comme graphe candidat en utilisant l’approche basée sur la distance d’édition. Tandis qu’avec
+l’approche basée sur le skyline, g2 n’est pas retourné à l’utilisateur car g4 est meilleur.
+
+7 Rafﬁnement du Skyline
+
+Un des problèmes qui peut survenir lors du calcul de l’ensemble SGS (et d’un skyline en
+général) est sa taille qui est souvent très importante. D’un point de vue utilisateur, il est très
+souhaitable de disposer d’un critère pertinent permettant de sélectionner un sous-ensemble, de
+taille raisonnable, des graphes les plus intéressants parmi ceux du skyline SGS. Une solution à
+
+22Skyline pour l’Interrogation de Bases de Données de Graphes
+
+ce problème est d’utiliser le critère de diversité (McSherry, 2002) pour sélectionner un sous-
+ensemble de graphes qui est aussi divers que possible, et ainsi fournir à l’utilisateur une image
+globale de l’ensemble des éléments de SGS.
+
+Soit S un sous-ensemble de SGS. La diversité de S signiﬁe que les graphes qu’il contient
+doivent être dissimilaires. L’objectif est d’extraire à partir de SGS un sous-ensemble S de taille
+k (k est un paramètre déﬁni par l’utilisateur) avec une diversité maximale. En s’inspirant des
+travaux de Kukkonen et Lampinen (2007), l’approche proposée déﬁnit la diversité de S (⊆
+SGS) de taille k par un vecteur Div(S) = (v1, v2, v3) tel que
+
+vi = min{Disti(g, g(cid:48))|g, g(cid:48) ∈ S},
+
+où, pour i=1, . . ., 3, Dist1 = DistEd/(DistEd +1), Dist2 = DistSCM et Dist3 = DistU G.
+La valeur vi exprime la diversité sur la i`eme dimension du sous-ensemble S.
+Aﬁn d’identiﬁer le sous-ensemble S, nous considérons tous les sous-ensembles S ⊆ SGS
+avec |S| = k comme candidats et appliquons les étapes suivantes :
+
+Étape 1. Pour chaque dimension i (i=1, . . ., 3), ordonner d’une manière décroissante tous
+les sous-ensembles candidats S selon leur diversité vi. Soit rangi(S) le rang de S au regard de
+la i`eme dimension. Rang de valeur 1 signiﬁe la meilleure valeur de diversité et rang de valeur
+C k|SGS| signiﬁe la plus mauvaise valeur de diversité.
+
+Etape 2. Évaluer un candidat S par : val(S) =(cid:80)
+
+i=1,...,3 rangi(S).
+
+Le sous-ensemble minimisant la somme de ses positions relativement à tous les rangs est consi-
+déré comme le sous-ensemble ayant la diversité maximale. Ainsi, S est caractérisé par
+
+val(S) = minSval(S), où S ⊆ SGS et |S| = k.
+Exemple 5. Reprenons l’exemple donné dans la section 6 où le skyline SGS(D, q) =
+{g1, g3, g4, g6}. Supposons maintenant que l’utilisateur est intéressé par les k (=2) meilleurs
+graphes au regard du critère de la diversité. On peut facilement vériﬁer que l’ensemble de tous
+les candidats contient 6 sous-ensembles de taille k, voir le tableau 4.
+
+S1 = {g1, g3}
+S2 = {g1, g4}
+S3 = {g1, g6}
+S4 = {g3, g4}
+S5 = {g3, g6}
+S6 = {g4, g6}
+
+v1
+0.86
+0.83
+0.87
+0.80
+0.83
+0.75
+
+v2
+0.67
+0.50
+0.60
+0.62
+0.70
+0.50
+
+v3
+0.80
+0.60
+0.67
+0.73
+0.77
+0.61
+
+TAB. 4 – Candidats avec leur diversité.
+
+L’étape 1 et 2 conduisent aux résultats décrits dans le tableau 5 à partir duquel on peut voir
+
+que val(S1) est la valeur minimale. Ainsi, S = S1 = {g1, g3}.
+
+8 Conclusion
+
+Dans cet article, nous avons proposé une approche permettant la recherche de graphes par
+similarité. Le concept clé de cette approche est la notion de skyline de graphes par similarité.
+
+23K.Abbaci et al.
+
+r1
+2
+3
+1
+4
+3
+5
+
+r2
+2
+5
+4
+3
+1
+5
+
+r3
+1
+6
+4
+3
+2
+5
+
+S1
+S2
+S3
+S4
+S5
+S6
+
+V al(Si) =(cid:80)
+
+i=1,··· ,3 ri
+
+5
+14
+9
+10
+6
+15
+
+TAB. 5 – Évaluation des Candidats (ri = rangi).
+
+Ce type de skyline permet l’extraction de tous les graphes de la base de données interrogée
+qui ne sont dominés par aucun autre graphe de la base au sens de la relation de dominance
+par similarité déﬁnie. Chaque graphe réponse est retourné à l’utilisateur avec un vecteur de
+scores montrant les différentes similarités correspondant aux différentes caractéristiques avec
+le graphe de la requête. Nous avons aussi montré comment sélectionner un sous-ensemble de
+diversité maximale à partir d’un skyline de graphes par similarité. Nous travaillons actuelle-
+ment sur l’implémentation de l’approche pour démontrer son efﬁcacité et sa pertinence.
+
+Références
+
+Borzsonyi, S., D. Kossmann, et K. Stocker (2001). The skyline operator. In Proc. of ICDE,
+
+pp. 421–430.
+
+Bunke, H. (1997). On a relation between graph edit distance and maximum common subgraph.
+
+Pattern Recogn. Letters 18 (9), 689–697.
+
+Bunke, H. et K. Shearer (1998). A graph distance metric based on the maximal common
+
+subgraph. Pattern Recogn. Letters 19 (3-4), 255–259.
+
+Cai, D., Z. Shao, X. He, X. Yan, et J. Han (2005). Community mining from multirelational
+
+networks. In Proc. of PPKDD, pp. 445–452.
+
+Chen, C., X. Yan, P. S. Yu, J. Han, D.-Q. Zhang, et X. Gu (2007). Towards Graph Containment
+
+Search and Indexing. In Proc. of VLDB, Vienna, Austria, pp. 926–937.
+
+Conte, D., P. Foggia, C. Sansone, et M. Vento (2004). Thirty years of graph matching in
+
+pattern recognition. Inter. J. of Pattern Recogn. and Art. Intell. 18 (3), 265–298.
+
+Hadjali, A., O. Pivert, et H. Prade (2010). Possibilistic contextual skylines with incomplete
+
+preferences. In Proc. of SoCPaR, Paris, France.
+
+He, H. et A. K. Singh (2006). Closure-tree: An index structure for graph queries. In Proc. of
+
+ICDE, pp. 38–54.
+
+Hu, H., Y. Hang, J. Han, et X. Zhou (2005). Mining coherent dense subgraphs across massive
+
+biological network for fonctional discovery. Bioinformatics 1(1), 1–9.
+
+Khalefa, M. E., M. F. Mokbel, et J. J. Levandoski (2008).
+
+incomplete data. In Proc. of ICDE, pp. 556–565.
+
+Skyline query processing for
+
+24Skyline pour l’Interrogation de Bases de Données de Graphes
+
+Klinger, S. et J. Austin (2005). Chemical similarity searching using a neural graph matcher.
+
+In Proc. of ESANN, pp. 479–484.
+
+Kukkonen, S. et J. Lampinen (2007). Ranking-dominance and many-objective optimization.
+
+In IEEE Congress on Evolutionary Computation, pp. 3983–3990.
+
+McSherry, D. (2002). Diversity-conscious retrieval. In Proc. of ECCBR, pp. 219–233.
+Pei, J., B. Jiang, X. Lin, et Y. Yuan (2007). Probabilistic skylines on uncertain data. In Proc.
+
+of VLDB, pp. 15–26.
+
+Shang, H., K. Zhu, X. Lin, Y. Zhang, et R. Ichise (2010). Similarity search on supergraph
+
+containment. In Proc. of ICDE, pp. 637–648.
+
+Tian, Y. et J. M. Patel (2008). Tale : A tool for approximate large graph matching. In Proc. of
+
+ICDE, Cancun, Mexico, pp. 963–972.
+
+Wallis, W. D., P. Shoubridge, M. Kraetz, et D. Ray (2001). Graph distances using graph union.
+
+Pattern Recogn. Letters 22 (6-7), 701–704.
+
+Yan, X., P. S. Yu, et J. Han (2004). Graph indexing: A frequent structurebased approach. In
+
+Proc. of0 ACM SIGMOD, pp. 335–346.
+
+Yan, X., P. S. Yu, et J. Han (2005). Substructure similarity search in graph databases. In Proc.
+
+of ACM SIGMOD, pp. 766–777.
+
+Yiu, M. L. et N. Mamoulis (2007). Efﬁcient processing of top-k dominating queries on multi-
+
+dimensional data. In Proc. of VLDB, pp. 483–494.
+
+Zeng, Z., A. Tung, J. Wang, J. Feng, et L. Zhou (2009). Comparing stars: On approximating
+
+graph edit distance. In Proc. of VLDB, pp. 25–36.
+
+Zhang, N., T. Özsu, I. Ilyas, et A. Aboulnaga (2006). Fix: Feature-based indexing technique
+
+for xml documents. In Proc. of VLDB, pp. 259–270.
+
+Zhang, S., M. Hu, et J. Yang (2007). Treepi: A novel graph indexing method.
+
+ICDE, pp. 966–975.
+
+In Proc. of
+
+Zhang, S., J. Z. Li, H. Gao, et Z. Zou (2009). A novel approach for efﬁcient supergraph query
+
+processing on graph databases. In Proc. of EDBT, pp. 204–215.
+
+Zou, L., L. Chen, M. T. Ozsu, et D. Zhao (2010). Dynamic skyline queries in large graphs. In
+
+Proc. of DASFAA, pp. 62–78.
+
+Summary
+
+One of the fundamental problems in graph databases is similarity search for graphs of
+interest. Existing approaches dealing with this problem rely on a single similarity measure
+between graph structures. In this paper, we suggest an approach allowing for searching similar
+graphs to a query graph where similarity between graphs is rather modelled by a vector of
+scalars than a unique scalar. To this end, we introduce the concept of similarity skyline of a
+query graph deﬁned by the subset of graphs of the target database that are the most similar
+to the query in a Pareto sense. A diversity-based method for reﬁning the retrieval result is
+proposed as well.
+
+25Adding Preferences to Semantic Process Model
+
+Matchmaking
+
+Fernando Lemos∗, Ahmed Gater∗, Daniela Grigori∗, Mokrane Bouzeghoub∗
+
+∗Laboratoire PRiSM, Université de Versailles St-Quentin en Yvelines
+
+ﬁrstname.lastname@prism.uvsq.fr,
+
+http://prism.uvsq.fr
+
+connector node ∨ with branches {b1, . . . , bk}
+
+activity node n
+
+F. Lemos et al.
+
+respT ime (s) =(cid:80)k
+
+respT ime (∧) = maxk
+respT ime (∧) = maxk
+
+The value of attribute respTime
+
+Response Time
+
+i=1 respT ime (ni)
+i=1 respT ime (bi)
+i=1 respT ime (bi)
+
+TAB. 1 – Response Time Aggregation Function.
+
+2 Adding Preferences to Business Process Speciﬁcation
+
+In this paper, we use preferences as one important aspect to select and rank business pro-
+
+is a relational operator and r is a value for m.
+
+– A soft preference is an expression of one the following forms 2:
+
+– atomic soft preferences:
+
+– around (m, rdesired): for attribute m, this expression favors the value rdesired;
+
+otherwise, it favors the values close to rdesired;
+
+– between (m, rlow, rup): for attribute m, this expression favors the values inside
+
+the interval [rlow, rup]; otherwise, it favors the values close to the limits;
+
+2. Based on the preference constructors deﬁned in Kießling (2002).
+
+start^C^endSoft Preferences:(cid:1860)(cid:1868)(cid:2869):(cid:1865)(cid:1853)(cid:1876)(cid:1870)(cid:1857)(cid:1864)(cid:1861)(cid:1853)(cid:1854)(cid:1861)(cid:1864)(cid:1861)(cid:1872)(cid:1877)(cid:1860)(cid:1868)(cid:2870):(cid:1865)(cid:1861)(cid:1866)(cid:1870)(cid:1857)(cid:1871)(cid:1868)(cid:1846)(cid:1861)(cid:1865)(cid:1857)(cid:1860)(cid:1868)(cid:2871):(cid:1860)(cid:1868)(cid:2869)&(cid:1860)(cid:1868)(cid:2870)Hard Preferences:(cid:1860)(cid:1868)(cid:2870):(cid:1870)(cid:1857)(cid:1871)(cid:1868)(cid:1846)(cid:1861)(cid:1865)(cid:1857)(cid:3407)20(cid:1865)(cid:1871)Hard Preferences:(cid:1860)(cid:1868)(cid:2869):(cid:1870)(cid:1857)(cid:1871)(cid:1868)(cid:1846)(cid:1861)(cid:1865)(cid:1857)(cid:3407)60(cid:1865)(cid:1871)ABstartend(cid:1853)(cid:2872):(cid:4666)(cid:1870)(cid:1857)(cid:1871)(cid:1868)(cid:1846)(cid:1861)(cid:1865)(cid:1857),10(cid:1865)(cid:1871)(cid:4667)(cid:1853)(cid:2873):(cid:4666)(cid:1870)(cid:1857)(cid:1864)(cid:1861)(cid:1853)(cid:1854)(cid:1861)(cid:1864)(cid:1861)(cid:1872)(cid:1877),60%(cid:4667)^^B'(cid:1853)(cid:2875):(cid:4666)(cid:1870)(cid:1857)(cid:1871)(cid:1868)(cid:1846)(cid:1861)(cid:1865)(cid:1857),75(cid:1865)(cid:1871)(cid:4667)D'(cid:1853)(cid:2874):(cid:4666)(cid:1870)(cid:1857)(cid:1871)(cid:1868)(cid:1846)(cid:1861)(cid:1865)(cid:1857),25(cid:1865)(cid:1871)(cid:4667)C'(cid:1853)(cid:2869):(cid:1855)(cid:1867)(cid:1871)(cid:1872),$15(cid:1853)(cid:2870):(cid:1870)(cid:1857)(cid:1871)(cid:1868)(cid:1846)(cid:1861)(cid:1865)(cid:1857),90(cid:1865)(cid:1871)(cid:1853)(cid:2871):(cid:4666)(cid:1870)(cid:1857)(cid:1871)(cid:1868)(cid:1846)(cid:1861)(cid:1865)(cid:1857),15(cid:1865)(cid:1871)(cid:4667)A'(cid:1853)(cid:2869)(cid:2868):(cid:4666)(cid:1870)(cid:1857)(cid:1871)(cid:1868)(cid:1846)(cid:1861)(cid:1865)(cid:1857),25(cid:1865)(cid:1871)(cid:4667)(cid:1853)(cid:2869)(cid:2869):(cid:4666)(cid:1870)(cid:1857)(cid:1864)(cid:1861)(cid:1853)(cid:1854)(cid:1861)(cid:1864)(cid:1861)(cid:1872)(cid:1877),90%(cid:4667)B'(cid:1853)(cid:2869)(cid:2870):(cid:4666)(cid:1870)(cid:1857)(cid:1871)(cid:1868)(cid:1846)(cid:1861)(cid:1865)(cid:1857),5(cid:1865)(cid:1871)(cid:4667)D'(cid:1853)(cid:2876):(cid:1853)(cid:2877):(cid:4666)(cid:1870)(cid:1857)(cid:1871)(cid:1868)(cid:1846)(cid:1861)(cid:1865)(cid:1857),15(cid:1865)start ^ C ^ end Soft Preferences: 𝑠𝑝1:𝑚𝑎𝑥𝑟𝑒𝑙𝑖𝑎𝑏𝑖𝑙𝑖𝑡𝑦 𝑠𝑝2:𝑚𝑖𝑛𝑟𝑒𝑠𝑝𝑇𝑖𝑚𝑒 𝑠𝑝3:𝑝𝑟𝑖𝑜𝑟𝑖𝑡𝑖𝑧𝑒𝑑𝑠𝑝1,𝑠𝑝2 Hard Preferences: ℎ𝑝2:𝑟𝑒𝑠𝑝𝑇𝑖𝑚𝑒<20𝑚𝑠 Hard Preferences: ℎ𝑝1:𝑟𝑒𝑠𝑝𝑇𝑖𝑚𝑒<60𝑚𝑠 A B start end 𝑎4:(𝑟𝑒𝑠𝑝𝑇𝑖𝑚𝑒,10𝑚𝑠) 𝑎5:(𝑟𝑒𝑙𝑖𝑎𝑏𝑖𝑙𝑖𝑡𝑦,60%) ^ ^ B' 𝑎7:(𝑟𝑒𝑠𝑝𝑇𝑖𝑚𝑒,75𝑚𝑠) D' 𝑎6:(𝑟𝑒𝑠𝑝𝑇𝑖𝑚𝑒,25𝑚𝑠) C' 𝑎1:𝑐𝑜𝑠𝑡,$15 𝑎2:𝑟𝑒𝑠𝑝𝑇𝑖𝑚𝑒,90𝑚𝑠 𝑎3:(𝑟𝑒𝑠𝑝𝑇𝑖𝑚𝑒,15𝑚𝑠) A' start end 𝑎10:(𝑟𝑒𝑠𝑝𝑇𝑖𝑚𝑒,25𝑚𝑠) 𝑎11:(𝑟𝑒𝑙𝑖𝑎𝑏𝑖𝑙𝑖𝑡𝑦,90%) V V B' 𝑎13:(𝑟𝑒𝑠𝑝𝑇𝑖𝑚𝑒,35𝑚𝑠) 𝑎14:(𝑟𝑒𝑙𝑖𝑎𝑏𝑖𝑙𝑖𝑡𝑦,80%) C' 𝑎12:(𝑟𝑒𝑠𝑝𝑇𝑖𝑚𝑒,5𝑚𝑠) D' 𝑎8:𝑟𝑒𝑠𝑝𝑇𝑖𝑚𝑒,60𝑚𝑠 𝑎9:(𝑟𝑒𝑠𝑝𝑇𝑖𝑚𝑒,15𝑚𝑠) A' 29F. Lemos et al.
+
+– max (m): for attribute m, this expression favors for the highest value; otherwise,
+
+the closest value to the maximum is favored;
+
+– min (m): for attribute m, this expression favors for the lowest value; otherwise,
+
+the closest value to the minimum is favored;
+
+– likes (m, rdesired): for attribute m, this expression favors the value rdesired; oth-
+
+erwise, any other value is accepted;
+
+– deslikes (m, rundesired): for attribute m, this expression favors the values that are
+
+not equal to rundesired; otherwise, rundesired is accepted;
+
+– complex soft preferences:
+
+– pareto (pi, pj): this expression states that the two soft preference expressions pi
+
+and pj are equally important;
+
+– prioritized (pi, pj): this expression states that the soft preference expression pi is
+
+more important than the soft preference expression pj.
+
+Deﬁnition 3 Semantic Process Model Graph is a tuple SP M G = (A, C, E, O, ϕ, Sa, Sp),
+where:
+
+– A is the set of activity descriptor nodes;
+– C is the set of connector nodes;
+– E ⊆ ((A ∪ C) × (A ∪ C)) is the set of edges;
+– O is the set of ontological concepts;
+
+Un ensemble 2Θ, déﬁni à partir de Θ contient les hypothèses singletons de Θ, toutes les dis-
+jonctions possibles de ces hypothèses ainsi que l’ensemble vide.
+
+La théorie des fonctions de croyance est fondée sur la manipulation des fonctions de masse
+appelée encore masse élémentaire de croyance. La fonction de masse m déﬁnie sur 2Θ et à
+valeurs dans [0, 1], vériﬁe les propriétés suivantes :
+m(∅) = 0
+
+(2)
+
+m(A) = 1
+
+(3)
+
+(cid:88)
+
+A⊆Θ
+
+Les éléments A ayant une masse de croyance non nulle sont appelés les éléments focaux.
+
+D’autres mesures de croyance peuvent être calculées à partir des fonctions de masse, à
+
+savoir la crédibilité (bel) et la plausibilité (pl).
+de 2Θ . Cette fonction est déﬁnie pour tout A ∈ 2Θ et à valeurs dans [0, 1] par :
+
+La fonction de crédibilité (bel) mesure la croyance minimale apportée à un sous ensemble
+
+(cid:88)
+
+(cid:88)
+
+bel(A) =
+
+m(B)
+
+B⊆A,B(cid:54)=∅
+
+pl(A) =
+
+m(B)
+
+A∩B(cid:54)=∅
+
+(4)
+
+(5)
+
+La fonction de plausibilité (pl) mesure la croyance maximale apportée à un sous ensemble
+
+de 2Θ. Cette fonction est déﬁnie pour tout A ∈ 2Θ et à valeurs dans [0, 1] par :
+
+Aﬁn de bien illustrer les notions présentées ci dessus, nous proposons dans ce qui suit
+un exemple d’organisation des conférences. Aﬁn de participer à une conférence, les auteurs
+soumettent leurs articles. Ces contributions seront par la suite évaluées par des relecteurs. Nous
+pouvons identiﬁer trois types de travaux à savoir un poster (PS), un papier long (PL) ou encore
+un papier court (PC). Suite à l’évaluation, un papier long peut être accepté, par exemple, à
+ce qu’il soit réécrit comme un papier court. Le problème peut être modélisé par un cadre de
+discernement Θ = {P S, P L, P C}. L’ensemble 2Θ correspondant est :
+2Θ = {∅, P S, P L, P C, P S ∪ P L, P S ∪ P C, P L ∪ P C, Θ}.
+
+Supposons qu’un des relecteurs a évalué un papier et a exprimé son degré de croyance par
+
+les masses suivantes :
+
+54Gestion du conﬂit dans l’appariement des ontologies
+
+m(PL) = 0.3, m(PL ∪ PC) =0.5, m(PS ∪ PC ∪ PL)= 0.2
+
+Le relecteur a un degré de croyance de 0.3 que le papier doit être long, de 0.5 qu’il peut
+être accepté en tant que papier long ou réécrit en tant que papier court et un degré d’ignorance
+totale (le papier peut être un poster, un papier long ou encore un papier court) de 0.2. Nous
+présentons dans le tableau 1 les fonctions de masse fournies par le relecteur ainsi que les
+fonctions de crédibilité et de plausibilité.
+
+∅
+PL
+PC
+PL ∪ PC
+PS
+PL ∪ PS
+PC ∪ PS
+Θ
+
+m
+0
+0.3
+0
+0.5
+0
+0
+0
+0.2
+
+bel
+0
+0.3
+0
+0.8
+0
+0.3
+0
+1
+
+pl
+0
+1
+0.7
+1
+0.2
+1
+0.7
+1
+
+TAB. 1 – Les fonctions de masse, de crédibilité et de plausibilité relatives à l’évaluation d’un
+article.
+
+3.2 Les règles de combinaison
+
+La fusion des données imparfaites (incertaines, imprécises et incomplètes) est une solu-
+tion pour obtenir une information plus pertinente et plus ﬁable. La théorie des fonctions de
+croyance est un outil intéressant de fusion de données. En effet, pour un problème donné et
+pour un même cadre de discernement, il est possible d’obtenir une fonction de masse synthé-
+tisant les différentes connaissances issues des différentes sources d’information distinctes et
+indépendantes et ceci par application d’une règle de combinaison.
+
+Il existe plusieurs modes de combinaison développés dans le cadre de la théorie des fonc-
+tions de croyance. Nous présentons dans ce qui suit la combinaison conjonctive, la combi-
+naison disjonctive ainsi que la combinaison mixte. Aﬁn d’illustrer les différentes règles, nous
+supposons que nous avons deux sources S1 et S2 distinctes et indépendantes. Ces sources
+fournissent des masses m1 et m2 pour un même cadre de discernement Θ.
+
+3.2.1 Combinaison conjonctive
+
+Elle fut introduite par Dempster (1967) et reprise par Shafer (1976), elle se fonde sur la
+
+combinaison des fonctions de masse en considérant les intersections des éléments de 2Θ.
+
+55Essaid et al.
+
+Règle orthogonale normalisée de Dempster-Shafer Etant données deux fonctions de masse
+m1 et m2, cette règle de combinaison est présentée comme suit :
+
+
+
+(cid:88)
+1− (cid:88)
+
+B∩C=A
+
+B∩C=∅
+
+0
+
+m1(B) × m2(C)
+m1(B) × m2(C)
+
+m1⊕2(A) =
+
+∀A ⊆ Θ, A (cid:54)= ∅
+
+si A = ∅
+
+(6)
+
+respectivement et que (cid:88)
+règle est normalisée par 1 − (cid:88)
+
+Notons que m1(B) et m2(C) sont les fonctions de masse associées aux deux sources S1 et S2
+m1(B)×m2(C) est une mesure de conﬂit entre les sources. Cette
+m1(B) × m2(C). Cette normalisation masque le conﬂit
+et n’est intéressante que sous l’hypothèse du monde fermé (toutes les hypothèses possibles du
+problème appartiennent au cadre de discernement Θ) et aussi lorsqu’il n’y a pas de conﬂit entre
+les sources. En effet, la fonction de masse obtenue suite à la combinaison renforce la croyance
+sur les décisions pour lesquelles les sources sont concordantes et l’atténue en cas de conﬂit.
+
+B∩C=∅
+
+B∩C=∅
+
+Règle de Smets Smets propose la forme non normalisée de la règle précédemment décrite.
+Cette règle est utilisée sous l’hypothèse du monde ouvert où une masse non nulle est affectée
+à l’ensemble vide. La règle conjonctive de combinaison est déﬁnie alors comme suit :
+
+m1 ∩(cid:13)2(A) =
+
+m1(B) × m2(C)
+
+(7)
+
+(cid:88)
+
+B∩C=A
+
+Cette règle est principalement utilisée lorsque les deux sources sont ﬁables.
+
+Règle de Yager Yager (1987) propose une règle où la mesure de conﬂit est affectée au cadre
+de discernement Θ. Pour deux fonctions de masse m1 et m2, la règle de Yager est déﬁnie
+
+comme suit : mY (A) = m1 ∩(cid:13)2(A)
+
+mY (Θ) = m1 ∩(cid:13)2(Θ) + m1 ∩(cid:13)2(∅)
+mY (∅) = 0
+
+∀A ∈ 2Θ, A (cid:54)= Θ et A (cid:54)= ∅
+
+(8)
+
+3.2.2 Combinaison disjonctive
+
+La règle de combinaison disjonctive a été proposée par Smets (1993) pour combiner des
+fonctions de masse dont l’une au moins est ﬁable, sans pour autant quantiﬁer la ﬁabilité ni iden-
+tiﬁer laquelle des deux sources est ﬁable. Cette règle est déﬁnie pour ∀A ∈ 2Θ par l’équation
+suivante :
+
+m1 ∪(cid:13)2(A) =
+
+m1(B) × m2(C)
+
+(9)
+
+(cid:88)
+
+B∪C=A
+
+56Gestion du conﬂit dans l’appariement des ontologies
+
+3.2.3 Combinaison mixte
+
+Dubois et Prade (1988) ont proposé un compromis aﬁn de tenir compte des avantages des
+deux modes de combinaison à savoir la combinaison conjonctive et la combinaison disjonctive.
+Cette combinaison est donnée pour tout A ∈ 2Θ par la formule suivante :
+
+ mDP (X) = m1 ∩(cid:13)2(X) +
+
+mDP (∅) = 0
+
+(cid:88)
+
+A∩X=∅, A∪X=B
+
+m1(X)m2(A)
+
+∀A ⊆ Θ, A (cid:54)= ∅
+
+(10)
+
+Ce mode de combinaison suppose que le conﬂit provient de la non ﬁabilité des sources.
+
+4 Une approche de gestion du conﬂit dans l’alignement des
+
+ontologies
+
+Dans le but d’apparier les ontologies, plusieurs mesures de similarité peuvent être utilisées
+aﬁn de tenir compte des aspects terminologiques des différents concepts de deux ontologies à
+aligner. L’utilisation de ces mesures peut faire apparaitre du conﬂit. Dans le cadre de la théorie
+des fonctions de croyance, nous proposons de gérer le conﬂit une fois que nous avons appliqué
+ces mesures. Pour ce faire, nous devons modéliser le problème d’appariement dans le cadre
+de cette théorie. En effet, les mesures de similarité utilisées seront considérées comme les
+sources d’évidence fournissant une information quant aux classes à apparier. Les résultats de
+ces mesures seront interprétés comme des fonctions de masse fournies par une source.
+
+Aﬁn d’illustrer notre modélisation, nous nous fondons sur deux ontologies cmt et confe-
+rence relatives à l’organisation des conférences 2. cmt est une ontologie source pour laquelle
+nous cherchons pour chacune de ses classes ses correspondantes au niveau de l’ontologie cible
+conference. Le tableau 2 met en évidence quelques classes de l’ontologie cmt (Paper, Pape-
+rAbstract, Document, Preference) ainsi que leurs correspondantes de l’ontologie conference
+suite à l’application des mesures terminologiques.
+
+Distance
+
+Levenshtein
+
+Paper
+Abstract
+
+Distance
+
+Jaro
+Paper
+Paper
+
+Distance
+Hamming
+
+Paper
+Paper
+
+Méthode
+Lexicale
+Paper
+Abstract
+Paper
+
+Conference_document
+
+Committee
+
+Conference
+
+Review_preference
+
+Co-chair
+Conference Review_preference
+
+Paper
+PaperAbstract
+Document
+Preference
+
+TAB. 2 – Appariement des ontologies cmt et conference.
+
+La distance Levenshtein, la distance jaro, la distance Hamming ainsi que la méthode lexi-
+cale sont représentées comme les sources d’évidence (Slev, Sjaro, Sham, Slex). Les quatre
+sources considèrent que la classe Paper de l’ontologie cmt doit être appariée à la classe Paper
+de l’ontologie conference. Slev et Slex relient la classe PaperAbstract de l’ontologie source à
+la classe Abstract de l’ontologie cible tantdis que les deux autres sources Sjaro et Sham relient
+
+2. http ://nb.vse.cz/svabo/oaei2010/
+
+57Essaid et al.
+
+PaperAbstract à Paper. Quant à la classe Document, le tableau 2 montre bien que les quatre
+sources ont des points de vue différents.
+Nous déﬁnissons le cadre de discernement comme étant l’ensemble de tous les couples
+formés à partir des classes des deux ontologies. Θ = {(ci, e1), (ci, e2), . . . (ci, en)} où ci
+et ej représentent respectivement une classe de l’ontologie source et son correspondant de
+l’ontologie cible fournie par la mesure de similarité. Les classes pour lesquelles les quatre
+sources donnent un même résultat seront exclues de cette modélisation comme le cas de Paper.
+Par exemple, le Θ correspondant au tableau 2 est représenté comme suit :
+Θ = {(P aperAbstract, Abstract), (P aperAbstract, P aper),
+(Document, Conf erence_document), (Document, Committee),
+(Document, Co − chair), (Document, P aper),
+(P ref erence, Conf erence), (P ref erence, Review_pref erence)
+
+Le tableau 3 illustre les résultats de ces différentes mesures. Dans le cadre de la théorie des
+
+fonctions de croyance, ces résultats sont interprétés comme des fonctions de masse.
+
+Distance
+
+Levenshtein
+
+Paper
+PaperAbstract
+Document
+Preference
+
+1.000
+0.615
+0.421
+0.700
+
+Distance
+
+Jaro
+1.000
+0.795
+0.638
+0.670
+
+Distance Méthode
+Lexicale
+Hamming
+1.000
+0.762
+0.910
+0.740
+
+1.000
+0.385
+0.125
+0.700
+
+TAB. 3 – Résultats d’appariement des ontologies cmt et conference.
+
+Par exemple pour la classe Paper, les quatre sources sont en accord et attribuent une masse
+
+égale à 1.000 à la classe Paper de l’ontologie cible comme suit :
+
+mSlev(Paper, Paper) = 1.000, mSjaro(Paper, Paper) = 1.000,
+mSham(Paper, Paper) = 1.000, mSlex(Paper, Paper) = 1.000.
+
+Quant à la classe PaperAbstract et malgré le choix d’une même classe Paper à apparier
+à PaperAbstract, les deux sources Sjaro et Sham n’attribuent pas une même masse. En effet,
+nous avons :
+
+mSlev(PaperAbstract, Abstract) = 0.615, mSjaro(PaperAbstract, Paper) = 0.795,
+mSham(PaperAbstract, Paper) = 0.385, mSlex(PaperAbstract, Abstract) = 0.762.
+
+Etant donné le conﬂit entre les différentes mesures, on gérera ce conﬂit lors de la combi-
+naison des résultats des différentes sources et ceci par application des règles de combinaison
+précédemment présentées.
+
+5 Discussion
+
+Dans cet article, nous nous sommes limités à apparier les ontologies tout en cherchant à
+relier les concepts qui sont équivalents en appliquant des techniques terminologiques. Nous
+
+58Gestion du conﬂit dans l’appariement des ontologies
+
+pouvons chercher dans le futur à apparier les individus ou encore les propriétés de deux on-
+tologies tout en utilisant des techniques structurelles ou sémantiques. Le fait d’appliquer uni-
+quement les techniques terminologiques a permis de détecter un conﬂit. L’utilisation d’autres
+méthodes d’alignement permettra de tenir compte des différents aspects des entités tel que la
+relation d’une entité avec les entités qui lui sont directement reliées. Dans ce cas, la gestion du
+conﬂit sera intéressante.
+
+Dans cet article, nous nous sommes contentés de proposer une approche où la gestion du
+conﬂit est effectuée lors la combinaison des informations issues des différentes mesures de
+similarité. Cette approche peut être étendue en s’intéressant à gérer le conﬂit avant même de
+combiner en estimant la ﬁabilité des mesures de similarité tout en affaiblissant les informations
+des mesures et donc de réduire le conﬂit.
+
+6 Conclusion
+
+Dans cet article, nous avons proposé une approche de gestion du conﬂit dans l’appariement
+des ontologies. Nous nous sommes limités à chercher les correspondances entre les classes de
+deux ontologies en utilisant quatre mesures de similarité terminologiques. Une fois que nous
+avons identiﬁé pour chaque classe de l’ontologie source son correspondant de l’ontologie cible,
+une gestion du conﬂit est effectuée par application de la théorie des fonctions de croyance. En
+effet, les mesures de similarité sont assimilées à des sources d’évidence et les résultats fournis
+par ces mesures sont traités comme des fonctions de masse. La gestion du conﬂit est effectuée
+lors de la combinaison des fonctions de masse des différentes sources par application des règles
+de combinaison.
+
+Comme perspective, nous envisageons à appliquer différentes règles de combinaison et
+de comparer les résultats fournis par ces règles. Des tests expérimentaux seront effectués sur
+différents couples d’ontologies fournis par l’OAEI 3.
+
+Références
+
+Berners-Lee, T., J. Hendler, et O. Lassila (2001). The semantic web. Scientiﬁc American 284,
+
+34–43.
+
+Dempster, A. (1967). Upper and Lower probabilities induced by a multivalued mapping. An-
+
+nals of Mathematical Statistics 38, 325–339.
+
+Dubois, D. et H. Prade (1988). Representation and combination of uncertainty with belief
+

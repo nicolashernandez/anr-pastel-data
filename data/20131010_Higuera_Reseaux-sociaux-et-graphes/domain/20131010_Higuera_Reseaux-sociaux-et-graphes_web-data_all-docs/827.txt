@@ -1,0 +1,1818 @@
+http://www.montefiore.ulg.ac.be/~geurts/Cours/sda/2011/07-graphes-a.pdf
+
+Partie 7
+
+Graphes
+
+Graphes
+
+395
+
+Plan
+
+1. D´eﬁnitions
+
+2. Repr´esentation des graphes
+
+3. Parcours de graphes
+
+4. Plus courts chemins
+
+5. Arbre de couverture
+
+Graphes
+
+396
+
+Graphes
+
+Un graphe (dirig´e) est un couple (V , E ) o`u :
+
+I V est un ensemble de nœuds (nodes), ou sommets (vertices) et
+I E ✓ V ⇥ V est un ensemble d’arcs, ou arˆetes (edges).
+
+Un graphe non dirig´e est caract´eris´e par une relation symm´etrique
+entre les sommets
+
+I Une arˆete est un ensemble e = {u, v} de deux sommets
+I On la notera tout de mˆeme (u, v ) (´equivalent `a (v , u)).
+
+Applications : mod´elisation de :
+
+I R´eseaux sociaux
+I R´eseaux informatiques
+I World Wide Web
+I Cartes routi`eres
+I . . .
+
+Graphes
+
+397
+
+Terminologie
+
+Graphe non dirig´e :
+
+Deux nœuds sont adjacents s’ils sont li´es par une mˆeme arˆete
+Une arˆete (v1, v2) est dite incidente aux nœuds v1 et v2
+Le degr´e d’un nœud est ´egal au nombre de ses arˆetes incidentes
+Le degr´ee d’un graphe est le nombre maximal d’arˆetes incidentes `a
+tout sommet.
+Un graphe est connexe s’il existe un chemin de tout sommet `a tout
+autre.
+Une composante connexe d’un graphe non orient´e est un
+sous-graphe connexe maximal de ce graphe
+
+Graphes
+
+398
+
+Terminologie
+
+Graphe dirig´e :
+
+Une arˆete (v1, v2) poss`ede l’origine v1 et la destination v2. Cette
+arˆete est sortante pour v1 et entrante pour v2
+Le degr´e entrant (in-degree) et le degr´e sortant (out-degree) d’un
+nœud v sont respectivement ´egaux aux nombres d’arˆetes entrantes
+et d’arˆetes sortantes de v
+Un graphe est acyclique s’il n’y a aucun cycle, c’est-`a-dire s’il n’est
+pas possible de suivre les arˆetes du graphes `a partir d’un sommet x
+et de revenir `a ce mˆeme sommet x
+
+Graphes
+
+399
+
+Type de graphes
+
+Un graphe est simple s’il ne poss`ede pas de boucle compos´ee d’une
+seule arˆete, c’est-`a-dire tel que :
+
+8v 2 V : (v , v ) /2 E
+
+Un arbre est un graphe acyclique connexe
+Un multigraphe est une g´en´eralisation des graphes pour laquelle il
+est permis de d´eﬁnir plus d’une arˆete liant un sommet `a un autre
+
+Un graphe est pond´er´e si les arˆetes sont annot´ees par des poids
+
+I Exemple : r´eseau entre villes avec comme poids la distance entre les
+
+villes, r´eseau internet avec comme poids la bande passante entre
+routeurs, etc.
+
+Graphes
+
+400
+
+Repr´esentation I : listes d’adjacences
+
+Un objet G de type graphe est compos´e :
+
+d’une liste de nœuds G .V = {1, 2, . . . ,|V|}
+d’un tableau G .Adj de |V| listes tel que :
+
+I Chaque sommet u 2 G .V est repr´esent´e par une ´el´ement du tableau
+I G .Adj[u] est la liste d’adjacence de u, c’est-`a-dire la liste des
+
+G .Adj
+
+sommets v tels que (u, v ) 2 E
+
+Permet de repr´esenter des graphes dirig´es ou non
+
+Si le graphe est dirig´e (resp. non dirig´e), la somme des longueurs des
+listes de G .Adj est |E| (resp. 2|E|).
+
+Permet de repr´esenter un graphe pond´er´e en associant un poids `a chaque
+´el´ement de liste
+
+Graphes
+
+401
+
+Exemple
+590
+
+Graphe non dirig´e
+
+5
+
+1
+
+5
+
+Graphe dirig´e
+
+1
+
+4
+1
+
+4
+
+Graphes
+
+2
+1
+2
+2
+4
+
+1
+2
+3
+4
+5
+6
+
+5
+5
+4
+5
+1
+(b)
+3
+
+2
+5
+6
+2
+4
+6
+5
+(b)
+
+4
+
+1
+
+2
+
+Chapter 22 Elementary Graph Algorithms
+
+3
+
+1
+2
+3
+4
+5
+
+3
+
+4
+
+3
+2
+
+4
+(a)
+2
+Figure 22.1 Two representations of an undirected graph. (a) An undirected graph G with 5 vertices
+and 7 edges. (b) An adjacency-list representation of G. (c) The adjacency-matrix representation
+4
+of G.
+(a)
+
+5
+5
+4
+5
+1
+(b)
+
+1
+0
+1
+0
+0
+1
+
+2
+1
+2
+2
+4
+
+1
+2
+3
+4
+5
+
+1
+2
+3
+4
+5
+
+3
+2
+
+3
+
+4
+
+Figure 22.1 Two representations of an undirected graph. (a) An undirected graph G with 5 vertices
+and 7 edges. (b) An adjacency-list representation of G. (c) The adjacency-matrix representation
+of G.
+2
+
+5
+
+3
+
+4
+
+2
+1
+0
+1
+1
+1
+
+1
+2
+3
+4
+5
+3
+0
+1
+0
+1
+0
+(c)
+1 2 3 4 5
+0
+0
+0
+0
+4
+0
+1
+0
+0
+0
+1
+0
+
+1
+2
+3
+4
+3
+5
+0
+6 0 0 0 0 0 1
+0
+0
+0
+0
+0
+402
+
+1
+0
+0
+0
+0
+0
+0
+
+2
+1
+0
+0
+1
+0
+0
+
+1
+2
+3
+4
+5
+6
+
+5
+2
+(a)
+
+6
+
+3
+
+1
+2
+3
+4
+5
+6
+
+2
+5
+6
+2
+4
+6
+
+6
+
+5
+Figure 22.2 Two representations of a directed graph. (a) A directed graph G with 6 vertices and 8
+edges. (b) An adjacency-list representation of G. (c) The adjacency-matrix representation of G.
+
+Complexit´es
+
+Complexit´e en espace : O(|V| + |E|)
+Acc´eder `a un sommet : O(1)
+
+I optimal
+
+I optimal
+
+I optimal
+
+Parcourir tous les sommets : ⇥(|V|)
+Parcourir toutes les arˆetes : ⇥(|V| + |E|)
+V´eriﬁer l’existence d’une arˆete (u, v ) 2 E : O(|V|)
+
+I ok (mais pas optimal)
+
+I ou encore O(min(degree(u), degree(v )))
+I mauvais
+
+Graphes
+
+403
+
+R´epr´esentation II : matrice d’adjacence
+
+Les nœuds sont les entiers de 1 `a |V|, G .V = {1, 2, . . . ,|V|}
+G est d´ecrit par une matrice G .A de dimension |V|⇥| V|
+G .A = (aij ) tel que
+
+aij =⇢ 1 si (i, j) 2 E
+
+0 sinon
+
+Permet de repr´esenter des graphes dirig´es ou non
+I G .A est symm´etrique si le graphe est non dirig´e
+
+Graphe pond´er´e : aij est le poids de l’arˆete (i, j) si elle existe, NIL
+(ou 0, ou +1) sinon
+
+Graphes
+
+404
+
+Chapter 22 Elementary Graph Algorithms
+
+1
+
+5
+1
+
+2
+1
+5
+Exemple
+590
+1
+2
+5
+Graphe non dirig´e
+2
+3
+4
+4
+2
+5
+2
+4
+5
+1
+3
+1
+(b)
+2
+2
+3
+4
+2
+
+5
+5
+4
+5
+1
+(b)
+Graphe dirig´e
+
+3
+4
+2
+2
+(a)
+
+3
+
+3
+
+4
+
+1
+2
+3
+4
+5
+
+1
+2 3 4
+2
+5
+0
+0
+1
+1
+0
+Chapter 22 Elementary Graph Algorithms
+1
+5
+2
+1
+1
+2
+0
+3
+1
+2
+4
+0
+0
+1
+3
+1
+2
+5
+3
+1 2 3
+4 5
+4
+1
+0
+1
+0
+2
+5
+1
+4
+2
+0
+1 0 0
+1
+1
+5
+1
+1
+0
+1
+5
+1
+1
+0 1 1
+(b)
+(c)
+4
+2
+0
+1 0 1
+0
+5
+2
+0
+1 1 0
+1
+4
+1
+1
+0
+1 0 1
+(b)
+
+1
+2
+3
+4
+5
+
+1
+2
+3
+4
+5
+
+4
+
+3
+
+5
+1
+1
+0
+1
+0
+
+4
+
+3
+
+4
+
+3
+2
+
+Figure 22.1 Two representations of an undirected graph. (a) An undirected graph G with 5 vertices
+and 7 edges. (b) An adjacency-list representation of G. (c) The adjacency-matrix representation
+
+Figure 22.1 Two representations of an undirected graph. (a) An undirected graph G with 5 vertices
+4
+and 7 edges. (b) An adjacency-list representation of G. (c) The adjacency-matrix representation
+of G.
+(a)
+
+5
+
+6
+4
+Figure 22.1 Two representations of an undirected graph. (a) An undirected graph G with 5 vertices
+0
+and 7 edges. (b) An adjacency-list representation of G. (c) The adjacency-matrix representation
+0
+5
+1
+0
+0
+1
+
+Figure 22.1 Two representations of an undirected graph. (a) An undirected graph G with 5 vertices
+4
+and 7 edges. (b) An adjacency-list representation of G. (c) The adjacency-matrix representation
+of G.
+2
+5
+
+1
+2
+3
+4
+5
+6
+
+1
+2
+3
+4
+5
+6
+
+1
+
+4
+
+6
+
+3
+
+1
+2
+
+Graphes
+
+2
+5
+
+1
+
+1
+2
+
+3
+
+2
+5
+6
+2
+4
+6
+4
+(b)
+
+5
+(a)
+2
+
+4
+
+(c)
+3
+1
+5
+2
+1
+0 1 0
+0
+1
+5
+2
+0 0 1
+0
+2
+6
+3
+0 0 1
+0
+3
+4
+2
+4
+0 0 0
+0
+4
+5
+0 1 0
+5
+0
+1 2 3 4 5
+6
+6
+2
+0
+6
+0
+0
+0
+0
+1 0 1
+0
+5
+(b)
+0
+1
+0 0 0
+6
+(c)
+
+2
+1
+0
+0
+1
+0
+1
+0
+2
+3
+
+6
+0
+0
+
+4
+
+5
+
+405
+
+Complexit´es
+
+Complexit´e en espace : O(|V|2)
+I potentiellement tr`es mauvais
+Acc´eder `a un sommet : O(1)
+
+I optimal
+
+Parcourir tous les sommets : ⇥(|V|)
+Parcourir toutes les arˆetes : ⇥(|V|2)
+V´eriﬁer l’existence d’une arˆete (u, v ) 2 E : O(1)
+
+I potentiellement tr`es mauvais
+
+I optimal
+
+I optimal
+
+Graphes
+
+406
+
+Repr´esentations
+
+Listes d’adjacence :
+
+I Complexit´e en espace optimal
+I Pas appropri´ee pour des graphes denses1 et des algorithmes qui ont
+
+besoin d’acc´eder aux arˆetes
+
+I Pr´ef´erable pour des graphes creux2 ou de degr´e faible
+
+Matrice d’adjacence :
+
+I Complexit´e en espace tr`es mauvaise pour des graphes creux
+I Appropri´ee pour des algorithmes qui d´esirent acc´eder al´eatoirement
+
+aux arˆetes
+
+I Pr´ef´erable pour des graphes denses
+
+1|E|⇡| V|2
+2|E|⌧| V|2
+
+Graphes
+
+407
+
+Plan
+
+1. D´eﬁnitions
+
+2. Repr´esentation des graphes
+
+3. Parcours de graphes
+
+4. Plus courts chemins
+
+5. Arbre de couverture
+
+Graphes
+
+408
+
+Parcours de graphes
+
+Objectif : parcourir tous les sommets d’un graphe qui sont
+accessibles `a partir d’un sommet v donn´e
+Un sommet v0 est accessible `a partir de v si :
+
+I soit v0 = v ,
+I soit v0 est adjacent `a v ,
+I soit v0 est adjacent `a un sommet v00 qui est accessible `a partir de v
+
+Di↵´erents types de parcours :
+
+I En profondeur d’abord (depth-ﬁrst)
+I En largeur d’abord (breadth-ﬁrst)
+
+Graphes
+
+409
+
+Parcours en largeur d’abord (breadth-ﬁrst search)
+
+Un des algorithmes les plus simples pour parcourir un graphe
+A la base de plusieurs algorithmes de graphe importants
+
+Entr´ees : un graphe G = (V , E ) et un sommet s 2 V
+
+I Parcourt le graphe en visitant tous les sommets qui sont accessibles `a
+
+partir de s
+
+I Parcourt les sommets par ordre croissant de leur distance (en nombre
+
+minimum d’arˆetes) par rapport `a s
+
+I on visite s
+I tous les voisins de s
+I tous les voisins des voisins de s
+I etc.
+
+I Fonctionne aussi bien pour des graphes dirig´es que non dirig´es
+
+Graphes
+
+410
+
+Example
+directed graph [undirectedexampleinbook].
+
+Exemple
+
+s
+
+a
+
+b
+
+0
+
+1
+
+3
+
+1
+c
+
+e
+
+2
+
+f
+
+g
+
+h
+
+3
+
+2
+
+3
+
+i
+
+3
+
+Un parcours en largeur `a partir de s : s-a-c-e-g -b-h-i-f
+
+Can show that Q consists of vertices with d values.
+i
+! Only 1 or 2 values.
+
+Pour l’impl´ementation :
+i
+On doit retenir les sommets d´ej`a visit´es de mani`ere `a ´eviter de
+boucler inﬁniment
+On doit retenir les sommets visit´es dont on n’a pas encore visit´e les
+voisins
+
+i C 1 i C 1 : : :
+
+!
+
+If 2, differ by 1 and all smallest are ﬁrst.
+
+i
+
+: : :
+
+i
+
+i C 1
+
+Graphes
+
+Since each vertex gets a ﬁnite d value at most once, values assigned to vertices are
+
+411
+
+Parcours en largeur d’abord : impl´ementation
+
+BFS(G , s)
+
+for each vertex u 2 G .V \ {s}
+s.d = 0
+
+u.d = 1
+
+1
+2
+3
+4 Q =”create empty Queue”
+5 Enqueue(Q, s)
+6 while not Queue-Empty(Q)
+7
+8
+9
+10
+11
+
+u = Dequeue(Q)
+for each v 2 G .Adj[u]
+v .d = u.d + 1
+Enqueue(Q, v )
+
+if v .d = 1
+
+v .d est la distance de v `a s
+
+I si un sommet v a ´et´e visit´e,
+
+v .d est ﬁni
+
+I on peut remplacer d par un
+
+drapeau binaire
+
+Q est une ﬁle (LIFO) qui
+contient les sommets visit´es
+mais dont les voisins n’ont pas
+encore ´et´e visit´es
+
+Graphes
+
+412
+
+Parcours en largeur d’abord : complexit´e
+
+BFS(G , s)
+
+for each vertex u 2 G .V \ {s}
+1
+2
+3
+s.d = 0
+4 Q = ;
+5 Enqueue(Q, s)
+6 while Q 6= ;
+7
+8
+9
+10
+11
+
+u = Dequeue(Q)
+for each v 2 G .Adj[u]
+v .d = u.d + 1
+Enqueue(Q, v )
+
+u.d = 1
+
+if v .d = 1
+
+Chaque sommet est enﬁl´e
+au plus une fois (v .d
+inﬁni ! v .d ﬁni)
+Boucle while ex´ecut´ee
+O(|V|) fois
+Boucle interne : O(|E|)
+au total
+Au total : O(|V| + |E|)
+
+Graphes
+
+413
+
+Parcours en largeur d’abord
+
+Correction :
+
+I L’algorithme fait bien un parcours du graphe en largeur et v .d
+
+contient bien la distance minimale de s `a v
+
+I Ok intuitivement mais pas ´evident `a montrer formellement. On le fera
+
+plus loin pour l’algorithme de Dijkstra (calcul du plus court chemin)
+
+Applications :
+
+I Calcul des plus courtes distances d’un sommet `a tous les autres
+I Recherche du plus court chemin entre deux sommets
+I Calcul du diam`etre d’un arbre
+I Tester si un graphe est biparti
+I . . .
+
+Graphes
+
+414
+
+if !:color == WHITE
+DFS-VISIT.!/
+
+Parcours en profondeur d’abord
+Parcours du graphe en profondeur :
+
+// ﬁnish u
+
+I On suit imm´ediatement les arˆetes incidentes au dernier sommet visit´e
+
+u:color D BLACK
+time D time C 1
+u:f D time
+I Au lieu de les mettre en attente dans une ﬁle
+Example
+[Gothroughthisexample,addinginthed andf valuesasthey’recomputed.Show
+sommets adjacents non visit´es
+colorsastheychange.Don’tputintheedgetypesyet.]
+
+I On revient en arri`ere (backtrack) quand le sommet visit´e n’a plus de
+
+Exemple :
+
+2
+
+D
+
+7
+
+T
+
+T
+
+1
+
+12
+A
+
+B
+
+3
+
+F
+
+4
+
+T
+
+d
+
+f
+
+T
+
+C
+
+C
+
+C
+
+9
+
+10
+E
+
+C
+
+8
+
+11
+B
+
+C
+
+65
+
+G
+
+13
+16
+C
+
+T
+
+14
+15
+H
+
+T
+
+F
+
+C
+
+Parcours en profondeur `a partir de A : A-D-F -G -B-E (C et H pas
+accessibles)
+
+Graphes
+
+415
+
+Parcours en profondeur : impl´ementation avec une pile
+
+DFS(G , s)
+
+for each vertex u 2 G .V
+1
+u.visited = False
+2
+3 S =”create empty stack”
+4 Push(S, s)
+5 while not Stack-empty(S)
+6
+7
+8
+9
+10
+11
+
+u = Pop(S)
+if u.visited == False
+u.visited = True
+for each v 2 G .Adj[u]
+Push(S, v )
+
+if v .visited == False
+
+On remplace la ﬁle Q
+par une pile S
+L’attribut visited
+marque les sommets
+visit´es
+
+Chaque sommet est
+empil´e au plus une fois
+Boucle while
+execut´ees O(|V|) fois
+Boucle interne :
+O(|E|) au total
+Complexit´e :
+O(|V| + |E|)
+
+Graphes
+
+416
+
+Parcours en profondeur : impl´ementation r´ecursive
+
+DFS(G , s)
+1
+2
+3 DFS-rec(G , s)
+
+for each vertex u 2 G .V
+u.visited = False
+
+DFS-Rec(G , s)
+1
+2
+3
+4
+
+s.visited = True
+for each v 2 G .Adj[s]
+
+if v .visited == False
+DFS-Rec(G , v )
+
+Remplace la pile par la
+r´ecursion
+
+DFS-REC appel´ee au plus
+|V| fois
+Chaque arˆete est consid´er´ee
+au plus une fois dans la
+boucle for
+Complexit´e : O(|V| + |E|)
+
+Graphes
+
+417
+
+Parcourir tous les sommets d’un graphe
+
+BFS et DFS ne visitent que les nœuds accessibles `a partir de la
+source s
+
+I Graphe non dirig´e : seule la composante connexe contenant s est
+
+visit´ee
+
+I Graphe dirig´e : certains sommets peuvent ne pas ˆetre accessibles de s
+
+en suivant le sens des arˆetes
+
+Pour parcourir tous les sommets d’un graphe :
+
+1. On choisit un sommet arbitraire v
+2. On visite tous les sommets accessibles depuis v (en profondeur ou en
+
+largeur)
+
+3. S’il reste certains sommets non visit´es, on en choisit un et on
+
+retourne en (2)
+
+Graphes
+
+418
+
+Parcours en profondeur de tous les sommets
+
+DFS-all(G )
+1
+2
+3
+4
+5
+
+for each vertex u 2 G .V
+u.visited = False
+for each vertex u 2 G .V
+
+if u.visited == False
+DFS-Rec(G , u)
+
+DFS-Rec(G , s)
+1
+2
+3
+4
+
+s.visited = True
+for each v 2 G .Adj[s]
+
+if v .visited == False
+DFS-Rec(G , v )
+
+Complexit´e : ⇥(|V| + |E|)
+
+I DFS-Rec est appel´e sur chaque sommet une et une seule fois
+
+⇥(|V|)
+
+I La boucle for de DFS-Rec parcourt chaque liste d’adjacence une et
+
+une seule fois
+
+⇥( Xu2G .V
+
+outdegree(u)) = ⇥(|E|)
+
+Graphes
+
+419
+
+Let m be the number of edges of G. ThenPv V out-degree(v) = m, and we get
+
+Sous-graphe de liaison
+
+Tdfs(n, m) =  (n + m).
+
+Note that we count an undirected edge as two edges, one in each direction. We then get
+
+Pv V degree(v) = 2m for undirected graphs, but since 2m 2  (m), this does not really
+
+Un parcours en profondeur de tous les sommets d’un graphe construit un
+ensemble d’arbres (une forˆet), appel´e sous-graphe de liaison, o`u :
+
+make a difference.
+
+10.2 DFS Forests
+
+les sommets sont les sommets du graphe,
+un sommet w est le ﬁls d’un sommet v dans la forˆet si
+DFS-rec(G , w ) est appel´e depuis DFS-rec(G , v )
+
+Note that a DFS starting at some vertex v explores the graph by building up a tree that
+contains all vertices that are reachable from v and all edges that are used to reach
+these vertices. We call this tree a DFS tree. A complete DFS exploring the full graph
+(and not only the part reachable from a given vertex v) builds up a collection of trees,
+or forest, called a DFS forest.
+
+CS2AlgorithmsandDataStructuresNote10
+
+Suppose, for example, that we explore the graph in Figure 10.3 by a DFS starting at
+vertex 0 that visits the vertices in the following order: 0, 2, 1, 5, 4, 3, 6. The corresponding
+DFS forest is shown in Figure 10.4.
+
+CS2Bh 31January2005
+
+Exemple :
+
+0
+
+4
+
+2
+
+5
+
+1
+
+3
+
+6
+
+0
+
+2
+
+4
+
+3
+
+6
+
+1
+
+5
+
+(Exercice : modiﬁez DFS-All et DFS-Rec pour construire la forˆet)
+
+Figure 10.3.
+
+Figure 10.4.
+
+Graphes
+
+2
+
+Note that, just like the order in which the vertices are visited during a DFS, a DFS
+forest is not unique. Figure 10.5 shows another DFS forest for the graph in Figure 10.3.
+
+420
+
+Application : tri topologique
+
+Tri topologique :
+
+I Etant donn´e un graphe acyclique dirig´e (DAG), trouver un ordre des
+
+sommets tel qu’il n’y ait pas d’arˆete d’un nœud vers un des nœuds
+qui le pr´ec`ede dans l’ordre
+
+I On peut montrer que c’est possible si (et seulement si) le graphe est
+
+acyclique
+
+Exemples d’applications :
+
+I Trouver un ordre pour suivre un ensemble de cours qui tienne compte
+
+des pr´erequis de chaque cours
+
+I Pour suivre SDA, il faut avoir suivi Introduction `a la programmation
+
+I R´esoudre les d´ependances pour l’installation de logiciels
+
+I Trouver un ordre d’installation de mani`ere `a ce que chaque logiciel
+
+soit install´e apr`es tous ceux dont il d´epend
+
+Graphes
+
+421
+
+Illustration
+
+22.4 Topological sort
+
+Graphe
+
+22.4 Topological sort
+
+11/16
+
+11/16
+undershorts
+12/15
+
+pants
+
+6/7
+
+belt
+
+12/15
+(a)
+6/7
+
+undershorts
+
+pants
+shirt
+belt
+tie
+
+1/8
+
+2/5
+
+(a)
+
+613
+
+watch
+
+9/10
+
+socks
+
+17/18
+
+shoes
+watch
+
+9/10
+
+13/14
+
+socks
+
+17/18
+
+shoes
+shirt
+
+13/14
+1/8
+
+tie
+
+2/5
+
+jacket
+
+3/4
+
+jacket
+
+3/4
+
+Une tri topologique
+
+(b)
+
+Graphes
+
+socks
+(b)
+17/18
+
+undershorts
+
+pants
+12/15
+11/16
+
+shoes
+13/14
+
+pants
+12/15
+
+undershorts
+socks
+11/16
+17/18
+
+jacket
+belt
+3/4
+6/7
+Figure 22.7 (a) Professor Bumstead topologically sorts his clothing when getting dressed. Each
+directed edge .u; !/ means that garment u must be put on before garment !. The discovery and
+ﬁnishing times from a depth-ﬁrst search are shown next to each vertex. (b) The same graph shown
+
+Figure 22.7 (a) Professor Bumstead topologically sorts his clothing when getting dressed. Each
+directed edge .u; !/ means that garment u must be put on before garment !. The discovery and
+
+belt
+watch
+6/7
+9/10
+
+tie
+shirt
+2/5
+1/8
+
+watch
+9/10
+
+shirt
+1/8
+
+shoes
+13/14
+
+tie
+2/5
+
+422
+
+Marquage des sommets pour le parcours en profondeur
+
+Dans le cadre d’un parcours en profondeur de tous les sommets,
+DFS-rec est appel´e une et une seule fois sur chaque sommet
+Lors de l’ex´ecution de DFS-All, on dira qu’un sommet v est ﬁni si
+l’appel DFS-rec(G , v ) est termin´e
+A un moment donn´e, les sommets peuvent ˆetre dans les trois ´etats
+suivants :
+
+I pas encore visit´e (on dira que v est blanc)
+I visit´e mais pas encore ﬁni (v est gris)
+I ﬁni (v est noir)
+
+Graphes
+
+423
+
+Marquage des sommets pour le parcours en profondeur
+
+DFS-all(G )
+1
+2
+3
+4
+5
+
+for each vertex u 2 G .V
+u.color = White
+for each vertex u 2 G .V
+if u.color == White
+DFS-Rec(G , u)
+
+s.color = Gray
+for each v 2 G .Adj[s]
+
+DFS-Rec(G , s)
+1
+2
+3
+4
+5
+
+if s.color == White
+DFS-Rec(G , v )
+
+s.color = Black
+
+Lemme. Soit s un sommet de G . Consid´erons le moment de
+l’ex´ecution de DFS-All(G ) o`u DFS-Rec(G , s) est appel´e. Pour
+tout sommet v , on a :
+
+1. Si v est blanc et accessible depuis s, alors v sera noir avant s
+2. Si v est gris, alors s est accessible depuis v
+
+Graphes
+
+424
+
+Trouver un tri topologique par DFS
+
+Soit un graphe G = (V , E ) et l’ordre suivant d´eﬁni sur V :
+
+s   v , v devient noir avant s
+
+Si G est un DAG, alors   d´eﬁnit un ordre topologique sur G
+Preuve :
+
+I Soit (s, v ) 2 E . On doit montrer que s   v .
+I Consid´erons le moment o`u DFS-rec(G , s) est appel´e :
+
+I Si v est d´ej`a noir, alors s   v par d´eﬁnition de  
+I Si v est blanc, alors v sera noir avant s par le lemme pr´ec´edent. Donc
+
+I Si v est gris, s est accessible depuis v et donc il y a un cycle (puisque
+
+s   v
+(s, v ) 2 E ). Ce qui ne peut pas arriver vu que G est un DAG
+
+Graphes
+
+425
+
+Tri topologique : impl´ementation
+
+for each vertex u 2 G .V
+u.color = White
+
+Top-Sort(G )
+1
+2
+3 L =”create empty linked list”
+4
+5
+6
+7
+
+for each vertex u 2 G .V
+if u.color == White
+
+return L
+
+Top-Sort-Rec(G , u, L)
+
+s.color = Gray
+for each v 2 G .Adj[s]
+
+Top-Sort-Rec(G , s, L)
+1
+2
+3
+4
+5
+6
+7
+8
+
+s.color = Black
+Insert-First(L, s)
+
+elseif s.color == Grey
+
+Error ”G has a cycle”
+
+if s.color == White
+
+Top-Sort-Rec(G , v , L)
+
+Complexit´e : ⇥(|V| + |E|)
+
+Graphes
+
+426
+
+Illustration
+
+22.4 Topological sort
+
+Graphe
+
+22.4 Topological sort
+
+11/16
+
+11/16
+undershorts
+12/15
+
+pants
+
+6/7
+
+belt
+
+12/15
+(a)
+6/7
+
+undershorts
+
+pants
+shirt
+belt
+tie
+
+1/8
+
+2/5
+
+(a)
+
+613
+
+watch
+
+9/10
+
+socks
+
+17/18
+
+shoes
+watch
+
+9/10
+
+13/14
+
+socks
+
+17/18
+
+shoes
+shirt
+
+13/14
+1/8
+
+tie
+
+2/5
+
+jacket
+
+3/4
+
+jacket
+
+3/4
+
+Une tri topologique
+
+(b)
+
+Graphes
+
+socks
+(b)
+17/18
+
+undershorts
+
+pants
+12/15
+11/16
+
+shoes
+13/14
+
+pants
+12/15
+
+undershorts
+socks
+11/16
+17/18
+
+jacket
+belt
+3/4
+6/7
+Figure 22.7 (a) Professor Bumstead topologically sorts his clothing when getting dressed. Each
+directed edge .u; !/ means that garment u must be put on before garment !. The discovery and
+ﬁnishing times from a depth-ﬁrst search are shown next to each vertex. (b) The same graph shown
+
+Figure 22.7 (a) Professor Bumstead topologically sorts his clothing when getting dressed. Each
+directed edge .u; !/ means that garment u must be put on before garment !. The discovery and
+
+belt
+watch
+6/7
+9/10
+
+tie
+shirt
+2/5
+1/8
+
+watch
+9/10
+
+shirt
+1/8
+
+shoes
+13/14
+
+tie
+2/5
+
+427
+
+Une autre solution
+
+Approche gloutonne :
+
+I Rechercher un sommet qui n’a pas d’arˆete entrante
+I C’est toujours possible dans un graphe acyclique
+
+I Ajouter ce sommet `a un tri topologique du graphe dont on a retir´e ce
+
+sommet et toutes ses arˆetes
+I Ce graphe reste acyclique
+
+Complexit´e identique `a l’approche DFS : ⇥(|E| + |V|)
+
+Graphes
+
+428
+
+

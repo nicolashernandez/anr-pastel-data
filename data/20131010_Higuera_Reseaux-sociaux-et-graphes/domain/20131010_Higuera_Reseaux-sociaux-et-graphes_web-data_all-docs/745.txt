@@ -1,0 +1,126 @@
+http://wwwabi.snv.jussieu.fr/people/soldano/sujetM2MultiPatternMining.pdf
+
+Sujet M2 2017 LIPN,
+
+Universit´e Paris 13,SPC
+
+Multipattern mining of enriched networks
+
+Henry Soldano
+
+Master 2 subject - short abstract
+
+For some years the A3 team of LIPN is interested in knowledge discovery in
+networks. Recently we focussed in attributed networks mining, addressing tasks as
+communities discovery and attribute pattern mining. A particular attention was paid
+in lifting attribute pattern mining to networks by associating attribute patterns with
+core subgraphs, where this notion of ”core“ is considered as ﬂexible and adapted to
+the kind of network we address. As a recent example we have proposed a new core
+designed to investigate advice or inﬂuence processes in directed graphs.
+
+We are currently interested in enriched graphs in a wide sense (multiplex, mul-
+timode, edge attributed networks) for which we want to investigate new pattern
+mining ideas : we consider graphs in which nodes or links are attributed and also
+have diﬀerent types or roles, therefore leading to consider multipatterns associated to
+extended cores. The practical motivation comes from the increasing domains where
+such networks appear and represent the knowledge or information we have about
+various kind of objects related in various ways. Examples of such domains are life
+science and sociology.
+
+The Master 2 subject concerns the formulation, algorithmics and development
+
+of methodologies associated to such multi pattern mining of enriched graphs.
+
+Contexte
+
+Les donn´ees structur´ees sous forme de graphes sont des objets devenus pro´emi-
+nents ces derni`eres ann´ees, en particulier en sciences de la vie (r´eseaux biologiques)
+et sur internet (r´eseaux sociaux en ligne), auxquels s’ajoutent les r´eseaux sociaux `a
+proprement parler, objets d’´etude de la sociologie. L’´etude de ces objets s’est long-
+temps limit´ee `a des questions topologiques, mesurant des indices et mod´elisant ces
+r´eseaux pour identiﬁer leurs caract´eristiques, leur structure, en extraire des com-
+munaut´es. Depuis quelques ann´ees, on s’int´eresse `a des r´eseaux enrichis, r´eseaux
+attribu´es dans lesquels les sommets ou les liens sont ´etiquet´es par des descriptions,
+r´eseaux multiplexes lorsque les liens qui relient les sommets sont de diﬀ´erentes na-
+tures, r´eseaux multi-modaux lorsque les sommets sont de diﬀ´erents types, r´eseaux
+orient´es lorsque les liens sont des arcs, r´eseaux g´eographiques dont les sommets sont
+
+1
+
+localis´es sur un espace physique, ces diﬀ´erents enrichissements pouvant ˆetre de plus
+combin´es en un r´eseau h´et´erog`ene. Ceci conduit d’une part techniquement `a adapter
+et ´etendre les m´ethodes existantes sp´eciﬁques aux r´eseaux, d’autre part `a importer
+les techniques provenant de l’apprentissage et de la fouille de donn´ees, en consid´erant
+que le r´eseau est une structure des donn´ees que l’on examine. Nous allons de ce fait
+vers la possibilit´e d’exploiter de la mani`ere la plus large la nature relationnelle des
+donn´ees.
+
+Nous avons r´ecemment d´evelopp´e diﬀ´erentes approches m´ethodologiques concer-
+nant l’apprentissage et la fouille de donn´ees sur les r´eseaux attribu´es. Les liens du
+graphe permettent alors d’examiner, s´electionner, raﬃner les motifs. Pour cela on
+utilise deux concepts issus de l’analyse des r´eseaux : 1) Un graphe peut ˆetre r´eduit `a
+son noyau (ou core), c’est-`a-dire au plus grand sous-graphe dont les sommets satis-
+font une certaine propri´et´e [1]. Par exemple, on peut r´eduire ainsi un graphe au plus
+grand sous-graphe dont tous les sommets ont un degr´e au moins k, obtenant ainsi son
+k-noyau. 2) Un graphe peut ˆetre d´ecompos´e en communaut´es, c’est-`a-dire en sous-
+graphes denses mais ayant peu ou pas de liens entre eux [3, 2]. La m´ethodologie
+que nous avons propos´ee utilise cette id´ee de noyau de la mani`ere suivante : tout
+motif d’attribut est associ´e au sous-graphe d´eﬁni par les objets dans lesquels il ap-
+paraˆıt, puis ce sous-graphe est r´eduit `a son noyau. Cette proc´edure permet de r´eduire
+le nombre de motifs s´electionn´es en r´eduisant le nombre de classes d’´equivalences,
+deux motifs formant des sous-graphes diﬀ´erents pouvant avoir le mˆeme noyau[4].
+On associe de mani`ere analogue `a chaque communaut´e extraite d’un noyau le motif
+le plus sp´eciﬁque partag´e par ses sommets, qu’on appelle alors un motif local [5].
+On mesure alors l’int´erˆet des motifs obtenus en comparant la taille des noyaux ou
+communaut´es `a leur taille attendue selon un mod`ele statistique approch´e par une si-
+mulation. La m´ethodologie a ´et´e principalement d´evelopp´ee pour l’´etude de r´eseaux
+non orient´es, et est actuellement ´etendue au cas des r´eseaux orient´es, comme par
+exemple les r´eseaux de citation (un article en cite un autre) ou les r´eseaux de conseils
+(un individu demande un conseil `a un autre individu) rencontr´es en Sociologie[6]. Il
+reste cependant de nombreuses questions ouvertes concernant le passage `a un mod`ele
+g´en´eral de r´eseau enrichi.
+
+Sujet : Le sujet porte sur la formulation et l’algorithmique de l’extension de ces
+m´ethodologies `a ces diﬀ´erents types de r´eseaux enrichis. En particulier nous nous
+int´eresserons aux types et aux rˆoles des diﬀ´erents ´el´ements constituant un r´eseau
+h´et´erog`ene, avec l’id´ee de travailler sur des motifs multiformes, appel´es mutipattern,
+chaque composante du motif contraignant un type d’´el´ement diﬀ´erent dans le r´eseau.
+Le transfert des m´ethodologies destin´es aux r´eseaux classiques vers un mod`ele plus
+large de r´eseaux n’est pas une tˆache triviale et n´ecessitera des comp´etences `a la fois
+pour la formulation et l’´etude th´eorique mais aussi pour le d´eveloppement d’outils
+logiciels que nous souhaitons mettre `a la disposition des communaut´es int´eress´ees.
+
+2
+
+R´ef´erences
+
+[1] Vladimir Batagelj and Matjaz Zaversnik. Fast algorithms for determining (ge-
+neralized) core groups in social networks. Adv. Data Analysis and Classiﬁcation,
+5(2) :129–145, 2011.
+
+[2] Rushed Kanawati. Empirical evaluation of applying ensemble methods to
+ego-centred community identiﬁcation in complex networks. Neurocomputing,
+150 :417–427, 2015.
+
+[3] Andrea Lancichinetti, Santo Fortunato, and J´anos Kert´esz. Detecting the over-
+lapping and hierarchical community structure in complex networks. New Journal
+of Physics, 11(3) :033015, 2009.
+
+[4] Henry Soldano and Guillaume Santini. Graph abstraction for closed pattern mi-
+ning in attributed networks. In Torsten Schaub, Gerhard Friedrich, and Barry
+O’Sullivan, editors, European Conference in Artiﬁcial Intelligence (ECAI), vo-
+lume 263 of Frontiers in Artiﬁcial Intelligence and Applications, pages 849–854.
+IOS Press, 2014.
+
+[5] Henry Soldano, Guillaume Santini, and Dominique Bouthinon. Motifs abstraits
+et sous-communaut´es dans les r´eseaux attribu´es. Revue d’Intelligence Artiﬁcielle,
+30(4) :441–468, 2016.
+
+[6] Henry Soldano, Guillaume Santini, Dominique Bouthinon, and Emmanuel La-
+zega. Hub-authority cores and attributed directed network mining. In IEEE 29th
+International Conference on Tools with Artiﬁcial Intelligence (ICTAI), page To
+appear, Boston, MA, USA, November 7-9 2017. IEEE Computer Society.
+
+3
+
+

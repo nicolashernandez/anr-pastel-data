@@ -1,0 +1,933 @@
+https://transp-or.epfl.ch/optimization/slides/08-graphes.pdf
+
+Graphes et réseaux
+
+Michel Bierlaire
+
+michel.bierlaire@epfl.ch
+
+EPFL - Laboratoire Transport et Mobilit´e - ENAC
+
+Graphes et r´eseaux – p. 1/44
+
+Réseaux
+
+Réseaux routiers
+
+Graphes et r´eseaux – p. 2/44
+
+Réseaux
+
+Réseaux de transports en commun
+
+Graphes et r´eseaux – p. 3/44
+
+Réseaux
+
+Réseaux de gaz
+
+Graphes et r´eseaux – p. 4/44
+
+Réseaux
+
+Réseaux d’eau
+
+Graphes et r´eseaux – p. 5/44
+
+Réseaux
+
+Réseaux d’ordinateurs
+
+Graphes et r´eseaux – p. 6/44
+
+Réseaux
+
+Réseaux de neurones
+
+Graphes et r´eseaux – p. 7/44
+
+Réseaux
+
+Réseaux sociaux
+
+Graphes et r´eseaux – p. 8/44
+
+Réseaux
+
+Formalisation mathématique du concept de réseaux
+Graphe
+
+Un graphe orienté G = (N, A) est constitué d’un ensemble N de noeuds et
+d’un ensemble A de paires de noeuds distincts, appelées arcs.
+
+1
+
+2
+
+3
+
+4
+
+Graphes et r´eseaux – p. 9/44
+
+Réseaux
+
+Arête
+
+Une arête est un arc dont on ignore l’orientation.
+
+Chaîne
+
+Une suite consécutive d’arêtes est appelée une chaîne.
+
+Chemin
+
+Une suite consécutive d’arcs est appelée un chemin.
+
+Graphe connexe
+
+Un graphe G = (N, A) est connexe si, quelque soit i, j ∈ N , il existe une
+chaîne de i à j.
+
+Graphe fortement connexe
+
+Un graphe G = (N, A) est fortement connexe si, quelque soit i, j ∈ N , il
+existe un chemin de i à j.
+
+Graphes et r´eseaux – p. 10/44
+
+Graphe non connexe
+
+1
+
+2
+
+4
+
+3
+
+5
+
+6
+
+Graphes et r´eseaux – p. 11/44
+
+Graphe connexe mais pas fortement
+
+1
+
+2
+
+4
+
+3
+
+5
+
+6
+
+Graphes et r´eseaux – p. 12/44
+
+Graphe fortement connexe
+
+1
+
+2
+
+4
+
+3
+
+5
+
+6
+
+Graphes et r´eseaux – p. 13/44
+
+Réseaux
+
+Cycle
+
+Une chaîne dont les deux sommets extrémités sont identiques est un cycle.
+
+1
+
+2
+
+4
+
+3
+
+5
+
+6
+
+Circuit
+
+Un chemin dont les deux sommets extrémités sont identiques est un circuit.
+
+1
+
+2
+
+4
+
+3
+
+5
+
+6
+
+Graphes et r´eseaux – p. 14/44
+
+Réseaux
+
+Forêt
+
+Un graphe sans cycle est appelé une forêt.
+
+1
+
+2
+
+4
+
+3
+
+5
+
+6
+
+Graphes et r´eseaux – p. 15/44
+
+Réseaux
+
+Arbre
+
+Un graphe connexe sans cycle est appelé un arbre.
+
+1
+
+2
+
+4
+
+3
+
+5
+
+6
+
+Graphes et r´eseaux – p. 16/44
+
+Réseaux
+
+• On supposera qu’il existe au plus un seul arc reliant deux
+
+noeuds dans une même direction.
+
+• Dans ce cours, un graphe est un graphe orienté.
+
+Réseau
+
+Un réseau est un graphe, pour lequel des valeurs numériques ont été asso-
+ciées aux noeuds et/ou aux arcs.
+
+• Longueur d’une route.
+• Capacité d’un tuyau.
+• Nombre de personnes habitants en un endroit.
+• Flot de véhicules empruntant une autoroute.
+• etc.
+
+Graphes et r´eseaux – p. 17/44
+
+Flots
+
+• Notations:
+
+• Noeuds : i et j.
+• Arc : (i, j).
+• Flot sur l’arc (i, j) : xij.
+• Si xij < 0, le ﬂot va à contre sens.
+
+• Vecteur de ﬂots:
+
+{xij tel que (i, j) ∈ A}.
+
+• Divergence : bilan des ﬂots en un noeud i
+
+yi = Xj|(i,j)∈A
+
+xij − Xj|(j,i)∈A
+
+xji, ∀i ∈ N.
+
+Graphes et r´eseaux – p. 18/44
+
+Flots
+
+2
+
+1
+
+=
+
+2
+
+1
+
+x
+
+x
+
+24=
+
+−2
+
+1
+
+x32 = 0
+
+x23 = 1
+
+4
+
+x
+
+13=
+
+0
+
+2
+
+=
+
+4
+
+3
+
+x
+
+3
+
+Graphes et r´eseaux – p. 19/44
+
+Flots
+
+y2 = −2
+
+2
+
+1
+
+=
+
+2
+
+1
+
+x
+
+x
+
+24=
+
+−2
+
+y1 = 1
+
+1
+
+x32 = 0
+
+x23 = 1
+
+4
+
+y4 = 0
+
+x
+
+13=
+
+0
+
+2
+
+=
+
+4
+
+3
+
+x
+
+3
+
+y3 = 1
+
+Graphes et r´eseaux – p. 20/44
+
+Flots
+
+y2 = −2
+
+2
+
+1
+
+=
+
+2
+
+1
+
+x
+
+x
+
+24=
+
+−2
+
+y1 = 1
+
+1
+
+x32 = 0
+
+x23 = 1
+
+4
+
+y4 = 0
+
+x
+
+13=
+
+0
+
+• Sources : yi > 0
+• Puits : yi < 0
+
+2
+
+=
+
+4
+
+3
+
+x
+
+3
+
+y3 = 1
+
+Graphes et r´eseaux – p. 21/44
+
+Flots
+
+• On a toujours
+
+yi = 0.
+
+Xi∈N
+
+• Si yi = 0, ∀i ∈ N, on dit que le vecteur de ﬂots est une
+
+circulation.
+
+Graphes et r´eseaux – p. 22/44
+
+Flots : exemple de circulation
+
+y2 = 0
+
+2
+
+1
+
+=
+
+2
+
+1
+
+x
+
+x
+
+24=
+
+−1
+
+y1 = 0
+
+1
+
+x32 = −1
+
+x23 = 1
+
+4
+
+y4 = 0
+
+x
+
+13=
+
+−1
+
+1
+
+=
+
+4
+
+3
+
+x
+
+3
+
+y3 = 0
+
+Graphes et r´eseaux – p. 23/44
+
+Problème de transbordement
+
+• Une entreprise doit transporter ses produits de ses usines
+
+(lieux de production) vers ses clients.
+
+• Elle désire minimiser ses coûts.
+• Elle doit se plier aux contraintes de capacité du système de
+
+transport.
+
+• Elle peut éventuellement transborder les marchandises en tout
+
+noeud du réseau.
+
+Graphes et r´eseaux – p. 24/44
+
+Problème de transbordement
+
+• Trouver un vecteur de ﬂots :
+
+• qui minimise une fonction de coût (linéaire),
+• qui produise un vecteur de divergence donné,
+• qui vériﬁe les contraintes de capacité.
+
+Graphes et r´eseaux – p. 25/44
+
+Problème de transbordement
+
+Données
+
+• aij : coût unitaire de transport sur l’arc (i, j),
+• bij : ﬂot minimum sur l’arc (i, j) (souvent 0),
+• cij : capacité de l’arc (i, j),
+• si : divergences désirées.
+
+• Si si > 0 alors si est l’offre en i, c.-à-d. ce qui est produit
+
+par l’usine située en i.
+
+• Si si < 0 alors si est la demande en i, c.-à-d. ce qui est
+
+commandé par le client situé en i.
+
+Graphes et r´eseaux – p. 26/44
+
+Problème de transbordement
+
+min
+
+x X(i,j)∈A
+
+aijxij
+
+sous contraintes
+
+Xj|(i,j)∈A
+
+xij − Xj|(j,i)∈A
+
+xji = si ∀i ∈ N
+
+offre/demande
+
+bij ≤ xij ≤ cij
+
+∀(i, j) ∈ A capacités
+
+Graphes et r´eseaux – p. 27/44
+
+Problème de transbordement
+
+• Il s’agit un problème d’optimisation linéaire.
+• Il peut donc être résolu par l’algorithme du simplexe.
+• Il généralise de nombreux problèmes dans les réseaux.
+
+Graphes et r´eseaux – p. 28/44
+
+Le plus court chemin
+
+• Le problème du plus court chemin consiste à déterminer le
+chemin de coût minimum reliant un noeud a à un noeud b.
+
+• On peut le voir comme un problème de transbordement.
+• Idée: on envoie une seule unité de ﬂot de a à b.
+
+Graphes et r´eseaux – p. 29/44
+
+Le plus court chemin
+
+Données
+
+• aij : longueur de l’arc (i, j),
+• bij : 0,
+• cij : 1,
+• si :
+
+• Origine : sa = 1.
+• Destination : sb = −1.
+• Autres noeuds : si = 0, si i 6= a et i 6= b.
+
+Graphes et r´eseaux – p. 30/44
+
+Affectation
+
+Je possède 4 chefs d’oeuvre que je désire vendre
+
+Renoir
+
+Van Gogh
+
+Monet
+
+Bierlaire
+
+Graphes et r´eseaux – p. 31/44
+
+Affectation
+
+J’ai contacté quatre acheteurs qui ont fait des offres (en kCHF)
+
+Van Gogh Renoir Monet Bierlaire
+
+Christie’s
+Drouot
+COOP
+
+Metropolitan
+
+8000
+9000
+9000
+
+—
+
+11000
+13000
+
+—
+
+14000
+
+—
+
+12000
+11000
+12000
+
+—
+—
+0.01
+—
+
+Graphes et r´eseaux – p. 32/44
+
+Affectation
+
+• Je désire vendre exactement une peinture à chaque acheteur.
+• Quelle peinture dois je vendre à quel acheteur pour gagner un
+
+maximum ?
+
+• On peut le voir comme un problème de transbordement.
+• Représentation en réseau.
+
+Graphes et r´eseaux – p. 33/44
+
+Affectation
+
+Van Gogh
+
+Christies
+
+Renoir
+
+Monet
+
+Bierlaire
+
+Drouot
+
+COOP
+
+Metro
+
+Graphes et r´eseaux – p. 34/44
+
+Affectation
+
+Données
+
+• aij : valeur de l’offre, changée de signe,
+• bij : 0,
+• cij : 1.
+• si :
+
+• Noeud i “oeuvre” : si = 1.
+• Noeud j “acheteur” : sj = −1.
+
+Graphes et r´eseaux – p. 35/44
+
+Flot maximal
+
+• Une société pétrolière désire envoyer un maximum de pétrole
+
+via un réseau de pipelines entre un lieu a et un lieu b.
+
+• Combien de litres par heure pourra-t-elle faire passer par le
+
+réseau ?
+
+• Les capacités des pipelines (en kilolitres/heure) sont indiquées
+
+sur les arcs.
+
+Graphes et r´eseaux – p. 36/44
+
+Flot maximal
+
+4
+
+=
+
+c 13
+
+ca1 = 2
+
+a
+
+1
+
+c12 = 3
+
+ca2 = 3
+
+3
+
+2
+
+c
+
+3
+
+b
+
+=
+
+1
+
+c2b = 2
+
+b
+
+Graphes et r´eseaux – p. 37/44
+
+Flot maximal
+
+• On peut le voir comme un problème de transbordement.
+• Il faut ajouter un arc artiﬁciel.
+• Idée : chaque unité de ﬂot qui a réussi à passer à travers le
+
+réseau est ramenée artiﬁciellement à a, en rapportant des
+bénéﬁces (coût négatif).
+
+Graphes et r´eseaux – p. 38/44
+
+Flot maximal
+
+4
+
+=
+
+c 13
+
+ca1 = 2
+
+a
+
+1
+
+c12 = 3
+
+ca2 = 3
+
+3
+
+2
+
+c
+
+3
+
+b
+
+=
+
+1
+
+c2b = 2
+
+b
+
+cba = +∞, aba = −1
+
+Graphes et r´eseaux – p. 39/44
+
+Flot maximal
+
+Données
+
+• aij : ( 0
+
+pour les arc réels
+−1 pour l’arc artiﬁciel
+
+• bij : 0,
+• cij : capacités,
+• si = 0 ∀i: on désire une circulation.
+
+Graphes et r´eseaux – p. 40/44
+
+Problème de transport
+
+• Une société électrique possède trois générateurs pour fournir 4
+
+villes en électricité.
+
+• Les générateurs produisent resp. 35, 50 et 40 MKWh.
+• Les villes consomment resp. 45, 20, 30 et 30 MKWh.
+• Les coûts de transport d’un MKWh d’un générateur à une ville
+
+sont repris dans le tableau suivant.
+
+Ville 1 Ville 2 Ville 3 Ville 4
+
+Gén. 1
+Gén. 2
+Gén. 3
+
+8
+9
+14
+
+6
+12
+9
+
+10
+13
+16
+
+9
+7
+5
+
+• Comment approvisionner les villes à moindre coût ?
+
+Graphes et r´eseaux – p. 41/44
+
+Problème de transport
+
+Gén. 3
+
+Gén. 2
+
+Gén. 1
+
+9
+
+13
+
+9
+
+5
+
+7
+
+16
+
+10
+
+12
+
+14
+9
+
+6
+
+8
+
+Ville 4
+
+Ville 3
+
+Ville 2
+
+Ville 1
+
+Graphes et r´eseaux – p. 42/44
+
+Problème de transport
+
+Données
+
+• aij : prix entre générateur i et ville j,
+• bij : 0,
+• cij : +∞,
+• si: offre et demande
+
+si =( capacité de production si i = générateur
+
+−demande
+
+si i = ville
+
+Graphes et r´eseaux – p. 43/44
+
+Résumé
+
+• Le problème de transbordement généralise beaucoup de
+
+problèmes dans les réseaux.
+
+• Il s’agit d’un problème d’optimisation linéaire.
+• L’algorithme du simplexe peut être utilisé.
+• Dans de nombreux cas, il est possible d’exploiter mieux la
+
+structure du problème aﬁn d’obtenir un algorithme plus efﬁcace.
+
+• Exemple : problème du plus court chemin.
+
+Graphes et r´eseaux – p. 44/44
+
+

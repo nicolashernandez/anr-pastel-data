@@ -1,0 +1,1439 @@
+http://www.erickstattner.com/enseignement/M2_IA_21012-13/M2_IA_ReseauxSociaux_1213.pdf
+
+Fondements théoriques
+Structure des réseaux
+Propagation dans les réseaux
+Conclusion
+
+Introduction à l’Analyse des Réseaux Sociaux
+
+Erick Stattner
+
+Laboratoire LAMIA
+
+Université des Antilles et de la Guyane, France
+
+erick.stattner@univ-ag.fr
+
+Guadeloupe, Novembre 2012
+
+Erick Stattner
+
+Introduction à l’Analyse des Réseaux Sociaux
+
+1 / 50
+
+Fondements théoriques
+Structure des réseaux
+Propagation dans les réseaux
+Conclusion
+
+Émergence des réseaux sociaux
+
+Qu’est ce qu’un réseau social?
+
+Erick Stattner
+
+Introduction à l’Analyse des Réseaux Sociaux
+
+2 / 50
+
+Fondements théoriques
+Structure des réseaux
+Propagation dans les réseaux
+Conclusion
+
+Émergence des réseaux sociaux
+
+Intérêt croissant pour les réseaux sociaux: Pourquoi?
+
+Analogie avec l’évolution du WEB
+
+Site WEB → Blog → Site communautaire
+
+Aujourd’hui, implication des liens sociaux dans de nombreux
+phénomènes:
+
+(cid:73) Problème de diffusion (rumeur, maladie, etc.)
+(cid:73) Phénomène d’achat (lien social > attributs démographiques)
+(cid:73) Phénomène d’inﬂuence (lien social peut déterminer un
+
+comportement)
+
+Les réseaux devenus un "truisme" [Barabasi2009]
+Le réseau internet, réseaux d’amitié, réseaux d’appels
+téléphoniques, réseaux de collaboration, etc.
+
+Erick Stattner
+
+Introduction à l’Analyse des Réseaux Sociaux
+
+3 / 50
+
+Fondements théoriques
+Structure des réseaux
+Propagation dans les réseaux
+Conclusion
+
+Émergence des réseaux sociaux
+
+Du web des contenus au web des utilisateurs ?
+
+(a)
+
+(b)
+
+Erick Stattner
+
+Introduction à l’Analyse des Réseaux Sociaux
+
+4 / 50
+
+Fondements théoriques
+Structure des réseaux
+Propagation dans les réseaux
+Conclusion
+
+Émergence des réseaux sociaux
+
+Vers une escalade de la collecte de données sociales
+
+Les données sociales sont collectées partout:
+(cid:73) Site communautaire (facebook, google+, etc.)
+(cid:73) Site de e-commerce (amazon, fnac, etc.)
+(cid:73) Vie de tous les jours (proximité géo., communautés, etc.)
+
+Pour aller plus loin dans la compréhension des phénomènes
+sociaux
+
+Besoin de données adaptées à l’extraction des liens sociaux
+pertinents
+Besoin de méthodes efﬁcientes pour modéliser et analyser ces
+réseaux
+Besoin de modèles efﬁcaces
+
+Erick Stattner
+
+Introduction à l’Analyse des Réseaux Sociaux
+
+5 / 50
+
+Fondements théoriques
+Structure des réseaux
+Propagation dans les réseaux
+Conclusion
+
+Origines
+Science des réseaux
+Déﬁnitions et notations
+Méthodes d’analyse
+
+Outline
+
+1 Fondements théoriques
+
+Origines
+Science des réseaux
+Déﬁnitions et notations
+Méthodes d’analyse
+
+2 Structure des réseaux
+
+3 Propagation dans les réseaux
+
+4 Conclusion
+
+Erick Stattner
+
+Introduction à l’Analyse des Réseaux Sociaux
+
+6 / 50
+
+Fondements théoriques
+Structure des réseaux
+Propagation dans les réseaux
+Conclusion
+
+Origines
+Science des réseaux
+Déﬁnitions et notations
+Méthodes d’analyse
+
+Fondements théoriques
+Origines
+
+Origines:
+
+Problème des 7 ponts de Königsberg
+"Peut-on trouver, à partir d’un point donné, une promenade
+permettant de traverser chaque pont une et une seule fois et
+permettant de revenir à ce point?"
+
+Erick Stattner
+
+Introduction à l’Analyse des Réseaux Sociaux
+
+7 / 50
+
+Fondements théoriques
+Structure des réseaux
+Propagation dans les réseaux
+Conclusion
+
+Origines
+Science des réseaux
+Déﬁnitions et notations
+Méthodes d’analyse
+
+Fondements théoriques
+Origines
+
+Origines:
+
+Solution par la représentation sous forme de graphe
+Proposée par Euleur [Euler1741]
+
+(c)
+
+(d)
+
+Euler montre qu’un tel chemin n’existe que si les sommets ont un
+nombre pair de liaisons
+Pose les bases de la théorie des graphes actuelle
+
+Erick Stattner
+
+Introduction à l’Analyse des Réseaux Sociaux
+
+8 / 50
+
+ADCBPoint terrestrePontRivièreACBDFondements théoriques
+Structure des réseaux
+Propagation dans les réseaux
+Conclusion
+
+Origines
+Science des réseaux
+Déﬁnitions et notations
+Méthodes d’analyse
+
+Fondements théoriques
+Origines
+
+Origines:
+
+Application de la théorie des graphes:
+
+(cid:73) L’attribution de ressources communes
+(cid:73) Flux dans les réseaux (liquide, transaction, etc.)
+(cid:73) Problème de maximisation/minimisation
+
+Erick Stattner
+
+Introduction à l’Analyse des Réseaux Sociaux
+
+9 / 50
+
+Fondements théoriques
+Structure des réseaux
+Propagation dans les réseaux
+Conclusion
+
+Origines
+Science des réseaux
+Déﬁnitions et notations
+Méthodes d’analyse
+
+Fondements théoriques
+Science des réseaux
+
+Les réseaux aujourd’hui:
+
+Modélisation par un graphe
+
+(cid:73) Un noeud représente une entité sociale
+
+(Homme, animaux, machine, cellule, etc.)
+(cid:73) Un lien représente une interaction sociale
+
+(amitié, intérêt commun, relation intimé, professionnelles, etc.)
+
+Ex. Réseau Internet, réseau de collaboration, réseau de relation
+intime, etc.
+
+Nouveau paradigme:
+
+Nouveau domaine d’étude la "Science des réseaux"
+L’étude se concentre sur les relations entre acteurs davantage
+que sur leurs attributs.
+Plus d’hypothèse de données IID (Indépendantes et
+Identiquement Distribuées)
+
+Erick Stattner
+
+Introduction à l’Analyse des Réseaux Sociaux
+
+10 / 50
+
+Fondements théoriques
+Structure des réseaux
+Propagation dans les réseaux
+Conclusion
+
+Origines
+Science des réseaux
+Déﬁnitions et notations
+Méthodes d’analyse
+
+Fondements théoriques
+Science des réseaux
+
+Réseau et processus supportés:
+
+Phénomène d’achat =⇒ Réseau d’inﬂuence
+Transmission d’une maladie infectieuse =⇒ Réseau de contacts
+de proximité
+Diffusion d’une rumeur =⇒ Réseau d’amitiés
+Communautés d’individus =⇒ Réseau d’intérêts communs
+
+Erick Stattner
+
+Introduction à l’Analyse des Réseaux Sociaux
+
+11 / 50
+
+Fondements théoriques
+Structure des réseaux
+Propagation dans les réseaux
+Conclusion
+
+Origines
+Science des réseaux
+Déﬁnitions et notations
+Méthodes d’analyse
+
+Fondements théoriques
+Déﬁnitions et notations
+
+Déﬁnitions et notations
+
+Réseaux traditionnellement représentés par un graphe
+Un réseau social est un graphe G = (V ,E)
+(cid:73) V : Ensemble des noeuds
+(cid:73) E: Ensemble des liens tel que E ⊆ V × V
+
+|V| Nombre de noeuds dans le réseau
+|E| Nombre de liens
+Si e = (vi ,vj ) ∈ E, on dit que les noeuds vi et vj sont liés,
+connectés, en relation, etc.
+
+Erick Stattner
+
+Introduction à l’Analyse des Réseaux Sociaux
+
+12 / 50
+
+Fondements théoriques
+Structure des réseaux
+Propagation dans les réseaux
+Conclusion
+
+Origines
+Science des réseaux
+Déﬁnitions et notations
+Méthodes d’analyse
+
+Fondements théoriques
+Déﬁnitions et notations
+
+Différents types de réseaux:
+
+Unipartis/Multipartis
+
+(e)
+
+(f)
+
+Ex. Réseau d’amitié / Réseau d’achat client-produit
+
+Erick Stattner
+
+Introduction à l’Analyse des Réseaux Sociaux
+
+13 / 50
+
+1. 2. 3. 5. 4. 1. x. 2. y. 3. Fondements théoriques
+Structure des réseaux
+Propagation dans les réseaux
+Conclusion
+
+Origines
+Science des réseaux
+Déﬁnitions et notations
+Méthodes d’analyse
+
+Fondements théoriques
+Déﬁnitions et notations
+
+Différents types de réseaux:
+
+Orientés/Non-Orientés:
+
+(g)
+
+(h)
+
+Ex. Réseau de collaboration / Réseau d’appels téléphoniques
+
+Erick Stattner
+
+Introduction à l’Analyse des Réseaux Sociaux
+
+14 / 50
+
+1. 2. 3. 5. 4. 1. 2. 3. 5. 4. Fondements théoriques
+Structure des réseaux
+Propagation dans les réseaux
+Conclusion
+
+Origines
+Science des réseaux
+Déﬁnitions et notations
+Méthodes d’analyse
+
+Fondements théoriques
+Déﬁnitions et notations
+
+Différents types de réseaux:
+
+Avec contenu:
+
+Ex. Réseau d’intérêts communs
+
+Erick Stattner
+
+Introduction à l’Analyse des Réseaux Sociaux
+
+15 / 50
+
+Fondements théoriques
+Structure des réseaux
+Propagation dans les réseaux
+Conclusion
+
+Origines
+Science des réseaux
+Déﬁnitions et notations
+Méthodes d’analyse
+
+Fondements théoriques
+Déﬁnitions et notations
+
+Différents types de réseaux:
+
+Avec structure relationnelle complexe:
+
+Ex. Réseau de relations professionnelles
+
+Erick Stattner
+
+Introduction à l’Analyse des Réseaux Sociaux
+
+16 / 50
+
+Fondements théoriques
+Structure des réseaux
+Propagation dans les réseaux
+Conclusion
+
+Origines
+Science des réseaux
+Déﬁnitions et notations
+Méthodes d’analyse
+
+Fondements théoriques
+Déﬁnitions et notations
+
+Différents types de réseaux:
+
+Avec dynamique importante
+
+Réseau de contacts de proximité géographique
+
+Erick Stattner
+
+Introduction à l’Analyse des Réseaux Sociaux
+
+17 / 50
+
+Fondements théoriques
+Structure des réseaux
+Propagation dans les réseaux
+Conclusion
+
+Origines
+Science des réseaux
+Déﬁnitions et notations
+Méthodes d’analyse
+
+Fondements théoriques
+Déﬁnitions et notations
+
+Évidemment, toutes ces propriétés sont non exclusives !
+
+Implications pour l’étude des réseaux
+Besoin de méthodes:
+
+ﬂexibles
+"scalables"
+qui tiennent compte de toutes les informations: structure et
+contenu
+
+Erick Stattner
+
+Introduction à l’Analyse des Réseaux Sociaux
+
+18 / 50
+
+Fondements théoriques
+Structure des réseaux
+Propagation dans les réseaux
+Conclusion
+
+Origines
+Science des réseaux
+Déﬁnitions et notations
+Méthodes d’analyse
+
+Fondements théoriques
+Méthodes d’analyse
+
+Deux grandes familles de méthodes d’analyse:
+
+Méthodes traditionnelles:
+
+(cid:73) Mesures Locales:
+
+Caractérisent localement un noeud ou un groupe de noeuds
+
+(cid:73) Mesures globales:
+
+Apportent une information sur l’ensemble de la structure
+
+Fouille de réseaux sociaux
+
+(cid:73) Applique les concepts du data mining aux réseaux
+(cid:73) Classiﬁcation, clustering, recherche de motifs fréquents, etc.
+
+Erick Stattner
+
+Introduction à l’Analyse des Réseaux Sociaux
+
+19 / 50
+
+Fondements théoriques
+Structure des réseaux
+Propagation dans les réseaux
+Conclusion
+
+Origines
+Science des réseaux
+Déﬁnitions et notations
+Méthodes d’analyse
+
+Fondements théoriques
+Méthodes d’analyse
+
+Analyse traditionnelle: Mesures locales
+
+Degré kvi d’un noeud vi:
+Nombre de liaisons du noeud vi, i.e.
+
+kvi = |{e ∈ E;e = (vi ,vj ) ∈ E}|
+
+Degré de centralité:
+Degré de vi, normalisé par le nombre de liaisons possibles, i.e.
+
+Wvi =
+
+kvi
+
+|V|− 1
+
+Erick Stattner
+
+Introduction à l’Analyse des Réseaux Sociaux
+
+20 / 50
+
+Fondements théoriques
+Structure des réseaux
+Propagation dans les réseaux
+Conclusion
+
+Origines
+Science des réseaux
+Déﬁnitions et notations
+Méthodes d’analyse
+
+Fondements théoriques
+Méthodes d’analyse
+
+Analyse traditionnelle: Mesures locales
+
+Noeud avec beaucoup de liens considéré comme important
+Un acteur central
+
+Exemples d’applications
+
+(cid:73) Réseaux de communication: identiﬁer les noeuds critiques
+(cid:73) Moteur de recherche: ordonnancer les pages par popularité
+
+Ex. Algorithme PageRank proposé par Google.
+
+Erick Stattner
+
+Introduction à l’Analyse des Réseaux Sociaux
+
+21 / 50
+
+Fondements théoriques
+Structure des réseaux
+Propagation dans les réseaux
+Conclusion
+
+Origines
+Science des réseaux
+Déﬁnitions et notations
+Méthodes d’analyse
+
+Fondements théoriques
+Méthodes d’analyse
+
+Analyse traditionnelle: Mesures locales
+
+De nombreuses autres mesures locales:
+
+(cid:73) Coefﬁcient de clustering
+(cid:73) Distance moyenne
+(cid:73) Degré de centralité
+(cid:73) Centralité d’intermédiarité
+(cid:73) Centralité de proximité
+(cid:73) Prestige
+(cid:73) etc.
+
+Erick Stattner
+
+Introduction à l’Analyse des Réseaux Sociaux
+
+22 / 50
+
+Fondements théoriques
+Structure des réseaux
+Propagation dans les réseaux
+Conclusion
+
+Origines
+Science des réseaux
+Déﬁnitions et notations
+Méthodes d’analyse
+
+Fondements théoriques
+Méthodes d’analyse
+
+Analyse traditionnelle: Mesures globales
+
+Densité p d’un réseau G
+Nombre de liens, normalisé par le nombre de liens total:
+
+2×|E|
+
+p =
+
+|V|× (|V|− 1)
+
+Degré moyen K
+Moyenne des degrés des noeuds:
+1
+|V| ∑kvi
+
+K =
+
+Distribution des degrés P(k)
+Probabilité qu’un noeud, choisi aléatoirement, ait un degré de k.
+
+P(k) =
+
+|vi ∈ V ;kvi = k|
+
+|V|
+
+Erick Stattner
+
+Introduction à l’Analyse des Réseaux Sociaux
+
+23 / 50
+
+Fondements théoriques
+Structure des réseaux
+Propagation dans les réseaux
+Conclusion
+
+Origines
+Science des réseaux
+Déﬁnitions et notations
+Méthodes d’analyse
+
+Fondements théoriques
+Méthodes d’analyse
+
+Analyse traditionnelle: Mesures globales
+
+Exemple d’applications
+
+(cid:73) Caractériser les réseaux
+(cid:73) Marketing virale
+(cid:73) Comprendre l’évolution d’un phénomène
+
+Études célèbres
+
+Etude menée par Elizabeth Both [Bott1957]
+Expérience de Milgram [Milgram1967]
+
+Erick Stattner
+
+Introduction à l’Analyse des Réseaux Sociaux
+
+24 / 50
+
+Fondements théoriques
+Structure des réseaux
+Propagation dans les réseaux
+Conclusion
+
+Origines
+Science des réseaux
+Déﬁnitions et notations
+Méthodes d’analyse
+
+Fondements théoriques
+Méthodes d’analyse
+
+Analyse traditionnelle: Mesures globales
+
+Autres mesures globales
+
+(cid:73) Composantes connexes
+(cid:73) Distance moyenne
+(cid:73) Diamètre
+(cid:73) Coefﬁcient de clustering moyen
+(cid:73) etc.
+
+Erick Stattner
+
+Introduction à l’Analyse des Réseaux Sociaux
+
+25 / 50
+
+Fondements théoriques
+Structure des réseaux
+Propagation dans les réseaux
+Conclusion
+
+Origines
+Science des réseaux
+Déﬁnitions et notations
+Méthodes d’analyse
+
+Fondements théoriques
+Méthodes d’analyse
+
+Fouille de réseaux sociaux
+
+Social network mining/Link mining
+"l’ensemble des techniques de data mining qui considèrent
+explicitement les liens lors de la construction de modèles
+descriptifs ou prédictifs à partir de données relationnelles"
+[Getoor2005]
+S’intéresse aux principales taches d’extraction de connaissances
+
+(cid:73) Classiﬁcation
+(cid:73) Clustering
+(cid:73) Recherche de motifs fréquents
+
+Erick Stattner
+
+Introduction à l’Analyse des Réseaux Sociaux
+
+26 / 50
+
+Fondements théoriques
+Structure des réseaux
+Propagation dans les réseaux
+Conclusion
+
+Origines
+Science des réseaux
+Déﬁnitions et notations
+Méthodes d’analyse
+
+Fondements théoriques
+Méthodes d’analyse
+
+Fouille de réseaux sociaux:
+
+Classiﬁcation
+
+(cid:73) Affecter à chaque noeud du réseau une classe
+
+Erick Stattner
+
+Introduction à l’Analyse des Réseaux Sociaux
+
+27 / 50
+
+Fondements théoriques
+Structure des réseaux
+Propagation dans les réseaux
+Conclusion
+
+Origines
+Science des réseaux
+Déﬁnitions et notations
+Méthodes d’analyse
+
+Fondements théoriques
+Méthodes d’analyse
+
+Fouille de réseaux sociaux:
+
+Clustering
+
+(cid:73) Identiﬁer les communautés dans un réseau
+
+Erick Stattner
+
+Introduction à l’Analyse des Réseaux Sociaux
+
+28 / 50
+
+Fondements théoriques
+Structure des réseaux
+Propagation dans les réseaux
+Conclusion
+
+Origines
+Science des réseaux
+Déﬁnitions et notations
+Méthodes d’analyse
+
+Fondements théoriques
+Méthodes d’analyse
+
+Fouille de réseaux sociaux:
+
+Recherche de motifs fréquents
+
+(cid:73) Rechercher les sous-graphes fréquents dans les réseaux
+
+Erick Stattner
+
+Introduction à l’Analyse des Réseaux Sociaux
+
+29 / 50
+
+Fondements théoriques
+Structure des réseaux
+Propagation dans les réseaux
+Conclusion
+
+Réseaux réguliers
+Réseaux aléatoires
+Réseaux petit-monde
+Réseaux scale-free
+
+Outline
+
+1 Fondements théoriques
+
+2 Structure des réseaux
+Réseaux réguliers
+Réseaux aléatoires
+Réseaux petit-monde
+Réseaux scale-free
+
+3 Propagation dans les réseaux
+
+4 Conclusion
+
+Erick Stattner
+
+Introduction à l’Analyse des Réseaux Sociaux
+
+30 / 50
+
+Fondements théoriques
+Structure des réseaux
+Propagation dans les réseaux
+Conclusion
+
+Réseaux réguliers
+Réseaux aléatoires
+Réseaux petit-monde
+Réseaux scale-free
+
+Structure des réseaux
+Présentation
+
+4 grands types de structure
+
+Réseau régulier
+Réseau aléatoire
+Réseau petit monde
+Réseau scale-free
+
+(i)
+
+(j)
+
+(k)
+
+(l)
+
+Erick Stattner
+
+Introduction à l’Analyse des Réseaux Sociaux
+
+31 / 50
+
+Fondements théoriques
+Structure des réseaux
+Propagation dans les réseaux
+Conclusion
+
+Réseaux réguliers
+Réseaux aléatoires
+Réseaux petit-monde
+Réseaux scale-free
+
+Structure des réseaux
+Réseaux réguliers
+
+Réseau régulier:
+
+Noeud: nombre identique de liens
+Densité faible
+Coefﬁcient de clustering élevé
+Distribution des degrés marquée par un pic
+
+(m)
+
+(n)
+
+Modèle de génération: basé sur la disposition autour d’un cercle
+
+Erick Stattner
+
+Introduction à l’Analyse des Réseaux Sociaux
+
+32 / 50
+
+Fondements théoriques
+Structure des réseaux
+Propagation dans les réseaux
+Conclusion
+
+Réseaux réguliers
+Réseaux aléatoires
+Réseaux petit-monde
+Réseaux scale-free
+
+Structure des réseaux
+Réseaux aléatoires
+
+Réseau aléatoire:
+
+Existence d’un lien: Résultat d’un processus aléatoire
+Distance moyenne faible
+Distribution des degrés suit une loi de poisson
+
+(o)
+
+(p)
+
+Modèle de génération: Modèle Erdos-Renyi
+
+Erick Stattner
+
+Introduction à l’Analyse des Réseaux Sociaux
+
+33 / 50
+
+Fondements théoriques
+Structure des réseaux
+Propagation dans les réseaux
+Conclusion
+
+Réseaux réguliers
+Réseaux aléatoires
+Réseaux petit-monde
+Réseaux scale-free
+
+Structure des réseaux
+Réseaux petit-monde
+
+Réseau petit-monde:
+
+Notion populaire: 7 degrés de séparation [Milgram1967]
+Distance moyenne très courte
+Coefﬁcient de clustering élevé
+
+(q)
+
+(r)
+
+Modèle de génération: Modèle Watts et Strogatz
+
+Erick Stattner
+
+Introduction à l’Analyse des Réseaux Sociaux
+
+34 / 50
+
+Fondements théoriques
+Structure des réseaux
+Propagation dans les réseaux
+Conclusion
+
+Réseaux réguliers
+Réseaux aléatoires
+Réseaux petit-monde
+Réseaux scale-free
+
+Structure des réseaux
+Réseaux scale-free
+
+Réseaux scale-free:
+
+Découvert par Barabasi en 1999
+Distribution des degrés suit une loi de puissance
+
+(s)
+
+(t)
+
+Modèle de génération: Modèle Barabi-Albert
+kj
+∑km
+
+(cid:73) Basé sur l’attachement préférentiel, pj =
+
+Erick Stattner
+
+Introduction à l’Analyse des Réseaux Sociaux
+
+35 / 50
+
+Fondements théoriques
+Structure des réseaux
+Propagation dans les réseaux
+Conclusion
+
+Introduction
+Percolation
+Diffusion
+
+Outline
+
+1 Fondements théoriques
+
+2 Structure des réseaux
+
+3 Propagation dans les réseaux
+
+Introduction
+Percolation
+Diffusion
+
+4 Conclusion
+
+Erick Stattner
+
+Introduction à l’Analyse des Réseaux Sociaux
+
+36 / 50
+
+Fondements théoriques
+Structure des réseaux
+Propagation dans les réseaux
+Conclusion
+
+Introduction
+Percolation
+Diffusion
+
+Propagation dans les réseaux
+Introduction
+
+Introduction:
+
+Propagation: phénomènes ayant comme support un réseau
+Ex. Maladie, la rumeur, information, mode, etc.
+Les modèles basés sur les réseaux sont de plus en plus utilisés
+pour étudier ces phénomènes
+Approches réseau:
+
+(cid:73) Ne s’intéresse pas aux aspects biologiques
+(cid:73) Comprendre les mécanismes de transmission
+
+Objectif:
+
+"Study of the dynamics of how transmission occur in a population,
+resulting in an epidemic". [De,2008]
+
+Erick Stattner
+
+Introduction à l’Analyse des Réseaux Sociaux
+
+37 / 50
+
+Fondements théoriques
+Structure des réseaux
+Propagation dans les réseaux
+Conclusion
+
+Introduction
+Percolation
+Diffusion
+
+Propagation dans les réseaux
+Introduction
+
+Deux types de problèmes:
+
+Percolation:
+
+(cid:73) La structure permet-elle l’émergence du phénomène?
+
+Diffusion:
+
+(cid:73) Comment évolue le phénomène?
+
+Erick Stattner
+
+Introduction à l’Analyse des Réseaux Sociaux
+
+38 / 50
+
+Fondements théoriques
+Structure des réseaux
+Propagation dans les réseaux
+Conclusion
+
+Introduction
+Percolation
+Diffusion
+
+Propagation dans les réseaux
+Percolation
+
+Origine:
+
+Introduite en 1957 par Broadbent
+Comprendre comment les masques à gaz devenaient inefﬁcaces
+Masque à gaz: composé de particules de carbone poreuses qui
+crée un réseau
+
+(cid:73) Si les pores sont trop petits, le gaz ne traverse pas
+(cid:73) Si les pores sont trop larges, le gaz traverse
+
+Intérêt:
+
+Permet de mettre en évidence des seuils critiques à partir
+desquels une transition de phase est observée
+i.e. Seuil à partir duquel la structure change brutalement d’état
+
+Erick Stattner
+
+Introduction à l’Analyse des Réseaux Sociaux
+
+39 / 50
+
+Fondements théoriques
+Structure des réseaux
+Propagation dans les réseaux
+Conclusion
+
+Introduction
+Percolation
+Diffusion
+
+Propagation dans les réseaux
+Percolation
+
+Exemples de problème de percolation:
+
+La densité du café
+Des iles aux continents
+
+Erick Stattner
+
+Introduction à l’Analyse des Réseaux Sociaux
+
+40 / 50
+
+Fondements théoriques
+Structure des réseaux
+Propagation dans les réseaux
+Conclusion
+
+Introduction
+Percolation
+Diffusion
+
+Propagation dans les réseaux
+Percolation
+
+Percolation dans les réseaux de communication:
+
+Seuil de paramètres critiques qui garantissent la connexité de la
+structure
+Ou la présence d’une composante principale
+
+(u)
+
+(v)
+
+(w)
+
+Erick Stattner
+
+Introduction à l’Analyse des Réseaux Sociaux
+
+41 / 50
+
+Fondements théoriques
+Structure des réseaux
+Propagation dans les réseaux
+Conclusion
+
+Introduction
+Percolation
+Diffusion
+
+Propagation dans les réseaux
+Percolation
+
+Attaque sur le réseaux de communication:
+
+Quel pourcentage de noeuds faut-il attaquer pour déconnecter un
+réseau scale-free? [Cohen2000]
+(cid:73) Attaque aléatoire → très difﬁcile
+(cid:73) Attaque ciblée → environ 3%
+
+Erick Stattner
+
+Introduction à l’Analyse des Réseaux Sociaux
+
+42 / 50
+
+Fondements théoriques
+Structure des réseaux
+Propagation dans les réseaux
+Conclusion
+
+Introduction
+Percolation
+Diffusion
+
+Propagation dans les réseaux
+Diffusion
+
+Compartment Models:
+
+First mathematical models
+Assume:
+
+(cid:73) Population can be divided into a set of compartments
+
+(Susceptible (S), Infected (I), Recover (R), ...)
+
+(cid:73) Uniform mixing of individuals into compartments
+
+Standards models:
+
+Erick Stattner
+
+Introduction à l’Analyse des Réseaux Sociaux
+
+43 / 50
+
+SISI ModelSIRSIR ModelSISIS ModelSIRSIRS ModelλααβαβαβFondements théoriques
+Structure des réseaux
+Propagation dans les réseaux
+Conclusion
+
+Introduction
+Percolation
+Diffusion
+
+Propagation dans les réseaux
+Diffusion
+
+Compartment models:
+
+Simple and Deterministic
+Moreover, assumption of uniform mixing is unrealistic
+Does not reﬂect :
+
+(cid:73) Real mechanisms of dissemination
+(cid:73) Complexity of human interaction
+
+Erick Stattner
+
+Introduction à l’Analyse des Réseaux Sociaux
+
+44 / 50
+
+Fondements théoriques
+Structure des réseaux
+Propagation dans les réseaux
+Conclusion
+
+Introduction
+Percolation
+Diffusion
+
+Propagation dans les réseaux
+Diffusion
+
+Network Models:
+
+First use in 1985 by Klovdahl on AIDS
+Represent entities and their relations
+Based on the idea that structure and nature of network are main
+factors of outbreak and dissemination (e.g. Sexual network)
+Assume:
+
+(cid:73) Each individual has a state (S, I, ...)
+(cid:73) Disease spreads through links the individuals maintain
+(cid:73) Individuals are infected with a certain probability
+
+Erick Stattner
+
+Introduction à l’Analyse des Réseaux Sociaux
+
+45 / 50
+
+Fondements théoriques
+Structure des réseaux
+Propagation dans les réseaux
+Conclusion
+
+Introduction
+Percolation
+Diffusion
+
+Propagation dans les réseaux
+Diffusion
+
+Network Models : Example of an Infection scenario:
+
+Erick Stattner
+
+Introduction à l’Analyse des Réseaux Sociaux
+
+46 / 50
+
+Fondements théoriques
+Structure des réseaux
+Propagation dans les réseaux
+Conclusion
+
+Introduction
+Percolation
+Diffusion
+
+Propagation dans les réseaux
+Diffusion
+
+Network Models:
+
+More realistic: no uniform mixing
+Suitable to represent dynamics of real human contacts
+Allow modeling relationships of different nature
+(intimate, professional, geographical, ...)
+
+Erick Stattner
+
+Introduction à l’Analyse des Réseaux Sociaux
+
+47 / 50
+
+Fondements théoriques
+Structure des réseaux
+Propagation dans les réseaux
+Conclusion
+
+Introduction
+Percolation
+Diffusion
+
+Propagation dans les réseaux
+Diffusion
+
+Erick Stattner
+
+Introduction à l’Analyse des Réseaux Sociaux
+
+48 / 50
+
+Fondements théoriques
+Structure des réseaux
+Propagation dans les réseaux
+Conclusion
+
+Outline
+
+1 Fondements théoriques
+
+2 Structure des réseaux
+
+3 Propagation dans les réseaux
+
+4 Conclusion
+
+Erick Stattner
+
+Introduction à l’Analyse des Réseaux Sociaux
+
+49 / 50
+
+Fondements théoriques
+Structure des réseaux
+Propagation dans les réseaux
+Conclusion
+
+Conclusion
+
+Conclusion:
+
+Les réseaux: nouvelle approche pour étudier de nombreux
+phénomènes
+Phénomènes de diffusion
+Fouille de données: classiﬁcation, clustering, etc.
+
+Applications:
+
+Identiﬁcation des acteurs centraux d’un système
+Mise en place de stratégie de marketing virale
+Solution visant à minimiser/maximiser la diffusion
+Extraire de la connaissance des réseaux
+
+Erick Stattner
+
+Introduction à l’Analyse des Réseaux Sociaux
+
+50 / 50
+
+

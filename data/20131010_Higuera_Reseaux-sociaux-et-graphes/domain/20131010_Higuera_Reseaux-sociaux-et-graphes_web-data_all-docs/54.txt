@@ -1,0 +1,295 @@
+http://gerin.perso.math.cnrs.fr/Enseignements/TP_Graphes.pdf
+
+MAP 572 - Mise en ÷uvre de méthodes numériques.
+
+François Alouges, Lucas Gerin
+
+Graphes : modèles et algorithmes
+
+Crédit : Igor Kortchemski (CNRS et École Polytechnique).
+
+Les graphes interviennent de façon essentielle dans de nombreux problèmes de mathématiques
+appliquées. Ils interviennent en particulier lorsque l'on souhaite modéliser le graphe des pages
+internet (les connexions étant les liens entre les pages), les maillages ou des études statistiques.
+Leur étude soulève de nombreuses questions et nous allons en aborder certaines dans ce travail.
+Les objectifs sont de
+
+ dénir et simuler des modèles de graphes,
+ les dessiner/représenter de façon pertinente,
+ faire de l'analyse de données et de l'algorithmique sur ces graphes.
+À la n de la dernière séance, vous devrez rendre un rapport par bînome de 15-20 pages
+au format pdf. Vous pouvez y inclure tout ce qui vous semble pertinent sur la résolution des
+problèmes posés : les sorties graphiques et leurs interprétations, le code matlab, des remarques
+sur la modélisation, des résultats théoriques et expérimentaux, etc. Les questions ci-dessous sont
+des suggestions, et vous n'êtes pas obligé de toutes les traiter. Toute prise d'initiative est la
+bienvenue !
+
+Pour enrichir le rapport vous êtes aussi tout à fait autorisé à chercher sur le web des références
+
+supplémentaires sur les problèmes et algorithmes évoqués ici (et à citer vos sources !).
+
+Les diérentes parties du projet proposées ci-dessous sont très largement indépendantes, selon
+
+la hiérarchie suivante :
+
+Pour vous permettre de tout traiter indépendamment nous avons déposé sur le moodle des chiers
+de données ou des scripts matlab contenant diérents types de graphe. Pour importer une matrice
+sous forme .txt utiliser la commande A=dlmread('NomDuFichier.txt').
+
+1 Simulation de graphes aléatoires : graphe par attachement pré-
+
+férentiel
+
+Nous allons commencer par le graphe à attachement préférentiel 1, introduit pour modéliser de
+façon dynamique la création de grands réseaux d'interactions (typiquement, le graphe d'internet :
+les sommets sont des pages web et une arête entre 2 sommets correspond à un lien).
+
+Le modèle
+
+Soit n ≥ 1 un entier, nous allons construire de façon dynamique un graphe aléatoire2 Gn à n
+
+sommets {1, . . . , n} et n arêtes.
+
+1. On part du graphe G1 à un sommet {1}, dont l'unique arête est une boucle 1 → 1.
+2. Connaissant Gk, on rajoute un sommet k + 1 et une nouvelle arête k + 1 → vk+1, où
+
+vk+1 ∈ {1, 2, . . . , k} est aléatoire et tiré de la façon suivante :
+
+P(vk+1 = i) = degré(i)
+j degré(j)
+
+= degré(i)
+2k − 1 ,
+
+((cid:63))
+
+(cid:80)
+
+où degré(i) est le nombre d'arêtes distinctes qui touchent le sommet i.
+
+Voici un exemple avec k = 7 (dans ce cas-là v8 = 2) :
+
+Question 1.1. Écrire un script qui simule le graphe Gn. Pour l'instant on représente un graphe
+par sa matrice d'adjacence n × n à valeurs dans {0, 1} dénie par Adjacence(i,j)= 1 si i et j
+sont voisins dans le graphe.
+
+1Le modèle a été introduit de façon implicite par A.-L. Barabási, R.Albert, "Emergence of scaling in random
+
+networks", Science (1999).
+
+2Ce sera en réalité un arbre, et pour l'instant les arêtes sont non orientées.
+
+Section1Section2(mod`ele)(visualisation)Section4(PageRank)Section3(clustering)1273456avecproba.3/1312734568Question 1.2. L'une des caractéristiques de ce modèle est que les degrés des sommets suivent
+approximativement une loi de puissance (power-law) : si s est un sommet tiré uniformément dans
+Gn,
+
+P( degré de s = k) k grand≈ ck−α,
+
+où c, α sont des constantes positives. Pouvez-vous illustrer ce phénomène (et évaluer le coecient
+α) sur une simulation de Gn ?
+[Théorique] Dans l'article original, les auteurs prétendent que leur modèle
+Question 1.3.
+reproduit "a rich-gets-richer phenomenon that can be easily detected in real networks". Pour
+illustrer le fait que Gn est extrêmement non-homogène, estimer l'espérance du degré du sommet
+1 dans Gn, et comparer avec le degré moyen d'un sommet.
+Indication : On pourra calculer E[X(cid:96)+1|X(cid:96)], où X(cid:96) est le degré du sommet 1 lorsque le (cid:96)-ème
+sommet apparaît dans le graphe.
+
+2 Visualisation d'un graphe : un problème d'optimisation
+
+Pour n grand, on souhaite représenter un graphe Gn plus visuellement qu'avec sa matrice
+d'adjacence. Ce genre de méthode peut aussi servir à visualiser une matrice creuse qui peut alors
+être vue comme la matrice d'adjacence d'un graphe. De tels dessins sont visibles sur
+http ://www.cise.ufl.edu/research/sparse/matrices/list_by_nnz.html.
+
+Question 2.1. Tracer le graphe de votre choix de la façon suivante :
+
+ Tirer au sort n points uniformes indépendants (X1, Y1), . . . , (Xn, Yn) dans le carré [0, 1]2.
+ Si i, j sont voisins dans Gn, tracer un segment entre (Xi, Yi) et (Xj, Yj).
+Pour un graphe à attachement préférentiel on obtient quelque chose d'un peu fouillis :
+
+On cherche à représenter ce graphe de façon plus élégante, de façon à représenter visuellement la
+topologie du graphe. Soit Distance la matrice n×n dans laquelle le coecient (i, j) est la longueur
+du plus court chemin entre i et j dans le graphe. L'idée est que les coordonnées Mi = (Xi, Yi)
+et Mj = (Xj, Yj) des points i et j doivent être d'autant plus éloignées que Distance(i, j) est
+grand :
+
+√
+
+2 correspond à la plus grande distance euclidienne dans le carré [0, 1]2, et est donc
+(le terme
+à comparer avec maxi,j Distance(i, j)). Pour une conguration M1, . . . Mn donnée, on introduit
+donc l'énergie
+
+1√
+2 (cid:107) Mi − Mj (cid:107)≈
+(cid:16) 1√
+
+E =(cid:88)
+
+2
+
+i,j
+
+Distance(i, j)
+
+maxi,j Distance(i, j)
+
+(cid:17)2
+
+,
+
+(cid:107) Mi − Mj (cid:107) −D(cid:63)
+
+i,j
+
+(D(cid:63)
+i,j
+
+)2
+
+où
+
+D(cid:63)
+i,j
+
+=
+
+Distance(i, j)
+
+maxi,j Distance(i, j) .
+
+Question 2.2. Tracer le graphe Gn de façon à minimiser le plus possible l'énergie E. On pourra
+utiliser des méthodes de type gradient. Vous pouvez aussi modier le choix de E pour obtenir
+des graphes plus harmonieux. Enn, on peut se poser la question de représenter le graphe en
+dimension 3, voire d'utiliser des couleurs.
+
+Une variante : le δ-attachement préférentiel
+
+On peut généraliser le modèle du graphe à attachement préférentiel de la façon suivante. Soit
+
+δ > −1 un paramètre xé, on remplace l'équation ((cid:63)) par
+
+P(vk+1 = i) =
+
+degré(i) + δ
+(degré(j) + δ)
+
+j
+
+= degré(i) + δ
+2k − 1 + kδ
+
+.
+
+(cid:80)
+
+Pour δ = 0, on retrouve le modèle initial.
+Question 2.3. Tracer des graphes Gn pour diérentes valeurs de δ. Comment peut-on décrire
+l'inuence de δ sur Gn ?
+
+3 Clustering et détection de communautés : utilisation de la dé-
+
+composition spectrale
+
+Dans cette partie on cherche à faire le clustering (ou segmentation) d'un graphe donné en un
+
+certain nombre k de classes, selon la proximité dans le graphe.
+
+Nous allons utiliser l'algorithme Spectral Clustering qui est détaillé dans l'article (téléchar-
+
+geable sur le moodle du cours)
+
+U.Von Luxburg. A tutorial on spectral clustering.
+
+Statistics and computing, vol.17 (2007) n.4, p.395-416.
+
+Question 3.1.
+férentes valeurs de k.
+
+Implémenter l'algorithme sur le graphe par attachement préférentiel pour dif-
+
+On va maintenant chercher à tester Spectral Clustering sur un autre modèle de graphe : le
+Stochastic Block Model (SBM). Ce graphe aléatoire est utilisé pour modéliser les communautés
+dans des réseaux sociaux. Les paramètres du modèle sont les suivants :
+
+n
+K
+
+Nombre de sommets
+Nombre de classes (ou communautés)
+E1, . . . , EK Partition de {1, 2, . . . , n} en K classes
+(qr,s)
+
+Probabilités inter-classes
+
+r,s≤K
+
+Le modèle est construit de la façon suivante : si i, j appartiennent respectivement aux classes
+Er, Es, alors on met une arête i ∼ j avec probabilité qr,s, et ce indépendamment pour chaque
+paire {i, j}.
+Question 3.2. Vous pouvez simuler quelques graphes obtenus selon le Stochastic Block Model,
+les tracer et essayer de retrouver les diérentes classes avec l'algorithme Spectral Clustering.
+Question 3.3. Télécharger sur le moodle le chier MatriceAdjacenceSBM.txt qui est une
+matrice d'adjacence 200 × 200 simulée par SBM. Tracer le graphe de la meilleure façon possible
+et essayer de déterminer le nombre de classes.
+Question 3.4. Ne pas hésiter à comparer Spectral Clustering avec le clustering obtenu en
+eectuant simplement k-means sur les graphe dessinés dans la partie précédente.
+
+4 Popularité dans un graphe : une approche par valeurs propres
+
+(PageRank)
+
+L'algorithme PageRank3, introduit en 1998 et à la base de Google, attribue à chaque sommet
+Le principe est le suivant. Soit G un graphe à n sommets, et A ∈ Mn×n({0, 1}) sa matrice
+
+d'un graphe un score censé évaluer sa popularité dans le graphe.
+d'adjacence. On note ˜A la matrice d'adjacence renormalisée :
+
+.
+
+Ai,j
+
+j
+
+Pour ε > 0, on note Pε la matrice
+
+˜Ai,j = Ai,j(cid:80)
+1 . . .
+propre 1 de la matrice Pε, renormalisé par(cid:80) Xi = 1.
+
+Pε = (1 − ε) ˜A + ε
+n
+
+. . .
+1 . . .
+
+ .
+
+1
+
+1
+
+Alors le vecteur des scores X de PageRank est le vecteur propre (à gauche) associé à la valeur
+
+Remarque : Pour que les résultats de PageRank soient plus pertinents, il est préférable d'uti-
+liser un modèle de graphe orienté. C'est très facile avec l'attachement préférentiel : on oriente
+chaque nouvelle arête dans le sens k + 1 → vk.
+Question 4.1. En évaluant les scores PageRank sur quelques graphes de petite taille, discuter
+du rôle de ε (pour donner une idée, Brin & Page proposaient initialement de prendre ε = 0, 15).
+Discuter de l'implémentation de l'algorithme pour des graphes de grande taille. Quels algorithmes
+de recherche de valeurs/vecteurs propres peut-on proposer qui soient utilisables dans ce cas (on
+pourra commencer par étudier la méthode de la puissance) ?
+Question 4.2.
+est-ce que cela semble un bon critère pour la popularité d'un site ?
+Question 4.3. On se demande si on peut "tricher" pour augmenter son PageRank. Pour
+répondre à cette question, estimer ce qu'il se passe pour X si l'on créé articiellement quelques
+sommets qui ne pointent que vers un sommet xé.
+
+Implémenter PageRank pour un grand graphe à attachement préférentiel,
+
+3S.Brin, L.Page. The anatomy of a large-scale hypertextual web search engine. Proceedings of the Seventh
+
+World Wide Web Conference (1998).
+
+

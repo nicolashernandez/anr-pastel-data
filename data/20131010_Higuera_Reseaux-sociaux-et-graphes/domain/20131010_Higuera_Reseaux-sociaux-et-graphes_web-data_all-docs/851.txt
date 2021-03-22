@@ -1,0 +1,766 @@
+http://www-sop.inria.fr/members/Frederic.Havet/FeteScience/Graphes-reseaux.pdf
+
+Graphes et applications aux r´eseaux
+
+Fr´ed´eric Havet
+
+MASCOTTE, commun I3S(CNRS/UNSA)-INRIA Sophia Antipolis
+
+Science culture au Lyc´ee – Lyc´ee du Rempart – 24 novembre
+
+2011
+
+Graphe
+
+Graphe: ensemble de sommets
+
+Graphe
+
+Graphe: ensemble de sommets reli´es par des arˆetes.
+
+Graphe: mod`ele naturel pour les r´eseaux
+
+(cid:73) R´eseaux routiers: Sommets ≡ villes. Arˆetes ≡ routes.
+
+(cid:73) R´eseaux d’ordinateurs: Sommets ≡ ordinateurs/routeurs.
+
+Arˆetes ≡ liens physiques ou WIFI.
+
+(cid:73) R´eseaux sociaux: Sommets ≡ personnes. Arˆetes entre deux
+
+amis.
+
+(cid:73) ...
+
+Les Ponts de K¨onigsberg
+
+La rivi`ere Pregel partage la ville de K¨onigsberg en 4 quartiers. Les
+habitants se demandent s’il est possible de faire un tour par
+chaque pont une et une seule fois. A votre avis?
+
+Les Ponts de K¨onigsberg
+
+La r´eponse est NON!
+Si un tel tour existait, chaque quartier devrait ˆetre reli´e `a un
+nombre pair de ponts. Un pont pour arriver et un pour repartir `a
+chaque fois qu’on passe par un quartier.
+
+Les Ponts de K¨onigsberg
+
+Et si on veut faire une balade (le d´epart et l’arriv´ee ne sont pas le
+mˆeme quartier) par chaque pont une et une seule fois?
+
+Les Ponts de K¨onigsberg
+La r´eponse est encore NON!
+Si une telle balade existait, tous les quartiers sauf deux (le d´epart
+et l’arriv´ee) devraient ˆetre reli´es `a un nombre pair de ponts: un
+pont pour arriver et un pour repartir `a chaque fois qu’on passe par
+un quartier.
+
+Mod´elisation par les graphes
+
+Quartiers ≡ sommets.
+Ponts ≡ arˆetes.
+
+Parcours et tour eul´erien
+
+Parcours: suite v0, e1, v1, e2, v2 . . . , en, vn telle que:
+
+ei = vi−1vi pour tout 1 ≤ i ≤ n;
+
+Si v0 = vn, le parcours est un tour.
+
+Degr´e d’un sommet v , d(v ), nb d’arˆetes incidentes `a v .
+
+Parcours eul´erien: qui passe par toutes les
+arˆetes une et une seule fois.
+
+Euler: Un graphe a un parcours eul´erien si
+et seulement si le nombre de sommets de
+degr´e impair est 0 ou 2.
+
+Dessiner sans lever la main
+
+Pouvez-vous dessiner chacune des ﬁgures ci-dessous sans lever le
+crayon et en ne passant qu’une seule fois sur chaque trait?
+
+Dessiner sans lever la main
+
+Pouvez-vous dessiner chacune des ﬁgures ci-dessous sans lever le
+crayon et en ne passant qu’une seule fois sur chaque trait?
+
+Dessiner sans lever la main
+
+Pouvez-vous dessiner chacune des ﬁgures ci-dessous sans lever le
+crayon et en ne passant qu’une seule fois sur chaque trait?
+
+44343444443333Trouver un parcours eul´erien
+
+Algorithme
+
+1. Partir d’un sommet de degr´e im-
+pair.
+2. Avancer tant qu’on peut.
+3. Si on est bloqu´e,
+
+-Trouver un sommet o`u une arˆete
+
+est libre
+
+- Couper le chemin en ce sommet.
+- Repartir par une arˆete libre jusqu’`a
+
+revenir au sommet.
+
+Trouver un parcours eul´erien
+
+Algorithme
+
+1. Partir d’un sommet de degr´e im-
+pair.
+2. Avancer tant qu’on peut.
+3. Si on est bloqu´e,
+
+-Trouver un sommet o`u une arˆete
+
+est libre
+
+- Couper le chemin en ce sommet.
+- Repartir par une arˆete libre jusqu’`a
+
+revenir au sommet.
+
+Trouver un parcours eul´erien
+
+Algorithme
+
+1. Partir d’un sommet de degr´e im-
+pair.
+2. Avancer tant qu’on peut.
+3. Si on est bloqu´e,
+
+-Trouver un sommet o`u une arˆete
+
+est libre
+
+- Couper le chemin en ce sommet.
+- Repartir par une arˆete libre jusqu’`a
+
+revenir au sommet.
+
+Trouver un parcours eul´erien
+
+Algorithme
+
+1. Partir d’un sommet de degr´e im-
+pair.
+2. Avancer tant qu’on peut.
+3. Si on est bloqu´e,
+
+-Trouver un sommet o`u une arˆete
+
+est libre
+
+- Couper le chemin en ce sommet.
+- Repartir par une arˆete libre jusqu’`a
+
+revenir au sommet.
+
+Trouver un parcours eul´erien
+
+Algorithme
+
+1. Partir d’un sommet de degr´e im-
+pair.
+2. Avancer tant qu’on peut.
+3. Si on est bloqu´e,
+
+-Trouver un sommet o`u une arˆete
+
+est libre
+
+- Couper le chemin en ce sommet.
+- Repartir par une arˆete libre jusqu’`a
+
+revenir au sommet.
+
+Trouver un parcours eul´erien
+
+Algorithme
+
+1. Partir d’un sommet de degr´e im-
+pair.
+2. Avancer tant qu’on peut.
+3. Si on est bloqu´e,
+
+-Trouver un sommet o`u une arˆete
+
+est libre
+
+- Couper le chemin en ce sommet.
+- Repartir par une arˆete libre jusqu’`a
+
+revenir au sommet.
+
+Trouver un parcours eul´erien
+
+Algorithme
+
+1. Partir d’un sommet de degr´e im-
+pair.
+2. Avancer tant qu’on peut.
+3. Si on est bloqu´e,
+
+-Trouver un sommet o`u une arˆete
+
+est libre
+
+- Couper le chemin en ce sommet.
+- Repartir par une arˆete libre jusqu’`a
+
+revenir au sommet.
+
+Trouver un parcours eul´erien
+
+Algorithme
+
+1. Partir d’un sommet de degr´e im-
+pair.
+2. Avancer tant qu’on peut.
+3. Si on est bloqu´e,
+
+-Trouver un sommet o`u une arˆete
+
+est libre
+
+- Couper le chemin en ce sommet.
+- Repartir par une arˆete libre jusqu’`a
+
+revenir au sommet.
+
+Trouver un parcours eul´erien
+
+Algorithme
+
+1. Partir d’un sommet de degr´e im-
+pair.
+2. Avancer tant qu’on peut.
+3. Si on est bloqu´e,
+
+-Trouver un sommet o`u une arˆete
+
+est libre
+
+- Couper le chemin en ce sommet.
+- Repartir par une arˆete libre jusqu’`a
+
+revenir au sommet.
+
+Trouver un parcours eul´erien
+
+Algorithme
+
+1. Partir d’un sommet de degr´e im-
+pair.
+2. Avancer tant qu’on peut.
+3. Si on est bloqu´e,
+
+-Trouver un sommet o`u une arˆete
+
+est libre
+
+- Couper le chemin en ce sommet.
+- Repartir par une arˆete libre jusqu’`a
+
+revenir au sommet.
+
+Trouver un parcours eul´erien
+
+Algorithme
+
+1. Partir d’un sommet de degr´e im-
+pair.
+2. Avancer tant qu’on peut.
+3. Si on est bloqu´e,
+
+-Trouver un sommet o`u une arˆete
+
+est libre
+
+- Couper le chemin en ce sommet.
+- Repartir par une arˆete libre jusqu’`a
+
+revenir au sommet.
+
+Trouver un parcours eul´erien
+
+Algorithme
+
+1. Partir d’un sommet de degr´e im-
+pair.
+2. Avancer tant qu’on peut.
+3. Si on est bloqu´e,
+
+-Trouver un sommet o`u une arˆete
+
+est libre
+
+- Couper le chemin en ce sommet.
+- Repartir par une arˆete libre jusqu’`a
+
+revenir au sommet.
+
+Trouver un parcours eul´erien
+
+Algorithme
+
+1. Partir d’un sommet de degr´e im-
+pair.
+2. Avancer tant qu’on peut.
+3. Si on est bloqu´e,
+
+-Trouver un sommet o`u une arˆete
+
+est libre
+
+- Couper le chemin en ce sommet.
+- Repartir par une arˆete libre jusqu’`a
+
+revenir au sommet.
+
+Trouver un parcours eul´erien
+
+Algorithme
+
+1. Partir d’un sommet de degr´e im-
+pair.
+2. Avancer tant qu’on peut.
+3. Si on est bloqu´e,
+
+-Trouver un sommet o`u une arˆete
+
+est libre
+
+- Couper le chemin en ce sommet.
+- Repartir par une arˆete libre jusqu’`a
+
+revenir au sommet.
+
+Trouver un parcours eul´erien
+
+Algorithme
+
+1. Partir d’un sommet de degr´e im-
+pair.
+2. Avancer tant qu’on peut.
+3. Si on est bloqu´e,
+
+-Trouver un sommet o`u une arˆete
+
+est libre
+
+- Couper le chemin en ce sommet.
+- Repartir par une arˆete libre jusqu’`a
+
+revenir au sommet.
+
+Quelques applications du tour eul´erien et ses
+g´en´eralisations
+
+(cid:73) Tourn´ee de camions poubelles. Trouver un ensemble de
+tours T1, . . . Tp tel que chaque rue (= arˆete) est dans au
+moins un de ces tours. On veut un tel ensemble de longueur
+minimum.
+
+(cid:73) Diagnostic ou maintenance d’un r´eseau par un robot.
+
+(cid:73) Bioinformatique: reconstruction de s´equences ADN `a partir
+
+de fragments.
+
+Le probl`eme Gaz-Eau-Electricit´e
+
+Peut-on relier trois maisons `a l’eau, le gaz et l’´electricit´e sans que
+les canalisations se croisent ?
+
+Graphe planaire
+
+Graphe planaire: dessinable sans croisement d’arˆetes.
+
+Formule d’Euler
+
+Euler: graphe planaire (connexe),
+S: nombre de sommets A: nombre d’arˆetes F : nombre de faces.
+
+S + F = A + 2
+
+f2
+
+f1
+
+f5
+
+f3
+
+f4
+
+Ici S = 7, A = 10, F = 5. On a bien 7 + 5 = 10 + 2.
+
+Relation degr´e des faces – nombre d’arˆetes
+
+degr´e d’une face f , d(f ): nombre d’arˆetes “autour” de f .
+
+d(f2)
+
+=3
+d(f1) = 4
+
+d(f5) = 6
+
+d(f3) = 3
+
+d(f4) = 4
+
+(cid:88)
+
+f face
+
+d(f ) = 2 × A.
+
+Une arˆete est autour de deux faces. Ainsi
+
+Ici: d(f1) + d(f2) + d(f3) + d(f4) + d(f5)
+
+= 4 + 3 + 3 + 4 + 6 = 20 = 2 × 10.
+
+Nombre maximum d’arˆetes d’un graphe planaire
+
+Une face a au moins 3 arˆetes donc 2A =
+
+(cid:88)
+
+f face
+
+d(f ) ≥ 3F .
+
+soit F ≤ 2
+3
+
+A.
+
+A = S + F − 2
+A − 2
+
+≤ S +
+2
+3
+A ≤ S − 2
+1
+3
+A ≤ 3S − 6.
+
+D’o`u
+
+R´eponse probl`eme Gaz-Eau-Electricit´e
+
+Dans notre graphe, les faces seraient
+de taille au moins 4.
+
+(cid:88)
+
+f face
+
+Reprenons le calcul: 2A =
+
+d(f ) ≥ 4F , soit F ≤ 1
+2
+
+A.
+
+A = S + F − 2
+A − 2
+
+≤ S +
+1
+2
+A ≤ S − 2
+1
+2
+A ≤ 2S − 4.
+
+D’o`u
+
+Or le graphe `a r´ealiser a 6 sommets et 9 arˆetes. Il ne peut pas ˆetre
+planaire.
+
+EM1M2M3EGApplication des graphes planaires
+
+(cid:73) Conception de circuits int´egr´es (sans croisement).
+Combinaison de milliers de transistors sur une puce.
+
+(cid:73) Planiﬁcation de r´eseaux: routiers, de t´el´ecommunications,
+
+....
+
+Colorer une carte
+
+1852 Francis Guthrie: Peut-on col-
+orer les r´egions (connexes) d’une
+carte avec 4 couleurs de mani`ere `a
+ce que deux r´egions voisines (ayant
+une fronti`ere en commun) aient
+des couleurs diﬀ´erentes.
+
+Colorer un graphe planaire
+
+Un sommet dans chaque r´egion.
+Deux sommets reli´es si les r´egions
+sont voisines.
+
+On obtient un graphe planaire.
+
+Colorer un graphe planaire
+
+Colorer les r´egions = colorer le
+graphe planaire.
+Donner des couleurs aux sommets
+tels que deux sommets adjacents
+aient des couleurs diﬀ´erentes.
+
+Colorer un graphe planaire
+
+Guthrie: Peut-on colorer n’importe quel graphe planaire avec 4
+couleurs?
+
+4 couleurs n´ecessaires pour certains graphes.
+
+Graphe complet `a 5 sommets n’est pas
+planaire.
+Nb d’arˆetes: (5× 4)/2 = 10 > 9 = 3× 5− 6
+
+Colorer un graphe planaire avec 6 couleurs
+
+A ≤ 3S − 6 et(cid:80)
+
+(cid:88)
+
+v sommet d(v ) = 2A.
+d(v ) ≤ 6S − 12 < 6S.
+
+Donc
+
+v sommet
+
+Il existe v tel que d(v ) < 6, soit d(v ) ≤ 5.
+
+Ordre (v1, . . . , vn) des sommets t.q. vi a au plus 5 voisins dans
+{v1, . . . , vi−1}.
+En colorant suivant cet ordre, on utilise au plus 6 couleurs.
+
+Exemple
+
+Exemple
+
+Exemple
+
+11Exemple
+
+11Exemple
+
+1011Exemple
+
+1011Exemple
+
+91110Exemple
+
+91110Exemple
+
+811109Exemple
+
+811109Exemple
+
+7111098Exemple
+
+7111098Exemple
+
+71110698Exemple
+
+71110698Exemple
+
+711105698Exemple
+
+711105698Exemple
+
+7111045698Exemple
+
+7111045698Exemple
+
+71110345698Exemple
+
+71110345698Exemple
+
+711102345698Exemple
+
+7111021345698Exemple
+
+7111021345698Exemple
+
+7111021345698Exemple
+
+7111021345698Exemple
+
+7111021345698Exemple
+
+7111021345698Exemple
+
+7111021345698Exemple
+
+7111021345698Exemple
+
+7111021345698Exemple
+
+7111021345698Exemple
+
+7111021345698Exemple
+
+7111021345698Exemple
+
+7111021345698Exemple
+
+7111021345698Exemple
+
+7111021345698Exemple
+
+7111021345698Exemple
+
+7111021345698Exemple
+
+7111021345698Exemple
+
+7111021345698Exemple
+
+7111021345698Exemple
+
+7111021345698Exemple
+
+7111021345698Th´eor`eme des 4 couleurs
+
+Kempe en 1879 et Tait en 1880 donnent une preuve. Des erreurs
+sont trouv´ees par Heawood (1890) et Petersen (1891).
+
+1976: Preuve par Appel et Haken. R´eduction `a 1478 graphes
+critiques. Utilisation de l’ordinateur pour r´esoudre ces cas.
+Probl`eme pour la validation:
+
+(cid:73) V´eriﬁcation de l’algorithme.
+(cid:73) V´eriﬁcation de l’impl´ementation.
+
+1995: Nouvelle preuve par Robertson, Sanders, Seymour et
+Thomas. R´eduction `a 633 cas.
+
+Le preuve donne un algorithme en O(n2) pour colorer un graphe
+planaire.
+
+Colorer un graphe planaire avec 3 couleurs
+
+Quel est le meilleur temps d’ex´ecution (au pire) possible pour un
+algorithme r´esolvant le probl`eme suivant:
+
+Entr´ee: un graphe G (planaire).
+Question: peut-on colorer G avec 3 couleurs?
+
+(cid:122)
+
+(cid:125)(cid:124)
+
+n fois
+
+(cid:123)
+
+3 × 3 × ··· × 3 colorations (non forc´ement propres)
+
+Il y a 3n =
+donc on peut le faire en O∗(3n).
+
+Conjecture: C’est impossible en temps polynomial.
+C’est P (cid:54)= NP, une des conjectures du mill´enaire.
+1 million de dollars est oﬀert pour qui la montre ou la r´efute.
+
+Le mˆeme probl`eme avec 2 couleurs se fait facilement en temps
+polynomial.
+
+Applications de la coloration
+
+(cid:73) Ordonnancement.
+Sommets = tˆaches.
+Arˆetes entre des tˆaches concurrentes.
+Couleurs = intervalles de temps.
+Coloration du graphe = ordonnancement possible des tˆaches.
+Minimiser le nombre de couleurs = minimiser le temps pour
+eﬀectuer toutes les tˆaches.
+(cid:73) Allocation de fr´equences.
+Sommets = transmetteurs.
+Arˆetes entre des transmetteurs dont les zones s’intersectent.
+Couleurs = fr´equences.
+Coloration du graphe = allocation de fr´equences sans
+interf´erences.
+Minimiser le nombre de couleurs = minimiser la largeur de
+bande n´ecessaire.
+
+Allocation de fr´equences
+
+Allocation de fr´equences
+
+Allocation de fr´equences
+
+Allocation de fr´equences
+
+BONUS: Tour de cartes
+
+Tour de cartes – le truc
+
+A chaque carte, on associe un nombre en binaire `a 5 bits comme
+suit:
+
+(cid:73) Les deux derniers bits repr´esentent la couleur de la carte.
+
+00=coeur, 10=carreau, 01 =tr`eﬂe et 11=pique. Ainsi le tout
+dernier bit nous dit si la carte est rouge ou noire.
+
+(cid:73) Les trois premiers bits repr´esentent la valeur de la carte.
+
+000=as; 001=7; 010=8; 011=9; 100=10; 101=valet; 110
+=dame; 111=roi.
+
+Tour de cartes – le truc
+
+On range les cartes de telle mani`ere que le code de chaque carte
+est obtenu `a partir de la suivante par d´ecalage. Cela revient `a
+trouver un cycle hamiltonien dans le graphe de de Bruijn.
+
+0011100101101000000000001100001000100010010001001000100010011100000011010101010101100001101100110011010111101011011011101111101111101111110111110011011011011100Tour de cartes – le truc
+
+5e bit de 1e carte = 1e de la 5e carte.
+5e bit de 2e carte = 2e de la 5e carte.
+5e bit de 3e carte = 3e de la 5e carte.
+5e bit de 4e carte = 4e de la 5e carte.
+5e bit de 5e carte = 5e de la 5e carte.
+
+0011100101101000000000001100001000100010010001001000100010011100000011010101010101100001101100110011010111101011011011101111101111101111110111110011011011011100Tour de cartes – le truc
+
+Un cycle hamiltonien est
+A♥-A♣-A♠-7♦-9♥-D♥-10♣-A♦-7♣-8♦-V♣-8♠-V♦-9♣-D♠-V♠-
+9♠-R♠-R♦-R♥-D♣-10♠-7♠-9♦-R♣-D♦-V♥-8♣-10♦-7♥-8♥-
+10♥
+
+0011100101101000000000001100001000100010010001001000100010011100000011010101010101100001101100110011010111101011011011101111101111101111110111110011011011011100Applications des graphes de Bruijn
+
+(cid:73) Quasi-optimum pour le probl`eme (∆, D). R´eseaux de
+
+faible degr´e et faible diam`etre.
+
+(cid:73) S´equen¸cage de chaˆınes d’ADN. Grande ﬂexibilit´e pour
+
+g´erer les duplications, inversions ou transpositions.
+
+

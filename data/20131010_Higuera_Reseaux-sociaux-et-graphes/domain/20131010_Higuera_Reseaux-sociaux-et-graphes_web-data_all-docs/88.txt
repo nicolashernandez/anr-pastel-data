@@ -1,0 +1,1385 @@
+http://lipn.univ-paris13.fr/~kanawati/ars/ARS-intro.pdf
+
+Analyse des r´eseaux sociaux : une introduction
+
+Analyse de graphes de terrain
+
+Rushed Kanawati
+
+LIPN, CNRS UMR 7030
+http://lipn.fr/∼kanawati
+
+Universit´e Paris 13
+
+rushed.kanawati@lipn.univ-paris13.fr
+
+October 24, 2016
+
+R. Kanawati (LIPN)
+
+Graphes de Terrain
+
+October 24, 2016
+
+1 / 1
+
+Objectifs & organisation du cours
+
+Objectifs : Pr´esentation des techniques d’´etude et d’analyse de
+grands r´eseaux complexes.
+Fouille et analyse des r´eseaux d’interactions.
+
+10 s´eances : Cours + TP
+
+Outils :
+
+Python http://www.python.org/
+
+R https://www.r-project.org/
+igraph http://igraph.wikidot.com
+Gephi http://gephi.org
+
+Tulip http://tulip.labri.fr/TulipDrupal/
+
+R. Kanawati (LIPN)
+
+Graphes de Terrain
+
+October 24, 2016
+
+2 / 1
+
+Th`emes abord´ees
+
+Graphes de terrains Mod`eles, caract´eristiques & probl`emes d’analyse.
+
+Caract´eristiques topologiques de nœuds Pr´esentation des diﬀ´erentes
+
+mesures de tri de nœuds.
+
+D´etection de communaut´es D´eﬁnitions, probl´ematique, fonctions de
+
+qualit´e, classiﬁcation des approches & applications.
+
+Analyse de r´eseaux dynamiques Probl´ematiques & Application, Pr´evision
+
+de liens,
+
+Mod`eles d’inﬂuence et de de diﬀusion
+
+Analyse des r´eseaux Multiplexes
+
+R. Kanawati (LIPN)
+
+Graphes de Terrain
+
+October 24, 2016
+
+3 / 1
+
+Graphes de terrain
+
+Graphes de terrains
+
+1 D´eﬁnitions & notations
+
+2 Caract´erisation & exemples
+
+3 Mod`eles
+
+4 Probl´ematiques d’analyse
+
+R. Kanawati (LIPN)
+
+Graphes de Terrain
+
+October 24, 2016
+
+4 / 1
+
+Graphes de terrain
+
+Graphes de terrain : r´eseau de collaborations scientiﬁques
+
+Un r´eseau social est un ensemble d’acteurs reli´e par des liens/interactions sociales
+
+R. Kanawati (LIPN)
+
+Graphes de Terrain
+
+October 24, 2016
+
+5 / 1
+
+Graphes de terrain
+
+Graphe de terrain : R´eseau social ?
+
+http://datamining.typepad.com/data mining/2007/04/twitter social .html
+
+source :
+
+R. Kanawati (LIPN)
+
+Graphes de Terrain
+
+October 24, 2016
+
+6 / 1
+
+Graphes de terrain
+
+Notations
+
+Un graphe G =< V , E ⊆ V × V > :
+
+V est l’ensemble de nœudes (i.e. acteurs)
+E est l’ensemble de liens.
+
+Notations :
+
+AG est la matrice d’adjacence de G : aij (cid:54)= 0 si les nœuds (vi , vj ) ∈ E ,
+0 sinon.
+n = |V|
+m = |E|
+Γ(v ) est l’ensemble de voisins de v . Γ(v ) = {x ∈ V : (x, v ) ∈ E}.
+Le degr´e d’un nœud d(v ) =(cid:107) Γ(v ) (cid:107)
+
+R. Kanawati (LIPN)
+
+Graphes de Terrain
+
+October 24, 2016
+
+7 / 1
+
+Graphes de terrain
+
+Propri´et´es de base
+
+Chemin vi , vj : liste de liens `a traverser pour aller de vi `a vj .
+Distance vi , vj : la longueur de plus court chemin reliant Vi `a vj .
+Connexit´e : Un graphe est connexe si il existe un chemin entre
+n’importe quel pair de nœuds.
+
+Diam`etre d’un graphe : la plus grande distance entre des nœuds du
+graphe.
+
+Densit´e du graphe : Probabilit´e d’existence de tous liens :
+
+2×m
+
+n×(n−1)
+
+R. Kanawati (LIPN)
+
+Graphes de Terrain
+
+October 24, 2016
+
+8 / 1
+
+Graphes de terrain
+
+R´eseaux cibles : Exemples
+
+R´eseaux bibliographiques : publications, citation [11, 12]
+
+R´eseaux sociologiques : Interaction sur forums/blogs [6, 10],
+communication [14], site de rencontres [4], terroriste
+
+R´eseaux ´ethologiques : Comportement des Z`ebres
+
+R´eseaux biologiques : Interactions entre prot´eines, M´etabolique,
+Interactions entre des g`enes.
+
+R´eseaux technologiques : Internat, Web
+
+...
+
+R. Kanawati (LIPN)
+
+Graphes de Terrain
+
+October 24, 2016
+
+9 / 1
+
+Graphes de terrain
+
+R´eseaux cibles
+
+R. Kanawati (LIPN)
+
+Graphes de Terrain
+
+October 24, 2016
+
+10 / 1
+
+source : www.visulacomplexity.com
+
+Graphes de terrain
+
+R´eseaux cibles
+
+source : Graphe de transactions durant un mois sur un site de musique en-ligne
+
+R. Kanawati (LIPN)
+
+Graphes de Terrain
+
+October 24, 2016
+
+11 / 1
+
+Graphes de terrain
+
+R´eseaux cibles : caract´eristiques
+
+Grande Taille : |V| > 103.
+Faible degr´e de s´eparation : la moyenne des distances g´eod´esiques
+entre chaque couple de nœuds est logarithmique en fonction de (cid:107) V (cid:107)
+Sans ´echelle : majorit´e de nœuds ayant peu de connexions mais un
+nombre substantiel de nœuds ont beaucoup de connexions.
+La probabilit´e pour un nœud v ∈ V d’avoir k voisins est : P(k) = k−γ
+
+Coeﬃcient de clustering elev´e : la probabilit´e que deux voisins
+d’un nœud choisis al´eatoirement soient eux-mˆemes connect´es est
+assez grande.
+
+cc(G ) =
+
+2|E ∩ (Γ(v ) × Γ(v ))|
+d(v ) × (d(v ) − 1)
+
+(cid:88)
+
+v∈V
+
+R. Kanawati (LIPN)
+
+Graphes de Terrain
+
+October 24, 2016
+
+12 / 1
+
+Graphes de terrain
+
+Le mythe de six degr´es de s´eparation
+
+Exp´erience de Milgram (1967)
+
+Choisir une personne cible (courtier `a Boston).
+Demander `a des groupes de personnes choisies
+al´etoirement (de Boston, de Nebraska, des
+actionnaires au Nebraska) de lui envoyer une
+lettre `a travers des personnes susceptibles de
+le connaˆıtre.
+217 lettres sont envoy´ees ; 64 sont arriv´ees
+(succ`es : 0.29)
+La longueur moyenne d’un chemin est de 5.2
+interm´ediaires.
+
+Exp´erience similaire mais au niveau mondial et
+en utilisant le courrier ´electronique
+
+24 000 participants de 166 pays : 384 e-mail
+arriv´es `a destination (succ`es 1.6 %)
+Longueur moyenne des chemins : 5.
+
+Satnley Milgram
+
+(1933-1984)
+
+R. Kanawati (LIPN)
+
+Graphes de Terrain
+
+October 24, 2016
+
+13 / 1
+
+Graphes de terrain
+
+Autre exemple: Le nombre d’Erd¨os
+
+Paul Erd¨os est un math´ematicien qui a publi´e
+plus de 1500 articles !
+
+On mesure l’importance d’un chercheur (en
+math´ematique) par la distance qui le s´epare
+d’Erd¨os dans le graphe de collaborations
+Site Web : www.oakland.edu/enp
+Degr´e de s´eparation entre chercheurs 2-Erd¨os
+est de 5 !
+
+Paul Erd¨os
+
+(1913-1996)
+
+R. Kanawati (LIPN)
+
+Graphes de Terrain
+
+October 24, 2016
+
+14 / 1
+
+Graphes de terrain
+
+Quelques graphes de terrain
+
+Graphe
+Internet
+
+Web
+
+Acteurs
+
+Co-publication
+Co-occurrence
+
+Prot´eines
+
+Nœuds
+Routeurs
+
+Pages
+Acteurs
+Auteurs
+
+Mots
+
+Prot´eines
+
+Liens
+
+Liaisons de donn´ees
+
+Hyperliens
+Mˆeme ﬁlm
+Co-signature
+Mˆeme phrase
+
+Inﬂuence
+
+Jeu de donn´ees
+http://www.isi.edu/div7/scan/mercator/maps.html.
+http://snap.stanford.edu/data/web-NotreDame.html
+http://www.imdb.com/.
+http://arxiv.org/.
+http://www.tniv.info/bible/
+http://www.nd.edu/ networks
+
+R. Kanawati (LIPN)
+
+Graphes de Terrain
+
+October 24, 2016
+
+15 / 1
+
+Graphes de terrain
+
+Quelques graphes de terrain
+
+Graph
+Internet
+
+Web
+
+Acteurs
+
+Co-publication
+Co-occurrence
+
+Prot´eines
+
+|V|
+75885
+325729
+392340
+16401
+9297
+2113
+
+|E|
+357317
+1090108
+15038083
+
+29552
+392066
+2203
+
+densit´e
+1.2e-4
+2.1e-5
+1.9e-4
+2.2e-4
+9.1e-3
+9.9e-4
+
+d
+
+5.80
+
+7
+3.6
+7.18
+2.13
+6.74
+
+γ
+2.5
+2.3
+2.2
+2.4
+1.8
+2.4
+
+cc
+
+0.171
+0.466
+0.785
+0.638
+0.822
+0.153
+
+R. Kanawati (LIPN)
+
+Graphes de Terrain
+
+October 24, 2016
+
+16 / 1
+
+Graphes de terrain Mod`eles de r´eseaux petit-monde
+
+Mod`eles de r´eseaux petit-monde
+
+Approches d’´echantillonnage : ´echantillonner des liens `a partir d’un
+
+graphe complet
+
+Erd¨os-Renyi
+Molloy et Reed
+
+Approches g´en´eratives : r`egles d’´evolution de r´eseau
+
+Mod`ele de l’anneau
+Mod`ele de l’attachement pr´ef´erentiel
+Le mod`ele HOT
+
+R. Kanawati (LIPN)
+
+Graphes de Terrain
+
+October 24, 2016
+
+17 / 1
+
+Graphes de terrain Mod`eles de r´eseaux petit-monde
+
+Erd¨os-R´enyi
+
+Principe : pour mod´eliser un graphe compos´e
+de n nœuds et m liens, on choisit al´eatoirement
+m liens, avec une probabilit´e p parmi
+l’ensemble de liens possibles ( n(n−1)
+)
+Le mod`ele g´en`ere des r´eseaux `a faible degr´e de
+s´eparation
+
+2
+
+Les graphes g´en´er´es ne sont pas sans ´echelle
+
+Coeﬃcient de clustering = p
+
+Alfr´ed R´enyi
+
+(1921-1970)
+
+R. Kanawati (LIPN)
+
+Graphes de Terrain
+
+October 24, 2016
+
+18 / 1
+
+Graphes de terrain Mod`eles de r´eseaux petit-monde
+
+Mod`ele de Molley et Reed
+
+Id´ee : forcer l’obtention d’une loi de puissance pour la distribution des
+degr´es.
+
+G´en´eration de graphes sans ´echelle et `a faible degr´e de s´eparation.
+Coeﬃcient de clustering cc → 0
+
+R. Kanawati (LIPN)
+
+Graphes de Terrain
+
+October 24, 2016
+
+19 / 1
+
+Graphes de terrain Mod`eles de r´eseaux petit-monde
+
+Mod`ele de l’anneau
+
+Les nœuds sont plac´es sur un anneau virtuel o`u chaque nœud est
+connect´e aux k nœuds les plus proches.
+
+On reconnecte chaque arˆete avec une probabilit´e p `a un nœud choisi
+al´eatoirement.
+
+Probl`eme : la distribution des degr´es ne suit pas une loi de puissance
+
+R. Kanawati (LIPN)
+
+Graphes de Terrain
+
+October 24, 2016
+
+20 / 1
+
+Graphes de terrain Mod`eles de r´eseaux petit-monde
+
+L’attachement pr´eferentiel
+
+Les nœuds sont ajout´es un `a un.
+
+La probabilit´e de relier un nouveau nœud `a un nœud existant d´epend
+du degr´e du nœud.
+
+Principe : enrichir les riches !
+
+Corr´elation entre le degr´e d’un nœud et son ˆage.
+
+Correction : probabilit´e d’un lien en fonction du degr´e des nœuds
+partenaires et d’une estimation d’utilit´e.
+Les graphes obtenus sont sans ´echelle mais cc → 0
+
+R. Kanawati (LIPN)
+
+Graphes de Terrain
+
+October 24, 2016
+
+21 / 1
+
+Graphes de terrain Mod`eles de r´eseaux petit-monde
+
+Le mod`ele Hot
+
+HOT : Highly Optimized Tolerance
+Placer al´eatoirement les nœuds sur une grille.
+
+Les nœuds sont ajout´es un `a un.
+Dans le graphe G , un nouveau nœud n est connect´e `a un nœud
+existant a de sorte `a :
+
+Minimiser α((cid:107) G (cid:107))dG (a, n)
+1(cid:80)
+Maximiser cp(a) =
+
+u∈V d(a,u)
+
+α < constant : le graphe est une ´etoile.
+
+α >(cid:112)( (cid:107) G (cid:107)) : la distribution de degr´es est exponentielle.
+constant < α <(cid:112)( (cid:107) G (cid:107)) : Graphe sans ´echelle.
+
+Mˆeme probl`eme : cc → 0
+
+R. Kanawati (LIPN)
+
+Graphes de Terrain
+
+October 24, 2016
+
+22 / 1
+
+Graphes de terrain Mod`eles de r´eseaux petit-monde
+
+Mod`ele de graphes bipartis
+
+Beaucoup de r´eseaux r´eels sont des graphes bipartis (ex.
+bibliographique, achats, etc.)
+Graphe biparti: G = ((cid:62),⊥, E ⊆ (cid:62) × ⊥). (cid:62), ⊥ sont deux ensembles
+distincts.
+Projections :
+
+G n(cid:62) = (V(cid:62) ⊆ (cid:62), E(cid:62) = {x, y ∈ (cid:62) : |ΓG (x) ∩ ΓG (y )| ≥ n}
+G m⊥ = (V⊥ ⊆ ⊥, E⊥ = {x, y ∈ ⊥ : |ΓG (x) ∩ ΓG (y )| ≥ m}
+n, m : param`etres des projections.
+
+La projection augmente artiﬁciellement le coeﬃcient de clustering du
+graphe projet´e !!
+
+R. Kanawati (LIPN)
+
+Graphes de Terrain
+
+October 24, 2016
+
+23 / 1
+
+Graphes de terrain Mod`eles de r´eseaux petit-monde
+
+Mod`ele de graphes bipartis
+
+Utiliser deux lois de puissance d´eﬁnies pour deux ensembles de nœuds.
+
+Les graphes obtenus sont sans ´echelle, `a faible degr´e de s´eparation,
+avec un coeﬃcient de clustering proche des cas r´eels.
+
+R. Kanawati (LIPN)
+
+Graphes de Terrain
+
+October 24, 2016
+
+24 / 1
+
+Graphes de terrain Mod`eles de r´eseaux petit-monde
+
+Mod`eles petit-monde : bilan
+
+Mod`ele
+
+Erd¨os-Renyi
+
+Molley et Reed
+
+Anneau
+
+Attachement pr´ef´erentiel
+
+HOT
+Biparti
+
+Faible s´eparation
+
+Sans ´echelle
+
+Clustering
+
+OUI
+OUI
+OUI
+OUI
+OUI
+OUI
+
+NON
+OUI
+NON
+OUI
+OUI
+OUI
+
+NON
+NON
+OUI
+NON
+NON
+OUI
+
+R. Kanawati (LIPN)
+
+Graphes de Terrain
+
+October 24, 2016
+
+25 / 1
+
+Graphes de terrain
+
+Probl´ematique
+
+Probl´ematique de l’´etude des r´eseaux sociaux
+
+Extraction et mod´elisation de r´eseaux.
+
+Support syt`eme : r´eseaux distribu´es, protection de vie priv´ee,
+interop´erabilit´e.
+
+Navigation et recherche dans les r´eseaux sociaux
+
+Visualisation des r´eseaux
+Fouille de r´eseaux (Analyse de r´eseaux sociaux : SNA)
+
+R. Kanawati (LIPN)
+
+Graphes de Terrain
+
+October 24, 2016
+
+26 / 1
+
+Analyse de r´eseaux sociaux
+
+Analyse de r´eseaux sociaux : les tˆaches
+
+R. Kanawati (LIPN)
+
+Graphes de Terrain
+
+October 24, 2016
+
+27 / 1
+
+Analyse de r´eseaux sociaux
+
+Analyse orient´e nœud
+
+Tˆaches orient´es nœuds
+
+But : caract´eriser le rˆole et/ou la position d’un nœud dans le r´eseau.
+
+Trier les nœuds selon leurs caract´eristiques.
+Inf´erer l’importance d’un acteur dans un r´eseau :
+
+PageRank employ´e par Google pour trier les r´esultats renvoy´es par le
+moteur de recherche.
+Marketing Viral,
+Evaluation des chercheurs !!
+D´etection des nœuds faibles (ou ponts) dans un r´esesau (virus
+informatiques, terrorisme, etc.)
+
+Les mˆemes tˆaches peuvent ˆetre d´eﬁnies pour les liens.
+
+R. Kanawati (LIPN)
+
+Graphes de Terrain
+
+October 24, 2016
+
+28 / 1
+
+Analyse de r´eseaux sociaux
+
+Analyse orient´e nœud
+
+Tˆaches orient´ees communaut´es
+
+Communaut´e : sous-graphe `a forte densit´e locale.
+Deux principales tˆaches :
+
+Recherche de communaut´es : partitionnement d’un r´eseau en
+communaut´es
+Identiﬁcation de communaut´e : d´etection de la communaut´e d’un
+nœud donn´e.
+
+Approches similaires `a la classiﬁcation de donn´ees.
+
+R. Kanawati (LIPN)
+
+Graphes de Terrain
+
+October 24, 2016
+
+29 / 1
+
+Analyse de r´eseaux sociaux
+
+Analyse orient´e nœud
+
+Tˆaches orient´ees structure
+
+D´ecouvrir les lois de l’´evolution du r´eseau.
+
+Probl`eme phare : pr´ediction de liens.
+Soit G =< G1, G2, . . . , GT > un r´eseau temporel de r´eseaux sociaux,
+Gi est le graphe du r´eseau `a l’instant i.
+La tˆache de pr´ediction de liens consiste `a pr´edire GT +1 `a partir de G .
+Autres probl`emes :
+
+D´etection de liens cach´es
+Compl´etion de liens
+D´etection de liens alarmants (anormaux)
+
+R. Kanawati (LIPN)
+
+Graphes de Terrain
+
+October 24, 2016
+
+30 / 1
+
+Analyse de r´eseaux sociaux
+
+Caract´erisation des nœuds
+
+Carat´erisation des nœuds
+
+Notion de Centralit´e :
+
+de degr´es.
+de proximit´e.
+d’interm´ediarit´e.
+de vecteur.
+
+HITS : identiﬁer des autorit´es et des hubs.
+
+PageRank : prestige d’un nœud.
+
+R. Kanawati (LIPN)
+
+Graphes de Terrain
+
+October 24, 2016
+
+31 / 1
+
+Analyse de r´eseaux sociaux
+
+Caract´erisation des nœuds
+
+Centralit´e de degr´e
+
+Un nœud ayant beaucoup de liens est consid´er´e comme important.
+
+Un acteur central est l’acteur le plus actif de point de vue de
+communication,
+Cd (v ) =
+
+(cid:107)(Γ(v )(cid:107)
+
+maxu∈V (cid:107)Γ(u)(cid:107)
+
+R. Kanawati (LIPN)
+
+Graphes de Terrain
+
+October 24, 2016
+
+32 / 1
+
+Analyse de r´eseaux sociaux
+
+Caract´erisation des nœuds
+
+Centralit´e de proximit´e
+
+Le nœud qui communique le plus facilement avec les autres nœuds est
+important.
+Centralit´e de proximit´e : cp(v ) =
+
+1(cid:80)
+
+u∈V d(v ,u)
+
+R. Kanawati (LIPN)
+
+Graphes de Terrain
+
+October 24, 2016
+
+33 / 1
+
+Analyse de r´eseaux sociaux
+
+Caract´erisation des nœuds
+
+Centralit´e d’interm´ediarit´e
+
+Le nœud qui rapproche le plus les autres nœuds est important.
+
+Nombre de chemins g´eod´esiques qui passent par v .
+chg (x, y ) : les nœuds qui se situent sur le plus court chemin reliant x
+`a y .
+Ci (v ) =
+
+(cid:107)ch(x,y )(cid:107)x,y∈V ,v∈ch(x,y )
+
+(cid:107)ch(x,y )x,y∈V(cid:107)
+
+R. Kanawati (LIPN)
+
+Graphes de Terrain
+
+October 24, 2016
+
+34 / 1
+
+Analyse de r´eseaux sociaux
+
+Caract´erisation des nœuds
+
+Centralit´e de vecteur
+
+(cid:80) Ai,j C (xj ) : AX = λX .
+
+La centralit´e d’un nœud d´epend des centralit´es de ses voisins.
+C (v ) = 1
+λ
+
+R. Kanawati (LIPN)
+
+Graphes de Terrain
+
+October 24, 2016
+
+35 / 1
+
+Analyse de r´eseaux sociaux
+
+Caract´erisation des nœuds
+
+HITS
+
+HITS : Hyperlink Induced Topic Search
+
+Indicateurs propos´es pour implanter un moteur de recherche sur le
+Web (Clever d’IBM).
+
+Web : graphe dirig´e
+Deux types de pages (i.e. nœuds) :
+
+Autorit´e : meilleures sources d’information sur un th´eme.
+Hub : page fournissant des liens vers des autorit´es de qualit´e sur un
+th`eme.
+
+Une autorit´e de qualit´e est cit´ee par de nombreux hubs de qualit´e.
+
+Un bon hub pointe vers beaucoup d’autorit´es de qualit´e.
+
+R. Kanawati (LIPN)
+
+Graphes de Terrain
+
+October 24, 2016
+
+36 / 1
+
+Analyse de r´eseaux sociaux
+
+Caract´erisation des nœuds
+
+HITS : l’algorithme
+
+Soit G un graphe connexe, z le vecteur unit´e de (cid:60)n
+x0 ← z
+y0 ← z
+R´ep´eter jusqu’`a convergence ou au max k fois :
+
+x <p>
+i
+y <p>
+i
+
+=(cid:80)∀q:q→p y <p>
+=(cid:80)∀q:p→q x <q>
+
+i−1
+i−1
+
+R. Kanawati (LIPN)
+
+Graphes de Terrain
+
+October 24, 2016
+
+37 / 1
+
+Analyse de r´eseaux sociaux
+
+Caract´erisation des nœuds
+
+PageRank
+
+1998, par Sergey Brin & Larry Page.
+
+Tri statique des pages Web.
+
+Le web est trait´e comme ´etant un graphe dirig´e(V,E).
+
+La mesure associ´ee `a une page i est :
+
+(cid:88)
+
+(j,i)∈E
+
+P(i) =
+
+P(j)
+Oj
+
+o`u Oj est le nombre de liens sortant de la page j
+On pose P le vecteur contenant les valeurs de tri :
+
+P = (P(1), P(2), .., P(n))T
+
+R. Kanawati (LIPN)
+
+Graphes de Terrain
+
+October 24, 2016
+
+38 / 1
+
+Analyse de r´eseaux sociaux
+
+Caract´erisation des nœuds
+
+Calcul de PageRank
+
+s ← vecteur al´eatoire.
+r ← AT × s
+Tant que (cid:107) r − s (cid:107)<  faire :
+
+s ← r
+r ← AT × s
+
+R. Kanawati (LIPN)
+
+Graphes de Terrain
+
+October 24, 2016
+
+39 / 1
+
+Analyse de r´eseaux sociaux
+
+Analyse de communaut´es
+
+Prvision de liens : d´eﬁnition
+
+D´eﬁnition informelle : pr´edire la formation d’un lien entre deux nœuds
+jamais connect´es auparavant.
+Soit G =< G1, G2, . . . , GT > un r´eseau temporel de r´eseaux sociaux,
+Gi est le graphe du r´eseau social `a l’instant i. La tˆache de pr´ediction
+i=1 Vi tels que
+(cid:54) ∃Ej (u, v ) ∈ Ej si (u, v ) ∈ ET +1.
+
+de liens consiste `a pr´edire pour chaque couple v , u ∈(cid:84)T
+
+R. Kanawati (LIPN)
+
+Graphes de Terrain
+
+October 24, 2016
+
+40 / 1
+
+Analyse de r´eseaux sociaux
+
+Analyse de communaut´es
+
+Application : syst`eme de recommandation
+
+Recommandation de produits = pr´ediction de liens dans le graphe
+biparti [5, 8, 1].
+
+L’analyse des r´eseaux sociaux est une solution au probl`eme pos´e par
+les matrices de transactions souvent creuses.
+
+R. Kanawati (LIPN)
+
+Graphes de Terrain
+
+October 24, 2016
+
+41 / 1
+
+Analyse de r´eseaux sociaux
+
+Analyse de communaut´es
+
+Application : recommandation de collaborations
+acad´emiques
+
+Recommandation de collaboration = pr´ediction de liens dans le
+graphe projet´e / auteurs [13, 9].
+
+R. Kanawati (LIPN)
+
+Graphes de Terrain
+
+October 24, 2016
+
+42 / 1
+
+Analyse de r´eseaux sociaux
+
+Analyse de communaut´es
+
+Autres applications
+
+Aide `a la navigation sur le Web
+
+Aide `a la r´eponse des questions sur forums, help-desk
+
+Etude de propagation des virus informatiques par e-mail.
+
+. . .
+
+R. Kanawati (LIPN)
+
+Graphes de Terrain
+
+October 24, 2016
+
+43 / 1
+
+Analyse de r´eseaux sociaux
+
+Probl`emes similaires
+
+Probl`eme similaire : liens cach´es (1)
+
+Etant donn´e un r´eseau Gt =< V , E > observ´e `a l’instant t, la tˆache
+de d´etection de liens cach´es consiste `a trouver les liens manquants
+`a l’instant t.
+
+Origine : information manquante, dissimulation d’information.
+
+R. Kanawati (LIPN)
+
+Graphes de Terrain
+
+October 24, 2016
+
+44 / 1
+
+Analyse de r´eseaux sociaux
+
+Probl`emes similaires
+
+Probl`eme similaire : liens cach´es (2)
+
+[2] : Comparer les caract´eristiques topologiques des nœuds impliqu´es
+en liens cach´es (LC) / liens en formation (LF).
+
+M´ethodologie : ´eliminer al´eatoirement des liens dans un r´eseau
+temporel de r´eseaux sociaux.
+Pour LC, le nombre de voisins communs est deux fois plus grand que
+pour LF.
+Pour LC, le produit des degr´es des nœuds impliqu´es est deux fois plus
+petit que pour LF.
+LC : distribution des degr´es des nœuds plus ´etal´ee.
+Pas de diﬀ´erence signiﬁcative en ce qui concne les distances !
+
+R. Kanawati (LIPN)
+
+Graphes de Terrain
+
+October 24, 2016
+
+45 / 1
+
+Analyse de r´eseaux sociaux
+
+Probl`emes similaires
+
+Probl`eme similaire: compl´etion de liens
+
+Dans un graphe G =< V , E >, on consid`ere un nœud v ∈ V dont on
+connaˆıt le degr´e r´eel d(v ) > dG (v ). Le probl`eme consiste `a trouver
+les nœuds ui ∈ V auxquels v est susceptible d’ˆetre li´e [3].
+Exemple : Un client ach`ete 4 livres sur un site de e-commerce mais le
+nom d’un des livres achet´es est perdu dans la transaction. Quel est ce
+livre ?
+
+Alice, Bob et une troisi`eme personne ont fait une r´eunion. Identiﬁer
+cette personne inconnue en fonction des liens connus.
+
+Dans [3], on se limite `a examiner le cas d’un seul nœud inconnu.
+
+R. Kanawati (LIPN)
+
+Graphes de Terrain
+
+October 24, 2016
+
+46 / 1
+
+Analyse de r´eseaux sociaux
+
+Probl`emes similaires
+
+Probl`eme similaire : liens alarmants
+
+Etant donn´e un r´eseau temporel G =< G1, G2, . . . , GT >, le probl`eme
+est de classiﬁer les nouveaux liens qui apparaissent dans GT en deux
+classes : {normal, anormal}, en fonction de l’´evolution du r´eseau
+Probl`eme plus facile que la pr´ediction de liens.
+
+R. Kanawati (LIPN)
+
+Graphes de Terrain
+
+October 24, 2016
+
+47 / 1
+
+Analyse de r´eseaux sociaux
+
+Probl`emes similaires
+
+Probl`eme similaire : ´evolution des r´eseaux
+
+D´eﬁnition de trois niveaux de granularit´e pour observer et/ou pr´edire
+l’´evolution d’un r´eseau.
+
+Niveau r´eseau
+
+Leskovec et al. , ´evolution des param`etres des r´eseaux: diam`etre
+d´ecroissant et densiﬁcation des degr´es dans des r´eseaux de co-citations.
+Barabasi et al. , r´eseaux de co-auteurs, domaine des maths et des
+neurosciences. Evolution gouvern´ee par l’attachement pr´ef´erentiel (lien
+internes et externes), augmentation du degr´e moyen et d´ecroissance de
+la s´eparation entre les nœuds.
+
+Niveau communaut´e : ´evolution des communaut´es par taille et des
+communaut´es de th`emes
+
+R. Kanawati (LIPN)
+
+Graphes de Terrain
+
+October 24, 2016
+
+48 / 1
+
+Analyse de r´eseaux sociaux
+
+Probl`emes similaires
+
+Approches de pr´ediction de liens
+
+Trois crit`eres de classiﬁcation :
+
+Approche : Dyadiques / Structurelles.
+
+Dyadique : Evaluer le score d’un lien entre deux nœuds vi , vj
+Structurelle : pr´edire l’´evolution de sous-graphes (pr´ediction de
+plusieurs liens en mˆeme temps) [7]
+
+Type d’attributs : topologiques / caract´eristiques des nœuds.
+
+Approche topologique : utiliser seulement le graphe du r´eseau.
+L’emploi des approches fond´ees sur l’analyse du contenu des nœuds
+n´ecessite une expertise dans le domaine de l’application.
+
+Prise en compte du temps : Oui / non.
+
+R. Kanawati (LIPN)
+
+Graphes de Terrain
+
+October 24, 2016
+
+49 / 1
+
+Analyse de r´eseaux sociaux
+
+Probl`emes similaires
+
+Bibliographie I
+
+Nesserine Benchettara, Rushed Kanawati, and C´eline Rouveirol.
+Calcul de recommandation par pr´ediction de liens dans un graphe biparti.
+In Actes de l’ateiler sur l’apprentissage et graphes pour les syst`emes complexes (plate-forme AFIA 2009), Hammemt,
+Tunisie, May 2009.
+
+Richard J E Cooke.
+Link prediction and link detection in sequences of large social networks using temporal and local metrics.
+Master thesis, University of cape Town, 2006.
+
+A Goldenberg, J Kubica, P Komarek, A Moore, and J Schneider.
+A comparaison of statistical and Machine learning Algorithms on the task of linl completion.
+In Proceedings of the KDD workshop on link analysis for detecting complex Behavior, 2003.
+
+Petter Holme, Christofer R Edling, and Fredrik Liljeros.
+Structure and Time-Evolution of an Internet Dating Community,.
+Social Networks, 26:155–174, 2004.
+
+Zan Huang, Xin Li, and Hsinchun Chen.
+Link prediction approach to collaborative ﬁltering.
+In Mary Marlino, Tamara Sumner, and Frank M Shipman III, editors, JCDL, pages 141–142. ACM, 2005.
+
+R. Kanawati (LIPN)
+
+Graphes de Terrain
+
+October 24, 2016
+
+50 / 1
+
+Analyse de r´eseaux sociaux
+
+Probl`emes similaires
+
+Bibliographie II
+
+Rushed Kanawati.
+On Using {SNA} techniques for enhancing performances of On-line help-desks.
+In Proceedings of {IADIS} International Conference on E-commerce (E-commerce’08), pages 286–291, Amsterdam,
+2008.
+
+Mayank Lahiri and Tanya Y Berger-Wolf.
+Structure Prediction in Temporal Networks using Frequent Subgraphs.
+In CIDM, pages 35–42. IEEE, 2007.
+
+Neal Lathia, Stephen Hailes, and Licia Capra.
+kNN CF: a temporal social network.
+In Pearl Pu, Derek G Bridge, Bamshad Mobasher, and Francesco Ricci, editors, RecSys, pages 227–234. ACM, 2008.
+
+David Liben-Nowell.
+An Algorithmic Approach to Social networks.
+PhD thesis, M.I.T., 2005.
+
+Tsuyoshi Murata and Sakiko Moriyasu.
+Link Prediction based on Structural Properties of On-line Social Networks.
+New Generation Computing, 26:245–257, 2008.
+
+R. Kanawati (LIPN)
+
+Graphes de Terrain
+
+October 24, 2016
+
+51 / 1
+
+Analyse de r´eseaux sociaux
+
+Probl`emes similaires
+
+Bibliographie III
+
+M E J Newman.
+Scientiﬁc collaboration networks. II. Shortest paths, weighted networks, and centrality.
+Phys. Rev. E, 64(1):16132, 2001.
+
+M E J Newman.
+Coauthorship networks and patterns of scientiﬁc collaboration.
+Proceedings of the National Academy of Science of the United States (PNAS), 101:5200–5205, 2004.
+
+Milen Pavlov and Ryutaro Ichise.
+Finding Experts by Link Prediction in Co-authorship Networks.
+In Anna V Zhdanova, Lyndon J B Nixon, Malgorzata Mochol, and John G Breslin, editors, FEWS, volume 290 of CEUR
+Workshop Proceedings, pages 42–55. CEUR-WS.org, 2007.
+
+Mukund Seshadri, Sridhar Machiraju, Ashwin Sridharan, Jean Bolot, Christos Faloutsos, and Jure Leskovec.
+Mobile call graphs: beyond power-law and lognormal distributions.
+In Ying Li, Bing Liu, and Sunita Sarawagi, editors, KDD, pages 596–604. ACM, 2008.
+
+R. Kanawati (LIPN)
+
+Graphes de Terrain
+
+October 24, 2016
+
+52 / 1
+
+

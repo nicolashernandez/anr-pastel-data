@@ -1,0 +1,120 @@
+https://pagesperso.g-scop.grenoble-inp.fr/~stehlikm/teaching/miashs/5-Planarite.pdf
+
+Application : design de circuits impri-
+més en microelectronique
+
+Figure 1: Deux représentations du
+graphe complet K4. La deuxième repré-
+sentation est planaire, donc K4 est un
+graphe planaire.
+
+Réseaux sociaux et graphes
+MIASHS
+
+5 Graphes planaires
+
+Déﬁnition 5.1. Un graphe G = (V, E) est planaire s’il peut être repré-
+senté dans le plan R2 de sorte que deux arêtes distinctes ne se croisent
+pas. On appelle une telle représentation un plongement de G dans le
+plan.
+
+Déﬁnition 5.2. Soit G un graphe plongé dans le plan R2. Les compo-
+santes connexes de R2 sont les faces de G.
+
+Déﬁnition 5.3. Soit G un graphe plongé dans le plan. Alors on déﬁnit
+le graphe dual G∗ de G comme suit. À chaque face f de G correspond
+un sommet f ∗ de G∗, et à chaque arête e de G correspond un arête e∗
+de G. Deux sommets f ∗, g∗ de G∗ sont les extrémités de l’arête e∗ si et
+seulement si l’arête e sépare les faces f et g de G.
+
+étant donné un graphe G et un sous-ensemble S de E(G), on note
+
+S∗ le sous-ensemble {e∗ : e ∈ S} de E(G∗).
+Déﬁnition 5.4. Soit G = (V, E) un graphe. Un ensemble d’aretes F ⊆ E
+est une coupe s’il existe un ensemble X ⊆ V tel que chaque arete dans
+F a une extrémité dans X et l’autre dans V \ X ; on note F = δ(X).
+
+Une attache d’un graphe est une coupe non-vide minimale, c’est-à-
+dire, une coupe non-vide dont aucun des sous-ensembles propres et
+non-vides n’est une coupe.
+Proposition 5.5. Soit G un graphe connexe plongé dans le plan, et soit G∗
+le graphe dual de G.
+1. Si C est un cycle de G, alors C∗ est une attache de G∗.
+2. Si B est une attache de G, alors B∗ est un cycle de G∗.
+Théorème 5.6 (Formule d’Euler). Soit G un graphe connexe plongé dans
+le plan. Soient n, m et f le nombre de sommets, arêtes et faces de G, respecti-
+vement. Alors on a n − m + f = 2.
+Démonstration. Soit T un arbre couvrant de G. Comme T a n sommets,
+il a n − 1 arêtes. Par la Proposition 5.5. le graphe C∗ = (G \ T)∗ est un
+arbre couvrant de G∗. Comme C∗ a f faces, C∗ a f − 1 arêtes. Toute
+arête de G est soit dans T, soit dans C. Donc on a m = (n − 1) + ( f −
+1).
+
+Corollaire 5.7 (Formule d’Euler avec composantes). Soit G un graphe
+plongé dans le plan. Soient n, m, f et c le nombre de sommets, arêtes, faces et
+composantes connexes de G, respectivement. Alors on a n − m + f = 1 + c.
+
+réseaux sociaux et graphes miashs
+
+2
+
+Démonstration. Récurrence sur c. Cas de base : c = 1 (Theorème 5.6).
+On suppose le résultat est vrai pour c ≥ 1. Soit G un graphe pla-
+naire avec c + 1 composantes connexes. Soit G1 une des composantes
+connexes. G(cid:48) = G − G1 a c composantes donc n1 − m1 + f1 = 2 et
+n(cid:48) − m(cid:48) + f (cid:48) = 1 + c par l’hypothèse de récurrence. Or, n = n1 + n(cid:48),
+m = m1 + m(cid:48), et f = f1 + f (cid:48) − 1 Donc n − m + f = (n1 − m1 + f1) +
+n(cid:48) − m(cid:48) + f − 1 = 1 + (c + 1).
+Corollaire 5.8. Soit G un graphe planaire connexe. Alors on a m ≤ 3n − 6.
+Démonstration. On montre que 2m ≥ 3 f car chaque face est bordée par
+au moins 3 arêtes. Puis calcul.
+
+Corollaire 5.9. Le graphe K5 n’est pas planaire.
+Démonstration. On a m = 10 > 9 = 3 · 5 − 6 = 3n − 6.
+Corollaire 5.10. Soit G un graphe planaire quelconque. Alors G contient un
+sommet de degre ≤ 5.
+Démonstration. Sinon, 2m ≥ 6n, donc m ≥ 3n.
+Proposition 5.11. Soit G planaire connexe sans triangle. Alors on a m ≤
+2n − 4.
+Corollaire 5.12. Le graphe K3,3 n’est pas planaire.
+Démonstration. On a m = 9 > 8 = 2 · 6 − 4 = 2n − 4.
+
+On a montré que K5 et K3,3 ne sont pas bipartis. En fait, ces deux
+graphes sont des graphes non-biparti « minimaux canoniques » et
+jouent un rôle important dans la caractérisation suivante de graphes
+planaires.
+
+Déﬁnition 5.13. Une subdivision d’un graphe est le résultat de l’ajout
+d’un ou plusieurs sommets sur une ou plusieurs arêtes.
+
+Théorème 5.14 (Le théorème de Kuratowski). Un graphe G est planaire
+si et seulement si G ne contient pas de subdivision de K5 ni de K3,3.
+
+Figure 2: Une subdivision de K3,3.
+
+5.1 Coloration des graphes planaires
+
+Le théorème célèbre dit des 4 couleurs
+
+Théorème 5.15. Soit G planaire, alors χ(G) ≤ 4.
+
+La preuve de ce théorème est extrêmement difﬁcile et dépend de
+l’usage de l’ordinateur pour étudier des centaines de cas. Le résultat
+suivant est beaucoup plus simple.
+Théorème 5.16. Soit G planaire, alors, χ(G) ≤ 6
+
+réseaux sociaux et graphes miashs
+
+3
+
+Démonstration. Soit n le nombre de sommets de G. Grâce au corol-
+laire 5.10, G0 := G contient un sommet u1 de degré au plus 5. De
+même, G1 := G − u1 contient un sommet u2 de degré au plus 5, et
+plus généralement, Gi := G − {u1, u2, . . . , ui} contient un sommet ui+1
+de degré au plus 5, pour tout 0 ≤ i ≤ n − 1.
+
+Appliquer l’algorithme glouton dans l’ordre un, un−1, . . . , u2, u1. À
+chaque étape, le sommet traité est voisin d’au plus 5 sommets déjà
+coloriés, donc l’algorithme va utiliser au plus 6 couleurs.
+
+

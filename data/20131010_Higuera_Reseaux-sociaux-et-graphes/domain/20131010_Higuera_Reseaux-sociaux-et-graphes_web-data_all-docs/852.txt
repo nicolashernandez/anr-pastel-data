@@ -1,0 +1,160 @@
+http://www-sop.inria.fr/members/Nicolas.Nisse/sujet-risque-systemique.pdf
+
+Dynamique et contrôle du Risque systémique 
+
+dans les graphes de réseaux financiers 
+
+Encadrement 
+
+Nicolas Nisse, chargé de recherche Inria (HDR), projet COATI, équipe COMRED, I3S.  
+
+ 
+ 
+Thèmes scientifiques 
+Risque systémique, théorie des graphes, jeux sur les graphes.   
+ 
+ 
+Contexte 
+La  dernière  crise  financière  a  révélé  les  conséquences  importantes  de  la  sous-estimation  du  risque 
+systémique  dans  la  propagation  de  défauts  dans  le  secteur  bancaire.  Face  à  cette  observation,  la 
+modélisation du risque systémique est devenue l’un des sujets de recherche les plus actifs du domaine. Les 
+approches envisagées jusqu’à maintenant ne permettent pas encore de capturer précisément la façon dont 
+les connexions entre institutions financières (prêt interbancaire, investissement sur des produits partageant 
+un risque commun,…) impactent le risque de propagation d’un défaut majeur, comme celui de Lehman 
+Brothers en 2008.   
+ 
+Modélisation  du  risque  systémique.  Afin  d’en  avoir  un  traitement  mathématique  adéquat,  la 
+modélisation  du  risque  de  contagion  entre  agents  est  généralement  effectuée  via  la  considération 
+d’interactions locales entre agents. Via sa stratégie d’investissement, de diversification ou de couverture 
+des  risques,  chaque  institution  bancaire  choisit  d’établir  des  connexions  avec  d’autres  institutions  (par 
+exemple via des prêts interbancaires). Etant donné le nombre conséquent d’agents, il est souvent considéré 
+que les agents sont identiques. Ils sont donc exposés de façon similaire aux autres institutions et forment 
+un graphe « homogène » (complet uniforme). D’un point de vue mathématique, cela permet par exemple 
+d’étudier le cas limite, plus facile à traiter numériquement, dans lequel il y a une infinité d’agents dans le 
+système [1].  
+ 
+Une littérature relativement abondante commence à apporter des éléments de réponse à ces questions de 
+risque systémique, mais le défaut principal de cette approche est l’hypothèse fondamentale permettant de 
+passer le système à la limite : les agents sont identiques.  Bien entendu, les institutions financières sont de 
+tailles  diverses,  ont  des  niveaux  d’expositions  actuels  distincts,  poursuivent  des  objectifs  qui  peuvent 
+diverger… Ainsi, il paraît nécessaire de construire des modèles qui prennent en compte cette asymétrie de 
+nature  et  de  comportement  des  agents,  qui  donnent  naissance  à  des  graphes  de  connexion  hétérogènes. 
+Dans  la  littérature,  on  peut  citer  par  exemple  [2,3,4]  qui  modélisent  le  système  à  l’aide  de  graphes 
+aléatoires et apportent des réponses partielles à ces questions. Il apparaît naturellement que la structure 
+même des graphes de connexion est une composante primordiale dans l’évaluation du risque de contagion 
+globale. Comme détaillé ci-après, en s’inspirant des questions connexes déjà traitées dans la littérature de 
+théorie des graphes (propagation d'épidémie ou de rumeurs, extinction et confinement de feux, etc.), nous 
+allons chercher à  mieux comprendre le type de structures qui diminue le plus le risque propagation de 
+défauts dans le système.  
+ 
+Théorie des graphes: modélisation de la propagation et jeux sur les graphes. Des problèmes connexes 
+au risque d'effondrement du système bancaires ont été étudiés dans la communauté théorie des graphes et 
+des  réseaux,  en  particulier  la  propagation  d'épidémies  ou  de  feux  ainsi  que  le  calcul  de  mesures 
+
+d’endiguement  optimales  [12],  puis  la  diffusion  d'information  avec  le  développement  des  réseaux  de 
+télécommunications (problème du gossip puis de diffusion de vidéos), et la propagation de rumeurs avec 
+l'apparition des réseaux sociaux. Ces problèmes ont d'abord été étudiés avec des modèles homogènes où 
+chaque individu est représenté de la même manière. Puis, ces dernières années, avec la constitution et la 
+collecte de grands ensembles de données et en particulier de très grands réseaux (graphes du web, réseaux 
+sociaux,  …),  l'étude  des  réseaux  complexes  a  attiré  une  attention  croissante  ces  dernières  années.  La 
+communauté scientifique s'est alors intéressé à des modèles hétérogènes où tous les individus n'ont pas la 
+même place dans le graphe qui les relie, par exemple [5,6,7]. L'équipe Coati a une expérience importante 
+sur ces thématiques [15,16].  Nous nous appuierons aussi sur l'expertise en modélisation économique du 
+GREDEG (Groupe de Recherche en Droit, Economie et Gestion) avec lequel l'I3S a commencé un projet 
+interdisciplinaire sur l'application de la théorie des réseaux en économie, ainsi que sur les partenaires du 
+projet PEPS Systemic, le CREM à Rennes et le LAMA à Paris.  
+ 
+ 
+Objectifs  de  la  thèse  :  Application  de  la  théorie  des  graphes  à  la  modélisation  du  risque 
+systémique 
+ 
+Le but de cette thèse est d'appliquer les méthodes de théorie des graphes mises en oeuvre pour l'étude de la 
+propagation  et  de  jeux  dans  les  graphes pour  modéliser  les  risques  du  système  bancaire.  Notre  objectif 
+général  est  d'introduire  et  d'analyser  des  modèles  hétérogènes.  Notre  point  de  départ  sera  l'étude  d'un 
+exemple précis, le modèle suivant.  
+ 
+Nous considèrerons une modélisation du système bancaire par un graphe valué. Les sommets de ce graphe 
+seront les banques et institutions financières qui auront chacune un montant de fonds propres. Des liens 
+valués connectant les sommets représenteront les dettes contractées entre banques. Nous étudierons des 
+scénarios sur ce graphe dans lesquels une banque fait défaut et risque d'entrainer dans sa chute une part 
+importante  du  système  bancaire,  voir  par  exemple  le  modèle  de  [2].  Dans  notre  modèle,    quand  une 
+banque  fait  défaut,  elle  ne  peut  plus  honorer  ses  dettes  (ces  liens  sortants  disparaissent)  et  certaines 
+banques voisines peuvent en conséquence se trouver avec une balance négative et faire défaut à la suite.  
+ 
+Pour ce modèle, nous étudierons les points suivants :  
+ 
+Analyse des caractéristiques du graphe des banques. Notre première étape sera d'étudier les modèles 
+de graphes de banques présents dans la littérature [8, 2 et références] pour déterminer les caractéristiques 
+principales de ces graphes : taille, distribution des degrés, connectivité, présence et taille des cycles, etc. 
+Cela nous servira par la suite pour proposer des méthodes d'étude et de résolution adéquate.  
+ 
+Modélisation  du  risque  et  calcul  de  la  propagation  dans  le  graphe  des  banques.  Nous  étudierons 
+ensuite la propagation d'un risque suite à un défaut dans ce type de graphes. En particulier, en s'appuyant 
+sur leurs caractéristiques, nous proposerons des algorithmes efficaces pour estimer le risque d'un défaut 
+majeur du système bancaire. Nous essaierons d'identifier les institutions les plus à risque dans le système 
+bancaire.  Nous  nous  appuierons  sur  les  nombreux  travaux  pour  identifier  des  individus  particuliers  (en 
+raison de leur forte connectivité ou de leur position centrale dans le réseau) dans les réseaux sociaux, que 
+ce soit des individus à risques [9] ou alors les individus les plus influents des réseaux sociaux.  
+ 
+Intervention sur la propagation du risque. Nous voulons étudier comment un état peut intervenir en cas 
+de  chute  d'une  des  institutions  bancaires.  En  particulier,  dans  le  cadre  de  scénarios  dans  lesquels  un 
+régulateur décide d'investir une somme d'argent (prêt des banques centrales pour la crise 2008) pour éviter 
+une propagation trop importante  du risque. Le régulateur doit déterminer comment affecter ce capital aux 
+diverses institutions afin de minimiser l’impact global. Ces questions se rapprochent de celles posées par 
+l’élaboration de stratégies de défense contre la propagation de rumeurs dans les réseaux sociaux, voir par 
+
+exemple [11]. Nous utiliserons des outils de la théorie des jeux sur les graphes.  
+ 
+Renforcement  du  réseau  bancaire  et  régulation.  La  structure  des  graphes  ayant  une  influence  sur  la 
+propagation d'un risque ou d'une information, il est important de chercher à déterminer quelles sont les 
+structures les plus solides pour résister à un défaut.  Nous nous demanderons ensuite comment renforcer le 
+graphe  des  banques  existant  ou  comment  éviter  qu'il  ne  s'affaiblisse.  Ainsi,  considérons   le  cas 
+d’un  régulateur mettant en  place de règles pour d’acception sur les prêts. Pour l'instant, seul des règles 
+prudentielles  individuelles  (par  exemple  réserve  de  fonds  propres)  sont  mises  en  place.  Serait-il 
+bénéfique   d’utiliser   des  critères  qui  prennent  en  compte  le  risque  global  (sur  le  réseau  financier)    et 
+donc  la situation des parties contractantes  dans le graphe ? Nous essaierons donc  de déterminer  si le 
+graphe  des  banques  pourrait  être  rendu  plus  solide  en  supprimant  certaines  structure  dangereuses,  et  si 
+celles-ci  sont suffisamment génériques pour être exclue par de la régulation. Nous nous appuierons sur 
+des outils de conception (design) de réseaux mis en place pour les réseaux de télécommunication [13]. En 
+effet,  dans  ce  contexte,  les  réseaux  ne  sont  pas  créés  de  façon  "naturelle",  mais  mis  en  place  par  des 
+opérateurs.  Les  chercheurs  se  sont  donc  demandés  comment  construire  des  réseaux  optimaux  pour 
+différents critères : tolérances aux pannes, diffusions de données optimale [14].   
+
+Références 
+ 
+[1] J.P. Fouque and T. Ichiba, Stability in a model of inter-bank lending, SIAM Journal on Financial Mathematics, 
+Vol. 4, 2013, p. 784-803 
+[2] Gleeson, J. P., Hurd, T. R., Melnik, S., & Hackett, A. (2013). Systemic risk in banking networks without Monte 
+Carlo simulation. In Advances in Network Analysis and its Applications (pp. 27-56). Springer Berlin Heidelberg 
+[3] H Amini, R Cont, A Minca, Resilience to contagion in financial networks, Mathematical Finance, 2013. 
+[4] A. Minca and A. Sulem, Optimal control of interbank contagion under complete information,  Statistics and Risk 
+Modeling 31(1), March 2014, pp. 23-48 
+[5]  Sudbury,  A.  (1985).  The  proportion  of  the  population  never  hearing  a  rumour.  Journal  of  applied  probability, 
+443-446. 
+[6]  Zanette,  D.  H.  (2001).  Critical  behavior  of  propagation  on  small-world  networks.  Physical  Review  E,  64(5), 
+050901. 
+[7]  Zhou,  J.,  Liu,  Z.,  &  Li,  B.  (2007).  Influence  of  network  structure  on  rumor  propagation.  Physics  Letters  A, 
+368(6), 458-463. 
+[8] Boss, M., Elsinger, H., Thurner, S. & Summer, M. 2004 Network topology of the interbank market. Quantitative 
+Finance 4, 677–684. 
+[9] Christley, R. M., Pinchbeck, G. L., Bowers, R. G., Clancy, D., French, N. P., Bennett, R., & Turner, J. (2005). 
+Infection  in  social  networks:  using  network  analysis  to  identify  high-risk  individuals.  American  journal  of 
+epidemiology, 162(10), 1024-1031. 
+[10]  Zanette,  D.  H.,  &  Kuperman,  M.  (2002).  Effects  of  immunization  in  small-world  epidemics.  Physica  A: 
+Statistical Mechanics and its Applications, 309(3), 445-452. 
+[11] Yu, H., Kaminsky, M., Gibbons, P. B., & Flaxman, A. (2006, September). Sybilguard: defending against sybil 
+attacks via social networks. In ACM SIGCOMM Computer Communication Review (Vol. 36, No. 4, pp. 267-278). 
+ACM. 
+[12]  Finbow,  S.,  &  MacGillivray,  G.  (2009).  The  firefighter  problem:  a  survey  of  results,  directions  and 
+questions. Australas. J. Combin, 43, 57-77. 
+[13]  Bermond,  J.  C.  (laboratoire  I3S),  Delorme,  C.,  &  Quisquater,  J.  J.  (1986).  Strategies  for  interconnection 
+networks: some methods from graph theory. Journal of Parallel and Distributed Computing, 3(4), 433-449 
+[14] Fraigniaud, P., & Peters, J. G. (1994). Minimum Linear Gossip Graphs and Maximal Linear(Delta,k)-Gossip 
+Graphs 
+[15] Fomin, F. V., Giroire, F., Jean-Marie, A., Mazauric, D., & Nisse, N. (2014). To satisfy impatient web surfers is 
+hard. Theoretical Computer Science, 526, 1-17. 
+[16]  Fomin,  F.  V.,  Golovach,  P.  A.,  Kratochvíl,  J.,  Nisse,  N.,  &  Suchan,  K.  (2010).  Pursuing  a  fast  robber  on  a 
+graph. Theoretical Computer Science, 411(7), 1167-1181. 
+  
+
+

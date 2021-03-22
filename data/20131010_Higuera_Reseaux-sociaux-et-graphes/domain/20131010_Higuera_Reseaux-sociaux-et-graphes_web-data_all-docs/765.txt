@@ -1,0 +1,1529 @@
+http://www.diffusion.ens.fr/databis/diffusion/bonus/2010_02_16_viennet.pdf
+
+Analyse des réseaux sociaux
+
+Emmanuel Viennet
+
+Laboratoire de Traitement et Transport de l’Information
+
+L2TI
+
+Université Paris 13
+
+Réseaux sociaux, analyse et data mining
+École Normale Supérieure
+Journée organisée par le groupe «Data mining et apprentissage»
+Société Française de Statistique
+
+16/02/2010
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+1 / 69
+
+Plan de l’exposé
+
+1
+
+Introduction: fouille des réseaux sociaux
+
+2 Caractérisation des réseaux sociaux
+
+3 Analyse relations/contenu: un exemple d’approche
+
+4 Analyse structurelle: communautés
+
+5 Catégorisation de nœuds
+
+6 Méthodes à noyaux pour les graphes
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+2 / 69
+
+Plan de l’exposé
+
+1
+
+Introduction: fouille des réseaux sociaux
+
+2 Caractérisation des réseaux sociaux
+
+3 Analyse relations/contenu: un exemple d’approche
+
+4 Analyse structurelle: communautés
+
+5 Catégorisation de nœuds
+
+6 Méthodes à noyaux pour les graphes
+
+Croissance du Web...
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+4 / 69
+
+Croissance des médias “sociaux”
+
+Du web des contenus au web des utilisateurs ?
+
+Début 2010:
+
+Facebook: 400 millions
+d’utilisateurs
+Twitter: 20 à 60 millions
+Orkut: 25 millions au
+Brésil
+SkyBlog, MySpace,
+LinkedIn, ...
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+5 / 69
+
+Les entreprises collectent de plus en plus de données
+sur les relations entre leurs clients
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+6 / 69
+
+Mais quels modèles économiques ?
+
+Sites payants: peu d’audience
+Sites institutionnels (services publics)
+Mécénat, donations (Wikipédia)
+
+Site gratuits, publicité
+
+Publicité personnalisée
+Marketing viral
+Marketing “temps réel”
+...
+
+Et pour ﬁdéliser les visiteurs d’un site “social”:
+“animation de communauté”, suivi d’un site à l’autre, ...
+⇒ besoin d’analyse (fouille) de données
+de type “graphe”
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+7 / 69
+
+Mais quels modèles économiques ?
+
+Sites payants: peu d’audience
+Sites institutionnels (services publics)
+Mécénat, donations (Wikipédia)
+
+Site gratuits, publicité
+
+Publicité personnalisée
+Marketing viral
+Marketing “temps réel”
+...
+
+Et pour ﬁdéliser les visiteurs d’un site “social”:
+“animation de communauté”, suivi d’un site à l’autre, ...
+⇒ besoin d’analyse (fouille) de données
+de type “graphe”
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+7 / 69
+
+Contexte: fouille de données structurées
+
+Des tables aux données structurées...
+
+Modèles: discrimination, régression, classiﬁcation...
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+8 / 69
+
+Réseaux (sociaux ou non)
+
+Pages Web
+
+Routeurs Internet
+
+Facebook
+
+Communications
+
+Citations
+
+Biologie
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+9 / 69
+
+Réseaux sociaux à l’ère Internet...
+
+Appels téléphoniques
+Courrier électronique
+Réseaux de co-auteurs
+Réseaux “d’amitié”
+Réseaux organisationnels
+Réseaux d’afﬁliation
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+10 / 69
+
+Exemple: le réseau Twitter
+
+Chaque utilisateur:
+
+émet de courts messages (140 caractères)
+“suit” (reçoit) les messages de quelques
+utilisateurs
+“suivi” (lu) par d’autres.
+
+◦ Tous les messages sont publics
+◦ Environ 25 millions d’utilisateurs (?)
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+11 / 69
+
+Analyse du réseau Twitter
+
+(2007, Bruno Peeters, Belgium)
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+12 / 69
+
+Marketing & recommandation: la longue traine
+
+Chris Anderson, The Long Tail, Wired, Issue 12.10 - October 2004
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+13 / 69
+
+Marketing, recommandation et réseaux sociaux
+Besoin de recommandations personnalisées !
+
+> 50% font des recherches en ligne avant d’acheter
+Les recommandations personnalisées sont basées sur les achats
+et notations passées, par ex. le système d’Amazon “les clients qui
+ont acheté ceci achètent aussi cela”
+
+(cid:73) MovieLens, “based on ratings of users like you...”
+(cid:73) Epinions, “based on the opinions of the raters you trust...”
+
+Nous sommes plus facilement inﬂuencés par nos amis que par des
+inconnus !
+
+68% des clients consultent leurs
+amis ou famille avant d’acheter des
+produits électroniques (Burke
+2003)
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+14 / 69
+
+Applications de l’analyse des réseaux sociaux
+
+Étude de la structure des réseaux: communautés, diffusion, ...
+(animation, vente ciblée)
+Web: recherche, extraction d’information
+Marketing: identiﬁer des groupes de clients ou produits pour faire
+des recommandations (publicité ciblée, marketing viral)
+Personalisation (interfaces, services)
+Epidémiologie
+Détection de fraude
+Sécurité (contre-terrorisme)
+...
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+15 / 69
+
+Problèmes intéressants pour la fouille de données
+
+Un domaine scientiﬁquement passionnant et pluri-disciplinaire:
+
+Data mining et Apprentissage pour:
+
+la caractérisation des réseaux sociaux
+la modèlisation de la diffusion d’information (par ex. pour le
+marketing viral)
+la modèlisation de l’évolution (par ex. créations de nouveaux liens)
+la classiﬁcation de nœuds
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+16 / 69
+
+Plan de l’exposé
+
+1
+
+Introduction: fouille des réseaux sociaux
+
+2 Caractérisation des réseaux sociaux
+
+3 Analyse relations/contenu: un exemple d’approche
+
+4 Analyse structurelle: communautés
+
+5 Catégorisation de nœuds
+
+6 Méthodes à noyaux pour les graphes
+
+Ordres de grandeurs
+
+Quelques jeux de données utilisés en recherche:
+
+e-mails labo sur 2 mois
+e-mails sur 2 ans
+“amitiés” entre bloggueurs
+Téléphone
+Communications IM
+
+Nombre de nœuds
+≈ 1000
+≈ 50000
+4,4 millions
+10-100 millions
+240 millions
+
+Parcimonie (sparseness): nombre de liens proportionnel au nombre
+de nœuds.
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+18 / 69
+
+Graphes
+
+Théorie des graphes
+depuis Euler...
+
+Très nombreux résultats:
+chemins, ﬂots, cliques,
+décompositions
+spectrales...
+
+⇓
+
+⇓
+
+⇓
+
+2
+1
+1
+0
+
+0
+1
+1
+1
+
+2
+0
+1
+1
+
+1CCA
+
+0BB@ 1
+
+2
+1
+2
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+19 / 69
+
+Réseaux sociaux et graphes: quelles différences ?
+Un réseau social est un graphe, mais:
+
+nœuds porteurs d’attributs
+liens valués pouvant porter des données (messages)
+similarité entre deux nœuds = f (attributs, liens)
+caractéristique du réseau (cid:54)= graphe aléatoire (propriétés
+structurelles spéciales)
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+20 / 69
+
+Exemple de propriété structurelle: l’effet petit monde
+Longueur moyenne du plus court chemin reliant deux nœuds petite.
+
+“six degrés de séparation”
+
+Caractéristique liée à la distribution des degrés: graphe “sans-échelle”
+(Barabasi, 2000), suivant une loi de Pareto:
+
+P(degré d’un nœud = k) ∝ k−γ
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+21 / 69
+
+Exemple: simulation du réseau Internet
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+22 / 69
+
+(Mahadevan et al., 2007)
+
+Etude des réseaux sociaux: terminologie
+
+Contagion: ﬂux dans le graphe
+(microbes, information, modes...)
+Connection: arêtes du graphe social
+Homophilie: qui se ressemble
+s’assemble
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+23 / 69
+
+Transitivité dans les réseaux sociaux
+Une relation sociale est transitive si
+tous les acteurs sont liés: triangles
+
+Coefﬁcient de clustering
+Lié au nombre de voisins d’un nœud qui sont eux mêmes reliés
+
+(Watts et Strogatz, 1998)
+
+A, C: grande transitivité, ancrés dans leurs
+groupes
+B, D: faible transitivité, ”ponts”
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+24 / 69
+
+Intermédiarité
+
+Déﬁnition
+Nombre de plus courts chemins passant par une arête (Newman 2004)
+
+Utilisation:
+
+nœuds importants pour la communication
+découpage en communautés
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+25 / 69
+
+Communautés
+
+(P. Pons, 2007)
+
+Recherche de communautés = partitionnement du graphe en N
+
+Identiﬁcation = recherche d’une communauté autour d’un nœud
+donné
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+26 / 69
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+27 / 69
+
+Hiérarchie de communautés et modularité
+
+D’après Newman & Girvan, 2004
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+28 / 69
+
+Intérêt de la recherche de communautés
+
+Organisation structurelle (micro ou macro)
+Évolution temporelle (voir exposé de JL Guillaume)
+Visualisation
+Permettre une analyse locale des interactions
+Animation des réseaux sociaux...
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+29 / 69
+
+Plan de l’exposé
+
+1
+
+Introduction: fouille des réseaux sociaux
+
+2 Caractérisation des réseaux sociaux
+
+3 Analyse relations/contenu: un exemple d’approche
+
+4 Analyse structurelle: communautés
+
+5 Catégorisation de nœuds
+
+6 Méthodes à noyaux pour les graphes
+
+Clustering à base de modèle pour les réseaux sociaux
+Ce type d’approche vise à modéliser simulanément les distributions de
+probabilité des attributs de nœuds et de leurs positions dans “l’espace
+social”: on introduit des variables latentes.
+
+Représentation du réseau social
+La matrice Yij décrit les liens entre les nœuds.
+Z = zi ∈ Rd donne les positions des nœuds dans l’espace (latent) Rd
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+31 / 69
+
+Modélisation (suite): le modèle
+
+Exemple: approche de Handcock & Raftery, 2006
+n nœuds, Y = yij matrice d’adjacence (“sociomatrix”).
+Les liens sont considérés comme indépendants:
+
+P(Y|Z , X , β) =
+
+P(yij|zi , zj , xij , β)
+
+(cid:89)
+
+i(cid:54)=j
+
+où:
+
+X : attributs des nœuds (ou de la paire (i, j))
+β : paramètres du modèle
+
+Modélisation par régression logistique:
+
+logit(yij = 1|zi , zj , xij , β) = βT
+
+0 xij − β1|zi − zj|
+
+(cid:80)
+i |zi|2 = 1
+
+avec 1
+n
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+32 / 69
+
+Modélisation (suite): estimation
+
+Clustering par modélisation des coordonnées zi en mixture de
+gaussiennes:
+
+) with λg > 0 and (cid:88)
+
+λg = 1
+
+G(cid:88)
+
+g=1
+
+zi ∝
+
+λg exp(−|zi − µg|2
+2σ2
+g
+
+G nombre de clusters, ﬁxé à priori
+
+Estimation des paramètres : maximum de vraisemblance (chaîne de
+Markov ou Monte Carlo)
+(cid:32) estimation coûteuse en calculs
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+33 / 69
+
+Modélisation (suite):: application 1
+
+Le choix du nombre de clusters G se pose comme un problème de
+sélection de modèle (utiliser par exemple un critère BIC) (cid:32) lent !
+Relations entre moines
+
+Étude sociologique: “amitié” entre moines
+18 nœuds (moines)
+(cid:32) 3 groupes de moines, qui
+correspondent à ceux identiﬁés par les
+sociologues
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+34 / 69
+
+Modélisation (suite): application 2
+
+Liens entre adolescents dans un collège
+
+Relations entre
+71 adolescents
+(ici 6 clusters)
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+35 / 69
+
+Modélisation (suite): conclusions
+
+Méthodes complexes (calculs lourds) mais précises
+Prise en compte simultanée des liens et des nœuds
+Applicable uniquement aux très petits réseaux !
+
+=⇒ on utilise souvent les méthodes “structurelles” d’extraction de
+communautés, qui ne prennent en compte que les liens (le graphe)
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+36 / 69
+
+Plan de l’exposé
+
+1
+
+Introduction: fouille des réseaux sociaux
+
+2 Caractérisation des réseaux sociaux
+
+3 Analyse relations/contenu: un exemple d’approche
+
+4 Analyse structurelle: communautés
+
+5 Catégorisation de nœuds
+
+6 Méthodes à noyaux pour les graphes
+
+Principal critère de qualité: la modularité
+
+La modularité mesure la qualité d’un découpage du graphe en c
+communautés
+
+(cid:88)
+(dii − (
+
+(cid:88)
+
+Q =
+
+dij )2)
+
+i
+
+j
+
+D matrice c × c, dont les éléments dij donnent la proportion de liens
+reliant des nœuds de la communauté i à la communauté j
+Q ∈ [−1, 1] mesure la densité des liens intra-communautaires vs
+inter-communautaires
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+38 / 69
+
+Recherche de communautés structurelles
+De nombreux progrès récents
+Méthodes basées sur l’intermédiarité
+Première proposition: Newman & Girvan (2004)
+
+Répéter:
+
+1 calculer l’intermédiarité des arêtes
+2 couper l’arête la plus importante
+
+jusqu’à isoler tous les nœuds (méthode séparative)
+
+Pour un grand réseau parcimonieux de n nœuds:
+
+2004 O(n3)
+Newman & Girvan
+2004 O(n2)
+Newman
+2007 O(n log2 n)
+Wakita & Tsurumi
+Blondel et al. (Louvain) 2008 O(n log n)
+(cid:32) moins de 5 minutes pour 1 million de nœuds, ou 40 minutes pour
+23 millions
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+39 / 69
+
+Exemple 1: réseau de collaboration entre scientiﬁques
+
+D’après K. Martin et M. Avnet, 2006.
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+40 / 69
+
+Exemple 2: site web collaboratif
+Liens entre utilisateurs du site MyMondomix (projet ANR CADI)
+
+Modularité Q = 0, 62
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+41 / 69
+
+Exemple 3: XTelco
+
+Données d’un opérateur téléphonique
+
+Numéro appelant Numéro appelé Durée d’appel
+
+0102030405
+
+0800101213
+
+...
+
+...
+
+3’03
+...
+
+126 millions d’appels, 25 millions de clients.
+
+Niveau
+
+0
+1
+2
+3
+
+Nœuds
+22 millions
+2,5 millions
+250 000
+100 000
+
+Modularité
+
+0,53
+0,75
+0,78
+0,79
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+42 / 69
+
+Identiﬁcation of communautés
+Chercher un voisinage (micro-communauté) à partir d’un nœud donné
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+43 / 69
+
+Principes de l’approche “physique” (Wu & Huberman)
+
+On considère le graphe comme un circuit électrique
+Loi de Kirchhoff sur le nœud C:
+
+n(cid:88)
+
+Ii =
+
+i=1
+
+i=1
+
+VDi − VC
+
+R
+
+= 0
+
+n(cid:88)
+
+n(cid:88)
+
+j=3
+
+Si graphe avec arcs valués par wij, on déﬁni Rij = w−1
+On ﬁxe la tension en deux nœuds: V1 = 1, V2 = 0 et on a:
+
+ij
+
+Vi =
+
+1
+ki
+
+Vjaij +
+
+1
+ki
+
+ai1 pour i = 3, . . . , n
+
+ki : degré du nœud i, aij matrice d’adjacence.
+Ce système d’équations linéaires se résoud en O(n3) (lent).
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+44 / 69
+
+Résolution approchée rapide
+
+Méthode itérative:
+1 ﬁxer V1 = 1, V2 = ··· = Vn = 0 (en temps O(V ))
+2 mettre à jour la tension de chaque nœud (en O(E))
+3
+
+répèter l’étape 2
+
+La précision après l’étape 2 ne dépend que du nombre
+d’itérations, pas de la taille du graphe.
+Quelques dizaines d’itérations sufﬁsent pour converger.
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+45 / 69
+
+Recherche de communautés: problèmes ouverts
+
+Prendre en compte (efﬁcacement) les attributs des nœuds et la
+structure du graphe.
+La modularité est-elle le bon critère ? (eg Fortunato 2006)
+Contrôler la distribution des tailles des communautés
+Communautés avec recouvrement
+Suivi dynamique
+Graphes bipartites
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+46 / 69
+
+Plan de l’exposé
+
+1
+
+Introduction: fouille des réseaux sociaux
+
+2 Caractérisation des réseaux sociaux
+
+3 Analyse relations/contenu: un exemple d’approche
+
+4 Analyse structurelle: communautés
+
+5 Catégorisation de nœuds
+
+6 Méthodes à noyaux pour les graphes
+
+Catégorisation de nœuds
+
+Applications: marketing (churn, inﬂuence), categorization de textes, ...
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+48 / 69
+
+??Catégorisation de nœuds
+
+Première approche: Relaxation labeling par ex. (Angelova et al 2006)
+
+Augmentation d’un tiers du score F1 / SVM sur les noeuds seuls.
+
+=> gains importants sur des applications diverses
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+49 / 69
+
+Catégorisation de nœuds: une approche simple
+
+La RL est lente sur de grands graphes
+
+Idée: pour catégoriser les nœuds à partir de leurs attributs et de leur
+“position” dans le graphe, exprimer celle ci comme de nouveaux
+attributs:
+
+caractéristiques locales du graphe (degré, triangles, ...)
+attributs décrivant la communauté à laquelle appartient le nœud
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+50 / 69
+
+Exemple: catégorisation de texte
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+51 / 69
+
+Catégorisation de texte (suite)
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+52 / 69
+
+Application: triage de bugs (Bugzilla)
+
+Bug tracker du projet Eclipse (Open
+Source)
+
+Réseau de développeurs
+10 000 bug reports, 2100 utilisateurs
+50 000 liens: personnes travaillant
+sur le même bug
+objectif: associer le bug à un
+développeur
+
+Niveau
+0
+1
+2
+3
+
+# communautés
+2081
+229
+16
+14
+
+Modularité
+0.01
+0.26
+0.36
+0.37
+
+Méthode
+Performance
+TF-IDF → SVM
+32%
+TF-IDF + Communauté de l’auteur → SVM 38%
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+53 / 69
+
+Plan de l’exposé
+
+1
+
+Introduction: fouille des réseaux sociaux
+
+2 Caractérisation des réseaux sociaux
+
+3 Analyse relations/contenu: un exemple d’approche
+
+4 Analyse structurelle: communautés
+
+5 Catégorisation de nœuds
+
+6 Méthodes à noyaux pour les graphes
+
+Espace de représentation et noyaux
+Projection dans un espace de représentation: transformation Φ
+
+Kernel K (x, y) = < φ(x), φ(y) >
+
+SVM non linéaire: ˆy =
+
+αiK (xi , x) + b
+
+(cid:88)
+
+i∈SV
+
+⇒ “kernel trick” utilisé dans de nombreux modèles, comme l’ACP,
+⇒ peut s’appliquer aux cas où l’on ne dispose pas de représentation
+
+l’Analyse Discriminante, la régression PLS, ...
+
+vectorielle des exemples (chaînes de symboles, arbres,
+graphes...)
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+55 / 69
+
+XFOOOOOXXXXXΦ(X)Φ(X)Φ(X)Φ(X)Φ(X)Φ(Ο)Φ(Ο)Φ(Ο)Φ(Ο)ΦΦ(Ο)Déﬁnir des noyaux
+Condition d’admissibilité
+
+symétrique: k(x, y) = k(y , x)
+
+semi-déﬁnie positive:(cid:80)(cid:80) cicjk(xi , xj ) ≥ 0
+
+On peut construire des noyaux à partir d’autres noyaux:
+
+combinaison:
+
+k(x, y) =
+
+composition:
+
+k(x, y) =
+
+(cid:88) wα kα(x, y) ,∀wα ≥ 0
+(cid:88) D(cid:89)
+
+kd (xd , yd )
+
+d=1
+
+(Haussler 1999)
+
+Exemples: noyaux pour séquences, arbres, graphes
+Exemple simple: noyau sur arbres
+
+t
+
+c1
+
+c0
+
+t(cid:48)
+
+c2
+
+c(cid:48)
+0
+
+c(cid:48)
+1
+
+k(t, t(cid:48)) =
+
+2(cid:88)
+
+1(cid:88)
+
+i=0
+
+j=0
+
+kc(ci , cj )
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+56 / 69
+
+Déﬁnir des noyaux
+Condition d’admissibilité
+
+symétrique: k(x, y) = k(y , x)
+
+semi-déﬁnie positive:(cid:80)(cid:80) cicjk(xi , xj ) ≥ 0
+
+On peut construire des noyaux à partir d’autres noyaux:
+
+combinaison:
+
+k(x, y) =
+
+composition:
+
+k(x, y) =
+
+(cid:88) wα kα(x, y) ,∀wα ≥ 0
+(cid:88) D(cid:89)
+
+kd (xd , yd )
+
+d=1
+
+(Haussler 1999)
+
+Exemples: noyaux pour séquences, arbres, graphes
+Exemple simple: noyau sur arbres
+
+t
+
+c1
+
+c0
+
+t(cid:48)
+
+c2
+
+c(cid:48)
+0
+
+c(cid:48)
+1
+
+k(t, t(cid:48)) =
+
+2(cid:88)
+
+1(cid:88)
+
+i=0
+
+j=0
+
+kc(ci , cj )
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+56 / 69
+
+Apprentissage à base de noyaux pour la
+catégorisation de nœuds
+
+Rappel: condition d’admissibilité
+K semi-déﬁnie positive:
+
+∀fx ,
+
+fxfx(cid:48)K (x, x(cid:48)) ≥ 0
+
+(cid:88)
+
+(cid:88)
+
+x
+
+x(cid:48)
+
+Suivant l’approche d’Haussler (1999), on peut écrire:
+
+eβH = lim
+
+n→∞(1 +
+= I + βH +
+
+βH
+n )n
+β2
+H2 + ···
+2!
+
+(1)
+
+(2)
+
+H auto-adjoint ⇒ K = eβH semi-déﬁnie positive.
+Le paramètre β contrôle la “localité” du noyau obtenu (diffusion sur le graphe).
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+57 / 69
+
+Noyau de diffusion
+
+Laplacien du graphe: L = D − A,
+
+soit L =
+
+ −1
+
+di
+0
+
+si i ∼ j
+si i = j
+sinon
+
+Le Laplacien se retrouve souvent en analyse spectrale des graphes.
+
+∀w, w THw =
+
+(wi − wj )2
+
+(cid:88)
+
+(i,j)∈E
+
+Remarque:
+∂
+∂t Ψ = µ∆Ψ : équation de la chaleur
+Si K = eβH, on a d
+& Lafferty 2002).
+Kβ(i, j) can be seen as the energy injected in i received in j, with
+diffusion parameter β
+
+dβ Kβ = −LKβ : équation de la chaleur sur le graphe (Kondor
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+58 / 69
+
+Noyau de diffusion: mise en œuvre
+
+K (0) = I
+
+K (β) = lim
+s→∞
+
+(cid:18)
+
+I +
+
+(cid:19)s
+
+βL
+s
+
+Problème: K est une matrice dense, même si L est sparse.
+⇒ utilisation impossible sur de très grands graphes
+
+Mais résultats intéressants: exemple jeux de données “WebKB”:
+
+- 8275 pages webs, 7 classes ((cid:54)= universités)
+- de 8 à 15% d’erreur en ignorant le texte des pages !
+
+Applications possibles en transductif (suggéré par Gärtner et Smola
+2007).
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+59 / 69
+
+Conclusions
+
+L’analyse des réseaux sociaux pose de nouveaux déﬁs pour la
+fouille de données: échantillons non iid, structure, grands
+volumes, évolution...
+Les nouvelles applications industrielles (Telco, Web 2.0, ...)
+produisent d’énormes volumes de données “en réseau” , avec une
+forte valeur potentielle
+Nombreuses recherches, nouvelles méthodes et algorithmes.
+
+Aujourd’hui
+
+Évolution des communautés: J.-L. Guillaume
+Outils industriels: F. Soulié-Fogelman
+Analyse des données d’un grand site “social”: R. Kirche
+Apprentissage et inférence: L. Denoyer
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+60 / 69
+
+Références principales (1)
+
+Ouvrages généraux
+
+Albert-Laszlo Barabasi.
+Linked.
+Perseus Publishing, 2002.
+
+Nicholas A. Christakis and James H. Fowler.
+Connected: The Surprising Power of Our Social Networks and How They Shape
+Our Lives.
+Little, Brown and Company, 2009.
+
+Chris Anderson.
+The Long Tail.
+Random House Business, 2006.
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+61 / 69
+
+Références principales (2)
+Recherche de communautés
+
+M. E. J. Newman.
+Modularity and community structure in networks.
+PNAS, 103(23):8577–8582, June 2006.
+
+Luciano da F. Costa, Francisco A. Rodrigues, Gonzalo Travieso, and P. R. Villas
+Boas.
+Characterization of complex networks: A survey of measurements.
+Advances in Physics, 56(1):167–242, January 2007.
+
+Santo Fortunato.
+Community detection in graphs.
+Physics Reports, Jun 2010.
+
+V.D. Blondel, J.L. Guillaume, R. Lambiotte, and E.L.J.S. Mech.
+Fast unfolding of communities in large networks.
+Journal of Statistical Mechanics: Theory and Experiment, P10008:1742–5468,
+2008.
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+62 / 69
+
+Références principales (3)
+
+Graphes et apprentissage
+
+Jure Leskovec.
+Dynamics of large networks.
+PhD thesis, Carnegie Mellon University, September 2008.
+
+Diane J. Cook and Lawrence B. Holder.
+Mining Graph Data.
+John Wiley & Sons, 2006.
+
+Nello Cristianini and John Shawe-Taylor.
+An introduction to support vector machines : and other kernel-based learning
+methods.
+Cambridge University Press, March 2000.
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+63 / 69
+
+Merci de votre attention !
+
+Ce travail a été partiellement ﬁnancé par l’ANR (projets CADI 2007 TLOG 003, Ex DEUSS 2009
+
+CORD 010), par la DGCIS (projet CEDRES 09 2 93 0762) et par le pôle Cap Digital
+
+E. Viennet (L2TI)
+
+Analyse des réseaux sociaux
+
+16/02/2010
+
+64 / 69
+
+

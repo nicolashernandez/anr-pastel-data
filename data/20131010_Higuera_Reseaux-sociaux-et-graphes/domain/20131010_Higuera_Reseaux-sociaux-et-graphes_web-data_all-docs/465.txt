@@ -1,0 +1,188 @@
+https://prezi.com/jurvp5uvhymw/theorie-des-graphes-et-reseaux-sociaux/
+
+
+    {
+        "@context" : "http://schema.org",
+        "@type" : "MediaObject",
+        "name" : "Théorie des graphes et réseaux sociaux",
+        
+        "author" : {
+            "@type" : "Person",
+            "name" : "Adrien  Lemaitre"
+        },
+        "dateModified" : "Nov. 29, 2012, 5:11 p.m.",
+        "dateCreated" : "Nov. 28, 2012, 2:55 p.m.",
+        "text" : "Les réseaux sociaux et la théorie des graphes Conclusion Hubs et Autorités I – Découverte de la théorie des graphes et des cliques. Concept : Un site A contient un lien vers un site B&lt;br&gt;-&amp;gt; Correspond a un &amp;quot;vote&amp;quot; de A pour B, plus B reçoit de vote, mieux il est référencé. 1 – Les 6 degré de séparation de Milgram&lt;br&gt;Réseau « small world » en anglais 2 - Descriptions de la théorie des graphes et des cliques. B A1 A2 A1,A2,.. = Hubs&lt;br&gt;B = Autorité Le PageRank La formule : PR(A) = (1-d) + d (PR(T1)/C(T1) + ... + PR(Tn)/C(Tn)) Elle admet l&amp;#39;hypothèse que toute personne sur la planète peut être reliée à n’importe quelle autre, au travers d’un enchaînement d’au plus cinq maillons. C&amp;#39;est un algorithme récursif Relation avec les réseaux sociaux PR(A) : le PageRank de la page A&lt;br&gt;PR(Tn) : le PageRank de la page Tn&lt;br&gt;C(Tn) : le nombre de liens émis sur la page Tn&lt;br&gt;d : tous les « votes » sont additionnés, mais pour en limiter l’importance, le total est multiplié par ce coefficient d’amortissement (0.85)&lt;br&gt;1 - d : Permet de garantir que la moyenne des PageRank de l’ensemble des pages du Web sera de 1. Les notations : Basée sur un échantillon de 721 millions de personnes (les utilisateurs de Facebook de l&amp;#39;époque), on sait désormais, chaque personne est reliée en moyenne par une chaîne de 4,74 relations à n&amp;#39;importe quelle autre. Exemple simple : Une page sans lien entrant : P(A)=(1 - 0.85) + 0.85*(0) = 0.15 Remarque : PageRank probablement établie sur &lt;br&gt;échelle logarithmique, et évoluant dans le temps... Pour simplifier les calculs, on choisi un log10. Le PageRank : Chaque niveau de PR est 10 fois plus difficile a obtenirque le nveau précédent dû au log10 Tableau indicatif : PageRange Affiché (log base 10)    PageRank réel (calculé)&lt;br&gt;PR0                                            0=&amp;lt; PR &amp;lt; 1&lt;br&gt;PR1                                             1 =&amp;lt; PR &amp;lt; 10&lt;br&gt;PR2                                            10 =&amp;lt; PR &amp;lt; 100&lt;br&gt;PR3                                            100 =&amp;lt; PR &amp;lt; 1,000&lt;br&gt;PR4                                            1,000 =&amp;lt; PR &amp;lt; 10,000&lt;br&gt;...&lt;br&gt;PR10                                           1,000,000,000 =&amp;lt; PR 10,000,000,000 PageRank Notions à comprendre : Pour connaître le Pr d&amp;#39;une page A, il faut connaître le PR des pages Tn qui renvoient vers A (&amp;quot;crédit&amp;quot;), mais aussi le PR des pages renvoyant vers Tn, etc..&lt;br&gt;&lt;br&gt;&lt;br&gt;D&amp;#39;où la notion d&amp;#39;algorithme récursif...&lt;br&gt;&lt;br&gt;&lt;br&gt;-&amp;gt; Objectif : converger vers le résultat sans connaitre le PR final des pages Tn émettant vers A PageRank : Exemple 2 pages A et B pointant l&amp;#39;une vers l&amp;#39;autre.&lt;br&gt;Chaque page a un lien sortant donc C(A)=C(B)=1 A B hubs et Autorités Algorithme HITS : Objectif : Trouver les pages qui sont des &amp;quot;autorités&amp;quot; quant a la requête de l&amp;#39;utilisateur.&lt;br&gt;&lt;br&gt;Inconveniant : Le calcul des autorités est fait pour chaque utilisateur, donc plus coûteux et complexe que le PageRank. Algorithme HITS A partir de l&amp;#39;ensemble des pages trouvés via une recherche, on forme un ensemble : Pages&lt;br&gt;vers&lt;br&gt;R_theta Pages&lt;br&gt;renvoyées&lt;br&gt;via&lt;br&gt;R_theta Introduction S_theta R_theta S_theta = grand ensemble&lt;br&gt;R_theta = ensemble des pages trouvées Les recherches de Milgram&lt;br&gt;La théorie des graphes, explications et vocabulaire:&lt;br&gt;Cliques&lt;br&gt;Hubs et autorité&lt;br&gt;La théorie des graphes à travers deux logiciels différents:&lt;br&gt;Vansande.org&lt;br&gt;Navicrawler Algorithme HITS On cherche :&lt;br&gt;-a(p) qui mesure la qualité d&amp;#39;une page en tant que receveuse de liens&lt;br&gt;&lt;br&gt;-h(p) qui mesure la qualité d&amp;#39;une page en tant que page de liens Algorithme HITS Méthode : - On fixe d&amp;#39;abord a(p)=1 et h(p)=1&lt;br&gt;-On défini la matrice A correspondant aux liens entre les pages&lt;br&gt;-puis on effectue cette suite d&amp;#39;opération : ...Et on réitère ! Algorithme hits Exemple : J&amp;#39;effectue la recherche : &amp;quot;rabais postal vélo&amp;quot; Algorithme hits Interprétation : - Grâce à a(p), index.html à visiter en 1er, puis velos.html mais PAS produit.html&lt;br&gt;&lt;br&gt;-Grâce à h(p), produit.html est la&lt;br&gt;meilleure page de liens (avec 2 liens) Le Navicrawler En quoi consiste le Navicrawler?&lt;br&gt;&lt;br&gt;Comment fonctionne-t-il?&lt;br&gt;&lt;br&gt;Quel est le rapprochement avec la théorie des graphes? Conclusion Conclusion&lt;br&gt;&lt;br&gt;Plus les réseaux sociaux, comme Facebook par exemple grandissent, plus les gens sont connectés entre eux.  2- Application aux réseaux sociaux 1 .Utilité des cliques maximales dans les réseaux sociaux « vansande.org » : outil graphique qui explore notre réseau social.&lt;br&gt;&lt;br&gt;-Lié avec le réseau social Facebook&lt;br&gt;-Permet de rassembler tous nos « amis » ou toutes les personnes liées à nous et les regrouper automatiquement en parties selon nos affinités. Un noeud Un noeud Un arc ( orienté) Notions de clique C&amp;#39;est un sous graphe complet, c’est-à-dire, un graphe dans un autre graphe plus grand que lui-même dont tous les sommets sont tous reliés 2 à 2 entre eux. Remarque&lt;br&gt;&lt;br&gt;Graphe non orientés, sens des relations entre les différents nœoeuds non pris en compte (les arêtes du graphe ne sont pas des flèches) Explication&lt;br&gt;&lt;br&gt;Plus la taille de la clique est important plus la personne aura la probabilité d’être en relation avec nous, et donc sera proposé dans les suggestions avant tous les autres. Conclusion&lt;br&gt;&lt;br&gt;Le but de l’analyse des réseaux sociaux : calculer ces cliques maximales avec des matrices pour les traiter et réussir à exploiter les résultats pour mettre en relation les personnes dans la vraie vie. Dans un cas plus complexe La théorie des réseaux, dont l&amp;#39;étude est la diktyologie, s&amp;#39;intéresse aux graphes présents dans le monde réel, tels que :&lt;br&gt;&lt;br&gt;•le World Wide Web,&lt;br&gt;•l&amp;#39;Internet,&lt;br&gt;•les réseaux de neurones,&lt;br&gt;•les réseaux sociaux&lt;br&gt;•etc. Applications pratiques très diverses : &lt;br&gt;&lt;br&gt;•Optimisation des réseaux de transport ;&lt;br&gt;•Transports routiers ou transports d’information ;&lt;br&gt;•Conception de réseaux électriques, de réseaux de communication ;&lt;br&gt;•Mécanique statistique, formules chimiques, informatique théorique, sciences sociales, géographies, architecture, etc. Hubs et autorités Méthodes : PageRank : Etablie une note de 0 à 10 pour l&amp;#39;importance d&amp;#39;un site web en se basant sur les connexions entrantes dont il dispose.&lt;br&gt;Limites : Ne permet pas de relever les pages de références. A a Algorithme HITS R_theta=velo.html&lt;br&gt;S_theta=index.html + produits.html A=  0     1     1&lt;br&gt;        1     0   0&lt;br&gt;       0     1    0 index.html produits.html velos.html index.html produits.html velos.html Conclusion&lt;br&gt;&lt;br&gt;Le but de l’analyse des réseaux sociaux : calculer ces cliques maximales avec des matrices pour les traiter et réussir à exploiter les résultats pour mettre en relation les personnes dans la vraie vie. Dans un cas plus complexe Expliquer les phénomènes présents sur les réseaux inter connectés&lt;br&gt;&lt;br&gt;Comprendre l&amp;#39;internet (gestion de la vie privée)&lt;br&gt;&lt;br&gt;Recherche opératonnelle outils de sciences sociales Clique maximale : clique la plus étendue.&lt;br&gt;&lt;br&gt;Clique maximum : plus grande des cliques maximales Relation avec les réseaux sociaux",
+        "thumbnailUrl" : "https://0901.static.prezi.com/preview/xvvbpctwav5pttlgv47e4dauhh6jc3sachvcdoaizecfr3dnitcq_0_0.png",
+        "discussionUrl" : "https://prezi.com/jurvp5uvhymw/theorie-des-graphes-et-reseaux-sociaux/#prezi-comments",
+        "playerType" : "Flash",
+        "contentUrl" : "https://prezi.com/bin/preziloader.swf?prezi_id=jurvp5uvhymw"
+    }
+        });
+
+        
+            Stand out and be remembered with Prezi,  
+            the secret weapon of great presenters.
+        
+                    Get started today
+                
+                    Get started
+                
+            What is Prezi?
+            
+                Learn more
+            
+                Loading presentation...
+            
+            
+                
+                    Public
+                
+            
+            
+                & reusable
+            
+        
+            Create your own
+        
+                    Make a copy
+                
+    Share
+
+        Embed
+    
+                Liked
+            
+                Like
+            Present Remotely Send the link below via email or IMCopy Present to your audienceStart remote presentationInvited audience members will follow you as you navigate and presentPeople invited to a presentation do not need a Prezi accountThis link expires 10 minutes after you close the presentationA maximum of 30 users can follow your presentationLearn more about this feature in our knowledge base article
+    Do you really want to delete this prezi?
+
+    Neither you, nor the coeditors you shared it with will be able to recover it again.
+DeleteCancelThéorie des graphes et réseaux sociaux
+                            
+                                No description
+                            
+                        
+        });
+    }
+        });
+        });
+    }
+
+        
+            by Adrien  Lemaitre
+        
+        on 29 November 2012
+    TweetComments (0)
+                                    Please log in to add your comment.
+                                Report abuseTranscript of Théorie des graphes et réseaux sociauxLes réseaux sociaux et la théorie des graphes Conclusion Hubs et Autorités I – Découverte de la théorie des graphes et des cliques. Concept : Un site A contient un lien vers un site B-> Correspond a un "vote" de A pour B, plus B reçoit de vote, mieux il est référencé. 1 – Les 6 degré de séparation de MilgramRéseau « small world » en anglais 2 - Descriptions de la théorie des graphes et des cliques. B A1 A2 A1,A2,.. = HubsB = Autorité Le PageRank La formule : PR(A) = (1-d) + d (PR(T1)/C(T1) + ... + PR(Tn)/C(Tn)) Elle admet l'hypothèse que toute personne sur la planète peut être reliée à n’importe quelle autre, au travers d’un enchaînement d’au plus cinq maillons. C'est un algorithme récursif Relation avec les réseaux sociaux PR(A) : le PageRank de la page APR(Tn) : le PageRank de la page TnC(Tn) : le nombre de liens émis sur la page Tnd : tous les « votes » sont additionnés, mais pour en limiter l’importance, le total est multiplié par ce coefficient d’amortissement (0.85)1 - d : Permet de garantir que la moyenne des PageRank de l’ensemble des pages du Web sera de 1. Les notations : Basée sur un échantillon de 721 millions de personnes (les utilisateurs de Facebook de l'époque), on sait désormais, chaque personne est reliée en moyenne par une chaîne de 4,74 relations à n'importe quelle autre. Exemple simple : Une page sans lien entrant : P(A)=(1 - 0.85) + 0.85*(0) = 0.15 Remarque : PageRank probablement établie sur échelle logarithmique, et évoluant dans le temps... Pour simplifier les calculs, on choisi un log10. Le PageRank : Chaque niveau de PR est 10 fois plus difficile a obtenirque le nveau précédent dû au log10 Tableau indicatif : PageRange Affiché (log base 10)    PageRank réel (calculé)PR0                                            0=< PR < 1PR1                                             1 =< PR < 10PR2                                            10 =< PR < 100PR3                                            100 =< PR < 1,000PR4                                            1,000 =< PR < 10,000...PR10                                           1,000,000,000 =< PR 10,000,000,000 PageRank Notions à comprendre : Pour connaître le Pr d'une page A, il faut connaître le PR des pages Tn qui renvoient vers A ("crédit"), mais aussi le PR des pages renvoyant vers Tn, etc..D'où la notion d'algorithme récursif...-> Objectif : converger vers le résultat sans connaitre le PR final des pages Tn émettant vers A PageRank : Exemple 2 pages A et B pointant l'une vers l'autre.Chaque page a un lien sortant donc C(A)=C(B)=1 A B hubs et Autorités Algorithme HITS : Objectif : Trouver les pages qui sont des "autorités" quant a la requête de l'utilisateur.Inconveniant : Le calcul des autorités est fait pour chaque utilisateur, donc plus coûteux et complexe que le PageRank. Algorithme HITS A partir de l'ensemble des pages trouvés via une recherche, on forme un ensemble : PagesversR_theta PagesrenvoyéesviaR_theta Introduction S_theta R_theta S_theta = grand ensembleR_theta = ensemble des pages trouvées Les recherches de MilgramLa théorie des graphes, explications et vocabulaire:CliquesHubs et autoritéLa théorie des graphes à travers deux logiciels différents:Vansande.orgNavicrawler Algorithme HITS On cherche :-a(p) qui mesure la qualité d'une page en tant que receveuse de liens-h(p) qui mesure la qualité d'une page en tant que page de liens Algorithme HITS Méthode : - On fixe d'abord a(p)=1 et h(p)=1-On défini la matrice A correspondant aux liens entre les pages-puis on effectue cette suite d'opération : ...Et on réitère ! Algorithme hits Exemple : J'effectue la recherche : "rabais postal vélo" Algorithme hits Interprétation : - Grâce à a(p), index.html à visiter en 1er, puis velos.html mais PAS produit.html-Grâce à h(p), produit.html est lameilleure page de liens (avec 2 liens) Le Navicrawler En quoi consiste le Navicrawler?Comment fonctionne-t-il?Quel est le rapprochement avec la théorie des graphes? Conclusion ConclusionPlus les réseaux sociaux, comme Facebook par exemple grandissent, plus les gens sont connectés entre eux.  2- Application aux réseaux sociaux 1 .Utilité des cliques maximales dans les réseaux sociaux « vansande.org » : outil graphique qui explore notre réseau social.-Lié avec le réseau social Facebook-Permet de rassembler tous nos « amis » ou toutes les personnes liées à nous et les regrouper automatiquement en parties selon nos affinités. Un noeud Un noeud Un arc ( orienté) Notions de clique C'est un sous graphe complet, c’est-à-dire, un graphe dans un autre graphe plus grand que lui-même dont tous les sommets sont tous reliés 2 à 2 entre eux. RemarqueGraphe non orientés, sens des relations entre les différents nœoeuds non pris en compte (les arêtes du graphe ne sont pas des flèches) ExplicationPlus la taille de la clique est important plus la personne aura la probabilité d’être en relation avec nous, et donc sera proposé dans les suggestions avant tous les autres. ConclusionLe but de l’analyse des réseaux sociaux : calculer ces cliques maximales avec des matrices pour les traiter et réussir à exploiter les résultats pour mettre en relation les personnes dans la vraie vie. Dans un cas plus complexe La théorie des réseaux, dont l'étude est la diktyologie, s'intéresse aux graphes présents dans le monde réel, tels que :•le World Wide Web,•l'Internet,•les réseaux de neurones,•les réseaux sociaux•etc. Applications pratiques très diverses : •Optimisation des réseaux de transport ;•Transports routiers ou transports d’information ;•Conception de réseaux électriques, de réseaux de communication ;•Mécanique statistique, formules chimiques, informatique théorique, sciences sociales, géographies, architecture, etc. Hubs et autorités Méthodes : PageRank : Etablie une note de 0 à 10 pour l'importance d'un site web en se basant sur les connexions entrantes dont il dispose.Limites : Ne permet pas de relever les pages de références. A a Algorithme HITS R_theta=velo.htmlS_theta=index.html + produits.html A=  0     1     1        1     0   0       0     1    0 index.html produits.html velos.html index.html produits.html velos.html ConclusionLe but de l’analyse des réseaux sociaux : calculer ces cliques maximales avec des matrices pour les traiter et réussir à exploiter les résultats pour mettre en relation les personnes dans la vraie vie. Dans un cas plus complexe Expliquer les phénomènes présents sur les réseaux inter connectésComprendre l'internet (gestion de la vie privée)Recherche opératonnelle outils de sciences sociales Clique maximale : clique la plus étendue.Clique maximum : plus grande des cliques maximales Relation avec les réseaux sociauxFull transcriptMore presentations by
+    
+        
+            Adrien  Lemaitre
+        Untitled PreziUntitled PreziSystèmes d'informations &
+            More prezis by author
+        Popular presentationsSee more popular or the latest prezisPreziProductGalleryThe ScienceConversational PresentingFor BusinessTestimonialsCompanyAboutTeamCareersOur ValuesPressOur CustomersContact UsLanguages
+                    English
+                
+                    Español
+                
+                    한국어
+                
+                    日本語
+                
+                    Deutsch
+                
+                    Português
+                
+                    Français
+                
+                    Magyar
+                
+                    Italiano
+                InfogramChartsInfographicsSupportPrezi Next SupportPrezi Classic SupportBlogLatest posts© 2018 Prezi Inc. Terms
+                
+    Prezi
+
+            ProductGalleryThe ScienceConversational PresentingFor BusinessTestimonials
+                
+    Infogram
+
+            InfogramChartsInfographics
+                
+    Company
+
+            AboutTeamCareersOur ValuesPressOur CustomersContact Us
+                
+    Support
+
+            Prezi Next SupportPrezi Classic SupportLanguages
+                                English
+                            
+                                Español
+                            
+                                한국어
+                            
+                                日本語
+                            
+                                Deutsch
+                            
+                                Português
+                            
+                                Français
+                            
+                                Magyar
+                            
+                                Italiano
+                            © 2018 Prezi Inc. TermsExport to Portable prezi to present offlinePresent offline on a Mac or PC (embedded YouTube videos need internet to play)Burn your prezi on to a CD/DVDA portable prezi is not editable (edit here, and export again if you need to make changes)Download for Prezi Desktop Pro to edit and present offline (for Pro users)DownloadCancelCreating downloadable prezi, be patient.Close
+            <textarea maxlength="250" class="textfield" id="id_description" name="value">${description}</textarea>
+            Done${user} · ${age} days ago
+                ${comment}Delete comment or cancel
+            <textarea placeholder="Add comment" class="textfield" id="id_comment" name="comment">${message}</textarea>
+            CancelReply0 characters used from the 300 allowed.${title}Adrien  Lemaitre
+                        on
+                        ${date}${description}
+            Do you really want to delete this prezi?
+        
+            Neither you, nor the coeditors you shared it with will be able to recover it again.
+        DeleteCancel
+                Width:
+                
+                pixels
+            
+                Height:
+                
+                pixels
+             Let viewers pan & zoom freely
+            Constrain to simple back and forward steps
+            
+
+        <textarea class="textfield" id="embedcode" name="embedcode">${embedcode}</textarea>
+
+        Copy code to clipboardTo:Add a personal note:
+                        <textarea class="textfield" id="note" name="message"></textarea>
+                    ${note}Send email${message}CloseViewingEditing
+                    Send link to share this prezi
+                    
+                CopyEmailFacebookTwitterEmbedSend link to edit together this prezi using Prezi Meeting (learn more):CopyEmail
+                    Reset share links
+                
+                    Resets both viewing and editing links (coeditors shown below are not affected).
+                Who can edit:To:Add a personal note:
+                    <textarea class="textfield" id="note" name="message"></textarea>
+                ${note}Send to groupSend this link to let others join your presentation:CopyStart presentingClose${title}
+                    ${body}
+                
+                    ${foot}
+                <div id="modal-scroll-container"><div class="modal privacy-permissions-modal"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button></div><div class="modal-body span6"><div class="container-popup privacy"><div id="permission-popup-container"><div class="h2">
+                
+                    Share
+                    <small id="share-modal-heading"></small></div><div id="modal-privacy-heading" class="h4"><%= #current_user_is_owner %>
+                    
+                        Set privacy level
+                    
+                    <%= /current_user_is_owner %><%= ^current_user_is_owner %>
+                    
+                        Privacy level
+                    
+                    <%= /current_user_is_owner %></div><div class="permission-modal-separator privacy-sep"></div><div id="slider-container"></div><div id="slider-icons-container"></div><div id="description-container"></div><div id="checkbox-container"></div><div id="share-modify-permissions"><%= #can_modify %><h4 id="modal-permission-heading">Add people</h4><div id="add-panel"><input id="add-fld" class="pull-left" type="email" placeholder="+ Add people by email..."><div id="add-controls"><div id="add-options" class="btn-group pull-left"><button class="btn dropdown-toggle" id="btn-add-perm-dropdown" data-toggle="dropdown"><span id="active-selection"><i class="icon-edit" id="selected-permission"></i>
+                                Editor

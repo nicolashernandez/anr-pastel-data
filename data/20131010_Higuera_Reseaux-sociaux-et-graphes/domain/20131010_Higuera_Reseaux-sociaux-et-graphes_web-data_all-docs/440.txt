@@ -1,0 +1,274 @@
+https://pagesperso.g-scop.grenoble-inp.fr/~stehlikm/teaching/miashs/1-Introduction.pdf
+
+Réseaux sociaux et graphes
+MIASHS
+
+1
+
+Introduction aux graphes
+
+1.1 Graphes
+
+Soit X un ensemble. On note (X
+
+2 ) l’ensemble des parties à deux
+éléments de X. En général, on notera uv la partie {u, v}. L’ordre et les
+répétitions ne sont pas pris en compte : 12 = 21.
+
+Déﬁnition 1.1. Un graphe est un couple (V, E) formé par un ensemble
+ﬁni V et un sous-ensemble E de (V
+2 ). V est l’ensemble des sommets de
+G (on le note aussi V(G)). E est l’ensemble des arêtes de G (on le note
+aussi E(G)).
+
+On peut représenter les graphes graphiquement (d’où le nom «
+graphe »). Pour chaque sommet, on dessine un cercle ou disque. Pour
+représenter une arête uv, on trace un trait entre les cercles correspon-
+dants à u et à v.
+
+La forme des « cercles » et des « traits » n’a aucune importance
+(sauf pour la lisibilité de la ﬁgure). Ce qui compte, c’est de traduire
+graphiquement s’il y a une arête entre deux sommets ou non.
+
+Déﬁnition 1.2. Soient G un graphe, u et v deux sommets de G et e une
+arête de G. On dit que u et v sont adjacents si uv ∈ E(G), et que e est
+incidente à u si u ∈ e. Les deux éléments de e sont ses extrémités. Le
+voisinage de u dans G est l’ensemble, noté NG(u), des sommets de G
+adjacents à u. Les voisins de u sont les éléments de NG(u). L’ensemble
+des arêtes incidentes à u est noté δG(u).
+
+1.2 Sous-graphes
+
+Déﬁnition 1.3. Soient G = (V, E) et H = (W, F) deux graphes.
+— H est un sous-graphe de G si W ⊆ V et F ⊆ E.
+— H est un sous-graphe couvrant de G si W = V et F ⊆ E.
+— H est un sous-graphe induit de G si W ⊆ V et F contient toutes les
+
+arêtes uv ∈ E où u, v ∈ W. On le note G[W].
+
+1.3 Isomorphismes
+
+Souvent, on ne fera pas de distinction entre deux graphes ayant « la
+même forme », c’est-à-dire : qu’on ne peut les distinguer si l’on oublie
+les noms de leurs sommets.
+
+Si X = {1, 2, 3}, alors (X
+
+2 ) = {12, 13, 23}.
+
+Exemples des graphes :
+— ({1, 2, 3, 4, 5},{12, 13, 23, 24}).
+— Métro de Paris.
+
+({stations},{stations voisines}).
+
+— Réseaux sociaux.
+
+({personnes},{amitiés}).
+
+1
+
+2
+
+5
+
+3
+
+4
+
+gra-
+=
+
+1:
+du
+
+graphe
+
+Représentation
+G
+
+Figure
+phique
+({1, 2, 3, 4, 5},{12, 13, 23, 24}).
+— 1 et 2 sont adjacents
+— 4 est un voisin de 2
+— N(2) = {1, 3, 4}, N(5) = ∅
+— 5 est isolé
+— 12 est incidente à 2
+
+réseaux sociaux et graphes miashs
+
+2
+
+Déﬁnition 1.4. Soient G, H deux graphes. On dit que G est isomorphe
+à H s’il existe une bijection f de V(G) sur V(H) telle que pour toute
+paire xy de sommets de G, on a xy ∈ E(G) si et seulement si f (x) f (y) ∈
+E(H).
+
+La relation d’isomorphisme est réﬂexive, symétrique et transitive
+
+(relation d’équivalence).
+
+On note qu’il n’est pas toujours facile, à partir de représentations
+graphiques, de décider si deux graphes sont isomorphes (exemple : K4
+en forme planaire et forme carrée).
+
+1.4 Représentation matricielle et par listes
+
+Il y a plusieurs façons de représenter un graphe en mémoire. On va
+en voir trois. En général, chacune est plus ou moins adaptée au pro-
+blème considéré et possède des avantages/inconvénients notamment
+par rapport à la densité (en arêtes) du graphe.
+
+Déﬁnition 1.5. Soit G un graphe à n sommets. On choisit une numé-
+rotation v1, . . . , vn des sommets de G. La matrice d’adjacence de G (pour
+la numérotation choisie) est la matrice M carrée n× n sur {0, 1} déﬁnie
+par : Mij = 1 si et seulement si vivj ∈ E(G), pour tous i, j = 1, . . . , n.
+On remarque qu’elle est symétrique et nulle sur la diagonale (un
+sommet n’est pas adjacent à lui-même, par déﬁnition). La réunion de
+ces deux conditions sufﬁt à garantir qu’une matrice carrée à coefﬁ-
+cients 0 ou 1 est une matrice d’adjacence (voir TD).
+
+Déﬁnition 1.6. Soit G un graphe qui a n sommets et m arêtes. On
+numérote ses sommets V(G) = {v1, . . . , vn} et ses arêtes E(G) =
+{e1, . . . , em}. La matrice d’incidence de G est la matrice N sur {0, 1} de
+taille n × m déﬁnie par : Nij = 1 si et seulement si ej est incidente à vi,
+pour tous i = 1, . . . , n et j = 1, . . . , m.
+
+Déﬁnition 1.7. Soit G un graphe. Une représentation en liste d’adja-
+cence de G est la donnée, pour chaque sommet v de G, de la liste des
+voisins de v.
+
+1.5 Degrés
+
+Déﬁnition 1.8. Soient G un graphe et v un sommet de G. Le degré de
+v dans G, noté dG(v), est le nombre d’arêtes de G incidentes à v. C’est
+aussi (par simplicité des graphes déﬁnis dans ce cours) le nombre de
+voisins de v : dG(v) = |NG(v)|.
+
+On dit que v est isolé si dG(v) = 0 et qu’il est une feuille si dG(v) = 1.
+Théorème 1.9 (dit (rarement) des poignées de main). Soit G un graphe.
+On a ∑v∈V(G) dG(v) = 2|E(G)|.
+
+Figure 2: Deux représentations du
+graphe complet K4.
+
+
+
+0
+0
+0
+0
+0
+
+
+
+Matrice d’adjacence de G :
+
+
+
+0
+1
+1
+0
+0
+
+1
+0
+1
+1
+0
+
+1
+1
+0
+0
+0
+
+0
+1
+0
+0
+0
+
+Matrice d’incidence de G :
+0
+1
+0
+1
+0
+
+0
+1
+1
+0
+0
+
+1
+0
+1
+0
+0
+
+
+
+1
+1
+0
+0
+0
+
+[2, 3]
+[1, 3, 4]
+[1, 2]
+[2]
+[]
+
+Liste d’adjacence de G :
+1 :
+2 :
+3 :
+4 :
+5 :
+Dans le graphe G :
+— d(1) = 2
+— d(2) = 3
+— d(3) = 2
+— d(4) = 1
+— d(5) = 0
+
+réseaux sociaux et graphes miashs
+
+3
+
+Démonstration. Soit S la somme de tous les éléments de la matrice
+d’incidence de G. La somme de chaque ligne est égale au degré du
+sommet correspondant, donc S = ∑v∈V(G) dG(v). La somme de chaque
+colonne est égale à deux, et on a |E(G)| colonnes, donc S = 2|E(G)|.
+
+Corollaire 1.10. Soit G un graphe. La somme ∑v∈V(G) dG(v) est paire.
+
+1.6 Notations supplémentaires et variations
+Déﬁnition 1.11. Soit n ≥ 1 un entier. Le graphe complet à n sommets
+est le graphe ({1, . . . , n}, (
+
+)). Il est noté Kn.
+
+{1,...,n}
+
+2
+
+Un multigraphe est un graphe auquel on permet d’avoir plus d’une
+arête entre deux sommets ou une arête dont les deux extrémités sont
+identiques (boucles). Ils se déﬁnissent rigoureusement à l’aide de la
+notion de multi-ensemble.
+
+Un graphe orienté est obtenu à partir d’un graphe en ordonnant,
+pour chaque arête, ses extrémités. Autrement dit, chaque arête est di-
+rigée vers une de ses extrémités.
+
+Dans un hypergraphe, les (hyper-)arêtes peuvent être incidentes à un
+nombre arbitraire de sommets (et pas seulement à deux comme dans
+le cas des graphes).
+
+

@@ -1,0 +1,1054 @@
+;; Transcriber export by stm.tcl,v 1.19 on Tue Dec 18 16:58:34 CET 2018 with encoding ISO-8859-1
+;; transcribed by , version 3 of 170615
+;;
+;; CATEGORY "0" "" ""
+;; LABEL "O" "Overall" "Overall"
+;;
+;; CATEGORY "1" "Hub4 Focus Conditions" ""
+;; LABEL "F0" "Baseline//Broadcast//Speech" ""
+;; LABEL "F1" "Spontaneous//Broadcast//Speech" ""
+;; LABEL "F2" "Speech Over//Telephone//Channels" ""
+;; LABEL "F3" "Speech in the//Presence of//Background Music" ""
+;; LABEL "F4" "Speech Under//Degraded//Acoustic Conditions" ""
+;; LABEL "F5" "Speech from//Non-Native//Speakers" ""
+;; LABEL "FX" "All other speech" ""
+;; CATEGORY "2" "Speaker Sex" ""
+;; LABEL "female" "Female" ""
+;; LABEL "male"   "Male" ""
+;; LABEL "unknown"   "Unknown" ""
+20141002 1 20141002_Locuteur_1 0.000 4.557 <o,f0,male> on va parler de d'une structure de données, une nouvelles structure de données.
+20141002 1 20141002_Locuteur_1 4.557 8.994 <o,f0,male> une structure de données, c'est quelque chose qui permet de stocker de l'information
+20141002 1 20141002_Locuteur_1 8.994 12.918 <o,f0,male> et cette structure, qui s'appelle les tableaux, c'est
+20141002 1 20141002_Locuteur_1 12.918 16.786 <o,f0,male> elle sera très très importante, notamment quand vous aurez
+20141002 1 20141002_Locuteur_1 16.786 19.466 <o,f0,male> à faire votre projet.
+20141002 1 20141002_Locuteur_1 19.466 24.280 <o,f0,male> puisqu'elle permet de stocker euh un grand nombre d'informations d'une manière très
+20141002 1 20141002_Locuteur_1 24.280 28.955 <o,f0,male> euh compacte en termes d'écriture euh algorithmique.
+20141002 1 20141002_Locuteur_1 28.955 33.593 <o,f0,male> donc ce qu'on va présenter aujourd'hui, c'est comment on le met en pratique, comment ça marche
+20141002 1 20141002_Locuteur_1 33.593 38.033 <o,f0,male> du () dans () d'un point de vue algorithmique mais aussi d'un point de vue euh plus pratique
+20141002 1 20141002_Locuteur_1 38.033 42.732 <o,f0,male> euh [pi] point de vue de du javascript
+20141002 1 20141002_Locuteur_1 42.732 48.364 <o,f0,male> ce qui va nous intéresser beaucoup, c'est comment on fait pour construire des tableaux à plusieurs dimensions parce que
+20141002 1 20141002_Locuteur_1 48.364 51.696 <o,f0,male> stocker un tableau à une dimension, ça permet de stocker
+20141002 1 20141002_Locuteur_1 51.696 56.402 <o,f0,male> un texte ou s() ça permet de stocker éventuellement un son
+20141002 1 20141002_Locuteur_1 56.402 61.808 <o,f0,male> mais dès qu'on veut stocker des images ou des choses un peu plus compliquées, ben on a envie d'avoir des tableaux
+20141002 1 20141002_Locuteur_1 61.808 68.779 <o,f0,male> qui représentent au moins des informations euh sous forme rectangulaire. donc on va voir comment on peut faire pour stocker ce genre d'informations
+20141002 1 20141002_Locuteur_1 68.779 74.137 <o,f0,male> et puis on parlera de parcours de tableaux et d'algorithmie qu'il y a derrière les tableaux.
+20141002 1 20141002_Locuteur_1 74.137 76.351 <o,f0,male> euh pour commencer donc voilà le plan :
+20141002 1 20141002_Locuteur_1 76.351 80.103 <o,f0,male> on va introduire euh ce que c'est qu'un tableau
+20141002 1 20141002_Locuteur_1 80.103 82.468 <o,f0,male> et puis on va faire deux introduction finalement.
+20141002 1 20141002_Locuteur_1 82.468 85.008 <o,f0,male> une introduction euh qui est dans la vie réelle ;
+20141002 1 20141002_Locuteur_1 85.008 87.426 <o,f0,male> pourquoi on a besoin de tableaux
+20141002 1 20141002_Locuteur_1 87.426 92.189 <o,f0,male> et puis euh on va voir qu'en informatique, c'est pas tout à fait
+20141002 1 20141002_Locuteur_1 92.189 93.603 <o,f0,male> le même besoin.
+20141002 1 20141002_Locuteur_1 93.603 98.345 <o,f0,male> donc on répondra à ces deux questions en introduction
+20141002 1 20141002_Locuteur_1 98.345 101.127 <o,f0,male> pour ensuite définir les tableaux,
+20141002 1 20141002_Locuteur_1 101.127 105.268 <o,f0,male> voir comment on déclare un tableau en tant que variable type tableau,
+20141002 1 20141002_Locuteur_1 105.268 111.567 <o,f0,male> voir comment on les utilise ; donc ça, ce sera tout un tas de de petites fonctions qu'on vous donnera.
+20141002 1 20141002_Locuteur_1 111.567 116.642 <o,f0,male> et puis la partie finalement la p() qui vous intéressera le plus, c'est la partie
+20141002 1 20141002_Locuteur_1 116.642 119.958 <o,f0,male> où on va chercher à aller plus loin
+20141002 1 20141002_Locuteur_1 119.958 126.731 <o,f0,male> et construire ce qu'on appelle les tableaux dynamiques. donc ça, vous aurez la définition euh d() dans cette partie-là.
+20141002 1 20141002_Locuteur_1 126.731 130.109 <o,f0,male> on parlera de tableaux à deux dimensions,
+20141002 1 20141002_Locuteur_1 130.109 133.039 <o,f0,male> on parlera de tableaux associatifs et on parlera d'algorithmique.
+20141002 1 20141002_Locuteur_1 133.039 137.432 <o,f0,male> sur les [pi] donc c'est vraiment une partie euh cette euh cinquième partie est complète
+20141002 1 20141002_Locuteur_1 137.432 138.055 <o,f0,male> et
+20141002 1 20141002_Locuteur_1 138.055 140.550 <o,f0,male> et très intéressante pour vous.
+20141002 1 20141002_Locuteur_1 140.550 141.922 <o,f0,male> bon
+20141002 1 20141002_Locuteur_1 141.922 145.896 <o,f0,male> en introduction, je vous () juste vous passer cette petite image
+20141002 1 20141002_Locuteur_1 145.896 147.903 <o,f0,male> où vous avez des tableaux.
+20141002 1 20141002_Locuteur_1 147.903 148.908 <o,f0,male> la joconde,
+20141002 1 20141002_Locuteur_1 148.908 152.124 <o,f0,male> tout le monde dit que c'est un tableau.
+20141002 1 20141002_Locuteur_1 152.124 154.315 <o,f0,male> ce que vous avez d() ce que j'ai derrière mon dos
+20141002 1 20141002_Locuteur_1 154.315 157.658 <o,f0,male> tout le monde dit que c'est un tableau.
+20141002 1 20141002_Locuteur_1 157.658 159.151 <o,f0,male> ça,
+20141002 1 20141002_Locuteur_1 159.151 161.198 <o,f0,male> c'est la table périodique des éléments
+20141002 1 20141002_Locuteur_1 161.198 164.451 <o,f0,male> c'est un tableau qui rep() qui permet de stocker
+20141002 1 20141002_Locuteur_1 164.451 166.088 <o,f0,male> une information.
+20141002 1 20141002_Locuteur_1 166.088 169.826 <o,f0,male> et puis euh ça, c'est aussi un tableau
+20141002 1 20141002_Locuteur_1 169.826 171.840 <o,f0,male> parce que ça donne un classement
+20141002 1 20141002_Locuteur_1 171.840 175.369 <o,f0,male> le classement de la star academy
+20141002 1 20141002_Locuteur_1 175.369 176.805 <o,f0,male> voilà, c'est un tableau
+20141002 1 20141002_Locuteur_1 176.805 179.796 <o,f0,male> un tableau avec des informations.
+20141002 1 20141002_Locuteur_1 179.796 181.619 <o,f0,male> bon est-ce () ça c'est ce qui
+20141002 1 20141002_Locuteur_1 181.619 183.841 <o,f0,male> c'est ce qui permet de travailler dans la vie, mais
+20141002 1 20141002_Locuteur_1 183.841 186.988 <o,f0,male> ce qui va nous rapprocher de l'*informatique, c'est euh
+20141002 1 20141002_Locuteur_1 186.988 189.362 <o,f0,male> c'est plutôt les les deux tableaux d'en bas,
+20141002 1 20141002_Locuteur_1 189.362 192.783 <o,f0,male> ceux qui permettent de stocker une information.
+20141002 1 20141002_Locuteur_1 192.783 195.793 <o,f0,male> donc un tableau b() en informatique, c'est pas ce qu'il y a au-dessus.
+20141002 1 20141002_Locuteur_1 195.793 200.957 <o,f0,male> *un tableau en informatique, c'est c'est plus proche de ce qu'il y a en dessous.
+20141002 1 20141002_Locuteur_1 200.957 204.625 <o,f0,male> voilà, donc un tableau dans la vie
+20141002 1 20141002_Locuteur_1 204.625 206.747 <o,f0,male> dans la vie réelle euh
+20141002 1 20141002_Locuteur_1 206.747 210.080 <o,f0,male> c'est c'est une suite
+20141002 1 20141002_Locuteur_1 210.080 216.930 <o,f0,male> c'est un outil pardon qui permet de structurer des informations qu'on souhaite garder en tête.
+20141002 1 20141002_Locuteur_1 216.930 217.545 <o,f0,male> voilà
+20141002 1 20141002_Locuteur_1 217.545 228.085 <o,f0,male> donc si on le l'a structurée, cette information, sous forme d'un tableau à deux dimensions ou une dimension, c'est parce qu'on a envie de tra() de travailler sur cette information.
+20141002 1 20141002_Locuteur_1 228.085 230.701 <o,f0,male> et encore une fois, dans la vie
+20141002 1 20141002_Locuteur_1 230.701 237.882 <o,f0,male> cette structuration sous forme de tableau est tellement importante qu'on a inventé des outils pour la manipuler et les outils, vous les connaissez tous
+20141002 1 20141002_Locuteur_1 237.882 240.341 <o,f0,male> ça s'appelle des tableurs ; c'est excel.
+20141002 1 20141002_Locuteur_1 240.341 243.007 <o,f0,male> voilà, c'est ça.
+20141002 1 20141002_Locuteur_1 243.007 245.605 <o,f0,male> ben des outils comme ça, vous en avez tous utilisé
+20141002 1 20141002_Locuteur_1 245.605 249.129 <o,f0,male> si vous en avez pas utilisé, rassurez-vous : vous en utiliserez en c deux i.
+20141002 1 20141002_Locuteur_1 249.129 252.514 <o,f0,male> c'est des outils qui permettent de travailler sur des tableaux
+20141002 1 20141002_Locuteur_1 252.514 255.422 <o,f0,male> et à partir d'une information stockée sous forme de colonne,
+20141002 1 20141002_Locuteur_1 255.422 259.055 <o,f0,male> on peut traverser des courbes, et cetera et cetera.
+20141002 1 20141002_Locuteur_1 259.055 263.181 <o,f0,male> voilà s() là, c'est la vie réelle.
+20141002 1 20141002_Locuteur_1 263.181 267.040 <o,f0,male> en informatique,
+20141002 1 20141002_Locuteur_1 267.040 269.025 <o,f0,male> c'est plus simple que ça.
+20141002 1 20141002_Locuteur_1 269.025 273.355 <o,f0,male> en informatique, on va se moquer de ce qui est stocké dans le tableau
+20141002 1 20141002_Locuteur_1 273.355 282.131 <o,f0,male> on va juste se dire que c'est un outil qui permet de stocker une information, qu'elle soit structurée ou pas structurée.
+20141002 1 20141002_Locuteur_1 282.131 287.470 <o,f0,male> donc on se moque de ce qu'on a appelé le tableau abstrait de la vie réelle,
+20141002 1 20141002_Locuteur_1 287.470 291.076 <o,f0,male> mais on va juste stocker une information de manière linéaire.
+20141002 1 20141002_Locuteur_1 291.076 293.637 <o,f0,male> on va demander à réserver un certain nombre de cases
+20141002 1 20141002_Locuteur_1 293.637 299.692 <o,f0,male> successives en mémoire pour stocker une information qui peut être complexes ou pas.
+20141002 1 20141002_Locuteur_1 299.692 300.510 <o,f0,male> donc
+20141002 1 20141002_Locuteur_1 300.510 302.703 <o,f0,male> concrètement, un in() tableau
+20141002 1 20141002_Locuteur_1 302.703 308.988 <o,f0,male> en informatique, c'est une réservation de plusieurs cases successives en mémoire.
+20141002 1 20141002_Locuteur_1 308.988 314.536 <o,f0,male> on a déjà vu ça euh la réservation, le stockage d'une variable, en fait euh s() c'est ni plus ni moins qu'une variable
+20141002 1 20141002_Locuteur_1 314.536 318.380 <o,f0,male> qui prend plus de place que les autres.
+20141002 1 20141002_Locuteur_1 318.380 320.251 <o,f0,male> alors c'est un peu plus que ça en informatique,
+20141002 1 20141002_Locuteur_1 320.251 323.917 <o,f0,male> mais on verra ça p() plus tard. donc en illustration, voilà la mémoire
+20141002 1 20141002_Locuteur_1 323.917 326.908 <o,f0,male> vous avez déjà vu cette petite image :
+20141002 1 20141002_Locuteur_1 326.908 328.407 <o,f0,male> c'est la barrette mémoire,
+20141002 1 20141002_Locuteur_1 328.407 336.910 <o,f0,male> organisée sous forme de petits interrupteurs, et puis on avait vu que c'était organisé sous forme de petites cases mémoire aussi.
+20141002 1 20141002_Locuteur_1 336.910 338.792 <o,f0,male> alors là j'ai une petite vidéo
+20141002 1 20141002_Locuteur_1 338.792 340.640 <o,f0,male> pour vous prouver que
+20141002 1 20141002_Locuteur_1 340.640 344.301 <o,f0,male> il y a un lien entre les tableaux qu'on va créer en informatique
+20141002 1 20141002_Locuteur_1 344.301 347.087 <o,f0,male> par ce petit euh algorithme-là,
+20141002 1 20141002_Locuteur_1 347.087 352.455 <o,f0,male> on crée un tableau. alors le tableau, il s'appelle global, c'est un tableau parce que on l'a défini comme ça.
+20141002 1 20141002_Locuteur_1 352.455 356.886 <o,f0,male> on reviendra sur cette notation p() plus tard, mais je veux juste vous montrer que
+20141002 1 20141002_Locuteur_1 356.886 362.007 <o,f0,male> si on n() regarde la mémoire utilisée par firefox quand on crée
+20141002 1 20141002_Locuteur_1 362.007 365.042 <o,f0,male> le les tableaux, ben vous allez voir que ça augmente
+20141002 1 20141002_Locuteur_1 365.042 368.946 <o,f0,male> donc là on est euh on utilise trois cents mégaoctets
+20141002 1 20141002_Locuteur_1 368.946 371.349 <o,f0,male> de mémoire ; s() c'est ce chiffre-là qu'il faut regarder
+20141002 1 20141002_Locuteur_1 371.349 373.600 <o,f0,male> et puis avec ce petit programme-là,
+20141002 1 20141002_Locuteur_1 373.600 377.529 <o,f0,male> on crée plein de tableaux différents, donc on crée un tableau qui augmente,
+20141002 1 20141002_Locuteur_1 377.529 380.398 <o,f0,male> dont la taille augmente, et puis on en recrée, on en recrée, on en recrée
+20141002 1 20141002_Locuteur_1 380.398 386.517 <o,f0,male> euh toutes les vingt millisecondes on crée un nouveau tableau de dix mille cases.
+20141002 1 20141002_Locuteur_1 386.517 389.068 <o,f0,male> voilà ce que fait ce programme
+20141002 1 20141002_Locuteur_1 389.068 391.074 <o,f0,male> ben si vous regardez bien
+20141002 1 20141002_Locuteur_1 391.074 393.026 <o,f0,male> la mémoire qu'on utilise
+20141002 1 20141002_Locuteur_1 393.026 393.948 <o,f0,male> augmente
+20141002 1 20141002_Locuteur_1 393.948 395.813 <o,f0,male> tout simplement parce que il y a un lien
+20141002 1 20141002_Locuteur_1 395.813 398.538 <o,f0,male> entre la petite barrette mémoire que je vous ai montrée
+20141002 1 20141002_Locuteur_1 398.538 400.889 <o,f0,male> qui est une mémoire physique
+20141002 1 20141002_Locuteur_1 400.889 404.318 <o,f0,male> et puis le petit programme qu'on va qu'on va créer, qui euh va
+20141002 1 20141002_Locuteur_1 404.318 407.642 <o,f0,male> demander à réserver des choses dans cette mémoire physique. donc
+20141002 1 20141002_Locuteur_1 407.642 410.645 <o,f0,male> toutes les vingt millisecondes, il demande de réserver dix mille cases
+20141002 1 20141002_Locuteur_1 410.645 414.413 <o,f0,male> ça fait beaucoup de cases de réservées, mais il y a de la place en mémoire hein
+20141002 1 20141002_Locuteur_1 414.413 417.035 <o,f0,male> on est on est rarement limité par la
+20141002 1 20141002_Locuteur_1 417.035 420.317 <o,f0,male> l'empreinte mémoire, sauf si on fait pas attention.
+20141002 1 20141002_Locuteur_1 420.317 422.593 <o,f0,male> donc voilà, je pense qu'à un moment ça s'arrête
+20141002 1 20141002_Locuteur_1 422.593 425.277 <o,f0,male> ça s'arrête avant que mon ordinateur explose
+20141002 1 20141002_Locuteur_1 425.277 426.733 <o,f0,male> mais vous ()
+20141002 1 20141002_Locuteur_1 426.733 428.859 <o,f0,male> si vous faites pas attention, il faut quand même faire [pi]
+20141002 1 20141002_Locuteur_1 428.859 432.567 <o,f0,male> faire quand même voir que ça augmente assez vite.
+20141002 1 20141002_Locuteur_1 432.567 433.409 <o,f0,male> bon
+20141002 1 20141002_Locuteur_1 433.409 435.524 <o,f0,male> je crois que je je vais jusqu'à
+20141002 1 20141002_Locuteur_1 435.524 438.533 <o,f0,male> un giga dans la vidéo mais on peut s'arrêter là, croyez-moi
+20141002 1 20141002_Locuteur_1 438.533 440.290 <o,f0,male> si je laisse tourner mon programme,
+20141002 1 20141002_Locuteur_1 440.290 442.528 <o,f0,male> à un moment
+20141002 1 20141002_Locuteur_1 442.528 444.819 <o,f0,male> l'ordinateur n'explose pas, rassurez-vous
+20141002 1 20141002_Locuteur_1 444.819 447.450 <o,f0,male> mais euh il bloque ;
+20141002 1 20141002_Locuteur_1 447.450 452.034 <o,f0,male> et ça c'est pas normal.
+20141002 1 20141002_Locuteur_1 452.034 453.160 <o,f0,male> bon
+20141002 1 20141002_Locuteur_1 453.160 454.881 <o,f0,male> la suite
+20141002 1 20141002_Locuteur_1 454.881 457.911 <o,f0,male> qu'est-ce que c'est qu'un tableau en informatique ?
+20141002 1 20141002_Locuteur_1 457.911 460.309 <o,f0,male> bah c'est un nouveau type
+20141002 1 20141002_Locuteur_1 460.309 462.728 <o,f0,male> de variable
+20141002 1 20141002_Locuteur_1 462.728 464.877 <o,f0,male> qui va s'appeler tableau de
+20141002 1 20141002_Locuteur_1 464.877 468.111 <o,f0,male> un certain nombre de cases qu'on veut réserver
+20141002 1 20141002_Locuteur_1 468.111 471.630 <o,f0,male> d'un certain type.
+20141002 1 20141002_Locuteur_1 471.630 476.161 <o,f0,male> évidemment, le nombre total d'interrupteurs nécessaires pour stocker
+20141002 1 20141002_Locuteur_1 476.161 477.929 <o,f0,male> l'ensemble du tableau
+20141002 1 20141002_Locuteur_1 477.929 481.730 <o,f0,male> va dépendre du nombre de cases qu'on veut créer dans le tableau,
+20141002 1 20141002_Locuteur_1 481.730 487.130 <o,f0,male> mais aussi du type de ce qu'on veut mettre dans chaque case.
+20141002 1 20141002_Locuteur_1 487.130 490.205 <o,f0,male> donc on a besoin de préciser les deux choses : nombre de cases
+20141002 1 20141002_Locuteur_1 490.205 495.374 <o,f0,male> et type de ce qu'on veut mettre dans chaque case.
+20141002 1 20141002_Locuteur_1 495.374 495.987 <o,f0,male> voilà
+20141002 1 20141002_Locuteur_1 495.987 498.982 <o,f0,male> et et euh donc qu'est-ce qu'on voit ici ?
+20141002 1 20141002_Locuteur_1 498.982 503.768 <o,f0,male> on voit que a et b sont des entiers, t un tableau de sept cases d'entiers
+20141002 1 20141002_Locuteur_1 503.768 509.895 <o,f0,male> ça, ce que j'ai écrit en français : remplir les trois premières cases de t avec les valeurs douze, trois et sept,
+20141002 1 20141002_Locuteur_1 509.895 514.096 <o,f0,male> on verra comment ça s'écrit dans le langage algorithmique un peu plus tard,
+20141002 1 20141002_Locuteur_1 514.096 519.540 <o,f0,male> mais qu'est-ce que ça fait ce petit programme-là ? ben tout simplement en mémoire,
+20141002 1 20141002_Locuteur_1 519.540 522.059 <o,f0,male> ça crée des associations entre les noms
+20141002 1 20141002_Locuteur_1 522.059 524.515 <o,f0,male> de variables a
+20141002 1 20141002_Locuteur_1 524.515 525.846 <o,f0,male> et une case mémoire
+20141002 1 20141002_Locuteur_1 525.846 528.531 <o,f0,male> qui va stocker un entier, ça on l'a déjà vu
+20141002 1 20141002_Locuteur_1 528.531 533.922 <o,f0,male> il y aura une case mémoi() u() une variable b associée à une case mémoire
+20141002 1 20141002_Locuteur_1 533.922 535.694 <o,f0,male> et il y aura une variable t
+20141002 1 20141002_Locuteur_1 535.694 537.412 <o,f0,male> associée à
+20141002 1 20141002_Locuteur_1 537.412 541.857 <o,f0,male> cette fois-ci un ensemble de cases mémoires.
+20141002 1 20141002_Locuteur_1 541.857 545.258 <o,f0,male> l'avantage, c'est ce que je peux utiliser le *nom le nom t
+20141002 1 20141002_Locuteur_1 545.258 549.842 <o,f0,male> pour accéder à n'importe quel de ces () à n'importe laquelle de ces cases.
+20141002 1 20141002_Locuteur_1 549.842 554.103 <o,f0,male> donc le le () remplir les trois premières cases avec douze, trois et sept, je saurai le faire
+20141002 1 20141002_Locuteur_1 554.103 557.504 <o,f0,male> je saurai lire et écrire dans le tableau ; ça c'est important.
+20141002 1 20141002_Locuteur_1 557.504 560.391 <o,f0,male> et je saurai lire n'importe quelle case
+20141002 1 20141002_Locuteur_1 560.391 564.381 <o,f0,male> aussi vite que je sais lire n'im() d() je sais lire une variable.
+20141002 1 20141002_Locuteur_1 564.381 566.990 <o,f0,male> ça, c'est ce qui définit
+20141002 1 20141002_Locuteur_1 566.990 568.077 <o,f0,male> le tableau.
+20141002 1 20141002_Locuteur_1 568.077 573.273 <o,f0,male> un accès cons() en temps constant à chacune de ces cases.
+20141002 1 20141002_Locuteur_1 573.273 575.959 <o,f0,male> voilà, donc un tableau en informatique
+20141002 1 20141002_Locuteur_1 575.959 582.013 <o,f0,male> c'est une structure de données linéaires, parce que ça suit la la mémoire,
+20141002 1 20141002_Locuteur_1 582.013 585.924 <o,f0,male> qui permet de stocker un ensemble d'éléments.
+20141002 1 20141002_Locuteur_1 585.924 589.204 <o,f0,male> il y a rien de plus compliqué () il y a rien de plus simple euh
+20141002 1 20141002_Locuteur_1 589.204 593.070 <o,f0,male> non il y a rien de plus compliqué que ça.
+20141002 1 20141002_Locuteur_1 593.070 597.843 <o,f0,male> la particularité, c'est que ces éléments sont stockés de manière contiguë en mémoire
+20141002 1 20141002_Locuteur_1 597.843 599.172 <o,f0,male> c'est pour ça qu'on peut
+20141002 1 20141002_Locuteur_1 599.172 600.852 <o,f0,male> avoir une méthode
+20141002 1 20141002_Locuteur_1 600.852 605.999 <o,f0,male> d'accès en temps constant, c'est parce qu'on sait où trouver les le dixième élément du tableau
+20141002 1 20141002_Locuteur_1 605.999 607.925 <o,f0,male> en faisant un tout petit calcul.
+20141002 1 20141002_Locuteur_1 607.925 609.218 <o,f0,male> donc on accède
+20141002 1 20141002_Locuteur_1 609.218 611.612 <o,f0,male> à un élément du tableau en donnant son indice,
+20141002 1 20141002_Locuteur_1 611.612 614.010 <o,f0,male> qui est un entier
+20141002 1 20141002_Locuteur_1 614.010 617.598 <o,f0,male> sachant que par euh convention,
+20141002 1 20141002_Locuteur_1 617.598 621.059 <o,f0,male> l'élément qui est dans la première case, il est à l'indice zéro
+20141002 1 20141002_Locuteur_1 621.059 626.275 <o,f0,male> comme pour les chaînes de caractères.
+20141002 1 20141002_Locuteur_1 626.275 626.787 <o,f0,male> voilà
+20141002 1 20141002_Locuteur_1 626.787 629.985 <o,f0,male> donc en langage algorithmique, ça se traduit par un nouveau type de données
+20141002 1 20141002_Locuteur_1 629.985 632.074 <o,f0,male> qui pourra être attribué à une variable ;
+20141002 1 20141002_Locuteur_1 632.074 634.897 <o,f0,male> c'est le type tableau de quelque chose
+20141002 1 20141002_Locuteur_1 634.897 636.884 <o,f0,male> tableau de x case
+20141002 1 20141002_Locuteur_1 636.884 638.030 <o,f0,male> de
+20141002 1 20141002_Locuteur_1 638.030 640.270 <o,f0,male> x [pi] y type
+20141002 1 20141002_Locuteur_1 640.270 642.747 <o,f0,male> voilà un exemple, donc un tableau de six cases de réels
+20141002 1 20141002_Locuteur_1 642.747 646.587 <o,f0,male> et ça c'écrira comme ça.
+20141002 1 20141002_Locuteur_1 646.587 648.409 <o,f0,male> ça, c'est comment comment on déclare
+20141002 1 20141002_Locuteur_1 648.409 655.640 <o,f0,male> un tableau.
+20141002 1 20141002_Locuteur_1 655.640 661.749 <o,f0,male> notez juste le tableau de six cases hein, c'est pas la peine de de noter plus, c'est dans la partie déclaration.
+20141002 1 20141002_Locuteur_1 661.749 665.690 <o,f0,male> c'est bon ?
+20141002 1 20141002_Locuteur_1 665.690 670.564 <o,f0,male> alors ce qui est important, c'est d'être capable de remplir le tableau
+20141002 1 20141002_Locuteur_1 670.564 675.498 <o,f0,male> et plus précisément, ce qu'on va vouloir, c'est lire et écrire dans s() n'importe quel
+20141002 1 20141002_Locuteur_1 675.498 679.721 <o,f0,male> dans n'importe laquelle des cases du tableau.
+20141002 1 20141002_Locuteur_1 679.721 682.280 <o,f0,male> donc
+20141002 1 20141002_Locuteur_1 682.280 688.947 <o,f0,male> ce que j'avais euh déjà plus ou moins dit, c'est que à chaque case on associait un indice.
+20141002 1 20141002_Locuteur_1 688.947 692.449 <o,f0,male> bah finalement, chaque case on peut y accéder de manière indépendante
+20141002 1 20141002_Locuteur_1 692.449 695.443 <o,f0,male> et chaque case représente une sorte de variable
+20141002 1 20141002_Locuteur_1 695.443 696.532 <o,f0,male> qui va s'appeler
+20141002 1 20141002_Locuteur_1 696.532 700.680 <o,f0,male> t entre crochets le numéro de la case.
+20141002 1 20141002_Locuteur_1 700.680 703.534 <o,f0,male> et on peut lire ou modifier n'importe quelle case,
+20141002 1 20141002_Locuteur_1 703.534 706.036 <o,f0,male> comme on le fait pour une variable.
+20141002 1 20141002_Locuteur_1 706.036 707.123 <o,f0,male> *alors voilà un exemple :
+20141002 1 20141002_Locuteur_1 707.123 709.212 <o,f0,male> si je veux calculer la moyenne,
+20141002 1 20141002_Locuteur_1 709.212 710.398 <o,f0,male> je peux mettre
+20141002 1 20141002_Locuteur_1 710.398 711.729 <o,f0,male> la valeur cinq
+20141002 1 20141002_Locuteur_1 711.729 712.840 <o,f0,male> dans la case
+20141002 1 20141002_Locuteur_1 712.840 714.220 <o,f0,male> d'indice zéro
+20141002 1 20141002_Locuteur_1 714.220 717.228 <o,f0,male> donc remplir la première case du tableau avec la valeur cinq,
+20141002 1 20141002_Locuteur_1 717.228 721.435 <o,f0,male> remplir la deuxième case du tableau avec la valeur deux
+20141002 1 20141002_Locuteur_1 721.435 724.203 <o,f0,male> et puis ensuite je peux lire
+20141002 1 20141002_Locuteur_1 724.203 726.525 <o,f0,male> la première case du tableau,
+20141002 1 20141002_Locuteur_1 726.525 730.719 <o,f0,male> lire la deuxième case du tableau comme j'aurais fait pour des variables,
+20141002 1 20141002_Locuteur_1 730.719 732.927 <o,f0,male> les utiliser comme des variables
+20141002 1 20141002_Locuteur_1 732.927 736.425 <o,f0,male> dans le cadre d'un dans le cadre d'une expression.
+20141002 1 20141002_Locuteur_1 736.425 739.072 <o,f0,male> donc là, je calcule la moyenne des deux premières valeurs du tableau.
+20141002 1 20141002_Locuteur_1 739.072 740.120 <o,f0,male> évidemment
+20141002 1 20141002_Locuteur_1 740.120 742.553 <o,f0,male> c'est pas fait pour stocker deux variables, un tableau ;
+20141002 1 20141002_Locuteur_1 742.553 745.877 <o,f0,male> c'est fait pour stocker des centaines voire des milliers de variables.
+20141002 1 20141002_Locuteur_1 745.877 750.935 <o,f0,male> c'est là qu'on trouve () qu'on commence à voir l'intérêt des tableaux
+20141002 1 20141002_Locuteur_1 750.935 756.578 <o,f0,male> donc quelques fonctions utiles pour manipuler les tableaux :
+20141002 1 20141002_Locuteur_1 756.578 761.313 <o,f0,male> ben très vite, on a() on aura envie de savoir combien il y a de cases dans le tableau
+20141002 1 20141002_Locuteur_1 761.313 762.996 <o,f0,male> ben pour ça, il y a une manière
+20141002 1 20141002_Locuteur_1 762.996 767.299 <o,f0,male> il y a il y a une fonction qui retourne la taille du tableau.
+20141002 1 20141002_Locuteur_1 767.299 769.385 <o,f0,male> c'est la fonction taille
+20141002 1 20141002_Locuteur_1 769.385 773.700 <o,f0,male> qui prend en entrée un tableau, et qui renvoie un entier.
+20141002 1 20141002_Locuteur_1 773.700 779.185 <o,f0,male> alors c'est () ça s'écrira taille de t et ce sera un entier
+20141002 1 20141002_Locuteur_1 779.185 779.738 <o,f0,male> il y a
+20141002 1 20141002_Locuteur_1 779.738 781.539 <o,f0,male> plein d'autres fonctions
+20141002 1 20141002_Locuteur_1 781.539 785.409 <o,f0,male> pour manipuler les tableaux, je vais pas les décrire en détail
+20141002 1 20141002_Locuteur_1 785.409 789.375 <o,f0,male> mais vous les retrouvez sur l'interface dans l'onglet memento
+20141002 1 20141002_Locuteur_1 789.375 794.270 <o,f0,male> et les fonctions importantes que vous allez voir, c'est par exemple afficher un tableau
+20141002 1 20141002_Locuteur_1 794.270 801.341 <o,f0,male> d'une manière un petit peu jolie s() un petit peu jolie euh quand le tableau sera à deux dimensions.
+20141002 1 20141002_Locuteur_1 801.341 804.287 <o,f0,male> euh celle-là elle s() elle est quand même vraiment
+20141002 1 20141002_Locuteur_1 804.287 806.522 <o,f0,male> importante aussi, c'est le tableau
+20141002 1 20141002_Locuteur_1 806.522 809.204 <o,f0,male> si ça contient des nombres
+20141002 1 20141002_Locuteur_1 809.204 812.337 <o,f0,male> eh ben on peut tracer une courbe avec ces nombres
+20141002 1 20141002_Locuteur_1 812.337 816.994 <o,f0,male> et il y a une fonction qui fait ça, qui s'appelle afficher courbe.
+20141002 1 20141002_Locuteur_1 816.994 824.438 <o,f0,male> et puis euh il y a tout un tas de fonctions pour trier les tableaux, pour les renverser, pour en extraire une sous-partie et cetera
+20141002 1 20141002_Locuteur_1 824.438 827.020 <o,f0,male> je vais pas les détailler, mais euh
+20141002 1 20141002_Locuteur_1 827.020 831.383 <o,f0,male> si vous allez sur le memento, non seulement vous avez cette liste-là mais vous avez
+20141002 1 20141002_Locuteur_1 831.383 833.040 <o,f0,male> une description de la fonction
+20141002 1 20141002_Locuteur_1 833.040 839.280 <o,f0,male> et un exemple à chaque fois.
+20141002 1 20141002_Locuteur_1 839.280 845.160 <o,f0,male> alors il y a des e() erreurs à ne pas commettre quand on manipule des tableaux
+20141002 1 20141002_Locuteur_1 845.160 850.822 <o,f0,male> les tableaux, ce sont des ti() ils sont de type tableau de un certain nombre de cases d'un certain type
+20141002 1 20141002_Locuteur_1 850.822 852.276 <o,f0,male> donc faut pas mélanger
+20141002 1 20141002_Locuteur_1 852.276 854.677 <o,f0,male> le type d'une case du tableau
+20141002 1 20141002_Locuteur_1 854.677 855.940 <o,f0,male> avec le tableau ;
+20141002 1 20141002_Locuteur_1 855.940 857.525 <o,f0,male> il faut pas mélanger
+20141002 1 20141002_Locuteur_1 857.525 859.785 <o,f0,male> le type des indices
+20141002 1 20141002_Locuteur_1 859.785 861.198 <o,f0,male> des cases
+20141002 1 20141002_Locuteur_1 861.198 862.302 <o,f0,male> qui sont des entiers
+20141002 1 20141002_Locuteur_1 862.302 865.317 <o,f0,male> avec les cases du tableau ou avec
+20141002 1 20141002_Locuteur_1 865.317 866.640 <o,f0,male> le type du tableau
+20141002 1 20141002_Locuteur_1 866.640 869.522 <o,f0,male> donc il y a euh toutes les erreurs qu'on peut commettre
+20141002 1 20141002_Locuteur_1 869.522 870.930 <o,f0,male> viennent de là.
+20141002 1 20141002_Locuteur_1 870.930 872.952 <o,f0,male> par exemple, si mon tableau
+20141002 1 20141002_Locuteur_1 872.952 875.325 <o,f0,male> c'est un tableau de quelque chose
+20141002 1 20141002_Locuteur_1 875.325 876.870 <o,f0,male> j'ai pas le droit d'écrire ça.
+20141002 1 20141002_Locuteur_1 876.870 879.208 <o,f0,male> j'ai pas le droit de stocker
+20141002 1 20141002_Locuteur_1 879.208 883.597 <o,f0,male> euh j'ai pas le droit de dire que euh mon tableau prend la valeur trois,
+20141002 1 20141002_Locuteur_1 883.597 887.901 <o,f0,male> puisque trois n'est pas de type tableau de quelque chose.
+20141002 1 20141002_Locuteur_1 887.901 895.501 <o,f0,male> pour la même raison, j'ai pas le droit d'écrire : mon tableau reçoit mon tableau entre crochets de, puisque mon tableau entre crochets de est de type
+20141002 1 20141002_Locuteur_1 895.501 900.504 <o,f0,male> par exemple entier, c'est de type () du type de ce qui est stocké dans une case du tableau
+20141002 1 20141002_Locuteur_1 900.504 904.571 <o,f0,male> donc j'ai pas le droit de l'attribuer à un tableau.
+20141002 1 20141002_Locuteur_1 904.571 907.056 <o,f0,male> j'ai pas le droit de faire le contraire, évidemment
+20141002 1 20141002_Locuteur_1 907.056 908.265 <o,f0,male> j'ai pas le droit de mettre
+20141002 1 20141002_Locuteur_1 908.265 910.132 <o,f0,male> un tableau de quelque chose
+20141002 1 20141002_Locuteur_1 910.132 915.650 <o,f0,male> dans quelque chose.
+20141002 1 20141002_Locuteur_1 915.650 920.306 <o,f0,male> autrement dit euh j'ai pas le droit de confondre une cellule du du tableau et le tableau ;
+20141002 1 20141002_Locuteur_1 920.306 923.926 <o,f0,male> j'ai pas le droit de confondre aussi une cellule du tableau avec un indice
+20141002 1 20141002_Locuteur_1 923.926 925.767 <o,f0,male> du tableau
+20141002 1 20141002_Locuteur_1 925.767 928.149 <o,f0,male> donc au() autrement dit, j'ai pas le droit d'écrire ça :
+20141002 1 20141002_Locuteur_1 928.149 932.345 <o,f0,male> mon tableau de indice reçoit indice
+20141002 1 20141002_Locuteur_1 932.345 934.125 <o,f0,male> si euh
+20141002 1 20141002_Locuteur_1 934.125 937.707 <o,f0,male> le tableau n'est pas un tableau qui stocke des entiers.
+20141002 1 20141002_Locuteur_1 937.707 940.072 <o,f0,male> voilà, donc je n'ai le droit de l'écrire que si
+20141002 1 20141002_Locuteur_1 940.072 943.926 <o,f0,male> mon tableau est un tableau d'entiers ;
+20141002 1 20141002_Locuteur_1 943.926 947.672 <o,f0,male> ça, ce sont les erreurs typiques. autre erreur typique :
+20141002 1 20141002_Locuteur_1 947.672 949.741 <o,f0,male> c'est que le tableau il est défini
+20141002 1 20141002_Locuteur_1 949.741 954.437 <o,f0,male> et il contient un certain nombre de cases
+20141002 1 20141002_Locuteur_1 954.437 960.009 <o,f0,male> ben si je me mets à l'explorer dans une case qui existe pas, ça pose un problème.
+20141002 1 20141002_Locuteur_1 960.009 962.019 <o,f0,male> en javascript,
+20141002 1 20141002_Locuteur_1 962.019 964.950 <o,f0,male> on aura le droit de le faire
+20141002 1 20141002_Locuteur_1 964.950 966.414 <o,f0,male> mais la case
+20141002 1 20141002_Locuteur_1 966.414 968.750 <o,f0,male> qui n'existe pas, elle sera pas définie.
+20141002 1 20141002_Locuteur_1 968.750 971.357 <o,f0,male> donc j'aurai un risque d'erreur
+20141002 1 20141002_Locuteur_1 971.357 973.406 <o,f0,male> qui ne sera pas une erreur de syntaxe,
+20141002 1 20141002_Locuteur_1 973.406 976.031 <o,f0,male> mais qui sera un bug informatique.
+20141002 1 20141002_Locuteur_1 976.031 978.793 <o,f0,male> *autrement dit, le calcul que je ferai avec cette valeur,
+20141002 1 20141002_Locuteur_1 978.793 980.085 <o,f0,male> sera un calcul faux
+20141002 1 20141002_Locuteur_1 980.085 982.221 <o,f0,male> mais ne me produira pas d'erreurs.
+20141002 1 20141002_Locuteur_1 982.221 983.881 <o,f0,male> dans d'autres langages,
+20141002 1 20141002_Locuteur_1 983.881 989.755 <o,f0,male> explorer un tableau hors de ses limites, ça produit une erreur
+20141002 1 20141002_Locuteur_1 989.755 992.332 <o,f0,male> voire ça n'en produit pas.
+20141002 1 20141002_Locuteur_1 992.332 995.208 <o,f0,male> et euh
+20141002 1 20141002_Locuteur_1 995.208 1000.076 <o,f0,male> en c par exemple, un langage euh de bas niveau qui s'appelle le c,
+20141002 1 20141002_Locuteur_1 1000.076 1006.631 <o,f0,male> il est possible d'explorer un tableau à l'é() à l'extérieur de son domaine de définition
+20141002 1 20141002_Locuteur_1 1006.631 1014.238 <o,f0,male> mais c'est tellement pas sécurisé que c'est euh une source d'attaque pour de des tonnes d'application sur le les réseaux.
+20141002 1 20141002_Locuteur_1 1014.238 1017.810 <o,f0,male> pour être plus clair :
+20141002 1 20141002_Locuteur_1 1017.810 1022.492 <o,f0,male> lorsque le programmeur n'a pas fait attention à ce que son tableau pouvait être exploré
+20141002 1 20141002_Locuteur_1 1022.492 1026.056 <o,f0,male> hors des limites du tableau,
+20141002 1 20141002_Locuteur_1 1026.056 1028.368 <o,f0,male> bah c'est une c'est une faille possible
+20141002 1 20141002_Locuteur_1 1028.368 1032.589 <o,f0,male> pour un pour un hacker euh bien avisé qui va attaquer le système,
+20141002 1 20141002_Locuteur_1 1032.589 1040.870 <o,f0,male> euh faire planter l'application qui a été programmée par le programmeur et prendre la main sur l'ordinateur
+20141002 1 20141002_Locuteur_1 1040.870 1043.378 <o,f0,male> à distance. bon, bref non je me s() je me suis embrouillé
+20141002 1 20141002_Locuteur_1 1043.378 1044.050 <o,f0,male> bref
+20141002 1 20141002_Locuteur_1 1044.050 1046.383 <o,f0,male> c'est une s() c'était
+20141002 1 20141002_Locuteur_1 1046.383 1048.697 <o,f0,male> c'est une grande source d'erreurs, ça
+20141002 1 20141002_Locuteur_1 1048.697 1051.111 <o,f0,male> et une une grande faille informatique
+20141002 1 20141002_Locuteur_1 1051.111 1054.492 <o,f0,male> le fait de pouvoir explorer un un tableau dans () hors de son domaine de *définition.
+20141002 1 20141002_Locuteur_1 1054.492 1057.157 <o,f0,male> autrement dit,
+20141002 1 20141002_Locuteur_1 1057.157 1059.160 <o,f0,male> j'ai pas le droit d'écrire ça parce que
+20141002 1 20141002_Locuteur_1 1059.160 1061.382 <o,f0,male> euh le tableau ne contient que vingt cases
+20141002 1 20141002_Locuteur_1 1061.382 1064.220 <o,f0,male> donc il y a pas de case d'indice s() quarante-sept
+20141002 1 20141002_Locuteur_1 1064.220 1067.990 <o,f0,male> j'ai pas le droit d'écrire cette boucle-là
+20141002 1 20141002_Locuteur_1 1067.990 1071.190 <o,f0,male> parce que le tableau ne commence pas à moins un
+20141002 1 20141002_Locuteur_1 1071.190 1072.800 <o,f0,male> donc il y a pas de case moins un
+20141002 1 20141002_Locuteur_1 1072.800 1076.077 <o,f0,male> et puis il y a pas non plus de case numéro vingt puisque s'il fait vingt cases
+20141002 1 20141002_Locuteur_1 1076.077 1078.697 <o,f0,male> et que la première est numérotée par zéro,
+20141002 1 20141002_Locuteur_1 1078.697 1080.809 <o,f0,male> alors ça s'arrête à dix-neuf.
+20141002 1 20141002_Locuteur_1 1080.809 1083.205 <o,f0,male> ok ?
+20141002 1 20141002_Locuteur_1 1083.205 1084.823 <o,f0,male> donc ça c'est un
+20141002 1 20141002_Locuteur_1 1084.823 1087.045 <o,f0,male> c'est un vr() il y a un vrai problème
+20141002 1 20141002_Locuteur_1 1087.045 1090.312 <o,f0,male> là-dessus
+20141002 1 20141002_Locuteur_1 1090.312 1093.830 <o,f0,male> dans la partie algorithmique,
+20141002 1 20141002_Locuteur_1 1093.830 1095.713 <o,f0,male> on va
+20141002 1 20141002_Locuteur_1 1095.713 1098.373 <o,f0,male> on va faire attention à ça.
+20141002 1 20141002_Locuteur_1 1098.373 1102.182 <o,f0,male> toutes les cases vont [bb] contiennent des éléments du même type
+20141002 1 20141002_Locuteur_1 1102.182 1108.270 <o,f0,male> donc qui seront le type du tableau. ça, ça va être dans la partie algorithmique parce qu'on définira des tableaux de x cases
+20141002 1 20141002_Locuteur_1 1108.270 1108.900 <o,f0,male> de
+20141002 1 20141002_Locuteur_1 1108.900 1110.129 <o,f0,male> un type
+20141002 1 20141002_Locuteur_1 1110.129 1112.076 <o,f0,male> et le type sera fixé.
+20141002 1 20141002_Locuteur_1 1112.076 1114.634 <o,f0,male> sachez tout de même qu'en javascript,
+20141002 1 20141002_Locuteur_1 1114.634 1122.457 <o,f0,male> on n'est pas limité à ça ; on peut stocker dans une case un entier, dans une autre case une chaîne de caractères. c'est une particularité des tableaux en javascript
+20141002 1 20141002_Locuteur_1 1122.457 1128.113 <o,f0,male> et c'est une particularité de de des tableaux dans des langages modernes, finalement. il y a une euh
+20141002 1 20141002_Locuteur_1 1128.113 1131.412 <o,f0,male> plu() [pi] on *appellera ça une pluripotence, *enfin
+20141002 1 20141002_Locuteur_1 1131.412 1134.753 <o,f0,male> on peut stocker plusieurs [pi] des choses de plusieurs types différents
+20141002 1 20141002_Locuteur_1 1134.753 1136.191 <o,f0,male> dans des cases différentes ;
+20141002 1 20141002_Locuteur_1 1136.191 1141.120 <o,f0,male> on se l'interdira.
+20141002 1 20141002_Locuteur_1 1141.120 1145.560 <o,f0,male> la deuxième ligne, là, on va lever la contrainte un peu plus tard. mais pour le moment
+20141002 1 20141002_Locuteur_1 1145.560 1148.068 <o,f0,male> toutes les cases seront des entiers.
+20141002 1 20141002_Locuteur_1 1148.068 1149.976 <o,f0,male> tous les indices des cases
+20141002 1 20141002_Locuteur_1 1149.976 1151.818 <o,f0,male> seront des entiers.
+20141002 1 20141002_Locuteur_1 1151.818 1153.559 <o,f0,male> ça c'est important
+20141002 1 20141002_Locuteur_1 1153.559 1158.779 <o,f0,male> c'est important de garder ça en tête, vous allez voir () vous allez tout de suite comprendre pourquoi.
+20141002 1 20141002_Locuteur_1 1158.779 1160.848 <o,f0,male> euh parce que si on associe ça
+20141002 1 20141002_Locuteur_1 1160.848 1167.400 <o,f0,male> à cette troisième contrainte, il y a pas de trous dans la numérotation.
+20141002 1 20141002_Locuteur_1 1167.400 1173.634 <o,f0,male> alors ce qu'on sait, c'est que s() dès qu'on connaît la dernière case du tableau, la case de plus grand indice,
+20141002 1 20141002_Locuteur_1 1173.634 1177.800 <o,f0,male> on connaît la taille du tableau ; connaît le nombre d'éléments du tableau dès qu'on connaît
+20141002 1 20141002_Locuteur_1 1177.800 1182.858 <o,f0,male> l'indice de la plus grande case du tableau.
+20141002 1 20141002_Locuteur_1 1182.858 1184.144 <o,f0,male> c'est important
+20141002 1 20141002_Locuteur_1 1184.144 1190.064 <o,f0,male> de le savoir s() parce que c'est important de connaître rapidement () d'avoir une méthode efficace pour calculer la taille du tableau.
+20141002 1 20141002_Locuteur_1 1190.064 1192.640 <o,f0,male> si on a des trous dans la numérotation,
+20141002 1 20141002_Locuteur_1 1192.640 1196.534 <o,f0,male> si on a des cases qui ne sont pas réservées en mémoire avec des trous dans la numérotation, ben
+20141002 1 20141002_Locuteur_1 1196.534 1197.209 <o,f0,male> on n'est
+20141002 1 20141002_Locuteur_1 1197.209 1202.463 <o,f0,male> plus euh capable de calculer la taille du tableau aussi facilement.
+20141002 1 20141002_Locuteur_1 1202.463 1203.834 <o,f0,male> donc ça coûte plus cher
+20141002 1 20141002_Locuteur_1 1203.834 1209.350 <o,f0,male> et ça pose des problèmes algorithmiques.
+20141002 1 20141002_Locuteur_1 1209.350 1212.240 <o,f0,male> donc euh cette contrainte-là,
+20141002 1 20141002_Locuteur_1 1212.240 1215.373 <o,f0,male> on on l'a déjà rappelée.
+20141002 1 20141002_Locuteur_1 1215.373 1218.228 <o,f0,male> ce qu'il faut retenir et ce qu'il faut noter, c'est ça
+20141002 1 20141002_Locuteur_1 1218.228 1222.303 <o,f0,male> c'est quand on parle de tableau, ou quand on écrit mon tab de i
+20141002 1 20141002_Locuteur_1 1222.303 1225.337 <o,f0,male> il y a trois types qui sont mis en jeu :
+20141002 1 20141002_Locuteur_1 1225.337 1228.428 <o,f0,male> le type de i qui est un entier, forcément
+20141002 1 20141002_Locuteur_1 1228.428 1232.569 <o,f0,male> le type de chaque cellule du tableau t
+20141002 1 20141002_Locuteur_1 1232.569 1238.361 <o,f0,male> et le type de mon tab, qui est un tableau de quelque chose.
+20141002 1 20141002_Locuteur_1 1238.361 1239.793 <o,f0,male> donc trois types différents,
+20141002 1 20141002_Locuteur_1 1239.793 1242.169 <o,f0,male> et faut bien retenir ça
+20141002 1 20141002_Locuteur_1 1242.169 1246.923 <o,f0,male> quand vous l() avez à définir un tableau, il faut juste retenir qu'il y a trois types qui sont mis en jeu
+20141002 1 20141002_Locuteur_1 1246.923 1264.392 <o,f0,male> et ne pas mélanger ces trois types.
+20141002 1 20141002_Locuteur_1 1264.392 1276.970 <o,f0,male> c'est bon ?
+20141002 1 20141002_Locuteur_1 1276.970 1279.657 <o,f0,male> alors
+20141002 1 20141002_Locuteur_1 1279.657 1286.015 <o,f0,male> quand on respecte toutes les contraintes que j'ai décrites,
+20141002 1 20141002_Locuteur_1 1286.015 1289.421 <o,f0,male> que les cases sont contiguës,
+20141002 1 20141002_Locuteur_1 1289.421 1293.420 <o,f0,male> qu'elles sont bien réservées en mémoire,
+20141002 1 20141002_Locuteur_1 1293.420 1301.298 <o,f0,male> alors on arrive euh on on a un vrai intérêt du tableau, qui est () on a un accès en temps constant à chaque case du tableau
+20141002 1 20141002_Locuteur_1 1301.298 1303.017 <o,f0,male> cet accès est
+20141002 1 20141002_Locuteur_1 1303.017 1304.777 <o,f0,male> très rapide
+20141002 1 20141002_Locuteur_1 1304.777 1306.562 <o,f0,male> très *rapide donc en temps constant
+20141002 1 20141002_Locuteur_1 1306.562 1309.227 <o,f0,male> ind() et indépendant de la case qu'on souhaite lire
+20141002 1 20141002_Locuteur_1 1309.227 1319.191 <o,f0,male> ça coûte aussi cher de lire la case d'indice zéro que de lire la case d'indice dix mille.
+20141002 1 20141002_Locuteur_1 1319.191 1320.836 <o,f0,male> donc euh
+20141002 1 20141002_Locuteur_1 1320.836 1326.790 <o,f0,male> pourquoi on sait faire ça ? ben tout simplement, comme les cases sont contiguës en mémoire,
+20141002 1 20141002_Locuteur_1 1326.790 1333.156 <o,f0,male> ben c'est facile d'avoir l'adresse mémoire connaiss() connaissant la première case, c'est facile d'avoir l'adresse mémoire de la case dix mille
+20141002 1 20141002_Locuteur_1 1333.156 1336.337 <o,f0,male> en faisant un tout petit calcul
+20141002 1 20141002_Locuteur_1 1336.337 1339.221 <o,f0,male> qu'on a là
+20141002 1 20141002_Locuteur_1 1339.221 1340.020 <o,f0,male> donc
+20141002 1 20141002_Locuteur_1 1340.020 1343.193 <o,f0,male> connaissant l'adresse mémoire de la case indice zéro,
+20141002 1 20141002_Locuteur_1 1343.193 1347.870 <o,f0,male> qui est par exemple cent vingt-quatre mille cinq cent soixante-dix-huit ;
+20141002 1 20141002_Locuteur_1 1347.870 1349.715 <o,f0,male> sachant aussi que
+20141002 1 20141002_Locuteur_1 1349.715 1355.083 <o,f0,male> dans chaque case je stocke des nombres euh on va dire des nombres réels
+20141002 1 20141002_Locuteur_1 1355.083 1356.131 <o,f0,male> qui occupent
+20141002 1 20141002_Locuteur_1 1356.131 1360.940 <o,f0,male> quatre cases mémoire
+20141002 1 20141002_Locuteur_1 1360.940 1368.075 <o,f0,male> alors c'est très facile euh de savoir à quelle adresse mémoire se trouvera la case d'indice dix, il suffit de faire ce calcul-là :
+20141002 1 20141002_Locuteur_1 1368.075 1372.722 <o,f0,male> douze mille quatre s() cent vingt-quatre mille cinq cent soixante-dix-huit plus dix fois
+20141002 1 20141002_Locuteur_1 1372.722 1376.911 <o,f0,male> l() l'occupation de la case égale cent vingt-quatre mille six cent dix-huit,
+20141002 1 20141002_Locuteur_1 1376.911 1383.180 <o,f0,male> qui est l'adresse mémoire où je vais retrouver la case d'indice dix.
+20141002 1 20141002_Locuteur_1 1383.180 1385.454 <o,f0,male> autrement dit,
+20141002 1 20141002_Locuteur_1 1385.454 1387.383 <o,f0,male> pour accéder à cette case-là
+20141002 1 20141002_Locuteur_1 1387.383 1391.216 <o,f0,male> connaissant cette adresse-là, il suffit de faire un tout petit calcul
+20141002 1 20141002_Locuteur_1 1391.216 1392.834 <o,f0,male> une somme un produit.
+20141002 1 20141002_Locuteur_1 1392.834 1396.020 <o,f0,male> et ce sera toujours une somme un produit, quelle que soit la case.
+20141002 1 20141002_Locuteur_1 1396.020 1397.578 <o,f0,male> donc ça coûte aussi cher
+20141002 1 20141002_Locuteur_1 1397.578 1402.063 <o,f0,male> d'avoir accès à la case dix que d'avoir accès à la case dix mille.
+20141002 1 20141002_Locuteur_1 1402.063 1405.648 <o,f0,male> et c'est un vrai intérêt des tableaux, hein
+20141002 1 20141002_Locuteur_1 1405.648 1408.789 <o,f0,male> par rapport à d'autres structures de données.
+20141002 1 20141002_Locuteur_1 1408.789 1410.552 <o,f0,male> alors en javascript,
+20141002 1 20141002_Locuteur_1 1410.552 1412.956 <o,f0,male> c'est un petit peu différent
+20141002 1 20141002_Locuteur_1 1412.956 1418.304 <o,f0,male> puisqu'en javascript, on ne précise pas le type
+20141002 1 20141002_Locuteur_1 1418.304 1424.864 <o,f0,male> on ne précise pas le type des éléments et on précise pas non plus le nombre d'éléments qu'on va stocker.
+20141002 1 20141002_Locuteur_1 1424.864 1427.310 <o,f0,male> donc pour déclarer un tableau,
+20141002 1 20141002_Locuteur_1 1427.310 1428.803 <o,f0,male> vide
+20141002 1 20141002_Locuteur_1 1428.803 1431.673 <o,f0,male> sans rien
+20141002 1 20141002_Locuteur_1 1431.673 1434.358 <o,f0,male> on a deux deux possibilités :
+20141002 1 20141002_Locuteur_1 1434.358 1435.931 <o,f0,male> variable t
+20141002 1 20141002_Locuteur_1 1435.931 1437.495 <o,f0,male> égale
+20141002 1 excluded_region 1437.495 1439.400 <o,,unknown> ignore_time_segment_in_scoring
+20141002 1 20141002_Locuteur_1 1439.400 1441.488 <o,f0,male> ça c'est la première possibilité.
+20141002 1 20141002_Locuteur_1 1441.488 1445.259 <o,f0,male> la peu() la possibilité que je préconise, c'est la deuxième :
+20141002 1 20141002_Locuteur_1 1445.259 1450.134 <o,f0,male> variable t égale crochet rien crochet.
+20141002 1 20141002_Locuteur_1 1450.134 1452.465 <o,f0,male> gardez en tête que un tableau, c'est
+20141002 1 20141002_Locuteur_1 1452.465 1453.721 <o,f0,male> des crochets
+20141002 1 20141002_Locuteur_1 1453.721 1455.460 <o,f0,male> avec des valeurs à l'intérieur.
+20141002 1 20141002_Locuteur_1 1455.460 1456.662 <o,f0,male> donc pour créer un k()
+20141002 1 20141002_Locuteur_1 1456.662 1461.483 <o,f0,male> tableau vide, il suffit de mettre des crochets avec rien du tout.
+20141002 1 20141002_Locuteur_1 1461.483 1468.070 <o,f0,male> gardez bien cette notation-là en tête, c'est celle que je vous conseille d'utiliser.
+20141002 1 20141002_Locuteur_1 1468.070 1471.039 <o,f0,male> si on veut mettre des valeurs à l'intérieur du tableau,
+20141002 1 20141002_Locuteur_1 1471.039 1473.609 <o,f0,male> si on veut commencer à le remplir
+20141002 1 20141002_Locuteur_1 1473.609 1478.164 <o,f0,male> ben il suffit de mettre des choses entre les crochets, séparées par des virgules
+20141002 1 20141002_Locuteur_1 1478.164 1481.586 <o,f0,male> c'est pour ça qu'avoir une seule notation, c'est c'est bien.
+20141002 1 20141002_Locuteur_1 1481.586 1482.897 <o,f0,male> donc pour déclarer
+20141002 1 20141002_Locuteur_1 1482.897 1484.560 <o,f0,male> un tableau,
+20141002 1 20141002_Locuteur_1 1484.560 1486.094 <o,f0,male> on utilise var
+20141002 1 20141002_Locuteur_1 1486.094 1487.587 <o,f0,male> t égale
+20141002 1 20141002_Locuteur_1 1487.587 1488.970 <o,f0,male> crochet
+20141002 1 20141002_Locuteur_1 1488.970 1490.590 <o,f0,male> des valeurs éventuellement
+20141002 1 20141002_Locuteur_1 1490.590 1503.836 <o,f0,male> fermez les crochets.
+20141002 1 20141002_Locuteur_1 1503.836 1506.538 <o,f0,male> c'est bon ?
+20141002 1 20141002_Locuteur_1 1506.538 1519.240 <o,f0,male> nan ?
+20141002 1 20141002_Locuteur_1 1519.240 1522.579 <o,f0,male> on passe
+20141002 1 20141002_Locuteur_1 1522.579 1524.605 <o,f0,male> alors voilà un exemple
+20141002 1 20141002_Locuteur_1 1524.605 1526.245 <o,f0,male> en javascript
+20141002 1 20141002_Locuteur_1 1526.245 1528.057 <o,f0,male> où on va déclarer
+20141002 1 20141002_Locuteur_1 1528.057 1529.235 <o,f0,male> un tableau
+20141002 1 20141002_Locuteur_1 1529.235 1532.210 <o,f0,male> on va pouvoir remplir la case d'indice zéro
+20141002 1 20141002_Locuteur_1 1532.210 1540.220 <o,f0,male> on va pouvoir remplir la case d'indice mille
+20141002 1 20141002_Locuteur_1 1540.220 1545.042 <o,f0,male> et puis, si vous regardez bien ce qui est affiché par les deux premières lignes, c'est () on chronomètre
+20141002 1 20141002_Locuteur_1 1545.042 1548.626 <o,f0,male> il y a une fonction qui chronomètre un certain type d'instruction
+20141002 1 20141002_Locuteur_1 1548.626 1550.636 <o,f0,male> donc quand on fait
+20141002 1 20141002_Locuteur_1 1550.636 1553.095 <o,f0,male> euh combien de fois ? un million de fois
+20141002 1 20141002_Locuteur_1 1553.095 1555.360 <o,f0,male> un accès à la case zéro,
+20141002 1 20141002_Locuteur_1 1555.360 1558.557 <o,f0,male> ça prend soixante-quatre millisecondes
+20141002 1 20141002_Locuteur_1 1558.557 1562.577 <o,f0,male> [pi] si on le fait s() un million de fois, c'est parce que c'est un accès très très rapide
+20141002 1 20141002_Locuteur_1 1562.577 1565.760 <o,f0,male> et qu'on n'est pas capable de voir en dessous de un milliseconde.
+20141002 1 20141002_Locuteur_1 1565.760 1567.971 <o,f0,male> donc soixante-quatre millisecondes
+20141002 1 20141002_Locuteur_1 1567.971 1570.941 <o,f0,male> pour accéder à la case
+20141002 1 20141002_Locuteur_1 1570.941 1572.510 <o,f0,male> d'indice zéro
+20141002 1 20141002_Locuteur_1 1572.510 1577.520 <o,f0,male> soixante-quatre milli() soixante-cinq millisecondes, donc autrement dit la même chose
+20141002 1 20141002_Locuteur_1 1577.520 1584.420 <o,f0,male> pour accéder un million de fois à la case d'indice mille.
+20141002 1 20141002_Locuteur_1 1584.420 1591.696 <o,f0,male> ça illustre le fait qu'on a un accès en temps constant à chacune des cases du tableau.
+20141002 1 20141002_Locuteur_1 1591.696 1594.380 <o,f0,male> alors bizarrement,
+20141002 1 20141002_Locuteur_1 1594.380 1596.187 <o,f0,male> si je cherche à accéder
+20141002 1 20141002_Locuteur_1 1596.187 1599.630 <o,f0,male> à la case numéro euh
+20141002 1 20141002_Locuteur_1 1599.630 1600.820 <o,f0,male> i
+20141002 1 20141002_Locuteur_1 1600.820 1604.213 <o,f0,male> pour i allant de zéro à un million,
+20141002 1 20141002_Locuteur_1 1604.213 1609.194 <o,f0,male> ben ça coûte un petit peu plus cher.
+20141002 1 20141002_Locuteur_1 1609.194 1611.644 <o,f0,male> à votre avis, pourquoi ça coûte plus cher ?
+20141002 1 20141002_Locuteur_1 1611.644 1614.140 <o,f0,male> ça coûte à peu près dix fois plus cher.
+20141002 1 20141002_Locuteur_1 1614.140 1616.884 <o,f0,male> vous avez une idée ?
+20141002 1 20141002_Locuteur_1 1616.884 1617.397 <o,f0,male> oui ?
+20141002 1 inter_segment_gap 1617.397 1620.620 <o,f0,>
+20141002 1 20141002_Locuteur_1 1620.620 1621.430 <o,f1,male> pardon ?
+20141002 1 inter_segment_gap 1621.430 1624.255 <o,f1,>
+20141002 1 20141002_Locuteur_1 1624.255 1625.077 <o,f1,male> j'entends pas
+20141002 1 inter_segment_gap 1625.077 1628.981 <o,f0,>
+20141002 1 20141002_Locuteur_1 1628.981 1631.840 <o,f0,male> [pi] on n'a jamais précisé la taille du tableau
+20141002 1 20141002_Locuteur_1 1631.840 1635.616 <o,f0,male> donc n() rien n'interdit d'avoir un tableau de taille mille
+20141002 1 20141002_Locuteur_1 1635.616 1638.052 <o,f0,male> mais en fait, t'as raison
+20141002 1 20141002_Locuteur_1 1638.052 1640.351 <o,f0,male> c'est c'est exactement ça.
+20141002 1 20141002_Locuteur_1 1640.351 1643.395 <o,f0,male> par défaut, le () en javascript, le tableau
+20141002 1 20141002_Locuteur_1 1643.395 1647.111 <o,f0,male> on le crée, il est vide
+20141002 1 20141002_Locuteur_1 1647.111 1651.870 <o,f0,male> donc la mémoire n'est pas réservée.
+20141002 1 20141002_Locuteur_1 1651.870 1654.469 <o,f0,male> quand j'écris t entre crochets
+20141002 1 20141002_Locuteur_1 1654.469 1656.374 <o,f0,male> zéro égale un
+20141002 1 20141002_Locuteur_1 1656.374 1659.081 <o,f0,male> c'est là que je commence à réserver une case en mémoire
+20141002 1 20141002_Locuteur_1 1659.081 1661.953 <o,f0,male> pour stocker mon tableau, j'ai besoin d'une case en mémoire
+20141002 1 20141002_Locuteur_1 1661.953 1663.850 <o,f0,male> parce qu'elle est numérotée
+20141002 1 20141002_Locuteur_1 1663.850 1666.278 <o,f0,male> par l'indice zéro.
+20141002 1 20141002_Locuteur_1 1666.278 1668.892 <o,f0,male> quand je crée la deuxième,
+20141002 1 20141002_Locuteur_1 1668.892 1671.989 <o,f0,male> quand j'écris la deuxième ligne,
+20141002 1 20141002_Locuteur_1 1671.989 1673.581 <o,f0,male> je dis
+20141002 1 20141002_Locuteur_1 1673.581 1676.537 <o,f0,male> à l'ordinateur j'ai besoin de m()
+20141002 1 20141002_Locuteur_1 1676.537 1680.612 <o,f0,male> mille euh mille une cases pour stocker mon tableau.
+20141002 1 20141002_Locuteur_1 1680.612 1683.685 <o,f0,male> donc la taille du tableau après cette deuxième ligne
+20141002 1 20141002_Locuteur_1 1683.685 1686.552 <o,f0,male> fera plus une case, mais fera mille une cases.
+20141002 1 20141002_Locuteur_1 1686.552 1690.288 <o,f0,male> donc il y a un processus un peu lourd de réservations
+20141002 1 20141002_Locuteur_1 1690.288 1691.864 <o,f0,male> de mille cases
+20141002 1 20141002_Locuteur_1 1691.864 1694.520 <o,f0,male> successives en mémoire.
+20141002 1 20141002_Locuteur_1 1694.520 1698.391 <o,f0,male> c'est pas si évident que ça à trouver
+20141002 1 20141002_Locuteur_1 1698.391 1701.720 <o,f0,male> bon mais qu'est-ce que je fais en() ensuite ?
+20141002 1 20141002_Locuteur_1 1701.720 1710.040 <o,f0,male> bah là j'ai réservé mon tableau de mille cases, et puis j'essaye de () au bout d'un moment j'essaye de mettre quelque chose dans la mille unième case.
+20141002 1 20141002_Locuteur_1 1710.040 1713.460 <o,f0,male> eh bah je crée un processus un peu lourd, qui va réserver en mémoire
+20141002 1 20141002_Locuteur_1 1713.460 1717.390 <o,f0,male> la place pour stocker un tableau de mille une cases.
+20141002 1 20141002_Locuteur_1 1717.390 1726.273 <o,f0,male> et puis je le fais encore une fois pour la mille deuxième case, la mille troisième case et je le fais jusqu'à la case numéro un million.
+20141002 1 20141002_Locuteur_1 1726.273 1728.310 <o,f0,male> donc j'ai
+20141002 1 20141002_Locuteur_1 1728.310 1733.221 <o,f0,male> à peu près un million de fois un processus de réservation en mémoire, et ça ça coûte cher
+20141002 1 20141002_Locuteur_1 1733.221 1738.797 <o,f0,male> ça coûte la différence qu'il y a entre l'accès mémoire simple et puis l'accès avec réservation de la mémoire
+20141002 1 20141002_Locuteur_1 1738.797 1741.481 <o,f0,male> qu'on a là.
+20141002 1 20141002_Locuteur_1 1741.481 1743.096 <o,f0,male> bon
+20141002 1 20141002_Locuteur_1 1743.096 1745.225 <o,f0,male> bah on en vient
+20141002 1 20141002_Locuteur_1 1745.225 1747.569 <o,f0,male> exactement à ça.
+20141002 1 20141002_Locuteur_1 1747.569 1752.280 <o,f0,male> qu'est-ce que j'ai fait là ?
+20141002 1 20141002_Locuteur_1 1752.280 1759.313 <o,f0,male> j'ai déjà m() m() mis le doigt sur la différence entre les tableaux en javascript
+20141002 1 20141002_Locuteur_1 1759.313 1760.200 <o,f0,male> qui sont
+20141002 1 20141002_Locuteur_1 1760.200 1763.995 <o,f0,male> comme euh le nom euh que vous voyez là, dynamiques,
+20141002 1 20141002_Locuteur_1 1763.995 1768.021 <o,f0,male> et les tableaux qu'on avait présentés jusque-là, qu'on appelait statiques.
+20141002 1 20141002_Locuteur_1 1768.021 1769.576 <o,f0,male> c'est quoi la différence ?
+20141002 1 20141002_Locuteur_1 1769.576 1778.430 <o,f0,male> ben dans un cas, on précise le nombre de cases et on n'a pas le droit de sortir de l'ensemble de définition
+20141002 1 20141002_Locuteur_1 1778.430 1782.062 <o,f0,male> donc ça, c'est euh le caractère statique du tableau ;
+20141002 1 20141002_Locuteur_1 1782.062 1784.522 <o,f0,male> dans certains cas
+20141002 1 20141002_Locuteur_1 1784.522 1786.424 <o,f0,male> et dans beaucoup de cas d'ailleurs,
+20141002 1 20141002_Locuteur_1 1786.424 1790.676 <o,f0,male> on connaît pas forcément à l'avance le nombre de cases dont on va avoir besoin
+20141002 1 20141002_Locuteur_1 1790.676 1792.510 <o,f0,male> donc il peut être utile
+20141002 1 20141002_Locuteur_1 1792.510 1796.698 <o,f0,male> de rajouter des cases au cours de l'exécution de l'algorithme.
+20141002 1 20141002_Locuteur_1 1796.698 1806.419 <o,f0,male> les tableaux qui permettent de faire ça s'appelle les tableaux dynamiques.
+20141002 1 20141002_Locuteur_1 1806.419 1807.157 <o,f0,male> voilà
+20141002 1 20141002_Locuteur_1 1807.157 1809.024 <o,f0,male> autrement dit, qu'est-ce qui se passe ?
+20141002 1 20141002_Locuteur_1 1809.024 1810.890 <o,f0,male> quand une case n'existe pas,
+20141002 1 20141002_Locuteur_1 1810.890 1813.141 <o,f0,male> j'essaye de créer la case numéro
+20141002 1 20141002_Locuteur_1 1813.141 1821.795 <o,f0,male> mille un, elle n'existe pas : qu'est-ce qui se passe ?
+20141002 1 20141002_Locuteur_1 1821.795 1823.760 <o,f0,male> eh ben [pi]
+20141002 1 20141002_Locuteur_1 1823.760 1826.609 <o,f0,male> on a un tableau de mille cases,
+20141002 1 20141002_Locuteur_1 1826.609 1828.608 <o,f0,male> on veut rajouter une case :
+20141002 1 20141002_Locuteur_1 1828.608 1831.090 <o,f0,male> si on n'a pas de chance,
+20141002 1 20141002_Locuteur_1 1831.090 1834.407 <o,f0,male> il y a des () la case est déjà occupée par une autre variable
+20141002 1 20141002_Locuteur_1 1834.407 1836.920 <o,f0,male> donc je suis obligé de trouver en mémoire
+20141002 1 20141002_Locuteur_1 1836.920 1839.807 <o,f0,male> un espace de mille une case
+20141002 1 20141002_Locuteur_1 1839.807 1842.325 <o,f0,male> qui me permettra de stocker tout mon tableau
+20141002 1 20141002_Locuteur_1 1842.325 1847.178 <o,f0,male> avec des cases de manière contiguë, sinon je perds tout l'intérêt des tableaux.
+20141002 1 20141002_Locuteur_1 1847.178 1849.665 <o,f0,male> donc le processus lourd, c'est : on recherche
+20141002 1 20141002_Locuteur_1 1849.665 1852.720 <o,f0,male> un espace avec mille une places,
+20141002 1 20141002_Locuteur_1 1852.720 1856.488 <o,f0,male> on recopie l'ensemble du tableau
+20141002 1 20141002_Locuteur_1 1856.488 1861.662 <o,f0,male> case par case à un autre endroit
+20141002 1 20141002_Locuteur_1 1861.662 1864.013 <o,f0,male> et puis on on modifie
+20141002 1 20141002_Locuteur_1 1864.013 1867.252 <o,f0,male> la valeur euh l'adresse mémoire du début du tableau.
+20141002 1 20141002_Locuteur_1 1867.252 1873.422 <o,f0,male> donc voilà ce processus lourd.
+20141002 1 20141002_Locuteur_1 1873.422 1875.900 <o,f4,male> ça change un peu les notations :
+20141002 1 20141002_Locuteur_1 1875.900 1878.850 <o,f4,male> dans le langage algorithmique, on précisera plus le nombre de cases
+20141002 1 20141002_Locuteur_1 1878.850 1884.771 <o,f4,male> donc on dira que c'est un tableau d'entiers, et pas un tableau de x cases d'entiers.
+20141002 1 20141002_Locuteur_1 1884.771 1892.294 <o,f4,male> en javascript, ça change rien puisque les tableaux sont par défaut des tableaux dynamiques.
+20141002 1 20141002_Locuteur_1 1892.294 1898.854 <o,f4,male> il y a un peu de bruit, là !
+20141002 1 20141002_Locuteur_1 1898.854 1903.691 <o,f4,male> bon, voilà un exemple :
+20141002 1 20141002_Locuteur_1 1903.691 1904.420 <o,f4,male> donc
+20141002 1 20141002_Locuteur_1 1904.420 1908.513 <o,f4,male> on crée un tableau avec un certain nombre de cases préremplies
+20141002 1 20141002_Locuteur_1 1908.513 1910.281 <o,f4,male> quand j'affiche le tableau
+20141002 1 20141002_Locuteur_1 1910.281 1912.106 <o,f4,male> avec ri() écrire t
+20141002 1 20141002_Locuteur_1 1912.106 1913.690 <o,f4,male> j'obtiens le tableau
+20141002 1 20141002_Locuteur_1 1913.690 1916.683 <o,f4,male> tel que je l'ai rempli.
+20141002 1 20141002_Locuteur_1 1916.683 1918.950 <o,f4,male> si je calcule la taille du tableau,
+20141002 1 20141002_Locuteur_1 1918.950 1920.370 <o,f4,male> il me renvoie quatre
+20141002 1 20141002_Locuteur_1 1920.370 1927.643 <o,f4,male> j'ai bien quatre éléments dans le tableau.
+20141002 1 20141002_Locuteur_1 1927.643 1933.381 <o,f4,male> imaginons que je veuille () que je mette maintenant quelque chose dans la case d'indice dix
+20141002 1 20141002_Locuteur_1 1933.381 1935.262 <o,f4,male> ce qui se passe, c'est simple :
+20141002 1 20141002_Locuteur_1 1935.262 1938.580 <o,f4,male> il va chercher un endroit où il y a dix cases mémoire
+20141002 1 20141002_Locuteur_1 1938.580 1944.120 <o,f4,male> il remplit la case d'indice dix, il re-remplit les premières cases avec les val() les anciennes valeurs
+20141002 1 20141002_Locuteur_1 1944.120 1946.949 <o,f4,male> et le nouveau tableau renvoyé, c'est ce tableau
+20141002 1 20141002_Locuteur_1 1946.949 1949.487 <o,f4,male> qui contient onze cases
+20141002 1 20141002_Locuteur_1 1949.487 1951.172 <o,f4,male> remplies de la manière suivante.
+20141002 1 20141002_Locuteur_1 1951.172 1959.384 <o,f4,male> et ça se voit si on l'affiche : écrire t, ça affiche le tableau composé de un virgule cinq, un virgule sept, deux virgule trois, quatre,
+20141002 1 20141002_Locuteur_1 1959.384 1961.630 <o,f4,male> des cases qui ne contiennent rien,
+20141002 1 20141002_Locuteur_1 1961.630 1966.337 <o,f4,male> donc c'est toutes les virgules avec rien à l'intérieur et la dernière case contient un virgule neuf.
+20141002 1 20141002_Locuteur_1 1966.337 1968.832 <o,f4,male> si on raffiche la taille du tableau, c'est bien
+20141002 1 20141002_Locuteur_1 1968.832 1971.076 <o,f4,male> onze
+20141002 1 20141002_Locuteur_1 1971.076 1975.554 <o,f4,male> tableau numéroté de zéro à dix.
+20141002 1 20141002_Locuteur_1 1975.554 1977.040 <o,f4,male> d'accord ? donc ça coûte cher.
+20141002 1 20141002_Locuteur_1 1977.040 1978.970 <o,f4,male> ça coûte cher de rajouter ces cases
+20141002 1 20141002_Locuteur_1 1978.970 1989.640 <o,f4,male> et on l'a vu sur euh l'exemple où on chronométrait le les temps.
+20141002 1 20141002_Locuteur_1 1989.640 1990.295 <o,f4,male> voilà
+20141002 1 20141002_Locuteur_1 1990.295 1994.090 <o,f4,male> euh juste j'attire votre attention sur le fait que la case est créée
+20141002 1 20141002_Locuteur_1 1994.090 2000.101 <o,f4,male> mais comme a priori il y a rien à mettre à l'intérieur, elle est créée et elle est laissée vide.
+20141002 1 20141002_Locuteur_1 2000.101 2004.540 <o,f4,male> donc quand elle sera affichée, elle sera affichée comme une case vide
+20141002 1 20141002_Locuteur_1 2004.540 2005.852 <o,f4,male> mais elle existe, hein
+20141002 1 20141002_Locuteur_1 2005.852 2007.121 <o,f4,male> elle existe, ça se voit
+20141002 1 20141002_Locuteur_1 2007.121 2008.720 <o,f4,male> dans la taille.
+20141002 1 20141002_Locuteur_1 2008.720 2015.106 <o,f4,male> bon, ça c'était la première chose, j'avais dit : pour aller plus loin, on va aller () on va voir plusieurs petites choses.
+20141002 1 20141002_Locuteur_1 2015.106 2017.500 <o,f4,male> maintenant pour aller plus loin,
+20141002 1 20141002_Locuteur_1 2017.500 2021.168 <o,f4,male> on va voir les tableaux à deux dimensions.
+20141002 1 20141002_Locuteur_1 2021.168 2024.505 <o,f4,male> donc si vous avez suivi jusqu'à présent,
+20141002 1 20141002_Locuteur_1 2024.505 2026.635 <o,f4,male> un tableau informatique
+20141002 1 20141002_Locuteur_1 2026.635 2030.773 <o,f4,male> c'est une réservation d'un espace linéaire
+20141002 1 20141002_Locuteur_1 2030.773 2032.759 <o,f4,male> qui permet de stocker un ensemble
+20141002 1 20141002_Locuteur_1 2032.759 2034.273 <o,f4,male> une suite de valeurs
+20141002 1 20141002_Locuteur_1 2034.273 2036.138 <o,f4,male> un ensemble de valeurs
+20141002 1 20141002_Locuteur_1 2036.138 2040.020 <o,f4,male> sur une ligne.
+20141002 1 20141002_Locuteur_1 2040.020 2042.562 <o,f4,male> c'est associé à un vecteur
+20141002 1 20141002_Locuteur_1 2042.562 2046.090 <o,f4,male> en mathématiques.
+20141002 1 20141002_Locuteur_1 2046.090 2049.438 <o,f4,male> si maintenant on veut stocker une matrice,
+20141002 1 20141002_Locuteur_1 2049.438 2052.230 <o,f4,male> l'analogue d'une matrice en mathématiques,
+20141002 1 20141002_Locuteur_1 2052.230 2055.344 <o,f4,male> c'est un tableau ce qu'on veut s() un tableau de valeurs qu'on veut stocker.
+20141002 1 20141002_Locuteur_1 2055.344 2058.440 <o,f4,male> comment on fait pour stocker ce tableau de valeurs
+20141002 1 20141002_Locuteur_1 2058.440 2062.152 <o,f4,male> en informatique ?
+20141002 1 20141002_Locuteur_1 2062.152 2063.875 <o,f4,male> ben
+20141002 1 20141002_Locuteur_1 2063.875 2068.100 <o,f4,male> la réponse est simple :
+20141002 1 20141002_Locuteur_1 2068.100 2071.895 <o,f4,male> en informatique, on ne peut stocker que des vecteurs de valeurs
+20141002 1 20141002_Locuteur_1 2071.895 2074.260 <o,f4,male> donc il faut se débrouiller
+20141002 1 20141002_Locuteur_1 2074.260 2076.397 <o,f4,male> pour stocker un tableau de valeurs
+20141002 1 20141002_Locuteur_1 2076.397 2079.290 <o,f4,male> uniquement avec des vecteurs de valeurs
+20141002 1 20141002_Locuteur_1 2079.290 2081.095 <o,f4,male> uniquement avec des vecteurs, pardon
+20141002 1 20141002_Locuteur_1 2081.095 2083.006 <o,f4,male> tableau de valeurs uniquement avec des vecteurs.
+20141002 1 20141002_Locuteur_1 2083.006 2085.631 <o,f4,male> il y a deux manières de s'en sortir
+20141002 1 20141002_Locuteur_1 2085.631 2091.090 <o,f4,male> et on va présenter les deux.
+20141002 1 20141002_Locuteur_1 2091.090 2092.255 <o,f4,male> soit
+20141002 1 20141002_Locuteur_1 2092.255 2094.850 <o,f4,male> on renumérote
+20141002 1 20141002_Locuteur_1 2094.850 2096.345 <o,f4,male> les cases
+20141002 1 20141002_Locuteur_1 2096.345 2101.246 <o,f4,male> pou() du du tableau à deux dimensions pour en faire un tableau à une dimension,
+20141002 1 20141002_Locuteur_1 2101.246 2103.020 <o,f4,male> soit on invente
+20141002 1 20141002_Locuteur_1 2103.020 2110.490 <o,f4,male> un autre type de valeurs qui sera stocké par le tableau
+20141002 1 20141002_Locuteur_1 2110.490 2114.227 <o,f4,male> et on va juste utiliser le fait que finalement
+20141002 1 20141002_Locuteur_1 2114.227 2116.430 <o,f4,male> écrire un tableau de valeurs,
+20141002 1 20141002_Locuteur_1 2116.430 2119.610 <o,f4,male> c'est uniquement une représentation graphique
+20141002 1 20141002_Locuteur_1 2119.610 2121.877 <o,f4,male> de d'un ensemble de données
+20141002 1 20141002_Locuteur_1 2121.877 2127.346 <o,f4,male> qu'on qu'on aurait très bien pu représenter sur une ligne.
+20141002 1 20141002_Locuteur_1 2127.346 2128.920 <o,f4,male> voilà
+20141002 1 20141002_Locuteur_1 2128.920 2131.092 <o,f4,male> donc deux méthodes pour s'en sortir
+20141002 1 20141002_Locuteur_1 2131.092 2135.319 <o,f4,male> donc pour stocker des valeurs à deux dimensions dans une mémoire à une dimension :
+20141002 1 20141002_Locuteur_1 2135.319 2139.315 <o,f4,male> soit on renumérote
+20141002 1 20141002_Locuteur_1 2139.315 2141.310 <o,f4,male> les lignes et les colonnes,
+20141002 1 20141002_Locuteur_1 2141.310 2148.233 <o,f4,male> soit on revoit la définition d'un tableau à deux dimensions.
+20141002 1 20141002_Locuteur_1 2148.233 2151.489 <o,f4,male> première méthode :
+20141002 1 20141002_Locuteur_1 2151.489 2154.541 <o,f4,male> comment je fais pour renuméroter
+20141002 1 20141002_Locuteur_1 2154.541 2159.281 <o,f4,male> mes cases d'un tableau à deux dimensions ? donc
+20141002 1 20141002_Locuteur_1 2159.281 2166.768 <o,f4,male> j'ai des lignes, ça c'est zéro virgule zéro, un virgule zéro, deux virgule zéro, trois virgule zéro et cetera et cetera.
+20141002 1 20141002_Locuteur_1 2166.768 2169.474 <o,f4,male> comment je fais pour renuméroter
+20141002 1 20141002_Locuteur_1 2169.474 2171.951 <o,f4,male> toutes ces cases-là ? ben c'est simple, il suffit
+20141002 1 20141002_Locuteur_1 2171.951 2174.083 <o,f4,male> de dire que ça c'est la case d'indice zéro,
+20141002 1 20141002_Locuteur_1 2174.083 2180.393 <o,f4,male> ça c'est la case d'indice un, d'indice deux, d'indice trois, d'indice quatre, d'indice cinq, d'indice six, d'indice sept, d'indice huit
+20141002 1 20141002_Locuteur_1 2180.393 2182.230 <o,f4,male> et puis de repartir à la ligne
+20141002 1 20141002_Locuteur_1 2182.230 2185.650 <o,f4,male> et de dire que celle-là, au lieu de s'appeler un, elle s'appelle neuf
+20141002 1 20141002_Locuteur_1 2185.650 2190.087 <o,f4,male> et celle-là, au lieu de s'appeler un virgule un, elle s'appelle dix,
+20141002 1 20141002_Locuteur_1 2190.087 2194.795 <o,f4,male> onze, douze, treize, quatorze, et cetera et cetera. donc en gros, pour avoir un tableau
+20141002 1 20141002_Locuteur_1 2194.795 2198.035 <o,f4,male> à une dimension quand on a un tableau à deux dimensions,
+20141002 1 20141002_Locuteur_1 2198.035 2199.571 <o,f4,male> il suffit de mettre les lignes
+20141002 1 20141002_Locuteur_1 2199.571 2201.066 <o,f4,male> au bout les unes des autres.
+20141002 1 20141002_Locuteur_1 2201.066 2204.598 <o,f4,male> ça donne ça :
+20141002 1 20141002_Locuteur_1 2204.598 2209.910 <o,f4,male> donc la ca() les cases euh seront numérotées comme ça.
+20141002 1 20141002_Locuteur_1 2209.910 2213.660 <o,f4,male> alors il y a u() un petit calcul très simple
+20141002 1 20141002_Locuteur_1 2213.660 2215.520 <o,f4,male> pour passer de quatre virgule huit
+20141002 1 20141002_Locuteur_1 2215.520 2217.545 <o,f4,male> à quarante-quatre :
+20141002 1 20141002_Locuteur_1 2217.545 2219.919 <o,f4,male> est-ce que vous le connai() est-ce que vous l'imaginez ?
+20141002 1 20141002_Locuteur_1 2219.919 2222.075 <o,f4,male> comment je fais pour avoir quarante-quatre
+20141002 1 20141002_Locuteur_1 2222.075 2224.272 <o,f4,male> sachant que j'ai quatre
+20141002 1 20141002_Locuteur_1 2224.272 2226.710 <o,f4,male> en ligne et huit en colonne ?
+20141002 1 20141002_Locuteur_1 2226.710 2234.725 <o,f4,male> vous l'avez pas ?
+20141002 1 20141002_Locuteur_1 2234.725 2240.510 <o,f4,male> il est simple, le calcul
+20141002 1 20141002_Locuteur_1 2240.510 2242.984 <o,f4,male> comment j'utilise le quatre et le huit
+20141002 1 20141002_Locuteur_1 2242.984 2244.510 <o,f4,male> pour obtenir quarante-quatre ?
+20141002 1 inter_segment_gap 2244.510 2247.806 <o,f4,>
+20141002 1 20141002_Locuteur_1 2247.806 2248.441 <o,f4,male> pardon ?
+20141002 1 inter_segment_gap 2248.441 2250.860 <o,f4,>
+20141002 1 20141002_Locuteur_1 2250.860 2253.299 <o,f4,male> c'est ça
+20141002 1 20141002_Locuteur_1 2253.299 2255.520 <o,f4,male> la réponse, c'est
+20141002 1 20141002_Locuteur_1 2255.520 2257.946 <o,f4,male> pour avoir le quarante-huit,
+20141002 1 20141002_Locuteur_1 2257.946 2259.507 <o,f4,male> je prends le quatre,
+20141002 1 20141002_Locuteur_1 2259.507 2261.514 <o,f4,male> je multiplie par le nombre de colonnes,
+20141002 1 20141002_Locuteur_1 2261.514 2262.968 <o,f4,male> c'est-à-dire neuf ici
+20141002 1 20141002_Locuteur_1 2262.968 2264.155 <o,f4,male> et j'ajoute huit
+20141002 1 20141002_Locuteur_1 2264.155 2268.743 <o,f4,male> quatre fois neuf plus huit, ça fait bien quarante-quatre.
+20141002 1 20141002_Locuteur_1 2268.743 2270.465 <o,f4,male> autrement dit, pour passer
+20141002 1 20141002_Locuteur_1 2270.465 2272.690 <o,f4,male> d'une case d'indice i j
+20141002 1 20141002_Locuteur_1 2272.690 2273.830 <o,f4,male> au numéro
+20141002 1 20141002_Locuteur_1 2273.830 2278.673 <o,f4,male> d'un tableau linéaire, il suffit de connaître le nombre de colonnes
+20141002 1 20141002_Locuteur_1 2278.673 2279.533 <o,f4,male> de la
+20141002 1 20141002_Locuteur_1 2279.533 2285.180 <o,f4,male> de la représentation graphique de mes données.
+20141002 1 20141002_Locuteur_1 2285.180 2289.984 <o,f4,male> donc si la largeur du () le nombre de colonnes du tableau c'est l,
+20141002 1 20141002_Locuteur_1 2289.984 2290.927 <o,f4,male> la valeur s()
+20141002 1 20141002_Locuteur_1 2290.927 2294.785 <o,f4,male> de la case x y sera stockée dans un tableau
+20141002 1 20141002_Locuteur_1 2294.785 2296.055 <o,f4,male> linéaire
+20141002 1 20141002_Locuteur_1 2296.055 2299.885 <o,f4,male> à la () à l'indice x fois l plus y,
+20141002 1 20141002_Locuteur_1 2299.885 2303.647 <o,f4,male> et la formule est relativement simple finalement.
+20141002 1 20141002_Locuteur_1 2303.647 2307.228 <o,f4,male> donc ça c'est la première méthode pour s'en sortir
+20141002 1 20141002_Locuteur_1 2307.228 2310.751 <o,f4,male> c'est la première méthode pour stocker
+20141002 1 20141002_Locuteur_1 2310.751 2312.198 <o,f4,male> dans un tableau
+20141002 1 20141002_Locuteur_1 2312.198 2314.309 <o,f4,male> à
+20141002 1 20141002_Locuteur_1 2314.309 2319.279 <o,f4,male> une dimension un tableau à deux dimensions.
+20141002 1 20141002_Locuteur_1 2319.279 2320.390 <o,f4,male> alors comment je fais ?
+20141002 1 20141002_Locuteur_1 2320.390 2323.226 <o,f4,male> juste euh toute petite remarque : comment je fais pour revenir
+20141002 1 20141002_Locuteur_1 2323.226 2324.642 <o,f4,male> à x y ?
+20141002 1 20141002_Locuteur_1 2324.642 2328.370 <o,f4,male> comment je fais pour passer de quarante-quatre à x y maintenant ?
+20141002 1 20141002_Locuteur_1 2328.370 2336.462 <o,f4,male> à votre avis ?
+20141002 1 20141002_Locuteur_1 2336.462 2341.120 <o,f4,male> je l'ai pas je l'ai pas écrit.
+20141002 1 20141002_Locuteur_1 2341.120 2344.869 <o,f4,male> mais f() c'est des mo() bon je vous donne la réponse : c'est des modulo.
+20141002 1 20141002_Locuteur_1 2344.869 2350.220 <o,f4,male> quarante-quatre modulo neuf, ça fait huit.
+20141002 1 20141002_Locuteur_1 2350.220 2356.390 <o,f4,male> quarante-quatre divisé en tiers par neuf, ça fait quatre.
+20141002 1 20141002_Locuteur_1 2356.390 2357.926 <o,f4,male> autrement dit, on peut passer
+20141002 1 20141002_Locuteur_1 2357.926 2363.740 <o,f4,male> de i () du couple x y à la case, mais on s() peut aussi passer de la case au couple x y,
+20141002 1 20141002_Locuteur_1 2363.740 2369.226 <o,f4,male> à condition de connaître la largeur du tableau.
+20141002 1 20141002_Locuteur_1 2369.226 2371.294 <o,f4,male> deuxième manière
+20141002 1 20141002_Locuteur_1 2371.294 2373.949 <o,f4,male> de stocker un tableau à deux dimensions
+20141002 1 20141002_Locuteur_1 2373.949 2378.090 <o,f4,male> dans un espace à une dimension
+20141002 1 20141002_Locuteur_1 2378.090 2378.908 <o,f4,male> elle est ()
+20141002 1 20141002_Locuteur_1 2378.908 2383.520 <o,f4,male> sont deux () ce sont deux méthodes aussi valables l'une que l'autre hein.
+20141002 1 20141002_Locuteur_1 2383.520 2386.940 <o,f4,male> elles sont aussi valables l'une que l'autre, moi je préfère celle-là
+20141002 1 20141002_Locuteur_1 2386.940 2392.350 <o,f4,male> mais j'ai aucun a priori sur les sur les deux ; je préfère utiliser cette manière de représenter les choses.
+20141002 1 20141002_Locuteur_1 2392.350 2394.748 <o,f4,male> donc comment je fais
+20141002 1 20141002_Locuteur_1 2394.748 2397.260 <o,f4,male> pour revoir la définition ? ben
+20141002 1 20141002_Locuteur_1 2397.260 2401.402 <o,f4,male> j'oublie que c'est un tableau à deux dimensions
+20141002 1 20141002_Locuteur_1 2401.402 2404.886 <o,f4,male> et je me dis que les lignes,
+20141002 1 20141002_Locuteur_1 2404.886 2408.520 <o,f4,male> ce sont des () *les lignes, c'est un te() c'est un tableau
+20141002 1 20141002_Locuteur_1 2408.520 2412.756 <o,f4,male> je crée un [pi] ligne
+20141002 1 20141002_Locuteur_1 2412.756 2416.430 <o,f4,male> qui contiendra un tableau.
+20141002 1 20141002_Locuteur_1 2416.430 2423.922 <o,f4,male> donc un tableau à deux dimensions, c'est un tableau dont les cases contiennent des tableaux
+20141002 1 20141002_Locuteur_1 2423.922 2429.226 <o,f4,male> donc on a revu la définition d'un tableau à deux dimensions, c'est un tableau de tableaux.
+20141002 1 20141002_Locuteur_1 2429.226 2434.474 <o,f4,male> et évidemment, celle-là elle est bien parce que c'est assez facile ensuite de faire des tableaux à trois dimensions
+20141002 1 20141002_Locuteur_1 2434.474 2435.910 <o,f4,male> qui seront des tableaux
+20141002 1 20141002_Locuteur_1 2435.910 2438.120 <o,f4,male> dont les cases contiendront des tableaux,
+20141002 1 20141002_Locuteur_1 2438.120 2442.040 <o,f4,male> dont les cases contiendront des tableaux.
+20141002 1 20141002_Locuteur_1 2442.040 2443.980 <o,f4,male> euh des tableaux de tableaux de tableaux
+20141002 1 20141002_Locuteur_1 2443.980 2448.589 <o,f4,male> et on peut faire ça pour n'importe quelle dimension.
+20141002 1 20141002_Locuteur_1 2448.589 2453.483 <o,f4,male> donc voilà, on est () on en est là et puis après ben les tab() les renumérotations, elles sont faciles.
+20141002 1 20141002_Locuteur_1 2453.483 2455.861 <o,f4,male> pour avoi() accéder à la case
+20141002 1 20141002_Locuteur_1 2455.861 2457.409 <o,f4,male> d'indice
+20141002 1 20141002_Locuteur_1 2457.409 2461.582 <o,f4,male> euh d'une de l'ancien indice deux trois, bah je vais
+20141002 1 20141002_Locuteur_1 2461.582 2463.137 <o,f4,male> dans le premier tableau,
+20141002 1 20141002_Locuteur_1 2463.137 2465.138 <o,f4,male> case indices deux ;
+20141002 1 20141002_Locuteur_1 2465.138 2468.299 <o,f4,male> et dans ce tableau-là, je vais récupérer la case d'indice trois.
+20141002 1 20141002_Locuteur_1 2468.299 2472.504 <o,f4,male> ça c'écrit comme ça
+20141002 1 20141002_Locuteur_1 2472.504 2473.918 <o,f4,male> donc un tableau
+20141002 1 20141002_Locuteur_1 2473.918 2478.725 <o,f4,male> à deux dimensions s() *ça peut être défini comme un tableau de lignes, chaque ligne étant un tableau, c'est ce que j'ai déjà dit.
+20141002 1 20141002_Locuteur_1 2478.725 2481.908 <o,f4,male> la valeur stockée en position x y
+20141002 1 20141002_Locuteur_1 2481.908 2485.226 <o,f4,male> correspond donc à la valeur d'indice x dans le tableau
+20141002 1 20141002_Locuteur_1 2485.226 2487.497 <o,f4,male> t entre crochets y.
+20141002 1 20141002_Locuteur_1 2487.497 2490.483 <o,f4,male> et ça s'écrira : t entre crochets y entre crochets x.
+20141002 1 20141002_Locuteur_1 2490.483 2494.361 <o,f4,male> c'est pour ça que j'aime bien cette notation-là, c'est parce qu'elle est relativement proche
+20141002 1 20141002_Locuteur_1 2494.361 2499.781 <o,f4,male> de la notation euh des tableaux à deux dimensions qu'on () dont on a l'habitude.
+20141002 1 20141002_Locuteur_1 2499.781 2502.703 <o,f4,male> c'était entre t() crochets x, entre crochets y
+20141002 1 20141002_Locuteur_1 2502.703 2506.200 <o,f4,male> on n'a plus besoin de connaître la largeur du tableau :
+20141002 1 20141002_Locuteur_1 2506.200 2510.218 <o,f4,male> là elle elle n'intervient plus, la largeur du tableau.
+20141002 1 20141002_Locuteur_1 2510.218 2512.170 <o,f4,male> en fait là où c'est euh
+20141002 1 20141002_Locuteur_1 2512.170 2515.933 <o,f4,male> un peu *sioux encore, c'est que les tableaux
+20141002 1 20141002_Locuteur_1 2515.933 2521.690 <o,f4,male> ne sont même pas obligés d'être de la même taille.
+20141002 1 20141002_Locuteur_1 2521.690 2526.583 <o,f4,male> donc on s'abstrait de de cette connaissance, et c'est pour ça que c'est à mon sens un peu plus intéressant.
+20141002 1 20141002_Locuteur_1 2526.583 2530.127 <o,f4,male> donc voilà un exemple de définition d'un tableau à deux dimensions :
+20141002 1 20141002_Locuteur_1 2530.127 2532.874 <o,f4,male> donc c'est un tableau t
+20141002 1 20141002_Locuteur_1 2532.874 2534.040 <o,f4,male> qui débute là
+20141002 1 20141002_Locuteur_1 2534.040 2535.845 <o,f4,male> et qui se termine là,
+20141002 1 20141002_Locuteur_1 2535.845 2543.164 <o,f4,male> dont la première case contient le tableau un cinq, la deuxième case contient le tableau sept neuf, la troisième case contient le *tableau trois quatre
+20141002 1 20141002_Locuteur_1 2543.164 2545.155 <o,f4,male> si je l'affiche,
+20141002 1 20141002_Locuteur_1 2545.155 2550.403 <o,f4,male> ça me donne ce tableau-là.
+20141002 1 20141002_Locuteur_1 2550.403 2552.660 <o,f4,male> ok ?
+20141002 1 20141002_Locuteur_1 2552.660 2556.947 <o,f4,male> euh je vous ai () peut-être que je peux vous laisser un peu noter
+20141002 1 20141002_Locuteur_1 2556.947 2562.479 <o,f4,male> voilà, je vous laisse un peu noter
+20141002 1 20141002_Locuteur_1 2562.479 2568.264 <o,f4,male> clairement, ça vous en aurez besoin pour votre projet.
+20141002 1 20141002_Locuteur_1 2568.264 2570.461 <o,f4,male> c'est important de savoir
+20141002 1 20141002_Locuteur_1 2570.461 2588.322 <o,f4,male> écrire convenablement un tableau et savoir utiliser convenablement un tableau.
+20141002 1 20141002_Locuteur_1 2588.322 2628.271 <o,f4,male> c'est bon ?
+20141002 1 20141002_Locuteur_1 2628.271 2640.050 <o,f4,male> *allez, on passe à la suite ?
+20141002 1 20141002_Locuteur_1 2640.050 2641.605 <o,f4,male> on a
+20141002 1 20141002_Locuteur_1 2641.605 2643.181 <o,f4,male> dans les tableaux
+20141002 1 20141002_Locuteur_1 2643.181 2649.421 <o,f4,male> dynamiques, on a supprimé une contrainte qui était que la taille des tableaux était fixée.
+20141002 1 20141002_Locuteur_1 2649.421 2653.230 <o,f4,male> là maintenant, on va supprimer la contrainte que les indices
+20141002 1 20141002_Locuteur_1 2653.230 2657.767 <o,f4,male> des cases du tableau sont forcément des entiers qui se suivent.
+20141002 1 20141002_Locuteur_1 2657.767 2658.361 <o,f4,male> *et
+20141002 1 20141002_Locuteur_1 2658.361 2660.717 <o,f4,male> enlever cette contrainte,
+20141002 1 20141002_Locuteur_1 2660.717 2667.055 <o,f4,male> c'est créer un nouveau type de tableaux qui s'appellent les tableaux associatifs.
+20141002 1 20141002_Locuteur_1 2667.055 2668.511 <o,f4,male> donc ça, ce sont des t()
+20141002 1 20141002_Locuteur_1 2668.511 2669.860 <o,f4,male> ce sont des tableaux
+20141002 1 20141002_Locuteur_1 2669.860 2672.998 <o,f4,male> qui sont là pour associer
+20141002 1 20141002_Locuteur_1 2672.998 2674.431 <o,f4,male> une clé
+20141002 1 20141002_Locuteur_1 2674.431 2676.365 <o,f4,male> qui peut être n'importe quoi
+20141002 1 20141002_Locuteur_1 2676.365 2681.628 <o,f4,male> à une valeur.
+20141002 1 20141002_Locuteur_1 2681.628 2683.266 <o,f4,male> donc euh
+20141002 1 20141002_Locuteur_1 2683.266 2690.602 <o,f4,male> les tableaux associatifs sont sont des tableaux dont les indices seront des chaînes de caractères ; la d() la différence sera là.
+20141002 1 20141002_Locuteur_1 2690.602 2696.625 <o,f4,male> autrement dit, j'aurai le droit de sto() d'écrire des choses comme ça : la note entre crochets
+20141002 1 20141002_Locuteur_1 2696.625 2700.310 <o,f4,male> de damien, c'est quinze.
+20141002 1 20141002_Locuteur_1 2700.310 2705.918 <o,f4,male> et on parle de tableau associatif parce que finalement ça associe la valeur quinze
+20141002 1 20141002_Locuteur_1 2705.918 2709.420 <o,f4,male> au nom damien.
+20141002 1 20141002_Locuteur_1 2709.420 2714.817 <o,f4,male> donc damien, c'est la clé de l'association et quinze, c'est la valeur de l'association.
+20141002 1 20141002_Locuteur_1 2714.817 2718.430 <o,f4,male> alors ça, s() si on définit ça en informatique, c'est parce que
+20141002 1 20141002_Locuteur_1 2718.430 2721.114 <o,f4,male> on a envie d'avoir des sortes de bases de données ;
+20141002 1 20141002_Locuteur_1 2721.114 2726.118 <o,f4,male> *des bases de données qui associent des clés à des valeurs
+20141002 1 20141002_Locuteur_1 2726.118 2733.026 <o,f4,male> des clés explicites à des valeurs.
+20141002 1 20141002_Locuteur_1 2733.026 2740.473 <o,f4,male> c'est bon ?
+20141002 1 20141002_Locuteur_1 2740.473 2744.842 <o,f4,male> il y a un exemple tout de suite, hein.
+20141002 1 20141002_Locuteur_1 2744.842 2747.423 <o,f4,male> alors
+20141002 1 20141002_Locuteur_1 2747.423 2750.389 <o,f4,male> c'est bien, maintenant on a associé des clés à des valeurs.
+20141002 1 20141002_Locuteur_1 2750.389 2754.270 <o,f4,male> ce qui était bien dans les entiers, c'est que les entiers on pouvait les les énumérer.
+20141002 1 20141002_Locuteur_1 2754.270 2758.071 <o,f4,male> les chaînes de caractères, c'est fini ; une chaîne de caractères, ça s'énumère pas.
+20141002 1 20141002_Locuteur_1 2758.071 2761.081 <o,f4,male> autrement dit, entre deux chaînes de caractères
+20141002 1 20141002_Locuteur_1 2761.081 2763.034 <o,f4,male> par ordre lexicographique,
+20141002 1 20141002_Locuteur_1 2763.034 2770.470 <o,f4,male> on pourra toujours trouver une chaîne de caractères qu'on pourra intercaler.
+20141002 1 20141002_Locuteur_1 2770.470 2774.650 <o,f4,male> hein ?
+20141002 1 20141002_Locuteur_1 2774.650 2777.251 <o,f4,male> donc entre entre chien
+20141002 1 20141002_Locuteur_1 2777.251 2780.979 <o,f4,male> au singulier et chien au pluriel
+20141002 1 20141002_Locuteur_1 2780.979 2784.870 <o,f4,male> on peut toujours intercaler chienne.
+20141002 1 20141002_Locuteur_1 2784.870 2789.906 <o,f4,male> et entre chienne et euh chien au pluriel, on pourra intercaler chienne au v() au pluriel.
+20141002 1 20141002_Locuteur_1 2789.906 2793.407 <o,f4,male> donc entre chaque mot, entre chaque chaîne de caractères, on peut intercaler
+20141002 1 20141002_Locuteur_1 2793.407 2796.817 <o,f4,male> une ch() *une autre chaîne de caractères
+20141002 1 20141002_Locuteur_1 2796.817 2798.777 <o,f4,male> ça, ça suffit pour dire que
+20141002 1 20141002_Locuteur_1 2798.777 2803.670 <o,f4,male> on pourra pas énumérer l'ensemble des chaînes de caractères.
+20141002 1 20141002_Locuteur_1 2803.670 2807.300 <o,f4,male> donc ça pose des problèmes, vu qu'on peut plus énumérer les choses
+20141002 1 20141002_Locuteur_1 2807.300 2811.375 <o,f4,male> on peut plus euh c'est c'est plus difficile de les compter
+20141002 1 20141002_Locuteur_1 2811.375 2816.900 <o,f4,male> notamment com() la la la question : combien de cases contient un tableau associatif ?
+20141002 1 20141002_Locuteur_1 2816.900 2818.559 <o,f4,male> ben là où
+20141002 1 20141002_Locuteur_1 2818.559 2823.060 <o,f4,male> quand les indices étaient des entiers, on pouvait se baser sur la dernière case remplie, c'est plus possible
+20141002 1 20141002_Locuteur_1 2823.060 2825.356 <o,f4,male> parce qu'on sait pas combien de cases sont remplies avant ;
+20141002 1 20141002_Locuteur_1 2825.356 2831.580 <o,f4,male> on sait même pas quelle est la dernière case remplie.
+20141002 1 20141002_Locuteur_1 2831.580 2834.998 <o,f4,male> puis la deuxième question, c'est
+20141002 1 20141002_Locuteur_1 2834.998 2836.578 <o,f4,male> jus()
+20141002 1 20141002_Locuteur_1 2836.578 2841.064 <o,f4,male> je l'*avais pas dit, mais pour parcourir un tableau, la case adaptée c'est une boucle pour :
+20141002 1 20141002_Locuteur_1 2841.064 2848.552 <o,f4,male> quand ce sont des () les indices sont des entiers, on fait une boucle pour pour i allant de zéro à la dernière case du tableau.
+20141002 1 20141002_Locuteur_1 2848.552 2850.252 <o,f4,male> ben ces boucles pour, là
+20141002 1 20141002_Locuteur_1 2850.252 2853.074 <o,f4,male> elles marchent plus
+20141002 1 20141002_Locuteur_1 2853.074 2857.705 <o,f4,male> puisqu'on n'a plus la notion d'indices qui se suivent,
+20141002 1 20141002_Locuteur_1 2857.705 2859.395 <o,f4,male> donc c'est compliqué.
+20141002 1 20141002_Locuteur_1 2859.395 2861.574 <o,f4,male> ce sont deux questions compliquées
+20141002 1 20141002_Locuteur_1 2861.574 2865.800 <o,f4,male> et pour y répondre,
+20141002 1 20141002_Locuteur_1 2865.800 2870.090 <o,f4,male> eh ben avant d'y répondre, je vais redonner la définition, vous allez voir :
+20141002 1 20141002_Locuteur_1 2870.090 2872.094 <o,f4,male> dans la déclaration algorithmique,
+20141002 1 20141002_Locuteur_1 2872.094 2875.520 <o,f4,male> au lieu de tableau, on parlera () on écrira tableau associatif
+20141002 1 20141002_Locuteur_1 2875.520 2880.178 <o,f4,male> d'entiers.
+20141002 1 20141002_Locuteur_1 2880.178 2883.296 <o,f4,male> en javascript, ça changera rien puisque les tableaux
+20141002 1 20141002_Locuteur_1 2883.296 2884.634 <o,f4,male> sont à la fois dynamiques
+20141002 1 20141002_Locuteur_1 2884.634 2888.780 <o,f4,male> et associatifs.
+20141002 1 20141002_Locuteur_1 2888.780 2896.130 <o,f4,male> ça dépendra de ce que j'utilise comme indice.
+20141002 1 20141002_Locuteur_1 2896.130 2902.780 <o,f4,male> dans le langage algorithmique et dans le langage javascript, on aura le droit d'écrire t entre crochets chaîne de caractères
+20141002 1 20141002_Locuteur_1 2902.780 2905.250 <o,f4,male> reçoit telle valeur
+20141002 1 20141002_Locuteur_1 2905.250 2908.185 <o,f4,male> donc () ou égale telle valeur en javascript.
+20141002 1 20141002_Locuteur_1 2908.185 2909.810 <o,f4,male> et on aura le droit
+20141002 1 20141002_Locuteur_1 2909.810 2912.315 <o,f4,male> d'accéder à cette case-là
+20141002 1 20141002_Locuteur_1 2912.315 2921.880 <o,f4,male> en lecture et en écriture.
+20141002 1 20141002_Locuteur_1 2921.880 2925.930 <o,f4,male> donc autrement dit, s() c'est une structure qui existait déjà.
+20141002 1 20141002_Locuteur_1 2925.930 2931.436 <o,f4,male> on l'a juste décrite et on a () j'ai juste per() je vous ai juste permis de l'utiliser, en gros
+20141002 1 20141002_Locuteur_1 2931.436 2933.340 <o,f4,male> en vous donnant
+20141002 1 20141002_Locuteur_1 2933.340 2940.440 <o,f4,male> cette ligne-là.
+20141002 1 20141002_Locuteur_1 2940.440 2942.467 <o,f4,male> *alors il y a un exemple, hein
+20141002 1 20141002_Locuteur_1 2942.467 2943.646 <o,f4,male> euh non
+20141002 1 20141002_Locuteur_1 2943.646 2960.520 <o,f4,male> euh je l'ai pas encore
+20141002 1 20141002_Locuteur_1 2960.520 2962.099 <o,f4,male> c'est bon ?
+20141002 1 20141002_Locuteur_1 2962.099 2964.070 <o,f4,male> bon
+20141002 1 20141002_Locuteur_1 2964.070 2965.935 <o,f4,male> bah on n'a toujours pas résolu notre problème :
+20141002 1 20141002_Locuteur_1 2965.935 2971.964 <o,f4,male> combien il y a de cases dans un tableau associatif ?
+20141002 1 20141002_Locuteur_1 2971.964 2976.570 <o,f4,male> bah la taille, c'est quoi ?
+20141002 1 20141002_Locuteur_1 2976.570 2983.990 <o,f4,male> on va revoir la définition : la définition de la taille d'un tableau qui () dont les cases sont indicées par des entiers, c'était *le
+20141002 1 20141002_Locuteur_1 2983.990 2986.910 <o,f4,male> un moins () un plus
+20141002 1 20141002_Locuteur_1 2986.910 2990.165 <o,f4,male> l'indice de la dernière case occupée.
+20141002 1 20141002_Locuteur_1 2990.165 2993.789 <o,f4,male> on revoit cette définition ; maintenant on a() on dira que la taille d'un tableau
+20141002 1 20141002_Locuteur_1 2993.789 3001.240 <o,f4,male> c'est le nombre d'éléments effectivement stockés dans le tableau.
+20141002 1 20141002_Locuteur_1 3001.240 3006.970 <o,f4,male> en javascript, il y a pas de fonction simple qui va renvoyer la taille du tableau
+20141002 1 20141002_Locuteur_1 3006.970 3010.366 <o,f4,male> donc dès qu'on voudra travailler avec un tableau associatif,
+20141002 1 20141002_Locuteur_1 3010.366 3011.368 <o,f4,male> il faudra
+20141002 1 20141002_Locuteur_1 3011.368 3012.987 <o,f4,male> oublier
+20141002 1 20141002_Locuteur_1 3012.987 3022.039 <o,f4,male> qu'on a besoin de sa taille ; faudra trouver des méthodes qui oublient qu'il y a p() pa() () k() qui euh s'abstraient de la taille du tableau.
+20141002 1 20141002_Locuteur_1 3022.039 3023.515 <o,f4,male> voilà
+20141002 1 20141002_Locuteur_1 3023.515 3025.448 <o,f4,male> voilà un exemple
+20141002 1 20141002_Locuteur_1 3025.448 3027.167 <o,f4,male> donc je crée le tableau t
+20141002 1 20141002_Locuteur_1 3027.167 3029.418 <o,f4,male> c'est un tableau associatif,
+20141002 1 20141002_Locuteur_1 3029.418 3034.020 <o,f4,male> j'écris t entre crochets damien égale quinze, c entre crochets jérémy égale onze ;
+20141002 1 20141002_Locuteur_1 3034.020 3036.820 <o,f4,male> il a eu une meilleure note que moi
+20141002 1 20141002_Locuteur_1 3036.820 3039.160 <o,f4,male> je peux accéder à ces notes
+20141002 1 20141002_Locuteur_1 3039.160 3044.690 <o,f4,male> et pourtant quand j'éc() j'essaye d'écrire la taille du tableau, vous voyez bien que ma fonction taille
+20141002 1 20141002_Locuteur_1 3044.690 3048.710 <o,f4,male> ou la fonction taille de javascript, elle marche plus.
+20141002 1 20141002_Locuteur_1 3048.710 3053.017 <o,f4,male> pour lui, j'ai rien de stocké dans le tableau parce que il s'est basée sur la dernière case
+20141002 1 20141002_Locuteur_1 3053.017 3063.230 <o,f4,male> sur l'indice entier de la dernière case occupée, qui n'existe pas.
+20141002 1 20141002_Locuteur_1 3063.230 3066.050 <o,f4,male> pour définir la taille, il faudra le parcourir ;
+20141002 1 20141002_Locuteur_1 3066.050 3068.266 <o,f4,male> et pour le parcourir,
+20141002 1 20141002_Locuteur_1 3068.266 3072.390 <o,f4,male> il faudra inventer une nouvelle type () un nouveau type de boucle
+20141002 1 20141002_Locuteur_1 3072.390 3075.140 <o,f4,male> donc nouvelle structure de contrôle
+20141002 1 20141002_Locuteur_1 3075.140 3076.041 <o,f4,male> ici
+20141002 1 20141002_Locuteur_1 3076.041 3077.535 <o,f4,male> nouvelle boucle
+20141002 1 20141002_Locuteur_1 3077.535 3078.436 <o,f4,male> qui n'est
+20141002 1 20141002_Locuteur_1 3078.436 3085.330 <o,f4,male> utilisable que pour parcourir les tableaux associatifs.
+20141002 1 20141002_Locuteur_1 3085.330 3089.611 <o,f4,male> donc euh l() la boucle s'écrit ()
+20141002 1 20141002_Locuteur_1 3089.611 3091.850 <o,f4,male> ce qu'on veut, c'est parcourir tout le tableau
+20141002 1 20141002_Locuteur_1 3091.850 3095.810 <o,f4,male> donc toutes les clés du tableau,
+20141002 1 20141002_Locuteur_1 3095.810 3097.600 <o,f4,male> on veut pouvoir faire quelque chose.
+20141002 1 20141002_Locuteur_1 3097.600 3099.074 <o,f4,male> donc ça s'écrit comme ça :
+20141002 1 20141002_Locuteur_1 3099.074 3100.813 <o,f4,male> pour tout clé dans t,
+20141002 1 20141002_Locuteur_1 3100.813 3101.829 <o,f4,male> faire
+20141002 1 20141002_Locuteur_1 3101.829 3104.405 <o,f4,male> des instructions
+20141002 1 20141002_Locuteur_1 3104.405 3108.198 <o,f4,male> qui peuvent utiliser
+20141002 1 20141002_Locuteur_1 3108.198 3110.970 <o,f4,male> euh clé
+20141002 1 20141002_Locuteur_1 3110.970 3113.409 <o,f4,male> qui sera une variable et qui prendra successivement
+20141002 1 20141002_Locuteur_1 3113.409 3116.650 <o,f4,male> toutes les clés possibles stockées dans le tableau.
+20141002 1 20141002_Locuteur_1 3116.650 3119.191 <o,f4,male> donc ça prendra successivement damien
+20141002 1 20141002_Locuteur_1 3119.191 3120.482 <o,f4,male> et jérémy
+20141002 1 20141002_Locuteur_1 3120.482 3122.468 <o,f4,male> dans le tableau t qu'on a écrit.
+20141002 1 20141002_Locuteur_1 3122.468 3124.843 <o,f4,male> donc ça, c'est l'écriture algorithmique ;
+20141002 1 20141002_Locuteur_1 3124.843 3130.643 <o,f4,male> l'écriture javascript, c'est celle-là.
+20141002 1 20141002_Locuteur_1 3130.643 3134.911 <o,f4,male> donc toutes les clés sont parcourues
+20141002 1 20141002_Locuteur_1 3134.911 3137.430 <o,f4,male> dans un certain ordre.
+20141002 1 20141002_Locuteur_1 3137.430 3141.560 <o,f4,male> ça aurait pu () on aurait pu imaginer que c'est l'ordre lexicographique
+20141002 1 20141002_Locuteur_1 3141.560 3146.130 <o,f4,male> parce que les clés, on pourrait les trier par ordre lexicographique.
+20141002 1 20141002_Locuteur_1 3146.130 3148.299 <o,f4,male> c'est pas ce qui est choisi
+20141002 1 20141002_Locuteur_1 3148.299 3152.900 <o,f4,male> parce que ça coûterait cher de trier le tableau à chaque fois qu'on met une clé.
+20141002 1 20141002_Locuteur_1 3152.900 3158.920 <o,f4,male> donc l'ordre qui est choisi, c'est l'ordre de création des clés.
+20141002 1 20141002_Locuteur_1 3158.920 3163.905 <o,f4,male> donc on parcourt le tableau dans l'ordre de création de des cases du tableau
+20141002 1 20141002_Locuteur_1 3163.905 3166.590 <o,f4,male> avec cette boucle pour
+20141002 1 20141002_Locuteur_1 3166.590 3168.001 <o,f4,male> une nouvelle boucle pour.
+20141002 1 20141002_Locuteur_1 3168.001 3171.035 <o,f4,male> donc euh en javascript, c'est for clé in t ;
+20141002 1 20141002_Locuteur_1 3171.035 3176.828 <o,f4,male> c'est la traduction presque littérale de ça.
+20141002 1 20141002_Locuteur_1 3176.828 3180.227 <o,f4,male> voilà un exemple
+20141002 1 20141002_Locuteur_1 3180.227 3181.870 <o,f4,male> donc je crée mon tableau,
+20141002 1 20141002_Locuteur_1 3181.870 3184.937 <o,f4,male> j'ajoute une personne, anne, qui a eu treize
+20141002 1 20141002_Locuteur_1 3184.937 3186.897 <o,f4,male> quand je parcours
+20141002 1 20141002_Locuteur_1 3186.897 3190.420 <o,f4,male> tout mon tableau,
+20141002 1 20141002_Locuteur_1 3190.420 3192.710 <o,f4,male> je peux écrire que damien
+20141002 1 20141002_Locuteur_1 3192.710 3194.122 <o,f4,male> a eu
+20141002 1 20141002_Locuteur_1 3194.122 3197.945 <o,f4,male> la valeur de la case, donc j'a() j'attire votre attention sur le fait que clé
+20141002 1 20141002_Locuteur_1 3197.945 3202.924 <o,f4,male> et t de clé sont utilisables dans la boucle.
+20141002 1 20141002_Locuteur_1 3202.924 3205.320 <o,f4,male> voilà
+20141002 1 20141002_Locuteur_1 3205.320 3210.110 <o,f4,male> donc ça, c'est une méthode de parcours du tableau.
+20141002 1 20141002_Locuteur_1 3210.110 3212.935 <o,f4,male> la fonction taille, elle n'existe plus
+20141002 1 20141002_Locuteur_1 3212.935 3220.156 <o,f4,male> mais ça, ça nous permet quand même de ré() [bg] de décrire ou d'imaginer une manière de calculer la taille du tableau.
+20141002 1 20141002_Locuteur_1 3220.156 3224.060 <o,f4,male> pour calculer la taille du tableau, il suffit d'ajouter un compteur
+20141002 1 20141002_Locuteur_1 3224.060 3225.146 <o,f4,male> dans cette boucle
+20141002 1 20141002_Locuteur_1 3225.146 3226.795 <o,f4,male> pour tout.
+20141002 1 20141002_Locuteur_1 3226.795 3227.878 <o,f4,male> ce que j'ai fait ici :
+20141002 1 20141002_Locuteur_1 3227.878 3231.110 <o,f4,male> j'ajoute un compteur que j'incrémente à chaque élément de boucle ;
+20141002 1 20141002_Locuteur_1 3231.110 3233.918 <o,f4,male> pour toutes les clés dans t, j'incrémente le compteur
+20141002 1 20141002_Locuteur_1 3233.918 3235.169 <o,f4,male> donc à la fin
+20141002 1 20141002_Locuteur_1 3235.169 3238.170 <o,f4,male> j'aurai le nombre d'éléments stockés dans le tableau :
+20141002 1 20141002_Locuteur_1 3238.170 3239.954 <o,f4,male> c'est trois.
+20141002 1 20141002_Locuteur_1 3239.954 3248.090 <o,f4,male> donc c'est une manière d'avoir la taille du tableau.
+20141002 1 20141002_Locuteur_1 3248.090 3254.417 <o,f4,male> on continue ?
+20141002 1 20141002_Locuteur_1 3254.417 3255.918 <o,f4,male> donc je mettrai pas les
+20141002 1 20141002_Locuteur_1 3255.918 3257.130 <o,f4,male> les transparents
+20141002 1 20141002_Locuteur_1 3257.130 3270.825 <o,f4,male> mais je mettrai les exemples à tester.
+20141002 1 20141002_Locuteur_1 3270.825 3271.441 <o,f4,male> bon
+20141002 1 20141002_Locuteur_1 3271.441 3276.041 <o,f4,male> pour aller plus loin, on va faire un petit peu d'algorithmique sur les tableaux.
+20141002 1 20141002_Locuteur_1 3276.041 3278.377 <o,f4,male> et une des tâches classiques
+20141002 1 20141002_Locuteur_1 3278.377 3283.944 <o,f4,male> de l'algorithmique sur les tableaux, c'est de rechercher si est un élément appartient au tableau ou pas.
+20141002 1 20141002_Locuteur_1 3283.944 3286.156 <o,f4,male> les tableaux contiennent un ensemble de valeurs
+20141002 1 20141002_Locuteur_1 3286.156 3289.231 <o,f4,male> on a juste envie de savoir si une certaine valeur
+20141002 1 20141002_Locuteur_1 3289.231 3291.104 <o,f4,male> appartient au tableau
+20141002 1 20141002_Locuteur_1 3291.104 3298.518 <o,f4,male> et si elle appartient au tableau, dans quelle ca() elle () dans quelle case elle se trouve.
+20141002 1 20141002_Locuteur_1 3298.518 3300.067 <o,f4,male> donc on aura
+20141002 1 20141002_Locuteur_1 3300.067 3303.504 <o,f4,male> finalement deux situations :
+20141002 1 20141002_Locuteur_1 3303.504 3305.828 <o,f4,male> soit
+20141002 1 20141002_Locuteur_1 3305.828 3307.237 <o,f4,male> on a un tableau
+20141002 1 20141002_Locuteur_1 3307.237 3308.610 <o,f4,male> non trié,
+20141002 1 20141002_Locuteur_1 3308.610 3311.218 <o,f4,male> soit on a un tableau trié,
+20141002 1 20141002_Locuteur_1 3311.218 3315.906 <o,f4,male> et puis on va essayer de réfléchir à comment on fait pour rechercher un élément dans le tableau.
+20141002 1 20141002_Locuteur_1 3315.906 3323.341 <o,f4,male> donc je () j'ai un tableau qui s'appelle mon tab, de n cases, je cherche un élément x.
+20141002 1 20141002_Locuteur_1 3323.341 3328.668 <o,f4,male> par exemple dans ce tableau-là, je recherche le nombre treize. alors il se trouve que le nombre treize n'y figure pas.
+20141002 1 20141002_Locuteur_1 3328.668 3331.360 <o,f4,male> comment ça va se passer ?
+20141002 1 20141002_Locuteur_1 3331.360 3335.990 <o,f4,male> le seul moyen de chercher un élément dans un tableau, c'est de parcourir
+20141002 1 20141002_Locuteur_1 3335.990 3339.063 <o,f4,male> les é() les cases du tableau jusqu'à trouver
+20141002 1 20141002_Locuteur_1 3339.063 3340.890 <o,f4,male> l'élément.
+20141002 1 20141002_Locuteur_1 3340.890 3341.609 <o,f4,male> et j()
+20141002 1 20141002_Locuteur_1 3341.609 3344.522 <o,f4,male> l'élément ne sera pas dans le tableau
+20141002 1 20141002_Locuteur_1 3344.522 3348.830 <o,f4,male> si à la fin du parcours du tableau, je l'ai pas trouvé.
+20141002 1 20141002_Locuteur_1 3348.830 3351.867 <o,f4,male> voilà. donc comment ça marche ? ben je parcours le tableau,
+20141002 1 20141002_Locuteur_1 3351.867 3352.935 <o,f4,male> j'arrive au bout
+20141002 1 20141002_Locuteur_1 3352.935 3354.470 <o,f4,male> j'ai pas trouvé treize
+20141002 1 20141002_Locuteur_1 3354.470 3357.232 <o,f4,male> donc je réponds : je n'ai pas trouvé treize.
+20141002 1 20141002_Locuteur_1 3357.232 3363.920 <o,f4,male> il y aura un algorithme, *je vous donnerai l'algorithme qui permet de de faire ce calcul.
+20141002 1 20141002_Locuteur_1 3363.920 3367.740 <o,f4,male> la question est un petit peu différente
+20141002 1 20141002_Locuteur_1 3367.740 3373.030 <o,f4,male> quand le tableau est trié.
+20141002 1 20141002_Locuteur_1 3373.030 3375.510 <o,f4,male> elle est un petit peu différente
+20141002 1 20141002_Locuteur_1 3375.510 3380.894 <o,f4,male> parce que la méthode que j'ai décrite jusque-là, on peut l'arrêter un tout petit peu avant.
+20141002 1 20141002_Locuteur_1 3380.894 3385.170 <o,f4,male> si je s() cherche treize, ben je peux parcourir le tableau
+20141002 1 20141002_Locuteur_1 3385.170 3388.940 <o,f4,male> et puis là, je peux () si le tableau est trié et que je vois quatorze,
+20141002 1 20141002_Locuteur_1 3388.940 3394.936 <o,f4,male> et qu'avant j'ai pas vu treize, ben c'est que treize n'est pas dans le tableau.
+20141002 1 20141002_Locuteur_1 3394.936 3396.421 <o,f4,male> donc la boucle
+20141002 1 20141002_Locuteur_1 3396.421 3399.110 <o,f4,male> la première méthode, c'est () la boucle, je peux l'arrêter avant
+20141002 1 20141002_Locuteur_1 3399.110 3404.720 <o,f4,male> et ça fait gagner un peu de temps.
+20141002 1 20141002_Locuteur_1 3404.720 3407.210 <o,f4,male> mais on peut faire beaucoup, beaucoup mieux.
+20141002 1 20141002_Locuteur_1 3407.210 3408.831 <o,f4,male> est-ce que vous avez une idée
+20141002 1 20141002_Locuteur_1 3408.831 3420.560 <o,f4,male> de comment on peut faire beaucoup mieux ?
+20141002 1 20141002_Locuteur_1 3420.560 3428.820 <o,f4,male> il y a un mot-clé
+20141002 1 20141002_Locuteur_1 3428.820 3434.850 <o,f4,male> le mot-clé, c'est le jeu du plus ou moins.u
+20141002 1 20141002_Locuteur_1 3434.850 3437.615 <o,f4,male> pour le ch() pour chech() pour chercher treize dans le tableau,
+20141002 1 20141002_Locuteur_1 3437.615 3440.333 <o,f4,male> la méthode très efficace pour le faire,
+20141002 1 20141002_Locuteur_1 3440.333 3445.281 <o,f4,male> c'est de se se poser la question : le treize, il est soit dans la première moitié du tableau,
+20141002 1 20141002_Locuteur_1 3445.281 3448.995 <o,f4,male> soit dans la deuxième moitié du tableau.
+20141002 1 20141002_Locuteur_1 3448.995 3455.610 <o,f4,male> comment je sais s'il est dans la première moitié du tableau ou dans la deuxième moitié du tableau ? ben il suffit de regarder
+20141002 1 20141002_Locuteur_1 3455.610 3460.913 <o,f4,male> l'élément qui est au milieu et de le comparer à treize.
+20141002 1 20141002_Locuteur_1 3460.913 3464.050 <o,f4,male> donc en regardant
+20141002 1 20141002_Locuteur_1 3464.050 3466.335 <o,f4,male> en comparant treize à neuf,
+20141002 1 20141002_Locuteur_1 3466.335 3469.875 <o,f4,male> je vais savoir que comme le milieu est plus petit que treize
+20141002 1 20141002_Locuteur_1 3469.875 3473.230 <o,f4,male> le treize se *trouve forcément dans la deuxième moitié du tableau.
+20141002 1 20141002_Locuteur_1 3473.230 3478.556 <o,f4,male> et puis cette ce test-là, on peut le refaire avec l'autre moitié du tableau : donc je compare à douze, je sais qu'il est après
+20141002 1 20141002_Locuteur_1 3478.556 3480.708 <o,f4,male> je compare à quinze, je sais qu'il est avant
+20141002 1 20141002_Locuteur_1 3480.708 3482.571 <o,f4,male> je compare à quatorze
+20141002 1 inter_segment_gap 3482.571 3483.640 <o,f4,>
+20141002 1 20141002_Locuteur_1 3483.640 3486.431 <o,f4,male> et là j'ai plus que deux cases
+20141002 1 20141002_Locuteur_1 3486.431 3497.790 <o,f4,male> on peut même s'arrêter à une case
+20141002 1 20141002_Locuteur_1 3497.790 3501.390 <o,f4,male> le treize est dans le tableau
+20141002 1 20141002_Locuteur_1 3501.390 3506.700 <o,f4,male> si c'est douze ou si c'est quatorze ; et puis si on s'arrête à une case, on peut même conclure directement.
+20141002 1 20141002_Locuteur_1 3506.700 3510.507 <o,f4,male> donc on a des algori() cet algorithme est très, très efficace puisqu'il met
+20141002 1 20141002_Locuteur_1 3510.507 3517.114 <o,f4,male> beaucoup moins d'opérations, beaucoup moins de tests pour trouver euh pour répondre à la question.
+20141002 1 20141002_Locuteur_1 3517.114 3519.769 <o,f4,male> la première version s'écrit comme ça,
+20141002 1 20141002_Locuteur_1 3519.769 3521.059 <o,f4,male> avec une boucle
+20141002 1 20141002_Locuteur_1 3521.059 3526.550 <o,f4,male> qui va parcourir tout le tableau.
+20141002 1 20141002_Locuteur_1 3526.550 3529.664 <o,f4,male> donc tant qu'on l'a pas trouvé, on continue
+20141002 1 20141002_Locuteur_1 3529.664 3534.190 <o,f4,male> et on continue au pire jusqu'à la taille du tableau.
+20141002 1 20141002_Locuteur_1 3534.190 3550.300 <o,f4,male> en javascript, ça s'écrira comme ça :
+20141002 1 20141002_Locuteur_1 3550.300 3554.115 <o,f4,male> si le tableau est trié,
+20141002 1 20141002_Locuteur_1 3554.115 3556.249 <o,f4,male> on peut même euh
+20141002 1 20141002_Locuteur_1 3556.249 3560.310 <o,f4,male> enlever la variable trouver.
+20141002 1 20141002_Locuteur_1 3560.310 3562.412 <o,f4,male> vous aurez ces exemples-là
+20141002 1 20141002_Locuteur_1 3562.412 3565.463 <o,f4,male> au moins en javascript, donc vous pourrez les regarder
+20141002 1 20141002_Locuteur_1 3565.463 3569.452 <o,f4,male> mais croyez-moi, c'est un petit peu plus efficace que l'autre, mais ça gagne pas
+20141002 1 20141002_Locuteur_1 3569.452 3574.320 <o,f4,male> ça gagne pas beaucoup de d'opérations.
+20141002 1 20141002_Locuteur_1 3574.320 3575.856 <o,f4,male> la
+20141002 1 20141002_Locuteur_1 3575.856 3578.550 <o,f4,male> troisième
+20141002 1 20141002_Locuteur_1 3578.550 3581.774 <o,f4,male> implémentation, c'est celle-là
+20141002 1 20141002_Locuteur_1 3581.774 3584.003 <o,f4,male> où on va se servir
+20141002 1 20141002_Locuteur_1 3584.003 3590.373 <o,f4,male> du milieu comme euh valeur de comparaison, on va chercher s'il est avant le milieu ou après le milieu
+20141002 1 20141002_Locuteur_1 3590.373 3591.992 <o,f4,male> et selon ce test-là,
+20141002 1 20141002_Locuteur_1 3591.992 3596.330 <o,f4,male> on considérera la première moitié du tableau ou la deuxième moitié du tableau.
+20141002 1 20141002_Locuteur_1 3596.330 3599.690 <o,f4,male> cette boucle-là, on l'arrête
+20141002 1 20141002_Locuteur_1 3599.690 3606.260 <o,f4,male> dès que la fin est égale euh au début, donc dès qu'on tombe sur un tableau à une case.
+20141002 1 20141002_Locuteur_1 3606.260 3607.797 <o,f4,male> et celle-là, elle est très rapide.
+20141002 1 20141002_Locuteur_1 3607.797 3610.670 <o,f4,male> en k() comment elle est très rapide ?
+20141002 1 20141002_Locuteur_1 3610.670 3615.241 <o,f4,male> bah il suffit de connaître le nombre de découpages dont on va avoir besoin pour un tableau de taille n
+20141002 1 20141002_Locuteur_1 3615.241 3619.040 <o,f4,male> de découpages en deux pour arriver à la bonne solution.
+20141002 1 20141002_Locuteur_1 3619.040 3620.743 <o,f4,male> ce nombre-là, c'est
+20141002 1 20141002_Locuteur_1 3620.743 3622.890 <o,f4,male> le logarithme en base deux
+20141002 1 20141002_Locuteur_1 3622.890 3625.105 <o,f4,male> de n. c'est euh
+20141002 1 20141002_Locuteur_1 3625.105 3627.966 <o,f4,male> une dichotomie à chaque fois.
+20141002 1 20141002_Locuteur_1 3627.966 3628.722 <o,f4,male> donc
+20141002 1 20141002_Locuteur_1 3628.722 3631.100 <o,f4,male> on coupe le tableau en deux
+20141002 1 20141002_Locuteur_1 3631.100 3633.804 <o,f4,male> et il faut : logarithme en base deux, découpage
+20141002 1 20141002_Locuteur_1 3633.804 3635.269 <o,f4,male> en deux
+20141002 1 20141002_Locuteur_1 3635.269 3636.240 <o,f4,male> pour tomber
+20141002 1 20141002_Locuteur_1 3636.240 3638.320 <o,f4,male> pour partir d'un tableau de n cases
+20141002 1 20141002_Locuteur_1 3638.320 3643.675 <o,f4,male> et arriver à un tableau de une case.

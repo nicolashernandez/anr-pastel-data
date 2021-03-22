@@ -1,0 +1,1415 @@
+http://docplayer.fr/40961569-Nouvelle-approche-de-fouille-de-graphes-ac-reduits-frequents.html
+
+
+
+
+
+Nouvelle approche de fouille de graphes AC-réduits fréquents - PDF
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            google_ad_client: "ca-pub-6133583279631137",
+            enable_page_level_ads: true
+        });
+    
+
+
+
+
+
+
+
+
+
+
+
+
+ Entrer
+Enregistrement
+
+
+
+
+
+
+
+Chercher
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Nouvelle approche de fouille de graphes AC-réduits fréquents
+
+
+                                                || document.documentElement.clientWidth
+                                                || document.body.clientWidth;
+                                            document.write('<sc'+'ript async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></sc'+'ript> \
+                       <ins class="adsbygoogle" \
+                             style="display:block" \
+                             data-ad-client="ca-pub-6133583279631137" \
+                             data-ad-slot="5061836408" \
+                             data-ad-format="auto"></ins> \
+                        <sc'+'ript> \
+                        </'+'scr'+'ipt>');
+                                        
+
+
+
+
+
+
+
+
+
+
+
+                                                            if (width < 612) {
+                                                                document.getElementById('left_banner_td').style.display= "none";
+                                                            } else {
+                                                                document.write('<scr'+'ipt async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></scri'+'pt>\
+                            <ins class="adsbygoogle"\
+                                 style="display:inline-block;width:160px;height:600px"\
+                                 data-ad-client="ca-pub-6133583279631137"\
+                                 data-ad-slot="6538569603"></ins>\
+                            <sc'+'ript>\
+                            </'+'scr'+'ipt>');
+                                                            }
+                                                        
+
+
+
+
+
+                                                            var k_dim = 70;
+                                                            var doc_pages_count = 6;
+                                                        
+ 
+
+
+                                                            if (Math.random() > 0.5) {
+                                                                document.write(
+                                                                    '<sc' + 'ript async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></s' + 'cript>' +
+                                                                    '<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6133583279631137" data-ad-slot="9492036005" data-ad-format="auto"></ins>'
+                                                                );
+                                                            } else {
+                                                                document.write('<div id="angrmnt_b0"></div>');
+                                                            }          
+                                                        
+
+
+
+
+
+
+
+
+
+
+
+                                                        SHARE 
+
+
+
+
+                                                        HTML 
+
+
+
+
+                                                        DOWNLOAD 
+
+
+
+
+
+Save this PDF as:
+ WORD
+ PNG
+ TXT
+ JPG
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                            Dimension: px
+                                                        
+
+                                                            Commencer à balayer dès la page:
+                                                        
+
+
+
+
+
+
+
+
+
+
+Download "Nouvelle approche de fouille de graphes AC-réduits fréquents"
+
+
+
+
+                                                                Erreur: 
+
+
+
+
+ Download Document
+
+
+
+
+
+
+
+
+
+  Pascal Lafond
+ il y a 1 ans                                                                                            
+ Total affichages :  
+
+
+
+
+
+
+
+
+
+
+
+Transcription
+
+
+
+
+                                                
+
+1 Nouvelle approche de fouille de graphes AC-réduits fréquents Brahim Douar, Michel Liquière, Chiraz Latiri, Yahya Slimani Equipe COCONUT, LIRMM, 161 rue Ada Montpellier, France URPAH, Département informatique, Faculté des Sciences de Tunis, Tunisie  Résumé. La fouille de graphes est devenue une piste de recherche intéressante et un défi réel en matière de fouille de données. Parmi les différentes familles de motifs de graphes, les graphes fréquents permettent une caractérisation intéressante des groupes de graphes, ainsi qu une discrimination des différents graphes lors de la classification ou de la segmentation. A cause de la NP-complétude du test d isomorphisme de sous-graphes et de l immensité de l espace de recherche, les algorithmes de fouille de graphes sont exponentiels en temps d exécution et/ou occupation mémoire. Dans cet article, nous étudions un nouvel opérateur de projection polynomial nommé AC-projection basé sur une propriété clé du domaine de la programmation par contraintes, à savoir l arc consistance. Cet opérateur est censé remplacer l utilisation de l isomorphisme de sous-graphes en établissant un biais sur la projection. Cette étude est suivie d une évaluation expérimentale du pouvoir discriminant des patterns AC-réduits découverts. 1 Introduction Avec la croissance importante du besoin d analyser une grande masse de données structurées tels que les composés chimiques, les structures de protéines ou même les documents XML, pour n en citer que quelques-uns, la fouille de graphes est devenue une problématique de recherche intéressante et un défi réel en matière de fouille de données. En effet, la découverte de sous-graphes fréquents est un réel challenge vu leur nombre exponentiel. A ceci s ajoute la NP-complétude du problème d isomorphisme d un sous-graphe général (Garey et Johnson, 1979). Dans cet article, nous introduisons la notion de biais de projection afin de proposer un opérateur similaire à l isomorphisme de sous-graphes mais ayant une complexité polynomiale et des contraintes relaxées. Nous utilisons ensuite cet opérateur dans un processus de fouille de graphes. 2 Fondements et travaux connexes Nous présentons dans ce qui suit les fondements mathématiques du domaine de la fouille de graphes. Cette présentation est accompagnée d une brève citation des travaux connexes et2 Nouvelle approche de fouille de graphes AC-réduits fréquents particulièrement d une approche en largeur sur laquelle se base notre algorithme de fouille de graphes. Définition 2.1 (Graphe étiqueté) Un graphe étiqueté peut être représenté par un quadruplet, G = (S,A,E,e), avec S est un ensemble de sommets, A S S est un ensemble d arêtes, E est un ensemble d étiquettes, e : S A E, e est une fonction qui affecte les étiquettes aux sommets et aux arêtes du graphe. Définition 2.2 (Isomorphisme, Isomorphisme de sous-graphes) Soient deux graphesg 1 etg 2, un isomorphisme est une fonction bijective f : S(G 1 ) S(G 2 ), telle que x S(G 1 ), e(x) = e(f(x)), et (x,y) A(G 1 ), (f(x),f(y)) A(G 2 ) et e(x,y) = e(f(x),f(y)). Un isomorphisme de sous-graphes de G 1 vers G 2 est un isomorphisme de G 1 vers un sousgraphe deg 2. Définition 2.3 (Fouille de graphes) Soit un ensemble de graphes, GS={G i i = 0...n}, et un support minimal (minsup), on pose ς(g,g) = { 1 s il existe une projection de g vers G 0 sinon. σ(g,gs) = G i GS ς(g,g i ) σ(g,gs) représente la fréquence d apparition de g dans GS, c.a.d, le support de g dans GS. Le processus de fouille de graphes consiste à trouver tout graphe g tel que σ(g,gs) est supérieur ou égal à minsup. Les algorithmes de fouille de graphes sont généralement basés sur cette définition et traitent avec le cas particulier où l opérateur de projection est l isomorphisme de sous-graphes. Ces algorithmes se basent sur deux paradigmes de parcours de l espace de recherche à savoir, le parcours en largeur et le parcours en profondeur. Leur but étant de trouver les sous-graphes connectés ayant un nombre suffisant d arêtes dans un seul graphe éparse non dirigé. La plupart de ces algorithmes utilisent des méthodes différentes pour énumérer et générer les motifs candidats. Une comparaison quantitative intéressante des approches de fouille de graphes les plus cités est donnée dans (Wörlein et al., 2005). L approche de fouille de graphes que nous présentons plus loin dans cet article se base sur une approche en largeur intensivement citée dans la littérature. Il s agit de l approche de fouille de graphe inspiré d Apriori (Agrawal et Skirant, 1994) nommée FSG et décrite dans (Kuramochi et Karypis, 2001, 2004).3 B. Douar et al. 3 AC-projection L AC-projection, initialement introduite dans (Liquiere, 2007), propose un opérateur de projection basé sur l algorithme de l arc consistance issue du domaine de la programmation par contraintes (Bessiere, 2006). Cette méthode de projection possède des propriétés intéressantes, à savoir la polynomialité, la validation locale, la parallélisation, l interprétation structurelle, etc. Définition 3.1 (Mappage) Soient deux graphes étiquetés G 1 et G 2. Nous appelons mappage de G 1 dans G 2 la correspondance I : S(G 1 ) 2 S(G2) x S(G 1 ), y I(x),e(x) = e(y). Définition 3.2 (AC-compatible ) Soit un graphe G,S 1 S(G),S 2 S(G) S 1 est AC-compatible avec S 2 ssi x k S 1, y p S 2 (x k,y p ) A(G) y q S 2, x m S 1 (x m,y q ) A(G). On note S 1 S 2 Définition 3.3 (Consistance d un arc) Soient deux graphesg 1 etg 2. Un mappagei : S(G 1 ) 2 S(G2) est consistant avec un arc (x,y) A(G 1 ), ssii(x) I(y). Définition 3.4 (AC-projection )Soient deux graphesg 1 etg 2. Un mappagei deg 1 dans G 2 est une AC-projection ssii est consistant avec tous les arcse A(G 1 ). On noteg 1 G 2. Nous notons que l AC-projection est calculable en un temps polynomial avec une complexité en O(a s 2 ) avec «a» désignant le nombre d arêtes de G 1 et «s» le nombre maximal de sommets de même étiquette de G 2. Définition 3.5 (AC-équivalence ) Deux graphes G 1 et G 2 sont AC-équivalents ssig 1 G 2 et G 2 G 1. On note G 1 G 2. Nous avons alors une relation d équivalence entre graphes en utilisant l AC-projection. Ceci fait alors apparaitre des classes d équivalence entre graphes. Chaque classe d équivalence est représenté par un élément minimal que nous nommons graphe AC-réduit. FIG. 1 Un exemple d AC-projection (G 1 G 2 )4 Nouvelle approche de fouille de graphes AC-réduits fréquents 4 FGMAC : Nouvelle approche de fouille de graphes Dans cette section, nous présentons FGMAC 1, une version modifiée de FSG (Kuramochi et Karypis, 2001) basée sur l AC-projection. En effet, dans cette version nous avons changé la fonction dédiée pour le calcul du support d un pattern, l AC-projection est désormais utilisée à la place de l isomorphisme de sous-graphes pour vérifier si un graphe candidat apparait dans une transaction donnée ou pas. L algorithme FGMAC commence par énumérer tous les graphes fréquents ayant une ou deux arêtes. Ensuite, en se basant sur ces deux ensembles, un processus itératif est amorcé. Lors de chaque itération, il commence par générer les graphes candidats ayant une taille supérieure d une seule arête par rapport aux fréquents de l itération précédente (Algorithme 1, ligne 5). Il calcule après la fréquence de chaque graphe moyennant l AC-projection comme opérateur de projection et non pas l isomorphisme de sous-graphes. L algorithme élague les sous-graphes qui ne satisfont pas la contrainte du support minimal (Algorithme 1, lignes 6-11). La particularité de l algorithme FGMAC est de ne retourner que les graphes AC-réduits fréquents (Algorithme 1, ligne 11) qui ne représente qu un sous-ensemble des graphes fréquents à l isomorphisme près. Algorithme 1: FGMAC Entrées : Un dataset de graphes D, Support minimal σ Sorties : L ensemble des graphes AC-réduits fréquents F 1 F 1 trouver tous les graphes fréquents à 1 arête dans D ; 2 F 2 trouver tous les graphes fréquents à 2 arêtes dans D ; 3 k 3 ; 4 tant que F k 1 faire 5 C k fsg-gen (F k 1 ) 6 pour chaque candidat g k C k faire 7 g k.count 0 ; 8 pour chaque transaction t D faire 9 sig k t alors 10 g k.count g k.count+1 ; 11 F k {AC-reduce(g k C k ) g k.count σ D } ; 12 k k +1 ; 13 retourner F ; 5 Étude expérimentale En vu de montrer l intêret de recourir à l AC-projection pour la fouille de graphes et souligner son apport, nous présenterons dans ce qui suit une évaluation expérimentale de l approche. Nous tenons à préciser que l ensemble des graphes AC-réduits fréquents trouvés par FGMAC 1. «Frequent subgraph Mining with Arc Consistency»5 B. Douar et al. n est pas exhaustif par rapport aux motifs à l isomorphisme près. Nous présentons alors dans ce qui suit une évaluation qualitative des motifs AC-réduits qui consiste à mesurer le pouvoir discriminant de ces motifs dans un processus de classification supervisée de graphes. Pour nos évaluations expérimentales nous avons sélectionné cinq bases de graphes largement citées dans la littérature à savoir PTC-FM, PTC-FR, PTC-MM, PTC-MR et HIA (Smalter et al., 2008). Nous commençons notre démarche expérimentale par une propositionnalisation des motifs issues de la fouille de graphes. Chaque transaction du dataset est représentée par un vecteur binaire avec une taille égale au nombre de motifs fréquents. Chaque motif est associé à une position spécifique du vecteur, et si la transaction en question contient le motif alors le bit à la position correspondante est défini à un, sinon il sera alors défini à zéro. En connaissant la classe de chaque transaction, nous lançons alors un processus de classification supervisée par arbre de décision (C4.5 (Quinlan, 1993)) et nous effectuons une validation croisée en considérant le pcc 2 comme métrique d évaluation du pouvoir discriminant des motifs. (a) HIA (# patterns) (b) HIA (pcc) (c) PTC-FM (pcc) FIG. 2 (a) Comparaison des nombres de patterns générés par FGMAC et de FSG, (b,c) Comparaison du pcc associé aux datasets PTC-FM et HIA La courbe (a) de la figure 2 montre que le nombre de patterns fréquents découverts par FGMAC est inférieur aux patterns à l isomorphisme près découverts par FSG pour tous les supports. Les deux courbes b et c montrent un pcc comparable pour FGMAC et FSG ce qui prouve qu expérimentalement les patterns approximés trouvés par FGMAC sont aussi expressifs que l ensemble exhaustif des sous-graphes à l isomorphisme près. 6 Conclusion Dans cet article nous avons introduit la notion de biais de projection pour la fouille de graphes. Nous avons utilisé l AC-projection, un opérateur polynomial, à la place de l isomorphisme de sous-graphes dans un processus de fouille de graphes. Dans un deuxième temps nous comptons proposer une approche en profondeur de fouille de graphes basé sur l AC-projection et assurant une meilleure mise à l échelle pour les grands graphes. 2. Pourcentage de classifications correctes6 Nouvelle approche de fouille de graphes AC-réduits fréquents Références Agrawal, R. et R. Skirant (1994). Fast algorithms for mining association rules. In proceedings of the 20th International Conference on Very Large Databases, Santiago, Chile, pp Bessiere, C. (2006). Constraint propagation. In F. Rossi, P. van Beek, et T. Walsh (Eds.), Handbook of Constraint Programming, Chapter 3. Amsterdam : Elsevier. Garey, M. R. et D. S. Johnson (1979). Computers and Intractability : A Guide to the Theory of NP-Completeness. New York, NY, USA : W. H. Freeman & Co. Kuramochi, M. et G. Karypis (2001). Frequent subgraph discovery. In N. Cercone, T. Y. Lin, et X. Wu (Eds.), International Conference on Data Mining, pp IEEE Computer Society. Kuramochi, M. et G. Karypis (2004). An efficient algorithm for discovering frequent subgraphs. IEEE Transactions on Knowledge and Data Engineering 16, Liquiere, M. (2007). Arc consistency projection : A new generalization relation for graphs. In U. Priss, S. Polovina, et R. Hill (Eds.), ICCS, Volume 4604 of LNCS, pp Springer. Quinlan, J. R. (1993). C4.5 : Programs for Machine Learning (Morgan Kaufmann Series in Machine Learning) (1 ed.). Morgan Kaufmann. Smalter, A. M., J. Huan, et G. H. Lushington (2008). Chemical compound classification with automatically mined structure patterns. In A. Brazma, S. Miyano, et T. Akutsu (Eds.), APBC, Volume 6 of Advances in Bioinformatics and Computational Biology, pp Imperial College Press. Wörlein, M., T. Meinl, I. Fischer, et M. Philippsen (2005). A quantitative comparison of the subgraph miners mofa, gspan, ffsm, and gaston. In European Conference on Machine Learning and Principles and Practice of Knowledge Discovery in Databases, Volume 3721 of LNCS, pp Springer. Summary Graph mining is an attractive track and a real challenge in the data mining field. Among the various kinds of graph patterns, frequent subgraphs seem to be relevant in characterizing graphsets, discriminating different groups of sets, and classifying and clustering graphs. Because of the NP-Completeness of subgraph isomorphism test as well as the huge search space, fragment miners are exponential in runtime and/or memory consumption. In this paper we study a new polynomial projection operator named AC-Projection based on a key technique of constraint programming namely Arc Consistency (AC). This is intended to replace the use of the exponential subgraph isomorphism. We study the relevance of frequent AC-reduced graph patterns on classification. 
+
+
+
+
+
+
+
+
+
+
+                                        
+
+
+
+Documents pareils
+
+
+
+
+
+TRS: Sélection des sous-graphes représentants par l intermédiaire des attributs topologiques et K-medoïdes
+
+
+
+        TRS: Sélection des sous-graphes représentants par l intermédiaire des attributs topologiques et K-medoïdes Mohamed Moussaoui,Wajdi Dhifli,Sami Zghal,Engelbert Mephu Nguifo FSJEG, Université de Jendouba,    
+
+        Plus en détail 
+
+
+
+
+Extraction de règles d association pour la prédiction de valeurs manquantes
+
+
+
+        Cari 2004 7/10/04 12:00 Page 487 Extraction de règles d association pour la prédiction de valeurs manquantes Sylvie Jami 1, Tao-Yan Jen 2, Dominique Laurent 3, George Loizou 1, Oumar Sy 3,4 1. Birkbeck    
+
+        Plus en détail 
+
+
+
+
+Découverte de motifs fréquents : Application à l analyse de documents graphiques
+
+
+
+        Découverte de motifs fréquents : Application à l analyse de documents graphiques Eugen Barbu Pierre Héroux Sébastien Adam Éric Trupin Laboratoire PSI Université et INSA de Rouen F-76821 Mont-Saint-Aignan,    
+
+        Plus en détail 
+
+
+
+
+Sélection de variables groupées avec les forêts aléatoires. Application à l analyse des données fonctionnelles multivariées.
+
+
+
+        Sélection de variables groupées avec les forêts aléatoires. Application à l analyse des données fonctionnelles multivariées. Baptiste Gregorutti 12, Bertrand Michel 2 & Philippe Saint Pierre 2 1 Safety    
+
+        Plus en détail 
+
+
+
+
+Etude d Algorithmes Parallèles de Data Mining
+
+
+
+        REPUBLIQUE TUNISIENNE MINISTERE DE L ENSEIGNEMENT SUPERIEUR, DE LA TECHNOLOGIE ET DE LA RECHERCHE SCIENTIFIQUE UNIVERSITE DE TUNIS ELMANAR FACULTE DES SCIENCES DE TUNIS DEPARTEMENT DES SCIENCES DE L INFORMATIQUE    
+
+        Plus en détail 
+
+
+
+
+La NP-complétude. Johanne Cohen. PRISM/CNRS, Versailles, France.
+
+
+
+        La NP-complétude Johanne Cohen PRISM/CNRS, Versailles, France. Références 1. Algorithm Design, Jon Kleinberg, Eva Tardos, Addison-Wesley, 2006. 2. Computers and Intractability : A Guide to the Theory of    
+
+        Plus en détail 
+
+
+
+
+Une méthode d apprentissage pour la composition de services web
+
+
+
+        Une méthode d apprentissage pour la composition de services web Soufiene Lajmi * Chirine Ghedira ** Khaled Ghedira * * Laboratoire SOIE (ENSI) University of Manouba, Manouba 2010, Tunisia Soufiene.lajmi@ensi.rnu.tn,    
+
+        Plus en détail 
+
+
+
+
+Application de K-means à la définition du nombre de VM optimal dans un cloud
+
+
+
+        Application de K-means à la définition du nombre de VM optimal dans un cloud EGC 2012 : Atelier Fouille de données complexes : complexité liée aux données multiples et massives (31 janvier - 3 février    
+
+        Plus en détail 
+
+
+
+
+UNE COMPARAISON DE QUATRE TECHNIQUES D INFÉRENCE DES REFUSÉS DANS LE PROCESSUS D OCTROI DE CRÉDIT
+
+
+
+        UNE COMPARAISON DE QUATRE TECHNIQUES D INFÉRENCE DES REFUSÉS DANS LE PROCESSUS D OCTROI DE CRÉDIT Asma Guizani 1 & Besma Souissi 2 & Salwa Ben Ammou 3,4 & Gilbert Saporta 4 1 Institut Supérieur de Gestion    
+
+        Plus en détail 
+
+
+
+
+Fouille de données: des bases binaires aux bases évidentielles
+
+
+
+        Fouille de données: des bases binaires aux bases évidentielles Ahmed Samet Faculté des sciences de Tunis Présenté le : 16 janvier 2013 Ahmed Samet Fouille de données: des bases binaires aux bases évidentielles    
+
+        Plus en détail 
+
+
+
+
+Empreintes conceptuelles et spatiales pour la caractérisation des réseaux sociaux
+
+
+
+        Empreintes conceptuelles et spatiales pour la caractérisation des réseaux sociaux Bénédicte Le Grand*, Marie-Aude Aufaure** and Michel Soto* *Laboratoire d Informatique de Paris 6 UPMC {Benedicte.Le-Grand,    
+
+        Plus en détail 
+
+
+
+
+Outil SANTE: Détection d erreurs par analyse statique et test structurel des programmes C
+
+
+
+        Outil SANTE: Détection d erreurs par analyse statique et test structurel des programmes C Omar Chebaro LIFC, Université de Franche-Comté, 25030 Besançon France CEA, LIST, Laboratoire Sûreté des Logiciels,    
+
+        Plus en détail 
+
+
+
+
+Nouvelles classes de problèmes pour la fouille de motifs intéressants dans les bases de données 2
+
+
+
+        Nouvelles classes de problèmes pour la fouille de motifs intéressants dans les bases de données 2 Lhouari Nourine 1 1 Université Blaise Pascal, CNRS, LIMOS, France SeqBio 2012 Marne la vallée, France 2.    
+
+        Plus en détail 
+
+
+
+
+Chapitre 6. Modélisation en P.L.I. 6.1 Lien entre PL et PLI. 6.1.1 Approximation de la PLI
+
+
+
+        Chapitre 6 Modélisation en P.L.I. 6.1 Lien entre PL et PLI (P) problème de PL. On restreint les variables à être entières : on a un problème de PLI (ILP en anglais). On restreint certaines variables à    
+
+        Plus en détail 
+
+
+
+
+Chapitre 1. L algorithme génétique
+
+
+
+        Chapitre 1 L algorithme génétique L algorithme génétique (AG) est un algorithme de recherche basé sur les mécanismes de la sélection naturelle et de la génétique. Il combine une stratégie de survie des    
+
+        Plus en détail 
+
+
+
+
+Mesure d entropie asymétrique et consistante
+
+
+
+        Djamel A. Zighed, Simon Marcellin Gilbert Ritschard Université Lumière Lyon 2, Laboratoire ERIC {abdelkader.zighed,simon.marcellin}@univ-lyon2.fr http://eric.univ-lyon2.fr Université de Genève, Département    
+
+        Plus en détail 
+
+
+
+
+Solution A La Gestion Des Objets Java Pour Des Systèmes Embarqués
+
+
+
+        International Journal of Engineering Research and Development e-issn: 2278-067X, p-issn: 2278-800X, www.ijerd.com Volume 7, Issue 5 (June 2013), PP.99-103 Solution A La Gestion Des Objets Java Pour Des    
+
+        Plus en détail 
+
+
+
+
+Extension des bases de données inductives pour la découverte de chroniques
+
+
+
+        Extension des bases de données inductives pour la découverte de chroniques lexandre Vautier, Marie-Odile Cordier, René Quiniou Irisa - Projet DREM Campus de eaulieu 35042 RENNES Cedex, France {lexandre.vautier,marie-odile.cordier,rene.quiniou}@irisa.fr    
+
+        Plus en détail 
+
+
+
+
+Fouille de données pour associer des noms de sessions aux articles scientifiques
+
+
+
+        21 ème Traitement Automatique des Langues Naturelles, Marseille, 2014 Fouille de données pour associer des noms de sessions aux articles scientifiques Solen Quiniou 1 Peggy Cellier 2 Thierry Charnois 3    
+
+        Plus en détail 
+
+
+
+
+Modules de spécialisation du parcours «Conduite d entreprises»
+
+
+
+        Modules de spécialisation du parcours «Conduite d entreprises» Ce parcours est dédié aux systèmes complexes se composant de nombreux sous-systèmes interagissant à de multiples niveaux d organisation et    
+
+        Plus en détail 
+
+
+
+
+Clermont Ferrand - Janvier 2003
+
+
+
+        DISDAMIN: Algorithmes de Data Mining Distribués Valerie FIOLET (1,2) - Bernard TOURSEL (1) 1 Equipe PALOMA - LIFL - USTL - LILLE (FRANCE) 2 Service Informatique - UMH - MONS (BELGIUM) Clermont Ferrand    
+
+        Plus en détail 
+
+
+
+
+BI = Business Intelligence Master Data-ScienceCours 7 - Data
+
+
+
+        BI = Business Intelligence Master Data-Science Cours 7 - Data Mining Ludovic DENOYER - UPMC 30 mars 2015 Ludovic DENOYER - Typologie des méthodes de Data Mining Différents types de méthodes : Méthodes    
+
+        Plus en détail 
+
+
+
+
+Présentation SSDM : Semantically Similar Data Miner
+
+
+
+        Présentation SSDM : Semantically Similar Data Miner Guillaume Calas  Henri-François Chadeisson  EPITA SCIA 2009 16 Juillet 2008 calas g - chadei h SSDM : Semantically    
+
+        Plus en détail 
+
+
+
+
+TANAGRA : un logiciel gratuit pour l enseignement et la recherche
+
+
+
+        TANAGRA : un logiciel gratuit pour l enseignement et la recherche Ricco Rakotomalala ERIC Université Lumière Lyon 2 5, av Mendès France 69676 Bron rakotoma@univ-lyon2.fr http://eric.univ-lyon2.fr/~ricco    
+
+        Plus en détail 
+
+
+
+
+Recherche Opérationnelle et Optimisation : Quelles perspectives pour le Datamining
+
+
+
+        Recherche Opérationnelle et Optimisation : Quelles perspectives pour le Datamining Clarisse DHAENENS LIFL Equipe OPAC INRIA Projet DOLPHIN Université de Lille 1 KESAKO Datamining Datamining : définitiond    
+
+        Plus en détail 
+
+
+
+
+Définition et diffusion de signatures sémantiques dans les systèmes pair-à-pair
+
+
+
+        Définition et diffusion de signatures sémantiques dans les systèmes pair-à-pair Raja Chiky, Bruno Defude, Georges Hébrail GET-ENST Paris Laboratoire LTCI - UMR 5141 CNRS Département Informatique et Réseaux    
+
+        Plus en détail 
+
+
+
+
+Fondements de l informatique: Examen Durée: 3h
+
+
+
+        École polytechnique X2013 INF412 Fondements de l informatique Fondements de l informatique: Examen Durée: 3h Sujet proposé par Olivier Bournez Version 3 (corrigé) L énoncé comporte 4 parties (sections),    
+
+        Plus en détail 
+
+
+
+
+Rapport du Jury du Concours 2010 Épreuve Pratique d Algorithmique et de Programmation (EPAP)
+
+
+
+        Rapport du Jury du Concours 2010 Épreuve Pratique d Algorithmique et de Programmation (EPAP) Loris Marchal, Guillaume Melquion, Frédéric Tronel 21 juin 2011 Remarques générales à propos de l épreuve Organisation    
+
+        Plus en détail 
+
+
+
+
+Variable Neighborhood Search
+
+
+
+        Variable Neighborhood Search () Universite de Montreal 6 avril 2010 Plan Motivations 1 Motivations 2 3 skewed variable neighborhood search variable neighborhood decomposition search 4 Le probleme d optimisation.    
+
+        Plus en détail 
+
+
+
+
+DOCTORAT DE L'UNIVERSITÉ DE TOULOUSE
+
+
+
+        En vue de l'obtention du DOCTORAT DE L'UNIVERSITÉ DE TOULOUSE Délivré par : Institut National Polytechnique de Toulouse (INP Toulouse) Discipline ou spécialité : Génie des Procédés et de l'environnement    
+
+        Plus en détail 
+
+
+
+
+INSERTION TECHNIQUES FOR JOB SHOP SCHEDULING
+
+
+
+        INSERTION TECHNIQUES FOR JOB SHOP SCHEDULING ÉCOLE POLYTECHNIQUE FÉDÉRALE DE LAUSANNE POUR L'OBTENTION DU GRADE DE DOCTEUR ES SCIENCES PAR Tamas KIS Informaticien mathématicien diplômé de l'université    
+
+        Plus en détail 
+
+
+
+
+AGROBASE : un système de gestion de données expérimentales
+
+
+
+        AGROBASE : un système de gestion de données expérimentales Daniel Wallach, Jean-Pierre RELLIER To cite this version: Daniel Wallach, Jean-Pierre RELLIER. AGROBASE : un système de gestion de données expérimentales.    
+
+        Plus en détail 
+
+
+
+
+République Algérienne Démocratique et Populaire
+
+
+
+        République Algérienne Démocratique et Populaire وزارة التعليم العالي والبحث العلمي Ministère de l Enseignement Supérieur et de la Recherche Scientifique UNIVERSITE DES SCIENCES ET DE LA TECHNOLOGIE d ORAN    
+
+        Plus en détail 
+
+
+
+
+Vers une approche Adaptative pour la Découverte et la Composition Dynamique des Services
+
+
+
+        69 Vers une approche Adaptative pour la Découverte et la Composition Dynamique des Services M. Bakhouya, J. Gaber et A. Koukam Laboratoire Systèmes et Transports SeT Université de Technologie de Belfort-Montbéliard    
+
+        Plus en détail 
+
+
+
+
+Big Data et Graphes : Quelques pistes de recherche
+
+
+
+        Big Data et Graphes : Quelques pistes de recherche Hamamache Kheddouci Laboratoire d'informatique en Image et Systèmes d'information LIRIS UMR 5205 CNRS/INSA de Lyon/Université Claude Bernard Lyon 1/Université    
+
+        Plus en détail 
+
+
+
+
+Cours : INF 784 Systèmes à base de connaissances Trimestre : Automne 2015 Enseignant : Évariste Valéry BÉVO WANDJI
+
+
+
+        Faculté des sciences Centre de formation en technologies de l information Cours : INF 784 Systèmes à base de connaissances Trimestre : Automne 2015 Enseignant : Évariste Valéry BÉVO WANDJI 1. Mise en contexte    
+
+        Plus en détail 
+
+
+
+
+Ce qu est le Data Mining
+
+
+
+        Data Mining 1 Ce qu est le Data Mining Extraction d informations intéressantes non triviales, implicites, préalablement inconnues et potentiellement utiles à partir de données. Autres appellations: ECD    
+
+        Plus en détail 
+
+
+
+
+Apprentissage de structure dans les réseaux bayésiens pour
+
+
+
+        Apprentissage de structure dans les réseaux bayésiens pour la détection d événements vidéo Siwar Baghdadi 1, Claire-Hélène Demarty 1, Guillaume Gravier 2, et Patrick Gros 3 1 Thomson R&D France, 1 av Belle    
+
+        Plus en détail 
+
+
+
+
+Baccalauréat ES Polynésie (spécialité) 10 septembre 2014 Corrigé
+
+
+
+        Baccalauréat ES Polynésie (spécialité) 10 septembre 2014 Corrigé A. P. M. E. P. Exercice 1 5 points 1. Réponse d. : 1 e Le coefficient directeur de la tangente est négatif et n est manifestement pas 2e    
+
+        Plus en détail 
+
+
+
+
+Apprentissage statistique dans les graphes et les réseaux sociaux
+
+
+
+        Apprentissage statistique dans les graphes et les réseaux sociaux Patrick Gallinari Collaboration : L. Denoyer, S. Peters Université Pierre et Marie Curie AAFD 2010 1 Plan Motivations et Problématique    
+
+        Plus en détail 
+
+
+
+
+Département d'informatique, Université Laval, IFT-63677 SBC V&V : VÉRIFICATION ET VALIDATION DES SBC
+
+
+
+        Assurance qualité logicielle Logiciel conventionnel SBC Fiabilité Facilité d'entretien Facilité des modifications Principales causes d erreur Absence de spécification, manque de conformité (1) Erreurs    
+
+        Plus en détail 
+
+
+
+
+Guide d utilisation de la base de données : ACMDL
+
+
+
+        partenaire du Guide d utilisation de la base de données : ACMDL Adresse: Rue la flanelle, cité Ain ellah Dely brahim Tél: (021) 91 03 52, Mob: (0770) 87 66 38, Fax: (021) 91 03 51 E mail: cadoc@cadoc.dz    
+
+        Plus en détail 
+
+
+
+
+Mes histoires d amour avec les travaux de Maxime Crochemore. Gregory Kucherov LIFL/CNRS/INRIA, Lille, France
+
+
+
+        Mes histoires d amour avec les travaux de Maxime Crochemore Gregory Kucherov LIFL/CNRS/INRIA, Lille, France Marne-la-Vallée, 26 octobre 2007 travaux de Maxime (données du 2/11/2006) 59 articles de revue    
+
+        Plus en détail 
+
+
+
+
+Appariement sémantique des documents à base d'ontologie pour le e-recrutement
+
+
+
+        Appariement sémantique des documents à base d'ontologie pour le e-recrutement Zouhel Boucetta 1, Zizette Boufaida 1 et Leila Yahiaoui 1,2 1 Laboratoire LIRE Université Mentouri Constantine- 25000, Algérie    
+
+        Plus en détail 
+
+
+
+
+Cours de Master Recherche
+
+
+
+        Cours de Master Recherche Spécialité CODE : Résolution de problèmes combinatoires Christine Solnon LIRIS, UMR 5205 CNRS / Université Lyon 1 2007 Rappel du plan du cours 16 heures de cours 1 - Introduction    
+
+        Plus en détail 
+
+
+
+
+Nombres premiers. Comment reconnaître un nombre premier? Mais...
+
+
+
+        Introduction Nombres premiers Nombres premiers Rutger Noot IRMA Université de Strasbourg et CNRS Le 19 janvier 2011 IREM Strasbourg Definition Un nombre premier est un entier naturel p > 1 ayant exactement    
+
+        Plus en détail 
+
+
+
+
+Intégration efficace des arbres de décision dans les SGBD : utilisation des index bitmap
+
+
+
+        Intégration efficace des arbres de décision dans les SGBD : utilisation des index bitmap Cécile Favre, Fadila Bentayeb Laboratoire ERIC, Lyon 2 5 Avenue Pierre Mendès France 69676 Bron CEDEX {cfavre,bentayeb}@eric.univ-lyon2.fr,    
+
+        Plus en détail 
+
+
+
+
+Régression ridge à noyau pour des variables explicatives et d intérêts fonctionnelles
+
+
+
+        Régression ridge à noyau pour des variables explicatives et d intérêts fonctionnelles Hachem Kadri 1, Philippe Preux 1,2 & Emmanuel Duflos 1,3 1 Equipe-projet SequeL, INRIA Lille - Nord Europe, Villeneuve    
+
+        Plus en détail 
+
+
+
+
+Techniques Data Mining pour la sélection d une configuration d index de jointure binaire
+
+
+
+        Faculté des Sciences Tidjani HADDAM Département de l Informatique Mémoire Pour l obtention du diplôme de MASTER Spécialité : Informatique Option : Modèles Intélligents et Décision (MID) THÈME Techniques    
+
+        Plus en détail 
+
+
+
+
+Baptiste Jeudy OPTIMISATION DE REQUÊTES INDUCTIVES : APPLICATION À L EXTRACTION SOUS CONTRAINTES DE RÈGLES D ASSOCIATION
+
+
+
+        N d ordre 02 ISAL 0090 Année 2002 THÈSE présentée DEVANT L INSTITUT NATIONAL DES SCIENCES APPLIQUÉES DE LYON FORMATION DOCTORALE : DISIC ÉCOLE DOCTORALE : EDIIS pour obtenir LE GRADE DE DOCTEUR SPÉCIALITÉ    
+
+        Plus en détail 
+
+
+
+
+Etat de l art sur l utilisation des techniques Web Sémantique en ECD
+
+
+
+        Etat de l art sur l utilisation des techniques Web Sémantique en ECD Hicham Behja ENSAM Meknès(1,2,3) Brigitte Trousse Projet AxIS INRIA Sophia Antipolis (2) Abdelaziz Marzak Faculté des sciences Casablanca    
+
+        Plus en détail 
+
+
+
+
+Sortie : OUI si n est premier, NON sinon. On peut voir Premier aussi comme une fonction, en remplaçant OUI par 1 et NON par 0.
+
+
+
+        Université Bordeaux 1. Master Sciences & Technologies, Informatique. Examen UE IN7W11, Modèles de calcul. Responsable A. Muscholl Session 1, 2011 2012. 12 décembre 2011, 14h-17h. Documents autorisés :    
+
+        Plus en détail 
+
+
+
+
+Reconnaissance de visages 2.5D par fusion des indices de texture et de profondeur ICI 12/12/12
+
+
+
+        Reconnaissance de visages 2.5D par fusion des indices de texture et de profondeur ICI 12/12/12 2 Discrimination Invariance Expressions faciales Age Pose Eclairage 11/12/2012 3 Personne Inconnue Identité    
+
+        Plus en détail 
+
+
+
+
+3 e Atelier des Étudiants Gradués en Actuariat et Mathématiques Financières. 3 rd Graduate Students Workshop on Actuarial and Financial Mathematics
+
+
+
+        3 e Atelier des Étudiants Gradués en Actuariat et Mathématiques Financières 3 rd Graduate Students Workshop on Actuarial and Financial Mathematics Résumé-Abstracts Organization: Ghislain Léveillé Co-organization:    
+
+        Plus en détail 
+
+
+
+
+FaceBook aime les Maths!
+
+
+
+        FaceBook aime les Maths! Michel Rigo http://www.discmath.ulg.ac.be/ http://orbi.ulg.ac.be/ Réseaux Visualizing my Twitter Network by number of followers. Michael Atkisson http://woknowing.wordpress.com/    
+
+        Plus en détail 
+
+
+
+
+Un algorithme de déduplication pour les bases et entrepôts de données
+
+
+
+        Un algorithme de déduplication pour les bases et entrepôts de données Faouzi Boufarès *, Aïcha Ben Salem *,**, Sebastiao Correia ** Laboratoire LIPN - UMR 7030 CNRS, Université Paris 13, Av. J. B. Clement    
+
+        Plus en détail 
+
+
+
+
+Principe de symétrisation pour la construction d un test adaptatif
+
+
+
+        Principe de symétrisation pour la construction d un test adaptatif Cécile Durot 1 & Yves Rozenholc 2 1 UFR SEGMI, Université Paris Ouest Nanterre La Défense, France, cecile.durot@gmail.com 2 Université    
+
+        Plus en détail 
+
+
+
+
+Big Data et Graphes : Quelques pistes de recherche
+
+
+
+        Big Data et Graphes : Quelques pistes de recherche Hamamache Kheddouci http://liris.cnrs.fr/hamamache.kheddouci Laboratoire d'informatique en Image et Systèmes d'information LIRIS UMR 5205 CNRS/INSA de    
+
+        Plus en détail 
+
+
+
+
+Fouille de données de mobilité
+
+
+
+        Fouille de données de mobilité Thomas Devogele Université François Rabelais (Tours) thomas.devogele@univ-tours.fr Laurent Etienne Ecole Navale (Brest) Laurent.etienne@ecole-navale.fr La fouille de donnée    
+
+        Plus en détail 
+
+
+
+
+CSI2510 Structures de données et algorithmes. Plus court chemin. Graphe pondéré. Propriétés
+
+
+
+        SI1 Structures de données et algorithmes Graphe pondéré Les poids des arêtes d un graphe représentent des distances, des coûts, etc. Exemple d un graphe pondéré non-orienté: ans un graphe des route aériennes,    
+
+        Plus en détail 
+
+
+
+
+EXPLORATION DES BASES DE DONNÉES INDUSTRIELLES À L AIDE DU DATA MINING PERSPECTIVES
+
+
+
+        EXPLORATION DES BASES DE DONNÉES INDUSTRIELLES À L AIDE DU DATA MINING PERSPECTIVES Bruno Agard (1), Andrew Kusiak (2) (1) Département de Mathématiques et de Génie Industriel, École Polytechnique de Montréal,    
+
+        Plus en détail 
+
+
+
+
+Programmation Par Contraintes
+
+
+
+        Programmation Par Contraintes Cours 2 - Arc-Consistance et autres amusettes David Savourey CNRS, École Polytechnique Séance 2 inspiré des cours de Philippe Baptiste, Ruslan Sadykov et de la thèse d Hadrien    
+
+        Plus en détail 
+
+
+
+
+Adaptation sémantique de documents SMIL
+
+
+
+        Adaptation sémantique de documents SMIL Sébastien Laborie Jérôme Euzenat Nabil Layaïda INRIA Rhône-Alpes - 655 Avenue de l Europe - 38334 St Ismier Cedex {Sebastien.Laborie;Jerome.Euzenat;Nabil.Layaida}@inrialpes.fr    
+
+        Plus en détail 
+
+
+
+
+Allocation de ressources pour réseaux virtuels Projet de fin d études. Mikaël Capelle. Marie-José Huguet Slim Abdellatif Pascal Berthou
+
+
+
+        Allocation de ressources pour réseaux virtuels Projet de fin d études Mikaël Capelle Marie-José Huguet Slim Abdellatif Pascal Berthou 27 Juin 2014 Plan 1 Introduction - La virtualisation de réseau 2 3    
+
+        Plus en détail 
+
+
+
+
+Introduction au Data-Mining
+
+
+
+        Introduction au Data-Mining Gilles Gasso, Stéphane Canu INSA Rouen -Département ASI Laboratoire LITIS 8 septembre 205. Ce cours est librement inspiré du cours DM de Alain Rakotomamonjy Gilles Gasso, Stéphane    
+
+        Plus en détail 
+
+
+
+
+BI = Business Intelligence Master Data-Science Cours 6 - Data Mining
+
+
+
+        BI = Business Intelligence Master Data-Science Cours 6 - Data Mining Ludovic DENOYER - D après Elisa Fromont UPMC 23 mars 2015 Ludovic DENOYER - D après Elisa Fromont Le Data Mining De plus en plus de    
+
+        Plus en détail 
+
+
+
+
+Modélisation géostatistique des débits le long des cours d eau.
+
+
+
+        Modélisation géostatistique des débits le long des cours d eau. C. Bernard-Michel (actuellement à ) & C. de Fouquet MISTIS, INRIA Rhône-Alpes. 655 avenue de l Europe, 38334 SAINT ISMIER Cedex. Ecole des    
+
+        Plus en détail 
+
+
+
+
+Nouvelle Approche à base de Graphes pour les Systèmes de Recommandation Collaboratifs
+
+
+
+        Nouvelle Approche à base de Graphes pour les Systèmes de Recommandation Collaboratifs Nassira CHEKKAI, Salim CHIKHI Laboratoire MISC, Université Mentouri Constantine, 25000, Algérie n.chekkai@gmail.com,    
+
+        Plus en détail 
+
+
+
+
+Fouille de Données Médicales
+
+
+
+        Journée Romande d Hygiène Hospitalière Fouille de Données Médicales Michèle Sebag Laboratoire de Recherche en Informatique, Université Paris-Sud http://www.lri.fr/ sebag/ Genève, 21 novembre 2002 MIT Technology    
+
+        Plus en détail 
+
+
+
+
+Hervé Couturier EVP, SAP Technology Development
+
+
+
+        Hervé Couturier EVP, SAP Technology Development Hervé Biausser Directeur de l Ecole Centrale Paris Bernard Liautaud Fondateur de Business Objects Questions à: Hervé Couturier Hervé Biausser Bernard Liautaud    
+
+        Plus en détail 
+
+
+
+
+Exemple PLS avec SAS
+
+
+
+        Exemple PLS avec SAS This example, from Umetrics (1995), demonstrates different ways to examine a PLS model. The data come from the field of drug discovery. New drugs are developed from chemicals that    
+
+        Plus en détail 
+
+
+
+
+1/24. I passer d un problème exprimé en français à la réalisation d un. I expressions arithmétiques. I structures de contrôle (tests, boucles)
+
+
+
+        1/4 Objectif de ce cours /4 Objectifs de ce cours Introduction au langage C - Cours Girardot/Roelens Septembre 013 Du problème au programme I passer d un problème exprimé en français à la réalisation d    
+
+        Plus en détail 
+
+
+
+
+FINI LA RÉCRÉ PASSONS AUX MÉGADONNÉES
+
+
+
+        1 FINI LA RÉCRÉ PASSONS AUX MÉGADONNÉES «Dans le concret, projets de transformation vers le BigData» V1-10/03/15 ABED AJRAOU CONNAISSEZ-VOUS PAGESJAUNES? CONNAISSEZ-VOUS PAGESJAUNES? LES MEGADONNEES RÉPONDENT    
+
+        Plus en détail 
+
+
+
+
+Windows Server 2008. Chapitre 1: Découvrir Windows Server 2008
+
+
+
+        Windows Server 2008 Chapitre 1: Découvrir Windows Server 2008 Objectives Identifier les caractéristiques de chaque édition de Windows Server 2008 Identifier les caractéristiques généraux de Windows Server    
+
+        Plus en détail 
+
+
+
+
+A GRASPxELS approach for the Job Shop with generic time-lags and new statistical determination of the parameters
+
+
+
+        A GRASPxELS approach for the Job Shop with generic time-lags and new statistical determination of the parameters Présenté par : Equipe de travail : Laboratoire : Maxime CHASSAING Philippe LACOMME, Nikolay    
+
+        Plus en détail 
+
+
+
+
+Extraction de termes centrée autour de l expert
+
+
+
+        Thomas Heitz, Mathieu Roche, Yves Kodratoff Université Paris-Sud, Bât 490, 91405 Orsay Cedex France, {heitz, roche, yk}@lri.fr, http://www.lri.fr/ {heitz, roche, yk}/ Résumé. Nous développons un logiciel,    
+
+        Plus en détail 
+
+
+
+
+Curriculum Vitae - Emmanuel Hebrard. Emmanuel Hebrard
+
+
+
+        Emmanuel Hebrard Adresse 5 Tuckey Street Cork, Ireland emmanuel.hebrard@gmail.com http ://4c.ucc.ie/ ehebrard/home.html Adresse Professionnelle Cork Constraint Computation Centre Cork, Ireland Telephone    
+
+        Plus en détail 
+
+
+
+
+Méthodes d apprentissage :
+
+
+
+        Méthodes d apprentissage : application au tri de complexes protéines-protéines Jérôme Azé Apprentissage: tâches Apprentissage non supervisé (Eisen, ) Apprentissage supervisé (arbres de décision, k-ppv,    
+
+        Plus en détail 
+
+
+
+
+Optimisation et programmation mathématique. Professeur Michel de Mathelin. Cours intégré : 20 h
+
+
+
+        Télécom Physique Strasbourg Master IRIV Optimisation et programmation mathématique Professeur Michel de Mathelin Cours intégré : 20 h Programme du cours d optimisation Introduction Chapitre I: Rappels    
+
+        Plus en détail 
+
+
+
+
+Spécificités, Applications et Outils
+
+
+
+        Spécificités, Applications et Outils Ricco Rakotomalala Université Lumière Lyon 2 Laboratoire ERIC Laboratoire ERIC 1 Ricco Rakotomalala ricco.rakotomalala@univ-lyon2.fr http://chirouble.univ-lyon2.fr/~ricco/data-mining    
+
+        Plus en détail 
+
+
+
+
+physicien diplômé EPFZ originaire de France présentée acceptée sur proposition Thèse no. 7178
+
+
+
+        Thèse no. 7178 PROBLEMES D'OPTIMISATION DANS LES SYSTEMES DE CHAUFFAGE A DISTANCE présentée à l'ecole POLYTECHNIQUE FEDERALE DE ZURICH pour l'obtention du titre de Docteur es sciences naturelles par Alain    
+
+        Plus en détail 
+
+
+
+
+Acquisition de la terminologie et définition des tâches à effectuer, deux principes indissociables
+
+
+
+        Acquisition de la terminologie et définition des tâches à effectuer, deux principes indissociables Mathieu Roche Équipe TAL, LIRMM, UMR 5506, Université Montpellier 2 mathieu.roche@lirmm.fr Résumé L acquisition    
+
+        Plus en détail 
+
+
+
+
+PREPROCESSING PAR LISSAGE LOESS POUR ACP LISSEE
+
+
+
+        PREPROCESSING PAR LISSAGE LOESS POUR ACP LISSEE Jean-Paul Valois, Claude Mouret & Nicolas Pariset Total, 64018 Pau Cédex MOTS CLEFS : Analyse spatiale, ACP, Lissage, Loess PROBLEMATIQUE En analyse multivariée,    
+
+        Plus en détail 
+
+
+
+
+Influence De La Taille Du Jeton Sur Les Performances De L algorithme D'exclusion Mutuelle De Ricart - Agrawala
+
+
+
+        Influence De La Taille Du Jeton Sur Les Performances De L algorithme D'exclusion Mutuelle De Ricart - Agrawala Sarah Benkouider, Souhila Labgaa 2, Mohamed Yagoubi 3 Université Amar Telidji Département    
+
+        Plus en détail 
+
+
+
+
+Vérification des systèmes modulaires
+
+
+
+        Vérification des systèmes modulaires F. Ouazar Lounnaci M.Ioualalen M.C.Boukala MOVEP, USTHB, Algérie fouazar@gmail.com mioualalen@usthb.dz mboukala@usthb.dz Résumé La vérification des systèmes par model-checking    
+
+        Plus en détail 
+
+
+
+
+Théorie des graphes. Introduction. Programme de Terminale ES Spécialité. Résolution de problèmes à l aide de graphes. Préparation CAPES UCBL
+
+
+
+        Introduction Ces quelques pages ont pour objectif de vous initier aux notions de théorie des graphes enseignées en Terminale ES. Le programme de Terminale (voir ci-après) est construit sur la résolution    
+
+        Plus en détail 
+
+
+
+
+stages d'initiation à la recherche / internships
+
+
+
+        http://www.db-net.aueb.gr/ & http://www.vazirgiannis.com/ email: mvazirg@lix.poytechnique.fr or mvazir@aueb.gr stages d'initiation à la recherche / internships Titre Thématique Compétences espérées IN1:    
+
+        Plus en détail 
+
+
+
+
+Laboratoire d Automatique et Productique Université de Batna, Algérie
+
+
+
+        Anale. Seria Informatică. Vol. IX fasc. 2 Annals. Computer Science Series. 9 th Tome st Fasc. 2 La sélection de paramètres d un système industriel par les colonies de fourmis Ouahab Kadri, L. Hayet Mouss,    
+
+        Plus en détail 
+
+
+
+
+Analyse factorielle des correspondances de Benzécri
+
+
+
+        Analyse factorielle des correspondances de Benzécri One Pager Décembre 2013 Vol. 8 Num. 011 Copyright Laréq 2013 http://www.lareq.com Analyse Factorielle des Correspondances de Benzécri Une illustration    
+
+        Plus en détail 
+
+
+
+
+Fouille de données et sémantique : des techniques pour donner du sens aux données
+
+
+
+        Fouille de données et sémantique : des techniques pour donner du sens aux données Nathalie Aussenac-Gilles (IRIT) co-animatrice avec M. Boughanem de l axe masse de données et calcul http://www.irit.fr/-masses-de-donnees-et-calcul,677-?lang=fr    
+
+        Plus en détail 
+
+
+
+
+Applications #2 Problème du voyageur de commerce (TSP)
+
+
+
+        Applications #2 Problème du voyageur de commerce (TSP) MTH6311 S. Le Digabel, École Polytechnique de Montréal H2014 (v2) MTH6311: Heuristiques pour le TSP 1/34 Plan 1. Introduction 2. Formulations MIP    
+
+        Plus en détail 
+
+
+
+
+Scénarios économiques en assurance
+
+
+
+        Motivation et plan du cours Galea & Associés ISFA - Université Lyon 1 ptherond@galea-associes.eu pierre@therond.fr 18 octobre 2013 Motivation Les nouveaux référentiels prudentiel et d'information nancière    
+
+        Plus en détail 
+
+
+
+
+Quelques tests de primalité
+
+
+
+        Quelques tests de primalité J.-M. Couveignes (merci à T. Ezome et R. Lercier) Institut de Mathématiques de Bordeaux & INRIA Bordeaux Sud-Ouest Jean-Marc.Couveignes@u-bordeaux.fr École de printemps C2 Mars    
+
+        Plus en détail 
+
+
+
+
+Séance 12: Algorithmes de Support Vector Machines
+
+
+
+        Séance 12: Algorithmes de Support Vector Machines Laboratoire de Statistique et Probabilités UMR 5583 CNRS-UPS www.lsp.ups-tlse.fr/gadat Douzième partie XII Algorithmes de Support Vector Machines Principe    
+
+        Plus en détail 
+
+
+
+
+Exercices théoriques
+
+
+
+        École normale supérieure 2008-2009 Département d informatique Algorithmique et Programmation TD n 9 : Programmation Linéaire Avec Solutions Exercices théoriques Rappel : Dual d un programme linéaire cf.    
+
+        Plus en détail 
+
+
+
+
+Accès au Contenu Informationnel pour les Masses de Données de Documents
+
+
+
+        Accès au Contenu Informationnel pour les Masses de Données de Documents Grappa LILLE 3 - UR Futurs INRIA MOSTRARE Laboratoire d Informatique de Paris 6 Laboratoire de Recherche en Informatique Orsay -    
+
+        Plus en détail 
+
+
+
+
+Plus courts chemins, programmation dynamique
+
+
+
+        1 Plus courts chemins, programmation dynamique 1. Plus courts chemins à partir d un sommet 2. Plus courts chemins entre tous les sommets 3. Semi-anneau 4. Programmation dynamique 5. Applications à la bio-informatique    
+
+        Plus en détail 
+
+
+
+
+RISK-BASED TRANSPORTATION PLANNING PRACTICE: OVERALL METIIODOLOGY AND A CASE EXAMPLE"' RESUME
+
+
+
+        RISK-BASED TRANSPORTATION PLANNING PRACTICE: OVERALL METIIODOLOGY AND A CASE EXAMPLE"' ERTUGRULALP BOVAR-CONCORD Etwiromnental, 2 Tippet Rd. Downsviel+) ON M3H 2V2 ABSTRACT We are faced with various types    
+
+        Plus en détail 
+
+
+
+
+Vérification Formelle des Aspects de Cohérence d un Workflow net
+
+
+
+        Vérification Formelle des Aspects de Cohérence d un Workflow net Abdallah Missaoui Ecole Nationale d Ingénieurs de Tunis BP. 37 Le Belvédère, 1002 Tunis, Tunisia abdallah.missaoui@enit.rnu.tn Zohra Sbaï    
+
+        Plus en détail 
+
+
+
+
+Débride ta Casio Collège 2D pour un usage au Lycée et dans le Supérieur
+
+
+
+        Tutoriel Débride ta Casio Collège 2D pour un usage au Lycée et dans le Supérieur Un guide à mettre entre toute les mains! 1 ère édition 6 juillet 2010 Réédition 29 mars 2012 Xavier Andréani andreanx@hotmail.com    
+
+        Plus en détail 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                2018 © DocPlayer.fr Politique de confidentialité | Conditions de service | Feed-back
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            var pixel_image_src = '/pix/'+Math.random()+'/report/pixel.gif?type=pageview&domain_id=29&page_id=0&design_id=0&l='+encodeURIComponent(navigator.language)+'&p='+encodeURIComponent(navigator.platform)+'&url='+encodeURIComponent(document.location);
+            document.write('<img src="'+pixel_image_src+'"> ');
+        }());
+    
+
+
+    To make this website work, we log user data and share it with processors. To use this website, you must agree to our Privacy Policy, including cookie policy.
+        I agree.    
+
+
+    
+        var fcb = document.getElementById('footer_height_for_cookie_msg');
+        if (fcb) { fcb.parentElement.removeChild(fcb); }
+    }
+    
+    })();
+
+
+

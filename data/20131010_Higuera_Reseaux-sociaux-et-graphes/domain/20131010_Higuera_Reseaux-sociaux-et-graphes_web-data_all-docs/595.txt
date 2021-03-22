@@ -1,0 +1,1038 @@
+https://www.eyrolles.com/Chapitres/9782212138047/9782212138047.pdf
+
+Bases de données orientées graphes avec 
+
+Neo4j
+
+Ces dernières années, les besoins relatifs au traitement des 
+données ont évolué à un rythme soutenu. Les sites web aux 
+millions  d’utilisateurs  (réseaux  sociaux,  plates-formes  de 
+diffusion de contenus) sont à l’origine de l’essor de la plus 
+dynamique des familles de moteurs de données : le NoSQL. 
+
+Une base de données optimisée pour le big data 
+Parmi les bases de données NoSQL, celles orientées « graphes » connaissent 
+un succès fulgurant du fait de leur souplesse et de leur évolutivité extrême. 
+Ne  reposant  sur  aucun  schéma,  un  graphe  peut  accepter  de  nouveaux  flux 
+de données sans nécessiter d’interventions lourdes. À l’heure où les sociétés 
+ont compris que la fusion de leurs silos de données (CRM, ERP, Web, etc.) est 
+une  condition  sine  qua  non  pour  créer  de  la  valeur  (solutions  d’intelligence 
+prédictive, moteurs de recommandation), cette propriété du graphe se révèle 
+essentielle.
+En considérant les relations entre objets comme des données de premier ordre, 
+de nouvelles perspectives d’exploration et d’analyse apparaissent et favorisent 
+la découverte d’informations inédites. L’absence de barrières logiques ouvre 
+également  la  porte  à  des  modalités  d’exploitation  de  la  donnée  en  profon-
+deur,  sans  nuire  aux  performances.  Installés  depuis  de  nombreuses  années 
+au cœur des infrastructures des géants du Web (Google, Facebook, LinkedIn), 
+les graphes sont désormais accessibles au plus grand nombre grâce à l’émer-
+gence des moteurs de graphes et notamment au leader du domaine : Neo4j.
+
+Un ouvrage de référence sur Neo4j
+Le présent ouvrage s’adresse à tous les publics confrontés au volet data d’un 
+projet informatique : développeurs, DSI, directeurs techniques, chefs de projets, 
+data miners et data scientists. Son objectif majeur est de vous aider à identifier 
+les projets informatiques qui gagneront à mettre en œuvre un graphe.
+Après une introduction au concept de graphe et une présentation de Neo4j 
+et  de  son  langage  de  requête  (Cypher),  le  présent  ouvrage  illustre  à  l’aide 
+d’exemples concrets la puissance des graphes pour traiter des problèmes aussi 
+pointus que la recommandation et l’analyse de réseaux sociaux. Les grandes 
+étapes  d’un  projet  data-driven  reposant  sur  le  graphe  sont  illustrées  de  la 
+conception à la mise en place de modèles prédictifs, en passant par l’ingestion 
+des données et l’analyse.
+
+À qui s’adresse cet ouvrage ? 
+•  Aux administrateurs de bases NoSQL de type graphe.
+•  Aux  développeurs  et  architectes,  pour  mettre  en  pratique  les  concepts  
+
+avec Neo4j.
+
+Avec plus de sept ans d’expérience dans la modéli-
+sation et l’analyse de données, Amine Lies Benhenni 
+s’est  spécialisé  dans  le  développement  d’applica-
+tions  data-driven  à  base  de  modèles  prédictifs, 
+d’analyse de graphes et de traitement automatique 
+du  langage.  Il  est  aujourd’hui  spécialiste  en  data 
+science et data engineering. 
+Ingénieur en sciences cognitives et en intelligence 
+artificielle, François-Xavier Bois est le fondateur de 
+la société Kernix, où il dirige la stratégie et l’innova-
+tion. Il est également expert auprès du pôle de com-
+pétitivité Cap Digital et auteur de plusieurs ouvrages 
+consacrés au Web.
+
+Sommaire 
+
+Réseaux  et  graphes  •  Qu’est-ce  qu’un  graphe  ? 
+• Notions et terminologie • Bases  de  données  et  
+modèles  de  graphes  •  Les  bases  relationnelles  • 
+Bases de données NoSQL • Installation de Neo4j • 
+Prise en main • Opérations de maintenance • Le lan-
+gage Cypher • Création d’entités • Lecture et impor-
+tation de données • Performance • Serveur  Neo4j 
+• API REST • Extensions  • Exemples pratiques de 
+modélisation des données • Modélisation en graphe 
+dans Neo4j • Gestion de projets  • Analyse prédictive 
+et recommandation • La recommandation, un bref pa-
+norama • Quelques mots sur la validation des modèles 
+• Outils de visualisation • sigma.js • Graphes et 
+réseaux sociaux • Données Twitter  • Twitter et médias 
+sociaux, une source d’information incontournable ?
+
+•  Aux data scientists qui trouveront avec les graphes un outil complémentaire 
+
+pour concevoir leurs modèles.
+
+32 E
+
+4
+0
+8
+3
+1
+G
+
+ 
+:
+ 
+r
+u
+e
+t
+i
+d
+é
+e
+d
+o
+
+ 
+
+7
+-
+4
+0
+8
+3
+1
+-
+2
+1
+2
+-
+2
+-
+8
+7
+9
+ 
+:
+ 
+
+N
+B
+S
+
+I
+
+Conception de couverture : © Jérémie Barlog 
+
+© éditions Eyrolles C
+
+Amine Lies Benhenni
+François-Xavier Bois
+
+Bases de données  
+orientées graphes avec 
+
+Neo4j
+
+Manipuler et exploiter vos bases  
+de données orientées graphes
+
+s
+i
+o
+B
+ 
+.
+X
+-
+.
+F
+ 
+t
+e
+ 
+i
+n
+n
+e
+h
+n
+e
+B
+ 
+.
+L
+ 
+.
+A
+
+j
+
+4
+o
+e
+N
+ 
+c
+e
+v
+a
+ 
+s
+e
+h
+p
+a
+r
+g
+ 
+s
+e
+é
+t
+n
+e
+i
+r
+o
+ 
+s
+e
+é
+n
+n
+o
+d
+ 
+e
+d
+ 
+s
+e
+s
+a
+B
+
+G13804_BasesDeDonneesOrienteesGraphesAvecNeo.indd   1
+
+06/01/2016   14:49
+
+Bases de données orientées graphes avec 
+
+Neo4j
+
+Ces dernières années, les besoins relatifs au traitement des 
+données ont évolué à un rythme soutenu. Les sites web aux 
+millions  d’utilisateurs  (réseaux  sociaux,  plates-formes  de 
+diffusion de contenus) sont à l’origine de l’essor de la plus 
+dynamique des familles de moteurs de données : le NoSQL. 
+
+Une base de données optimisée pour le big data 
+Parmi les bases de données NoSQL, celles orientées « graphes » connaissent 
+un succès fulgurant du fait de leur souplesse et de leur évolutivité extrême. 
+Ne  reposant  sur  aucun  schéma,  un  graphe  peut  accepter  de  nouveaux  flux 
+de données sans nécessiter d’interventions lourdes. À l’heure où les sociétés 
+ont compris que la fusion de leurs silos de données (CRM, ERP, Web, etc.) est 
+une  condition  sine  qua  non  pour  créer  de  la  valeur  (solutions  d’intelligence 
+prédictive, moteurs de recommandation), cette propriété du graphe se révèle 
+essentielle.
+En considérant les relations entre objets comme des données de premier ordre, 
+de nouvelles perspectives d’exploration et d’analyse apparaissent et favorisent 
+la découverte d’informations inédites. L’absence de barrières logiques ouvre 
+également  la  porte  à  des  modalités  d’exploitation  de  la  donnée  en  profon-
+deur,  sans  nuire  aux  performances.  Installés  depuis  de  nombreuses  années 
+au cœur des infrastructures des géants du Web (Google, Facebook, LinkedIn), 
+les graphes sont désormais accessibles au plus grand nombre grâce à l’émer-
+gence des moteurs de graphes et notamment au leader du domaine : Neo4j.
+
+Un ouvrage de référence sur Neo4j
+Le présent ouvrage s’adresse à tous les publics confrontés au volet data d’un 
+projet informatique : développeurs, DSI, directeurs techniques, chefs de projets, 
+data miners et data scientists. Son objectif majeur est de vous aider à identifier 
+les projets informatiques qui gagneront à mettre en œuvre un graphe.
+Après une introduction au concept de graphe et une présentation de Neo4j 
+et  de  son  langage  de  requête  (Cypher),  le  présent  ouvrage  illustre  à  l’aide 
+d’exemples concrets la puissance des graphes pour traiter des problèmes aussi 
+pointus que la recommandation et l’analyse de réseaux sociaux. Les grandes 
+étapes  d’un  projet  data-driven  reposant  sur  le  graphe  sont  illustrées  de  la 
+conception à la mise en place de modèles prédictifs, en passant par l’ingestion 
+des données et l’analyse.
+
+À qui s’adresse cet ouvrage ? 
+•  Aux administrateurs de bases NoSQL de type graphe.
+•  Aux  développeurs  et  architectes,  pour  mettre  en  pratique  les  concepts  
+
+avec Neo4j.
+
+•  Aux data scientists qui trouveront avec les graphes un outil complémentaire 
+
+pour concevoir leurs modèles.
+
+Avec plus de sept ans d’expérience dans la modéli-
+sation et l’analyse de données, Amine Lies Benhenni 
+s’est  spécialisé  dans  le  développement  d’applica-
+tions  data-driven  à  base  de  modèles  prédictifs, 
+d’analyse de graphes et de traitement automatique 
+du  langage.  Il  est  aujourd’hui  spécialiste  en  data 
+science et data engineering. 
+Ingénieur en sciences cognitives et en intelligence 
+artificielle, François-Xavier Bois est le fondateur de 
+la société Kernix, où il dirige la stratégie et l’innova-
+tion. Il est également expert auprès du pôle de com-
+pétitivité Cap Digital et auteur de plusieurs ouvrages 
+consacrés au Web.
+
+Sommaire 
+
+Réseaux  et  graphes  •  Qu’est-ce  qu’un  graphe  ? 
+• Notions et terminologie • Bases  de  données  et  
+modèles  de  graphes  •  Les  bases  relationnelles  • 
+Bases de données NoSQL • Installation de Neo4j • 
+Prise en main • Opérations de maintenance • Le lan-
+gage Cypher • Création d’entités • Lecture et impor-
+tation de données • Performance • Serveur  Neo4j 
+• API REST • Extensions  • Exemples pratiques de 
+modélisation des données • Modélisation en graphe 
+dans Neo4j • Gestion de projets  • Analyse prédictive 
+et recommandation • La recommandation, un bref pa-
+norama • Quelques mots sur la validation des modèles 
+• Outils de visualisation • sigma.js • Graphes et 
+réseaux sociaux • Données Twitter  • Twitter et médias 
+sociaux, une source d’information incontournable ?
+
+s
+i
+o
+B
+ 
+.
+X
+-
+.
+F
+ 
+t
+e
+ 
+i
+n
+n
+e
+h
+n
+e
+B
+ 
+.
+L
+ 
+.
+A
+
+j
+
+4
+o
+e
+N
+ 
+c
+e
+v
+a
+ 
+s
+e
+h
+p
+a
+r
+g
+ 
+s
+e
+é
+t
+n
+e
+i
+r
+o
+ 
+s
+e
+é
+n
+n
+o
+d
+ 
+e
+d
+ 
+s
+e
+s
+a
+B
+
+Amine Lies Benhenni
+François-Xavier Bois
+
+Bases de données  
+orientées graphes avec 
+
+Neo4j
+
+Manipuler et exploiter vos bases  
+de données orientées graphes
+
+G13804_BasesDeDonneesOrienteesGraphesAvecNeo.indd   1
+
+06/01/2016   14:49
+
+Bases de données  
+orientées graphes avec 
+
+Neo4j
+
+Manipuler et exploiter vos bases  
+de données orientées graphes
+
+G13804_BasesDeDonneesOrienteesGraphesAvecNeo_PDT.indd   1
+
+28/12/2015   09:42
+
+DANS LA MÊME COLLECTION
+R. Goetter. – CSS 3 Flexbox. 
+N°14363, 2016, 152 pages.
+C. Blaess. – Solutions temps réel sous Linux. 
+N°14208, 2015, 300 pages.
+W. McKinney. – Analyse de données en Python. 
+N°14109, 2015, 488 pages.
+E. Biernat, M. lutz. – Data science : fondamentaux et études de cas. 
+N°14243, 2015, 312 pages.
+B. PhiliBert. – Bootstrap 3 : le framework 100 % web design. 
+N°14132, 2015, 318 pages.
+C. caMin. – Développer avec Symfony2. 
+N°14131, 2015, 474 pages.
+S. Pittion, B. sieBMan. – Applications mobiles avec Cordova et PhoneGap. 
+N°14052, 2015, 184 pages.
+H. Giraudel, r. Goetter. – CSS 3 : pratique du design web. 
+N°14023, 2015, 372 pages.
+C. delannoy. – Le guide complet du langage C. 
+N°14012, 2014, 844 pages.
+K. ayari. – Scripting avancé avec Windows PowerShell.  
+N°13788, 2013, 358 pages.
+W. Bories, o. Mirial, s. PaPP. – Déploiement et migration Windows 8. 
+N°13645, 2013, 480 pages.
+W. Bories, a. laachir, d. thiBleMont, P. lafeil, f.-X. Vitrant. – Virtualisation du poste de travail Windows 7 et 8 avec 
+Windows Server 2012.  
+N°13644, 2013, 218 pages.
+J.-M. defrance. – jQuery-Ajax avec PHP. 
+N°13720, 4e édition, 2013, 488 pages.
+L.-G. Morand, l. Vo Van, a. zanchetta. – Développement Windows 8 - Créer des applications pour le Windows Store. 
+N°13643, 2013, 284 pages.
+Y. GaBory, n. ferrari, t. Petillon. – Django avancé. 
+N°13415, 2013, 402 pages.
+P. roques. – Modélisation de systèmes complexes avec SysML. 
+N°13641, 2013, 188 pages.
+
+SUR LE MÊME THÈME
+R. Bruchez. – Les bases de données NoSQL et le Big Data. 
+N°14155, 2015, 322 pages.
+M.-R. aMini. – Apprentissage machine, de la théorie à la pratique. 
+N°13800, 2015, 272 pages.
+M.-R. aMini, e. Gaussier. – Recherche d’information. 
+N°13532, 2013, 234 pages.
+A. cornuéJols, l. Miclet. – Apprentissage artificiel. 
+N°12471, 2010, 804 pages.
+
+Retrouvez nos bundles (livres papier + e-book) et livres numériques sur
+
+http://izibook.eyrolles.com
+
+Amine Lies Benhenni
+François-Xavier Bois
+
+Bases de données  
+orientées graphes avec 
+
+Neo4j
+
+Manipuler et exploiter vos bases  
+de données orientées graphes
+
+G13804_BasesDeDonneesOrienteesGraphesAvecNeo_PDT.indd   3
+
+28/12/2015   09:42
+
+BDD_Bois_.book  Page IV  Tuesday, January 5, 2016  4:05 PM
+
+ÉDITIONS EYROLLES
+61, bd Saint-Germain
+75240 Paris Cedex 05
+
+www.editions-eyrolles.com
+
+En application de la loi du 11 mars 1957, il est interdit de reproduire intégralement ou partiellement le présent ouvrage,
+sur quelque support que ce soit, sans l’autorisation de l’Éditeur ou du Centre Français d’exploitation du droit de copie,
+20, rue des Grands Augustins, 75006 Paris.
+© Groupe Eyrolles, 2016, ISBN : 978-2-212-13804-7
+
+BDD_Bois_.book  Page V  Tuesday, January 5, 2016  4:05 PM
+
+Avant-propos
+
+Les besoins relatifs au traitement des données ont évolué à un rythme soutenu ces dernières
+années. Il faut en effet être en mesure de répondre aux contraintes toujours plus importantes
+de sites web aux millions d’utilisateurs (réseaux sociaux, plates-formes de publication et de
+diffusion de contenus, etc.). Ces enjeux en termes de clustering et de scalabilité ont fait naître
+la plus dynamique des familles de moteurs de données : le NoSQL.
+
+Le graphe : une base à part
+
+Parmi ces moteurs de données, ceux orientés « graphes » connaissent un succès fulgurant du
+fait de leur souplesse et de leur évolutivité extrême. Ne reposant sur aucun schéma, un graphe
+peut  accepter  de  nouveaux  flux/jeux  de  données  sans  imposer  d’interventions  lourdes.  À
+l’heure où les sociétés ont compris que la fusion de leurs silos de données (CRM, ERP, Web,
+etc.) est une condition sine qua non pour créer de la valeur (solutions d’intelligence prédic-
+tive, moteurs de recommandation), cette propriété du graphe se révèle essentielle.
+Le présent ouvrage s’adresse à tous les publics confrontés de près ou de loin à la dimension
+data  d’un  projet  informatique :  développeurs, DSI,  directeurs  techniques,  chefs  de  projets.
+Son objectif majeur est de vous aider à identifier les projets informatiques qui gagneront à
+mettre en œuvre un graphe.
+Les deux premiers chapitres vous familiariseront avec les principaux concepts relatifs aux gra-
+phes.  Le  chapitre 3  vous  dotera  d’un  moteur  de  données  Neo4j  grâce  auquel  vous  créerez
+votre premier graphe. Le chapitre 4 présentera le langage utilisé par Neo4j pour réaliser des
+opérations (lecture/écriture) sur le graphe : Cypher.
+Les chapitres suivants illustreront avec des cas concrets l’utilisation des graphes. Nous abor-
+derons à la fois des aspects liés à la programmation, l’algorithmie et la datavisualisation.
+Le  dernier  chapitre  montre  un  exemple  d’application  data-driven,  avec  une  ingestion  en
+temps réel de flux de données complexes au sein du graphe.
+
+BDD_Bois_.book  Page VI  Tuesday, January 5, 2016  4:05 PM
+
+Bases de données orientées graphes avec Neo4j
+
+VI
+
+À l’issue de ce livre, les lecteurs seront ainsi capables de développer une application reposant
+sur la base Neo4j pour répondre à différentes problématiques orientées data. De par la diver-
+sité des sujets et le potentiel offert par l’outil, ce livre fournit une porte d’entrée royale et ori-
+ginale sur le monde des données, du big data, de la Data Science et des modèles prédictifs.
+
+Présentation des auteurs
+
+Avec plus de sept ans d’expérience dans la modélisation mathématique et l’analyse statistique
+des données, Amine Lies Benhenni s’est spécialisé ces dernières années dans le développe-
+ment d’applications data-driven à base de modèles prédictifs, d’analyse de graphes et de trai-
+tement automatique du langage. Il est aujourd’hui spécialiste en data science et data enginee-
+ring et il a accompagné entre autres de grands comptes du CAC 40 et du Nasdaq, ainsi que
+de  jeunes  startups,  en  travaillant  en  parallèle  sur  la  solution  technologique  et  les  usages
+métier. Il est également docteur en physique théorique, siège au comité scientifique de l’École
+polytechnique  d’assurances  en  tant  qu’expert  big  data.  Il  est  par  ailleurs  responsable  du
+module d’analyse de données au sein de la licence Sciences et ingénierie à l’institut Villebon-
+Georges Charpak, labellisé Initiative d’excellence en formations innovantes.
+Ingénieur en sciences cognitives et en intelligence artificielle, François-Xavier Bois est le fon-
+dateur  de  la  société  Kernix,  où  il  dirige  la  stratégie  et  l’innovation.  Créée  en  2001,  cette
+agence parisienne repose sur deux piliers : une Digital Factory spécialisée dans la conception
+d’applications web et mobiles, et un Data Lab travaillant, pour de grands groupes industriels,
+sur des missions stratégiques dans l’univers des Smart Data. Les réalisations du Data Lab
+(outils d’aide à la décision, plates-formes d’intelligence collective) reposent sur l’analyse com-
+binée des graphes et des données non structurées (textes, images, vidéos). Le Data Lab est
+lauréat de plusieurs concours d’innovation nationaux et européens. François-Xavier Bois est
+également expert auprès du pôle de compétitivité Cap Digital et auteur de plusieurs ouvrages
+consacrés à des technologies du Web.
+
+Remerciements
+
+Nous tenons à remercier pour leur relecture et leurs conseils Imen El Karoui et Joseph Pelle-
+grino, collaborateurs au sein du Kernix Lab. Olivier Marillier, directeur artistique de Kernix,
+a  également  contribué  à  cet  ouvrage  en  nous  fournissant  un  certain  nombre  de  visuels.
+Remercions enfin nos épouses et enfants pour leur patience, leur soutien et leurs encourage-
+ments.
+
+BDD_Bois_.book  Page VII  Tuesday, January 5, 2016  4:05 PM
+
+Table des matières
+
+Introduction ...................................................................................  1
+
+CHAPITRE 1
+Réseaux et graphes .......................................................................  3
+Qu’est-ce qu’un graphe ?   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+Un monde de réseaux  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+Graphes et réseaux sociaux  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+Graphes et Web  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+Graphes et informatique . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+Notions et terminologie  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+Concepts  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+Graphes particuliers  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+Autres structures de données  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
+
+CHAPITRE 2
+Bases de données et modèles de graphes.................................  17
+Les bases relationnelles . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+Caractéristiques des bases relationnelles   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
+Normalisation des bases de données et jointure . . . . . . . . . . . . . . . . . . . . . . . . .  20
+Gestion des transactions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  22
+Limitations   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
+Bases de données NoSQL   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
+Bases de graphes  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
+Intérêt du graphe  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
+Comparatif avec les autres modèles . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+Normalisation, dénormalisation et structure en graphe. . . . . . . . . . . . . . . . . . .  27
+Réseaux sociaux et associations multiples  . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  29
+Intégration de données et Master Data Management  . . . . . . . . . . . . . . . . . . .  30
+Conclusion  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
+
+BDD_Bois_.book  Page VIII  Tuesday, January 5, 2016  4:05 PM
+
+VIII
+
+Bases de données orientées graphes avec Neo4j
+
+CHAPITRE 3
+Installation de Neo4j................................................................... 35
+Installation  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
+Sous OS X  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
+Sous Windows et Linux  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
+Prise en main   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
+Démarrage du serveur . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39
+Arborescence  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39
+Fichiers de configuration   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 40
+Opérations de maintenance  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 40
+Réaliser une sauvegarde   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 40
+Mettre à jour Neo4j  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 40
+L’interface web  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
+Le menu général . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
+La console web . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
+L’invite de commande. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  42
+Les panneaux de réponse . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  43
+Les commandes disponibles  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 44
+Commande :PLAY . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  44
+Commandes :GET et :POST . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  45
+Commande :HELP. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  48
+Autres commandes. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  48
+Webadmin . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 51
+
+CHAPITRE 4
+Le langage Cypher....................................................................... 53
+Création d’entités  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 55
+Créer un nœud . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 55
+Associer un label   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 56
+Utiliser des identifiants . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 56
+Associer des propriétés  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 57
+Créer un chemin   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 58
+Personnaliser l’affichage  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 61
+Créer dynamiquement une relation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 62
+Lecture de données  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 62
+Réinitialiser le graphe . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 62
+Principe général  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 65
+Utiliser les motifs  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 66
+Filtrer les collections . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 69
+Définir le format des réponses   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 70
+
+BDD_Bois_.book  Page IX  Tuesday, January 5, 2016  4:05 PM
+
+Table des matières
+
+IX
+
+Opérations sur les collections  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 71
+Importation de données  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 72
+Script Cypher . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 73
+Import CSV . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 73
+Modification du graphe  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 76
+Ajouter des propriétés et des labels  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 76
+Supprimer des entités  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 76
+Performance  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 78
+Créer un index  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 78
+Optimiser les requêtes   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 79
+Clauses EXPLAIN et PROFILE . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 80
+Configuration   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 80
+
+CHAPITRE 5
+Serveur Neo4j ..............................................................................  81
+API REST  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 82
+Nœuds . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 84
+Contraintes et index  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 86
+Relations  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 88
+Requêtes Cypher  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 89
+Requêtes batch . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 91
+Calculs de plus courts chemins  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 93
+Extensions   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 94
+Une base de données Java  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 95
+Déploiement de l’extension . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 97
+Construire une application avec Neo4j . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 99
+
+CHAPITRE 6
+Exemples pratiques de modélisation des données ................  101
+Modélisation en graphe dans Neo4j  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 102
+Nœuds et relations  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 103
+Labels et index  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 104
+Site e-commerce  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 105
+Réseau de transport et calculs de chemins   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 110
+Gestion de projets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 114
+
+CHAPITRE 7
+Analyse prédictive et recommandation ..................................  119
+La recommandation, un bref panorama  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 120
+Principaux défis et limitations . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 123
+
+BDD_Bois_.book  Page X  Tuesday, January 5, 2016  4:05 PM
+
+Bases de données orientées graphes avec Neo4j
+
+X
+
+Recommandation sur le graphe   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 124
+Movielens : recommandation de films . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 125
+Import des données  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  127
+Requêtes Cypher et stratégies de recommandation   . . . . . . . . . . . . . . . . . . . . 132
+Filtrage collaboratif  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  133
+Filtrage par caractéristiques et approche hybride . . . . . . . . . . . . . . . . . . . . . . .  135
+Quelques mots sur la validation des modèles  . . . . . . . . . . . . . . . . . . . . . . . . . . . 137
+Validation hors ligne   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 137
+Prise en compte de l’ordre des recommandations . . . . . . . . . . . . . . . . . . . . . . 138
+De la validation hors ligne aux tests A/B en ligne  . . . . . . . . . . . . . . . . . . . . . 139
+
+CHAPITRE 8
+Outils de visualisation .............................................................. 141
+Visualisation de graphes  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 143
+sigma.js  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 144
+Principes de base   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 145
+Force Atlas . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 149
+Plug-in Cypher   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 153
+
+CHAPITRE 9
+Graphes et réseaux sociaux...................................................... 157
+Données Twitter . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 158
+Twitter et ses API   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 160
+Création de l’application Twitter   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 160
+Application d’intégration des tweets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 163
+Initialisation du projet Node.js  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 163
+Connexion à Twitter   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 165
+API Search  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  166
+API Stream. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  170
+Connexion Neo4j et node.js  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 171
+Intégration des tweets dans le graphe  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 173
+Twitter et médias sociaux, une source d’information incontournable ?  . . . . . . . 176
+
+Index........................................................................................... 179
+
+BDD_Bois_.book  Page 1  Tuesday, January 5, 2016  4:05 PM
+
+Introduction
+
+On reconnaît les grandes créations (sciences, art, design) à leur simplicité. Les scientifiques
+ont ainsi l’habitude de remettre en cause leur modèle dès lors que les concepts engagés devien-
+nent trop nombreux et que la théorie perd en lisibilité. Cette mécanique quantique, si sédui-
+sante et cohérente il y a un siècle, irrite les physiciens maintenant que des dizaines de parti-
+cules entrent en jeu. Les grands designers n’ont de cesse de simplifier les lignes pour atteindre
+une forme de pureté, d’évidence. Stravinsky, grand compositeur, répondait ainsi aux journa-
+listes qui lui demandaient comment il composait ses œuvres : « Avec une gomme ! » Ne con-
+server  que  le  strict  minimum,  mais  avec  la  « substantifique  moelle ».  Reprenons  à  notre
+compte la devise de Churchill : « J’ai des goûts très simples, je me contente du meilleur. »
+Les graphes font partie de ces théories avec lesquelles vous sentez très vite que tout est là et
+que rien n’est en trop. La simplicité des concepts mis en œuvre est aussi impressionnante que
+la complexité des problèmes qu’ils aident à résoudre.
+Ils permettent de répondre à des problèmes très concrets de ciblage, d’optimisation… mais
+s’avèrent également le meilleur moyen de modéliser la « connaissance ».
+Les  graphes  correspondent  à  une  théorie  particulièrement  appréciée  des  mathématiciens.
+C’est précisément un des leurs, Euler, qui créa cette théorie au XVIIIe siècle pour répondre au
+fameux problème des sept ponts de Königsberg. À l’inverse des « heureux » mathématiciens
+qui n’ont besoin que d’une feuille et d’un crayon pour créer, l’ingénieur en informatique uti-
+lise des outils tels que des compilateurs et des moteurs de stockage de données pour donner
+vie à ses idées. Neo4j est aujourd’hui le moteur de graphes le plus avancé, gratuit, open source
+et multi-plates-formes. Nous nous concentrerons par conséquent sur cet outil pour illustrer
+nos exemples d’utilisation des graphes.
+
+BDD_Bois_.book  Page 2  Tuesday, January 5, 2016  4:05 PM
+
+BDD_Bois_.book  Page 3  Tuesday, January 5, 2016  4:05 PM
+
+1
+
+Réseaux et graphes
+
+Aussi abstraits et conceptuels qu’ils puissent paraître, les graphes sont au cœur de nos
+vies.  Après  un  bref  historique  de  leur  origine,  nous  tisserons  un  parallèle  entre  la
+notion de graphe et celle, plus répandue, de « réseau ».
+Sans nous attaquer à la théorie des graphes, nous présenterons un certain nombre de
+notions  dont  nous  aurons  besoin  dans  les  prochains  chapitres.  Nous  chercherons
+notamment à comprendre la particularité des graphes en algorithmie et pourquoi le
+moteur  Neo4j,  présenté  dans  les  chapitres  suivants,  est  indispensable  à  tout
+développeur qui souhaite exploiter une telle structure de données.
+
+NOTIONS ABORDÉES
+
+B Origines
+B Graphes et réseaux sociaux
+B Concepts
+B Structures de données
+
+BDD_Bois_.book  Page 4  Tuesday, January 5, 2016  4:05 PM
+
+Bases de données orientées graphes avec Neo4j
+
+4
+
+Qu’est-ce qu’un graphe ?
+
+Le terme « graphe » tirant son origine du mot « graphique », il est légitime d’en donner une
+définition visuelle.
+Un graphe correspond à un ensemble de points joints par des liaisons. Compte tenu de ce postulat
+de départ, il est tout à fait naturel d’associer la notion de réseau à celle de graphe. Un réseau ferré
+correspond bien à un maillage de gares (les points) liées entre elles par des voies (les liaisons).
+Le graphe est précisément issu du besoin de se doter d’outils permettant de traiter les pro-
+blèmes portant sur des structures d’objets organisées en réseaux.
+C’est  le  grand  mathématicien  Euler  qui  créa  cet  outil  mathématique  au  XVIIIe siècle  pour
+résoudre l’énigme des ponts de Königsberg : étant donné le plan ci-après avec quatre régions
+(deux îles, deux rives) et sept ponts, est-il possible, depuis un point de départ quelconque (sur
+une des régions), de réaliser un parcours qui conduira le promeneur à traverser chaque pont
+une et une seule fois et à le ramener à son point de départ ?
+
+Figure 1–1
+Modélisation des ponts 
+de Königsberg en graphes
+
+Pour travailler sur ce problème et prouver qu’il n’y avait aucune solution, Euler eut l’idée de con-
+sidérer les zones de terre ferme comme des points et les ponts comme des liaisons. Le schéma
+graphique qui résultait de cette modélisation était plus simple à appréhender et constituait un
+socle sur lequel il devenait possible d’échafauder des théories. À partir de ces graphes, Euler
+énonça le théorème éponyme qui prouvait que la balade envisagée n’était pas possible.
+
+BDD_Bois_.book  Page 5  Tuesday, January 5, 2016  4:05 PM
+
+Réseaux et graphes
+CHAPITRE 1
+
+5
+
+Réussir à simplifier un problème pour parvenir à en extraire la quintessence est la marque des
+grands esprits. Cette abstraction imaginée par Euler se révéla si puissante qu’elle fut à l’origine
+d’une  des  branches  les  plus  importantes  des  mathématiques  modernes :  la  topologie.  Cette
+« science  des  déformations » repose  également sur  des concepts  très  visuels  et  expressifs.  En
+topologie, c’est le nombre de trous qui caractérise un objet : un bagel se retrouve ainsi identique
+à une tasse à café (le trou correspond à l’anse) mais différent d’un bretzel (deux trous).
+
+Figure 1–2
+Une déformation continue permet 
+de passer d’un bagel à une tasse.
+
+Un monde de réseaux
+
+Une fois cette définition posée, nous réalisons de façon évidente que nous vivons dans un
+monde de graphes.
+Qu’il s’agisse du transport (réseau maritime, fluvial, aérien, ferré, métropolitain, routier), de
+l’énergie  (réseau  électrique,  gazier),  des  télécommunications  (réseau  postal,  téléphonique,
+Internet), de l’information (le Web), notre société repose depuis longtemps sur des infras-
+tructures organisées en graphes. Tout dysfonctionnement de ces réseaux peut conduire à des
+conséquences dramatiques. Il est donc logique que les opérateurs de ces réseaux tirent parti de
+ces  graphes  pour  répondre  à  des  enjeux  de  flux  (congestion),  d’optimisation  (routage/
+livraison) et de tolérance aux pannes. Une société qui ne maîtrise pas ses réseaux est à la fois
+peu efficiente et vulnérable.
+
+Figure 1–3
+Réseau de métro de la ville de Paris
+
+BDD_Bois_.book  Page 6  Tuesday, January 5, 2016  4:05 PM
+
+Bases de données orientées graphes avec Neo4j
+
+6
+
+Diktyologie, quèsaco ?
+
+La diktyologie correspond à l’étude des réseaux qui « existent » dans la vie réelle : réseau ferré, Internet, etc.
+
+Graphes et réseaux sociaux
+
+Le déferlement des graphes dans notre vie numérique est plus récent. Début 2000, des startups
+permirent aux internautes de se connecter les uns aux autres, ces connexions matérialisant aussi
+bien  des  liens  d’amitié  que  des  relations  professionnelles.  Ces  réseaux  sociaux  donnèrent  un
+coup de projecteur très important sur les graphes, à la fois dans la sphère web (entrepreneurs,
+développeurs) et, plus généralement, auprès du grand public. Pour la première fois, des pure
+players du Web disposaient d’un graphe au cœur de leur infrastructure informatique. Bien leur
+en a pris car, à peine une dizaine d’années plus tard, ces Facebook et autres LinkedIn génèrent
+grâce à leur graphe des dizaines de milliards de chiffre d’affaires.
+Créer un réseau d’amis était finalement réducteur et Facebook a bien vite réalisé que le Graal
+serait  de  construire  un  graphe  universel  d’interactions.  Il  s’agissait  pour  cela  d’ouvrir  son
+graphe à d’autres entités que les Personnes et à d’autres relations que X est ami avec Y. La pre-
+mière étape de cette évolution fut l’ajout de la notion de Page à son graphe. Les boutons J’aime
+et Je partage apparurent sur tous les sites pour permettre de relier les membres du réseau aux
+sites qu’ils consultaient1 et appréciaient (par un clic sur un de ces boutons). La seconde étape
+fut l’ouverture du graphe aux développeurs, qui purent à leur tour créer leurs propres types de
+nœuds et de relations. Il devenait possible pour un site musical de créer des nœuds Album ou
+Morceau  de  musique  et  des  relations  a acheté  ou  a écouté.  Le graphe de  Facebook  devenait
+alors l’Open Graph.
+
+Figure 1–4
+Logo de la plate-forme 
+Open Graph de Facebook
+
+Pourquoi l’Open Graph ?
+
+En créant l’Open Graph, Facebook réalisa un véritable coup de génie en faisant en sorte que des sociétés
+enrichissent le profil de leurs utilisateurs et, par ricochet, celui des membres de Facebook. Il ne faut pas
+oublier que le trésor de Facebook est là, dans cette richesse d’informations sur chaque individu qui per-
+met à des annonceurs de réaliser des campagnes de publicité particulièrement ciblées.
+
+1. De façon tout à fait discrète, ces boutons permettent à Facebook de tracer les visites de ses membres sur les sites
+
+qui proposent les boutons J’aime ou Je partage.
+
+BDD_Bois_.book  Page 7  Tuesday, January 5, 2016  4:05 PM
+
+Réseaux et graphes
+CHAPITRE 1
+
+7
+
+Une conséquence intéressante du succès de ces réseaux sociaux fut de redonner ses lettres de
+noblesse à leur analyse (SNA, Social Network Analysis). Cette discipline étudie les commu-
+nautés en privilégiant les interactions entre individus, et non les caractéristiques de ces der-
+niers.  Elle  est  notamment  à  l’origine  de  la  théorie  des  « six  degrés  de  séparation » :  toute
+« paire »  d’individus  sur  Terre  serait  en  moyenne  séparée  par  cinq  personnes.  Les  réseaux
+sociaux numériques et ces milliards de données directement exploitables offrent un terrain de
+jeu fabuleux aux chercheurs. L’identification de communautés, la rapidité de diffusion d’un
+signal  au  sein  de  ces  dernières  font  notamment  partie  des  sujets  particulièrement  étudiés.
+L’étude d’une caractéristique telle que la centralité2 aide par exemple à mieux comprendre les
+phénomènes de diffusion d’épidémies ou de campagnes marketing (le fameux buzz).
+
+Graphes et Web
+
+Le Knowledge Graph est un projet de Google qui vise à exploiter le Web sémantique3 pour
+créer une base de connaissances à la fois vaste et structurée. Ce projet stratégique n’est rien de
+moins que l’avenir de Google. Sa vision est en effet très claire : le moteur de recherche du
+futur ne pourra pas se limiter à une liste ordonnée de résultats mais devra offrir des réponses
+précises aux questions des utilisateurs.
+
+Figure 1–5
+Données du Knowledge Graph 
+présentées dans la colonne 
+de droite
+
+Nous disposons d’ores et déjà d’un avant-goût du Knowledge Graph avec les encarts proposés
+sur certaines pages de résultats.
+
+2. La centralité est une mesure qui définit à quel point un nœud est « proche » des autres nœuds.
+3. À la différence du Web classique, le Web sémantique cherche à donner accès à l’information de façon structurée,
+
+pour permettre l’extraction automatique de données.
+
+BDD_Bois_.book  Page 8  Tuesday, January 5, 2016  4:05 PM
+
+Bases de données orientées graphes avec Neo4j
+
+8
+
+Ces informations proviennent des pages d’un grand nombre de sources de données qui sont
+parcourues  en  permanence  par  les  robots  de  Google.  En  analysant  ces  contenus  et  en  les
+fusionnant, Google est en mesure de proposer des condensés d’informations et d’identifier
+des sujets connexes. C’est bien là tout l’enjeu : parvenir à conserver l’internaute sur son site à
+l’issue de sa recherche en lui offrant des contenus autonomes. Le potentiel d’augmentation du
+trafic de Google avec une telle mécanique devient stratosphérique.
+
+Figure 1–6
+À la requête « birdman critics 
+reviews », Google répond 
+en proposant des informations 
+sur le film (à droite) et sur les notes 
+(au centre).
+
+Le Knowledge Graph n’est bien évidemment pas la seule utilisation des graphes par Google.
+L’algorithme qui a fait sa fortune, le PageRank, repose directement sur la théorie des graphes.
+Toutes les pages du Web pouvant être liées, nous nous rendons bien compte que ce dernier
+n’est rien d’autre qu’un immense graphe (les pages sont les points et les liens HTML sont les
+relations). Le principe fondateur du PageRank est de classer les sites en fonction du nombre
+de « citations », une citation correspondant à un lien d’un site vers un autre. Plus un site est
+cité, plus il devient important. Cette définition récursive est un indice qui nous prouve que le
+seul moyen de traiter ce sujet convenablement est d’utiliser un graphe.
+
+Graphes et informatique
+
+Les graphes sont présents à chaque étape de la vie d’un logiciel, de la conception à l’exécution
+en passant par le déploiement.
+Avant de concevoir un logiciel, le développeur passe par une phase de modélisation, durant
+laquelle il détaille les différentes composantes des objets qui seront mis en œuvre dans son
+code. Ces objets disposent de propriétés, de méthodes, et ils dépendent les uns des autres.
+L’UML  est  une  norme  qui  sert  à  visualiser  cette  modélisation  à  l’aide  de  boîtes  (pour  les
+objets)  et  de  flèches  (pour  les  relations  entre  ces  derniers).  Les  interconnexions  entre  ces
+objets pouvant former des cycles, nous sommes bien face à une modélisation de type graphe.
+
+BDD_Bois_.book  Page 9  Tuesday, January 5, 2016  4:05 PM
+
+Figure 1–7
+Exemple de schéma UML
+
+Package kernix.shopping
+
+Commande
+
+Réseaux et graphes
+CHAPITRE 1
+
+9
+
++ id : int
++ coupon : string
++ trace() : void
+
+1
+n
+
+Achat
+
++ commande_id : int
++ produit_id : int
++ quantite : int
++ annule() : void
+
+1
+
+Produit
+
++ id : int
++ nom : string
++ prix : float
++ supprime() : void
+
+Durant l’exécution du logiciel, un mécanisme est en charge de supprimer de la mémoire de
+l’ordinateur les « objets » du programme qui ne sont plus actifs. Ces « ramasse-miettes » (gar-
+bage collectors) sont particulièrement complexes à concevoir dans la mesure où ces objets sont
+souvent interconnectés : un objet A référence un objet B qui référence l’objet A.
+Les  gestionnaires  de  paquets  (yum,  rpm,  npm)  doivent  également  faire  face  à  ces  problèmes
+d’interdépendance  lorsque  nous  désinstallons  un  logiciel  sur  une  distribution  Linux.  Un
+paquet (package) X peut en effet reposer sur le paquet Y, qui nécessite lui-même le paquet X.
+Dans le monde de l’intelligence artificielle et des sciences cognitives, les graphes sont égale-
+ment vivement appréciés. La « connaissance »  est souvent  représentée en informatique  par
+des tuples designant des concepts. Les ontologies basées sur des triplets sont les plus com-
+munes, chaque triplet figurant un sujet, un prédicat et un objet. Stocker ces triplets dans un
+graphe se révèle donc tout à fait naturel.
+
+Feynman -[enseigne]-> Caltech
+Nasa -[subventionne]-> Caltech
+Feynman -[conseille]-> Nasa
+
+L’objectif de cette modélisation est bien de permettre à la machine de prendre des décisions.
+Il est à ce propos intéressant de rappeler qu’en ce qui concerne le « vivant », l’instrument de la
+« compréhension » est le cerveau, organe qui n’est autre qu’un vaste réseau de cellules ner-
+veuses reliées entre elles par des axones.
+
+

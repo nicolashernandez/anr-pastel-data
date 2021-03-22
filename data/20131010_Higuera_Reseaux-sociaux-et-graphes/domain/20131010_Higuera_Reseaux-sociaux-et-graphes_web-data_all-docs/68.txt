@@ -1,0 +1,270 @@
+http://jlguillaume.free.fr/www/documents/jlguillaume-hdr.pdf
+
+habilitation à diriger des recherches
+de l’université Pierre et Marie Curie
+
+Spécialité
+
+Informatique
+
+Présentée par
+
+Jean-Loup Guillaume
+
+Déterminisme et non-déterminisme au service de la
+
+détection de communautés dynamiques.
+
+2
+
+TABLE DES MATIÈRES
+
+Introduction
+
+5
+
+1 Contexte
+
+9
+9
+1.1 Fonctions de qualité . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1.2 La méthode de Louvain . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
+1.3 Communautés dynamiques
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15
+1.4 Synthèse . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+
+2 Stabilisation
+
+19
+2.1 Mémoires du passé . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
+2.2 Communautés multi-pas . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23
+2.3 Fenêtres de temps
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
+2.4 Synthèse . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
+
+3 Cœurs de communautés
+
+31
+3.1 Approches similaires . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
+3.2 Méthodologie . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
+3.3 Cœurs dans les graphes aléatoires . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
+3.4 Dynamique des cœurs
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39
+3.5 Synthèse . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 44
+
+Conclusion
+
+45
+
+3
+
+INTRODUCTION
+
+De nombreux systèmes réels peuvent être modélisés par des graphes. On peut bien sûr penser
+aux réseaux sociaux, qu’ils soient en ligne ou pas, aux réseaux de communications téléphoniques,
+aux réseaux informatiques physiques ou virtuels tels que des réseaux pair-à-pair ou des réseaux
+de pages web, voir [5, 25, 39, 53, 77, 87] pour des exemples de travaux. La modélisation sous
+forme de graphes a également été appliquée dans beaucoup d’autres contextes, par exemple
+aux connexions entre aéroports [29], aux neurones et à leurs connexions synaptiques [1], aux
+synonymies entre mots [19], etc.
+
+Le fait d’être modélisables par des graphes n’est pas le seul point commun entre ces exemples
+variés. Un certain nombre de travaux ont montré que ces réseaux, bien que diﬀérents par bien
+des aspects, sont aussi semblables par beaucoup d’autres : ils contiennent en eﬀet des sommets
+très connectés aux autres et d’autres très isolés ; les voisins d’un sommet sont souvent connectés
+entre eux suivant le principe « les amis de mes amis sont mes amis » ; il existe des groupes de
+sommets fortement connectés entre eux, appelés communautés ; ils ont en commun bien d’autres
+propriétés [4]. Au-delà de ces similarités topologiques, plusieurs questions se posent de manière
+quasiment identique sur ces diﬀérents réseaux. Ainsi, que l’on considère la diﬀusion d’un virus
+informatique, d’une épidémie, d’un ﬁchier sur un réseau pair-à-pair ou encore d’informations
+entre neurones, il s’agit toujours d’une propagation utilisant les connexions du réseau.
+
+Avec la découverte de ces similarités, certains travaux ont commencé à appréhender ces
+réseaux comme un tout, tout en les étudiant également de manière individuelle. Ces réseaux
+ayant comme point commun d’être issus de contextes réels, ont reçu la dénomination commune
+de graphes de terrain.
+
+Ce mémoire est dédié à une question spéciﬁque aux graphes de terrain – la détection de
+communautés – que nous décrirons bientôt, mais qu’il est malgré tout important de resituer
+dans un contexte plus général. Toute étude sur les graphes de terrain doit commencer par la
+mesure d’un système réel aﬁn de connaître les entités qui le composent et les connexions entre
+elles. Mesurer un système réel est rarement simple et les données obtenues sont presque toujours
+incomplètes et bruitées. La description et l’analyse des données modélisées sous forme de graphes
+peuvent ensuite se faire à l’aide de diﬀérents outils et à diﬀérents niveaux. On peut par exemple
+étudier le comportement individuel des sommets ou s’intéresser à des propriétés statistiques
+à un niveau plus macroscopique. On a en particulier souvent recours à la modélisation qui
+permet de synthétiser les données dans un modèle mathématique. Ce modèle peut aussi bien
+permettre de comprendre les données que de prédire leur évolution. Un exemple classique est la
+modélisation de la propagation d’épidémies, qui a pour objectif d’estimer ou de prédire le nombre
+de personnes infectées au cours du temps en fonction de la virulence de la maladie. Enﬁn, la
+taille des données requiert en général des outils algorithmiques performants et qui tirent parti,
+autant que possible, de la structure particulière des graphes de terrain. Ces diﬀérents aspects
+sont bien sûr fortement interconnectés.
+
+L’étude des graphes de terrain a beaucoup progressé depuis une quinzaine d’années et l’état
+
+5
+
+de l’art fournit maintenant de nombreux outils pour les étudier. On dispose notamment d’al-
+gorithmes très rapides pour calculer automatiquement des communautés. Outre les questions
+fondamentales, de nombreux cas particuliers ont aussi été étudiés de manière plus spéciﬁque
+dans diﬀérents contextes. Par exemple, dans [74, 89], des disciplines scientiﬁques sont inférées
+à partir de graphes de citations (i.e. qui cite qui dans un article scientiﬁque). Dans [62], les
+auteurs montrent que, dans un réseau d’interaction entre protéines, des communautés calculées
+automatiquement regroupent des protéines de fonctions biologiques homogènes.
+
+Le concept de « communauté » n’est pas simple à déﬁnir mais deux notions sont très fré-
+quemment utilisées pour caractériser leurs membres : ils sont similaires et fortement liés. Pour
+ces raisons, les premières tentatives de modélisation du concept dans le cadre de la théorie des
+graphes ont interprêté ces notions par une faible distance (grande similarité ou proximité) ou
+une forte densité (forte connectivité). Les communautés ont ainsi parfois été déﬁnies comme
+des sous-graphes étant : des composantes connexes (il existe un chemin entre toute paire de
+sommets), des cliques (tous les sommets sont connectés) [64], des n-cliques (tous les sommets
+sont connectés à distance au plus n) [2], des k-degree sets ou k-degree cores (tous les sommets
+ont au moins k liens vers les autres) [79], et un certain nombre d’autres notions [36, 66].
+
+En dehors de ces critères de forte densité ou de courte distance, un critère supplémentaire
+est apparu pour signiﬁer qu’une communauté n’a en général de sens que vis-à-vis de l’extérieur
+et que ses membres devraient donc être plus similaires entre eux qu’avec les autres, ou plus
+reliés les uns avec les autres qu’avec l’extérieur. Ceci a conduit à des déﬁnitions du type : k-
+outdegree set (au plus k liens vers l’extérieur) [22], LS Set (aussi peu de liens vers l’extérieur
+que possible) [63], Alpha set (chaque membre a plus de liens internes que de liens externes) [22],
+etc.
+
+La déﬁnition de la notion de communauté va souvent de pair avec la proposition de méthodes
+pour les calculer en pratique et, pour cette raison, un grand nombre d’algorithmes ont été
+développés (voir [41] pour une présentation très complète des méthodes proposées ces dernières
+années). Dans ce mémoire, nous nous focaliserons sur les méthodes dites de partitionnement où
+chaque sommet du graphe est associé à une et une seule communauté. Ce choix de partionner
+un graphe en communautés est très fort et il exclut notamment que des sommets appartiennent
+à plusieurs communautés. L’étude des communautés recouvrantes représente cependant une
+perspective très importante dans le domaine de la détection de communautés. Nous montrerons
+dans le chapitre 3 une méthode qui a été utilisée dans ce contexte et nous discuterons rapidement
+d’une autre méthode en conclusion.
+
+Au cœur des méthodes de partitionnement on trouve souvent une formalisation de ce qu’est
+une « bonne partition » d’un graphe en communautés. Dans ce mémoire, nous nous concentre-
+rons sur la modularité, une mesure de qualité des partitions introduite récemment [68] et qui,
+malgré ses défauts, s’est très largement imposée dans le domaine.
+
+Enﬁn, la plupart des graphes de terrain sont dynamiques et évoluent au cours du temps par
+l’ajout ou la suppression de sommets et de liens. Cette dynamique n’a pas été prise en compte
+dans les premières études des graphes de terrain à cause de la diﬃculté à attaquer d’emblée
+l’analyse de la structure des graphes de terrain et l’étude de leur dynamique. Il y a quelques
+années, cette question de la dynamique a ressurgi, le domaine étant clairement déﬁni et l’état
+de l’art suﬃsamment avancé.
+
+Tout comme la structure peut être diﬀérente d’un graphe de terrain à l’autre, il n’y a pas non
+plus une dynamique unique. Les travaux actuels dans ce domaine sont encore à leurs débuts et
+cherchent à caractériser la dynamique des graphes réels. Il faut pour cela mesurer la dynamique
+de ces graphes, ce qui est très complexe car l’opération de mesure prend du temps, pendant
+lequel le graphe continue d’évoluer. Il faut ensuite décrire cette dynamique et, là encore, aucune
+
+6
+
+méthode claire n’existe : les quelques modèles existants, voir [4] par exemple, s’attachent plus
+au résultat ﬁnal qu’à la manière dont ce résultat est atteint. Pour reprendre l’exemple de la
+propagation d’épidémies, s’il est intéressant de savoir quelle proportion de la population sera
+infectée in ﬁne, il est aussi intéressant de savoir quels individus le seront, à quel moment, et
+comment la propagation a eu lieu, notamment si certains contacts la favorisent.
+
+L’approche classique consiste à considérer un graphe dynamique comme une succession
+de graphes statiques entre lesquels des modiﬁcations se produisent. On peut alors décrire la
+dynamique en calculant plusieurs propriétés à chaque instant et en étudiant leur évolution.
+Cette méthode, valable dans de nombreux contextes, reste limitée car certaines propriétés, par
+exemple la durée de vie des liens, ne se décrivent pas naturellement dans ce cadre.
+
+En revanche, cette vision est toujours au centre des études sur les communautés dynamiques.
+Ces dernières sont dans ce cas calculées à chaque instant, de manière plus ou moins indépen-
+dante. Nous montrerons que cette solution n’est pas utilisable directement du fait qu’il y a
+énormément de partitions de très bonne qualité mais structurellement assez diﬀérentes. Cela
+conduit, si l’on n’y prend pas garde, à observer des évolutions de la structure communautaire
+sans lien avec l’évolution de la topologie.
+
+Plusieurs études très récentes commencent à utiliser cette approche et justiﬁent de l’intérêt
+des études amont. Par exemple, dans [48], les auteurs étudient l’évolution du domaine des
+systèmes complexes à partir de la dynamique d’écriture et de citation d’articles. Dans [40], les
+auteurs calculent les corrélations entre les taux de change du marché des changes et mettent
+en évidence des modiﬁcations du comportement transactionnel via des réorganisations de la
+structure communautaire. Enﬁn dans [14], les auteurs utilisent des mesures dynamiques de
+la connectivité fonctionnelle du cerveau pendant l’apprentissage d’une tâche et parviennent à
+identiﬁer une structure communautaire qui leur permet de prédire l’apprentissage ultérieur.
+
+Ce mémoire est consacré à l’étude de la dynamique des communautés sous deux angles assez
+diﬀérents. Après une présentation rapide du contexte nécessaire à la bonne compréhension de
+ce mémoire, ainsi que des méthodes de calcul et d’évaluation de partitions en communautés
+dans le chapitre 1, je présenterai deux approches pour le calcul de communautés dynamiques.
+La première, intitulée communautés multi-pas et introduite dans le chapitre 2, consiste à rendre
+les algorithmes plus déterministes pour pouvoir suivre les communautés au ﬁl du temps. La
+seconde, nommée cœurs de communautés et présentée dans le chapitre 3, exploite au contraire
+le fait que les algorithmes soient naturellement non-déterministes.
+
+Je ne présenterai pas de manière complète les résultats auxquels j’ai contribué sur ces deux
+thèmes mais je tenterai d’en expliciter les points majeurs et de les mettre en perspective. Les
+détails techniques se trouvent bien entendu dans les publications auxquelles j’ai participé et qui
+seront référencées dans la suite. De même, je m’abstiendrai de présenter les états de l’art sur
+les diﬀérents sujets de manière extensive. Des articles très complets le font déjà de manière fort
+satisfaisante et je préfère les référencer que les paraphraser.
+
+D’autre part, certains de mes travaux pendant ces dernières années ont été consacrés à
+d’autres sujets que la détection de communautés, mais toujours dans le domaine de l’étude des
+graphes de terrain. J’ai préféré ne pas parler de ces études par souci de cohérence mais certains
+aspects font partie de mes perspectives de recherche et j’en parlerai donc en conclusion.
+
+Enﬁn, tous les travaux présentés ici ont été réalisés en collaboration avec d’autres chercheurs
+ou étudiants. J’utiliserai donc le pronom « nous » aﬁn de ne pas laisser croire que ces travaux
+sont de mon seul fait, et me cantonnerai au « je » pour les remarques plus personnelles.
+
+7
+
+8
+
+CHAPITRE 1
+
+CONTEXTE
+
+Avant de proposer des méthodes de détection de communautés dynamiques, il convient
+d’introduire un certain nombre de notations et de méthodes que nous utiliserons par la suite
+dans ce mémoire. Tout d’abord, nous allons discuter de l’évaluation de la qualité d’une partition
+en communautés et des principaux problèmes posés par la fonction la plus couramment utilisée :
+la modularité.
+
+Ensuite, nous montrerons brièvement que l’approche naïve qui consiste à calculer des com-
+munautés à chaque instant puis à tenter de suivre leur évolution n’est pas utilisable directement
+à cause d’un phénomène d’instabilité causé principalement par le nombre élevé de partitions
+pertinentes.
+
+Puis, nous présenterons la méthode de Louvain qui, depuis son introduction en 2008, fait
+référence dans le domaine de l’optimisation de la modularité tant pour la qualité de ses résultats
+que pour sa vitesse d’exécution. Il est nécessaire de la présenter en détail, car les approches que
+nous introduirons dans les chapitres ultérieurs sont fondées sur cette méthode.
+
+Enﬁn, nous ferons un point très rapide sur les méthodes générales utilisées pour calculer
+des communautés dynamiques. Cette section sera volontairement très courte et nous renvoyons
+à [13] pour une description plus détaillée des diﬀérentes méthodes.
+
+Notations
+
+Étant donné un graphe G = (V, E) non orienté avec n = |V | sommets et m = |E| liens, ce
+graphe peut être décrit par sa matrice d’adjacence (symétrique) A dont les éléments Aij sont
+les poids des liens entre les sommets i et j. Dans le cas d’un graphe non pondéré, les éléments
+Aij valent simplement 1 lorsqu’il existe un lien entre i et j, 0 dans le cas contraire. Notons
+qu’une valeur non nulle Aii sur la diagonale correspond à une boucle (éventuellement pondérée)
+sur le sommet i. Les méthodes que nous présenterons dans la suite s’appliqueront de manière
+indiﬀérenciée aux graphes pondérés ou non, sauf mention explicite du contraire. Par contre la
+transition des graphes non orientés aux graphes orientés est en général plus complexe.
+
+Une communauté dans un graphe représente de manière équivalente un sous-ensemble C de
+V ou le sous-graphe de G induit par C. Une partition du graphe G en communautés attribue
+à chaque sommet i une unique communauté Ci et deux sommets i et j appartiennent à la
+même communauté si et seulement si Ci = Cj. Dans la suite, une telle partition d’un graphe en
+communautés sera notée P.
+
+1.1 Fonctions de qualité
+
+Avant de parler de fonctions de qualité, il convient de rappeler un théorème d’impossibilité
+
+énoncé par Jon Kleinberg [56] :
+
+9
+

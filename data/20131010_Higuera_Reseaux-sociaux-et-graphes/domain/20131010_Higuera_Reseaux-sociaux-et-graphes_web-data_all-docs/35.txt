@@ -1,0 +1,3623 @@
+http://dac.lip6.fr/master/wp-content/uploads/2018/01/Fouille-graphes.pdf
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+Fouille dans les graphes 
+
+Graph Mining 
+
+Caractérisation des grands graphes 
+
+Recherche de motifs fréquents 
+
+ACASA — LIP6 — Sorbonne Université 
+
+1 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+Example Pattern Types 
+
+Itemset 
+
+Sequence 
+
+A 
+
+B 
+
+C 
+
+D 
+
+A 
+
+B 
+
+C 
+
+D 
+
+Tree 
+
+A 
+
+B 
+
+C 
+
+D 
+
+Graph 
+
+A 
+
+B 
+
+C 
+
+D 
+
+•   Can add attributes 
+
+•  To nodes 
+•  To edges 
+•   Attributes 
+•  Labels 
+•  Type (directed 
+or undirected ) 
+•  Set-valued 
+
+ACASA — LIP6 — Sorbonne Université 
+
+2 
+
+Fouille de graphes 
+
+•  Problèmes 
+
+–  À quoi ressemblent les graphes 
+–  Comment évoluent-ils? 
+–  Quels outils utiliser? 
+–  Passage à l’échelle 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+ACASA — LIP6 — Sorbonne Université 
+
+3 
+
+Présence des graphes… 
+
+ 
+)
+1
+0
+0
+2
+(
+ 
+1
+4
+ 
+,
+1
+1
+4
+ 
+e
+r
+u
+t
+a
+N
+
+ 
+l
+a
+ 
+t
+e
+ 
+g
+n
+o
+e
+J
+ 
+.
+
+ 
+
+H
+m
+o
+r
+f
+
+Aspirine 
+
+réseau d’interaction de protéines 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+Internet 
+
+Réseau de co-auteurs 
+
+ACASA — LIP6 — Sorbonne Université 
+
+4 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+Graphes - Exemples 
+
+Internet Map 
+[lumeta.com] 
+
+Food Web 
+[Martinez ’91] 
+
+Friendship Network 
+[Moody ’01] 
+
+Protein Interactions 
+[genomebiology.com] 
+ACASA — LIP6 — Sorbonne Université 
+
+5 
+
+Propriétés  
+
+Distribution des degrés des noeuds  
+
+internet domains 
+
+log(degree) 
+
+-0.82 
+
+log(rank) 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+ACASA — LIP6 — Sorbonne Université 
+
+6 
+
+Diameter – ArXiv citation graph 
+
+diameter 
+
+L 
+I 
+P 
+•  Citations among 
+6 
+physics papers    
+•  1992 –2003 
+ 
+•  One graph per 
+C 
+N 
+R 
+S 
+
+year 
+
+time [years] 
+ACASA — LIP6 — Sorbonne Université 
+
+7 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+Diameter – “Autonomous Systems” 
+
+diameter 
+
+•  Graph of Internet 
+•  One graph per 
+
+day  
+
+•  1997 – 2000 
+
+number of nodes 
+ACASA — LIP6 — Sorbonne Université 
+
+8 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+Diameter – “Affiliation 
+
+Network” 
+
+diameter 
+
+•  Graph of 
+
+collaborations in 
+physics – authors 
+linked to papers 
+•  10 years of data 
+
+time [years] 
+ACASA — LIP6 — Sorbonne Université 
+
+9 
+
+Diameter – “Patents” 
+
+diameter 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+•  Patent citation 
+
+network 
+
+•  25 years of data 
+
+time [years] 
+ACASA — LIP6 — Sorbonne Université 
+
+10 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+ 
+
+–  29,555 papers, 
+352,807 
+citations 
+
+Densification – Physics Citations 
+•  Citations among 
+physics papers  
+•  2003: 
+
+E(t) 
+
+?? 
+
+ACASA — LIP6 — Sorbonne Université 
+
+11 
+
+N(t) 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+Densification – Patent Citations 
+
+•  Citations among 
+patents granted 
+
+•  1999 
+
+–  2.9 million nodes 
+–  16.5 million 
+edges 
+
+•  Each year is a 
+
+datapoint 
+
+E(t) 
+
+1.66 
+
+N(t) 
+
+ACASA — LIP6 — Sorbonne Université 
+
+12 
+
+Popularity over time 
+
+days after post 
+(log) 
+
+# in links 
+(log) 
+
+1 
+
+2 
+
+3 
+
+Post popularity drops-off ? 
+POWER LAW! 
+Exponent? 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+ACASA — LIP6 — Sorbonne Université 
+
+13 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+Nombre vs. popularité 
+
+•  “web hit counts” [w/ A. Montgomery] 
+
+log(nombre) 
+
+traffic sur le web 
+
+Zipf 
+
+``ebay’’ 
+
+utilisateurs 
+
+sites 
+
+NSF tensors 
+2009 
+
+ACASA — LIP6 — Sorbonne Université 
+
+C. Faloutsos 
+
+log(degrés) 
+14 
+
+14 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+Degree distribution 
+
+44,356 nodes, 122,153 edges.  Half of blogs belong to 
+largest connected component. 
+
+count 
+
+B
+1 
+
+B
+3 
+
+1 
+1 
+1 
+
+B
+2 
+2 
+
+B
+4 
+
+3 
+
+blog in-degree 
+
+ACASA — LIP6 — Sorbonne Université 
+
+15 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+ 
+Recherche de triangles 
+ 
+Les vrais réseaux sociaux devraient comporter beaucoup de triangles: 
+« les amis de mes amis sont mes amis » 
+
+DÉTECTION DE MOTIFS 
+CARACTÉRISTIQUES 
+
+ACASA — LIP6 — Sorbonne Université 
+
+16 
+
+Loi de distribution des Triangles – 1   
+
+[Tsourakakis ICDM 2008] 
+
+HEP-TH 
+
+Epinions 
+
+Abscisse: nbre de 
+triangles auxquels 
+un nœud appartient 
+ 
+Ordonnée: nombre 
+de tels nœuds 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+ACASA — LIP6 — Sorbonne Université 
+
+17 
+
+Loi de distribution des Triangles – 2   
+
+[Tsourakakis ICDM 2008] 
+
+Reuters 
+
+Epinions 
+
+Abscisse: degré des 
+nœuds 
+ 
+Ordonnée: nombre 
+moyen de triangles 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+ACASA — LIP6 — Sorbonne Université 
+
+18 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+Extraction de motifs fréquents: nombre d’occurrences (support) 
+supérieur à un nombre minimal 
+
+EXTRACTION DE MOTIFS 
+
+ACASA — LIP6 — Sorbonne Université 
+
+19 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+Terminologie 1 – rappels 
+
+•  Un graphe G(V,E) est composé de deux ensembles 
+
+–  V: ensemble d’arc/d’arêtes 
+–  E: ensemble de nœuds/sommets 
+
+•  On considère ici des graphes non orientés et 
+
+étiquetés 
+–  Lv: ensemble d’étiquettes d’arêtes 
+–  LE: ensemble d’étiquettes de sommets 
+
+•  Les étiquettes n’ont pas besoin d’être uniques 
+–  par exemple, nom des éléments dans une molécule 
+
+ACASA — LIP6 — Sorbonne Université 
+
+20 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+Terminologie 2 – rappels  
+
+•  Un graphe est dit connecté	s’il existe un chemin entre 
+
+toute paire de nœuds 
+
+•  Un graphe Gs (Vs, Es) est un sous	graphe	d’un autre 
+
+graphe G(V, E) si et seulement si 
+–  Vs est un sous-ensemble de V   et Es un sous-ensemble de E 
+
+•  Deux graphes G1(V1, E1) et G2(V2, E2) sont 
+isomorphes	si leur topologie est identique 
+–  Il existe un appariement de V1 vers V2 tel que chaque arête 
+
+de E1 est appariée à une arête unique de E2 et vice-versa 
+
+•  Recherche d’isomorphisme entre deux graphes  
+
+G1(V1, E1) et G2(V2, E2)  
+–  Problème NP complet 
+ACASA — LIP6 — Sorbonne Université 
+
+21 
+
+21 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+Exemple d’isomorphisme  
+
+de graphes 
+
+ƒ(a ) = 1
+
+ƒ(b ) = 6
+
+ƒ(c ) = 8
+
+ƒ(d ) = 3
+
+ƒ(g ) = 5
+
+ƒ(h ) = 2
+
+ƒ(i ) = 4
+
+ƒ(j ) = 7
+
+ACASA — LIP6 — Sorbonne Université 
+
+22 
+
+22 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+Exemple 1 
+
+Ensemble de graphes 
+
+(T1) 
+
+(T2) 
+
+(T3) 
+
+Motifs fréquents 
+(MIN SUPPORT = 2) 
+
+(1) 
+
+(2) 
+
+ACASA — LIP6 — Sorbonne Université 
+
+23 
+
+Exemple 2 
+
+Ensemble de graphes 
+
+Motifs fréquents 
+(MIN SUPPORT = 2) 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+ACASA — LIP6 — Sorbonne Université 
+
+24 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+Exemple 3 
+
+Ensemble de graphes 
+
+Motifs fréquents 
+(MIN SUPPORT =  2) 
+
+ACASA — LIP6 — Sorbonne Université 
+
+25 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+Méthodes d’extraction de motifs 
+
+•   Approches	«	Apriori	»	(jointure)	
+	
+• 		Approche	basée	sur	la	croissance	de	motifs 
+
+ACASA — LIP6 — Sorbonne Université 
+
+26 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+Approche Apriori 
+
+k-graphe	
+
+G 
+
+G’ 
+
+G’’ 
+
+(k+1)-graphe	
+
+G1 
+
+G2 
+
+… 
+
+Gn 
+
+jointure	
+
+ACASA — LIP6 — Sorbonne Université 
+
+27 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+Approche par croissance de motifs 
+
+(k+2)-graphe	
+
+(k+1)-graphe	
+
+k-graphe	
+
+G 
+
+G1 
+
+G2 
+
+… 
+
+Gn 
+
+…
+
+…
+
+Risque	de		
+duplication		
+de	graphes	
+
+ACASA — LIP6 — Sorbonne Université 
+
+28 
+
+Libre génération 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+ACASA — LIP6 — Sorbonne Université 
+
+29 
+
+Cas délicats 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+ACASA — LIP6 — Sorbonne Université 
+
+30 
+
+Compression de graphes 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+ACASA — LIP6 — Sorbonne Université 
+
+31 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+Recherche	de	sous-graphes	communs	
+
+n  Entrée:	(D,	minSup)	
+
+n  Ensemble	de	graphes	étiquetés	D={T1,	T2,	…,	TN}	
+n  Support	minimum	minSup	
+
+n  Sortie:	(tous	les	sous-graphes	communs).	
+
+n  Un	sous-graphe	est	dit	fréquent	si	c’est	un	sous-graphe	d’au	
+
+moins	minSup⋅|D|	éléments	de	D.	
+n  Chaque	sous-graphe	est	connecté.	
+
+	
+
+ACASA — LIP6 — Sorbonne Université 
+
+32 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+Recherche	motifs	récurrents	
+
+n  Entrée:	(D,	minSup)	
+
+n  Un	seul	graphe	D	(exemple	le	Web	ou	DBLP	ou	encore	
+
+un	fichier	XML)	
+
+n  Support	minimum	minSup	
+
+	
+
+n  Sortie:	(tous	les	sous-graphes	fréquents).	
+
+n  Un	sous-graphe	est	fréquent	si	le	nombre	de	ses	
+
+occurrences	dans	D	excède	une	mesure	de	support	
+admissible	(c’est-à-dire	une	mesure	qui	satisfait	la	
+propriété	de	fermeture	descendante)	
+
+	
+
+ACASA — LIP6 — Sorbonne Université 
+
+33 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+Recherche de sous-graphes fréquents 
+
+entrées et sorties 
+
+non ordonné 
+
+Entrées 
+–  Base de données de graphes 
+–  Graphe  simple  (sans  cycle) 
+–  Etiquettes  associées  aux 
+–  Seuil minimal de support σ. 
+ 
+Output 
+–  Sous-graphes  fréquents  qui 
+la  contrainte 
+
+nœuds et aux arcs 
+
+satisfont 
+minimum de support. 
+
+–  Chaque  sous-graphe  fréquent 
+
+est connecté. 
+
+Entrées: base de graphes 
+
+Sorties : motifs connectés fréquents 
+
+Support = 100% 
+
+Support = 66% 
+
+Support = 66% 
+
+ACASA — LIP6 — Sorbonne Université 
+
+ 
+
+34 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+Algorithme FSG  
+
+ [M. Kuramochi and G. Karypis. Frequent subgraph discovery. ICDM 2001]  
+
+Notation: un k-sous-graphe est un sous-graphe avec k arêtes. 
+Initialisation:  explorer tous les graphes pour trouver F1, l’ensemble de tous les         
+         1-sous-graphes fréquents puis F1, l’ensemble des 2-sous-graphes fréquents; 
+Pour (k=3; Fk-1 ≠ ∅ ; k++)  
+
+de Fk-1, l’ensemble des (k-1)-sous-graphes fréquents; 
+
+1.  Génération des candidats – Ck, ensemble des k-sous-graphes, à partir 
+2.  Elimination des candidats – une condition nécessaire pour qu’un 
+candidat soit fréquent est que chacun de ses (k-1)-sous-graphes soit 
+fréquent. 
+
+3.  Comptage des fréquences – balayer tous les graphes pour calculer les 
+4.  Fk = { c ∈CK | le nombre de graphe de D où c apparaît est supérieur à 
+
+occurrences des éléments de Ck; 
+
+minSup.|D| } 
+
+Retourner F1 ∪ F2 ∪ ……∪ Fk    (= F ) 
+
+ACASA — LIP6 — Sorbonne Université 
+
+35 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+Les opérations triviales sur les séquences 
+
+deviennent complexes sur les graphes 
+
+•  Génération des candidats 
+
+–  Pour déterminer les candidats que l’on peut joindre, il faut 
+
+vérifier l’isomorphisme de graphes. 
+
+•  Elimination des candidats 
+
+–  Pour vérifier la propriété de fermeture descendante, on a 
+
+besoin de détecter l’isomorphisme de graphes. 
+
+•  Comptage des fréquences 
+
+–  L’isomorphisme de sous-graphe est nécessaire pour calculer 
+
+la fréquence d’un sous-graphe. 
+
+ACASA — LIP6 — Sorbonne Université 
+
+36 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+Génération des candidats par jointure 
+Fondée sur la détection d’un noyau commun 
+
++ 
+
++ 
+
++ 
+
+ACASA — LIP6 — Sorbonne Université 
+
+37 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+Génération des candidats (suite)  
+Fondée sur la détection d’un noyau commun 
+
+1er noyau 
+
+2nd noyau 
+
+1er noyau 
+
+2nd Noyau 
+
+Multiples noyaux 
+
+communs entre deux 
+(k-1)-sous-graphes  
+
+ 
+
+ACASA — LIP6 — Sorbonne Université 
+
+38 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+3-candidats: 
+
+4-candidats: 
+
+Elimination des candidats 
+Propriété de fermeture descendante  
+
+•  Tout les  
+
+(k-1)-sous-graphes doivent 
+être fréquents. 
+•  Pour tous les  
+
+(k-1)-sous-graphes d’un k-
+candidat donné, vérifier 
+s’il vérifie la propriété de 
+fermeture descendante 
+
+ACASA — LIP6 — Sorbonne Université 
+
+39 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+1-sous-graphes 
+
+fréquents 
+
+1-sous-graphes 
+
+fréquents 
+
+3-candidats 
+
+3-sous-graphes 
+
+fréquents 
+
+4-candidats 
+
+4-sous-graphes 
+
+fréquents 
+
+. . . 
+
+. . . 
+
+ACASA — LIP6 — Sorbonne Université 
+
+40 
+
+Défis calculatoires  
+
+• Clefs de l’efficacité de l’algorithme FSG : 
+– Utilisation d’un algorithme efficace pour déterminer un 
+étiquetage canonique d’un graphe et utiliser des 
+« chaînes » pour calculer l’identité (simple comparaison 
+de chaînes) 
+– Utiliser un algorithme de génération des candidats 
+élaboré pour réduire le nombre de fois que chaque 
+candidat et engendré 
+– Accélérer le comptage des fréquences (approche fondée 
+sur l’utilisation de TID-listes) 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+ACASA — LIP6 — Sorbonne Université 
+
+41 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+FSG: représentation canonique pour les graphes 
+(fondée sur l’utilisation de matrices d’adjacence) 
+
+Code(M1)	=	“yzx”	
+Code(M2)	=	“xyz”	
+ 
+
+Graphe G: 
+
+a 
+
+y 
+
+z 
+
+a 
+
+x 
+
+b 
+
+Code(G) = min{ code(M) | M est la matrice d’adj. } 
+
+M1 : 
+
+M2 : 
+
+a 
+
+a 
+
+b 
+
+a 
+
+b 
+
+a 
+
+  a    a   b 
+z 
+x 
+
+y 
+
+y 
+z 
+
+x 
+
+  a    b   a 
+y 
+z 
+
+x 
+
+x 
+y 
+
+z 
+
+ACASA — LIP6 — Sorbonne Université 
+
+42 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+Etiquetage canonique 
+
+v1  B 
+
+v2  B 
+
+B 
+
+v0 
+
+B 
+
+v3 
+
+v4 A 
+
+v5 A 
+
+v
+0
+B
+
+v
+2
+B
+
+v
+1
+B
+1
+
+2
+
+4
+
+v
+
+v
+
+1
+
+1
+
+1
+
+v
+1
+
+v
+5
+
+1
+1
+
+v
+v
+3
+0
+BAABBB
+
+⎡
+⎢
+⎢
+⎢
+⎢
+⎢
+⎢
+⎢
+⎢
+⎢
+⎢
+⎢
+⎣
+Etiquette	=	“1	11	100	1000	01000”	
+
+v
+3
+v
+1
+v
+v
+4
+v
+5
+v
+0
+
+B
+B
+B
+A
+A
+B
+
+⎤
+⎥
+⎥
+⎥
+⎥
+⎥
+⎥
+⎥
+⎥
+⎥
+⎥
+⎥
+⎦
+
+1
+1
+1
+1
+
+1
+
+1
+
+1
+
+2
+
+v
+3
+B
+
+v
+4
+A
+
+v
+5
+A
+
+2
+
+1
+
+1
+
+1
+1
+
+⎡
+⎢
+⎢
+⎢
+⎢
+⎢
+⎢
+⎢
+⎢
+⎢
+⎢
+⎢
+⎣
+
+B
+B
+B
+B
+A
+A
+
+v
+0
+v
+1
+v
+v
+v
+v
+
+⎤
+⎥
+⎥
+⎥
+⎥
+⎥
+⎥
+⎥
+⎥
+⎥
+⎥
+⎥
+⎦
+Etiquette	=	“1	01	011	0001	00010”	
+ACASA — LIP6 — Sorbonne Université 
+
+1
+1
+
+1
+1
+
+1
+
+1
+
+1
+
+4
+
+3
+
+5
+
+43 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+FSG: découverte de l’étiquetage canonique 
+
+–  Le problème est d’une complexité identique à la 
+découverte de l’isomorphisme de graphes, mais 
+FSG suggère des heuristiques pour l’accélérer, 
+comme: 
+•  Invariants de sommets (p.e. degré) 
+•  Listes de voisins 
+•  Partitionnement itératif 
+
+ACASA — LIP6 — Sorbonne Université 
+
+44 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+Une autre heuristique de FSG :  
+
+1) = { 1, 2, 3, 8, 9 } 
+2) = { 1, 3, 6, 9 } 
+
+Graphes 
+2 ⊂ T1 
+1 , gk-1
+gk-1
+1               ⊂ T2 
+gk-1
+gk-1
+1 , gk-1
+2 ⊂ T3 
+2 ⊂ T6 
+         gk-1
+1             ⊂ T8 
+gk-1
+gk-1
+1 , gk-1
+2 ⊂ T9 
+ 
+
+comptage de fréquences 
+Sous-graphes fréquents 
+TID(gk-1
+TID(gk-1
+ 
+Candidats 
+ 
+ck = join(gk-1
+ 
+TID(ck) ⊂ TID(gk-1
+                   ⇓ 
+        TID(ck ) ⊂ { 1, 3, 9} 
+•  calculer l’isomorphisme de graphe de T1, T3 et T9 avec ck  
+et déterminer TID(ck) 
+•  Noter que les listes TID requièrent beaucoup de mémoire. 
+
+1, gk-1
+
+2) 
+
+1) ∩ TID(gk-1
+
+2)  
+
+ACASA — LIP6 — Sorbonne Université 
+
+45 
+
+Performance de FSG sur la base DTP 
+
+(composants chimiques)   
+
+1400 
+
+1200 
+
+1000 
+
+Running Time [sec] 
+#Patterns 
+
+1600 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+ 
+]
+c
+e
+s
+[
+ 
+.
+c
+é
+x
+e
+d
+ 
+s
+p
+m
+e
+T
+
+’
+
+10000 
+9000 
+8000 
+7000 
+6000 
+5000 
+4000 
+3000 
+2000 
+1000 
+0 
+
+ 
+
+ 
+s
+f
+i
+t
+o
+m
+e
+d
+e
+r
+b
+m
+o
+N
+
+ 
+
+ 
+s
+t
+r
+e
+v
+u
+o
+c
+é
+d
+
+800 
+
+600 
+
+400 
+
+200 
+
+0 
+
+1 
+
+2 
+
+3 
+
+5 
+
+4 
+Support minimal [%] 
+
+6 
+
+7 
+
+8 
+
+9 
+
+10 
+
+ACASA — LIP6 — Sorbonne Université 
+
+46 
+
+Autres	approches	de	fouille	de	graphe	
+
+Y. Xifeng and H. Jiawei 
+gSpan: Graph-Based 
+Substructure Pattern Mining 
+ICDM, 2002. 
+
+Partie 1:  
+Définir l’arbre de recherche  
+(Tree Search Space (TSS)) 
+
+Partie 2: 
+Trouver tous les arbres 
+fréquents avec le TSS 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+ACASA — LIP6 — Sorbonne Université 
+
+47 
+
+Ordre – élimination duplications 
+
+profondeur d’abord 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+ACASA — LIP6 — Sorbonne Université 
+
+48 
+
+Motivation: recherche profondeur d’abord  
+exploration  eu égard aux ensembles d’items. 
+
+Espace	de	recherche	des	items	-	préfixe	
+
+abcde 
+
+abcd  abce  abde 
+
+acde 
+
+bcde 
+
+abc  abd  abe  acd  ace  ade 
+
+bcd  bce  bde 
+
+cde 
+
+ab  ac 
+
+ad  ae 
+
+bc 
+
+bd 
+
+be 
+
+cd  ce 
+
+de 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+a 
+
+b 
+
+e 
+ACASA — LIP6 — Sorbonne Université 
+
+d 
+
+c 
+
+49 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+Motivation pour l’arbre de recherche TSS  
+
+•  Représentation canonique des ensembles 
+
+d’items est obtenue à l’aide d’un ordre total sur 
+les items.  
+
+•  Chaque ensemble possible d’items apparaît 
+
+• 
+
+exactement une fois dans l’arbre (TSS) – sans 
+duplication ni omission. 
+ Propriétés de l’arbre de recherche 
+–  pour chaque k-étiquette, son parent est sont 
+–  La relation entre les frères est en ordre lexical 
+
+k-1-préfixe 
+
+ascendant. 
+
+ACASA — LIP6 — Sorbonne Université 
+
+50 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+Représentation: 
+
+Code profondeur d’abord 
+
+•  Apparier chaque graphe (2-dim) à un code séquentiel 
+
+de parcours profondeur d’abord (1-Dim). 
+•  Ordonner lexicographiquement les codes. 
+•  Construire l’arbre de recherche (TSS) en se fondant 
+
+sur l’ordre lexicographique 
+
+ 
+
+ACASA — LIP6 — Sorbonne Université 
+
+51 
+
+Construction codage parcours 
+
+profondeur d’abord 
+
+•  Etant donné un graphe G. pour chaque parcours en 
+
+profondeur d’abord de G, construire le codage 
+correspondant. 
+
+(b) 
+v0 
+X 
+a 
+v1 
+Y 
+b 
+X 
+c 
+Z 
+
+b 
+
+a 
+
+d 
+Z 
+
+(c) 
+v0 
+X 
+a 
+v1 
+Y 
+b 
+X 
+v2 
+c 
+Z 
+
+b 
+
+a 
+
+d 
+Z 
+
+(d) 
+v0 
+X 
+a 
+v1 
+Y 
+b 
+X 
+v2 
+c 
+Z 
+
+b 
+
+a 
+
+d 
+Z 
+
+a 
+
+d 
+Z 
+
+(e) 
+v0 
+X 
+a 
+v1 
+Y 
+b 
+X 
+v2 
+c 
+Z 
+v3 
+
+b 
+
+a 
+
+d 
+Z 
+
+(f) 
+v0 
+X 
+a 
+v1 
+Y 
+b 
+X 
+v2 
+c 
+Z 
+v3 
+
+(0,1,X,a,Y)  (1,2,Y,b,X)  (2,0,X,a,X)  (2,3,X,c,Z) 
+
+(g) 
+v0 
+X 
+a 
+v1 
+Y 
+b 
+X 
+v2 
+c 
+Z 
+v3 
+
+a 
+
+a 
+
+b 
+
+b 
+
+d 
+Z 
+
+d 
+Z 
+v4 
+(3,1,Z,b,Y)  (1,4,Y,d,Z) 
+
+L 
+I 
+P 
+6 
+ 
+(a) 
+v0 
+X 
+C 
+a 
+Y 
+N 
+b 
+X 
+c 
+R 
+Z 
+S 
+
+b 
+
+ACASA — LIP6 — Sorbonne Université 
+
+52 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+Un seul graphe, plusieurs codes 
+
+       
+1 
+
+2 
+
+3 
+
+4 
+
+5 
+
+6 
+
+(a) 
+(0, 1, X, a, Y) 
+ 
+(1, 2, Y, b, X) 
+ 
+(2, 0, X, a, X) 
+ 
+(2, 3, X, c, Z) 
+ 
+(3, 1, Z, b, Y) 
+ 
+(1, 4, Y, d, Z) 
+ 
+
+(b) 
+(0, 1, Y, a, X) 
+ 
+(1, 2, X, a, X) 
+ 
+(2, 0, X, b, Y) 
+ 
+(2, 3, X, c, Z) 
+ 
+(3, 0, Z, b, Y) 
+ 
+(0, 4, Y, d, Z) 
+ 
+
+(c) 
+(0, 1, X, a, X) 
+ 
+(1, 2, X, a, Y) 
+ 
+(2, 0, Y, b, X) 
+ 
+(2, 3, Y, b, Z) 
+ 
+(3, 0, Z, c, X) 
+ 
+(2, 4, Y, d, Z) 
+ 
+
+G 
+
+b 
+
+X 
+a 
+Y 
+b 
+X 
+c 
+Z 
+
+a 
+
+d 
+Z 
+
+v0 
+X 
+a 
+v1 
+Y 
+b 
+X 
+v2 
+c 
+v3 
+Z 
+
+b 
+
+a 
+
+d 
+v4 
+Z 
+
+d 
+
+v4 
+Z 
+
+b 
+
+v0 
+Y 
+a 
+v1 
+X 
+a 
+v2 
+X 
+c 
+v3 
+Z 
+
+b 
+
+(a) 
+
+v0 
+X 
+a 
+v1 
+X 
+a 
+v2 
+Y 
+b 
+v3 
+Z 
+
+c 
+
+b 
+
+d 
+
+v4 
+Z 
+
+(c) 
+ACASA — LIP6 — Sorbonne Université 
+
+(b) 
+
+53 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+Un seul graphe, un seul codage minimal! 
+
+Min 
+ DFS-Code 
+(c) 
+(0, 1, X, a, X) 
+ 
+
+(b) 
+(0, 1, Y, a, X) 
+ 
+
+(1, 2, X, a, X) 
+ 
+
+(1, 2, X, a, Y) 
+ 
+
+(2, 0, X, b, Y) 
+ 
+
+(2, 0, Y, b, X) 
+ 
+
+(2, 3, X, c, Z) 
+ 
+(3, 0, Z, b, Y) 
+ 
+(0, 4, Y, d, Z) 
+ 
+
+(2, 3, Y, b, Z) 
+ 
+(3, 0, Z, c, X) 
+ 
+(2, 4, Y, d, Z) 
+ 
+
+       
+1 
+
+2 
+
+3 
+
+4 
+
+5 
+
+6 
+
+(a) 
+(0, 1, X, a, Y) 
+ 
+
+(1, 2, Y, b, X) 
+ 
+
+(2, 0, X, a, X) 
+ 
+
+(2, 3, X, c, Z) 
+ 
+(3, 1, Z, b, Y) 
+ 
+(1, 4, Y, d, Z) 
+ 
+
+G 
+
+b 
+
+X 
+a 
+Y 
+b 
+X 
+c 
+Z 
+
+a 
+
+d 
+Z 
+
+v0 
+X 
+a 
+v1 
+Y 
+b 
+X 
+v2 
+c 
+v3 
+Z 
+
+b 
+
+a 
+
+d 
+v4 
+Z 
+
+d 
+
+v4 
+Z 
+
+b 
+
+c 
+
+b 
+
+v0 
+Y 
+a 
+v1 
+X 
+a 
+v2 
+X 
+c 
+v3 
+Z 
+
+(b) 
+
+(a) 
+
+v0 
+X 
+a 
+v1 
+X 
+a 
+v2 
+Y 
+b 
+v3 
+Z 
+
+(c) 
+
+b 
+
+d 
+
+v4 
+Z 
+
+ACASA — LIP6 — Sorbonne Université 
+
+54 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+Code profondeur d’abord minimal 
+
+•  Le code profondeur d’abord minimal dans l’ordre 
+
+lexicographique, min(G), est une représentation 
+canonique du graphe G. 
+
+•  Propriété: deux graphes A et B sont isomorphes 
+
+ssi leur code profondeur d’abord minimal est 
+identique, autrement dit ssi: 
+
+ min(A) = min(B) 
+
+ACASA — LIP6 — Sorbonne Université 
+
+55 
+
+Arbre des codes profondeur d’abord 
+minimaux : relations parents-enfants 
+•  Si min(G1) = { a0, a1, ….., an} 
+      et min(G2) = { a0, a1, ….., an, b} 
+
+–  G1 est un parent de G2  
+–  G2 est un enfant de G1  
+
+•  Un code profondeur d’abord requière que b 
+
+grossisse d’un sommet vers le chemin le plus à 
+droite (propriété héritée de la recherche en 
+profondeur d’abord) 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+ACASA — LIP6 — Sorbonne Université 
+
+56 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+Graphe G1: 
+
+a 
+
+b 
+
+v0 
+X 
+a 
+Y 
+b 
+X 
+v2 
+c 
+Z 
+v3 
+
+v1 
+d 
+Z 
+v4 
+
+Min(g) =  
+
+(0,1,X,a,Y)  (1,2,Y,b,X)  (2,0,X,a,X)  (2,3,X,c,Z) 
+
+(3,1,Z,b,Y)  (1,4,Y,d,Z) 
+
+Un enfant du graphe G1 doit croître de l’arête la plus à 
+droite de  G1 (condition nécessaire) 
+
+Graphe G2: 
+faux 
+
+a 
+
+b 
+
+v5 
+
+? 
+
+? 
+
+? 
+
+v0 
+X 
+a 
+Y 
+b 
+X 
+v2 
+c 
+Z 
+v3 
+
+? 
+
+v1 
+d 
+Z 
+v4 
+
+v5 
+? 
+
+v5 
+
+? 
+
+? 
+
+v5 
+
+? 
+
+a 
+
+b 
+
+? 
+
+v0 
+X 
+a 
+Y 
+b 
+X 
+v2 
+c 
+Z 
+v3 
+
+? 
+
+v1 
+d 
+Z 
+v4 
+
+Forward EDGE 
+
+Backward EDGE 
+
+ACASA — LIP6 — Sorbonne Université 
+
+57 
+
+0 
+A  A 
+C 
+
+1 
+
+2 
+
+C 
+
+3 
+
+0 
+
+1 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+A  A 
+C 
+
+2 
+
+A 
+A 
+
+0 
+
+1 
+
+0 
+
+A 
+
+1 
+
+B 
+
+A 
+
+0 
+
+1 
+
+C 
+
+Code 
+minimal 
+0 
+
+A 
+
+1 
+
+C 
+
+2 
+
+C 
+
+3 
+
+2 
+
+B 
+
+3 
+
+S 
+
+2 
+
+C 
+
+3 
+
+0 
+A 
+
+1 
+
+2 
+
+B 
+
+0 
+A 
+1 
+
+C 
+
+2 
+
+0 
+B 
+1 
+
+2 
+
+B 
+
+0 
+B 
+
+1 
+
+… 
+
+Code Non 
+minimal 
+0 
+
+C 
+
+1 
+
+C 
+
+2 
+
+A 
+
+S’ 
+
+3 
+
+l
+
+E
+a
+g
+u
+é
+
+ 
+
+0 
+
+B 
+
+1 
+
+C 
+
+3 
+
+C 
+
+2 
+
+0 
+
+B 
+
+1 
+
+C 
+
+3 
+
+B 
+
+2 
+
+0 
+C 
+1 
+
+C 
+2 
+
+0 
+B 
+1 
+
+2 
+
+C 
+
+0 
+C 
+
+1 
+
+0 
+
+1 
+
+C 
+
+A 
+
+B 
+
+2 
+
+0 
+A 
+
+1 
+
+ACASA — LIP6 — Sorbonne Université 
+
+58 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+Emondage de l’arbre 
+
+•  Tous les descendants d’un nœuds non fréquents 
+
+sont non fréquents.  
+
+ 
+
+•  Tous les descendants d’un code profondeur 
+
+d’abord non minimal ne sont pas non plus des 
+code profondeur d’abord minimaux 
+
+ACASA — LIP6 — Sorbonne Université 
+
+59 
+
+Autres	approches	de	fouille	de	graphe	
+
+Y. Xifeng and H. Jiawei 
+gSpan: Graph-Based 
+Substructure Pattern Mining 
+ICDM, 2002. 
+
+Partie 1:  
+Définir l’arbre de recherche  
+(Tree Search Space (TSS)) 
+
+Partie 2: 
+Trouver tous les arbres 
+fréquents avec le TSS 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+ACASA — LIP6 — Sorbonne Université 
+
+60 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+Algorithme gSpan 
+
+gSpan(D,	F,	g)	
+1:	si		g	≠	min(g)		
+							retourner;	
+2:	F	←	F	∪	{	g	}	
+3:	enfants(g)	←	[engendrer	tous	les	enfants	potentiels	g’		
+
+de	g	qui	ont	une	arête	de	plus	]*	
+
+4:	Enumérer(D,	g,	enfants(g))	
+5:	pour	chaque	c	∈	enfants(g)	
+							if	support(c)	≥	#minSup	
+												RechercheSous-Graphe	(D,	F,	c)	
+ 
+
+ACASA — LIP6 — Sorbonne Université 
+
+61 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+Exemple 
+
+Donnée d’entrée: base de graphe D  
+
+T1 
+
+T2 
+
+a 
+
+b 
+c 
+
+b 
+
+a 
+c 
+
+a 
+
+c  
+
+c 
+
+a 
+
+b 
+c 
+
+c 
+
+a 
+
+b 
+
+T3 
+
+c 
+
+a 
+a 
+
+c 
+
+b 
+
+a 
+
+b 
+
+Tâche: trouver tous les sous-graphes fréquents, c-à-d avec support ≥ 2  (#minSup) 
+
+ACASA — LIP6 — Sorbonne Université 
+
+62 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+T1 
+
+T2 
+
+a 
+
+b 
+c 
+
+b 
+
+a 
+c 
+
+a 
+
+c  
+
+c 
+
+a 
+
+b 
+c 
+
+c 
+
+a 
+
+b 
+
+T3 
+
+c 
+
+a 
+a 
+
+c 
+
+b 
+
+a 
+
+b 
+
+TID={1,3} 
+
+0 
+A  A 
+1 
+C 
+
+2 
+
+C 
+
+3 
+
+TID={1,3} 
+
+0 
+A  A 
+1 
+C 
+
+2 
+TID={1,3}  TID={1,2,3}  TID={1,2,3} 
+
+0 
+A 
+1 
+
+B 
+
+2 
+
+0 
+A 
+1 
+
+C 
+
+2 
+
+A 
+A 
+
+0 
+
+1 
+
+TID={1,2,3} 
+
+0
+A 
+1 
+
+ACASA — LIP6 — Sorbonne Université 
+
+63 
+
+B 0
+1 
+
+0
+C 
+1 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+T1 
+
+T2 
+
+a 
+
+b 
+c 
+
+b 
+
+a 
+c 
+
+a 
+
+c  
+
+c 
+
+a 
+
+b 
+c 
+
+c 
+
+a 
+
+b 
+
+T3 
+
+c 
+
+a 
+a 
+
+c 
+
+b 
+
+a 
+
+b 
+
+0 
+A  A 
+1 
+C 
+
+2 
+
+C 
+
+3 
+
+0 
+A  A 
+1 
+C 
+
+2 
+
+A 
+A 
+
+0 
+
+1 
+
+TID={1,2} 
+
+0 
+
+A 
+
+1 
+
+C 
+B 
+
+2 
+TID={1,2,3}  TID={1,2,3} 
+
+0 
+A 
+1 
+
+B 
+
+2 
+
+0 
+A 
+1 
+
+C 
+
+2 
+
+0
+A 
+1 
+
+0
+B 
+1 
+
+0
+C 
+1 
+
+ACASA — LIP6 — Sorbonne Université 
+
+64 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+T1 
+
+T2 
+
+a 
+
+b 
+c 
+
+b 
+
+a 
+c 
+
+a 
+
+c  
+
+c 
+
+a 
+
+b 
+c 
+
+c 
+
+a 
+
+b 
+
+T3 
+
+c 
+
+a 
+a 
+
+c 
+
+b 
+
+a 
+
+b 
+
+0 
+A  A 
+1 
+C 
+
+2 
+
+C 
+
+3 
+
+0 
+
+A 
+
+1 
+
+2 
+
+C 
+B 
+
+0 
+A  A 
+1 
+C 
+
+2 
+
+A 
+A 
+
+0 
+
+1 
+
+0 
+
+A 
+
+1 
+
+B 
+
+0 
+
+A 
+
+1 
+
+C 
+
+2 
+
+C 
+3 
+
+2 
+
+B 
+
+3 
+
+0 
+
+A 
+
+1 
+
+C 
+2 
+
+C 
+3 
+
+0 
+A 
+1 
+
+B 
+
+2 
+
+0 
+A 
+1 
+
+C 
+
+2 
+
+0 
+B 
+1 
+
+B 
+
+2 
+
+B 
+
+0 
+
+1 
+
+C 
+
+3 
+
+B 
+
+2 
+
+B 
+
+0 
+
+1 
+
+C 
+
+3 
+
+C 
+2 
+
+0 
+B 
+1 
+
+C 
+
+2 
+
+0 
+C 
+1 
+
+C 
+2 
+
+0
+A 
+1 
+
+ACASA — LIP6 — Sorbonne Université 
+
+65 
+
+0
+B 
+1 
+
+0
+C 
+1 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+Performances gSpan 
+
+•  Sur des ensembles de données synthétiques, 6-10 
+
+fois plus rapide que FSG 
+
+•  Sur les bases de données de composants chimiques, 
+
+il était 15-100 fois plus rapide! 
+
+•  Mais, ces comparaisons ne prennent en compte que 
+
+de vieilles versions de FSG… 
+
+ACASA — LIP6 — Sorbonne Université 
+
+66 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+Sous graphes fréquents clos 
+
+•  Définition:  
+
+–  un sous-graphe fréquent G est clos s’il n’existe 
+pas de sur-graphe qui ait le même support 
+•  Si deux sous-graphes d’un graphe ont le 
+même support, il n’est pas nécessaire de 
+donner ces sous-graphes 
+
+ACASA — LIP6 — Sorbonne Université 
+
+67 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+CLOSEGRAPH (Yan & Han, KDD 2003) 
+•  A quelle condition peut-on 
+arêter de chercher sur les 
+enfants? terminaison 
+précoce 
+
+(k+1)-graphe	
+
+•  Si G et G’ sont fréquents et si 
+G’ est un sous-graphe de G, 
+dans n’importe quel graphe 
+ou G apparaît, G’ aussi. 
+Alors, il n’est pas nécessaire 
+de faire croître G si aucun de 
+ses enfants n’est clos, excepté 
+G’. 
+
+G1 
+
+k-graphe	
+
+G 
+
+G2 
+
+… 
+
+Gn 
+
+ACASA — LIP6 — Sorbonne Université 
+
+68 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+Nombre motifs fréquents vs. clos 
+
+ACASA — LIP6 — Sorbonne Université 
+
+69 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+Temps d’exécution fréquents vs. clos 
+
+ACASA — LIP6 — Sorbonne Université 
+
+70 
+
+Résumé des motifs 
+
+•  Ne conserver que les motifs les plus 
+
+représentatifs 
+
+•  Conserver les motifs les plus centraux 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+ACASA — LIP6 — Sorbonne Université 
+
+71 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+Représentation des motifs 
+
+Motifs 
+
+Données 
+
+Motifs les plus représentatif  
+des motifs 
+
+Motifs les plus représentatif 
+des données 
+
+ACASA — LIP6 — Sorbonne Université 
+
+72 
+
+Croissance: quand s’arrêter? 
+
+L 
+I 
+P 
+6 
+ 
+C 
+N 
+R 
+S 
+
+ACASA — LIP6 — Sorbonne Université 
+
+73 
+
+

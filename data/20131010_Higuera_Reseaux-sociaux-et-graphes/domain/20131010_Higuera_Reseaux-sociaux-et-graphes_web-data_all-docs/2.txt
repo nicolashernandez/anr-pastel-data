@@ -1,0 +1,3327 @@
+http://88milsms.huma-num.fr/references/guerre-martin_kodelja-dorian.pdf
+
+Visualisation et analyse du réseau socio-sémantique 88milSMS
+
+Université de Nantes - Université de Montpellier
+
+Dorian KODELJA - dorian.kodelja@gmail.com
+Martin GUERRE - martin.guerre44@gmail.com
+
+Résumé : Le corpus "88milSMS" , diﬀusé à partir du 26 juin 2014, est un
+grand corpus de SMS authentiques, anonymisés, en français. L’objectif est de
+construire et d’analyser le graphe socio-sémantique représentant ce corpus, pour
+visualiser les communautés thématiques constituées autour de vocabulaires com-
+muns, communautés génériques, incontournables ou excentriques, sous-jacentes au
+corpus étudié.
+
+Mots-clés : graphes, 88milSMS, réseau socio-sémantique, communautés, cor-
+
+pus, ranking
+
+88milSMS. A corpus of authentic text messages in French » Panckhurst R.,
+Détrie C., Lopez C., Moïse C., Roche M., Verine B. (2014), produit par l’Uni-
+versité Paul-Valéry Montpellier 3 et le CNRS, en collaboration avec l’Université
+catholique de Louvain, ﬁnancé grâce au soutien de la MSH-M et du Ministère de
+la Culture (Délégation générale à la langue française et aux langues de France)
+et avec la participation de Praxiling, Lirmm, Lidilem, Tetis, Viseo. ISLRN : 024-
+713-187-947-8
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+1
+
+Table des matières
+
+Introduction
+
+1. Présentation de l’entreprise
+
+1.1. Présentation générale . . . . . . . . . . . . . . . . . . . . . . . . .
+1.2. La société CAPACITES . . . . . . . . . . . . . . . . . . . . . . .
+1.3. Organigramme . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1.4. Projet
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+2. Contexte du projet
+
+3. Modèle du domaine
+
+4
+
+6
+6
+6
+7
+7
+
+8
+
+10
+
+4. Objectifs globaux
+
+12
+4.1. Objectifs fonctionnels . . . . . . . . . . . . . . . . . . . . . . . . . 12
+4.2. Objectifs techniques . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+
+5. Etat de l’Art
+
+14
+5.1. Détermination du système de gestion de base de données . . . . . . 14
+5.1.1. Type de SGBD . . . . . . . . . . . . . . . . . . . . . . . . 15
+5.1.2. Choix d’une solution de base de donnée relationnelle . . . . 21
+5.2. Traitement automatisé d’un corpus SMS . . . . . . . . . . . . . . . 25
+5.2.1. Les particularités d’un corpus SMS . . . . . . . . . . . . . 25
+5.2.2. Outils d’analyse sémantique . . . . . . . . . . . . . . . . . 29
+5.3. Pondération pour la fouille de texte . . . . . . . . . . . . . . . . . 31
+tf . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
+5.3.1.
+idf
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
+5.3.2.
+5.3.3.
+tf-idf . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
+5.3.4. Okapi BM25 . . . . . . . . . . . . . . . . . . . . . . . . . . 32
+5.4. FREETEXTTABLE et CONTAINSTABLE . . . . . . . . . . . . . 32
+5.4.1. CONTAINSTABLE . . . . . . . . . . . . . . . . . . . . . . 32
+5.4.2. FREETEXTTABLE . . . . . . . . . . . . . . . . . . . . . 33
+5.5. Graphes et communautés . . . . . . . . . . . . . . . . . . . . . . . 35
+
+2
+
+Table des matières
+
+Table des matières
+
+5.5.1. Modularité . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
+5.5.2. Graphes bipartis
+. . . . . . . . . . . . . . . . . . . . . . . 36
+5.6. Visualisation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
+5.7. Solution rejetée . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
+
+6. Conception du corpus restreint
+
+6.2. Prétraitement des données
+
+6.1.1. Stockage des données brutes du corpus
+
+40
+6.1. Base de données . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
+. . . . . . . . . . . 41
+. . . . . . . . . . . . . . . . . . . . . . 44
+. . . . . . . . . . . 44
+6.2.1. Constitution de la liste des mots bruits
+6.2.2. Table des faits . . . . . . . . . . . . . . . . . . . . . . . . . 45
+6.3. Traitement des données . . . . . . . . . . . . . . . . . . . . . . . . 46
+6.3.1. Structure du graphe . . . . . . . . . . . . . . . . . . . . . . 46
+6.3.2. Construction des tables de noeuds et d’arc
+. . . . . . . . . 47
+6.3.3. Visualisation et analyse . . . . . . . . . . . . . . . . . . . . 52
+
+7. Développement du corpus restreint
+7.1. Mise en place de base de données
+
+54
+. . . . . . . . . . . . . . . . . . 54
+7.1.1.
+Installation de la base de données . . . . . . . . . . . . . . 54
+7.1.2. Structure et remplissage des données du corpus . . . . . . . 55
+7.1.3.
+Index FullText, un outil puissant . . . . . . . . . . . . . . . 56
+7.2. Pré-traitement des données . . . . . . . . . . . . . . . . . . . . . . 57
+7.2.1. Constitution de la liste des mots bruits
+. . . . . . . . . . . 57
+7.2.2. Ranking et table des faits . . . . . . . . . . . . . . . . . . . 59
+7.3. Traitement des données . . . . . . . . . . . . . . . . . . . . . . . . 64
+7.3.1. Construction des tables de noeuds et d’arcs . . . . . . . . . 64
+7.3.2. Visualisation et analyse . . . . . . . . . . . . . . . . . . . . 65
+
+8. Conception du corpus étendu
+
+77
+8.1. Base de données . . . . . . . . . . . . . . . . . . . . . . . . . . . . 77
+. . . . . . . . . . . . . . . . . . . . . . 77
+8.2. Prétraitement des données
+8.2.1. Table des faits . . . . . . . . . . . . . . . . . . . . . . . . . 78
+8.3. Traitement des données . . . . . . . . . . . . . . . . . . . . . . . . 79
+8.3.1. Structure du graphe . . . . . . . . . . . . . . . . . . . . . . 79
+8.3.2. Construction des tables de noeuds et d’arcs . . . . . . . . . 80
+
+9. Développement du corpus étendu
+
+9.1. Prétraitement des données
+
+81
+. . . . . . . . . . . . . . . . . . . . . . 81
+9.1.1. Table des faits . . . . . . . . . . . . . . . . . . . . . . . . . 81
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+3
+
+Table des matières
+
+Table des matières
+
+9.2. Traitement des données . . . . . . . . . . . . . . . . . . . . . . . . 84
+9.2.1. Visualisation et analyse . . . . . . . . . . . . . . . . . . . . 84
+
+10.Bilan et perspectives
+
+89
+10.1. Bilan . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 89
+10.2. Perspectives . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 89
+
+11.Remerciements
+
+91
+
+A. Annexes
+
+92
+A.1. Requête d’installation du package Semantic Language Database . . 96
+A.2. Procédures stockées . . . . . . . . . . . . . . . . . . . . . . . . . . 97
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+4
+
+Introduction
+
+Le corpus 88milSMS est un corpus réunissant plus de 88 000 SMS authen-
+tiques, provenant de Montpellier et collectés en 2011 dans le cadre du projet
+de recherche sud4science LR étudiant les “mutations des pratiques scripturales
+en communications électroniques médiées”. Les participants pouvaient également
+compléter un questionnaire sociolinguistique, portant sur leurs informations per-
+sonnelles (sexe, âge, niveau d’études, profession. . . ) et leurs pratiques liées aux
+SMS (type de téléphone, d’abonnement, nombre de SMS par semaine, destina-
+taires principaux, style d’écriture,...). A partir du corpus anonymisé, 1000 SMS
+ont été transcodés en français en parallèle par les chercheurs et des étudiants en
+Master Langage, pour rétablir l’orthographe et la grammaire sans injecter d’in-
+formations supplémentaires, ceci pour faciliter l’automatisation de traitements
+ultérieurs.
+
+Ce corpus est très intéressant à des ﬁns d’études car il constitue le seul su-
+jet d’étude disponible sur les échanges SMS en français. Bien que de nombreuses
+études aient déjà été réalisées sur des corpus similaires traitant des chats en ligne,
+on ne peut extrapoler totalement les résultats à ce médium car il s’agit d’une part
+d’un service payant, et d’autre part pratiqué sur un clavier limité (l’étude datant
+de 2011, les smartphones étaient bien moins répandus, de même que les forfaits
+illimités) ce qui inﬂuence certainement les pratiques d’expression.
+
+Nous allons étudier ce corpus aﬁn de faire ressortir les communautés socio-
+sémantiques issues de celui-ci, bien qu’elles soient invisibles à première vue. Nous
+étudierons diﬀérentes techniques permettant d’extraire des communautés aussi
+bien au sein du corpus restreint corrigé, et du corpus étendu brut.
+
+5
+
+1. Présentation de l’entreprise
+
+1.1. Présentation générale
+
+L’entreprise iRéalitécite [3] est une cellule de compétences dédiée aux
+Technologies de l’Information et de la Communication rattachée à la so-
+ciété CAPACITES, une ﬁliale de l’Université de Nantes. Elle est située en plein
+cœur de Nantes, dans les anciens chantiers navals de Nantes.
+
+Un des principaux objectifs de cette cellule est de valoriser les travaux de
+recherche développés au sein du Laboratoire d’Informatique de Nantes Atlantique
+(LINA) dans diﬀérents domaines que sont l’Ingénierie des Connaissances, le Web
+Sémantique et l’Analyse des Réseaux Sociaux.
+
+1.2. La société CAPACITES
+
+La société CAPACITES, à laquelle iRéalité est rattachée, travaille en lien
+étroit avec le laboratoire de l’Université de Nantes. Elle est composée d’ingénieurs
+« chargés de développer et de commercialiser les innovations qui en sont issues
+»[4]. Pour les chercheurs dirigeant et exploitant cette cellule, l’avantage est de
+pouvoir valoriser ﬁnancièrement les travaux de recherches qu’ils poursuivent, sans
+devoir passer par le lancement d’une start-up ou d’une réelle entreprise. Quant
+aux bénéﬁces engendrés par les cellules de compétences, ils sont ensuite réinvestis
+dans les laboratoires rattachés.
+
+L’entreprise CAPACITES SAS est composée de six cellules de compétences[5].
+A iRéalité viennent s’ajouter THERASSAY dans le secteur du médicament, IXEAD
+dans l’ingénierie portuaire et oﬀshore, ITIS dans le traitement de surface des ma-
+tériaux, MER l’économie de la mer, de la pêche et de l’aquaculture, et Spectro-
+Maitrise dans l’analyse chimique.
+
+En plus de l’organisation de ces cellules de compétences et de la commercia-
+lisation de leurs produits et services, CAPACITES assure depuis sa création en
+
+6
+
+Présentation de l’entreprise
+
+Organigramme
+
+2005 « la gestion administrative et ﬁnancière des contrats privés de Recherche et
+Développement », entre les industries et les laboratoires de l’Université de Nantes.
+
+1.3. Organigramme
+
+iRéalité est une entreprise à taille humaine. Voici les principaux acteurs de
+
+l’entreprise :
+
+Francky Trichet : Directeur général. Maître de conférence à l’université de
+
+Nantes et chercheur au sein du laboratoire LINA.
+
+Pierre Crinon : Directeur commercial.
+Christophe Renaudineau : Responsable développement informatique.
+Christophe Thovex : Dr. Responsable RD - PhD. Head of RD
+Noémie Simon : Chargée de communication.
+
+1.4. Projet
+
+Le projet nous a été founi par l’entreprise iRéalité, dans le cadre d’un projet
+au sein du cursus de l’école d’ingénieur de Polytech Nantes. Nous avons travaillé
+durant 8 mois, en collaboration avec 3 chercheurs, sur le projet suivant :
+
+Figure 1.1. – Projet fourni par iRéalité
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+7
+
+2. Contexte du projet
+
+Les études linguistiques s’appuient sur des données recueillies puis analysées,
+notamment via des méthodes de traitement plus ou moins automatisés à l’aide
+d’outils informatiques. Il s’agit des techniques de traitement automatique du lan-
+gage naturel (TALN) et s’appuyant sur des corpus numériques. Cependant, si les
+méthodes de stockage sont eﬀectivement numériques, les premiers usages s’ap-
+puyaient sur des corpus initialement issus de documents papier. Néanmoins, avec
+l’expansion des moyens de communication numérique et les nombreux usages liés,
+de nombreux corpus purement numériques, issus des chats, forums, courriels et
+autres réseaux sociaux son apparus. Ces corpus ont permis de visualiser l’appari-
+tion d’usages émergents, parfois spéciﬁques au médium d’origine et réunis sous le
+terme de communication médiée par ordinateur (Panckhurst 1997) [21].
+
+Cependant, si les données transitant par les médias précédemment cités sont
+facilement collectable, l’analyse de l’envoi de SMS faisait encore défaut, et avec
+elle un nouveau champ de recherche très prometteur, faute de solution ﬁable pour
+recueillir ces données en garantissant qu’elles soient authentiques et non modiﬁées
+lors du recueil.
+
+En 2004, un équipe de chercheurs belges a lancé un projet international vi-
+sant à combler ce manque, avec pour objectif de collecter et structurer dans une
+base de donnée un corpus de SMS authentiques et à portée mondiale : Le projet
+sms4science [23] était né. Dans le cadre de ce projet, plusieurs collectes de SMS
+ont eu lieu dans diﬀérentes langues, notamment le français avec la récente initia-
+tive sud4science [24] LR (Languedoc Roussillon) qui a organisé la collecte de plus
+de 90 000 SMS dans la région, dont plus de 88000 ont été conservé pour le corpus
+88milSMS[8].
+Cette collecte a été réalisée via un Iphone vers lequel les participants étaient incités
+à envoyer leur message en copie. Les participants pouvaient également renvoyer
+d’anciens messages encore stockés sur leur téléphone. Les SMS étaient ensuite ré-
+gulièrement téléchargés sur un disque dur externe.
+
+Pour des raisons juridiques évidentes, il a ensuite fallu procéder à l’anony-
+misation du corpus, qui a été réalisée de manière semi-automatique par le logiciel
+
+8
+
+Contexte du projet
+
+Seek and Hide.
+
+Une fois l’anonymisation terminée, un corpus restreint de 1000 sms a été
+traduit manuellement, avec comme objectif de restituer l’orthographe et la gram-
+maire pour permettre des traitements automatiques, mais sans introduire d’élé-
+ments nouveaux. De plus, un corpus restreint de 100 SMS a été annoté à l’aide
+de 8 balises diﬀérentes, TYPographie, MODiﬁcation, GRAmmaire, BiNettes, AB-
+sence, LANgue, ORThographe, Divers.
+
+L’analyse de ce corpus est intéressant de plusieurs manières : Pour l’étude des
+évolutions de la langue conditionnée d’une part par l’aspect numérique du média,
+et d’autre part par les contraintes de ce média spéciﬁque : taille limitée, facturation
+et clavier restreint ainsi que pour l’étude des mutations sociales.
+
+C’est dans ce contexte nouveau que se place notre étude dont nous verrons
+
+les objectifs dans la partie suivante
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+9
+
+3. Modèle du domaine
+
+Figure 3.1. – Modèle du domaine
+
+Le modèle de domaine du projet présenté ci-dessus est volontairement sim-
+pliﬁé et représente les concepts en place des classes. En eﬀet, notre projet n’étant
+pas un projet de développement objet, cette modélisation n’est pas tout à fait
+adaptée.
+
+Les classes Graphes et Base de données par exemple ne seront pas représen-
+
+tées ainsi lors de la conception.
+
+10
+
+Modèle du domaine
+
+Cependant, cette modélisation permet de bien visualiser la représentation
+des données et le processus de pondération : Le corpus stocké dans la base de
+données est constitué de SMS envoyés par des expéditeurs, contenant un message
+fragmentable sous forme d’expressions qui seront également stockées sur la base
+associée à une pondération, générée par des fonctions de pondération sémantique.
+
+A partir de cette base, il sera possible de générer un graphe à l’aide de fonc-
+tions de génération de graphes. Celui-ci sera ensuite visualisé grâce à un logiciel
+de visualisation de graphes, permettant notamment de ﬁltrer des données pour
+sélectionner certains phénomènes.
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+11
+
+4. Objectifs globaux
+
+4.1. Objectifs fonctionnels
+
+Les objectifs fonctionnels de ce projet sont la cartographie et l’analyse des
+communautés présentes dans le corpus, ainsi que des thématiques échangées au
+sein de ces communautés. Cette solution doit permette d’observer les distances et
+proximités entre les communautés, les personnes et thématiques incontournables
+et excentriques ou toute autre particularité remarquable présentant un intérêt so-
+ciologique, économique ou politique. D’autres mesures traditionnelles d’analyse
+des réseaux sociaux permettront de faire apparaître des leaders d’opinions et des
+personnages.
+
+Pour faciliter cette analyse, il sera nécessaire d’assurer le développement d’un
+modèle graphique en vue de représenter ces cartographies sous forme de réseau
+socio-sémantique.
+
+Pour résumer, l’objectif de ce projet est la création d’un système de construc-
+tion automatique de réseaux socio-sémantiques qui intègre des composants d’ana-
+lyse syntaxique, un système de recherche rapide d’information et un système de
+base de données, ainsi qu’un système de visualisation et d’analyse des réseaux
+sociaux.
+
+4.2. Objectifs techniques
+
+Le premier objectif technique est le chargement du corpus de SMS dans une
+base de données, puis le développement de procédures stockées d’analyse syn-
+taxique, permettant d’attribuer des pondérations sémantiques aux messages et
+aux expressions.
+
+Plusieurs types de base de données s’oﬀrent à nous : les bases de données
+relationnelles ( SGBDR), les triplestores et les graphstores. Il est donc nécessaire
+de réaliser une recherche bibliographique pour déterminer lequel de ces systèmes
+est le plus adapté à notre besoin.
+
+12
+
+Objectifs globaux
+
+Objectifs techniques
+
+De plus, il sera nécessaire d’étudier diﬀérentes fonctions d’indexation pour
+trouver la plus adaptée au résultat attendu. La présence de langage SMS, de
+fautes et de smileys impose également le développement de thésaurus de langue
+pour permettre le traitement des messages.
+
+Une fois le graphe sémantiquement pondéré, l’objectif est de faire apparaître
+
+les phénomènes sous-jacents au corpus et de permettre leur visualisation.
+
+Cette visualisation se fera en chargeant le ou les graphes obtenus dans un
+logiciel d’analyse et de visualisation permettant de classer, regrouper, spatialiser
+et ﬁltrer les données obtenues pour visualiser des communautés thématiques. Une
+autre recherche bibliographique sera donc nécessaire pour déterminer quelle plate-
+forme de visualisation utiliser.
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+13
+
+5. Etat de l’Art
+
+Dans ce chapitre, nous faisons le point sur les diﬀérentes informations à notre
+disposition permettant de répondre au sujet. Cette étape nous permet d’une part
+d’identiﬁer des technologies, méthodes et outils que nous pourrons appliquer à
+notre sujet, d’autre part la lecture d’articles relatifs aux spéciﬁcités d’un corpus
+SMS nous permet de mieux cerner le sujet. Notre sujet portant sur la représen-
+tation et l’analyse de graphes à partir du corpus, il nous sera dans un premier
+temps nécessaire de stocker ce corpus, ce qui nécessitera de déterminer une solu-
+tion de base de donnée. D’autre part, comme déﬁni dans les objectifs techniques,
+nous avons à réaliser la construction du graphe. Et pour se faire, d’attribuer des
+indices aux messages, expressions et émetteur. Pour se faire, la majorité de notre
+projet, et également de notre bibliographie portera sur le traitement sémantique
+du corpus. Nous aurons ainsi à étudier les particularités de ce corpus, et les outils
+adaptés pour réaliser des statistiques sémantiques sur celui-ci.
+
+5.1. Détermination du système de gestion de
+
+base de données
+
+Comme expliqué précédemment, la première étape de notre recherche portera
+sur le système à même de stocker nos données. De plus, comme vu avec notre
+client une solution intégrant des solutions d’analyse syntaxiques et sémantiques
+directement seraient préférable à des systèmes de base de données nécessitant
+des outils externes pour le traitement sémantique. En outre, notre client nous a
+encouragé à utiliser des SGBDR (dont appartenant à la catégorie des solutions
+SQL), et plus particulièrement SQL Server dont il a déjà éprouvé l’eﬃcacité sur
+des projets similaires. Nous comparerons cependant dans un premier temps les
+systèmes SQL et NoSQL puis les diﬀérentes solutions correspondant au modèle
+choisi.
+
+14
+
+Etat de l’Art
+
+Détermination du système de gestion de base de données
+
+5.1.1. Type de SGBD
+
+Avant de choisir le logiciel de SGBD qui hébergera nécessairement le corpus,
+nous devons déterminer quelle architecture de base de données nous allons utili-
+ser.
+On dénombre plusieurs architectures principales, la première étant les bases de
+données relationnelles (SGBDR,type SQL) et les autres types étant réunis sous le
+terme générique NoSQL (qui signiﬁe Not Only SQL, soit des architectures n’uti-
+lisant pas, ou pas uniquement de modèle relationnel et de requêtes SQL).
+
+Nous allons à présent étudier les diﬀérentes possibilités techniques de chaque
+architecture. Les divergences entre celles-ci pouvant se diviser en plusieurs do-
+maines : nature des données à stocker, vitesse et souplesse de développement,possibles
+problèmes, optimisation des requêtes et de l’analyse sémantique en particulier.
+Ceci nous permettra de déterminer celle qui se prête le plus à la représentation
+des données de notre corpus ainsi qu’aux données produites par notre analyse.
+
+BD Relationnelle
+
+Une base de données relationnelle se base sur la représentation des données
+sous forme de tables à deux dimensions. Une colonne correspond à un attribut, et
+une ligne est un n-uplet. Pour permettre de réaliser des opérations entre les diﬀé-
+rentes tables, on utilise des clés : La clé primaire est un attribut ou un ensemble
+d’attributs permettant d’identiﬁer de manière unique le n-uplet recherché. Une
+clé étrangère est un attribut dans la table utilisable comme clé primaire dans une
+autre table.
+
+La structure d’une telle base doit être conçue à l’avance pour en assurer l’in-
+tégrité. Toute modiﬁcation ultérieure ne peut être faite sans reconstruction de la
+base, ce qui peut être problématique dans un contexte temps réel. Pour récupé-
+rer des informations sur la base, on utilise le langage de requête SQL (Structure
+Query Language) qui est un langage déclaratif , c’est à dire où la requête décrit
+le résultat attendu et non les opérations nécessaires pour l’obtenir. Les opérations
+entre les tables se basent sur des opérateurs linéaires et il est possible de gérer plu-
+sieurs utilisateurs ayant des droits diﬀérents sur la base. Ce langage est puissant
+et pérenne, bien adapté aux requêtes impliquant plusieurs lignes ou des jointures
+complexes. Les SGBDRs répondent aux propriétés ACID (Atomicité, Cohérence,
+Isolation, Durabilité), quatre grandes propriétés qui garantissent la ﬁabilité des
+requêtes.
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+15
+
+Etat de l’Art
+
+Détermination du système de gestion de base de données
+
+Atomicité : Cette propriété assure que toute requête est exécutée entière-
+ment ou pas du tout. Cette propriété doit être assurée malgré les pannes,
+erreurs et autres crash.
+
+Cohérence : Toute opération doit amener la base d’un état valide à un
+autre état valide, sans violer aucune contrainte de la base, en appliquant
+les cascades et les triggers.
+
+Isolation : On garantit ici que l’exécution concomitante de plusieurs re-
+quêtes produit le même résultat que l’exécution en série des dites requêtes.
+Il est donc nécessaire de gérer les conﬂits de lecture/écriture sur une même
+ressource.
+
+Durabilité : La durabilité impose que toute requête qui a été executé doit
+placer la base dans un état durable, malgré un crash de la base immédiate-
+ment après. Cette propriété impose que les requêtes (ou les modiﬁcations
+induites sur la base) soient conservées dans une mémoire non-volatile pour
+pallier aux coupures de courant.
+
+Cependant, les SGBD utilisant NoSQL oﬀrent généralement une meilleure
+vitesse de développement d’une solution et des possibilités d’extension ultérieure
+de la base à moindre coût[22].
+
+Les SGBDR sont ainsi plus adaptés à pour stocker des données relationnelles,
+dont la forme n’est pas amenée à changer, et pour y opérer des requêtes complexes
+de manière eﬃcace. Les problèmes d’échelle et de souplesse des données représen-
+tées ne nous concerne pas réellement puisque le corpus n’est pas amené à changer.
+De plus, la plupart des SGBDR permettent d’utiliser des fonctions de traitement
+du langage, notamment les index Full-Text.
+
+NoSQL
+
+Comme expliqué précédemment, les bases de données NoSQL sont une alter-
+native aux bases de données relationnelles. Pouvant représenter les données sous
+d’autres formes et s’accordant quelques écarts aux propriétés ACID, les bases
+NoSQL oﬀrent de meilleurs possibilités de scalabilité horizontale et permettent
+des schémas dynamiques et l’absence de schéma pour les données. Elles répondent
+au théorème CDP (Cohérence, haute Disponibilité, tolérance au Partitionnement)
+qualiﬁant les système distribués :
+
+Cohérence : Tous les noeuds voient les mêmes données au même moment.
+Disponibilité : Garantie que toute requête eﬀectuée reçoit une réponse boo-
+
+léenne quant au succès de leur exécution.
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+16
+
+Etat de l’Art
+
+Détermination du système de gestion de base de données
+
+Tolérance au partitionnement : En cas de problème morcelant le réseau
+en sous-réseau, chacun doit pouvoir opérer de manière autonome (seule
+une panne totale du réseau doit le rendre totalement indisponible
+
+Les schémas dynamiques permettent de faire évoluer la base tout au long
+du développement d’un projet au fur et à mesure de l’ajout de nouvelles fonc-
+tionnalités créant de nouveaux attributs. Ainsi, il n’est pas nécessaire de devoir
+recharger complètement la base. Ces fonctionnalités permettent des vitesses de
+développement plus rapides, adaptées notamment aux méthodes agile et Scrum.
+A l’inverse des SGBDR, ne permettant qu’une scalabilité verticale, c’est à dire
+un amélioration des capacités du serveur gérant le système, les bases NoSQL per-
+mettent une scalabilité horizontale simple en rajoutant des serveurs d’appoint.[19]
+On voit ainsi que les bases NoSQL permettent plus de souplesse quant au
+schémas, facilitant un développement plus rapide, et pour des volumes de données
+très importants, ceci grâce à la scalabilité horizontale.
+
+Ces modèles, à l’inverse des modèles SQL privilégient le modèle des données
+
+à l’exécution des requêtes.
+
+Présentons maintenant les 4 grandes familles de solutions NoSQL :
+
+Clé/valeur Reprenant le principe du Hashmap, ce type de base NoSQL est le
+plus simple : Chaque élément est stocké sous la forme d’un couple clé-valeur. Un
+élément ne peut être récupéré que par sa clé et les valeurs peuvent être de tous
+types. Ceci permet de représenter des données polymorphiques et non structurées
+puisque les couples clé-valeur n’ont pas à répondre à un schéma prédéﬁni. Les
+visées d’un tel modèle sont les performances et la scalabilité qui peuvent être
+grandement optimisées de part la simplicité des méthodes d’accès aux données.
+Cependant, les requêtes n’utilisant pas la clé principale nécessitent la construction
+d’index secondaires par l’utilisateur, la plupart des bases clé-valeur ne proposant
+pas de solutions d’index secondaire, ou de piètre qualité.[19] Plusieurs autres types
+de bases NoSQL s’appuient sur ce modèle, notamment les modèles "document" et
+"column family".
+
+Column Family Ce modèle de données, basé sur le modêle clé-valeur associe à
+une clé une valeur qui est un ensemble de colonnes. Chaque colonne est elle même
+constituée de 3 champs, le nom de la colonne, sa valeur et un timestamp. Chaque
+tuple peut être constitué d’un nombre variable de colonnes. Dans un SGBDR, il
+serait nécessaire de mettre des champs à Null pour obtenir un tel résultat. Il est
+possible de regrouper plusieurs colonnes dans des super colonnes, comme dans le
+schéma ci-dessous. On parle alors de Super Column family.
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+17
+
+Etat de l’Art
+
+Détermination du système de gestion de base de données
+
+Ce système possède les mêmes avantages et inconvénients qu’une base clé-
+valeur : Accès par clé principale uniquement, mais très bonne scalabilité, avec une
+meilleur capacité à représenter des données complexes de manière cohérente.
+
+Base de données orientée document Les bases de données orientées docu-
+ment sont un dérivé du modèle clé-valeur, où la valeur est un document structuré
+(en JSON par exemple). De fait, chaque document est donc un objet, dont chaque
+champ peut contenir une chaîne de caractère, un tableau, un booléen...
+
+Cette modélisation permet un accès rapide aux données, correspond bien à
+
+la POO, ainsi qu’à la méthode agile, avec un schéma dynamique.
+
+De plus, les requêtes peuvent porter sur les diﬀérents champs du document,
+donc les bases Documents ne souﬀrent pas des faiblesses des bases clé-valeur, et
+de nombreux index peuvent être créés pour accélérer ces requêtes.
+
+Base de données orientée graphe Une base de données orientée graphe re-
+présente les données sous forme de noeuds reliés entre eux par des arcs. Cette
+modélisation favorise les relations entre les éléments. Ce modèle devient intéres-
+sant lorsque les données n’ont pas une forme tabulaire et que l’interconnexion des
+données est importante.
+
+Les données sont stockées sous forme d’objets-noeuds, ayant diﬀérentes pro-
+priétés, chaque type de noeuds est stocké dans une table diﬀérente, et les relations
+entre noeuds sont stockés sous forme de pointeurs physiques.
+
+Les requêtes permettent d’étudier des relations complexes au sein de la base
+de manière optimisée mais sont moins eﬃcaces pour des requêtes classiques, pour
+lesquelles on créé des index secondaires.
+
+Ces modèles ne sont pas spéciﬁquement destinés aux gros volume de données,
+mais permettent également une bonne scalabilité horizontale et s’adaptent bien à
+des développements orientés objet.
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+18
+
+Etat de l’Art
+
+Détermination du système de gestion de base de données
+
+De plus, contrairement à d’autres modèles NoSQL, les modèles orientés graphe
+
+répondent aux propriétés ACID.
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+19
+
+Etat de l’Art
+
+Détermination du système de gestion de base de données
+
+Comparaison des diﬀérentes solutions
+
+On a vu précédemment les avantages et inconvénients des diﬀérentes solu-
+
+tions, que l’on pourrait résumer dans le tableau suivant.
+
+SQL
+
+cle/valeur
+
+Langage de requêtes puissant
+
+index full text
+
+absence de schéma
+
+scalabilité
+
+NoSQL
+
+Column Family orientée document
+schéma dynamique
+adapté POO/agile
+
+absence de schéma
+
+scalabilité
+
+scalabilité
+
+orientée graphe
+schéma dynamique
+
+optimisé pour requetes relationnelles
+
+scalabilité
+
+schéma ﬁxe
+
+scalabilité verticale
+
+index secondaires
+
+index secondaire
+
+faiblesses sur requêtes classiques
+
++
+
+-
+
+On constate que la majorité des avantages octroyés par les solutions NoSQL
+sont en rapport avec la scalabilité et le polymorphisme des données. Or, notre
+travail s’eﬀectuant sur un corpus ﬁni, la forme des données n’est pas amené à
+changer, pas plus que le volume de données à exploiter.
+
+Une solution exposé lors de notre première présentation de projet était l’uti-
+lisation de la solution graphDB neo4j couplé à la librairie java d’index et de re-
+cherche Lucene. Cependant, il ressort des recherche que nous avons fait sur le sujet
+que l’utilisation de ranking avec Lucene nécessiterait le développement d’une ex-
+tension. D’autre part, notre projet nécessite des pré-traitements, notamment la
+suppression des mots bruits, avant de donner une structure de graphe aux don-
+nées. De fait, il serait nécessaire si l’on choisissait cette solution de procéder à ces
+pré-traitements dans un SGBDR et/ou par programmation avant de les transfé-
+rer sur le graphstore pour procéder au ranking. Bien que cette solution puisse se
+justiﬁer au niveau des temps d’exécutions pour un grand jeu de données, le temps
+d’installation, de développement et d’intégration supplémentaire est rédhibitoire
+pour un projet tel que le notre en comparaison d’architectures intégrant native-
+ment des fonctions de traitement de langage naturel et de recherche de données
+relationnelles comme le font la plupart des SGBD actuels, puisque nous risquerions
+de ne même pas obtenir de graphe exploitable à la ﬁn de l’année.
+
+C’est pourquoi les solutions SQL, aux outils sémantiques et syntaxiques déja
+intégrés et à la topographie plus adaptés à notre projet on étaient choisies. Il est
+maintenant nécessaire de déterminer quelle solution SQL utiliser.
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+20
+
+Etat de l’Art
+
+Détermination du système de gestion de base de données
+
+5.1.2. Choix d’une solution de base de donnée
+
+relationnelle
+
+Suivant l’orientation donnée par le client, nous avons retenu deux SGBDR
+dotés de fonctions natives de traitement du langage naturel, en adéquation aux
+objectifs du projet. Nous allons donc comparer ces deux systèmes SQL concurrents.
+
+Oracle
+
+Oracle Database est un système de gestion de base de données relationnelle
+développé par Oracle Corporation et dont le développement a commencé en 1977.
+En outre, il intègre, depuis la version 8, le support du modèle objet.
+
+Ce SGBDR intègre diﬀérentes fonctionnalités qui font de lui un très bon
+outil de gestion de base de données. En eﬀet, comme la plupart des SGBD, ses
+fonctionnalités principales sont, entre autres, l’utilisation du SQL, du PL/SQL qui
+est un langage de programmation utilisé pour les procédures stockées ainsi que
+les triggers (utilisé en parrallèle avec du Java) ainsi que la gestion de très grands
+volumes de données.[13]
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+21
+
+Etat de l’Art
+
+Détermination du système de gestion de base de données
+
+Figure 5.1. – Oracle SQL Developper - IDE pour Oracle Database
+
+Nous nous sommes plus particulièrement intéressés aux outils lexico-sémantiques
+
+fournis par Oracle Database. Ces outils sont présents dans Oracle Text, une ex-
+tension de Oracle Database permettant de manipuler du texte. Cependant, il ne
+fournit pas d’outils d’analyse du texte à proprement parler. Ces outils sont uti-
+lisés majoritairement pour ﬁltrer et extraire le contenu de diﬀérents formats de
+documents comme des ﬁchiers PDF, Word, HTML et XML.
+
+Oracle Text fournit, par exemple, un analyseur lexical qui va diviser le texte
+traité en une suite de mot et qui va eﬀectuer une série d’opération aﬁn d’enlever
+la ponctuation ainsi que le bruit, c’est à dire les mots jugés "inutiles".
+
+Chaîne de caractère
+Aha ! C’est le train de 5h15, il faut que tu viennes !
+
+Chaîne d’origine
+Chaîne sans ponctuation aha c’est le train de 5 15 il faut que tu viennes
+aha *** ** train ** 5 15 ** faut ** tu viennes
+Chaîne sans bruit
+
+Table 5.1. – Exemple d’utilisation de l’analyseur lexical [10]
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+22
+
+Etat de l’Art
+
+Détermination du système de gestion de base de données
+
+Dans cet exemple, on peut observer l’action de l’analyseur lexical sur une
+phrase simple. On peut s’interroger sur la façon dont il juge un mot inutile ou non.
+On peut quand même modiﬁer les paramètres de l’analyseur lexical, notamment
+en choisissant d’être sensible ou non à la casse ou bien de déﬁnir des caractères
+spéciaux pour la séparation des termes de la phrase. Par exemple "PL/SQL" de-
+vrait être indexé comme "PL et "SQL" mais le caractère "/" lie les deux mots et
+la séparation n’aura pas lieu sauf si cela est précisé dans les paramètres.
+
+L’analyseur lexical est un exemple des outils disponible dans Oracle Text
+mais comme nous l’avons précisé précédemment, il n’y a que très peu de fonction
+de ranking basées sur des statistiques linguistiques (aussi ﬁnes soient-elles).
+
+Malgré cela, Oracle Text oﬀre un des meilleurs ensembles multilingues. En
+eﬀet, il peut eﬀectuer des recherches dans des documents dans les langues occi-
+dentales (anglais, français, espagnol, allemand, etc.) mais aussi japonais, coréen,
+chinois traditionnel et simpliﬁé.
+
+SQL Server
+
+SQL Server est lui aussi un système de gestion de bases de données rela-
+tionnelle mais qui est développé par Microsoft. Ce SGBD est utilisé généralement
+avec d’autres outils développés par Microsoft, comme Microsoft Visual Studio ou
+Windows Server.
+
+Tout comme Oracle Database, il intègre les fonctionnalités de base d’un
+SGBD mais aussi le Transact-SQL, qui correspond plus ou moins au PL/SQL
+permettant l’implémentation de procédures stockées, de triggers, etc. SQL Ser-
+ver intègre également un optimisateur de requêtes avancé ainsi que que la prise en
+charge native de XML, notamment des schémas XQuery et XML. Ce dernier point
+est important puisqu’on verra par la suite le lexique ouvert des formes ﬂéchies du
+français appelé Morphalou présenté sous format XML. [15]
+
+Ce qui va nous intéresser, ce sont plus les outils lexico-sémantique oﬀerts
+par SQL Server. Dans sa version gratuite, le système intègre des words stemmers
+et word breakers pour les langues les plus courantes, à l’instar de PostGreSQL.
+Ceux-ci sont très puissants comme la recherche sémantique, utilisé aﬁn d’indexer
+des documents (en l’occurence des SMS) et de les diviser en mots-clés et de les
+marquer en fonction de l’analyse statistique. Ce s bases de traitement du langage
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+23
+
+Etat de l’Art
+
+Détermination du système de gestion de base de données
+
+Figure 5.2. – SQL Server Management Studio - IDE pour SQL Server
+
+permettent d’associer la racine d’un mot à ses inﬂexions (conjugaisons de verbes,
+accords de genre et de nombre). L’extraction des termes des diﬀérentes phrases
+peut se faire de deux manières diﬀérentes. Soit c’est une extraction qui va essayer
+de regrouper des ensembles de mots ensemble, soit c’est une extraction qui va
+simplement séparer tous les termes en mots simples, sans chercher à voir le lien
+entre les diﬀérents termes de la phrase. L’étape suivante consiste à éviter les mots
+bruits ou mots vides (stopwords) au cours des phases d’indexation et de recherche
+d’information. Ce sont des mots qui sont trop communs et qui ne contiennent pas
+d’informations utilisables (comme "dans" ou "la"). [14]
+
+SQL Server, dans la dernière version à jour, ne supporte que les unigrammes.
+Un unigramme correspond à un seul mot alors que des n-grammes sont des com-
+binaisons de mots (expressions par exemple). Le mot "Google Chrome" ne peut
+être pris en charge comme une seule entité, du moins lors du stockage. [14]
+
+SQL Server, contrairement à Oracle, contient des outils de statistiques séman-
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+24
+
+Etat de l’Art
+
+Traitement automatisé d’un corpus SMS
+
+tiques en créant des indices internes pour les colonnes de recherche sémantique aﬁn
+de déterminer l’importance des termes dans un texte donné (en utilisant notam-
+ment la fréquence du terme). [14]
+
+Comparaison
+
+La visualisation étant sur des communautés thématiques, nous avons choisi
+d’utiliser SQL Server car il intègre les outils nécessaires à la réalisation du projet et
+il n’est pas indispensable de re-développer ces outils lexico-sémantiques. De plus,
+Mr. Thovex a travaillé avec SQL Server sur de nombreux projets. Il sera donc plus
+apte à répondre à nos questions techniques, s’il y en a.
+
+5.2. Traitement automatisé d’un corpus SMS
+
+Nous allons dans cette partie abordé les outils nécessaires à la partie princi-
+pale de notre projet, le traitement sémantique du corpus permettant d’obtenir la
+pondération des termes, messages et utilisateurs nécessaire à la construction du
+graphe. Nous verrons dans un premier temps les particularités d’un tel corpus,
+puis les méthodes adaptés au traitement de celui-ci.
+
+5.2.1. Les particularités d’un corpus SMS
+
+Tout d’abord, on observe certainement dans ce corpus les variations propres
+
+à toute étude sociolinguistique [18] :
+
+Variations diatopiques : variations régionales entre les corpus (Belgique,
+France, Quebec) ainsi qu’au sein d’un même corpus (expressions locales)
+
+Variations diastriques : Variations sociaux-démographiques (profession, age,
+
+sexe, langue maternelle)
+
+Variations diaphasiques : Variations pour un même usager, en fonction
+
+du destinataire
+
+De plus, comme les autres formes de DEM (discours électroniquement médié),
+le language SMS peut diﬀérer grandement dans ses pratiques des autres formes
+d’écrits traditionnels, celles-ci étant plus sujettes aux contraintes institutionnelles
+de la langue. Il présente "une absence quasi totale de normes et une créativité
+lexicale extrêmement riche" [9]. Ce phénomène est ampliﬁé par les limitations
+du média et le type d’usage correspondant. Ainsi, un SMS est constitué d’un
+message ne pouvant dépasser 160 caractères. Bien que les nouvelles générations
+de téléphones permettent de fractionner un plus long message et de l’envoyer par
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+25
+
+Etat de l’Art
+
+Traitement automatisé d’un corpus SMS
+
+parties, on observe sur la distribution des SMS par nombre de caractères des eﬀets
+de seuils à 160 et 320 caractères.Une preuve que la contrainte de longueur est un
+facteur important dans la rédaction de SMS. De fait, la nécessité de concision
+pousse l’auteur à parfois optimiser son nombre de caractère.
+
+D’autre part le nombres de jeunes utilisateurs dans le corpus est plus impor-
+
+tant que dans la population, comme le montre le tableau ci-dessous.
+
+Figure 5.3. – Répartition des utilisateurs selon leur classe d’âge, dans le corpus
+
+et dans la population [9]
+
+Ceci pourrait s’expliquer de deux manières : Ou une utilisation plus impor-
+tante des SMS par les populations jeunes, ou un biais dans le corpus s’exprimant
+par une sureprésentation des jeunes utilisateurs. Cependant, le tableau ci-dessous
+laisse envisager qu’il s’agit de la première possibilité.
+
+2006 2007 2008
+Ensemble des équipés mobiles 71% 72% 79%
+98% 97% 97%
+21-24 ans
+25-39 ans
+87% 85% 93%
+49% 56% 59%
+40 ans et +
+
+Table 5.2. – Utilisation des SMS "au moins de temps en temps" [6]
+
+Ces populations jeunes ont plus particulièrement tendance à utiliser le sms
+plutôt qu’un appel téléphonique, bien qu’on retrouve ce phénomène chez les autres
+utilisateurs. On observe plusieurs usages liés au sms et inﬂuant sur la syntaxe
+employée :
+
+Usage ludique Certains utilisateurs écrivent des SMS de manière ludiques,
+en "cryptant" leur message de manière à rendre le déchiﬀrage également
+ludique pour le destinataire.
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+26
+
+Etat de l’Art
+
+Traitement automatisé d’un corpus SMS
+
+Usage mettant en jeu l’aﬀect Le SMS peut être employé pour faciliter
+l’expression de sentiments, parfois à grand renfort de smileys ou modiﬁ-
+cations syntaxiques ("mon amoureuuuuuuuuse :) ")
+
+Facilité d’usage La facilité d’usage peut pousser des utilisateurs à employer
+le SMS lorsqu’ils sont encombrés ou au volant par exemple, et donc gênés,
+ce qui les pousse à réduire le nombre de caractères.
+
+De plus, la communauté des utilisateurs de SMS n’est pas un tout uniforme,
+mais est constitué de "sous-groupes présentant chacun leurs particularismes"[20].
+et un utilisateur peuvent appartenir ou être en contact avec plusieurs de ces sous-
+groupes, les variations diaphasiques sont d’autant plus importantes.
+
+Dès lors, les expressions étant propres à chaque expéditeur, voir à chaque
+conversation avec un destinataire particulier, une approche quantitative de l’ana-
+lyse des données s’impose pour faire apparaître des phénomènes sous-jacents au
+corpus mais invisibles à une approche qualitative, ainsi que pour pouvoir quantiﬁer
+l’importance de ces phénomènes.
+
+Cependant, l’automatisation de ce processus est complexe, de part la créati-
+vité lexicale vue ci-dessus. Ainsi, lors d’une étude portant sur les salutations dans
+un corpus SMS, les auteurs ont observés 13 formes principales de salutation, avec
+de nombreuses variantes pour chacun (17 variantes de bonjour).
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+27
+
+Etat de l’Art
+
+Traitement automatisé d’un corpus SMS
+
+Figure 5.4. – Statistiques pour les diﬀérentes formes et variantes de salutation
+
+[9]
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+28
+
+Etat de l’Art
+
+Traitement automatisé d’un corpus SMS
+
+Ces multiples variations sont diﬃciles à traiter de manière automatisé car on
+
+trouve dans le corpus de nombreux types de modiﬁcations :
+
+Substitution phonétique : Substitution totale d’un son par des caractères
+uniques ("o" pour "eau, "7" pour "cet") ou bien substitution partielle d’un
+digramme/trigramme dans le mot ("ossi" pour "aussi, "bo" pour "beau"
+).
+
+Réduction graphique : Suppression des lettres muettes en ﬁn de mot ("chian"
+
+pour "chiant").
+
+Suppressions graphiques : Suppression de ponctuation ou de signes dia-
+
+critiques ("ca" pour "ça" ).
+
+Acronymes et agglutinations : Utilisation d’acronymes et d’expressions
+constitués de la concaténation phonétique de plusieurs mots, avec parfois
+des substitutions phonétiques ("asv pour "Age, sexe, ville", "OKLM" pour
+"au calme").
+
+Augmentations et ajouts : Répétitions de caractères et ou de ponctua-
+tion ("suuuuuuuuuuuuuuuuuupppeeeeeeeeeeeerrr ! ! ! ! !"), Ajouts de ca-
+ractères ("oki" pour "ok").
+
+Smileys et onomatopées : Ajout de termes n’ayant pas d’existence syn-
+taxique, mais ayant un intérêt pour la compréhension sémantique du texte
+( " :(", "bouarf", "arﬀf").
+
+On voit ainsi que le traitement du corpus étendu va nécessiter des pré-
+traitements permettant de passer outre les nombreuses variations orthographiques
+présentes. C’est pourquoi nous travaillerons dans un premier temps sur le corpus
+restreint corrigé, comportant toujours des smileys et des expressions familières,
+mais ou la sémantique du message a été rétablie. On utilisera des thésaurus de
+langue aﬁn de regrouper diﬀérents termes. La solution choisie implémente native-
+ment la prise en compte de tels thésaurus.
+
+5.2.2. Outils d’analyse sémantique
+
+Nous allons voir dans la partie suivante les diﬀérents outils permettant de
+travailler sur ce corpus restreint, puis les possibilités d’adaptation des méthodes
+du corpus restreint au corpus étendu.
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+29
+
+Etat de l’Art
+
+Traitement automatisé d’un corpus SMS
+
+Index FullText
+
+L’index en texte intégral est un index pouvant être créer sur une ou plusieurs
+colonnes de texte (de type char, varchar, nchar, nvarchar, text, ntext, image, xml
+ou varbinary(max)). On peut ensuite eﬀectuer des requetes en texte intégral eﬀec-
+tuant des recherches linguistiques sur des mots ou des expressions. L’index Full-
+Text permet également d’accélérer les requêtes sur le contenu de colonnes de texte.
+Les méthodes de ranking exposées ci-dessus étant toutes centrées sur le contenu
+des messages du corpus, cet index se révélera nécessaire pour une exécution en un
+temps abordable.
+
+Morphalou
+
+Pour automatiser une partie des processus d’épuration des mots bruits et
+de ranking, nous avons besoin d’un lexique de termes français. Morphalou est un
+lexique ouvert disponible en ligne et édité par le centre national des ressources tex-
+tuelles et lexicales. Il fournit 540 000 formes ﬂéchies (conjuguées pour les verbes,
+accordées pour les noms, etc) de plus de 68 000 formes lémmatisées (forme can-
+nonique du mot, comme présent dans le dictionnaire), ainsi que leur nature gram-
+maticale. On le télécharge sous forme d’un ﬁchier XML qu’on importera dans la
+base de donnée.
+
+Requêtes en texte intégral
+
+Ces ranking s’appuyent sur deux fonctions de requête en texte intégral :
+FREETEXTTABLE et CONTAINSTABLE. Ces deux requêtes permettent de
+chercher les occurences exactes ou approchées d’un terme recherché dans une table.
+Ces requêtes doivent porter sur des colonnes disposant d’un index FullText. Elles
+s’utilisent dans les clauses FROM d’une requete SELECT et renvoient une table.
+Cette table contient notamment une colonne correspondant à l’index FullText
+du terme(unique) et une colonne rank, attribuant une valeur comprise entre 0 et
+1000 reﬂétant la proximité du terme au critère de sélection. Ces deux opérateurs
+se basent sur les metriques classiques d’analyse de texte que sont tf et idf. Nous
+allons maintenant détaillé plus avant les formules de ces diﬀérentes métriques.
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+30
+
+Etat de l’Art
+
+Pondération pour la fouille de texte
+
+5.3. Pondération pour la fouille de texte
+
+5.3.1. tf
+
+La mesure tf présente la fréquence du terme dans le message. On utilisera
+par la suite t pour le terme recherché, d pour le document concerné et tf(t,d) la
+métrique tf du terme t appliqué au document d. Il existe plusieurs manières de
+calculer un tf :
+
+Fréquence pure : tf(t,d)=f(t,d) avec f(t,d) le nombre d’apparitions du terme
+
+t dans le document d.
+
+Fréquence Booléenne : tf(t,d)=1 si le terme est présent, 0 sinon
+Fréquence normalisée : permet de réduire un biais pour les documents longs
+
+en divisant par la fréquence maximum du document.
+0.5 ∗ tf (t, d)
+
+tf (t, f ) = 0.5 +
+
+max{f (w, d) : w ∈ d}
+
+5.3.2. idf
+
+L’idf est la fréquence inverse de document, elle permet de reﬂéter l’infor-
+mation apportée par le terme, c’est à dire observer si le terme est très pré-
+sent(commun) dans le corpus ou plutôt rare (signiﬁcatif).Ici, D désigne le corpus
+et N le nombre de documents qu’il contient.
+
+idf (t, D) = log
+
+N
+
+|{d ∈ D : t ∈ d}|
+
+Un terme présent dans tous les documents obtiendra donc un indice de 0.
+
+5.3.3. tf-idf
+
+Le TF-IDF est une métrique statistique permettant de reﬂéter la prégnance
+d’un terme dans un document au sein d’un corpus. La métrique tf-idf s’obtient
+simplement en réalisant le produit des deux fonctions précédentes.
+
+tf idf (t, d) = tf (t, d) ∗ idf (t, D)
+
+Comme on a vu précédemment, le tf met en avant l’importance du terme
+dans le document, et l’idf permet de relativiser cette importance en observant si le
+terme est commun ou rare. Ainsi, un terme rare à l’échelle du corpus et très pré-
+sent dans le document obtiendra une très haute statistique, ce qui témoignera de
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+31
+
+Etat de l’Art
+
+FREETEXTTABLE et CONTAINSTABLE
+
+l’importance de ce terme dans le document. Au contraire, les termes présent dans
+la majorité des documents se verront attribuer un indice faible grâce à l’incidence
+de l’idf.
+
+5.3.4. Okapi BM25
+
+L’algorithme BM25 (Best Match 25) est une version perfectionnée de tf-idf
+
+adaptée aux requêtes portant sur plusieurs termes.
+
+n(cid:88)
+
+i=1
+
+Score(d, Q) =
+
+IDF (qi) ∗
+
+(k1 + 1) ∗ f (qi, d)
+
+f (qi, d) + k1 ∗ (1 − b + b ∗ dl
+avdl)
+
+5.4. FREETEXTTABLE et CONTAINSTABLE
+
+Les fonctions de ranking utilisées par SQL server sont disponible sur la do-
+
+cumentation en ligne[17] :
+
+5.4.1. CONTAINSTABLE
+Pour un seul terme
+
+Avec :
+IndexedRowCount : Nombre de documents
+KeyRowCount : Nombre de documents contenant le terme recherché.
+MaxOccurrence : La fréquence maximum observé dans le corpus.
+MaxQueryRank : Le rank maximum attribuable par la fonction,1000.
+Hitcount : La fréquence observée du terme dans le document.
+
+StatisticalW eight = 2(
+
+)
+
+2 + IndexedRowCount
+
+KeyRowCount
+
+On observe que StatisticalWeight correspond à un IDF, avec l’ajout de la constante
+’2’ pour augmenter la dispersion.
+
+Rank = min(M axQueryRank,
+
+HitCount ∗ 16 ∗ StatisticalW eight
+
+M axOccurrence)
+
+En reformulant l’équation précédente avec les notations utilisées pour le tf-idf,
+
+on obtient :
+
+Rank(t, d) = min(1000, idf (t, D) ∗ HitCount ∗ 16
+
+M axOccurrence)
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+32
+
+Etat de l’Art
+
+FREETEXTTABLE et CONTAINSTABLE
+
+On observe la fraction
+
+HitCount ∗ 16
+M axOccurrence)
+
+qui peut être assimilée à un tf normalisé. Finalement, le ranking de CONTAINS-
+TABLE pour un terme peut ainsi être vu comme un tf-idf, c’est à dire une mesure
+de prégnance.
+
+Pour plusieurs terme
+
+ContainsRank : Formule de CONTAINSTABLE pour un terme
+Weight : Pondération du terme dans la requête, par défaut le poids est 1.
+
+W eightedSum =
+
+tf idf (i, d, Q) ∗ W eight(i)
+
+Rank =
+
+n(cid:80)
+
+i=1
+
+(M axQueryRank ∗ W eightedSum)
+
+tf idf (i, d, Q)2 +
+
+W eight(i)2 − W eightedSum
+
+n(cid:88)
+
+i=1
+
+n(cid:80)
+
+i=1
+
+a∗b
+
+Le ranking multiterme et pondéré est de la forme
+
+a2+b2+a∗b. On observe donc
+un produit sur somme, opération usuelle pour augmenter la dispersion de la me-
+sure. Cependant au dénominateur, les termes sont élevés au carré, ce qui permet
+sûrement de limiter cette dispersion pour garder des valeurs homogènes avec celles
+renvoyées par le ranking monoterme. La présence de W eightedSum au dénomi-
+nateur est certainement un autre ajustement de la formule visant à augmenter les
+valeurs du ranking.
+
+5.4.2. FREETEXTTABLE
+
+n(cid:88)
+
+Score(d, Q) =
+
+w ∗ (k1 + 1).tf (qi, d)
+
+k + tf (qi, d)
+
+∗ (k3 + 1) ∗ qtf
+
+k3 + qtf
+
+(r + 0.5) ∗ (N − R + r + 0.5)
+(R − r + 0.5)(n − r + 0.5)
+
+i=1
+
+w = log10
+
+K = (k1((1 − b) +
+
+b ∗ dl
+avdl
+
+))
+
+on a :
+
+R : Nombre de documents annotés[26].
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+33
+
+Etat de l’Art
+
+FREETEXTTABLE et CONTAINSTABLE
+
+r : Nombre de documents annotés contenant le terme ti.
+N : Nombre de documents indexés.
+n : Nombre de documents indexés contenant le terme ti.
+k1 : 1.2
+b : 0.75
+k3 : 8.0
+dl : longueur du document.
+avdl : Longueur moyenne d’un document du corpus
+qtf : Fréquence relative de documents matchant la requête et contenant la
+
+forme lémmatisée (variant entre 0 et 1).
+
+K = (1.2(0.25 + 0.75
+
+)) = 0.3 + 0.9
+
+n(cid:88)
+
+i=1
+
+w ∗
+
+dl
+
+avdl
+2.2 ∗ tf (qi, d)
+
+dl
+
+avdl
+
+∗ 9 ∗ qtf
+
+8 + qtf
+
+Score(d, Q) =
+
+0.3 + 0.9 dl
+
+avdl + tf (qi, d)
+
+On peut reconnaître un okapi BM25, auquel a été ajouté un facteur
+
+9 ∗ qtf
+8 + qtf
+
+.
+
+Pour w :
+En l’absence d’annotation, on a r = 0 et R = 0, on obtient alors :
+
+w = log10
+
+0.5 ∗ (N + 0.5)
+0.5 ∗ (n + 0.5)
+
+w = log10
+
+(N + 0.5)
+(n + 0.5)
+
+On identiﬁe aisément un idf dans cette forme simpliﬁée. w est donc un idf
+modiﬁé permettant de gérer l’annotation de documents jugés plus pertinents [25].
+Ainsi, Score(d, Q) devient :
+
+Score(d, Q) =
+
+idf (qi, D) ∗ tf (qi, d) ∗
+
+0.3 + 0.9 dl
+
+2.2
+avdl + tf (qi, d)
+
+∗ 9 ∗ qtf
+
+8 + qtf
+
+n(cid:88)
+
+i=1
+
+Score(d, Q) =
+
+n(cid:88)
+
+i=1
+
+idf (qi, D) ∗
+
+2.2 ∗ tf
+
+a + tf (qi, d)
+
+∗ b
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+34
+
+Etat de l’Art
+
+Graphes et communautés
+
+Le fait de multiplier tf par 2.2 au numérateur et de l’ajouter au dénomi-
+nateur permet d’augmenter la dispersion de la fonction de ranking. Nous allons
+maintenant déterminer les eﬀets de a et b.
+
+a = 0.9 dl
+
+avdl varie entre 0 pour un document très court et 1 pour le document
+le plus long du corpus. De fait, ce facteur au dénominateur atténue la pondération
+pour les messages plus longs et renforce la pondération pour les messages plus
+courts. Ceci permet d’éviter un biais pour les documents longs qui contiennent
+donc statistiquement plus le terme recherché. (On peut constater que la méthode
+de normalisation utilisée n’est pas la même que pour CONTAINSTABLE).
+
+Pour b = 9∗qtf
+
+8+qtf , on étudie tout d’abord qtf qui correspond au ratio du nombre
+de documents contenant uniquement le mot recherché par le nombre de documents
+contenant une des formes inﬂéchies du mot. De fait, si toutes les correspondances
+trouvées sont des formes inﬂéchies diﬀérentes, alors qtf = 0 et si toutes les corres-
+pondances trouvées sont le terme exact, alors qtf = 1. Si l’on suppose maintenant
+que la distribution des diﬀérentes formes inﬂéchies est uniforme, alors qtf repré-
+sente le nombre de forme inﬂéchies du terme. Un terme n’ayant qu’une forme
+lématisée se verra attribuer un qtf = 1 et un terme ayant de nombreuses formes
+inﬂéchies aura un qtf plus faible. En revenant à b = 9∗qtf
+8+qtf , on peut maintenant
+observer que b varie également entre 0 (pour qtf = 0) et 1(pour qtf = 1). Les
+facteurs multiplicatifs et additifs permettent encore une fois d’augmenter la dis-
+persion. En multipliant le ranking par ce coeﬃcient b on favorise les termes ayant
+peu de formes inﬂéchies par rapport à ceux en ayant beaucoup. Ceci permet de
+contrebalancer le fait que FREETEXTTABLE cumule les rankings des formes in-
+ﬂéchies, favorisant au contraire les termes ayant de nombreuses formes inﬂéchies.
+FREETEXTTABLE est donc un okapi BM25 ajusté pour tenir compte des
+
+formes inﬂéchies et de disparités dans la taille des documents.
+
+Pour ce qui est de SEMANTICSIMILARITYTABLE, le détail de la fonction
+utilisé n’est pas disponible et nous n’avons donc pu réaliser une analyse similaire.
+
+5.5. Graphes et communautés
+
+L’étude de réseaux complexes possédant de nombreux noeuds et arêtes peut
+rendre l’extraction et la visualisation d’informations dans le graphe d’origine im-
+possibles. C’est pourquoi l’émergence de nombreux graphes complexes, possédant
+plusieurs millions de noeuds impose de pouvoir décomposer ce graphe en plusieurs
+structures cohérentes. L’obtention de ces communautés structurelles permet d’une
+part de découvrir des informations initialement inconnues au sein du graphe, telles
+que des thématiques au sein de réseaux d’informations ou des communautés d’in-
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+35
+
+Etat de l’Art
+
+Graphes et communautés
+
+dividus au sein de réseaux sociaux et d’autre part de permettre de meilleures
+visualisations et compréhension de la structure du graphe d’origine[2].
+
+5.5.1. Modularité
+
+L’obtention de ces communautés utilise une métrique appelé modularité qui
+permet d’évaluer la qualité du partitionnement d’un graphe. Cette valeur, qui
+peut varier sur [-1,1] et correspond au niveau d’une communauté à la fraction du
+nombre d’arêtes observé au sein de celle-ci moins le nombre d’arêtes qu’on aurait
+observé pour cette même communauté si les arcs étaient déterminés aléatoirement.
+La modularité tend vers 1 pour une structures de communautés cohérente, avec de
+nombreuses arêtes au sein des communautés et peu d’arêtes entre communautés.
+Au contraire elle tend vers -1 si le modèle présente des communautés peu denses
+en arc avec beaucoup de connexions inter-communautés. Cette métrique permet
+ainsi d’évaluer la qualité d’une structure de communautés ou d’un algorithme de
+partitionnement. La modularité peut également être utilisée directement comme
+critère à optimiser dans des algorithmes gloutons : On initialise le graphe en
+plaçant chaque noeud dans une communauté, puis on fusionne les communautés
+2 à 2 en cherchant à maximiser le gain de modularité et en réitérant le processus
+jusqu’à obtenir un graphe satisfaisant.
+
+5.5.2. Graphes bipartis
+
+La structure des données que nous obtenons à partir du corpus 88milSMS
+nous permet de construire plusieurs topologies de graphes et notamment des
+graphes multipartis. Dans un graphe biparti, on peut identiﬁer deux types de
+noeuds, apparentés généralement à des noeuds représentant les individus et les
+relations. Dans notre cas, nous avons donc les expéditeurs d’une part et les termes
+comme relation entre les expéditeurs. Cette représentation est la représentation do-
+minante pour les réseaux sociaux (personnes participants à des évènements, scien-
+tiﬁques partageant des publications, etc). On peut obtenir des graphes simples
+par projection sur une ou l’autre des catégories de noeuds. Pour ce faire, dans
+notre cas on relierait les expéditeurs ayant des termes communs, puis on étudie-
+rait le graphe obtenu et ne portant que sur les expéditeurs. L’approche habituelle
+pour extraire des communautés au sein de graphe biparti est alors de réaliser les
+opérations d’extraction tel que la modularité sur une des projections. Cependant,
+bien que cette méthode permet d’obtenir des communautés pertinente, elle peut
+également fournir des résultats non ﬁables ou incorrects [16]. Une autre alternative
+est d’appliquer des algorithmes de modularités adaptés aux graphes bipartis.
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+36
+
+Etat de l’Art
+
+5.6. Visualisation
+
+Visualisation
+
+Aﬁn de visualiser les communautés du corpus, nous avons besoin d’un outil
+de visualisation de graphe. Lors de notre première réunion avec Mr. Thovex, il
+a été convenu que nous utiliserons Gephi, un logiciel de visualisation de graphe.
+Nous allons donc en faire sa présentation technique.
+
+Gephi est un logiciel open source d’analyse de visualisation de graphes et
+de réseaux. Il utilise un moteur de rendu 3D pour l’aﬃchage de grands réseaux
+(allant jusqu’à plus de 20 000 noeuds) en temps réel pour une meilleur exploration
+du graphe. Il a notamment une architecture ﬂexible et multi-tâche apportant des
+solutions pour travailler avec des ensembles de données complexes. Il intègre des
+outils permettant de spatialiser, de ﬁltrer, de manipuler et de faire du clustering
+(classiﬁcation) sur une ensemble de données.[11]
+
+Son utilisation est multiple [12]. Gephi peut :
+- Identiﬁer des données clés : identiﬁer les leaders d’opinion dont les messages
+
+sont repris en masse par les autres utilisateurs.
+
+- Identiﬁer des groupes de personnes : à partir de données brutes, mettre en
+
+avant les communautés sur les réseaux sociaux ou corpus de SMS.
+
+- Cartographier les réseaux sociaux : très rapidement, Gephi permet d’ob-
+
+tenir une cartographie complète de Facebook ou Twitter.
+
+- Cartographier un mot clé pour un positionnement marketing.
+
+Gephi intègre des algorithmes de clustering. Par exemple, l’algorithme de
+modularité permet de regrouper les noeuds en communautés en fonction de para-
+mètres données. Cet algorithme est crucial pour notre projet car il dégagera les
+communauté en fonction du ranking des termes et expressions, qui est la ﬁnalité
+du projet. Il y a des également des algorithmes permettant de calculer des me-
+sures d’intermédiarité qui seront utile aﬁn de visualiser quels termes sont les plus
+partagés et les plus prégnants dans le corpus de SMS.
+
+Gephi possède énormément d’algorithmes comme ceux cités ci-dessus per-
+mettant de modiﬁer la conception du graphe aﬁn de visualiser les données sous
+un autre angle.
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+37
+
+Etat de l’Art
+
+Solution rejetée
+
+Figure 5.5. – Gephi - Outil d’analyse et de visualisation de graphes
+
+5.7. Solution rejetée
+
+Une solution alternative pour le traitement, l’analyse et la visualisation était
+l’utilisation du GraphStore Neo4j couplé à la bibliothèque opensource Lucene,
+permettant d’indexer et de rechercher du texte. Cependant, il aurait fallu stocker
+le corpus sous la forme de noeuds messages ayant un attribut identiﬁant du mes-
+sage et un attribut contenu du message et de noeuds utilisateur n’ayant qu’un
+identiﬁant, puis procéder au prétraitement du corpus et son nettoyage avant de
+créer un nouveau graphe ayant comme structure des noeuds pouvant être des mes-
+sages, des utilisateurs et des mots. Le pré-traitement des données se ferait à l’aide
+de Lucene, avec potentiellement des problèmes pour l’interfaçage et une automa-
+tisation moins aisée qu’avec SQLServer (avec lequel notre client est familier et
+pouvait nous conseiller). D’autre part, tous les outils s’intègrent nativement sous
+SQLServer alors qu’il aurait fallu le faire nous même avec cette autre solution.
+Notamment, les fonctions de ranking sont présentes dans SQLServer alors qu’il
+aurait fallu les intégrer à du code depuis Lucene. Une autre solution aurait été
+de réaliser le traitement sous SQLServer puis le stockage sous forme de graphe
+via Neo4j, mais ceci ne présente que peu d’intérêt aucun traitement ne serait fait
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+38
+
+Etat de l’Art
+
+Solution rejetée
+
+sur Neo4j. Pour conclure, les gains potentiels que pourraient nous apporter neo4j
+pour des accès plus nombreux à une structure de graphe ne sont pas intéressants
+compte tenu de la taille relativement faible du corpus et des temps de recherche
+et de développement supplémentaires nécessaires.
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+39
+
+6. Conception du corpus
+
+restreint
+
+Puisque il s’agit d’un projet de recherche, tous les aspects techniques ne sont
+pas maîtrisés et normalisables dans un cahier des charges. C’est pourquoi cette
+partie relève plus de la conception et sera amenée à évoluer au cours du dévelop-
+pement du projet dont les objectifs sont redéﬁnis chaque semaine. En eﬀet, nous
+avons adopté un développement agile et userdriven, et réévaluons donc réguliè-
+rement les objectifs avec le client. Nous traiterons pour l’instant le travail sur le
+corpus restreint de SMS transcodés. Le traitement du corpus étendu sera traité
+dans la partie suivante.
+
+Figure 6.1. – Processus de fouille de donnée adapté à notre projet
+
+40
+
+Conception du corpus restreint
+
+Base de données
+
+Nous verrons dans un premier temps les tables que nous allons devoir mani-
+puler dans la base de données. Nous verrons dans un second temps les diﬀérentes
+étapes permettant le pré-traitement des données : La constitution d’une liste de
+mots vides devant être ignorés, puis l’index FullText permettant d’indexer chaque
+mot non bruit du corpus, ces termes se voyant alors attribué un rank reﬂétant la
+prégnance du terme dans le message et enﬁn le stockage de ces termes pondérés
+dans une table des faits. Nous aborderons ensuite la constitution des tables d’arcs
+et de noeuds qui seront ensuite chargés dans Gephi. Les méthodes d’analyse et de
+visualisation de Gephi permettront alors d’obtenir des communautés. On pourra
+ﬁnalement interpréter ces communautés pour en déduire des informations d’ordre
+social, économique, politique ou linguistique .
+
+6.1. Base de données
+
+Nous avons décidé d’utiliser SQL Server pour ce projet. Nous parlerons ici de
+la conception des tables que nous utiliserons par la suite. Celles-ci seront utilisées
+pour stocker, manipuler et analyser les données. La conception des tables s’est
+basée sur la reproduction de structure de table que nous a présenté C. Thovex.
+
+6.1.1. Stockage des données brutes du corpus
+
+Tous d’abord, nous avons besoin de stocker nos données dans la base. Dans
+un premier temps, nous devons stocker les SMS "bruts" dans une table que nous
+nommerons "SMS_BASE".
+
+Figure 6.2. – Structure de SMS_BASE
+
+Cette table stockera les 88522 SMS récupérés du corpus de SMS. Les données
+stockées ne seront pas altérées. Nous devrons aussi stocker les SMS transcodés
+une première fois par des chercheurs et une deuxième fois par des étudiants. Ces
+données seront stockées dans une deuxième table nommée "SMS_TRANSCODE".
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+41
+
+Conception du corpus restreint
+
+Base de données
+
+Figure 6.3. – Structure de SMS_TRANSCODE
+
+Ces deux tables seront des tables de stockage. La clé primaire de ces deux
+tables est donc le NUM_SMS puisqu’il est unique pour chacun des SMS. Tous
+les autres attributs dépendent directement de cette clé. Ces informations nous
+permettent de déduire que ces deux tables sont 3FN puisqu’elles respectent les
+caractéristiques des tables 1FN, 2FN et 3FN que sont :
+Une table 1FN est une table qui ne contient pas de doublon et dont toutes les
+valeurs sont atomiques.
+Une table 2FN est une table dont un attribut non clé ne dépend pas d’une partie
+de la clé.
+Une table 3FN est une table dont un attribut non clé ne dépend pas d’un ou
+plusieurs attributs ne participant pas à la clé.
+Tous ces critères sont validés par nos deux tables. Nous nous eﬀorcerons de res-
+pecter la 3ème forme normale pour toutes les tables que nous créerons par la suite.
+
+Nous avons déﬁni avec notre client la structure de la table des faits, qui
+contiendra la liste de tous les mots non vide présents dans chacun des messages
+avec leur rank et leur méthode de ranking associée. Cette table ne respecte que
+les contraintes 2FN.
+
+Figure 6.4. – Structure de TABLE_FAITS
+
+En eﬀet, nous pourrions enlever les colonnes Message et ID_NUM_TEL
+puisque ces informations sont accessibles depuis SMS_BASE. Les données n’étant
+pas conséquentes, nous avons décidé de tout stocker dans la table des faits qui re-
+groupe vraiment toutes les informations nécessaires, notamment dans la construc-
+tion des noeuds et des arcs.
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+42
+
+Conception du corpus restreint
+
+Base de données
+
+Enﬁn, la dernière table à concevoir est celle du lexique Morphalou. La struc-
+ture de cette table nous a été donnée par C. Thovex et nous ne l’avons pas modiﬁée.
+
+Figure 6.5. – Structure de REFLEX
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+43
+
+Conception du corpus restreint
+
+Prétraitement des données
+
+6.2. Prétraitement des données
+
+6.2.1. Constitution de la liste des mots bruits
+
+Les données brutes du corpus restreint ne sont pas intéressantes à étudier
+en l’état. En eﬀet, de nombreux mots présent dans le corpus ne sont pas porteur
+d’information, tel que les prépositions, les adjectifs, les prénoms, ou des mots
+n’ayant aucun sens. Il est donc nécessaire de pouvoir éliminer ces mots bruits,
+ce qui permet d’une part d’optimiser l’exécution des requêtes utilisant l’index
+FullText, et d’autre part de réduire l’analyse aux termes intéressants. De plus,
+nous souhaitons pouvoir gérer les smileys, qui ne doivent donc pas être supprimés
+par l’écrémage précédent. Nous allons donc présenter diﬀérents outils et méthodes
+permettant de remplir ces objectifs.
+
+Mots vide système
+
+On souhaite tout d’abord éliminer les prépositions, pronoms, et autres mots
+français n’ayant aucune signiﬁcation pertinente. Pour ce faire, on créé une liste
+de mot vide de texte intégral qui sera ensuite utilisée par l’index FullText pour
+déterminer quels mots doivent être indexés. Cette liste peut dans un premier temps
+être pré-remplie à l’aide de la liste des mots vide système, contenant déjà une liste
+de mots tels que les prépositions, pronoms, etc.
+
+Morphalou
+
+Pour permettre d’éliminer la majorité des mots bruits du corpus, on souhaite
+savoir s’il s’agit d’un mot existant dans la langue française. C’est pourquoi on
+cherche tout d’abord pour chaque terme (non éliminé par la liste système) s’il
+existe une forme inﬂéchie correspondante dans le lexique Morphalou. Dans le cas
+échéant, le mot est conservé, sinon il est ajouté à la liste des mots bruits.
+
+Table des mots bruits expert
+
+Les étapes précédentes permettent une suppression automatique d’une grande
+partie des mots vides. Cependant, après un premier essai de graphe, nous avons ob-
+servé avec C. Thovex que les adjectifs, adverbes et pronoms étaient surreprésentés
+par rapport aux noms et aux verbes, sans présenter un grand intérêt sémantique
+et surchargeait le graphe. Nous avons donc choisi avec le client d’éliminer ces ca-
+tégories grammaticales dans un premier temps, tout en gardant une trace de ces
+suppressions subjectives (et pouvant donc être amenées à changer, notamment
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+44
+
+Conception du corpus restreint
+
+Prétraitement des données
+
+pour les verbes). Pour se faire nous avons créé une table de mots bruits expert,
+que nous peuplons grâce à Morphalou dont une colonne renseigne la catégorie
+grammaticale des mots.
+
+Table des termes expert
+
+Cependant, certains mots présents dans la liste des mots vides nous inté-
+ressent et on souhaite donc les garder. On constitue manuellement pour se faire
+une table de termes experts, dans lequel on vient placer les termes présents dans
+la liste de mots vides que l’on souhaite tout de même garder. On y trouve ainsi
+les smileys ou des termes familiers, tel que le mot ’fac’ pour l’université. Une mé-
+thode permettra alors d’enlever les mots bruits de la liste également présent dans
+la table de termes expert. Une fois cette étape terminée, on obtient une liste de
+mots vides adéquate, prête à être utilisée par l’index FullText.
+
+6.2.2. Table des faits
+
+Une fois le nettoyage des données eﬀectué, on doit attribuer à chaque terme
+un rank permettant de quantiﬁer l’importance du terme dans le message, puis
+construire une table des faits à partir de ces valeurs. On dispose de deux méthodes
+de ranking diﬀérentes, FREETEXTTABLE et CONTAINSTABLE, permettant
+chacune d’attribuer un rang de prépondérance du terme dans le message. On
+vient ensuite renseigner une table des faits, qui contiendra pour chaque mot de
+chaque message les deux rankings diﬀérents. Pour le moment, nous souhaitons
+obtenir un premier graphe pour ce rendu. Nous utiliserons donc la méthode de
+ranking CONTAINSTABLE aﬁn d’obtenir une première table des faits utilisable
+avec lequel nous produirons un graphe exploitable.
+
+Comme nous avons vu dans la structure de la table des faits, celle-ci va conte-
+nir l’ensemble des mots qui ne sont pas des mots bruits contenus dans les messages.
+Ces mots seront croisés avec des méthodes de ranking comme CONTAINSTABLE
+ou FREETEXTTABLE qui permetteront d’attribuer un rank à chacun d’entre-
+eux. Ce rank correspond à la prépondérance du mot dans le SMS. Plus il est
+important, plus le mot l’est lui aussi.
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+45
+
+Conception du corpus restreint
+
+Traitement des données
+
+6.3. Traitement des données
+
+6.3.1. Structure du graphe
+
+L’objectif ﬁnal de ce projet est de visualiser des communautés d’expediteurs
+réunis autour de termes relevant de thématiques communes. Pour ce faire, le client
+a imposé l’utilisation de graphe pour extraire ces communautés. Nous allons donc
+réﬂéchir à plsieurs modélisations de graphe aﬁn de représenter au mieux les infor-
+mations extraites de ces SMS.
+
+Un premier graphe ferait le lien entre les expéditeur et les messages puis entre
+les messages et les termes. Celui-ci ferait apparaître les messages, aﬁn de visualiser
+lesquels sont les plus signiﬁcatifs, au niveau de la pondération des noeuds. Les
+pondérations des arcs message-terme correspondraient au ranking attribués par
+les fonctions de ranking présentées dans la partie précédente.
+
+Figure 6.6. – Graphe triparti, représentant utilisateurs, messages et termes
+
+Un deuxième graphe ne ferait de lien qu’entre les expéditeur et les termes. Donc,
+dans ce graphe, les messages ne seraient pas aﬃchés.
+
+Tous les noeuds(expéditeur, message dans le premier cas et terme) auront une
+pondération attribuée. De même tous les arcs (Expéditeur-Message et Message-
+Terme dans le premier cas, ou simplement Expéditeur-Terme dans le second cas)
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+46
+
+Conception du corpus restreint
+
+Traitement des données
+
+Figure 6.7. – Graphe biparti, représentant utilisateurs et termes
+
+se verront attribuer une pondération en fonction de leurs noeuds sources et desti-
+nations.
+
+Nous ne pouvons déterminer à priori si une structure de graphe est plus
+adaptée à notre projet ou si les deux structures seront intéressantes à étudier.
+Nous pourrons lors des premières expérimentations de développement choisir si
+les deux structures doivent être gardées ou si une est plus adaptée à l’étude du
+corpus.
+
+En opposition à cette approche centrée sur les utilisateurs, et proposant des
+graphes bipartis ou tripartis, une autre approche pourrait être de développer tout
+d’abord un graphe simple permettant d’aﬃcher des communautés de termes (ou
+thématiques), puis de venir y projeter les expéditeurs pour obtenir un graphe
+présentant les communautés d’expediteurs regroupés autour de ces thématiques.
+Cependant, le client nous a conseillé de privilégier les précédents modèles plutôt
+que celui-ci d’après ces précédentes expérimentations sur le sujet.
+
+6.3.2. Construction des tables de noeuds et d’arc
+
+Nous avons déﬁni précédemment la structure de la table des faits ainsi que
+la structure du(des) graphe(s). Avec ces données, nous pouvons donc construire
+les tables d’arcs et de noeuds qui seront ensuite intégrées par Gephi. L’attribution
+des pondérations des noeuds termes se fait par une opération d’agrégation sur les
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+47
+
+Conception du corpus restreint
+
+Traitement des données
+
+ranking du terme dans chacun des messages y faisant référence (les arcs message-
+terme).
+
+Figure 6.8. – Processus de pondération des noeuds termes
+
+Nous réduisons les diﬀérentes formes inﬂéchies de la table des faits correspon-
+dants à une même forme lématisée aﬁn de réduire la dimension du graphe. Cette
+réduction n’entraîne pas une grande perte d’information puisque la diﬀérence sé-
+mantique est négligeable. Par exemple, les mots "étaient" et "sera" seront réduits
+en "être" auquel on attribuera une pondération en réduisant les pondérations de
+toutes les formes inﬂéchies.
+
+Figure 6.9. – Processus de réduction des formes inﬂéchies en un seul terme
+
+lématisé
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+48
+
+Conception du corpus restreint
+
+Traitement des données
+Les noeuds messages recevrons comme pondération une agrégations des pon-
+dérations de chaque arcs message-terme. Cette pondération sera propagée au poids
+des arcs expéditeurs-messages.
+
+Figure 6.10. – Processus de pondération des messages
+
+De la même manière, la pondérations des noeuds expéditeurs sera déduite de
+
+l’agrégation de l’ensemble des pondérations des messages de l’expéditeur.
+
+Figure 6.11. – Processus de pondération des expéditeurs
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+49
+
+Conception du corpus restreint
+
+Traitement des données
+
+La réduction est eﬀectuée à l’aide d’une moyenne des valeurs des arcs pour les
+diﬀérentes formes inﬂéchies. Pour l’agrégation, nous avons également utilisé la
+moyenne.
+En outre nous avons choisi dans cette dernière phase de développement, d’expé-
+rimenter une autre fonction d’agrégation, permettant d’augmenter la dispersion.
+Pour ce faire, nous sommes tout d’abord parti d’un produit sur somme, opération
+classique pour augmenter la dispersion.
+
+(cid:81)n
+(cid:80)n
+
+k=i rmi
+k=i rmi
+
+aggr(M ) =
+
+Avec :
+aggr(M) : Pondération de l’arc expéditeur terme
+M : Ensemble des n message de l’expéditeur partageant un terme.
+mi : Un des messages de M.
+rmi : Pondération de l’arc message-terme.
+Cependant, la multiplication au numérateur augmentait fortement les ran-
+kings lors de l’introduction de pondérations importantes. Nous avons donc intro-
+duit un logarithme, qui permet de réduire l’explosion pour les valeurs élevées.
+
+aggr(M ) = log(
+
+k=i rmi
+k=i rmi
+
+)
+
+(cid:81)n
+(cid:80)n
+
+(cid:81)n
+(cid:80)n
+
+La dispersion était toujours trop élevée, avec quelques valeurs extrêmes et
+une majorité de valeurs faibles. Nous avons donc choisi de mettre la somme au
+carré au dénominateur, pratique également utilisé dans le ranking de containstable
+pour plusieurs termes.
+
+aggr(M ) = log(
+
+k=i rmi
+k=i r2
+mi
+
+)
+
+On constate sur la ﬁgure 2.12 que quelques termes possèdent un ranking très
+élevé mais que plus de 95% des données ont une pondération faible, avec énor-
+mément de très faible valeurs. Ceci est dû, notamment, au fait que de nombreux
+termes ne sont pas communs à plusieurs utilisateurs.
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+50
+
+Conception du corpus restreint
+
+Traitement des données
+
+Figure 6.12. – Distribution des pondérations obtenues
+
+ordonnées
+
+: Pondérations en
+
+C’est pourquoi nous avons également normalisé les valeurs en supprimant
+tous les termes non partagés. Pour les valeurs élevées, nous avons choisi de borner
+en attribuant à tous les termes du premier quintile la valeur du dernier membre
+de ce quartile (en l’occurence 50).
+
+Figure 6.13. – Distribution des pondérations obtenues
+
+ordonnées
+
+: Pondérations en
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+51
+
+Conception du corpus restreint
+
+Traitement des données
+
+On obtient ﬁnalement un résultat plutôt linéaire pour les valeurs de ranking.
+
+Nous visualiserons par la suite ce graphe dans la partie développement.
+
+Une autre étape possible pour rendre les valeurs des arcs plus homogènes entre
+elles seraient la propagation. En eﬀet, si un terme n’est constitué que d’un seul
+mot, le rank de ce terme sera élevé, même si le mot n’est pas intéressant à l’échelle
+du corpus. Pour que ces arêtes reﬂètent à la fois l’importance du mot dans le
+message et au sein du corpus, on vient ré-attribuer une valeur aux arêtes message-
+terme, qui sera le produit de la valeur initiale de l’arête par le poids du terme
+dans le corpus. Cette valeur est ensuite propagée aux pondérations des messages
+et des expéditeurs. Ce processus permet de propager l’importance d’un terme
+dans le corpus aux messages et expéditeurs y faisant référence. On obtient ainsi
+des pondérations qui reﬂètent à la fois l’importance d’un individu relativement à
+l’ensemble du corpus.
+
+Figure 6.14. – Processus de propagation des pondérations des termes
+
+6.3.3. Visualisation et analyse
+
+Une fois la table des arcs et des noeuds générée, on charge les données sous
+Gephi. On dispose alors de 4 types d’outils permettant de modiﬁer et d’analyser
+le graphe pour en extraire des communautés socio-sémantiques.
+
+Métriques statistiques
+
+Gephi oﬀre un panel de métriques statistiques permettant d’attribuer aux
+
+arcs et aux noeuds des valeurs supplémentaires en plus du ranking.
+
+— L’intermédiarité (betweenness centrality) attribue à un noeud une valeur
+reﬂétant le fait que le noeud est sur beaucoup de chemins les plus courts
+ou non, c’est à dire s’il se trouve sur de nombreux axes de passage.
+
+— La connectivité locale (degree centrality) attribue des poids forts aux
+
+noeuds ayant beaucoup de voisins.
+
+— Le centre "géographique" (closeness centrality) fait ressortir les noeuds
+
+proches des autres noeuds.
+
+Ces métriques sont des métriques ARS, adaptées à l’analyse des Réseaux Sociaux.
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+52
+
+Conception du corpus restreint
+
+Traitement des données
+
+Classement
+
+Ces méthodes permettent de déterminer les dimension et la coloration des
+arcs et des noeuds en fonction d’autre valeurs (notamment les métriques vues
+précédemment) et permettent de commencer à structurer le graphe.
+
+Spatialisation
+
+Diﬀérentes méthodes de spatialisation force et ressort(force-based layout) per-
+mettent de déterminer la structure du graphe et de faire apparaître des clusters
+présentant un intérêt singulier. Ces algorithmes se basent sur une répulsions des
+noeuds entre eux (comme des particules de même charge) combinés à une attrac-
+tion des noeuds reliés par une arête (comme un ressort). Ces forces attractives et
+répulsives mettent le système en mouvement jusqu’à atteindre un point d’équilibre
+stable. On utilisera notamment l’algorithme Force Atlas.
+
+Filtrage
+
+Une fois un premier graphe exploitable obtenu par ces outils, il est possible de
+restreindre le graphe pour générer un sous-graphe et réitérer les étapes précédentes
+dessus pour étudier certains aspects spéciﬁques du graphe. On peut par exemple
+ﬁltrer pour ne garder que les termes et les messages, ou que les termes et les
+expéditeurs ou encore ne garder que les termes ayant une valeur de ranking et/ou
+une métrique supérieure à un certain seuil. On obtient ainsi un nouvel espace de
+travail sur lequel on pourra tester d’autres paramètres de visualisation pour la
+nouvelle itération des étapes précédentes.
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+53
+
+7. Développement du corpus
+
+restreint
+
+Dans cette partie, nous allons présenter toutes les étapes de développement
+ainsi que notre démarche d’expérimentation lors de ce projet. Tout d’abord, il est
+important de noter que cette partie du développement a été eﬀectuée sur les don-
+nées transcodées, c’est à dire la base de 1000 SMS qui ont été corrigés en langage
+français. Le développement sur le corpus étendu sera réalisé plus tard. Nous ver-
+rons dans un premier temps la mise en place de la base de donnée, puis la création
+et le remplissage des tables nécessaire au pré-traitement. Nous verrons ensuite
+les fonctions permettant l’obtention d’une table des faits et des tables d’arcs et
+de noeuds. Finalement nous expliciterons les étapes nécessaire à l’obtention d’un
+graphe intéressant que nous présenterons.
+
+7.1. Mise en place de base de données
+
+Nous utilisons une base de données SQL Server pour ce projet. Ce SGBDR va
+nous permettre d’eﬀectuer tous les traitements sur les SMS. Nous devons dans un
+premier temps l’installer, la remplir de données brutes et eﬀectuer le paramétrage
+de l’index fulltext avant de commencer tout pré-traitement.
+
+7.1.1. Installation de la base de données
+
+Dans un premier temps, nous avons mis en place une machine virtuelle dis-
+ponible à distance et non une machine locale, ceci pour pouvoir travailler de
+n’importe quel poste. Nous avons installé une machine virtuelle avec le système
+d’exploitation Microsoft Server 2012, qui fonctionne parfaitement avec SQL Ser-
+ver. Ce système d’exploitation est utilisé de manière légale puisque nous avons
+obtenu une licence oﬃcielle grâce à notre statut d’étudiant.
+
+Nous avons ensuite installé Microsoft SQL Server. C. Thovex nous a indiqué
+qu’il fallait utiliser, SQL Server 2014 Express with Advanced Services, une version
+gratuite de SQL Server intégrant toutes les fonctionnalités dont nous avons besoin
+
+54
+
+Développement du corpus restreint
+
+Mise en place de base de données
+
+pour notre projet. Il nous a donné deux autres packages à installer pour avoir les
+outils lexico-sémantiques de SQL Server : Semantic Language Database et Filter
+Pack 2010 SP2. L’installation du package Semantic Language Database nécessite
+l’exécution d’un script SQL [A.1]. Ce package contient tous les outils permettant
+de faire des statistiques sémantiques sur le corpus de SMS. Le package Filter Pack
+2010 SP2 va mettre à jour les stemmers (génère les formes inﬂéchies des mots) et
+word breakers (sépare les mots dans une phrase) Full-Text partagés avec la suite
+Oﬃce (correction ortographique).
+
+7.1.2. Structure et remplissage des données du corpus
+
+Nous avons créé les tables conçues dans la partie précédente. Voici leur struc-
+
+ture respective :
+
+Figure 7.1. – Structures des tables
+
+Les tables sont maintenant prêtes à l’utilisation. Nous avons rempli manuel-
+lement les tables SMS_BASE et SMS_TRANSCODE grâce à des ﬁchiers Excel.
+Nous nous sommes assurés de l’intégrité des données du corpus dans la base. Nous
+remplirons la table des faits par la suite.
+
+Toutes les données "brutes" ont maintenant été intégrées dans la base de
+données et sont prêtes à être utilisées. Mais avant ça, nous devons construire
+l’index fulltext avant d’eﬀectuer le pré-traitement des données.
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+55
+
+Développement du corpus restreint
+
+Mise en place de base de données
+
+7.1.3. Index FullText, un outil puissant
+
+Comme vu précédemment, nous allons utiliser l’Index FullText sur notre table
+SMS_TRANSCODE. Pour ce faire, nous devons dans un premier temps créer une
+liste de mots vides dans notre base de donnée.Elle sera initialisée à partir de la
+liste des mots vides système. Nous verrons par la suite les diﬀérentes étapes pour
+compléter cette liste.
+
+Une fois que cette liste de mots vides a été créée, il faut maintenant créer le
+catalogue et l’index fulltext sur notre table SMS_TRANSCODE sur la colonne
+SMS_TRANSCODE_2, qui correspond à la correction des chercheurs et des étu-
+diants (Nous avons jugé cette colonne plus pertinente que celle seulement corrigée
+par les chercheurs). Il est important de noter qu’il est nécessaire d’avoir une clé
+primaire dans la table, ici NUM_SMS, pour l’index. On déclare aussi pour l’index
+que la liste de mots vides est celle que nous venons tout juste de créer.
+
+Notre index fulltext est donc créé et utilisable sur la table SMS_TRANSCODE.
+
+Il faudra re-remplir cet index à chaque fois que nous modiﬁerons la liste des mots
+vides. En eﬀet, FullText n’indexera que les termes considérés comme non-bruit.
+Nous avons donc maintenant tous les outils pour pré-traiter nos données.
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+56
+
+Développement du corpus restreint
+
+Pré-traitement des données
+
+7.2. Pré-traitement des données
+
+Maintenant que la base de données est ﬁn prête, nous pouvons procéder au
+pré-traitement des données. Celui-ci correspond à la constitution de la liste de
+vide ainsi que de la réalisation de la table des faits avec diﬀérentes méthodes de
+ranking.
+
+7.2.1. Constitution de la liste des mots bruits
+Peupler la liste des mots vides
+
+Rappelons que la liste de mots vides est initialisée à partir de celle du système,
+pour la langue française. Le but est d’améliorer cette liste aﬁn de ne récupérer que
+les mots "utiles" et exploitables pour la table des faits. Nous utilisons plusieurs
+procédures stockées aﬁn de peupler la liste des mots vides.
+
+Nous avons créé une table LISTE_MOTS_BRUITS_EXPERTS qui contient
+la liste des mots en français que nous jugeons inutiles. Nous avons inséré dans
+cette table tous les adjectifs, adverbes et mots fonction. Il est nécessaire de faire
+attention à n’ajouter que des mots ne pouvant pas être des verbes ou des noms
+communs. En eﬀet, le mot "bête" peut être un adjectif ou un nom commun. Cet
+exemple ne sera pas ajouté à la liste de mots vides.
+
+Figure 7.2. – Sélection des mots à ajouter
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+57
+
+Développement du corpus restreint
+
+Pré-traitement des données
+
+Dans la requête ci-dessus, nous récupérons la liste des mots vides système, la
+
+liste des mots bruits expert récupérée de la table précédemment remplie :
+LISTE_MOTS_BRUITS_EXPERTS et la liste des mots n’étant pas présent dans
+le lexique Morphalou (comme les mots en anglais par exemple)
+
+Figure 7.3. – Ajout dans la liste des mots vides
+
+Une fois cette liste récupérée, on va ajouter un à un chacun des termes dans
+
+la liste des mots vides utilisé par l’index fulltext.
+
+Cependant, des mots jugés inutiles peuvent être intéressant à analyser. C’est
+principalement le cas de mots familiers non présent dans Morphalou (langue fran-
+çaise "stricte"), mais conservé lors du transcodage car utilisés couramment. C’est
+pour cela que nous allons épurer cette liste.
+
+Épuration de la liste des mots vides
+
+Nous utilisons la même méthode que pour peupler la liste de mots vides. nous
+créons une table LISTE_TERMES_EXPERTS qui va contenir tous les mots que
+nous jugeons utiles et que nous voulons enlever de la liste de mots vides. Nous
+remplissons cette table manuellement après avoir déterminé quels mots étaient
+utiles dans la liste des mots vides . La sélection des mots pertinents à supprimer
+de la liste des mots vide étant eﬀectué manuellement selon nos propres critères, il
+est important de garder à l’esprit la possibilité d’un biais de subjectivité.
+
+Une fois que les mots à supprimer ont été récupérés, nous les enlevons un à
+
+un de la liste des mots vides.
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+58
+
+Développement du corpus restreint
+
+Pré-traitement des données
+
+Figure 7.4. – Sélection des mots à enlever
+
+Figure 7.5. – Suppression dans la liste des mots vides
+
+Cette méthode itérative de construction de la liste des mots vides nous permet
+de pouvoir la modiﬁer à tout moment en ajoutant ou en supprimant des mots de
+cette liste.
+
+Maintenant que celle-ci est complète, il nous faut regénérer l’index fulltext
+
+pour que les modiﬁcations eﬀectuées sur la liste soient prises en compte.
+
+7.2.2. Ranking et table des faits
+
+Dans cette partie, nous allons présenter deux méthodes de ranking (pour
+l’instant) ainsi que la création de la table des faits qui sera notre base de travail
+pour la suite du projet.
+
+CONTAINSTABLE
+
+La méthode de ranking CONTAINSTABLE est utilisée pour trouver des cor-
+respondances exactes ou ﬂoues (moins précises) de mots simples dans les SMS
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+59
+
+Développement du corpus restreint
+
+Pré-traitement des données
+
+du corpus. Elle calcule la proximité de mots à une certaine distance les uns des
+autres ou des correspondances pondérées. Cette proximité est le rank que nous
+utiliserons pour la table des faits.
+
+Figure 7.6. – Méthode de ranking CONTAINSTABLE
+
+Cette méthode s’utilise comme une jointure de table (voir requête ci-dessus).
+Elle va donc associer un rank à chacune des occurences du mot ’étudiant’ dans
+les SMS contenants ce mot (voir résultats ci-dessus). Elle va matcher avec les
+correspondances exactes du mot (formes inﬂéchies), à moins d’être paramétrée la
+méthode pour matcher sur les formes lématisées.
+
+FREETEXTTABLE
+
+La méthode FREETEXTTABLE est aussi utilisée aﬁn de trouver des corres-
+pondances de mots dans les SMS du corpus mais va pondérer l’importance des
+mots dans le message diﬀéremment. Elle va également matcher avec les termes
+dérivés du mot de recherche initial comme dans l’exemple ci-dessous.
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+60
+
+Développement du corpus restreint
+
+Pré-traitement des données
+
+Figure 7.7. – Méthode de ranking FREETEXTTABLE
+
+Tout d’abord, on observe que 2 nouvelles lignes sont apparues. Elles cor-
+respondent aux termes dérivés comme dans le SMS numéro 533 qui n’était pas
+présent avec la méthode CONTAINSTABLE et qui contient le mot ’étudiantes’.
+On observer aussi une diﬀérence au niveau de la pondération des mots.
+
+Nous eﬀectuerons diﬀérents tests aﬁn de déterminer si une de ces deux mé-
+thodes (ou plus) est plus ou moins adaptée à notre projet, ou bien si elles sont
+toutes intéressantes.
+
+Table des faits
+
+Nous avons choisi de n’utiliser que le ranking utilisant CONTAINSTABLE.
+Nous verrons plus tard dans le projet comment associer à un mot plusieurs ranks
+de méthodes diﬀérentes ou un rank combinant les résultats de plusieurs méthodes.
+
+Comme les méthodes de ranking ne s’exécutent qu’avec des mots bruts, nous
+devons créer une procédure stockée aﬁn d’évaluer chaque terme "utile" du corpus
+transcodé. C’est le curseur qui va nous permettre de naviguer entre chacun des
+termes pour les évaluer. Pour ce faire, nous sélectionnons dans un premier temps
+tous ces termes avec la requête suivante :
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+61
+
+Développement du corpus restreint
+
+Pré-traitement des données
+
+Figure 7.8. – Sélection de la liste des mots utiles
+
+Une fois que la requête de sélection est stockée dans le curseur, on va eﬀectuer
+le ranking sur chacun des termes et insérer le résultat dans la table des faits. On
+utilisera un compteur aﬁn d’indiquer le nombre de lignes insérées dans la table.
+
+Figure 7.9. – Ranking sur chacun des termes
+
+Les données sont donc insérées dans la table avec toutes les informations
+
+nécessaires.
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+62
+
+Développement du corpus restreint
+
+Pré-traitement des données
+
+Figure 7.10. – Données de la table des faits
+
+La table des faits est ﬁn prête pour la transformation des données en graphe.
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+63
+
+Développement du corpus restreint
+
+Traitement des données
+
+7.3. Traitement des données
+
+Maintenant que la table des faits est ﬁnalisée, il est possible de construire les
+
+tables de noeuds et d’arcs des deux graphes.
+
+7.3.1. Construction des tables de noeuds et d’arcs
+
+Lors de la construction de ces tables, il y a deux aspects à prendre en compte.
+Tout d’abord, il faut construire deux tables d’arcs et deux tables de noeuds. Un
+couple de tables pour le graphe comprenant les messages et un autre couple pour
+le graphe expéditeur-terme. Ensuite, il va falloir regrouper les termes sous forme
+lémmatisée. Par exemple, il faut regrouper les termes "sera" et "étaient" sous le
+terme "être".
+
+Dans la conception, nous avons expliqué que nous utiliserons des fonctions
+d’agrégation aﬁn de pondérer les noeuds et les arcs. Nous utiliserons pour le mo-
+ment l’agrégation de la moyenne sur chacun de ces éléments.
+
+Table des noeuds
+
+Gephi fonctionne avec des identiﬁants uniques pour chacun des noeuds. De
+ce fait, on doit associer un identiﬁant unique a chacun des noeuds. Les noeuds cor-
+respondront aux expéditeurs, aux messages et aux termes pour le premier graphe)
+et aux expéditeurs et aux termes pour le second. On pondère ces diﬀérents noeuds
+avec la moyenne de tous leurs termes ou forme lémmatisées. Un noeud expéditeur
+va avoir pour pondération la moyenne de tous les termes ou messages qui lui sont
+liés. Nous eﬀectuons le même traitement pour les messages et les termes.
+
+Le regroupement de terme sous forme lémmatisée est assez compliqué. En
+eﬀet, comment déterminer si le mot "privé" correspond au mot "privé" ou au
+verbe "priver". Pour le moment, nous avons décidé d’utiliser une méthode non
+pertinente en sélectionnant la forme lémmatisée "minimum", qui sélectionnera
+le mot le plus petit. Pour l’exemple précèdent, le mot "privé" sera sélectionné
+avant "priver". Les déclinaisons de verbe comme "mangerons" seront généralement
+matchées avec le verbe d’origine. Nous nous occuperons par la suite de trouver
+une meilleur méthode de matching pour les diﬀérents termes.
+
+La requête permettant d’ajouter les diﬀérents noeuds de la table des faits
+dans la table TABLE_NOEUDS_TRANSCODE est disponible en annexe. [B.7]
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+64
+
+Développement du corpus restreint
+
+Traitement des données
+
+Table des arcs
+
+Pour les arcs, nous eﬀectuons le même regroupement de terme sous forme
+lémmatisée pour que les noeuds terme et les arcs correspondent. Cependant, il va
+falloir associer les noeuds avec leur identiﬁant déﬁni précédemment. On récupère
+ceux-ci à la place de l’expéditeur, message ou terme.
+
+La requête insérant les arcs dans la table TABLE_ARCS_TRANSCODE est
+
+aussi disponible en annexe. [B.6]
+
+7.3.2. Visualisation et analyse
+
+Les tables des noeuds et des arcs étant prêtes, nous pouvons passer à la partie
+d’analyse et de visualisation sous Gephi. Ceci nous permettra à partir d’un graphe
+simplement structuré par ses arcs pondérés d’obtenir un graphe exploitable. Les
+méthodes fournis par Gephi permettront de spatialiser le graphe puis d’extraire
+et de colorer les communautés, ou encore de ﬁltrer certaines communautés pour
+les étudier plus en détail.
+
+Génération des graphes
+
+Nous visualisons dans un premier temps le graphe avec message. Il faut tout
+d’abord récupérer les données des tables et dans un second temps utiliser des
+fonctions de Gephi aﬁn de rendre le graphe lisible.
+
+La connexion entre Gephi et la base de donnée est directe. Nous utilisions
+auparavant un document CSV pour intégrer les données mais nous avons opté
+pour la connexion au vue de la rapidité de développement et de l’intégrité de
+cette solution.
+
+Une fois les données intégrées dans le laboratoire de données de Gephi, le
+
+travail d’analyse à proprement parler peut commencer.
+
+Les deux ﬁgures suivantes présentent les deux graphes obtenus à partir des
+structures déﬁnies dans la conception. Nous avons appliqué dans les deux cas
+les étapes de spatialisation(donner une structure représentative au graphe) et de
+classement (attribution des couleurs et des dimensions des noeuds et arcs). On peut
+observer spontanément que le graphe conservant les noeuds messages ne présente
+pas de communautés clairement visible et est principalement constitué d’un amas
+de noeud au centre de l’image. Au contraire, le graphe ne possédant que des noeuds
+expéditeurs et messages, bien que possédant également une grosse communauté
+centrale, dispose également de communautés identiﬁables visuellement. De fait,
+nous poursuivrons uniquement l’analyse du graphe à partir de cette structure, du
+moins pour l’instant.
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+65
+
+Développement du corpus restreint
+
+Traitement des données
+
+Figure 7.11. – Graphe avec messages
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+66
+
+Développement du corpus restreint
+
+Traitement des données
+
+Figure 7.12. – Graphe sans messages
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+67
+
+Développement du corpus restreint
+
+Traitement des données
+
+Première analyse des graphes
+
+Pour obtenir le graphe présenté ci-dessus, nous avons tout d’abord utilisé
+l’algorithme de spatialisation Yifan Hu d’après les conseils de notre client. Ce-
+pendant, cet algorithme tend à superposer les labels des noeuds, c’est pourquoi
+nous appliquons un deuxième algorithme, Noverlap, qui restructure légèrement les
+noeuds pour permettre une meilleure lecture du graphe. De plus, nous appliquons
+un partitionnement basé sur les poids des arcs et des noeuds pour visualiser les
+termes et utilisateurs prépondérants
+
+Figure 7.13. – Graphe initial
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+68
+
+Développement du corpus restreint
+
+Traitement des données
+
+Figure 7.14. – Graphe après spatialisation et partitionnement
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+69
+
+Développement du corpus restreint
+
+Traitement des données
+
+Le graphe précédent présentait déjà des communautés identiﬁables mais dis-
+posait encore d’une grosse communauté centrale non pertinente. En eﬀet, celle-ci
+est constituée de termes très communs, notamment des verbes comme "aller" ou
+des notions de temps "demain", "week-end", qui sont donc partagés par la majo-
+rité des expéditeurs, et ne permettront pas de discriminer les communautés.
+
+Figure 7.15. – Termes pregnants non pertinents
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+70
+
+Développement du corpus restreint
+
+Traitement des données
+
+Pour éliminer ces termes pregnants non pertinents nous appliquons un pre-
+mier ﬁltre sur les plages de données entrantes. Ce ﬁltre paramétrable permet de ne
+conserver que les termes ayant un nombre d’arcs entrants appartenant à une plage
+de valeur. Dans notre cas, nous ne conservons que les termes n’ayant pas plus de
+4 émetteurs. Une autre possibilité serait de ﬁltrer sur la closeness centrality des
+termes pour supprimer les termes géographiquement au centre du graphe.
+
+Figure 7.16. – Filtrage des termes pregnants non pertinents
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+71
+
+Développement du corpus restreint
+
+Traitement des données
+
+Aﬁn de permettre la coloration des diﬀérentes communautés, nous utilisons
+une autre métrique statistique, modularity class, qui permet d’identiﬁer les dif-
+férents clusters au sein du graphe, et d’attribuer aux noeuds de chaque commu-
+nauté un identiﬁant commun. Un paramètre de modularité permet de faire varier
+le nombre de classe. Ici, avec une valeur de 1.3 nous obtenons 9 classes. Cette
+métrique est ensuite utilisée par la fonction de partitionnement pour colorer les
+diﬀérentes communautés.
+
+Figure 7.17. – Coloration par algorithme de modularité [2]
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+72
+
+Développement du corpus restreint
+
+Traitement des données
+
+Exploitation d’une communauté
+
+Nous allons à présent présenter diﬀérentes étapes d’exploitation d’une com-
+munauté (en violet dans le graphe ci-dessous). Nous avons choisi une coloration
+des autres classes en gris pour permettre une identiﬁcation visuelle aisée.
+
+Figure 7.18. – Identiﬁcation d’une première communauté
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+73
+
+Développement du corpus restreint
+
+Traitement des données
+
+On peut maintenant extraire cette communauté pour permettre de l’analyser
+plus ﬁnement. Pour ce faire, nous appliquons un ﬁltre sur la classe de modularité
+voulue. Ce ﬁltre ne conserve donc que les noeuds appartenant à cette classe et les
+arcs les reliant.
+
+Figure 7.19. – Extraction de la communauté
+
+En observant les diﬀérents termes utilisés par ces expéditeurs, on remarque
+que ceux-ci sont pour la plus part liés au vocabulaire scolaire. Ces personnes
+pourraient donc être des enseignants, des collégiens, des lycéens ou des étudiants.
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+74
+
+Développement du corpus restreint
+
+Traitement des données
+
+Si l’on souhaite visualiser les termes les plus prégnants au sein de la commu-
+nauté, nous commençons par appliquer un ﬁltre sur la catégorie des noeuds, pour
+ne conserver que les noeuds termes. On génère alors une métrique de centralité
+d’intermédiarité sur les termes. On peut ensuite baser la coloration des termes sur
+cette métrique pour visualiser les termes forts de la communauté.
+
+Figure 7.20. – Prépondérance des termes dans la communauté
+
+On peut observer en rouge les mots les plus prégnants, notamment "re-
+cherche" et "inscrire", qui relèvent bien du domaine de l’éducation. D’autres
+termes moins signiﬁants, tels que "coup" et "bis" sont également présents.
+
+Nouvelle formule d’agrégation
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+75
+
+Développement du corpus restreint
+
+Traitement des données
+
+Figure 7.21. – Graphe avec deuxième pondération
+
+La ﬁgure ci-dessus présente le graphe obtenu en utilisant la nouvelle fonction
+d’agrégation. On constate que bien que la distribution obtenue semblait intéres-
+sante, elle ne permet pas d’obtenir un graphe exploitable. En eﬀet, malgré plusieurs
+tentatives de ﬁltrages et spatialisation nous n’avons pu extraire de communautés
+pertinentes. On peut supposer que c’est une conséquence de la prépondérance des
+verbes dans le corpus, moins variés que les noms donc plus prégnants. D’autre part,
+le fait de ﬁltrer sur les termes non partagés réduisait drastiquement le nombre de
+termes diﬀérents (de 1100 termes à 450 termes diﬀérents), ce qui limite la possi-
+bilité d’obtenir des communautés, et cette méthode n’est donc pas adaptée à de
+petits corpus tel que le nôtre.
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+76
+
+8. Conception du corpus étendu
+
+Nous allons reprendre, dans cette partie, les étapes que nous avons utilisées
+pour la conception avec le corpus restreint. Comme une majeure partie du travail
+a été faite dans la partie précédente, nous n’aborderons pas certains points comme
+la constitution de la liste des mots vides, etc. De plus, nous avons beaucoup moins
+travaillé sur le corpus étendu que sur le corpus restreint. De ce fait, les parties
+Conception et Développement seront moins importantes.
+
+Dans le corpus étendu, les SMS ne sont pas corrigés et sont sous forme brute,
+c’est à dire que la majorité des SMS contiennent des fautes d’orthographes, des va-
+riations de termes, etc, comme vu dans l’état de l’art. Il est assez diﬃcile d’exami-
+ner des communautés autour de termes à cause de ces variations orthographiques
+parfois involontaires ou peu répandus. L’idée retenue pour exploiter ce corpus est
+d’utiliser une fonction de similarité entre les diﬀérents messages, sans se préoccu-
+per de l’orthographe des mots. Nous verrons dans la partie traitement des données
+quelle est la structure de graphe que nous avons retenue.
+
+8.1. Base de données
+
+Les données brutes ont déjà été importées dans la base de données. Il va
+falloir donc déﬁnir uniquement la structure de la table des faits de ce nouveau
+graphe.
+
+Cette table sera en 3FN puisque l’attribut "Rank" dépend entièrement de
+tous les attributs clés. Nous n’avons pas jugé pertinent de rajouter les messages
+dans cette table puisque l’analyse ne sera pas faite sur les messages et les termes
+mais sur la similarité entre les messages, c’est à dire le rank.
+
+8.2. Prétraitement des données
+
+La majeure partie du prétraitement des données a déjà été eﬀectuée. Nous
+parlons ici uniquement de la table des faits et de ce avec quoi nous l’alimentons.
+
+77
+
+Conception du corpus étendu
+
+Prétraitement des données
+
+Figure 8.1. – Structure de TABLE_FAITS_SIMILARITE
+
+8.2.1. Table des faits
+
+Cette table des faits est assez diﬀérente de celle que nous avons fait pré-
+cédemment. En eﬀet, les faits à proprement parler sont diﬀérents. Avant, nous
+avions, pour un mot dans un message, un ranking correspondant à la prépondé-
+rance du mot dans le message. Ici, nous avons un rank obtenu par la fonction
+SEMANTICSIMILARITYTABLE qui correspond à la similarité entre deux mes-
+sages. Pour constituer la table des faits, on va, pour chaque message, récupérer
+les 10 messages qui sont les plus similaires à ce dernier.
+
+On peut représenter la table des faits avec un graphe intermédiaire.
+
+Figure 8.2. – Graphe de la table des faits
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+78
+
+Conception du corpus étendu
+
+Traitement des données
+
+Sur ce graphe, on représente la similarité comme ceci :
+Expéditeur_source : E1
+Expéditeur_target : E2
+Message_source : M1
+Message_target : M2
+Rank : 0,75
+Il est à noter que la similarité entre M1 et M2 est diﬀérente de la similarité
+entre M2 et M1. De ce fait, nous devrons passer par une étape intermédiaire dans
+la génération des arcs aﬁn de réduire ces deux similarités orientées en une seule
+similarité symétrique.
+
+8.3. Traitement des données
+
+8.3.1. Structure du graphe
+
+Comme évoqué précédemment, l’objectif de ce graphe est diﬀérent du pre-
+mier. On oriente le graphe sur la similarité entre les messages. Pour le graphe, il
+n’est pas important de visualiser les messages car il y aurait trop d’informations
+et il serait trop diﬃcile d’exploiter les données. De ce fait, nous avons décidé de
+réaliser un graphe comprenant uniquement des expéditeurs.
+
+Figure 8.3. – Graphe expéditeur
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+79
+
+Conception du corpus étendu
+
+Traitement des données
+
+8.3.2. Construction des tables de noeuds et d’arcs
+
+Pour passer du graphe 4.2 au graphe 4.3, nous devons réduire les liens expéditeur-
+
+message et message-message pour obtenir les liens de similarité entre expéditeurs.
+Pour ce faire, nous commençons par réduire les deux arcs orientés représentant la
+similarité entre deux messages. En eﬀet la similarité n’est pas symétrique et on
+peut donc disposer de deux lignes dans la table des faits.
+
+Figure 8.4. – Réduction des similarités de messages
+
+Une fois les arcs orientés réduits en arcs non orientés pour les similarités entre
+les messages, on doit obtenir la similarité entre les expéditeurs. Pour ce faire, on
+réalisera la somme des similarités entre messages de ces deux expéditeurs.
+
+Figure 8.5. – Similarité des expéditeurs
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+80
+
+9. Développement du corpus
+
+étendu
+
+Dans cette partie, nous traiterons du développement du corpus étendu qui
+
+nous amènera à la visualisation du graphe de similarité entre les expéditeurs.
+
+9.1. Prétraitement des données
+
+9.1.1. Table des faits
+
+Comme nous avons vu dans la partie conception, nous allons utiliser SEMAN-
+TICSIMILARITYTABLE qui attribut un rank de similarité entre deux messages.
+Voici son fonctionnement.
+
+Utilisation de SEMANTICSIMILARITYTABLE
+
+On doit tout d’abord donner l’identiﬁant du document témoin, qui va être
+comparé à tous les autres messages. Dans l’exemple ci-dessous, le document témoin
+est le n24. On va récupérer, grâce à la requête, le numéro des messages les plus
+similaires au document témoin, ainsi que leur message et leur rank associé.
+
+81
+
+Développement du corpus étendu
+
+Prétraitement des données
+
+Figure 9.1. – Requête utilisant SEMANTICSIMILARITYTABLE
+
+Figure 9.2. – Résultat de la requête
+
+On limite notre recherche aux 10 messages les plus similaires aﬁn de ne pas
+saturer les données. On peut voir ici que les messages associés comme similaires
+partagent un certain vocabulaire comme "allez", "je t’aime", "vas-y", "coeur" etc.
+
+Création de la table des faits
+
+La table des faits ne prend pas en compte les mots ou les messages. De ce
+fait, la sélection se résume à récupérer la liste de tous les numéros de SMS. Une
+fois récupérée, on boucle sur cette liste et on applique SEMANTICSIMILARITY-
+TABLE à chacun des messages.
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+82
+
+Développement du corpus étendu
+
+Prétraitement des données
+
+Figure 9.3. – Méthode de ranking SEMANTICSIMILARITYTABLE
+
+Nous avons décidé avec le client de ne conserver que les rank supérieurs à
+0,5. On considère alors que si un rank est inférieur, le message n’est pas assez
+similaire pour être pris en compte. Cette procédure stockée met beaucoup de
+temps à s’exécuter car il faut faire l’opération sur 88000 SMS. On pourrait passer
+par une table temporaire pour augmenter la rapidité d’exécution mais après avoir
+eﬀectué des tests, la diﬀérence est négligeable.
+
+Après l’alimentation de la table, on se retrouve avec 557065 lignes dans la
+table. C’est dû au fait que le nombre maximum de lignes aurait pu être : 10 lignes
+x 88522 SMS = 885220 lignes maximum.
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+83
+
+Développement du corpus étendu
+
+Traitement des données
+
+Figure 9.4. – Données de la table de similarité
+
+9.2. Traitement des données
+
+Maintenant que la table des faits a été alimentée, nous pouvons construire les
+tables de noeuds et d’arcs aﬁn de générer notre graphe d’expéditeurs. Contraire-
+ment au graphe du corpus restreint, ce graphe est assez simple à réaliser à partir
+de la table des faits. On eﬀectue les mêmes opérations qu’avec le corpus restreint
+(sans le regroupement sous forme lémmatisée). aﬁn de créer les tables de noeuds
+et d’arcs.
+
+9.2.1. Visualisation et analyse
+
+Une fois les tables de noeuds et d’arcs réalisées, on récupère les données dans
+
+Gephi.
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+84
+
+Développement du corpus étendu
+
+Traitement des données
+
+Figure 9.5. – Graphe de similarité brut
+
+On récupère le graphe ci-dessus. Comme on peut le constater, celui-ci est
+assez grand (38000 arcs). Nous allons donc devoir ajouter des ﬁltres et appliquer
+des mesures statistiques aﬁn d’épurer le graphe et d’en extraire des communautés.
+Tout d’abord, on ﬁltre les arcs en fonction de leur rank. On ne va garder
+que les arcs ayant un rank compris entre 0,95 et 1. Ainsi, on ne conserve que les
+liens démontrant une grande similarité entre les messages. Nous aurions pu le faire
+dans la base de données mais vu que nous sommes en phase exploratoire, nous
+garderons ces valeurs.
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+85
+
+Développement du corpus étendu
+
+Traitement des données
+
+Ensuite, nous appliquons une statistique de degré pondéré. Nous récupérons
+le Within Degree et nous appliquons un ﬁltre sur celui-ci, pour ne garder que les
+valeurs supérieures à la moyenne (ici 241) , aﬁn de conserver les expéditeurs les
+plus inﬂuents. Nous obtenons le graphe suivant :
+
+Figure 9.6. – Graphe Within Degree
+
+Comme on peut le voir, il reste encore beaucoup d’arcs et le graphe est
+diﬃcilement exploitable. Nous avons donc décidé, avec le client, d’appliquer un
+algorithme de spanning tree, qui va nous permettre d’extraire les communautés
+prépondérantes.
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+86
+
+Développement du corpus étendu
+
+Traitement des données
+
+Nous avons enﬁn appliqué un algorithme de spacialisation. Nous avons d’abord
+essayé Yfan Yu mais celui-ci n’était pas adapté (dans le sens où il ne donnait pas
+un graphe exploitable), nous avons choisi d’utiliser Force Atlas.
+
+Figure 9.7. – Graphe avec Spacialisation Force Atlas
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+87
+
+Développement du corpus étendu
+
+Traitement des données
+
+On peut voir sur ce graphe des communautés émerger. Malheureusement,
+nous ne pouvons pas visualiser quels termes partagent ces communautés. Nous
+pouvons cependant aﬃrmer que l’expéditeur 183 est le plus incontournable (celui
+qui partage le plus de similarités entre les messages) et qu’il y a la présences de
+hub sur certains expéditeurs comme l’expéditeur 504, 148, 390 et 485, qui sont les
+gens les plus inﬂuents de part leur taille dans le graphe.
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+88
+
+10. Bilan et perspectives
+
+10.1. Bilan
+
+Dans ce dernier livrable nous avons poursuivi le développement sur le corpus
+restreint et réalisé un début de développement sur le corpus étendu. Pour ce qui
+est du corpus restreint, nous avons mis au propre les diﬀérentes méthodes utilisées
+pour générer la table des faits sous forme de procédures stockées pour permettre
+la reprise de notre projet ultérieurement. De plus, nous avons développé une autre
+fonction d’agrégation avec le client, mais celle-ci n’a ﬁnalement pas produit de
+résultats exploitables. Nous avons également procédé à une analyse détaillée des
+formules de ranking containstable et freetexttable et des métriques théoriques tf-
+idf sur lesquelles celles-ci sont basées. Le travail sur le corpus étendu s’est concentré
+sur la conception d’un nouveau graphe et l’analyse de celui-ci, puisque le travail
+sur la base de données était déjà réalisé. Nous avons ainsi choisi une nouvelle
+topologie de graphe basée sur la similarité entre messages et par extension entre
+utilisateurs. L’analyse de ce graphe n’a pas fourni de résultats pertinents non
+plus, ce qui est certainement dû à la variété orthographique présente dans le
+corpus restreint. Ces diﬀérentes topologies et pondérations pourraient aboutir à
+des résultats exploitables.
+
+10.2. Perspectives
+
+Les perspectives de développement pour ce projet sont multiples.
+Tout d’abord, la topologie de graphes que nous avons appliquée au graphe
+restreint pourrait l’être au graphe étendu. Cependant, le travail sur le graphe
+étendu nécessite l’utilisation de techniques de traitement du langage naturel qu’il
+reste à développer ou documenter. En eﬀet comme nous l’avons vu, les résultats
+ne sont pour l’instant pas pertinents à cause de la variété orthographique au sein
+de ce corpus. Il faudrait alors constituer un thésaurus de langue couvrant l’inté-
+gralité du corpus. La méthode manuelle n’étant pas viable à une telle échelle, des
+méthodes semi-automatiques utilisant un apprentissage sur les versions corrigées
+et non corrigées des SMS du corpus restreint devraient être mises en place. Pour
+
+89
+
+Bilan et perspectives
+
+Perspectives
+
+les mots non présents dans ces messages, une fonction évaluant la proximité ortho-
+graphique (distance de Hamming) entre les mots déjà présents dans le thésaurus
+et d’autres variations orthographiques pourrait s’avérer utile.
+
+D’autre part, la propagation des pondérations dans les graphes n’a pas été
+mises en place non plus, mais pourrait également aider à mieux déterminer les com-
+munautés. Une comparaison entre FREETEXTTABLE et CONTAINSTABLE
+peut elle aussi être envisagée. Une autre possibilité pour extraire des communau-
+tés plus pertinentes seraient de supprimer les verbes, moins variés que les noms
+mais apportant moins d’information, qui tendent donc à parasiter les commu-
+nautés. Enﬁn, on pourrait réaliser une projection des termes communs sur les
+communautés obtenues par similarité, ce qui permettrait une meilleure lisibilité
+du graphe.
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+90
+
+11. Remerciements
+
+Nous souhaitons remercier les personnes qui nous ont aidés durant ce projet.
+Tout d’abord, nous remercions Christophe Thovex, qui nous a suivi, aidé et
+orienté grace à son expertise technique et sa maîtrise du contexte de notre projet.
+Ensuite, nous remercions Pascale Kuntz, qui nous a aidés dans nos démarches
+
+de recherche en nous indiquant des publications similaires dans le domaine.
+
+Enﬁn, nous remercions Philippe Le Ray pour ses retours critiques tout au
+
+long de notre travail.
+
+91
+
+A. Annexes
+
+92
+
+Figure A.1. – Termes commun à deux textes
+
+Figure A.2. – Termes prégnants dans un texte
+
+Figure A.3. – Documents saillants pour un texte
+
+A.1. Requête d’installation du package Semantic Language
+
+Database
+
+Figure A.4. – Script SQL d’installation du package Semantic Language Database
+
+A.2. Procédures stockées
+
+Figure A.5. – Procédure d’ajout des arcs
+
+Figure A.6. – Procédure d’ajout des noeuds
+
+Table des ﬁgures
+
+1.1. Projet fourni par iRéalité . . . . . . . . . . . . . . . . . . . . . . .
+
+7
+
+3.1. Modèle du domaine . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+
+5.1. Oracle SQL Developper - IDE pour Oracle Database . . . . . . . . 22
+5.2. SQL Server Management Studio - IDE pour SQL Server . . . . . . 24
+5.3. Répartition des utilisateurs selon leur classe d’âge, dans le corpus
+
+et dans la population [9]
+
+. . . . . . . . . . . . . . . . . . . . . . . 26
+5.4. Statistiques pour les diﬀérentes formes et variantes de salutation [9] 28
+. . . . . . . 38
+5.5. Gephi - Outil d’analyse et de visualisation de graphes
+
+. . . . . . . . 40
+6.1. Processus de fouille de donnée adapté à notre projet
+6.2. Structure de SMS_BASE . . . . . . . . . . . . . . . . . . . . . . . 41
+6.3. Structure de SMS_TRANSCODE . . . . . . . . . . . . . . . . . . 42
+6.4. Structure de TABLE_FAITS . . . . . . . . . . . . . . . . . . . . . 42
+6.5. Structure de REFLEX . . . . . . . . . . . . . . . . . . . . . . . . 43
+6.6. Graphe triparti, représentant utilisateurs, messages et termes
+. . . 46
+6.7. Graphe biparti, représentant utilisateurs et termes
+. . . . . . . . . 47
+6.8. Processus de pondération des noeuds termes . . . . . . . . . . . . . 48
+6.9. Processus de réduction des formes inﬂéchies en un seul terme lématisé 48
+6.10. Processus de pondération des messages
+. . . . . . . . . . . . . . . 49
+6.11. Processus de pondération des expéditeurs . . . . . . . . . . . . . . 49
+6.12. Distribution des pondérations obtenues : Pondérations en ordonnées 51
+6.13. Distribution des pondérations obtenues : Pondérations en ordonnées 51
+6.14. Processus de propagation des pondérations des termes . . . . . . . 52
+
+. . . . . . . . . . . . . . . . . . . . . . . . . 55
+7.1. Structures des tables
+. . . . . . . . . . . . . . . . . . . . . 57
+7.2. Sélection des mots à ajouter
+. . . . . . . . . . . . . . . . . . 58
+7.3. Ajout dans la liste des mots vides
+7.4. Sélection des mots à enlever
+. . . . . . . . . . . . . . . . . . . . . 59
+7.5. Suppression dans la liste des mots vides . . . . . . . . . . . . . . . 59
+7.6. Méthode de ranking CONTAINSTABLE . . . . . . . . . . . . . . . 60
+7.7. Méthode de ranking FREETEXTTABLE . . . . . . . . . . . . . . 61
+
+99
+
+Table des ﬁgures
+
+Table des ﬁgures
+
+7.8. Sélection de la liste des mots utiles . . . . . . . . . . . . . . . . . . 62
+7.9. Ranking sur chacun des termes . . . . . . . . . . . . . . . . . . . . 62
+7.10. Données de la table des faits
+. . . . . . . . . . . . . . . . . . . . . 63
+7.11. Graphe avec messages . . . . . . . . . . . . . . . . . . . . . . . . . 66
+7.12. Graphe sans messages . . . . . . . . . . . . . . . . . . . . . . . . . 67
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . 68
+7.13. Graphe initial
+7.14. Graphe après spatialisation et partitionnement
+. . . . . . . . . . . 69
+7.15. Termes pregnants non pertinents . . . . . . . . . . . . . . . . . . . 70
+7.16. Filtrage des termes pregnants non pertinents
+. . . . . . . . . . . . 71
+7.17. Coloration par algorithme de modularité [2] . . . . . . . . . . . . . 72
+7.18. Identiﬁcation d’une première communauté . . . . . . . . . . . . . . 73
+7.19. Extraction de la communauté . . . . . . . . . . . . . . . . . . . . . 74
+7.20. Prépondérance des termes dans la communauté . . . . . . . . . . . 75
+7.21. Graphe avec deuxième pondération . . . . . . . . . . . . . . . . . . 76
+
+8.1. Structure de TABLE_FAITS_SIMILARITE . . . . . . . . . . . . 78
+8.2. Graphe de la table des faits . . . . . . . . . . . . . . . . . . . . . . 78
+8.3. Graphe expéditeur . . . . . . . . . . . . . . . . . . . . . . . . . . . 79
+8.4. Réduction des similarités de messages
+. . . . . . . . . . . . . . . . 80
+8.5. Similarité des expéditeurs . . . . . . . . . . . . . . . . . . . . . . . 80
+
+9.1. Requête utilisant SEMANTICSIMILARITYTABLE . . . . . . . . 82
+9.2. Résultat de la requête . . . . . . . . . . . . . . . . . . . . . . . . . 82
+9.3. Méthode de ranking SEMANTICSIMILARITYTABLE . . . . . . . 83
+9.4. Données de la table de similarité . . . . . . . . . . . . . . . . . . . 84
+9.5. Graphe de similarité brut . . . . . . . . . . . . . . . . . . . . . . . 85
+9.6. Graphe Within Degree
+. . . . . . . . . . . . . . . . . . . . . . . . 86
+9.7. Graphe avec Spacialisation Force Atlas . . . . . . . . . . . . . . . . 87
+
+A.1. Termes commun à deux textes . . . . . . . . . . . . . . . . . . . . 93
+A.2. Termes prégnants dans un texte . . . . . . . . . . . . . . . . . . . 94
+A.3. Documents saillants pour un texte . . . . . . . . . . . . . . . . . . 95
+A.4. Script SQL d’installation du package Semantic Language Database
+96
+A.5. Procédure d’ajout des arcs
+. . . . . . . . . . . . . . . . . . . . . . 97
+A.6. Procédure d’ajout des noeuds . . . . . . . . . . . . . . . . . . . . . 98
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+100
+
+Bibliographie
+
+[1] Marcus BARKOWSKY et Yannick PRIE. “Cours de Génie Logiciel”.
+[2] Vincent D. Blondel et al. “Fast unfolding of communities in large net-
+works”. In : Journal of Statistical Mechanics : Theory and Experiment (2008).
+[3] CAPACITES SAS. Cellule de compétences iRéalité. http://www.capacites.
+
+fr/cellules-de-competences/irealite.html.
+
+[4] CAPACITES SAS. Organisation et activités. http://www.capacites.fr/
+
+organisation-et-activites.html.
+
+[5] CAPACITES SAS.Les Cellules de compétences. http://www.capacites.
+
+fr/cellules-de-competences.
+
+[6] Gaëlle Chaubert. SMS et TAL : kL 1Trè ? 2010.
+[7] Contexte du projet. http://www.huma-num.fr/sites/default/files/
+
+partage_exp_31.pdf.
+
+[8] Corpus 88milSMS. http://88milsms.huma-num.fr/.
+[9] Louise-Amélie Cougnon et Thomas François. “Quelques contributions
+des statistiques à l’analyse sociolinguistique d’un corpus de SMS”. In : Pro-
+ceedings of 10th International Conference JADT. 2010.
+
+[10] Document Oracle Text. http://www.oracle.com/technetwork/database/
+
+enterprise-edition/11goracletexttwp-133192.pdf.
+
+[11] Documentation Gephi. https://gephi.org/publications/gephi-bastian-
+
+feb09.pdf.
+
+[12] Documentation Gephi. http://www.disko.fr/reflexions/user-experience/
+
+cartographie-de-reseaux-et-dinformations-focus-sur-gephi/.
+
+[13] Documentation Oracle Database. https://docs.oracle.com/cd/E11882_
+
+01/license.112/e47877/options.htm#DBLIC142.
+
+[14] Documentation Recherche Semantique SQL Server. http://wiki.hsr.ch/
+Datenbanken/files/Semantic_Search_In_MS_SQL_2012_Rico_Suter.
+pdf.
+
+101
+
+Bibliographie
+
+Bibliographie
+
+[15] Documentation SQL Server. http://technet.microsoft.com/fr-fr/
+
+library/ms165636(v=sql.105).aspx.
+
+[16] Roger Guimerà, Marta Sales-Pardo et Luís A. Nunes Amaral. “Mo-
+dule identiﬁcation in bipartite and directed networks”. In : Physical Review
+E (Statistical, Nonlinear, and Soft Matter Physics) (2007).
+
+[17] Limit Search Results with RANK. https://msdn.microsoft.com/en-
+
+us/library/cc879245.aspx#how.
+
+[18] Marie-Louise Moreau. Sociolinguistique :Les concepts de base. 1997.
+[19] NoSQL explained. http://www.mongodb.com/nosql-explained.
+[20] Rachel Panckhurst. “Short message service (SMS) : typologie et problé-
+matiques futures.” In : Arnavielle T. (coord.), Polyphonies, pour Michelle
+Lanvin, Université Paul-Valéry Montpellier 3, p. 33-52. 2009.
+
+[21] Panckhurst, R. (1997), « La communication médiatisée par ordinateur ou
+la communication médiée par ordinateur ? », Terminologies nouvelles, 17,
+56–58.
+
+[22] RDBMS vs. NoSQL : How do you pick ? http://www.zdnet.com/rdbms-
+
+vs-nosql-how-do-you-pick-7000020803/.
+
+[23] Sms4Science. http://www.sms4science.org/.
+[24] Sud4Science. http://www.sud4science.org/.
+[25] Christophe Thovex. “Réseaux de Compétences :de l’Analyse des Réseaux
+
+Sociaux à l’Analyse Prédictive de Connaissances.” Thèse de doct. 2012.
+
+[26] Hugo Zaragoza et al. “Microsoft Cambridge at TREC-13 : Web and
+
+HARD tracks”. In : Proceedings of Text REtrieval Conference. 2004.
+
+[27] « 88milSMS. A corpus of authentic text messages in French » Panckhurst
+R., Détrie C., Lopez C., Moïse C., Roche M., Verine B. (2014), produit par
+l’Université Paul-Valéry Montpellier 3 et le CNRS, en collaboration avec
+l’Université catholique de Louvain, ﬁnancé grâce au soutien de la MSH-M et
+du Ministère de la Culture (Délégation générale à la langue française et aux
+langues de France) et avec la participation de Praxiling, Lirmm, Lidilem,
+Tetis, Viseo. ISLRN : 024-713-187-947-8 ».
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+102
+
+Bibliographie
+
+Bibliographie
+
+Visualisation and analysis of the socio-semantic network of the
+
+88milSMS corpus
+
+Université de Nantes - Université de Montpellier
+
+Dorian KODELJA - dorian.kodelja@gmail.com
+Martin GUERRE - martin.guerre44@gmail.com
+
+Abstract : The "88milSMS" corpus, published on June the 26th, 2014, is a
+big corpus of authentics and anonymized french SMS. The goal of this project is
+to build and analyze the corresponding socio-semantic graph in order to visualise
+the thematic communities gathered around similar vocabulary.
+
+Key words : graph, 88milSMS, socio semantic networks, communities, corpus,
+
+ranking
+
+Juin 2015 - Université de Nantes - Université de Montpellier - Reproduction interdite
+
+103
+
+

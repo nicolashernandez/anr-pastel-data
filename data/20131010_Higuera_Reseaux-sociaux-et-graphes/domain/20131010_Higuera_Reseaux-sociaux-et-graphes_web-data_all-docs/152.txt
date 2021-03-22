@@ -1,0 +1,1375 @@
+https://blogs.univ-tlse2.fr/jouve/files/2014/12/SFC2012.pdf
+
+1.Entre théorie des graphes et réseaux réels
+
+2. Partition métrique
+
+3. Clans
+
+4.Graphes cospectraux
+
+4. Démontabilité
+
+5. Conclusion
+
+Théorie des graphes pour l’analyse de réseaux
+
+réels
+
+Bertrand Jouve
+
+Laboratoire ERIC - IXXI - Université Lyon 2
+
+1.Entre théorie des graphes et réseaux réels
+
+2. Partition métrique
+
+3. Clans
+
+4.Graphes cospectraux
+
+4. Démontabilité
+
+5. Conclusion
+
+Plan
+
+1 Entre théorie des graphes et réseaux réels
+
+2 Partitionnement métrique
+
+Exemple d’étude : organisation cortico-corticale
+
+3 Décomposition en Clans
+
+Exemple d’étude : procédure de vote
+
+4 Graphes cospectraux
+
+Exemple d’étude : modélisation de réseaux sociaux anciens
+
+5 Réduction de graphe par démontabilité
+
+Exemple d’étude : dynamique de parcellaires
+
+6 Conclusion
+
+1.Entre théorie des graphes et réseaux réels
+
+2. Partition métrique
+
+3. Clans
+
+4.Graphes cospectraux
+
+4. Démontabilité
+
+5. Conclusion
+
+Déﬁnition
+[Graphe] G = (V , E) où V est un ensemble non vide et E un
+ensemble de couples d’éléments de V .
+[Réseau] Un réseau est un graphe dont les individus et les relations
+présentent des caractéristiques quantitatives ou qualitatives.
+[Système complexe] Grand nombre d’entités en interaction formant
+un ensemble dont le comportement est imprévisible pour
+l’observateur car résultant d’interactions non triviales.
+
+1.Entre théorie des graphes et réseaux réels
+
+2. Partition métrique
+
+3. Clans
+
+4.Graphes cospectraux
+
+4. Démontabilité
+
+5. Conclusion
+
+Déﬁnition
+[Graphe] G = (V , E) où V est un ensemble non vide et E un
+ensemble de couples d’éléments de V .
+[Réseau] Un réseau est un graphe dont les individus et les relations
+présentent des caractéristiques quantitatives ou qualitatives.
+[Système complexe] Grand nombre d’entités en interaction formant
+un ensemble dont le comportement est imprévisible pour
+l’observateur car résultant d’interactions non triviales.
+
+Deux objectifs pour l’étude des sytèmes complexes :
+
+DESCRIPTIFS et PREDICTIFS.
+
+1.Entre théorie des graphes et réseaux réels
+
+2. Partition métrique
+
+3. Clans
+
+4.Graphes cospectraux
+
+4. Démontabilité
+
+5. Conclusion
+
+La démarche générale
+
+1 Etant donné un système complexe à étudier, déﬁnir les réseaux
+
+d’interactions qui peuvent aider à sa compréhension.
+
+2 Utiliser et enrichir l’ensemble des outils mathématiques qui
+
+permettent l’étude formelle de ces réseaux.
+
+3 Appliquer aux systèmes à l’étude et exploiter les résultats
+
+obtenus pour enrichir des approches SHS-centrées.
+
+4 boucler sur 2.
+
+en particulier les apports et limites de la théorie des graphes :
+analyse des données, analyse spectrale, combinatoire, topologie.
+
+Des applications
+
+1.Entre théorie des graphes et réseaux réels
+
+2. Partition métrique
+
+3. Clans
+
+4.Graphes cospectraux
+
+4. Démontabilité
+
+5. Conclusion
+
+et la différence par rapport à l’analyse des réseaux ’classique’ ...
+
+1.Entre théorie des graphes et réseaux réels
+
+2. Partition métrique
+
+3. Clans
+
+4.Graphes cospectraux
+
+4. Démontabilité
+
+5. Conclusion
+
+Partitionnement métrique
+
+Problème : Partitionner le graphe en classes qui satisfont certaines
+propriétés déﬁnies à l’avance en le plongeant dans un espace
+géométrique.
+
+Ce type d’approche pour l’analyse de graphes n’est pas récent (Benzecri
+dans les années 70 , Lebart dans les années 80, ...) mais a été relancé dans
+les années 90 / 00 avec la construction de réseaux réels dans des domaines
+très variés.
+
+1.Entre théorie des graphes et réseaux réels
+
+2. Partition métrique
+
+3. Clans
+
+4.Graphes cospectraux
+
+4. Démontabilité
+
+5. Conclusion
+
+G = (V , E) graphe non orienté.
+
+Objectif : Partitionner G en sous-graphes denses
+(communautés ?).
+
+Principe de la méthode
+
+munir V d’une dissimilarité d (souvent une comparaison des
+voisins)
+plonger (V , d) dans (Rn, d2) et étudier la forme du nuage plongé.
+projeter le nuage sur les 1ères dimensions d’une A.C.P.
+effectuer une Classiﬁcation automatique des points de la
+projection.
+
+Exemple :
+
+d 2(i, j) = |V [i]∆V [j]|
+|V [i]|+|V [j]|
+
+1.Entre théorie des graphes et réseaux réels
+
+2. Partition métrique
+
+3. Clans
+
+4.Graphes cospectraux
+
+4. Démontabilité
+
+5. Conclusion
+
+Extension aux graphes orientés et ou pondérés.
+
+Objectif : Partitionner G en sous-graphes denses et différencier
+ceux qui sont des pseudo-sources ou pseudo-puits.
+
+La distance entre deux sommets i et j s’écrit
+
+d 2(i , j) = f (cid:0)V +[i], V +[j](cid:1) + f (cid:0)V −[i], V −[j](cid:1)
+
+ou plus généralement
+
+f (cid:16)V +[i], V +[j], V +2
+
+[i], V +2
+
+[j], · · ·(cid:17) + f (cid:16)V +[i], V +[j], V +2
+
+[i], V +2
+
+[j], · · ·(cid:17)
+
+Exemple : Si f est le carré de la métrique de Dice, d s’écrit
+
+d 2(i , j) =
+
+|V [i]∆V [j]|
+|V [i]| + |V [j]|
+
+d 2(i , j) =
+
+|V +[i]∆V +[j]|
+|V +[i]| + |V +[j]|
+
++
+
+|V −[i]∆V −[j]|
+|V −[i]| + |V −[j]|
+
+d est euclidienne ainsi que son extension aux graphes pondérés.
+
+1.Entre théorie des graphes et réseaux réels
+
+2. Partition métrique
+
+3. Clans
+
+4.Graphes cospectraux
+
+4. Démontabilité
+
+5. Conclusion
+
+Résultats
+
+[1998 ; 2001]
+
+Si f est un indice de proximité pour tableaux de présence /
+absence, on construit des familles de dissimilarités pour graphes
+orientés qui héritent des propriétés de f .
+
+a =< ai , aj > b =< ai , 1 − aj > c =< 1 − ai , aj >
+d =< 1 − ai , 1 − aj >
+Exemple : d 2 = b+c
+
+2a+b+c
+
+Résultats
+
+[2002]
+
+Dans certains cas, il est possible de déterminer formellement
+l’information portée par les 1ers axes factoriels de l’A.C.P.
+Sous l’hypothèse de 1ères valeurs propres assez distantes, le
+graphe peut être perturbé.
+
+1.Entre théorie des graphes et réseaux réels
+
+2. Partition métrique
+
+3. Clans
+
+4.Graphes cospectraux
+
+4. Démontabilité
+
+5. Conclusion
+
+Modèles jouets :
+
+(cid:4)
+Gp=3,q=3
+
+Les p premières dimensions portent le nombre de cliques
+Les p + 1 à p + q − 1 dimensions suivantes portent les couplages.
+
+(cid:4) GGAR(4, 10, 0.6, 0.2)
+
+1.Entre théorie des graphes et réseaux réels
+
+2. Partition métrique
+
+3. Clans
+
+4.Graphes cospectraux
+
+4. Démontabilité
+
+5. Conclusion
+
+Exemple d’étude : organisation cortico-corticale
+
+Questions :
+
+Quelle modularité corticale dans
+l’organisation anatomo-fonctionnelle
+du cortex ?
+Comment traiter une connaissance
+incomplète du réseau neuronal ?
+Une ou plusieurs hiérarchies ?
+
+Outils et résultats
+
+[1998 ; 2004]
+
+Extension sous contraintes du réseau
+neuronal.
+Représentation géométrique de réseaux
+orientés.
+SLN : associer hiérarchie et
+représentation bidimensionnelles.
+
+1.Entre théorie des graphes et réseaux réels
+
+2. Partition métrique
+
+3. Clans
+
+4.Graphes cospectraux
+
+4. Démontabilité
+
+5. Conclusion
+
+Exemple d’étude : organisation cortico-corticale
+
+Questions :
+
+Quelle modularité corticale dans
+l’organisation anatomo-fonctionnelle
+du cortex ?
+Comment traiter une connaissance
+incomplète du réseau neuronal ?
+Une ou plusieurs hiérarchies ?
+
+Outils et résultats
+
+[1998 ; 2004]
+
+Extension sous contraintes du réseau
+neuronal.
+Représentation géométrique de réseaux
+orientés.
+SLN : associer hiérarchie et
+représentation bidimensionnelles.
+
+1.Entre théorie des graphes et réseaux réels
+
+2. Partition métrique
+
+3. Clans
+
+4.Graphes cospectraux
+
+4. Démontabilité
+
+5. Conclusion
+
+Exemple d’étude : organisation cortico-corticale
+
+Questions :
+
+Quelle modularité corticale dans
+l’organisation anatomo-fonctionnelle
+du cortex ?
+Comment traiter une connaissance
+incomplète du réseau neuronal ?
+Une ou plusieurs hiérarchies ?
+
+Outils et résultats
+
+[1998 ; 2004]
+
+Extension sous contraintes du réseau
+neuronal.
+Représentation géométrique de réseaux
+orientés.
+SLN : associer hiérarchie et
+représentation bidimensionnelles.
+
+1.Entre théorie des graphes et réseaux réels
+
+2. Partition métrique
+
+3. Clans
+
+4.Graphes cospectraux
+
+4. Démontabilité
+
+5. Conclusion
+
+Notion de communautés
+
+La notion de ’communauté’ apparaît souvent centrale car elle permet
+une schématisation du réseau et donc une approche à un autre
+niveau de granulométrie. Pour autant elle n’admet pas de déﬁnition
+unique. Si l’on ne regarde que la structure du graphe, les déﬁnitions
+suivantes correspondent à des notions combinatoires bien
+étudiéees :
+
+Les sommets d’une même communauté sont vus de la même
+manière par un invidividu extérieur à la communauté,
+Tous les éléments d’une communauté se connaissent 2 à 2,
+Deux sommets d’une communauté sont ’interchangeables’.
+...
+
+1.Entre théorie des graphes et réseaux réels
+
+2. Partition métrique
+
+3. Clans
+
+4.Graphes cospectraux
+
+4. Démontabilité
+
+5. Conclusion
+
+Décomposition en clans
+
+Un tournoi est un graphe
+complet orienté.
+
+Problème : Etant donné un tournoi (ou un graphe orienté), comment
+peut-on le décomposer en ordres totaux (ou partiels) liés par des
+connexions en unidirection ?
+
+1.Entre théorie des graphes et réseaux réels
+
+2. Partition métrique
+
+3. Clans
+
+4.Graphes cospectraux
+
+4. Démontabilité
+
+5. Conclusion
+
+T est un tournoi.
+
+Déﬁnition
+
+Un Clan (ie. Intervalle) I de T est un sous-ensemble de sommets
+de T tel que tout sommet qui n’est pas dans I soit domine soit
+est dominé par tous les sommets de T .
+Un 2-Clan est un clan à 2 éléments.
+Un tournoi sans clan non trivial (resp. 2-clan) est
+sommet-critique lorsque la suppression d’un sommet
+quelconque crée un clan non trivial (resp. 2-clan).
+
+1.Entre théorie des graphes et réseaux réels
+
+2. Partition métrique
+
+3. Clans
+
+4.Graphes cospectraux
+
+4. Démontabilité
+
+5. Conclusion
+
+T est un tournoi.
+
+Déﬁnition
+
+Un Clan (ie. Intervalle) I de T est un sous-ensemble de sommets
+de T tel que tout sommet qui n’est pas dans I soit domine soit
+est dominé par tous les sommets de T .
+Un 2-Clan est un clan à 2 éléments.
+Un tournoi sans clan non trivial (resp. 2-clan) est
+sommet-critique lorsque la suppression d’un sommet
+quelconque crée un clan non trivial (resp. 2-clan).
+
+Remarque :
+
+Un tournoi dont les clans acycliques sont triviaux sont les tournois
+sans 2-clans et réciproquement.
+Si d est bien choisie, l’approche géométrique sur un tournoi
+exhibe un partitionnement dont les classes sont "proches" de
+clans acycliques [2005] : nous rigidiﬁons le critère.
+
+1.Entre théorie des graphes et réseaux réels
+
+2. Partition métrique
+
+3. Clans
+
+4.Graphes cospectraux
+
+4. Démontabilité
+
+5. Conclusion
+
+Objectif : Caractériser les tournois sans 2-clans et qui sont
+sommet-critiques pour cette propriété.
+
+Remarque :
+Les questions et résultats de décomposabilité et d’indécomposabilité
+en clans et 2-clans pour les tournois s’étendent aux structures
+binaires ([2012 soumis])
+
+1.Entre théorie des graphes et réseaux réels
+
+2. Partition métrique
+
+3. Clans
+
+4.Graphes cospectraux
+
+4. Démontabilité
+
+5. Conclusion
+
+Etat de l’art
+
+étudiés Tournois dont les clans sont triviaux [Schmerl and
+
+Trotter, 1993 ; Ille, 1997]
+
+caractérisés Parmi ces tournois, ceux qui sont sommet-critiques
+
+pour cette propriété [Ille, 1997]
+
+étudiés Les tournois dont une partition en ordres totaux admet
+
+r sous-ensembles et sommet-critiques pour cette
+propriété [Neumann-Lara, 1984]
+
+Résultats
+caractérisés Tournois sans 2-clans (ie. tous les clans acycliques
+
+[2005 ; 2010]
+
+sont triviaux) et sommets critiques pour cette
+propriété : T ′[
+
+−→
+Ck2 , ...,
+
+−→
+Ck1 ,
+
+−→
+Ckp ].
+
+Exemple :
+
+−→
+C3,
+
+−→
+C5,
+
+−→
+C7] =
+
+O3[
+
+1.Entre théorie des graphes et réseaux réels
+
+2. Partition métrique
+
+3. Clans
+
+4.Graphes cospectraux
+
+4. Démontabilité
+
+5. Conclusion
+
+Exemple d’étude : procédure de vote
+
+Les tournois apparaissent notamment lors des procédures de votes.
+n candidats numérotés de 1 à n et p votants
+Chaque votant doit classer les candidats sans
+ex-æquo.
+
+L’objectif est d’agréger les p ordres totaux obtenus en un seul.
+Procédure de Condorcet (dite aussi vote majoritaire) :
+Les candidats sont les sommets d’un tournoi T et il existe un arc de i
+vers j si une majorité de votant préfère i à j.
+Paradoxe de Condorcet : une telle procédure peut créer des cycles.
+Exemple :
+n = 4 et p = 3
+Votant 1 : 1 > 2 > 3 > 4
+Votant 3 : 2 > 3 > 1 > 4
+
+Votant 2 : 3 > 1 > 2 > 4
+
+Questions :
+Comment agréger les préférences ?
+
+1.Entre théorie des graphes et réseaux réels
+
+2. Partition métrique
+
+3. Clans
+
+4.Graphes cospectraux
+
+4. Démontabilité
+
+5. Conclusion
+
+Exemple d’étude : procédure de vote
+
+Outils
+
+On cherche l’ordre O à distance minimale du tournoi T . Si la
+distance est le nombre minimal d’arcs à inverser (indice de
+Slater), on obtient un ordre de Slater. A un tournoi peuvent
+correspondre plusieurs ordres de Slater et la distance d(O, T )
+peut être importante.
+On cherche un partitionnement en clans acycliques.
+
+1.Entre théorie des graphes et réseaux réels
+
+2. Partition métrique
+
+3. Clans
+
+4.Graphes cospectraux
+
+4. Démontabilité
+
+5. Conclusion
+
+Exemple d’étude : procédure de vote
+
+Outils
+
+On cherche l’ordre O à distance minimale du tournoi T . Si la
+distance est le nombre minimal d’arcs à inverser (indice de
+Slater), on obtient un ordre de Slater. A un tournoi peuvent
+correspondre plusieurs ordres de Slater et la distance d(O, T )
+peut être importante.
+On cherche un partitionnement en clans acycliques.
+
+1.Entre théorie des graphes et réseaux réels
+
+2. Partition métrique
+
+3. Clans
+
+4.Graphes cospectraux
+
+4. Démontabilité
+
+5. Conclusion
+
+Graphes cospectraux
+
+Croiser les méthodes pour trouver les communautés.
+
+Tout graphe peut être codé de façon biunivoque par une matrice
+binaire.
+
+Problème : Qu’ajoute la connaissance d’invariants, comme le
+spectre de la matrice d’adjacence, sur la compréhension de la
+structure du graphe, de ses ’communautés’ ? Dans quelle mesure,
+disposer des distributions de valeurs propres est-il une aide à la
+comparaison de 2 graphes ?
+
+Remarque : On a déjà utilisé le spectre de matrices pour l’ACP sur
+tableau de distances. On essaie ici de s’affranchir de la métrique.
+
+1.Entre théorie des graphes et réseaux réels
+
+2. Partition métrique
+
+3. Clans
+
+4.Graphes cospectraux
+
+4. Démontabilité
+
+5. Conclusion
+
+Déﬁnition
+Deux graphes sont dits cospectraux s’ils ont même spectre Sp
+(ensemble des solutions en λ de l’équation Au = λu).
+
+Objectif : Augmenter la connaissance sur les graphes
+cospectraux. En particulier, déterminer de nouvelles classes de
+graphes déterminés par leur spectre.
+
+Remarque :
+Deux graphes isomorphes sont cospectraux mais la réciproque est
+fausse.
+Exemple :
+Deux graphes non isomorphes cospectraux pour la matrice
+d’adjacence et non cospectraux pour le Laplacien L = D − A.
+
+SpA = {−2; 0; 0; 0; 2}
+
+Dans la suite, on parlera de spectre d’un graphe pour désigner le spectre de
+sa matrice d’adjacence. Tous les graphes considérés sont connexes.
+
+1.Entre théorie des graphes et réseaux réels
+
+2. Partition métrique
+
+3. Clans
+
+4.Graphes cospectraux
+
+4. Démontabilité
+
+5. Conclusion
+
+Etat de l’art (un peu ...)
+
+chemins : Les chemins sont déterminés par le spectre [Schen et
+
+al., 2005]
+
+arbres : Presque tous les arbres sont cospectraux [Schwenk,
+
+1973]
+
+cycles : Les cycles sont déterminés par le spectre [Smith,
+
+1970]
+
+monocles impairs : Les monocles de cycle impair sont déterminés
+
+par le spectre [Haemers et al., 2008]
+
+Résultats
+monocles pairs : Les monocles de cycle pair sont déterminés par le
+
+[2008]
+
+spectre.
+
+Exemple :
+
+L(6, 4)
+
+1.Entre théorie des graphes et réseaux réels
+
+2. Partition métrique
+
+3. Clans
+
+4.Graphes cospectraux
+
+4. Démontabilité
+
+5. Conclusion
+
+Déﬁnition
+Une communauté parfaite d’un graphe G est un sous-graphe complet
+de G qui est un intervalle de G.
+
+[Van den Heuvel and Pejic 2001]
+
+Résultat
+Si le laplacien L du graphe a une valeur propre λ non nulle de
+multiplicité au moins k − 1 dont les vecteurs propres associés
+possèdent exactement les mêmes k coordonnées non nulles alors
+ces k coordonnées correspondent soit aux sommets d’une
+k-communauté parfaite soit aux sommets d’un k-ensemble stable.
+
+1.Entre théorie des graphes et réseaux réels
+
+2. Partition métrique
+
+3. Clans
+
+4.Graphes cospectraux
+
+4. Démontabilité
+
+5. Conclusion
+
+Exemple d’étude : modélisation de réseaux sociaux anciens
+
+1.Entre théorie des graphes et réseaux réels
+
+2. Partition métrique
+
+3. Clans
+
+4.Graphes cospectraux
+
+4. Démontabilité
+
+5. Conclusion
+
+Exemple d’étude : modélisation de réseaux sociaux anciens
+
+1.Entre théorie des graphes et réseaux réels
+
+2. Partition métrique
+
+3. Clans
+
+4.Graphes cospectraux
+
+4. Démontabilité
+
+5. Conclusion
+
+Exemple d’étude : modélisation de réseaux sociaux anciens
+
+Hypothèse :
+Les données de noms et de lieux
+présentes dans l’ensemble de ces
+contrats permettent l’émergence de
+réseaux de relations qui sont
+descriptifs de l’organisation de la
+société.
+
+1.Entre théorie des graphes et réseaux réels
+
+2. Partition métrique
+
+3. Clans
+
+4.Graphes cospectraux
+
+4. Démontabilité
+
+5. Conclusion
+
+Exemple d’étude : modélisation de réseaux sociaux anciens
+
+Questions :
+
+1
+
+Identiﬁer les réseaux sociaux
+dans le monde paysan des
+XIIIe-XVIe siècles.
+
+2 Hiérarchiser les individus et leur
+
+rôle au sein de ces réseaux.
+
+3 Analyser l’évolution de ces
+
+réseaux (passage de la guerre de
+cent ans.
+
+1.Entre théorie des graphes et réseaux réels
+
+2. Partition métrique
+
+3. Clans
+
+4.Graphes cospectraux
+
+4. Démontabilité
+
+5. Conclusion
+
+Exemple d’étude : modélisation de réseaux sociaux anciens
+
+Outils et résultats
+BDD de contrats agraires (1250-1350 et
+1450-1550) : 8706 individus et 11591 arêtes
+
+Mise en forme des données, déﬁnition
+des liens pour la construction des
+réseaux.
+Structure en communautés parfaites,
+club huppé et ’individus relais’.
+Comparaison des graphes à différentes
+périodes.
+
+1.Entre théorie des graphes et réseaux réels
+
+2. Partition métrique
+
+3. Clans
+
+4.Graphes cospectraux
+
+4. Démontabilité
+
+5. Conclusion
+
+Exemple d’étude : modélisation de réseaux sociaux anciens
+
+Travaux en cours : dynamique et spatialisation
+
+1.Entre théorie des graphes et réseaux réels
+
+2. Partition métrique
+
+3. Clans
+
+4.Graphes cospectraux
+
+4. Démontabilité
+
+5. Conclusion
+
+Exemple d’étude : modélisation de réseaux sociaux anciens
+
+Travaux en cours : dynamique et spatialisation
+
+1.Entre théorie des graphes et réseaux réels
+
+2. Partition métrique
+
+3. Clans
+
+4.Graphes cospectraux
+
+4. Démontabilité
+
+5. Conclusion
+
+Réduction de graphe par démontabilité
+
+Notion d’homotopie en topologie : deux objets sont homotopes si on
+peut passer de l’un à l’autre par une déformation continue de l’objet
+sur lui-même.
+
+Problème : dans quel mesure peut-on étudier la ’forme’ d’un graphe
+en utilisant des outils de topologie comme l’homotopie ?
+
+1.Entre théorie des graphes et réseaux réels
+
+2. Partition métrique
+
+3. Clans
+
+4.Graphes cospectraux
+
+4. Démontabilité
+
+5. Conclusion
+
+Il existe un lien ’assez classique’ entre les graphes et la topologie par
+le biais des complexes simpliciaux.
+Rappel : Un complexe simplicial K , d’ensemble de sommets V , est
+une collection d’ensembles non vides de V (les simplexes) telle que :
+V = Sσ∈K σ et (σ ∈ K , x ∈ σ)σ \ {x} ∈ K .
+Déﬁnition
+
+∆(G) est le complexe simplicial dont les k-simplexes sont les
+sous-graphes complets à k sommets.
+Une réduction élémentaire de ∆(G) est la suppression d’une
+paire de simplexes (σ, τ ) avec τ face propre maximale de σ et τ
+libre (ie. face d’aucun autre simplexe).
+
+Exemple :
+
+1.Entre théorie des graphes et réseaux réels
+
+2. Partition métrique
+
+3. Clans
+
+4.Graphes cospectraux
+
+4. Démontabilité
+
+5. Conclusion
+
+Il existe un lien ’assez classique’ entre les graphes et la topologie par
+le biais des complexes simpliciaux.
+Rappel : Un complexe simplicial K , d’ensemble de sommets V , est
+une collection d’ensembles non vides de V (les simplexes) telle que :
+V = Sσ∈K σ et (σ ∈ K , x ∈ σ)σ \ {x} ∈ K .
+Déﬁnition
+
+∆(G) est le complexe simplicial dont les k-simplexes sont les
+sous-graphes complets à k sommets.
+Une réduction élémentaire de ∆(G) est la suppression d’une
+paire de simplexes (σ, τ ) avec τ face propre maximale de σ et τ
+libre (ie. face d’aucun autre simplexe).
+
+Exemple :
+
+1.Entre théorie des graphes et réseaux réels
+
+2. Partition métrique
+
+3. Clans
+
+4.Graphes cospectraux
+
+4. Démontabilité
+
+5. Conclusion
+
+Il existe un lien ’assez classique’ entre les graphes et la topologie par
+le biais des complexes simpliciaux.
+Rappel : Un complexe simplicial K , d’ensemble de sommets V , est
+une collection d’ensembles non vides de V (les simplexes) telle que :
+V = Sσ∈K σ et (σ ∈ K , x ∈ σ)σ \ {x} ∈ K .
+Déﬁnition
+
+∆(G) est le complexe simplicial dont les k-simplexes sont les
+sous-graphes complets à k sommets.
+Une réduction élémentaire de ∆(G) est la suppression d’une
+paire de simplexes (σ, τ ) avec τ face propre maximale de σ et τ
+libre (ie. face d’aucun autre simplexe).
+
+Exemple :
+
+1.Entre théorie des graphes et réseaux réels
+
+2. Partition métrique
+
+3. Clans
+
+4.Graphes cospectraux
+
+4. Démontabilité
+
+5. Conclusion
+
+Il existe un lien ’assez classique’ entre les graphes et la topologie par
+le biais des complexes simpliciaux.
+Rappel : Un complexe simplicial K , d’ensemble de sommets V , est
+une collection d’ensembles non vides de V (les simplexes) telle que :
+V = Sσ∈K σ et (σ ∈ K , x ∈ σ)σ \ {x} ∈ K .
+Déﬁnition
+
+∆(G) est le complexe simplicial dont les k-simplexes sont les
+sous-graphes complets à k sommets.
+Une réduction élémentaire de ∆(G) est la suppression d’une
+paire de simplexes (σ, τ ) avec τ face propre maximale de σ et τ
+libre (ie. face d’aucun autre simplexe).
+
+Objectif : construire une homotopie combinatoire sur les
+graphes identiﬁable à l’homotopie sur les complexes
+simpliciaux, qui procède par élimination de sommets.
+L’homotopie (simple) sur les complexes est une succession d’ajouts
+et de réductions élémentaires.
+
+1.Entre théorie des graphes et réseaux réels
+
+2. Partition métrique
+
+3. Clans
+
+4.Graphes cospectraux
+
+4. Démontabilité
+
+5. Conclusion
+
+Sommet simplicial
+
+Le voisinage fermé de i dans G est l’ensemble VG[i] = Vg(i) ∪ {i}.
+
+Déﬁnition
+
+Un sommet i est simplicial si VG[i] est complet.
+Un graphe G est démontable par sommets simpliciaux s’il existe
+un ordre 1, 2, · · · , n de ses sommets tel que i est simplicial dans
+G − {1, 2, · · · , i − 1}.
+
+Proposition [Dirac, 1961]
+Un graphe ﬁni G est triangulé (ou cordé) ssi G est démontable par
+sommets simpliciaux.
+
+Exemple :
+
+1.Entre théorie des graphes et réseaux réels
+
+2. Partition métrique
+
+3. Clans
+
+4.Graphes cospectraux
+
+4. Démontabilité
+
+5. Conclusion
+
+Sommet simplicial
+
+Le voisinage fermé de i dans G est l’ensemble VG[i] = Vg(i) ∪ {i}.
+
+Déﬁnition
+
+Un sommet i est simplicial si VG[i] est complet.
+Un graphe G est démontable par sommets simpliciaux s’il existe
+un ordre 1, 2, · · · , n de ses sommets tel que i est simplicial dans
+G − {1, 2, · · · , i − 1}.
+
+Proposition [Dirac, 1961]
+Un graphe ﬁni G est triangulé (ou cordé) ssi G est démontable par
+sommets simpliciaux.
+
+Exemple :
+
+1.Entre théorie des graphes et réseaux réels
+
+2. Partition métrique
+
+3. Clans
+
+4.Graphes cospectraux
+
+4. Démontabilité
+
+5. Conclusion
+
+Sommet démontable
+
+Déﬁnition [Quillot, 1983 ; Nowakowski and Winkler, 1983]
+
+Un sommet i est démontable s’il existe j tel que VG[i] ⊆ VG[j].
+Un graphe G est démontable s’il existe un ordre 1, 2, · · · , n de
+ses sommets tel que i est démontable dans G − {1, 2, · · · , i − 1}.
+
+Exemple :
+
+Remarque : un sommet simplicial est démontable.
+
+Proposition [Quillot, 1983 ; Nowakowski and Winkler, 1983]
+Un graphe ﬁni G est policier-gagnant ssi G est démontable.
+
+Remarque : faux dans le cas inﬁni (cf. arbre).
+
+1.Entre théorie des graphes et réseaux réels
+
+2. Partition métrique
+
+3. Clans
+
+4.Graphes cospectraux
+
+4. Démontabilité
+
+5. Conclusion
+
+Sommet démontable
+
+1.Entre théorie des graphes et réseaux réels
+
+2. Partition métrique
+
+3. Clans
+
+4.Graphes cospectraux
+
+4. Démontabilité
+
+5. Conclusion
+
+Sommet s-démontable
+
+Déﬁnition [2008]
+
+Un sommet i est s-démontable si VG(i) est démontable.
+Un graphe G est s-démontable s’il existe un ordre 1, 2, · · · , n de
+ses sommets tel que i est démontable dans G − {1, 2, · · · , i − 1}.
+
+Exemple : ni sommet simplicial, ni sommet démontable.
+
+Remarque : simplicial ⇒ démontable ⇒ s-démontable
+
+Déﬁnition [2010]
+On dira que G et H ont le même type de s-homotopie s’il existe
+s
+G = J1 , J2 , · · · , Jk −1 , Jk = H tels que G = J1
+→ Jk −1
+où s
+
+→ représente l’addition ou la suppression d’un sommet s-démontable.
+
+s
+→ Jk = H
+
+s
+→ J2
+
+s
+→ . . .
+
+1.Entre théorie des graphes et réseaux réels
+
+2. Partition métrique
+
+3. Clans
+
+4.Graphes cospectraux
+
+4. Démontabilité
+
+5. Conclusion
+
+Sommet s-démontable
+
+Déﬁnition [2008]
+
+Un sommet i est s-démontable si VG(i) est démontable.
+Un graphe G est s-démontable s’il existe un ordre 1, 2, · · · , n de
+ses sommets tel que i est démontable dans G − {1, 2, · · · , i − 1}.
+
+Exemple : ni sommet simplicial, ni sommet démontable.
+
+Remarque : simplicial ⇒ démontable ⇒ s-démontable
+
+Déﬁnition [2010]
+On dira que G et H ont le même type de s-homotopie s’il existe
+s
+G = J1 , J2 , · · · , Jk −1 , Jk = H tels que G = J1
+→ Jk −1
+où s
+
+→ représente l’addition ou la suppression d’un sommet s-démontable.
+
+s
+→ Jk = H
+
+s
+→ J2
+
+s
+→ . . .
+
+1.Entre théorie des graphes et réseaux réels
+
+2. Partition métrique
+
+3. Clans
+
+4.Graphes cospectraux
+
+4. Démontabilité
+
+5. Conclusion
+
+Sommet s-démontable
+
+[2008, 2010]
+Résultat
+G ցs H ⇒ ∆(G) ցs ∆(H).
+
+Exemple :
+
+L’implication inverse est fausse :
+
+1.Entre théorie des graphes et réseaux réels
+
+2. Partition métrique
+
+3. Clans
+
+4.Graphes cospectraux
+
+4. Démontabilité
+
+5. Conclusion
+
+Sommet s-démontable
+
+Déﬁnition
+Deux complexes simpliciaux ont même type d’homotopie simple si
+l’on peut passer de l’un à l’autre par une succession de réductions et
+d’expansions élémentaires.
+
+Résultat
+[G]s = [H]s ⇔ [∆(G)]s = [∆(H)]s
+
+[BFJ 2010]
+
+Exemple :
+
+1.Entre théorie des graphes et réseaux réels
+
+2. Partition métrique
+
+3. Clans
+
+4.Graphes cospectraux
+
+4. Démontabilité
+
+5. Conclusion
+
+Exemple d’étude : dynamique de parcellaires
+
+Question :
+
+1 Quelle lecture des paysages disparus donnent les compoix ?
+2 Dans les recherches sur les sociétés, l’histoire du paysage ou du
+
+climat, le compoix peut-il remplacer la carte ?
+
+3 Comment comparer des documents cartographiés et non
+
+cartographiés pour étudier la dynamique de parcellaires sur une
+longue période ?
+
+1.Entre théorie des graphes et réseaux réels
+
+2. Partition métrique
+
+3. Clans
+
+4.Graphes cospectraux
+
+4. Démontabilité
+
+5. Conclusion
+
+Exemple d’étude : dynamique de parcellaires
+
+Outils et résultats
+
+Comparer les graphes duaux de
+parcellaires
+Caler ces graphes sur des invariants
+connus
+
+1.Entre théorie des graphes et réseaux réels
+
+2. Partition métrique
+
+3. Clans
+
+4.Graphes cospectraux
+
+4. Démontabilité
+
+5. Conclusion
+
+Conclusion
+
+Un positionnement volontaire dans le domaine
+de la ’combinatoire appliquée’.
+
+Comment la théorie des graphes peut s’accorder avec une
+’science des réseaux’ qui doit traiter de la dynamique et du
+multiplexage ?
+
+

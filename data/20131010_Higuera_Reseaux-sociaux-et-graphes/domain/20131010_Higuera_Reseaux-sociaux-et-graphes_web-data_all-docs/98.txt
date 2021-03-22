@@ -1,0 +1,657 @@
+http://marami.mines-ales.fr/sites/mines-ales.fr/files/u348/marami_2015_plantie.pdf
+
+Trois approches de la
+Complémentarité de personnes dans
+les Réseaux Sociaux
+
+Michel Plantié , Mouhamadou Niang , Michel Crampes
+
+Laboratoire LGI2P, Ecole des Mines, Parc Georges Besse, 30035 Nîmes,
+France
+http:social-networks.mines-ales.fr
+michel.{plantie,crampes}@mines-ales.fr
+
+RÉSUMÉ. La complémentarité dans les réseaux sociaux est une approche intéressante
+pour identiﬁer la cohésion de groupes de personnes. Nos travaux précédents ont étu-
+dié une première approche de la complémentarité dans les réseaux représentés sous
+la forme de graphes bipartis : réseaux sociaux, communautés d’acteurs, etc. Dans
+cet article nous comparons plusieurs approches de la complémentarité aﬁn de trouver
+la technique la plus appropriée pour remplir des objectifs prédéﬁnis. Notre approche
+se base toujours sur la notion d’entropie et de gain d’information. Dans certaines
+conceptions de la complémentarité, la problématique est proche d’une recherche clas-
+sique : trouver des transversaux dans des hypergraphes, avec toutefois des diﬀérences
+dans les buts recherchés. Aﬁn de valider notre approche, nous appliquons et compa-
+rons les diﬀérentes méthodes sur des graphes bien connus et des données réelles dont
+les tailles sont très diﬀérentes : des petits graphes à de très grands graphes.
+ABSTRACT. Complementarity in social networks is an interesting approach to identify
+cohesion in groups of persons. Our previous works studied a ﬁrst approach of comple-
+mentarity in networks represented as bipartite graphs: social networks, communities
+of actors, etc. In this paper we compare several approaches of complementarity to ﬁnd
+the most appropriate technique achieving deﬁned objectives. In some deﬁnitions of
+complementarity, the problem is viewed as close to a classical research: ﬁnd transver-
+sals in hypergraphs, with however diﬀerences in ﬁnal goals. To validate our approach,
+we apply and compare our methods on well known graphs and real data whose sizes
+are very diﬀerent: from small graphs to very large graphs.
+MOTS-CLÉS : Complementarité, Réseaux Sociaux, graphes bipartis, transversaux, Hy-
+pergraphes
+KEYWORDS: Complementarity, Social Networks, bipartite graphs, transversals, Hy-
+pergraphs
+
+DOI:10.3166/RIA.1.1-12 c(cid:13) 2015 Lavoisier
+
+Revue d’intelligence artiﬁcielle – no 1-2/2015, 1-12
+
+2
+
+RIA. Volume 1 – no 1-2/2015
+
+1. Introduction
+
+Beaucoup de travaux de recherche en fouille de données utilisent la notion
+de similarité ou de distance pour obtenir des corrélations et des analyses sur
+les données étudiées. La complémentarité se démarque un peu de cette ap-
+proche en cherchant à associer des éléments qui ne sont pas semblables mais
+peuvent couvrir un ensemble d’objectifs complémentaires. L’importance prise
+par les réseaux sociaux, pose des questions en terme de similarité, mais égale-
+ment dans l’identiﬁcation d’éléments complémentaires. La complémentarité est
+perçue diﬀéremment selon les disciplines. Les mathématiques évidemment ont
+étudié longuement ce problème à travers de nombreux travaux de recherche.
+Les problèmes de complémentarité sont la suite naturelle des problématiques
+suggérées par la décomposition de graphes en communautés. En eﬀet une com-
+munauté est d’autant plus viable qu’elle obéit à des règles sémantiques et prag-
+matiques pilotées par les réalités quotidiennes des individus. Une règle possible
+et fréquemment appliquée dans la réalité est la complémentarité qui contribue
+à la stabilité d’un groupe. Si les individus sont trop en concurrence dans un
+groupe, alors ce groupe peut devenir instable. Prenons un exemple simple :
+une équipe de rugby. Elle est constituée de joueurs possédant diﬀérentes com-
+pétences. Tous les joueurs ne peuvent pas être semblables si l’on souhaite que
+l’équipe soit performante. Si l’on a deux demis de mêlée dans l’équipe, même
+s’ils jouent à des postes diﬀérents, les deux joueurs vont certainement eﬀec-
+tuer les mêmes actions et aﬀecter la performance de l’équipe, dans laquelle
+l’atmosphère va se dégrader et créer de l’instabilité. La complémentarité des
+joueurs contribuera à la cohésion de l’équipe. Nous étudions donc ici, des ré-
+seaux de personnes représentés sous la forme de graphes bipartis. Dans ces
+graphes, de nombreuses relations sociales sont médiatisées par des propriétés
+communes entre individus. Il n’y a pas de relations directes entre individus ou
+entre propriétés mais directement des relations entre individus et propriétés.
+Nous approfondissons théoriquement et expérimentalement les diﬀérentes pos-
+sibilités de la complémentarité d’un groupe qui peut être un réseau social ou
+une communauté plus réduite. La complémentarité, comme nous allons le voir
+peut consister simplement à la couverture d’un espace de propriétés mais peut
+ensuite être vue comme une propriété plus générale liée à la notion d’utilité
+d’un ensemble d’individus. Ces deux notions presque duales pouvant d’ailleurs
+contribuer à des objectifs plus ambitieux.
+
+L’article est structuré ainsi : après un état de l’art sur la complémentarité,
+nous déﬁnissons les diﬀérentes notions nécessaires à l’établissement d’une me-
+sure de complémentarité, puis nous décrivons plusieurs méthodes diﬀérentes de
+complémentarité. Enﬁn nous montrons des applications sur des graphes connus
+ou réels de tailles très variées aﬁn d’illustrer les concepts et les résultats obtenus.
+
+2. État de l’art
+
+Trois approches de la Complémentarité
+
+3
+
+Le terme complémentarité dérivé du mot Latin complere qui signiﬁe "com-
+pléter" 1, est étudié dans les sciences humaines et sociales et dans d’autres dis-
+ciplines, avec des signiﬁcations diﬀérentes. Elle a été utilisée principalement
+dans les domaines du biomédical, de l’économie, de l’innovation et du mana-
+gement mais aussi en mathématiques. Dans le domaine biomédical, les auteurs
+déﬁnissent la complémentarité comme la meilleure correspondance spatiale pos-
+sible dans l’association d’une ou plusieurs protéines pour remplir au mieux une
+fonction. Pour les molécules, les auteurs (Lawrence, Colman, 1993) proposent
+une méthode statistique pour mesurer la complémentarité de formes entre deux
+protéines. On parle alors de complémentarité géométrique. En économie,
+(Milgrom, Roberts, 1994) donnent une déﬁnition de la complémentarité qui
+représente la logique de marché. Deux produits intermédiaires entrant dans un
+processus de production sont des compléments si la diminution du prix de l’un
+augmente la croissance de la demande de l’autre.Par exemple, si l’on considère
+que le lait et le sucre sont deux produits complémentaires, le fait de diminuer
+le prix du lait, va faire exploser la demande d’achat sur le sucre, montrant
+ainsi que les deux produits dépendent l’un de l’autre au sens de la complémen-
+tarité. Pour mieux employer ce concept de complémentarité dans l’étude des
+choix concernant les niveaux d’activités internes d’une organisation ou d’une
+structure ainsi que les niveaux d’achat de biens intermédiaires, les deux auteurs
+adoptent une déﬁnition plus générale de la complémentarité : des activités sont
+complémentaires si l’augmentation de la rentabilité de l’une d’entre elles nom-
+mée A augmente la rentabilité de toutes les autres activités d’une quantité
+supérieure à leur augmentation lorsque elles sont utilisées sans l’activité A et
+réciproquement. Par exemple l’étude faite dans (Ichniowski et al., 1997) des
+eﬀets des stratégies innovantes sur la productivité auprès de 36 lignes de pro-
+duction d’acier homogène appartenant à 17 compagnies montre que certaines
+pratiques de travail (stratégies) telles que la formation des employés, les primes
+de travail, aﬀectations ﬂexibles des tâches ont eu un eﬀet plus important sur la
+productivité quand elles étaient couplées à un système de Ressources Humaines
+bien organisé que quand elles ont été utilisées séparément. Cette notion de com-
+plémentarité est formalisée dans (Milgrom, Roberts, 1995) pour comprendre les
+liens existants entre les éléments de stratégie d’une entreprise manufacturière et
+sa structure. Dans leur déﬁnition un élément x est complémentaire à un élément
+y si et seulement si la condition de supermodularité suivante est vériﬁée :
+
+Y(x ∧ y) +Y(x ∨ y) ≥Y(x) +Y(y)(M ilgrom, Roberts,1990)
+Q est une fonction d’utilité.
+
+(1)
+
+Dans le domaine de l’innovation, la complémentarité peut être étudiée pour
+comprendre comment les innovations technologiques et organisationnelles évo-
+
+1. http://lexicon.ft.com/Term?term=complementarity
+
+4
+
+RIA. Volume 1 – no 1-2/2015
+
+luent et s’inﬂuencent dans le temps mais aussi sous quelles conditions des acti-
+vités liées à l’innovation peuvent être complémentaires. (Ayerbe, 2006) identiﬁe
+trois niveaux de complémentarité entre innovations technologiques et organi-
+sationnelles :
+
+- coexistence entre innovations technologiques et organisationnelles:
+
+le
+simple fait de leur présence simultanée (sans que l’une n’inﬂuence l’autre) amé-
+liore la performance du système.
+
+- l’innovation technologique et l’innovation organisationnelle s’inﬂuencent
+
+mutuellement pour améliorer la performance du système.
+
+- la dimension temporelle des relations entre innovations (ordre d’appari-
+tion des innovations dans le temps) que nous n’étudierons pas dans cet article.
+La déﬁnition formelle de la complémentarité de (Cassiman, Veugelers, 2006)
+entre activités complémentaires liées à l’innovation est que deux entités sont
+complémentaires si leur apport au système est plus grand quand ils
+sont présents ensemble dans le système que leur apport séparé. Cette
+déﬁnition a été formalisée comme suit: :
+
+Compl´ementarit´e(a, b) :Y(a, b) −Y(¬a, b) >
+où a et b sont deux éléments du système. Q(a,¬b) signiﬁe que a est présent
+et b absent. L’utilité mesure la diﬀérence entre Q lorsque a est présent et Q
+
+lorsque a est absent dans les deux cas en présence de b par rapport aux mêmes
+situations lorsque b est absent.
+
+Y(a,¬b) −Y(¬a,¬b)
+
+(2)
+
+La complémentarité d’information sur un sujet a été abordée dans la com-
+munauté Recherche d’Information (RI). Dans (Ma et al., 2006), les auteurs
+proposent d’abord une nouvelle méthode de représentation des informations
+extraites dans diﬀérentes médias appelée topic-structure. Puis à partir d’un
+sujet ou d’une information intéressant(e) extrait(e) de la diﬀusion d’une émis-
+sion de télévision (source primaire) cherche des pages web (source secondaire)
+qui sont complémentaires au sujet qui nous intéresse. Un " topic-structure "
+consiste en un couple (sujets, contenus) où sujets représentent les termes domi-
+nants dans les médias (thème) et contenus représentent les termes qui ont des
+relations de co-occurrence fortes avec les sujets diﬀusés. Cependant le problème
+de la polysémie émerge très rapidement que les auteurs ont prévu de résoudre
+dans leurs futurs travaux.
+
+Par ailleurs la complémentarité se rapproche indirectement de la notion
+d’hypergraphe transversal. En eﬀet dans (Jelassi et al., 2014), les auteurs dé-
+montrent que la recherche de multi-membres est semblable au problème de dé-
+termination d’un sous ensemble de transversaux minimaux. Un multi-membre
+est un sous ensemble de sommets (acteurs) qui représentent le mieux possible
+l’ensemble des communautés, c’est à dire un ensemble de sommets qui couvrent
+un nombre maximum ou l’ensemble des communautés.
+
+Trois approches de la Complémentarité
+
+5
+
+Cependant notre approche se distingue de leur méthode. Dans (Jelassi et
+al., 2014), les auteurs travaillent sur des communautés d’acteurs. Ils supposent
+que les communautés existent ou peuvent être préalablement détectées par
+des algorithmes adéquats. Dans notre méthode nous rajoutons un critère sup-
+plémentaire : l’utilité d’un acteur qui n’apparait pas de façon évidente dans
+l’appartenance à une communauté.
+
+3. COMPLÉMENTARITÉ : DÉFINTIONS ET FORMULES
+
+Dans cette section nous déﬁnissons et formalisons notre notion de complé-
+mentarité. Auparavant nous présentons les concepts que nous allons utiliser. Les
+réseaux sur lesquels nous étudions la complémentarité sont représentés sous la
+forme de graphes bipartis.
+3.1. Entropie d’un système
+
+L’entropie est la mesure d’information apportée par un élément dans un en-
+semble de classe d’éléments (Yang, Petersen, 1997). Dans notre méthode l’en-
+tropie système sera calculé sur l’espace des propriétés. En eﬀet nous cherchons
+à déterminer la quantité d’information portée par une personne qui peut se ma-
+térialiser par l’espace des propriétés que la personne couvre. Soit S un système
+représenté par un graphe biparti G = (P e, P r, E), avec P e un sous-ensemble
+de n1 personnes, P r un sous-ensemble de n2 propriétés, E un ensemble de m
+arêtes entre les personnes de P e et les propriétés de P r. L’entropie est formulée
+comme suit :
+H(S) =
+P(P rj) =
+est la probabilité d’apparition de la propriété P rj pour
+toutes les personnes du réseau dans le système S. A(i, j) est la matrice d’adja-
+cence de G, i représentant l’indice des personnes P e et j l’indice des propriétés
+P r (voir (Crampes, Plantié, 2015) pour une explication plus détaillée).
+
+j=1 P (P rj)×ln(P (P rj))
+i=1 A(i,j)
+
+−Pn2
+Pn1
+
+, n2 > 0.
+
+ln(n2)
+
+m
+
+3.2. Entropie conditionnelle
+
+Nous considérons toujours le graphe biparti G = (P e, P r, E). L’entropie
+conditionnelle est déﬁnie et expliquée dans (Crampes, Plantié, 2015) comme
+l’entropie portée par une personne P ej . Elle est formalisée comme suit :
+
+i=1 P (P ri/P ej)×ln(P (P ri/P ej))
+
+ou de non-présence d’une personne :
+
+H(S/P ej) = −Pn2
+H(S/P ej) = −Pn2
+sonne Pej soit présente. Elle se calcule comme suit : P(Pri\Pej) =n
+
+i=1 P (P ri/P ej)×ln(P (P ri/P ej))
+
+P(Pri\Pej) est la probabilité d’avoir la propriété P(Prj) sachant que la per-
+
+0, 1 \ nb sinon. nb est le nombre de fois ou la personne Pej a participé aux évè-
+nements.
+
+ln(n2)
+
+ln(n2)
+
+0
+
+si A(i, j) =
+
+6
+
+RIA. Volume 1 – no 1-2/2015
+
+3.3. Fonction d’utilité, Gain d’information
+
+Une fonction d’utilité permet de mesurer le niveau de satisfaction, l’impor-
+tance ou l’impact d’un élément dans un ensemble d’éléments. Dans notre cas
+nous utiliserons le gain d’information pour mesurer l’importance d’une per-
+sonne (la quantité d’information qu’elle porte) dans le système S déﬁni plus
+haut. Plus l’information portée par une personne est grande plus la personne
+est importante dans le système. Le gain d’information représente la diﬀérence
+des entropies du système et des entropies conditionnelles pour une personne
+P ej et son complémentaire P ej . Elle est formulée comme suit :
+
+G(P ej) = H(S) − P(P ej) × H(S/P ej) − P(P ej) × H(S/P ej)
+
+(3)
+
+3.4. Déﬁnition générique de la complémentarité
+
+L’état de l’art montre que la complémentarité est utilisée dans plusieurs
+domaines avec des signiﬁcations diﬀérentes. De ce constat, nous donnons une
+déﬁnition générique qui peut englober l’ensemble de ces domaines. Toutes les
+conceptions de la complémentarité reposent sur le fait que deux éléments sont
+complémentaires, si leur apport au système est plus grand quand ils sont pré-
+sents ensemble que leur apport quand ils sont pris séparément. Cette notion
+peut se décliner selon les quatre variantes suivantes :
+
+– les éléments sont complémentaires par inﬂuence réciproque,
+– des éléments du système inﬂuencent d’autres éléments (sans réciprocité),
+– l’objectif unique est la couverture par les éléments de l’ensemble des pro-
+
+priétés (la formule 1 de Milgrom en est une implémentation),
+
+– l’objectif est aussi la couverture par les éléments de l’ensemble des pro-
+priétés, avec en plus des propriétés communes entre ces éléments (Cassiman).
+Les deux premiers cas ne correspondent pas à notre approche de la complé-
+mentarité fondée sur la notion d’utilité conjointe. Nous cherchons à trouver un
+ensemble minimal d’éléments qui couvre toutes les propriétés P r d’un graphe
+biparti, et éventuellement que cet ensemble d’éléments apporte un surplus d’uti-
+lité au système. Ce qui correspond aux deux dernières variantes ci-dessus que
+nous traiterons. Nous déclinons ces deux variantes en trois méthodes diﬀérentes
+(les formules détaillées seront présentées dans le paragraphe suivant) de calcul
+de la complémentarité :
+
+1 méthode simple : les éléments sont sélectionnés au hasard, par association
+successive, pour trouver un ensemble d’éléments couvrant toutes les propriétés
+du graphe.
+
+2 méthode inspirée de la déﬁnition de la complémentarité par Cassiman
+
+avec 3 variations possibles :
+
+- variante 1 : formule de Cassiman avec fonction OU d’appariement :
+les éléments sélectionnés couvrent toutes les propriétés et peuvent avoir en plus
+des propriétés communes.
+
+Trois approches de la Complémentarité
+
+7
+
+- variante 2 : formule de Cassiman avec fonction OU Exclusif d’appa-
+riement : les éléments sélectionnés partagent le moins de propriétés possible.
+On cherche ainsi à trouver des éléments les plus disjoints au sens des propriétés
+partagées.
+
+- variante 3 : formule de Cassiman avec fonction ET d’appariement :
+certains éléments sélectionnés ont de fortes connections entre eux (redondance
+élevée).
+
+3 méthode utilisant la formule de supermodularité de Milgrom
+La ﬁgure 1 suivante illustre sur un exemple la spéciﬁcité des méthodes 2 et
+3 décrites ci-dessus. Il s’agit d’un graphe de 4 personnes nommées de A à D
+et 4 colonnes. À droite un tableau montre le résultat de complémentarité de
+chaque méthode. Les sommets sélectionnés assurent une couverture complète.
+
+Figure 1. Complémentarité sur un graphe de 4 personnes et 4 propriétés
+
+3.5. Formalisation de la Complémentarité
+
+Dans cette section nous donnons les formules des cinq méthodes ou variantes
+de calcul de complémentarité décrites ci dessus. La fonction d’utilité est le gain
+d’information.
+3.5.1. Méthode simple
+
+Elle consiste à prendre les éléments du graphe au hasard puis à poursuivre
+
+jusqu’à couverture du graphe :
+
+– Choix d’un premier sommet au hasard et arrêt si couverture totale,
+– Sinon, prendre l’élément suivant au hasard et recommencer jusqu’à l’ob-
+
+tention d’une couverture de toutes les propriétés.
+Cette méthode simple donne une référence de comparaison pour les autres
+méthodes. La notion d’entropie et de gain d’information n’interviennent pas
+dans cette méthode.
+
+3.5.2. Méthode utilisant la formule de Cassiman
+
+Nous appliquons la formule d’utilité 2 couplée à la formule 3 du gain.
+
+variante 1, méthode Cassiman utilisant le OU :
+
+compl´ementarit´e(P ei, P ej) =
+
+G(P ei ∨ P ej) − G(P ei ∨ P ej) − (G(P ei ∨ P ej) − G(P ei ∨ P ej)),
+
+(4)
+
+8
+
+RIA. Volume 1 – no 1-2/2015
+
+variante 2, méthode Cassiman utilisant le ET :
+
+compl´ementarit´e(P ei, P ej) =
+
+G(P ei ∧ P ej) − G(P ei ∧ P ej) − (G(P ei ∧ P ej) − G(P ei ∧ P ej)),
+
+(5)
+
+variante 3, méthode Cassiman utilisant le OU Exclusif :
+
+compl´ementarit´e(P ei, P ej) =
+
+G(P ei ⊕ P ej) − G(P ei ⊕ P ej) − (G(P ei ⊕ P ej) − G(P ei ⊕ P ej)),
+
+(6)
+
+Le développement de la variante 1 donne la formule ﬁnale suivante :
+
+ln(n2) × [−P(P ei ∨ P ej) × H(S/P ei ∨ P ej)
+
+compl´ementarit´e(P ei, P ej) = 1
+− P(P ei ∨ P ej) × H(S/P ei ∨ P ej) + P(P ei ∨ P ej) × H(S/P ei ∨ P ej)
++ P(P ei ∨ P ej) × H(S/P ei ∨ P ej) + P(P ei ∨ P ej) × H(S/P ei ∨ P ej)
++ P(P ei ∨ P ej) × H(S/P ei ∨ P ej) − P(P ei ∨ P ej) × H(S/P ei ∨ P ej)
+− P(P ei ∨ P ej) × H(S/P ei ∨ P ej)]
+
+(7)
+
+Les formules ﬁnales des autres variantes, s’obtiennent en remplaçant res-
+
+pectivement ∨ par ∧ et ⊕ dans la formule 7.
+3.5.3. Méthode utlisant la formule de supermodularité de Milgrom
+
+Nous appliquons la déﬁnition de la supermodularité donnée à la formule 1
+
+couplée à la formule 3 du gain.
+
+compl´ementarit´e(P ei, P ej) =
+
+G(P ei ∨ P ej) − G(P ej) − (G(P ei) − G(P ei ∧ P ej)),
+
+(8)
+
+Cette formule se développe de façon similaire à la formule 7.
+
+3.6. Algorithme de complémentarité
+
+L’algorithme de recherche de complémentarité est eﬀectué en plusieurs étapes :
+
+Trois approches de la Complémentarité
+
+9
+
+Algorithm 1 Algorithme de recherche de complémentarité
+
+donnée initiale : Liste des candidats V, une liste vide L qui va contenir les
+personnes complémentaires
+Calcul de l’entropie système
+Trouver la personne avec Gain d’information maximum et l’ajouter à L
+nbcandidat ← longueur(V )
+couverturetotale ← f alse
+while ((nbcandidat 6= 0) and (arretCouvertureT otale())) do
+
+trouverLaP ersonneComplementaire() avec les personnes déjà sélection-
+if ((nbcandidat 6= 0) and (arretCouvertureT otale() == true)) then
+
+nées
+
+(couverturetotale ← true)
+
+end if
+end while
+if couverturetotale == f alse then
+
+end if
+
+. nous avons une couverture partielle
+
+Procédure trouverLaPersonneComplementaire() : calcule pour chaque candidat
+sa complémentarité avec les personnes déjà sélectionnées.
+Sortie : personne ayant la valeur maximale de complémentarité
+
+Ainsi l’ensemble des P ecomp_max trouvé constitue un groupe de sommets
+complémentaires couvrant partiellement ou totalement les propriétés du graphe.
+1 × n2), n1 étant le nombre de personnes, n2
+
+La complexité est de O(n2
+
+étant le nombre de propriétés.
+4. Expérimentation
+
+Nous montrons des expérimentations des cinq méthodes de traitement de
+la complémentarité sur plusieurs graphes de taille et de contexte diﬀérents.
+Tout d’abord, nos expériences se font sur un graphe biparti intensément étudié
+(voir la meta-analyse de (Freeman, 2003)) "Southern Women" (SW) ou "‘Wo-
+men Events"’ (WE). Il consiste en un relevé de la participation diﬀérenciée de
+18 dames à 14 évènements sociaux. Cette expérimentation simple permet de
+comprendre l’eﬀet de nos méthodes. Nous expérimentons ensuite nos méthodes
+sur un graphe biparti issu du monde du rugby sportif. Cette expérimentation
+a pour objet de vériﬁer le bien fondé de chaque méthode. Nous utilisons en-
+suite un graphe biparti issu de Facebook, de taille intermédiaire, et enﬁn nous
+testons nos algorithmes sur un grand graphe issu du monde des publications
+scientiﬁques, aﬁn de mesurer l’eﬃcacité et le passage à l’échelle. Nos mesures
+de performances sont le pourcentage de couverture, nombre de personnes sé-
+lectionnées et le temps d’exécution.
+4.1. graphe biparti WE
+
+Les résultats sur le graphe Women-Events sont présentés dans la ﬁgure 2.
+Nous constatons que les deux algorithmes les plus eﬃcaces sont celui de Cassi-
+man/Ou_Exclusif et Milgrom. L’algorithme simple donne un nombre variable
+
+10
+
+RIA. Volume 1 – no 1-2/2015
+
+de personnes en fonction de la sélection du premier élément qui s’eﬀectue au
+hasard. L’utilisation du ou exclusif permet d’obtenir la couverture maximum
+des évènements avec le minimum de personnes.
+
+Figure 2. Résultats de complémentarité sur le graphe Women-Events
+
+4.2. La meilleure équipe de Rugby pour la coupe du monde...
+
+Nous avons appliqué les mêmes calculs sur un jeu de données réel : il s’agit
+de trouver la meilleure équipe française de rugby pour participer à la prochaine
+coupe du monde. Les données sont donc représentée sous la forme d’un graphe
+biparti de 91 joueurs pour lesquels 11281 évènements ont été pris en compte :
+participation aux matches, blessures, points marqués etc sur les cinq dernières
+années. Les évènements jouent le rôle de propriétés partagées et les personnes
+le même rôle que dans le graphe Women Events. Les résultats sur le graphe
+rugby sont présentés dans la ﬁgure 3 nous constatons que l’algorithme le plus
+eﬃcace est celui de Milgrom qui trouve un collectif de 31 joueurs permettant de
+couvrir l’ensemble des considérations de jeu présentes dans le graphe. Précisons
+que les contraintes d’un maximum de joueur et autres (nationalités, etc.) n’ont
+pas été prise en compte dans cette expérimentation.
+
+Figure 3. Résultats de complémentarité sur le graphe Rugby
+
+4.3. graphe Facebook
+
+Nous avons appliqué les mêmes calculs sur un jeu de données plus consé-
+quent : un graphe biparti de partage de 700 photos entre environ 274 personnes
+provenant d’un compte Facebook. Les photos jouent ici le rôle de propriétés
+partagées et les personnes le même rôle que dans le graphe Women Events.
+Les résultats sur le graphe Facebook sont présentés dans la ﬁgure 4. Nous
+constatons à nouveau que les deux algorithmes les plus eﬃcaces sont ceux de
+Cassiman/Ou_Exclusif et Milgrom.
+
+4.4. graphe Auteur-Article
+
+Pour évaluer le passage à l’échelle de notre méthode, nous avons utilisé un
+jeu de données bien plus grand : un graphe biparti de relations co-auteurs sur
+
+Trois approches de la Complémentarité
+
+11
+
+Figure 4. Résultats de complémentarité sur le graphe Facebook
+
+des articles scientiﬁques. Les données proviennent de la banque de données
+d’articles scientiﬁques bien connue "Pubmed" dans le domaine biomédical 2.
+Le jeu de données contient plus de 82000 individus et plus de 40000 articles
+scientiﬁques. Les résultats sur ce graphe sont présentés dans la ﬁgure 5. Nous
+constatons à nouveau que les deux algorithmes les plus eﬃcaces sont ceux de
+Cassiman/Ou_Exclusif et Milgrom. Le temps de traitement de l’algorithme est
+relativement court (environ 40 secondes), cependant le temps de préparation
+(constitution des structures de données et stockages) est assez important de
+l’ordre de 25 minutes. Ce dernier traitement pourra être bien mieux optimisé
+dans le futur.
+
+Figure 5. Résultats de complémentarité sur le graphe Auteurs-Articles
+
+discussion :
+
+Nous cherchons à couvrir de façon minimale un espace de propriétés, avec
+cependant un point additionnel : les éléments sont choisis par rapport à leur
+utilité, apportant ainsi une diﬀérence par rapport aux travaux de recherche
+des transversaux dans des hypergraphes. Notre algorithme est calculable avec
+1 × n2). Nos résultats montrent que les algorithmes Cassi-
+une complexité O(n2
+man/Ou_Exclusif et Milgrom sont les plus eﬃcaces pour atteindre l’objectif de
+couverture minimale. "Cassiman/variante OU exclusif" donne une couverture
+minimale tout en favorisant le partage de propriétés. La méthode "Milgrom" fa-
+vorise les personnes ayant des propriétés les plus disjointes. Sur l’exemple Rugby
+la méthode "Cassiman/variante OU exclusif" sélectionne plus de joueurs, mais
+ils peuvent couvrir une variété plus grande de postes tout en favorisant une
+couverture maximale. Cette méthode est plus intéressante en terme de complé-
+mentarité. La méthode simple est intéressante mais n’est pas optimisée. Elle
+constitue une base de référence pour vériﬁer l’eﬃcacité de notre mesure d’uti-
+lité et l’amélioration des algorithmes suivants sur les résultats. La méthode
+"Cassiman/variante OU" ne permet pas d’obtenir une couverture minimale. La
+méthode "Cassiman/variante ET" se rapproche trop de la notion de similarité.
+
+2. http://www.ncbi.nlm.nih.gov/pubmed
+
+12
+
+RIA. Volume 1 – no 1-2/2015
+
+5. Conclusion
+
+Dans cet article nous avons étudié diﬀérentes approches de la complémen-
+tarité dans les réseaux représentés sous forme de graphes bipartis. L’approche
+fondée sur "Cassiman/Ou exclusif" semble remplir les objectifs déﬁnis au dé-
+part. Dans le futur, nous allons optimiser nos algorithmes notamment dans la
+partie préparation de données qui prend un temps assez long (plus de la moitié
+du temps d’exécution), puis les étendrons aux graphes pondérés pour appor-
+ter plus de sémantique, et nous approfondirons les déﬁnitions statistiques dans
+l’utilisation de l’entropie pour une meilleure sémantique de l’utilité.
+Bibliographie
+
+Ayerbe C. (2006). Innovations technologique et organisationnelle au sein de pme in-
+novantes: complémentarité des processus, analyse comparative des mécanismes de
+diﬀusion. Revue internationale PME: Économie et gestion de la petite et moyenne
+entreprise, vol. 19, no 1, p. 9–34.
+
+Cassiman B., Veugelers R. (2006, janvier). In Search of Complementarity in Innova-
+tion Strategy: Internal R&D and External Knowledge Acquisition. Management
+Science, vol. 52, no 1, p. 68–82.
+
+Crampes M., Plantié M.
+
+propriétés dans les Réseaux Sociaux.
+Rennes,France.
+
+(2015). Complémentarité de personnes partageant des
+In Ic 2015 ingénierie des connaissance.
+
+Freeman L. C. (2003). Finding social groups: A meta-analysis of the southern women
+data. In Dynamic social network modeling and analysis. the national academies,
+p. 39—-97. Press.
+
+Ichniowski C., Shaw K., Prennushi G. (1997). The eﬀects of human resource mana-
+gement practices on productivity: A study of steel ﬁnishing lines. The American
+Economic Review, vol. 87, no 3, p. pp. 291-313.
+
+Jelassi M. N., Largeron C., Yahia S. B. (2014). Eﬃcient unveiling of multi-members
+
+in a social network. Journal of Systems and Software, vol. 94, no 0, p. 30 - 38.
+
+Lawrence M. C., Colman P. M. (1993). Shape complementarity at protein/protein
+
+interfaces. Journal of molecular biology, vol. 234, no 4, p. 946–950.
+
+Ma Q., Nadamoto A., Tanaka K. (2006). Complementary information retrieval for
+
+cross-media news content. Information Systems, vol. 31, no 7, p. 659–678.
+
+Milgrom P., Roberts J. (1990). Rationalizability, learning, and equilibrium in games
+In Journal of the econometric
+
+with strategic complementarities. econometrica.
+society.
+
+Milgrom P., Roberts J. (1994). Economics, organization and management. Prentice-
+
+Hall.
+
+Milgrom P., Roberts J. (1995). Complementarities and ﬁt strategy, structure, and
+organizational change in manufacturing. Journal of accounting and economics,
+vol. 19, no 2, p. 179–208.
+
+Yang Y., Petersen J. O. (1997). A comparative Study on Feature Selection in Text Ca-
+tegorisation. In Fourteenth international conference on machine learning, icml’97.
+
+

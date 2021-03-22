@@ -1,0 +1,300 @@
+https://pagesperso.g-scop.grenoble-inp.fr/~stehlikm/teaching/miashs/3-Plus-court-chemin.pdf
+
+Réseaux sociaux et graphes
+MIASHS
+
+3 Plus court chemin, graphes eulériens
+
+3.1 Le plus court chemin
+
+Dans cette section, on considère les graphes orientés.
+
+Déﬁnition 3.1. Un graphe orienté (digraph en anglais) est un couple D =
+(V, A) formé par un ensemble ﬁni V et un sous-ensemble A ⊆ V × V.
+V est l’ensemble des sommets de G et A est l’ensemble des arcs de D.
+
+On peut représenter un digraphe de la même façon qu’un graphe,
+sauf qu’on remplace des traits (pour les arêtes) par des ﬂèches (pour
+les arcs). Si (u, v) est un arc, on dit que u est le début et v est la ﬁn de
+(u, v).
+
+Déﬁnition 3.2. Un chemin dans un graphe orienté D est une suite de
+la forme (v0, a1, v2, . . . , ak, vk) où k est un entier supérieur ou égal à 0,
+les vi sont des sommets de D et les ai sont les arcs de D tels que pour
+i = 1, . . . , k, ai = (vi−1, vi).
+Déﬁnition 3.3. étant donné un graphe orienté D = (V, A), une fonc-
+tion de poids p : A → R et un chemin C dans D, le poids (ou longueur)
+de C est p(C) = ∑a∈A p(a). étant donné deux sommets u, v ∈ V, la
+distance distD(u, v) est le poids (longueur) minimum d’un chemin de
+u vers v.
+
+Problème 3.4. étant donné un graphe orienté D = (V, A), une fonction de
+poids p : A → R et deux sommets u (cid:54)= v dans V, trouver un plus court
+chemin (« chaîne orientée ») de u vers v.
+
+Si le graphe contient un circuit de poids négatif (circuit absorbant),
+
+alors il peut ne pas exister de plus court chemin.
+
+Lemme 3.5 (Principe de sous-optimalité). Si C est un plus court chemin
+de s vers v alors, en notant v(cid:48) le prédécesseur de v dans ce chemin, le sous-
+chemin de C qui va de s vers v(cid:48) est un plus court chemin de s vers v(cid:48).
+Preuve par l’absurde. S’il existe C(cid:48) de s vers v(cid:48) de poids strictement infé-
+rieur au sous-chemin de C de s vers v(cid:48) alors en concaténant C(cid:48) à (v, v(cid:48))
+on aurait un chemin de s à v(cid:48) de poids strictement inférieur à celui de
+C, contradiction.
+
+Déﬁnition 3.6 (Distances partielles). Soit G = (V, A) un graphe orienté,
+p : A → R+ un fonction de poids, et s ∈ S ⊆ V. Pour tout x ∈ V, on
+note d(x) = dist(s, x). Pour tout sommet w /∈ S, on déﬁnit
+
+D(w) = min{d(v) + p(v, w) | v ∈ S et (v, w) ∈ A} .
+
+w
+
+v
+
+y
+
+x
+
+Figure 1: (v, w, x, y) est un chemin ;
+(v, w, y) n’est pas un chemin.
+
+7
+
+−1
+
+3
+
+−4
+
+Figure 2: Il peut ne pas exister de plus
+court chemin : possibilité de boucler in-
+déﬁniment dans dans le cycle absorbant.
+
+0
+
+1
+
+2
+
+3
+
+Figure 3: Si C est un plus court chemin
+de 0 à 3, alors forcément le sous-chemin
+C(cid:48) ⊂ C de 0 à 2 est un plus court chemin
+de 0 à 2.
+
+réseaux sociaux et graphes miashs
+
+2
+
+Lemme 3.7. Soit w0 tel que D(w0) est minimum, parmi tous les sommets
+dans V − S. Alors, D(w0) = d(w0).
+
+dessin avec intuition
+
+Démonstration. Soit w0 tel que D(w0) est minimum. Comme D(w0) est
+la longueur d’un chemin de s à w0, D(w0) ≥ d(w0).
+Si D(w0) ≤ d(w0) alors la preuve est terminé. Sinon, on suppose
+D(w0) > d(w0). Soit C un plus court chemin de s vers w0 (son poids
+est alors d(w0)). Soit x le premier sommet de C qui n’appartient pas à
+S. Soit y ∈ S le prédécesseur de x dans ce chemin.
+
+dessin
+Soit C(cid:48) le sous chemin de C de s vers y. C(cid:48) est un plus court chemin
+de s vers y (principe de sous optimalité). Soit C(cid:48)(cid:48) le sous chemin de C
+de s vers x. La longueur de C(cid:48)(cid:48) est d(y) + p(y, x). Ceci entraîne que
+
+D(x) ≤ d(y) + p(y, x) ≤ d(w0) < D(w0).
+
+Première inégalité : par déﬁnition de D. Deuxième inégalité : tous les
+poids sont ≥ 0. Troisième inégalité : par hypothèse.
+
+Implique D(x) < D(w0) — contradiction avec la minimalité de
+
+D(w0).
+
+Algorithme 3.1 : Dijkstra
+Entrées : Un graphe orienté connexe G = (V, E)
+une fonction de poids w : E → R+
+un sommet s ∈ V.
+Sorties : Un tableau avec les distances de s vers x pour tout x ∈ V.
+// Variable locales
+1 Sous-ensemble S de V
+2 Tableau D
+
+Utilisé par des systèmes de navigation
+GPS.
+Complexité O(n2), avec des structures
+de données appropriées O(m + n log n).
+
+// Initialisation
+
+3 S := ∅;
+4 D[s] := 0;
+5 pour tous les x (cid:54)= s faire
+
+D[x] := +∞;
+
+// Partie principale
+7 tant que S (cid:54)= V faire
+
+Trouver x /∈ S tel que D[x] est minimum;
+pour tous les y /∈ S tel que (x, y) ∈ E faire
+
+D[y] := min(D[y], D[x] + p(x, y));
+
+6
+
+8
+
+9
+
+10
+
+S := S ∪ {x}
+
+11
+12 retourner D;
+
+réseaux sociaux et graphes miashs
+
+3
+
+Figure 4: Les ponts de Königsberg.
+
+D
+
+A
+
+E
+
+B
+
+C
+
+F
+
+Figure 5: Représentation graphique des
+ponts de Königsberg.
+
+3.2 Graphes eulériens
+
+(Dans cette section on permet des arêtes parallèles !)
+La ville de Königsberg (aujourd’hui Kaliningrad) est construite au-
+tour de deux îles situées sur le Pregel et reliées entre elles par un pont.
+Six autres ponts relient les rives de la rivière à l’une ou l’autre des deux
+îles. Le problème consiste à déterminer s’il existe ou non une prome-
+nade dans les rues de Königsberg permettant, à partir d’un point de
+départ au choix, de passer une et une seule fois par chaque pont, et de
+revenir à son point de départ, étant entendu qu’on ne peut traverser le
+Pregel qu’en passant sur les ponts.
+
+Le problème a été résolu en 1736 par Leonhard Euler. Il a représenté
+chaque masse terrestre par un sommet d’un graphe, et chaque pont par
+une arête. Notons que le graphe correspondant au problème des sept
+ponts de Königsberg contient trois sommets de degré 3 et un sommet
+de degré 5. Euler a montré le théorème suivant.
+Soit G un graphe. Un cycle C ⊆ G est eulérien si C passe par chaque
+arête de G une et une seule fois. On appelle un graphe avec un cycle
+eulérien un graphe eulérien.
+
+Théorème 3.8. Un graphe G est eulérien si et seulement si G est connexe,
+et tout sommet de G est de degré pair.
+
+Démonstration. Pour la nécessité, soit G un graphe eulérien avec un
+cycle eulérien C et soit v un sommet de G quelconque. Chaque fois
+que C passe par v, il faut utiliser deux arêtes incidentes à v. Donc, le
+degré de v est pair.
+
+La sufﬁsance est une conséquence de l’algorithme de Fleury.
+Une chaîne eulérienne est une chaîne P ⊆ G telle que P passe par
+
+chaque arête de G une et une seule fois.
+
+Théorème 3.9. Un graphe G contient une chaîne eulérienne si et seulement
+si précisément deux sommets de G sont de degré impair.
+
+Démonstration. Soit x et y les sommets de G de degré impair. Le graphe
+G + xy est eulérien ; soit C un cycle eulérien de G + xy. Alors C − xy
+est une chaîne eulérienne.
+
+3.3 Le problème du postier chinois
+
+Un postier veut livrer des lettres dans un quartier ; il est donc obligé
+de passer par chaque rue du quartier. Comment peut-il trouver un plus
+court tour du quartier qui passe par chaque rue au moins une fois et
+se termine au point de départ ?
+
+Si on représente les rues par des arêtes d’un graphe, et on met un
+« poids » sur chaque arête pour représenter la longueur de la rue, le
+problème se traduit au problème suivant.
+
+réseaux sociaux et graphes miashs
+
+4
+
+Algorithme 3.2 : Fleury
+Entrées : Un graphe eulérien G = (V, E) et un sommet u de G.
+Sorties : Un cycle eulérien C de G qui commence et termine à u.
+// Variables
+
+1 F: sous-graphe de G
+2 C: chaîne dans G
+3 x: sommet de G
+
+// Initialisation
+
+4 C := u;
+5 x := u;
+6 F := G;
+7 tant que δF(x) (cid:54)= 0 faire
+
+choisir une arête e = xy ∈ δF(x) telle que e n’est pas un
+isthme de F sauf si c’est la seule possibilité;
+C := Cey;
+x := y;
+F := F − e;
+11
+12 retourner C;
+
+10
+
+8
+
+9
+
+Problème 3.10 (Le problème du postier chinois). Êtant donné un (multi-
+)graphe G = (V, E) avec une fonction de poids w : E → R+, trouver un
+plus court cycle (par rapport à la somme des poids des arêtes) qui contient
+chaque arête du graphe.
+
+Si le graphe est eulérien, alors le plus court cycle est un cycle eu-
+lérien. Sinon, l’idée est de dédoubler certaines arêtes aﬁn de rendre
+le graphe eulérien, et de faire cela d’une manière la plus économique
+possible. On peut utiliser l’algorithme suivant.
+
+Algorithme 3.3 : Postier chinois
+Entrées : Un graphe connexe G = (V, E) et une fonction de poids
+
+w : E → R.
+
+Sorties : Un plus court tour de postier chinois dans G.
+1 Trouver l’ensemble T de sommets de G de degré impair
+2 Pour tous u, v ∈ T, trouver la distance distG(u, v)
+3 Construire le graphe complet pondéré H avec l’ensemble de
+
+sommets T et w(uv) = distG(u, v)
+
+4 Trouver un couplage parfait M dans H de poids minimum
+5 Construire le graphe G(cid:48) à partir de G en dupliquant les arêtes
+
+dans les chaînes correspondant aux arêtes dans M
+
+6 Trouver un cycle eulérien dans G(cid:48) en utilisant l’algorithme de
+
+Fleury.
+
+

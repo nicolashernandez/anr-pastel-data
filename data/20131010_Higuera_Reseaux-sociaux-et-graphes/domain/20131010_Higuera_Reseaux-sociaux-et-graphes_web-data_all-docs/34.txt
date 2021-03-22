@@ -1,0 +1,1355 @@
+http://dac.lip6.fr/master/wp-content/uploads/2015/07/RequetesGraphes.pdf
+
+Croissance exponentielle du 
+volume de données
+
+Interrogation de données de 
+type graphe
+
+BDLE (Bases de Données Large Echelle)
+
+Camelia CONSTANTIN (pénom.nom@lip6.fr) 
+
+Connectivité des données
+
+Les données sont de plus en plus connectées
+
+Réseaux sociaux: des graphes 
+gigantesques
+
+Volume x Connectivité = Complexité
+
+Quelques exemples (2014)
+
+Quelques exemples (2014)
+
+Facebook
+
+
+
+
+
+1.3 milliards 
+d’utilisateurs actifs
+400 milliards d’arcs 
+dans le graphe
+
+Twitter
+
+
+
+
+
+650 millions 
+d’utilisateurs
+130 milliards 
+d’arcs dans le 
+graphe
+
+Quelques exemples (2014)
+
+Utilisation des graphes
+
+LinkedIn
+
+
+
+330 millions 
+d’utilisateurs
+ Environ 63 
+
+milliards d’arcs
+
+Les graphes sont largement utilisés pour représenter les données 
+
+dans de nombreuses applications, comme:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Le transport
+Information géographique
+Les documents semi-structurés
+Les citations bibliographiques
+Les processus biologiques
+La représentation de la connaissance (Web sémantique)
+Les systèmes de workflows
+La provenance de données
+Les réseaux sociaux
+Les recommandations sur les sites de vente
+Les pages Web
+
+ …
+
+Types de graphe
+
+Graphes étiquetés
+
+Les graphes peuvent être dirigés (réseau social, 
+workflow, références bibliographiques, etc) ou 
+non (réseau routier, réseau des connaissances, 
+etc)
+
+Les nœuds et les arêtes peuvent être étiquetés 
+
+(coût, classe, nature du lien, etc)
+
+Exemple de graphe étiqueté 
+
+Représentation d’un graphe
+
+Graphe des aéroports et durée de vol entre 
+
+eux.
+
+Matrice d’adjacence
+
+noeud
+
+N1
+
+N2
+
+N3
+
+N1
+
+N2
+
+N3
+
+0
+
+0
+
+0
+
+1
+
+0
+
+1
+
+1
+
+0
+
+0
+
+Ajout/modification/suppression d’un arc?
+
+Ex: Update matrice set N2=1 where nœud=‘N3’
+
+Ajout d’un nouvel utilisateur?
+
+Alter table matrice ADD N4 boolean  !!!!!
+
+Représentation d’un graphe 
+avec matrice
+
+Quelle taille pour la matrice?
+ Exemple LinkedIn (330 millions 
+d’utilisateurs, 63 milliards d’arcs)
+ Avec un fichier (stockage bien, interrogation 
+
+coûteuse surtout si pas en mémoire)
+
+ Avec une BD
+
+ Exemple Facebook (1.3 milliards 
+d’utilisateurs, 400 milliards d’arcs)
+ Avec un fichier
+ Avec une BD
+
+Représentation d’un graphe 
+avec matrice
+
+Quelle taille pour la matrice?
+ Et Facebook (1.3 milliards 
+
+d’utilisateurs, 400 milliards d’arcs)?
+ Avec un fichier / BD
+
+ Matrice de booléens de taille 
+
+1,3.10^9x1,3.10^9 = 1,69.10^18 bits
+
+ Soit… environ 1,5 Exaoctets !!
+
+Représentation d’un graphe 
+avec matrice
+
+Quelle taille pour la matrice?
+ Exemple LinkedIn (330 millions d’utilisateurs, 63 
+
+milliards d’arcs)
+ Avec un fichier 
+
+ Matrice de booléens de taille 
+
+330.10^6x330.10^6=108,9.10^15 bits
+ Soit… environ 12 Po !! -> sur disque 
+
+ Avec une BD
+
+ Un tuple= 1 id de nœud (double), 330.10^6 bits
+
+
+
+330.10^6 entrées
+
+ Donc du même ordre! 
+ Mais par contre mécanisme d’accès par index permettant 
+
+d’accéder efficacement au disque pour interrogation, maj, etc
+
+Représentation d’un graphe 
+avec listes
+
+Quelle taille pour les listes (avec BD)?
+ Exemple LinkedIn (330 millions 
+d’utilisateurs, 63 milliards d’arcs)
+ Exemple Facebook (1.3 milliards 
+d’utilisateurs, 400 milliards d’arcs)
+
+Représentation d’un graphe 
+avec listes
+
+Quelle taille pour les listes (avec BD)?
+ Exemple LinkedIn (330 millions 
+d’utilisateurs, 63 milliards d’arcs)
+ Table des comptes: 330 millions de tuples de 
+
+taille suivant info. stockée
+
+ Table d’adjacence: 63 milliards de tuples de 
+
+taille 2xdouble, soit 1008 milliards d’octets, soit 
+environ 940 Go
+
+ Exemple Facebook (1.3 milliards 
+d’utilisateurs, 400 milliards d’arcs)
+ Table d’adjacence d’environ 6 To
+
+Représentation d’un graphe 
+dans une BDR
+
+Meilleure solution: Liste d’adjacence: table edge et node
+
+compte nom
+
+email …
+
+follower
+
+followee
+
+N1
+
+N2
+
+N3
+
+Jean
+
+Lucie
+
+Marc
+
+…
+
+…
+
+…
+
+Ajout/modification/suppression d’un arc?
+
+Ex: Insert into edge values (‘N3’,’N2’) 
+
+Ajout d’un nouvel utilisateur?
+
+N1
+
+N1
+
+N2
+
+N2
+
+…
+
+N2
+
+N3
+
+N1
+
+N3
+
+…
+
+Insert into node values (‘N4’,’Anne’,…)  →  pas de LDD, juste du LMD
+
+Exemples de requêtes
+
+Exemples de requêtes (suite)
+
+ Dans un réseau de type transport, alimentation, 
+
+communication
+ Atteignabilité: puis-je aller de a à b ?
+ Court-chemin: trouver le plus court chemin (ou le moins 
+
+cher, etc) entre a et b
+
+ Dans un réseau de représentation de connaissance:
+
+ Une classe (élément) A est elle un sous-classe d’une classe 
+
+B?
+
+ Existe-t’il un lien entre l’entité A et l’entité B?
+ Calcul de similarité entre l’entité A et l’entité B basé sur le 
+
+graphe sémantique
+
+ Pages Web et réseaux sociaux
+
+ Existence de chemins entre A et B (et nombre, longueur, 
+
+coût, etc)
+
+ Recherche du plus court chemin
+ Requête sur le voisinage de A
+ Recommandations basées sur le graphe
+ Détection de cycles de longueur 2, 3, quelconque
+ Provenance d’une information
+ Détection de fraude pour score de recommandation
+ Calcul du diamètre du graphe
+ Calcul de la couverture d’un noeud
+ Etc etc etc
+
+Analyse structurelle
+
+Mesures de base :
+ Nombre de nœuds : |V|
+ Nombre d'arcs : |E| (plus important que |V|)
+
+
+
+
+
+indegree(n) : nombre d'arcs entrants
+outdegree(n) : nombre d'arcs sortants
+
+L'histogramme d'un graphe (décrit le graphe) 
+  graphique : diagramme de dispersion (d, n(d)) où n(d)=nombre de 
+nœuds avec outdegree=d
+
+2
+
+2
+
+4
+
+3
+
+1
+1
+1
+
+0
+
+2
+
+5
+
+7
+
+1
+
+4
+
+1
+
+6
+
+1
+
+d n(d)
+0
+1
+2
+3
+
+1
+3
+2
+0
+1
+
+4
+
+n(d)
+
+4
+
+3
+
+2
+
+1
+
+0
+
+1
+
+2
+
+3
+
+4
+
+5
+
+d
+
+Histogramme :Distribution 
+exponentielle
+
+n(d )≃c( 1
+
+2
+
+d
+
+)
+
+(en général cxd  pour x<1)
+
+ Un graphe aléatoire a une distribution exponentielle
+
+n(d)
+1200000
+
+1000000
+
+800000
+
+600000
+
+400000
+
+200000
+
+n(d)
+1000000
+
+100000
+
+10000
+
+1000
+
+100
+
+10
+
+0
+
+5
+
+d
+
+10
+
+1
+
+0
+
+5
+
+Échelle logarithmique
+
+d
+
+10
+
+Histogramme : Distribution Zipf
+
+Graphe du Web
+
+n(d )≃ 1
+d
+
+x , x>0
+
+ Données générées par les utilisateurs (lettres de l'alphabète, mots dans un vocabulaire) 
+
+100000
+
+10000
+
+1000
+
+100
+
+100000
+
+10000
+
+10
+
+0
+
+2
+
+4 6 8 10
+
+12 14 16 18
+
+1000
+
+1
+
+4
+
+16
+
+Échelle log-log
+
+Pages Web (Broder et al.*, 2000) : A. Broder, R. Kumar, F. Maghoul, 
+P. Raghavan, S. Rajagopalan, R. Stata, A. Tomkins, J. Wiener.Graph structure in the web. In
+WWW'00, pages 309-320.
+   
+
+Voisins communs
+
+Voisins communs: utilisation
+
+ Déterminer le nombre de voisins en 
+
+commun entre 2 noeuds 
+
+ Les voisins peuvent être des comptes 
+(graphes sociaux de type FB, Twitter, 
+LinkedIn)
+
+ … ou alors avoir une autre nature → 
+
+graphe bi-parti du type Youtube, 
+FourSquare, …
+
+ You Might Also Know de Facebook: si 
+on partage beaucoup d’amis, on doit 
+sans doute se connaître
+
+ Recommandation de lieux dans 
+
+FourSquare d’après avis des amis: si 
+des amis recommandent un lieu, alors 
+de bonne chance que j’aime aussi
+
+Connexité d'un graphe
+
+Distance
+
+Degré de connexité : nombre minimum de sommets qu'on doit enlever 
+
+afin de déconnecter le graphe.
+   
+
+2
+
+3
+
+1
+1
+1
+
+4
+
+5
+
+6
+
+7
+
+Exemple : degré de connexité du graphe ?
+Degré 1 : enlever 3 on a deux composantes
+déconnectées 
+
+ Déterminer le chemin le plus court permettant de relier 
+
+deux sommets quelconques
+
+ Éventuellement des poids sur les arcs → on cherche le 
+
+chemin de poids minimal
+
+Utilisation : 
+
+ GPS (avec distance, mais aussi avec coût le plus 
+
+
+
+bas)
+degré de séparation (ex : nombre d’utilisateurs 
+entre deux utilisateurs sur Facebook)
+
+Centralité
+
+Arbre couvrant
+
+Mesure l'importance d'un sommet v
+
+Centralité basée sur le degré: indegree(v)/|E| 
+Centralité de proximité: 
+ Distance moyenne des plus courts chemins vers ce nœud (graphe dirigé) →  
+
+nœud central = à une faible distance des autre nœuds
+
+Centralité d'intermédiarité de v: 
+
+
+
+ La proportion des plus courts chemins entre deux autres sommets qui passent
+
+        par v
+   
+
+2
+
+3
+
+1
+1
+1
+
+4
+
+5
+
+6
+
+7
+
+Exemple : centralité d'intermédiarité de 4 ? 
+3/nombre total de plus courts chemins
+
+Arbre inclus dans le graphe qui connecte tous les sommets du 
+   graphe (l'ensemble minimal d'arrêtes qui connectent le graphe)
+   
+
+2
+
+3
+
+1
+1
+1
+
+4
+
+5
+
+6
+
+7
+
+Exemple : un arbre couvrant possible 
+(6 arrêtes) 
+
+Circuit hamiltonien 
+
+Recherche de motifs
+
+Chemin qui visite chaque sommet seulement une fois 
+
+Difficulté: chaque somment peut être traversé par beaucoup de chemins 
+
+→  quelle est  la meilleure manière d'utiliser le sommet ?
+
+ Extension : chaque arrête a un coût associé 
+
+   →  quel est le chemin de coût minimum qui traverse chaque sommet 
+   seulement une fois ? 
+
+→ pas d'algorithme efficace, on peut utiliser des heuristiques et des 
+     approximations
+
+Trouver toutes les instances d'un motif (peut contenir des 
+
+   étiquettes de sommets ou d'arrêtes)
+
+Exemple de motif : 
+   
+
+$y
+
+$x
+
+Instanciation :
+ 
+ $x = 2, $y=3   ($x=3, $y=2)
+ $x = 7, $y=6    ($x=6, $y=7)
+   
+
+2
+
+3
+
+1
+1
+1
+
+4
+
+5
+
+6
+
+7
+
+Exemple de recherche de 
+motifs : Triangles
+
+Trouver les triangles ayant le motif : $x → $y → $z → $x  
+
+(nombre total de triangles= autre mesure de connexité)
+
+Il existe beaucoup d'algorithmes. Un algorithme naïf trouvera le 
+même triangle plusieurs fois : 
+
+    
+      $x → $y → $z → $x 
+     $y → $z → $x → $y 
+     $z → $x → $y → $z 
+   
+
+Langages de requêtes
+plusieurs possibilités:
+ SQL2 : PL/SQL avec boucles et condition d’arrêt suivant la 
+
+requête (pas de suivant, profondeur voulue, etc.)
+
+ Requêtes hiérarchiques (clause CONNECT BY), Oracle7 
+ SQL3:Requêtes récursives (clause WITH), Oracle 11gR2
+ DATALOG : modèle théorique base sur les clauses de Horn, 
+
+des implantations mais  pas de produits véritables
+
+ SPARQL : équivalent à SQL pour des données RDF (triplets : 
+
+sujet, prédicat, objet = arrête étiquetée dans un graphe)  
+
+ Cypher :  pour la BD graphe Neo4j
+…....
+ 
+
+SQL : Exemple de requête 
+
+Trouver les voisins directs
+
+follower
+
+followee
+
+Nom des utilisateurs qui suivent 'Marc'?
+
+compte nom
+
+email …
+
+N1
+
+N2
+
+N3
+
+Jean
+
+Lucie
+
+Marc
+
+…
+
+…
+
+…
+
+Table Node
+
+N1
+
+N1
+
+N2
+
+N2
+
+…
+
+N2
+
+N3
+
+N1
+
+N3
+
+…
+
+ Trouver les voisins directs :
+
+ Le nom des utilisateurs qui suivent 'Marc'?
+
+Table Edge
+
+Select B.nom
+
+From node A, node B, edge
+
+where A.nom=‘Marc’
+
+and A.compte=followee
+
+and follower=B.compte 
+
+Plus compliqué pour un graphe non dirigé (à faire 
+
+en TME)
+
+Atteignabilité?
+
+Liste des nœuds atteignables depuis le 
+
+compte de ‘Marc’ ?
+
+ Implique d’explorer le graphe depuis 
+
+un nœud donné
+
+ Avec une profondeur d'exploration 
+
+fixée (à réaliser en TME)
+
+Requêtes hiérarchiques
+
+
+
+
+
+
+
+
+
+ START WITH indique le noeud de départ
+ CONNECT BY PRIOR : règle de connexion entre les nœuds, 
+spécifie la relation entre les tuples parent/enfant dans la hiérarchie.
+ WHERE supprime les tuples de la hiérarchie qui ne satisfont pas la 
+condition (on n'arrête pas la récursion)
+LEVEL : attribut permettant de retourner la profondeur du nœud par 
+rapport à la racine 
+
+ NOCYCLE : ne retourne pas un message d'erreur si un cycle est 
+
+
+
+rencontré
+SYS_CONNECT_BY_PATH : permet de construire le chemin depuis 
+la racine
+
+ CONNECT_BY_ROOT : utiliser le nœud racine dans une condition
+ …......   
+
+Requêtes hiérarchiques
+
+Syntaxe : 
+
+SELECT select_list 
+FROM table_expression 
+[ WHERE ... ] 
+[ START WITH start_expression ] 
+CONNECT BY [NOCYCLE] { PRIOR parent_expr = 
+
+child_expr | child_expr = PRIOR parent_expr } 
+[ ORDER SIBLINGS BY column1 [ ASC | DESC ] 
+
+[, column2 [ ASC | DESC ] ] ... 
+
+[ GROUP BY ... ] 
+[ HAVING ... ] 
+... 
+
+Exemple de requêtes 
+hiérarchiques
+
+Table :
+
+EMP(EMPNO,NAME,TOWN,MGR)
+
+Requête :
+
+–
+
+Tous les subordonnés parisiens de Pierre?
+
+Select NAME,LEVEL
+from EMP E 
+where E.TOWN=‘Paris’
+start with E.NAME=‘Pierre’
+connect by E.MGR = prior E.EMPNO; 
+
+Exemple de requêtes 
+hiérarchiques
+
+Liste des ancêtres
+EMP(EMPNO,NAME,TOWN,MGR)
+Tous les supérieurs parisiens de Pierre?
+
+Select NAME,LEVEL
+from EMP E 
+where E.TOWN=‘Paris’
+start with E.NAME=‘Pierre’
+connect by prior E.MGR = E.EMPNO; 
+
+Récursivité (SQL3)
+
+WITH [ RECURSIVE ] <surnom_requête> 
+
+[ ( <liste_colonne> ) ] 
+AS ( <requête_select> ) 
+
+Puis:
+<requête_utilisant_surnom_requête> 
+
+NB: le mot clé RECURSIVE n'est pas utile en 
+
+général sauf certains systèmes où 
+obligatoire (ex. postgres)
+
+Exemple récursion SQL3
+
+Exemple récursion SQL3
+
+EMP(EMPNO,NAME,TOWN,MGR)
+Tous les subordonnés parisiens de Pierre?
+
+WITH subordonne(monSubNo,monsubNom, TOWN)
+AS
+(SELECT DISTINCT EMPNO,NAME, TOWN
+FROM EMP
+WHERE NAME=‘Pierre’
+UNION ALL
+SELECT sub.EMPNO, sub.NAME, sub.TOWN
+FROM EMP sub, subordonne sup where sup.ENO=sub.MGR)
+
+Liste des ancêtres
+EMP(EMPNO,NAME,TOWN,MGR)
+Tous les supérieurs parisiens de Pierre?
+
+WITH supérieur(monSupNo,monSupNom, town)
+AS
+(SELECT DISTINCT EMPNO,NAME, TOWN
+FROM EMP
+WHERE NAME=‘Pierre’
+UNION ALL
+SELECT sup.EMPNO, sup.NAME, sup.TOWN
+FROM EMP sup, supérieur sub on sup.ENO=sub.MGR)
+
+Select * FROM subordonne where town=‘Paris’;
+
+Select * FROM supérieur where town=‘Paris’;
+
+Limites des BD relationnelles
+
+Limites des BD relationnelles
+
+Schéma non flexible :
+
+– On ne peut pas stocker et modéliser les relations facilement 
+– Relation : table permettant de relier des objets → on doit modifier le 
+            schéma pour ajouter de nouveaux types de données et de relations
+ 
+
+Code complexe et difficilement maintainable :
+
+– Requêtes complexes avec beaucoup de jointures 
+
+ Mauvaises performances :
+
+– Les performances se dégradent avec le nombre de relations et la taille
+de la BD 
+
+Source : neo4j.com
+
+Performance des BD 
+Relationnelles
+
+BD orientées graphe
+
+Remplacent la table supplémentaire par des relations directes (pointeurs physiques
+au lieu de pointeurs logiques)
+
+Source : neo4j.com
+
+BD orientées graphes
+
+BD orientées graphes
+
+ Stockage optimisé pour:
+ les structures de données fortement connexes  (structures de stockage
+dédiées aux nœuds et arcs) 
+ la lecture et le parcours du graphe
+
+Requêtes : 
+ en temps linéaire (exponentiel pour SQL) lorsque le volume/connectivité/
+profondeur  de parcours de données augmentent 
+ traversent le graphe efficacement
+ adjacence entre les éléments voisins sans indexation : pointer physique entre 
+      une entité et ses voisins), évitent les jointures coûteuses (enregistrées comme
+      Part entière de la donnée)
+  
+
+Organisées selon des modèle complexes et flexibles :  
+ pas besoin de créer explicitement une entité pour les nœuds/arrêtes
+ les relations entre les données sont stockées et traitées dès leur apparition
+
+   → réactivité et souplesse en cas de modification de la BD
+
+Utilisation des algorithmes classiques avec des API intégrées (plus court 
+chemin, centralité, etc) 
+
+Exemples de BD orientées graphe : 
+
+ AllegroGraph, ArrangoDB,  GraphEngine, Sones, HypergraphDB,  etc 
+ Neo4j :
+
+ BD transactionnelle , respecte les principes ACID (Atomicité, Cohérence, 
+
+      Isolation, Durabilité)
+
+ haute disponibilité : mise en place d'un cluster
+ volumétrie : stocker et requêter des milliards de noueds et de relations
+ utilisée par :  Viadeo, ebay, National Geographic, Cisco, Adobe, Meetic, SFR, 
+
+Voyages-SNCF, etc  
+
+Neo4j : Graphe de propriétés
+
+Graphe de propriétés
+
+Noeuds : enregistrements qui représentent des entités du modèle, peuvent avoir :   
+ étiquettes : différencier les nœuds, donnent un rôle/type à un nœud, 
+
+       plusieurs étiquettes possibles pour un nœuds 
+
+ des propriétés clef/valeur
+
+Relations :
+ nœud de départ, nœud d'arrivée et type de relation
+ des propriétés clef/valeur  
+
+ 
+
+Person, Employee
+{name : Jim, age : 47'}
+
+COORDINATES
+{since :02/03/2013}
+
+Project
+{title : Graph Databases
+town : Paris, duration:6}
+
+Étiquette
+
+Propriétés
+
+Relation
+
+Person, Employee
+{name : Jim, age : 47}
+
+MANAGER, WORKS_WITH
+{since : 01/09/2015}
+
+C
+
+Person, Employee
+{name : Sally, age : 28}
+
+WORKS_WITH
+{since : 02/05/2014}
+
+Person, Employee
+{name : John, age : 30}
+
+O
+
+{
+sin
+
+c
+
+e
+
+O
+
+R
+
+D
+
+I
+
+N
+
+ : 
+
+0
+
+A
+
+T
+
+2
+/
+0
+
+E
+
+3
+/
+2
+
+S
+
+0
+
+1
+
+5
+}
+
+{since : 02/03/2015}
+P A R TICIP A T E S
+
+B
+
+E
+
+L
+
+O
+
+N
+
+G
+
+S
+
+_
+
+T
+
+O
+
+BELONGS_TO
+
+Project
+{title : Graph Databases
+town : Paris}
+
+Department
+{name : 4FUTURE}
+
+Cypher
+
+ langage de requêtes déclaratif  (on décrit le résultat, pas la manière de l'obtenir )
+ inspiré de SQL 
+ orienté graphes, optimisé pour la lisibilité
+ permet de définir des motifs qui seront recherchés dans le graphe
+ 
+Syntaxe :
+
+ spécification de nœuds :  (p : Person), (p : Person:Employee), (p:Person {name:Jim}), () 
+ spécification de relations : (u) → (v), (u) -[r] → (v), (u) – [r : MANAGER|WORKS_WITH] → (v), 
+(u) - [:COORDINATES {since:"02/03/2015"}] ->(p)
+ spécification de motifs :
+
+
+
+
+
+
+
+
+
+
+
+
+
+(u)-->(z)<--(v), (u)-->()<--(v), (u)--(v)
+(u) - [*2] → (v)  équivalent à (u) → () → (v)
+(u) - [*3..5] → (v) : longueur entre 3 et 5 (relations)
+(u) - [*3..] → (v) : chemin de longueur minimum 3   
+(u) - [*..5] → (v) : chemin de longueur maximum 5
+(u) - [*] → (v) : n'importe quelle longueur
+
+   
+
+Requêtes Cypher
+
+MATCH : trouve un exemple de motif dans le graphe
+
+WHERE : prédicats pour filtrer les résultats
+
+RETURN : retourne les résultats sous la forme demandée, 
+valeurs scalaires, éléments de graph, chemins, 
+collections ou même documents.
+
+CREATE : créé les les nœuds ou les relations avec les 
+étiquettes et les propriétés
+
+LIMIT : garde seulement un nombre donné de résultats
+
+ORDER BY : trie le résultat
+….... 
+
+Exemples de requêtes
+
+ Tous les nœuds du graphe 
+
+MATCH(n) RETURN n
+
+ Tous les nœuds qui on une relation avec un autre 
+
+MATCH(n) → () RETURN n
+
+ Toutes les relations de John (indépendamment de la direction)
+
+MATCH (john {name :"John"}) – [r ] - ()
+RETURN r         
+
+ Tous les employés avec leur département : 
+
+MATCH (e:EMPLOYE) → (d:DEPARTMENT)
+Return e.name, d.name
+
+Exemples de requêtes
+
+ Trouver Jim et ses subordonnés : 
+
+   MATCH (jim : Person {name :"Jim"}) - [:MANAGER]->(sub)
+   RETURN jim, sub
+
+ Depuis quand participe Sally au projet "Graph Databases" ?
+
+   MATCH (sally : Employe {name :'Sally'})
+   MATCH (projet :Project {name :'Graph Databases'})
+   MATCH (sally)-[r:PARTICIPATES] → (projet) 
+   RETURN r.since
+
+ Tous les projets à Paris dans lesquels a travaillé Sally
+   MATCH (sally:EMPLOYE)-[:PARTICIPATES]->(project)
+    WHERE sally.name="Sally"
+    AND project.name ="Paris"
+    RETURN project.name;
+
+Exemples de requêtes
+
+ Tous les projets dans lesquels a travaillé chaque employé avec les noms
+     des chefs des projets
+     
+      MATCH (e)-[:PARTICIPATES]->(p), (p)<-[:COORDINATES]-(c)
+      RETURN e.name, p.title, c.name;
+
+ Qui est le plus âgé parmi Jim et Sally ?
+   
+   MATCH(p : Person)
+   WHERE p.name='Jim' OR p.name='Sally'
+   RETURN p.name as oldest
+   ORDER BY p.age DESC
+   LIMIT 1
+
+ Les 5 personnes les plus âgées : 
+  MATCH (p:Person)
+  RETURN p.name
+  ORDER BY p.age DESC
+  LIMIT 5;
+
+Exemples de requêtes
+
+ La longueur du plus court chemin entre "Sally" et "Jim" :
+   MATCH p=shortestPath( (sally)-[*]-(jim) ) 
+   WHERE sally.name="Sally" and jim.name = "Jim"
+   RETURN length(p)
+
+ Le plus court chemin entre "Sally" et "John", si ce chemin a maximum
+10 relations :  
+MATCH (sally : Person {name :'Sally'}), (john:Person {name :'John'}), 
+   p=shortestPath((sally) - [*..10] – (john))
+RETURN p 
+
+ Tous les plus courts chemins entre "Sally" et "John" :
+    MATCH (sally : Person {name :'Sally'}), (john:Person {name :'John'}), 
+    P = allShortestPath((sally) - [*] – (john))
+    RETURN p
+
+Exemples de requêtes
+
+ Les 10 employés qui ont travaillé dans le plus de projets :
+   MATCH (e:EMPLOYE)-[:PARTICIPATES]->(p)
+   RETURN e.name, count(p)
+   ORDER BY count(p) DESC
+    LIMIT 10;
+    → Autres fonctions d'agrégation : min, max, sum, collect
+
+ Les projets dans lesquels travaille Sally et dans lesquels ne travaille pas John
+MATCH (sally:Person {name:"Sally"})-[:PARTICIPATES]->(project),
+      (john:Person {name:"John"})
+WHERE NOT (john)-[:PARTICIPATES]->(project)
+RETURN DISTINCT project.name;
+
+ Les employés avec lesquels travaillent ceux qui travaillent avec Sally 
+    et avec lesquels Sally n'a jamais travaillé:
+   MATCH (sally:Employe)-[:WORKS_WITH*2]->(fof)
+    WHERE sally.name = "Sally" and NOT((sally)-[:WORKS_WITH]->(fof))
+    RETURN DISTINCT fof.name;
+
+Exemples de requêtes
+
+ Afficher le nom des personnes sur le plus court chemin :
+ 
+    MATCH (sally:Person {name:"Sally"}), (jim:Person {name:"Jim"})
+    MATCH p=shortestPath((sally)-[*]->(jim))
+    RETURN [ n in nodes(p) | n.name ];
+
+ Le chef de Sally et son chef
+
+    MATCH (sally)-[:MANAGER*1..2]-(chef)
+    WHERE sally.name="Sally"
+    RETURN chef.name      
+
+

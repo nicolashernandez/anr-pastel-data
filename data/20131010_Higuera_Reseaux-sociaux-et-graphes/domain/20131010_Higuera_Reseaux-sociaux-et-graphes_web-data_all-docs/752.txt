@@ -1,0 +1,1316 @@
+http://www-bd.lip6.fr/wiki/_media/site/enseignement/master/bdle/1-intro-graphes_sql-recursif_ba.pdf
+
+INTERROGATION DE DONNÉES DE 
+TYPE GRAPHE
+
+BDLE (BASES DE DONNÉES LARGE ECHELLE)
+
+BERND AMANN (SUPPORT CAMELIA CONSTANTIN -- PRÉNOM.NOM@LIP6.FR)
+
+GRAPHES DE DONNÉES : EXEMPLES
+ET PROPRIÉTÉS
+
+VOLUME ET CONNECTIVITÉ DES DONNÉES
+
+Volume x Connectivité = Complexité
+
+RÉSEAUX SOCIAUX
+
+Utilisateurs
+(106)
+
+Arcs 
+(109)
+
+Facebook
+
+LinkedIn
+
+Twitter
+
+1 300
+
+330
+
+650
+
+400
+
+63
+
+130
+
+TYPES DE GRAPHE
+
+ Graphes 
+
+•
+
+•
+
+dirigés : réseau social, citations 
+bibliographiques, web hypertexte, web 
+sémantique, graphe de recommandation, 
+graphe d'évolution…
+
+non-dirigés : réseau routier, réseau des 
+collaboration, graphes de cooccurrences, …
+
+Graphes étiquetés 
+
+•
+
+•
+
+nœuds : nom, age, contenu
+
+arcs : amitiés, coût, durée, ..
+
+ANALYSE STATISTIQUE ET STRUCTURELLE
+
+ Mesures de base :
+
+ Nombre de nœuds : |V|
+
+ Nombre d'arcs : |E| (plus important que |V|)
+
+ in/out-degree(n) : nombre d'arcs entrants/sortants
+
+ L'histogramme d'un graphe (décrit le graphe)
+
+ diagramme de dispersion (d, n(d)) où n(d)=nombre de nœuds avec out-degree=d
+
+2
+
+2
+
+4
+
+3
+
+1
+1
+1
+
+0
+
+2
+
+5
+
+7
+
+1
+
+4
+
+1
+
+6
+
+1
+
+d n(d)
+0
+1
+2
+3
+
+1
+3
+2
+0
+1
+
+4
+
+n(d
+)
+4
+
+3
+
+2
+
+1
+
+0
+
+1
+
+2
+
+3
+
+4
+
+5
+
+d
+
+(en général cxd pour x<1)
+
+HISTOGRAMME : DISTRIBUTION EXPONENTIELLE
+
+Graphe aléatoire
+
+n(d)
+1200000
+
+1000000
+
+800000
+
+600000
+
+400000
+
+200000
+
+0
+
+5
+
+d
+
+10
+
+n(d)
+1000000
+
+100000
+
+10000
+
+1000
+
+100
+
+10
+
+1
+
+0
+
+5
+
+Échelle logarithmique
+
+d
+
+10
+
+n(d)≃c(12)dHISTOGRAMME : DISTRIBUTION ZIPF
+
+ Graphes générés par les applications
+
+graphe occurrences mots / documents
+
+graphe web
+
+100000
+
+10000
+
+
+
+
+
+100000
+
+10000
+
+1000
+
+100
+
+10
+
+0
+
+2
+
+4 6 8 10
+
+12 14 16 18
+
+1000
+
+1
+
+4
+
+16
+
+Échelle log-log
+
+n(d)≃1dx,x>0GRAPHE DU WEB
+
+Pages Web (Broder et al.*, 2000) : A. Broder, R. Kumar, F. Maghoul, 
+P. Raghavan, S. Rajagopalan, R. Stata, A. Tomkins, J. Wiener.Graph structure in the web. In
+WWW'00, pages 309-320.
+
+CONNEXITÉ D'UN GRAPHE
+
+ Degré de connexité : nombre minimum de sommets qu'on doit enlever afin de 
+
+déconnecter le graphe.
+
+ Utile pour décider si un graphe est "intéressant" pour un certain type d'analyse.   
+
+2
+
+3
+
+1
+1
+1
+
+4
+
+5
+
+6
+
+7
+
+Exemple : degré de connexité du graphe ?
+Degré 1 : enlever 3 on a deux composantes
+déconnectées 
+
+CENTRALITÉ D'UN NOEUD
+
+ Mesure l'importance d'un sommet v 
+
+ Utile par exemple pour l'analyse de communautés
+
+ Centralité basée sur le degré : in-degree(v)/|E| 
+
+ Centralité de proximité: 
+
+ Distance moyenne des plus courts chemins vers ce nœud (graphe dirigé) → nœud central = 
+
+a une faible distance des autre nœuds
+
+ Centralité d'intermédiarité de v: 
+
+ La proportion des plus courts chemins entre deux autres sommets qui passent par v
+
+2
+
+3
+
+1
+1
+1
+
+4
+
+5
+
+6
+
+7
+
+Exemple : centralité d'intermédiarité de 4 ?
+(2,3,4,6), (3,4,6), (5,4,6)
+3/nombre total de plus courts chemins
+3/6 = 0.5
+
+MODÉLISER ET INTERROGER LES 
+GRAPHES DE DONNÉES
+
+MATRICE ET LISTES D'ADJACENCE ET TABLES
+
+compte
+
+nom
+
+email
+
+…
+
+N1
+
+N2
+
+N3
+
+Jean
+
+Lucie
+
+Marc
+
+…
+
+…
+
+…
+
+noeud
+
+N1
+
+N2
+
+N3
+
+N1
+
+N2
+
+N3
+
+0
+
+0
+
+0
+
+1
+
+0
+
+1
+
+1
+
+0
+
+0
+
+Données
+
+follower
+
+followee
+
+Matrice d’adjacence
+
+N1
+
+N1
+
+N2
+
+N2
+
+…
+
+N2
+
+N3
+
+N1
+
+N3
+
+…
+
+N2
+
+N3
+
+N1
+
+N3
+
+N1
+
+N2
+
+N3
+
+Liste d’adjacence
+
+Table d’adjacence
+
+COMPARAISON TAILLE
+
+Exemple :LinkedIn 
+
+ 330 millions de nœuds
+
+ 63 milliards d’arcs
+
+ Matrice d'adjacence
+
+ 330 * 106 * 330 * 106 bits =  1016 bits = 1,2 . 1015 octets = 1,2 pétaoctets
+
+ Table relationnelle / liste d'adjacence
+
+ 1 id de nœud = double = 4o
+
+ 63 * 109 * 2 * 4 octets = 5 * 1011 octets = 0,5 téraoctets
+
+COMPARAISON OPÉRATIONS
+
+Mises-à-jour
+
+Accès
+
+ Matrice d'adjacence :
+
+ Matrice d'adjacence
+
+ noeuds: insertion / suppression de lignes
+
+et colonnes (~ |N|)
+
+ arcs : maj cellule (constant)
+
+ Liste d'adjacence
+
+ noeuds : creation de liste (const)
+
+ arcs: maj liste (~ out-degree)
+
+ Table relationnelle
+
+ operations logiques (AND, OR)
+
+ operations matricielle : +, -, *, T
+
+ matrice = index "bitmap"
+
+ Liste d'adjacence
+
+ parcours de listes
+
+ Table relationnelle
+
+ arcs : insertion et suppression de nuplets
+
+ langages de requêtes
+
+(depend des index) 
+
+ stockage et indexation
+
+M
+é
+m
+o
+i
+r
+e
+
+i
+
+D
+s
+q
+u
+e
+
+EXEMPLES DE REQUÊTES
+
+ Dans un réseau de type transport, alimentation, communication
+
+ Comment aller de l'adresse a à l'adresse b ?
+
+ Combien de chemins entre le nœud réseau a et le nœud réseau b ?
+
+ Le chemin le plus rapide entre l'usine a et le magasin b ?
+
+ Dans un réseau de représentation de connaissance:
+
+ Une classe (élément) A est elle un sous-classe d’une classe B?
+
+ Existe-t’il un lien entre l’entité A et l’entité B?
+
+ Similarité entre l’entité A et l’entité B basé sur le graphe sémantique
+
+ Réseaux de citations
+
+ Quels auteurs sont le plus cités directement et indirectement ?
+
+ Quels chercheurs / articles sont important dans un domaine (centralité) ?
+
+ Réseaux sociaux
+
+ You Might Also Know de Facebook: si on partage beaucoup d’amis, on doit sans doute se connaître
+
+ Recommandation de lieux dans FourSquare d’après avis des amis: si des amis recommandent un 
+
+lieu, alors de bonne chance que j’aime aussi
+
+ Degré de séparation (ex : nombre d’utilisateurs entre deux utilisateurs sur Facebook)
+
+RECHERCHE DE MOTIFS
+
+ Trouver toutes les instances d'un motif (peut contenir des étiquettes de 
+
+sommets ou d'arrêtes)
+
+ Exemple de motif :    
+
+$y
+
+$x
+
+Instanciation :
+
+ $x = 2, $y=3   ($x=3, $y=2)
+ $x = 7, $y=6    ($x=6, $y=7)
+
+2
+
+3
+
+1
+1
+1
+
+4
+
+5
+
+6
+
+7
+
+EXEMPLE DE RECHERCHE DE MOTIFS : 
+TRIANGLES
+
+ Trouver les triangles ayant le motif : $x → $y → $z → $x  (nombre total de 
+
+triangles= autre mesure de connexité)
+
+ Il existe beaucoup d'algorithmes. Un algorithme naïf trouvera le même triangle 
+
+plusieurs fois :     
+
+$x → $y → $z → $x 
+
+$y → $z → $x → $y 
+
+$z → $x → $y → $z 
+
+EXEMPLES DE REQUÊTES (SUITE)
+
+ Les voisins de A
+
+ Voisins en commun entre A et B
+
+ Existence / nombre de chemins entre A et B (et nombre, longueur, coût, etc.)
+
+ Existence de chemins entre A et B correspondant à une expression régulière (A 
+
+B)*(C|D)+ 
+
+ Recherche du plus court chemin entre A et B, entre tous les nœuds
+
+ Recherche de motifs de graphes : cycles, "motifs de graphes", arbre couvrant, 
+
+circuit hamiltonien
+
+ Calcul de propriétés : diamètre du graphe, centralité, ..
+
+LANGAGES DE REQUÊTES GRAPHES
+
+LANGAGES DE REQUÊTE POUR DES GRAPHES
+
+ Langages de requêtes "classiques" (SQL):
+
+ schema logique : ensembles de prédicats, dépendances fonctionnelles, …
+
+ modèle simple et langages fermés : l'éntrée et lasortie sont des tables
+
+ sémantique : calcul relational (logique du premier ordre sans fonctions)
+
+ execution : algèbre relationnel (projection, selection, jointure, …)
+
+ compléxité maîtrisée, mais insuffisant pour interroger des graphes (pas de recursion, …)
+
+ Langage de graphes
+
+ schema complexes : contraintes sur les motifs possibles; automates
+
+ modèle complex et langages "non fermés" : le résultat d'une requête n'est pas forcément un graphe. 
+
+ sémantique : expressions régulières, mappings, automates, …
+
+ execution : algèbre complexe / récursives, règles, fonctions
+
+ compléxité élevée
+
+LANGAGES DE REQUÊTES GRAPHE
+
+ SQL2 : PL/SQL avec boucles et condition d’arrêt suivant la requête (pas de 
+
+suivant, profondeur voulue, etc.)
+
+ Requêtes hiérarchiques (clause CONNECT BY), Oracle7 
+
+ SQL3 : Requêtes récursives (clause WITH), Oracle 11gR2
+
+ DATALOG : modèle théorique base sur les clauses de Horn, des implantations 
+
+mais  pas de produits véritables
+
+ SPARQL : équivalent à SQL pour des données RDF (triplets : sujet, prédicat, 
+
+objet = arrête étiquetée dans un graphe)  
+
+ Cypher :  pour la BD graphe Neo4j
+
+ ….... 
+
+SQL : EXEMPLE DE REQUÊTE
+
+ Trouver les voisins directs :
+
+ Le nom des utilisateurs qui suivent 'Marc'?
+
+compte
+
+nom
+
+email
+
+…
+
+follower
+
+followee
+
+N1
+
+N2
+
+N3
+
+Jean
+
+Lucie
+
+Marc
+
+…
+
+…
+
+…
+
+Table Node
+
+N1
+
+N1
+
+N2
+
+N2
+
+…
+
+N2
+
+N3
+
+N1
+
+N3
+
+…
+
+Table Edge
+
+TROUVER LES VOISINS DIRECTS
+
+ Nom des utilisateurs qui suivent 'Marc'?
+
+select B.nom
+from node A, node B, edge E
+where A.nom=‘Marc’ and A.compte=E.followee
+
+and E.follower=B.compte
+
+compte
+
+nom
+
+email
+
+N1
+
+N2
+
+N3
+
+Jean
+
+Lucie
+
+Marc
+
+…
+
+…
+
+…
+
+follower
+
+followee
+
+ Liste des nœuds atteignables depuis le compte de ‘Marc’ ?
+
+ Implique d’explorer le graphe depuis un nœud donné avec une 
+
+profondeur d'exploration fixée (à réaliser en TME)
+
+N1
+
+N1
+
+N2
+
+N2
+
+…
+
+N2
+
+N3
+
+N1
+
+N3
+
+…
+
+DATALOG
+
+ Datalog : langage de requêtes pour bases de données relationnelles
+
+ Requête = ensemble de règles ~ program logique
+
+ Exemple
+
+SQL
+
+select B.nom
+from node A, node B, edge E
+where A.nom=‘Marc’ and
+A.compte=E.followee
+
+and E.follower=B.compte 
+
+Datalog
+
+node(1, 'Marc')
+node(2,'Paul')
+node(3,'Mary')
+edge(1,2)
+edge(2,3)
+AmisMarc(n) :- node(a,'Marc'), 
+
+node(b,n), edge(a,b)
+
+DATALOG : RECURSION ET NÉGATION
+
+node(…, …)
+
+edge(…, …)
+
+Amis(m,n) :- node(a,m), node(b,n), edge(a,b)
+
+ Négation : not
+
+ Négation + recursion :
+
+ possibilité de créer des programmes
+
+"mal-formées" 
+
+ sémantique : plusieurs solutions (pas de 
+
+modèle minimal / point fixe unqiue)
+
+PasAmis(m,n) :- not Amis(m,n)
+
+ execution : boucle infinie
+
+Connecté(m,n) :- Amis(m,n)
+
+Connecté(m,n) :- Amis(m,x), Connecté(x,n)
+
+PasConnecté(m,n) :- not Connecté(m,n)
+
+ contrainte: Programmes stratifiés
+
+ les règles peuvent être regroupées en
+"strates"  et une règle d'une strate s 
+peut appliquer la negation seulement à 
+une règle (recursive) d'une strate s-1.
+
+SQL 3 : REQUÊTES HIÉRARCHIQUES
+
+SELECT select_list 
+
+FROM table_expression 
+
+[ WHERE ... ] 
+
+[ START WITH start_expression ] 
+
+CONNECT BY [NOCYCLE] { PRIOR parent_expr = child_expr | 
+
+child_expr = PRIOR parent_expr } 
+
+[ ORDER SIBLINGS BY column1 [ ASC | DESC ]  [, column2 [ ASC | DESC ] ] ... 
+
+[ GROUP BY ... ] 
+
+[ HAVING ... ] 
+
+REQUÊTES HIÉRARCHIQUES
+
+ START WITH indique le noeud de départ
+
+ CONNECT BY PRIOR : règle de connexion entre les nœuds, spécifie la relation 
+
+entre les tuples parent/enfant dans la hiérarchie.
+
+ WHERE supprime les tuples de la hiérarchie qui ne satisfont pas la condition (on 
+
+n'arrête pas la récursion)
+
+ LEVEL : attribut permettant de retourner la profondeur du nœud par rapport à 
+
+la racine 
+
+ NOCYCLE : ne retourne pas un message d'erreur si un cycle est rencontré
+
+ SYS_CONNECT_BY_PATH : permet de construire le chemin depuis la racine
+
+ CONNECT_BY_ROOT : utiliser le nœud racine dans une condition
+
+(voir TME)
+
+EXEMPLE DE REQUÊTES HIÉRARCHIQUES
+
+Tous les subordonnés 
+parisiens de Pierre?
+
+Tous les supérieurs parisiens 
+de Pierre?
+
+select NAME, LEVEL
+
+select NAME,LEVEL
+
+from EMP E 
+
+from EMP E 
+
+where E.TOWN=‘Paris’
+
+where E.TOWN=‘Paris’
+
+start with E.NAME=‘Pierre’
+
+start with E.NAME=‘Pierre’
+
+connect by E.MGR = prior E.EMPNO; 
+
+connect by prior E.MGR = E.EMPNO; 
+
+EMP(EMPNO,'Pierre',TOWN,MGR)
+
+PRIOR
+
+EMP(EMPNO,NAME,TOWN,MGR)
+
+…
+
+EMP(EMPNO,NAME,TOWN,MGR)
+
+SQL3 : FACTORISATION AVEC WITH
+
+WITH [ RECURSIVE ]
+
+<vue V1> [ ( <liste_colonne1> ) ] AS [( <requête SQL Q1> )],
+
+<vue V2> [ ( <liste_colonne2> ) ] AS [( <requête SQL Q2> )], …
+
+<requête SQL Q> ;
+
+ Oracle: on ne met pas le mot clé RECURSIVE
+
+ Requête Qi peut utiliser toutes les vues Vj pour j < i
+
+ Récursion : Qi utilise la vue Vi (avec UNION ALL)
+
+ Qi: select … from (<requête>) union all (select … from Vi, … )
+
+ Requêtes "valides" : program Datalog stratifié, évaluation semi-naïve
+
+EXEMPLE RÉCURSION SQL3
+
+EMP(ENO,NAME,TOWN,MGR)
+
+Tous les subordonnés parisiens de Pierre?
+WITH subordonne(SUBENO, SUBENAME, TOWN)
+
+AS (SELECT DISTINCT sub.ENO, sub.NAME, sub.TOWN
+
+FROM EMP sup, EMP sub WHERE sup.NAME=‘Pierre’ 
+
+AND sup.ENO = sub.MGR
+
+UNION ALL
+
+SELECT sub.ENO, sub.NAME, sub.TOWN
+
+FROM subordonne sup, EMP sub WHERE sup.ENO=sub.MGR)
+
+SELECT * FROM subordonne where TOWN = ‘Paris’;
+
+(voir TME)
+
+RÉCURSION EN PROFONDEUR OU EN LARGEUR
+
+ Contrôler l'odre d'évaluation : 
+
+SEARCH DEPTH | BREADTH FIRST BY <attr> SET <ordre>
+
+WITH subordonne(SUBENO, SUBENAME, TOWN)
+AS 
+(
+
+SELECT DISTINCT sub.ENO, sub.NAME, sub.TOWN
+FROM EMP sup, EMP sub WHERE sup.NAME=‘Pierre’ 
+
+AND sup.ENO = sub.MGR
+
+UNION ALL
+SELECT sub.ENO, sub.NAME, sub.TOWN
+FROM subordonne sup, EMP sub WHERE sup.ENO=sub.MGR
+
+)
+SEARCH DEPTH FIRST BY SUBENO SET order1
+SELECT * FROM subordonne where TOWN = ‘Paris’
+ORDER BY order1;
+
+RÉCURSION ET CYCLE
+
+ Détection de cycles : 
+
+CYCLE <attr1> SET <attr2> TO <val1> DEFAULT <val2>
+
+ attr2 = val1 quand un cycle est détecté sur l'attribute attr1 (attre = val2 sinon)
+
+WITH subordonne(SUBENO, SUBENAME, TOWN)
+AS (
+
+SELECT DISTINCT sub.ENO, sub.NAME, sub.TOWN
+FROM EMP sup, EMP sub WHERE sup.NAME=‘Pierre’ AND sup.ENO = sub.MGR
+
+UNION ALL
+
+SELECT sub.ENO, sub.NAME, sub.TOWN
+FROM subordonne sup, EMP sub WHERE sup.ENO=sub.MGR
+
+)
+CYCLE SUBENO SET cyc TO 1 DEFAULT 0
+SELECT * FROM subordonne where TOWN = ‘Paris’;
+
+LIMITES DES BD RELATIONNELLES
+
+ Modèle :
+
+ Le modèle relationnel est bien adapté pour des données structurées qui peuvent 
+
+facilement être organisés en plusieurs tables
+
+ Un graphe est une structuration libre de nœuds divers connectés par des liens
+
+ Requêtes
+
+ Les requêtes SQL récursives sont complexes 
+
+ Les optimiseurs et structures d'index relationnels  ne sont pas adaptés à l'évaluation 
+
+de requêtes graphes
+
+Source : neo4j.com
+
+PERFORMANCE DES BD RELATIONNELLES
+
+Source : neo4j.com
+
+BD ORIENTÉES GRAPHE
+
+Source : neo4j.com
+
+Remplacer les références logiques clés/clés étrangères par des 
+pointeurs physiques  jointure = suivi de pointeurs
+
+BD ORIENTÉES GRAPHES
+
+ Organisées selon des modèle complexes et flexibles
+
+ Utilisation des algorithmes optimisés avec des API intégrées 
+
+ plus court chemin, centralité, etc
+
+ Exemples de BD orientées graphe : 
+
+ AllegroGraph, ArrangoDB,  GraphEngine, Sones, HypergraphDB
+
+ Neo4j :
+
+ BD transactionnelle / ACID (Atomicité, Cohérence,  Isolation, Durabilité)
+
+ haute disponibilité (cluster)
+
+ scalabilité : stocker et requêter des milliards de noueds et de relations
+
+ utilisateurs :  Viadeo, ebay, National Geographic, Cisco, Adobe, Meetic, SFR, Voyages-SNCF, etc
+
+NEO4J : GRAPHE DE PROPRIÉTÉS
+
+ Noeuds :
+
+ étiquettes pour différencier les nœuds
+
+ donnent un rôle/type à un nœud,  plusieurs étiquettes possibles pour un nœuds 
+
+ propriétés clef/valeur
+
+ Relations :
+
+ nœud de départ, nœud d'arrivée 
+
+ type de relation
+
+ propriétés clef/valeur  
+
+Person, Employee
+{name : Jim, age : 47'}
+
+Project
+{title : Graph Databases
+town : Paris, duration:6}
+
+NEO4J : GRAPHE DE PROPRIÉTÉS
+
+Person, Employee
+{name : Jim, age : 47}
+
+Person, Employee
+{name : Sally, age : 28}
+
+MANAGER, WORKS_WITH
+{since : 01/09/2015}
+
+Person, Employee
+{name : John, age : 30}
+
+Project
+{title : Graph Databases
+town : Paris}
+
+Department
+{name : 4FUTURE}
+
+NEO4J : CYPHER
+
+ Langage de requêtes déclaratif
+
+ Motifs de chemins / graphes
+
+Syntaxe :
+
+ spécification de nœuds :  (p : Person), (p : Person:Employee), (p:Person {name:Jim}), () 
+
+ spécification de relations : (u) → (v), (u) -[r] → (v), 
+
+(u) – [r : MANAGER|WORKS_WITH] → (v), 
+
+(u) - [:COORDINATES {since:"02/03/2015"}] ->(p)
+
+ motifs de chemins :
+
+ (u)-->(z)<--(v), (u)-->()<--(v), (u)--(v)
+
+ (u) - [*2] → (v)  équivalent à (u) → () → (v)
+
+ (u) - [*3..5] → (v) : longueur entre 3 et 5 (relations)
+
+ (u) - [*3..] → (v) : chemin de longueur minimum 3   
+
+ (u) - [*..5] → (v) : chemin de longueur maximum 5
+
+ (u) - [*] → (v) : n'importe quelle longueur
+
+REQUÊTES CYPHER
+
+ MATCH (m) : retourne les instances (bindings de variables) de motif m
+
+ WHERE : prédicats pour filtrer les résultats
+
+ RETURN : formatage des résultats sous la forme demandée:
+
+ valeurs scalaires, éléments de graph, chemins, collections ou même documents.
+
+ CREATE : créé les nœuds ou les relations avec les étiquettes et les propriétés
+
+ LIMIT : restriction de cardinalité 
+
+ ORDER BY : ordonnancement
+
+EXEMPLES DE REQUÊTES
+
+ Tous les nœuds du graphe
+
+MATCH(n) RETURN n
+
+ Tous les nœuds qui on une relation avec un autre noeud
+
+MATCH(n) → () RETURN n
+
+ Toutes les relations de John (indépendamment de la direction)
+
+MATCH (john {name :"John"}) – [r ] - ()
+
+RETURN r         
+
+ Tous les employés avec leur département : 
+
+MATCH (e: EMPLOYE) → (d: DEPARTMENT)
+
+RETURN e.name, d.name
+
+EXEMPLES DE REQUÊTES
+
+ Trouver Jim et ses subordonnés : 
+
+MATCH (jim : Person {name :"Jim"}) - [:MANAGER]->(sub)
+
+RETURN jim, sub
+
+ Depuis quand participe Sally au projet "Graph Databases" ?
+
+MATCH (sally : Employe {name :'Sally'})
+
+MATCH (projet :Project {name :'Graph Databases'})
+
+MATCH (sally)-[r:PARTICIPATES] → (projet) 
+
+RETURN r.since
+
+ Tous les projets à Paris dans lesquels a travaillé Sally
+
+MATCH (sally:EMPLOYE)-[:PARTICIPATES]->(project)
+
+WHERE sally.name="Sally"   AND project.name ="Paris"
+
+RETURN project.name;
+
+EXEMPLES DE REQUÊTES
+
+ Tous les projets dans lesquels a travaillé chaque employé avec les noms  des chefs des 
+
+projets   
+
+MATCH (e)-[:PARTICIPATES]->(p), (p)<-[:COORDINATES]-(c)
+
+RETURN e.name, p.title, c.name;
+
+ Qui est le plus âgé parmi Jim et Sally ?   
+
+MATCH(p : Person)
+
+WHERE p.name='Jim' OR p.name='Sally'
+
+RETURN p.name as oldest
+
+ORDER BY p.age DESC  LIMIT 1
+
+ Les 5 personnes les plus âgées : 
+
+MATCH (p:Person)
+
+RETURN p.name
+
+ORDER BY p.age DESC LIMIT 5;
+
+EXEMPLES DE REQUÊTES
+
+ Les 10 employés qui ont travaillé dans le plus de projets :
+
+MATCH (e:EMPLOYE)-[:PARTICIPATES]->(p)
+
+RETURN e.name, count(p)
+
+ORDER BY count(p) DESC  LIMIT 10;
+
+→ Autres fonctions d'agrégation : min, max, sum, collect
+
+ Les projets dans lesquels travaille Sally et dans lesquels ne travaille pas John
+
+MATCH (sally:Person {name:"Sally"})-[:PARTICIPATES]->(project), (john:Person {name:"John"})
+
+WHERE NOT (john)-[:PARTICIPATES]->(project)
+
+RETURN DISTINCT project.name;
+
+ Les employés avec lesquels travaillent ceux qui travaillent avec Sally et avec lesquels 
+
+Sally n'a jamais travaillé:
+
+MATCH (sally:Employe)-[:WORKS_WITH*2]->(fof)
+
+WHERE sally.name = "Sally" and NOT((sally)-[:WORKS_WITH]->(fof))
+
+RETURN DISTINCT fof.name;
+
+EXEMPLES DE REQUÊTES
+
+ La longueur du plus court chemin entre "Sally" et "Jim" :
+
+MATCH p=shortestPath( (sally)-[*]-(jim) ) 
+
+WHERE sally.name="Sally" and jim.name = "Jim"
+
+RETURN length(p)
+
+ Le plus court chemin entre "Sally" et "John", si ce chemin a maximum 10 relations :  
+
+MATCH (sally : Person {name :'Sally'}), (john:Person {name :'John'}),  p=shortestPath((sally) -
+[*..10] – (john))
+
+RETURN p 
+
+ Tous les plus courts chemins entre "Sally" et "John" :
+
+MATCH (sally : Person {name :'Sally'}), (john:Person {name :'John'}), 
+
+P = allShortestPath((sally) - [*] – (john))
+
+RETURN p
+
+EXEMPLES DE REQUÊTES
+
+ Afficher le nom des personnes sur le plus court chemin :
+
+MATCH (sally:Person {name:"Sally"}), (jim:Person {name:"Jim"})
+
+MATCH p=shortestPath((sally)-[*]->(jim))
+
+RETURN [ n in nodes(p) | n.name ];
+
+ Le chef de Sally et son chef
+
+MATCH (sally)-[:MANAGER*1..2]-(chef)
+
+WHERE sally.name="Sally"
+
+RETURN chef.name      
+
+

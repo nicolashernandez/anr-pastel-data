@@ -1,0 +1,666 @@
+http://lipn.fr/marami12/actes/combe.pdf
+
+Détection de communautés dans des réseaux
+scientiﬁques à partir de données relationnelles
+et textuelles
+
+David Combe* — Christine Largeron* — El˝od Egyed-Zsigmond**
+— Mathias Géry*
+
+* Université de Lyon, F-42023, Saint-Étienne, France,
+CNRS, UMR 5516, Laboratoire Hubert Curien, F-42000, Saint-Étienne, France
+Université de Saint-Étienne, Jean-Monnet, F-42000, Saint-Étienne, France
+Email : {david.combe, christine.largeron, mathias.gery}@univ-st-etienne.fr
+
+** Université de Lyon
+UMR 5205 CNRS, LIRIS
+7 av J. Capelle, F-69100 Villeurbanne, France
+Email : elod.egyed-zsigmond@insa-lyon.fr
+
+RÉSUMÉ. Nous présentons dans cet article différentes méthodes permettant de détecter des com-
+munautés dans des réseaux sociaux en considérant les relations entre les acteurs et des attributs
+les décrivant. Nous évaluons leurs résultats sur un jeu de données avec vérité terrain que nous
+avons construit à partir de plusieurs sources et qui décrit un réseau social scientiﬁque dans
+lequel des données textuelles sont associées à chaque acteur et les classes sont connues. Selon
+le type de données exploité et le type de résultats escompté, nous montrons que le choix de la
+méthode de classiﬁcation est important et nous présentons quelques exemples concrets pour
+l’illustrer.
+ABSTRACT. In this paper, we present different combined clustering methods and we evaluate their
+performances and their results on a dataset with ground truth. This dataset, built from several
+sources, contains a scientiﬁc social network in which textual data is associated to each vertex
+and the classes are known. We argue that, depending on the kind of data we have and the type of
+results we want, the choice of the clustering method is important and we present some concrete
+examples for underlining this.
+MOTS-CLÉS : réseau d’information, partitionnement de graphe, réseau social
+KEYWORDS: information network, graph clustering
+
+2
+
+MARAMI 2012.
+
+1. Introduction
+
+L’objectif de la détection de communautés dans les graphes, ou encore dans les
+réseaux sociaux, est de créer une partition des sommets, en tenant compte des rela-
+tions qui existent entre les sommets dans le graphe, de telle sorte que les communau-
+tés soient composées de sommets fortement connectés [BRA 03, NEW 04b, SCH 07,
+LAN 09]. Parmi les principales méthodes de détection de communautés proposées
+dans la littérature, on peut citer celles qui optimisent une fonction de qualité pour éva-
+luer la qualité d’une partition donnée, comme la modularité, la coupe ratio, la coupe
+min-max ou la coupe normalisée [KER 70, CHA 94, SHI 00, DIN 01, NEW 04c], les
+techniques hiérarchiques comme les algorithmes de division [FLA 03], les méthodes
+spectrales [Von 07] ou l’algorithme de Markov et ses extensions [SAT 09]. Ces tech-
+niques de partitionnement de graphes sont très utiles pour détecter des composantes
+fortement connectées dans un graphe, mais elles se concentrent sur la structure des
+liens, en ignorant les propriétés des sommets. Or dans de nombreuses applications,
+les réseaux sociaux issus notamment d’internet mais aussi des bases de brevets ou
+de données biologiques peuvent être représentés par des graphes dont les sommets
+ont des attributs qui peuvent être pris en compte pour détecter plus efﬁcacement les
+communautés.
+
+Un nouveau déﬁ en matière de détection de communautés consiste à combiner les
+données relationnelles (i.e. les liens) avec les attributs décrivant les sommets. Récem-
+ment, plusieurs travaux ont tenté de s’attaquer à ce problème de classiﬁcation hybride.
+Cependant, la combinaison de plusieurs types de données soulève le problème du sens
+de la classiﬁcation. En effet, les différentes fonctions de comparaison et de distance
+peuvent ne pas être compatibles et, par conséquent, conduire à des résultats contra-
+dictoires. En outre, ces résultats sont difﬁciles à évaluer car il n’existe aucun jeu de
+données de référence, avec liens et attributs, adapté à l’évaluation d’une classiﬁca-
+tion combinant attributs et données relationnelles. Pour cette raison, dans ce travail,
+nous avons construit un jeu de données pourvu d’une vérité terrain aﬁn de comparer
+la classe de chaque sommet avec son appartenance réelle à un groupe. Il s’agit d’un
+réseau scientiﬁque, principalement basé sur des publications et la participation à des
+manifestations scientiﬁques. Il comprend des données textuelles (titres des publica-
+tions et résumés) et des données relationnelles (co-auteur, co-participation à un même
+évènement). Nos expériences montrent que, en fonction du poids accordé à chaque
+type de données (textuelles ou relationnelles) et la façon de les combiner au cours de
+la classiﬁcation, les résultats peuvent être très différents.
+
+Le reste de l’article est organisé comme suit. La section suivante est consacrée
+aux techniques récentes de partitionnement de graphes qui considèrent les attributs
+et les informations relationnelles. Nous déﬁnissons formellement le problème dans la
+section 3 alors que nous proposons plusieurs approches qui tiennent compte simul-
+tanément des données relationnelles et des attributs dans la section 4. Notre étude
+expérimentale pour évaluer ces approches est détaillée dans la section 5 et les résultats
+dans la section 6. Enﬁn, la section 7 conclut l’article.
+
+Détection hybride de communautés
+
+3
+
+2. État de l’art
+
+Parmi les méthodes de détection de communautés, on peut distinguer d’une part les
+techniques d’apprentissage non supervisé, également appelées classiﬁcation de don-
+nées vectorielles, qui exploitent les attributs décrivant les objets, comme la classiﬁca-
+tion hiérarchique ou les k-means, et d’autre part celles qui considèrent les relations
+entre les différents objets comme c’est généralement le cas dans le partitionnement de
+graphes [FOR 10, BIC 10].
+
+Récemment, des méthodes qui exploitent les deux types de données ont été intro-
+duites aﬁn de détecter les communautés dans les réseaux sociaux où les attributs sont
+associés aux sommets. Par exemple, dans une étape de pré-traitement, Steinhaeuser
+et Chawla calculent une mesure de similarité entre chaque paire de sommets, sur la
+base des attributs, qui est utilisée en tant que poids du lien correspondant à cette paire.
+Ensuite, toute méthode de partitionnement de graphe peut être appliquée sur le graphe
+valué [STE 08]. Cette méthode est similaire à la première approche présentée dans la
+section suivante, mais la métrique nécessite de déﬁnir un paramètre ; ce qui n’est pas
+le cas dans notre travail.
+
+Zhou et al. exploitent également les attributs aﬁn d’étendre le graphe original
+[ZHO 09, ZHO 10]. Ils ajoutent des sommets et des arêtes incarnant les attributs qui
+relient les sommets de départ ayant la même valeur. Un partitionnement est ensuite
+réalisé sur le graphe augmenté des attributs. Une limite de cette méthode réside dans
+le fait qu’elle ne convient pas à des attributs continus. La seconde méthode, introduite
+dans la prochaine section, exploite la même idée. Cependant, le graphe est étendu de
+façon plus simple, sans restriction sur le type des attributs considérés.
+
+Dans la classiﬁcation hiérarchique de Li et al., les communautés sont construites
+sous des contraintes basées sur les attributs [LI 08]. Lors d’une première étape, les
+noyaux sont détectés en utilisant seulement les données relationnelles. Ils sont ensuite
+fusionnés en fonction de la similitude de leurs attributs.
+
+Ester et al. traitent la question sous l’angle du "problème des k-centres connec-
+tés" et proposent NetScan, une version étendue de l’algorithme des k-means avec une
+contrainte de connexité interne [EST 06, GE 08]. Sous cette condition, deux sommets
+d’une classe sont reliés par un chemin interne à celle-ci. Dans NetScan, comme dans
+d’autres algorithmes de partitionnement, le nombre de classes doit être connu, mais ce
+point a été assoupli dans des travaux récents [MOS 07]. D’autres approches ont égale-
+ment été introduites aﬁn de détecter des sous-graphes denses qui sont aussi homogènes
+vis à vis des attributs [GUN 10, GUN 11].
+
+Dang et al. ont étendu la modularité de Newman en ajoutant un terme pour mesurer
+la similarité basée sur les attributs entre deux sommets [DAN 12]. De cette façon, les
+deux types de données sont considérés simultanément au cours du processus de parti-
+tionnement. Toutefois, les communautés peuvent contenir des sommets non connectés.
+De la même manière, dans la troisième méthode proposée dans la section suivante, les
+deux types de données sont également considérés simultanément, mais ils sont fusion-
+
+4
+
+MARAMI 2012.
+
+nés en une mesure de dissimilarité globale utilisée pendant le partitionnement avec la
+garantie que les sommets d’une même communauté soient connectés.
+
+Dans la section 4, nous présenterons plusieurs approches qui tiennent compte si-
+multanément des données de structure et des attributs et qui offrent l’avantage d’être
+faciles à mettre en œuvre tandis, que dans la section suivante, le problème du parti-
+tionnement hybride de réseau d’information est déﬁni de façon plus formelle.
+
+3. Énoncé du problème
+
+Nous considérons un graphe G = (V, E) où V =(cid:8)v1, . . . , vi, . . . , v|V |(cid:9) est l’en-
+
+semble des sommets et E ⊂ V × V est l’ensemble des arêtes non étiquetées. Le
+partitionnement de graphe consiste à regrouper les sommets en classes en prenant en
+considération les relations qui existent entre les sommets de telle sorte qu’il devrait y
+avoir de nombreuses arêtes au sein de chaque classe et relativement peu entre celles-ci
+[SCH 07, GIR 02]. Dans cet article nous considérons le cas où le processus de re-
+groupement consiste à partitionner l’ensemble V des sommets en r classes disjointes
+P = {C1, . . . , Cr} de telle sorte que :
+
+–(cid:83)
+
+k∈{1,...,r} Ck = V
+
+– Ck ∩ Cl = ∅, ∀ 1 ≤ k < l ≤ r
+– Ck (cid:54)= ∅, ∀k ∈ {1, . . . , r}
+De plus, nous supposons que chaque sommet vi ∈ V est associé à un document
+représenté par un vecteur di = (wi1, . . . , wij, . . . wiT ) où wij est le poids du terme tj
+dans le document di. Ces documents peuvent été considérés comme des attributs des
+sommets et donc G vu comme un réseau d’information [ZHO 09].
+
+Dans le problème de partitionnement de réseau d’information, les liens et les attri-
+buts sont considérés, de telle sorte que d’une part il doit y avoir de nombreuses arêtes
+au sein de chaque classe et relativement peu entre elles et d’autre part, deux sommets
+appartenant à la même classe sont plus proches en termes d’attributs, que deux som-
+mets appartenant à des classes différentes. Ainsi, les classes doivent être bien séparées
+et les sommets appartenant à un même groupe doivent être connectés et homogènes
+vis à vis des attributs.
+
+4. Approches de partitionnement de graphes avec vecteurs d’attributs
+
+Nous introduisons différentes approches pour partitionner le graphe en utilisant à
+la fois les liens et les attributs des sommets. Les méthodes différent dans la manière
+dont les données relationnelles et les attributs sont combinés.
+
+Détection hybride de communautés
+
+5
+
+4.1. Partitionnement orienté relations appliqué sur un graphe valué
+
+Dans cette méthode, les attributs sont utilisés pour obtenir un graphe valué. Nous
+déﬁnissons une distance portant sur les attributs textuels disT , par exemple la dis-
+tance euclidienne ou la distance du cosinus, bien adaptée aux attributs textuels. La
+valeur disT (di, dj) est associée à chaque arête (vi, vj) de E. Puis, une méthode de
+détection de communautés dans un graphe, compatible avec les graphes valués, est
+utilisée pour partitionner l’ensemble des sommets V , par exemple un algorithme qui
+optimise une fonction de qualité comme l’algorithme de Kernighan-Lin ou ceux basés
+sur la modularité [KER 70].
+
+4.2. Partitionnement de données vectorielles appliqué sur la distance relationnelle
+
+Dans ce scénario, les informations relationnelles sont utilisées pour déﬁnir une
+mesure de dissimilarité disS(vi, vj) entre chaque paire de sommets (vi, vj) dans le
+graphe. Dans la pratique, la longueur du plus court chemin entre vi et vj peut être
+utilisée comme disS(vi, vj), où le chemin le plus court entre vi et vj est le chemin
+qui a le plus petit nombre d’arêtes. Dans le cas où les arêtes sont valuées, la longueur
+du chemin entre vi et vj est la somme des poids des arêtes du chemin et le plus court
+chemin entre deux sommets est celui pour lequel cette somme est minimale. Les lon-
+gueurs des chemins minimaux déﬁnissent des dissimilarités et toute technique d’ap-
+prentissage non supervisée peut être appliquée sur la matrice de dissimilarités ainsi
+obtenue.
+
+4.3. Classiﬁcation hybride
+
+Dans cette méthode, une dissimilarité globale disT S(vi, vj) entre deux sommets
+vi et vj est déﬁnie comme une combinaison linéaire de deux mesures de dissimilarité
+correspondant respectivement à chaque type d’information :
+
+disT S(vi, vj) = α disT (di, dj) + (1 − α) disS(vi, vj)
+
+(1)
+
+où disT (di, dj) est une dissimilarité déﬁnie sur les attributs, disS(vi, vj) est déﬁnie
+directement sur le graphe et α est un paramètre compris entre 0 et 1.
+
+Comme précédemment, la longueur d’un plus court chemin entre vi et vj peut
+être utilisée pour disS(vi, vj), et la distance euclidienne ou la distance du cosinus
+calculées sur les attributs peuvent être utilisées pour disT (di, dj). Ensuite, la partition
+peut être construite soit avec un algorithme de partitionnement de graphe appliqué
+sur le graphe étendu et valué par la dissimilarité globale, soit par une technique non
+supervisée d’apprentissage utilisant la dissimilarité globale.
+
+6
+
+MARAMI 2012.
+
+5. Étude expérimentale
+
+Nous avons effectué des expérimentations pour évaluer les différentes méthodes
+présentées précédemment. Bien qu’il existe des jeux de données pour l’évaluation
+d’algorithmes de détection de communautés avec une vérité terrain, à notre connais-
+sance, il n’existe pas un tel jeu de données de référence, avec des données relation-
+nelles et des attributs, exploitable pour l’évaluation d’une partition construite à partir
+d’un réseau d’information. Dans le cas où la communauté de chaque acteur est incon-
+nue, on peut utiliser les mesures qui servent à l’évaluation de partitions construites à
+partir des données relationnelles comme la modularité, ou celles destinées à l’évalua-
+tion de classiﬁcation vectorielle comme l’inertie intra-classe. Cependant, il est clair
+que les mesures d’évaluation sont liées à la stratégie de partitionnement correspon-
+dante. Pour éviter ce biais, nous avons construit un jeu de données associé à une vérité
+terrain aﬁn de comparer la communauté de chaque sommet avec sa classe réelle ; ce
+qui permet d’utiliser la précision comme mesure d’évaluation. Ce jeu de données est
+présenté dans le paragraphe suivant.
+
+5.1. Données relationnelles
+
+Aﬁn de construire un graphe pourvu d’attributs et d’une vérité terrain, nous nous
+sommes concentrés sur deux conférences : SAC 2009 et IJCAI 2009. Un réseau de
+co-participation a été généré à partir de la base de données DBLP1 et les résumés, les
+titres et les thématiques de recherche ont été extraits des sites Internet des conférences
+sélectionnées2.
+
+5.1.1. Auteurs et thématiques de recherche
+
+Trois domaines de recherche, correspondant à des sessions de conférences, ont été
+sélectionnés : la robotique, la bio-informatique et la programmation par contraintes.
+Une session de robotique est proposée dans les deux conférences, tandis que seule
+SAC 2009 propose une session bioinformatique et seule IJCAI 2009 propose la pro-
+grammation par contraintes. Comme le montre le tableau 1, il y a 24 auteurs dans le
+premier domaine de recherche (A : bio-informatique), 16 + 38 = 54 dans le second
+(B+C : robotique) et 21 dans le dernier (D : programmation par contraintes). Cha-
+cun de ces auteurs correspond à un sommet de V et son adhésion à la thématique de
+recherche est utilisée lors de l’étape d’évaluation.
+
+Les résumés et les titres des articles publiés par les auteurs à IJCAI 2009 et SAC
+2009 sont représentés dans le modèle vectoriel introduit par Salton et al. [SAL 75].
+Après un prétraitement du texte consistant en l’élimination des mots vides et la racini-
+sation des termes, un vecteur di est attaché à chaque auteur vi de V . Les composantes
+
+1. http://www.informatik.uni-trier.de/~ley/db/
+2. Le jeu de données est disponible à l’adresse http://labh-curien.univ-st-etienne.
+fr/datasets/2012_datasetSessionsRecognition.zip
+
+Détection hybride de communautés
+
+7
+
+Tableau 1. Nombre d’auteurs par session et conférence
+
+Session
+A Bioinformatique
+B Robotique
+C Robotique
+D Contraintes
+Total
+
+Conférence Nombre d’auteurs
+24
+SAC
+16
+SAC
+38
+IJCAI
+IJCAI
+21
+99
+
+(wij, j = 1, T ) de ce vecteur sont calculées selon la formule du tf-idf comme ci-
+dessous de sorte que wij le poids associé au terme ti dans le texte associé à l’auteur
+vi est d’autant plus élevé que ce terme est fréquent dans ce texte et rare dans ceux
+associés aux autres auteurs.
+
+wij =
+
+nb(tj, di)
+
+nbT ermes(di)
+
+· log(
+
+|V |
+
+|{di : tj ∈ di|} )
+
+(2)
+
+où nbT ermes(di) est le nombre de termes du document di et nb(tj, di) est le
+
+nombre d’occurrences du terme tj dans di.
+
+5.1.2. Réseau social
+
+Nous considérons un événement e comme un journal ou une conférence référencé
+dans DBLP entre 2007 et 2009. Un réseau de co-participation est construit sur l’en-
+semble V , en utilisant la base de données DBLP, comme suit : soient vi et vj deux
+auteurs appartenant à V ; s’il existe au moins un événement e de telle sorte que vi et
+vj sont les auteurs d’articles publiés dans e (même s’ils ne sont pas co-auteurs), alors
+(vi,vj) ∈ E.
+
+5.1.3. Graphe
+
+On obtient le graphe pourvu d’attributs G = (V, E) où les sommets incarnent
+les auteurs et les arêtes représentent les relations de co-participation. De plus, chaque
+sommet (i.e. auteur), est décrit par des attributs textuels correspondant au vecteur tf-idf
+associé à ses articles. La classe réelle correspondant à chaque auteur est la thématique
+(i.e. la session A, B, C ou D de SAC 2009 ou IJCAI 2009) de son auteur.
+
+5.2. Hypothèses
+
+Nous énumérons ici plusieurs scénarios de classiﬁcation et hypothèses et nous pré-
+sentons les résultats attendus. Nous considérons quatre sous-ensembles de sommets A,
+B, C et D, rassemblant les auteurs publiant dans les quatre sessions considérées (voir
+tableau 1).
+
+8
+
+MARAMI 2012.
+
+5.2.1. Texte : 3 domaines de recherche / 3 classes (PT )
+
+Ne considérant que les attributs textuels des sommets, l’hypothèse qui fonde cette
+première expérience est que cette information devrait permettre de retrouver les trois
+domaines de recherche : robotique, bioinformatique et programmation par contraintes ;
+ce qui revient à prendre comme vérité terrain la partition en trois groupes contenant
+les auteurs rattachés à chaque thématique de recherche : PT = {A, B ∪ C, D}.
+
+5.2.2. Relations : 2 conférences / 2 classes (PS)
+
+La prise en compte des données relationnelles seules devrait permettre d’identi-
+ﬁer deux groupes correspondants aux auteurs qui participent à chaque conférence :
+SAC2009 et IJCAI2009 et qui déﬁnissent comme vérité terrain la partition PS =
+{A ∪ B, C ∪ D}.
+
+5.2.3. Texte et structure : 4 sessions / 4 communautés (PT S)
+
+Cependant, si nous voulons identiﬁer les auteurs rattachés à chaque session, les
+informations textuelles et relationnelles doivent alors être utilisées. Dans ce cas, la
+partition associée à la vérité terrain est PT S = {A, B, C, D}.
+
+6. Stratégies évaluées et résultats
+
+Aﬁn de vériﬁer ces hypothèses, nous évaluons plusieurs modèles combinant texte
+et liens (modèles T S1, T S2, T S3), correspondant aux différentes approches décrites
+dans la section 4. Nous comparons ces trois modèles de classiﬁcation hybride (T S)
+avec deux références : le partitionnement basé sur le texte uniquement (modèle T )
+et le partitionnement basé sur les données relationnelles uniquement (modèle S). Les
+différentes stratégies ont été évaluées en calculant la précision des classes fournies par
+les algorithmes par rapport à la vérité terrain reﬂétant les domaines de recherche (PT )
+ou les conférences (PS) ou encore les sessions (PT S).
+
+L’ensemble des résultats obtenus par les modèles T , S, T S1, T S2 et T S3 sont
+
+regroupés dans le tableau 2.
+
+Tableau 2. Synthèse des résultats : modèles T , S, T S1, T S2 et T S3
+
+PS
+-
+
+Précision vis-à-vis de :
+PT S
+PT
+69%
+87%
+63%
+76%
+73%
+
+-
+-
+-
+-
+
+100%
+
+-
+-
+-
+
+47-69%
+
+Modèle
+T
+
+S
+
+T S1
+T S2
+T S3
+
+Détection hybride de communautés
+
+9
+
+6.1. Classiﬁcation en fonction des attributs textuels : modèle T
+
+La classiﬁcation en fonction des attributs textuels ne prend en compte que les do-
+cuments {di,∀vi ∈ V }. Elle a été réalisée avec la distance euclidienne ainsi qu’avec
+la distance du cosinus calculée sur la description tf-idf, et avec la méthode du k-means
+bissectif, puis avec la distance du cosinus et l’algorithme du lien moyen [STE 00].
+Comme cette dernière stratégie donne de meilleurs résultats, c’est la seule qui sera
+présentée ici comme référence pour nos expérimentations.
+
+Comme prévu, la précision est plus élevée en prenant comme référence pour vé-
+× 100 = 87%) que pour
+rité terrain la partition en trois groupes PT ( (11+16+38+21)
+la partition en quatre groupes PT S (69%). Ce résultat conﬁrme notre hypothèse se-
+lon laquelle les données textuelles permettent d’identiﬁer les différents domaines de
+recherche, mais ne parviennent pas à détecter correctement les quatre sessions.
+
+99
+
+6.2. Partitionnement uniquement à partir des relations : modèle S
+
+L’algorithme de Blondel et al. exploite seulement les données structurelles (i.e. le
+graphe G = (V, E)) [BLO 08]. Cette extension de l’algorithme de Newman et Girvan,
+bien connue pour sa capacité à gérer de grands graphes, est une méthode gloutonne qui
+optimise la modularité des partitions construites sur le réseau [NEW 04a]. Cet algo-
+rithme, appliqué directement sur le graphe G = (V, E), fournit une bipartition qui est
+exactement la vérité terrain PS = {A ∪ B, C ∪ D}. Ainsi, l’identiﬁcation des deux
+conférences à l’aide des données structurelles est parfaitement réalisée. Toutefois, la
+précision est seulement égal à 63% si on considère les quatre sessions (PT S) comme
+vérité terrain.
+
+6.3. Partitionnement du graphe de similarité des attributs : modèle T S1
+
+Dans cette stratégie, qui correspond à l’approche présentée dans la section 4.1, la
+distance du cosinus calculée sur les vecteurs de tf-idf est associée à chaque arête dans
+le but d’obtenir un graphe valué. Le graphe peut alors être partitionné selon la méthode
+de Blondel et al.. La prise en compte des données structurelles et des attributs améliore
+la précision qui atteint 76% pour la partition en quatre classes (PT S), quand elle est
+seulement égale à 69% sans les attributs. Ce résultat conﬁrme notre hypothèse selon
+laquelle les deux types d’informations sont utiles pour identiﬁer les quatre sessions
+(PT S).
+
+6.4. Classiﬁcation basée sur les liens appliquée sur le graphe valué des attibuts :
+modèle T S2
+
+Comme précédemment, la distance du cosinus calculée sur les vecteurs tf-idf est
+associée à chaque arête, aﬁn d’obtenir un graphe valué. Ensuite, la distance géodé-
+
+10
+
+MARAMI 2012.
+
+sique entre deux sommets est déﬁnie comme la plus petite somme des poids des arêtes
+des chemins entre ces sommets. Enﬁn, une classiﬁcation hiérarchique ascendante est
+appliquée sur la matrice des distances géodésiques, en utilisant comme critère d’agré-
+gation le lien simple, le lien complet, le lien moyen ou encore la distance des centres
+de gravité. Avec une précision de la classiﬁcation de 73% pour la partition en quatre
+classes (PT S), les résultats sont similaires à ceux obtenus avec l’algorithme basé sur
+la modularité et meilleurs que ceux obtenus en utilisant un seul type d’information
+(textuelle ou relationnelle). Le lien simple, le lien complet et la distance des centres
+de gravité donnent des résultats identiques.
+
+6.5. Partitionnement hybride : modèle T S3
+
+Dans cette approche, une dissimilarité globale est déﬁnie comme une combinai-
+son linéaire de deux dissimilarité, correspondant chacune à un type de données : la
+distance du cosinus sur les informations textuelles et la distance géodésique sur les
+nœuds en relation dans le graphe G. Ensuite, une classiﬁcation hiérarchique ascen-
+dante est appliquée sur la matrice des dissimilarités globales. Cette stratégie corres-
+pond à la classiﬁcation hybride présentée dans la section 4.3. Même si cette méthode
+apparait comme une solution simple pour exploiter simultanément les deux types de
+données, elle a l’inconvénient de nécessiter de ﬁxer le paramètre α dans la fonction
+linéaire qui inﬂuence la qualité des résultats. Ainsi, dans nos expériences, la précision
+de la partition en quatre groupes (PT S) varie en fonction de α entre 47% (α ﬁxé à
+0.85, 0.96) et 69% (α ﬁxé à 1). La meilleure précision correspond à celle obtenue
+avec un partitionnement basé sur le texte et elle est inférieure à celles obtenues avec
+les méthodes précédentes combinant les données structurelles et les attributs.
+
+7. Conclusion et perspectives de travail
+
+Comme cela a été présenté dans les sections précédentes, nous obtenons des résul-
+tats très différents selon la méthode de classiﬁcation et les données prises en compte
+lors du partitionnement d’un graphe avec attributs.
+
+Dans cette étude nous avons cherché à souligner les difﬁcultés posées par le choix
+de bonnes méthodes de classiﬁcation. Nous avons construit un jeu de données à partir
+de données du monde réel pour être en mesure d’évaluer une série de méthodes de
+classiﬁcation et de comparer leurs résultats. Dans nos expériences, la classiﬁcation
+basée sur les attributs textuels permet assez bien de récupérer les thématiques de re-
+cherche, le partitionnement à partir des données structurelles permet de retrouver les
+conférences, tandis que l’information structurelle et les attributs sont utiles pour iden-
+tiﬁer les quatre sessions correspondant aux participants à une conférence qui partagent
+une même thématique.
+
+Nous avons également montré que dans le cas de classiﬁcation hybride combinant
+données structurelles et attributs, de bons résultats peuvent être obtenus grâce à des
+
+Détection hybride de communautés
+
+11
+
+méthodes simples. En particulier, des méthodes qui exploitent la valuation du graphe
+donnent de meilleurs résultats que la combinaison linéaire.
+
+Nous avons l’intention d’étudier plus profondément l’intérêt et les caractéristiques
+de haut niveau des méthodes multicritères de classiﬁcation en vue de fournir des cri-
+tères précis de choix de scénarios pour le partitionnement de graphes d’information.
+
+Remerciements
+
+Ce travail a été partiellement soutenu par Saint-Étienne Métropole (http://www.
+
+agglo-st-etienne.fr/) et la Région Rhône-Alpes.
+
+8. Bibliographie
+
+[BIC 10] BICHOT C., SIARRY P., Partitionnement de graphe : optimisation et applications,
+
+Lavoisier, 2010.
+
+[BLO 08] BLONDEL V. D., GUILLAUME J.-L., LAMBIOTTE R., LEFEBVRE E., « Fast un-
+folding of communities in large networks », Journal of Statistical Mechanics : Theory and
+Experiment, vol. 2008, no 10, 2008.
+
+[BRA 03] BRANDES U., GAERTLER M., WAGNER D., « Experiments on Graph Clustering
+
+Algorithms », In 11th Europ. Symp. Algorithms, Springer-Verlag, 2003, p. 568–579.
+
+[CHA 94] CHAN P. K., SCHLAG M. D. F., ZIEN J. Y., « Spectral K-way ratio-cut partitioning
+and clustering », IEEE Transactions on Computer-Aided Design of Integrated Circuits and
+Systems, vol. 13, no 9, 1994, p. 1088–1096, ACM.
+
+[DAN 12] DANG T. A., VIENNET E., « Community Detection based on Structural and Attri-
+
+bute Similarities », International Conference on Digital Society (ICDS), 2012, p. 7–12.
+
+[DIN 01] DING C., HE X., ZHA H., GU M., « A min-max cut algorithm for graph partitioning
+and data clustering », IEEE International Conference on Data Mining, 2001, p. 107 – 114.
+[EST 06] ESTER M., GE R., GAO B., HU Z., BEN-MOSHE B., ZENGJIAN HU B. B.-M. M.
+E. R. G. B. J. G., « Joint Cluster Analysis of Attribute Data and Relationship Data : the
+Connected k-Center Problem », SIAM International Conference on Data Mining, ACM
+Press, 2006, p. 25–46.
+
+[FLA 03] FLAKE G., TARJAN R., TSIOUTSIOULIKLIS K., « Graph clustering and minimum
+
+cut trees », Internet Mathematics, vol. 1, no 4, 2003, p. 385–408, AK Peters.
+
+[FOR 10] FORTUNATO S., « Community detection in graphs », Physics Reports, vol. 486, no
+
+3-5, 2010, p. 75–174.
+
+[GE 08] GE R., ESTER M., GAO B. J., HU Z., BHATTACHARYA B., BEN-MOSHE B., « Joint
+cluster analysis of attribute data and relationship data », ACM Transactions on Knowledge
+Discovery from Data, vol. 2, no 2, 2008, p. 1–35.
+
+[GIR 02] GIRVAN M., NEWMAN M., « Community structure in social and biological net-
+works », Proceedings of the National Academy of Sciences, vol. 99, no 12, 2002, page
+7821.
+
+12
+
+MARAMI 2012.
+
+[GUN 10] GUNNEMANN S., FARBER I., BODEN B., SEIDL T., « Subspace Clustering Meets
+Dense Subgraph Mining : A Synthesis of Two Paradigms », IEEE International Conference
+on Data Mining, 2010, p. 845–850.
+
+[GUN 11] GUNNEMANN S., BODEN B., SEIDL T., « DB-CSC : a density-based approach for
+subspace clustering in graphs with feature vectors », Machine Learning and Knowledge
+Discovery in Databases, vol. 6911, 2011, p. 565–580, Springer.
+
+[KER 70] KERNIGHAN B. W., LIN S., « An Efﬁcient Heuristic Procedure for Partitioning
+
+Graphs », Bell System Technical Journal, vol. 49, no 2, 1970, p. 291–307.
+
+[LAN 09] LANCICHINETTI A., FORTUNATO S., « Community detection algorithms : a com-
+
+parative analysis », Physical review E, vol. 80, no 5, 2009, page 056117, APS.
+
+[LI 08] LI H., NIE Z., LEE W.-C. W., GILES C. L., WEN J.-R., « Scalable Community Dis-
+covery on Textual Data with Relations », ACM conference on Information and knowledge
+management, 2008, p. 1203–1212.
+
+[MOS 07] MOSER F., GE R., ESTER M., « Joint Cluster Analysis of Attribute and Relation-
+ship Data Without A-Priori Speciﬁcation of the Number of Clusters », ACM SIGKDD
+international conference on Knowledge discovery and data mining, août 2007, p. 510-519.
+[NEW 04a] NEWMAN M. E. J., « Fast algorithm for detecting community structure in net-
+
+works », Physics, vol. 69, no 2, 2004, p. 1–5, APS.
+
+[NEW 04b] NEWMAN M., « Detecting community structure in networks », The European
+Physical Journal B-Condensed Matter and Complex Systems, vol. 38, no 2, 2004, p. 321–
+330, Springer.
+
+[NEW 04c] NEWMAN M., GIRVAN M., « Finding and evaluating community structure in net-
+
+works », Physical review E, vol. 69, no 2, 2004, p. 1–16.
+
+[SAL 75] SALTON G., WONG A., YANG C. S., « A vector space model for automatic in-
+
+dexing », Commun. ACM, vol. 18, no 11, 1975, p. 613–620, ACM.
+
+[SAT 09] SATULURI V., PARTHASARATHY S., « Scalable graph clustering using stochastic
+
+ﬂows : applications to community discovery », ACM SIGKDD, 2009, p. 737–746.
+
+[SCH 07] SCHAEFFER S., « Graph clustering », Computer Science Review, vol. 1, no 1, 2007,
+
+p. 27–64.
+
+[SHI 00] SHI J., MALIK J., « Normalized cuts and image segmentation », Pattern Analysis
+and Machine Intelligence, IEEE Transactions on, vol. 22, no 8, 2000, p. 888–905, IEEE.
+[STE 00] STEINBACH M., KARYPIS G., KUMAR V., « A comparison of document clustering
+
+techniques », KDD workshop on text mining, vol. 400, no X, 2000, p. 525–526.
+
+[STE 08] STEINHAEUSER K., CHAWLA N. V., « Community Detection in a Large Real-World
+Social Network », LIU H., SALERNO J. J., YOUNG M. J., Eds., Social Computing, Beha-
+vioral Modeling, and Prediction, p. 168-175, Springer US, 2008.
+
+[Von 07] VON LUXBURG U., « A tutorial on spectral clustering », Statistics and Computing,
+
+vol. 17, no 4, 2007, p. 395–416, Springer.
+
+[ZHO 09] ZHOU Y., CHENG H., YU J., « Graph clustering based on structural/attribute simi-
+larities », Proceedings of the VLDB Endowment, vol. 2, no 1, 2009, p. 718–729, VLDB.
+[ZHO 10] ZHOU Y., CHENG H., YU J. X., « Clustering Large Attributed Graphs : An Efﬁcient
+Incremental Approach », IEEE International Conference on Data Mining, IEEE, décembre
+2010, p. 689–698.
+
+

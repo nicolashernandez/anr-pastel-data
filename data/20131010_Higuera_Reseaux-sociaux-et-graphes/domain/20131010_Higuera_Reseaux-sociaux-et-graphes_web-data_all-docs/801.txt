@@ -1,0 +1,743 @@
+http://www.lacim.uqam.ca/~blondin/files/8inf802/ete2014/imprimable-reseaux.pdf
+
+Chapitre 5 : Réseaux et graphes
+
+Alexandre Blondin Massé
+
+Laboratoire d’informatique formelle
+Université du Québec à Chicoutimi
+
+11 juin 2014
+
+Cours 8INF802
+
+Département d’informatique et mathématique
+
+A. Blondin Massé (UQAC)
+
+11 juin 2014
+
+1 / 57
+
+Réseaux
+
+noeud
+lien
+
+(cid:73) Un réseau est un ensemble de sommets ou noeuds,
+
+connectés entre eux par des arêtes ou des liens;
+
+(cid:73) Autrement dit, c’est un graphe;
+
+(cid:73) La plupart du temps, on associe des informations aux
+
+sommets et aux arêtes.
+
+A. Blondin Massé (UQAC)
+
+11 juin 2014
+
+3 / 57
+
+Études des réseaux
+
+(cid:73) Historiquement, les graphes sont surtout étudiés en
+
+mathématiques discrètes;
+
+(cid:73) En parallèle, les réseaux (sociaux, par exemple) sont étudiés
+
+en sciences sociales;
+
+(cid:73) Typiquement, en sciences sociales, on s’intéresse aux
+
+questions de
+
+(cid:73) centralité, c’est-à-dire qui est inﬂuent et le mieux
+
+connecté, ou de
+
+(cid:73) connexité, c’est-à-dire comment les individus sont reliés
+
+les uns aux autres.
+
+A. Blondin Massé (UQAC)
+
+11 juin 2014
+
+4 / 57
+
+De petits réseaux à grands réseaux
+
+(cid:73) Les approches traditionnelles fonctionnent bien pour de
+
+petits réseaux;
+
+(cid:73) Plus récemment (depuis les années 90), on s’intéresse aux
+
+statistiques à grande échelle de ces réseaux.
+
+(cid:73) Prenons par exemple la question suivante : « Quel sommet
+
+est le plus crucial dans ce réseau s’il était supprimé ? »
+
+(cid:73) Une autre question plus réaliste est : « Combien de
+
+sommets doit-on supprimer pour rendre le graphe non
+connexe ? »
+
+A. Blondin Massé (UQAC)
+
+11 juin 2014
+
+5 / 57
+
+Visualisation
+
+(cid:73) Il existe de nombreux logiciels de visualisation de graphes;
+
+(cid:73) On peut espérer « bien visualiser » des graphes de quelques
+
+milliers de sommets;
+
+(cid:73) En eﬀet, l’oeil humain permet souvent de capturer des
+
+propriétés plus diﬃciles à détecter de façon
+computationnelle;
+
+(cid:73) En revanche, lorsqu’on a plusieurs millions ou même
+
+milliards de sommets, ce n’est pas envisageable;
+
+(cid:73) L’analyse structurale de ces grands réseaux devient donc
+
+une sorte de visualisation de ces objets.
+
+A. Blondin Massé (UQAC)
+
+11 juin 2014
+
+6 / 57
+
+Types de réseaux
+
+Diﬀérents types de réseaux peuvent être utilisés :
+
+(cid:73) Il peut y avoir diﬀérents types de sommets;
+
+(cid:73) Ou diﬀérents types de liens;
+
+(cid:73) On peut associer des données discrètes ou continues aux
+
+sommets et/ou aux liens;
+
+(cid:73) Les liens peuvent être orientés ou non;
+
+(cid:73) Certains réseaux sont acycliques;
+
+(cid:73) Si on s’intéresse à des relations non binaires, on peut
+
+utiliser des hypergraphes;
+
+(cid:73) Parfois, on peut séparer les sommets en classes pour obtenir
+
+des réseaux bipartis, tripartis, etc.
+
+A. Blondin Massé (UQAC)
+
+11 juin 2014
+
+7 / 57
+
+Références classiques
+
+De nombreuses références classiques portent sur l’analyse de
+réseaux :
+
+(cid:73) Albert et Barabási, 2002;
+
+(cid:73) Barabási, 2002;
+
+(cid:73) Bollobás, 1998;
+
+(cid:73) Buchanan, 2002;
+
+(cid:73) Newman, 2003;
+
+(cid:73) Steyvers et Tenenbaum, 2001;
+
+(cid:73) Watts, 2002.
+
+A. Blondin Massé (UQAC)
+
+11 juin 2014
+
+8 / 57
+
+Exemples de réseaux
+
+On identiﬁe quatre grandes familles de réseaux :
+
+(cid:73) Les réseaux dits sociaux, comme Facebook, Twitter et
+
+Google+;
+
+(cid:73) Les réseaux d’informations, comme les réseaux sémantiques,
+
+WordNet, la Toile, les réseaux de citations, IMDb, etc.
+
+(cid:73) Les réseaux technologiques, tels que Internet, les circuits
+
+électriques et électroniques, les réseaux de
+télécommunication, les réseaux routiers, ferroviaires, etc.
+
+(cid:73) Les réseaux biologiques, comme la chaîne alimentaire, la
+
+classiﬁcation des espèces animales, les réseaux de neurones,
+le réseau sanguin, etc.
+
+A. Blondin Massé (UQAC)
+
+11 juin 2014
+
+9 / 57
+
+Le Web
+
+(cid:73) Le Web surfacique (ou indexé par les moteurs de recherche
+populaires) est estimé, en mai 2014, à plus de 1.8 milliards
+de noeuds;
+
+(cid:73) On estime que le Web profond (ou invisible) est environ 3
+
+fois plus important en taille que le Web surfacique;
+
+A. Blondin Massé (UQAC)
+
+11 juin 2014
+
+10 / 57
+
+L’expérience de Miligram
+
+(cid:73) Stanley Miligram est célèbre pour son expérience sur la
+
+soumission à l’autorité;
+
+(cid:73) Il a également mis en évidence ce qui est communément
+
+appelé l’eﬀet petit monde;
+
+(cid:73) Un individu-cible vivant à Boston est choisi;
+
+(cid:73) Des groupes d’individus sont constitués aléatoirement à
+
+Boston et au Nebraska;
+
+(cid:73) Sur les 217 individus qui ont accepté de participer à
+
+l’expérience, 64 dossiers se sont rendus à terme avec une
+moyenne de 5.2 intermédiaires.
+
+A. Blondin Massé (UQAC)
+
+11 juin 2014
+
+12 / 57
+
+Distance géodésique
+
+(cid:73) Soit G un graphe non orienté de n sommets et m arêtes
+
+dont les sommets sont v1, v2, . . ., vn;
+
+(cid:73) On déﬁnit la distance géodésique entre deux sommets vi et
+
+vj par
+
+dist(vi, vj) = min{|p| : p est un chemin entre vi et vj}.
+
+(cid:73) La distance géodésique moyenne d’un réseau est alors
+
+donnée par
+
+(cid:88)
+
+1
+
+(cid:96) =
+
+n(n + 1)/2
+
+i≥j
+
+dist(vi, vj).
+
+(cid:73) Le nombre (cid:96) peut être facilement calculé en temps O(mn)
+
+par un parcours en largeur.
+
+A. Blondin Massé (UQAC)
+
+11 juin 2014
+
+14 / 57
+
+Exercice
+
+Quelle est la valeur de (cid:96) pour chacun des graphes suivants ?
+(cid:73) Le graphe complet Kn, pour n ≥ 1 ?
+(cid:73) La chaîne Ln, pour n ≥ 1 ?
+(cid:73) Le cycle Cn, pour n ≥ 3 ?
+(cid:73) La roue Wn, pour n ≥ 3 ?
+(cid:73) Le graphe biparti complet Km,n, pour m, n ≥ 1 ?
+(cid:73) L’hypercube Qn, pour n ≥ 1 ?
+
+A. Blondin Massé (UQAC)
+
+11 juin 2014
+
+15 / 57
+
+Distance géodésique moyenne dans les réseaux
+
+Dans les réseaux, la distance géodésique moyenne est souvent
+très petite :
+
+Réseau
+IMDb
+
+Articles (math)
+Articles (biologie)
+
+Citations
+
+Réseau peer-to-peer
+Réseau électrique
+
+Chaîne alimentaire marine
+
+n
+
+449 913
+253 339
+1 520 251
+783 339
+880
+4 941
+135
+
+m
+
+25 516 482
+496 489
+11 803 064
+6 716 198
+1 296
+6 594
+598
+
+(cid:96)
+
+3.48
+7.57
+4.92
+8.57
+4.28
+2.67
+4.43
+
+A. Blondin Massé (UQAC)
+
+11 juin 2014
+
+16 / 57
+
+Distance harmonique
+
+(cid:73) Si le graphe est non connexe, puis vi et vj sont dans des
+composantes connexes distinctes, alors dist(vi, vj) = ∞;
+
+(cid:73) Alors la distance géodésique moyenne est (cid:96) = ∞;
+(cid:73) Une façon de contourner le problème est de déﬁnir (cid:96) et dist
+
+par leur inverse multiplicatif :
+
+−1 =
+
+(cid:96)
+
+1
+
+−1(vi, vj).
+
+dist
+
+(cid:88)
+
+n(n + 1)/2
+
+i≥j
+
+A. Blondin Massé (UQAC)
+
+11 juin 2014
+
+17 / 57
+
+Conséquence de l’eﬀet « petit monde »
+
+(cid:73) Une rumeur se propagera plus rapidement s’il n’y a que 6
+
+intermédiaires plutôt que 100 intermédiaires;
+
+(cid:73) Un paquet d’informations sera transmis plus rapidement
+sur Internet si la distance géodésique moyenne est petite;
+
+(cid:73) Dans un réseau de transport, cela permet de minimiser les
+
+correspondances;
+
+(cid:73) En sciences, on parle du nombre d’Erdős;
+
+(cid:73) Les acteurs ont ce qu’on appelle un nombre de Bacon;
+
+(cid:73) On parle même de nombre d’Erdős-Bacon. Daniel Kleitman
+
+a un
+
+(cid:73) nombre d’Erdős de 1;
+
+(cid:73) nombre de Bacon de 2.
+
+A. Blondin Massé (UQAC)
+
+11 juin 2014
+
+18 / 57
+
+Déﬁnition de l’eﬀet « petit monde »
+
+(cid:73) Dans la plupart des réseaux aléatoires, le nombre de
+
+sommets à distance au plus r d’un sommet donné croît de
+façon exponentielle;
+
+(cid:73) Par conséquent, la valeur de (cid:96) croît de façon logarithmique;
+
+(cid:73) On dit d’un réseau qu’il est de type « petit monde » (ou
+
+qu’il présente l’eﬀet « petit monde » si sa distance
+géodésique moyenne croît à un rythme au plus
+logarithmique par rapport au nombre de noeuds, où le
+degré moyen des sommets est ﬁxé;
+
+(cid:73) Cette observation est vériﬁée également dans les graphes
+
+Erdős-Rényi.
+
+A. Blondin Massé (UQAC)
+
+11 juin 2014
+
+19 / 57
+
+Transitivité
+
+(cid:73) Une propriété qui distingue les « vrais réseaux » des
+
+graphes aléatoires est la transitivité;
+
+(cid:73) Essentiellement, cette propriété dit que si u ↔ v et v ↔ w,
+
+alors la probabilité que u ↔ w est plus élevée;
+
+(cid:73) Structuralement, ceci signiﬁe qu’il y a plus de triangles
+
+dans le graphe;
+
+(cid:73) On déﬁnit le coeﬃcient de clustering par
+
+C =
+
+3× nombre de triangles
+
+nombre de V
+
+.
+
+A. Blondin Massé (UQAC)
+
+11 juin 2014
+
+21 / 57
+
+Exemple
+
+(cid:73) Il y a 8 triplets de sommets formant un V;
+
+(cid:73) Il y a 1 triangle;
+
+(cid:73) Par conséquent, C = 3/8.
+(cid:73) On peut facilement montrer que 0 ≤ C ≤ 1.
+
+A. Blondin Massé (UQAC)
+
+11 juin 2014
+
+22 / 57
+
+Coeﬃcient de clustering d’un sommet
+
+(cid:73) On peut également mesurer la transitivité d’un sommet
+
+donné;
+
+(cid:73) Watts et Strogatz proposent la mesure suivante
+
+Cu =
+
+nombre de triangles liés à u
+nombre de V centrés en u
+
+.
+
+(cid:73) Par convention, si le degré du sommet u est 0 et 1, alors on
+
+pose Cu = 0.
+
+(cid:73) Le coeﬃcient de clustering du réseau est alors
+
+(cid:88)
+
+v∈V
+
+C =
+
+1
+n
+
+Cv.
+
+A. Blondin Massé (UQAC)
+
+11 juin 2014
+
+23 / 57
+
+Exemple
+
+0
+
+1
+
+1/6
+
+1
+
+0
+
+(cid:73) On avait calculé C = 3/8;
+
+(cid:73) En utilisant la déﬁnition alternative, on obtient plutôt
+
+C =
+
+1 + 1 + 1/6 + 0 + 0
+
+5
+
+=
+
+13
+30
+
+.
+
+A. Blondin Massé (UQAC)
+
+11 juin 2014
+
+24 / 57
+
+Observations empiriques
+
+(cid:73) Certaines études ont comparé les valeurs de C dans des
+
+réseaux sociaux par rapport aux graphes aléatoires;
+
+(cid:73) Empiriquement, on constate que
+
+(cid:73) Pour les graphes aléatoires, C = O(1) lorsque n → ∞;
+(cid:73) Or, dans les réseaux sociaux, C = O(n−1) lorsque
+n → ∞.
+
+(cid:73) Cette notion est surtout étudiée dans les graphes non
+
+orientés;
+
+(cid:73) Dans les graphes orientés, on parle plutôt de réciprocité.
+
+A. Blondin Massé (UQAC)
+
+11 juin 2014
+
+25 / 57
+
+Distribution des degrés
+
+(cid:73) Dans un graphe non orienté G = (V, E), on déﬁnit le degré
+
+d’un sommet comme le nombre d’arêtes incidentes à ce
+sommet;
+
+(cid:73) Dans les graphes orientés, on parle plutôt de degré
+
+intérieur, degré extérieur et alors le degré est la somme des
+degrés intérieur et extérieur;
+
+(cid:73) Pour k = 1, 2, . . ., dénotons par pk le nombre de sommets
+
+de degré k;
+
+(cid:73) On s’intéresse à la distribution de pk.
+
+A. Blondin Massé (UQAC)
+
+11 juin 2014
+
+27 / 57
+
+Graphes d’Erdős-Rényi
+
+(cid:73) Les graphes aléatoires les plus simples sont les graphes
+
+d’Erdős-Rényi;
+
+(cid:73) On se ﬁxe un nombre réel p ∈ [0, 1];
+(cid:73) Puis pour chaque paire de sommets u et v, on inclut l’arête
+
+{u, v} avec probabilité p :
+
+(cid:73) Quelle est la distribution des degrés d’un graphe
+
+d’Erdős-Rényi ?
+
+(cid:73) Voir erdos_renyi.py.
+
+A. Blondin Massé (UQAC)
+
+11 juin 2014
+
+28 / 57
+
+Histogramme des degrés (p = 0.5)
+
+A. Blondin Massé (UQAC)
+
+11 juin 2014
+
+29 / 57
+
+Histogramme des degrés (p = 0.001)
+
+A. Blondin Massé (UQAC)
+
+11 juin 2014
+
+30 / 57
+
+Graphes d’Erdős-Rényi et réseaux
+
+(cid:73) Dans les deux cas, on observe l’eﬀet « petit monde »;
+
+(cid:73) Par contre, dans les « vrais » réseaux, on observe des
+
+distributions de degrés très diﬀérentes des lois binomiale et
+de Poisson;
+
+(cid:73) Plus précisément, on constate souvent une asymétrie vers la
+
+droite;
+
+A. Blondin Massé (UQAC)
+
+11 juin 2014
+
+31 / 57
+
+Loi de puissance
+
+(cid:73) Dans les réseaux de type « petit monde », les degrés
+
+suivent une loi de puissance
+−α,
+
+pk ∼ k
+
+où k, α > 0.
+
+(cid:73) Ces lois sont faciles à identiﬁer sur des graphiques en
+
+utilisant une échelle logarithmique;
+
+(cid:73) On dit alors que ces réseaux sont invariants d’échelle
+
+(scale-free);
+
+(cid:73) Dans le cas des graphes orientés, il est préférable de
+
+distinguer la distribution des degrés intérieur et extérieur;
+
+(cid:73) Par contre, il y a beaucoup d’informations à tirer de la
+
+distribution conjointe.
+
+A. Blondin Massé (UQAC)
+
+11 juin 2014
+
+32 / 57
+
+Résilience et connexité
+
+(cid:73) Dans la plupart des réseaux, la connexité entre diﬀérents
+
+sommets est fondamentale;
+
+(cid:73) Il est alors naturel de se demander l’eﬀet que peut avoir la
+
+suppression de certains sommets;
+
+(cid:73) Par exemple, on peut supprimer les sommets
+
+(cid:73) aléatoirement;
+
+(cid:73) en ordre décroissant de degré.
+
+(cid:73) Lorsqu’on souhaite modéliser la propagation d’une maladie,
+
+la suppression d’un sommet peut correspondre à la
+vaccination d’une personne contre la maladie en question.
+
+A. Blondin Massé (UQAC)
+
+11 juin 2014
+
+34 / 57
+
+Internet
+
+(cid:73) En bleu, si la suppression se fait aléatoirement;
+
+(cid:73) En rouge, si la suppression se fait en ordre décroissant des
+
+degrés.
+
+A. Blondin Massé (UQAC)
+
+11 juin 2014
+
+35 / 57
+

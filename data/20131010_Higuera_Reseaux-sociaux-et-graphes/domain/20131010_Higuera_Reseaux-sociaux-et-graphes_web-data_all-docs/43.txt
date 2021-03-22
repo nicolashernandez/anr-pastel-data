@@ -1,0 +1,969 @@
+http://eric.univ-lyon2.fr/~ricco/cours/slides/WM.C%20-%20Detection%20de%20communautes.pdf
+
+Ricco Rakotomalala
+
+R.R. – Université Lyon 2
+
+1
+
+Réseaux sociaux
+
+Un réseau social désigne un ensemble d’individus (au sens large : famille, 
+collègues, organisations, etc.) qui sont liés d’une certaine manière, qui 
+interagissent en s’échangeant du contenu. Le domaine a connu une très 
+forte accélération ces dernières années avec le développement des médias 
+sociaux. On parle de réseautage social.
+
+« The top 25 Social Networking Sites People Are 
+Using », E. Moreau, Lifewire, October 2016.
+
+R.R. – Université Lyon 2
+
+2
+
+Détection des communautés
+
+Une communauté est formée par un ensemble d’individus qui 
+interagissent (interaction sociale) plus souvent entre eux qu’avec les 
+autres. Ils s’agit donc de groupes d’individus qui ont tissés des liens 
+plus forts ou qui ont des affinités communes.
+
+ 
+
+e
+m
+r
+o
+f
+ 
+e
+n
+u
+ 
+t
+s
+e
+’
+C
+
+»
+g
+n
+i
+r
+e
+t
+s
+u
+l
+c
+«
+e
+d
+
+ 
+
+La détection de communautés a pour rôle de mettre en évidence ces 
+groupes qui se sont formés implicitement c.-à-d. qui ne résultent pas 
+d’un choix explicite. Ex. Dans une entreprise, les employés forment des 
+communautés explicites (les services), mais certains vont collaborer 
+plus souvent avec d’autres, dans le service, ou à cheval sur différents 
+services, et former des communautés implicites.
+
+L’intérêt de la détection de communautés est multiple : identifier des profils 
+types, effectuer des actions ciblées, mieux ajuster les recommandations, 
+réorganisation, identifier les acteurs centraux / influents, etc.
+
+R.R. – Université Lyon 2
+
+3
+
+Plan
+
+1. Représentation des réseaux sociaux
+
+2. Détection de communautés
+
+3. Approche agglomérative (CAH)
+
+4. Approche divisive
+
+Approches 
+hiérarchiques
+
+5. Approche par maximisation de la modularité
+
+6. Changement de représentation (MDS)
+
+7. Plus loin avec la découverte de communautés
+
+8. Bibliographie
+
+R.R. – Université Lyon 2
+
+4
+
+Utilisation des graphes – Matrice d’adjacence
+
+REPRÉSENTATION DES RÉSEAUX 
+SOCIAUX
+
+R.R. – Université Lyon 2
+
+5
+
+Réseau Social = Graphe
+
+(Tang & Liu, 2010)
+
+Un réseau social peut être représenté par 
+un graphe G(V,E) où V (vertex) représente 
+l’ensemble des sommets (nœuds), E 
+l’ensemble des arêtes (edge).
+
+Un graphe peut être représenté à 
+l’aide matrice dite d’adjacence (Aij) qui 
+indique les connexions entre les 
+nœuds.
+
+Nous nous positionnons dans un cadre très simple. Le graphe peut être plus complexe, 
+il peut être orienté (arcs entre les sommets), les liens peuvent être pondérés, les 
+sommets peuvent l’être également. Ex. Les citations bibliographiques.
+
+R.R. – Université Lyon 2
+
+6
+
+Sv1v2v3v4v5v6v7v8v9v1011100000v2101000000v3110100000v4101011000v5000101110v6000110110v7000011011v8000011100v9000000100Quelques notions clés – Quelques définitions et indicateurs (1)
+
+G(V,E) : V l’ensemble des sommets [vi, i = 
+1, …, n], E l’ensemble des arêtes [eij = 
+e(vi,vj), i,j = 1,…, n]
+
+Chemin : Un chemin permettant d’aller de vi à vj est la succession de sommets et arêtes qui 
+les deux sommets. De vi à vj, plusieurs chemins sont possibles, il existe un plus court chemin
+minimisant le nombre d’arêtes parcourus.
+
+Boucle : Arête reliant un sommet à lui-même. Nous considérons que nous n’en avons pas.
+
+Distance géodésique ij : Nombre d’arêtes du plus court chemin reliant deux sommets. Ex. 3,6 = 2
+
+Voisinage Ni d’un sommet = l’ensemble des nœuds qui lui sont directement connectés. Ex. N3 = {2, 1, 4}
+
+Graphe connexe : Il existe au moins un chemin entre chaque paire de nœuds. Il n’y a pas de 
+sommets isolés.
+
+R.R. – Université Lyon 2
+
+7
+
+Quelques notions clés (2)
+
+Diamètre d’un graphe : La plus grande distance géodésique 
+possible entre 2 sommets dans le graphe. Diamètre = 5 avec 2,9
+
+Densité d’un graphe : Rapport entre le nombre d’arêtes observées 
+et le nombre maximal d’arêtes possibles. Densité = 0, tous les 
+sommets sont isolés ; Densité = 1, graphe complet c.-à-d. il y a un 
+lien entre chaque paire de sommets.
+
+Densité = 
+
+𝐸
+
+𝑉 . 𝑉 −1
+
+2
+
+Voisinage commun
+
+Force d’un lien entre deux sommets peut être évalué à partir de 
+l’importance du recouvrement (overlap) entre leurs voisinages. 
+Plus il (le recouvrement) est élevé, plus le lien est fort.
+
+overlap 𝑣𝑖, 𝑣𝑗 =
+
+𝑁𝑖∩𝑁𝑗
+𝑁𝑖∪𝑁𝑗 −2
+
+overlap 𝑣4, 𝑣1 =
+
+1,3,5,6 ∩{2,3,4}
+
+1,3,5,6 ∪{2,3,4} −2
+
+=
+
+1
+
+6−2
+
+= 0.25
+
+overlap 𝑣4, 𝑣5 =
+
+1,3,5,6 ∩{4,6,7,8}
+
+1,3,5,6 ∪{4,6,7,8} −2
+
+=
+
+1
+
+7−2
+
+= 0.2
+
+R.R. – Université Lyon 2
+
+Voisinage « total »
+
+Ne pas prendre en 
+compte les 2 sommets
+
+v1 et v5 sont tous deux connectés à v4, mais 
+le lien entre v4 et v1 est plus fort (une 
+connexion dans un espace « sparse » est 
+plus importante que dans une zone dense).
+
+8
+
+Quelques notions clés (3)
+
+Degré de centralité d’un sommet, en terme de 
+voisinage = nombre d’arêtes qui lui est associé 
+(nombre de voisins adjacents), absolu CD(vi) ou 
+relatif C’D(vi). Ex. CD(v3)= 3, C’D(v3)= 3/8
+
+CD(vi)= di = σ𝑗 𝐴𝑖𝑗
+
+C’D(vi) =
+
+𝐶𝐷(𝑣𝑖)
+𝑛−1
+
+Autre vision de la centralité d’un sommet, en terme de distance : dans 
+quelle mesure le sommet permet d’accéder rapidement aux autres nœuds
+
+Matrice d’adjacence
+
+Cavg(4) = 1.63
+Cavg(3) = 2.13
+
+Centralité moyenne : moyenne des 
+distances du nœud à tous les autres 
+(valeur faible = nœud central)
+
+Cavg(vi) =
+
+1
+
+𝑛−1
+
+σ𝑗≠𝑖 𝛿𝑖𝑗
+
+Closeness centrality : inverse du degré 
+moyen (valeur forte = nœud central)
+
+CC(vi) =
+
+𝑛−1
+
+σ𝑗≠𝑖 𝛿𝑖𝑗
+
+Matrice des distances géodésiques
+
+Betweenness centrality : recenser le plus court chemin entre chaque paire de nœuds, comptabiliser 
+le nombre de fois où il passe par le sommet étudié (rapporté sur le nombre de plus courts chemins 
+possibles entre ces nœuds – voir illustration edge betweenness). Plus le betweenness centrality est 
+grand, plus le sommet est central puisqu’il est situé à la « croisée » des chemins.
+
+R.R. – Université Lyon 2
+
+9
+
+Sv1v2v3v4v5v6v7v8v9v1011100000v2101000000v3110100000v4101011000v5000101110v6000110110v7000011011v8000011100v9000000100v1v2v3v4v5v6v7v8v9v1011122334v2101233445v3110122334v4121011223v5232101112v6232110112v7343211011v8343211102v9454322120Définition et principe
+DÉTECTION DE COMMUNAUTÉS
+
+R.R. – Université Lyon 2
+
+10
+
+Communautés
+
+Une communauté est un ensemble de personnes qui entretiennent 
+des liens privilégiés parce ce qu’ils ont des affinités particulières, ou 
+présentent des caractéristiques similaires, ou encore partagent des 
+centres d’intérêts, etc.
+
+Au sens du graphe, une communauté est constitué par un ensemble 
+de nœuds qui sont fortement liés entre eux, et faiblement liés avec 
+les nœuds situés en dehors de la communauté.
+
+Une partition possible de 
+notre réseau exemple.
+
+R.R. – Université Lyon 2
+
+11
+
+C1
+
+C2
+
+Communautés disjointes et chevauchantes
+
+Exactement comme en classification automatique (clustering), la partition peut 
+être « crisp » (groupes disjoints) ou « floue » (groupes avec chevauchement). 
+L’appartenance à une communauté n’est pas forcément univoque.
+
+L’individu n°4 fait partie des deux communautés, 
+il joue le rôle d’interface entre les deux. On 
+perçoit la notion de centralité et d’influence.
+
+Nous nous intéressons aux communautés disjointes dans ce support.
+
+R.R. – Université Lyon 2
+
+12
+
+Intérêt de la détection de communautés – Un exemple
+
+Exemple de la « scierie de bois » (Michael & Massey, 1997).
+
+Les employés  étaient de groupes ethniques 
+différents (E, H), et affectés à différentes 
+tâches (P, M, Y). Lorsqu’un changement 
+d’organisation a été proposé, une opposition 
+forte est apparue.
+
+Une cartographique des communications 
+(fréquence des discussions) a été réalisée. Il 
+s’est avéré que JUAN tenait un rôle 
+particulier dans la structure. Il fallait le 
+persuader lui d’abord, l’acceptation se 
+propagerait aux autres par la suite. C’est ce 
+qui s’est passé.
+
+(Selmane, 2015)
+
+R.R. – Université Lyon 2
+
+13
+
+Mesurer la qualité d’une partition – Modularité
+
+Force d’une communauté : écart entre le 
+nombre de connexions observées et le nombre 
+théorique (espéré) obtenu si les connexions 
+avaient été distribuées aléatoirement entre les 
+nœuds (Q élevé  communauté compacte)
+
+Espérance de la connexion sous 
+hypothèse de distribution aléatoire.
+
+𝑄 𝐶 = ෍
+𝑖,𝑗𝜖𝐶
+
+𝐴𝑖𝑗 −
+
+𝑑𝑖𝑑𝑗
+2𝑚
+
+m est le nombre de connexions observées
+di,dj sont les degrés de centralité des nœuds vi et vj
+C est la communauté étudiée.
+
+Modularité d’un réseau après 
+partitionnement en K communautés.
+Voir https://en.wikipedia.org/wiki/Modularity_(networks)
+
+𝑄 =
+
+1
+2𝑚
+
+𝐾
+
+෍
+𝑘=1
+
+෍
+𝑖,𝑗𝜖𝐶𝑘
+
+𝐴𝑖𝑗 −
+
+𝑑𝑖𝑑𝑗
+2𝑚
+
+Plus la modularité est grande, meilleure est la partition.
+
+R.R. – Université Lyon 2
+
+14
+
+Modularité – Formulation matricielle
+
+On peut écrire :
+
+𝑄 =
+
+1
+2𝑚
+
+𝑇𝑟 𝑆𝑇𝐵𝑆
+
+Où m est le nombre de connexions dans le réseau
+S (n x K) est une matrice d’indicatrices associant 
+chaque individu à une des communautés.
+B (n x n) est la matrice de modularité
+
+𝐵𝑖𝑗 = 𝐴𝑖𝑗 −
+
+𝑑𝑖𝑑𝑗
+2𝑚
+
+m=14
+
+S
+
+B
+
+𝑄 = 0.347
+
+Peut servir à comparer deux 
+partitions concurrentes, ou à 
+détecter le bon nombre de 
+partitions (faire varier K et 
+surveiller l’évolution de Q, 
+comme en clustering).
+
+R.R. – Université Lyon 2
+
+15
+
+C1C2V110V210V310V410V501V601V701V801V901V1V2V3V4V5V6V7V8V9V1-0.3210.7860.6790.571-0.429-0.429-0.429-0.321-0.107V20.786-0.1430.786-0.286-0.286-0.286-0.286-0.214-0.071V30.6790.786-0.3210.571-0.429-0.429-0.429-0.321-0.107V40.571-0.2860.571-0.5710.4290.429-0.571-0.429-0.143V5-0.429-0.286-0.4290.429-0.5710.4290.4290.571-0.143V6-0.429-0.286-0.4290.4290.429-0.5710.4290.571-0.143V7-0.429-0.286-0.429-0.5710.4290.429-0.5710.5710.857V8-0.321-0.214-0.321-0.4290.5710.5710.571-0.321-0.107V9-0.107-0.071-0.107-0.143-0.143-0.1430.857-0.107-0.036Algorithme pour la détection des communautés
+APPROCHE AGGLOMÉRATIVE
+
+R.R. – Université Lyon 2
+
+16
+
+Classification ascendante hiérarchique – Mesures de similarité
+
+Principe : On définit une mesure de similarité 
+entre les sommets à partir de la matrice 
+d’adjacence, et nous pouvons enchaîner avec 
+une CAH (Ex. saut moyen, etc.)
+
+Indice de Jaccard
+
+J𝑎𝑐𝑐𝑎𝑟𝑑 𝑣𝑖, 𝑣𝑗 =
+
+𝑁𝑖∩𝑁𝑗
+𝑁𝑖∪𝑁𝑗
+
+Jaccard 𝑣4, 𝑣5 =
+1,3,5,6 ∩{4,6,7,8}
+1,3,5,6 ∪{4,6,7,8}
+
+=
+
+1
+7
+
+= 0.143
+
+Similarité Cosinus C𝑜𝑠𝑖𝑛𝑒 𝑣𝑖, 𝑣𝑗 =
+
+𝑁𝑖∩𝑁𝑗
+𝑁𝑖 . 𝑁𝑗
+
+Cosine 𝑣4, 𝑣5 =
+1,3,5,6 ∩{4,6,7,8}
+
+1,3,5,6 |.|{4,6,7,8}
+
+=
+
+1
+4
+
+= 0.25
+
+La similarité est définie en terme de voisinage : deux sommets sont 
+« proches » s’il y a un fort recouvrement entre leurs voisinages.
+
+R.R. – Université Lyon 2
+
+17
+
+CAH – Un exemple
+
+Matrice de similarité Cosinus
+
+CAH avec dissimilarité 
+= (1 – cos) + Méthode 
+du saut moyen.
+
+R.R. – Université Lyon 2
+
+18
+
+V1V2V3V4V5V6V7V8V9v110.4080.6670.2890.2890.2890.0000.0000.000v20.40810.4080.7070.0000.0000.0000.0000.000v30.6670.40810.2890.2890.2890.0000.0000.000v40.2890.7070.28910.2500.2500.5000.5770.000v50.2890.0000.2890.25010.7500.5000.5770.500v60.2890.0000.2890.2500.75010.5000.5770.500v70.0000.0000.0000.5000.5000.50010.5770.000v80.0000.0000.0000.5770.5770.5770.57710.577v90.0000.0000.0000.0000.5000.5000.0000.5771v9v7v8v5v6v2v4v1v30.20.40.60.8Cluster Dendrogramhclust (*, "average")discosHeightAPPROCHE DIVISIVE
+
+R.R. – Université Lyon 2
+
+19
+
+Edge betweenness
+
+L’importance d’une connexion entre deux sommets peut être matérialisée par le « edge
+betweenness ». Elle indique la fréquence avec laquelle elle est empruntée lorsque l’on 
+considère le plus court chemin entre chaque paire de nœuds. Plus la valeur est élevée, plus la 
+connexion est importante parce qu’elle établit un « pont » entre des groupes de sommets.
+
+𝑒𝑏 𝑒 = ෍
+
+𝑖
+
+𝜎𝑖𝑗(𝑒)
+
+𝜎𝑖𝑗
+
+෍
+𝑗>𝑖
+
+Nombre de plus courts chemins entre les 
+sommets vi et vj passant par la connexion e
+
+Nombre de plus courts chemins 
+entre les sommets vi et vj
+
+eb(e[1,2]) = 4, parce que…
+
+9
+
+4
+
+1
+
+4
+
+9
+
+10
+
+10
+
+6
+
+1
+
+6
+
+8
+
+2
+
+3
+
+3
+
+1-> (2,3,…) 
+
+2-> (3,4,…) 
+
+3-> (4,5,…) 
+
+𝟏
+𝟏
+
++
+
+𝟎
+𝟏
+
++
+
+𝟎
+𝟏
+
+𝟏
+𝟐
+𝟎
+𝟏
+
++ ⋯
+
++
+
++
+
+𝟏
+𝟐
+𝟎
+𝟐
+
++
+
+𝟏
+𝟐
+
++
+
+𝟏
+𝟐
+
++
+
+𝟏
+𝟐
+
++
+
++ ⋯
+
+𝟏
+𝟐
+𝟎
+𝟏
+
++
+
++
+
++
+
+𝟎
+𝟏
+𝟎
+𝟏
+
++
+
+…
+
+R.R. – Université Lyon 2
+
+20
+
+Σ = 4
+
+Algorithme divisif
+
+La procédure repose sur un partitionnement récursif
+
+Fonction Subdiviser(graphe)
+Calculer les eb()
+TANT QUE graphe  singleton
+
+Retirer le lien avec l’eb() le plus élevé
+Si partition en g1 et g2 Alors
+
+Subdiviser(g1), Subdiviser(g2)
+
+Sinon
+
+Recalculer les eb()
+
+FIN TANT QUE
+
+Dans les sous-graphes, les 
+« edge betweenness » doivent 
+être recalculés.
+
+1.5
+
+1.5
+
+1.0
+
+1.5
+
+1.5
+
+On obtient un « dendrogramme » du graphe
+
+R.R. – Université Lyon 2
+
+21
+
+APPROCHE PAR MAXIMISATION DE 
+LA MODULARITÉ
+
+R.R. – Université Lyon 2
+
+22
+
+Diagonalisation de la matrice de modularité
+
+La modularité Q permet d’évaluer la qualité d’une partition. Pourquoi ne 
+pas la maximiser explicitement en cherchant la matrice d’appartenance 
+S qui permet de l’optimiser ?
+
+max
+
+𝑆
+
+𝑄 =
+
+1
+2𝑚
+
+𝑇𝑟 𝑆𝑇𝐵𝑆
+
+w.r.t
+
+𝑆𝑇𝑆 = 𝐼
+
+S n’est plus une matrice d’indicatrices 
+fournie, mais devient le fruit du calcul. 
+Nous avons une sorte de repère factoriel 
+où les axes sont deux à deux orthogonaux
+
+Les solutions sont obtenues grâce à la diagonalisation de la matrice de 
+modularité B (écart entre les matrices d’adjacence observées et théoriques)
+
+Seuls les facteurs correspondants aux valeurs propres positives contribuent à 
+la modularité.
+
+Les vecteurs propres associés permettent de positionner les sommets dans un 
+repère factoriel.
+
+R.R. – Université Lyon 2
+
+23
+
+Identification des communautés (1) - Méthode « leading eigenvector »
+
+On s’en tient à la première valeur propre.
+
+𝑑𝑖𝑎𝑔(𝐵)
+
+Communauté 1
+
+Communauté 2
+
+On subdivise en deux groupes en fonction du signe des coefficients du 
+vecteur propre.
+
+S’ils ont tous le même signe, cela veut dire qu’il n’y a pas de partition possible.
+
+Pour une subdivision en K (K > 2) communautés, il faut soit adopter une 
+approche divisive, soit voir la page suivante.
+
+R.R. – Université Lyon 2
+
+24
+
+Identification des communautés (2)
+
+𝑑𝑖𝑎𝑔(𝐵)
+
+V1 et V3 sont confondus
+
+2 valeurs propres 
+positives
+
+V5 et V6 sont confondus
+
+On positionne les 
+sommets dans ce nouvel 
+espace
+
+Et on peut alors utiliser un algorithme classique de clustering (ex. K-Means)
+
+R.R. – Université Lyon 2
+
+25
+
+Placer les sommets dans une espace factoriel et réaliser un clustering
+POSITIONNEMENT MULTIDIMENSIONNEL 
+(MDS EN ANGLAIS)
+
+R.R. – Université Lyon 2
+
+26
+
+Multidimensional scaling (MDS)
+
+Le MDS est une technique d’analyse factorielle sur matrice de distances. On souhaite que 
+la distance entre chaque paire d’individu soit préservée au mieux dans le repère factoriel.
+
+On peut utiliser la matrice des 
+distances géodésiques
+
+Δ = 𝛿𝑖𝑗
+
+; 𝑖, 𝑗 = 1, … , 𝑛
+
+𝑛
+
+On cherche à minimiser le 
+critère
+
+𝜃𝑖𝑗 − 𝛿𝑖𝑗
+
+2
+
+min ෍
+𝑖,𝑗
+
+ij est la distance entre les sommets vi et vj dans le nouvel espace 
+de représentation défini par les coordonnées factorielles.
+
+Pour cela on doit diagonaliser 
+la matrice ∆’ avec
+
+𝛿′
+
+𝑖𝑗 = −
+
+1
+2
+
+2 − 𝛿𝑖.
+𝛿𝑖𝑗
+
+2 − 𝛿.𝑗
+
+2 + 𝛿..
+2
+
+où
+
+Les coordonnées factorielles 
+s’écrivent alors
+
+𝐹 = 𝑉Λ
+
+1
+2
+
+Λ est la matrice diagonale des plus 
+grandes valeurs propres (positives)
+V sont les vecteurs propres corresp.
+
+R.R. – Université Lyon 2
+
+27
+
+jiijiijjjijinnn,222..22.22.111MDS – Un exemple
+
+2 premières v.p.
+
+Δ′ =
+
+V1 et V3 sont 
+confondus
+
+Λ =
+
+𝑉 =
+
+V5 et V6 sont 
+confondus
+
+On peut appliquer un algorithme de clustering 
+dans le nouvel espace de représentation.
+
+R.R. – Université Lyon 2
+
+1
+𝐹 = 𝑉Λ
+2
+
+28
+
+v1v2v3v4v5v6v7v8v9v12.4573.9571.9570.846-0.654-0.654-2.210-2.043-3.654v23.9576.4573.9571.346-1.154-1.154-3.710-3.543-6.154v31.9573.9572.4570.846-0.654-0.654-2.210-2.043-3.654v40.8461.3460.8460.235-0.265-0.265-0.821-0.654-1.265v5-0.654-1.154-0.654-0.2650.235-0.2650.6790.8461.235v6-0.654-1.154-0.654-0.265-0.2650.2350.6790.8461.235v7-2.210-3.710-2.210-0.8210.6790.6792.1231.7903.679v8-2.043-3.543-2.043-0.6540.8460.8461.7902.4572.346v9-3.654-6.154-3.654-1.2651.2351.2353.6792.3466.235PLUS LOIN AVEC LA DÉCOUVERTE DE 
+COMMUNAUTÉS
+
+R.R. – Université Lyon 2
+
+29
+
+Sur les approches
+
+Une autre approche possible de la découverte 
+de communautés est l’étude des cliques. Une 
+clique est un sous-ensemble de sommets qui 
+sont en relation deux à deux. On parle de 
+clique maximale lorsqu’elle n’est pas 
+contenue dans une clique plus grande. Ex. {5, 
+6, 7} est une clique ; {5, 6, 7, 8} est une clique 
+maximale. 
+
+Déjà évoquée plus haut, la recherche des 
+communautés chevauchantes permet 
+d’enrichir l’analyse car plus réaliste. On tient 
+compte de la multi-appartenance, un facteur 
+d’appartenance est calculé. Ex. un personne 
+peut aimer le tennis ET le foot.
+
+R.R. – Université Lyon 2
+
+30
+
+Sur les cadres d’applications
+
+La recherche des influences et l’étude de la propagation des informations sont 
+des domaines particulièrement intéressants. On travaille à partir d’un graphe 
+orienté, on étudie l’activation des sommets et sa diffusion dans le graphe. Ex. 
+étude de la propagation des fake news.
+
+Les réseaux sociaux sont souvent hétérogènes. Ex. Twitter. Les entités (sommets) 
+peuvent être de type différents (les utilisateurs, les hashtags, les URL),  et les 
+relations (liens entre les entités) peuvent s’appuyer sur des supports de différents 
+types (échanges en ligne, mail personnel, followers, etc.). L’intégration de ces 
+différents modes et dimensions enrichit l’analyse mais la complexifie également.
+
+L’étude des communautés dans les réseaux sociaux dynamiques est un champ 
+d’application très intéressant. Les liens ne sont pas statiques, les acteurs évoluent, 
+les structures des communautés également : elles peuvent disparaître, fusionner, 
+certaines peuvent émerger, etc. On ajoute une dimension temporelle dans l’analyse.
+
+R.R. – Université Lyon 2
+
+31
+
+Voir notre site de référence : http://dmml.asu.edu/cdm/
+
+Références - Bibliographie
+
+Ouvrages et articles
+
+• Tang L., Liu H., « Community detection and mining in social media », Morgan and 
+
+Claypool Publishers, 2010. A servi de référence, une bonne partie du matériel 
+
+pédagogique est accessible en ligne : http://dmml.asu.edu/cdm/
+
+• Selmane S.A., « Détection et analyse de communautés dans les réseaux sociaux : 
+
+approche basée sur l’analyse formelle de concepts », Thèse de Doctorat Lyon 2, 2015.
+
+• Newman M.E.J., « Finding community structure in networks using eigenvectors of 
+
+matrices », Physical Review, E 74 036104, 2006.
+
+• Package igraph, « The network analysis ».
+
+•
+
+•
+
+Liu B., « Web Data Mining - Exploring Hyperlinks, Contents, and Usage Data », 
+
+Springer, 2008 ; Chapitre 7.
+
+Leskovec J., Rajaraman A., Ullman J., « Mining of Massive Datasets », 2nd Edition, 2014. 
+Chapitre 10.
+
+• Wikipédia, « Community structure ».
+
+R.R. – Université Lyon 2
+
+32
+
+

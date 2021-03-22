@@ -1,0 +1,962 @@
+https://uclouvain.be/cps/ucl/doc/fsa/documents/Bastogne.pdf
+
+aGRAPHEz-
+
+vous...les maths 
+sont partout !
+
+Table des matières
+Introduction..........................................................................................................................................1
+Notions.................................................................................................................................................3
+1. Notions de bases..........................................................................................................................3
+2. Différents types de graphes..........................................................................................................3
+a) Le graphe connexe..................................................................................................................3
+b) Le graphe complet .................................................................................................................3
+3. Chemin et Chaîne.........................................................................................................................3
+a) Chemin ...................................................................................................................................3
+Chemin élémentaire................................................................................................................4
+Chemin simple........................................................................................................................4
+b) Chaîne.....................................................................................................................................4
+Chaîne élémentaire.................................................................................................................4
+Chaîne simple.........................................................................................................................4
+4. Prédécesseurs et successeurs.......................................................................................................4
+5. Degrés et demi-degré ..................................................................................................................4
+La théorie des graphes et les GPS........................................................................................................5
+Les graphes eulériens et hamiltoniens................................................................................................10
+  a) Les graphes eulériens :.............................................................................................................10
+Théorème d'Euler.................................................................................................................10
+   a) Les graphes hamiltoniens : ....................................................................................................10
+ Théorème d'Ore........................................................................................................................10
+ Théorème de Dirac...................................................................................................................10
+Exercices :......................................................................................................................................11
+a) Graphes Eulériens.................................................................................................................11
+Problème de königsberg :.....................................................................................................11
+Casse tête :............................................................................................................................11
+b) Graphes Hamiltoniens..........................................................................................................12
+Problème du mariage :   .......................................................................................................12
+Coloration de cartes............................................................................................................................14
+Définitions :...................................................................................................................................14
+Coloration : ..............................................................................................................................14
+Le nombre chromatique : .........................................................................................................14
+Sous-graphe :.............................................................................................................................14
+Graphe stable : .........................................................................................................................14
+Le cycle élémentaire : ..............................................................................................................15
+Clique :......................................................................................................................................15
+Condition de coloration : ..........................................................................................................15
+Encadrement du nombre chromatique :.........................................................................................16
+Majoration :...............................................................................................................................16
+Minoration :...............................................................................................................................16
+Algorithme de coloration de Welsh et Powell :.............................................................................16
+Graphe parfait :.........................................................................................................................17
+Théorème des 4 couleurs (Appel  et Haken 1977) :..................................................................17
+Problèmes ......................................................................................................................................18
+
+Problème 1 : Combien de couleurs au minimum faut-il pour dessiner les états de la partie 
+ouest des États-Unis?................................................................................................................18
+Problème 2 : Combien de couleurs faut-il pour remplir un damier de 9x9?.............................21
+Problème 3 : Planification des JO.............................................................................................22
+La méthode PERT ..............................................................................................................................24
+
+Représentation...............................................................................................................................24
+La dépendance...............................................................................................................................24
+La tâche fictive...............................................................................................................................24
+Le temps.........................................................................................................................................25
+Exercice : ......................................................................................................................................25
+Conclusion..........................................................................................................................................28
+Bibliographie......................................................................................................................................29
+
+Introduction
+
+Les graphes, on les retrouve aussi bien dans les réseaux sociaux, les plans de métro que dans nos 
+cartes de géo...
+Qui ne s'est jamais posé une question du type : « Comment colorier une carte de géographie avec le 
+moins de couleurs différentes sans que la même couleur ne soit présente sur deux pays limitrophes ? 
+», « Comment déterminer, d'un seul regard, si un dessin ou une trajectoire peut être réalisé(e) un 
+passant une seule fois par tous les points proposés? » (Problème de kaliningrad), « Comment peut-
+on planifier l'organisation d'un événement à l'aide de la théorie des graphes? », « qu'est ce qui se 
+cache derrière les cartes « d 'amis facefook ? », comment notre GPS fait-il pour trouver le chemin le 
+plus court, le plus rapide,... ? »
+Cette année, les étudiants de 5ème année de l' INDSé de Bastogne ont choisi pour thème de leur 
+recherche   approfondie   de   vulgarisation   mathématique   la   théorie   des   graphes   afin   d'expliquer 
+quelques problèmes comme ceux cités ci-dessus . Ils commenceront par donner quelques notions 
+utiles de théorie des graphes avant de détailler les 4 projets qu'ils s'étaient lancés. 
+
+1
+
+2
+
+Notions
+
+1. Notions de bases
+
+Un   graphe   G=(V , E)
+  est   défini   par   l'ensemble   des     sommets   V ={v1, v2,v3 ,... ,vn}   et 
+l'ensemble des arêtes  E={e1,e2,e3 ,... ,en} . Une arête e relie une paire de sommets (extrémités 
+de l'arête) n'ayant pas de sens défini. Un arc relie deux sommets avec un sens défini. 
+
+On note une arête :  {x , y} et un arc : 
+
+(x , y)
+
+ (remarque : une arête reprend deux arcs).
+
+L'ordre d'un graphe est le nombre de sommets de ce graphe. 
+
+Dans un graphe, lorsque aucune arrête n'en coupe une autre, celui-ce est dit planaire (les arêtes ne 
+sont pas forcément rectilignes). 
+
+2. Différents types de graphes
+
+a) Le graphe connexe
+Un graphe est dit connexe lorsqu'à partir de n'importe quel sommet on peut rejoindre tous les autres 
+en suivant les arêtes.
+b) Le graphe complet 
+Un graphe est dit complet lorsque chaque sommet est relié directement à tous les autres.
+
+3. Chemin et Chaîne
+
+a) Chemin 
+Le chemin dans un graphe (V,E) est une suite finie d'arcs  U
+Seconde définition d'un chemin :
+Un chemin est aussi défini par une suite de points  v
+n tels que deux points qui se 
+suivent sont toujours reliés par un arc ayant pour origine le premier point et pour extrémité le 
+second.
+
+p appartenant à E. 
+
+2 , ... ,U
+
+1 ,  U
+
+o,  v
+
+1 , ...,  v
+
+Le premier point  v
+Le dernier point  v
+
+o est appelé origine du chemin.
+nest appelé extrémité du chemin.
+
+3
+
+Chemin élémentaire
+Un chemin  v
+o,  v
+(on ne peut avoir  v
+
+1 , ...,  v
+i=v
+
+p est élémentaire s'il ne passe pas deux fois par le même sommet
+
+j  si  i  et  j  sont différents).
+
+Chemin simple
+Un chemin  U 1 ,  U 2 , ...  U p  est simple s'il ne passe pas deux fois par le même arc
+N.B :  Un chemin élémentaire est toujours simple alors qu'un chemin simple n'est pas toujours 
+élémentaire. Un chemin simple peut donc contenir des circuits.
+
+b) Chaîne
+Une chaîne est suite alternative des sommets et d’arêtes commençant et se terminant   par un 
+sommet.
+
+Chaîne élémentaire
+Une chaîne est dite élémentaire lorsque chaque sommet  v  apparaît au plus une fois.
+
+Chaîne simple
+Une chaîne est dite simple lorsque chaque arrête  v  apparaît au plus une fois.
+
+4. Prédécesseurs et successeurs
+- Le prédécesseur d'un point   v2   d'un arc   (v1,v 2)   est l'origine de cet arc ( v1 ) ayant comme 
+extrémité  v2 .  v1  est donc le prédécesseur de  v2
+- Le successeur d'un point  v1  d'un arc  (v1 v2)  est l'extrémité de cet arc ( v2 ) ayant comme origine 
+v1 .  v2  est donc le successeur de   v1
+
+5. Degrés et demi-degré 
+
+- Le degré d'un point  v, noté  d( v)  est le nombre d'arêtes incidentes au point  v.
+
+Un voisin de  v  est un successeur et/ou un prédécesseur de  v .
+
+- Le demi-degré extérieur de  v  est le nombre d'arcs d'origine  v . Il est noté  d.e(v) .
+C'est donc aussi le nombre de successeurs de  v  soit  card(Γ(v))  
+N.B : card. est l'abréviation de cardinal (= nombre de ... )
+
+- Le demi-degré intérieur de  v  est le nombre d'arcs d'extrémité  v . Il est noté  d.i(v) .
+C'est donc aussi le nombre de prédécesseurs de  v  soit  card (Γ−1(v)) .
+
+4
+
+La théorie des graphes et les GPS
+
+On utilise un GPS afin de trouver, la plupart du temps, le chemin le plus court entre deux endroits. 
+À travers un bref exemple, nous allons tenter de découvrir comment cela fonctionne. Enfin d'y 
+arriver, nous devons appliquer l'algorithme de Dijkstra, qui s'utilise avec un tableau et un schéma 
+s'inspirant de la théorie des graphes.
+Dans l'exemple, les sommets correspondent à plusieurs villes de Belgique et les distances séparant 
+ces sommets sont proportionnelles aux distances à vol d'oiseau entre les villes. Nous allons chercher 
+quel est le chemin le plus court pour se rendre de Roulers à Liège...
+Afin de bien comprendre, nous devons lire la tableau de la page suivante de haut en bas. Les 
+nombre attribués aux sommets sont leur poids et les lettres entre parenthèses sont leur antécédent. 
+Pour être sûr du trajet, nous devons étudier chaque sommet dans un certain ordre. Après avoir 
+réalisé chaque étape, nous devons partir de la destination finale et remonter les antécédents afin le 
+découvrir le chemin le plus court. 
+
+5
+
+A
+
+0
+
+B
+
+∞
+
+H
+
+∞
+
+C
+
+∞
+
+3(A)
+
+4(A) 9(A)
+
+D
+
+∞
+
+∞
+
+E
+
+∞
+
+∞
+
+4(A) 9(A) 10(B) 12(B)
+
+9(A) 10(B) 12(B)
+
+F
+
+∞
+
+∞
+
+∞
+
+∞
+
+10(B) 12(B) 17(C)
+
+12(B) 17(C)
+
+G
+
+∞
+
+∞
+
+∞
+
+∞
+
+∞
+
+∞
+
+Sommets sélectionnés et commentaires
+
+On attribue le poids minimal 0 au point de départ A et les autres sommets sont affectés 
+d'un poids infini. On recherche les sommets non fixés adjacents de A.
+On marque les sommets B H C et leur poids est égal à leur distance avec A. Le 
+Sommet B de poids minimal est fixé, on recherche les sommets non fixés adjacents de 
+B. 
+On marque le sommet E (12). Le sommet H de poids minimal (4) est fixé, on recherche 
+les sommets non fixés adjacents de H.
+Aucun sommet non fixé adjacent à B n'est trouvé. Le sommet C de poids minimal (9) 
+est fixé, on recherche les sommets non fixés adjacents de C.
+On marque le sommet F (17). Le sommet D (10) est fixé, on recherche les sommets 
+non fixés adjacents de D.
+Aucun sommet non fixé adjacent à D n'est trouvé. Le sommet E (12) est fixé, on 
+recherche les sommets non fixés adjacents de E. 
+On marque le sommet G (20). Le sommet F (17) est fixé, on recherche les sommets 
+non fixés adjacents de F.
+
+17(C) 20(E)
+
+20(E) Le sommet G est déjà marqué, et c'est le point final.
+
+Le chemin les plus court est donc A-B-E-G.
+
+8
+
+Les graphes eulériens et hamiltoniens
+
+  a) Les graphes eulériens
+    :  
+
+ 
+
+➔ un cycle eulérien est un cycle passant une et une seule fois par chacune des arêtes de G 
+
+(graphe eulérien) .    
+
+➔ un graphe eulérien est un graphe contenant un cycle eulérien
+➔ une chaîne eulérienne d'un graphe G est une chaîne passant une et une seule fois par 
+chacune des arêtes de GL. Un graphe possédant une chaîne eulérienne est appelé : Graphe 
+semi eulérien
+
+➔ plus simplement, on peut dire qu'un graphe est eulérien (ou semi-eulérien) si il est possible 
+
+de dessiner le graphe sans lever le crayon et sans passer deux fois sur la même arrête.
+Théorème d'Euler
+Un graphe (simple ou multiple) connexe admet un cycle eulérien si et seulement s’il a 0 ou 2 
+sommet(s) de degré impair.
+
+   a) Les graphes hamiltoniens : 
+
+➔ un cycle hamiltonien est un cycle passant une et une seule fois par chacun des sommets de G 
+
+(graphe hamiltonien)
+
+➔ un graphe hamiltonien est un graphe contenant un cycle hamiltonien
+➔ une chaîne hamiltonienne d'un graphe G est est une chaîne passant une et une seule fois par 
+chacun des sommets de G. Un graphe possédant une chaîne hamiltonienne est appelé : 
+Graphe semi-hamiltonien. 
+
+    Petites propriétés et conditions suffisantes des graphes hamiltoniens
+    :  
+
+ 
+
+•
+•
+
+•
+
+un graphe possédant un sommet de degré 1 ne peut être hamiltonien.
+Si un sommet dans un graphe est de degré 2, alors les deux arêtes incidentes à ce sommet 
+doivent faire partie du cycle hamiltonien
+les graphes complets  K n sot hamiltoniens
+Théorème d'Ore
+soit G un graphe simple d'ordre  n=3 . Si pour toute paire (x;y) de sommet non adjacents, on 
+a  d (x)+d ( y)=n , alors G est Hamiltonien 
+
+Théorème de Dirac
+soit G un graphe simple d'ordre  n=3 . Si pour tout sommet X de G, on a  d (x)= n
+2
+graphe est hamiltonien
+
+, alors le 
+
+9
+
+Exercices :
+
+a) Graphes Eulériens
+
+Problème de königsberg :
+Ce problème est un des problèmes fondateurs de la théorie des graphes, cette ville possède sept 
+ponts enjambant une rivière (la Pregel), qui coule de part et d'autre de l'île de Kneiphof. Au cours 
+d'une promenade, est-il possible de passer sur tous les ponts de la ville une et une seule fois ?
+
+Depuis ce plan, nous pouvons dessiner un graphe 
+qui   nous   facilitera   la   tâche   pour   résoudre   ce 
+problème :
+
+Résolution :
+Par l'énoncé de l'exercice, nous pouvons déduire que nous devons travailler avec les graphes 
+eulériens car nous pouvons facilement représenter les ponts sur un graphe par des arrêtes et que 
+nous devons passez par chacun des ponts une et une seule fois. Il y a deux manière de résoudre ce 
+problème, soit nous essayons plusieurs fois pour pouvoir déterminer si le graphe est oui ou non 
+eulérien, soit nous utilisons le théorèmes des cycles eulériens qui nous dit qu'un graphe connexe est 
+eulérien si le degré de chaque sommet est pair, comme dans ce cas tous nos sommets sont de degré 
+impair, le graphe n'est pas eulérien. Si nous appliquons la méthode, plus simple, des essais nous 
+arrivons à la même conclusion : ce graphe n'est malheureusement pas eulérien et donc le problème 
+est irréalisable.
+
+Casse tête :
+Est-ce qu'il est possible de tracer ces figures suivantes sans lever le crayon (et sans passer deux fois 
+sur la même arrête) ?
+
+10
+
+Résolution :
+En lisant le problème ci-dessus on peut dire qu'il s'agit de graphes eulériens. Si nous suivons le 
+théorème d'Euler et que nous traçons des graphes à partir des figures, nous arrivons à la conclusion 
+que la figure 1 est impossible à faire car le graphe créé n'est pas eulérien (il a quatre sommets de 
+degré impair).  La figure 2, elle, est eulérienne car elle a juste deux sommets de degré impair. Pour 
+ce qui est de la dernière figure, nous devons absolument tracer un graphe au crayon sur le coté et 
+noter tous ses sommets pour ne pas s'embrouiller, nous voyons assez rapidement que nous avons 
+bien plus que deux sommets de degré impair. Il est donc aussi impossible de tracer cette figure sans 
+lever la crayon de la feuille en papier.
+
+b) Graphes Hamiltoniens
+
+Problème du mariage :   
+Un   groupe   de   huit   personnes   se   retrouve   pour   dîner.   Le   graphe   ci-dessous   précise   les 
+«incompatibilités d’humeur » entre les personnes de ce groupe (une arête reliant deux personnes 
+indique que celles-ci s’entendent très modérément…). 
+
+•
+
+Proposez un plan de table (la table est ronde) pour ce 
+groupe en évitant de placer cote à cote deux personnes 
+« incompatibles »
+
+• Combien y a-t-il de solutions possibles ?
+
+Résolution :
+Il suffit de tracer un graphe hamiltonien dans ce graphe à l'aide des sommets mais sans passer par 
+aucune des arrêtes. Par exemple, on trouve la Chaîne Hamiltonienne : B,C,H,A,F,G,E,D.
+Pour ce qui est du nombre de solutions possibles, il faut prendre le temps de les énumérer toutes en 
+essayant plusieurs possibilités.
+
+11
+
+12
+
+Coloration de cartes
+
+Définitions :
+
+Coloration : 
+Une coloration consiste à attribuer des couleurs à des sommets d'un graphe G. La règle est que deux 
+sommets adjacents ne peuvent jamais avoir la même couleur. Si ce graphe G est coloré en k 
+couleurs, on dira qu'on possède d'une k coloration du graphe G. 
+
+Le nombre chromatique : 
+Le nombre chromatique d'un graphe G est noté   γ(G)   est défini comme le nombre minimal de 
+couleurs dont on a besoin pour colorier son graphe à condition que 2 sommets adjacents soient de 
+couleurs différentes.
+
+Sous-graphe :
+Le sous-graphe d’un graphe G est un graphe dont les sommets et les arêtes sont des sommets et des 
+arêtes de G.
+
+→ 
+
+Graphe stable : 
+Un graphe G est stable si ce graphe n'est composé que de sommets non adjacents 2 à 2. Dans le 
+graphe ci-dessous, {A, A4} forment un stable ; {A, A2} aussi, ainsi que {A, A3} et {A1, A2}.
+Le plus grand stable = le nombre de stabilité :
+Le cardinal du plus grand stable d'un graphe G est appelé le nombre de stabilité d'un graphe G et 
+est noté  α(G) . Dans le graphe ci-dessous, on a α(G)=2.
+
+13
+
+Le cycle élémentaire : 
+Cycle qui ne passe qu'une et une seule fois par tous les sommets d'un graphe G est qui est fermé. Le 
+nombre chromatique d'un cycle élémentaire est 2 si son nombre de sommets est pair, 3 si son 
+nombre de sommets est impair . Les arêtes jaunes sont un cycle élémentaire, les rouges ne le sont 
+pas car le cycle est ouvert et les vertes non plus car on passe une fois 2 fois par un seul sommet.
+
+Clique :
+Tous les sommets d'un graphe G sont reliés les uns aux autres. Le cardinal de la plus grande clique 
+est noté    ω(G) . C'est donc le nombre maximal de sommets Trois couleurs sont nécessaires pour 
+dessiner ce sous-graphe.
+
+Condition de coloration : 
+L'objectif d'une coloration est de colorer le graphe G avec le moins de couleurs possible. Sur le 
+graphe ci-dessous, on a eu besoin de trois couleurs pour colorer les sommets de sorte que deux 
+sommets adjacents aient des couleurs différentes. On a donc trois stables : {A, A3}, {A1, A2} et 
+{A4}. On ne peut pas utiliser moins de couleurs, à cause des cliques {A1, A3, A4} et {A2, A3, A4}.
+
+14
+
+Encadrement du nombre chromatique :
+
+Majoration :
+γ(G)  ≤ r +1, où r (réel) est le plus grand degré des sommets du graphe G.
+
+• Preuve 1 :
+ 
+
+ 
+Soit le graphe G et un réel r qui est le degré maximum des sommets. Du graphe G. Je choisis 
+une coloration (r + 1) couleurs donc pour chaque sommet A de mon graphe G on peut  
+énoncer que : ce sommet A est adjacent à r sommets au plus, et le nombre de couleurs déjà 
+utilisées pour colorer ces sommets est donc inférieur ou égal à r. Il reste donc au moins une 
+couleur non utilisée dans la notre coloration (r+1), avec laquelle je peux colorier mon  
+sommet A.
+
+γ(G)  ≤ n+1−α(G) (un graphe G simple d'ordre m)
+
+• Preuve 2 :
+ 
+
+ 
+Je considère S un stable de V (ensemble) de cardinalité α(G). Une coloration possible des 
+sommets consiste à colorier les sommets de S d’une même couleur et les n−α(G) autres  
+sommets de couleurs toutes différentes. J'en déduit que  γ(G)  ≤ 1+ (n−α(G)).
+
+Minoration :
+
+1. Le nombre chromatique d’un graphe G est ≥  à celui de chacun de ses sous-graphes.
+• Preuve 1 :
+ 
+
+ 
+Le résultat est la définition du nombre chromatique.
+
+    2.  Le nombre chromatique d'un graphe G est ≥  à l'ordre k de sa plus grande clique  γ(G)  ≥ 
+
+• Preuve 2 :
+ 
+
+ω(G).
+ 
+Par définition d'une clique d’ordre k, je peux conclure que tous les sommets sont adjacents 
+entre eux, il me faudra donc k couleurs ou au moins ω(G) couleurs pour colorier le graphe 
+G.
+
+Algorithme de coloration de Welsh et Powell :
+
+La coloration d'un graphe G quand l’ordre k est petit est très simple, mais si on a une carte du 
+monde, la coloration se complique car le nombre de sommets est élevé . Cette algorithme utilise 
+une coloration n’utilisant pas un trop grand nombre de couleurs. Cependant, il n’assure pas que le 
+nombre de couleurs utilisées soit au minimum (condition de coloration) et donc l'Algorithme de 
+coloration de Welsh et Powell est égal au nombre chromatique du graphe. 
+
+• Étape 1 :
+ 
+
+ 
+je classe les sommets d'un graphe G dans l’ordre décroissant de leur degré, et attribuer à 
+chacun des sommets (A,B,C,...,Zn) son numéro d’ordre k dans la liste obtenue. La liste aura 
+une forme comme celle-ci : d(A), d(B), d(C),..., d(Zn)
+
+15
+
+• Étape 2 :
+ 
+
+ 
+En parcourant la liste dans l’ordre, j'attribue une couleur non encore (ex: rouge) utilisée au 
+sommet L non encore coloré, et j'attribue cette même couleur (rouge) à chaque sommet non 
+encore coloré et non adjacent au sommet L de cette couleur (rouge).
+ 
+S'il y a encore des sommets du graphe G auxquels je n'ai pas attribué une couleur je  
+reviens à l'étape 2 sinon la coloration de ce graphe est terminée.
+
+• Étape 3 :
+ 
+
+Graphe parfait :
+Un graphe G pour lequel le nombre chromatique de chaque sous-graphe induit et la taille de la plus 
+grande clique dudit sous-graphe induit sont égaux. Un graphe G est donc parfait si pour tout sous-
+graphe induit G′ de G on a γ(G′) = ω(G′).
+
+Théorème des 4 couleurs (Appel  et Haken 1977) :
+Ce théorème affirme qu'il est possible, en n'utilisant que  quatre couleurs  différentes, de 
+colorier n'importe quelle carte en respectant les conditions de coloration.
+
+16
+
+Problèmes 
+
+Problème 1 : Combien de couleurs au minimum faut-il pour dessiner les états de 
+la partie ouest des États-Unis?
+
+ 
+
+Résolution
+1. J'attribue à chaque sommet du graphe G une lettre. 
+
+ 
+
+17
+
+2. Je repère le degré de chaque sommet.
+
+D(SC)=2                           D(SK)=5                D(SS)=4
+
+D(SD)=4                           D(SL)=7                D(ST)=3  
+
+D(SE)=3                           D(SM)=5               D(SU)=4  
+
+D(SF)=6                           D(SN)=3                D(SV)=5 
+
+D(SG)=5                          D(SO)=6                D(SW)=4  
+
+D(SH)=4                          D(SP)=6                 D(SZ)=2
+
+D(SI)=6                           D(SQ)=4 
+
+D(SJ)=6                          D(SR)=6
+
+3. Je classe les sommets du graphe G dans l’ordre décroissant de leur degré en attribuant à 
+chacun des sommets un numéro d’ordre m dans la liste obtenue. Méthode de l'algorithme de 
+Welsh et Powell.
+
+• Étape 1 :
+ 
+
+ 
+Je classe les sommets d'un graphe G dans l’ordre décroissant de leur degré, et attribuer à 
+chacun des sommets (A,B,C,...,Zn) son numéro d’ordre k dans la liste obtenue. La liste aura 
+une forme comme celle-ci : d(A), d(B), d(C),..., d(Zn)
+
+1. L                          7. J                     13. D                 19. N 
+
+2. F                          8. G                    14. Q                 20. T 
+
+3.
+
+I                           9. K                     15. S                  21. C
+
+4. O                        10. V                     16. U                 22. Z
+
+5. P                         11. M                     17. W               
+
+6. R                        12. H                     18. E
+
+• Étape 2 :
+ 
+
+ 
+En parcourant la liste dans l’ordre, j'attribue une couleur non encore (ex: rouge) utilisée au 
+sommet A non encore coloré, et j'attribue cette même couleur (rouge) à chaque sommet non 
+encore coloré et non adjacent au sommet A de cette couleur (rouge).
+
+18
+
+1. L    bleu                      7. J    rouge                      13. D    rouge                19. N    rouge
+
+2. F    bleu                      8. G    vert                       14. Q    rouge                 20. T    vert 
+
+3. I    jaune                      9. K    jaune                    15. S    bleu                   21. C    jaune
+
+4. O    bleu                    10. V    bleu                     16. U    jaune                  22. Z    jaune
+
+5. P    vert                      11. M    vert                     17. W    vert               
+
+6. R    jaune                   12. H    vert                     18. E    bleu
+
+• Étape 3 :
+ 
+
+ 
+S'il y a encore des sommets du graphe G auxquels je n'ai pas attribué une couleur je  
+reviens à l'étape 2 sinon la coloration de ce graphe est terminée.
+
+ 
+
+Donc γ(G)=4 car on a pu dessiner les états de la partie ouest des États-Unis avec un 
+nombre minimal de 4 couleurs.
+
+19
+
+Problème 2 : Combien de couleurs faut-il pour remplir un damier de 9x9?
+
+Résolution
+Voir problème 1 pour toutes les étapes.
+On attribue à chaque case du damier une lettre puis on repère le degré de chaque sommet. Par 
+l'algorithme de Welsh et Powell on va obtenir :
+
+•
+•
+•
+•
+
+16 SOMMETS VERTS 
+20 SOMMETS ROUGES
+20 SOMMETS JAUNES
+25 SOMMETS BLEUS
+
+Il faut donc 4 couleurs différentes donc γ(G)=4 on a pu dessiner le damier avec 
+un nombre minimal de 4 couleurs.
+
+20
+
+Problème 3 : Planification des JO
+Aux   jeux   olympiques,   le   début   (10h00)   de   la   première   journée   est   catastrophique.   Il   y   a   7 
+disciplines (numérotées de 1 à 7) planifiées la première journée mais quand les athlètes reçoivent 
+leur horaire, quelques athlètes réclament car ils doivent être en même temps à 2 ou plusieurs 
+disciplines. Quelle erreur de la part des organisateurs !!! 
+Reconstruisez un horaire au plus vite afin que la première journée des fameux jeux olympiques 
+puisse quand même continuer. Voici la  feuille que les organisateurs ont reçue au début des  jeux 
+avec un avertissement qu'ils ont oublié de lire: « ATTENTION !! Il y a des paires de disciplines 
+qui ont des athlètes en commun » : ce sont les disciplines 1-3, 1-6, 1-7, 2-3, 2-4, 2-5, 2-6, 2-7, 3-
+4, 3-6, 3-7, 4-5, 4-6, 4-7, 5-6, 5-7. 
+
+Comment organiser les 7 différentes disciplines de façon qu’aucun athlètes n’ait à passer deux 
+disciplines en même temps et cela sur une durée minimale car les disciplines commencent à 10h15?
+
+Résolution par minoration et majoration
+Je construis le graphe G dont les sommets sont les disciplines numérotées de 1 à 7,  en reliant une 
+arête à deux sommets lorsque les deux disciplines correspondant possèdent des athlètes communs.
+Je planifie les disciplines en un temps minimal veut dire que je détermine une k-coloration d'un 
+graphe G avec k = γ(G):  
+
+Le graphe G possède une clique d’ordre  m=4  ( les sommets 2, 3, 4,6), donc γ(G) ≥ 4
+
+Ensuite, je détermine une partition des sommets de G en sous-ensembles stables :
+S1 = {2,1},S2 = {3,5}, S3 = {4}, S4 = {6,7}, d’où γ(G) ≤ 4 
+
+S1 = {4,1},S2 = {3,5}, S3 = {2}, S4 = {6,7}, d’où γ(G) ≤ 4.
+
+ou 
+
+J'en en déduis que γ(G) = 4
+
+Les disciplines peuvent être réparties en 4 périodes :
+
+OU
+
+3ème période (jaune) : discipline 2
+4ème période (bleu) : disciplines  6 et 7
+
+1ère période (rouge) : disciplines 2 et 1
+2ème période (vert) :  disciplines 3 et 5
+3ème période (jaune) : discipline 4
+4ème période (bleu) : disciplines  6 et 7
+1ère période (rouge) : disciplines 4 et 1
+2ème période (vert) :  disciplines 3 et 5
+
+21
+
+22
+
+La méthode PERT 
+
+La méthode de PERT (Project Evaluation and Review Technique) est une méthode de gestion de 
+projet permettant d'organiser un projet selon son temps, ses délais et ses coûts. Son principe est de 
+découper un projet en différentes actions, qui seront alors appelées tâches, en les représentants sous 
+forme d'un de graphe de dépendances. Chaque tâche est reliée à une autre en passant par un 
+sommet, appelé étape, ce sont des états d'avancement du projet.
+
+Pour réaliser un graphe PERT, il faut admettre plusieurs conventions :
+
+Représentation
+
+Une tâche est représentée par un vecteur, auquel on y attribue une lettre (pour alléger le schéma) et 
+qui possède un temps de réalisation représenté par un nombre dont les unités sont en minutes, 
+heures, jours,...
+
+Une étape sert à indiquer le début et la fin d'une tâche, elle est représentée par un rond découpé en 
+trois zones. La zone supérieur permettant de numéroter la tâche, les deux zones inférieures utilisées 
+pour marquer le laps de temps dans lequel l'étape doit être exécutée (cf : "dates imposées").
+
+La dépendance
+
+Pour la chronologie dans un graphe PERT, le temps s'écoule de la gauche vers la droite c'est-à-dire 
+que l'étape la plus à gauche est forcément la plus ancienne. Il n'est donc pas nécessaire d'orienter les 
+vecteurs de tâches.
+
+Une tâche ne peut commencer que si tous ses prédécesseurs sont terminés, c'est la relation de 
+dépendance.
+
+La tâche fictive
+
+Certaines configurations logiques de dépendances sont impossible à représenter avec uniquement 
+les tâches et les étapes.
+
+Par exemple :Prenons trois tâches : A, B et C telles que C est dépendante de A et B.
+Seulement, il faut ajouter une 4ème étape, D, telle qu'elle n'aie comme prédécesseur que B, sans que 
+les autres relations soient changées.
+Pour ce faire : On conserve A et C, on dessine B et D, en créant une nouvelle étape qui marque la 
+fin de C et le début de D. Maintenant, il faut établir la relation de dépendance entre B et C. Pour ce 
+faire, on crée une tâche fictive, représentée par une flèche en pointillés. Cette tâche n'est pas réelle, 
+et ne représente aucune action, elle est juste là pour montrer la relation de dépendance entre B et C.
+
+23
+
+Le temps
+Nous n'avons pas encore abordé le problème du temps, or pour l'élaboration d'un projet, le temps est 
+un paramètre indispensable. La méthode PERT introduit le temps de 2 manières :
+
+La durée :
+Comme nous l'avons vu un peu plus haut, les tâches ont une certaine durée ( en minutes, heures, 
+mois, années, ...), indiquée près de la tâche. Ce paramètre est évidement indispensable pour pouvoir 
+ce faire une idée de la durée de l’entièreté du projet.
+
+Les dates imposées :
+Ce sont des délais imposés aux étapes pour que le projet ne prenne pas de retard. Il en existe quatre 
+types : la date de début au plus tôt, la date de début au plus tard, la date de fin au plus tôt et la date 
+de fin au plus tard. La date de début au plus tôt et la date de début au plus tard étant les plus 
+couramment utilisées. La date de début au plus tôt se calcule en additionnant la durée de toutes les 
+tâches antérieures à cette étape, tandis que la date de début au plus tard se déduit de manière logique 
+par rapport aux tâches et aux étapes qui l'entourent. Ces dates permettent de définir le chemin 
+critique, c'est-à-dire le chemin tracer par l'ensemble des étapes dont les dates au plus tôt et au plus 
+tard sont les mêmes.
+
+Exercice : 
+Il est déjà 14 h 15 et Papi et Mamie arrivent à 16 h !
+• Eh bien, reprend Maman, il va falloir chercher un enchaînement des tâches qui permette d'y 
+arriver. Nous représenterons cet enchaînement par un diagramme PERT.
+• Par quoi je commence, Maman ?
+• Par réfléchir ! On ne peut pas faire n'importe quoi : il est impossible de commencer à faire la pâte 
+si le beurre n'est pas ramolli. De même on ne peut pas faire ramollir le beurre si on ne l'a pas 
+acheté !
+
+• Alors, dit Papa, nous allons recenser ce qui doit être fait au moment de commencer chaque tâche. 
+Par exemple, il faut noter que ramollir le beurre est nécessaire à la fabrication de la pâte. En 
+revanche, il ne faut pas noter qu'acheter le beurre est nécessaire à faire la pâte. On le dira quand on 
+examinera ce qui doit être fait avant de ramollir le beurre : le noter une seule fois suffit, et ça évitera 
+de s'embrouiller ;
+• Oui, complète Maman : on ne listera que les antécédents directs.
+
+Tâches
+
+Durée Antécédent(s) direct(s)
+10
+P : élaborer la Pâte
+20
+R : Ramollir le beurre
+45
+G : faire la Garniture
+20
+C : Cuire
+10
+D : Dresser la table
+A : Acheter les ingrédients 15
+
+R
+A
+A
+P, G
+aucun
+aucun
+
+•D'accord Papa, mais que fait-on de ce tableau ?
+
+24
+
+•Nous allons le compléter pour pouvoir dessiner le diagramme.
+
+En rassemblant ces éléments, j'obtiens un diagramme PERT 'vierge'. Il me donne l'enchaînement 
+mais pas l'heure à laquelle je dois commencer mes tâches. Pour le moment, je ne sais pas encore si 
+je pourrai terminer à temps.
+
+Une fois le diagramme complété (cf. page suivante), on constate qu'il y a moyen de faire le gâteau 
+en 80 minutes si on est bien organisé. Il peut donc être terminé dans les temps.
+
+25
+
+Conclusion
+
+La théorie des graphes est une méthode qui nous aide à résoudre beaucoup de problèmes qui se 
+passent dans la vie quotidienne sans qu'on ne s'en rende compte. Par exemple, un simple graphe 
+permet la coloration de cartes dans les atlas ou la planification d'un tournoi. Nous avons étudié la 
+méthode PERT, les graphes hamiltoniens et eulériens, la coloration des cartes et le fonctionnement 
+du GPS (Algorithme de Dijkstra). Les 4 thèmes sont faciles à comprendre grâce à la vulgarisation 
+de cette théorie que nous avons effectuée. 
+
+Faire ce travail nous a permis d'apprendre à « dégrossir » un sujet mathématique, à première vue 
+assez complexe, pour en ressortir les éléments essentiels à la réalisation de problèmes spécifiques et 
+utiles. Ce travail nous a aussi permis de savoir mieux mettre en page une recherche et d'apprendre 
+plusieurs   techniques   de   travail   (Cloud,   table   des   matières   automatique,   géogébra,   le   langage 
+mathématique, etc...) qui nous seront très utiles pour le reste de nos études. Il nous a fait réaliser 
+qu'avec un peu de motivation on peut apprendre bien plus de choses qu'on ne le pense et parfois 
+avec juste un peu d'aide et de soutient de la part de nos professeurs.
+
+27
+
+Bibliographie
+
+1. Application de l’algorithme à travers un exemple / Clemherreman. – Service en ligne. – Accès 
+
+World Wide Web http://fr.openclassrooms.com/informatique/cours/le-pathfinding-avec-
+dijkstra/application-de-l-algorithme-a-travers-un-exemple-non-code – Description d'après 
+consultation le 22/04/14
+
+2. Le problème de plus court chemin / A. Yallouz. – Service en ligne. – Accès World Wide Web 
+
+http://yallouz.arie.free.fr/terminale_cours/graphes/dijkstra.php – Description d'après 
+consultation le 22/04/14
+
+3.
+
+4.
+
+Introduction à la théorie des graphes / Scenari. – Service en ligne. – Accès World Wide Web 
+http://ensrotice.sciences.univ-metz.fr/module_de_base_voo7/co/moduledebase_web.html – 
+Description d'après consultation le 22/04/14
+
+Introduction à la théorie des graphes / Didier Müller. – Service en ligne. – Accès World Wide 
+Web http://www.apprendre-en-ligne.net/graphes/graphes.pdf – Description d'après consultation 
+le 22/04/14
+
+5. Éléments de théorie des graphes quelques exercices d'application [Ressource électronique] / M. 
+
+BENZIRAR & M. MESTARI. - Données textuelles et iconographiques. - Accès World Wide 
+Web  http://www.fstm.ac.ma/cours/exo_graphes_IMIAE.pdf - Description d'après consultation 
+le 22/04/14
+
+6. Éléments de théorie des graphes solutions des exercices d'application [Ressource électronique] / 
+M.   BENZIRAR   &   M.   MESTARI.   -   Données   textuelles.   -   Accès   World   Wide 
+Web http://www.fstm.ac.ma/cours/exo_graphes_IMIAE_sol.pdf -
+d'après 
+consultation le 22/04/14
+
+  Description
+
+ 
+
+7. Correction des problèmes de la semaine 34 [Ressource électronique] / Camje Lemon. - Données 
+  Web 
+
+textuelles
+http://epik.scientifik.fr/2010/08/30/maths-correction-des-problemes-de-la-semaine-34-aout-
+2010/ - Dernière mise à jour le 30/08/10 - Déscription d'après consultation le 22/04/14
+
+iconographiques.
+
+  Accès
+
+  World
+
+  Wide
+
+-
+
+ 
+
+et
+
+ 
+
+ 
+
+8. Carte muette  des provinces de la Belgique (+ Bruxelles) :
+
+jardindhannut.over-blog.com – RJN - données textuelles et iconographiques – accès World Wide 
+Web http://jardindhannut.over-blog.com/article-cartes-de-belgique-un-peu-de-geographie-
+70445901.html - dernière mise à jour le 28 mars 2011 - description d'après consultation le 
+22/04/2014
+
+9. Carte muette de la partie gauche des états des États-Unis :
+
+statistiques-mondiales.com - données multimédia et iconographiques -  accès World Wide Web 
+http://www.statistiques-mondiales.com/carte_vierge_etats_unis.html – dernière mise à jour en 
+décembre 2011 - description d'après consultation le 22/04/2014
+
+28
+
+10. Damier 9*9 :
+
+alfanero.blogspirit.com - données textuelles et iconographiques – accès World Wide Web 
+http://alfanero.blogspirit.com/archive/2007/04/20/damier.html - dernière mise à jour le 
+21/04/2007 - description d'après consultation le 22/04/2014
+
+11. Réseau PERT - Données textuelles – Accés World Wide Web https://fr.wikipedia.org/wiki/PERT 
+
+- Dernière modification de cette page le 2 février 2014 à 21:48. - Description d'après 
+consultation le 01/04/14
+
+12. Apprendre la méthode PERT -  Données textuelles – Accès World Wide Web 
+
+http://www.projectplanningoffice.com/planification-projet-pert-technique-methode-
+pert/planification-projet-pert-exercices-methode-pert – Description d'après consultation le 
+01/04/14
+
+29
+
+

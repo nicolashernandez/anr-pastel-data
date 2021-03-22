@@ -1,0 +1,392 @@
+https://www.gerad.ca/Sebastien.Le.Digabel/MTH1007/8.2_graphes.pdf
+
+1/2
+
+2/2
+
+8.2. Application: Graphes et r´eseaux
+
+Section 8.2
+
+MTH1007
+
+S. Le Digabel
+
+´Ecole Polytechnique de Montr´eal
+
+A2018
+
+(v1)
+
+MTH1007: alg`ebre lin´eaire
+
+1/18
+
+1/2
+
+Plan
+
+2/2
+
+1. La th´eorie des graphes
+
+2. Graphes et alg`ebre lin´eaire
+
+MTH1007: alg`ebre lin´eaire
+
+2/18
+
+1/2
+
+2/2
+
+1. La th´eorie des graphes
+
+2. Graphes et alg`ebre lin´eaire
+
+MTH1007: alg`ebre lin´eaire
+
+3/18
+
+1/2
+
+2/2
+
+D´eﬁnition d’un graphe
+
+(cid:73) Un graphe est constitu´e d’un ensemble de noeuds ou sommets
+
+reli´es entre eux par des liens appel´es :
+
+(cid:73) arˆetes dans le cas des graphes non-orient´es,
+(cid:73) ou arcs dans le cas des graphes orient´es.
+
+(cid:73) Deux sommets reli´es sont appel´es adjacents.
+(cid:73) Des poids peuvent ˆetre associ´es aux arˆetes (arcs). Ces poids
+peuvent ˆetre des coˆuts, des distances, une conductivit´e, etc.
+
+(cid:73) Un graphe est not´e G = (V, E) avec V l’ensemble des
+
+sommets et E l’ensemble des arˆetes (arcs).
+
+(cid:73) La th´eorie des graphes est le domaine des math´ematiques qui
+
+´etudie les graphes.
+
+MTH1007: alg`ebre lin´eaire
+
+4/18
+
+1/2
+
+2/2
+
+Repr´esentation d’un graphe
+
+Un graphe se repr´esente graphiquement de la fa¸con suivante :
+
+Graphe orient´e
+
+Graphe non-orient´e
+
+(pris de Wikipedia).
+
+MTH1007: alg`ebre lin´eaire
+
+5/18
+
+1/2
+
+2/2
+
+Quelques types de graphes
+
+(cid:73) Un graphe complet est un graphe dont tous les sommets sont
+
+adjacents. Une clique est un sous-ensemble de sommets
+adjacents. Un graphe complet poss`ede n(n − 1)/2 arˆetes
+(arcs), si |V | = n.
+
+(cid:73) Un arbre est un graphe non-orient´e, acyclique et connexe
+
+(connexe : il existe un chemin entre toute paire de sommets).
+Un arbre poss`ede n − 1 arˆetes (arcs), si |V | = n.
+
+(cid:73) Une graphe est biparti quand on peut s´eparer les sommets en
+
+deux ensembles dans lesquels il n’y a aucune arˆete.
+
+(cid:73) Un graphe est planaire quand on peut le repr´esenter dans un
+
+plan sans qu’il y ait intersection d’arˆetes.
+
+MTH1007: alg`ebre lin´eaire
+
+6/18
+
+1/2
+
+2/2
+
+Domaines d’application de la th´eorie des graphes
+
+(cid:73) De nombreux probl`emes discrets peuvent se mod´eliser avec
+
+des graphes.
+
+(cid:73) Tous les domaines o`u la notion de r´eseau intervient :
+
+probl`emes d’ordonnancement, de transport, de ﬂots, etc.
+
+(cid:73) Informatique, t´el´ecommunications, r´eseaux sociaux.
+
+(cid:73) Gestion d’horaires, planiﬁcation de tˆaches, etc.
+
+MTH1007: alg`ebre lin´eaire
+
+7/18
+
+1/2
+
+2/2
+
+Probl`emes c´el`ebres de la th´eorie des graphes
+
+(cid:73) Probl`eme des ponts de K¨onigsberg (18`eme si`ecle) : peut-on
+imaginer une promenade dans la ville en empruntant chacun
+de ses 7 ponts une fois et une seule pour revenir `a son point
+de d´epart ?
+
+(cid:73) Probl`eme du plus court chemin (algorithme de Dijkstra),
+
+probl`eme du ﬂot maximal, probl`eme de la coupe maximale,
+probl`eme de couplage.
+
+(cid:73) Probl`eme du voyageur de commerce (TSP) : NP-diﬃcile ; ne
+
+peut ˆetre r´esolu qu’avec des heuristiques, pour des tailles
+modestes.
+
+(cid:73) Coloration des sommets ou des arˆetes d’un graphe.
+(cid:73) Th´eor`eme des quatre couleurs.
+
+MTH1007: alg`ebre lin´eaire
+
+8/18
+
+1/2
+
+2/2
+
+Cours avec des graphes `a Polytechnique
+
+MTH1007: alg`ebre lin´eaire
+
+9/18
+
+1/2
+
+2/2
+
+1. La th´eorie des graphes
+
+2. Graphes et alg`ebre lin´eaire
+
+MTH1007: alg`ebre lin´eaire
+
+10/18
+
+1/2
+
+2/2
+
+Matrice d’incidence
+
+Soit un graphe orient´e G = (V, E) avec |V | = n sommets et
+|E| = m arcs. On note V = {v1, v2, . . . , vn} et
+E = {e1, e2, . . . , em} avec ei = (v, w), i ∈ {1, 2, . . . , m} et
+v, w ∈ V .
+(cid:73) La matrice d’incidence est d´eﬁnie par A ∈ Rm×n avec
+
+ −1 si ei = (vj, w) ∈ E, avec w ∈ V ,
+
++1 si ei = (w, vj) ∈ E, avec w ∈ V ,
+0 sinon
+
+ai,j =
+
+avec i ∈ {1, 2, . . . , m} et j ∈ {1, 2, . . . , n}.
+
+(cid:73) Chaque ligne (arc) comprend un −1 et un +1.
+(cid:73) On ne peut pas repr´esenter d’arcs de la forme (v, v) ou des
+
+(cid:73) Pour repr´esenter des poids sur les arcs, remplacer les valeurs
+
+arcs multiples.
+±1 par les poids ±wi, i ∈ {1, 2, . . . , m}.
+
+MTH1007: alg`ebre lin´eaire
+
+11/18
+
+1/2
+
+Exemple
+
+Donner la matrice d’incidence du graphe suivant, ainsi que sa
+forme ´echelonn´ee U , et sa forme ´echelonn´ee r´eduite R.
+
+2/2
+
+Noter que U est la matrice d’incidence d’un arbre (sans tenir
+compte de l’orientation).
+
+MTH1007: alg`ebre lin´eaire
+
+12/18
+
+12342134561/2
+
+2/2
+
+Propri´et´es
+
+(cid:73) Les arcs qui constituent une boucle correspondent `a des lignes
+
+d´ependantes de la matrice d’incidence.
+
+(cid:73) Les lignes ind´ependantes forment des arbres.
+
+(cid:73) L’´elimination r´eduit tout graphe en un arbre (orient´e).
+
+(cid:73) Comme le nombre d’arˆetes d’un arbre est n − 1, le rang de A
+
+est r(A) = n − 1.
+
+(cid:73) Si on consid`ere que x ∈ Rn correspond `a des potentiels `a
+
+chaque sommet, alors Ax repr´esente un vecteur de diﬀ´erences
+de potentiels (un ﬂux) `a chaque arc.
+
+MTH1007: alg`ebre lin´eaire
+
+13/18
+
+1/2
+
+Noyau
+
+2/2
+
+(cid:73) Ax = 0 correspond `a des ﬂux nuls, et donc des potentiels
+
+´egaux `a chaque sommet.
+
+(cid:73) Chaque x du noyau est de la forme x = k(1, 1, . . . , 1), k ∈ R.
+(cid:73) Le noyau est de dimension 1 car
+
+dim N(A) = n − r(A) = n − (n − 1) = 1.
+(cid:73) La solution sp´eciale est s = (1, 1, . . . , 1).
+(cid:73) Le noyau est une droite dans Rn.
+
+MTH1007: alg`ebre lin´eaire
+
+14/18
+
+1/2
+
+2/2
+
+Espace des lignes
+
+(cid:73) L’espace des lignes est de dimension n − 1 dans Rn :
+
+dim C(A(cid:62)) = r(A) = r = n − 1.
+
+(cid:73) Les r lignes pivots de A correspondent aux arˆetes de l’arbre
+repr´esent´e par U . Les lignes suivantes forment des boucles.
+
+(cid:73) v ∈ C(A(cid:62)) si v est perpendiculaire `a la solution sp´eciale du
+
+noyau x = (1, 1, . . . , 1), c’est-`a-dire que la somme de ses
+composantes est nulle.
+
+MTH1007: alg`ebre lin´eaire
+
+15/18
+
+1/2
+
+2/2
+
+Espace des colonnes
+
+(cid:73) L’espace des colonnes est de dimension n − 1 dans Rm :
+
+dim C(A) = r(A) = r = n − 1.
+
+(cid:73) C’est l’ensemble de tous les Ax possibles.
+(cid:73) Loi des mailles : La somme des composantes de Ax est z´ero
+
+autour de chaque boucle.
+
+(cid:73) ´Equivalent `a : b ∈ C(A) si pour toutes les boucles, ses
+
+composantes ob´eissent `a la loi de Kirchhoﬀ :
+
+(cid:88)
+
+bi − (cid:88)
+
+bi = 0 .
+
+i:ei de sens 1
+
+i:ei de sens 2
+
+(cid:73) Illustrer sur l’exemple.
+
+MTH1007: alg`ebre lin´eaire
+
+16/18
+
+1/2
+
+2/2
+
+Noyau `a gauche
+
+(cid:73) Le noyau `a gauche est de dimension m − r = m − n + 1 dans
+
+Rm : dim N(A(cid:62)) = m − n + 1. Ce chiﬀre correspond au
+nombre de boucles ind´ependantes du graphe.
+
+(cid:73) Ce sont les vecteurs y ∈ Rm (une composante par arc) tels
+que A(cid:62)y = 0. Chaque ´equation de ce syst`eme signiﬁe qu’au
+noeud (sommet) correspondant, le ﬂux entrant est ´egal au
+ﬂux sortant. C’est la loi des noeuds.
+
+(cid:73) On obtient les solutions A(cid:62)y = 0 `a l’aide des boucles
+
+ind´ependantes (les petites boucles) : Chacune donne une
+solution sp´eciale du noyau `a gauche, avec yi = ±1.
+
+(cid:73) Illustrer sur l’exemple.
+
+MTH1007: alg`ebre lin´eaire
+
+17/18
+
+1/2
+
+2/2
+
+Travail personnel
+
+Lire les pages 428 `a 430.
+
+MTH1007: alg`ebre lin´eaire
+
+18/18
+
+

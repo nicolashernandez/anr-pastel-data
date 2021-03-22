@@ -1,0 +1,271 @@
+https://pagesperso.g-scop.grenoble-inp.fr/~stehlikm/teaching/miashs/2-Arbres.pdf
+
+Réseaux sociaux et graphes
+MIASHS
+
+2 Arbres
+
+2.1 Chaînes et cycles
+
+Déﬁnition 2.1. Une chaîne d’un graphe est une suite de la forme :
+
+(x0, e1, x1, . . . , ek, xk)
+
+où k est un entier supérieur ou égal à 0, les xi sont des sommets de G
+et les ei sont des arêtes de G tels que pour i = 0, . . . , k − 1, xi et xi+1
+sont les extrémités de ei+1.
+
+L’entier k est la longueur de la chaîne. (Une chaîne de longueur nulle
+
+est un seul sommet.)
+
+Les sommets x0 et xk sont les extrémités de la chaîne. Lorsque le
+graphe est simple, une chaîne peut être déﬁnie simplement par la suite
+(x0, . . . , xk) de ses sommets.
+
+Une sous-chaîne d’une chaîne est déﬁnie comme une sous-suite, entre
+
+deux sommets, de la suite déﬁnissant la chaîne considérée.
+
+Une chaîne est dite simple si ses arêtes ei, pour i = 1, . . . , k, sont
+deux à deux distinctes. On dit que la chaîne ne passe pas deux fois par
+une même arête.
+
+Une chaîne est dite élémentaire si ses sommets xi, pour i = 0, . . . , k,
+sont deux à deux distincts. On dit que la chaîne ne passe pas deux fois
+par un même sommet. Remarquer que élémentaire entraîne simple.
+
+Déﬁnition 2.2. Un cycle est une chaîne de longueur supérieur ou égal
+à 1 simple et fermée. C’est donc une chaîne de la forme :
+
+(x0, e1, x1, . . . , ek, x0)
+
+où k ≥ 1 et les ei sont distinctes.
+
+L’entier k est la longueur du cycle.
+Notons que, contrairement à une chaîne, un cycle n’est jamais de
+longueur nulle ; comme cas limite il peut être de longueur 1, il est
+alors constitué d’un sommet avec une boucle.
+
+(x0, x1, . . . , x0) de ses sommets.
+
+Lorsque le graphe G est simple, un cycle peut être déﬁni par la suite
+Un cycle est élémentaire si ses ses sommets xi, pour i = 0, . . . , k − 1,
+
+sont deux à deux distincts.
+
+Un cycle est dit pair où impair suivant que sa longueur est paire où
+
+impaire.
+
+réseaux sociaux et graphes miashs
+
+2
+
+compo-
+On peut aussi deﬁnir
+les
+santes connexes en utilisant
+les rela-
+tions d’équivalence. Soit G = (V, E) un
+graphe et mettons x ∼ y ss’il existe une
+chaine entre x et y. On peut montrer
+que ∼ est une relation d’équivalence. Les
+classes d’equivalence induisent les com-
+posantes connexes de G.
+
+Figure 1: Un arbre.
+« chaînes uniques »
+« minimalement connexe »
+« maximalement acyclique »
+« la formule d’Euler »
+« la formule d’Euler »
+
+Déﬁnition 2.3. Un graphe G est connexe si il existe une chaîne entre x
+et y, pour tout pair de sommets x, y ∈ V(G).
+Déﬁnition 2.4. Une composante connexe d’un graphe G est un sous-
+graphe connexe maximal (par inclusion).
+
+2.2 Caractérisation des arbres
+
+Déﬁnition 2.5. Un arbre est un graphe connexe sans cycle.
+
+Théorème 2.6. Les énoncés suivants sont équivalents.
+1. G est un arbre ;
+2. Pour tout pair de sommets x, y ∈ V(G), il existe une chaîne élémentaire
+
+unique entre x et y ;
+
+3. G est connexe, et si on supprime n’importe quelle arête, le graphe devient
+
+non connexe ;
+
+4. G est acyclique, et si on rajoute une nouvelle arête à G, le nouveau graphe
+
+contiendra un cycle ;
+
+5. G est connexe et |V(G)| = |E(G)| + 1.
+6. G est acyclique et |V(G)| = |E(G)| + 1.
+
+Le théorème peut être prouvé par récurrence en utilisant les deux
+
+lemmes suivants.
+
+Lemme 2.7. Tout arbre avec au moins deux sommets contient au moins deux
+feuilles.
+
+Démonstration. Soit P = (v0, e1, v1, . . . , et, vt) une chaîne de longueur
+maximum dans un arbre T = (V, E). La longueur de la chaîne P est
+au moins 1, donc en particulier v0 (cid:54)= vt. Nous allons prouver que v0
+et vt sont des feuilles. Supposons que ce n’est pas le cas. Par exemple,
+supposons que v0 n’est pas une feuille, alors il existe une arête e = v0v
+qui contient le sommet v0 et qui est différent de la première arête
+e1 = v0v1 de la chaîne P.
+
+Il y a deux possibilités à considérer :
+
+— Soit v est un sommet de la chaîne P, c’est-à-dire, v = vi, où i ≥ 2.
+Dans ce cas, l’arête e réunie avec la partie de la chaîne P entre v0 et
+vi forme un cycle ; contradiction.
+
+— Soit v /∈ {v0, . . . , vt}. Dans ce cas nous pourrions prolonger P en
+
+lui rajoutant l’arête e ; contradiction.
+
+Lemme 2.8. Les deux énoncés suivants sont équivalents :
+1. G est un arbre avec une feuille v.
+2. G − v est un arbre.
+
+réseaux sociaux et graphes miashs
+
+3
+
+Démonstration. Nous allons d’abord prouver l’implication (1) =⇒
+(2). Le graphe G est un arbre, et nous voulons démontrer que G − v est
+aussi un arbre. Considérons deux sommets x, y de G − v. Comme G
+est connexe, il existe une chaîne dans G de x à y. Cette chaîne ne peut
+contenir aucune feuille différente de x et y, donc elle ne contient pas v.
+Par conséquent, elle appartient à G − v, et nous pouvons conclure que
+G − v est connexe. Comme G n’a pas de cycle, il est clair que G − v n’a
+pas de cycle, donc c’est bien un arbre.
+Il reste à prouver l’implication (2) =⇒ (1). Soit G − v un arbre.
+En rajoutant la feuille v à G − v, aucun cycle ne peut être créé. Il faut
+vériﬁer la connexité de G, mais cela est évident aussi : deux sommets
+quelconques différents de v étaient reliés par une chaîne déjà dans
+G − v, et nous pouvons obtenir une chaîne à v depuis un autre sommet
+quelconque x en considérant le voisin unique v(cid:48) de v dans G, le reliant
+à x par une chaîne dans G − v, et en prolongeant cette chaîne par
+l’arête v(cid:48)v.
+Déﬁnition 2.9. Soit G un graphe. Un arbre couvrant de G est un sous-
+graphe couvrant de G qui est un arbre.
+
+Proposition 2.10. Tout graphe connexe contient un arbre couvrant.
+
+Démonstration. Soit G un graphe connexe. Retirons de G, tant qu’il
+est possible, une arête qui ne coupe pas le graphe (le graphe reste
+connexe). On obtient un sous-graphe partiel T qui est connexe par la
+condition sur les arêtes, et il n’a pas de cycles puisque s’il y aurait un
+cycle, on pourrait enlever une arête du cycle sans couper le graphe. T
+est donc un arbre.
+
+2.3 Arbres couvrants de poids minimum
+
+Déﬁnition 2.11. Soit G = (V, E) un graphe connexe avec une fonction
+de poids w : E → R. Un arbre couvrant de poids minimum de G est un
+arbre couvrant T ⊆ G qui minimise w(T) = ∑e∈E w(e).
+
+Le problème de trouver un arbre couvrant de poids minimum de
+G = (V, E) peut être résolu avec l’algorithme de Kruskal. L’idée de l’al-
+gorithme est vraiment très simple. L’algorithme construit un arbre cou-
+vrant de poids minimum à partir du graphe vide (V, ∅) en ajoutant
+des arêtes de E une par une selon la règle suivante :
+
+Ajouter l’arête la plus légère qui ne crée pas de cycle.
+
+C’est un exemple d’un algorithme glouton.
+
+Justiﬁcation de l’algorithme. L’algorithme s’arrête au pire lorsque toutes
+les arêtes du graphe ont été considérées. Comme le graphe est ﬁni, l’al-
+gorithme s’arrête au bout d’un nombre ﬁni d’opérations élémentaires.
+
+Exemple : réalisation d’un réseau élec-
+trique ou informatique entre différents
+points, deux points quelconques doivent
+toujours être reliés entre eux (connexité)
+et on doit minimiser le coût de la réali-
+sation.
+
+il
+
+Algorithmes gloutons
+Pour gagner aux
+échecs,
+faut calculer beaucoup de
+coups à l’avance ; un joueur qui ne
+considère que des gains immédiates
+n’aura pas beaucoup de succès. Pour-
+tant, dans certains problèmes, cette stra-
+tégie myope peut conduire à des bons al-
+gorithmes, comme dans le cas des arbres
+couvrants de poids minimum. Les algo-
+rithmes gloutons construisent une solu-
+tion pièce par pièce, ajoutant à chaque
+étape la pièce qui donne les bénéﬁces les
+plus importants.
+
+réseaux sociaux et graphes miashs
+
+4
+
+Algorithme 2.1 : Kruskal
+Entrées : Un graphe connexe G = (V, E) avec des poids we sur les
+
+arêtes
+
+Sorties : Un arbre couvrant T de G de poids minimum
+1 X : sous-ensemble de E
+2 X ← ∅;
+3 Trier les arêtes E = {e1, . . . , em} par poids croissant;
+4 i ← 1;
+5 tant que |X| < |V| − 1 faire
+
+si (V, X ∪ {ei}) est acyclique alors
+
+X ← X ∪ {ei}
+
+6
+
+7
+
+i ← i + 1;
+
+8
+9 retourner T := (V, X);
+
+Montrons qu’à la ﬁn de l’exécution de l’algorithme, la sortie T =
+(V, X) est un arbre couvrant de poids minimum. D’abord T est un
+sous-graphe couvrant de G, puisqu’il contient tous les sommets de G.
+De plus, T est acyclique par la condition de la boucle, et il a |V(G)| − 1
+arêtes par la condition de la sortie de la boucle. Donc, T est un arbre
+par Théorème 1.6(6).
+Il reste à montrer que T est de poids minimum. Soit T0 = (V, E0)
+un arbre couvrant de G de poids minimum, tel que |E ∩ E0| soit maxi-
+mum. Nous allons prouver que |E ∩ E0| = |E|, c’est-a-dire, T = T0.
+Supposons par l’absurde que |E ∩ E0| < |E|, et soit e1 l’arête la plus
+légère dans E(T0) \ E(T). Le graphe (V, E ∪ {e1}) contient un cycle C
+(voir la caractérisation des arbres). Comme T0 est acyclique, il existe
+au moins une arête e2 ∈ E(C) \ E(T0). Si w(e1) < w(e2), l’algorithme
+de Kruskal aurait choisi l’arête e1 au lieu de e2. Donc, w(e1) ≥ w(e2).
+Soit T1 = (V, (E0 − {e1}) ∪ {e2}) ; comme w(T1) ≤ w(T0), T1 est
+un (autre) arbre couvrant de G de poids minimum, tel que |E ∩ E1| >
+|E ∩ E0|, contradiction avec l’hypothèse.
+
+Donc, E = E0, et alors T est un arbre couvrant de G de poids mini-
+
+mum.
+
+Complexité. La complexité de l’algorithme, dominée par l’étape de tri
+des arêtes, est O(m log n) avec m le nombre d’arêtes et n le nombre de
+sommets du graphe G.
+
+

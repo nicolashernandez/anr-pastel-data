@@ -1,0 +1,328 @@
+https://www.irif.fr/~francoisl//DIVERS/projet-algo-poo-0809.pdf
+
+Universit´e Paris Diderot – Paris 7
+L3 Informatique
+
+POO / Algorithmique
+Ann´ee 2008-2009, 1er semestre
+
+R´eseaux sociaux
+
+Projet de programmation et d’algorithmique
+
+1 Contenu du projet
+
+Certains sites sur internet, par exemple des sites d’´echange de photos, constituent d’immenses « r´eseaux
+sociaux » : des millions d’utilisateurs y sont reli´es, par exemple en ´echangeant des messages ou en laissant
+des commentaires sur les photos d’un autre. On obtient ainsi un grand graphe dont les sommets sont les
+utilisateurs et les arˆetes repr´esentent les liens entre eux. L’objectif de ce projet est la manipulation de tels
+graphes aﬁn d’en extraire des statistiques comme par exemple le nombre moyen de contacts `a parcourir
+pour relier une personne `a une autre.
+Pour les trois tˆaches d´ecrites ci-dessous, le projet consiste `a imaginer un algorithme et `a le programmer,
+de sorte que la manipulation de grands graphes (comme donn´es en test) soit possible.
+
+Partie commune
+
+Le projet devra ˆetre constitu´e d’une seule application, ´ecrite dans le langage Java. Dans un premier temps,
+elle demandera le chemin ou l’URL d’un ﬁchier d´ecrivant le graphe `a utiliser. Le format de ces ﬁchiers est
+d´ecrit `a la section 2. Dans un deuxi`eme temps, votre application demandera (´eventuellement plusieurs
+fois) `a choisir quelle fonctionnalit´e ex´ecuter parmi les trois d´ecrites dans les sections 1.1, 1.2 et 1.3. Votre
+programme doit permettre de mesurer le temps de chargement du graphe et le temps d’ex´ecution de la
+fonctionnalit´e demand´ee.
+L’interaction avec votre programme peut ˆetre eﬀectu´e `a l’aide de param`etres en ligne de commande, d’une
+interface texte en console ou d’une interface graphique (ces trois options sont non-exclusives). En aucun
+cas une recompilation du programme ne doit-ˆetre n´ecessaire pour modiﬁer un param`etre.
+Une douzaine de graphes de test vous sont fournis ; ils sont d´ecrits `a la section 2. Lors de la soutenance,
+nous vous demanderons de faire une d´emonstration de votre programme avec un autre ensemble de
+graphes. Ils seront disponibles `a une URL fournie ce jour-l`a.
+Comme pr´ecis´e `a la partie 2, certains graphes sont orient´es et d’autres non. Les deux cas doivent pouvoir
+ˆetre trait´es ; cela ne change rien aux fonctionnalit´es d´ecrites ci-dessous.
+
+1.1 Calculs de plus courts chemins
+
+Description Un plus court chemin de x `a y est un chemin de x `a y de longueur minimale, si y est
+accessible depuis x. La distance entre eux est la longueur de ce chemin s’il existe, +∞ sinon.
+
+Rendu attendu
+
+1. ´Etant donn´ees deux personnes x et y choisies interactivement, votre programme aﬃchera la distance
+
+de x `a y et puis la liste des sommets d’un plus court chemin, s’il en existe un.
+
+2. Votre programme doit aussi ˆetre capable d’aﬃcher la distance moyenne entre les gens, c’est-`a-dire
+la moyenne des distances entre x et y, pour tous x et y tels qu’un chemin de x `a y existe. On
+ne consid`ere donc pas les personnes `a distance +∞ dans la moyenne.
+
+1
+
+1.2 Graphe de voisinage
+
+Description Pour une personne x, c’est-`a-dire un sommet x d’un graphe G = (S, A), on note Vois(x)
+l’ensemble {y | (x, y) ∈ A} de ses voisins. Le graphe de voisinage de x est le sous-graphe Vx de G induit
+par Vois(x), c’est-`a-dire le graphe ayant comme sommets les voisins de x et comme arˆetes exactement les
+arˆetes (y, z) de G o`u y et z sont voisins de x. En d’autres termes Vx = (Vois(x), A∩ (Vois(x)× Vois(x))).
+
+Rendu attendu ´Etant donn´e un individu x, votre programme :
+
+1. aﬃchera le nombre de sommets et d’arˆetes de Vx ;
+2. puis aﬃchera une repr´esentation graphique de Vx.
+
+Repr´esentation graphique d’un graphe Pour l’aﬃchage de Vx, vous pourrez faire appel `a la bi-
+blioth`eque ou au programme externe d’aﬃchage de graphe de votre choix. Nous vous proposons ici trois
+pistes, mais vous ˆetes aussi libres de faire vous-mˆemes le dessin, ou d’utiliser d’autre biblioth`eques ou lo-
+giciels tant qu’il est possible de les installer sur les machines de l’UFR et que vous pr´evenez pr´ealablement
+votre charg´e de TD. Dans tous les cas, l’interface avec le programme externe ou la biblioth`eque doit ˆetre
+automatique, c’est-`a-dire qu’apr`es la saisie du sommet x une fenˆetre doit apparaˆıtre, contenant le dessin
+de Vx, sans manipulation suppl´ementaire de la part de l’utilisateur.
+
+graphviz est un logiciel de dessin de graphe. Il prend en entr´ee un ﬁchier de description au format dot,
+et il est capable de g´en´erer de nombreux ﬁchier de sortie : SVG, PostScript, . . . Il est possible de
+faire appel `a un programme externe en Java, en utilisant la classe java.lang.Runtime.
+http://www.graphviz.org/Download.php
+
+grappa est une biblioth`eque objet d´evelopp´e par le mˆeme laboratoire que ’graphviz’. Elle fournit les
+
+mˆemes fonctionnalit´es, et se t´el´echarge sur le mˆeme site web.
+http://www.graphviz.org/Download.php
+
+jung est une biblioth`eque objet de visualisation de graphe beaucoup plus compl`ete et param´etrisable.
+
+Elle s’int`egre parfaitement avec Swing.
+http://jung.sourceforge.net/
+
+Tout ces logiciels devraient ˆetre install´es prochainement sur lucien, la page web suivante devrait contenir
+plus d’information : version install´ee, lien vers la documentation et des tutoriels. . .
+http://www.pps.jussieu.fr/~henry/e/algo-l3/wiki
+
+1.3 Diﬀusion d’une rumeur
+
+´Enonc´e du probl`eme Un individu dans un groupe est averti d’une rumeur (au sens large, c’est-`a-dire
+d’une information). Il peut, par le moyen de conversations, la diﬀuser `a ses voisins un par un.
+`A chaque instant, il y a donc deux cat´egories de gens : ceux qui connaissent la rumeur, et ceux qui ne la
+connaissent pas. La rumeur est compl`etement diﬀus´ee lorsque tous les nœuds accessibles depuis le nœud
+de d´epart connaissent la rumeur.
+Vous devez concevoir et impl´ementer un algorithme qui assure le plus eﬃcacement possible la diﬀusion
+de la rumeur, c’est-`a-dire qui minimise le temps de diﬀusion compl`ete. Nous ne demandons pas forc´ement
+de concevoir un algorithme fournissant une solution optimale, car ceux-ci pourraient ˆetre trop lents, mais
+plutˆot d’´elaborer un algorithme eﬃcace donnant une solution aussi proche que possible de l’optimal.
+
+2
+
+Hypoth`eses On suppose que chaque conversation prend un temps 1. Donc si l’individu x est inform´e
+de la rumeur au temps t, il peut la diﬀuser `a un voisin au temps t + 1, `a un deuxi`eme au temps t + 2,
+etc. Bien sˆur, les conversations se font en parall`ele : au temps t, plusieurs individus peuvent avoir une
+conversation, mais chaque individu ne peut avoir qu’une conversation `a la fois.
+On suppose aussi — de fa¸con largement abusive — que chaque individu a une connaissance totale du
+syst`eme : description compl`ete du graphe, de qui connaˆıt la rumeur, etc. De mˆeme, on suppose que chaque
+individu connaˆıt les intentions des autres. En termes algorithmique, on ne vous demande donc pas un
+algorithme distribu´e, o`u chaque individu prend une d´ecision locale bas´ee sur une information partielle,
+mais un algorithme centralis´e : une « intelligence sup´erieure » prend la d´ecision globale `a la place des
+individus, avec une connaissance totale. Dans un premier temps, aﬁn de simpliﬁer le probl`eme et de
+tester les autres composantes du programme, cette « intelligence » pourra se contenter de faire un choix
+al´eatoire parmi les choix possibles.
+
+Rendu attendu ´Etant donn´e un utilisateur x, qui `a l’instant 1 est le seul utilisateur en possession
+d’une information capitale, votre programme devra g´en´erer une sortie texte compos´ee de lignes de la
+forme suivante :
+
+`A l’instant <t>, l’utilisateur <x> parle `a <y>.
+
+o`u t est un temps, x un individu ayant la rumeur et y un individu n’ayant pas la rumeur `a cet instant.
+La sortie sera tri´ee par t croissant. Ce texte devra `a la fois ˆetre aﬃch´e et sauvegard´e sur disque.
+
+2 Graphes fournis
+
+En guise de jeu de tests nous vous fournissons une douzaine de graphes de diﬀ´erentes tailles. Ils ont ´et´e
+construits en explorant un site web de partage de photos : chaque nœud correspond de mani`ere anonyme
+`a un utilisateur de ce site. Il est repr´esent´e par un entier strictement inf´erieur `a 231.
+Vous trouverez ces graphes `a l’adresse : http://www.pps.jussieu.fr/~henry/e/algo-l3/wiki
+
+Graphe des contacts
+
+Cette premi`ere s´erie de graphes est construite `a partir des contacts ´etablis entre les utilisateurs du site
+web. La relation de contact ´etant une relation sym´etrique, ces graphes sont non-orient´es et simples
+(c’est-`a-dire sans arˆete multiple et sans boucle). Ils sont faiblement denses.
+
+Nom du ﬁchier
+contact1.graph
+contact2.graph
+contact3.graph
+contact4.graph
+contact5.graph
+contact6.graph
+
+nombre de sommets
+21
+33
+95
+568
+3346
+27756
+
+nombre d’arˆetes
+15
+93
+202
+3456
+31974
+935281
+
+Graphe des commentaires
+
+Cette seconde s´erie de graphes est construite `a partir des commentaires laiss´es par les utilisateurs sur
+les photos. Une arˆete de l’utilisateur x vers l’utilisateur y signiﬁe que l’utilisateur x a laiss´e au moins
+un commentaire sur une des photos de l’utilisateur y. Ce sont des graphes orient´es et sans arˆete
+multiple. Ces graphes des commentaires sont `a peine plus denses que les graphes des contacts.
+
+3
+
+Nom du ﬁchier
+comm1.graph
+comm2.graph
+comm3.graph
+comm4.graph
+comm5.graph
+comm6.graph
+
+nombre de sommets
+38
+61
+139
+639
+3536
+27684
+
+nombre d’arˆetes
+171
+335
+615
+5099
+178714
+2094305
+
+Format de description des graphes
+
+Un graphe est d´ecrit par un ﬁchier ASCII contenant autant de lignes qu’il y a d’arˆetes dans ce graphe.
+Chaque ligne est constitu´ee de deux entiers s´epar´es par un caract`ere espace. Ces deux entiers corres-
+pondent aux deux extr´emit´es de l’arˆete. Dans le cas des graphes orient´es, ils repr´esentent respectivement
+le nœud d’origine et le nœud de destination de l’arˆete. L’ensemble des noeuds d’un graphe est l’ensemble
+des entiers qui apparaissent dans ce ﬁchier. Attention : ces entiers ne sont pas n´ecessairement cons´ecutifs,
+c’est-`a-dire que l’existence d’un nœud num´erot´e i n’implique pas celle de tous les nœuds j < i.
+
+ﬁchier
+
+graphe
+
+165435 435436
+165435 57987
+15432 15432
+435436 5435
+165435 5435
+435436 15432
+15432 435436
+
+Fig. 1 – Exemple de ﬁchier de description et le graphe orient´e correspondant
+
+3 Modalit´e d’´evaluation (partie algorithmique)
+
+Les trois parties du projet sont `a r´ealiser, cependant en cas de probl`eme, manque de temps ou autre, il vaut
+mieux r´ealiser bien une ou deux parties que mal les trois. Sachez que la troisi`eme partie sur la propagation
+de rumeur comptera plus pour la note que la premi`ere partie sur les distances entre utilisateur, et que
+cette premi`ere partie comptera elle mˆeme plus que la seconde partie sur les graphes de voisinage. Les
+coeﬃcients ne sont pas encore ﬁx´es.
+
+Calculs de plus courts chemins L’´evaluation tiendra surtout compte du fait que l’algorithme est
+impl´ement´e avec sa complexit´e optimale, et non en un temps sup´erieur.
+
+Graphe de voisinage La notation tiendra compte de la correction du r´esultat. Vous devez produire
+un algorithme lin´eaire en la taille de la sortie, c’est `a dire en O(|Vx| + |A(Vx)|) et non en la taille de
+l’entr´ee : O(|S| + |A|).
+
+Diﬀusion d’une rumeur Dans cette section seront not´ees `a la fois l’ing´eniosit´e de l’algorithme, son
+eﬃcacit´e (temps de diﬀusion), et sa complexit´e (temps d’execution en fonction de |S| et |A|, qui diﬀ`ere
+bien sˆur du temps de diﬀusion).
+
+4
+
+La diﬀusion d’une rumeur vous demande d’inventer un algorithme : en eﬀet, aucun n’est connu pour ˆetre
+« la » solution du probl`eme. Si cependant vous n’y arrivez pas, vous pouvez vous rabattre sur le probl`eme
+plus simple de diﬀusion de rumeur en parall`ele d´ecrit ci-dessous. Si au contraire vous ˆetes pleinement
+satisfait de votre algorithme vous pouvez `a titre d’extension aﬃcher une animation graphique montrant
+la construction de l’arbre de propagation.
+
+Diﬀusion en parall`ele d’une rumeur La diﬀusion en parall`ele de rumeur consiste `a propager la
+rumeur, non pas `a une personne connue par le moyen d’une conversation, mais au contraire `a toutes les
+personnes connues. La diﬀusion est donc en parall`ele, par “broadcast”. Par exemple, l’individu envoie un
+mail `a tout son carnet d’adresse
+« La » solution du probl`eme est alors connue : pour diﬀuser la rumeur le plus vite possible, il faut faire
+un arbre couvrant en largeur (arbre produit par un parcours en largeur). `A l’instant t, un nœud situ´e au
+niveau t re¸coit la rumeur de son p`ere. `A l’instant t + 1, il la diﬀuse `a tous ses ﬁls simultan´ement.
+
+4 Modalit´e d’´evaluation (partie programmation)
+
+Nous insistons sur le fait que le programme doit ˆetre r´ealis´e en utilisant une structuration objet des
+concepts. Le choix des interfaces/classes et objets doit ˆetre intelligemment con¸cu et document´e : par
+exemple, il sera bien vu de ne pas dupliquer le code d’un algorithme qui peut `a la fois s’appliquer `a un
+graphe non-orient´e et `a un graphe orient´e.
+D’autre part, l’utilisation pertinente de classes Java pr´ed´eﬁnies sera jug´ee comme un point positif, no-
+temment lors de la lecture du ﬁchier de description d’un graphe. Par contre, `a l’exception de l’aﬃchage
+du graphe de voisinage, il est interdit d’utiliser d’autres classes que celles install´ees avec la version 6 de
+Java.
+La mani`ere dont votre programme g`ere les erreurs sera prise en compte. En particulier si un ﬁchier
+d’entr´ee n’est pas correct, votre programme ne doit pas se terminer subitement en aﬃchant une pile
+d’ex´ecution.
+Entre deux projets ´equivalents, celui avec une interface graphique aura une note sup´erieure `a celui avec
+seulement une interface texte. De la mˆeme fa¸con, l’utilisation astucieuse d’une biblioth`eque objet pour
+la repr´esentation graphique du voisinage d’un nœud peut d´emontrer votre bonne compr´ehension des
+concepts objets.
+Il est demand´e de documenter correctement les classes et interfaces con¸cues en utilisant javadoc : le
+rˆole de chaque classe devra ˆetre expliqu´e et le comportement, en fonction de ses arguments, de chaque
+m´ethode public devra ˆetre d´ecrit. Si possible, cette documentation sera en anglais correct.
+
+5 Organisation
+
+Le projet doit ˆetre r´ealis´e en binˆome, ´eventuellement en monˆome avec l’accord de vos charg´es de TD. Vous
+devrez rendre au plus tard le 4 janvier 2009 une archive comprenant : vos sources Java et un script de
+compilation, votre programme compil´e (si possible dans un unique ﬁchier jar), la javadoc et un rapport
+au format pdf.
+
+Soutenances Les soutenances auront lieu dans la semaine du 12 au 16 janvier 2009.
+La soutenance dure environ 30min et est obligatoire, sauf pour les dispenses oﬃcielles. Toute absence
+conduira le jury `a d´elivrer la note 0. Chaque participant au projet devra intervenir lors de la soutenance
+et les notes seront attribu´ees individuellement. Il y aura une note diﬀ´erente pour chaque cours. Il sera
+n´ecessaire de faire une d´emonstration du projet sur un ordinateur qui compilera et ex´ecutera le code.
+Cela pourra se faire soit sur un ordinateur de l’UFR, soit sur un ordinateur portable personnel.
+
+5
+
+Rapport Vous rendrez avec votre code un rapport de quatre pages maximum, imp´erativement au
+format pdf, avec une police de 11pt ou sup´erieure. Voici les diﬀ´erents points qu’il devra contenir, au
+minimum.
+
+1. Une br`eve description de l’utilisation de l’application, sauf pour ce qui est ´evident. Donc si votre er-
+gonomie est bonne, cette section peut ˆetre vide, mais l’enseignant doit alors r´eussir seul `a manipuler
+le programme et il risque d’y mettre une l´eg`ere mauvaise volont´e !
+
+2. Pour le calcul de plus courts chemins, vous nommerez le ou les algorithmes utilis´es, en justiﬁant
+
+votre choix. Si vous modiﬁez un algorithme connu, d´ecrivez la modiﬁcation.
+
+3. Pour le graphe de voisinage, si vous avez utilis´e un programme externe ou une biblioth`eque, vous la
+nommerez et justiﬁerez votre choix. Puis vous d´ecrirez bri`evement l’interface avec votre programme.
+Si vous avez d´evelopp´e un module personnel, vous d´ecrirez l’algorithme de positionnement des
+nœuds.
+
+4. Pour la diﬀusion de rumeur, vous d´ecrirez votre algorithme (sans recopier le code Java dans le
+rapport !) et analyserez sa complexit´e en temps dans le pire cas, en fonction de |S|, de |A| ou
+d’autres param`etres. Puis vous donnerez des bornes sur le temps de diﬀusion de la rumeur : quels
+sont le plus petit et le plus grand temps possible pour un graphe quelconque ? Vous pouvez donner
+les bornes en fonction de |S|, de |A| ou d’autres param`etres.
+
+Vous pourrez inclure en annexes quelques mesures du temps d’ex´ecution de votre programme en fonction
+de la taille du graphe d’entr´ee.
+L’organisation de votre programme doit ˆetre expliqu´ee dans la javadoc, il est donc inutile de la r´ep´eter
+dans le rapport.
+
+6
+
+

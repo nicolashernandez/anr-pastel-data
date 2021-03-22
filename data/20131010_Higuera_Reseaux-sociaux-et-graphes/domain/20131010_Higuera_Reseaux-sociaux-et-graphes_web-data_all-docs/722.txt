@@ -1,0 +1,1021 @@
+https://www.unine.ch/files/live/sites/math/files/shared/documents/sem_math_soc/2015/ConfMathSociete_FMartin_Nov_2015_Final.pdf
+
+Théorie des graphes et biologie moléculaire : 
+la sociologie des gènes et des protéines 
+
+Florian Martin
+
+Maths et Société, Université de Neuchâtel
+25 novembre 2015
+
+Agenda
+
+• Théorie des Graphes et Réseaux
+
+• Dogme Central de la Biologie Moléculaire et Biologie des 
+
+Systèmes
+
+• Hubs et Réseaux invariants d’échelle (“scale-free”)
+
+– Les réseaux biologiques sont-ils aléatoires?
+– Les réseaux biologiques sont-ils aléatoires?
+
+• Communautés dans les réseaux
+
+– Une méthode spectrale 
+
+• Frustration: “Les amis de mes amis sont mes amis et les 
+
+ennemis de mes amis sont mes ennemis”.
+
+Page: 2
+
+Définition d’un graphe
+
+• Graphe: Un graphe G est un ensemble de sommets V, et 
+
+un ensemble d’arêtes E    V x V reliant chacun deux 
+sommets.
+
+∩
+
+• Les arêtes peuvent être dirigées, pondérées et parfois 
+
+même signées.
+
+• Exemple:
+
+C
+
+A
+
+E
+
+B
+
+D
+
+Page: 3
+
+Exemple 1:  Star Alliance Network
+
+Star Alliance Network
+http://www.staralliance.com/documents/20184/0/Global+Reach+Slide/
+
+Page: 4
+
+Exemple 2: Les Autoroutes Suisses
+
+Page: 5
+
+https://upload.wikimedia.org/wikipedia/commons/1/10/Image-Swiss-Highway-network-en.png
+
+Exemple 3: Facebook Network
+
+Page: 6
+
+Exemple 4: Internet
+
+Page: 7
+
+https://en.wikipedia.org/wiki/Internet_Mapping_Project
+
+Théorie des graphes
+
+• La théorie des graphes est la branche des mathématiques 
+
+qui étudies les propriétés de ces objets. 
+
+• La résolution de certains problèmes liés aux graphes fait 
+
+appel à des algorithmes complexes.
+
+Un article du mathématicien suisse Leonhard Euler publié 
+en 1741, et traitant d’un problème appelé « les sept ponts 
+en 1741, et traitant d’un problème appelé « les sept ponts 
+de Königsberg » est considéré comme l’origine de la 
+théorie des graphes.
+
+Page: 8
+
+Le Dogme Central de la Biologie (1/2)
+
+1014 de cellules
+
+L’ADN est contenu dans le noyau de 
+chacune des cellules de notre corps. 
+Il est compose de 4 nucléotides A, 
+C, G, T.
+
+Le génome humain est composé de 
+~ 3’400’000’000 de ces nucléotides. 
+~ 3’400’000’000 de ces nucléotides. 
+
+Arithmétique scolaire:
+
+A raison de 4’000 caractères par 
+page A4, il faudrait 850’000 pages 
+soit un livre de 42.5 mètres de 
+hauteur pour l’imprimer recto-verso.
+
+Page: 9
+
+https://commons.wikimedia.org/wiki/File:Chromosome_fr.svg
+
+Le Dogme Central de la Biologie (2/2)
+
+Double brin d’ADN
+
+Gène
+
+Transcription
+
+Le double brin d’ADN contient des régions, 
+appelées “gènes” qui contiennent les 
+informations (encodées en utilisant 
+l’alphabet {A,C,G,T}) pour créer des 
+protéines.
+
+Simple brin d’ADN (ARN messager, ARNm)
+
+Traduction
+
+L’ARNm utilise les informations contenues dans l’ADN 
+pour synthétiser des protéines.
+
+Protéine
+
+On estime à 26’517 le nombre de gènes codant pour 
+des protéines.
+
+Les protéines exécutent les tâches dans notre corps, 
+Par exemple l’hémoglobine transporte l’oxygène. Les 
+enzymes en particulier sont responsable de la 
+biosynthèse des lipides.
+
+Page: 10
+
+Au-delà du Dogme: Réseaux biologiques
+
+Les protéines interagissent entre elles en formant des complexes. 
+
+L’interactome humain est la description des interactions entre les 
+protéines. C’est un graphe dont les sommets sont les protéines et dont les 
+arêtes décrivent les interactions entre elles.
+
+Page: 11
+
+https://en.wikipedia.org/wiki/Protein%E2%80%93protein_interaction
+
+Réseaux Biologiques: Et c’est important?
+
+La biologie des systèmes est une approche intégrative des différentes 
+molécules (protéines, gènes,..) afin de décrire le système dans son ensemble. 
+La toxicologie des systèmes est l’application de la biologie des systèmes à la 
+toxicologie.
+
+x
+u
+a
+e
+s
+é
+R
+
+e
+m
+s
+i
+n
+a
+g
+r
+
+O
+
+Biologie
+
+Descriptive
+
+Biologie
+
+des Systèmes
+
+Physiologie
+
+Médicine
+
+Certaines maladies, comme le cancer, sont liées à la 
+perturbation de réseaux biologiques.
+
+s
+s
+e
+e
+t
+t
+n
+n
+a
+a
+s
+s
+o
+o
+p
+p
+m
+m
+o
+o
+C
+C
+
+s
+s
+e
+e
+r
+r
+i
+i
+a
+a
+l
+l
+u
+u
+c
+c
+é
+é
+l
+l
+o
+o
+M
+M
+
+Page: 12
+
+Hubs et Réseaux invariants d’échelle (“scale-free”)
+
+Dans un graphe, le degré d’un sommet est le nombre 
+d’arêtes reliées à ce sommet.
+
+Degré(
+
+D
+
+) = 3
+
+On observe dans les réseaux biologiques et sociaux que 
+certains sommets ont un degré bien plus élevé que la 
+majorité des autres sommets: ce sont les hubs.
+
+Page: 13
+
+Hubs et Réseaux invariants d’échelle (“scale-free”)
+Réseau social
+
+Lien entre les pages 
+Wikipédia des
+chimistes, biologistes, 
+physiciens et 
+mathématiciens.
+
+Les 3 “hubs” sont:
+
+1. Albert Einstein
+2. Werner Heisenberg
+2. Werner Heisenberg
+3. David Hilbert
+
+Dans le sous-graphe des 
+mathématiciens:
+
+1. Paul Erdös
+2. Carl Friedrich Gauss
+3. Felix Klein
+Et…
+4. Leonhard Euler
+
+Parmi les 355 pages de biologistes connus, seulement 5 ont un lien vers d’autres scientifiques!
+
+Page: 14
+
+Hubs et Réseaux invariants d’échelle (“scale-free”)
+Réseau social
+
+Lien entre les pages 
+Wikipédia des
+chimistes, biologistes, 
+physiciens et 
+mathématiciens.
+
+Les 3 “hubs” sont:
+
+1. Albert Einstein
+2. Werner Heisenberg
+2. Werner Heisenberg
+3. David Hilbert
+
+Dans le sous-graphe des 
+mathématiciens:
+
+1. Paul Erdös
+2. Carl Friedrich Gauss
+3. Felix Klein
+Et…
+4. Leonhard Euler
+
+Parmi les 355 pages de biologistes connus, seulement 8 ont un lien vers d’autres scientifiques!
+
+Page: 15
+
+Leonhard Euler
+
+Hubs et Réseaux invariants d’échelle (“scale-free”)
+Réseau biologique
+
+Interactions protéine-
+protéine dans la levure. Le 
+degré des protéines 
+nécessaires à la survie est 
+nécessaires à la survie est 
+plus grand (en moyenne 
+de 49%)!
+
+Protéine nécessaire 
+à la survie
+
+Page: 16
+
+Jeong, H., S. P. Mason, A.-L. Barabasi and Z. N. Oltvai. (2001). 
+"Lethality and centrality in protein networks." Nature 411(6833): 41-42.
+
+Hubs et Réseaux invariants d’échelle (“scale-free”)
+
+On peut alors s’intéresser à la distribution des degrés dans un graphe:
+
+e
+c
+n
+e
+r
+r
+u
+c
+c
+O
+
+1
+
+2
+
+3
+
+4
+
+Degré
+
+Un réseau est invariant d’échelle («scale-free») si la distribution des 
+Un réseau est invariant d’échelle («scale-free») si la distribution des 
+degrés de ses sommet suit une loi exponentielle: P(k)~k-c
+Donc, pour détecter une telle propriété, il suffit de représenter le log10(k) 
+vs. log10(fréquence(k)): si les points sont alignés, le réseau est invariant 
+d’échelle!
+
+)
+)
+k
+(
+e
+c
+n
+e
+u
+q
+é
+r
+f
+(
+0
+1
+g
+o
+
+l
+
+log10(k)
+
+Page: 17
+
+Invariance d’échelle: Une propriété communément partagée 
+par les réseaux biologiques et sociaux
+
+Sociologie
+
+Biologie
+
+Page: 18
+
+Hubs et Réseaux invariants d’échelle (“scale-free”)
+
+Peut-on essayer d’expliquer 
+cette propriété?
+
+On utilise le modèle aléatoire 
+de l’attachement 
+préférentiel pour décrire 
+l’évolution d’un réseau: un 
+nouveau membre du réseau 
+nouveau membre du réseau 
+social (ou une nouvelle 
+molécule en biologie?) aura 
+tendance à se mettre en 
+relation avec quelqu’un qui a 
+déjà beaucoup de relations 
+(«key opinion leaders», 
+«personnalités connues», 
+etc...)
+
+Page: 19
+
+Communautés dans les réseaux
+
+• Définition: Il existe dans les réseaux des régions où les 
+
+sommets sont densément reliés entre eux. Ces sous-
+réseaux sont appelés communautés.
+
+• Détecter les communautés dans un graphe n’est pas chose 
+
+aisée. Certains algorithmes pour représenter les graphes 
+aisée. Certains algorithmes pour représenter les graphes 
+essaient de les mettre en évidence; mais cette approche 
+n’est généralement pas applicable.
+
+• Des méthodes spécifiques sont nécessaires. Une méthode 
+
+mathématique pour détecter les communautés: le 
+clustering spectral.
+
+Page: 20
+
+Communautés dans les réseaux: Le Laplacien d’un graphe
+
+•
+
+Page: 21
+
+Communautés dans les réseaux: Le Laplacien d’un graphe
+
+L’équation de la chaleur et ses 
+solutions permettent d’identifier 
+des régions du graphe ou la 
+chaleur se propage facilement; et 
+donc d’identifier des 
+communautés.
+communautés.
+
+Cette information réside 
+principalement dans le Laplacien.
+
+C’est pourquoi, l’étude (spectrale) 
+de cette matrice est utilisée.
+
+Page: 22
+
+Le Laplacien d’un graphe
+
+• L est très facile à construire:
+
+C
+
+A
+
+E
+
+B
+
+D
+
+A B C D E
+A B C D E
+
+A
+A 2
+
+-1
+
+B
+B
+B -1
+B -1
+
+C
+C 0
+
+2
+2
+
+0
+
+D
+D -1 -1
+
+E
+E
+
+0
+
+0
+
+0
+
+0
+0
+
+2
+
+0
+-1
+-1
+
+-1
+
+-1
+-1
+
+0
+3
+3
+0
+
+0
+
+0
+0
+-1
+-1
+0
+
+1
+
+Page: 23
+
+Communautés dans les réseaux: Exemples
+
+L’utilisation du Laplacien permet 
+donc de découvrir des groupes 
+denses dans les graphes (e.g., [1]).
+
+[1] MEJ Newman: “Finding community structure using the eigenvectors of matrices”, Physical Review E 74 036104, 2006.
+
+Page: 24
+
+Communautés dans les réseaux: Réseau social
+
+Wikipédia, pages des personnalités
+scientifiques.
+
+Paul Erdös
+
+Leonhard Euler
+
+Page: 25
+
+Communautés dans les réseaux: Réseau biologique
+
+Réseau biologique
+(stringDB http://string-db.org/)
+
+L’étude des protéines 
+répondant à un stimulus 
+donné se groupent en 
+communautés décrivant des 
+processus biologiques.
+
+Phosphorylation oxidative
+
+ROS detoxification
+
+Tight junction
+
+Stress Oxidatif
+
+18’884 sommets et 740’950 arêtes
+
+Protéasome
+
+Page: 26
+
+Frustration d’un graphe signé
+
+• “Les amis de mes amis sont mes amis et les ennemis de 
+mes amis sont mes ennemis”. Cette citation bien connue 
+reflète une propriété des réseaux sociaux.
+
+• Problème du message: Si les sommets sont des personnes 
+
+et que les arêtes sont signées (relations amicales (+1) ou 
+et que les arêtes sont signées (relations amicales (+1) ou 
+inamicales (-1)), on cherche alors a communiquer un 
+message.
+
+– Paul communique le message à un de ses voisins. Si la relation 
+
+est amicale, le message est transmis tel quel; sinon c’est le 
+contraire de ce message qui est communiqué. 
+
+– Si Paul reçoit en retour l’information; recevra-t-il le message 
+
+d’origine ou son contraire?
+
+Page: 27
+
+Frustration d’un graphe signé
+
+• Un chemin dans un graphe est une suite d’arêtes 
+
+partageant 2 à 2 un sommet. Si le graphe est signé, le 
+signe d’un chemin est le produit des signes de ces arêtes. 
+Un cycle est un chemin finissant à son point de départ.
+
+C
+
+E
+
+A
+
+Chemin entre B et D
+
+D
+
+B
+
+C
+
++1
+
+-1
+-1
+
+E
+
+-1
+
+Ce chemin entre B et D
+Ce chemin entre B et D
+est négatif
+
+A
+
+-1
+
+D
+
+B
+
+• Le problème est de savoir si le graphe signé sous-jacent 
+
+est équilibré: un graphe signé est équilibré si tous ces 
+cycles sont positifs.
+
+Page: 28
+
+Frustration d’un graphe signé
+
+• Donc si le graphe est équilibré, Paul recevra le message 
+
+d’origine!
+
+-1
+
+C
+
+E
+
++1
+
+-1
+
++1
+
+D
+D
+
+B
+
++1
+
+A
+
++1
++1
+
+-1
+
+C
+
+E
+
+-1
+
+-1
+
++1
+
+A
+
++1
++1
+
+D
+D
+
+B
+
++1
+
+Graphe équilibré
+
+Graphe pas équilibré
+
+Définition: Le nombre d’arêtes dont il faut changer le signe (où enlever) 
+pour rendre un graphe signé équilibré est appelé frustration.
+
+Donc un graphe est équilibré si et seulement si sa frustration est nulle.
+
+Page: 29
+
+Frustration d’un graphe signé
+
+• On peut montrer assez facilement:
+
+Théorème:
+
+Un graphe signé est équilibré si et seulement si on peut partitionner 
+ses sommets en deux groupes opposés d’amis (arêtes positives 
+entre les sommets d’un groupe) et uniquement des arêtes négatives 
+reliant les deux groupes: c’est-à-dire deux alliances ennemies!
+
+C
+
+E
+
+A
+
+D
+
+B
+
+E
+
+B
+
+C
+
+D
+
+A
+
+-1
++1
+
+Page: 30
+
+Frustration et Réseaux biologiques: Feedback négatif
+
+X
+
+Y
+
+Z
+
+Un modèle mathématique 
+décrivant ce système 
+décrivant ce système 
+dynamique non linéaire:
+
+http://www.biooncology.com/molecular-causes-of-cancer/proliferative-signaling
+http://www.biooncology.com/molecular-causes-of-cancer/proliferative-signaling
+
+k1=0.1, k2=0.2, k3=0.2, k4=1, 
+k5=0.2, k6=0.1, k7=0.1, k8=0.2, 
+n=12,x(0)=1, y(0)=1, z(0)=1
+
+Page: 31
+
+Frustration et Réseaux biologiques: Feedback négatif
+
+-1
+
+-1
+
+A
+
+B
+
+D
+
+A
+A
+
+B
+
+D
+
++1
+
++1
+
++1
+
++1
+
+Frustration=1, ce réseau n’est pas équilibré.
+
+Frustration=0, ce réseau est équilibré.
+
+Dans les réseaux biologiques, la frustration indique le degré d’auto-régulation
+d’un système. Si il n’y a pas de frustration (i.e., le réseau est équilibré), le 
+système dynamique sous-jacent devient monotone.
+
+Page: 32
+
+Le Laplacien d’un graphe signé
+
+• C’est une simple adaptation du Laplacien déjà 
+
+décrit:
+
+C
+
+-1
+
+A
+
++1
+
+-1
+
+E
+
++1
+
+B
+
++1
+
+D
+
+A B C D E
+
+A 2
+
+-1
+
+B -1
+
+C 0
+
+D 1
+
+E
+
+0
+
+2
+
+0
+
+-1
+
+0
+
+0
+
+0
+
+2
+
+0
+
+1
+
+1
+
+-1
+
+0
+
+3
+
+0
+
+0
+
+0
+
+1
+
+0
+
+1
+
+Page: 33
+
+Frustration: Comment calculer ce nombre et identifier 
+un ensemble d’arêtes?
+
+Deux théorèmes faisant le lien entre la frustration et le Laplacien
+signé:
+
+Théorème 1: Soit F(Gσ) la frustration d’un graphe signé connexe 
+Gσ et soit λ
+
+1(Gσ) la première valeur propre de L σ. Alors:
+
+où ∆ est le degré maximal du graphe.
+
+Théorème 2: On a
+
+Trouver une solution au théorème 2 permet alors d’identifier effectivement un 
+ensemble d’arêtes dont la suppression rend le graphe équilibré.
+
+Page: 34
+
+Frustration et Réseaux sociaux
+
+Le premier exemple est un réseau social bien 
+connu qui décrit les relations entre les tribus 
+des hauts plateaux, en Nouvelle-Guinée 
+dans les années 50.
+
+Frustration=7
+
+Les réseaux d’alliance, ici les relations entre 
+l’Allemagne (Ge), l’empire Austro-Hongrois 
+(AH),  l’Italie (It), l’Angleterre (GB), la France 
+(Fr) et la Russie (Ru). Les graphes ont 
+tendance à devenir équilibrés: Frustration en 
+1907 = 0.
+
+Kenneth E Read. “Cultures of the central highlands, new guinea.” 
+Southwestern Journal of Anthropology, pages 1–43, 1954.
+
+http://arxiv.org/ftp/arxiv/papers/1406/1406.2132.pdf
+
+Page: 35
+
+Frustration: Exemple plus complexe le cycle cellulaire
+
+Page: 36
+
+http://www.causalbionet.com/
+
+Le Laplacien est un bon indicateur de la frustration.
+
+Si on estime la frustration basé sur la première fonction propre de L σ
+(Théorème 1) ou  si on la calcule en utilisant le théorème 2, les deux 
+approches s’accordent à quelques exceptions près. Les réseaux de la base 
+de donnée CBN servent d’exemple ici.
+
+http://www.causalbionet.com/
+
+Page: 37
+
+Et les 7 ponts alors!?
+
+• Le problème consiste à déterminer s'il existe ou non une 
+
+promenade dans les rues de Königsberg permettant, à 
+partir d'un point de départ au choix, de passer une et une 
+seule fois par chaque pont, et de revenir à son point de 
+départ, étant entendu qu'on ne peut traverser le fleuve 
+qu'en passant sur les ponts.
+
+Théorème d’Euler (1736):
+Théorème d’Euler (1736):
+
+Un graphe a un cycle eulérien si et seulement si chaque 
+sommet a un degré pair.
+
+Page: 38
+
+Merci de 
+Merci de votre
+Merci de 
+Merci de votre
+
+votre attention
+votre attention
+attention
+attention
+
+Page: 39
+
+

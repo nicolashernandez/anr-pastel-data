@@ -1,0 +1,732 @@
+http://lipn.fr/~kanawati/ars/OLD/ars-com.pdf
+
+Introduction
+
+Partitionnement en communuatés
+
+Fonctions de qualité
+
+Algorithme de détection de communautés
+
+Détection de communautés dans les réseaux
+
+sociaux
+
+Rushed Kanawati
+
+A3 - LIPN UMR CNRS 7030
+
+Université Paris 13
+
+rushed.kanawati@lipn.univ-paris13.fr
+
+Rushed Kanawati
+
+1 / 25
+
+Introduction
+
+Partitionnement en communuatés
+
+Fonctions de qualité
+
+Algorithme de détection de communautés
+
+Plan
+
+Introduction
+
+Partitionnement en communuatés
+
+Fonctions de qualité
+
+Algorithme de détection de communautés
+
+Rushed Kanawati
+
+2 / 25
+
+Introduction
+
+Partitionnement en communuatés
+
+Fonctions de qualité
+
+Algorithme de détection de communautés
+
+Communauté : déﬁnition
+
+• Un sous-graphe dont les nœuds sont plus liés entre eux
+
+qu’avec d’autres nœuds.
+
+Rushed Kanawati
+
+3 / 25
+
+Introduction
+
+Partitionnement en communuatés
+
+Fonctions de qualité
+
+Algorithme de détection de communautés
+
+Intérêts
+
+• Réseaux sociaux : identiﬁcation de groupes d’amis
+• Web : ensemble de pages web traitant un même thème,
+• Réseaux biologiques : un ensemble de gènes dédiés à une
+
+même fonction,
+
+• etc.
+
+Rushed Kanawati
+
+4 / 25
+
+Introduction
+
+Partitionnement en communuatés
+
+Fonctions de qualité
+
+Algorithme de détection de communautés
+
+Application
+
+• Parallélisation
+• Visualisation
+• Compression
+
+Rushed Kanawati
+
+5 / 25
+
+Introduction
+
+Partitionnement en communuatés
+
+Fonctions de qualité
+
+Algorithme de détection de communautés
+
+Problèmes
+
+• Partitionnement du graphe en N sous-graphes
+
+(communautés non chevauchantes).
+
+• Detection de communautés (potentiellement
+
+chevauchantes)
+
+• Identiﬁcation de communauté : délimiter la communauté
+
+d’un nœud.
+
+• Apprentissage d’une similarité entre les nœuds du réseau.
+
+Rushed Kanawati
+
+6 / 25
+
+Introduction
+
+Partitionnement en communuatés
+
+Fonctions de qualité
+
+Algorithme de détection de communautés
+
+Partitionnement du graphe
+
+Recherche de communautés = partitionnement du graphe en N
+communautés.
+
+• Soit P = {C1,C2, . . . ,Cn} une partition du graphe.
+• Soit Q(P) une fonction de qualité de la partition
+• Objectif trouver Pm qui maximise Q(P).
+• Problème NP-diﬃcile.
+• Trouver des heuristiques pour résoudre le problème en
+
+complexité raisonnable
+
+Rushed Kanawati
+
+7 / 25
+
+Introduction
+
+Partitionnement en communuatés
+
+Fonctions de qualité
+
+Algorithme de détection de communautés
+
+Exemples de fonctions de qualité
+
+• La modularité QM (la fonction la plus utilisée)
+• La performance QP
+• . . .
+
+Rushed Kanawati
+
+8 / 25
+
+Introduction
+
+Partitionnement en communuatés
+
+Fonctions de qualité
+
+Algorithme de détection de communautés
+
+La Modularité QM
+
+• La somme, sur toutes les communautés Ci, des diﬀérences
+
+entre la proportion de liens à l’intérieur de la communauté Ci
+et la proportion de liens que peut avoir une communauté dans
+un graphe aléatoire de même taille dans un graphe ayant la
+mêm distribution de degrés.
+• Proportion de liens interne
+
+j∈C Aij
+
+(cid:80)
+i∈C(cid:80)
+i∈C(cid:80)
+(cid:80)
+(cid:80)
+(cid:80)
+
+i∈V
+
+j∈V wij
+j∈V wij
+
+(cid:80)
+i∈C(cid:80)
+• Graphe non ponderé : e(C) = 1
+2×m
+(cid:80)
+(cid:80)
+• Graphe pondéré : e(C) =
+
+j∈C wij
+j∈V wij
+• La proportion de liens liées à C : a(C) =
+
+i∈V
+
+• QM (P) =(cid:80)
+
+c∈P e(C) − a(C )2
+
+• −1 ≤ QM ≤ 1
+• Complexité de calcul : O(m)
+
+Rushed Kanawati
+
+9 / 25
+
+Introduction
+
+Partitionnement en communuatés
+
+Fonctions de qualité
+
+Algorithme de détection de communautés
+
+La performance QP
+
+• Déﬁnitions : 2 nœuds x, y sont en accord sur une partition P
+
+si :
+
+• (x, y ) ∈ E et ∃Ci ∈ (P) tel que x, y ∈ Ci
+• (x, y ) (cid:54)∈ E et (cid:54) ∃Ci ∈ (P) tel que x, y ∈ Ci
+
+• QP est donné par la proportion de nœuds en accord sur une
+
+partition P
+• 0 ≤ QP ≤ 1
+• Complexité de calcul : O(m)
+
+Rushed Kanawati
+
+10 / 25
+
+Introduction
+
+Partitionnement en communuatés
+
+Fonctions de qualité
+
+Algorithme de détection de communautés
+
+Approches de partitionnement
+
+Une grande variété d’approches :
+
+• Approches de bisection de graphes
+• Approches de classiﬁcation hiérarchiques
+• Approches d’optimisation
+• Approches séparatives
+• Approches agglomératives
+• Approches basées sur les marches aléatoires
+• . . .
+
+Rushed Kanawati
+
+11 / 25
+
+Introduction
+
+Partitionnement en communuatés
+
+Fonctions de qualité
+
+Algorithme de détection de communautés
+
+Bisection de graphes
+
+But Grouper les nœuds en un nombre prédéterminé de parties
+(souvent 2) tout en minimisant le nombre de liens inter-groupes.
+
+• Bissection spectrale :
+
+• Calculer le vecteur propre correspondant à la plus petite valeur
+
+propre non nulle de la matrice Laplacienne du graphe
+L = D − A
+
+• Le graphe est séparé en deux parties en fonction du signe de
+• Complexité O(n3)
+
+leur composante selon ce vecteur propre.
+
+• Méthode de Kernighan et Lin
+
+tombant entre les deux groupes.
+
+• Trouver la coupe du graphe minimisant le nombre d’arêtes
+• Une coupe est choisie arbitrairement comme point de départ
+• La bissection est améliorée itérativement en faisant des
+• Complexité O(n3)
+
+échanges de sommets entre les communautés.
+
+Rushed Kanawati
+
+12 / 25
+
+Introduction
+
+Partitionnement en communuatés
+
+Fonctions de qualité
+
+Algorithme de détection de communautés
+
+Classiﬁcation hiérarchique
+
+• Chaque sommet = communauté.
+• On itère jusqu’au avoir une seule communauté :
+
+• Calcule les distances entre chaque 2 communautés
+• Fusionner les deux communautés les plus proches
+
+• On obtient un dendrogramme de communautés.
+• Distance entre communautés : La distance minimale,
+
+maximale, ou moyenne entre deux sommets des 2
+communautés. Distance entre barycentre des communauté.
+
+Rushed Kanawati
+
+13 / 25
+
+Introduction
+
+Partitionnement en communuatés
+
+Fonctions de qualité
+
+Algorithme de détection de communautés
+
+Optimisation : Algorithmique génétique
+
+• Une population de solutions : chaque individu est représenté
+
+par une séquence de gènes
+
+• Evolution de la population par mécanismes de : croisement,
+
+mutation et sélection naturelle.
+
+• Gène : vecteur d’aﬀectation de communauté aux sommets.
+• Mécanismes de sélection : Modularité.
+• Intérêt : Parrallélisation facile.
+
+Rushed Kanawati
+
+14 / 25
+
+Introduction
+
+Partitionnement en communuatés
+
+Fonctions de qualité
+
+Algorithme de détection de communautés
+
+Approches séparatives
+
+• Principe : A chaque itération retirer un lien inter-communuaté
+• Diﬀérents critères pour identiﬁer un lien inter-communauté
+• Algo. de Girvan et Newman :la centralité d’intermédiarité.
+• Algo. de Fortunato : centralité d’information. L’eﬃcacité d’un
+, La centralité d’une
+
+graph E est donné par la moyenne de 1
+dij
+arête (i, j) est donné par la diminution de E en retirant ce lien.
+Complexité O(m3n).
+
+Complexité O(m2n).
+
+Rushed Kanawati
+
+15 / 25
+
+Introduction
+
+Partitionnement en communuatés
+
+Fonctions de qualité
+
+Algorithme de détection de communautés
+
+Approche Agglomérative
+
+• Chaque nœud est associé à une communauté
+• Répéter jusqu’à stabilisation :
+(cid:80)
+
+(cid:80)
+rejoint la communauté d’un noœud voisin j
+2m − (
+
+• ∆Q = (
+
+− (
+
+in
+
+• pour chaque nœud i évaluer le gain de modularité ∆Q si i
+(cid:80)
+2m )2 − ( ki
+
+(cid:80)
+2m )2)
+in est la somme des poids des liens dans la communauté
+
+2m )2) − (
+tot +ki
+
+in +2ki ,in
+
+2m
+
+tot
+
+tot est la somme des liens adjacents aux nœuds de la
+
+• (cid:80)
+• (cid:80)
+
+cible,
+
+communauté cible,
+
+• ki ,in est la somme des poids des liens reliant i à des nœuds de
+
+la communauté cible.
+
+Rushed Kanawati
+
+16 / 25
+
+Introduction
+
+Partitionnement en communuatés
+
+Fonctions de qualité
+
+Algorithme de détection de communautés
+
+Approche Agglomérative (suite)
+
+• (suite Répéter jusqu’à stabilisation)
+
+• i est ajouté á la communauté qui maximise le gain si ce gain
+• Remplacer le graphe actuel par le graphe de connexion de
+
+est positif.
+
+communautés calculé comme suit :
+• Les nœuds sont les communautés
+• Le poids d’un lien (u, v ) est la somme des poids des liens
+
+reliant tous les nœuds de u aux nœuds de v
+
+code :
+http://perso.crans.org/∼aynaud/communities/community.py
+
+Rushed Kanawati
+
+17 / 25
+
+Introduction
+
+Partitionnement en communuatés
+
+Fonctions de qualité
+
+Algorithme de détection de communautés
+
+Algorithme agglomératif
+
+Rushed Kanawati
+
+18 / 25
+
+Introduction
+
+Partitionnement en communuatés
+
+Fonctions de qualité
+
+Algorithme de détection de communautés
+
+Approche de propagation d’étiquettes
+
+• Chaque nœud est attribué une étiquette unique.
+• Chaque nœud propage son étiquette à ses voisins.
+• A réception, chaque nœud adopte l’étiquette majoritaire.
+• En cas de conﬂit, un nœud choisit une étiquette aléatoirement.
+• Deux approches : Propagation synchrone et propagation
+
+asynchrone.
+
+Rushed Kanawati
+
+19 / 25
+
+Introduction
+
+Partitionnement en communuatés
+
+Fonctions de qualité
+
+Algorithme de détection de communautés
+
+Algorithme de Leaders/suiveurs [SZ10]
+
+• Principe : Dans une communauté il y a (au moins) un leader
+
+et des suiveurs.
+
+• La centralité de proximité d’un suiveur > centralité d’un leader.
+• Un nœud est dit leader si sa centralité de proximité est < à la
+
+centralité de tous ses voisins.
+
+• Trier les leaders par ordre croissant de centralité.
+• Associer un suiveur au premier voisin leader.
+• Un nœud isolé est associé au leader majoritaire de ses voisins.
+
+Rushed Kanawati
+
+20 / 25
+
+Introduction
+
+Partitionnement en communuatés
+
+Fonctions de qualité
+
+Algorithme de détection de communautés
+
+Algorithme de Top Leaders [KCZ10]
+
+• Entrée : Graphe (connexe) G =< V , E > et k : nombre de
+
+communautés à trouver
+
+• initialization d’un ensemble L de k leaders
+• répéter
+
+• pour chaque n ∈ V − L associer n à un leader de L .
+• pour chaque l ∈ L l ← argmaxn∈Community (l)Centralite(n)
+
+• Jusqu’au stabilisation de L
+
+Rushed Kanawati
+
+21 / 25
+
+Introduction
+
+Partitionnement en communuatés
+
+Fonctions de qualité
+
+Algorithme de détection de communautés
+
+Approches d’initialisation de L
+
+Diﬀérentes approches testées :
+
+• Choix aléatoire de k leaders
+• Trier les nœuds par la centralité décroissante : choix de top k
+
+nœuds.
+
+• Choix de top k nœuds de sorte que aucun pair de sélectionnés
+
+ne soient de voisins directes.
+
+• Choix de top k nœuds de sorte que le nombre de voisins
+
+communs de chaque pair de sélectionnés soit < δ
+
+Rushed Kanawati
+
+22 / 25
+
+Introduction
+
+Partitionnement en communuatés
+
+Fonctions de qualité
+
+Algorithme de détection de communautés
+
+Attribution de leaders
+
+• Entrées : Graphe G, un nœud n et les leaders L
+• d ← 1 /* profondeur de voisinage */
+• candidats ← L
+• Répéter
+
+• candidats ← argmaxc∈candidats|Γ(n, d) ∩ Γ(c, d)|
+• d ← d + 1
+
+• jusque d ≥ σ OU |candidats| ≤ 1
+• if |candidats| == 1 Then Community (n) ← candidats
+• elif |candidats| == 0 Then n est un nœud libre
+• else n est un hub.
+
+Rushed Kanawati
+
+23 / 25
+
+Introduction
+
+Partitionnement en communuatés
+
+Fonctions de qualité
+
+Algorithme de détection de communautés
+
+Comparaison de partitions
+
+(cid:80)
+j maxi (|Uj ∩ Vj|)
+
+Soient U, V deux partitions d’un graphe G
+
+• Pureté : p(U, V ) = 1|G|
+• Pureté ∈ [0, 1]
+• Indice de Rand :
+
+communauté selon V
+
+communauté selon V
+
+• a pairs placés dans une même communauté selon U et V
+• b pairs placés en même communauté selon U et en diﬀérents
+• c pairs placés en même communauté selon V et en diﬀérents
+• d pairs placées en diﬀérentes communauté selon U et selon V.
+• rand = a+d
+a+b+c+d
+n (a+d)−[(a+b)(a+c)+(c+d)(b+d)]
+• ARI = C 2
+n )2−[(a+b)(a+c)+(c+d)(b+d)]
+(C 2
+• E(ARI)=0
+• rappel : C k
+
+n = n!
+
+k!(n−k)!
+
+Rushed Kanawati
+
+24 / 25
+
+Introduction
+
+Partitionnement en communuatés
+
+Fonctions de qualité
+
+Algorithme de détection de communautés
+
+TP : Détection de communautés prédéterminées
+
+• Zacahry Karaté Club : 2 communautés de 34 nœuds
+• http ://vlado.fmf.uni-
+
+lj.si/pub/networks/data/ucinet/ucidata.htmzachary
+
+• Mouvement de grèves :
+
+http ://vlado.fmf.uni-lj.si/pub/networks/data/esna/strike.htm
+But : appliquer les diﬀérentes algorithmes de détection de
+communauté et mesurer leur performance par rapport aux
+commaunautés établies.
+
+Rushed Kanawati
+
+25 / 25
+
+Introduction
+
+Partitionnement en communuatés
+
+Fonctions de qualité
+
+Algorithme de détection de communautés
+
+Reihaneh Rabbany Khorasgani, Jiyang Chen et Osmar R.
+Zaiane :
+Top leaders community detection approach in information
+networks.
+In 4th SNA-KDD Workshop on Social Network Mining and
+Analysis, Washington D.C., July 2010.
+D. Shah et T. Zaman :
+Community detection in networks : The leader-follower
+algorithm.
+In Workshop on Networks Across Disciplines in Theory and
+Applications, NIPS, November 2010.
+
+Rushed Kanawati
+
+25 / 25
+
+

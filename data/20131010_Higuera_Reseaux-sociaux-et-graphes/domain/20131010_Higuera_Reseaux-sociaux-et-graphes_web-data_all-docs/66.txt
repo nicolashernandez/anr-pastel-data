@@ -1,0 +1,1938 @@
+http://irt.enseeiht.fr/stanica/slides/com.pdf
+
+Sommaire
+
+1. Introduction
+
+1.1 Motivation du sujet
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1.2 Exemples d’applications . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+2. ´Etat de l’art de la d´etection des communaut´es
+
+2.1 D´eﬁnir une communaut´e . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+2.2 Partitionnement des graphes et algorithmes hi´erarchiques . . . . . . . . . . . . . . . . . . . . . .
+2.3 La modularit´e . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+2.4 Autres techniques
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+2.5 ´Evaluation des algorithmes
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+3. Nouvelle perspective sur les graphes orient´es
+
+. . . . . . . . . . . . . . . . . . . . .
+3.1 M´ethodes actuelles de traitement pour les graphes orient´es
+3.2 L’´equivalence structurelle et les graphes orient´es
+. . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.3 Performances sur des graphes avec une structure modulaire pr´ed´eﬁnie . . . . . . . . . . . . . . .
+3.4 Application sur un r´eseau r´eel . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+4. Des communaut´es dynamiques
+
+4.1 Les propri´et´es des r´eseaux dynamiques . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.2 Un nouvel algorithme : motivation et d´eﬁnition . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.3 Performances de l’algorithme sur des graphes statiques . . . . . . . . . . . . . . . . . . . . . . . .
+4.4 Traitement des r´eseaux dynamiques
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+5. Conclusion et perspectives
+
+Annexe A
+
+Bibliographie
+
+2
+2
+3
+
+4
+4
+5
+6
+10
+12
+
+14
+14
+14
+16
+20
+
+23
+23
+24
+26
+27
+
+30
+
+31
+
+34
+
+1
+
+Introduction
+
+1.1 Motivation du sujet
+
+La puissance de calcul des processeurs est devenu de plus en plus importante dans la derni`ere d´ecennie et
+plusieurs domaines, a priori sans aucune liaison avec l’informatique, ont commenc´e `a proﬁter de ces ´evolutions.
+Des biologistes ou des sociologues utilisent largement aujourd’hui l’ordinateur dans leurs ´etudes et l’analyse
+des syst`emes trop complexes pour un œil humain est maintenant possible. Dans ces circonstances, un ´el´ement
+tr`es important est constitu´e par la mod´elisation de ces syst`emes par des structures de donn´ees qui contiennent
+le maximum d’information disponible et qui sont, en mˆeme temps, facilement repr´esentables du point de vue
+informatique.
+
+Un graphe est peut-ˆetre la plus simple structure qui permet la mod´elisation des interactions entre des
+objets divers, mais le nombre d’objets et le nombre d’interactions des syst`emes ´etudi´es, souvent tr`es ´elev´es,
+impliquent l’utilisation des graphes de taille assez importante. L’analyse de ces graphes, appel´es aussi r´eseaux
+complexes, est devenu donc un sujet multidisciplinaire, qui m´elange des notions de physique, de sociologie ou
+d’informatique.
+
+Pour donner une image plus claire de l’importance des r´eseaux complexes, nous allons pr´esenter quelques
+
+exemples o`u ce type de graphe repr´esente un outil de mod´elisation des divers ph´enom`enes [103] :
+
+– Dans les r´eseaux sociaux, les nœuds repr´esentent des individus et les liens peuvent ˆetre de diﬀ´erentes
+natures : connaissance entre individus, contact physique, collaborations, appels t´el´ephoniques, ´echange
+des mails ou des ﬁchiers etc.
+
+– Les r´eseaux d’infrastructure mod´elisent des connections mat´erielles entre objets. C’est le cas des
+
+r´eseaux de transports ou des r´eseaux de distribution ´electrique.
+
+– Plusieurs types des r´eseaux biologiques ont ´et´e mod´elis´es par des graphes. Par exemple, les r´eseaux
+m´etaboliques, o`u les nœuds sont des g`enes ou des prot´eines reli´es par des interactions chimiques, les
+r´eseaux de neurones ou bien les r´eseaux trophiques
+
+– Les r´eseaux d’information d´ecrivent des liens abstraits de r´ef´erencement entre des supports d’infor-
+
+mation. L’exemple classique est celui des pages Web li´ees par des liens hypertexte.
+
+Les probl´ematiques d’´etude peuvent ˆetre aussi tr`es vari´ees, selon les disciplines. Par exemple on ´etudie
+la propagation des ´epid´emies grˆace `a un r´eseau social de contact physique ou on peut vouloir ´etablir les proﬁls
+des clients d’un op´erateur t´el´ephonique en analysant le r´eseau des appels t´el´ephoniques.
+
+La puissance des r´eseaux complexes comme outil de mod´elisation ´etant ´evidente, le pas suivant a ´et´e
+d’´etudier les propri´et´es de ces syst`emes en utilisant les approches classiques de la th´eorie des graphes. La
+plupart de ces analyses se sont concentr´ees soit sur un niveau microscopique, en d´ecrivant les propri´et´es de
+chaque nœud, soit sur un niveau macroscopique, c’est-`a-dire sur les caract´eristiques de la totalit´e du r´eseau, en
+ignorant les niveaux interm´ediaires. Pourtant, ces derni`eres ann´ees, les dimensions de plus en plus importantes
+des r´eseaux r´eels mod´elis´es ont relev´e quelques propri´et´es m´esoscopiques int´eressantes comme la distribution
+en loi de puissance du degr´e des nœuds ou bien, dans beaucoup de cas, un fort coeﬃcient de clustering.
+
+Cette h´et´erog´en´eit´e dans la r´epartition des liens indique tr`es souvent l’existence des groupes de noeuds
+fortement li´es par la topologie du r´eseau, liaison qui implique d’habitude une similarit´e au niveau structurel
+et/ou au niveau fonctionnel des nœuds. Pour cette raison, on appelle ces groupes ”des communaut´es”, en
+employant un terme qui provient de la sociologie et qui d´esigne un groupe de personnes qui interagissent plus
+`a l’int´erieur de leur groupe qu’avec les autres membres de la population.
+
+2
+
+D´etection des communaut´es dans des r´eseaux dynamiques
+Razvan Stanica
+3SCR 2008
+
+Connaitre les diverses communaut´es d’un r´eseau peut s’av´erer tr`es utile lorsqu’il s’agit, par exemple,
+de la propagation d’un virus, du routage dans les r´eseaux tol´erants aux d´elais [25][59][60][78], de l’interaction
+entre les g`enes [56] ou de la recherche des pages web [32]. Comme la taille des r´eseaux analys´es ne permet
+pas aux humains de d´etecter ces groupes de nœuds, la d´etection automatique des communaut´es est devenu un
+sujet de recherche important pour beaucoup de math´ematiciens, informaticiens et physiciens.
+
+Pourtant, en d´epit de l’int´erˆet accord´e au sujet, la quasi-totalit´e des chercheurs se sont concentr´es sur
+l’´etude des communaut´es dans des graphes statiques, mˆeme si les syst`emes mod´elis´es sont souvent intrins`e-
+quement dynamiques. L’´evolution temporelle des communaut´es, l’apparition de nouvelles familles de nœuds
+ou le changement de communaut´es d’un nœud ont ´et´e ignor´es jusqu’`a pr´esent.
+
+Notre travail vient donc remplir ce vide, en ´etudiant l’inﬂuence du dynamisme des graphes sur la
+
+d´etection des communaut´es dans des r´eseaux complexes.
+
+1.2 Exemples d’applications
+
+En dehors de l’int´erˆet scientiﬁque d´ecrit ci-dessus, le travail eﬀectu´e pendant ce stage est aussi impor-
+tant dans le contexte de deux projets pluridisciplinaires auxquels participe l’Institut Rhˆonalpin de Syst`emes
+Complexes (IXXI).
+
+Cet institut f´ed`ere toutes les ´equipes de recherche de la r´egion Rhˆone-Alpes travaillant sur les syst`emes
+complexes, en oﬀrant des possibilit´es d’interaction aux chercheurs de disciplines diﬀ´erentes. Ainsi l’IXXI r´eunit
+dans un lieu unique exp´erimentateurs et mod´elisateurs, biologistes, ´economistes et g´eographes, philosophes,
+informaticiens et physiciens ou encore, linguistes, math´ematiciens et roboticiens.
+
+Le premier de ces deux projets est une ´etude en collaboration avec la soci´et´e JCDecaux, les initiateurs du
+programme Velov qui propose des v´elos en libre service `a Lyon. Dans le cadre de cette ´etude, des sociologues,
+des sp´ecialistes dans les transports, des physiciens et des informaticiens mod´elisent et analysent les pratiques
+d’utilisation du syst`eme Velov dans le but de l’am´eliorer.
+
+JCDecaux a mis `a la disposition des chercheurs l’int´egralit´e des traces de traﬁc des v´elos entre le 19 mai
+2005 (la date de d´ebut du programme) et le 31 d´ecembre 2007, soit plus de 13 millions de d´eplacements. Avec
+150 stations en juin 2005 et 327 au ﬁn d´ecembre 2007, le r´eseau Velov peut ˆetre consid´er´e comme un excellent
+exemple de graphe dynamique. L’objectif dans ce cas est double. Il faut d’abord analyser les communaut´es des
+stations pr´esentes dans le r´eseau actuel pour mieux comprendre le comportement des utilisateurs et ´eventuel-
+lement am´eliorer la r´epartition des v´elos. En mˆeme temps, il est important de tenir compte du dynamisme de
+ce r´eseau qui a augment´e de plus de 100% en 18 mois et d’´etudier l’´evolution des communaut´es avec le temps
+pour pouvoir se baser sur des informations pertinentes quand il faudra choisir des nouveaux emplacements
+pour les stations.
+
+L’analyse des modiﬁcations des communaut´es au niveau temporel est aussi int´eressante pour un deuxi`eme
+projet auquel l’IXXI participe, le projet europ´een MOSAR (Mastering hOSpital Antimicrobial Resistance),
+qui ´etudie l’´emergence et la diﬀusion de bact´eries r´esistantes aux antibiotiques.
+
+Au sein du consortium pluridisciplinaire MOSAR, compos´e de biologistes, ´epid´emiologistes, profession-
+nels de la sant´e et ´economistes, l’´equipe ARES de l’ENS Lyon est charg´ee de la collecte des donn´ees sur le
+r´eseau de 400 capteurs et la mod´elisation de la dynamique de transmission des bact´eries. Un monitoring des
+interactions entre personnels hospitaliers et malades permettra d’examiner les facteurs de transmission et de
+diﬀusion des bact´eries et l’eﬃcacit´e des strat´egies de contrˆole mises en place. Le monitoring sera r´ealis´e par
+un r´eseau de 400 capteurs, chaque capteur ´etant associ´e `a un patient, un agent hospitalier ou `a un lieu de
+passage. Pendant une p´eriode de 6 mois, les capteurs enregistreront toutes les interactions per¸cues dans leur
+champ de proximit´e.
+
+L’importance des communaut´es est ´evidente pour comprendre le fonctionnement d’un tel r´eseau, ou
+les bact´eries sont transmises par des contacts physiques, plus probables entre deux personnes de la mˆeme
+communaut´e. Un algorithme qui pourra d´evoiler ces communaut´es et leur ´evolution aidera a la mise au point
+d’approches eﬃcaces pour ´eviter l’´emergence et contenir la diﬀusion de ces bact´eries dans l’environnement
+hospitalier europ´een.
+
+3
+
+´Etat de l’art de la d´etection des
+communaut´es
+
+2.1 D´eﬁnir une communaut´e
+
+Avant mˆeme de proposer un algorithme pour d´etecter les communaut´es, il faut se poser une autre
+question : comment exprimer math´ematiquement l’appartenance d’un nœud `a une communaut´e plutˆot qu’`a
+une autre ? Si son sens sociologique est assez clair pour un ˆetre humain, il devient tout `a fait inutilisable
+lorsqu’il s’agit d’un calcul exact.
+
+Mˆeme si essentielle, cette question est peu adress´ee dans la litt´erature. De mani`ere intuitive, on peut
+aﬃrmer qu’un nœud appartient `a une communaut´e s’il est fortement li´e aux autres nœuds de la communaut´e
+et il a peu de liaisons avec l’ext´erieur. Dans la th´eorie des graphes, il existe d´ej`a quelques d´eﬁnitions qui
+remplissent ces contraintes.
+
+Une clique est un sous-graphe complet maximal, o`u chaque nœud est li´e avec tous les autres. Il est ´evident
+qu’une clique poss`ede les propri´et´es requises pour une communaut´e, mais elle impose aussi des restrictions
+importantes, surtout pour les r´eseaux peu denses.
+
+Une structure moins stricte est le k-core, un sous-graphe de dimension sup´erieure `a k, ou chaque nœud
+doit avoir des liaisons vers au moins k autres nœuds. Mˆeme si les contraintes d’un k-core sont moins dures, il
+d´efavorise les introvertis, les nœuds de faible degr´e.
+
+Les notions de clique et de k-core sont bas´ees seulement sur l’analyse d’un sous-graphe donn´e. Une
+troisi`eme d´eﬁnition, qui prend en compte la totalit´e du graphe, est celle d’un LS set. Un LS set est un groupe
+de nœuds qui pr´esente la propri´et´e que chaque sous-groupe de ce groupe poss`ede plus de liaisons vers l’int´erieur
+du groupe que vers le reste du graphe.
+
+A part ces d´eﬁnitions, assez restrictives, qui peuvent ˆetre utilis´ees aussi dans la d´etection des commu-
+naut´es, il existe trois autres essais d’exprimer math´ematiquement le concept. Deux de ces d´eﬁnitions, celle de
+communaut´e au sens fort et celle de communaut´e au sens faible, sont donn´ees par Radicchi et al. [104] .
+
+La d´eﬁnition forte de la communaut´e tient compte de chaque nœud du sous-ensemble. Ainsi, un sous-
+
+graphe V est consid´er´e une communaut´e si
+
+i (V ) > kout
+kin
+
+i
+
+(V ),∀i ∈ V
+
+i (V ) repr´esente le nombre de liens du nœud i avec les nœuds de l’ensemble V et kout
+
+o`u kin
+est le nombre de
+liens du nœud i `a l’ext´erieur de la communaut´e. Cette d´eﬁnition impose une contrainte sur chaque nœud, ce
+qui n’est pas le cas pour une communaut´e dans le sens faible :
+
+i
+
+(cid:88)
+
+i∈V
+
+(cid:88)
+
+i∈V
+
+i (V ) >
+kin
+
+kout
+i
+
+(V )
+
+Concr`etement, dans une communaut´e forte chaque nœud a plus de liens vers sa communaut´e que vers le reste
+du graphe et dans une communaut´e faible le nombre de liens internes est sup´erieur au nombre de liens externes.
+Plus r´ecemment, Hu et al. ont propos´e une nouvelle d´eﬁnition d’une communaut´e, encore moins contrai-
+gnante [55] . Dans leur d´eﬁnition, un nœud i fait partie de la communaut´e Va s’il a au moins autant de liens
+
+4
+
+D´etection des communaut´es dans des r´eseaux dynamiques
+Razvan Stanica
+3SCR 2008
+
+Fig. 1 – Exemple de dendogramme
+
+vers cette communaut´e que vers n’importe quelle autre communaut´e :
+i (Vb),∀b (cid:54)= a,∀i ∈ V
+
+i (Va) ≥ kin
+kin
+
+Pourtant, il existe peu d’algorithmes qui utilisent directement ces d´eﬁnitions. Dans la plupart des cas,
+on ne regarde mˆeme pas si le partitionnement ﬁnal les v´eriﬁe, mais on pr´ef`ere comparer les propri´et´es de ce
+partitionnement avec un mod`ele de r´ef´erence qui provient d’une topologie similaire mais sans une structure
+modulaire (le ”null model”).
+
+Le fait qu’il n’existe pas une d´eﬁnition g´en´eralement reconnue pour la notion de communaut´e rend plus
+diﬃcile la construction d’un algorithme accept´e par tout le monde, mais, en mˆeme temps, permet de diversiﬁer
+et particulariser les approches prosopop´ees pour d´etecter ce type de structures.
+
+2.2 Partitionnement des graphes et algorithmes hi´erarchiques
+
+Les premiers algorithmes qui visaient la d´etection des communaut´es dans les r´eseaux complexes pou-
+
+vaient ˆetre classiﬁ´es en deux familles, selon le domaine de provenance des chercheurs qui les proposaient.
+
+Les informaticiens ont recommand´e [32][33] de traiter la recherche des communaut´es d’une mani`ere
+similaire `a un autre probl`eme, beaucoup ´etudi´e dans leur domaine, celui du partitionnement des graphes. Ce
+probl`eme, tr`es important dans le contexte des calculs distribu´es et de la communication entre les processeurs,
+a comme but de trouver le partitionnement d’un graphe dans un nombre donn´e de modules de tailles connues
+aﬁn de minimiser les liaisons entre ces modules. Mais, mˆeme si la d´etection des communaut´es a le mˆeme but
+ﬁnal, les diﬀ´erences par rapport au partitionnement des graphes sont majeures : le nombre de communaut´es
+et leurs tailles sont inconnus et, le plus important, il faut pouvoir reconnaitre les r´eseaux qui ne poss`edent pas
+une structure modulaire. Ce qui fait que ces algorithmes, la plupart bas´es sur le th´eor`eme du min cut - max
+ﬂow, ne sont pas tr`es utilis´es.
+
+La deuxi`eme famille d’algorithmes s’est inspir´ee des techniques utilis´ees dans les analyses sociologiques.
+Parce que le r´esultat d’un tel algorithme peut ˆetre repr´esent´e sous la forme d’une sorte de ﬁgure pyramidale,
+appel´ee dendogramme (voir ﬁgure 1), ce type d’approche porte le nom d’approche hi´erarchique.
+
+A son tour, la famille des algorithmes hi´erarchiques peut ˆetre divis´ee en deux : les m´ethodes hi´erarchiques
+ascendantes (agglomeratives) et les m´ethodes hi´erarchiques descendantes (divisives). Les deux m´ethodes sont
+bas´ees sur la d´eﬁnition d’une mesure de similarit´e entre chaque paire de nœuds.
+
+Les algorithmes agglomeratifs [22][52] commencent avec chaque nœud dans une communaut´e diﬀ´erente
+et, `a chaque it´eration, les deux communaut´es les plus similaires sont regroup´ees, jusqu’au moment o`u tous les
+nœuds sont dans la mˆeme communaut´e. Les algorithmes divisifs [38][104], au contraire, mettent initialement
+tous les nœuds dans un graphe complet et ils enl`event les liens entre les nœuds avec la similarit´e la plus faible.
+Petit `a petit le graphe se s´epare en plusieurs composantes connexes (les communaut´es) et, au ﬁnal, chaque
+nœud est une communaut´e.
+
+Plusieurs mesures ont ´et´e propos´ees pour mesurer la similarit´e entre les nœuds, mais la plus utilis´ee
+
+5
+
+D´etection des communaut´es dans des r´eseaux dynamiques
+Razvan Stanica
+3SCR 2008
+
+dans le cadre des m´ethodes ascendantes est la distance euclidienne :
+(Aik − Ajk)2
+
+xij =
+
+(cid:115)(cid:88)
+
+k(cid:54)=i,j
+
+o`u A est la matrice d’adjacence du graphe.
+
+L’algorithme hi´erarchique le plus connu et celui qui a marqu´e le d´ebut de ”l’`ere moderne” de la d´etection
+des communaut´es est un algorithme divisif propos´e par Girvan et Newman [90][92]. Cet algorithme est bas´e
+sur la notion de centralit´e des liens (edge betweeness) , c’est-`a-dire le nombre de plus courts chemins auxquels
+un lien appartient. Les deux auteurs observent que, du au fait qu’il y a peu de liens entre les communaut´es, ces
+liens doivent se trouver sur un nombre important de plus courts chemins. Ils mesurent donc cette centralit´e
+pour chaque lien et ils enl`event le lien le plus central. L’op´eration est r´ep´et´ee jusqu’`a ce qu’il ne reste plus de
+liens dans le graphe et le r´esultat est donc repr´esentable sous la forme d’un dendogramme.
+
+Malgr´e sa complexit´e (O(m2n) o`u m est le nombre de liens du graphe et n le nombre total de nœuds),
+qui le rend pratiquement inutilisable pour des r´eseaux de plus de quelques milliers de nœuds, l’algorithme de
+Girvan-Newman est `a la base de plusieurs ´etudes [56][74][116] grˆace `a ses bases th´eoriques solides et il est
+aujourd’hui impl´ement´e dans beaucoup de librairies d’analyse des r´eseaux complexes.
+
+Compar´es aux solutions propos´ees pour le partitionnement des graphes, les algorithmes hi´erarchiques
+ne n´ecessitent plus la connaissance pr´ealable du nombre et de la taille des partitions. Pourtant, il reste tr`es
+diﬃcile de choisir le niveau du dendogramme qui donne le meilleur partitionnement et il est impossible de
+reconnaitre les graphes qui ne poss`edent pas cette structure modulaire.
+
+2.3 La modularit´e
+
+La version initiale de l’algorithme de Girvan-Newman constitue sans doute un pas important dans la
+
+d´etection automatique des communaut´es mais l’interpr´etation du dendogramme reste un probl`eme majeur.
+
+Pour am´eliorer l’algorithme de ce point de vue, Girvan et Newman proposent une nouvelle version [91],
+munie cette fois ci d’une fonction qui indique le meilleur partitionnement du dendogramme et qui donne aussi
+une indication sur la qualit´e du r´esultat ﬁnal. Cette fonction, appel´ee modularit´e , est calcul´ee par la formule :
+
+(eii − a2
+i )
+
+(1)
+
+o`u eij repr´esente la fraction des liens du graphe qui ont une extremit´e dans la communaut´e i et l’autre bout
+
+dans la communaut´e j et ai =(cid:80)
+
+j eij.
+
+L’´equation (1) peut ˆetre ´ecrite sous deux autres formes ´equivalentes :
+
+(cid:19)
+
+Q =
+
+1
+2L
+
+Aij − kikj
+2L
+
+δ(σi, σj)
+
+Q =(cid:88)
+
+i
+
+(cid:18)
+
+(cid:88)
+
+i(cid:54)=j
+
+(cid:34)
+
+Q =(cid:88)
+
+s
+
+(cid:19)2(cid:35)
+
+(cid:18) ds
+
+2L
+
+−
+
+ls
+L
+
+(2)
+
+(3)
+
+o`u L est le nombre total de liens dans le graphe, A est la matrice d’adjacence du graphe, ki est le degr´e du
+nœud i, δ est la fonction de Kronecker et σi est l’indice de la communaut´e du nœud i et
+
+o`u ls est le nombre de liens internes dans la communaut´e s et ds est le degr´e total des nœuds dans la
+communaut´e s.
+
+Quelle que soit la mani`ere dont on exprime la modularit´e, sa signiﬁcation reste la mˆeme : la diﬀ´erence
+entre le nombre de liens `a l’int´erieur d’une communaut´e et le nombre de liens attendus `a l’int´erieur de cette
+communaut´e si les liens apparaissent al´eatoirement dans le graphe tout en respectant la distribution des degr´es
+des nœuds. Un partitionnement dans une seule communaut´e donne une modularit´e de 0 et une modularit´e
+sup´erieure `a 0.3 est d’habitude consid´er´ee comme une valeur signiﬁcative pour un r´eseau modulaire.
+
+6
+
+D´etection des communaut´es dans des r´eseaux dynamiques
+Razvan Stanica
+3SCR 2008
+
+Cette fonction qualitative essaye donc de maximiser le nombre de liens `a l’int´erieur des communaut´es,
+une approche diﬀ´erente de celle utilis´ee pour partitionner les graphes, o`u on se propose de minimiser le
+nombre de liens entre communaut´es. Les propri´et´es de la modularit´e l’imposent face aux autres fonctions
+qualitatives [49] et une grande partie des algorithmes hi´erarchiques l’utilisent aujourd’hui pour choisir le
+meilleur partitionnement.
+
+La complexit´e de ces algorithmes et le fait que chaque m´ethode donne des bons r´esultats pour la
+modularit´e dans certains cas et des mauvais dans d’autres provoquent Newman `a proposer une approche
+bas´ee totalement sur la recherche d’un maximum de la modularit´e [81]. A partir de ce moment, la modularit´e
+devient un standard de facto dans la d´etection des communaut´es et la plupart des travaux se focalisent sur la
+recherche du partitionnement qui maximise la modularit´e.
+
+Optimisation de la modularit´e
+
+Malheureusement, le nombre de partitionnements possibles augmente de mani`ere exponentielle avec le
+nombre de nœuds [81] et la maximisation de la modularit´e est un probl`eme qui ne peut pas ˆetre r´esolu dans
+un temps polynomial [18]. Une limite sup´erieure pour cette fonction peut ˆetre calcul´ee sur un graphe donn´e
+[50], mais mˆeme ce calcul a une complexit´e ´elev´ee, qui limite son application `a des r´eseaux de petite taille.
+
+N´eanmoins, de nombreux algorithmes [2][7][15][16][44][51][54][73][75][82][83][87] ont ´et´e propos´es pour
+approximer cet optimum si diﬃcile `a atteindre. Les proﬁls tr`es vari´es des chercheurs m`enent `a une gamme
+tr`es diversiﬁ´ee d’approches, commen¸cant avec des m´ethodes bas´ees sur des notions de thermodynamique
+[75] et allant jusqu’`a l’utilisation des structures de donn´ees sp´eciales [87] ou des algorithmes g´en´etiques [15].
+Plusieurs comparaisons entre ces diﬀ´erentes m´ethodes d’optimisation [4][5][36] montrent que, dans le choix
+d’un algorithme, il faut trouver un ´equilibre entre la pr´ecision et le temps d’ex´ecution.
+
+L’algorithme rapide de Newman [81] est le premier qui a ´et´e propos´e et la version d´ecrite en [87],
+qui utilise des structures de donn´ees sp´ecialement con¸cues pour les matrices creuses, a une complexit´e de
+O(nlog2n). Dans sa phase initiale, chaque nœud est une communaut´e. Pour toutes les paires de communaut´es
+voisines, la modiﬁcation de la modularit´e en cas de fusion est calcul´ee et les deux communaut´es qui apportent
+le gain le plus important sont r´eunies dans une seule. Ce calcul est eﬀectu´e de mani`ere it´erative jusqu’au
+moment o`u aucun gain n’est plus possible. Avec des r´esultats satisfaisants, cet algorithme a l’avantage qu’il
+est tr`es rapide et il peut ˆetre utilis´e pour des r´eseaux de plus d’un million de nœuds.
+
+L’algorithme de Guimer`a et Amaral [45] est l’algorithme qui donne les meilleurs r´esultats en
+termes de modularit´e. Ces travaux, appliqu´es initialement `a la cartographie de r´eseaux m´etaboliques, utilisent
+une technique d’optimisation stochastique, le recuit simul´e. Inspir´ee par un processus utilis´e en m´etallurgie,
+cette m´ethode alterne des cycles de refroidissement lent et de r´echauﬀage qui tendent `a minimiser l’´energie
+du syst`eme. Concr`etement, dans notre cas, les nœuds sont plac´es al´eatoirement dans deux communaut´es et
+des mouvements individuels sont eﬀectu´es. Ces mouvements sont acceptes avec une probabilit´e p = 1 s’ils
+am`enent un gain en modularit´e et avec une probabilit´e p ∼ e
+si ∆Q < 0. Ces mouvements individuels sont
+suivis par un nombre de mouvements collectifs (s´eparations et fusions des communaut´es) et la ”temp´erature”
+du syst`eme (T ) est diminu´ee, jusqu’`a l’´equilibre. Les r´esultats obtenus par cette technique sont tr`es souvent
+utilis´es comme des r´ef´erences pour les autres algorithmes. Malheureusement, la complexit´e de l’algorithme est
+assez ´elev´ee et il est impossible de l’utiliser pour des r´eseaux de plus de 105 nœuds.
+
+∆Q
+T
+
+L’algorithme de Guillaume et al. a ´et´e propos´e r´ecemment [44] et il parvient `a des r´esultats similaires
+aux ceux de Guimer`a et Amaral dans un temps d’ex´ecution inferieur `a celui de Newman, ce qui a permis de
+l’appliquer sur des sous-graphes du web de plus de 100 millions nœuds. Comme dans la version de Newman,
+au d´ebut chaque nœud est mis dans une communaut´e diﬀ´erente. Les n nœuds sont parcourus dans un ordre
+al´eatoire et, pour chacun d’entre eux, on regarde si le placement dans la communaut´e d’un de ses voisins
+apporte un gain en modularit´e. Si c’est le cas, le nœud est d´eplac´e dans cette communaut´e, sinon il reste dans
+l’ancienne communaut´e. Lorsqu’aucun gain n’est plus possible, la deuxi`eme ´etape de l’algorithme commence.
+Un nouveau graphe est cr´e´e, dont les nœuds correspondent aux communaut´es de l’´etape pr´ec´edente, et la
+premi`ere ´etape est r´ep´et´ee sur ce graphe. Les it´erations s’arrˆetent au moment o`u une nouvelle ´etape n’apporte
+plus une croissance de la modularit´e. A part le temps d’ex´ecution tr`es rapide et les excellentes valeurs de
+la modularit´e, cette m´ethode fournit donc aussi une structure modulaire hi´erarchique, ce qui peut ˆetre tr`es
+
+7
+
+D´etection des communaut´es dans des r´eseaux dynamiques
+Razvan Stanica
+3SCR 2008
+
+important pour des r´eseaux de grande taille.
+
+Dans sa version initiale, la modularit´e ´etait utilisable seulement dans le cas d’un graphe non-orient´e et
+non-pond´er´e et l’appartenance d’un nœud `a plusieurs communaut´es n’´etait pas envisag´ee. La fonction a ´et´e
+red´eﬁnie pour le cas pond´er´e [79] et pour les graphes orient´es [48][94]. Les 3 algorithmes d´ecrits dans cette
+section et la plupart des algorithmes cit´es sont facilement adaptables `a n’importe quelle de ces d´eﬁnitions.
+D’autres extensions de la modularit´e ont ´et´e propos´ees, pour permettre l’analyse des graphes bipartits [48] et
+des hypergraphes [17] ou pour r´esoudre le probl`eme d’appartenance `a plusieurs communaut´es [96], mais leur
+utilisation n´ecessite des modiﬁcations plus importantes au niveau algorithmique
+
+Les probl`emes de la modularit´e
+
+Mˆeme si l’optimisation de la modularit´e a concentr´e la quasi-totalit´e des travaux de recherche, quelques
+analyses pertinentes de cette fonction existent dans la litt´erature. Guimer`a et al. [47] et, plus tard, Reichardt
+et Bornholdt [108][110] ´etudient le mod`ele de r´ef´erence utilis´e par Newman. Ce mod`ele est bas´e sur l’hypo-
+th`ese qu’un graphe pour lequel les liens ont une r´epartition totalement al´eatoire doit avoir une modularit´e
+proche de 0. Cette hypoth`ese n’est pas valide et des r´esultats analytiques et des simulations montrent que des
+partitionnements avec une modularit´e entre 0.2 et 0.6 existent dans tous les r´eseaux al´eatoires. Il est vrai que
+la probabilit´e d’apparition d’un tel partitionnement est beaucoup plus faible dans ces graphes, mais le nombre
+important des partitionnements possibles fait que cette faible probabilit´e est suﬃsante et donc l’existence d’une
+structure modulaire dans les graphes al´eatoires est une r`egle, et non pas une exception. Reichardt et Bornholdt
+arrivent mˆeme `a d´eduire une formule pour la modularit´e attendue dans un r´eseau de type Erdos-Renyi1 avec
+N nœuds et un degr´e moyen (cid:104)k(cid:105) = pN :
+
+(cid:114)1 − p
+
+pN
+
+Q = 0.97
+
+(4)
+
+(5)
+
+En conclusion, une modularit´e importante n’est pas forcement le signe d’une structure modulaire. New-
+man et al. [93] proposent de r´esoudre ce probl`eme par une introduction de perturbations dans le syst`eme. Si
+une structure communautaire ´etait bien d´eﬁnie, le fait de retracer un petit nombre de liens ne devrait pas trop
+la modiﬁer. Cette technique a le d´esavantage de donner plutˆot des informations sur la qualit´e de l’algorithme
+utilis´e et non pas sur celle du partitionnement. De plus, elle n´ecessite de faire tourner plusieurs fois l’algorithme
+de d´etection des communaut´es, ce qui peut ˆetre assez p´enalisant au niveau du temps d’ex´ecution.
+
+Une solution plus simple serait de comparer la modularit´e du partitionnement obtenu par l’algorithme
+avec une valeur th´eorique, comme celle donn´ee par l’´equation 4. Malheureusement, les r´eseaux complexes
+ont des propri´et´es diﬀ´erentes des graphes Erdos-Renyi et une telle comparaison n’aurait pas la signiﬁcation
+souhait´ee. En [108], Reichardt et Bornholdt arrivent `a d´eduire aussi une formule valable pour des mod`eles
+plus r´ealistes, toujours avec un degr´e moyen (cid:104)k(cid:105), mais avec une distribution en loi de puissance des degr´es des
+nœuds :
+
+(cid:112)(cid:104)k(cid:105)
+
+(cid:104)k(cid:105)
+
+Q = 0.97
+
+Comme les calculs exacts dans ce dernier cas sont beaucoup plus diﬃciles, les auteurs obtiennent une
+valeur exacte pour un partitionnement en deux communaut´es et ils utilisent ce r´esultat de mani`ere r´ecurrente.
+Il existe beaucoup de contre-exemples [109] qui prouvent que cette r´ecurrence ne m`ene pas toujours `a un
+partitionnement id´eal et cette formule doit donc ˆetre vue comme une approximation.
+
+N´eanmoins, une comparaison avec la valeur calcul´ee `a l’aide de (5) peut donner une id´ee sur la signiﬁ-
+cation du partitionnement obtenu, mais il ne faut pas oublier que le mod`ele utilis´e pour obtenir cette formule
+n’est pas une repr´esentation r´ealiste dans la totalit´e des cas et que les approximations eﬀectu´ees pour d´eduire
+cette ´equation impliquent plusieurs hypoth`eses qui ne sont pas g´en´eralement valables.
+
+Le deuxi`eme grand probl`eme de la modularit´e a ´et´e d´ecouvert par Fortunato et Barth´elemy [35] et
+on parle cette fois-ci d’un probl`eme de r´esolution. La modularit´e est d´eﬁnie `a partir de la notion de nombre
+
+1Le mod`ele Erdos-Renyi est le mod`ele le plus utilis´e pour la g´en´eration des graphes al´eatoires. Dans ce mod`ele, des liens entre
+
+chaque paire de nœuds sont ´etablis avec la mˆeme probabilit´e p.
+
+8
+
+D´etection des communaut´es dans des r´eseaux dynamiques
+Razvan Stanica
+3SCR 2008
+
+Fig. 2 – Limite de r´esolution de la modularit´e (selon [35]). Km est une clique d’ordre m et le partitionnement
+qui maximise la modularit´e est indiqu´e par la ligne interrompue.
+
+attendu de liens l. Pour deux groupes de nœuds S1 et S2, avec des degr´es totaux d1 et d2, le nombre de liens
+attendus entre S1 et S2 est :
+
+l = d1d2
+2L
+
+(6)
+
+On observe que d1 et d2 ne d´ependent pas du nombre total de liens L et donc le produit d1d2 peut ˆetre
+inferieur `a 2L et, dans ce cas, le nombre attendu de liens entre S1 et S2 est inf´erieur `a 1. Ce qui signiﬁe qu’un
+seul lien entre les deux groupes suﬃrait pour que leur fusion dans une seule communaut´e am`ene un gain en
+modularit´e. Si d1 = d2 = d, la condition l < 1 est ´equivalente a d <
+2L ce qui fait qu’on parle souvent dans
+la litt´erature d’une limite de r´esolution de la modularit´e de
+
+√
+
+√
+
+L.
+
+∼ √
+
+Plusieurs exemples sont analys´es en [35] et cette limite est bien mise en ´evidence, mˆeme dans des cas
+o`u la structure modulaire est tr`es claire (voir ﬁgure 2). La maximisation de la modularit´e ne peut donc pas
+aller au del`a d’une certaine limite, impos´ee par la taille du graphe.
+
+La solution propos´ee par Fortunato et Barth´elemy en [35] est d’analyser les communaut´es de taille
+L comme des graphes isol´es, mˆeme s’ils reconnaissent qu’il n’y a aucun support th´eorique derri`ere cette
+proposition. En eﬀet, la modularit´e est une fonction globale d’un partitionnement est son application seulement
+L est trouv´ee dans un cas
+sur un sous-graphe ne donne pas des r´esultats signiﬁcatives. De plus, la limite de
+extrˆeme et elle peut ˆetre plus ´elev´ee dans des cas plus proches de la r´ealit´e [68].
+
+√
+
+Arenas et al. pr´esentent une solution ´el´egante pour r´esoudre ce probl`eme de r´esolution par l’introduction
+d’un param`etre r[10]. Dans leur approche, le degr´e de chaque nœud est modiﬁ´e en lui ajoutant une boucle
+de poids r. Cette technique permet de modiﬁer le degr´e total du graphe L, sans modiﬁer sa topologie. r peut
+prendre mˆeme des valeurs n´egatives, `a condition que le degr´e total du graphe reste positif, et l’id´ee des auteurs
+et de faire varier ce param`etre entre sa valeur minimale rasymp = − 2L
+N (N est l’ordre du graphe) et une valeur
+maximale au del`a de laquelle la taille du graphe n’inﬂuence plus le r´esultat. Cette valeur maximale est donn´ee
+par la formule
+
+(di + r)(dj + r)
+
+,∀i (cid:54)= j
+
+lij <
+
+2L + N r
+
+9
+
+D´etection des communaut´es dans des r´eseaux dynamiques
+Razvan Stanica
+3SCR 2008
+
+o`u lij est le nombre de liens entre les communaut´es i et j
+
+Cette solution donne des r´esultats int´eressants dans beaucoup de cas [10][69] mais son d´esavantage est
+qu’elle impose de faire tourner l’algorithme de d´etection plusieurs fois avec des valeurs diﬀ´erentes pour le
+param`etre r, ce qui peut ˆetre assez coˆuteux, surtout pour des r´eseaux de grande taille o`u la plage possible
+pour r est importante.
+
+Pourtant, malgr´e les probl`emes d´ecrits dans cette section, la modularit´e reste la fonction qualitative la
+
+plus utilis´ee dans la d´etection des communaut´es et son optimisation est encore un d´eﬁ tr`es int´eressant.
+
+2.4 Autres techniques
+
+Les formations diﬀ´erentes des chercheurs int´eress´es dans la d´etection des communaut´es ont men´e, comme
+nous l’avons vu dans la section pr´ec´edente, `a un nombre impressionnant de m´ethodes propos´ees. Ces m´ethodes
+ne se limitent pas `a l’optimisation de la modularit´e et elles am`enent aussi d’autres points de vue sur la notion de
+communaut´e [1][6][11][14][21][26][27][28][37][38][42][31][55][58][72][76][95][97][99][102][105][107] [109] [111] [115]
+[117] [118] [119].
+
+Il serait impossible et inutile de d´etailler toutes ces approches dans ce rapport et nous allons nous
+
+contenter de d´ecrire dans cette section les algorithmes les plus utilis´es et les plus cit´es dans la litt´erature.
+
+Les m´ethodes spectrales. Dans le cas de la d´etection des communaut´es, les m´ethodes spectrales
+s’appuient sur l’analyse de deux matrices particuli`eres, d´eriv´ees de la matrice d’adjacence du graphe A : le
+Laplacian L = K − A et la matrice normale N = K−1A. Dans les deux cas, la matrice K est une matrice
+diagonale de la mˆeme taille que A (nxn) et avec kii ´egal au degr´e du nœud i.
+
+La matrice normale a toujours une valeur propre ´egale `a 1 et toutes ses autres valeurs propres sont plus
+petites ou ´egales `a celle-l`a. Cette matrice pr´esente la propri´et´e que le nombre de valeurs propres ´egales `a 1
+donne le nombre de composantes connexes du graphe. Dans le cas d’une structure modulaire, on a une seule
+composante connexe mais, si les liaisons entre les communaut´es sont tr`es faibles, on a un nombre s − 1 de
+valeurs propres tr`es proches de 1, ce qui permet de d´eduire le nombre des communaut´es s.
+
+La deuxi`eme matrice, L, a des propri´et´es similaires `a N. La diﬀ´erence est que cette fois ci la plus petite
+valeur propre est ´egale `a 0 et le nombre de valeurs propres proches de 0 donne le nombre de communaut´es.
+Dans le cas d’un graphe non-connexe, chacun des m vecteurs propres, qui correspondent aux m valeurs propres
+nulles, d´ecrit la structure d’une composante connexe. Un tel vecteur a des composantes non-nulles pour les
+nœuds appartenant au sous-graphe qu’il repr´esente et 0 pour les autres nœuds.
+
+Les propri´et´es de ces deux matrices sont tr`es utiles dans le cas de la bissection des graphes, une des
+techniques les plus employ´ees dans le partitionnement des graphes. Pour la bissection, on utilise la plus
+petite valeur propre non-nulle de L et le vecteur propre associ´e. Les nœuds qui donnent des composantes
+n´egatives dans ce vecteur sont consid´er´es comme faisant partie d’un sous-graphe est les nœuds qui donnent
+des composantes positives sont inclus dans un autre sous-graphe.
+
+Cette m´ethode, qui donne des r´esultats excellents, a inspir´e Donetti et Munoz `a proposer un algorithme
+de d´etection des communaut´es bas´e sur l’analyse des vecteurs propres de L [26][27]. Au lieu d’utiliser un seul
+vecteur propre, ils utilisent les vecteurs propres associ´es aux D plus petites valeurs propres non-nulles. Chaque
+nœud est repr´esent´e dans un espace de dimension D en utilisant les composantes qui lui correspondent dans
+les D vecteurs. Pour trouver les communaut´es, les auteurs utilisent un algorithme hi´erarchique bas´e sur la
+distance angulaire entre les nœuds dans cette espace. Le meilleur partitionnement du dendogramme est celui
+qui a la plus grande modularit´e.
+
+Pour des structures tr`es modulaires, l’algorithme de Donetti et Munoz donne des bons r´esultats mˆeme
+pour D = 1 ou D = 2 (voir ﬁgure 3) mais, dans le cas g´en´eral, la qualit´e du partitionnement augmente avec
+D. Mˆeme si l’optimisation de la modularit´e n’est pas le but direct de l’algorithme, les valeurs obtenues pour Q
+sont comparables `a celles trouv´ees par les meilleures techniques d’optimisation [5] et elles sont sup´erieures aux
+r´esultats de l’approche spectrale d’optimisation de la modularit´e [82]. L’inconv´enient de l’algorithme vient de
+sa complexit´e de O(n3) est du fait que le nombre D de vecteurs propres qu’on doit analyser n’est pas connu
+a priori.
+
+Les marches al´eatoires constituent les bases de deux autres algorithmes hi´erarchiques propos´es par
+Pons et Latapy [102] et par Zhou[117][118]. L’id´ee qui est derri`ere ces algorithmes est que, si on commence une
+
+10
+
+D´etection des communaut´es dans des r´eseaux dynamiques
+Razvan Stanica
+3SCR 2008
+
+Fig. 3 – Les r´esultats de l’algorithme de Donetti et Munoz pour un r´eseau de 4 communaut´es (selon [26]). Les
+4 communaut´es sont d´ej`a visibles pour D = 1 (a) et leur d´elimitation est ´evidente pour D = 2 (b).
+
+marche al´eatoire `a partir du nœud i, la probabilit´e P t
+ij de se trouver au nœud j apr`es t pas est plus grande si i
+et j sont dans la mˆeme communaut´e (si t ne d´epasse pas une certaine limite). Les deux algorithmes d´eﬁnissent
+des distances bas´ees sur P t
+ij et ils les utilisent pour calculer un dendogramme. Ils diﬀ`erent par le choix de ces
+distances et par le temps d’ex´ecution, beaucoup plus ´elev´e dans la version de Zhou. Leurs performances, et
+surtout celles de la version de Pons et Latapy, sont impressionnantes sur certains types de graphes de tests
+mais elles restent moyennes en termes de modularit´e sur des r´eseaux r´eels.
+
+L’algorithme de Palla et al.[97], qui utilise la notion de seuil de percolation des cliques [98], permet
+la superposition des communaut´es et il a ´et´e int´egr´e en plusieurs logiciels libres de d´etection des communaut´es.
+Cette m´ethode est bas´ee sur la d´etection des k-cliques adjacentes, pour un k choisi en fonction du seuil de
+percolation. Une k-clique est d´eﬁnie comme un sous-graphe complet de dimension k et deux k-cliques sont
+adjacentes si elles ont k-1 liens communs. L’hypoth`ese de l’algorithme est que deux cliques adjacentes font
+partie de la mˆeme communaut´e et donc la ”rotation” d’un tel motif dans le r´eseau conduit `a la d´etection des
+communaut´es. La complexit´e de l’algorithme est diﬃcile `a calculer mais le temps d’ex´ecution pour des graphes
+avec un ordre de 105 est raisonnable [36]. Malheureusement, cette m´ethode ne donne pas des bons r´esultats dans
+des graphes peu denses, o`u beaucoup de nœuds restent non-assign´es aux communaut´es ﬁnales, et la version
+destin´ee aux graphes pond´er´es n´ecessite un seuillage qui r´esulte dans une importante perte d’information.
+
+Reichardt et Bornholdt utilisent un algorithme bas´e sur un mod`ele de Potts `a q ´etats [107] [109],
+inspir´e du monde de la m´ecanique statistique, o`u le mod`ele de Potts est un des principaux outils dans l’´etude
+des syst`emes ferromagn´etiques. Dans un environnement avec des interactions ferromagn´etiques, tous les spins
+s’alignent dans le mˆeme ´etat `a une temp´erature proche de 0. Par contre, si des interactions antiferromagn´etiques
+apparaissent aussi dans le syst`eme, les spins vont occuper, `a une temp´erature suﬃsamment basse, s des q ´etats
+disponibles.
+
+Les auteurs expriment l’´energie du r´eseau de la mani`ere suivante :
+
+(Aij − γPij)δ(σi, σj)
+
+(7)
+
+H = −(cid:88)
+
+i(cid:54)=j
+
+o`u A est la matrice d’adjacence et Pij est la probabilit´e d’apparition d’un lien entre les nœuds i et j.
+
+Il est ´evident que pour Pij = kikj
+
+2L et γ = 1, l’´equation 7 est ´equivalente `a la d´eﬁnition de la modularit´e,
+`a une constante multiplicative pr`es. La modularit´e est donc un cas particulier de ce mod`ele de Potts. Le
+but de l’algorithme est dans ce cas de trouver l’´etat d’´energie minimale, ce qui correspond `a une modularit´e
+maximale dans les conditions ´enonc´ees ci-dessus. Cette minimisation est bien ´evidemment NP-compl`ete aussi et
+donc Reichardt et Bornholdt emploient une optimisation par recuit simul´e. La technique donne des r´esultats
+excellents et elle permet aussi le chevauchement des communaut´es. Le mod`ele de Potts pr´esent aussi les
+probl`emes de r´esolution de la modularit´e [68], mais le param`etre γ actionne comme un facteur de r´esolution
+[69], ce qui limite les probl`emes.
+
+L’id´ee de traiter le partitionnement id´eal comme l’´etat d’´equilibre d’un syst`eme n’est pas utilis´ee seule-
+ment par Reichardt et Bornholdt. Raghavan et al. [105], Gudkov et Montealegre [42] ou Hu et. al [55] proposent
+
+11
+
+D´etection des communaut´es dans des r´eseaux dynamiques
+Razvan Stanica
+3SCR 2008
+
+plusieurs algorithmes o`u le partitionnement id´eal est le r´esultat obtenu `a l’´equilibre des diverses syst`emes. Ses
+algorithmes sont tr`es int´eressants par leur temps d’ex´ecution r´eduit. C’est surtout le cas de l’approche de
+Raghavan et al. qui utilise la propagation des labels dans le graphe et qui a une complexit´e de O(n).
+
+Ces algorithmes n´ecessitent de parcourir tous les nœuds du graphe, et les partitionnements r´esultats
+d´ependent beaucoup de l’ordre dans lequel on parcourt ces nœuds. Cela est vu comme un avantage par les au-
+teurs qui sugg`erent de faire tourner l’algorithme plusieurs fois et de d´etecter ainsi les nœuds qui appartiennent
+`a plusieurs communaut´es. Pourtant, une analyse tr`es int´eressante des algorithmes `a propagation de labels,
+faite par Tibely et Kertesz [63], montre que ces algorithmes sont vite attir´es dans des maximums locaux. Pour
+un r´eseau de 2000 nœuds, l’algorithme trouve presque 130.000 partitionnements dans 220.000 ex´ecutions et
+l’agr´egation des r´esultats m`ene `a un partitionnement avec des communaut´es de petite taille (sous 10 nœuds).
+Cette homog´en´eisation des tailles des modules dans le partitionnement ﬁnal parait un probl`eme g´en´eral
+des algorithmes bas´es sur un ´equilibre de forces [36]. Il se manifeste aussi dans les approches propos´ees par
+Boccaletti et al. [16] et par Arenas et al.[6], qui utilisent la synchronisation des syst`emes d’oscillateurs.
+L’hypoth`ese de ces m´ethodes est que, dans le cas d’un syst`eme d’oscillateurs (qui repr´esentent les nœuds du
+graphe) avec des phases initiales al´eatoires, les interactions entre les voisins conduisent `a une synchronisation,
+plus rapide pour les nœuds de la mˆeme communaut´e.
+
+Les r´esultats de ces algorithmes doivent donc ˆetre pris avec pr´ecaution si le r´eseau analys´e a une structure
+avec des communaut´es de tailles h´et´erog`enes, ce qui semble ˆetre le cas dans beaucoup de r´eseaux r´eels [100].
+La derni`ere m´ethode d´ecrite dans cette section et peut-ˆetre la plus int´eressante est celle de Newman et
+Leicht [95]. Les auteurs proposent de calculer le partitionnement le plus probable pour une topologie donn´ee
+en mesurant la vraisemblance d’obtenir cette topologie `a partir du partitionnement. Ce dernier est d´eﬁni par
+plusieurs param`etres, comme la distribution des tailles des communaut´es ou les probabilit´es de connexion
+entre les modules. Le partitionnement qui donne le maximum de vraisemblance est trouv´e apr`es la r´esolution
+d’un systeme d’´equations diﬀ´erentielles, mais les conditions initiales impos´ees peuvent parfois conduire `a un
+maximum local et non au maximum global.
+
+N´eanmoins, la technique est plus g´en´erale et elle est utile non-seulement pour la d´etection des com-
+munaut´es mais aussi pour d’autres types de structures (multipartites, hi´erarchiques). L’algorithme est assez
+rapide et permet l’analyse des r´eseaux d’environ 106 nœuds. Il peut ˆetre appliqu´e aussi pour g´en´erer des
+graphes artiﬁcielles avec une structure pr´ed´eﬁnie ou bien pour compl´eter un r´eseau avec les liens inexistants
+les plus probables [71][88].
+
+2.5 ´Evaluation des algorithmes
+
+La vari´et´e des m´ethodes propos´ees pour la d´etection des communaut´es donne naissance `a une autre
+question : comment faire pour comparer les r´esultats de ces algorithmes ? Pour les m´ethodes qui proposent
+l’optimisation de la modularit´e, le crit`ere de comparaison est, bien sur, la valeur de cette fonction. Mais
+nous avons vu dans la section pr´ec´edente un nombre important d’algorithmes qui ont des buts diﬀ´erents, qui
+n’impliquent pas la fonction Q.
+
+Pour pouvoir comparer les diﬀ´erentes techniques, on a besoin de r´eseaux avec une structure modulaire
+connue. Mais, mˆeme dans ce cas, la comparaison du partitionnement connu est de celui obtenu n’est pas facile.
+Le nombre de communaut´es des deux sets de communaut´es n’est pas forcement le mˆeme et l’utilisation d’une
+mesure de similarit´e entre les partitionnements s’impose.
+
+Le mod`ele le plus populaire parmi les r´eseaux de tests est celui utilis´e par Girvan et Newman pour
+´evaluer leur algorithme hi´erarchique [90]. Les deux prouvent les qualit´es de leur m´ethode de d´etection sur des
+graphes al´eatoires avec une structure modulaire connue. Chaque graphe a 128 nœuds divis´es en 4 groupes. Le
+seul param`etre du mod`ele est zin, le nombre moyen des liens qu’un nœud a dans son groupe. Le nombre des
+liens ext´erieurs est calcul´e tel que le degr´e moyen d’un nœud est 16. Pour zin = 4 le graphe est ´equivalent `a
+un graphe d’Erdos-Renyi et pour zin ≤ 7 la structure modulaire devient de plus en plus diﬃcile `a retrouver.
+La taille r´eduite de ce type de graphe, l’uniformit´e des communaut´es et le degr´e similaire des nœuds
+sont des limitations importantes du mod`ele. Pour r´esoudre ces probl`emes et pour permettre une analyse plus
+pertinente des diverses solutions, Fortunato et al. ont r´ecemment propos´e l’utilisation d’une autre structure
+modulaire [39]. Les graphes de leur mod`ele sont plus proches des r´eseaux r´eels, avec des distributions en loi de
+
+12
+
+D´etection des communaut´es dans des r´eseaux dynamiques
+Razvan Stanica
+3SCR 2008
+
+puissance pour le degr´e des nœuds et pour la taille des communaut´es. Le param`etre le plus important est dans
+ce cas non pas le nombre de liens `a l’int´erieur de la communaut´e, mais la proportion de ces liens rapport´ee au
+degr´e de chaque nœud.
+
+Mˆeme en utilisant ces mod`eles, il est diﬃcile de comparer directement deux partitionnements diﬀ´erents.
+Le premier objectif est, bien sur, d’obtenir le mˆeme nombre de communaut´es que dans le mod`ele de r´ef´erence,
+mais ce nombre n’est pas un crit`ere d´ecisif. Par exemple, un algorithme qui donne un r´esultat ﬁnal o`u une des
+communaut´es est divis´ee en deux peut ˆetre mieux consid´er´e qu’un algorithme qui obtient le bon nombre de
+communaut´es mais qui fait plus d’erreurs en ce qui concerne l’appartenance des nœuds `a ces communaut´es.
+Plusieurs fonctions ont ´et´e d´eﬁnies pour mesurer la similarit´e de deux partitionnements [77]. Dans
+cette section nous allons pr´esenter l’indexe de Jaccard, la sensitivit´e, la sp´eciﬁcit´e et l’information mutuelle
+normalis´ee.
+
+La sensitivit´e et la sp´eciﬁcit´e sont deux mesures tr`es utiles lorsqu’on veut observer les qualit´es d’un
+algorithme sur un mod`ele de graphe avec une structure modulaire connue. Dans un tel contexte, la sensitivit´e
+mesure la fraction des paires de nœuds correctement classiﬁ´ees dans la mˆeme communaut´e, tandis que la
+sp´eciﬁcit´e compte les paires de nœuds correctement classiﬁ´ees dans des communaut´es diﬀ´erentes. La sensitivit´e
+et la sp´eciﬁcit´e ont la signiﬁcation d´esir´ee seulement si elles sont utilis´ees ensemble, car on observe qu’une
+d’entre elles (la sensitivit´e) peut ˆetre maximis´ee par un partitionnement dans une seule communaut´e et l’autre
+(la sp´eciﬁcit´e) par un partitionnement o`u chaque nœud repr´esente une communaut´e.
+
+Si la structure modulaire n’est pas connue a priori, ces quantit´es n’ont pas de sens, car dans cette
+situation on n’a pas une r´ef´erence, mais on veut plutˆot mesurer une ”distance” entre les partitionnements. Il
+existe d’autres mesures, applicables dans les deux cas, qui peuvent ˆetre utilis´ees comme distance.
+
+Pour deux partitionnements S1 et S2, l’indexe de Jaccard est donn´e par la formule :
+
+IJ(S1, S2) = ns
+
+ns + nd
+
+o`u ns est le nombre de paires de nœuds classiﬁ´es dans la mˆeme communaut´e pour S1 et pour S2 et nd
+est le nombre de paires de nœuds qui appartiennent `a la mˆeme communaut´e seulement dans un des deux
+partitionnements. L’indexe prend des valeurs entre 0, pour deux partitionnements totalement diﬀ´erents, et 1,
+si S1 et S2 sont identiques.
+
+Les diﬀ´erences entre deux partitionnements peuvent ˆetre exprim´ees d’une mani`ere simple `a l’aide d’une
+matrice C, o`u les lignes correspondent aux communaut´es de S1 et les colonnes aux communaut´es de S2.
+Un ´el´ement Cij repr´esente le nombre de nœuds communs au module i de S1 et `a la communaut´e j de S2.
+L’information mutuelle normalis´ee est une mesure bas´ee sur la matrice C et d´eﬁnie par :
+
+(cid:80)
+−2(cid:80)
+(cid:80)
+N +(cid:80)
+j Cij et C.j =(cid:80)
+
+i Ci. log Ci.
+
+i
+
+i Cij.
+
+j Cij log Cij N
+Ci.C.j
+
+j C.j log C.j
+
+N
+
+o`u N est le nombre total de nœuds, Ci. =(cid:80)
+
+IN (S1, S2) =
+
+Pour conclure ce chapitre, il faut noter que chaque mod`ele et chaque mesure de similarit´e pr´esent´es
+dans cette section favorise des algorithmes diﬀ´erentes, ce qui rend tr`es diﬃcile la tˆache de choisir une m´ethode
+de d´etection g´en´eralement valable.
+
+13
+
+Nouvelle perspective sur les graphes
+orient´es
+
+3.1 M´ethodes actuelles de traitement pour les graphes orient´es
+
+La plupart des algorithmes de d´etection de communaut´es ont initialement ´et´e d´eﬁnis pour des graphes
+non-orient´es et non-pond´er´es. Malheureusement, ce type de graphe simple n’est pas un bon mod`ele pour tous
+les syst`emes ´etudi´es. Si le traitement des graphes pond´er´es n´ecessite en g´en´eral seulement des modiﬁcations
+mineures, la situation des graphes orient´es est plus d´elicate.
+
+La solution la plus simple est d’ignorer l’orientation des liens et d’utiliser les mˆemes m´ethodes et
+d´eﬁnitions que dans le cas non-orient´e. Il est ´evident que cette approche m`ene `a une perte d’information qui
+pourrait ˆetre exploit´ee.
+
+Newman et Leicht proposent une d´eﬁnition de la modularit´e pour le cas orient´e [94]. Leur hypoth`ese est
+que l’existence d’un lien de faible probabilit´e doit apporter un gain de modularit´e plus important. Ils modiﬁent
+donc l’´equation 2, qui devient dans cette nouvelle version :
+
+δ(σi, σj)
+
+(8)
+
+(cid:88)
+
+i(cid:54)=j
+
+Qd =
+
+1
+L
+
+(cid:32)
+Aij − kin
+j
+L
+
+i kout
+
+(cid:33)
+
+Les propri´et´es et les probl`emes de la modularit´e restent les mˆemes dans ce cas et les algorithmes d’optimisation
+d´ecrits dans la section pr´ec´edente sont facilement adaptables `a cette d´eﬁnition.
+
+Parmi les autres algorithmes, celui de Reichardt et Bornholdt [109] et ceux bas´es sur la propagation
+des labels [105] ou sur les marches al´eatoires [102] n´ecessitent seulement des petites modiﬁcations dans le cas
+orient´e. Les propri´et´es des matrices utilis´ees par les m´ethodes spectrales imposent une sym´etrie qui ne peut
+pas ˆetre assur´ee dans ce cas. Finalement, Palla et al. proposent une extension de la percolation des cliques
+pour les graphes orient´es [99], mais la notion de k-clique dans ce cas est probl´ematique.
+
+Une proposition int´eressante concernant les r´eseaux orient´es est formul´ee par Guimer`a et al. [48]. Si
+chaque nœud i est s´epar´e en deux, un nœud iout pour mod´eliser les liens qui sortent de i et un nœud iin pour
+les liens qui entrent en i, alors tout graphe orient´e a un graphe bipartite ´equivalent. Les auteurs comparent
+les r´esultats obtenus en n´egligeant l’orientation des liens avec ceux de deux autres approches : l’optimisation
+de la modularit´e classique sur la projection du graphe bipartite et l’optimisation d’une nouvelle fonction, la
+modularit´e bipartite. Les deux derni`eres approches donnent des r´esultats tr`es similaires et elles sont capables
+de d´etecter des modules l`a o`u les algorithmes ”non-orient´es” n’arrivent pas `a capturer une telle structure.
+
+Comme tous les nouveaux algorithmes sont d’abord ´evalu´es dans le cas le plus simple, celui d’un graphe
+non-orient´e et non-pond´er´e, et comme il n’existe pas parmi ces algorithmes un qui soit g´en´eralement accept´e,
+le nombre r´eduit des m´ethodes applicables dans le cas orient´e ne doit pas ´etonner.
+
+3.2 L’´equivalence structurelle et les graphes orient´es
+
+L’´equivalence structurelle est une propri´et´e tr`es utilis´ee dans la sociologie. Pour que deux nœuds (appel´es
+acteurs par les sociologues) soient structurellement ´equivalents, il faut que toutes leurs liaisons avec les autres
+
+14
+
+D´etection des communaut´es dans des r´eseaux dynamiques
+Razvan Stanica
+3SCR 2008
+
+Fig. 4 – L’importance de l’orientation pour la d´etection des communaut´es. Si dans a) il n’y a aucune liaison
+entre les nœuds A, B, C et D, dans b) tous ces 4 nœuds ont la mˆeme fonctionnalit´e, celle de source
+
+acteurs soient identiques. En termes matricielles, le nœud i et le nœud j ont cette propri´et´e si Aik = Ajk et
+Aki = Akj,∀k (cid:54)= i, j.
+
+Cette d´eﬁnition est tr`es stricte, car une seule diﬀ´erence entre les liens de deux acteurs les rend non-
+´equivalents. Il est tr`es rare que deux nœuds soient ´equivalents et la probabilit´e d’un tel ´ev´enement diminue
+consid´erablement lorsque la taille du r´eseau devient importante. Cependant, le nombre de voisins communs
+peut ˆetre une information int´eressante dans l’analyse des r´eseaux. Au lieu d’utiliser l’´equivalence structurelle
+dans sa d´eﬁnition binaire originale, il est possible de relˆacher cette d´eﬁnition et de mesurer l’´equivalence de
+deux nœuds par leur nombre de voisins communs [21].
+
+D’une mani`ere intuitive, on peut penser que les nœuds d’une mˆeme communaut´e ont un nombre plus
+important de voisins communs que deux nœuds qui font partie des communaut´es diﬀ´erentes. Cette hypoth`ese
+a ´et´e utilis´ee par plusieurs algorithmes hi´erarchiques [112] et elle est `a la base de notre proposition pour une
+nouvelle m´ethode de d´etection des communaut´es dans les r´eseaux orient´es.
+
+Dans le cas des graphes non-orient´es, l’existence d’un lien (ou bien d’un lien fort si le graphe est pond´er´e)
+indique g´en´eralement une similarit´e entre les deux extr´emit´es. Par contre, un lien dans un graphe orient´e n’a
+pas la mˆeme signiﬁcation, car un des nœuds peut ˆetre vu comme une source et l’autre comme une destination
+(voir ﬁgure 4).
+
+Il est vrai qu’un lien orient´e peut impliquer une relation d’´equivalence (un article qui cite un autre
+article) mais, dans la plupart des cas, l’existence d’un tel lien n’a pas cette signiﬁcation. Dans un r´eseau de
+transport, dans un r´eseau trophique ou mˆeme dans le cas des pages web, un lien orient´e, mˆeme tr`es fort, ne
+repr´esente pas un crit`ere pour grouper les deux extr´emit´es dans la mˆeme communaut´e.
+
+Le fait que le lion mange des gazelles n’est pas l’information essentielle lorsqu’on cherche des commu-
+naut´es dans un r´eseau trophique. On aurait plutˆot envie de grouper dans une mˆeme communaut´e le lion et
+le tigre, mais aucun lien direct n’existe pas entre ces deux animaux. Nous consid´erons que, pour des r´eseaux
+de ce type, le nombre de voisins communs est plus signiﬁcatif et les communaut´es devraient ˆetre form´ees par
+des nœuds qui ressemblent structurellement, sans n´ecessiter l’existence d’un lien direct entre les membres d’un
+groupe.
+
+Pour retrouver des communaut´es dans un graphe pond´er´e et orient´e, d´eﬁni par la matrice des poids W ,
+nous proposons d’utiliser une nouvelle matrice T = W W T + W T W . Pratiquement, un ´el´ement de la matrice
+T , Tij repr´esente la somme entre le nombre de destinations communes pour les liens qui sortent des nœuds i
+et j et le nombre de voisins communs qui pointent vers les deux nœuds.
+
+La matrice T est une matrice sym´etrique et un Tij fort indique une grande similarit´e entre les nœuds i et
+j. Il est donc tr`es simple d’appliquer sur cette matrice un algorithme classique de d´etection des communaut´es,
+bas´e par exemple sur la maximisation de la modularit´e.
+
+15
+
+D´etection des communaut´es dans des r´eseaux dynamiques
+Razvan Stanica
+3SCR 2008
+
+Fig. 5 – La sensitivit´e (les paires de nœuds correctement identiﬁ´ees dans la mˆeme communaut´e) et la sp´eciﬁcit´e
+(la fraction des paires de nœuds correctement identiﬁ´ees comme faisant partie de communaut´es diﬀ´erentes) des
+trois m´ethodes (la modularit´e orient´ee de Newman et Leicht, la modularit´e sur le graphe bipartite ´equivalent
+propos´ee par Guimera et al. et l’utilisation du nombre de voisins communs comme mesure de similarit´e) en
+fonction de la probabilit´e d’existence d’un lien pour le r´eseau de test utilis´e par Newman et Leicht dans
+[94]. Dans les trois cas, la modularit´e est optimis´ee avec le mˆeme algorithme, d´ecrit dans [44] et les courbes
+repr´esentent la moyenne sur 30 r´ealisations
+
+3.3 Performances sur des graphes avec une structure modulaire pr´e-
+d´eﬁnie
+
+Nous allons maintenant analyser les performances de cette technique et les comparer avec les approches
+propos´ees par Newman et Leicht [94] et par Guimera et al. [48]. Pour retrouver le partitionnement optimal en
+termes de modularit´e, nous utilisons le mˆeme algorithme dans les 3 cas, celui d´ecrit par Guillaume et al. [44].
+Les mod`eles classiques utilis´es pour tester les algorithmes de d´etection des communaut´es (voir section
+2.5) sont des mod`eles non-orient´es, qui n’apportent pas beaucoup d’information dans notre cas. Les mod`eles
+orient´es ´etudi´es dans la litt´erature sont tr`es rares.
+
+Newman et Leicht testent leur m´ethode sur un graphe de 32 nœuds, o`u un lien entre deux nœuds existe
+avec une probabilit´e p. Un tel graphe n’a pas une structure modulaire si l’orientation des liens n’est pas prise
+en compte. Pour introduire cependant une telle structure, ils proposent de construire deux groupes ´egaux et
+d’orienter de la mˆeme fa¸con les liens qui relient les deux groupes. Par exemple, un lien avec une extr´emit´e dans
+le groupe 1 (form´e par les nœuds 1-16) et l’autre extr´emit´e dans le groupe 2 (les nœuds 17-32) sera toujours
+orient´e vers le groupe 2, tandis que l’orientation des liens internes reste al´eatoire.
+
+Dans la ﬁgure 5, nous comparons les performances de notre technique avec les autres m´ethodes existantes
+sur ce type de graphe. Le seul param`etre dans ce cas est la probabilit´e d’existence d’un lien p. En analysant
+la sp´eciﬁcit´e et la sensitivit´e des partitionnements obtenus par rapport aux deux communaut´es connues, nous
+observons que pour un p suﬃsamment grand (p > 0.55), toutes les m´ethodes retrouvent les deux modules.
+Quand p diminue, la d´etection du partitionnement r´eel devient de plus en plus diﬃcile. Cela est due au fait
+que ce n’est pas juste le nombre de liens entre les deux groupes qui diminue avec p, mais aussi le nombre de
+liens `a l’int´erieur de chaque groupe. La structure modulaire devient donc plus fragile et elle disparait mˆeme
+pour un p petit, quand le graphe n’est plus connexe. Notre m´ethode est nettement sup´erieure aux deux autres,
+en d´etectant correctement les deux communaut´es pour p > 0.3 (l’approche de Guimera et al. n´ecessite un
+
+16
+
+D´etection des communaut´es dans des r´eseaux dynamiques
+Razvan Stanica
+3SCR 2008
+
+Fig. 6 – R´eseau orient´e de test pour les algorithmes de d´etection des communaut´es. Le graphe est form´e
+par deux types de nœuds. nnoyau nœuds font partie d’un groupe central dans lequel un lien existe avec une
+probabilit´e pnoyau, sans tenir compte de l’orientation. Un deuxi`eme groupe est form´e par nout nœuds qui
+pointent vers chaque nœud du noyau avec une probabilit´e pout
+
+p > 0.5 et celle de Newman et Leicht un p > 0.55).
+
+Pour tester plus en d´etail notre approche, nous analysons ses performances sur un deuxi`eme type de
+r´eseau (voir ﬁgure 6). Dans cet exemple, nnoyau nœuds sont group´es dans un module central et nout nœuds
+pointent vers ce noyau. Il est ´evident que les nœuds qui ne font pas partie du noyau sont comme des sources
+et ils ont tous un comportement similaire, mˆeme s’il n’existe aucun lien direct entre deux nœuds de ce type.
+Nous essayons donc de retrouver cette structure modulaire en utilisant les trois m´ethodes. Le mod`ele a
+4 param`etres : le nombre de nœuds dans le noyau, le nombre de sources, la probabilit´e d’un lien entre deux
+nœuds du noyau et la probabilit´e d’un lien entre une source et les nœuds centrales.
+
+Nous regardons d’abord l’inﬂuence de la taille des deux modules sur le partitionnement obtenu (voir
+ﬁgure 7). Pour pnoyau = 1 et pout = 1, nous obtenons pratiquement une clique centrale et tous les nœuds de
+cette clique sont aussi des destinations pour chacun des nœuds externes. Nous observons que notre m´ethode
+n’est pas li´ee `a la taille des modules, tandis que les deux autres m´ethodes donnent des meilleures r´esultats
+pour nout petit et nnoyau grand. Cela est la cons´equence du fait que les deux m´ethodes sont incapables de
+grouper les nœuds externes dans la mˆeme communaut´e.
+
+Si l’algorithme de Newman et Leicht et celui de Guimera et al. donnent des r´esultats identiques dans
+ce cas, la premi`ere m´ethode est aussi inﬂuenc´ee par la variation de pout. Cette d´ependance peut ˆetre observ´ee
+dans la ﬁgure 8, o`u la probabilit´e de connexion entre une source et un nœud central n’est plus ´egale `a 1, mais
+`a 0.7.
+
+Cette observation nous donne envie d’analyser plus attentivement l’inﬂuence de deux probabilit´es, pout
+et pnoyau sur les trois techniques. Dans la ﬁgure 9, nous choisissons nout = 25 et nnoyau = 20 et nous varions
+une de ces probabilit´es.
+
+Les r´esultats obtenus sont tr`es int´eressants et ils n´ecessitent une discussion plus ample. L’algorithme
+de Guimera et al. ne semble pas ˆetre inﬂuenc´e par la variation de pout et de pnoyau, mais ses performances
+sont assez moyennes en termes d’information mutuelle (environ 0.4). La m´ethode de Newman et Leicht prouve
+encore ses faiblesses et les partitionnements obtenus n’ont aucune signiﬁcation dans ce type de graphe.
+
+Notre m´ethode par contre retrouve le partitionnement id´eal pour toutes les valeurs de pnoyau. Cela
+veut dire que, mˆeme si pnoyau = 0 et les nœuds du noyau ne sont pas li´es, l’algorithme arrive `a les regrouper
+dans un seul module, guid´e par leur fonctionnalit´e commune (tous ces nœuds restent des destinations pour les
+
+17
+
+D´etection des communaut´es dans des r´eseaux dynamiques
+Razvan Stanica
+3SCR 2008
+
+Fig. 7 – Inﬂuence de la taille des deux modules sur la qualit´e du partitionnement. L’information mutuelle
+normalis´ee est calcul´ee par rapport aux deux communaut´es connues. Comme pour l’exemple pr´ec´edent, nous
+avons utilis´e le mˆeme algorithme pour maximiser la modularit´e dans les trois cas. Dans toutes les ﬁgures,
+DM (Directed Modularity) repr´esente les r´esultats obtenus en utilisant la d´eﬁnition de Newman et Leicht,
+BM (Bipartite Modularity) est calcul´e selon Guimera et al. et TM (Transposed Modularity) est le r´esultat de
+notre approche
+
+Fig. 8 – L’information mutuelle normalis´ee pour pout = 0.7. La m´ethode de Newman et Leicht retrouve des
+partitionnements sans aucune signiﬁcation
+
+18
+
+D´etection des communaut´es dans des r´eseaux dynamiques
+Razvan Stanica
+3SCR 2008
+
+Fig. 9 – Inﬂuence des probabilit´es de connexion `a l’int´erieur du noyau et entre une source et le noyau sur la
+qualit´e des partitionnements retrouv´es par les trois approches.
+
+Fig. 10 – La sp´eciﬁcit´e et la sensitivit´e des trois m´ethodes.
+
+nout sources).
+
+La variation de pout pose plus de probl`emes, car, pour une probabilit´e faible, les sources ont moins de
+voisins communs et donc leur similarit´e est moins forte. L’utilisation de la matrice des voisins communs nous
+permet de retrouver presque parfaitement les deux communaut´es pour pout > 0.3.
+
+La sp´eciﬁcit´e et, surtout, la sensitivit´e des algorithmes montrent aussi la sup´eriorit´e de notre proposition
+(voir ﬁgure 10). L’analyse de ces deux mesures de similarit´e nous permet aussi d’observer que l’algorithme de
+Guimera et al. n’est pas ﬁnalement ind´ependant de pout, mais cette d´ependance est identiﬁable juste au niveau
+de la sensitivit´e. Contrairement `a la m´ethode bas´ee sur la modularit´e orient´ee, cette approche ne regroupe
+jamais dans la mˆeme communaut´e des sources et des nœuds du noyau. Mais, en mˆeme temps, elle ne regroupe
+non plus toutes les sources dans un seul module.
+
+Les deux exemples pr´esent´es dans cette section constituent des arguments forts en faveur de notre
+proposition concernant l’analyse des r´eseaux orient´es. Cette nouvelle m´ethode donne des r´esultats excellents
+dans des cas o`u la similarit´e des nœuds est juste de nature fonctionnelle et elle est sup´erieure aux autres
+techniques propos´ees dans toutes les situations ´etudi´ees.
+
+19
+
+D´etection des communaut´es dans des r´eseaux dynamiques
+Razvan Stanica
+3SCR 2008
+
+Fig. 11 – Les communaut´es d´etect´ees par la m´ethode de Newman et Leicht dans le r´eseau Velov pour les
+trajets de 12 juin 2007.
+
+3.4 Application sur un r´eseau r´eel
+
+Dans cette section nous allons pr´esenter les r´esultats obtenus en optimisant la modularit´e sur la matrice
+T dans le cas d’un r´eseau r´eel, plus pr´ecis´ement le r´eseau des stations de v´elos en libre service de la ville de
+Lyon.
+
+Nous choisissons de construire le graphe d’une journ´ee normale de trajets, le 12 juin 2007. Dans ce graphe
+les nœuds repr´esentent les stations de v´elos et les liens orient´es et pond´er´es Wij donnent une information sur
+le nombre de v´elos emprunt´es `a la station i et retourn´es `a la station j dans la journ´ee en question. Parmi
+les 327 stations, seulement 246 ont ´et´e actives ce jour-l`a (les autres stations n’´etaient pas inaugur´ees ou elles
+n’ont pas ´et´e utilis´ees pendant cette p´eriode). Le nombre total de trajets pour les 24 heures est de 20877.
+
+Les r´esultats obtenus en utilisant la modularit´e orient´ee d´eﬁnie par Newman et Leicht (voir ﬁgure 11)
+et ceux obtenus en employant notre m´ethode (voir ﬁgure 12) sont similaires. Les deux approches retrouvent
+des communaut´es homog`enes du point de vue g´eographique (il faut pr´eciser que, dans les deux cas, les stations
+marqu´ees en noir sont des stations inactives).
+
+La partie Est de la ville est divis´ee en deux communaut´es, presque identiques dans les deux cas. La
+diﬀ´erence vient de la partie Ouest o`u l’algorithme de Newman et Leicht retrouve une seule communaut´e, tandis
+que notre algorithme divise cette zone en trois communaut´es. En ´etudiant du point de vue cartographique
+cette partie de la ville, nous observons une particularit´e pour la r´egion encadr´ee sur les deux ﬁgures. Cette
+zone correspond `a la colline de la Croix-Rousse, avec des pentes assez dures, qui favorisent la descente mais
+qui constituent un probl`eme majeur pour ceux qui voudraient monter en v´elo. Notre intuition est valid´ee par
+l’analyse des d´eparts et des arriv´ees pour ces stations. Le nombre d’emprunts et celui de restitutions pour une
+station repr´esentative pour cette zone sont compar´es dans la ﬁgure 13.
+
+20
+
+D´etection des communaut´es dans des r´eseaux dynamiques
+Razvan Stanica
+3SCR 2008
+
+Fig. 12 – Les communaut´es d´etect´ees par notre m´ethode dans le r´eseau Velov pour les trajets de 12 juin 2007.
+
+Fig. 13 – Nombre moyen des emprunts (en rouge) et de restitutions (en bleu) en fonction du jour de la semaine
+pour une station situ´ee sur la colline de la Croix-Rousse. On observe la forte dissym´etrie de cette station, qui
+peut ˆetre vue comme une source de v´elos
+
+21
+
+D´etection des communaut´es dans des r´eseaux dynamiques
+Razvan Stanica
+3SCR 2008
+
+Nous observons que les stations situ´ees sur la colline fonctionnent comme des sources, ce qui est aussi
+conﬁrm´e par la soci´et´e qui g`ere les stations et qui doit constamment alimenter ces stations avec des v´elos. Les
+stations qui se trouvent plus au sud ne pr´esentent pas cette particularit´e et donc notre m´ethode distingue bien
+deux familles diﬀ´erentes de stations.
+
+Comme la structure modulaire du r´eseau Velov est inconnue, la qualit´e du partitionnement obtenu
+est diﬃcile `a appr´ecier. Nous consid´erons cependant que les r´esultats obtenus par notre m´ethode sont en
+concordance avec les donn´ees utilis´ees et ils respectent plusieurs crit`eres g´eographiques et sociaux.
+
+L’utilisation du nombre de voisins communs comme mesure pour la similarit´e entre les nœuds permet
+de d´ecouvrir des communaut´es de stations qui ne sont pas li´ees par un nombre important des liens, mais qui
+ont quand mˆeme un comportement proche.
+
+22
+
+Des communaut´es dynamiques
+
+4.1 Les propri´et´es des r´eseaux dynamiques
+
+Nous avons vu dans les chapitres pr´ec´edents que l’utilisation des r´eseaux complexes pour mod´eliser des
+diverses types d’interactions a beaucoup d’avantages. Pourtant, un d´esavantage important du mod`ele vient du
+fait qu’un graphe est un objet statique par d´eﬁnition, dans le sens qu’il ne contient aucune information sur la
+succession temporelle des interactions.
+
+Cette nature statique peut donner une image inexacte du syst`eme ´etudi´e [13][24]. L’exemple classique
+de ce probl`eme est celui de la propagation d’une ´epid´emie. Dans le cas pr´esent´e dans la ﬁgure 14, il est ´evident
+que le mod`ele obtenu par agr´egation n’est pas une repr´esentation ﬁd`ele de la r´ealit´e.
+
+Les r´eseaux dynamiques sont beaucoup moins ´etudi´es que les mod`eles statiques, mais le domaine a gagn´e
+en int´erˆet ces derni`eres ann´ees. Les travaux de recherche men´es rel`event plusieurs caract´eristiques, cach´ees pour
+un observateur statique.
+
+Clauset et Eagle s’int´eressent `a une propri´et´e qui peut paraˆıtre triviale : la p´eriodicit´e des interactions
+dans les r´eseaux sociaux [24]. La dur´ee de la p´eriode dans un syst`eme peut ˆetre int´eressante pour trouver un
+intervalle temporaire pour lequel la perte d’information due `a l’agr´egation des interactions reste suﬃsamment
+petite pour ne pas introduire des erreurs dans le mod`ele.
+
+Une analyse de l’´evolution de plusieurs r´eseaux r´eels est faite en [64], o`u les auteurs observent que le
+degr´e moyen de ces r´eseaux augmente dans le temps et que, mˆeme si la taille des r´eseaux augmente aussi,
+le diam`etre d´ecroˆıt dans la plupart des cas. Ils proposent donc un mod`ele qui respecte ces propri´et´es et qui
+pourrait ˆetre utilis´e dans les simulations de ces syst`emes. Un autre mod`ele de ce type, qui a l’avantage d’ˆetre
+repr´esentable sous la forme d’un seul graphe, est d´ecrit en [66].
+
+La variation au cours du temps des propri´et´es classiques des graphes statiques (le taille, le nombre de
+composantes connexes, le nombre de nœuds connect´es, le nombre de triangles) est l’objet d’´etude en [43]. Cette
+derni`ere analyse va mˆeme un peu plus loin, s’int´eressant `a des caract´eristiques qui n’ont aucun sens dans un
+contexte statique : la dur´ee des contacts, le temps inter-contacts, l’apparition et la disparition des liens.
+
+Fig. 14 – Inﬂuence de la succession temporelle des interactions (selon [24]). Seulement 2 nœuds sont aﬀect´es
+par l’´epid´emie, mais dans le mod`ele statique le graphe complet donne une image incorrecte
+
+23
+
+D´etection des communaut´es dans des r´eseaux dynamiques
+Razvan Stanica
+3SCR 2008
+
+Fig. 15 – Optimisation de la modularit´e dans des r´eseaux dynamiques (selon [34]). Dans A) les deux cliques
+sont identiﬁ´ees comme deux communaut´es diﬀ´erentes, tandis qu’en B) elles se retrouvent dans le mˆeme module
+parce que la taille totale du graphe augmente. Pourtant la structure des deux communaut´es n’a pas chang´ee.
+
+4.2 Un nouvel algorithme : motivation et d´eﬁnition
+
+En ce qui concerne la d´etection des communaut´es, la notion de dynamisme peut ˆetre tr`es importante
+dans certains cas. L’agr´egation des liens peut conduire `a une classiﬁcation erron´ee de deux nœuds dans la mˆeme
+communaut´e. Par exemple, dans un r´eseau de contacts, une personne va faire partie de deux communaut´es,
+souvent totalement disjointes : une avec ses coll`egues de travail pendant la journ´ee et une autre avec ses amis
+et sa famille le soir et `a la ﬁn de la semaine.
+
+L’´evolution temporelle des communaut´es est un sujet qui commence `a faire son apparition dans la
+litt´erature de sp´ecialit´e. Jusqu’`a pr´esent, toutes les analyses [12][43][53][65] utilisent la mˆeme technique :
+d´ecouper les donn´ees en plusieurs graphes statiques (snapshots) et traiter ces graphes de mani`ere ind´ependante.
+L’objectif de ces travaux n’est pas de proposer un algorithme qui tient compte de l’´evolution des r´eseaux mais
+d’´etudier la dynamique des communaut´es en utilisant les algorithmes d´ej`a existants.
+
+Le probl`eme qui apparaˆıt est que les m´ethodes actuelles sont con¸cues pour le traitement d’une structure
+statique. Ils sont souvent trop lents pour pouvoir analyser un grand nombre de snapshots et ils ont parfois des
+propri´et´es qui posent des probl`emes dans un contexte dynamique.
+
+Par exemple, l’utilisation de la modularit´e dans un r´eseau qui ´evolue au cours du temps accroˆıt le
+probl`eme de r´esolution (voir la section 2.3). Comme l’optimisation de la modularit´e impose une limite dlim
+sur la taille des communaut´es d´etectables et que cette limite d´epend de la taille du graphe, les communaut´es
+retrouv´ees pour un snapshot peuvent disparaˆıtre dans le suivant, mˆeme si la structure interne du module ne
+change pas. Fortunato pr´esente un exemple concret du probl`eme dans [34] (voir ﬁgure 15), o`u la modularit´e
+peut d´etecter d’une mani`ere erron´ee la fusion de deux modules.
+
+Mˆeme si on utilise la solution propos´ee par Arenas et al. (voir la section 2.3), il reste tr`es diﬃcile
+d’identiﬁer les vraies fusions de communaut´es et les fausses alarmes. Il est donc claire que l’utilisation des
+approches bas´ees sur la modularit´e dans des ´etudes sur la dynamique des graphes n’est pas conseill´ee, surtout
+si la taille du r´eseau en question augmente d’une mani`ere consid´erable dans le temps (c’est le cas du graphe
+du World Wide Web ou de celui du r´eseau Velov).
+
+Nous proposons donc par la suite une premi`ere m´ethode de d´etection des communaut´es qui prend en
+compte des crit`eres dynamiques. Cette m´ethode est bas´ee sur la notion d’´equivalence structurelle, utilis´ee d´ej`a
+avec succ`es dans le cas orient´e (voir le chapitre 3) et elle a le grand avantage de permettre des recouvrements
+au niveau spatial et au niveau temporel.
+
+24
+
+D´etection des communaut´es dans des r´eseaux dynamiques
+Razvan Stanica
+3SCR 2008
+
+Fig. 16 – L’inﬂuence du param`etre α sur la sensitivit´e et la sp´eciﬁcit´e du partitionnement obtenu par notre
+m´ethode sur le graphe de test d´eﬁni par Newman.
+
+L’algorithme est construit sur l’hypoth`ese que deux nœuds qui sont les extr´emit´es d’un lien fort et/ou
+
+qui poss`edent un nombre important de voisins commun font partie de la mˆeme communaut´e.
+
+Nous allons d’abord expliquer le fonctionnement de notre m´ethode dans le cas d’un seul snapshot et
+ensuite nous montrerons comment cette m´ethode peut ˆetre modiﬁ´ee pour prendre en compte une ´evolution `a
+l’´echelle temporelle.
+
+Avant de calculer la matrice T = W W T , nous op´erons une petite modiﬁcation sur la matrice de poids
+W . Nous avons argument´e dans le chapitre pr´ec´edent que, dans un graphe orient´e, un lien n’oﬀre pas une
+information sur la similarit´e de ses extr´emit´es. Pour que l’existence d’un lien n’inﬂuence pas les poids de la
+matrice T , dans le cas orient´e les ´el´ements Wii doivent ˆetre nuls. Par contre, dans le cas non-orient´e, un lien
+fort est un indicateur mˆeme plus important que le nombre de voisins communs. Il faut donc tenir compte de
+cette propri´et´e et nous ﬁxons Wii = maxi(cid:54)=jWij. En assignant `a la diagonale la valeur du poids maximal de la
+matrice, nous assurons qu’un lien direct est plus important que n’importe quel voisin commun (mais plusieurs
+voisins communs peuvent ˆetre plus signiﬁcatifs qu’un lien direct).
+
+Une fois ce pr´etraitement fait, pour chaque ligne de la matrice T (c’est `a dire pour tout nœud du r´eseau),
+nous calculons l’´el´ement le plus similaire max(i), donn´e par le maximum sur la ligne i en ignorant ceux qui se
+trouvent sur la diagonale. Nous choisissons un seuil α entre 0 et 1 et, pour ce seuil, nous pouvons d´eﬁnir une
+matrice binaire C telle que :
+
+(cid:26) 1
+
+0
+
+Cij =
+
+si Tij > α ∗ max(i)
+sinon
+
+Comme la valeur max(i) est diﬀ´erente pour chaque ligne, la matrice C n’est pas une matrice sym´etrique.
+Pour un nœud k de faible degr´e (un introverti), max(k) va ˆetre plus petit que pour un nœud central j. Il est
+donc possible d’avoir Ckj = 1 et Cjk = 0. En mˆeme temps, un nœud peut avoir des fortes liaisons avec deux
+nœuds qui sont faiblement li´es l’un `a l’autre. Cette propri´et´e nous permet de d´etecter des communaut´es qui
+se recouvrent, une caract´eristique tr`es rare pour les autres algorithmes.
+
+Cette approche n´ecessite seulement des informations locales (connaˆıtre ses voisins et les voisins de ceux-
+ci), ce qui peut ˆetre tr`es int´eressant dans des situations o`u l’omniscience est impossible `a cause des contraintes
+temporelles ou de stockage, comme dans le cas d’un moteur de recherche Web ou d’un protocole de routage
+bas´e sur la structure modulaire du r´eseau.
+
+Mettre l’information disponible dans la matrice C sous une forme plus compr´ehensible et qui faciliterait
+l’analyse reste un probl`eme ouvert pour nous. L’approche utilis´ee pour le moment est de trouver toutes les
+cliques maximales dans la matrice C est de consid´erer ces sous-ensembles comme des communaut´es. Malheu-
+reusement, l’utilisation des cliques impose des contraintes assez fortes et, en plus, la recherche de toutes les
+cliques maximales dans un graphe est un probl`eme NP-complet.
+
+25
+
+D´etection des communaut´es dans des r´eseaux dynamiques
+Razvan Stanica
+3SCR 2008
+
+Fig. 17 – La sp´eciﬁcit´e des partitionnements retrouv´es par l’algorithme de Guillaume et al. [44] et par notre
+m´ethode sur le graphe de test d´eﬁni par Newman. Les courbes repr´esentent la moyenne sur 30 r´ealisations.
+
+Fig. 18 – La sensitivit´e du partitionnement retrouv´e par l’algorithme de Guillaume et al. [44] et par notre
+m´ethode sur le graphe de test d´eﬁni par Newman. Les courbes repr´esentent la moyenne sur 30 r´ealisations.
+
+4.3 Performances de l’algorithme sur des graphes statiques
+
+Pour tester notre algorithme dans un contexte statique, nous utilisons le mod`ele de graphe introduit par
+Newman (voir la section 2.5), form´e de 128 nœuds avec un degr´e moyen de 16. Le seul param`etre du mod`ele
+est zout, le nombre de liens qui relient chaque nœud `a l’ext´erieur de sa communaut´e. Pour zout = 8, le nombre
+de liens `a l’int´erieur de la communaut´e est ´egal au nombre de liens vers l’ext´erieur et cette situation est vue
+comme un vrai d´eﬁ pour un algorithme de d´etection des communaut´es.
+
+Nous analysons d’abord l’inﬂuence du param`etre α sur les r´esultats obtenus (voir ﬁgure 16). Nous
+observons que la sp´eciﬁcit´e augmente avec α et la sensitivit´e diminue. Cette caract´eristique parait tout `a fait
+normale si on pense que pour α grand, l’algorithme met dans la mˆeme communaut´e seulement les nœuds les
+plus similaires. Comme pour un nœud quelconque les 8 liens externes constituent la liaison avec 3/4 du graphe
+et les autres 8 liens assurent la connexion juste avec son propre module (1/4 du graphe), il est tr`es probable que
+les nœuds qui lui ressemblent le plus se trouvent dans le mˆeme module th´eorique. L’algorithme ne m´elange pas
+les communaut´es th´eoriques (sp´eciﬁcit´e proche de 1) mais il ne retrouve pas non plus les grandes communaut´es
+(sensitivit´e petite). Lorsque α d´ecroˆıt, la taille des modules d´etect´es augmente mais la sp´eciﬁcit´e diminue, car
+de plus en plus de nœuds qui th´eoriquement sont externes sont vus comme des ´el´ements avec une structure
+semblable.
+
+Il faut aussi pr´eciser qu’il est diﬃcile de mesurer la qualit´e d’un partitionnement qui permet que les
+communaut´es se recouvrent. Pour les calculs pr´esent´es dans ce chapitre, nous utilisons seulement l’information
+
+26
+
+D´etection des communaut´es dans des r´eseaux dynamiques
+Razvan Stanica
+3SCR 2008
+
+Fig. 19 – Deux cliques de taille N qui ont m nœuds communs. Notre algorithme d´etecte bien les deux commu-
+naut´es qui se recouvrent. La modularit´e est aussi maximis´ee par un partitionnement en deux communaut´es,
+mais dans ce cas les nœuds du noyau sont divis´es entre ces deux modules
+
+fournie par la matrice C. Cela veut dire que deux nœuds i et j sont consid´er´es comme faisant partie de la
+mˆeme communaut´e seulement si Cij = 1. Cela peut paraˆıtre normal, vu le fait que la structure modulaire est
+d´eduite `a partir de la matrice C. Mais il ne faut pas oublier que cette matrice est obtenu par un seuillage et,
+dans un cas concret, si Cij = 0 mais Cik = Cjk = 1 pour beaucoup de nœuds k, il est probable que i et j font
+quand mˆeme partie de la mˆeme communaut´e.
+Dans la ﬁgure 16 nous observons que l’intersection des deux courbes a lieu pour un α ≈ 0.6. La valeur
+d’environ 0.8 des deux fonctions qui correspond au point d’intersection, repr´esente une performance moyenne
+compar´ee aux r´esultats obtenus par d’autres m´ethodes de d´etection des communaut´es. A titre d’exemple,
+Reichardt et Bornholdt trouvent, pour zout = 8, une sp´eciﬁcit´e et une sensitivit´e aux alentours de 0.75. Mais
+il existe aussi des algorithmes qui surclassent notre m´ethode sur ce type de graphes. Une comparaison avec
+les r´esultats obtenus en optimisant la modularit´e par l’algorithme de Guillaume et al. est pr´esent´ee dans les
+ﬁgures 17 et 18.
+
+Un autre exemple de mod`ele utilis´e pour tester notre algorithme est celui des deux cliques de taille
+N qui se recouvrent par m nœuds (voir ﬁgure 19). Les approches bas´ees sur l’optimisation de la modularit´e
+n’arrivent pas `a d´etecter la structure r´eelle dans ce cas (voir l’annexe A pour plus de d´etails), mais l’utilisation
+de l’´equivalence structurelle nous permet de retrouver les deux communaut´es recouvrantes.
+
+4.4 Traitement des r´eseaux dynamiques
+
+Dans la section pr´ec´edente, nous avons analys´e les performances d’un nouvel algorithme de d´etection des
+communaut´es, bas´e sur la notion d’´equivalence structurelle. Mˆeme si les r´esultats obtenus sont raisonnables,
+le point fort de notre m´ethode ne vient pas de son application sur des r´eseaux statiques mais du fait qu’elle
+peut ˆetre utilis´ee aussi dans des r´eseaux dynamiques.
+
+Nous proposons d’abord un mod`ele de graphe, que nous appelons graphe temporel et qui nous permet
+
+d’utiliser les propri´et´es des graphes et de garder en mˆeme temps l’information temporelle des donn´ees.
+
+La construction de ce graphe est simple. Nous supposons l’existence d’un r´eseau d’´el´ements Ai et d’un
+ensemble S de snapshots de ce r´eseau. Nous faisons aussi l’hypoth`ese qu’un ordre chronologique peut ˆetre
+impos´e sur cet ensemble, tel que chaque Si a une date ti associ´ee et toutes ces dates sont diﬀ´erentes. Au
+lieu d’agr´eger tous les Si dans un seul graphe ou de traiter chaque snapshot de mani`ere ind´ependante, nous
+introduisons l’ensemble S dans une nouvelle structure, en respectant aussi l’ordre temporel. Pour faire cela,
+nous d´eﬁnissons d’abord un nœud pour chaque paire (Ai,tj). Chaque ´el´ement Ai est donc repr´esent´e par les
+nœuds Ait1, Ait2, ..., Aitn, o`u n est le nombre de snapshots.
+
+Notre but est de garder une information concernant la dynamique du r´eseau et pour faire cela, nous
+ajoutons un lien orient´e entre chaque paire (Aitj , Aitk), avec tj < tk. Notre choix est motiv´e par l’intuition
+que chaque ´el´ement Ai est inﬂuenc´e plus ou moins par son pass´e. Il faut noter aussi qu’une approche similaire
+pour l’analyse des r´eseaux dynamiques a ´et´e r´ecemment propos´ee dans [66].
+
+La repr´esentation sous forme de graphe temporel du r´eseau d´ecrit dans la ﬁgure 14 est tr`es suggestive
+
+et les probl`emes pr´esent´es au d´ebut de ce chapitre n’apparaissent plus (voir ﬁgure 20).
+
+27
+
+D´etection des communaut´es dans des r´eseaux dynamiques
+Razvan Stanica
+3SCR 2008
+
+Fig. 20 – Mod´elisation par un graphe temporel de la propagation d’´epid´emie d´ecrite dans la section 4.1 et
+dans la ﬁgure 14
+
+w
+
+Les poids des liens entre Aitj et Aitk, que nous appelons des
+
+liens temporels, peuvent prendre des
+valeurs diﬀ´erentes. Le choix le plus facile est de consid´erer que tous ces liens ont la mˆeme importance et leur
+assigner un poids constant w. L’autre cas extrˆeme est d’assigner un poids nul `a tous les liens entre les nœuds
+du snapshot j et ceux du snapshot k si k − j (cid:54)= 1. Cela signiﬁerait qu’`a un moment tj, un element Ai est
+inﬂuenc´e seulement par son ´etat `a tj−1. Pour ˆetre plus proches de la r´ealit´e, nous sugg´erons d’utiliser des poids
+plus importants si les nœuds se trouvent dans des fenˆetres temporelles proches et de diminuer l’importance
+des liens entre des nœuds ´eloign´es `a l’´echelle temporelle. Par exemple, les poids peuvent ˆetre donn´es par la
+2tk−tj mais, pour le moment, nous n’avons pas ´etudi´e l’impact des poids et d’autres choix peuvent
+formule
+ˆetre meilleurs.
+Le nouveau graphe Gt a bien sur une matrice de poids W qui peut ˆetre utilis´ee par l’algorithme de
+d´etection des communaut´es d´ecrit dans la section 4.2. Le fait qu’un nœud Atj a des liaisons vers le futur lui
+permet, par exemple, de se situer dans la mˆeme communaut´e qu’un nœud Btj+1 sans pour autant appartenir
+`a un module qui contient l’instance B au moment tj. De plus, si la topologie du r´eseau change beaucoup, il est
+mˆeme possible que Atj n’appartienne pas `a une communaut´e qui inclut Atj+1. Ce type d’´ev´enement permet
+de reconnaitre les fusions et les divisions des communaut´es et aussi les moments quand un nœud change de
+communaut´e.
+
+Si le nombre de r´eseaux de test est petit dans le cas statique, il est ´egal `a 0 dans le cas des r´eseaux
+dynamiques. Il est tr`es diﬃcile donc d’´etudier les performances de notre algorithme et de trouver des ´eventuelles
+am´eliorations. Nous d´eﬁnissons donc un mod`ele basique pour observer le comportement de l’algorithme dans
+un cas dynamique.
+
+Ce graphe, repr´esent´e dans la ﬁgure 21, est form´e par 3 snapshots de 16 nœuds. Pour chaque ti les
+nœuds sont plac´es dans deux cliques de taille 8 et les 2 modules contenus par ces cliques changent le long du
+temps. La structure de 4 modules avec 4 nœuds chacun est ´evidente pour un observateur humain.
+
+Une agr´egation des liens dans un seul graphe conduirait `a une seule clique et, donc, `a une seule commu-
+naut´e. La d´etection r´ep´et´ee sur chaque snapshot retrouve 2 communaut´es pour chaque ti, donc 6 communaut´es
+au total. La projection de ces communaut´es sur le mˆeme graphe statique peut donner une id´ee sur la structure
+
+28
+
+D´etection des communaut´es dans des r´eseaux dynamiques
+Razvan Stanica
+3SCR 2008
+
+Fig. 21 – Graphe dynamique de test pour notre m´ethode. Les 16 nœuds sont divis´es dans 4 communaut´es et
+sur chaque snapshot 2 de ces 4 communaut´es sont group´ees ensemble.
+
+pr´ed´eﬁnie, mais aucun crit`ere ne permet, mˆeme dans ce cas, de la distinguer clairement.
+
+Pour α = 0.6, notre algorithme retrouve aussi 6 communaut´es. Si on consid`ere que les nœuds sont
+
+num´erotes de 1 `a 16 de gauche `a droite et de haut en bas, les 6 communaut´es obtenues sont :
+
+C1 = 1, 2, 5, 6
+
+C2 = 3, 4, 7, 8
+
+C3 = 9, 10, 13, 14
+C4 = 11, 12, 15, 16
+
+C5 = 1, 2, 3, 4, 5, 6, 7, 8
+
+C6 = 9, 10, 11, 12, 13, 14, 15, 16
+
+L’algorithme d´etecte donc les 4 communaut´es recherch´ees, mais il d´etecte aussi les communaut´es du
+dernier snapshot, probablement parce que ces nœuds ne sont pas encore li´es `a aucun ´ev´enement futur et donc
+ils trouvent les nœuds les plus similaires dans leur environnement actuel.
+
+Cet exemple est juste un premier pas dans la validation de notre m´ethode et il reste encore beaucoup `a
+faire, surtout en ce qui concerne la d´eﬁnition de nouveaux mod`eles de test et l’analyse de l’inﬂuence des poids
+sur les liens temporels. N´eanmoins, les r´esultats encourageants obtenus jusqu’`a pr´esent et la base th´eorique
+solide de l’algorithme sont des arguments importants, qui nous donnent beaucoup d’espoirs concernant les
+performances de cette m´ethode et son utilisation future.
+
+29
+
+Conclusion et perspectives
+
+Les r´eseaux complexes constituent l’outil de mod´elisation le plus employ´e pour l’analyse des interac-
+tions dans plusieurs domaines scientiﬁques. Que ce soit les contacts physiques `a l’int´erieur d’une population,
+les liaisons trophiques d’un ´ecosyst`eme, l’infrastructure routi`ere d’une r´egion ou les ´echanges des ﬁchiers in-
+formatiques, tous ces syst`emes peuvent ˆetre repr´esent´es sous la forme d’un graphe.
+
+L’utilisation intense de ce type de graphes fait que les propri´et´es des r´eseaux complexes sont un sujet
+de recherche tr`es important dans la sociologie, la biologie, l’informatique ou la physique. Une de ces propri´et´es
+est la structure modulaire qui peut ˆetre retrouv´ee dans la plupart des r´eseaux. Ces modules, appel´es des
+communaut´es, sont des ensembles de nœuds plus li´es aux autres nœuds de leur module et qui ont peu de liens
+vers les autres communaut´es.
+
+La d´etection automatique des communaut´es repr´esente un d´eﬁ int´eressant pour les chercheurs qui ´etu-
+dient les syst`emes complexes. La pluridisciplinarit´e du domaine est b´en´eﬁque au niveau de la diversit´e des
+techniques propos´ees, mais elle rend presque impossible le choix d’une m´ethode de d´etection g´en´eralement
+accept´ee.
+
+D’une mani`ere surprenante, la quasi-totalit´e des approches se contentent de d´etecter des modules dans
+des mod`eles statiques, ce qui ne correspond toujours pas `a la r´ealit´e o`u les syst`emes pr´esentent parfois un
+dynamisme non-n´egligeable.
+
+Les travaux men´es pendant ce stage et pr´esent´es dans ce rapport peuvent ˆetre classiﬁ´es en deux cat´e-
+gories. Nous proposons d’abord une nouvelle technique pour la d´etection des communaut´es dans les r´eseaux
+orient´es. En consid´erant qu’un lien orient´e n’est pas un signe d’´equivalence entre ses deux extr´emit´es, nous
+utilisons le nombre de voisins communs comme crit`ere de similarit´e entre les nœuds. Notre m´ethode rend pos-
+sible l’application dans le cas orient´e des algorithmes d´evelopp´es pour des r´eseaux non-orient´es et les r´esultats
+obtenus montrent une sup´eriorit´e claire par rapport aux autres techniques d´ecrites dans la litt´erature.
+
+Nous proposons aussi la premi`ere m´ethode de d´etection des communaut´es qui prend en compte l’´evolu-
+tion temporelle des r´eseaux. En plus, l’algorithme est local et il permet aussi le recouvrement des communaut´es,
+une propri´et´e tr`es int´eressante, qui peut servir pour retrouver les ´el´ements centraux du r´eseau. Le r´esultat de
+l’algorithme est donn´e sous la forme d’une matrice binaire et dont l’interpr´etation reste laborieuse. Comme
+cet algorithme est le premier de sa famille, ses performances sont diﬃciles `a mesurer mais les r´esultats obtenus
+sont encourageants.
+
+En perspective, nous esp´erons que les qualit´es montr´ees par cette nouvelle vision sur les communaut´es
+dans les graphes orient´es vont imposer notre m´ethode comme une des principales techniques dans son domaine.
+En ce qui concerne la d´etection des communaut´es dynamiques, nous voyons comme prioritaires la d´eﬁnition
+de plusieurs graphes avec une structure connue, pour pouvoir mesurer la qualit´e des algorithmes, et, dans le
+contexte de notre algorithme, le d´eveloppement d’une m´ethode de visualisation des communaut´es donn´ees par
+la matrice r´esultat.
+
+30
+
+D´etection des communaut´es dans des r´eseaux dynamiques
+Razvan Stanica
+3SCR 2008
+
+Fig. 22 – Les partitionnements ´etudi´es dans cette annexe.
+
+Annexe A : Calcul de la modularit´e dans le cas de la superposition
+de deux cliques
+
+Nous allons ´etudier, analytiquement et par simulations, la modularit´e de plusieurs partitionnements
+d’un graphe comme celui d´ecrit dans la ﬁgure 19. Ce graphe est form´e par deux cliques de taille N qui ont m
+nœuds communs.
+
+Les quatre cas analys´es sont pr´esent´es dans la ﬁgure 22. Dans le partitionnement A, les nœuds communs
+se trouvent dans un module s´epar´e. Les partitionnements B et C sont form´es par deux communaut´es pour
+lesquels les nœuds du noyau sont soit assign´es `a un des modules, soit divis´es entre les deux communaut´es.
+Finalement, le dernier cas est celui dans lequel les m nœuds se trouvent chacun dans sa propre communaut´e.
+Nous comparons d’abord la modularit´e des partitionnements A et B. Pour calculer la modularit´e, nous
+
+utilisons la d´eﬁnition donn´ee dans l’´equation 3. Nous pouvons donc ´ecrire :
+
+Q(PA) = Q(CA1) + Q(CA2) + Q(CA3) = 2Q(CA1) + Q(CA2)
+
+Q(PB) = Q(CB1) + Q(CB2)
+
+parce que CA1 et CA3 ont la mˆeme structure. Pour CA1 et CA2, nous avons :
+
+Q(CA1) =
+
+(N − m)(N − m − 1)
+
+L
+
+− (N − m)2(N − 1)2
+
+L2
+
+Q(CA2) = m(m − 1)
+
+L
+
+− m2(2N − m − 1)2
+
+L2
+
+De la mˆeme mani`ere, pour le partitionnement B nous obtenons :
+
+Q(CB1) =
+Q(CB2) = N(N − 1)
+
+L
+
+L
+
+(N − m)(N − m − 1)
+
+− (N − m)2(N − 1)2
+− [N(N − 1) + m(N − m)]2
+
+L2
+
+L2
+
+Comme Q(CA1) = Q(CB1), il nous reste :
+
+∆Q = Q(B) − Q(A) = Q(CB2) − Q(CA1) − Q(CA2)
+
+31
+
+D´etection des communaut´es dans des r´eseaux dynamiques
+Razvan Stanica
+3SCR 2008
+
+Fig. 23 – La modularit´e des 4 partitionnements ´etudi´es en fonction de m (N est ﬁxe et ´egal `a 25).
+
+Mais CB2 = CA1 ∪ CA2 et pour le gain en modularit´e apport´e par la fusion de deux communaut´es i et j on
+sait que ∆Q ∼ eij − aiaj, o`u eij est le nombre de liens entre les deux modules avant la fusion et ai est la
+somme des degr´es des nœuds de la communaut´e i.
+
+eij − aiaj =
+
+(N − m)m
+
+L
+
+− m(N − m)(N − 1)(2N − m − 1)
+
+L2
+
+= m(N − m)
+
+L2
+
+Comme L = 2(N − m)(N − 1) + m(2N − m − 1) la relation devient
+
+[L − (N − 1)(2N − m − 1)]
+
+∆Q ∼ m(N − m)
+
+L2
+
+[m(2N − m − 1) − (N − 1)(m − 1)]
+
+et donc
+
+∆Q ∼ m(N − m)
+
+L2
+
+[N − 1 + m(N − m)] ≥ 0∀m ≤ N
+
+Comme la condition m ≤ N est toujours satisfaite, la fusion des deux communaut´es apporte un gain en
+modularit´e et donc le partitionnement B est sup´erieur de ce point de vue que le partitionnement A.
+Nous nous int´eressons maintenant `a la modularit´e d’un partitionnement avec deux modules. Il est clair
+que pour les 2N−m nœuds qui n’appartiennent pas au noyau, la modularit´e est optimis´ee en assignant chacune
+des cliques `a une communaut´e diﬀ´erente (CC1 et respectivement CC2). Il reste le probl`eme des m nœuds du
+noyau. Si on consid`ere que x de ces nœuds vont appartenir `a CC1 et les autres m − x `a CC2, on peut ´ecrire :
+
+Q(C) =
+
+(N − x)(N − x − 1)
+
+L
+
+(N − m + x)(N − m + x − 1)
+
+L
+
+− [(N − m)(N − 1) + (m − x)(2N − m − 1)]2
+− [(N − m)(N − 1) + x(2N − m − 1)]2
+
+L2
+
+L2
+
++
+
+ce qui revient `a :
+
+Q(C) =
+
+(N − x)2 + (N − m + x)2 − 2N + m
+
+L
+
+32
+
+− 2(N − m)2(N − 1)2
+
+L2
+
+D´etection des communaut´es dans des r´eseaux dynamiques
+Razvan Stanica
+3SCR 2008
+
+−2m(N − m)(N − 1)(2N − m − 1)
+
+L2
+
+− (2N − m − 1)2[(m − x)2 + x2]
+
+L2
+
+Pour trouver le x qui maximise la modularit´e nous calculons la d´eriv´ee de Q(C) par rapport `a x :
+
+Q(cid:48)(C) =
+
+4x
+L
+
+− 2m
+L
+
+− 4x(2N − m − 1)2
+
++
+
+2m(2N − m − 1)2
+
+ce qui donne
+
+Q(cid:48)(C) =
+
+4x − 2m
+
+L
+
+−
+
+L2
+
+(cid:20)
+1 − (2N − m − 1)2
+
+L2
+
+(cid:21)
+
+L
+
+Comme le deuxi`eme terme est diﬀ´erent de 0, la solution de l’´equation Q(cid:48)(C) = 0 et, implicitement, le maximum
+de la modularit´e, est donn´ee par x = m
+2 . Le partitionnement C est donc sup´erieur au partitionnement B en
+termes de modularit´e.
+Ces r´esultats sont conﬁrm´es par des simulations (voir ﬁgure 23), o`u on observe bien le fait que C a la
+modularit´e la plus importante jusqu’au moment o`u cette modularit´e devient n´egative (lorsque (2N −m−1)2 >
+2 se transforme dans un point de minimum. Les valeurs n´egatives de la
+L). A partir de ce moment, x = m
+modularit´e ne sont pas signiﬁcatives, car un partitionnement de modularit´e nulle (tous les nœuds dans un seul
+module) existe toujours.
+
+Le partitionnement D, souvent retrouv´e par des divers algorithmes de d´etection des communaut´es, a ´et´e
+aussi introduit dans les simulations. Nous observons qu’il donne une modularit´e sup´erieure `a A mais inf´erieure
+aux deux autres.
+
+33
+
+Bibliographie
+
+[1] N. Alves Unveiling community structures in weighted networks Physical Review E 76, 036101 (2007)
+[2] L. Danon, A. Diaz-Guilera, A. Arenas Eﬀect of size heterogeneity on community identiﬁcation in complex
+
+networks Journal of Statistical Mechanics : Theory and Experiment, P11010 (2006)
+
+[3] L. Danon, A. Arenas, A. Diaz-Guilera Impact of community structure on information transfer Physical
+
+Review E 77, 036103 (2008)
+
+[4] L. Danon, J. Duch, A. Arenas, A. Diaz-Guilera Community structure identiﬁcation ”Large Scale
+Structure and Dynamics of Complex Networks : From Information Technology to Finance and Natural
+Science”, World Scientiﬁc, 93-113 (2007)
+
+[5] L. Danon, A. Diaz-Guilera, J. Duch, A. Arenas Comparing community structure identiﬁcation Journal
+
+of Statistical Mechanics : Theory and Experiment, P09008 (2005)
+
+[6] A. Arenas, A. Diaz-Guilera, C. P´erez-Vicente Synchronization reveals topological scales in complex
+
+networks Physical Review Letters 96, 114102 (2006)
+
+[7] J. Duch, A.Arenas Community detection in complex networks using extremal optimization Physical
+
+Review E 72, 027104 (2005)
+
+[8] A. Arenas, J. Duch, A. Fernandez, S. Gomez Size reduction of complex networks preserving modularity
+
+New Journal of Physics 9, 176 (2007)
+
+[9] A. Arenas, A. Fernandez, S. Fortunato, S. Gomez Motif-based communities in complex networks Journal
+
+of Physics A : Mathematical and Theoretical, 41, 224001 (2008)
+
+[10] A. Arenas, A. Fernandez, S. Gomez Multiple resolution of the modular structure of complex networks
+
+New Journal of Physics 10, 05039 (2008)
+
+[11] J. Bagrow, E. Bollt Local method for detecting communities Physical Review E 72, 046108 (2005)
+[12] C. Tantipathananandh, T. Berger-Wolf, D. Kempe A framework for community identiﬁcation in dyna-
+mic social networks Proceedings of the 13th ACM SIGKDD International Conference on Knowledge
+Discovery and Data Mining (2007)
+
+[13] T. Berger-Wolf, J. Saia A framework for analysis of dynamic social networks Proceedings of the 12th
+
+ACM SIGKDD International Conference on Knowledge Discovery and Data Mining (2006)
+
+[14] J. Berry, B. Hendrickson, R. LaViolette, V. Leung, C. Phillips Community detection via facility location
+
+arXiv :0710.3800v2 [physics.soc-ph] (2007)
+
+[15] M. Tasgin, A. Herdagdelen, H. Bingol Community detection in complex networks using genetic algo-
+
+rithms arXiv :0711.0491v1 [physics.soc-ph] (2007)
+
+[16] S. Boccaletti, M. Ivanchenko, V. Latora, A. Pluchino, A. Rapisarda Detecting complex network modu-
+
+larity by dynamical clustering Physical Review E 75, 045102(R) (2007)
+
+[17] C. Bothorel, M. Bouklit An algorithm for detecting communities in folksonomy hypergraphs 8th Inter-
+
+national Conference on Innovative Internet Community Systems I2CS (2008)
+
+[18] U. Brandes, D. Delling, M. Gaertler, R. Gorke, M. Hoefer, Z. Nikoloski, D. Wagner Maximizing modu-
+
+larity is hard arXiv :physics/0608255v2 [physics.data-an] (2006)
+
+34
+
+D´etection des communaut´es dans des r´eseaux dynamiques
+Razvan Stanica
+3SCR 2008
+
+[19] U. Brandes, D. Delling, M. Gaertler, R. Gorke, M. Hoefer, Z. Nikoloski, D. Wagner On ﬁnding graph
+clusterings with maximum modularity Proceedings of the 33rd International Workshop Graph-Theoretic
+Concepts in Computer Science (2007)
+
+[20] U. Brandes, D. Delling, M. Gaertler, R. Gorke, M. Hoefer, Z. Nikoloski, D. Wagner On modularity
+clustering IEEE Transactions on Knowledge and Data Engineering, volume 20, issue 2, 172-188 (2008)
+[21] A. Capocci, V. Servedio, G. Caldarelli, F. Colaiori Detecting communities in large networks Physica A
+
+350, 491-499 (2005)
+
+[22] R. Cilibrasi, P. Vitanyi Similarity of objects and the meaning of words Proceedings of the 3rd Conference
+
+on Theory and Applications of Models of Computation (TAMC) (2006)
+
+[23] A. Clauset Finding local community structure in networks Physical Review E 72,026132 (2005)
+[24] A. Clauset, N. Eagle Persistence and periodicity in a dynamic proximity network DIMACS Workshop
+
+on Computational Methods for Dynamic Interaction Networks (2007)
+
+[25] P. Costa, C. Mascolo, M. Musolesi, GP. Picco Socially-aware routing for publish-subscribe in Delay-
+Tolerant Mobile Ad Hoc Networks IEEE Journal on Selected Areas in Communications, vol. 26, no. 5
+(2008)
+
+[26] L. Donetti, M. Munoz Detecting network communities : a new systematic and eﬃcient algorithm Journal
+
+of Statistical Mechanics, P10012 (2004)
+
+[27] L. Donetti, M. Munoz Improved spectral algorithm for the detection of network communities Modeling
+
+Cooperative Behavior in the Social Sciences, published by Springer, vol.779, 104-107 (2005)
+
+[28] N. Du, B. Wu, B. Wang, Y. Wang Overlapping community detection in bipartite networks
+
+arXiv :0804.3636v1 [physics.soc-ph] (2008)
+
+[29] A. Dutot, F. Guinand, D. Olivier, Y. Pign´e GraphStream : a tool for bridging the gap between complex
+
+systems and dynamic graphs arXiv :0803.2093v1 [cs.MS] (2008)
+
+[30] N. Eagle, A. Pentland Reality mining : sensing complex social systems Personal and Ubiquitous Com-
+
+puting 10, 255-268 (2006)
+
+[31] Y. Hu, M. Li, P. Zhang, Y. Fan, Z. Di Community detecting by signaling on complex networks
+
+arXiv :0710.5441v1 [physics.soc-ph] (2007)
+
+[32] G. Flake, S. Lawrence, L. Giles, F. Coetzee Self-organization and identiﬁcation of web communities
+
+IEEE Computer 35, 66 (2002)
+
+[33] G. Flake, R. Tarjan, K. Tsioutsiouliklis Graph clustering and minimum cut trees Internet Mathematics,
+
+vol. 1, no. 4, 385-408 (2004)
+

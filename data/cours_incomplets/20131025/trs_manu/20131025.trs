@@ -1,0 +1,2922 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Trans SYSTEM "trans-14.dtd">
+<Trans audio_filename="20131025" version="4" version_date="170621">
+<Speakers>
+<Speaker id="spk26" name="Locuteur 1" check="no" type="male" dialect="native" accent="" scope="local"/>
+</Speakers>
+<Episode>
+<Section type="report" startTime="0" endTime="4779.435">
+<Turn startTime="0" endTime="0.490">
+<Sync time="0"/>
+
+</Turn>
+<Turn speaker="spk26" mode="planned" fidelity="high" channel="studio" startTime="0.490" endTime="2097.82">
+<Sync time="0.490"/>
+<Background time="0.49" type="speech" level="high"/>
+alors bon() bonjour à tous
+<Sync time="3.579"/>
+si vous êtes là aujourd'hui, c'est pour entendre parler de cryptographie
+<Sync time="7.745"/>
+donc la cryptographie, c'est la science du secret
+<Sync time="10.511"/>
+mais on prétend pas, en une heure vingt, faire un cours de cryptographie mais euh
+<Sync time="15.095"/>
+ce qu'on va essayer de de voir aujourd'hui, c'est euh quelques bases
+<Sync time="19.181"/>
+de ce qu'on appelle la cryptographie, d'un certain nombre d'exemples
+<Sync time="22.924"/>
+euh de de protocoles cryptographiques
+<Sync time="26.381"/>
+qui ont été inventés euh il y a très longtemps, depuis l'antiquité
+<Sync time="30.84"/>
+et euh qu'on continue à inventer aujourd'hui.
+<Sync time="33.516"/>
+voilà. on va faire un petit panorama historique de ce que () ce qu'on appelle la cryptographie
+<Sync time="38.44"/>
+mais avant de commencer
+<Sync time="41.059"/>
+on va voir
+<Sync time="42.560"/>
+avant de commencer, on va
+<Sync time="44.600"/>
+on va voir dans quel cadre s'inscrit la cryptographie. donc la cryptogaphie ça s'inscrit dans le cadre de ce qu'on appelle la théorie de l'information
+<Sync time="53.013"/>
+un peu de silence !
+<Sync time="54.007"/>
+en théorie de l'information, ce qu'on cherche à faire, c'est coder l'information
+<Sync time="58.501"/>
+et étudier l'information qu'on a codée.
+<Sync time="61.720"/>
+alors le premier transparent, ça sert à à faire quelques rap() quelques rappels du premier cours que vous avez eu
+<Sync time="66.875"/>
+sur comment on fait pour coder l'information.
+<Sync time="68.740"/>
+en mémoire, l'information est codée sous forme de
+<Sync time="71.427"/>
+de suites binaires, donc on peut en mémoire euh
+<Sync time="74.810"/>
+stocker que des que des nombres zéros ou uns 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ interrupteurs
+<Sync time="78.795"/>
+euh grossièrement.
+<Sync time="81.200"/>
+donc la première information qu'on va vouloir stocker en mémoire, ce seront les entiers
+<Sync time="85.193"/>
+et les entiers, vous avez tous vu comment on les stockait.
+<Sync time="88.913"/>
+pour stocker un entier, il suffit de prendre sa décomposition binaire
+<Sync time="92.359"/>
+donc vous avez un exemple ici : la décomposition binaire de cent trente-cinq, c'est un zéro zéro zéro zéro un un un
+<Sync time="99.108"/>
+donc un interrupteur allumé, quatre interrupteurs éteints, trois interrupteurs allumés
+<Sync time="104.550"/>
+qui représentent donc le nombre cent trente-cinq puisque on pourra le réécrire
+<Sync time="108.470"/>
+en utilisant des puissances de deux
+<Sync time="111.13"/>
+donc le nombre cent trente-cinq, c'est
+<Sync time="112.83"/>
+un fois deux à la puissance sept plus
+<Sync time="117.849"/>
+un fois deux à la puissance six 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ plus zéro 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ deux à la puissance six, et cetera et cetera. donc ça c'est le passage de l'écriture binaire à l'écriture décimale.
+<Sync time="125.651"/>
+vous avez certainement vu ça en 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ en cours de mathématiques
+<Sync time="129.769"/>
+alors une fois qu'on a des entiers, on peut s() on peut faire plein de choses
+<Sync time="132.830"/>
+une fois qu'on a des entiers, on peut stocker des des réels. des réels informatiques, ce qu'on appelle les flottants
+<Sync time="138.169"/>
+en utilisant la notation ingénieur.
+<Sync time="140.904"/>
+ça, on a vu ça en cours la la première fois
+<Sync time="143.433"/>
+pour stocker un réel, ben il suffit
+<Sync time="146.071"/>
+de définir deux entiers, qu'on appellera mantisse et exposant
+<Sync time="149.913"/>
+et chaque nombre réel peut s'écrire
+<Sync time="152.314"/>
+
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ peut s'écrire
+<Sync time="154.733"/>
+douze () mille deux cent quarante-sept exposant moins deux.
+<Sync time="159.222"/>
+exposant moins deux
+<Sync time="160.901"/>
+donc avec
+<Sync time="162.299"/>
+deux entiers.
+<Sync time="164.454"/>
+une fois qu'on sait coder des entiers, on sait aussi coder des caractères. ça encore, on l'a vu au premier cours.
+<Sync time="169.859"/>
+il suffit d'utiliser une table de correspondance entre des caractères et des entiers ; cette table, on l'appelle la table ascii
+<Sync time="175.520"/>
+ou euh ou la table unicode que vous *verrez que vous verrez un peu plus tard dans le cours du () dans le cours de traitement automatique des langues naturelles.
+<Sync time="182.663"/>
+donc à chaque caractère s'associe un entier.
+<Sync time="184.982"/>
+et c'est donc () chaque caractère, on peut le coder en mémoire ; on peut coder des textes en mémoire.
+<Sync time="190.546"/>
+pour de l'information un peu plus compliquée, bah on va utiliser des petits stratagèmes
+<Sync time="195.177"/>
+euh
+<Sync time="196.570"/>
+pour coder une couleur, par exemple
+<Sync time="198.939"/>
+un point d'une image
+<Sync time="200.660"/>
+on va utiliser un codage de cette couleur sous forme d'une décomposition en composantes de rouge, de vert et de bleu
+<Sync time="207.240"/>
+et 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ un certain nombre de niveaux de couleurs pour chaque euh composante de rouge, de vert et de bleu.
+<Sync time="213.670"/>
+donc ici, ça va coder couleur
+<Sync time="216.041"/>
+dont la composante est
+<Sync time="218.918"/>
+du rouge moyen
+<Sync time="220.598"/>
+le nombre qu'on peut mettre, c'est un nombre entre zéro et deux cent cinquante-cinq, donc cent vingt-six c'est le () c'est au milieu
+<Sync time="226.473"/>
+un peu plus de vert et euh un peu plus de bleu ; donc ça va être un un gris.
+<Sync time="230.314"/>
+une sorte de gris 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+
+<Sync time="234.290"/>
+donc euh les les couleurs 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ voilà, les couleurs
+<Sync time="239.212"/>
+hop
+<Sync time="240.440"/>
+on peut on peut euh stocker n'importe quelle couleur de ce type-là ; on peut définir n'importe quelle couleur de ce type-là 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ rien qu'avec des composantes de rouge, de vert et de bleu.
+<Sync time="249.090"/>
+et pour la petite histoire, ça c'est () ça a été fait grâce à l'interface
+<Sync time="252.563"/>
+en utilisant le petit code que vous avez là, et que vous retrouverez évidemment en ligne.
+<Sync time="257.719"/>
+pour stocker du son,
+<Sync time="259.938"/>
+ben le son c'est euh
+<Sync time="262.347"/>
+un son c'est euh un signal électrique qui permet de faire se () de faire vibrer une membrane, la membrane de votre euh
+<Sync time="268.859"/>
+de votre haut-parleur.
+<Sync time="270.570"/>
+donc il faut être capable de stocker un signal électrique
+<Sync time="274.549"/>
+un peu sinusoïdal
+<Sync time="276.731"/>
+en mémoire.
+<Sync time="278.580"/>
+donc ça aussi, on pourra le faire avec des entiers
+<Sync time="282.158"/>
+par exemple
+<Sync time="283.730"/>
+en en décomposant le le son, en coupant le son par petites bandes, on appellera ça l'échantillonnage
+<Sync time="289.944"/>
+et puis en permettant que chaque bande fasse une hauteur
+<Sync time="294.180"/>
+entière
+<Sync time="295.821"/>
+voilà. le signal sinusoïdal que vous avez là,
+<Sync time="299.931"/>
+on peut le réécrire
+<Sync time="302.713"/>
+euh sous forme de petites bandes
+<Sync time="305.590"/>
+chaque bande aura une hauteur entière
+<Sync time="308.09"/>
+correspondant quasiment à la hauteur qu'on souhaite dans le signal analogique,
+<Sync time="312.918"/>
+mais ce sera un s() euh codé par un tableau de () d'entiers.
+<Sync time="317.621"/>
+voilà, donc un son on peut le stocker par un tableau d'entiers.
+<Sync time="320.090"/>
+si les images et les sons, on peut les stocker sous forme entière comme ça, sous forme 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ c'est parce que l'oeil et l'oreille ne sont pas capables de discerner des sons extrêmement précis.
+<Sync time="329.688"/>
+donc on on peut se permettre de perdre un peu d'information quand on stocke des des images ou quand on stocke des sons.
+<Sync time="337.218"/>
+voilà, donc au final du point de vue de la machine, l'information c'est une suite de bits
+<Sync time="341.219"/>
+et puis on traitera cette suite de bits.
+<Sync time="344.595"/>
+la théorie de l'information, c'est euh la science qui traite ces suites de bits d'information.
+<Sync time="350.955"/>
+stop
+<Sync time="353.33"/>
+voilà
+<Sync time="355.192"/>
+alors quand on veut traiter cette suite euh cette information, on a trois préoccupations
+<Sync time="360.028"/>
+en théorie de l'information.
+<Sync time="361.467"/>
+la première préoccupation
+<Sync time="363.67"/>
+va consister à ce que l'information
+<Sync time="365.970"/>
+qu'on envoie sur un
+<Sync time="367.97"/>
+sur un canal téléphonique
+<Sync time="370.996"/>
+soit la même que celle qu'on reçoit.
+<Sync time="374.137"/>
+et ça, c'est compliqué parce que euh il y a de la perte
+<Sync time="377.200"/>
+sur les sur les canaux téléphoniques, dans les fils électriques il y a de la perte, il y a des
+<Sync time="383.135"/>
+des perturbations du signal
+<Sync time="385.229"/>
+euh c'est encore pire quand euh
+<Sync time="387.479"/>
+quand on envoie euh par satellite des des des communications
+<Sync time="392.110"/>
+et c'est encore pire quand on les stocke sur un support comme un cd, puisque le support peut typiquement être rayé.
+<Sync time="398.885"/>
+alors voilà, il y a une première préoccupation, c'est euh si on perd de l'information
+<Sync time="403.580"/>
+comment on fait pour retrouver cette information perdue ?
+<Sync time="406.551"/>
+le signal il est gravé, quand même
+<Sync time="410.070"/>
+alors pour ça
+<Sync time="412.101"/>
+on va utiliser ce qu'on appelle des codes détecteurs d'erreurs ou des codes correcteurs d'erreurs.
+<Sync time="418.560"/>
+alors le principe est très très simple :
+<Sync time="420.824"/>
+un exemple de code correcteur d'erreurs, c'est ce qu'on appelle le bit de parité.
+<Sync time="426.720"/>
+ce bit de parité 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ ça prend des petits blocs
+<Sync time="429.77"/>
+de sept bits
+<Sync time="431.500"/>
+de rajouter un () de rajouter un bit supplémentaire au signal qu'on envoie
+<Sync time="436.060"/>
+qui sera la somme modulo deux de tous les
+<Sync time="439.586"/>
+de tous les bits qui précèdent, donc des sept bits qui précèdent.
+<Sync time="442.258"/>
+donc si on regarde ce qu'il y a là, on a un zéro plus un
+<Sync time="445.664"/>
+ça fait un, plus zéro ça reste un, plus un ça fait zéro modulo deux
+<Sync time="450.603"/>
+plus un, plus zéro, plus un, le tout ça fait zéro modulo deux, on met zéro.
+<Sync time="454.572"/>
+et on ajoute
+<Sync time="455.806"/>
+tous les sept bits, on ajoute un bit de parité.
+<Sync time="458.951"/>
+donc qu'est-ce que ça permet, ça ?
+<Sync time="460.848"/>
+ben ça permet que lorsque l'information est transmise
+<Sync time="463.690"/>
+avec erreurs, ben les erreurs on va les retrouver ici :
+<Sync time="467.013"/>
+il y en a il y en a une qui s'est produite ici, ça 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ on a un.
+<Sync time="471.232"/>
+il y en a une qui s'est produite ici, qui transforme un un en zéro ;
+<Sync time="474.420"/>
+ben cette information-là, on pourra la détecter
+<Sync time="477.349"/>
+grâce au bit de parité
+<Sync time="478.975"/>
+puisque euh
+<Sync time="480.147"/>
+ça va changer la
+<Sync time="481.610"/>
+si on change un zéro en un un ici, ben la somme est plus la même
+<Sync time="484.485"/>
+
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+
+<Sync time="485.640"/>
+comme la somme est plus la même, on peut dire que avant il y a une erreur ;
+<Sync time="489.283"/>
+on détecte l'erreur.
+<Sync time="492.934"/>
+alors ça permet donc l() ici on détecte des erreurs de complétion dans deux blocs
+<Sync time="497.710"/>
+et ce qu'on voit, c'est qu'en ajoutant un bit tous les sept bits,
+<Sync time="501.07"/>
+donc on a on a 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ la taille du signal de quatorze pour cent
+<Sync time="505.055"/>
+on est capable de détecter
+<Sync time="507.618"/>
+une erreur sous les blocs de sept bits.
+<Sync time="511.070"/>
+l'action des codes détecteurs d'erreurs, c'est de définir des nouveaux codes correcteurs qui permettent non seulement de détecter une erreur
+<Sync time="518.427"/>
+mais de détecter où est l'erreur et de la corriger
+<Sync time="522.442"/>
+en ajoutant évidemment beaucoup plus d'informations que quatorze pour cent. en général c'est () on multiplie le
+<Sync time="527.286"/>
+le signal par trois ; donc il faut ajouter trois fois
+<Sync time="530.348"/>
+euh la taille du signal pour être capable de corriger le signal,
+<Sync time="534.731"/>
+mais ça fonctionne.
+<Sync time="535.805"/>
+ça fonctionne, puisque vous êtes capables d'écouter un cd rayé
+<Sync time="538.492"/>
+jusqu'à un certain point.
+<Sync time="541.053"/>
+la deuxième préoccupation, c'est que l'information se transmette rapidement
+<Sync time="546.370"/>
+alors rapidement dans le sens où euh maintenant on veut envoyer () avant on on était euh raisonnable
+<Sync time="553.04"/>
+on voulait s'envoyer des textes pendant les années soixante-dix, dans les années euh quatre-vingts, quatre-vingt-dix on a voulu s'envoyer des textes et des images
+<Sync time="561.180"/>
+maintenant on en est à vouloir s'envoyer des signaux euh on v() on veut s'envoyer de la télévision sur internet, donc à chaque fois on veut s'envoyer des très très gros euh fichiers
+<Sync time="570.470"/>
+et si ça
+<Sync time="572.173"/>
+la qualité des des canaux
+<Sync time="574.570"/>
+s'améliore
+<Sync time="576.280"/>
+mais l'amélioration des canaux n'est pas suffisante pour euh
+<Sync time="580.184"/>
+l'usage qu'on a envie d'en faire.
+<Sync time="583.59"/>
+donc
+<Sync time="584.240"/>
+pour envoyer plus d'information,
+<Sync time="586.780"/>
+une manière de faire, c'est de compresser l'information, donc de la rendre plus petite.
+<Sync time="591.470"/>
+on va prendre un petit exemple.
+<Sync time="595.900"/>
+alors un petit calcul autour de la vidéo haute définition
+<Sync time="601.060"/>
+une image de vidéo haute définition, c'est une image qui fait une taille de mille vingt-quatre euh pixels de large et mille quatre-vingts pixels de haut.
+<Sync time="611.319"/>
+comme on a vu, pour pour coder une image, il faut trois
+<Sync time="615.997"/>
+trois nombres
+<Sync time="617.146"/>
+trois nombres de huit bits.
+<Sync time="620.027"/>
+au final, donc, pour coder
+<Sync time="622.154"/>
+une ima() une image en haute définition, il faut
+<Sync time="625.916"/>
+trente-trois millions de bits par image
+<Sync time="629.510"/>
+des images, on va en transmettre beaucoup quand on fait une vidéo :
+<Sync time="632.886"/>
+la vidéo, elle se transmet à trente images par seconde.
+<Sync time="636.020"/>
+donc si on fait un petit calcul, il faut un mil() il faut être capable d'envoyer un milliard de bits par seconde pour transmettre
+<Sync time="641.977"/>
+une seconde de
+<Sync time="643.350"/>
+pour transmettre une vidéo.
+<Sync time="645.542"/>
+un milliard de bits par seconde, ça fait à peu près cent vingt-cinq mégaoctets par seconde.
+<Sync time="651.320"/>
+voilà. quand on veut stocker une vidéo hd, on veut stocker cent vingt-cinq mégaoctets par seconde.
+<Sync time="657.420"/>
+si on souhaitait la stocker sur un cd, un cd dont la capacité c'est sept cents mégaoctets
+<Sync time="662.555"/>
+alors on stockerait environ cinq secondes de vidéo sur un cd.
+<Sync time="669.978"/>
+si on voulait la stocker sur un dvd, c'est une forme moderne
+<Sync time="674.040"/>
+dont la capacité est de huit gigaoctets,
+<Sync time="675.986"/>
+on serait capable de stocker à peu près une minute de vidéo non compressée.
+<Sync time="681.427"/>
+alors euh
+<Sync time="683.149"/>
+ça ça vous parle peut-être pas, mais euh prenons un film
+<Sync time="686.660"/>
+le film le parrain
+<Sync time="689.647"/>
+qui fait cent soixante-huit minutes, ben si on voulait stocker le parrain sur des dvd, il en faudrait cent soixante-huit
+<Sync time="694.484"/>
+toutes les minutes faut changer de dvd.
+<Sync time="696.307"/>
+donc évidemment, vous vous doutez bien que c'est pas comme ça que ça marche.
+<Sync time="701.850"/>
+parce que le parrain
+<Sync time="704.584"/>
+vous savez très bien ce qu'il y a sur un dvd
+<Sync time="708.212"/>
+et puisque vous faites
+<Sync time="710.053"/>
+vous ne téléchargez pas sur internet et euh
+<Sync time="712.310"/>
+vous av() vous savez que ça existe
+<Sync time="714.000"/>
+et vous savez que le parrain
+<Sync time="716.119"/>
+on peut même le faire tenir sur un cd
+<Sync time="718.272"/>
+à condition de le compresser dans un bon format.
+<Sync time="722.552"/>
+donc la compression, ça ça consiste à réduire la taille
+<Sync time="726.130"/>
+des fichiers,
+<Sync time="727.604"/>
+tout en préservant la qualité
+<Sync time="729.633"/>
+des fichiers.
+<Sync time="730.740"/>
+
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ le le fait que ça stocke quand même un film.
+<Sync time="736.511"/>
+donc j'arrête là les les calculs.
+<Sync time="739.758"/>
+ce qui va nous intéresser aujourd'hui, c'est la troisième préoccupation
+<Sync time="742.796"/>
+c'est la préoccupation que certaines informations
+<Sync time="745.180"/>
+sont importantes, et on n'a pas envie qu'elles soient divulguées
+<Sync time="748.375"/>
+donc on a envie de transmettre l'information mais de manière protégée.
+<Sync time="753.631"/>
+donc par exemple on veut euh en() on veut être sûr que le code de notre carte bleue, il circule pas euh de manière claire sur le réseau, il peut pas être intercepté.
+<Sync time="762.095"/>
+on a envie que certaines conversations
+<Sync time="764.703"/>
+typiquement euh ça ça ça c'est d'actualité hein euh vous avez entendu parler de la 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+
+<Sync time="769.280"/>
+on a envie () on n'a pas envie que ça arrive.
+<Sync time="772.938"/>
+donc pour
+<Sync time="774.29"/>
+que
+<Sync time="775.799"/>
+pour mettre en en oeuvre ces protocoles euh de sécurité
+<Sync time="780.683"/>
+on parle euh on utilise des techniques de cryptographie, et c'est ce dont je vais vous parler aujourd'hui.u
+<Sync time="789.361"/>
+dans ces trois choses
+<Sync time="791.120"/>
+il y a un terme qui est important, qui s'appelle la redondance. alors qu'est-ce que c'est que la redondance ?
+<Sync time="796.140"/>
+euh ben la redondance, c'est euh
+<Sync time="798.560"/>
+c'est le fait que s() un certain nombre de caractères ne soient pas utiles. par exemple, si je vous écris :
+<Sync time="803.570"/>
+mon nom est yves puis j'oublie des lettres
+<Sync time="806.460"/>
+parce qu'elles ont été effacées,
+<Sync time="808.560"/>
+vous êtes tous capables de de le retrouver, mon nom
+<Sync time="812.186"/>
+parce que vous avez un certain nombre d'informations.
+<Sync time="814.560"/>
+les lettres que j'ai enlevées, elles ne servent pas,
+<Sync time="817.019"/>
+elles sont redondantes.
+<Sync time="818.744"/>
+si je voulais compresser mon nom,
+<Sync time="820.632"/>
+il suffirait d'enlever un certain nombre de lettres et vous () à partir du moment où vous êtes capable
+<Sync time="824.773"/>
+de retrouver ce que j'ai enlevé, c'est que ce que j'ai enlevé ne servait pas.
+<Sync time="828.725"/>
+c'est redondant.
+<Sync time="830.652"/>
+alors toutes les lettres n'ont pas le même statut de redondance, par exemple si je vous donne mon numéro de téléphone
+<Sync time="837.640"/>
+le premier caractère que je vais enlever,
+<Sync time="839.873"/>
+vous savez lequel c'est
+<Sync time="841.590"/>
+c'est un zéro, forcément.
+<Sync time="843.780"/>
+mais par contre celui que j'ai enlevé ici,
+<Sync time="846.165"/>
+vous êtes pas capables de le retrouver
+<Sync time="848.014"/>
+sans faire dix essais.
+<Sync time="851.026"/>
+donc
+<Sync time="852.044"/>
+le premier est redondant,
+<Sync time="853.894"/>
+celui-là ne l'est pas.
+<Sync time="856.087"/>
+voilà
+<Sync time="857.48"/>
+donc qu'est-ce qu'on va faire en théorie de l'information ? on va retirer de la redondance pour compresser
+<Sync time="863.646"/>
+mais par contre
+<Sync time="865.369"/>
+si on veut repérer des erreurs et les détecter
+<Sync time="868.212"/>
+il faut en ajouter, de la redondance
+<Sync time="869.966"/>
+je vous ai dit, ça peut aller jusqu'à euh
+<Sync time="872.036"/>
+multiplier la taille du signal par trois.
+<Sync time="875.991"/>
+et puis euh on va utiliser de la redondance
+<Sync time="879.974"/>
+quand on cherchera à dé() attaquer un un protocole cryptographique
+<Sync time="883.770"/>
+on se *servira on se servira du fait que le
+<Sync time="886.630"/>
+le texte codé on sait que c'est du français, par exemple.
+<Sync time="889.963"/>
+du français avec toutes les redondances qu'il y a dans le français
+<Sync time="894.477"/>
+d'accord ? donc voilà, le terme important c'est la redondance.
+<Sync time="899.542"/>
+le plan du cours d'aujourd'hui, donc ça c'était l'introduction, le plan du cours d'aujourd'hui
+<Sync time="903.899"/>
+ça va être euh il va s() ça va se dérouler en deux parties. une première partie avec un grand zi() un grand historique de tout ce qui s'est fait
+<Sync time="909.939"/>
+de l'antiquité jusque dans les années euh soixante, soixante-dix
+<Sync time="915.436"/>
+où la cryptographie était plutôt militaire,
+<Sync time="918.910"/>
+et puis ensuite on parlera de cryptographie moderne
+<Sync time="922.782"/>
+alors un cer() on présentera un certain nombre de protocoles cryptographiques.
+<Sync time="931.969"/>
+
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ très rapidement
+<Sync time="934.261"/>
+pourquoi on fait de la cryptographie ?
+<Sync time="936.460"/>
+ben on fait de la cryptographie pour protéger des messages.
+<Sync time="939.270"/>
+la cryptographie était militaire
+<Sync time="941.296"/>
+entre l'antiquité jusqu'à la seconde guerre mondiale
+<Sync time="944.000"/>
+voi() jusque () voire jusqu'à la guerre froide
+<Sync time="945.701"/>
+c'était une cryptographie militaire.
+<Sync time="948.770"/>
+depuis que l'informatique personnelle se développe,
+<Sync time="951.970"/>
+euh les besoins cryptographiques se développent aussi
+<Sync time="955.978"/>
+et donc de plus en plus, on a on a besoin d'une cryptographie domestique. on a besoin de payer avec sa carte bleue sur internet,
+<Sync time="964.010"/>
+on a besoin de signer
+<Sync time="965.711"/>
+sa déclaration d'impôts de manière électronique, on a besoin de faire des choses comme ça.
+<Sync time="970.772"/>
+donc on va s'adapter à des nouvelles () la cryptographie doit s'adapter à des nouvelles applications
+<Sync time="975.656"/>
+pour
+<Sync time="976.639"/>
+coder des textes,
+<Sync time="977.960"/>
+pour signer, pour coder des images, pour coder des vidéos.
+<Sync time="983.638"/>
+le signal canal plus qui est diffusé sur la tnt est crypté
+<Sync time="987.890"/>
+par un protocole crypto() euh cryptographique.
+<Sync time="992.067"/>
+et puis évidemment
+<Sync time="994.32"/>
+vous avez euh
+<Sync time="996.740"/>
+c'est tout à fait d'actualité : on pensait qu'on était protégés parce que euh
+<Sync time="1000.713"/>
+les protocoles cryptographiques ce sont des protocoles sécurisés mais
+<Sync time="1005.870"/>
+c'est plus tout à fait le cas, puisque il y a une croissance exponentielle des ma() des moyens informatiques mis à disposition des
+<Sync time="1012.836"/>
+des personnes malveillantes.
+<Sync time="1014.269"/>
+donc il faut tenir compte
+<Sync time="1015.888"/>
+de cette euh croissance exponentielle de la puissance de calcul quand on définit un protocole cryptographique. on on reviendra dessus
+<Sync time="1025.560"/>
+alors petit schéma général de cryptographie :
+<Sync time="1028.960"/>
+la cryptographie concerne deux personnes qui veulent communiquer
+<Sync time="1034.508"/>
+alors un petit garçon et une petite fille qui veulent communiquer dans la salle de classe
+<Sync time="1039.300"/>
+et pour communiquer dans la salle de classe,
+<Sync time="1041.820"/>
+la méthode simple, c'est d'écrire le message sur un petit bout de papier et de se l'envoyer
+<Sync time="1046.200"/>
+à l'é() verticalement
+<Sync time="1048.599"/>
+voilà
+<Sync time="1050.124"/>
+donc le message est envoyé, il est reçu, il est lu
+<Sync time="1053.836"/>
+le seul problème, c'est que il y a le () il y a le prof dans la salle
+<Sync time="1057.391"/>
+et le prof, il est pas con() il est pas il est pas très sympa
+<Sync time="1061.185"/>
+donc ce que fait le prof,
+<Sync time="1063.480"/>
+c'est qu'il est capable d'intercepter l'avion.
+<Sync time="1066.560"/>
+si le message n'est pas crypté, il lit le message
+<Sync time="1069.720"/>
+et évidemment, le petit garçon doit apprendre à protéger ses messages.
+<Sync time="1073.615"/>
+donc la leçon qu'il a reçue, c'est ça.
+<Sync time="1077.465"/>
+comment il fait pour protéger ses messages ?
+<Sync time="1079.800"/>
+ben les protocoles cryptographiques
+<Sync time="1081.89"/>
+tous les protocoles cryptographiques vont reposer sur
+<Sync time="1084.560"/>
+une clé
+<Sync time="1086.910"/>
+une clé qui doit être partagée
+<Sync time="1088.935"/>
+entre les deux personnes qui veulent communiquer.
+<Sync time="1091.268"/>
+ça c'est le premier élément du protocole cryptographique ;
+<Sync time="1094.098"/>
+le deuxième élément
+<Sync time="1096.541"/>
+c'est un coffre.
+<Sync time="1098.220"/>
+le message, au lieu de l'envoyer sur un papier
+<Sync time="1101.130"/>
+il va le () l'enfermer dans une sorte de coffre cryptographique fermé à clé.
+<Sync time="1106.372"/>
+la seule clé
+<Sync time="1107.684"/>
+qui peut ouvrir le coffre, c'est la clé qui est partagée.
+<Sync time="1110.577"/>
+en gros, on t'envoie le coffre
+<Sync time="1112.210"/>
+même si le coffre est intercepté, c'est pas grave
+<Sync time="1115.208"/>
+donc ce qui va être important c'est d'avoir une
+<Sync time="1117.326"/>
+une bonne clé.
+<Sync time="1118.658"/>
+qu'est-ce que ça veut dire, avoir une bonne clé ? ça veut dire
+<Sync time="1121.388"/>
+que pour ouvrir le coffre,
+<Sync time="1122.823"/>
+il suffit pas de laisser trois ou quatre clés.
+<Sync time="1125.308"/>
+il faut tester tellement de clés que on n'a pas le temps de le faire.
+<Sync time="1129.797"/>
+donc une clé de bonne qualité, c'est une clé qui est sur un trousseau de plusieurs milliards de clés,
+<Sync time="1135.629"/>
+impossibles à tester par un être humain
+<Sync time="1138.190"/>
+en le temps qui lui est imparti.
+<Sync time="1140.956"/>
+la deuxième préoccupation, c'est que le coffre soit de bonne qualité.
+<Sync time="1144.971"/>
+un coffre de bonne qualité, c'est pas un coffre qu'il suffit de dévisser pour ouvri() pour l'ouvrir, voilà.
+<Sync time="1150.995"/>
+donc on l'ou() on l'ouvre pas avec un marteau ; si on veut l'ouvrir, c'est euh
+<Sync time="1154.660"/>
+il faut y mettre les moyens,
+<Sync time="1159.220"/>
+les moyens qu'on ne peut pas mettre en oeuvre en un temps raisonnable.
+<Sync time="1164.299"/>
+voilà. et puis la troisième préoccupation, c'est euh j'ai dit : c'est bien beau, il suffit de s'échanger une clé.
+<Sync time="1168.617"/>
+ben ça c'est un vrai problème
+<Sync time="1170.545"/>
+euh quand on cherche à
+<Sync time="1173.438"/>
+à définir un protocole cryptographique, c'est comment on fait pour s'échanger une clé
+<Sync time="1176.982"/>
+sachant qu'évidemment, on peut pas se l'envoyer
+<Sync time="1179.412"/>
+d'un bout à l'autre de la salle, sinon elle pourrait être interceptée.
+<Sync time="1182.811"/>
+faut mettre en oeuvre
+<Sync time="1184.039"/>
+ces protocoles d'échange de clés.
+<Sync time="1187.561"/>
+voilà
+<Sync time="1190.066"/>
+on va voir maintenant un certain nombre d'exemples
+<Sync time="1192.926"/>
+de protocoles cryptographiques.
+<Sync time="1195.060"/>
+
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+
+<Sync time="1197.494"/>
+on retourne très loin en arrière, puisqu'on retourne euh cinq cents avant jésus-christ
+<Sync time="1201.880"/>
+on va parler d'un protocole cryptographique mis au point par les grecs
+<Sync time="1206.730"/>
+euh le but était de () étant de communiquer entre plusieurs unités euh de l'armée grecque.
+<Sync time="1215.260"/>
+ce protocole cryptographique porte le nom de transcodage ; c'est
+<Sync time="1219.130"/>
+c'est une technique qui consiste à mélanger les lettres du message : je prends un message, je mélange les lettres
+<Sync time="1224.68"/>
+et j'obtiens un nouveau message codé.
+<Sync time="1227.257"/>
+si la personne
+<Sync time="1228.930"/>
+sait comment j'ai mélangé les lettres, elle est capable de les redémélanger
+<Sync time="1232.187"/>
+et de de relire le message.
+<Sync time="1235.760"/>
+alors ça peut paraître très général, mais les grecs avaient inventé ça
+<Sync time="1238.815"/>
+comme ça, ils ils procédaient comme ça.
+<Sync time="1241.388"/>
+ils avaient un cylindre
+<Sync time="1243.048"/>
+d'un certain diamètre
+<Sync time="1244.410"/>
+ils avaient une bande de papier
+<Sync time="1247.285"/>
+pour coder le message,
+<Sync time="1248.773"/>
+il suffisait d'enrouler la bande de papier autour du cylindre,
+<Sync time="1252.092"/>
+d'écrire le message sur la bande de papier, dans le sens vertical
+<Sync time="1256.787"/>
+et quand on redépliait la bande de papier, évidemment les lettres étaient mélangées.
+<Sync time="1264.310"/>
+donc ici, il y a une clé ;
+<Sync time="1266.507"/>
+la clé c'est le t() c'est le tuyau
+<Sync time="1269.131"/>
+qui doit être commun entre les deux personnes
+<Sync time="1272.290"/>
+*enfin le les () c'était pas vraiment le tuyau, mais c'était euh plus précisément
+<Sync time="1276.686"/>
+le nombre de lettres qu'on doit passer quand on est en train de relire le message.
+<Sync time="1281.646"/>
+donc ça, c'est la clé.
+<Sync time="1283.123"/>
+la clé du transcodage à la grecque, c'est le nombre de lettres qu'on passe pour pouvoir lire le message.
+<Sync time="1290.160"/>
+alors est-ce que c'est un bon protocole cryptographique ?
+<Sync time="1293.19"/>
+la réponse est plutôt non
+<Sync time="1295.054"/>
+dans le cas d'un 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+, puisque des clés possibles il y en a pas tant que ça.
+<Sync time="1298.941"/>
+si le message fait euh cinquante euh symboles, alors il y a cinquante clés à tester, cinquante écarts de lettres à tester
+<Sync time="1306.270"/>
+pour retrouver le message non codé.
+<Sync time="1308.668"/>
+c'est pas beaucoup, cinquante.
+<Sync time="1311.507"/>
+dans le cas d'un transcodage général, le principe va être de mélanger
+<Sync time="1315.667"/>
+selon une certaine permutation le nombre euh les les les symboles du message, alors
+<Sync time="1320.281"/>
+évidemment il y aura beaucoup plus de clés possibles, il y en aura le nombre de permutations de n symboles possibles.
+<Sync time="1326.680"/>
+c'est pas pour autant que ça en fait un bon cryptosystème.
+<Sync time="1332.958"/>
+voilà
+<Sync time="1333.720"/>
+alors si vous lisez un petit peu
+<Sync time="1336.689"/>
+et si vous lisez euh jules verne l'auteur euh nantais par excellence
+<Sync time="1341.463"/>
+il a écrit un livre qui s'appelle voyage au centre de la terre
+<Sync time="1344.390"/>
+où il fait un
+<Sync time="1345.620"/>
+où il a une énigme à base de transcodage
+<Sync time="1348.672"/>
+donc je vous laisse
+<Sync time="1349.930"/>
+pas le lire sur le tableau puisque il y a pas il y a pas d'intérêt, mais ça peut vous donner une idée de ce que vous pouvez lire pendant les vacances
+<Sync time="1357.466"/>
+voyage au centre de la terre.
+<Sync time="1361.000"/>
+donc typiquement, si la l() l'énigme à résoudre, c'est un transcodage
+<Sync time="1365.130"/>
+et euh évidemment le héros la résout et va explorer
+<Sync time="1368.714"/>
+le centre de la terre.
+<Sync time="1372.780"/>
+le deuxième codage
+<Sync time="1374.760"/>
+qu'on va présenter, c'est celui qu'on appelle le codage de césar ; donc là on revient à
+<Sync time="1379.794"/>
+à peu près cinquante avant jésus-christ, l'année d'astérix
+<Sync time="1384.125"/>
+le but de ce codage,
+<Sync time="1386.050"/>
+ça va plus être de mélanger les lettres du message, mais ça va être de mélanger les lettres de l'alphabet.
+<Sync time="1391.664"/>
+donc on commence à mélanger les lettres de l'alphabet ;
+<Sync time="1394.448"/>
+dans le codage de césar, c'est pas un mélange très compliqué, c'est un décalage.
+<Sync time="1398.840"/>
+on décale les lettres de l'alphabet d'un certain nombre de caractères
+<Sync time="1402.550"/>
+ici on met le un en bas du d, et puis on réécrit l'alphabet
+<Sync time="1407.767"/>
+pour coder le message
+<Sync time="1409.416"/>
+bah il suffit de prendre la lettre d'en haut
+<Sync time="1411.780"/>
+et d'écrire la lettre en bas. donc le message codé 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ deviendra 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ voilà
+<Sync time="1418.329"/>
+f, r euh d, h, u, et cetera, et cetera
+<Sync time="1422.140"/>
+si on l'appelle codage de césar, c'est parce qu'il a été décrit dans l'antiquité par euh
+<Sync time="1426.330"/>
+quelqu'un qui s'appelle suétone, un poète euh romain
+<Sync time="1429.580"/>
+dans un livre qui s'appelait "la vie des douze césars".
+<Sync time="1434.190"/>
+c'est une sécurité qui est faible, il y a pas beaucoup de clés
+<Sync time="1437.000"/>
+
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ vingt-six
+<Sync time="1439.470"/>
+mais il est tellement simple d'utilisation
+<Sync time="1442.501"/>
+il est encore utilisé aujourd'hui
+<Sync time="1444.445"/>
+sur certains forums un peu spécialisés pour cacher des devinettes,
+<Sync time="1447.475"/>
+et il est utilisé aujourd'hui sous le nom de "rot treize"
+<Sync time="1450.404"/>
+rotation de treize symboles ;
+<Sync time="1452.174"/>
+donc le décalage est fixé à treize symboles.
+<Sync time="1455.707"/>
+donc ça, ça s'appelle
+<Sync time="1457.222"/>
+substitution ou codage monoalphabétique, donc c'est s() s() ce terme
+<Sync time="1462.020"/>
+décrit toutes les techniques
+<Sync time="1464.590"/>
+de cryptographie qui consistent à mélanger les lettres de l'alphabet.
+<Sync time="1470.287"/>
+alors je vous ai dit
+<Sync time="1472.623"/>
+son avantage et sa simplicité, c'est qu'il est indépendant de la taille du message, donc ça c'est important
+<Sync time="1477.779"/>
+quand on veut décrire un un cryptosystème, le fait que ce soit in() indépendant de la taille du message c'est bien
+<Sync time="1483.620"/>
+c'est pas un bon cryptosystème, le codage de césar c'est absolument pas un bon cryptosystème
+<Sync time="1488.347"/>
+vous, êtres humaines, vous êtes capables de
+<Sync time="1491.048"/>
+de lire vingt-six textes
+<Sync time="1492.460"/>
+et de trouver lequel est écrit en français
+<Sync time="1495.39"/>
+par une attaque euh
+<Sync time="1497.513"/>
+en testant toutes les clés vous êtes capables de le faire, vous êtes même *capables de le faire à la main sans ordinateur.
+<Sync time="1502.900"/>
+dans le cadre des substitutions générales,
+<Sync time="1505.530"/>
+c'est un peu plus compliqué puisque des permutations de l'alphabet, il y en a vingt-six factorielles.
+<Sync time="1510.719"/>
+donc ça, ça commence à faire beaucoup de clés euh
+<Sync time="1512.952"/>
+vingt-six factorielles, ça fait quatre
+<Sync time="1514.350"/>
+fois dix à la puissance vingt-six, ça fait pas mal, hein.
+<Sync time="1517.366"/>
+imaginons que vous, êtres hu()
+<Sync time="1519.390"/>
+êtres humains () en tant qu'êtres humains, vous êtes capables de tester cent mille clés par seconde.
+<Sync time="1524.858"/>
+je doute que vous soyez capables de le faire, mais imaginons que vous soyez capables de le faire :
+<Sync time="1528.209"/>
+vous lisez cent mille
+<Sync time="1529.442"/>
+textes par seconde et vous détectez, parmi ces cent mille, s'il y en a un qui est 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ écrit en français.
+<Sync time="1534.990"/>
+alors même si vous étiez capables de faire ce travail, il vous faudrait dix à la puissance douze siècles
+<Sync time="1540.730"/>
+pour pouvoir déchiffrer un message codé par un
+<Sync time="1544.097"/>
+substitution monoalphabétique quelconque.
+<Sync time="1547.969"/>
+et dix à la puissance douze, c'est évidemment énorme puisque l'univers n'a que dix à la puissance huit siècles ;
+<Sync time="1555.074"/>
+n'imaginons même pas que vous soyez capables de le faire.
+<Sync time="1558.518"/>
+par contre
+<Sync time="1559.747"/>
+on sait très bien que c'est pas un bon cryptosystème, et on verra pourquoi c'est pas un bon cryptosystème un peu plus tard.
+<Sync time="1564.714"/>
+on verra comment attaquer ce cryptosystème.
+<Sync time="1569.310"/>
+alors il y a des généralisations du codage de césar ; ces généralisations sont connues sous le nom de codage de vigenère,
+<Sync time="1575.806"/>
+où le but ça va être d'enchaîner un certain nombre de codages de césar avec des clés différentes.
+<Sync time="1581.307"/>
+l'avantage du codage de césar, c'est que vous voyez :
+<Sync time="1583.545"/>
+la lettre qu'on met en face
+<Sync time="1585.290"/>
+du a, elle est importante et puis on peut l'utiliser pour écrire un message.
+<Sync time="1590.474"/>
+donc ici, la clé
+<Sync time="1592.390"/>
+sera représentée par un mot
+<Sync time="1594.252"/>
+le mot "feu"
+<Sync time="1596.200"/>
+et comment on utilise un codage de vigenère ? ben f() c'est simple
+<Sync time="1600.261"/>
+pour la première lettre qu'on utilise, on fait un codage de césar de la première lettre avec le premier cryptosystème de césar,
+<Sync time="1606.322"/>
+puis un codage de la deuxième lettre avec le deuxième, puis un codage de la troisième lettre avec le troisième
+<Sync time="1612.381"/>
+il y a trop de bruit, là-haut !
+<Sync time="1615.516"/>
+donc le mot bonjour sera codé par le mot 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+
+<Sync time="1620.610"/>
+alors ici, ce qui est important, c'est la longueur de la clé.
+<Sync time="1623.770"/>
+je vous ai dit le cry() le codage de césar, c'est un mauvais cryptosystème
+<Sync time="1628.310"/>
+le codage de vigenère sera un mauvais cryptosystème si on connaît la longueur de la clé.
+<Sync time="1634.298"/>
+donc on verra un peu plus tard
+<Sync time="1636.130"/>
+quand on *présentera les attaques sur ces cryptosystèmes,
+<Sync time="1639.120"/>
+une technique qui permet de retrouver la longueur de la clé
+<Sync time="1642.259"/>
+d'avoir une idée de la longueur de la clé.
+<Sync time="1646.973"/>
+cette longueur de clé est importante, puisque même si c'est indépendant de la longueur du message,
+<Sync time="1650.902"/>
+le nombre de clés à tester dépend du de la longueur de la
+<Sync time="1655.461"/>
+clé
+<Sync time="1656.417"/>
+et il y en aura vingt-six à la puissance k dans le cas d'un codage de vigenère classique ;
+<Sync time="1661.025"/>
+si on mélange si on met plusieurs
+<Sync time="1663.995"/>
+codages euh
+<Sync time="1665.790"/>
+plusieurs substitutions monoalphabétiques
+<Sync time="1668.841"/>
+euh à la suite, on aura euh ce nombre-là qui est très très grand, mais euh
+<Sync time="1673.166"/>
+évidemment ça sera () ça ne fera pas un bon cryptosystème puisque le codage de césar ou les substitutions monoalphabétiques ne sont pas des bons cryptosystèmes.
+<Sync time="1682.960"/>
+donc le codage de vigenère fait partie de ce qu'on appelle les substitutions 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ polyalphabétiques
+<Sync time="1688.831"/>
+plusieurs alphabets
+<Sync time="1693.256"/>
+on se rapproche
+<Sync time="1695.079"/>
+on est au moyen âge
+<Sync time="1697.208"/>
+et on va voir maintenant le troisième grand () la troisième grande famille de procédés cryptographiques qui s'appelle la stéganographie.
+<Sync time="1704.590"/>
+alors historiquement,
+<Sync time="1706.170"/>
+ce procédé stéganographique est important puisqu'il a été publié dans le premier ouvrage qui traite de de cryptographie.
+<Sync time="1713.029"/>
+écrit par euh l'abbé de trithème
+<Sync time="1716.507"/>
+en mille quatre cent quatre-vingt-dix-neuf
+<Sync time="1720.000"/>
+et cet abbé
+<Sync time="1721.670"/>
+dans son ouvrage introduit le principe de stéganographie ; qu'est-ce que c'est que ce principe ?
+<Sync time="1726.006"/>
+ben c'est tout simplement cacher une information
+<Sync time="1729.163"/>
+secrète
+<Sync time="1730.090"/>
+dans un document qui est a() a priori anodin.
+<Sync time="1734.874"/>
+alors voilà un petit exemple :
+<Sync time="1737.660"/>
+l'abbé de trithème écrivait des litanies
+<Sync time="1742.053"/>
+en voilà une
+<Sync time="1744.491"/>
+dans la félicité à perpétuité, dans son royaume à perpétuité, 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ à perpétuité, et cetera, et cetera, et cetera ; c'est un petit poème
+<Sync time="1752.564"/>
+ça veut dire
+<Sync time="1753.530"/>
+ça veut pas forcément dire grand-chose, c'est une litanie
+<Sync time="1756.4"/>
+mais est-ce que vous pourrez retrouver le message qui est caché dans cette euh dans ce poème ? et comment il est caché ?
+<Sync time="1763.786"/>
+est-ce que vous avez une idée ?
+<Sync time="1772.82"/>
+est-ce que vous avez une idée ?
+<Sync time="1774.662"/>
+personne ?
+<Sync time="1777.157"/>
+alors il y a beaucoup de à perpétuité
+<Sync time="1779.655"/>
+c'est une très bonne idée
+<Sync time="1781.960"/>
+alors il y a beaucoup de à perpétuité, imaginons que à perpétuité je le remplace par un e
+<Sync time="1787.539"/>
+on les remplace tous par un e
+<Sync time="1791.270"/>
+imaginons que maintenant j'ai un alphabet qui m() qui me permet de remplacer des bouts de phrases par des lettres
+<Sync time="1797.352"/>
+j'ai un une table de correspondance entre des bouts de phrase et des lettres
+<Sync time="1802.320"/>
+voilà le le cryptosystème va reposer sur ces
+<Sync time="1805.717"/>
+sur cette table de correspondances.
+<Sync time="1807.534"/>
+ben dans ma table de correspondance, je verrai que dans la félicité, ça se remplace par un r
+<Sync time="1812.819"/>
+que euh
+<Sync time="1814.237"/>
+dans mon royaume ça se remplace par un t, et cetera et cetera
+<Sync time="1817.527"/>
+et quand on
+<Sync time="1819.003"/>
+on remplace tout ce qu'il faut, on obtient un message :
+<Sync time="1822.270"/>
+retenez bien les formules, c'est c'est un conseil que je vous donne.
+<Sync time="1828.883"/>
+alors je vais vous donner un () je vais vous donner un autre exemple maintenant
+<Sync time="1835.279"/>
+mais un exemple
+<Sync time="1837.163"/>
+voilà
+<Sync time="1838.779"/>
+celui-là
+<Sync time="1842.587"/>
+une autre manière de
+<Sync time="1846.23"/>
+euh 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ problème
+<Sync time="1847.581"/>
+une autre manière de cacher des messages, c'est de les cacher dans une image.
+<Sync time="1852.784"/>
+est-ce que vous avez une idée ?
+<Sync time="1855.250"/>
+de comment on on va retrouver le message
+<Sync time="1866.136"/>
+vous avez une petite idée ?
+<Sync time="1878.590"/>
+si vous avez pas trouvé, c'est parce qu'il manquait 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ des oiseaux.
+<Sync time="1884.404"/>
+voilà, là vous les avez tous
+<Sync time="1888.13"/>
+vous avez trouvé ?
+<Sync time="1890.760"/>
+il y a des () c'est avec les oiseaux
+<Sync time="1894.154"/>
+allez
+<Sync time="1895.22"/>
+je vous aide
+<Sync time="1896.560"/>
+hop
+<Sync time="1898.500"/>
+je fais descendre les choses
+<Sync time="1900.840"/>
+donc les petits les petits oiseaux ils sont pas placés n'importe comment
+<Sync time="1905.49"/>
+le premier le premier petit oiseau, celui qui est tout beau, il est sur la colonne du r
+<Sync time="1911.318"/>
+le deuxième il est sur la colonne du e, le troisième il est sur la colonne du n
+<Sync time="1915.396"/>
+et cetera, et cetera, et cetera.
+<Sync time="1917.977"/>
+donc si je laisse descendre
+<Sync time="1921.284"/>
+mes petits thèmes, ça va parcourir tous les oiseaux dans un ordre déterminé ; cet ordre
+<Sync time="1927.010"/>
+évidemment on le voit () vous le voyez pas, mais ça écrit le message : les renseignements arrivent.
+<Sync time="1932.338"/>
+donc on est capable aussi de cacher
+<Sync time="1938.38"/>
+on cache aussi
+<Sync time="1945.530"/>
+des i() des messages dans des textes, voilà.
+<Sync time="1949.190"/>
+le message était bien caché, vous l'avez là
+<Sync time="1953.170"/>
+la stéganographie consiste à cacher des messages dans des documents anodins ;
+<Sync time="1958.020"/>
+cette carte que vous auriez pu envoyer à votre grand-mère.
+<Sync time="1960.020"/>
+même si elle était interceptée, il était très difficile de retrouver le message codé.
+<Sync time="1965.410"/>
+évidemment c'est c'est évident de retrouver le message quand on connaît le principe qui a permis de le cacher.
+<Sync time="1971.776"/>
+donc c'est pas des bons cryptosystèmes dans le sens où
+<Sync time="1974.220"/>
+ça () leur secret ne repose pas sur la clé, ça ne repose que sur le coffre
+<Sync time="1978.99"/>
+ou sur la qualité du coffre.
+<Sync time="1981.287"/>
+il y a plein d'exemples comme ça dans la littérature.
+<Sync time="1987.020"/>
+allez, on a passé un grand
+<Sync time="1988.850"/>
+on a passé plusieurs siècles, là, et on arrive à la seconde guerre mondiale.
+<Sync time="1995.033"/>
+pour communiquer de manière sécurisée, les troupes allemandes avaient mis au point une machine, la première machine
+<Sync time="2001.501"/>
+à coder des messages.
+<Sync time="2002.933"/>
+cette machine s'appelait enigma.
+<Sync time="2005.863"/>
+ils en étaient très fiers
+<Sync time="2008.140"/>
+et ils s'envoyaient ils communiquaient de manière très fiable
+<Sync time="2012.608"/>
+à leur avis entre leurs troupes.
+<Sync time="2016.031"/>
+le seul souci
+<Sync time="2018.220"/>
+c'est que les les alliés ont ont volé une machine
+<Sync time="2021.600"/>
+ils l'ont démontée,
+<Sync time="2022.888"/>
+ont compris comment le coffre fonctionnait
+<Sync time="2025.889"/>
+et en comprenant comment le coffre fonctionnait, ils ont été capables de décoder les messages, des messages importants
+<Sync time="2031.410"/>
+et la petite histoire dit que c'est
+<Sync time="2033.528"/>
+parce que ils ont été capables de décoder
+<Sync time="2035.531"/>
+la plupart des communications allemandes que les les alliés ont gagné la guerre
+<Sync time="2040.183"/>
+ils l'ont gagnée plus vite.
+<Sync time="2042.696"/>
+alors à quoi ressemblait cette machine ? bah ça ressemblait à une machine à écrire
+<Sync time="2047.153"/>
+c'était euh une machine euh qui euh permettait d'envoyer des signaux électriques, don() donc qui
+<Sync time="2052.551"/>
+qui était à base de signaux électriques, il y avait pas de signaux électroniques
+<Sync time="2056.589"/>
+le principe, c'était euh 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ le principe, c'était 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+
+<Sync time="2064.817"/>
+excusez-moi
+<Sync time="2068.65"/>
+hop
+<Sync time="2069.180"/>
+le principe, c'était : on appuie sur une euh une lettre, sur une touche
+<Sync time="2074.300"/>
+et ça nous dit quelle lettre je dois écrire
+<Sync time="2077.288"/>
+en allumant une petite euh une petite ampoule ici.
+<Sync time="2080.686"/>
+donc on appuie sur une lettre, ça ça allume cette ampoule-là, ça veut dire que
+<Sync time="2084.496"/>
+si je tape un a, je dois écrire un i.
+<Sync time="2088.178"/>
+nan un 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ c'est un i
+<Sync time="2090.723"/>
+et cetera () nan, c'est un i grec 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+
+<Sync time="2093.189"/>
+et cetera, et cetera
+<Sync time="2095.323"/>
+nan, c'est un i
+</Turn>
+<Turn mode="spontaneous" fidelity="high" channel="studio" startTime="2097.82" endTime="2099.654">
+<Sync time="2097.820"/>
+
+<Event desc="conv" type="noise" extent="instantaneous"/>
+
+</Turn>
+<Turn speaker="spk26" mode="spontaneous" fidelity="high" channel="studio" startTime="2099.654" endTime="2100.351">
+<Sync time="2099.654"/>
+c'est un ?
+</Turn>
+<Turn mode="spontaneous" fidelity="high" startTime="2100.351" endTime="2101.118">
+<Sync time="2100.351"/>
+
+<Event desc="conv" type="noise" extent="instantaneous"/>
+
+</Turn>
+<Turn speaker="spk26" mode="planned" fidelity="high" channel="studio" startTime="2101.118" endTime="4779.435">
+<Sync time="2101.118"/>
+c'est un z
+<Sync time="2102.202"/>
+merci
+<Sync time="2103.353"/>
+donc si je tape un a, je code par un z, il y a tout un tas de mécanismes qui se mettent à tourner
+<Sync time="2108.902"/>
+euh si bien que si je tape un a la fois suivante,
+<Sync time="2111.894"/>
+ce sera pas forcément un z, ce sera une autre lettre.
+<Sync time="2115.190"/>
+donc le principe de cette machine reposent sur des rotors
+<Sync time="2118.418"/>
+des rotors qu'on voit ici
+<Sync time="2120.430"/>
+
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ c'est () les rotors qu'on voit ici, qui sont des des petits cylindres qui vont tourner
+<Sync time="2126.360"/>
+
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+
+<Sync time="2130.921"/>
+voilà
+<Sync time="2131.970"/>
+donc ces rotors qui sont représentés ici
+<Sync time="2134.452"/>
+qui euh sont donc uniquement des petits euh contacts électriques entre
+<Sync time="2139.329"/>
+un bout d'un côté et une 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ lettre de l'autre côté.
+<Sync time="2143.771"/>
+donc chaque rotor
+<Sync time="2145.185"/>
+si on regarde bien, c'est une substitution monoalphabétique fixée.
+<Sync time="2149.872"/>
+on en met plusieurs en série, dans la première version de la machine enigma il y en avait trois,
+<Sync time="2154.374"/>
+dans une version un peu plus tard, il y en avait euh six, mais c'était toujours des rotors
+<Sync time="2158.881"/>
+mis en série
+<Sync time="2160.133"/>
+et à chaque lettre
+<Sync time="2161.284"/>
+le rotor tourne et donc la substitution
+<Sync time="2164.490"/>
+que code le rotor change.
+<Sync time="2169.460"/>
+le principe de fonctionnement, c'était le suivant : donc
+<Sync time="2172.270"/>
+j'appuie sur la lettre a,
+<Sync time="2174.439"/>
+j'ai des contacts électriques qui se font, donc avec des
+<Sync time="2177.917"/>
+une première partie de connexion
+<Sync time="2179.637"/>
+mais la partie importante, c'est les rotors
+<Sync time="2181.773"/>
+donc mon signal électrique se balade dans les rotors
+<Sync time="2185.450"/>
+il est renvoyé par un réflecteur, il repasse dans les rotors
+<Sync time="2189.218"/>
+et puis hop
+<Sync time="2190.61"/>
+il envoie vers la petite ampoule c.
+<Sync time="2194.973"/>
+les rotors tournent et ça change les contacts électriques.
+<Sync time="2201.030"/>
+alors ce qui est important, c'est de savoir combien il y avait de
+<Sync time="2203.308"/>
+combien il y avait de clés à tester.
+<Sync time="2205.040"/>
+ben des clés, il y en avait quand même pas mal
+<Sync time="2208.345"/>
+puisque, si on regarde bien, il y avait donc une partie, un tableau de connexions avec des fiches
+<Sync time="2213.470"/>
+c'était une partie euh qu'on voyait en bas sur la photo.
+<Sync time="2217.266"/>
+donc ça, ça permettait de
+<Sync time="2220.089"/>
+définir une première partie de la clé de codage.
+<Sync time="2222.539"/>
+ensuite, il y avait l'ordre dans lequel on mettait les rotors,
+<Sync time="2226.410"/>
+ensuite il y avait la position initiale des rotors qui contribuait à
+<Sync time="2230.053"/>
+à définir la clé.
+<Sync time="2232.724"/>
+si on met tout ça bout à bout, ça faisait euh à peu près dix à la puissance seize clés. ça fait beaucoup, dix à la puissance seize clés
+<Sync time="2240.201"/>
+je vous rappelle que si vous étiez un humain
+<Sync time="2242.25"/>
+sans ordinateur, ce qui était à peu près le cas en () pendant la seconde guerre mondiale
+<Sync time="2247.037"/>
+a () au début de la seconde guerre mondiale d'ailleurs, plutôt
+<Sync time="2249.764"/>
+euh un être humain qui serait capable de tester un mil() euh cent mille clés par seconde
+<Sync time="2254.619"/>
+mettrait environ trente siècles pour toutes les tester.
+<Sync time="2257.572"/>
+et pourtant je vous ai dit, c'est grâce () c'est parce que le cryptosystème a été cassé
+<Sync time="2262.893"/>
+que les alliés ont pu euh ont pu facilement gagner la guerre
+<Sync time="2266.988"/>
+donc c'est pas un bon cryptosystème.
+<Sync time="2272.515"/>
+le seul bon cryptosystème inventé jusqu'à présent
+<Sync time="2276.940"/>
+et il y en a pas () et il y en a aucun de mieux que celui-là en termes de sécurité, c'est le cryptosystème de vernam
+<Sync time="2283.332"/>
+ou le codage ou ou le système de vernam
+<Sync time="2286.360"/>
+c'est celui qui était utilisé dans les années soixante, soixante-dix pour euh
+<Sync time="2291.090"/>
+dans le télépho() dans le téléphone rouge
+<Sync time="2294.046"/>
+donc euh son principe est extrêmement simple
+<Sync time="2297.175"/>
+on a un message
+<Sync time="2298.69"/>
+clair
+<Sync time="2299.928"/>
+qu'on écrit sous forme de de bits
+<Sync time="2302.010"/>
+on a une clé secrète qu'on écrit sous forme de bits
+<Sync time="2305.650"/>
+le texte chiffré, c'est l'addition modulo deux de 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+
+<Sync time="2309.177"/>
+de la () du texte clair et de la clé.
+<Sync time="2313.320"/>
+pourquoi le cryptosystème est bon et est meilleur que les autres ? bah c'est tout simplement parce qu'on prend une clé qui est aussi longue que le message.
+<Sync time="2321.370"/>
+donc si on si on a cette clé aussi longue que la le message, et que cette clé est parfaitement aléatoire
+<Sync time="2328.370"/>
+alors on peut prouver
+<Sync time="2330.506"/>
+mathématiquement
+<Sync time="2332.300"/>
+ça, ça a été fait par euh un des théoriciens de la théorie de l'information qui s'appelle euh claude shannon,
+<Sync time="2338.420"/>
+on peut prouver qu'il est
+<Sync time="2340.121"/>
+qu'il est inconditionnellement sûr
+<Sync time="2343.135"/>
+à condition que la clé soit parfaitement aléatoire et ne soit utilisée qu'une seule fois.
+<Sync time="2347.600"/>
+et voilà, le le le piège est là :
+<Sync time="2349.875"/>
+c'est que des cryptosystèmes comme ça, on peut pas les mettre en oeuvre
+<Sync time="2354.470"/>
+ou alors on peut les mettre en oeuvre, mais dans des conditions très particulières ; bon c'était le cas du téléphone rouge
+<Sync time="2362.170"/>
+où dans ce cas-là
+<Sync time="2363.564"/>
+le problème, c'est l'échange de la clé.
+<Sync time="2366.060"/>
+si on veut se parler pendant une minute,
+<Sync time="2368.150"/>
+donc on va coder une une minute de signal
+<Sync time="2371.197"/>
+euh sonore
+<Sync time="2372.65"/>
+sur un téléphone, donc il en faut un paquet de
+<Sync time="2375.339"/>
+de zéros et de uns, donc il faut des très très longues clés.
+<Sync time="2379.540"/>
+ça ne pouvait être utilisé que à une échelle euh de président
+<Sync time="2383.080"/>
+euh américain et russe
+<Sync time="2385.170"/>
+et dans ce cas-là, la clé elle était transmise par valise diplomatique.
+<Sync time="2388.934"/>
+donc quand chaque président voulait se téléphoner, ils se () ils envoyaient un diplomate avec une valise remplie de zéros et de uns
+<Sync time="2395.729"/>
+pour pouvoir communiquer de manière chiffrée entre les deux.
+<Sync time="2401.36"/>
+voilà
+<Sync time="2403.910"/>
+faut savoir que le début de la cryptographie mo() de la recherche moderne en cryptographie, c'est parce qu'on voulait améliorer le système
+<Sync time="2411.160"/>
+qu'on a lancé euh des recherches en cryptographie
+<Sync time="2414.53"/>
+des recherches modernes en cryptographie.
+<Sync time="2420.728"/>
+et à cette époque, peu() peut-être un peu avant, on a défini d'un certain nombre de critères
+<Sync time="2425.220"/>
+que doit satisfaire un protocole cryptographique.
+<Sync time="2429.930"/>
+alors ces critères sont connus sous les noms de de principes de kerckhoffs
+<Sync time="2435.642"/>
+et il y en a sept :
+<Sync time="2436.960"/>
+donc le premier critère, c'est qu'une information codée
+<Sync time="2441.100"/>
+ne doit en aucun cas être décodée sans la clé.
+<Sync time="2444.720"/>
+ça élimine les principes de stéganographie
+<Sync time="2446.970"/>
+sté() la stéganographie n'est pas un bon cryptosystème.
+<Sync time="2450.947"/>
+deuxième principe :
+<Sync time="2452.771"/>
+les interlocuteurs ne doivent pas subir de dégâts au cas où le système de codage est dévoilé
+<Sync time="2458.030"/>
+ça élimine enigma.
+<Sync time="2463.010"/>
+troisième crypto() troisième principe : la clé doit être simple
+<Sync time="2468.06"/>
+et modifiable à souhait
+<Sync time="2469.800"/>
+ça élimine le cryptosystème de vernam.
+<Sync time="2474.551"/>
+les cryptogrammes doivent être transportables, c'est-à-dire télégraphiables
+<Sync time="2479.680"/>
+alors euh voilà télégraphiables parce que on était au dix-neuvième siècle
+<Sync time="2483.880"/>
+euh là on pourrait dire que les crypto() les
+<Sync time="2487.117"/>
+cryptogrammes doivent pouvoir être envoyés sur des signaux satellitaires,
+<Sync time="2492.475"/>
+pour être plus moderne.
+<Sync time="2494.230"/>
+mais le le la problématique est toujours là
+<Sync time="2499.620"/>
+l'appareil de codage et les documents doivent être transportables
+<Sync time="2506.610"/>
+ça, c'est encore d'actualité :
+<Sync time="2508.395"/>
+vous devez pouvoir intégrer un système de codage dans votre téléphone portable ;
+<Sync time="2513.370"/>
+c'est le cas.
+<Sync time="2514.231"/>
+vous avez des systèmes cryptographiques dans votre téléphone portable ;
+<Sync time="2518.587"/>
+vous l'avez sans le savoir, mais vous l'avez.
+<Sync time="2521.970"/>
+le système doit être simple d'utilisation
+<Sync time="2525.050"/>
+simplement parce que vous de() n'avez pas besoin d'être expert en cryptographie pour utiliser des protocoles cryptographiques.
+<Sync time="2530.33"/>
+ça doit être
+<Sync time="2531.910"/>
+les protocoles cryptographiques doivent être au service de la société.
+<Sync time="2536.087"/>
+on n'a pas besoin d'être expert pour coder un message
+<Sync time="2540.431"/>
+et évidemment
+<Sync time="2542.359"/>
+même si ce cryptosystème doit être utilisé par n'importe, il doit quand même être
+<Sync time="2547.569"/>
+vérifié par des experts.
+<Sync time="2550.46"/>
+donc ça, tout ça c'est d'actualité
+<Sync time="2552.408"/>
+même si ça a été initié dans les années euh
+<Sync time="2555.256"/>
+vers la fin du
+<Sync time="2557.549"/>
+du dix-neuvième siècle, c'est toujours d'actualité.
+<Sync time="2561.279"/>
+tous les cryptosystèmes modernes respectent ces principes
+<Sync time="2565.180"/>
+sauf éventuellement quelques cryptosystèmes militaire
+<Sync time="2569.116"/>
+qui sont par nature des *cryptosystèmes
+<Sync time="2572.008"/>
+validés par des experts militaires, mais qui sont absolument pas euh
+<Sync time="2576.624"/>
+amenés à être dévoilés.
+<Sync time="2580.15"/>
+donc il y avait une maxime de shannon qui disait : voilà
+<Sync time="2583.710"/>
+l'adversaire doit connaître
+<Sync time="2585.918"/>
+nos failles
+<Sync time="2587.340"/>
+on doit être conscient que l'adversaire connaît nos failles.
+<Sync time="2594.000"/>
+bon
+<Sync time="2594.9"/>
+alors je vous ai promis quelques petites attaques
+<Sync time="2597.424"/>
+on change de monde
+<Sync time="2598.816"/>
+on passe dans le monde des méchants
+<Sync time="2600.460"/>
+et on va voir comment on attaque
+<Sync time="2602.538"/>
+les cryptosystèmes quand on est quelqu'un de mal intentionné.
+<Sync time="2608.311"/>
+donc pourquoi ce que je vous ai présenté jusqu'à présent, ça ne prés() ce ne sont pas de bons cryptosystèmes ?
+<Sync time="2613.971"/>
+voilà ce qu'on va chercher à répondre euh là maintenant.
+<Sync time="2619.893"/>
+et on va définir un certain nombre d'attaques :
+<Sync time="2623.683"/>
+la première attaque,
+<Sync time="2625.529"/>
+c'est celle qui consiste à essayer toutes les clés.
+<Sync time="2629.357"/>
+donc on l'appelle l'attaque force brute
+<Sync time="2631.856"/>
+ou attaque exhaustive.
+<Sync time="2634.645"/>
+le principe, c'est voilà :
+<Sync time="2636.780"/>
+on sait qu'on n'a pas trop de clés à tester
+<Sync time="2638.956"/>
+on les teste toutes et puis on réussira bien à décoder le message.
+<Sync time="2644.640"/>
+donc ça nécessite d'être capable de reconnaître assez rapidement si un texte est écrit
+<Sync time="2650.079"/>
+dans un langage compréhensible ou non
+<Sync time="2652.710"/>
+mais en général, ça marche bien
+<Sync time="2655.058"/>
+sur les ordinateurs puisque
+<Sync time="2657.190"/>
+on sera capable de
+<Sync time="2659.262"/>
+de faire ce genre de () il y a () il existe des tests pour savoir si 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ un texte est bien écrit en français ou pas.
+<Sync time="2664.953"/>
+donc on
+<Sync time="2666.312"/>
+on sera capable de de décoder assez facilement le codage de césar
+<Sync time="2670.480"/>
+en testant vingt-six clés
+<Sync time="2672.080"/>
+on sera capable de décoder le codage grec en testant euh
+<Sync time="2675.461"/>
+cent clés s'il le faut
+<Sync time="2678.698"/>
+si cent, c'est la longueur des messages parce que tout simplement il y a pas trop de clés à tester. 
+<Sync time="2682.797"/>
+donc l'attaque force brute, ça marche bien
+<Sync time="2685.195"/>
+dans le cas où il y a pas trop de clés.
+<Sync time="2689.395"/>
+la deuxième attaque
+<Sync time="2691.997"/>
+c'est une attaque euh qui utilise la la faille
+<Sync time="2695.183"/>
+ou la redondance des messages.
+<Sync time="2697.744"/>
+le fait qu'un message soit écrit en français, c'est pas
+<Sync time="2700.630"/>
+le fait de savoir qu'un message est écrit a() en français, c'est pas anodin.
+<Sync time="2704.240"/>
+on a dit qu'on s'en moquait quand on définissait des cryptosystèmes
+<Sync time="2707.996"/>
+mais quand on attaque des cryptosystèmes
+<Sync time="2710.400"/>
+c'est une () c'est un élément qu'on peut prendre en compte.
+<Sync time="2714.200"/>
+et ce qui va se passer, c'est que s'il est écrit en français
+<Sync time="2717.685"/>
+alors on sait que il y a une lettre qui prédomine
+<Sync time="2720.324"/>
+c'est le e.
+<Sync time="2721.718"/>
+il y a à peu près vingt pour cent de e
+<Sync time="2724.134"/>
+dans les textes écrits en français.
+<Sync time="2726.020"/>
+c'est pour ça, tout à l'heure quand j'ai supprimé euh les e de jérémy, vous étiez quand même capables de relire jérémy
+<Sync time="2731.389"/>
+parce que des e, il y en a plein.
+<Sync time="2733.630"/>
+donc il y a
+<Sync time="2734.654"/>
+deux fois plus
+<Sync time="2736.147"/>
+de e
+<Sync time="2737.274"/>
+que la plus
+<Sync time="2739.229"/>
+que la seconde euh meilleure euh lettre
+<Sync time="2741.805"/>
+que la seconde lettre la plus représentée
+<Sync time="2744.29"/>
+voilà, qui est le a
+<Sync time="2745.868"/>
+le a, il y en a à peu près euh huit pour cent ;
+<Sync time="2749.050"/>
+des e, il y en a à peu près vingt pour cent
+<Sync time="2751.240"/>
+donc il y en a à peu près deux fois plus.
+<Sync time="2753.025"/>
+du coup
+<Sync time="2754.196"/>
+pour le codage de césar,
+<Sync time="2757.360"/>
+c'est un élément qui est très important, ça
+<Sync time="2759.460"/>
+puisqu'on doit savoir quelle est la lettre
+<Sync time="2762.305"/>
+qui se trouve en face du a
+<Sync time="2764.640"/>
+si on trouve la lettre qui est en face du e
+<Sync time="2767.979"/>
+s() ça () c'est pareil
+<Sync time="2769.640"/>
+il suffira de décaler de trois positions pour retrouver celle qui était en face du a et on aura décodé le codage de césar..
+<Sync time="2775.123"/>
+donc pour décoder un codage de césar,
+<Sync time="2778.564"/>
+on fait un tableau de fréquence des lettres
+<Sync time="2781.537"/>
+du message codé,
+<Sync time="2783.245"/>
+on trouve la lettre qui prédomine
+<Sync time="2786.130"/>
+et on sait que cette lettre qui prédomine est en face () est est la lettre qui code le e.
+<Sync time="2791.4"/>
+et ça, ça marche presque à tous les coups :
+<Sync time="2793.161"/>
+il suffit que le message soit suffisamment long
+<Sync time="2795.779"/>
+alors suffisamment long, c'est de l'ordre de vingt ou trente caractères hein
+<Sync time="2800.304"/>
+il y a une
+<Sync time="2800.979"/>
+très () tellement grande prédominance du e que vingt ou tr() un message de vingt ou trente caractères
+<Sync time="2805.470"/>
+euh aura déjà plus de e que toutes les autres lettres.
+<Sync time="2817.074"/>
+alors
+<Sync time="2818.139"/>
+dernier type d'attaque :
+<Sync time="2819.630"/>
+je vous ai dit la () dans le cas des codages de vigenère, la longueur de la clé c'est un élément important.
+<Sync time="2826.790"/>
+un des buts, ça va donc être de retrouver la longueur de cette clé
+<Sync time="2830.473"/>
+et on aura trois manières de
+<Sync time="2832.390"/>
+pour re() trois trois types de d'attaques qui permettront de retrouver la longueur de la clé.
+<Sync time="2837.530"/>
+la première attaque va consister à rechercher
+<Sync time="2841.600"/>
+des mots probables
+<Sync time="2844.210"/>
+le mot "les" en français est très souvent codé
+<Sync time="2847.880"/>
+est très s() est très présent.
+<Sync time="2849.640"/>
+donc il y a de grandes chances que
+<Sync time="2851.908"/>
+si on a un long texte
+<Sync time="2853.880"/>
+"les" soit toujours () soit souvent codé par les trois mêmes lettres.
+<Sync time="2857.598"/>
+donc on détecte
+<Sync time="2859.71"/>
+des des groupes de lettres qui se suivent, qui vont coder pour des mots
+<Sync time="2863.153"/>
+probables, et puis on 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ on réussira à décoder des codages de vigenère comme ça,
+<Sync time="2867.777"/>
+en trouvant des mots probables.
+<Sync time="2870.787"/>
+le deuxième
+<Sync time="2872.57"/>
+test qui permet de cal() la deuxième attaque qui permet de calculer la longueur de la clé, ça s'appelle le test de friedman.
+<Sync time="2878.960"/>
+c'est un test qui, étant donné les fréquences d'apparition
+<Sync time="2881.860"/>
+des lettres dans un texte,
+<Sync time="2884.001"/>
+est capable de déterminer si c'est un texte en français ou si c'est un texte aléatoire.
+<Sync time="2888.520"/>
+donc pour trouver la longueur de la clé,
+<Sync time="2892.584"/>
+on va 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ on va faire un tableau de fréquences en prenant toutes les lettres
+<Sync time="2896.439"/>
+les unes à la suite des autres, donc sans passer des s() sans passer de lettres
+<Sync time="2901.103"/>
+si c'est un texte qui ressemble à du français selon le test de friedman, alors c'est que la clé
+<Sync time="2906.264"/>
+sera de longueur un
+<Sync time="2908.290"/>
+sera un codage de césar
+<Sync time="2910.380"/>
+si ça ressemble plutôt à un texte aléatoire, c'est que la clé sera pas de longueur un, on teste la longueur deux
+<Sync time="2914.850"/>
+donc en prenant une lettre sur deux.
+<Sync time="2917.820"/>
+si le texte euh si le tableau de fréquences reta() ressemble à un tableau de fréquences de français,
+<Sync time="2923.339"/>
+alors euh c'est qu'on a trouvé la longueur de la clé, c'est deux ; sinon on teste la longueur trois, et cetera et cetera.
+<Sync time="2928.48"/>
+donc en faisant ça, c'est un test de friedman qui se calcule assez facilement
+<Sync time="2932.74"/>
+on sera capable de retrouver la longueur de la clé.
+<Sync time="2935.853"/>
+la troisième manière pour essayer de re() retrouver la longueur de la clé, c'est la méthode de pavel 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+
+<Sync time="2941.250"/>
+qui, comme
+<Sync time="2942.395"/>
+la technique du du du mot probable, va rechercher des séquences de lettres qui se répètent dans le texte.
+<Sync time="2948.044"/>
+et si elles se répètent, elles vont avoir tendance à se répéter
+<Sync time="2951.560"/>
+en des longueurs multiples
+<Sync time="2955.360"/>
+de la longueur de la clé.
+<Sync time="2958.281"/>
+ensuite, si on s() si on trouve un certain nombre de de lettres, de suites de lettres qui se répètent comme ça, on peut 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ le plus petit commun multiple 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+
+<Sync time="2966.374"/>
+de toutes ces longueurs et on retrouve
+<Sync time="2968.170"/>
+on a de grandes chances de retrouver la longueur de la clé.
+<Sync time="2970.863"/>
+donc trois attaques qui permettent de retrouver la longueur de la clé d'un codage de vigenère ;
+<Sync time="2976.37"/>
+c'est pour ça que le codage de vigenère n'est pas un bon cryptosystème.
+<Sync time="2980.43"/>
+allez, on passe dans le monde euh des gentils
+<Sync time="2982.496"/>
+et on va parler de cryptographie moderne.
+<Sync time="2988.815"/>
+alors
+<Sync time="2989.717"/>
+dans la cryptographie moderne, on va distinguer deux choses : on va distinguer la cryptographie de ce qu'on appelle la cryptanalyse.
+<Sync time="2998.544"/>
+qu'est-ce que s() et et tout ça
+<Sync time="3001.450"/>
+ces deux termes représentent ce qu'on 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ va appeler la cryptologie.
+<Sync time="3005.053"/>
+alors la cryptologie
+<Sync time="3006.936"/>
+c'est la science
+<Sync time="3008.532"/>
+du secret ;
+<Sync time="3009.638"/>
+science qui comporte deux branches :
+<Sync time="3011.810"/>
+la branche des gentils, la cryptographie
+<Sync time="3014.807"/>
+qui est euh la branche qui va concevoir des systèmes cryptographiques,
+<Sync time="3018.506"/>
+mettre en place des protocoles cryptographiques et mettre à disposition des services cryptographiques.
+<Sync time="3023.770"/>
+et puis il y aura le monde des méchants
+<Sync time="3025.824"/>
+la cryptanalyse
+<Sync time="3027.468"/>
+qui va chercher à à casser ces protocoles cryptographiques.
+<Sync time="3030.660"/>
+
+<Sync time="3033.329"/>
+vous retrouvez tous ces transparents en ligne sur madoc, hein
+<Sync time="3035.788"/>
+c'est pour ça que ça va () ça peut aller un peu vite
+<Sync time="3037.778"/>
+mais vous avez tout en ligne.
+<Sync time="3044.17"/>
+voilà donc
+<Sync time="3045.133"/>
+dans un cas, on est les gentils 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+
+<Sync time="3048.123"/>
+on essaie de mettre au point des cryptosystèmes fiables, dans l'autre cas on est les méchants
+<Sync time="3052.096"/>
+et on utilise
+<Sync time="3053.489"/>
+tout
+<Sync time="3054.513"/>
+les informations à disposition pour essayer de casser le cryptosystème
+<Sync time="3058.700"/>
+y compris () on on utilise y compris la redondance ; c'est là qu'on l'utilise.
+<Sync time="3063.824"/>
+alors ça peut reposer sur un petit schéma comme ça
+<Sync time="3069.119"/>
+un petit schéma où en vert, vous avez la 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+
+<Sync time="3072.272"/>
+en vert, vous avez la cryptographie et en jaune, vous avez la cryptanalyse.
+<Sync time="3076.612"/>
+en cryptographie,
+<Sync time="3078.783"/>
+on partira d'un message clair
+<Sync time="3080.870"/>
+et d'une clé de chiffrement
+<Sync time="3083.730"/>
+on aura une fonction en chiffrement ; c'est de l'algorithmique qu'il y a derrière tout ça, hein
+<Sync time="3088.583"/>
+ça a l'air caché, mais il y a de l'algorithmique derrière
+<Sync time="3090.750"/>
+il y a des fonctions qui permettent de faire le chiffrement,
+<Sync time="3093.120"/>
+il y a des fonctions qui permettent de faire le déchiffrement.
+<Sync time="3095.744"/>
+donc on a une fonction
+<Sync time="3098.059"/>
+qui chiffre,
+<Sync time="3099.300"/>
+qui permet d'obtenir un texte chiffré,
+<Sync time="3101.47"/>
+ce texte chiffré est envoyé sur le réseau
+<Sync time="3104.316"/>
+à une personne qui va essayer de le déchiffrer en ayant une 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ clé de déchiffrement
+<Sync time="3109.358"/>
+et en utilisant une fonction de déchiffrement.
+<Sync time="3113.702"/>
+la cryptographie
+<Sync time="3115.462"/>
+une des tâches de la cryptographie, c'est de mettre au point ces fonctions de chiffrement et de déchiffrement, et de mettre au point des fonctions fiables.
+<Sync time="3125.164"/>
+la cryptanalyse, ça se passe ici
+<Sync time="3128.450"/>
+et ici on cherche à décrypter
+<Sync time="3131.501"/>
+le message codé sans connaître la clé.
+<Sync time="3134.190"/>
+il y a qu'un paramètre à la fonction de décryptement
+<Sync time="3138.690"/>
+et on va chercher à à décoder le message pour pouvoir trouver la clé.
+<Sync time="3148.570"/>
+quand on parle de sécurité et de chiffrement
+<Sync time="3152.017"/>
+les applications sont multiples
+<Sync time="3155.414"/>
+et on va di() on va distinguer deux choses : on va distinguer les services
+<Sync time="3159.530"/>
+de sécurité dont on a besoin
+<Sync time="3161.97"/>
+donc quand on parle de services, on parle de confidentialité ; on a envie
+<Sync time="3166.495"/>
+d'envoyer un message de manière confidentielle à un destinataire
+<Sync time="3171.690"/>
+on parle d'intégrité :
+<Sync time="3173.532"/>
+on a envie d'être sûr que le message qu'on a envoyé
+<Sync time="3177.262"/>
+ne () n'a pas pu être modifié
+<Sync time="3179.775"/>
+par un tiers.
+<Sync time="3182.040"/>
+une fois qui () une fois qu'on a signé un document, on signe pas une page blanche
+<Sync time="3185.833"/>
+on est sûr que le document qu'on a signé
+<Sync time="3187.923"/>
+ne pourra plus être modifié ; ça, ça s'appelle l'intégrité.
+<Sync time="3193.640"/>
+on a envie d'authentifier euh
+<Sync time="3196.846"/>
+l'origine des données ou l'origine d'un tiers donc
+<Sync time="3199.612"/>
+ça c'est un pr() c'est un principe de signature électronique ; on a envie de d'identifier la personne qui a signé
+<Sync time="3207.796"/>
+on
+<Sync time="3208.410"/>
+le terme non-répudiation, il est un petit peu plus compliqué euh à saisir puisque c'est pas quelque chose qu'on a l'habitude de faire
+<Sync time="3216.985"/>
+imaginons que vous ayez un chèque :
+<Sync time="3220.790"/>
+si quelqu'un signe votre chèque, vous pourrez toujours aller à la banque et dire : ah c'est pas moi qui ai signé le chèque !
+<Sync time="3228.572"/>
+si vous êtes pas très honnête,
+<Sync time="3230.58"/>
+vous pouvez signer un chèque
+<Sync time="3233.691"/>
+vous-même, et passer à la banque en disant : mais nan euh c'est pas () c'est jamais moi () c'est pas moi qui ai fait le chèque.
+<Sync time="3240.145"/>
+je vous assure, c'est pas moi qui ai fait le chèque.
+<Sync time="3242.198"/>
+vous pouvez être malhonnête.
+<Sync time="3243.762"/>
+ben le principe de non-répudiation, c'est qu'une fois que vous signez un document électronique avec une signature électronique,
+<Sync time="3249.300"/>
+il vous est impossible
+<Sync time="3251.130"/>
+de nier que vous avez signé le document
+<Sync time="3253.449"/>
+vous-même.
+<Sync time="3256.312"/>
+donc ça c'est
+<Sync time="3257.590"/>
+un des services qu'apportent
+<Sync time="3259.269"/>
+les protocoles cryptographiques, le principe de non-répudiation de de documents.
+<Sync time="3264.841"/>
+ces principes ces services de sécurité sont mis en place, mis en oeuvre par des mécanismes de sécurité
+<Sync time="3270.502"/>
+construits à partir d'outils cryptographiques
+<Sync time="3273.824"/>
+des outils cryptographiques qui sont des fonctions de chiffrement / déchiffrement, des algorithmes, des 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+, des protocoles 
+<Sync time="3280.114"/>
+de chiffrement, de signature
+<Sync time="3282.930"/>
+et euh d'échange de clés.
+<Sync time="3285.995"/>
+on va parler de tout ça maintenant.
+<Sync time="3289.361"/>
+donc les utilisations de la cryptographie mélangent en général plusieurs services.
+<Sync time="3294.760"/>
+vous avez un document que vous voulez transmettre de manière sécurisée et vous voulez le
+<Sync time="3298.610"/>
+le signer
+<Sync time="3300.002"/>
+de manière euh sécurisée aussi
+<Sync time="3302.746"/>
+donc ça mélange plusieurs services qui sont eux-mêmes basés sur plusieurs mécanismes de sécurité.
+<Sync time="3309.440"/>
+voilà, donc la cryptographie c'est un grand c'est un grand panier et on se sert dans le panier
+<Sync time="3315.429"/>
+donc ça c'est sur le 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ parce que j'en ai déjà parlé
+<Sync time="3318.495"/>
+des mots () ça ça peut vous servir.
+<Sync time="3322.190"/>
+alors confidentialité
+<Sync time="3324.011"/>
+et algorithme de chiffrement. donc la la première tâche
+<Sync time="3328.150"/>
+ça va être ce que voulaient faire les militaires : communiquer entre eux
+<Sync time="3331.262"/>
+entre deux personnes de manière sécurisée.
+<Sync time="3333.480"/>
+c'est la tâche principale de la cryptographie
+<Sync time="3336.515"/>
+ou c'était la tâche principale de la cryptographie
+<Sync time="3339.285"/>
+très récemment.
+<Sync time="3340.718"/>
+et pour mettre en place ces communications sécurisées, il y a deux deux familles d'algorithmes
+<Sync time="3347.230"/>
+la première famille, qu'on appelle algorithmes symétriques
+<Sync time="3350.490"/>
+repose sur le principe que
+<Sync time="3352.397"/>
+il y a une clé qui est partagée
+<Sync time="3354.106"/>
+et c'est la même clé qui est partagée entre l'expéditeur et le récipiendaire
+<Sync time="3358.658"/>
+du message.
+<Sync time="3362.837"/>
+donc leurs avantages,
+<Sync time="3365.274"/>
+c'est qu'ils sont en général très rapides
+<Sync time="3368.189"/>
+ils sont tellement rapides que c'est ceux-là qu'on préférera pour envoyer des messages très longs
+<Sync time="3371.919"/>
+de manière sécurisée.
+<Sync time="3376.850"/>
+euh mais ils doivent a() ils doivent avoir des clés
+<Sync time="3380.700"/>
+qui résistent à à une attaque exhaustive
+<Sync time="3383.660"/>
+donc euh clés de
+<Sync time="3386.082"/>
+au moins cinquante-six bits
+<Sync time="3387.741"/>
+voire euh on en est plutôt à des à des euh clés de taille cent vingt-huit bits. alors cent vingt-huit bits, ça fait des 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+
+<Sync time="3394.815"/>
+euh cent vingt-huit bits, c'est euh le mé()
+<Sync time="3398.131"/>
+c'est la clé que vous tapez quand vous saisissez votre clé web et que vous vous connectez sur le wi-fi.
+<Sync time="3403.824"/>
+quand vous vous connectez sur le wi-fi, vous communiquez de manière sécurisée entre votre routeur
+<Sync time="3408.164"/>
+et votre ordinateur
+<Sync time="3410.635"/>
+et cette communication sécurisée est protégée par un protocole cryptographique
+<Sync time="3415.244"/>
+basé sur un algorithme 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+
+<Sync time="3420.529"/>
+euh il y a une autre famille
+<Sync time="3422.759"/>
+euh qui s'appelle les algorithmes euh asymétriques
+<Sync time="3426.137"/>
+ou à clé publique
+<Sync time="3429.272"/>
+alors ceux-là, ils sont moins rapides
+<Sync time="3432.040"/>
+mais ils permettent de s'échanger les clés secrètes
+<Sync time="3434.609"/>
+donc en général
+<Sync time="3436.332"/>
+bon euh je vais revenir dessus
+<Sync time="3438.238"/>
+euh
+<Sync time="3440.203"/>
+ils ont besoin de clés beaucoup plus grandes puisque il y a deux clés, cette fois-ci : une clé qui va être diffusée
+<Sync time="3445.95"/>
+et une clé qui va rester secrète
+<Sync time="3448.740"/>
+et comme il y a cette clé qui est diffusée euh
+<Sync time="3452.480"/>
+la qualité de la clé doit être supérieure
+<Sync time="3454.467"/>
+donc il y a besoin de clés beaucoup beaucoup plus grandes 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+
+<Sync time="3460.630"/>
+quelle est la grande différence entre les deux
+<Sync time="3462.865"/>
+cryptosystèmes ?
+<Sync time="3465.020"/>
+dans un cas, on doit avoir une clé partagée entre deux personnes
+<Sync time="3469.150"/>
+pour chaque communication entre deux personnes, on doit avoir une clé partagée.
+<Sync time="3473.120"/>
+si mille personnes veulent communiquer avec mille personnes,
+<Sync time="3476.459"/>
+il faut
+<Sync time="3478.608"/>
+euh cin() à peu près cinq cent mille clés.
+<Sync time="3481.588"/>
+puisque chaque euh
+<Sync time="3483.005"/>
+paire de communication a besoin d'une clé partagée.
+<Sync time="3486.954"/>
+imaginons que ce soit faisable pour mille personnes
+<Sync time="3489.46"/>
+à l'échelle euh du monde entier, un milliard de personnes
+<Sync time="3493.658"/>
+euh c'est pas faisable puisqu'il faudrait à peu près cinq cent milliards de clés.
+<Sync time="3497.418"/>
+donc ça
+<Sync time="3500.084"/>
+ce ces protocoles cryptographiques
+<Sync time="3503.150"/>
+euh doivent être mis en oeuvre avec des () dans des conditions très particulières.
+<Sync time="3510.069"/>
+sur un réseau domestique, par exemple, où vous êtes très peu à vouloir communiquer.
+<Sync time="3515.777"/>
+la deuxième famille
+<Sync time="3517.770"/>
+c'est la famille des cryptosystèmes euh asymétriques où là, il y a
+<Sync time="3522.210"/>
+ce qui est euh quand une personne veut communiquer avec une autre personne,
+<Sync time="3526.060"/>
+il s() il suffit de récupérer une clé publique : la clé publique de la personne.
+<Sync time="3531.860"/>
+donc si mille personnes veulent communiquer avec mille personnes, il y a besoin de mille clés.
+<Sync time="3535.233"/>
+si un milliard de personnes veulent communiquer avec un milliard de personnes, il y a besoin d'un milliard de clés.
+<Sync time="3539.291"/>
+c'est pas euh un un milliard de 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ c'est un milliard de clés.
+<Sync time="3543.032"/>
+
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+
+<Sync time="3546.890"/>
+donc on va voir les () on va voir les deux fam() on on va voir en détail les deux familles de
+<Sync time="3551.374"/>
+d'algorithmes
+<Sync time="3555.011"/>
+on va commencer par les algorithmes
+<Sync time="3556.772"/>
+symétriques
+<Sync time="3558.610"/>
+
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ le principe en deux en deux mots : quand on est en cryptographie,
+<Sync time="3562.976"/>
+les petits bonhommes que j'ai dessinés là en général ils s'appellent alice et bob
+<Sync time="3567.272"/>
+et puis le le méchant il s'appelle charlie.
+<Sync time="3572.530"/>
+donc alice veut communiquer avec bob.
+<Sync time="3575.010"/>
+pour communiquer avec bob,
+<Sync time="3577.510"/>
+elle a une clé
+<Sync time="3579.047"/>
+secrète
+<Sync time="3580.470"/>
+et bob a la même clé.
+<Sync time="3582.886"/>
+alice veut envoyer le message à bob
+<Sync time="3587.849"/>
+alors son travail, ça va être d'utiliser la fonction de chiffrement
+<Sync time="3591.308"/>
+je vais appeler en code cette fois-ci
+<Sync time="3593.271"/>
+qui va prendre le message, la clé et les s()
+<Sync time="3597.040"/>
+et euh calculer un message chiffré.
+<Sync time="3600.505"/>
+le message chiffré
+<Sync time="3602.059"/>
+est envoyé à bob, bob le reçoit et comme il a la fonction de déchiffrement, il est capable de retrouver le message
+<Sync time="3608.138"/>
+et il lit le message, voilà 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+
+<Sync time="3613.130"/>
+ce sont les cryptosystèmes certainement les plus utilisés actuellement
+<Sync time="3618.254"/>
+euh
+<Sync time="3619.580"/>
+celui qui est le plus utilisé et qui est d'actualité, c'est le sys() le cryptosystème aes
+<Event desc="épelé" type="pronounce" extent="previous"/>
+
+<Sync time="3624.280"/>
+avant les années deux mille,  le cryptosystème utilisé c'était le s() le cryptosystème des
+<Event desc="épelé" type="pronounce" extent="previous"/>
+
+<Sync time="3629.779"/>
+euh dat() 
+<Event desc="en" type="language" extent="begin"/>
+data encryption standard
+<Event desc="en" type="language" extent="end"/>
+
+<Sync time="3633.222"/>
+et 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ 
+<Event desc="en" type="language" extent="begin"/>
+advanced encryption standard
+<Event desc="en" type="language" extent="end"/>
+
+<Sync time="3636.138"/>
+ce qui s'est passé, c'est que dans les années deux mille on s'est rendus compte que il y avait un problème
+<Sync time="3640.03"/>
+avec la taille des clés qui sont () voilà qui sont représentées par des chaînes de sept caractères
+<Sync time="3646.410"/>
+et on se () on s'est rendu compte que sept caractères c'était
+<Sync time="3649.524"/>
+c'était plus euh
+<Sync time="3651.090"/>
+c'était plus envisageable de continuer avec ça
+<Sync time="3655.425"/>
+tout simplement parce que imaginons qu'on soit capable de tester un milliard de clés par seconde
+<Sync time="3660.968"/>
+par 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+
+<Sync time="3663.323"/>
+alors des clés il y en a di() deux à la puissance cinquante-six dans le cas de 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+
+<Sync time="3667.500"/>
+donc euh décoder deux à la puissance cinquante-six clés, il faut deux mille deux cents ans
+<Sync time="3672.522"/>
+si on est capable de tester
+<Sync time="3674.695"/>
+un milliard de clés par seconde,
+<Sync time="3676.758"/>
+et deux mille deux cents ans pour un ordinateur capable de tester un milliard de clés par seconde
+<Sync time="3682.330"/>
+mais dans les a() années deux mille on s'est dit () on s'est rendu compte que euh
+<Sync time="3686.036"/>
+les ordinateurs on pouvait euh on peut en utiliser plusieurs
+<Sync time="3689.490"/>
+plusieurs en parallèle.
+<Sync time="3691.680"/>
+et euh par exemple, si on u() on utilise deux mille () dix mille en parallèle,
+<Sync time="3696.924"/>
+qui testent chacun
+<Sync time="3698.040"/>
+une partie de l'ensemble des clés, ben alors il faut plus que quatre-vingts jours.
+<Sync time="3702.57"/>
+si on en branche cent mille,
+<Sync time="3704.411"/>
+il faut plus que huit jours.
+<Sync time="3706.671"/>
+donc pour les crypto() pour les euh messages confidentiels qui avaient be()
+<Sync time="3710.420"/>
+besoin d'un haut degré confidentialité, des
+<Event desc="épelé" type="pronounce" extent="previous"/>
+ était plus adapté parce qu'on savait très bien
+<Sync time="3714.634"/>
+que des puissances étrangères, vous en connaissez, étaient capables de décoder ces messages
+<Sync time="3720.670"/>
+parce que ils disposaient d'une puissance de calcul suffisante pour brancher cent mille ordinateurs
+<Sync time="3725.980"/>
+pour faire travailler cent mille ordinateurs en en parallèle.
+<Sync time="3730.933"/>
+donc dans les années deux mille,
+<Sync time="3732.612"/>
+il y a eu un concours, un ap() un appel à à cryptosystèmes
+<Sync time="3737.144"/>
+avec une validation par des experts, et le cryptosystème qui a gagné, c'est le cryp() un cryptosystème qui s'appelle aes
+<Event desc="épelé" type="pronounce" extent="previous"/>
+
+<Sync time="3743.794"/>
+sachez quand même qu'il y a des français qui avaient concouru, qui étaient pas () qu'étaient pas loin de de gagner : ils ont terminé ils ont terminé cinquièmes.
+<Sync time="3751.292"/>
+c'était pas si mal
+<Sync time="3752.459"/>
+mais ils ont pas gagné.
+<Sync time="3755.633"/>
+donc euh ce que vous tapez maintenant quand vous vous connectez en wpa, ce sont des z()
+<Sync time="3761.538"/>
+des messages de seize ou trente-deux caractères, parce que vous utilisez un cryptosystème avancé.
+<Sync time="3770.943"/>
+deuxième question importante, c'est : comment on fait pour s'échanger
+<Sync time="3773.914"/>
+les clés entre deux personnes ?
+<Sync time="3776.980"/>
+c'est compliqué : on veut co() on veut communiquer de manière sécurisée en ayant la même clé de chaque côté
+<Sync time="3782.920"/>
+mais on peut pas s'envoyer la clé
+<Sync time="3785.070"/>
+sur le réseau, parce que la clé elle risque d'être interceptée
+<Sync time="3789.736"/>
+donc on peut pas communiquer la clé en clair
+<Sync time="3791.810"/>
+et on peut pas la communiquer de manière
+<Sync time="3794.035"/>
+chiffrée, parce que elle serait
+<Sync time="3796.065"/>
+parce que il y aurait besoin d'avoir une clé partagée.
+<Sync time="3798.834"/>
+donc on tombe sur un problème euh de d'oeuf ou de poule, là.
+<Sync time="3802.776"/>
+comment on fait pour
+<Sync time="3805.621"/>
+partager une clé ?
+<Sync time="3806.965"/>
+voilà le problème
+<Sync time="3808.024"/>
+comment on fait pour partager une clé secrète ?
+<Sync time="3811.157"/>
+ben il y a un protocole qui s'appelle le protocole de 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+, qui permet de faire ce travail
+<Sync time="3815.973"/>
+et il fonctionne comme ça :
+<Sync time="3819.830"/>
+alice et bob, qui veulent communiquer de manière sécurisée, se mettent d'accord
+<Sync time="3823.800"/>
+ils se mettent d'accord sur deux nombres
+<Sync time="3825.99"/>
+un grand nombre premier
+<Sync time="3827.854"/>
+p
+<Sync time="3829.909"/>
+il y a du () il y a du bruit, là !
+<Sync time="3832.420"/>
+un grand nombre premier, p
+<Sync time="3835.187"/>
+et un nombre g
+<Sync time="3838.424"/>
+qui est inférieur à p
+<Sync time="3840.719"/>
+voilà, deux nombres
+<Sync time="3842.290"/>
+p et g
+<Sync time="3843.613"/>
+premier () un un premier in() euh inférieur à au premier nombre
+<Sync time="3849.904"/>
+il faut que ce soit des grands nombres, hein
+<Sync time="3851.730"/>
+parce que euh 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+
+<Sync time="3857.320"/>
+et ces nombres-là, ils se les échangent. et ça () ceux-là, ils peuvent se les envoyer de manière non sécurisée, c'est pas grave
+<Sync time="3863.987"/>
+donc p et g est partagé
+<Sync time="3867.062"/>
+ensuite
+<Sync time="3868.287"/>
+alice, qui veut communiquer avec bob, choisit un nombre à la fois
+<Sync time="3871.395"/>
+a
+<Sync time="3872.744"/>
+et elle calcule
+<Sync time="3874.765"/>
+une valeur
+<Sync time="3876.040"/>
+la valeur grand a, qui est égale à g à la puissance a modulo p
+<Sync time="3883.060"/>
+alice, une fois qu'elle a fait ce calcul, elle envoie a sur le réseau. a peut être () le grand a
+<Sync time="3887.772"/>
+elle envoie le grand a sur le réseau, grand a peut être connu par tout le monde.
+<Sync time="3891.710"/>
+hop, on envoie grand a à paul.
+<Sync time="3894.560"/>
+bob fait la même chose
+<Sync time="3896.075"/>
+il choisit un petit nombre euh un nombre, b
+<Sync time="3899.433"/>
+et il calcule g à la puissance b modulo p.
+<Sync time="3903.070"/>
+il obtient grand b
+<Sync time="3904.279"/>
+et il envoie grand b à alice.
+<Sync time="3906.350"/>
+grand b, c'est pas grave s'il est intercepté
+<Sync time="3912.038"/>
+et ensuite
+<Sync time="3913.330"/>
+ben il calcule une clé
+<Sync time="3915.900"/>
+la clé qui sera partagée, ce sera la clé
+<Sync time="3919.031"/>
+k, qui sera égale à g à la puissance a b modulo p.
+<Sync time="3924.970"/>
+et cette clé, alice peut la calculer, même sans connaître b
+<Sync time="3929.140"/>
+puisqu'il lui suffit de calculer b à la puissance a modulo p ; grand b à la puissance a modulo p
+<Sync time="3935.310"/>
+bob il est capable de la calculer
+<Sync time="3937.706"/>
+puisqu'il lui suffit de calculer grand a à la puissance b modulo p.
+<Sync time="3942.230"/>
+et on peut prouver qu'il est matériellement impossible
+<Sync time="3946.660"/>
+si p est suffisamment grand
+<Sync time="3948.67"/>
+parce que sinon on peut faire une attaque exhaustive,
+<Sync time="3950.686"/>
+si p est suffisamment grand, il est matériellement impossible
+<Sync time="3953.250"/>
+de calculer k
+<Sync time="3954.770"/>
+si on ne connaît ni a, ni b.
+<Sync time="3958.421"/>
+ça, on peut le prouver.
+<Sync time="3959.580"/>
+donc c'est un moyen de s'échanger une clé de manière sécurisée.
+<Sync time="3966.72"/>
+alors
+<Sync time="3968.105"/>
+tac
+<Sync time="3968.928"/>
+on va passer 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+
+<Sync time="3970.830"/>
+on va maintenant présenter les la deuxième grande famille d'algorithmes de chiffrement, ça s'appelle les algorithmes de chiffrement asymétriques.
+<Sync time="3977.93"/>
+le principe de ces algorithmes, c'est qu'ils reposent
+<Sync time="3980.739"/>
+sur
+<Sync time="3981.97"/>
+une publication d'un couple de clés bah d'une clé euh
+<Sync time="3986.251"/>
+publique
+<Sync time="3987.15"/>
+donc le cryptosystème repose sur un couple de clé publique, clé privée.
+<Sync time="3991.641"/>
+chaque personne, donc alice
+<Sync time="3993.976"/>
+et bob
+<Sync time="3995.149"/>
+ont
+<Sync time="3996.994"/>
+un triplé
+<Sync time="3998.642"/>
+avec une clé publique
+<Sync time="4000.539"/>
+e
+<Sync time="4001.280"/>
+une clé privée, d
+<Sync time="4002.689"/>
+et n, qui est aussi une valeur publique.
+<Sync time="4006.270"/>
+bob a la même chose : une clé publique, une clé privée, une clé publique.
+<Sync time="4012.899"/>
+comme ces clés sont publiques, elles sont communiquées
+<Sync time="4015.256"/>
+elles s() elles sont dans un annuaire
+<Sync time="4017.657"/>
+consultables par tout le monde
+<Sync time="4019.617"/>
+donc l'annuaire euh
+<Sync time="4021.340"/>
+à la ligne alice, j'ai dans l'annuaire la clé publique d'alice et son grand n d'alice.
+<Sync time="4026.583"/>
+pour bob, j'ai la même chose, donc e de a et n () e de b et n de b, pardon.
+<Sync time="4032.562"/>
+euh
+<Sync time="4033.522"/>
+typographie
+<Sync time="4034.524"/>
+
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ typographie
+<Sync time="4036.680"/>
+voilà, et comment on fait pour communiquer ensuite ?
+<Sync time="4040.655"/>
+eh bah () ah oui, pardon. avant de euh communiquer, en fait
+<Sync time="4045.381"/>
+vous communiquez
+<Sync time="4047.009"/>
+avec ces () v() vous connaissez ces annuaires, même s'ils sont un petit peu cachés dans firefox, vous les utilisez
+<Sync time="4052.420"/>
+pour les retrouver, ces annuaires
+<Sync time="4054.930"/>
+il vous suffit d'aller dans firefox
+<Sync time="4057.346"/>
+euh dans les euh
+<Sync time="4060.051"/>
+dans les euh paramètres avancés de firefox, je vais regarder ce qu'il y a dans chiffrement
+<Sync time="4064.410"/>
+euh à un endroit, vous voyez les certificats de sécurité, vous les affichez puis vous les avez là, les annuaires
+<Sync time="4069.856"/>
+des annuaires
+<Sync time="4071.352"/>
+qui s'appellent euh
+<Sync time="4072.364"/>
+ce sont euh des annuaires détenus par des sociétés
+<Sync time="4076.385"/>
+euh don() accréditées
+<Sync time="4079.557"/>
+qui s'appellent 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+, qui s'appellent () vous en avez tout un tas.
+<Sync time="4083.308"/>
+chaque euh société possède un certain nombre euh
+<Sync time="4086.089"/>
+
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ un certain nombre de personnes.
+<Sync time="4090.550"/>
+et toutes les sociétés ne peuvent pas posséder ces annuaires, évidemment
+<Sync time="4098.381"/>
+voilà, donc vous les avez, ces annuaires
+<Sync time="4100.256"/>
+euh même s'ils sont un peu cachés pour vous
+<Sync time="4102.959"/>
+vous faites beaucoup () on fait beaucoup de choses cachées en cryptographie, hein. il y a beaucoup de choses qui () qu'on ignore mais euh
+<Sync time="4107.697"/>
+les protocoles cryptographiques sont omniprésents.
+<Sync time="4110.235"/>
+alors alice veut veut parler à bob, donc elle récupère la paire
+<Sync time="4113.950"/>
+t euh 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ de bob et n de bob.
+<Sync time="4117.648"/>
+et ce qu'elle en fait, c'est que () donc elle va vouloir envoyer un message clair
+<Sync time="4120.860"/>
+elle calcule le message *chiffré chiffré, qui sera
+<Sync time="4124.297"/>
+une fonction
+<Sync time="4126.180"/>
+du message et des clés publiques de bob.
+<Sync time="4130.399"/>
+elle l'envoie à bob
+<Sync time="4133.380"/>
+alors qu'est-ce que c'est que ce f, là ?
+<Sync time="4135.868"/>
+donc ça peut être un peu mystérieux, mais euh
+<Sync time="4138.508"/>
+f, c'est () il y en a plein, de fonctions f, qui permettent de le faire
+<Sync time="4142.570"/>
+c'est toute la famille
+<Sync time="4144.024"/>
+de () des fonctions qu'on appelle fonctions à trappe
+<Sync time="4147.074"/>
+une *fonction à trappe, c'est une fonction dont on peut 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ dont on peut calculer facilement l'inverse quand on connaît la trappe
+<Sync time="4153.776"/>
+donc i c'est petit d
+<Sync time="4155.353"/>
+mais euh dont on peut difficilement calculer l'inverse quand on connaît pas la trappe.
+<Sync time="4159.940"/>
+et le cryptosystème qui est le plus utilisé
+<Sync time="4163.240"/>
+euh dans la famille des cryptosystèmes symétriques, c'est le cryptosystème rsa
+<Sync time="4168.640"/>
+pour lequel la fonction, elle est toute simple
+<Sync time="4170.970"/>
+la fonction, elle prend euh le message
+<Sync time="4173.569"/>
+elle met à la puissance deux modulo n
+<Sync time="4178.033"/>
+il faut qu'il y ait une relation
+<Sync time="4179.598"/>
+assez facile entre la clé de
+<Sync time="4181.896"/>
+de
+<Sync time="4182.770"/>
+la clé publique et la clé privé ; cette relation, c'est simple :
+<Sync time="4185.74"/>
+deux fois d, c'est égal à un modulo
+<Sync time="4189.177"/>
+
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ qui s'appelle p
+<Sync time="4193.333"/>
+et euh ce qui se passe, c'est connaissant c, e, n, il est matériellement impossible de retrouver m
+<Sync time="4198.541"/>
+sauf si on connaît d.
+<Sync time="4200.365"/>
+si on connaît d
+<Sync time="4201.717"/>
+on a la clé de déchiffrement : pour inverser, il suffit de prendre c à la puissance d modulo m
+<Sync time="4207.494"/>
+et puis on se rend compte qu'on retrouve facilement le message.
+<Sync time="4212.889"/>
+donc connaissant
+<Sync time="4216.340"/>
+ne connaiss() quand on ne connaît pas d, on n'est pas capable de retrouver le message m à partir de c ;
+<Sync time="4220.969"/>
+quand on connaît d, c'est évident.
+<Sync time="4224.272"/>
+et il y en a d'autres, des cryptosystèmes euh
+<Sync time="4227.016"/>
+
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ asymétriques.
+<Sync time="4230.024"/>
+voilà
+<Sync time="4230.960"/>
+donc on envoie c, on calcule f moins un
+<Sync time="4233.738"/>
+parce que c'est facile de le faire quand on connaît d
+<Sync time="4237.054"/>
+et puis voilà.
+<Sync time="4239.205"/>
+une () un des problèmes
+<Sync time="4240.993"/>
+qui se posent quand on
+<Sync time="4243.001"/>
+quand on s'intéresse à des cryptosystèmes comme ça, c'est de générer des paires de clés publiques et privées.
+<Sync time="4248.928"/>
+et dans le cas des rsa
+<Sync time="4252.295"/>
+la question qui va se poser, c'est : comment on fait pour générer un () une clé valide
+<Sync time="4257.620"/>
+valide dans le sens : qui vérifie la propriété e fois d est égal à un modulo pi de n
+<Sync time="4264.670"/>
+et qui soit valide dans le sens où euh il assure un bon chiffrement
+<Sync time="4268.939"/>
+donc un déchiffrement in() matériellement impossible.
+<Sync time="4273.540"/>
+alors pour ça, on tire au hasard deux très grands nombres premiers
+<Sync time="4277.067"/>
+tirer au hasard des très grands nombres premiers, c'est quelque chose qu'on fait classiquement en cryptographie
+<Sync time="4282.588"/>
+il y a beaucoup de bruit, là !
+<Sync time="4284.574"/>
+donc c'est quelque chose qu'il faut être capable de faire efficacement.
+<Sync time="4287.646"/>
+il faudra mettre au point des algorithmes efficaces
+<Sync time="4290.715"/>
+des al() l'algorithmique elle est là, en fait : 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ des algorithmes efficaces pour tirer des très grands nombres premiers.
+<Sync time="4297.499"/>
+alors on tire des très grands nombres premiers p et q, alors des très grands nombres ça veut dire des nombres à peu près à () entre cent et deux cents chiffres
+<Sync time="4306.814"/>
+on pose
+<Sync time="4308.228"/>
+une fois qu'on connaît p et q
+<Sync time="4310.860"/>
+alors on peut poser : n égale p fois q.
+<Sync time="4314.997"/>
+n sera donc un très grand nombre
+<Sync time="4319.059"/>
+pi de n, en fait le pi de n qui était mystérieux
+<Sync time="4321.984"/>
+il est très facile à calculer
+<Sync time="4325.218"/>
+pi de n, c'est p moins un fois q moins un.
+<Sync time="4329.577"/>
+ensuite, il suffit de choisir un un nombre e au hasard
+<Sync time="4334.899"/>
+allez, un petit
+<Sync time="4336.057"/>
+un petit nombre entier
+<Sync time="4338.639"/>
+on doit juste s'assurer que le b d c d de e et q de n est égal à un, c'est ce qui va assurer que e fois d c'est égal à un modulo pi de n.
+<Sync time="4347.075"/>
+on prend le 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ on prend un nombre premier avec euh pi de n
+<Sync time="4352.17"/>
+il y a trop de bruit, là-haut !
+<Sync time="4353.645"/>
+ça peut être par exemple trois
+<Sync time="4355.572"/>
+on n'est pas obligé de prendre une grande puissance de e
+<Sync time="4360.180"/>
+ensuite, on calcule d tel que euh
+<Sync time="4363.76"/>
+e d est égal à un modulo pi de n, ça ça se fait () c'est de l'algorithmique, ça se fait par l'algorithme d'euclide
+<Sync time="4370.311"/>
+calculer un 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+
+<Sync time="4374.150"/>
+et toute la sécurité de rsa
+<Sync time="4377.037"/>
+va reposer sur le fait que
+<Sync time="4379.007"/>
+connaissant d,
+<Sync time="4381.013"/>
+il est impossible de retrouver le couple p et q.
+<Sync time="4386.055"/>
+ou connaissant n, il est impossible de retrouver p et q si n est très grand ;
+<Sync time="4389.939"/>
+c'est difficile de factoriser un nombre très grand.
+<Sync time="4394.181"/>
+tout le secret de rsa repose là-dessus :
+<Sync time="4396.167"/>
+la factorisation est difficile.
+<Sync time="4398.316"/>
+et il y a plein de gens qui essayent de casser rsa en prouvant qu'on peut factoriser des très grands nombres premiers, mais ils y arrivent pas encore ;
+<Sync time="4405.158"/>
+mais il y a des compétitions.
+<Sync time="4411.136"/>
+voilà, par exemple
+<Sync time="4415.040"/>
+si n
+<Sync time="4416.396"/>
+si 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ pardon si p et q sont des nombres très grands de type deux à la puissance cent vingt-huit
+<Sync time="4421.635"/>
+alors il faudra à peu près dix puissance vingt-trois siècles pour factoriser n ; c'est matériellement impossible de le faire
+<Sync time="4427.47"/>
+même en mettant beaucoup de machines.
+<Sync time="4430.649"/>
+il y a des compétitions
+<Sync time="4432.533"/>
+euh 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+
+<Sync time="4434.928"/>
+il y a des compétitions de factorisation mais
+<Sync time="4440.081"/>
+
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ pardon
+<Sync time="4442.151"/>
+si vous voulez gagner de l'argent, vous pouvez vous lancer dans ces compétitions hein.
+<Sync time="4447.844"/>
+alors voilà
+<Sync time="4449.260"/>
+il y a des nombres à factoriser
+<Sync time="4451.572"/>
+ça s'appelle des compétitions et puis vous vous pouvez gagner de l'argent si vous réussissez à les factoriser.
+<Sync time="4456.260"/>
+il y a beaucoup d'argent à gagner, mais croyez-moi c'est pas facile.
+<Sync time="4465.528"/>
+bon
+<Sync time="4469.233"/>
+le dernier
+<Sync time="4470.220"/>
+un des derniers travaux qu'on a envie de faire, en général
+<Sync time="4472.910"/>
+en cryptographie, c'est de signer ses documents
+<Sync time="4476.134"/>
+quand vous aurez à faire une déclaration d'impôts, vous verrez que vous pouvez signer de manière électronique.
+<Sync time="4481.470"/>
+donc le 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ le cahier des charges
+<Sync time="4484.557"/>
+d'une signature numérique, c'est qu'elle soit calculable par le signataire
+<Sync time="4488.572"/>
+quel que soit le message.
+<Sync time="4491.338"/>
+
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+
+<Sync time="4493.345"/>
+donc la signature
+<Sync time="4495.200"/>
+doit dépendre du signataire
+<Sync time="4498.250"/>
+quand on signe un document, on signe un o() on on atteste que on signe le bon document, donc la la signature c'est pas dire : je m'appelle jérémy bourdon.
+<Sync time="4506.721"/>
+c'est dire : je m'appelle jérémy bourdon et je signe tout le document que je viens d'écrire.
+<Sync time="4512.034"/>
+la signature est associée à la fois à une personne et à un document.
+<Sync time="4517.270"/>
+le principe d'une signature, c'est qu'elle doit être vérifiable par tout individu.
+<Sync time="4523.026"/>
+elle doit pas être falsifiable
+<Sync time="4525.629"/>
+falsifiable dans le sens où une signature papier, c'est falsifiable.
+<Sync time="4528.7"/>
+on peut imiter la signature de ses parents pour signer un bulletin de de notes.
+<Sync time="4532.39"/>
+ça doit pas être le cas dans le cadre d'une signature électronique.
+<Sync time="4534.498"/>
+c'est pas terminé !
+<Sync time="4535.809"/>
+il reste encore
+<Sync time="4536.834"/>
+au moins deux minutes.
+<Sync time="4540.020"/>
+et dans deux minutes dans deux min() le prochain transparent c'est le transparent de conclusion, donc laissez-moi finir.
+<Sync time="4546.810"/>
+donc un exemple de mise en oeuvre
+<Sync time="4548.849"/>
+d'une signature électronique, c'est en signant avec a() avec rsa.
+<Sync time="4553.231"/>
+alice veut signer un message
+<Sync time="4555.607"/>
+avec cette clé-là
+<Sync time="4557.326"/>
+elle calcule cette signature
+<Sync time="4560.137"/>
+par euh ce petit calcul-là, elle prend le message
+<Sync time="4564.010"/>
+elle le met à la puissance d
+<Sync time="4566.030"/>
+le d, c'est son nombre euh privé
+<Sync time="4569.388"/>
+module n
+<Sync time="4571.66"/>
+et sa signature
+<Sync time="4574.342"/>
+sa signature, c'est ce nombre, là.
+<Sync time="4576.908"/>
+donc elle dépend bien
+<Sync time="4578.383"/>
+d'alice, puisque le d dépend d'alice ; elle dépend bien du message, puisque c'est n à la puissance d.
+<Sync time="4584.486"/>
+pour vérifier la signature
+<Sync time="4586.74"/>
+sur un message
+<Sync time="4589.421"/>
+il suffit de calculer
+<Sync time="4592.25"/>
+euh le la signature à la puissance e modulo n.
+<Sync time="4597.910"/>
+c'est quasiment un chiffrement / déchiffrement
+<Sync time="4600.230"/>
+de rsa, sauf que c'est fait à l'envers en utilisant 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ clés différentes.
+<Sync time="4604.310"/>
+
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ en en inversant les clés.
+<Sync time="4607.98"/>
+et ça, c'est un protocole de signature qui est classique.
+<Sync time="4612.939"/>
+pour terminer
+<Sync time="4616.934"/>
+alors tout 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+
+<Sync time="4618.660"/>
+va reposer sur une suite de protocoles.
+<Sync time="4621.648"/>
+un protocole
+<Sync time="4623.055"/>
+qui va consister à comment on fait pour envoyer un message très long.
+<Sync time="4626.553"/>
+un message très long
+<Sync time="4628.071"/>
+comme on a () on on va devoir le découper en petits bouts
+<Sync time="4631.53"/>
+si on veut le coder.
+<Sync time="4633.976"/>
+donc là, le le découpage 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ dans des mots comme ça, ça va reposer sur un certain nombre de protocoles : comment on fait pour enchaîner les les messages 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+
+<Sync time="4641.027"/>
+est-ce qu'on tient compte du message d'avant ou pas ?
+<Sync time="4644.058"/>
+donc il y a des protocoles pour ça
+<Sync time="4645.739"/>
+on va avoir des protocoles sur euh comment
+<Sync time="4648.076"/>
+on fait pour bien partager un secret entre plusieurs personnes.
+<Sync time="4651.294"/>
+partager un secret, ça veut dire que on a un secret global
+<Sync time="4654.508"/>
+et on veut que chaque personne
+<Sync time="4656.453"/>
+possède une petite partie du secret ;
+<Sync time="4659.136"/>
+le secret ne devant être dévoilé que si la totalité des personnes se mettent à discuter les unes avec les autres.
+<Sync time="4664.903"/>
+il y a des protocoles d'échange de s() de partage de secret comme ça.
+<Sync time="4668.384"/>
+il y a des protocoles pour euh
+<Sync time="4670.966"/>
+générer des nombres aléatoires ; ça, c'est () vous avez vu, on génère plein de nombres aléatoires
+<Sync time="4675.414"/>
+et il faut qu'ils soient bien générés.
+<Sync time="4677.984"/>
+
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ protocole de signature
+<Sync time="4681.67"/>
+et puis il y a tout un tas de problèmes algorithmiques à résoudre sur comment on fait pour générer des très grands nombres premiers, comment on fait pour calculer des
+<Sync time="4688.239"/>
+des nombres à des très grandes puissances,
+<Sync time="4691.473"/>
+comment on fait pour calculer efficacement des inverses de nombres, et cetera, et cetera
+<Sync time="4698.335"/>
+donc il y a pas mal d'a() d'algorithmique derrière
+<Sync time="4702.682"/>
+et puis
+<Sync time="4703.804"/>
+pour conclure,
+<Sync time="4705.892"/>
+il y a un certain nombre de craintes autour de la cryptographie, et il faudrait démystifier un certain nombre de choses
+<Sync time="4712.825"/>
+donc
+<Sync time="4713.686"/>
+ce qu'on a vu aujourd'hui, c'était des pri() des primitives de cryptographie
+<Sync time="4717.260"/>
+des primitives de cryptographie moderne fiables
+<Sync time="4720.314"/>
+fiables, puisqu'elles sont vérifiées par des experts.
+<Sync time="4724.134"/>
+ensuite, il y a des protocoles qui génèrent () qui gèrent des services, par exemple des protocoles de vote électronique
+<Sync time="4729.729"/>
+et en général, il y a des preuves de
+<Sync time="4732.187"/>
+des preuves de type mathématique ou de type () pour moi, c'est matériellement impossible de
+<Sync time="4737.787"/>
+de falsifier les choses
+<Sync time="4740.174"/>
+quand ces protocoles
+<Sync time="4742.135"/>
+ont été définis. et ça, c'est fiable puisque c'est vérifié par des experts.
+<Sync time="4747.16"/>
+ce qui n'est pas fiable,
+<Sync time="4748.982"/>
+c'est que ces protocoles sont en général repris par des entreprises
+<Sync time="4753.043"/>
+à but lucratif
+<Sync time="4756.054"/>
+et que tout ce qui est écrit dans ces implémentations de protocoles sont difficiles à vérifier.
+<Sync time="4761.447"/>
+donc là, le manque de fiabilité et le manque de de confiance peut
+<Sync time="4766.176"/>
+peut reposer là-dedans.
+<Sync time="4768.734"/>
+voilà
+<Sync time="4770.064"/>
+ça termine le cours d'aujourd'hui ;
+<Sync time="4773.112"/>
+je vous remercie de votre attention.
+<Background time="4779.29" type="other" level="off"/>
+
+</Turn>
+</Section>
+</Episode>
+</Trans>

@@ -1,0 +1,571 @@
+;; Transcriber export by stm.tcl,v 1.19 on Tue Dec 18 16:58:33 CET 2018 with encoding ISO-8859-1
+;; transcribed by , version 4 of 170613
+;;
+;; CATEGORY "0" "" ""
+;; LABEL "O" "Overall" "Overall"
+;;
+;; CATEGORY "1" "Hub4 Focus Conditions" ""
+;; LABEL "F0" "Baseline//Broadcast//Speech" ""
+;; LABEL "F1" "Spontaneous//Broadcast//Speech" ""
+;; LABEL "F2" "Speech Over//Telephone//Channels" ""
+;; LABEL "F3" "Speech in the//Presence of//Background Music" ""
+;; LABEL "F4" "Speech Under//Degraded//Acoustic Conditions" ""
+;; LABEL "F5" "Speech from//Non-Native//Speakers" ""
+;; LABEL "FX" "All other speech" ""
+;; CATEGORY "2" "Speaker Sex" ""
+;; LABEL "female" "Female" ""
+;; LABEL "male"   "Male" ""
+;; LABEL "unknown"   "Unknown" ""
+20140919 1 20140919_Locuteur_1 0.000 3.620 <o,f0,male> [pi] du cours d'introduction à l'informatique qui porte sur les structures de contrôle,
+20140919 1 20140919_Locuteur_1 3.620 8.084 <o,f0,male> où on va répondre principalement à la question : comment peut-on faire pour répéter une instruction,
+20140919 1 20140919_Locuteur_1 8.084 14.731 <o,f0,male> et comment peut-on faire pour éviter de d'exécuter une in() certaine instru() instruction ?
+20140919 1 20140919_Locuteur_1 14.731 16.627 <o,f0,male> commençons par un petit rappel :
+20140919 1 20140919_Locuteur_1 16.627 22.471 <o,f0,male> l'organisation basique d'un algorithme, qui est une suite d'instructions, est le séquencement. autrement dit
+20140919 1 20140919_Locuteur_1 22.471 24.154 <o,f0,male> quand on écrit
+20140919 1 20140919_Locuteur_1 24.154 27.006 <o,f0,male> l'instruction a suivi de l'instruction b,
+20140919 1 20140919_Locuteur_1 27.006 35.320 <o,f0,male> alors on exécute d'abord l'instruction a puis on exécute instruction b en se servant des résultats obtenus après exécution de l'instruction a.
+20140919 1 20140919_Locuteur_1 35.320 37.799 <o,f0,male> si on prend cet exemple-là,
+20140919 1 20140919_Locuteur_1 37.799 42.894 <o,f0,male> on voit très bien que ces deux algorithmes sont différents puisque les deux dernières instructions
+20140919 1 20140919_Locuteur_1 42.894 45.385 <o,f0,male> ont été euh inversées,
+20140919 1 20140919_Locuteur_1 45.385 51.130 <o,f0,male> ce qui se remarque très très bien quand on construit les historiques d'exécution de ces deux algorithmes
+20140919 1 20140919_Locuteur_1 51.130 55.610 <o,f0,male> où pour le premier algorithme, on va avoir un résultat final
+20140919 1 20140919_Locuteur_1 55.610 57.231 <o,f0,male> euh de
+20140919 1 20140919_Locuteur_1 57.231 63.285 <o,f0,male> douze pour la valeur de la variable a et dix-sept pour la valeur de la variable b,
+20140919 1 20140919_Locuteur_1 63.285 69.641 <o,f0,male> et pour le deuxième algorithme, on aura dix-neuf comme valeur de la variable a et douze comme valeur *pour la variable b,
+20140919 1 20140919_Locuteur_1 69.641 75.445 <o,f0,male> ce qui démontre bien que l'ordre d'exécution des instructions est très important.
+20140919 1 20140919_Locuteur_1 75.445 82.036 <o,f0,male> alors évidemment, c'est insuffisant quand on cherche à programmer des choses un peu plus compliquées.
+20140919 1 20140919_Locuteur_1 82.036 84.735 <o,f0,male> et on a souvent envie de faire deux choses :
+20140919 1 20140919_Locuteur_1 84.735 90.829 <o,f0,male> premièrement, on n'a pas toujours envie de faire la même chose, autrement dit on a envie d'exécuter un certain nombre d'instructions
+20140919 1 20140919_Locuteur_1 90.829 92.914 <o,f0,male> sous certaines conditions ;
+20140919 1 20140919_Locuteur_1 92.914 96.135 <o,f0,male> ça donnera lieu à une première structure de contrôle.
+20140919 1 20140919_Locuteur_1 96.135 101.730 <o,f0,male> la deuxième chose qu'on a envie de faire, c'est souvent de répéter ou d'itérer plusieurs fois la même chose
+20140919 1 20140919_Locuteur_1 101.730 107.482 <o,f0,male> plu() plusieurs fois le même bloc d'instructions. ça, ça donnera lieu à une deuxième famille de structures de contrôle
+20140919 1 20140919_Locuteur_1 107.482 111.380 <o,f0,male> qui sont les répétitions.
+20140919 1 20140919_Locuteur_1 111.380 117.207 <o,f0,male> modifier l'ordre naturel des instructions se fait donc à l'aide de structures de contrôle, qu'on appellera les structures conditionnelles
+20140919 1 20140919_Locuteur_1 117.207 120.911 <o,f0,male> et et qu'on appellera les structures répétitives.
+20140919 1 20140919_Locuteur_1 120.911 123.011 <o,f0,male> on va commencer par les conditionnelles.
+20140919 1 20140919_Locuteur_1 123.011 127.680 <o,f0,male> donc dans cette partie, on va présenter la syntaxe, on va présenter comment ça s'utilise,
+20140919 1 20140919_Locuteur_1 127.680 135.040 <o,f0,male> on va parler de conditionnelles imbriquées, d'arbres de décision pour construire des conditions un peu plus complexes.
+20140919 1 20140919_Locuteur_1 135.040 142.033 <o,f0,male> les motivations qu'on peut voir aux conditionnelles, c'est par exemple lorsqu'on cherche à calculer la valeur absolue d'un nombre
+20140919 1 20140919_Locuteur_1 142.033 144.847 <o,f0,male> alors la manière simple de la calculer, c'est
+20140919 1 20140919_Locuteur_1 144.847 150.825 <o,f0,male> d'inverser s() de prendre l'opposé de sa valeu() de de la valeur du nombre quand ce nombre est négatif
+20140919 1 20140919_Locuteur_1 150.825 154.403 <o,f0,male> donc on a une instruction qui calcule l'inverse de x
+20140919 1 20140919_Locuteur_1 154.403 158.022 <o,f0,male> qu'on doit exécuter que quand x est négatif.
+20140919 1 20140919_Locuteur_1 158.022 161.396 <o,f0,male> quand on cherche à afficher l'inverse d'un nombre,
+20140919 1 20140919_Locuteur_1 161.396 170.841 <o,f0,male> alors on va () on doit voir s() on doit se poser la question de : qu'est-ce que c'est que l'inverse de un plus () un sur zéro ? et on doit faire un cas particulier de ce de ce de ce traitement-là.
+20140919 1 20140919_Locuteur_1 170.841 171.695 <o,f0,male> donc
+20140919 1 20140919_Locuteur_1 171.695 175.370 <o,f0,male> en gros, dans tous les cas où il y a un traitement alternatif,
+20140919 1 20140919_Locuteur_1 175.370 181.260 <o,f0,male> il y a besoin d'une structure de contrôle adaptée qui permet ce traitement alternatif.
+20140919 1 20140919_Locuteur_1 181.260 187.710 <o,f0,male> la structure de contrôle s'appelle une conditionnelle ou encore une alternative, puisqu'on va avoir *l'alternative entre deux
+20140919 1 20140919_Locuteur_1 187.710 190.347 <o,f0,male> possibilités.
+20140919 1 20140919_Locuteur_1 190.347 192.639 <o,f0,male> la syntaxe est donnée par
+20140919 1 20140919_Locuteur_1 192.639 197.100 <o,f0,male> ce que vous voyez en gras, donc si entre *parenthèses une condition
+20140919 1 20140919_Locuteur_1 197.100 199.669 <o,f0,male> qui sera vérifiée, vraie ou fausse
+20140919 1 20140919_Locuteur_1 199.669 201.534 <o,f0,male> si la condition est vraie,
+20140919 1 20140919_Locuteur_1 201.534 204.982 <o,f0,male> alors on va exécuter un certain type d'instructions
+20140919 1 20140919_Locuteur_1 204.982 209.422 <o,f0,male> si un () si la condition est fausse, alors on va exécuter un autre type d'instructions :
+20140919 1 20140919_Locuteur_1 209.422 211.231 <o,f0,male> les instructions du sinon.
+20140919 1 20140919_Locuteur_1 211.231 213.423 <o,f0,male> *alors prenons un exemple :
+20140919 1 20140919_Locuteur_1 213.423 219.985 <o,f0,male> euh la condition peut être une condition sur l'âge, par exemple, et si on prend cette condition sur l'âge
+20140919 1 20140919_Locuteur_1 219.985 222.433 <o,f0,male> alors si l'âge est inférieur à dix-huit ans,
+20140919 1 20140919_Locuteur_1 222.433 223.772 <o,f0,male> on est mineur,
+20140919 1 20140919_Locuteur_1 223.772 230.520 <o,f0,male> sinon on est majeur ; et il y aura deux traitements différents.
+20140919 1 20140919_Locuteur_1 230.520 234.457 <o,f0,male> ce qu'il faut noter, c'est que la condition peut être n'importe quelle expression
+20140919 1 20140919_Locuteur_1 234.457 236.952 <o,f0,male> qui peut être une expression complexe
+20140919 1 20140919_Locuteur_1 236.952 239.323 <o,f0,male> euh mais dont le résultat
+20140919 1 20140919_Locuteur_1 239.323 243.779 <o,f0,male> est un va() est un booléen.
+20140919 1 20140919_Locuteur_1 243.779 249.726 <o,f0,male> il y a des cas particuliers à l'alternative, s() ce cas pa() ces cas *particuliers s'appellent les conditionnelles simples
+20140919 1 20140919_Locuteur_1 249.726 251.919 <o,f0,male> s() ils sont ils sont euh
+20140919 1 20140919_Locuteur_1 251.919 256.795 <o,f0,male> évidents, ces cas particuliers, c'est que le sinon n'est pas toujours indispensable pour répondre à un problème.
+20140919 1 20140919_Locuteur_1 256.795 261.343 <o,f0,male> par exemple, quand on cherche à calculer l'opposé d'un n() le la valeur absolue d'un nombre,
+20140919 1 20140919_Locuteur_1 261.343 268.496 <o,f0,male> il suffit de tester si le nombre est négatif, et dans ce cas-là on a une instruction à exécuter quand il est négatif mais on n'a rien à faire quand il est positif.
+20140919 1 20140919_Locuteur_1 268.496 272.414 <o,f0,male> dans ce cas-là, on va utiliser plutôt une conditionnelle simple qui est un cas particulier
+20140919 1 20140919_Locuteur_1 272.414 276.070 <o,f0,male> de l'alternative pour lesquels on a supprimé le bloc de sinon ;
+20140919 1 20140919_Locuteur_1 276.070 281.920 <o,f0,male> autrement dit, le bloc de sinon est facultatif.
+20140919 1 20140919_Locuteur_1 281.920 283.346 <o,f0,male> en javascript,
+20140919 1 20140919_Locuteur_1 283.346 289.153 <o,f0,male> le si alors sinon va se traduire presque euh littéralement par un if
+20140919 1 20140919_Locuteur_1 289.153 290.694 <o,f0,male> else
+20140919 1 20140919_Locuteur_1 290.694 296.911 <o,f0,male> alors on traduira jamais le alors qui est implicite dans le langage, puisque le bloc est obligatoire
+20140919 1 20140919_Locuteur_1 296.911 302.074 <o,f0,male> et on traduit euh littéralement comme ceci : [pi] s() if,
+20140919 1 20140919_Locuteur_1 302.074 304.664 <o,f0,male> la condition entre parenthèses,
+20140919 1 20140919_Locuteur_1 304.664 307.330 <o,f0,male> un bloc d'instructions
+20140919 1 20140919_Locuteur_1 307.330 310.820 <o,f0,male> qu'on va repérer par des accolades ouvrantes et fermantes,
+20140919 1 20140919_Locuteur_1 310.820 314.357 <o,f0,male> sinon, le bloc d'instructions qui va correspondre
+20140919 1 20140919_Locuteur_1 314.357 319.331 <o,f0,male> aux instructions du sinon, lui aussi délimité par des accolades ouvrantes et fermantes.
+20140919 1 20140919_Locuteur_1 319.331 320.935 <o,f0,male> alors évidemment
+20140919 1 20140919_Locuteur_1 320.935 322.830 <o,f0,male> dans le cas de la conditionnelle simple,
+20140919 1 20140919_Locuteur_1 322.830 328.586 <o,f0,male> le sinon est facultatif, mais le else du javascript est lui aussi facultatif
+20140919 1 20140919_Locuteur_1 328.586 330.519 <o,f0,male> donc on peut ne pas l'écrire
+20140919 1 20140919_Locuteur_1 330.519 334.429 <o,f0,male> et une conditionnelle simple se traduira en javascript par
+20140919 1 20140919_Locuteur_1 334.429 340.810 <o,f0,male> une conditionnelle avec une absence de else.
+20140919 1 20140919_Locuteur_1 340.810 345.187 <o,f0,male> on va maintenant parler des historiques d'exécution dans le cadre d'une conditionnelle.
+20140919 1 20140919_Locuteur_1 345.187 350.070 <o,f0,male> ceci va changer l'ordre dans lequel é() sont évaluées les instructions
+20140919 1 20140919_Locuteur_1 350.070 353.415 <o,f0,male> comment ça va se passer pour construire un historique d'exécution ?
+20140919 1 20140919_Locuteur_1 353.415 357.073 <o,f0,male> comme dans tous les cas, il faut numéroter les instructions.
+20140919 1 20140919_Locuteur_1 357.073 360.866 <o,f0,male> donc là j'ai euh cinq instructions à numéroter.
+20140919 1 20140919_Locuteur_1 360.866 365.230 <o,f0,male> et puis comme dans le le cas standard, il faut repérer les variables
+20140919 1 20140919_Locuteur_1 365.230 368.652 <o,f0,male> donc là il y en a deux : âge et statut. ce sont les variables qu'on va vouloir suivre.
+20140919 1 20140919_Locuteur_1 368.652 370.756 <o,f0,male> ceci nous permet de construire
+20140919 1 20140919_Locuteur_1 370.756 372.475 <o,f0,male> l'historique d'exécution
+20140919 1 20140919_Locuteur_1 372.475 374.318 <o,f0,male> qui sera un ensemble
+20140919 1 20140919_Locuteur_1 374.318 375.456 <o,f0,male> de lignes,
+20140919 1 20140919_Locuteur_1 375.456 378.029 <o,f0,male> chaque ligne correspondant à l'exécution d'une instruction
+20140919 1 20140919_Locuteur_1 378.029 384.057 <o,f0,male> et un ensemble de colonnes k() *où chaque colonne correspondra au suivi d'une variable.
+20140919 1 20140919_Locuteur_1 384.057 392.272 <o,f0,male> alors c'est facile de de voir ce qui se passe avant d'exécuter la première instruction, il y a il y a rien en mémoire donc euh les valeurs les variables sont non définies.
+20140919 1 20140919_Locuteur_1 392.272 395.764 <o,f0,male> après l'instruction un,
+20140919 1 20140919_Locuteur_1 395.764 402.738 <o,f0,male> ben là on on a un cas aussi particulier des historiques [pi] d'exécution, c'est qu'on va demander à l'utilisateur de saisir une valeur. donc dans ce cas-là,
+20140919 1 20140919_Locuteur_1 402.738 407.180 <o,f0,male> il peut y avoir plusieurs historiques d'exécution possibles, et il faudra en tenir compte quand on les écrit.
+20140919 1 20140919_Locuteur_1 407.180 409.685 <o,f0,male> quand il y a plusieurs historiques d'exécution possibles,
+20140919 1 20140919_Locuteur_1 409.685 411.618 <o,f0,male> il faut en écrire () il faut
+20140919 1 20140919_Locuteur_1 411.618 414.347 <o,f0,male> écrire plusieurs historiques d'exécution.
+20140919 1 20140919_Locuteur_1 414.347 418.333 <o,f0,male> donc voilà, on en est on en est ici : on demande à l'utilisateur de saisir une valeur.
+20140919 1 20140919_Locuteur_1 418.333 419.469 <o,f0,male> premier cas :
+20140919 1 20140919_Locuteur_1 419.469 422.720 <o,f0,male> imaginons que l'utilisateur saisisse la valeur quinze.
+20140919 1 20140919_Locuteur_1 422.720 425.217 <o,f0,male> donc s'il saisit quinze,
+20140919 1 20140919_Locuteur_1 425.217 429.563 <o,f0,male> quand on passe à l'exécution de l'instruction deux, on commence l'exécution
+20140919 1 20140919_Locuteur_1 429.563 434.936 <o,f0,male> la première chose euh qu'on qu'on fait, c'est qu'on compare l'âge saisi avec la valeur dix-huit
+20140919 1 20140919_Locuteur_1 434.936 436.441 <o,f0,male> donc ici,
+20140919 1 20140919_Locuteur_1 436.441 438.711 <o,f0,male> il est inférieur, donc le test est vrai
+20140919 1 20140919_Locuteur_1 438.711 442.740 <o,f0,male> et on exécute les instructions du s() du signe () de du alors,
+20140919 1 20140919_Locuteur_1 442.740 444.650 <o,f0,male> *donc l'instruction trois.
+20140919 1 20140919_Locuteur_1 444.650 448.999 <o,f0,male> c'est ce qu'on repère sur la sur la ligne après trois
+20140919 1 20140919_Locuteur_1 448.999 450.960 <o,f0,male> et évidemment, ça change le statut
+20140919 1 20140919_Locuteur_1 450.960 453.068 <o,f0,male> de rien du tout en m() en mineur.
+20140919 1 20140919_Locuteur_1 453.068 455.431 <o,f0,male> on n'exécute pas l'instruction quatre
+20140919 1 20140919_Locuteur_1 455.431 462.210 <o,f0,male> et on passe directement à la fin de l'instruction, alors j'attire votre as() attention sur le fait que l'instruction deux
+20140919 1 20140919_Locuteur_1 462.210 463.769 <o,f0,male> ne se termine
+20140919 1 20140919_Locuteur_1 463.769 468.404 <o,f0,male> qu'ici, après avoir totalement réalisé le si.
+20140919 1 20140919_Locuteur_1 468.404 475.454 <o,f0,male> et enfin dernière ligne, c'est une c'est un affichage qui ne change pas les valeurs des variables.
+20140919 1 20140919_Locuteur_1 475.454 481.572 <o,f0,male> si l'utilisateur avait saisi une valeur plus grande que dix-huit, par exemple vingt et un
+20140919 1 20140919_Locuteur_1 481.572 483.783 <o,f0,male> alors
+20140919 1 20140919_Locuteur_1 483.783 490.559 <o,f0,male> l'instruction trois n'aurait pas été exécutée, l'instruction quatre aurait quant à elle été exécutée ; on aurait eu comme statut majeur
+20140919 1 20140919_Locuteur_1 490.559 493.760 <o,f0,male> et on aurait terminé l'instruction deux à ce moment-là.
+20140919 1 20140919_Locuteur_1 493.760 495.437 <o,f0,male> voilà, donc
+20140919 1 20140919_Locuteur_1 495.437 497.060 <o,f0,male> dans un historique d'exécution,
+20140919 1 20140919_Locuteur_1 497.060 504.170 <o,f0,male> on ne note effectivement que les instructions qui sont exécutées.
+20140919 1 20140919_Locuteur_1 504.170 510.427 <o,f0,male> là maintenant, on va voir ce qui se passe quand euh une alternative ne suffit pas pour prendre une décision.
+20140919 1 20140919_Locuteur_1 510.427 514.104 <o,f0,male> c'est le cas par exemple où il y a trois choix possibles : dans ce cas-là,
+20140919 1 20140919_Locuteur_1 514.104 517.578 <o,f0,male> il faut s'en() il faut se s'en sortir
+20140919 1 20140919_Locuteur_1 517.578 520.708 <o,f0,male> avec des alternatives pour faire pour
+20140919 1 20140919_Locuteur_1 520.708 524.700 <o,f0,male> pour prendre une décision entre trois ch() trois possibilités.
+20140919 1 20140919_Locuteur_1 524.700 532.295 <o,f0,male> bah ce qu'il va se passer, c'est que dans le alors ou dans le sinon, on peut mettre n'importe quel ch() n'importe quoi, notamment on peut mettre des si.
+20140919 1 20140919_Locuteur_1 532.295 536.379 <o,f0,male> donc on peut mettre des alternatives dans des alternatives
+20140919 1 20140919_Locuteur_1 536.379 540.446 <o,f0,male> ceci, ça s'appelle avoir des conditionnelles imbriquées.
+20140919 1 20140919_Locuteur_1 540.446 548.723 <o,f0,male> et des conditionnelles imbriquées, bah on va on va voir ça tout de suite mais ça sert à implémenter des arbres de décision, des arbres qui p() permettent de prendre des décisions par des suites
+20140919 1 20140919_Locuteur_1 548.723 553.450 <o,f0,male> de décisions élémentaires de type vrai ou faux.
+20140919 1 20140919_Locuteur_1 553.450 557.603 <o,f0,male> alors prenons un cas pratique : euh vous connaissez tous ce que c'est que le le ph
+20140919 1 20140919_Locuteur_1 557.603 560.920 <o,f0,male> un ph qui est une euh qui est une valeur réelle
+20140919 1 20140919_Locuteur_1 560.920 566.594 <o,f0,male> comprise entre zéro et quatorze, peut être soit basique, soit neutre, soit acide.
+20140919 1 20140919_Locuteur_1 566.594 573.057 <o,f0,male> trois () il y a il y a trois possibilités, donc on ne peut pas se servir d'une alternative pour les distinguer, ces trois possibilités.
+20140919 1 20140919_Locuteur_1 573.057 577.781 <o,f0,male> on peut résoudre cependant le problème en utilisant l'arbre de décision suivant
+20140919 1 20140919_Locuteur_1 577.781 582.109 <o,f0,male> qui teste d'abord si le ph est strictement plus petit que sept
+20140919 1 20140919_Locuteur_1 582.109 584.490 <o,f0,male> si c'est le si c'est le cas, alors
+20140919 1 20140919_Locuteur_1 584.490 586.449 <o,f0,male> la solution est acide.
+20140919 1 20140919_Locuteur_1 586.449 592.778 <o,f0,male> si ce n'est pas le cas, il reste deux possibilités : soit le ph est égal à sept, soit il est strictement plus grand que sept.
+20140919 1 20140919_Locuteur_1 592.778 595.362 <o,f0,male> et c'est le test qu'on réalise par la suite
+20140919 1 20140919_Locuteur_1 595.362 596.478 <o,f0,male> donc cet
+20140919 1 20140919_Locuteur_1 596.478 598.926 <o,f0,male> arbre de décision
+20140919 1 20140919_Locuteur_1 598.926 604.848 <o,f0,male> qui est une succession de prises de décision binaires permet de décider
+20140919 1 20140919_Locuteur_1 604.848 611.566 <o,f0,male> du caractère acide, basique ou neutre de la solution ; c'est ce qui s'appelle un arbre de décision.
+20140919 1 20140919_Locuteur_1 611.566 618.248 <o,f0,male> cet arbre de décision s'implémente très bien avec des si, alors, sinon, tout simplement en mettant un si dans le sinon
+20140919 1 20140919_Locuteur_1 618.248 620.150 <o,f0,male> du premier euh du premier si.
+20140919 1 20140919_Locuteur_1 620.150 622.948 <o,f0,male> c'est ce qui s'appelle une conditionnelle imbriquée.
+20140919 1 20140919_Locuteur_1 622.948 632.030 <o,f0,male> alors évidemment, on peut imbriquer des conditionnelles et imbriquer des conditionnelles et imbriquer des *conditionnelles pour prendre des décisions très très compliquées.
+20140919 1 20140919_Locuteur_1 632.030 634.097 <o,f0,male> j'attire votre attention là-dessus :
+20140919 1 20140919_Locuteur_1 634.097 642.241 <o,f0,male> j'ai pas écrit mon programme n'importe comment, j'ai fait attention à à bien aligner les alors et les sinon, à bien décaler les les si imbriqués les uns dans les autres ;
+20140919 1 20140919_Locuteur_1 642.241 644.502 <o,f0,male> tout ceci, ça s'appelle l'indentation.
+20140919 1 20140919_Locuteur_1 644.502 655.303 <o,f0,male> et avoir une bonne indentation, j'espère que vous en êtes convaincus, c'est primordial pour simplifier la lecture et même la compréhension d'un algorithme, et même d'un programme.
+20140919 1 20140919_Locuteur_1 655.303 661.398 <o,f0,male> donc je j() ce qu'on vous demande dans les td et en tp, c'est de soigner votre indentation pour que
+20140919 1 20140919_Locuteur_1 661.398 665.685 <o,f0,male> au moment du transfert de votre programme ou de votre algorithme
+20140919 1 20140919_Locuteur_1 665.685 669.718 <o,f0,male> à un de vos camarades ou à votre enseignant, il y ait pas de problèmes de compréhension,
+20140919 1 20140919_Locuteur_1 669.718 672.870 <o,f0,male> et donc pas de problèmes de notes.
+20140919 1 20140919_Locuteur_1 672.870 675.432 <o,f0,male> alors quelques mots sur les arbres de décision :
+20140919 1 20140919_Locuteur_1 675.432 678.594 <o,f0,male> les arbres de décision sont composés d'embranchements de type
+20140919 1 20140919_Locuteur_1 678.594 681.693 <o,f0,male> un test qui peut être vrai ou faux
+20140919 1 20140919_Locuteur_1 681.693 684.981 <o,f0,male> et après cet embranchement, soit on a pris la décision
+20140919 1 20140919_Locuteur_1 684.981 689.268 <o,f0,male> et on trace une feuille de l'arbre dans () de décision, soit on
+20140919 1 20140919_Locuteur_1 689.268 692.207 <o,f0,male> on ajoute ce qu'on appelle un noeud d'embranchements
+20140919 1 20140919_Locuteur_1 692.207 694.057 <o,f0,male> qui permet de prendre une nouvelle décision.
+20140919 1 20140919_Locuteur_1 694.057 701.161 <o,f0,male> donc c'est () ils décrivent euh exactement la succession de tests à réaliser pour prendre une décision qu'on pourra as() appeler complexe
+20140919 1 20140919_Locuteur_1 701.161 702.499 <o,f0,male> et souvent
+20140919 1 20140919_Locuteur_1 702.499 707.783 <o,f0,male> ce qu'on peut remarquer, c'est que il y a plusieurs manières de de concevoir cette prise de décision,
+20140919 1 20140919_Locuteur_1 707.783 711.541 <o,f0,male> et donc plusieurs arbres qui permettent de prè() de prendre la même décision.
+20140919 1 20140919_Locuteur_1 711.541 719.350 <o,f0,male> il suffit de réordonner les les tests, par exemple on aurait pu commencer par tester si la solution é() était euh avait un ph égal à sept,
+20140919 1 20140919_Locuteur_1 719.350 722.495 <o,f0,male> puis prendre une décision différente après.
+20140919 1 inter_segment_gap 722.495 723.886 <o,f0,>
+20140919 1 20140919_Locuteur_1 723.886 731.062 <o,f0,male> la deuxième chose qu'il faut retenir, c'est que construire l'arbre de décision, c'est la partie difficile de la résolution du problème
+20140919 1 20140919_Locuteur_1 731.062 739.866 <o,f0,male> puisque on peut imaginer plein de manière quasi automatiques pour passer de l'arbre de décision à son écriture dans le langage algorithmique, et même dans le langage de programmation.
+20140919 1 20140919_Locuteur_1 739.866 742.889 <o,f0,male> alors si on p() on va prendre l'exemple sur le langage algorithmique :
+20140919 1 20140919_Locuteur_1 742.889 746.770 <o,f0,male> connaissant l'arbre de décision, il suffit d'écrire quelques petites choses
+20140919 1 20140919_Locuteur_1 746.770 749.823 <o,f0,male> si, des parenthèses, alors, sinon,
+20140919 1 20140919_Locuteur_1 749.823 751.965 <o,f0,male> finsi,
+20140919 1 20140919_Locuteur_1 751.965 753.114 <o,f0,male> et ensuite
+20140919 1 20140919_Locuteur_1 753.114 758.729 <o,f0,male> en parcourant l'arbre de décision et en écrivant tout ce qu'on lit sous le trait vert,
+20140919 1 20140919_Locuteur_1 758.729 760.886 <o,f0,male> alors on réussit
+20140919 1 20140919_Locuteur_1 760.886 766.441 <o,f0,male> à écrire la la partie algorithmique correspondante, et s() la partie sera bien écrite.
+20140919 1 20140919_Locuteur_1 766.441 773.495 <o,f0,male> si vous avez suivi convenablement ces étapes-là, la partie sera bien écrite. elle sera écrite comme ça : si entre parenthèses une expression booléenne, alors
+20140919 1 20140919_Locuteur_1 773.495 776.022 <o,f0,male> bla bla bla des instructions, sinon
+20140919 1 20140919_Locuteur_1 776.022 780.654 <o,f0,male> des instructions et finsi. et ça c'est une ex() c'est un une partie euh
+20140919 1 20140919_Locuteur_1 780.654 785.448 <o,f0,male> algorithmique valide. on peut faire la même chose dans dans le cas du langage de *programmation. donc
+20140919 1 20140919_Locuteur_1 785.448 789.553 <o,f0,male> vraiment, la partie difficile c'est construire l'arbre de décision. s() c'est pas
+20140919 1 20140919_Locuteur_1 789.553 794.930 <o,f0,male> c'est pas écrire le l'algorithme ou c'est pas écrire le programme.
+20140919 1 20140919_Locuteur_1 794.930 798.909 <o,f0,male> voilà, donc c'est tout ce que on voulait dire sur les les conditionnelles.
+20140919 1 20140919_Locuteur_1 798.909 803.444 <o,f0,male> après les conditionnelles, je vous ai parlé d'une deuxième structure de contrôle qui s'appelait les répétitives.
+20140919 1 20140919_Locuteur_1 803.444 808.253 <o,f0,male> alors dans cette partie, on va regarder la syntaxe, on va regarder les usages
+20140919 1 20140919_Locuteur_1 808.253 811.784 <o,f0,male> et puis on va euh voir ce qui se passe quand on met des
+20140919 1 20140919_Locuteur_1 811.784 816.874 <o,f0,male> des boucles dans des boucles, tout [pi] tout comme on l'a fait quand on a parlé de conditionnelles.
+20140919 1 20140919_Locuteur_1 816.874 822.516 <o,f0,male> donc ça, on appellera ça des doubles boucles ou des triples boucles et cetera, ou des boucles imbriquées.
+20140919 1 20140919_Locuteur_1 822.516 831.004 <o,f0,male> les motivations euh à avoir des répétitions, ben c'est que on a très souvent envie de répéter [pi] une ou plusieurs instructions
+20140919 1 20140919_Locuteur_1 831.004 832.840 <o,f0,male> ça, c'est un premier fait.
+20140919 1 20140919_Locuteur_1 832.840 839.730 <o,f0,male> dans les répétitions qu'on va vouloir faire, parfois on saura combien de fois on doit répéter les choses, mais parfois on l'ignorera.
+20140919 1 20140919_Locuteur_1 839.730 850.136 <o,f0,male> donc si je j'insiste là-dessus, c'est parce que on va présenter deux structures de contrôle répétitives ; chaque structure de contrôle répondra à une de ces problématiques.
+20140919 1 20140919_Locuteur_1 850.136 855.766 <o,f0,male> alors pourquoi on veut répéter les choses ? tout simplement parce qu'on n'a pas envie que nos algorithmes ressemblent à des choses comme ça
+20140919 1 20140919_Locuteur_1 855.766 858.837 <o,f0,male> donc por() par exemple pour calculer trois à la puissance dix,
+20140919 1 20140919_Locuteur_1 858.837 868.490 <o,f0,male> eh ben euh un exemple d'algorithme valide, c'est de faire x reçoit la valeur un, puis x reçoit la valeur trois fois x, puis x reçoit la valeur trois fois x, et puis ça on le fait dix fois
+20140919 1 20140919_Locuteur_1 868.490 871.080 <o,f0,male> et ça permet de calculer trois la puissance dix.
+20140919 1 20140919_Locuteur_1 871.080 877.699 <o,f0,male> et puis évidemment, si on avait voulu le faire pour trois à la puissance cinquante, ben il aurait fallu répéter cinquante fois la même instruction
+20140919 1 20140919_Locuteur_1 877.699 882.904 <o,f0,male> et euh c'est même encore pire quand on cherche à calculer trois à la puissance cent.
+20140919 1 20140919_Locuteur_1 882.904 885.563 <o,f0,male> donc ce dont on rêve, c'est d'écrire
+20140919 1 20140919_Locuteur_1 885.563 888.393 <o,f0,male> une seule fois x reçoit la valeur un,
+20140919 1 20140919_Locuteur_1 888.393 891.536 <o,f0,male> mais d'avoir une sorte de s()
+20140919 1 20140919_Locuteur_1 891.536 894.996 <o,f0,male> de mot-clé qui permet de répéter n fois
+20140919 1 20140919_Locuteur_1 894.996 897.630 <o,f0,male> une instruction.
+20140919 1 20140919_Locuteur_1 897.630 902.830 <o,f0,male> alors le mot-clé il existe, mais s'appelle pas répéter n fois
+20140919 1 20140919_Locuteur_1 902.830 906.220 <o,f0,male> il y en a deux, et le premier s'appelle pour.
+20140919 1 20140919_Locuteur_1 906.220 910.589 <o,f0,male> donc la boucle pour, c'est une boucle qui intègre un compteur de répétitions.
+20140919 1 20140919_Locuteur_1 910.589 916.645 <o,f0,male> c'est la boucle euh à utiliser quand on connaît à l'avance le nombre de tours de boucle qui doivent être réalisés.
+20140919 1 20140919_Locuteur_1 916.645 921.023 <o,f0,male> la syntaxe de cette boucle pour est la suivante : donc pour
+20140919 1 20140919_Locuteur_1 921.023 922.435 <o,f0,male> une variable
+20140919 1 20140919_Locuteur_1 922.435 924.658 <o,f0,male> qui va être finalement un compteur
+20140919 1 20140919_Locuteur_1 924.658 927.115 <o,f0,male> donc par exemple pour i
+20140919 1 20140919_Locuteur_1 927.115 932.521 <o,f0,male> le mot-clé allant de, une valeur de début entière à une valeur de fin entière
+20140919 1 20140919_Locuteur_1 932.521 936.455 <o,f0,male> faire, et là on écrit les instructions qu'on doit répéter.
+20140919 1 20140919_Locuteur_1 936.455 938.150 <o,f0,male> donc ça, c'est la syntaxe.
+20140919 1 20140919_Locuteur_1 938.150 942.340 <o,f0,male> on peut prendre un exemple : pour calculer trois à la puissance dix,
+20140919 1 20140919_Locuteur_1 942.340 947.998 <o,f0,male> il aurait fallu écrire : pour i allant de un à dix, faire x reçoit trois fois x.
+20140919 1 20140919_Locuteur_1 947.998 953.463 <o,f0,male> alors pourquoi une boucle pour plutôt qu'une boucle répéter ? ben tout simplement la boucle pour, avec sa variable supplémentaire,
+20140919 1 20140919_Locuteur_1 953.463 957.006 <o,f0,male> apporte une malléabilité euh très importante
+20140919 1 20140919_Locuteur_1 957.006 960.971 <o,f0,male> parce que la variable i, on peut s'en servir euh pour décrire les instructions.
+20140919 1 20140919_Locuteur_1 960.971 964.735 <o,f0,male> *donc ce n'est pas utile dans cet exemple-là, mais dans d'autres exemples c'est utile
+20140919 1 20140919_Locuteur_1 964.735 971.471 <o,f0,male> [pi] alors euh ça, c'est c'est une première chose. euh ce qu'on aurait pu ce qu'on peut voir assez facilement, c'est que c'est bien
+20140919 1 20140919_Locuteur_1 971.471 975.797 <o,f0,male> d'avoir une boucle pour puisque l'algorithme est aussi long
+20140919 1 20140919_Locuteur_1 975.797 983.605 <o,f0,male> pour calculer trois à la puissance cent que pour calculer trois à la puissance dix. il suffit de changer dix en cent et on est () on a trois à la puissance cent. donc l'algorithme
+20140919 1 20140919_Locuteur_1 983.605 986.845 <o,f0,male> s'écrit de manière aussi courte
+20140919 1 20140919_Locuteur_1 986.845 990.385 <o,f0,male> que l'algorithme pour *calculer trois la puissance dix. et on peut même
+20140919 1 20140919_Locuteur_1 990.385 994.196 <o,f0,male> euh le faire pour n'importe quel n en demandant à l'utilisateur de saisir la valeur
+20140919 1 20140919_Locuteur_1 994.196 998.468 <o,f0,male> de de n, la valeur de la puissance.
+20140919 1 20140919_Locuteur_1 998.468 1000.720 <o,f0,male> voilà
+20140919 1 20140919_Locuteur_1 1000.720 1008.729 <o,f0,male> pourquoi la variable i est utile ? ben tout simplement parce qu'on peut l'utiliser, et ça c'est par exemple euh ce qu'on va chercher à faire quand on cherche à calculer
+20140919 1 20140919_Locuteur_1 1008.729 1010.039 <o,f0,male> factoriel vingt.
+20140919 1 20140919_Locuteur_1 1010.039 1013.643 <o,f0,male> factoriel vingt, c'est une première exécution de l'instruction
+20140919 1 20140919_Locuteur_1 1013.643 1019.948 <o,f0,male> x reçoit un fois x, puis une euh une exécution de l'instruction x reçoit deux fois x, puis une ex()
+20140919 1 20140919_Locuteur_1 1019.948 1022.425 <o,f0,male> puis x reçoit trois fois x, et cetera et cetera,
+20140919 1 20140919_Locuteur_1 1022.425 1024.185 <o,f0,male> jusqu'à x reçoit vingt fois x.
+20140919 1 20140919_Locuteur_1 1024.185 1027.020 <o,f0,male> donc l'instruction à répéter n'est pas la même,
+20140919 1 20140919_Locuteur_1 1027.020 1032.300 <o,f0,male> mais on peut l'exprimer assez facilement en fonction de i, en fonction de l() de la valeur courante
+20140919 1 20140919_Locuteur_1 1032.300 1033.883 <o,f0,male> de la variable de la boucle
+20140919 1 20140919_Locuteur_1 1033.883 1039.716 <o,f0,male> qui vaudra successivement les valeurs un, deux, trois jusqu'à vingt.
+20140919 1 20140919_Locuteur_1 1039.716 1044.158 <o,f0,male> donc la boucle pour est particulièrement adaptée à ces traitements.
+20140919 1 20140919_Locuteur_1 1044.158 1046.290 <o,f0,male> i, c'est une variable entière
+20140919 1 20140919_Locuteur_1 1046.290 1049.275 <o,f0,male> elle doit être déclarée dans l'algorithme
+20140919 1 20140919_Locuteur_1 1049.275 1055.996 <o,f0,male> elle est incrémentée de un à chaque tour de boucle, c'est pour ça qu'on peut l'utiliser à l'intérieur de la boucle.
+20140919 1 20140919_Locuteur_1 1055.996 1059.622 <o,f0,male> en javascript, ça s'écrit comme ça. alors la syntaxe est un petit peu particulière
+20140919 1 20140919_Locuteur_1 1059.622 1062.525 <o,f0,male> en javascript et puis dans tous les langages qui ressemblent à
+20140919 1 20140919_Locuteur_1 1062.525 1065.022 <o,f0,male> à à du c.
+20140919 1 inter_segment_gap 1065.022 1066.013 <o,f0,>
+20140919 1 20140919_Locuteur_1 1066.013 1067.981 <o,f0,male> la traduction de pour, c'est for
+20140919 1 20140919_Locuteur_1 1067.981 1071.090 <o,f0,male> pour le moment, il y a rien de difficile mais par contre ce qui est entre parenthèses
+20140919 1 20140919_Locuteur_1 1071.090 1073.892 <o,f0,male> n'est pas si facile que ça à comprendre.
+20140919 1 20140919_Locuteur_1 1073.892 1076.030 <o,f0,male> la variable
+20140919 1 20140919_Locuteur_1 1076.030 1078.446 <o,f0,male> i () pardon, donc voilà un exemple
+20140919 1 20140919_Locuteur_1 1078.446 1079.219 <o,f0,male> mais
+20140919 1 20140919_Locuteur_1 1079.219 1081.690 <o,f0,male> la variable de boucle i
+20140919 1 20140919_Locuteur_1 1081.690 1085.450 <o,f0,male> il y a un moment où il faut l'initialiser ; c'est le i allant de
+20140919 1 20140919_Locuteur_1 1085.450 1088.910 <o,f0,male> alors là on va dire : i allant de un
+20140919 1 20140919_Locuteur_1 1088.910 1094.632 <o,f0,male> et on n'écrit pas i allant de un dans () en javascript, *on écrit i re() a pour valeur un à l'initialisation
+20140919 1 20140919_Locuteur_1 1094.632 1098.682 <o,f0,male> de la boucle. donc c'est l'affectation de la valeur de départ à la *variable de boucle.
+20140919 1 20140919_Locuteur_1 1098.682 1105.910 <o,f0,male> la deuxième partie qu'on retrouve, c'est une expression booléenne qui est en fait un test de continuation
+20140919 1 20140919_Locuteur_1 1105.910 1111.721 <o,f0,male> la b() on on restera dans la boucle tant que cette expression booléenne sera vraie
+20140919 1 20140919_Locuteur_1 1111.721 1118.867 <o,f0,male> autrement dit on écrira, toujours dans notre cas, i inférieur ou égal à la valeur de fin.
+20140919 1 20140919_Locuteur_1 1118.867 1120.896 <o,f0,male> et enfin le troisième bloc,
+20140919 1 20140919_Locuteur_1 1120.896 1126.220 <o,f0,male> c'est une affectation qui décrit comment on va faire varier la variable de boucle à chaque tour de boucle.
+20140919 1 20140919_Locuteur_1 1126.220 1132.544 <o,f0,male> autrement dit, on a une beaucoup plus grande mané() malléabilité des boucles du javascript
+20140919 1 20140919_Locuteur_1 1132.544 1138.480 <o,f0,male> par rapport aux boucles euh du du langage algorithmique, mais c'est pas grave.
+20140919 1 20140919_Locuteur_1 1138.480 1143.856 <o,f0,male> alors on va prendre maintenant un exemple, euh un exemple visuel qui est tiré du
+20140919 1 20140919_Locuteur_1 1143.856 1150.943 <o,f0,male> de la de la tortue logo où on a quatre instructions qui permettent de faire des dessins : avancer de dix pixels et tracer,
+20140919 1 20140919_Locuteur_1 1150.943 1158.366 <o,f0,male> tourner à droite de euh un certain angle en degrés, ou il y a évidemment les instructions tourner à gauche et reculer
+20140919 1 20140919_Locuteur_1 1158.366 1160.311 <o,f0,male> donc cet algorithme
+20140919 1 20140919_Locuteur_1 1160.311 1163.560 <o,f0,male> polygone
+20140919 1 20140919_Locuteur_1 1163.560 1166.548 <o,f0,male> puisqu'on réalise n fois
+20140919 1 20140919_Locuteur_1 1166.548 1170.237 <o,f0,male> euh ces deux instructions-là, permet de tracer un polygone.
+20140919 1 20140919_Locuteur_1 1170.237 1175.237 <o,f0,male> [pi] prenons l'exemple de n égal quatre, eh bah on va répéter quatre fois avancer de dix pas,
+20140919 1 20140919_Locuteur_1 1175.237 1177.612 <o,f0,male> tourner à droite de quatre-vingt-dix degrés
+20140919 1 20140919_Locuteur_1 1177.612 1181.609 <o,f0,male> et si on le répète quatre fois, vous voyez très très bien qu'on va finir par tracer un carré ;
+20140919 1 20140919_Locuteur_1 1181.609 1187.536 <o,f0,male> donc ça se généralise pour toutes les valeurs de n.
+20140919 1 20140919_Locuteur_1 1187.536 1190.032 <o,f0,male> la deuxième boucle qu'on va aborder, c'est la boucle tant que.
+20140919 1 20140919_Locuteur_1 1190.032 1192.839 <o,f0,male> alors on pourrait l'appeler la boucle universelle,
+20140919 1 20140919_Locuteur_1 1192.839 1201.734 <o,f0,male> *parce que c'est la boucle à utiliser quand on ne connaît pas à l'avance le nombre de tours de boucle qui doivent être réalisés, et puis ça c'est quand même un cas qui se produit assez souvent.
+20140919 1 20140919_Locuteur_1 1201.734 1206.280 <o,f0,male> donc sa syntaxe est relativement simple : on écrit tant que,
+20140919 1 20140919_Locuteur_1 1206.280 1210.981 <o,f0,male> une expression booléenne qui sera un test de continuation
+20140919 1 20140919_Locuteur_1 1210.981 1217.070 <o,f0,male> faire, des instructions qui seront répétées tant que l'expression booléenne sera vraie.
+20140919 1 20140919_Locuteur_1 1217.070 1223.838 <o,f0,male> prenons l'exemple : alors euh un exemple tiré du calcul de trois à la puissance euh dix, mais on va le prendre à l'envers
+20140919 1 20140919_Locuteur_1 1223.838 1228.038 <o,f0,male> on va utiliser le calcul de trois à la puissance dix pour calculer des logarithmes
+20140919 1 20140919_Locuteur_1 1228.038 1230.864 <o,f0,male> des des parties entières de logarithmes.
+20140919 1 20140919_Locuteur_1 1230.864 1234.721 <o,f0,male> comment on fait ? ben tout simplement on va prendre les puissances
+20140919 1 20140919_Locuteur_1 1234.721 1235.809 <o,f0,male> euh de trois
+20140919 1 20140919_Locuteur_1 1235.809 1239.965 <o,f0,male> et puis si on veut calculer le logarithme en base trois deux cents, bah il ch() il faudra chercher
+20140919 1 20140919_Locuteur_1 1239.965 1242.599 <o,f0,male> le plus petit i
+20140919 1 20140919_Locuteur_1 1242.599 1246.925 <o,f0,male> tel que euh trois à la puissance euh i
+20140919 1 20140919_Locuteur_1 1246.925 1249.081 <o,f0,male> reste plus petit que cent.
+20140919 1 20140919_Locuteur_1 1249.081 1251.357 <o,f0,male> donc on va y arriver avec une boucle tant que,
+20140919 1 20140919_Locuteur_1 1251.357 1258.058 <o,f0,male> en calculant les puissances tant que cette puissance est plus petite que cent. dès qu'on a dépassé cent, c'est qu'on est allé un cran trop loin
+20140919 1 20140919_Locuteur_1 1258.058 1263.970 <o,f0,male> donc euh il suffira d'écrire i moins un pour avoir le bon résultat.
+20140919 1 20140919_Locuteur_1 1263.970 1267.725 <o,f0,male> voilà un exemple. alors il y a beaucoup de dangers à écrire des boucles tant que :
+20140919 1 20140919_Locuteur_1 1267.725 1273.569 <o,f0,male> le premier danger, c'est que () *enfin c'est c'est pas un danger, c'est une particularité. d'ailleurs, c'est que si le test est faux dès le début,
+20140919 1 20140919_Locuteur_1 1273.569 1276.272 <o,f0,male> aucune instruction s() ne sera exécutée.
+20140919 1 20140919_Locuteur_1 1276.272 1279.950 <o,f0,male> donc première cho() première chose : le test doit pouvoir être réalisé
+20140919 1 20140919_Locuteur_1 1279.950 1287.889 <o,f0,male> avant de rentrer dans la boucle ; il ne peut pas y avoir de variable in() qui ne soit pas initialisée dans le calcul du test
+20140919 1 20140919_Locuteur_1 1287.889 1289.059 <o,f0,male> et ensuite
+20140919 1 20140919_Locuteur_1 1289.059 1291.435 <o,f0,male> il peut se produire que le test soit faux dès le début
+20140919 1 20140919_Locuteur_1 1291.435 1294.228 <o,f0,male> et que aucun aucune instruction ne soit exécutée
+20140919 1 20140919_Locuteur_1 1294.228 1301.607 <o,f0,male> [pi] on rentre pas du tout dans la boucle. donc le nombre de tours de boucle [pi] tant que peut être zéro, un, deux, mille, un milliard
+20140919 1 20140919_Locuteur_1 1301.607 1302.772 <o,f0,male> et cetera
+20140919 1 20140919_Locuteur_1 1302.772 1305.353 <o,f0,male> et en général, il faut s'arrêter euh
+20140919 1 20140919_Locuteur_1 1305.353 1310.628 <o,f0,male> à un milliard, parce que ensuite euh l'ordinateur a des p() a des soucis.
+20140919 1 20140919_Locuteur_1 1310.628 1312.368 <o,f0,male> ce qu'il faut surtout pas faire,
+20140919 1 20140919_Locuteur_1 1312.368 1314.434 <o,f0,male> c'est tomber dans le cas d'une boucle infinie
+20140919 1 20140919_Locuteur_1 1314.434 1317.239 <o,f0,male> et ça, ça se produit quand le test
+20140919 1 20140919_Locuteur_1 1317.239 1318.472 <o,f0,male> est toujours vrai.
+20140919 1 20140919_Locuteur_1 1318.472 1323.311 <o,f0,male> donc ça, c'est un cas à éviter évidemment, puisque ça pose euh des soucis euh
+20140919 1 20140919_Locuteur_1 1323.311 1327.120 <o,f0,male> des soucis au moment de l'exécution de l'algorithme.
+20140919 1 20140919_Locuteur_1 1327.120 1334.720 <o,f0,male> et ça pose même des s() des soucis au moment de l'exécution du programme, quand on est dans la dans la vé() dans la vie réelle.
+20140919 1 20140919_Locuteur_1 1334.720 1341.606 <o,f0,male> ce dont il faut faire très attention, c'est que les instructions doivent donc modifier la valeur calculée de l'expression booléenne.
+20140919 1 20140919_Locuteur_1 1341.606 1345.230 <o,f0,male> il y a un moment où l'expression booléenne doit être évaluée à faux
+20140919 1 20140919_Locuteur_1 1345.230 1348.340 <o,f0,male> et ça, il y a que les instructions qui permettent de modifier
+20140919 1 20140919_Locuteur_1 1348.340 1351.780 <o,f0,male> le calcul de cette expression.
+20140919 1 20140919_Locuteur_1 1351.780 1359.266 <o,f0,male> donc il faudra passer par des variables dont la valeur est changée au moment d() au cours des instructions.
+20140919 1 20140919_Locuteur_1 1359.266 1371.090 <o,f0,male> en javascript, la traduction de la boucle tant que est assez élémentaire : tant que se traduit par while , entre parenthèses une condition, et entre accolades le bloc d'instructions répétées.
+20140919 1 20140919_Locuteur_1 1371.090 1376.690 <o,f0,male> l'expression booléenne est donc le test de continuation, le même que de tant que
+20140919 1 20140919_Locuteur_1 1376.690 1382.082 <o,f0,male> et puis là, je vais vous donner un algorithme mystère, encore une fois à base de tortue logo
+20140919 1 20140919_Locuteur_1 1382.082 1384.990 <o,f0,male> et je vais vous demander ce qu'il permet de tracer.
+20140919 1 20140919_Locuteur_1 1384.990 1394.989 <o,f0,male> alors en réfléchissant un petit peu, euh on se rend compte que on avance, on tourne d'un degré puis on tourne () on avance, on tourne de deux degrés puis on avance, on tourne de trois degrés
+20140919 1 20140919_Locuteur_1 1394.989 1399.310 <o,f0,male> jusqu'à arriver à cent quatre-vingts degrés, où là on va se mettre à faire demi-tour
+20140919 1 20140919_Locuteur_1 1399.310 1402.098 <o,f0,male> donc on va faire une sorte de spirale
+20140919 1 20140919_Locuteur_1 1402.098 1404.110 <o,f0,male> qui fait demi-tour
+20140919 1 20140919_Locuteur_1 1404.110 1409.553 <o,f0,male> et qui retourne à faire une spirale, parce qu'une fois qu'on a passé trois cent soixante degrés c'est comme si on recommençait à zéro
+20140919 1 20140919_Locuteur_1 1409.553 1412.439 <o,f0,male> eh bah en fait, le dessin ce sera ça :
+20140919 1 20140919_Locuteur_1 1412.439 1418.430 <o,f0,male> des spirales inversées. c'est un un joli dessin, réalisé en en trois lignes de programme
+20140919 1 20140919_Locuteur_1 1418.430 1420.970 <o,f0,male> avec une boucle tant que.
+20140919 1 20140919_Locuteur_1 1420.970 1421.760 <o,f0,male> voilà
+20140919 1 20140919_Locuteur_1 1421.760 1425.696 <o,f0,male> on va maintenant parler des historiques d'exécution pour les répétitives.
+20140919 1 20140919_Locuteur_1 1425.696 1433.512 <o,f0,male> dans le cas d'une répétitive, les instructions répétées on va les retrouver plusieurs fois puisqu'elles sont évaluées plusieurs fois, il faut les retrouver plusieurs fois dans l'historique d'exécution.
+20140919 1 20140919_Locuteur_1 1433.512 1436.563 <o,f0,male> donc si on prend cet exemple très très simple
+20140919 1 20140919_Locuteur_1 1436.563 1440.023 <o,f0,male> comme d'habitude, on va devoir numéroter les instructions
+20140919 1 20140919_Locuteur_1 1440.023 1444.525 <o,f0,male> comme d'habitude, il va *falloir falloir repérer les variables, nb un et nb deux,
+20140919 1 20140919_Locuteur_1 1444.525 1446.348 <o,f0,male> ce qui nous permettra de commencer
+20140919 1 20140919_Locuteur_1 1446.348 1449.573 <o,f0,male> à tracer l'historique d'exécution.
+20140919 1 20140919_Locuteur_1 1449.573 1457.689 <o,f0,male> mais pour euh tracer totalement l'historique d'exécution, ben il va falloir quand même dérouler l'exécution de [pi] dérouler l'algorithme.
+20140919 1 20140919_Locuteur_1 1457.689 1467.134 <o,f0,male> donc si on reprend cet algorithme dans l'ordre, avant l'instruction un il n'y a rien dans nb un, il n'y a rien dans dans nb deux mais après l'instruction un, on a mis un dans nb un
+20140919 1 20140919_Locuteur_1 1467.134 1470.304 <o,f0,male> après l'instruction deux, on a mis dix dans nb deux.
+20140919 1 20140919_Locuteur_1 1470.304 1478.532 <o,f0,male> et là on se retrouve à commencer la boucle tant que, donc on commence l'instruction trois mais on ne la terminera évidemment que quand toutes les instructions de la boucle tant que seront terminées
+20140919 1 20140919_Locuteur_1 1478.532 1480.539 <o,f0,male> seront évaluées.
+20140919 1 20140919_Locuteur_1 1480.539 1487.642 <o,f0,male> et on commence la boucle tant que en faisant un test, donc en se *posant la question : est-ce que un est inférieur à dix ? la réponse est vrai
+20140919 1 20140919_Locuteur_1 1487.642 1490.039 <o,f0,male> donc on rentre dans la boucle
+20140919 1 20140919_Locuteur_1 1490.039 1492.862 <o,f0,male> et on exécute les l'instruction quatre,
+20140919 1 20140919_Locuteur_1 1492.862 1496.036 <o,f0,male> qui place euh la valeur deux dans nb un
+20140919 1 20140919_Locuteur_1 1496.036 1502.251 <o,f0,male> puis on exécute l'instruction cinq qui place la valeur neuf dans nb deux.
+20140919 1 20140919_Locuteur_1 1502.251 1505.026 <o,f0,male> et on se repose la question
+20140919 1 20140919_Locuteur_1 1505.026 1507.055 <o,f0,male> du test de continuation
+20140919 1 20140919_Locuteur_1 1507.055 1510.865 <o,f0,male> qui est : est-ce que cette fois-ci, deux est inférieur à neuf ?
+20140919 1 20140919_Locuteur_1 1510.865 1512.602 <o,f0,male> *donc la réponse est encore vrai
+20140919 1 20140919_Locuteur_1 1512.602 1517.454 <o,f0,male> on réexécute encore une fois les instructions quatre et les instructions cinq, et on passe
+20140919 1 20140919_Locuteur_1 1517.454 1519.666 <o,f0,male> aux valeurs quatre et huit.
+20140919 1 20140919_Locuteur_1 1519.666 1523.761 <o,f0,male> on se repose encore une fois la question : est-ce que quatre est inférieur à huit ? la réponse est vrai. on passe
+20140919 1 20140919_Locuteur_1 1523.761 1525.278 <o,f0,male> encore une fois
+20140919 1 20140919_Locuteur_1 1525.278 1529.171 <o,f0,male> dans les le bloc d'instructions quatre et cinq
+20140919 1 20140919_Locuteur_1 1529.171 1536.348 <o,f0,male> et à la fin de ce bloc, on se retrouve dans la situation où enfin nb un est supérieur ou égal à nb deux
+20140919 1 20140919_Locuteur_1 1536.348 1537.959 <o,f0,male> donc on sort de la boucle.
+20140919 1 20140919_Locuteur_1 1537.959 1542.230 <o,f0,male> et on s() c'est à ce moment-là et une() et uniquement à ce moment-là que l'instruction trois est terminée
+20140919 1 20140919_Locuteur_1 1542.230 1548.060 <o,f0,male> et et qu'on la note.
+20140919 1 20140919_Locuteur_1 1548.060 1554.181 <o,f0,male> alors comme dans le cas des ré() des conditionnelles, on peut être amené à mettre des boucles dans des boucles
+20140919 1 20140919_Locuteur_1 1554.181 1558.298 <o,f0,male> puisque les instructions à l'intérieur d'une boucle sont quelconques
+20140919 1 20140919_Locuteur_1 1558.298 1560.876 <o,f0,male> et dans ce cas-là, on parle de boucles imbriquées
+20140919 1 20140919_Locuteur_1 1560.876 1568.394 <o,f0,male> ou de boucles doubles. alors ces boucles euh doubles sont particulièrement utiles pour parcourir des espaces à deux dimensions, et l'*exemple typique
+20140919 1 20140919_Locuteur_1 1568.394 1569.951 <o,f0,male> que vous aurez à manipuler
+20140919 1 20140919_Locuteur_1 1569.951 1577.847 <o,f0,male> euh dans ce cas-là, c'est par exemple pour parcourir tout l'écran de votre ordinateur et mettre une couleur à tous les pixels de l'écran.
+20140919 1 20140919_Locuteur_1 1577.847 1579.116 <o,f0,male> ça
+20140919 1 20140919_Locuteur_1 1579.116 1580.535 <o,f0,male> voici un exemple
+20140919 1 20140919_Locuteur_1 1580.535 1582.832 <o,f0,male> de boucle pour qui fait ceci
+20140919 1 20140919_Locuteur_1 1582.832 1587.919 <o,f0,male> donc pour x allant de zéro à huit cents, pour y allant de zéro à six cents,
+20140919 1 20140919_Locuteur_1 1587.919 1593.794 <o,f0,male> on modifie la couleur de chaque point, et évidemment on peut utiliser les variables euh de boucles x et y
+20140919 1 20140919_Locuteur_1 1593.794 1595.596 <o,f0,male> qui sont connues
+20140919 1 20140919_Locuteur_1 1595.596 1602.330 <o,f0,male> dans () à l'intérieur des de de ce dernier euh de ce dernier euh de ce dernier bloc d'instructions. donc ça, ça va donner
+20140919 1 20140919_Locuteur_1 1602.330 1605.379 <o,f0,male> une valeur à chaque couleur, à chaque pixel de l'écran
+20140919 1 20140919_Locuteur_1 1605.379 1607.118 <o,f0,male> et le résultat, c'est ceci :
+20140919 1 20140919_Locuteur_1 1607.118 1607.895 <o,f0,male> donc euh
+20140919 1 20140919_Locuteur_1 1607.895 1613.680 <o,f0,male> un j() de jolis dégradés de couleurs.
+20140919 1 20140919_Locuteur_1 1613.680 1616.613 <o,f0,male> voilà. on va maintenant passer à une partie importante,
+20140919 1 20140919_Locuteur_1 1616.613 1623.690 <o,f0,male> tout simplement parce que on va voir ici des schémas standards de programmation à base de boucles
+20140919 1 20140919_Locuteur_1 1623.690 1629.785 <o,f0,male> schémas standards qu'on va devoir euh qu'on va avoir à appliquer dans plein de cas de résolutions de problèmes.
+20140919 1 20140919_Locuteur_1 1629.785 1634.598 <o,f0,male> donc il y en a trois, des schémas de standards : il y a des vérifications de saisie, ou on peut appeler ça aussi de validations de saisie,
+20140919 1 20140919_Locuteur_1 1634.598 1638.270 <o,f0,male> il y aura des compteurs et des accumulateurs.
+20140919 1 20140919_Locuteur_1 1638.270 1643.167 <o,f0,male> et comme ces schémas sont standards, et que beaucoup de problèmes reposent sur des
+20140919 1 20140919_Locuteur_1 1643.167 1651.173 <o,f0,male> mélanges de ces schémas, ou des applications pures et () stricto sensu de ces schémas, alors il faudra les reconnaître quand on lit l'énoncé d'un problème
+20140919 1 20140919_Locuteur_1 1651.173 1655.400 <o,f0,male> et il faudra savoir les écrire ; ça, c'est très important.
+20140919 1 20140919_Locuteur_1 1655.400 1660.813 <o,f0,male> le premier schéma de () le sch() premier schéma standard qu'on va voir, c'est la vérification de saisie
+20140919 1 20140919_Locuteur_1 1660.813 1665.835 <o,f0,male> alors on parle de *vérification de saisie lorsqu'une boucle contient une saisie
+20140919 1 20140919_Locuteur_1 1665.835 1670.159 <o,f0,male> et que la valeur saisie est utilisée par le test de continuation de la boucle.
+20140919 1 20140919_Locuteur_1 1670.159 1678.104 <o,f0,male> [pi] typiquement, on utilisera euh une boucle tant que car dans ce cas, on on ne connaît pas le nombre de tours de boucles nécessaires à l'utilisateur pour rentrer
+20140919 1 20140919_Locuteur_1 1678.104 1679.930 <o,f0,male> une valeur convenable.
+20140919 1 20140919_Locuteur_1 1679.930 1686.314 <o,f0,male> un cas typique de la vérification de saisie, c'est par exemple pour demander à l'utilisateur de saisir un nombre positif
+20140919 1 20140919_Locuteur_1 1686.314 1687.870 <o,f0,male> on a deux possibilités :
+20140919 1 20140919_Locuteur_1 1687.870 1693.215 <o,f0,male> soit on fait confiance à l'utilisateur et on lui écrit juste un message pour lui dire "rentrer un nombre positif",
+20140919 1 20140919_Locuteur_1 1693.215 1695.674 <o,f0,male> soit on lui p() fait pas confiance, et c'est
+20140919 1 20140919_Locuteur_1 1695.674 1699.693 <o,f0,male> dans dans beaucoup de cas, il ne faut pas forcément faire confiance à l'utilisateur,
+20140919 1 20140919_Locuteur_1 1699.693 1703.076 <o,f0,male> et on met en place un processus qui va vérifier
+20140919 1 20140919_Locuteur_1 1703.076 1710.079 <o,f0,male> la saisie de l'utilisateur et lui redemandera de saisir une valeur si ce qu'il a saisi n'est pas convenable.
+20140919 1 20140919_Locuteur_1 1710.079 1710.858 <o,f0,male> c'est
+20140919 1 20140919_Locuteur_1 1710.858 1713.853 <o,f0,male> un cas typique de vérification de saisie.
+20140919 1 20140919_Locuteur_1 1713.853 1717.250 <o,f0,male> donc ce qu'on retrouve dans une boucle tant que, c'est
+20140919 1 20140919_Locuteur_1 1717.250 1722.110 <o,f0,male> à l'intérieur de la boucle tant que, une instruction qui saisit une valeur ;
+20140919 1 20140919_Locuteur_1 1722.110 1725.929 <o,f0,male> et dans le test de continuation, un test
+20140919 1 20140919_Locuteur_1 1725.929 1728.281 <o,f0,male> sur s() la valeur qui a été saisie
+20140919 1 20140919_Locuteur_1 1728.281 1731.386 <o,f0,male> voilà. *donc les deux instructions importantes, ce sont ces deux-là.
+20140919 1 20140919_Locuteur_1 1731.386 1736.467 <o,f0,male> euh il y a une euh une instruction x reçoit saisit avant la boucle tant que parce que évidemment
+20140919 1 20140919_Locuteur_1 1736.467 1740.662 <o,f0,male> ce que je vous ai dit tout à l'heure, c'est qu'il faut que les le test puisse être réalisé
+20140919 1 20140919_Locuteur_1 1740.662 1743.511 <o,f0,male> avant de rentrer dans la boucle, donc il faut que x ait une valeur.
+20140919 1 20140919_Locuteur_1 1743.511 1745.083 <o,f0,male> ça représentera
+20140919 1 20140919_Locuteur_1 1745.083 1746.740 <o,f0,male> la première valeur c. donc
+20140919 1 20140919_Locuteur_1 1746.740 1749.545 <o,f0,male> une vérification de saisie s'écrit comme ça.
+20140919 1 20140919_Locuteur_1 1749.545 1753.307 <o,f0,male> deux fois la saisie, dont une à l'intérieur de la boucle, et un test
+20140919 1 20140919_Locuteur_1 1753.307 1757.590 <o,f0,male> sur la saisie () sur la valeur saisie.
+20140919 1 20140919_Locuteur_1 1757.590 1761.978 <o,f0,male> le deuxième schéma classique de programmation, c'est ce qui s'appelle le compteur.
+20140919 1 20140919_Locuteur_1 1761.978 1768.224 <o,f0,male> et on va parler de compteur dès qu'on a ajouté les instructions qui permettent de compter le nombre de tours de boucles. alors il y a plein d'occasions
+20140919 1 20140919_Locuteur_1 1768.224 1773.088 <o,f0,male> euh il y a plein de moments où on veut avoi() savoir combien de tours de boucles on a réalisé.
+20140919 1 20140919_Locuteur_1 1773.088 1776.202 <o,f0,male> quelles instructions on va devoir rajouter ? ben tout simplement on va devoir
+20140919 1 20140919_Locuteur_1 1776.202 1778.480 <o,f0,male> déclarer une nouvelle variable,
+20140919 1 20140919_Locuteur_1 1778.480 1780.098 <o,f0,male> une variable compteur
+20140919 1 20140919_Locuteur_1 1780.098 1782.587 <o,f0,male> et on va devoir ajouter deux instructions
+20140919 1 20140919_Locuteur_1 1782.587 1786.974 <o,f0,male> au pro() euh à l'algorithme : une instruction d'initialisation du compteur
+20140919 1 20140919_Locuteur_1 1786.974 1789.187 <o,f0,male> à zéro, par exemple
+20140919 1 20140919_Locuteur_1 1789.187 1792.917 <o,f0,male> et une instruction d'incrémentation du compteur.
+20140919 1 20140919_Locuteur_1 1792.917 1796.233 <o,f0,male> ce qu'il faut noter, c'est qu'un compteur ça s'ajoute à tout type de boucles.
+20140919 1 20140919_Locuteur_1 1796.233 1806.115 <o,f0,male> mais euh il est rare d'avoir à rajouter un deuxième compteur à une boucle pour, puisque donc la boucle pour intègre un compteur.
+20140919 1 20140919_Locuteur_1 1806.115 1813.271 <o,f0,male> alors si on reprend les () un exemple, je suis pas allé le chercher loin, je suis allé re() le rechercher sur le calcul du log en en base trois de cent
+20140919 1 20140919_Locuteur_1 1813.271 1815.326 <o,f0,male> ben tout simplement
+20140919 1 20140919_Locuteur_1 1815.326 1818.910 <o,f0,male> là, on a un cas typique où euh un cas typique de compteur
+20140919 1 20140919_Locuteur_1 1818.910 1820.792 <o,f0,male> qu'on retrouve ici
+20140919 1 20140919_Locuteur_1 1820.792 1823.021 <o,f0,male> où le compteur c'est la variable i,
+20140919 1 20140919_Locuteur_1 1823.021 1825.540 <o,f0,male> qui permet de compter le nombre de tours de boucle
+20140919 1 20140919_Locuteur_1 1825.540 1829.666 <o,f0,male> qu'on va réaliser avant de tomber sur la bonne valeur
+20140919 1 20140919_Locuteur_1 1829.666 1831.779 <o,f0,male> du logarithme en base cent.
+20140919 1 20140919_Locuteur_1 1831.779 1836.054 <o,f0,male> voilà, donc c'est la variable i qui a deux instructions : i reçoit zéro, c'est l'initialisation
+20140919 1 20140919_Locuteur_1 1836.054 1841.177 <o,f0,male> et i reçoit i plus un, c'est l'incrémentation. et puis il faut pas oublier la déclaration de cette variable
+20140919 1 20140919_Locuteur_1 1841.177 1843.053 <o,f0,male> comme une variable de l'algorithme.
+20140919 1 20140919_Locuteur_1 1843.053 1844.855 <o,f0,male> donc trois
+20140919 1 20140919_Locuteur_1 1844.855 1846.909 <o,f0,male> ins() trois instructions,
+20140919 1 20140919_Locuteur_1 1846.909 1851.290 <o,f0,male> deux instructions à noter et une déclaration.
+20140919 1 20140919_Locuteur_1 1851.290 1855.547 <o,f0,male> le troisiè() troisième schéma qu'il faut retenir, c'est ce qui s'appelle l'accumulateur
+20140919 1 20140919_Locuteur_1 1855.547 1861.813 <o,f0,male> et on parle d'accumulateur dès lors qu'on a ajouté les instructions permettant de cumuler des valeurs à chaque tour de boucle
+20140919 1 20140919_Locuteur_1 1861.813 1866.852 <o,f0,male> donc les va() les instructions qu'on doit ajouter, c'est une déclaration de variables, les deux instructions ;
+20140919 1 20140919_Locuteur_1 1866.852 1868.839 <o,f0,male> encore une fois une initialisation
+20140919 1 20140919_Locuteur_1 1868.839 1874.270 <o,f0,male> et une instruction de modification de l'accumulateur. donc c'est vraiment très très proche d'un compteur
+20140919 1 20140919_Locuteur_1 1874.270 1876.490 <o,f0,male> la seule différence c'est qu'un compteur,
+20140919 1 20140919_Locuteur_1 1876.490 1883.624 <o,f0,male> c'est fait pour compter les choses, c'est forcément additif alors qu'un accumulateur peut être additif ou va vouloir
+20140919 1 20140919_Locuteur_1 1883.624 1885.959 <o,f0,male> additionner des choses,
+20140919 1 20140919_Locuteur_1 1885.959 1888.370 <o,f0,male> mais il peut être multiplicatif.
+20140919 1 20140919_Locuteur_1 1888.370 1893.179 <o,f0,male> dans ce cas-là, on va vouloir multiplier des choses, ou ça peut être une concaténation, donc un ajout
+20140919 1 20140919_Locuteur_1 1893.179 1896.351 <o,f0,male> progressif de bouts de chaînes de caractères.
+20140919 1 20140919_Locuteur_1 1896.351 1899.543 <o,f0,male> l'accumulateur peut s'ajouter à tout type de boucle.
+20140919 1 20140919_Locuteur_1 1899.543 1901.611 <o,f0,male> et qu'est-ce que permet de faire un accumulateur ? ben
+20140919 1 20140919_Locuteur_1 1901.611 1910.134 <o,f0,male> typiquement, il est utilisé pour calculer des formules de type somme des i égale zéro à n de [pi] ou produit de i égale zéro à n [pi]
+20140919 1 20140919_Locuteur_1 1910.134 1913.090 <o,f0,male> ce sont des cas typiques où on a besoin d'un accumulateur.
+20140919 1 20140919_Locuteur_1 1913.090 1916.414 <o,f0,male> euh s()
+20140919 1 20140919_Locuteur_1 1916.414 1917.476 <o,f0,male> par exemple,
+20140919 1 20140919_Locuteur_1 1917.476 1923.591 <o,f0,male> pour calculer la factorielle, c'est un cas *typique où on a besoin d'un accumulateur
+20140919 1 20140919_Locuteur_1 1923.591 1926.477 <o,f0,male> un accumulateur qu'on va placer dans une boucle pour,
+20140919 1 20140919_Locuteur_1 1926.477 1930.858 <o,f0,male> qui va nous permettre de faire vingt *itérations
+20140919 1 20140919_Locuteur_1 1930.858 1934.945 <o,f0,male> d'une instruction qui modifie l'accumulateur appelé x.
+20140919 1 20140919_Locuteur_1 1934.945 1937.483 <o,f0,male> donc l'accumulateur, on a besoin
+20140919 1 20140919_Locuteur_1 1937.483 1941.661 <o,f0,male> de de l'initialiser à à valeur un et de le modifier
+20140919 1 20140919_Locuteur_1 1941.661 1945.799 <o,f0,male> à la valeur i par la l'instruction x reçoit x fois i.
+20140919 1 20140919_Locuteur_1 1945.799 1954.255 <o,f0,male> un deuxième cas typique, c'est pour euh faire une répétition de caractères [pif] là on va avoir un accumulateur qui est euh une concaténation ; on va chercher à ajouter
+20140919 1 20140919_Locuteur_1 1954.255 1959.203 <o,f0,male> cent fois une étoile à une chaîne de caractères. donc le résultat de cette accumulation
+20140919 1 20140919_Locuteur_1 1959.203 1964.513 <o,f0,male> sera une chaîne de caractères de longueur cent con() ne con() composée uniquement d'étoiles.
+20140919 1 20140919_Locuteur_1 1964.513 1966.240 <o,f0,male> troisième cas typique
+20140919 1 20140919_Locuteur_1 1966.240 1968.948 <o,f0,male> bah c'est par exemple pour saisir des notes
+20140919 1 20140919_Locuteur_1 1968.948 1970.258 <o,f0,male> de d'élèves
+20140919 1 20140919_Locuteur_1 1970.258 1972.097 <o,f0,male> donc on va avoir euh
+20140919 1 20140919_Locuteur_1 1972.097 1974.301 <o,f0,male> on va vouloir calculer une moyenne
+20140919 1 20140919_Locuteur_1 1974.301 1977.290 <o,f0,male> et pour ça euh on va accumuler
+20140919 1 20140919_Locuteur_1 1977.290 1978.631 <o,f0,male> des notes
+20140919 1 20140919_Locuteur_1 1978.631 1982.457 <o,f0,male> des notes saisies euh donc on va devoir accumuler trente-six notes
+20140919 1 20140919_Locuteur_1 1982.457 1986.072 <o,f0,male> qu'on va demander à l'utilisateur de saisir.
+20140919 1 20140919_Locuteur_1 1986.072 1989.082 <o,f0,male> ce qu'on retrouve, et ce qui est important,
+20140919 1 20140919_Locuteur_1 1989.082 1992.050 <o,f0,male> c'est ce fait-là.
+20140919 1 20140919_Locuteur_1 1992.050 1996.186 <o,f0,male> l'initiali() la valeur d'initialisation sera for() toujours liée
+20140919 1 20140919_Locuteur_1 1996.186 1998.830 <o,f0,male> à l'opération qu'on va vouloir faire.
+20140919 1 20140919_Locuteur_1 1998.830 2001.798 <o,f0,male> et ce qu'il faut retenir, c'est que dans quatre-vingt-dix-neuf pourcent des cas,
+20140919 1 20140919_Locuteur_1 2001.798 2005.628 <o,f0,male> on [pi] on initialisera un accumulateur
+20140919 1 20140919_Locuteur_1 2005.628 2006.859 <o,f0,male> avec
+20140919 1 20140919_Locuteur_1 2006.859 2012.616 <o,f0,male> comme valeur l'élément neutre de l'opération qu'on considère. donc l'élément neutre de la multiplication, c'est un
+20140919 1 20140919_Locuteur_1 2012.616 2019.996 <o,f0,male> un fois n'importe quoi est égal à n'importe quoi fois un égale un () égale n'importe quoi, pardon.
+20140919 1 20140919_Locuteur_1 2019.996 2022.823 <o,f0,male> l'élément neutre de l'opération plus
+20140919 1 20140919_Locuteur_1 2022.823 2024.111 <o,f0,male> ben c'est zéro
+20140919 1 20140919_Locuteur_1 2024.111 2026.434 <o,f0,male> zéro plus n'importe quoi,
+20140919 1 20140919_Locuteur_1 2026.434 2031.313 <o,f0,male> c'est la même chose que n'importe quoi plus zéro et c'est n'importe quoi
+20140919 1 20140919_Locuteur_1 2031.313 2038.519 <o,f0,male> et on fera la même chose pour le l'opération concaténation, mais cette fois euh c'est un un peu moins intuitif
+20140919 1 20140919_Locuteur_1 2038.519 2043.879 <o,f0,male> ce qu'il faut retenir, c'est que le l'élément neutre de l'opération concaténation, c'est la chaîne vide.
+20140919 1 20140919_Locuteur_1 2043.879 2053.236 <o,f0,male> guillemets, rien entre les deux, guillemets. et c'est ce qu'on utilisera comme initialisa() comme initialisateur, valeur d'initialisation de la variable accumulateur.
+20140919 1 20140919_Locuteur_1 2053.236 2054.150 <o,f0,male> voilà
+20140919 1 20140919_Locuteur_1 2054.150 2056.650 <o,f0,male> donc là maintenant, on a présenté les trois schémas
+20140919 1 20140919_Locuteur_1 2056.650 2060.665 <o,f0,male> de programmation, et puis on va voir comment on peut les combiner et les utiliser
+20140919 1 20140919_Locuteur_1 2060.665 2062.793 <o,f0,male> pour construire un jeu un peu plus ambitieux,
+20140919 1 20140919_Locuteur_1 2062.793 2068.261 <o,f0,male> un jeu que vous avez probablement déjà programmé sur votre calculatrice, donc c'est le jeu du plus ou moins.
+20140919 1 20140919_Locuteur_1 2068.261 2069.710 <o,f0,male> qu'est-ce que c'est que ce jeu ?
+20140919 1 20140919_Locuteur_1 2069.710 2075.631 <o,f0,male> bah au départ, c'est une simple vérification de saisie : on va demander à l'utilisateur de saisir une valeur
+20140919 1 20140919_Locuteur_1 2075.631 2079.225 <o,f0,male> et puis on va vérifier que la valeur qui est saisie
+20140919 1 20140919_Locuteur_1 2079.225 2082.707 <o,f0,male> est égale au nombre caché ou n'est pas égale au nombre caché.
+20140919 1 20140919_Locuteur_1 2082.707 2083.834 <o,f0,male> ça donne ça :
+20140919 1 20140919_Locuteur_1 2083.834 2085.330 <o,f0,male> donc le jeu du plus ou moins,
+20140919 1 20140919_Locuteur_1 2085.330 2089.739 <o,f0,male> ça prend deux variables : une variable cachée et la proposition de l'utilisateur.
+20140919 1 20140919_Locuteur_1 2089.739 2097.785 <o,f0,male> la variable cachée, on peut demander à quelqu'un de la saisir en cachette mais on peut aussi demander à l'utilisateur d'en choisir une au hasard
+20140919 1 20140919_Locuteur_1 2097.785 2099.958 <o,f0,male> entre zéro et neuf
+20140919 1 20140919_Locuteur_1 2099.958 2106.829 <o,f0,male> et là, on écrit une vérification de saisie, comme on a fait tout à l'heure : proposition reçoit saisie. tant que la proposition n'est pas égale au nombre caché,
+20140919 1 20140919_Locuteur_1 2106.829 2110.193 <o,f0,male> alors on redemande de saisir une valeur.
+20140919 1 20140919_Locuteur_1 2110.193 2111.795 <o,f0,male> et on fait tout ça
+20140919 1 20140919_Locuteur_1 2111.795 2116.350 <o,f0,male> jusqu'à ce que la personne gagne.
+20140919 1 20140919_Locuteur_1 2116.350 2120.551 <o,f0,male> voilà. mais on veut aller plus loin quand on écrit le jeu du plus ou moins
+20140919 1 20140919_Locuteur_1 2120.551 2126.836 <o,f0,male> ça ne devient le jeu du plus ou moins que quand on indi() on ajoute l'indication à l'utilisateur du () c'est-à-dire le fameux plus ou moins.
+20140919 1 20140919_Locuteur_1 2126.836 2129.831 <o,f0,male> donc ça, c'est une alternative
+20140919 1 20140919_Locuteur_1 2129.831 2132.251 <o,f0,male> qu'on ajoute
+20140919 1 20140919_Locuteur_1 2132.251 2134.095 <o,f0,male> à l'intérieur de la boucle tant que.
+20140919 1 20140919_Locuteur_1 2134.095 2143.010 <o,f0,male> si la proposition est plus petite que euh la valeur cachée, alors il doit saisir une valeur plus grande, sinon il doit saisir une valeur moins grande.
+20140919 1 20140919_Locuteur_1 2143.010 2145.022 <o,f0,male> donc
+20140919 1 20140919_Locuteur_1 2145.022 2153.837 <o,f0,male> à cette vérification de saisie, on a ajouté une alternative ; on a commencé à construire notre pro() notre projet de programme [pif] un peu complexe.
+20140919 1 20140919_Locuteur_1 2153.837 2158.688 <o,f0,male> mais c'est pas fini : le jeu du plus ou moins, on a envie quand même de savoir
+20140919 1 20140919_Locuteur_1 2158.688 2161.530 <o,f0,male> combien de fois il a joué avant de trouver la bonne solution.
+20140919 1 20140919_Locuteur_1 2161.530 2162.718 <o,f0,male> ben maintenant
+20140919 1 20140919_Locuteur_1 2162.718 2167.189 <o,f0,male> pour ça, il suffit de compter le nombre de propositions, donc ajouter un compteur de boucles,
+20140919 1 20140919_Locuteur_1 2167.189 2170.479 <o,f0,male> un compteur de propositions.
+20140919 1 20140919_Locuteur_1 2170.479 2176.675 <o,f0,male> alors le compteur il s'ajoute comme ça : nombre de propositions reçoit, alors cette fois-ci, un et pas zéro, tout simplement parce que
+20140919 1 20140919_Locuteur_1 2176.675 2180.794 <o,f0,male> il y aura déjà une saisie avant de rentrer dans la boucle, donc il y aura déjà une proposition
+20140919 1 20140919_Locuteur_1 2180.794 2184.800 <o,f0,male> et puis ensuite, à chaque fois qu'on fait un tour de boucle, on incrémente le compteur de propositions.
+20140919 1 20140919_Locuteur_1 2184.800 2186.153 <o,f0,male> et voilà
+20140919 1 20140919_Locuteur_1 2186.153 2187.730 <o,f0,male> avec ça
+20140919 1 20140919_Locuteur_1 2187.730 2189.083 <o,f0,male> moralité :
+20140919 1 20140919_Locuteur_1 2189.083 2193.857 <o,f0,male> en combinant une vérification de saisie, un compteur de boucle et en ajoutant une conditionnelle,
+20140919 1 20140919_Locuteur_1 2193.857 2196.510 <o,f0,male> on a créé notre jeu complet
+20140919 1 20140919_Locuteur_1 2196.510 2200.250 <o,f0,male> du jeu () le jeu du plus ou moins.
+20140919 1 20140919_Locuteur_1 2200.250 2205.727 <o,f0,male> voilà, donc ça évidemment ça s'écrit en javascript mais vous trouverez tout ça dans les compléments associés
+20140919 1 20140919_Locuteur_1 2205.727 2208.872 <o,f0,male> aux notes de cours.
+20140919 1 20140919_Locuteur_1 2208.872 2209.979 <o,f0,male> au bilan
+20140919 1 20140919_Locuteur_1 2209.979 2211.290 <o,f0,male> bilan de cette partie :
+20140919 1 20140919_Locuteur_1 2211.290 2216.620 <o,f0,male> un algorithme, c'est une suite séquentielle d'instructions qui modifient l'état de la mémoire.
+20140919 1 20140919_Locuteur_1 2216.620 2224.880 <o,f0,male> mais l'ordre séquentiel n'est pas suffisant, et on on a on a enrichi la syntaxe de structures de contrôle qui sont des conditionnelles ou des répétitives
+20140919 1 20140919_Locuteur_1 2224.880 2226.067 <o,f0,male> qui permettent
+20140919 1 20140919_Locuteur_1 2226.067 2229.980 <o,f0,male> en gros de *simplifier simplifier ou d'optimiser l'écriture de l'algorithme.
+20140919 1 20140919_Locuteur_1 2229.980 2232.663 <o,f0,male> un n() on n'a un langage de programmation que
+20140919 1 20140919_Locuteur_1 2232.663 2238.310 <o,f0,male> lorsqu'on dispose d'une conditionnelle et d'une répétitive.
+20140919 1 20140919_Locuteur_1 2238.310 2244.696 <o,f0,male> on a eu aussi des schémas standards, qui s'appliquent et qui se combinent dans énormément de cas de résolutions de problèmes.
+20140919 1 20140919_Locuteur_1 2244.696 2248.528 <o,f0,male> donc ceci termine cette euh troisième partie du cours.

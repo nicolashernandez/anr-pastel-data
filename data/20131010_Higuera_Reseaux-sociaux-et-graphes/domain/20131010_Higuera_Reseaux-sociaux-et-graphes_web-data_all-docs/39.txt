@@ -1,0 +1,1424 @@
+http://docplayer.fr/4291535-Theorie-des-graphes-pour-l-analyse-de-reseaux-reels.html
+
+
+
+
+
+Théorie des graphes pour l analyse de réseaux réels - PDF
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            google_ad_client: "ca-pub-6133583279631137",
+            enable_page_level_ads: true
+        });
+    
+
+
+
+
+
+
+
+
+
+
+
+
+ Entrer
+Enregistrement
+
+
+
+
+
+
+
+Chercher
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Théorie des graphes pour l analyse de réseaux réels
+
+
+                                                || document.documentElement.clientWidth
+                                                || document.body.clientWidth;
+                                            document.write('<sc'+'ript async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></sc'+'ript> \
+                       <ins class="adsbygoogle" \
+                             style="display:block" \
+                             data-ad-client="ca-pub-6133583279631137" \
+                             data-ad-slot="5061836408" \
+                             data-ad-format="auto"></ins> \
+                        <sc'+'ript> \
+                        </'+'scr'+'ipt>');
+                                        
+
+
+
+
+
+
+
+
+
+
+
+                                                            if (width < 612) {
+                                                                document.getElementById('left_banner_td').style.display= "none";
+                                                            } else {
+                                                                document.write('<scr'+'ipt async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></scri'+'pt>\
+                            <ins class="adsbygoogle"\
+                                 style="display:inline-block;width:160px;height:600px"\
+                                 data-ad-client="ca-pub-6133583279631137"\
+                                 data-ad-slot="6538569603"></ins>\
+                            <sc'+'ript>\
+                            </'+'scr'+'ipt>');
+                                                            }
+                                                        
+
+
+
+
+
+                                                            var k_dim = 133;
+                                                            var doc_pages_count = 50;
+                                                        
+ 
+
+
+                                                            if (Math.random() > 0.5) {
+                                                                document.write(
+                                                                    '<sc' + 'ript async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></s' + 'cript>' +
+                                                                    '<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6133583279631137" data-ad-slot="9492036005" data-ad-format="auto"></ins>'
+                                                                );
+                                                            } else {
+                                                                document.write('<div id="angrmnt_b0"></div>');
+                                                            }          
+                                                        
+
+
+
+
+
+
+
+
+
+
+
+                                                        SHARE 
+
+
+
+
+                                                        HTML 
+
+
+
+
+                                                        DOWNLOAD 
+
+
+
+
+
+Save this PDF as:
+ WORD
+ PNG
+ TXT
+ JPG
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                            Dimension: px
+                                                        
+
+                                                            Commencer à balayer dès la page:
+                                                        
+
+
+
+
+
+
+
+
+
+
+Download "Théorie des graphes pour l analyse de réseaux réels"
+
+
+
+
+                                                                Erreur: 
+
+
+
+
+ Download Document
+
+
+
+
+
+
+
+
+
+  Élisabeth Lepage
+ il y a 3 ans                                                                                            
+ Total affichages :  
+
+
+
+
+
+
+
+
+
+
+
+Transcription
+
+
+
+
+                                                
+
+1 Théorie des graphes pour l analyse de réseaux réels Bertrand Jouve Laboratoire ERIC - IXXI - Université Lyon 2 
+2 Plan 1 Entre théorie des graphes et réseaux réels 2 Partitionnement métrique Exemple d étude : organisation cortico-corticale 3 Décomposition en Clans Exemple d étude : procédure de vote 4 Graphes cospectraux Exemple d étude : modélisation de réseaux sociaux anciens 5 Réduction de graphe par démontabilité Exemple d étude : dynamique de parcellaires 6 Conclusion 
+3 Définition [Graphe] G = (V, E) où V est un ensemble non vide et E un ensemble de couples d éléments de V. [Réseau] Un réseau est un graphe dont les individus et les relations présentent des caractéristiques quantitatives ou qualitatives. [Système complexe] Grand nombre d entités en interaction formant un ensemble dont le comportement est imprévisible pour l observateur car résultant d interactions non triviales. 
+4 Définition [Graphe] G = (V, E) où V est un ensemble non vide et E un ensemble de couples d éléments de V. [Réseau] Un réseau est un graphe dont les individus et les relations présentent des caractéristiques quantitatives ou qualitatives. [Système complexe] Grand nombre d entités en interaction formant un ensemble dont le comportement est imprévisible pour l observateur car résultant d interactions non triviales. Deux objectifs pour l étude des sytèmes complexes : DESCRIPTIFS et PREDICTIFS. 
+5 La démarche générale 1 Etant donné un système complexe à étudier, définir les réseaux d interactions qui peuvent aider à sa compréhension. 2 Utiliser et enrichir l ensemble des outils mathématiques qui permettent l étude formelle de ces réseaux. 3 Appliquer aux systèmes à l étude et exploiter les résultats obtenus pour enrichir des approches SHS-centrées. 4 boucler sur 2. en particulier les apports et limites de la théorie des graphes : analyse des données, analyse spectrale, combinatoire, topologie. Des applications 
+6 et la différence par rapport à l analyse des réseaux classique... 
+7 Partitionnement métrique Problème : Partitionner le graphe en classes qui satisfont certaines propriétés définies à l avance en le plongeant dans un espace géométrique. Ce type d approche pour l analyse de graphes n est pas récent (Benzecri dans les années 70, Lebart dans les années 80,...) mais a été relancé dans les années 90 / 00 avec la construction de réseaux réels dans des domaines très variés. 
+8 G = (V, E) graphe non orienté. Objectif : Partitionner G en sous-graphes denses (communautés?). Principe de la méthode munir V d une dissimilarité d (souvent une comparaison des voisins) plonger (V, d) dans (R n, d 2 ) et étudier la forme du nuage plongé. projeter le nuage sur les 1 ères dimensions d une A.C.P. effectuer une Classification automatique des points de la projection. Exemple : d 2 (i, j) = V[i] V[j] V[i] + V[j] 
+9 Extension aux graphes orientés et ou pondérés. Objectif : Partitionner G en sous-graphes denses et différencier ceux qui sont des pseudo-sources ou pseudo-puits. La distance entre deux sommets i et j s écrit d 2 (i, j) = f ( V + [i], V + [j] ) + f ( V [i], V [j] ) ou plus généralement ) ) f (V + [i], V + [j], V + 2 [i], V +2 [j], + f (V + [i], V + [j], V + 2 [i], V +2 [j], Exemple : Si f est le carré de la métrique de Dice, d s écrit d 2 (i, j) = V[i] V[j] V[i] + V[j] d 2 (i, j) = V + [i] V + [j] V + [i] + V + [j] + V [i] V [j] V [i] + V [j] d est euclidienne ainsi que son extension aux graphes pondérés. 
+10 Résultats [1998 ; 2001] Si f est un indice de proximité pour tableaux de présence / absence, on construit des familles de dissimilarités pour graphes orientés qui héritent des propriétés de f. a =< a i, a j > b =< a i, 1 a j > c =< 1 a i, a j > d =< 1 a i, 1 a j > Exemple : d 2 = Résultats [2002] b+c 2a+b+c Dans certains cas, il est possible de déterminer formellement l information portée par les 1 ers axes factoriels de l A.C.P. Sous l hypothèse de 1 ères valeurs propres assez distantes, le graphe peut être perturbé. 
+11 Modèles jouets : G p=3,q=3 Les p premières dimensions portent le nombre de cliques Les p + 1 à p + q 1 dimensions suivantes portent les couplages. G GAR (4, 10, 0.6, 0.2) 
+12 Exemple d étude : organisation cortico-corticale Outils et résultats [1998 ; 2004] Extension sous contraintes du réseau neuronal. Questions : Représentation géométrique de réseaux orientés. SLN : associer hiérarchie et représentation bidimensionnelles. Quelle modularité corticale dans l organisation anatomo-fonctionnelle du cortex? Comment traiter une connaissance incomplète du réseau neuronal? Une ou plusieurs hiérarchies? 
+13 Exemple d étude : organisation cortico-corticale Questions : Quelle modularité corticale dans l organisation anatomo-fonctionnelle du cortex? Comment traiter une connaissance incomplète du réseau neuronal? Une ou plusieurs hiérarchies? Outils et résultats [1998 ; 2004] Extension sous contraintes du réseau neuronal. Représentation géométrique de réseaux orientés. SLN : associer hiérarchie et représentation bidimensionnelles. 
+14 Exemple d étude : organisation cortico-corticale Questions : Quelle modularité corticale dans l organisation anatomo-fonctionnelle du cortex? Comment traiter une connaissance incomplète du réseau neuronal? Une ou plusieurs hiérarchies? Outils et résultats [1998 ; 2004] Extension sous contraintes du réseau neuronal. Représentation géométrique de réseaux orientés. SLN : associer hiérarchie et représentation bidimensionnelles. 
+15 Notion de communautés La notion de communauté apparaît souvent centrale car elle permet une schématisation du réseau et donc une approche à un autre niveau de granulométrie. Pour autant elle n admet pas de définition unique. Si l on ne regarde que la structure du graphe, les définitions suivantes correspondent à des notions combinatoires bien étudiéees : Les sommets d une même communauté sont vus de la même manière par un invidividu extérieur à la communauté, Tous les éléments d une communauté se connaissent 2 à 2, Deux sommets d une communauté sont interchangeables.... 
+16 Décomposition en clans Un tournoi est un graphe complet orienté. Problème : Etant donné un tournoi (ou un graphe orienté), comment peut-on le décomposer en ordres totaux (ou partiels) liés par des connexions en unidirection? 
+17 T est un tournoi. Définition Un Clan (ie. Intervalle) I de T est un sous-ensemble de sommets de T tel que tout sommet qui n est pas dans I soit domine soit est dominé par tous les sommets de T. Un 2-Clan est un clan à 2 éléments. Un tournoi sans clan non trivial (resp. 2-clan) est sommet-critique lorsque la suppression d un sommet quelconque crée un clan non trivial (resp. 2-clan). 
+18 T est un tournoi. Définition Un Clan (ie. Intervalle) I de T est un sous-ensemble de sommets de T tel que tout sommet qui n est pas dans I soit domine soit est dominé par tous les sommets de T. Un 2-Clan est un clan à 2 éléments. Un tournoi sans clan non trivial (resp. 2-clan) est sommet-critique lorsque la suppression d un sommet quelconque crée un clan non trivial (resp. 2-clan). Remarque : Un tournoi dont les clans acycliques sont triviaux sont les tournois sans 2-clans et réciproquement. Si d est bien choisie, l approche géométrique sur un tournoi exhibe un partitionnement dont les classes sont "proches" de clans acycliques [2005] : nous rigidifions le critère. 
+19 Objectif : Caractériser les tournois sans 2-clans et qui sont sommet-critiques pour cette propriété. Remarque : Les questions et résultats de décomposabilité et d indécomposabilité en clans et 2-clans pour les tournois s étendent aux structures binaires ([2012 soumis]) 
+20 Etat de l art étudiés Tournois dont les clans sont triviaux [Schmerl and Trotter, 1993 ; Ille, 1997] caractérisés Parmi ces tournois, ceux qui sont sommet-critiques pour cette propriété [Ille, 1997] étudiés Les tournois dont une partition en ordres totaux admet r sous-ensembles et sommet-critiques pour cette propriété [Neumann-Lara, 1984] Résultats [2005 ; 2010] caractérisés Tournois sans 2-clans (ie. tous les clans acycliques sont triviaux) et sommets critiques pour cette propriété : T [ C k1, C k2,..., C kp ]. Exemple : O 3 [ C 3, C 5, C 7 ] = 
+21 Exemple d étude : procédure de vote Les tournois apparaissent notamment lors des procédures de votes. n candidats numérotés de 1 à n et p votants Chaque votant doit classer les candidats sans ex-æquo. L objectif est d agréger les p ordres totaux obtenus en un seul. Procédure de Condorcet (dite aussi vote majoritaire) : Les candidats sont les sommets d un tournoi T et il existe un arc de i vers j si une majorité de votant préfère i à j. Paradoxe de Condorcet : une telle procédure peut créer des cycles. Exemple : n = 4 et p = 3 Votant 1 : 1 > 2 > 3 > 4 Votant 2 : 3 > 1 > 2 > 4 Votant 3 : 2 > 3 > 1 > 4 Questions : Comment agréger les préférences?22 Exemple d étude : procédure de vote Outils On cherche l ordre O à distance minimale du tournoi T. Si la distance est le nombre minimal d arcs à inverser (indice de Slater), on obtient un ordre de Slater. A un tournoi peuvent correspondre plusieurs ordres de Slater et la distance d(o, T) peut être importante. On cherche un partitionnement en clans acycliques.23 Exemple d étude : procédure de vote Outils On cherche l ordre O à distance minimale du tournoi T. Si la distance est le nombre minimal d arcs à inverser (indice de Slater), on obtient un ordre de Slater. A un tournoi peuvent correspondre plusieurs ordres de Slater et la distance d(o, T) peut être importante. On cherche un partitionnement en clans acycliques.24 Graphes cospectraux Croiser les méthodes pour trouver les communautés. Tout graphe peut être codé de façon biunivoque par une matrice binaire. Problème : Qu ajoute la connaissance d invariants, comme le spectre de la matrice d adjacence, sur la compréhension de la structure du graphe, de ses communautés? Dans quelle mesure, disposer des distributions de valeurs propres est-il une aide à la comparaison de 2 graphes? Remarque : On a déjà utilisé le spectre de matrices pour l ACP sur tableau de distances. On essaie ici de s affranchir de la métrique.25 Définition Deux graphes sont dits cospectraux s ils ont même spectre Sp (ensemble des solutions en λ de l équation Au = λu). Objectif : Augmenter la connaissance sur les graphes cospectraux. En particulier, déterminer de nouvelles classes de graphes déterminés par leur spectre. Remarque : Deux graphes isomorphes sont cospectraux mais la réciproque est fausse. Exemple : Deux graphes non isomorphes cospectraux pour la matrice d adjacence et non cospectraux pour le Laplacien L = D A. Sp A = { 2; 0; 0; 0; 2} Dans la suite, on parlera de spectre d un graphe pour désigner le spectre de sa matrice d adjacence. Tous les graphes considérés sont connexes.26 Etat de l art (un peu...) chemins : Les chemins sont déterminés par le spectre [Schen et al., 2005] arbres : Presque tous les arbres sont cospectraux [Schwenk, 1973] cycles : Les cycles sont déterminés par le spectre [Smith, 1970] monocles impairs : Les monocles de cycle impair sont déterminés par le spectre [Haemers et al., 2008] Résultats [2008] monocles pairs : Les monocles de cycle pair sont déterminés par le spectre. Exemple : L(6, 4)27 Définition Une communauté parfaite d un graphe G est un sous-graphe complet de G qui est un intervalle de G. Résultat [Van den Heuvel and Pejic 2001] Si le laplacien L du graphe a une valeur propre λ non nulle de multiplicité au moins k 1 dont les vecteurs propres associés possèdent exactement les mêmes k coordonnées non nulles alors ces k coordonnées correspondent soit aux sommets d une k-communauté parfaite soit aux sommets d un k-ensemble stable.28 Exemple d étude : modélisation de réseaux sociaux anciens29 Exemple d étude : modélisation de réseaux sociaux anciens30 Exemple d étude : modélisation de réseaux sociaux anciens Hypothèse : Les données de noms et de lieux présentes dans l ensemble de ces contrats permettent l émergence de réseaux de relations qui sont descriptifs de l organisation de la société.31 Exemple d étude : modélisation de réseaux sociaux anciens Questions : 1 Identifier les réseaux sociaux dans le monde paysan des XIIIe-XVIe siècles. 2 Hiérarchiser les individus et leur rôle au sein de ces réseaux. 3 Analyser l évolution de ces réseaux (passage de la guerre de cent ans.32 Exemple d étude : modélisation de réseaux sociaux anciens Outils et résultats BDD de contrats agraires ( et ) : 8706 individus et arêtes Mise en forme des données, définition des liens pour la construction des réseaux. Structure en communautés parfaites, club huppé et individus relais. Comparaison des graphes à différentes périodes.33 Exemple d étude : modélisation de réseaux sociaux anciens Travaux en cours : dynamique et spatialisation34 Exemple d étude : modélisation de réseaux sociaux anciens Travaux en cours : dynamique et spatialisation35 Réduction de graphe par démontabilité Notion d homotopie en topologie : deux objets sont homotopes si on peut passer de l un à l autre par une déformation continue de l objet sur lui-même. Problème : dans quel mesure peut-on étudier la forme d un graphe en utilisant des outils de topologie comme l homotopie?36 Il existe un lien assez classique entre les graphes et la topologie par le biais des complexes simpliciaux. Rappel : Un complexe simplicial K, d ensemble de sommets V, est une collection d ensembles non vides de V (les simplexes) telle que : V = σ K σ et (σ K, x σ)σ \ {x} K. Définition (G) est le complexe simplicial dont les k-simplexes sont les sous-graphes complets à k sommets. Une réduction élémentaire de (G) est la suppression d une paire de simplexes (σ,τ) avec τ face propre maximale de σ et τ libre (ie. face d aucun autre simplexe). Exemple :37 Il existe un lien assez classique entre les graphes et la topologie par le biais des complexes simpliciaux. Rappel : Un complexe simplicial K, d ensemble de sommets V, est une collection d ensembles non vides de V (les simplexes) telle que : V = σ K σ et (σ K, x σ)σ \ {x} K. Définition (G) est le complexe simplicial dont les k-simplexes sont les sous-graphes complets à k sommets. Une réduction élémentaire de (G) est la suppression d une paire de simplexes (σ,τ) avec τ face propre maximale de σ et τ libre (ie. face d aucun autre simplexe). Exemple :38 Il existe un lien assez classique entre les graphes et la topologie par le biais des complexes simpliciaux. Rappel : Un complexe simplicial K, d ensemble de sommets V, est une collection d ensembles non vides de V (les simplexes) telle que : V = σ K σ et (σ K, x σ)σ \ {x} K. Définition (G) est le complexe simplicial dont les k-simplexes sont les sous-graphes complets à k sommets. Une réduction élémentaire de (G) est la suppression d une paire de simplexes (σ,τ) avec τ face propre maximale de σ et τ libre (ie. face d aucun autre simplexe). Exemple :39 Il existe un lien assez classique entre les graphes et la topologie par le biais des complexes simpliciaux. Rappel : Un complexe simplicial K, d ensemble de sommets V, est une collection d ensembles non vides de V (les simplexes) telle que : V = σ K σ et (σ K, x σ)σ \ {x} K. Définition (G) est le complexe simplicial dont les k-simplexes sont les sous-graphes complets à k sommets. Une réduction élémentaire de (G) est la suppression d une paire de simplexes (σ,τ) avec τ face propre maximale de σ et τ libre (ie. face d aucun autre simplexe). Objectif : construire une homotopie combinatoire sur les graphes identifiable à l homotopie sur les complexes simpliciaux, qui procède par élimination de sommets. L homotopie (simple) sur les complexes est une succession d ajouts et de réductions élémentaires.40 Sommet simplicial Le voisinage fermé de i dans G est l ensemble V G [i] = V g (i) {i}. Définition Un sommet i est simplicial si V G [i] est complet. Un graphe G est démontable par sommets simpliciaux s il existe un ordre 1, 2,, n de ses sommets tel que i est simplicial dans G {1, 2,, i 1}. Proposition [Dirac, 1961] Un graphe fini G est triangulé (ou cordé) ssi G est démontable par sommets simpliciaux. Exemple : 41 Sommet simplicial Le voisinage fermé de i dans G est l ensemble V G [i] = V g (i) {i}. Définition Un sommet i est simplicial si V G [i] est complet. Un graphe G est démontable par sommets simpliciaux s il existe un ordre 1, 2,, n de ses sommets tel que i est simplicial dans G {1, 2,, i 1}. Proposition [Dirac, 1961] Un graphe fini G est triangulé (ou cordé) ssi G est démontable par sommets simpliciaux. Exemple :42 Sommet démontable Définition [Quillot, 1983 ; Nowakowski and Winkler, 1983] Un sommet i est démontable s il existe j tel que V G [i] V G [j]. Un graphe G est démontable s il existe un ordre 1, 2,, n de ses sommets tel que i est démontable dans G {1, 2,, i 1}. Exemple : Remarque : un sommet simplicial est démontable. Proposition [Quillot, 1983 ; Nowakowski and Winkler, 1983] Un graphe fini G est policier-gagnant ssi G est démontable. Remarque : faux dans le cas infini (cf. arbre).43 Sommet démontable44 Sommet s-démontable Définition [2008] Un sommet i est s-démontable si V G (i) est démontable. Un graphe G est s-démontable s il existe un ordre 1, 2,, n de ses sommets tel que i est démontable dans G {1, 2,, i 1}. Exemple : ni sommet simplicial, ni sommet démontable. Remarque : simplicial démontable s-démontable Définition [2010] On dira que G et H ont le même type de s-homotopie s il existe s s s s G = J 1, J 2,, J k 1, J k = H tels que G = J 1 J 2... J k 1 J k = H où s représente l addition ou la suppression d un sommet s-démontable.45 Sommet s-démontable Définition [2008] Un sommet i est s-démontable si V G (i) est démontable. Un graphe G est s-démontable s il existe un ordre 1, 2,, n de ses sommets tel que i est démontable dans G {1, 2,, i 1}. Exemple : ni sommet simplicial, ni sommet démontable. Remarque : simplicial démontable s-démontable Définition [2010] On dira que G et H ont le même type de s-homotopie s il existe s s s s G = J 1, J 2,, J k 1, J k = H tels que G = J 1 J 2... J k 1 J k = H où s représente l addition ou la suppression d un sommet s-démontable.46 Sommet s-démontable Résultat [2008, 2010] G ց s H (G) ց s (H). Exemple : L implication inverse est fausse :47 Sommet s-démontable Définition Deux complexes simpliciaux ont même type d homotopie simple si l on peut passer de l un à l autre par une succession de réductions et d expansions élémentaires. Résultat [BFJ 2010] [G] s = [H] s [ (G)] s = [ (H)] s Exemple :48 Exemple d étude : dynamique de parcellaires Question : 1 Quelle lecture des paysages disparus donnent les compoix? 2 Dans les recherches sur les sociétés, l histoire du paysage ou du climat, le compoix peut-il remplacer la carte? 3 Comment comparer des documents cartographiés et non cartographiés pour étudier la dynamique de parcellaires sur une longue période?49 Exemple d étude : dynamique de parcellaires Outils et résultats Comparer les graphes duaux de parcellaires Caler ces graphes sur des invariants connus50 Conclusion Un positionnement volontaire dans le domaine de la combinatoire appliquée. Comment la théorie des graphes peut s accorder avec une science des réseaux qui doit traiter de la dynamique et du multiplexage? 
+
+
+
+
+
+
+
+
+
+
+                                        
+
+
+
+Documents pareils
+
+
+
+
+
+Théorie des graphes pour l analyse de réseaux d intéractions
+
+
+
+        Théorie des graphes pour l analyse de réseaux d intéractions Bertrand Jouve Laboratoire ERIC - IXXI - Université Lyon 2 SMAI 2013 Plan 1 Introduction 2 Décomposition en Clans Exemple d étude : modélisation    
+
+        Plus en détail 
+
+
+
+
+Théorie des graphes. Introduction. Programme de Terminale ES Spécialité. Résolution de problèmes à l aide de graphes. Préparation CAPES UCBL
+
+
+
+        Introduction Ces quelques pages ont pour objectif de vous initier aux notions de théorie des graphes enseignées en Terminale ES. Le programme de Terminale (voir ci-après) est construit sur la résolution    
+
+        Plus en détail 
+
+
+
+
+Groupes et Actions de groupes. 1 Groupes, morphismes et actions de groupes.
+
+
+
+        Groupes et Actions de groupes On présente ici des notions de base de théorie des groupes pour l agrégation interne. 1 Groupes, morphismes et actions de groupes. Un groupe (G, ), ou plus simplement G, est    
+
+        Plus en détail 
+
+
+
+
+M2 MPRO. Optimisation dans les Graphes 2014-2015
+
+
+
+        M2 MPRO Optimisation dans les Graphes 2014-2015 Programmation linéaire et problèmes d'optimisation dans les graphes 1 Problèmes d'optimisation dans les graphes : quelles méthodes pour les résoudre? Théorie    
+
+        Plus en détail 
+
+
+
+
+Fonctions de plusieurs variables
+
+
+
+        Module : Analyse 03 Chapitre 00 : Fonctions de plusieurs variables Généralités et Rappels des notions topologiques dans : Qu est- ce que?: Mathématiquement, n étant un entier non nul, on définit comme    
+
+        Plus en détail 
+
+
+
+
+Théorie des Graphes Cours 3: Forêts et Arbres II / Modélisation
+
+
+
+        IFIPS S7 - informatique Université Paris-Sud 11 1er semestre 2009/2010 Théorie des Graphes Cours 3: Forêts et Arbres II / 1 Forêts et arbres II Théorème 1.1. Les assertions suivantes sont équivalentes    
+
+        Plus en détail 
+
+
+
+
+Autour de Perron, Frobenius et Markov
+
+
+
+        Université Claude Bernard Lyon 1-2007/2008 Préparation Capes - Algèbre et Géométrie - Devoir à rendre le 12 février 2008 - Autour de Perron Frobenius et Markov Rappels et notations On note M mn (K) le    
+
+        Plus en détail 
+
+
+
+
+BACCALAUREAT GENERAL MATHÉMATIQUES
+
+
+
+        BACCALAUREAT GENERAL FEVRIER 2014 MATHÉMATIQUES SERIE : ES Durée de l épreuve : 3 heures Coefficient : 5 (ES), 4 (L) 7(spe ES) Les calculatrices électroniques de poche sont autorisées, conformement à la    
+
+        Plus en détail 
+
+
+
+
+Applications des nombres complexes à la géométrie
+
+
+
+        Chapitre 6 Applications des nombres complexes à la géométrie 6.1 Le plan complexe Le corps C des nombres complexes est un espace vectoriel de dimension 2 sur R. Il est donc muni d une structure naturelle    
+
+        Plus en détail 
+
+
+
+
+Placements de tours sur les diagrammes de permutations
+
+
+
+        Placements de tours sur les diagrammes de permutations 5 août 0 Résumé Le problème des placements de tours consiste à compter le nombre de manières de placer k tours sur un échiquier sans que les tours    
+
+        Plus en détail 
+
+
+
+
+Espaces vectoriels et applications
+
+
+
+        Espaces vectoriels et applications linéaires 1 Définitions On parle d espaces vectoriels sur le corps R ou sur le corps C. Les définitions sont les mêmes en substituant R à C ou vice versa. Définition    
+
+        Plus en détail 
+
+
+
+
+À propos des matrices échelonnées
+
+
+
+        À propos des matrices échelonnées Antoine Ducros appendice au cours de Géométrie affine et euclidienne dispensé à l Université Paris 6 Année universitaire 2011-2012 Introduction Soit k un corps, soit E    
+
+        Plus en détail 
+
+
+
+
+Chapitre 1: Introduction au calcul des probabilités, cas d un univers fini.
+
+
+
+        Chapitre 1: Introduction au calcul des probabilités, cas d un univers fini. 1 Introduction Des actions comme lancer un dé, tirer une carte d un jeu, observer la durée de vie d une ampoule électrique, etc...sont    
+
+        Plus en détail 
+
+
+
+
+Généralités sur les graphes
+
+
+
+        Généralités sur les graphes Christophe ROSSIGNOL Année scolaire 2008/2009 Table des matières 1 Notion de graphe 3 1.1 Un peu de vocabulaire.......................................... 3 1.2 Ordre d un graphe,    
+
+        Plus en détail 
+
+
+
+
+Le corps R des nombres réels
+
+
+
+        Le corps R des nombres réels. Construction de R à l aide des suites de Cauchy de nombres rationnels On explique brièvement dans ce paragraphe comment construire le corps R des nombres réels à partir du    
+
+        Plus en détail 
+
+
+
+
+Baccalauréat ES Centres étrangers 12 juin 2014 - Corrigé
+
+
+
+        Baccalauréat ES Centres étrangers 1 juin 14 - Corrigé A. P. M. E. P. Exercice 1 5 points Commun à tous les candidats 1. On prend un candidat au hasard et on note : l évènement «le candidat a un dossier    
+
+        Plus en détail 
+
+
+
+
+Programme de Mathématique Préparation Maths-Physique. Analyse et Géométrie Différentielle. Première Année
+
+
+
+        Programme de Mathématique Préparation Maths-Physique Analyse et Géométrie Différentielle Première Année I NOMBRES REELS ET COMPLEXES, SUITES ET FONCTIONS 1 Nombres réels et complexes 2 Suites de nombres    
+
+        Plus en détail 
+
+
+
+
+L approche Bases de données
+
+
+
+        L approche Bases de données Cours: BD. Avancées Année: 2005/2006 Par: Dr B. Belattar (Univ. Batna Algérie) I- : Mise à niveau 1 Cours: BDD. Année: 2013/2014 Ens. S. MEDILEH (Univ. El-Oued) L approche Base    
+
+        Plus en détail 
+
+
+
+
+AGRÉGATION INTERNE: RÉDUCTION DES ENDOMORPHISMES
+
+
+
+        AGRÉGATION INTERNE: RÉDUCTION DES ENDOMORPHISMES VINCENT GUEDJ 1. Notions fondamentales 1.1. Noyau, Image. On se donne E un K-espace vectoriel de dimension finie (K = R, C principalement) et f L(E) un    
+
+        Plus en détail 
+
+
+
+
+Simulation centrée individus
+
+
+
+        Simulation centrée individus Théorie des jeux Bruno BEAUFILS Université de Lille Année 4/5 Ce document est mis à disposition selon les termes de la Licence Creative Commons Attribution - Partage dans les    
+
+        Plus en détail 
+
+
+
+
+Graphes planaires. Classes de graphes & Décompositions
+
+
+
+        Classes de graphes & Décompositions Détails des démonstrations dans les livres suivants : [West] Introduction to Graph Theory, D. West [Diestel] Graph Theory, R. Diestel 2010-2011 : définition Définition    
+
+        Plus en détail 
+
+
+
+
+LA PHYSIQUE DES MATERIAUX. Chapitre 1 LES RESEAUX DIRECT ET RECIPROQUE
+
+
+
+        LA PHYSIQUE DES MATERIAUX Chapitre 1 LES RESEAUX DIRECT ET RECIPROQUE Pr. A. Belayachi Université Mohammed V Agdal Faculté des Sciences Rabat Département de Physique - L.P.M belayach@fsr.ac.ma 1 1.Le réseau    
+
+        Plus en détail 
+
+
+
+
+Théorie des Langages Formels Chapitre 5 : Automates minimaux
+
+
+
+        Théorie des Langages Formels Chapitre 5 : Automates minimaux Florence Levé Florence.Leve@u-picardie.fr Année 2015-2016 1/29 Introduction Les algorithmes vus précédemment peuvent mener à des automates relativement    
+
+        Plus en détail 
+
+
+
+
+Par contre, lorsque P est finie, l inclusion f(p ) P implique l égalité f(p ) = P car, f
+
+
+
+        Université Lyon 1 Algèbre générale S.P. Groupes III I. Groupe symétrique et géométrie. On se donne un ensemble E (souvent un espace euclidien ou une partie de cet espace) et une bijection f : E E (souvent    
+
+        Plus en détail 
+
+
+
+
+Chapitre 2 : Conception de base de données relationnelle
+
+
+
+        Chapitre 2 : Conception de base de données relationnelle Le modèle entité-association 1. Les concepts de base 1.1 Introduction Avant que la base de données ne prenne une forme utilisable par le SGBD il    
+
+        Plus en détail 
+
+
+
+
+Préparation à l agrégation 2012/2013. Mots clés : Graphes. Vecteur propre ; matrices stochastiques ; matrices à coefficients positifs.
+
+
+
+        Mots clés : Graphes. Vecteur propre ; matrices stochastiques ; matrices à coefficients positifs. Le jury n exige pas une compréhension exhaustive du texte. Vous êtes laissé(e) libre d organiser votre discussion    
+
+        Plus en détail 
+
+
+
+
+Un tout petit peu d homotopie
+
+
+
+        Vincent Beck On note I = [ 0, 1 ]. Un tout petit peu d homotopie 0.1 Homotopie Définition 1 Applications homotopes. Soient X, Y deux espaces topologiques et f, g : X Y deux applications continues. On dit    
+
+        Plus en détail 
+
+
+
+
+MÉTHODES DE CLASSIFICATION
+
+
+
+        MÉTHODES DE CLASSIFICATION Pierre-Louis GONZALEZ MÉTHODES DE CLASSIFICATION Objet Opérer des regroupements en classes homogènes d un ensemble d individus. Données Les données se présentent en général sous    
+
+        Plus en détail 
+
+
+
+
+Outils Statistiques du Data Mining
+
+
+
+        Outils Statistiques du Data Mining Pr Roch Giorgi roch.giorgi@univ-amu.fr SESSTIM, Faculté de Médecine, Aix-Marseille Université, Marseille, France http://sesstim-orspaca.org http://optim-sesstim.univ-amu.fr    
+
+        Plus en détail 
+
+
+
+
+Cours de spécialité mathématiques en Terminale ES
+
+
+
+        Cours de spécialité mathématiques en Terminale ES O. Lader 2014/2015 Lycée Jean Vilar Spé math terminale ES 2014/2015 1 / 51 Systèmes linéaires Deux exemples de systèmes linéaires à deux équations et deux    
+
+        Plus en détail 
+
+
+
+
+Outils d analyse fonctionnelle Cours 5 Théorie spectrale
+
+
+
+        Outils d analyse fonctionnelle Cours 5 Théorie spectrale 22 septembre 2015 Généralités Dans tout ce qui suit V désigne un espace de Hilbert réel muni d un produit scalaire x, y. Définition Soit A une application    
+
+        Plus en détail 
+
+
+
+
+Un corrigé de l épreuve de mathématiques du baccalauréat blanc
+
+
+
+        Terminale ES Un corrigé de l épreuve de mathématiques du baccalauréat blanc EXERCICE ( points). Commun à tous les candidats On considère une fonction f : définie, continue et doublement dérivable sur l    
+
+        Plus en détail 
+
+
+
+
+Logique informatique 2013-2014. Examen
+
+
+
+        Logique informatique 2013-2014. Examen 30 mai 2013. Durée 3h. Tous les documents sont autorisés. Seuls les résultats du cours peuvent être utilisés sans démonstration. Le barême et la longueur des solutions    
+
+        Plus en détail 
+
+
+
+
+Exercices théoriques
+
+
+
+        École normale supérieure 2008-2009 Département d informatique Algorithmique et Programmation TD n 9 : Programmation Linéaire Avec Solutions Exercices théoriques Rappel : Dual d un programme linéaire cf.    
+
+        Plus en détail 
+
+
+
+
+Notes de cours L1 MATH120. Hervé Le Dret
+
+
+
+        Notes de cours L1 MATH120 Hervé Le Dret 18 octobre 2004 40 Chapitre 3 Vecteurs dans R m Dans ce chapitre, nous allons nous familiariser avec la notion de vecteur du point de vue algébrique. Nous reviendrons    
+
+        Plus en détail 
+
+
+
+
+Programme de mathématiques TSI1
+
+
+
+        Programme de mathématiques TSI1 1. PROGRAMME DE DÉBUT D ANNÉE I. Nombres complexes et géométrie élémentaire 1. Nombres complexes 1 2. Géométrie élémentaire du plan 3 3. Géométrie élémentaire de l espace    
+
+        Plus en détail 
+
+
+
+
+Algorithmique et Analyse d Algorithmes
+
+
+
+        Algorithmique et Analyse d Algorithmes L3 Info Cours 11 : Arbre couvrant Prétraitement Benjamin Wack 2015-2016 1 / 32 La dernière fois Rappels sur les graphes Problèmes classiques Algorithmes d optimisation    
+
+        Plus en détail 
+
+
+
+
+La mesure de Lebesgue sur la droite réelle
+
+
+
+        Chapitre 1 La mesure de Lebesgue sur la droite réelle 1.1 Ensemble mesurable au sens de Lebesgue 1.1.1 Mesure extérieure Définition 1.1.1. Un intervalle est une partie convexe de R. L ensemble vide et    
+
+        Plus en détail 
+
+
+
+
+Arbres binaires, arbres non-croisés, quadrangulations. janvier 2010
+
+
+
+        Arbres binaires, arbres non-croisés, quadrangulations Frédéric Chapoton janvier 2010 Plan 1 Les arbres binaires 2 Les arbres non-croisés 3 La relation entre les deux 4 Dualité et rotation 5 Les intervalles    
+
+        Plus en détail 
+
+
+
+
+Introduction à l analyse des données. Olivier Godechot
+
+
+
+        Introduction à l analyse des données Olivier Godechot Introduction. Les données statistiques : de très nombreuses variables. Aucune n est parfaite La perception d un phénomène appréhendée comme la combinaison    
+
+        Plus en détail 
+
+
+
+
+Rubik's Cube résentation :
+
+
+
+        Rubik's Cube Présentation : Le Rubik's Cube est composé de 20 cubes mobiles (8 cubes sommet et 12 cubes arête) et 6 cubes immobiles (1 au centre de chaque face). Le cube au centre d'une face peut en fait    
+
+        Plus en détail 
+
+
+
+
+Licence de Sciences et Technologies. Fiche de cours 1 - Nombres réels.
+
+
+
+        Licence de Sciences et Technologies EM21 - Analyse Fiche de cours 1 - Nombres réels. On connaît les ensembles suivants, tous munis d une addition, d une multiplication, et d une relation d ordre compatibles    
+
+        Plus en détail 
+
+
+
+
+Utilisation des Structures Combinatoires pour le Test Statistique. Contexte. Plan. Le test de logiciel. Les structures combinatoires décomposables
+
+
+
+        Utilisation des Structures Combinatoires pour le Test Statistique Sandrine-Dominique GOURAUD Équipe Programmation et Génie Logiciel, L.R.I. Co-encadrants: M.-C. Gaudel et A. Denise Plan Contexte Structures    
+
+        Plus en détail 
+
+
+
+
+Seul document autorisé : le polycopié du cours Examen du 3 juin 2009 Durée : 3 heures
+
+
+
+        Université P. et M. Curie (Paris VI) Master de sciences et technologies ère année - applications Spécialité : Mathématiques Fondamentales code UE : MMAT4020 Mention : Mathématiques et MO : (2 ECTS) code    
+
+        Plus en détail 
+
+
+
+
+Master Modélisation Statistique M2 Finance - chapitre 1. Gestion optimale de portefeuille, l approche de Markowitz
+
+
+
+        Master Modélisation Statistique M2 Finance - chapitre 1 Gestion optimale de portefeuille, l approche de Markowitz Clément Dombry, Laboratoire de Mathématiques de Besançon, Université de Franche-Comté.    
+
+        Plus en détail 
+
+
+
+
+Rappels d Algèbre Linéaire de P.C.S.I
+
+
+
+        Rappels d Algèbre Linéaire de PCSI Table des matières 1 Structure d espace vectoriel sur IK 3 11 Définition et règles de calcul 3 12 Exemples de référence 3 13 Espace vectoriel produit 4 14 Sous-espaces    
+
+        Plus en détail 
+
+
+
+
+1 Définition et premières propriétés des congruences
+
+
+
+        Université Paris 13, Institut Galilée Département de Mathématiques Licence 2ème année Informatique 2013-2014 Cours de Mathématiques pour l Informatique Des nombres aux structures Sylviane R. Schwer Leçon    
+
+        Plus en détail 
+
+
+
+
+Session 2011. Enseignement de Spécialité. Durée de l épreuve : 3 heures. Coefficient : 7. Ce sujet comporte 7 pages numérotées de 1 à 7.
+
+
+
+        BACCALAURÉAT GENÉRAL Session 2011 MATHÉMATIQUES Série ES Enseignement de Spécialité Durée de l épreuve : 3 heures Coefficient : 7 Ce sujet comporte 7 pages numérotées de 1 à 7. L utilisation d une calculatrice    
+
+        Plus en détail 
+
+
+
+
+Extraction d informations stratégiques par Analyse en Composantes Principales
+
+
+
+        Extraction d informations stratégiques par Analyse en Composantes Principales Bernard DOUSSET IRIT/ SIG, Université Paul Sabatier, 118 route de Narbonne, 31062 Toulouse cedex 04 dousset@irit.fr 1 Introduction    
+
+        Plus en détail 
+
+
+
+
+Calcul Matriciel. Chapitre 10. 10.1 Qu est-ce qu une matrice? 10.2 Indexation des coefficients. 10.3 Exemples de matrices carrées.
+
+
+
+        Chapitre 10 Calcul Matriciel 101 Qu est-ce qu une matrice? Définition : Soit K un ensemble de nombres exemples, K = N, Z, Q, R, C, n, p N On appelle matrice à n lignes et p colonnes la données de np nombres    
+
+        Plus en détail 
+
+
+
+
+PROPOSITION D UNE APPROCHE DE SEGMENTATION D IMAGES HYPERSPECTRALES
+
+
+
+        PROPOSITION D UNE APPROCHE DE SEGMENTATION D IMAGES HYPERSPECTRALES Nathalie GORRETTA MONTEIRO 1 1 UMR Information et Technologies pour les Agro-Procédés, Cemagref Montpellier, France Présentée le 25 Février    
+
+        Plus en détail 
+
+
+
+
+133: endomorphismes remarquables d'un espace vectoriel euclidien de dimension nie
+
+
+
+        133: endomorphismes remarquables d'un espace vectoriel euclidien de dimension nie Pierre Lissy March 8, 2010 On considère un espace vectoriel euclidien de dimension nie n, le produit scalaire sera noté    
+
+        Plus en détail 
+
+
+
+
+Data Mining : la classification non supervisée
+
+
+
+        Data Mining : la classification non supervisée Clustering : une affaire de distance. Etude préliminaire. Valeurs discrètes. Soient les deux individus suivants correspondant à des séquences ADN : X = AGGGTGGC    
+
+        Plus en détail 
+
+
+
+
+208. Espaces vectoriels normés. Applications linéaires continues. Exemples.
+
+
+
+        208. Espaces vectoriels normés. Applications linéaires continues. Exemples. Pierre Lissy May 29, 2010 Dans totue la suite, E désigne un espace vectoriel sur R ou C. 1 Norme. Espace vectoriel normé 1.1    
+
+        Plus en détail 
+
+
+
+
+Introduction à l étude des Corps Finis
+
+
+
+        Introduction à l étude des Corps Finis Robert Rolland (Résumé) 1 Introduction La structure de corps fini intervient dans divers domaines des mathématiques, en particulier dans la théorie de Galois sur    
+
+        Plus en détail 
+
+
+
+
+PAD - Notes de cours. S. Rigal, D. Ruiz, et J. C. Satgé
+
+
+
+        ALGÈBRE PAD - Notes de cours S. Rigal, D. Ruiz, et J. C. Satgé November 23, 2006  Table des Matières Espaces vectoriels Applications linéaires - Espaces vectoriels............................... 3 -. Approche    
+
+        Plus en détail 
+
+
+
+
+IUT STID, 1 ère année Découverte de logiciels statistiques Prise en main du logiciel SPAD
+
+
+
+        Université de Perpignan - IUT de Carcassonne Vivien ROSSI Année 2006/2007 IUT STID, 1 ère année Découverte de logiciels statistiques Prise en main du logiciel SPAD Ce document est tiré du site : http ://www.stat.ucl.ac.be/ispersonnel/lecoutre/stats/spad/    
+
+        Plus en détail 
+
+
+
+
+Support du cours de Probabilités IUT d Orléans, Département d informatique
+
+
+
+        Support du cours de Probabilités IUT d Orléans, Département d informatique Pierre Andreoletti IUT d Orléans Laboratoire MAPMO (Bât. de Mathématiques UFR Sciences) - Bureau 126 email: pierre.andreoletti@univ-orleans.fr    
+
+        Plus en détail 
+
+
+
+
+Structures de données non linéaires
+
+
+
+        Structures de données non linéaires I. Graphes Définition Un graphe (simple) orienté G est un couple (S, A), où : S est un ensemble dont les éléments sont appelés les sommets. A est un ensemble de couples    
+
+        Plus en détail 
+
+
+
+
+Applications linéaires
+
+
+
+        Applications linéaires I) Applications linéaires - Généralités 1.1) Introduction L'idée d'application linéaire est intimement liée à celle d'espace vectoriel. Elle traduit la stabilité par combinaison    
+
+        Plus en détail 
+
+
+
+
+Analyse simultanée de variables quantitatives et qualitatives. à l aide de l analyse factorielle multiple
+
+
+
+        Analyse simultanée de variables quantitatives et qualitatives à l aide de l analyse factorielle multiple Jérôme Pagès Laboratoire de mathématiques appliquées Agrocampus France Analyse Factorielle Multiple    
+
+        Plus en détail 
+
+
+
+
+Les supports de cours suivants font référence au cours de Mr SOL et à son livre : "Accès à l'université" chez DUNOD
+
+
+
+        Les supports de cours suivants font référence au cours de Mr SOL et à son livre : "Accès à l'université" chez DUNOD Les supports de cours ne sont pas complets, ils ne contiennent ni les démonstrations,    
+
+        Plus en détail 
+
+
+
+
+Baccalauréat ES Amérique du Nord 4 juin 2008
+
+
+
+        Baccalauréat ES Amérique du Nord 4 juin 2008 EXERCICE 1 Commun à tous les candidats f est une fonction définie sur ] 2 ; + [ par : 4 points f (x)=3+ 1 x+ 2. On note f sa fonction dérivée et (C ) la représentation    
+
+        Plus en détail 
+
+
+
+
+Aspects théoriques et algorithmiques du calcul réparti Placement - Compléments
+
+
+
+        A- 0/0 Aspects théoriques et algorithmiques du calcul réparti Placement - Compléments Patrick CIARLET Enseignant-Chercheur UMA patrick.ciarlet@ensta-paristech.fr Françoise LAMOUR franc.lamour@gmail.com    
+
+        Plus en détail 
+
+
+
+
+Théorie des ensembles
+
+
+
+        Théorie des ensembles Cours de licence d informatique Saint-Etienne 2002/2003 Bruno Deschamps 2 Contents 1 Eléments de théorie des ensembles 3 1.1 Introduction au calcul propositionnel..................    
+
+        Plus en détail 
+
+
+
+
+Groupe symétrique. Chapitre II. 1 Définitions et généralités
+
+
+
+        Chapitre II Groupe symétrique 1 Définitions et généralités Définition. Soient n et X l ensemble 1,..., n. On appelle permutation de X toute application bijective f : X X. On note S n l ensemble des permutations    
+
+        Plus en détail 
+
+
+
+
+En 2005, année de sa création, un club de randonnée pédestre comportait 80 adhérents. Chacune des années suivantes on a constaté que :
+
+
+
+        Il sera tenu compte de la présentation et de la rédaction de la copie lors de l évaluation finale. Les élèves n ayant pas la spécialité mathématique traiteront les exercices 1, 2,3 et 4, les élèves ayant    
+
+        Plus en détail 
+
+
+
+
+1 Topologies, distances, normes
+
+
+
+        Université Claude Bernard Lyon 1. Licence de mathématiques L3. Topologie Générale 29/1 1 1 Topologies, distances, normes 1.1 Topologie, distances, intérieur et adhérence Exercice 1. Montrer que dans un    
+
+        Plus en détail 
+
+
+
+
+Regroupement (clustering) Bruno Pinaud (basé sur le support de Sofian Maabout)
+
+
+
+        1 Regroupement (clustering) Bruno Pinaud (basé sur le support de Sofian Maabout) C est quoi? Regroupement (Clustering): construire une collection d objets Similaires au sein d un même groupe Dissimilaires    
+
+        Plus en détail 
+
+
+
+
+Résolution d équations non linéaires
+
+
+
+        Analyse Numérique Résolution d équations non linéaires Said EL HAJJI et Touria GHEMIRES Université Mohammed V - Agdal. Faculté des Sciences Département de Mathématiques. Laboratoire de Mathématiques, Informatique    
+
+        Plus en détail 
+
+
+
+
+Déroulement de l épreuve
+
+
+
+        Déroulement de l épreuve Le sujet, volontairement très long, se compose de deux problèmes indépendants. Le candidat pourra au choix se concentrer sur l un des deux problèmes ou les aborder tous les deux.    
+
+        Plus en détail 
+
+
+
+
+I. Polynômes de Tchebychev
+
+
+
+        Première épreuve CCP filière MP I. Polynômes de Tchebychev ( ) 1.a) Tout réel θ vérifie cos(nθ) = Re ((cos θ + i sin θ) n ) = Re Cn k (cos θ) n k i k (sin θ) k Or i k est réel quand k est pair et imaginaire    
+
+        Plus en détail 
+
+
+
+
+Relations Binaires Relations d équivalence sur un ensemble
+
+
+
+        Relations Binaires Relations d équivalence sur un ensemble MPSI 2 1 Généralités Soit E un ensemble non vide. Définition 1..1 On appelle relation binaire sur E le couple (E, G où G est un graphe de E dans    
+
+        Plus en détail 
+
+
+
+
+TOPOLOGIE DE LA DROITE REELLE
+
+
+
+        TOPOLOGIE DE LA DROITE REELLE P. Pansu 16 mai 2005 1 Qu est-ce que la topologie? C est l étude des propriétés des objets qui sont conservées par déformation continue. Belle phrase, mais qui nécessite d    
+
+        Plus en détail 
+
+
+
+
+COURS DE THÉORIE DES GRAPHES ORGANISATION PRATIQUE & PROJET
+
+
+
+        COURS DE THÉORIE DES GRAPHES ORGANISATION PRATIQUE & PROJET Pour le lundi 26 octobre 2015, chaque étudiant aura choisi les modalités d examen le concernant : 1) projet d implémentation, exercices, partie    
+
+        Plus en détail 
+
+
+
+
+Généralités sur les fonctions numériques
+
+
+
+        7 Généralités sur les fonctions numériques Une fonction numérique est, de manière générale, une fonction d une variable réelle et à valeurs réelles. 7.1 Notions de base sur les fonctions Si I, J sont deux    
+
+        Plus en détail 
+
+
+
+
+De même, le périmètre P d un cercle de rayon 1 vaut P = 2π (par définition de π). Mais, on peut démontrer (difficilement!) que
+
+
+
+        Introduction. On suppose connus les ensembles N (des entiers naturels), Z des entiers relatifs et Q (des nombres rationnels). On s est rendu compte, depuis l antiquité, que l on ne peut pas tout mesurer    
+
+        Plus en détail 
+
+
+
+
+Analyse des Données. Questions de cours. Exercice n o 1. Examen terminal - Durée 3h
+
+
+
+        I.U.T de Caen STID 2ème année Département STID Année Universitaire 2002-2003 Responsable de cours : Alain LUCAS Seule la calculatrice type collège est autorisée. Seul le cours est autorisé. On rappelera    
+
+        Plus en détail 
+
+
+
+
+Image d un intervalle par une fonction continue
+
+
+
+        DOCUMENT 27 Image d un intervalle par une fonction continue La continuité d une fonction en un point est une propriété locale : une fonction est continue en un point x 0 si et seulement si sa restriction    
+
+        Plus en détail 
+
+
+
+
+Développement décimal d un réel
+
+
+
+        4 Développement décimal d un réel On rappelle que le corps R des nombres réels est archimédien, ce qui permet d y définir la fonction partie entière. En utilisant cette partie entière on verra dans ce    
+
+        Plus en détail 
+
+
+
+
+Actions de groupes. Exemples et applications
+
+
+
+        4 Actions de groupes. Exemples et applications G, ) est un groupe multiplicatif et on note ou G si nécessaire) l élément neutre. E est un ensemble non vide et S E) est le groupe des permutations de E.    
+
+        Plus en détail 
+
+
+
+
+CHAPITRE V. de U U dans Hom(F, F ) est de classe C. b dans Hom(F,F ) est de classe C, l application b b. de U U
+
+
+
+        CHAPITRE V FIBRÉS VECTORIELS 1. Fibrés vectoriels 1. Cartes et atlas vectoriels Soit B une variété différentielle. Considérons un B -ensemble, c est à-dire un ensemble M muni d une application p : M B.    
+
+        Plus en détail 
+
+
+
+
+Fondements de l informatique: Examen Durée: 3h
+
+
+
+        École polytechnique X2013 INF412 Fondements de l informatique Fondements de l informatique: Examen Durée: 3h Sujet proposé par Olivier Bournez Version 3 (corrigé) L énoncé comporte 4 parties (sections),    
+
+        Plus en détail 
+
+
+
+
+Cours MP. Espaces vectoriels normés
+
+
+
+        Table des matières Espaces vectoriels normés B. Seddoug. Médiane Sup, Oujda I Norme et distance 1 I.1 Définitions..................... 1 I.2 Evn produit.................... 12 I.3 Notions topologiques    
+
+        Plus en détail 
+
+
+
+
+chapitre 4 Nombres de Catalan
+
+
+
+        chapitre 4 Nombres de Catalan I Dénitions Dénition 1 La suite de Catalan (C n ) n est la suite dénie par C 0 = 1 et, pour tout n N, C n+1 = C k C n k. Exemple 2 On trouve rapidement C 0 = 1, C 1 = 1, C    
+
+        Plus en détail 
+
+
+
+
+Polynômes à plusieurs variables. Résultant
+
+
+
+        Polynômes à plusieurs variables. Résultant Christophe Ritzenthaler 1 Relations coefficients-racines. Polynômes symétriques Issu de [MS] et de [Goz]. Soit A un anneau intègre. Définition 1.1. Soit a A \    
+
+        Plus en détail 
+
+
+
+
+Fiche n 1: Groupe, sous-groupe, ordre
+
+
+
+        Université Lille 1 Algèbre 2010/11 M51.MIMP Fiche n 1: Groupe, sous-groupe, ordre Exercice 1 On considère sur R la loi de composition définie par x y = x + y xy. Cette loi est-elle associative, commutative?    
+
+        Plus en détail 
+
+
+
+
+Table des Matières. Satisfaisabilité en logique propositionnelle ES pour les problèmes d optimisation Élagage à l aide d heuristiques Le Labyrinthe
+
+
+
+        Table des Matières Essais Successifs (ES) 1 Rappels : Fonctions et Ordres de grandeurs 2 Diviser pour Régner 3 Approches Gloutonnes 4 Programmation Dynamique 5 Essais Successifs (ES) Le problème des n    
+
+        Plus en détail 
+
+
+
+
+Université Paris 6 Année universitaire 2011-2012 Cours Groupes finis et leurs représentations Corrigé de l examen terminal du 21 mai 2012.
+
+
+
+        Université Paris 6 Année universitaire 011-01 Cours Groupes finis et leurs représentations Corrigé de l examen terminal du 1 mai 01 Exercice 1 Questions de cours Soit G un groupe fini et soit p un nombre    
+
+        Plus en détail 
+
+
+
+
+Mathématiques pour l Informatique Relations binaires Jérôme Gensel
+
+
+
+        Master ICA Spécialité IHS Année 2007/2008 Mathématiques pour l Informatique Relations binaires Jérôme Gensel I) Relations binaires 1. Généralités Définition 1 : Une relation binaire d un ensemble E vers    
+
+        Plus en détail 
+
+
+
+
+Utilisation du logiciel OpMat Ce logiciel effectue des opérations élémentaires sur les lignes d une matrice avec des entrées rationnelles
+
+
+
+        Utilisation du logiciel OpMat Ce logiciel effectue des opérations élémentaires sur les lignes d une matrice avec des entrées rationnelles Michel Bouchard, enseignant retraité, Département de mathématiques,    
+
+        Plus en détail 
+
+
+
+
+CONCOURS GÉNÉRAL DES LYCÉES SESSION DE 2009 COMPOSITION DE MATHÉMATIQUES. (Classe terminale S)
+
+
+
+        MA 09 CONCOURS GÉNÉRAL DES LYCÉES SESSION DE 009 COMPOSITION DE MATHÉMATIQUES (Classe terminale S) DURÉE : 5 heures La calculatrice de poche est autorisée, conformément à la réglementation. La clarté et    
+
+        Plus en détail 
+
+
+
+
+Introduction à la programmation en variables entières Cours 3
+
+
+
+        Introduction à la programmation en variables entières Cours 3 F. Clautiaux francois.clautiaux@math.u-bordeaux1.fr Université Bordeaux 1 Bât A33 - Bur 272 Sommaire Notion d heuristique Les algorithmes gloutons    
+
+        Plus en détail 
+
+
+
+
+C) Fiche : Espaces vectoriels.
+
+
+
+        C) Fiche : Espaces vectoriels. 1) Définition d'un espace vectoriel. K= I ou est le corps des scalaires. E est un K-espace I vectoriel si et seulement si : C'est un ensemble non vide muni de deux opérations,    
+
+        Plus en détail 
+
+
+
+
+BACCALAURÉAT GÉNÉRAL. MATHÉMATIQUES Série ES
+
+
+
+        BACCALAURÉAT GÉNÉRAL SESSION 2015 MATHÉMATIQUES Série ES Durée de l épreuve : 3 heures Coefficient : 7 (ES) ES : ENSEIGNEMENT DE SPECIALITE Les calculatrices électroniques de poche sont autorisées conformément    
+
+        Plus en détail 
+
+
+
+
+RECHERCHE OPERATIONNELLE
+
+
+
+        RECHERCHE OPERATIONNELLE PROBLEME DE L ARBRE RECOUVRANT MINIMAL I - INTRODUCTION (1) Définitions (2) Propriétés, Conditions d existence II ALGORITHMES (1) Algorithme de KRUSKAL (2) Algorithme de PRIM  I    
+
+        Plus en détail 
+
+
+
+
+Construire des espaces triangulés avec des graphes colorés
+
+
+
+        25 janvier 2016 Soient x 0,..., x D des points linéairement indépendants dans R n, avec D n. Le simplexe σ(x 0,..., x D ) défini par x 0,..., x D est leur enveloppe convexe, i.e. : { } σ(x 0,..., x D )    
+
+        Plus en détail 
+
+
+
+
+Graphes Pour la Terminale ES
+
+
+
+        Graphes Pour la Terminale ES Groupe IREM de Luminy Pierre Arnoux Fernand Didier Catherine Dufossé Nicolas Lichiardopol Christian Mauduit Dominique Proudhon Christiane Rambaud 18 octobre 2002 Table des    
+
+        Plus en détail 
+
+
+
+
+Feuille d exercices n o 1. N(x i ). 4. On rappelle qu un espace normé est séparable s il contient une partie dénombrable dense.
+
+
+
+        1 Feuille d exercices n o 1 1. Deuxième forme géométrique du théorème de Hahn-Banach Soient A E et B E deux convexes, non vides, disjoints (E est une espace vectoriel normé). On suppose que A est fermé    
+
+        Plus en détail 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                2018 © DocPlayer.fr Politique de confidentialité | Conditions de service | Feed-back
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            var pixel_image_src = '/pix/'+Math.random()+'/report/pixel.gif?type=pageview&domain_id=29&page_id=0&design_id=0&l='+encodeURIComponent(navigator.language)+'&p='+encodeURIComponent(navigator.platform)+'&url='+encodeURIComponent(document.location);
+            document.write('<img src="'+pixel_image_src+'"> ');
+        }());
+    
+
+
+    To make this website work, we log user data and share it with processors. To use this website, you must agree to our Privacy Policy, including cookie policy.
+        I agree.    
+
+
+    
+        var fcb = document.getElementById('footer_height_for_cookie_msg');
+        if (fcb) { fcb.parentElement.removeChild(fcb); }
+    }
+    
+    })();
+
+
+

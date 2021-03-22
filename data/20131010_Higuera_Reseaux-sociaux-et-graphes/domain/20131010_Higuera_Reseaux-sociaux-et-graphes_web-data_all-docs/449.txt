@@ -1,0 +1,1861 @@
+https://pagesperso.g-scop.grenoble-inp.fr/~stehlikm/teaching/ricm4/cours-graphes.pdf
+
+Graphes et complexité — RICM4
+28 septembre 2017
+
+Table des matières
+
+2
+
+2
+
+2
+Graphes
+Sous-graphes
+Isomorphismes
+Représentation matricielle et par listes
+Degrés
+Notations supplémentaires et variations
+Chaînes et cycles
+
+4
+
+3
+
+Introduction à la complexité
+Complexité des algorithmes
+Notation grand O de Bachmann–Landau
+
+6
+6
+
+9
+
+3
+
+4
+
+7
+
+2
+
+Arbres
+
+Introduction aux graphes
+
+1
+1.1
+1.2
+1.3
+1.4
+1.5
+1.6
+1.7
+2
+2.1
+2.2
+3
+3.1
+3.2
+3.3
+3.4
+4
+4.1
+5
+6
+6.1
+6.2
+7
+7.1
+7.2
+7.3
+8
+8.1
+9
+10 P, NP
+11 Algorithmes d’approximation
+
+Clique et Stable
+21
+Coloration
+Graphes bipartis
+Graphes planaires
+
+Flot-max / coupe-min
+
+Le plus court chemin
+
+L’algorithme de Dijkstra
+
+Coloration
+
+23
+24
+
+28
+
+27
+
+16
+
+21
+
+21
+
+Graphes eulériens
+Le problème du postier chinois
+
+19
+
+Coloration des graphes planaires
+
+19
+
+25
+
+29
+
+9
+
+Caractérisation des arbres
+Arbres couvrants de poids minimum
+Une implémentation plus détaillée
+Une structure des données pour des ensembles disjoints
+
+12
+
+11
+
+13
+
+16
+
+Couplages
+Cycles eulériens et le problème du postier chinois
+
+18
+
+19
+
+graphes et complexité — ricm4
+
+2
+
+Si X = {1, 2, 3}, alors (X
+
+2 ) = {12, 13, 23}.
+
+Exemples des graphes :
+— ({1, 2, 3, 4, 5},{12, 13, 23, 24}).
+— Métro de Paris.
+
+({stations},{stations voisines}).
+
+— Réseaux sociaux.
+
+({personnes},{amitiés}).
+
+1
+
+2
+
+5
+
+3
+
+4
+
+gra-
+=
+
+1:
+du
+
+graphe
+
+Représentation
+G
+
+Figure
+phique
+({1, 2, 3, 4, 5},{12, 13, 23, 24}).
+— 1 et 2 sont adjacents
+— 4 est un voisin de 2
+— N(2) = {1, 3, 4}, N(5) = ∅
+— 5 est isolé
+— 12 est incidente à 2
+
+1
+
+Introduction aux graphes
+
+1.1 Graphes
+
+Soit X un ensemble. On note (X
+
+2 ) l’ensemble des parties à deux
+éléments de X. En général, on notera uv la partie {u, v}. L’ordre et les
+répétitions ne sont pas pris en compte : 12 = 21.
+
+Déﬁnition 1.1. Un graphe est un couple (V, E) formé par un ensemble
+ﬁni V et un sous-ensemble E de (V
+2 ). V est l’ensemble des sommets de
+G (on le note aussi V(G)). E est l’ensemble des arêtes de G (on le note
+aussi E(G)).
+
+On peut représenter les graphes graphiquement (d’où le nom «
+graphe »). Pour chaque sommet, on dessine un cercle ou disque. Pour
+représenter une arête uv, on trace un trait entre les cercles correspon-
+dants à u et à v.
+
+La forme des « cercles » et des « traits » n’a aucune importance
+(sauf pour la lisibilité de la ﬁgure). Ce qui compte, c’est de traduire
+graphiquement s’il y a une arête entre deux sommets ou non.
+
+Déﬁnition 1.2. Soient G un graphe, u et v deux sommets de G et e une
+arête de G. On dit que u et v sont adjacents si uv ∈ E(G), et que e est
+incidente à u si u ∈ e. Les deux éléments de e sont ses extrémités. Le
+voisinage de u dans G est l’ensemble, noté NG(u), des sommets de G
+adjacents à u. Les voisins de u sont les éléments de NG(u). L’ensemble
+des arêtes incidentes à u est noté δG(u).
+
+1.2 Sous-graphes
+
+Déﬁnition 1.3. Soient G = (V, E) et H = (W, F) deux graphes.
+— H est un sous-graphe de G si W ⊆ V et F ⊆ E.
+— H est un sous-graphe couvrant de G si W = V et F ⊆ E.
+— H est un sous-graphe induit de G si W ⊆ V et F contient toutes les
+
+arêtes uv ∈ E où u, v ∈ W. On le note G[W].
+
+1.3 Isomorphismes
+
+Souvent, on ne fera pas de distinction entre deux graphes ayant « la
+même forme », c’est-à-dire : qu’on ne peut les distinguer si l’on oublie
+les noms de leurs sommets.
+
+Déﬁnition 1.4. Soient G, H deux graphes. On dit que G est isomorphe
+à H s’il existe une bijection f de V(G) sur V(H) telle que pour toute
+paire xy de sommets de G, on a xy ∈ E(G) si et seulement si f (x) f (y) ∈
+E(H).
+
+graphes et complexité — ricm4
+
+3
+
+La relation d’isomorphisme est réﬂexive, symétrique et transitive
+
+(relation d’équivalence).
+
+On note qu’il n’est pas toujours facile, à partir de représentations
+graphiques, de décider si deux graphes sont isomorphes (exemple : K4
+en forme planaire et forme carrée).
+
+1.4 Représentation matricielle et par listes
+
+Il y a plusieurs façons de représenter un graphe en mémoire. On va
+en voir trois. En général, chacune est plus ou moins adaptée au pro-
+blème considéré et possède des avantages/inconvénients notamment
+par rapport à la densité (en arêtes) du graphe.
+
+Déﬁnition 1.5. Soit G un graphe à n sommets. On choisit une numé-
+rotation v1, . . . , vn des sommets de G. La matrice d’adjacence de G (pour
+la numérotation choisie) est la matrice M carrée n× n sur {0, 1} déﬁnie
+par : Mij = 1 si et seulement si vivj ∈ E(G), pour tous i, j = 1, . . . , n.
+On remarque qu’elle est symétrique et nulle sur la diagonale (un
+sommet n’est pas adjacent à lui-même, par déﬁnition). La réunion de
+ces deux conditions sufﬁt à garantir qu’une matrice carrée à coefﬁ-
+cients 0 ou 1 est une matrice d’adjacence (voir TD).
+
+Déﬁnition 1.6. Soit G un graphe qui a n sommets et m arêtes. On
+numérote ses sommets V(G) = {v1, . . . , vn} et ses arêtes E(G) =
+{e1, . . . , em}. La matrice d’incidence de G est la matrice N sur {0, 1} de
+taille n × m déﬁnie par : Nij = 1 si et seulement si ej est incidente à vi,
+pour tous i = 1, . . . , n et j = 1, . . . , m.
+
+Déﬁnition 1.7. Soit G un graphe. Une représentation en liste d’adja-
+cence de G est la donnée, pour chaque sommet v de G, de la liste des
+voisins de v.
+
+1.5 Degrés
+
+Déﬁnition 1.8. Soient G un graphe et v un sommet de G. Le degré de
+v dans G, noté dG(v), est le nombre d’arêtes de G incidentes à v. C’est
+aussi (par simplicité des graphes déﬁnis dans ce cours) le nombre de
+voisins de v : dG(v) = |NG(v)|.
+
+On dit que v est isolé si dG(v) = 0 et qu’il est une feuille si dG(v) = 1.
+
+Théorème 1.9 (dit (rarement) des poignées de main). Soit G un graphe.
+On a ∑v∈V(G) dG(v) = 2|E(G)|.
+Démonstration. Soit S la somme de tous les éléments de la matrice
+d’incidence de G. La somme de chaque ligne est égale au degré du
+sommet correspondant, donc S = ∑v∈V(G) dG(v). La somme de chaque
+
+Figure 2: Deux représentations du
+graphe complet K4.
+
+
+
+0
+0
+0
+0
+0
+
+
+
+Matrice d’adjacence de G :
+
+
+
+0
+1
+1
+0
+0
+
+1
+0
+1
+1
+0
+
+1
+1
+0
+0
+0
+
+0
+1
+0
+0
+0
+
+Matrice d’incidence de G :
+0
+1
+0
+1
+0
+
+1
+0
+1
+0
+0
+
+0
+1
+1
+0
+0
+
+
+
+1
+1
+0
+0
+0
+
+[2, 3]
+[1, 3, 4]
+[1, 2]
+[2]
+[]
+
+Liste d’adjacence de G :
+1 :
+2 :
+3 :
+4 :
+5 :
+Dans le graphe G :
+— d(1) = 2
+— d(2) = 3
+— d(3) = 2
+— d(4) = 1
+— d(5) = 0
+
+graphes et complexité — ricm4
+
+4
+
+colonne est égale à deux, et on a |E(G)| colonnes, donc S = 2|E(G)|.
+
+Corollaire 1.10. Soit G un graphe. La somme ∑v∈V(G) dG(v) est paire.
+
+1.6 Notations supplémentaires et variations
+Déﬁnition 1.11. Soit n ≥ 1 un entier. Le graphe complet à n sommets
+est le graphe ({1, . . . , n}, (
+
+)). Il est noté Kn.
+
+{1,...,n}
+
+2
+
+Un multigraphe est un graphe auquel on permet d’avoir plus d’une
+arête entre deux sommets ou une arête dont les deux extrémités sont
+identiques (boucles). Ils se déﬁnissent rigoureusement à l’aide de la
+notion de multi-ensemble.
+
+Un graphe orienté est obtenu à partir d’un graphe en ordonnant,
+pour chaque arête, ses extrémités. Autrement dit, chaque arête est di-
+rigée vers une de ses extrémités.
+
+Dans un hypergraphe, les (hyper-)arêtes peuvent être incidentes à un
+nombre arbitraire de sommets (et pas seulement à deux comme dans
+le cas des graphes).
+
+1.7 Chaînes et cycles
+
+Déﬁnition 1.12. Une chaîne d’un graphe est une suite de la forme :
+
+(x0, e1, x1, . . . , ek, xk)
+
+où k est un entier supérieur ou égal à 0, les xi sont des sommets de G
+et les ei sont des arêtes de G tels que pour i = 0, . . . , k − 1, xi et xi+1
+sont les extrémités de ei+1.
+
+L’entier k est la longueur de la chaîne. (Une chaîne de longueur nulle
+
+est un seul sommet.)
+
+Les sommets x0 et xk sont les extrémités de la chaîne. Lorsque le
+graphe est simple, une chaîne peut être déﬁnie simplement par la suite
+(x0, . . . , xk) de ses sommets.
+
+Une sous-chaîne d’une chaîne est déﬁnie comme une sous-suite, entre
+
+deux sommets, de la suite déﬁnissant la chaîne considérée.
+
+Une chaîne est dite simple si ses arêtes ei, pour i = 1, . . . , k, sont
+deux à deux distinctes. On dit que la chaîne ne passe pas deux fois par
+une même arête.
+
+Une chaîne est dite élémentaire si ses sommets xi, pour i = 0, . . . , k,
+sont deux à deux distincts. On dit que la chaîne ne passe pas deux fois
+par un même sommet. Remarquer que élémentaire entraîne simple.
+
+Déﬁnition 1.13. Un cycle est une chaîne de longueur supérieur ou égal
+à 1 simple et fermée. C’est donc une chaîne de la forme :
+
+(x0, e1, x1, . . . , ek, x0)
+
+graphes et complexité — ricm4
+
+5
+
+où k ≥ 1 et les ei sont distinctes.
+
+L’entier k est la longueur du cycle.
+Notons que, contrairement à une chaîne, un cycle n’est jamais de
+longueur nulle ; comme cas limite il peut être de longueur 1, il est
+alors constitué d’un sommet avec une boucle.
+
+(x0, x1, . . . , x0) de ses sommets.
+
+Lorsque le graphe G est simple, un cycle peut être déﬁni par la suite
+Un cycle est élémentaire si ses ses sommets xi, pour i = 0, . . . , k − 1,
+
+sont deux à deux distincts.
+
+Un cycle est dit pair où impair suivant que sa longueur est paire où
+
+impaire.
+
+Déﬁnition 1.14. Un graphe G est connexe si il existe une chaîne entre
+x et y, pour tout pair de sommets x, y ∈ V(G).
+Déﬁnition 1.15. Une composante connexe d’un graphe G est un sous-
+graphe connexe maximal (par inclusion).
+
+compo-
+On peut aussi deﬁnir
+les
+santes connexes en utilisant
+les rela-
+tions d’équivalence. Soit G = (V, E) un
+graphe et mettons x ∼ y ss’il existe une
+chaine entre x et y. On peut montrer
+que ∼ est une relation d’équivalence. Les
+classes d’equivalence induisent les com-
+posantes connexes de G.
+
+graphes et complexité — ricm4
+
+6
+
+2
+
+Introduction à la complexité
+
+2.1 Complexité des algorithmes
+
+Déﬁnition 2.1. Une opération élémentaire est une opération qui s’effec-
+tue en temps constant sur tous les calculateurs usuels.
+
+On considérera les opérations suivantes comme élémentaires :
+
+— Affectation ;
+— Comparaisons ;
+— Opérations arithmétiques et logiques ;
+— Accès à une case d’un tableau ;
+— Appel d’une sous-routine ;
+— . . .
+
+Déﬁnition 2.2. La complexité temporelle (dans le pire cas) d’un algorithme
+A, noté T(n), est le nombre d’opérations élémentaires le plus grand
+que puisse effectuer A avant d’arriver à un résultat, étant donné une
+entrée de taille n. T(n) s’exprime en fonction de la taille n de l’entrée.
+
+— pour un graphe, on compte la complexité en fonction du nombre
+de sommets n, et éventuellement du nombre d’arêtes m (donc n
+n’est pas ici exactement la taille de l’entrée ; mais ce n’est pas grave
+car c’est relié polynomialement)
+
+— pour un tableau à une dimension, on compte la complexité en fonc-
+
+tion du nombre d’entrées n
+
+— pour un tableau à dimensions n × m, on compte la complexité en
+
+fonction de n et m.
+
+— Les études de complexité portent dans la majorité des cas sur
+le comportement asymptotique, lorsque la taille des entrées tend
+vers l’inﬁni, et l’on utilise couramment les notations grand O de
+Bachmann–Landau.
+
+— La complexité temporelle étant la mesure la plus courante en al-
+gorithmique, on parle parfois simplement de la complexité d’un
+algorithme, mais il existe d’autres mesures comme la complexité
+spatiale.
+
+graphes et complexité — ricm4
+
+7
+
+Algorithme 2.1 : Max(A)
+Entrées : un tableau A d’une dimension avec n entrées.
+Sorties : le maximum de A.
+
+1 début
+2
+
+max ← A[0]pour i de 1 à n − 1 faire
+
+3
+
+4
+
+5
+
+si A[i] > max alors
+
+max ← A[i]
+
+Retourner max ;
+
+2.2 Notation grand O de Bachmann–Landau
+
+Déﬁnition 2.3. Soient f (n) et g(n) des fonctions de N vers R+. On
+écrit f = O(g) (qui veut dire que « f n’augmente pas plus vite que g
+») s’il existe une constante c > 0 telle que f (n) ≤ c · g(n).
+— Dire que f = O(g) est moins fort que dire que f ≤ g. La diffé-
+rence vient de la constante c, donc par exemple 10n = O(n). Cette
+constante nous permet d’ignorer ce qui se passe pour des petites
+valeurs de n.
+
+Exemple 2.4. — Supposons que nous devrons choisir entre deux al-
+gorithmes pour une certaine tâche. La complexité du premier est
+T1(n) = n2, et le complexité du deuxième est T2(n) = 2n + 20.
+Quel algorithme est meilleur ? Cela dépend de la valeur de n. Pour
+n ≤ 5, T1 est inférieur, mais T2 est inférieur lorsque n > 5. Dans
+ce cas, f2 se comporte mieux quand n augmente, donc le deuxième
+algorithme est meilleur.
+
+— Cette supériorité peut être exprimé par la notation grand O : T2 =
+
+Pour calculer T(n) de l’algorithme Max :
+— La ligne max ← A[i] fait 2 opérations
+élémentaires (accès à une case d’un
+tableau et affectation).
+
+— Vériﬁer la condition A[i] > max fait
+
+une opération élémentaire.
+
+— Incrémenter i fait une opération élé-
+
+mentaire.
+
+— Donc, la boucle répète n − 1 fois 4
+operations élémentaires, soit 4(n −
+1).
+
+— En plus de la boucle, l’algorithme
+fait 2 opérations élémentaires pour
+l’initialisation de max (accès à une
+case d’un tableau et affectation).
+
+— On obtient T(n) = 4(n − 1) + 2 =
+
+4n − 2.
+
+— Donc, T(n) = O(n).
+
+O(T1), parce que
+
+n2 ≤ 22
+pour tout n. Par contre, T1 (cid:54)= O(T2), parce que
+
+T2(n)
+T1(n)
+
+2n + 20
+
+=
+
+2n + 20
+tend vers l’inﬁni quand n tend vers l’inﬁni.
+
+T1(n)
+T2(n)
+
+=
+
+n2
+
+— Supposons qu’il y a un autre algorithme de complexité T3(n) =
+n + 1. Est-ce mieux que T2 ? Oui, mais seulement par un facteur
+constant. La différence entre T2 et T3 est minuscule comparé à la
+différence énorme entre T1 et T2. Donc, on considère deux fonctions
+comme équivalentes si elles ne diffèrent que par une constante mul-
+tiplicative. On remarque que T2 = O(T3) :
+
+T2(n)
+T3(n)
+
+=
+
+2n + 20
+n + 1
+
+≤ 20,
+
+graphes et complexité — ricm4
+
+8
+
+et bien évidemment T3 = O(T2), avec c = 1.
+
+Déﬁnition 2.5. De la même manière que O(·) est un analogue de ≤,
+nous pouvons aussi déﬁnir des analogues de ≥ et de = comme suit :
+
+f = Ω(g) veut dire g = O( f )
+f = Θ(g) veut dire f = O(g) et f = Ω(g).
+
+Exemple 2.6. Dans l’exemple précédent, T2 = Θ(T3) et T1 = Ω(T3).
+— La notation grand O nous permet de nous concentrer sur la vue
+
+d’ensemble.
+
+— Étant donné une fonction compliquée, comme 3n2 + 4n + 5, nous la
+replaçons par O( f (n)), où f (n) est aussi simple que possible. Dans
+cet exemple particulier nous utiliserions O(n2), parce que le terme
+quadratique de la fonction domine le reste. Voici quelques règles
+qui nous aidons à simpliﬁer des fonctions en ignorant des termes
+dominés :
+1. Nous pouvons ignorer des constantes multiplicatives : 14n2 de-
+
+vient n2.
+
+2. na domine nb si a > b : par exemple, n2 domine n.
+3. Toute fonction exponentielle domine toute fonction polynomiale :
+
+3n domine n5.
+
+4. De la même manière, toute fonction polynomiale domine toute
+fonction logarithmique : n domine (log n)3. Cela signiﬁe, par
+exemple, que n2 domine n log n.
+
+Remarque 2.7. Il faut faire attention à cette attitude cavalière aux
+constantes. Les programmeurs sont très intéressés par les constantes
+et vont passer des nuits blanches pour améliorer la complexité d’un
+algorithme par un facteur de 2 !
+
+graphes et complexité — ricm4
+
+9
+
+3 Arbres
+
+3.1 Caractérisation des arbres
+
+Déﬁnition 3.1. Un arbre est un graphe connexe sans cycle.
+
+Théorème 3.2. Les énoncés suivants sont équivalents.
+1. G est un arbre ;
+2. Pour tout pair de sommets x, y ∈ V(G), il existe une chaîne élémentaire
+
+unique entre x et y ;
+
+« chaînes uniques »
+
+3. G est connexe, et si on supprime n’importe quelle arête, le graphe devient
+
+« minimalement connexe »
+
+non connexe ;
+
+4. G est acyclique, et si on rajoute une nouvelle arête à G, le nouveau graphe
+
+« maximalement acyclique »
+
+contiendra un cycle ;
+
+5. G est connexe et |V(G)| = |E(G)| + 1.
+
+« la formule d’Euler »
+
+Comme il faut prouver plusieurs implications, il est important de
+bien organiser la démonstration. L’idée de base dans toutes les étapes
+est de faire récurrence sur le nombre de sommets du graphe, et d’ar-
+racher un sommet de degré 1 pour prouver l’hérédité. Nous allons
+utiliser les deux lemmes simples suivants.
+
+Lemme 3.3 (« Lemme des feuilles »). Tout arbre avec au moins deux
+sommets contient au moins deux feuilles.
+
+Démonstration. Soit P = (v0, e1, v1, . . . , et, vt) une chaîne de longueur
+maximum dans un arbre T = (V, E). La longueur de la chaîne P est
+au moins 1, donc en particulier v0 (cid:54)= vt. Nous allons prouver que v0
+et vt sont des feuilles. Supposons que ce n’est pas le cas. Par exemple,
+supposons que v0 n’est pas une feuille, alors il existe une arête e = v0v
+qui contient le sommet v0 et qui est différent de la première arête
+e1 = v0v1 de la chaîne P.
+
+Il y a deux possibilités à considérer :
+
+— Soit v est un sommet de la chaîne P, c’est-à-dire, v = vi, où i ≥ 2.
+Dans ce cas, l’arête e réunie avec la partie de la chaîne P entre v0 et
+vi forme un cycle ; contradiction.
+
+— Soit v /∈ {v0, . . . , vt}. Dans ce cas nous pourrions prolonger P en
+
+lui rajoutant l’arête e ; contradiction.
+
+Lemme 3.4 (« Lemme de la croissance des arbres »). Les deux énoncés
+suivants sont équivalents :
+1. G est un arbre avec une feuille v.
+2. G − v est un arbre.
+
+graphes et complexité — ricm4
+
+10
+
+Démonstration. Nous allons d’abord prouver l’implication (1) =⇒
+(2). Le graphe G est un arbre, et nous voulons démontrer que G − v est
+aussi un arbre. Considérons deux sommets x, y de G − v. Comme G
+est connexe, il existe une chaîne dans G de x à y. Cette chaîne ne peut
+contenir aucune feuille différente de x et y, donc elle ne contient pas v.
+Par conséquent, elle appartient à G − v, et nous pouvons conclure que
+G − v est connexe. Comme G n’a pas de cycle, il est clair que G − v n’a
+pas de cycle, donc c’est bien un arbre.
+Il reste à prouver l’implication (2) =⇒ (1). Soit G − v un arbre.
+En rajoutant la feuille v à G − v, aucun cycle ne peut être créé. Il faut
+vériﬁer la connexité de G, mais cela est évident aussi : deux sommets
+quelconques différents de v étaient reliés par une chaîne déjà dans
+G − v, et nous pouvons obtenir une chaîne à v depuis un autre sommet
+quelconque x en considérant le voisin unique v(cid:48) de v dans G, le reliant
+à x par une chaîne dans G − v, et en prolongeant cette chaîne par
+l’arête v(cid:48)v.
+
+Ce lemme nous permet de réduire un arbre à des arbres de plus
+en plus petits en supprimant des feuilles successivement. Nous allons
+maintenant appliquer cette idée.
+Proof of Theorem 3.2. Nous allons prouver que chacun des énoncés (2)–
+(5) équivaut à (1). Cela sufﬁt pour prouver l’équivalence mutuelle de
+tous les énoncés. Les preuves sont par récurrence sur le nombre de
+sommets de G et dépendent du lemme de la croissance des arbres 3.4.
+Quant au cas de base, il sufﬁt de noter que tous les énoncés sont vrais
+pour le graphe avec un seul sommet (on considère le graphe sans som-
+mets comme non connexe).
+
+Prouvons d’abord que (1) implique chacun des énoncés (2)–(5). Soit
+G un arbre à deux sommets au moins, soit v une feuille, et soit v(cid:48) le
+voisin unique de v dans G. Supposons que le graphe G − v satisfait
+(2)–(5) ; cela est l’hypothèse de récurrence.
+
+Dans cette situation, la validité de (2), (3), et (5) pour le graphe G
+
+est évidente.
+Quant à l’énoncé (4), nous n’avons même pas besoin de l’hypothèse
+de récurrence pour G − v. Comme G est connexe, deux sommets quel-
+conques x, y ∈ V(G) sont reliés par une chaîne, et si xy /∈ E(G), l’arête
+xy réunie avec la dite chaîne crée un cycle. Cela prouve l’implication
+(1) =⇒ (4).
+
+Maintenant, nous allons prouver que chacune des conditions (2)–(5)
+implique (1). Dans (2) et (3) nous présupposons la connexité. De plus,
+un graphe qui satisfait (2) ou (3) ne peut contenir aucun cycle. Pour
+(2), c’est parce que deux sommets dans un cycle peuvent être reliés par
+deux chaîne différentes, et pour (3), la raison est que si on supprime
+
+(1)
+
+(2)
+
+(5)
+
+(3)
+
+(4)
+
+(1)
+
+(2)
+
+(5)
+
+(3)
+
+(4)
+
+(1)
+
+(2)
+
+(5)
+
+(3)
+
+(4)
+
+(1)
+
+(2)
+
+(5)
+
+(3)
+
+(4)
+
+graphes et complexité — ricm4
+
+11
+
+une arête dans un cycle nous allons obtenir un graphe connexe. Nous
+avons déjà prové l’équivalence de (1)—(3).
+Pour vériﬁer l’implication (4) =⇒ (1), il sufﬁt de vériﬁer que G est
+connexe. Pour faire cela, nous allons utiliser « l’inverse » de l’argument
+que nous avons utilisé pour prouver (1) =⇒ (4). Si x, y ∈ V(G) sont
+deux sommets, soit ils sont reliés par une arête, soit le graphe G + xy
+contient un cycle, et supprimer l’arête xy de ce cycle donne lieu à une
+chaîne de x à y dans G.
+Pour ﬁnir, nous prouvons l’implication (5) =⇒ (1) par récurrence
+sur le nombre de sommets. Soit G un graphe tel que |V| = |E| +
+1 ≥ 2. La somme des degrés de tous les sommets est 2|V| − 2 (par
+le théorème des poignées de main 1.9). Cela veut dire que tous les
+sommets ne peuvent pas avoir degré supérieur ou égal à 2, et comme
+tous les degrés sont supérieurs ou égaux à 1 (grâce à la connexité), il
+existe un sommet v de degré exactement 1, c’est-à-dire, une feuille de
+G. Le graphe G(cid:48) = G − v est de nouveau connexe et satisfait |V(G(cid:48))| =
+|E(G(cid:48))| + 1. Donc c’est un arbre par l’hypothèse de récurrence, et par
+conséquent G est un arbre aussi.
+
+Déﬁnition 3.5. Soit G un graphe. Un arbre couvrant de G est un sous-
+graphe couvrant de G qui est un arbre.
+
+Proposition 3.6. Tout graphe connexe contient un arbre couvrant.
+
+Démonstration. Soit G un graphe connexe. Retirons de G, tant qu’il
+est possible, une arête qui ne coupe pas le graphe (le graphe reste
+connexe). On obtient un sous-graphe partiel T qui est connexe par la
+condition sur les arêtes, et il n’a pas de cycles puisque s’il y aurait un
+cycle, on pourrait enlever une arête du cycle sans couper le graphe. T
+est donc un arbre.
+
+3.2 Arbres couvrants de poids minimum
+
+Déﬁnition 3.7. Soit G = (V, E) un graphe connexe avec une fonction
+de poids w : E → R. Un arbre couvrant de poids minimum de G est un
+arbre couvrant T ⊆ G qui minimise w(T) = ∑e∈E w(e).
+
+Le problème de trouver un arbre couvrant de poids minimum de
+G = (V, E) peut être résolu avec l’algorithme de Kruskal. L’idée de l’al-
+gorithme est vraiment très simple. L’algorithme construit un arbre cou-
+vrant de poids minimum à partir du graphe vide (V, ∅) en ajoutant
+des arêtes de E une par une selon la règle suivante :
+
+Ajouter l’arête la plus légère qui ne crée pas de cycle.
+
+C’est un exemple d’un algorithme glouton.
+
+Exemple 3.8. Montrer un exemple sur le tableau.
+
+(1)
+
+(2)
+
+(5)
+
+(3)
+
+(4)
+
+(1)
+
+(2)
+
+(5)
+
+(3)
+
+(4)
+
+Exemple : réalisation d’un réseau élec-
+trique ou informatique entre différents
+points, deux points quelconques doivent
+toujours être reliés entre eux (connexité)
+et on doit minimiser le coût de la réali-
+sation.
+
+il
+
+Algorithmes gloutons
+Pour gagner aux
+échecs,
+faut calculer beaucoup de
+coups à l’avance ; un joueur qui ne
+considère que des gains immédiates
+n’aura pas beaucoup de succès. Pour-
+tant, dans certains problèmes, cette stra-
+tégie myope peut conduire à des bons al-
+gorithmes, comme dans le cas des arbres
+couvrants de poids minimum. Les algo-
+rithmes gloutons construisent une solu-
+tion pièce par pièce, ajoutant à chaque
+étape la pièce qui donne les bénéﬁces les
+plus importants.
+
+graphes et complexité — ricm4
+
+12
+
+arêtes
+
+Procédure kruskal(G, w)
+Entrées : Un graphe connexe G = (V, E) avec des poids we sur les
+Sorties : Ensemble d’arêtes X ⊆ E d’un arbre couvrant de G
+1 X ← ∅;
+2 Trier les arêtes E par poids croissant;
+3 pour tous les e ∈ E faire
+si (V, X ∪ {e}) est acyclique alors
+
+X ← X ∪ {e}}
+
+4
+
+5
+
+Justiﬁcation de l’algorithme. L’algorithme s’arrête au pire lorsque toutes
+les arêtes du graphe ont été considérées. Comme le graphe est ﬁni, l’al-
+gorithme s’arrête au bout d’un nombre ﬁni d’opérations élémentaires.
+Montrons qu’à la ﬁn de l’exécution de l’algorithme, la sortie T =
+(V, X) est un arbre couvrant de poids minimum. D’abord T est un
+sous-graphe couvrant de G, puisqu’il contient tous les sommets de G.
+Soient T1 et T2 deux composantes connexes de T, et soit e une arête
+dans X entre T1 et T2 de poids minimum (l’arête e existe parce que G
+est connexe). Comme (V, X ∪ {e}) n’a pas de cycle, l’algorithme aurait
+choisi l’arete e. Donc, T est connexe. De plus, T est acyclique par la
+condition de la boucle. Cela montre que T est un arbre couvrant de G.
+Il reste à montrer que T est de poids minimum. Soit T0 = (V, E0)
+un arbre couvrant de G de poids minimum, tel que |E ∩ E0| soit maxi-
+mum. Nous allons prouver que |E ∩ E0| = |E|, c’est-a-dire, T = T0.
+Supposons par l’absurde que |E ∩ E0| < |E|, et soit e1 l’arête la plus
+légère dans E(T0) \ E(T). Le graphe (V, E ∪ {e1}) contient un cycle C
+(voir la caractérisation des arbres). Comme T0 est acyclique, il existe
+au moins une arête e2 ∈ E(C) \ E(T0). Si w(e1) < w(e2), l’algorithme
+de Kruskal aurait choisi l’arête e1 au lieu de e2. Donc, w(e1) ≥ w(e2).
+Soit T1 = (V, (E0 − {e1}) ∪ {e2}) ; comme w(T1) ≤ w(T0), T1 est
+un (autre) arbre couvrant de G de poids minimum, tel que |E ∩ E1| >
+|E ∩ E0|, contradiction avec l’hypothèse.
+
+Donc, E = E0, et alors T est un arbre couvrant de G de poids mini-
+
+mum.
+
+3.3 Une implémentation plus détaillée
+
+Question 3.9. Comment décider si l’ajout d’une arête crée un cycle ?
+C’est possible de le faire en temps constant ?
+
+Nous allons modéliser l’état de l’algorithme par une collection d’en-
+sembles disjoints ; chacun des ensembles contient les sommets d’une
+composante connexe. Au début chaque sommet est isolé, c’est-à-dire,
+
+Version naïve : faire un parcours en
+largeur ou profondeur pour détecter le
+cycle — coût O(n + m) à chacun des ap-
+pels, c’est-à-dire, coût O(nm + m2), po-
+tentiellement O(n4). On va chercher à
+l’améliorer.
+
+graphes et complexité — ricm4
+
+13
+
+chaque sommet est une composante connexe.
+
+makeset(x) : créer l’ensemble {x}.
+Nous aurons besoin de vériﬁer si deux sommets sont dans la même
+
+composante connexe.
+
+find(x) : à quel ensemble appartient x ?
+Lorsque nous rajoutons une arête, nous fusionnons deux compo-
+
+santes connexes.
+
+union(x, y) : fusionner les deux ensembles qui contiennent x et y.
+
+Procédure kruskal(G, w)
+Entrées : Un graphe connexe G = (V, E) avec des poids we sur les
+Sorties : Ensemble d’arêtes X ⊆ E d’un arbre couvrant de G
+1 pour tous les u ∈ V faire
+
+arêtes
+
+makeset(u)
+
+3 X ← ∅;
+4 Trier les arêtes E par poids croissant;
+5 pour tous les uv ∈ E, dans l’ordre croissant de poids faire
+
+2
+
+6
+
+7
+
+8
+
+si find(u) (cid:54)= find(v) alors
+
+X ← X ∪ {uv};
+union(u, v)
+
+L’algorithme de Kruskal appelle makeset |V| fois, find 2|E| fois, et
+
+union |V| − 1 fois.
+
+3.4 Une structure des données pour des ensembles disjoints
+
+Nous pouvons stocker un ensemble S comme une arborescence.
+Les nœuds de cette arborescence sont des éléments de S (dans un
+ordre quelconque) et chaque élément x a un pointeur π(x) vers son
+parent. Donc, si nous suivons le chemin (x, π(x), π(π(x)), . . .), nous
+arriverons à la ﬁn à la racine r. Nous pouvons considérer r comme
+l’élément représentatif de S. Cet élément est distingué par le fait que
+π(r) = r.
+
+À part du pointeur π, chaque nœud a un rang qui mesure la hauteur
+
+du sous-arbre dont le nœud est la racine.
+
+Procédure makeset(x)
+1 π(x) ← x;
+2 rank(x) ← 0
+
+Cette procédure est de complexité constante.
+
+Une représentation de deux ensembles
+{A, B, D, E} et {C, F, G} par des arbores-
+cences :
+
+D
+
+E
+
+B
+
+A
+
+F
+
+C
+
+G
+
+graphes et complexité — ricm4
+
+14
+
+Fonction ﬁnd(x)
+1 tant que x (cid:54)= π(x) faire
+
+x ← π(x)
+2
+3 retourner x
+
+Cette procédure suit les pointeurs jusqu’à la racine de l’arbores-
+cence, donc sa complexité dépend de la hauteur de l’arborescence.
+L’arborescence est construit en utilisant union, donc il est important
+de limiter la hauteur de l’arborescence.
+
+Fusionner deux ensembles A et B est facile : si rA est la racine de A
+et rB est la racine de B, il sufﬁt de déﬁnir π(rA) = rB ou π(rB) = rA.
+Une chose à noter ici : si la hauteur de A est supérieure a celle de B,
+et nous mettons π(rA) = rB, alors la hauteur du nouveau arbre aug-
+mente par 1. Par contre, si nous mettons π(rA) = rB, alors la hauteur
+n’augmente pas. Avec cette stratégie, la hauteur augmente seulement
+lorsque les deux arborescences ont la même hauteur (=rank).
+
+Procédure union(x, y)
+1 rx ← find(x);
+2 ry ← find(y);
+3 si rx = ry alors
+4
+5 si rank(rx) > rank(ry) alors
+6
+
+π(ry) ← rx
+
+Retour
+
+7 sinon
+8
+
+9
+
+10
+
+π(rx) ← ry;
+si rank(rx) = rank(ry) alors
+rank(ry) ← rank(ry) + 1
+
+Il est clair que rank d’un nœud x est la hauteur de la sous-arborescence
+
+avec racine x. Cela implique, par exemple, que rank(x) < rank(π(x)),
+pour toute nœud x.
+
+Nous pouvons prouver la propriété suivante :
+
+Lemme 3.10. Soit x un nœud d’une arborescence A. Si rank(x) = k, alors
+le sous-arbre avec la racine x a au moins 2k sommets.
+
+Démonstration. Vrai pour k = 0. Supposons que la proposition est vraie
+pour un entier k ≥ 0, et soit x un nœud d’une arborescence A tel que
+rank(x) = k + 1. On a rank(x) = k + 1 parce qu’on a fusionné deux
+arborescences A1, A2 telles que le rang de la racine de chacune est k.
+Donc, par l’hypothèse de récurrence, A1 et A2 ont chacune au moins
+
+graphes et complexité — ricm4
+
+15
+
+2k nœuds. Donc, A a au moins 2k+1 nœuds.
+
+Par conséquent, rank(x) ≤ log2 n, pour tout nœud x. Donc, find et
+union sont de complexité O(log n). Nous pouvons conclure que l’algo-
+rithme de Kruskal est de complexité O(m log n).
+
+Après makeset(A), . . . , makeset(G) :
+F0
+
+A0
+Après
+union(A, D), union(B, E), union(C, F) :
+
+C0
+
+B0
+
+D0
+
+E0
+
+G0
+
+D1
+
+A0
+
+E1
+
+B0
+
+F1
+
+C0
+
+G0
+
+Après union(C, G), union(E, A) :
+
+D2
+
+A0
+
+E1
+
+B0
+
+Après union(B, G) :
+
+D2
+
+A0
+
+E1
+
+B0
+
+F1
+
+C0
+
+G0
+
+F1
+
+C0
+
+G0
+
+graphes et complexité — ricm4
+
+16
+
+4 Le plus court chemin
+
+Dans cette section, on considère les graphes orientés.
+
+Déﬁnition 4.1. Un graphe orienté (digraph en anglais) est un couple D =
+(V, A) formé par un ensemble ﬁni V et un sous-ensemble A ⊆ V × V.
+V est l’ensemble des sommets de G et A est l’ensemble des arcs de D.
+
+On peut représenter un digraphe de la même façon qu’un graphe,
+sauf qu’on remplace des traits (pour les arêtes) par des ﬂèches (pour
+les arcs). Si (u, v) est un arc, on dit que u est le début et v est la ﬁn de
+(u, v).
+
+Déﬁnition 4.2. Un chemin dans un graphe orienté D est une suite de
+la forme (v0, a1, v2, . . . , ak, vk) où k est un entier supérieur ou égal à 0,
+les vi sont des sommets de D et les ai sont les arcs de D tels que pour
+i = 1, . . . , k, ai = (vi−1, vi).
+
+Déﬁnition 4.3. étant donné un graphe orienté D = (V, A), une fonc-
+tion de poids p : A → R et un chemin C dans D, le poids (ou longueur)
+de C est p(C) = ∑a∈A p(a). étant donné deux sommets u, v ∈ V, la
+distance distD(u, v) est le poids (longueur) minimum d’un chemin de
+u vers v.
+
+Problème 4.4. étant donné un graphe orienté D = (V, A), une fonction de
+poids p : A → R et deux sommets u (cid:54)= v dans V, trouver un plus court
+chemin (« chaîne orientée ») de u vers v.
+
+Si le graphe contient un circuit de poids négatif (circuit absorbant),
+
+alors il peut ne pas exister de plus court chemin.
+
+w
+
+v
+
+y
+
+x
+
+Figure 3: (v, w, x, y) est un chemin ;
+(v, w, y) n’est pas un chemin.
+
+7
+
+−1
+
+3
+
+−4
+
+Lemme 4.5 (Principe de sous-optimalité). Si C est un plus court chemin
+de s vers v alors, en notant v(cid:48) le prédécesseur de v dans ce chemin, le sous-
+chemin de C qui va de s vers v(cid:48) est un plus court chemin de s vers v(cid:48).
+
+Figure 4: Il peut ne pas exister de plus
+court chemin : possibilité de boucler in-
+déﬁniment dans dans le cycle absorbant.
+
+Preuve par l’absurde. S’il existe C(cid:48) de s vers v(cid:48) de poids strictement infé-
+rieur au sous-chemin de C de s vers v(cid:48) alors en concaténant C(cid:48) à (v, v(cid:48))
+on aurait un chemin de s à v(cid:48) de poids strictement inférieur à celui de
+C, contradiction.
+
+0
+
+1
+
+2
+
+3
+
+Figure 5: Si C est un plus court chemin
+de 0 à 3, alors forcément le sous-chemin
+C(cid:48) ⊂ C de 0 à 2 est un plus court chemin
+de 0 à 2.
+
+4.1 L’algorithme de Dijkstra
+
+Déﬁnition 4.6 (Distances partielles). Soit G = (V, A) un graphe orienté,
+p : A → R+ un fonction de poids, et s ∈ S ⊆ V. Pour tout x ∈ V, on
+note d(x) = dist(s, x). Pour tout sommet w /∈ S, on déﬁnit
+
+D(w) = min{d(v) + p(v, w) | v ∈ S et (v, w) ∈ A} .
+
+graphes et complexité — ricm4
+
+17
+
+Lemme 4.7. Soit w0 tel que D(w0) est minimum, parmi tous les sommets
+dans V − S. Alors, D(w0) = d(w0).
+
+dessin avec intuition
+
+Démonstration. Soit w0 tel que D(w0) est minimum. Comme D(w0) est
+la longueur d’un chemin de s à w0, D(w0) ≥ d(w0).
+Si D(w0) ≤ d(w0) alors la preuve est terminé. Sinon, on suppose
+D(w0) > d(w0). Soit C un plus court chemin de s vers w0 (son poids
+est alors d(w0)). Soit x le premier sommet de C qui n’appartient pas à
+S. Soit y ∈ S le prédécesseur de x dans ce chemin.
+
+dessin
+Soit C(cid:48) le sous chemin de C de s vers y. C(cid:48) est un plus court chemin
+de s vers y (principe de sous optimalité). Soit C(cid:48)(cid:48) le sous chemin de C
+de s vers x. La longueur de C(cid:48)(cid:48) est d(y) + p(y, x). Ceci entraîne que
+
+D(x) ≤ d(y) + p(y, x) ≤ d(w0) < D(w0).
+
+Première inégalité : par déﬁnition de D. Deuxième inégalité : tous les
+poids sont ≥ 0. Troisième inégalité : par hypothèse.
+
+Implique D(x) < D(w0) — contradiction avec la minimalité de
+
+D(w0).
+
+Algorithme 4.1 : Dijkstra
+Entrées : Un graphe orienté connexe G = (V, E)
+une fonction de poids w : E → R+
+un sommet s ∈ V.
+Sorties : Un tableau avec les distances de s vers x pour tout x ∈ V.
+// Variable locales
+1 Sous-ensemble S de V
+2 Tableau D
+
+Utilisé par des systèmes de navigation
+GPS.
+Complexité O(n2), avec des structures
+de données appropriées O(m + n log n).
+
+// Initialisation
+
+3 S := ∅;
+4 D[s] := 0;
+5 pour tous les x (cid:54)= s faire
+
+D[x] := +∞;
+
+// Partie principale
+7 tant que S (cid:54)= V faire
+
+Trouver x /∈ S tel que D[x] est minimum;
+pour tous les y /∈ S tel que (x, y) ∈ E faire
+
+D[y] := min(D[y], D[x] + p(x, y));
+
+6
+
+8
+
+9
+
+10
+
+S := S ∪ {x}
+
+11
+12 retourner D;
+
+graphes et complexité — ricm4
+
+18
+
+5 Couplages
+
+A faire
+
+graphes et complexité — ricm4
+
+19
+
+6 Cycles eulériens et le problème du postier chinois
+
+Dans cette section on permet des arêtes dupliquées !
+
+6.1 Graphes eulériens
+
+La ville de Königsberg (aujourd’hui Kaliningrad) est construite au-
+tour de deux îles situées sur le Pregel et reliées entre elles par un pont.
+Six autres ponts relient les rives de la rivière à l’une ou l’autre des deux
+îles. Le problème consiste à déterminer s’il existe ou non une prome-
+nade dans les rues de Königsberg permettant, à partir d’un point de
+départ au choix, de passer une et une seule fois par chaque pont, et de
+revenir à son point de départ, étant entendu qu’on ne peut traverser le
+Pregel qu’en passant sur les ponts.
+
+Le problème a été résolu en 1736 par Leonhard Euler. Il a représenté
+chaque masse terrestre par un sommet d’un graphe, et chaque pont par
+une arête. Notons que le graphe correspondant au problème des sept
+ponts de Königsberg contient trois sommets de degré 3 et un sommet
+de degré 5. Euler a montré le théorème suivant.
+Soit G un graphe. Un cycle C ⊆ G est eulérien si C passe par chaque
+arête de G une et une seule fois. On appelle un graphe avec un cycle
+eulérien un graphe eulérien.
+
+Théorème 6.1. Un graphe G est eulérien si et seulement si G est connexe,
+et tout sommet de G est de degré pair.
+
+Démonstration. Pour la nécessité, soit G un graphe eulérien avec un
+cycle eulérien C et soit v un sommet de G quelconque. Chaque fois
+que C passe par v, il faut utiliser deux arêtes incidentes à v. Donc, le
+degré de v est pair.
+
+La sufﬁsance est une conséquence de l’algorithme de Fleury.
+Une chaîne eulérienne est une chaîne P ⊆ G telle que P passe par
+
+chaque arête de G une et une seule fois.
+
+Théorème 6.2. Un graphe G contient une chaîne eulérienne si et seulement
+si précisément deux sommets de G sont de degré impair.
+
+Démonstration. Soit x et y les sommets de G de degré impair. Le graphe
+G + xy est eulérien ; soit C un cycle eulérien de G + xy. Alors C − xy
+est une chaîne eulérienne.
+
+6.2 Le problème du postier chinois
+
+Un postier veut livrer des lettres dans un quartier ; il est donc obligé
+de passer par chaque rue du quartier. Comment peut-il trouver un plus
+court tour du quartier qui passe par chaque rue au moins une fois et
+se termine au point de départ ?
+
+Figure 6: Les ponts de Königsberg.
+
+D
+
+A
+
+E
+
+B
+
+C
+
+F
+
+Figure 7: Représentation graphique des
+ponts de Königsberg.
+
+graphes et complexité — ricm4
+
+20
+
+Algorithme 6.1 : Fleury
+Entrées : Un graphe eulérien G = (V, E) et un sommet u de G.
+Sorties : Un cycle eulérien C de G qui commence et termine à u.
+// Variables
+
+1 F: sous-graphe de G
+2 C: chaîne dans G
+3 x: sommet de G
+
+// Initialisation
+
+4 C := u;
+5 x := u;
+6 F := G;
+7 tant que δF(x) (cid:54)= 0 faire
+
+choisir une arête e = xy ∈ δF(x) telle que e n’est pas un
+isthme de F sauf si c’est la seule possibilité;
+C := Cey;
+x := y;
+F := F − e;
+11
+12 retourner C;
+
+10
+
+8
+
+9
+
+Si on représente les rues par des arêtes d’un graphe, et on met un
+« poids » sur chaque arête pour représenter la longueur de la rue, le
+problème se traduit au problème suivant.
+
+Problème 6.3 (Le problème du postier chinois). Êtant donné un (multi-
+)graphe G = (V, E) avec une fonction de poids w : E → R+, trouver un
+plus court cycle (par rapport à la somme des poids des arêtes) qui contient
+chaque arête du graphe.
+
+Si le graphe est eulérien, alors le plus court cycle est un cycle eu-
+lérien. Sinon, l’idée est de dédoubler certaines arêtes aﬁn de rendre
+le graphe eulérien, et de faire cela d’une manière la plus économique
+possible. On peut utiliser l’algorithme suivant.
+
+graphes et complexité — ricm4
+
+21
+
+Algorithme 6.2 : Postier chinois
+Entrées : Un graphe connexe G = (V, E) et une fonction de poids
+
+w : E → R.
+
+Sorties : Un plus court tour de postier chinois dans G.
+1 Trouver l’ensemble T de sommets de G de degré impair
+2 Pour tous u, v ∈ T, trouver la distance distG(u, v)
+3 Construire le graphe complet pondéré H avec l’ensemble de
+
+sommets T et w(uv) = distG(u, v)
+
+4 Trouver un couplage parfait M dans H de poids minimum
+5 Construire le graphe G(cid:48) à partir de G en dupliquant les arêtes
+
+dans les chaînes correspondant aux arêtes dans M
+
+6 Trouver un cycle eulérien dans G(cid:48) en utilisant l’algorithme de
+
+Fleury.
+
+7 Coloration
+
+7.1 Clique et Stable
+
+Déﬁnition 7.1. Une clique de G est un sous graphe induit de G qui
+est complet, c’est-à-dire, il contient toutes les arêtes possibles. On note
+ω(G) le nombre de sommets de la plus grande clique dans G.
+
+1
+
+2
+
+5
+
+Déﬁnition 7.2. Un stable de G est un sous-ensemble de sommets de
+G deux à deux non adjacents : il induit un sous graphe ne contenant
+aucune arête. Autrement dit, U ⊆ V est un stable si et seulement si
+uv /∈ E pour toute paire de sommets u, v ∈ U. On note α(G) le nombre
+de sommets du plus grand stable de G.
+
+Déﬁnition 7.3. Soit G = (V, E) un graphe. On note G le graphe complé-
+2 ) \ V), c’est-à-dire, G a le même ensemble
+mentaire de G, ou G = (V, (V
+de sommets que G, et les non-arêtes de G sont les arêtes de G (et vice
+versa).
+
+Observation 7.4. Pour tout graphe G, ω(G) = α(G).
+
+7.2 Coloration
+Déﬁnition 7.5. étant donné un entier k ∈ N, une k-coloratin d’un
+graphe G = (V, E) est une fonction c : V → {1, . . . , k} telle que c(u) (cid:54)=
+c(v) pour toute arête uv ∈ E. L’entier k minimum tel qu’il existe un
+k-coloration de G est le nombre chromatique de G, qu’on note χ(G).
+
+Le nombre chromatique joue un rôle centrale en théorie des graphes ;
+il s’agit peut-être du parametre le plus étudié de toute la théorie des
+
+3
+
+4
+
+Figure 8: L’ensemble {1, 2, 3} induit une
+clique à 3 sommets. L’ensemble {3, 4, 5}
+induit un stable à 3 sommets.
+
+1
+
+2
+
+5
+
+3
+
+4
+
+Figure 9: Le graphe complémentaire.
+
+1
+
+2
+
+1
+
+3
+
+3
+
+Figure 10: Une coloration de G avec 3
+couleurs.
+
+graphes et complexité — ricm4
+
+22
+
+graphes. Cependant, le nombre chromatique est très difﬁcile de calcu-
+ler en général (plus présisément, décider si χ(G) ≤ k est un problème
+NP-difﬁcile pour tout k ≥ 3.) C’est pourquoi les bornes pour le nombre
+chromatique sont importantes.
+
+D’abord deux bornes inférieures pour le nombre chromatique.
+Proposition 7.6. Soit G un graphe quelconque. Alors, χ(G) ≥ ω(G).
+Démonstration. Soit H un sous-graphe complet de G à ω(G) sommets.
+Chaque sommet de H est relié à tous les autres sommets de H, donc il
+faut une couleur pour chaque sommet. Donc, χ(G) ≥ ω(G).
+Proposition 7.7. Soit G un graphe à n sommets. Alors, χ(G) ≥ n/α(G).
+Démonstration. Une coloration est une partition des sommets en stables.
+Comme chaque stable est de taille inférieure ou égale à α(G), il faut au
+moins n/α(G) stables pour recouvrir tous les sommets. Donc, χ(G) ≥
+n/α(G).
+
+Exemple 7.8. χ(Kn) = n, χ(Cn) = 2 si n est pair, χ(Cn) = 3 si n est
+impair.
+Déﬁnition 7.9. On note ∆(G) le degré maximum de G, déﬁni comme
+∆(G) = max{d(v) | v ∈ V(G)}.
+
+Algorithme 7.1 : Algorithme glouton de coloration
+Entrées : Un graphe G = (V, E).
+Sorties : Une coloration de G avec au plus ∆(G) + 1 couleurs.
+
+1 Choisir un ordre pour les sommets et pour les couleurs
+2 Prendre le premier sommet de la liste non colorié
+3 Le colorier avec la plus petite couleur non utilisee dans son
+
+voisinage
+
+4 Recommencer l’étape 2 jusqu’a ce que tous les sommets soient
+
+coloriés
+
+Remarque 7.10. — Coloration avec au maximum ∆ + 1 couleurs ;
+— Coloration pas toujours optimale ;
+— Il existe un ordre pour lequel la coloration est optimale.
+
+L’algorithme glouton démontre la proposition suivante :
+
+Proposition 7.11. Soit G un graphe quelconque. Alors, χ(G) ≤ ∆(G) + 1.
+On peut améliorer la borne de la proposition précédente dans la
+
+plupart des cas.
+Théorème 7.12 (Théorème de Brooks). Pour tout graphe G, on a χ(G) ≤
+∆(G), sauf si G est un graphe complet ou un cycle de longueur impaire.
+
+graphes et complexité — ricm4
+
+23
+
+7.3 Graphes bipartis
+Déﬁnition 7.13. G = (V, E) est biparti si χ(G) ≤ 2. C’est-à-dire, on
+peut partitionner l’ensemble de sommets V en deux sous-ensembles
+stables A, B.
+
+Un cycle élémentaire de longueur impaire n’est pas biparti ; donc,
+une condition nécessaire pour qu’un graphe G soit biparti est que G
+ne contient pas de cycles élémentaires impairs. La proposition suivante
+montre que c’est aussi une condition sufﬁsante.
+
+Proposition 7.14. Un graphe est biparti si et seulement s’il ne contient pas
+de cycles impairs comme sous-graphe.
+
+Démonstration. Un graphe est biparti si et seulement chaque compo-
+sante connexe est biparti, et un graphe contient un cycle impair si et
+seulement si une composante connexe contient un cycle impair. Donc,
+il sufﬁt de considérer les graphes connexes.
+
+Soit G un graphe connexe biparti, avec bipartition (A, B). Les som-
+mets d’une chaîne quelconque alternent entre A et B. Donc, toutes les
+chaînes qui relient des sommets dans des différentes parties de la bi-
+partition sont de longueur impaire, et toutes les chaînes qui relient des
+sommets dans la même partie de la bipartition sont de longueur paire.
+Comme toutes les arêtes de G ont une extrémité dans A et l’autre dans
+B, tous les cycles de G doivent être bipartis.
+
+Supposons que G est un graphe connexe sans cycle impair. Grâce à
+la Proposition 3.6, G contient un arbre couvrant T. Soit r un sommet
+de T. Par le Théorème 3.2, il existe une chaîne unique entre r et tout
+autre sommet v. Soit A l’ensemble de sommets de G dont la distance à
+r est paire, est soit B = V \ A. Cela déﬁnit une bipartition (A, B) de T.
+On va montrer que (A, B) est aussi une bipartition de G. Soit e = uv
+une arête de E(G) \ E(T), et soit P la chaîne unique dans T qui relie
+u et v. Par l’hypothèse, le cycle P + e est pair, donc P est de longueur
+impaire. Donc, les sommets u et v sont dans des parties différentes de
+(A, B). Cela démontre que (A, B) est bien une bipartition de G.
+
+Déﬁnition 7.15. Le graphe biparti complet Ka,b est le graphe biparti avec
+bipartition (A, B), où |A| = a et |B| = b, et toutes les arêtes possibles
+entre A et B.
+
+Exemples de graphes bipartis: arbres,
+cycles élémentaires de longueur paire.
+
+Figure 11: Le graphe biparti complet
+K3,3.
+
+graphes et complexité — ricm4
+
+24
+
+Application : design de circuits impri-
+més en microelectronique
+
+Figure 12: Deux représentations du
+graphe complet K4. La deuxième repré-
+sentation est planaire, donc K4 est un
+graphe planaire.
+
+8 Graphes planaires
+
+Déﬁnition 8.1. Un graphe G = (V, E) est planaire s’il peut être repré-
+senté dans le plan R2 de sorte que deux arêtes distinctes ne se croisent
+pas. On appelle une telle représentation un plongement de G dans le
+plan.
+
+Déﬁnition 8.2. Soit G un graphe plongé dans le plan R2. Les compo-
+santes connexes de R2 sont les faces de G.
+
+Déﬁnition 8.3. Soit G un graphe plongé dans le plan. Alors on déﬁnit
+le graphe dual G∗ de G comme suit. À chaque face f de G correspond
+un sommet f ∗ de G∗, et à chaque arête e de G correspond un arête e∗
+de G. Deux sommets f ∗, g∗ de G∗ sont les extrémités de l’arête e∗ si et
+seulement si l’arête e sépare les faces f et g de G.
+
+étant donné un graphe G et un sous-ensemble S de E(G), on note
+
+S∗ le sous-ensemble {e∗ : e ∈ S} de E(G∗).
+Déﬁnition 8.4. Soit G = (V, E) un graphe. Un ensemble d’aretes F ⊆ E
+est une coupe s’il existe un ensemble X ⊆ V tel que chaque arete dans
+F a une extrémité dans X et l’autre dans V \ X ; on note F = δ(X).
+
+Une attache d’un graphe est une coupe non-vide minimale, c’est-à-
+dire, une coupe non-vide dont aucun des sous-ensembles propres et
+non-vides n’est une coupe.
+Proposition 8.5. Soit G un graphe connexe plongé dans le plan, et soit G∗
+le graphe dual de G.
+1. Si C est un cycle de G, alors C∗ est une attache de G∗.
+2. Si B est une attache de G, alors B∗ est un cycle de G∗.
+Théorème 8.6 (Formule d’Euler). Soit G un graphe connexe plongé dans
+le plan. Soient n, m et f le nombre de sommets, arêtes et faces de G, respecti-
+vement. Alors on a n − m + f = 2.
+Démonstration. Soit T un arbre couvrant de G. Comme T a n sommets,
+il a n − 1 arêtes. Par la Proposition 8.5. le graphe C∗ = (G \ T)∗ est un
+arbre couvrant de G∗. Comme C∗ a f faces, C∗ a f − 1 arêtes. Toute
+arête de G est soit dans T, soit dans C. Donc on a m = (n − 1) + ( f −
+1).
+
+Corollaire 8.7 (Formule d’Euler avec composantes). Soit G un graphe
+plongé dans le plan. Soient n, m, f et c le nombre de sommets, arêtes, faces et
+composantes connexes de G, respectivement. Alors on a n − m + f = 1 + c.
+Démonstration. Récurrence sur c. Cas de base : c = 1 (Theorème 8.6).
+On suppose le résultat est vrai pour c ≥ 1. Soit G un graphe pla-
+naire avec c + 1 composantes connexes. Soit G1 une des composantes
+
+graphes et complexité — ricm4
+
+25
+
+connexes. G(cid:48) = G − G1 a c composantes donc n1 − m1 + f1 = 2 et
+n(cid:48) − m(cid:48) + f (cid:48) = 1 + c par l’hypothèse de récurrence. Or, n = n1 + n(cid:48),
+m = m1 + m(cid:48), et f = f1 + f (cid:48) − 1 Donc n − m + f = (n1 − m1 + f1) +
+n(cid:48) − m(cid:48) + f − 1 = 1 + (c + 1).
+Corollaire 8.8. Soit G un graphe planaire connexe. Alors on a m ≤ 3n − 6.
+Démonstration. On montre que 2m ≥ 3 f car chaque face est bordée par
+au moins 3 arêtes. Puis calcul.
+
+Corollaire 8.9. Le graphe K5 n’est pas planaire.
+Démonstration. On a m = 10 > 9 = 3 · 5 − 6 = 3n − 6.
+Corollaire 8.10. Soit G un graphe planaire quelconque. Alors G contient un
+sommet de degre ≤ 5.
+Démonstration. Sinon, 2m ≥ 6n, donc m ≥ 3n.
+Proposition 8.11. Soit G planaire connexe sans triangle. Alors on a m ≤
+2n − 4.
+Corollaire 8.12. Le graphe K3,3 n’est pas planaire.
+Démonstration. On a m = 9 > 8 = 2 · 6 − 4 = 2n − 4.
+
+On a montré que K5 et K3,3 ne sont pas bipartis. En fait, ces deux
+graphes sont des graphes non-biparti « minimaux canoniques » et
+jouent un rôle important dans la caractérisation suivante de graphes
+planaires.
+
+Déﬁnition 8.13. Une subdivision d’un graphe est le résultat de l’ajout
+d’un ou plusieurs sommets sur une ou plusieurs arêtes.
+
+Théorème 8.14 (Le théorème de Kuratowski). Un graphe G est planaire
+si et seulement si G ne contient pas de subdivision de K5 ni de K3,3.
+
+Figure 13: Une subdivision de K3,3.
+
+8.1 Coloration des graphes planaires
+
+Le théorème célèbre dit des 4 couleurs
+
+Théorème 8.15. Soit G planaire, alors χ(G) ≤ 4.
+
+La preuve de ce théorème est extrêmement difﬁcile et dépend de
+l’usage de l’ordinateur pour étudier des centaines de cas. Le résultat
+suivant est beaucoup plus simple.
+Théorème 8.16. Soit G planaire, alors, χ(G) ≤ 6
+
+graphes et complexité — ricm4
+
+26
+
+Démonstration. Soit n le nombre de sommets de G. Grâce au corol-
+laire 8.10, G0 := G contient un sommet u1 de degré au plus 5. De
+même, G1 := G − u1 contient un sommet u2 de degré au plus 5, et
+plus généralement, Gi := G − {u1, u2, . . . , ui} contient un sommet ui+1
+de degré au plus 5, pour tout 0 ≤ i ≤ n − 1.
+
+Appliquer l’algorithme glouton dans l’ordre un, un−1, . . . , u2, u1. À
+chaque étape, le sommet traité est voisin d’au plus 5 sommets déjà
+coloriés, donc l’algorithme va utiliser au plus 6 couleurs.
+
+graphes et complexité — ricm4
+
+27
+
+9 Flot-max / coupe-min
+
+A faire
+
+graphes et complexité — ricm4
+
+28
+
+10 P, NP
+
+A faire
+
+graphes et complexité — ricm4
+
+29
+
+11 Algorithmes d’approximation
+
+A faire
+
+

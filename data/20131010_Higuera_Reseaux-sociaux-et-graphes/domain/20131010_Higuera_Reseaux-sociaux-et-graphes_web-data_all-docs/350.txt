@@ -1,0 +1,589 @@
+https://halshs.archives-ouvertes.fr/file/index/docid/546973/filename/fmr3_mesures_locales.pdf
+
+Les mesures locales d’un réseau
+
+César Ducruet
+
+To cite this version:
+
+César Ducruet. Les mesures locales d’un réseau. 2010. <halshs-00546814v2>
+
+HAL Id: halshs-00546814
+
+https://halshs.archives-ouvertes.fr/halshs-00546814v2
+
+Submitted on 15 Dec 2010
+
+HAL is a multi-disciplinary open access
+archive for the deposit and dissemination of sci-
+entific research documents, whether they are pub-
+lished or not. The documents may come from
+teaching and research institutions in France or
+abroad, or from public or private research centers.
+
+L’archive ouverte pluridisciplinaire HAL, est
+destinée au dépôt et à la diffusion de documents
+scientifiques de niveau recherche, publiés ou non,
+émanant des établissements d’enseignement et de
+recherche français ou étrangers, des laboratoires
+publics ou privés.
+
+Les mesures locales d’un réseau
+
+César Ducruet, CNRS, UMR Géographie-cités
+
+ducruet<at>parisgeo.cnrs.fr
+
+Version 1 - Décembre 2010
+
+Introduction
+
+Une mesure locale s’attache à décrire la situation d’un élément au sein
+du réseau par rapport aux autres éléments, qu’il s’agisse de sommets ou
+bien de liens. Les mesures locales peuvent être interprétées, selon l’approche
+et la thématique en jeu, comme des mesures de centralité et d’accessibilité ;
+elles expriment avant tout un potentiel. L’analyse statistique de ces mesures,
+prises dans leur individualité ou bien deux à deux, peut permettre de vériﬁer
+certaines lois d’organisation des réseaux en construisant des mesures globales
+([8]).
+
+Les mesures locales sont bien plus nombreuses et diverses que les mesures
+globales. Nous proposons de les classer en deux grands types : les mesures lo-
+cales de voisinage et les mesures locales d’ensemble. Les premières décrivent
+la situation d’un élément par rapport à ses voisins immédiats (directement
+connectés ou adjacents), tandis que les secondes rendent compte de la situa-
+tion d’un élément par rapport à tous les autres éléments de même nature
+présents dans le réseau. Quand cela est possible, des sous-catégories per-
+mettent de mieux diﬀérencier les mesures de nature diﬀérente, c’est-à-dire
+qui sont habituellement appliquées dans des champs scientiﬁques séparés (ex :
+centralité dans un réseau social, accessibilité dans un réseau de transport).
+Or il n’y a aucune raison valable de conserver ces coupures thématiques et
+disciplinaires puisque ces mesures s’appliquent à tout réseau.
+
+1 Les mesures locales de voisinage
+
+Certaines mesures peuvent connaître de nombreuses variantes en fonction
+du critère retenu. Par exemple, la déﬁnition du degré ou degré d’incidence
+(degree centrality) peut s’appliquer à une profondeur (depth) d’une valeur
+
+1
+
+de 1 (sommets voisins immédiats, adjacents, directement connectés), de 2
+(voisins proches, reliés par l’intermédiaire des voisins immédiats), de 3, etc.
+En d’autres termes, il s’agit de prendre ou non en compte le degré des voisins.
+Le degré peut également être pondéré en fonction du poids des liens (weighted
+degree), ce qui équivaut dans le cas d’un réseau de transport à calculer la
+somme, par exemple, du traﬁc des liens d’un sommet (voyageurs, tonnes)
+même si cette somme peut varier en fonction de la profondeur retenue (Barrat
+et al., 2004[1]). Dans un graphe orienté, on distingue le degré « entrant »(in-
+degree) du degré « sortant »(out-degree), les deux pouvant être identiques ou
+non.
+
+Calculer la part du ﬂux majeur dans le total du traﬁc revient à détermi-
+ner un niveau de vulnérabilité d’un sommet (hub dependence, voir Ducruet,
+2008[7]). En eﬀet, cette mesure illustre à quel point le lien principal compte
+dans l’activité générale du sommet, et quelle part de son activité serait per-
+due en cas de disparition de ce lien (ou du voisin relié via le ﬂux majeur).
+Dans le cas où un sommet serait relié par plusieurs liens de poids identique
+ou comparable, la prise en compte du seul ﬂux majeur peut s’avérer trop
+simpliste (Puebla, 1987[17]). On peut dans ce cas appliquer un seuil : liens
+ayant un poids d’au moins 10% dans le degré pondéré ; liens dont le poids
+total constitue au plus 50% du degré pondéré, etc. aﬁn de prendre en compte
+les ﬂux dominants (dominant ﬂows) dans l’analyse. Enﬁn, le degré peut de-
+venir une mesure locale d’ensemble si l’on rapporte le degré au nombre de
+sommets du graphe (pourcentage de sommets reliés dans le total) ou bien si
+l’on calcule le poids du degré pondéré dans le poids total du graphe Q(G).
+La « centralité combinée » est d’après Opsahl et al. (2010[16]) plus eﬃcace
+que les mesures précédentes puisqu’elle combine le degré d’incidence et le
+degré pondéré : topologie et poids. En eﬀet, le degré considère tous les liens
+de la même façon (0, absence de lien et 1, présence de lien), tandis que le
+degré pondéré ne fait pas de distinction entre un seul lien de valeur 2 et
+deux liens de valeur 1. Tout est dans le paramètre alpha proposé par les
+auteurs, dont le réglage (entre 0 et 1) dépend de la thématique abordée : un
+coeﬃcient faible donnera plus d’importance au degré, tandis qu’un coeﬃcient
+fort favorisera le rôle du poids des liens.
+
+Le degré moyen des voisins les plus proches est utile puisqu’il permet
+de révéler la structure d’ensemble du réseau. En anglais assortative network
+signiﬁe que les sommets voisins ont un degré comparable, disassortative net-
+work signiﬁe le contraire (Newman, 2002 et 2003[13][14]). Deux mesures
+globales permettent d’en rendre compte (cf. [8]). L’assortativity coeﬃcient
+est donc une mesure globale qui correspond à la corrélation de Pearson au
+sein de chaque couple de sommets entre leurs degrés respectifs. Le neighbor
+connectivity est la corrélation entre le degré d’un sommet et la moyenne des
+degrés des sommets voisins. On peut aussi raisonner en termes de proba-
+bilités en fonction de la distribution statistique des valeurs. L’eigenvector
+centrality se diﬀérencie du degré par le fait qu’elle tient compte du degré des
+
+2
+
+Tableau 1 – Les mesures locales de voisinage
+
+Degré, degré d’incidence (degree centrality) : nombre de sommets adjacents
+
+Degré ponderé (weighted degree) : somme des poids des liens adjacents
+
+N(cid:88)
+
+j
+
+N(cid:88)
+
+i
+
+ki = CD(i) =
+
+xij
+
+si = Cw
+
+D(i) =
+
+wij
+
+(cid:18) si
+
+(cid:19)α
+
+ki
+
+(cid:88)
+
+j
+
+n(cid:88)
+
+j=1
+
+knn,i =
+
+1
+ki
+
+aijkj
+
+xi =
+
+1
+λ
+
+Aijxj
+
+Centralité combinée (combined centrality) : degré pondéré sur degré d’inci-
+dence à l’exposant α
+
+D (i) = ki ×
+Cwα
+
+= k(1−α)
+
+i
+
+× sα
+
+i
+
+Degré moyen des voisins les plus proches (average nearest neighbours degree)
+
+Centralité des vecteurs propres (eigenvector centrality)
+
+Vulnérabilité (hub dependence) : part du lien le plus fort dans le degré pon-
+déré (%)
+Transitivité (transitivity, clustering coeﬃcient) : nombre de triades fermées
+sur nombre de triades possibles
+
+Ci =
+
+2|{ejk}|
+ki(ki − 1)
+
+Indice de force (strength index) : probabilité que les liens adjacents appar-
+tiennent à des cycles 3 et 4
+
+(cid:80)
+
+ws(u) =
+
+e∈adj(u) ws(e)
+
+deg(u)
+
+Indice de Strahler (Strahler index, Horton-Strahler number) : nombre d’em-
+branchements en aval du sommet
+
+3
+
+sommets adjacents. Cette centralité tient donc compte à la fois du nombre
+et de la qualité des liens ([3]).
+
+Certaines mesures locales de voisinage se prêtent à un type particulier
+de réseau. L’indice de Strahler, créé en hydrologie, s’applique uniquement
+aux graphes en arbre (tree graph) et mesure le niveau de ramiﬁcation des
+sommets. C’est le nombre d’embranchements (conﬂuences) en aval de chaque
+sommet. Inversement, la transitivité ne peut s’appliquer à un graphe en
+arbre car elle s’intéresse avant tout à l’existence de cycles (cf.[2]) dans le
+graphe. Plus précisément, la transitivité correspond au nombre de triades
+(triads) fermées sur le nombre de triades possibles (trois sommets voisins
+interconnectés). C’est donc la probabilité pour un sommet donné que ses
+deux voisins immédiats soient également connectés entre eux. En théorie,
+l’existence d’un réseau petit-monde (small-world network) repose sur une
+forte transitivité moyenne, ainsi que sur un diamètre faible et une distance
+moyenne faible des plus courts chemins (cf. [8]). L’indice de force (strength
+index) est identique à cela près qu’il ne considère pas les triades mais les
+cycles de niveau 3 et 4 1(Bourqui et al., 2009[4]). L’indice de force est en
+fait la densité de la cohésion des liens autour d’un sommet donné. Une force
+élevée correspondra à des nœuds situés dans un environnement dense, comme
+un graphe ou sous-graphe complets, une force faible correspondra à des hubs,
+dont les sommets adjacents ne sont que faiblement reliés entre eux.
+
+2 Les mesures locales d’ensemble
+
+La plupart des mesures d’ensemble sont des mesures d’accessibilité prises
+sous diﬀérents angles. Elles prennent en compte soit la distance géodésique,
+soit la distance euclidienne (ex : kilomètres). La majorité des mesures d’en-
+semble a été appliquée aux réseaux de transport (le plus souvent sur des
+graphes planaires), visant à rendre compte de l’inégale situation des sommets
+(villes, gares, etc.) dans le réseau routier ou ferroviaire. Leur point commun
+est de décrire la situation d’un sommet par rapport à tous les autres, par rap-
+port aux chemins possibles, à leur longueur (totale, la plus courte, moyenne),
+et à leurs caractéristiques (poids, qualité, etc.).
+
+L’indice de Shimbel se calcule à partir d’une matrice des distances : celles-
+ci sont additionnées en ligne ou en colonne. Le sommet dont la somme est la
+moindre est donc le plus accessible depuis et vers tous les autres sommets.
+La centralité de proximité (closeness centrality) est simplement l’inverse de
+l’indice de Shimbel, avec l’avantage d’être normalisée de 0 à 1, 1 étant la
+plus forte accessibilité. L’accessibilité géographique est également un dérivé
+de l’indice de Shimbel, puisqu’il suﬃt de diviser ce dernier par le nombre
+de sommets présents sur les plus courts chemins. De la même façon, l’acces-
+sibilité potentielle divise un attribut quelconque d’un sommet donné (ex :
+
+1. Contenant 3 ou 4 sommets.
+
+4
+
+population, surface commerciale, richesse) par l’indice de Shimbel (Rodrigue
+et al., 2009 [18]). L’accessibilité potentielle se basant sur des valeurs asso-
+ciées aux sommets, les résultats varient en ligne ou en colonne : on parle
+alors d’émissivité (somme en ligne ; capacité à quitter un lieu) ou d’attracti-
+vité (somme en colonne ; capacité à atteindre un lieu).
+
+Un bon exemple est l’analyse par Chapelon (2006[5]) de l’accessibilité
+des ports à la richesse et à la population européennes. La recherche de plus
+courts chemins dans le graphe valué (algorithme de Floyd) ne se borne pas à
+la simple topologie du réseau routier ; elle prend également en compte la lé-
+gislation en vigueur, la qualité des liens (hiérarchie, longueur). De nombreux
+travaux appliquant ces mesures aux réseaux de transport (ex : indice de
+Shimbel) ont pu souligner les dynamiques territoriales et réticulaires sous-
+jacentes, comme dans le cas des stratégies de hub en transport aérien ou
+encore l’inﬂuence de l’intégration européenne sur l’accessibilité des régions.
+Wang et al. (2010[20]) ont notamment mis en évidence la forte corrélation
+entre diﬀérents types de centralité (degré, d’intermédiarité, de proximité) et
+les caractéristiques socio-économiques des villes dans le cas du réseau aé-
+rien chinois, en termes de produit régional brut et de population urbaine.
+Gleyze (2007[10]) propose de distinguer l’eﬀet réseau de l’eﬀet spatial dans
+le niveau de centralité des sommets, à partir de l’exemple du réseau routier
+d’Indianapolis.
+
+La centralité d’intermédiarité (betweenness), dans sa version topologique
+ou pondérée, a retenu l’attention de nombreux travaux récents. Les sommets
+ayant un niveau élevé de centralité d’intermédiarité sont ceux qui permettent
+de limiter la distance à parcourir dans le réseau. Leur suppression condui-
+rait donc à ralentir le ﬂux puisque ce dernier devrait passer par des che-
+mins plus longs. La centralité d’intermédiarité a notamment été utilisée en
+géographie par Comin (2009[6]) pour montrer la polarisation du réseau des
+collaborations scientiﬁques européennes par les grandes villes, ainsi que par
+Rozenblat (2010[19]) pour mettre en évidence les logiques de localisation des
+multinationales dans les villes européennes.Cette centralité se calcule égale-
+ment sur les liens : Girvan et Newman (2002[9]) s’en servent comme base de
+leur algorithme (divisive hierarchical clustering algorithm) pour trouver des
+sous-graphes dans le réseau, puisque la suppression des liens les plus cen-
+traux met en valeur des cliques. Newman (2005[15]) reste critique à l’égard
+de la centralité d’intermédiarité puisque d’après lui, les ﬂux dans un réseau
+ne suivent pas forcément le plus court chemin ou le chemin le plus eﬃcace.
+Il propose donc de prendre en compte les chemins aléatoires (random-walk
+betweenness) dans le calcul de cette centralité, et reconnaît l’existence de
+multiples mesures existantes allant dans ce sens 2 .
+
+2. Newman (2005) mentionne notamment la power centrality de Bonacich, la random-
+walk centrality de Noh et Rieger, l’information centrality de Stephenson et Zelen. Wasser-
+man et Faust (1994[21]) mentionnent également la stress centrality et la graph centrality.
+
+5
+
+(cid:16)(cid:80)n
+
+(cid:80)n
+
+i
+
+j dij
+
+(cid:17)
+
+(cid:80)n
+i Pi +(cid:80)n
+
+j Pj
+
+n
+
+dij
+
+A(G) =
+
+A(P ) =
+
+Tableau 2 – Les mesures locales d’ensemble
+
+Nombre de Koenig, excentricité (Koenig number, associated number, eccen-
+tricity, dag level) : nombre de liens servant à connecter le sommet le plus
+distant
+
+e(x) = maxy∈X d(x, y)
+
+Indice de Shimbel (Shimbel index, Shimbel distance, nodal accessibility, no-
+dality) : somme des longueurs des plus courts chemins permettant de relier
+tous les autres sommets
+
+n(cid:88)
+
+j=1
+
+Ai =
+
+dij
+
+Accessibilité géographique* (geographic accessibility) : distance minimale di-
+visée par le nombre de sommets du graphe
+
+Accessibilité potentielle** (potential accessibility) : accessibilité géographique
+divisée par un attribut du sommet choisi en fonction de la thématique traitée
+
+Centralité de proximité (closeness centrality, distance centrality) : inverse de
+l’indice de Shimbel
+
+1(cid:80)
+
+t∈G dG(v, t)
+
+Dc(v) =
+
+Centralité d’intermédiarité (betweenness centrality, shortest-path between-
+ness) : nombre de plus courts chemins du graphe passant par chaque sommet
+
+CB(i) =
+
+gjk(i)
+
+gjk
+
+Centralité d’intermédiarité pondérée* (weighted betweenness centrality, ﬂow
+betweenness) : traﬁc passant par le sommet i entre les sommets j et k par
+rapport au traﬁc maximum entre j et k
+
+(cid:80)
+(cid:80)
+
+CF
+
+i =
+
+j<k∈G mjk(i)
+j<k∈G mjk
+
+*Dans un graphe valué (ex : distance kilométrique pour les liens)
+**Dans un graphe valué (ex : distance kilométrique pour les liens ; population ou richesse
+pour les sommets)
+
+6
+
+3 Des mesures locales aux mesures globales
+
+L’étude de la distribution statistique des mesures locales est un aspect
+essentiel de la recherche sur les réseaux, puisque l’on peut en déduire le type
+de réseau rencontré.
+
+La distribution des degrés (degree distribution)
+
+L’exemple le plus communément admis dans les recherches récentes est
+celui de la distribution des degrés des sommets, qui permet de déterminer
+l’existence d’une structure invariante d’échelle (scale-free, voir séance fmr
+2). Le graphique bi logarithmique du degré (abscisses) et de la fréquence des
+sommets (ordonnées) sert à vériﬁer l’applicabilité de la loi de puissance. La
+pente de la courbe (coeﬃcient) est supérieure ou égale à 1 dans le cas des
+réseaux invariants d’échelle, même si la littérature suggère des valeurs plus
+élevées (2 à 3) pour valider la structure en question. Cette analyse n’a guère
+de sens dans le cas des graphes planaires où la dimension hiérarchique est
+modérée.
+
+Degré et centralité d’intermédiarité
+
+Croiser ces deux centralités dans un graphique permet de repérer la situa-
+tion exceptionnelle de certains sommets dans le réseau. La centralité désignée
+comme « anormale »(anomalous centrality) par Guimera et al. (2005[11])
+s’explique par des sommets étant mieux placés au niveau global (forte cen-
+tralité d’intermédiarité) qu’au niveau local (degré plus faible) : ce sont des
+ponts, des connecteurs (bridges, connectors) servant, dans le réseau aérien
+par exemple, de relais entre régions distantes, comme Anchorage (Alaska)
+entre l’Asie et l’Amérique du Nord. Guimera et al. (2005) vont plus loin en
+soulignant que ce type de conﬁguration est directement lié à l’existence de
+sous-groupes ou communautés (voir séance fmr4) fortement interconnectés
+mais étant reliées par peu de sommets. Le proﬁl opposé existe également, ce-
+lui d’un sommet ayant beaucoup de liens avec ses voisins (degré élevé) mais
+n’ayant pas ce rôle de connecteur entre diﬀérentes communautés. Or ces
+écarts n’apparaissent pas dans tous les réseaux car ils dépendent en grande
+partie de facteurs géographiques et politiques sous-jacents à leur organisa-
+tion, l’aérien étant plus favorable à la formation de communautés que le
+maritime (Hu et Zhu, 2009[12]). Le plus souvent, la corrélation entre degré
+et centralité d’intermédiarité est plutôt forte, les sommets au degré élevé
+étant également les plus centraux au niveau global ; on parle alors de hub 3.
+
+3. Selon les disciplines, le hub signiﬁe un sommet de fort degré, un sommet de fort
+
+degré très central, ou un sommet très central de faible degré (pont).
+
+7
+
+Autres combinaisons possibles
+
+Certaines comparaisons permettent de mettre en évidence d’autres pro-
+priétés globales d’un réseau. Par exemple, celle de l’indice de force (strength)
+et du degré dans un graphique bi logarithmique peut suggérer que si la force
+augmente plus vite que le degré (pente de la droite de régression supérieure
+à 1), les sommets à fort degré auront tendance à attirer plus de traﬁc. De la
+même façon, combiner le degré avec la transitivité conﬁrme que les sommets
+à fort degré ont, en général, une transitivité faible puisqu’ils connectent par
+leur position centrale beaucoup de sommets non connectés entre eux (et ne
+formant donc pas de triades ou de cycles en général). A l’inverse, les sommets
+de faible degré auront plus de chance de se trouver intégrés dans une triade,
+donc avec une transitivité maximale.
+
+Conclusion
+
+Les mesures locales sont très diverses et cet inventaire est loin d’être
+exhaustif. On peut retenir que le degré est bien souvent la seule mesure
+locale ne soulevant aucune controverse. Simple à la fois par sa déﬁnition et
+son calcul, sa portée est grande et elle suﬃt dans bien des cas à résumer
+la situation d’un sommet dans le graphe, même si cela est surtout valable
+dans le cas des graphes non planaires où la hiérarchie du degré est bien plus
+prononcée que dans le cas des graphes planaires. De plus, la plupart des
+mesures locales dans des graphes non planaires sont fortement corrélées au
+degré. Conclure sur l’utilité de mesures complémentaires n’aurait donc de
+sens que par rapport aux questions posées. Ainsi en géographie, la centralité
+d’un nœud ou d’un territoire doit être interrogée par rapport aux autres
+composantes de l’espace étudié.
+
+Références
+[1] A. Barrat, M. Barthélemy, R. Pastor-Satorras et A. Vespi-
+gnani : The architecture of complex weighted networks. Proceedings of
+the National Academy of Sciences, 101(11):3747–3752, 2004.
+
+[2] L. Beauguitte : Graphes, réseaux, réseaux sociaux : vocabu-
+laire et notation. Groupe fmr, 7p., 2010 (http ://halshs.archives-
+ouvertes.fr/halshs-00541898/en/).
+
+[3] P. Bonacich : Some unique properties of eigenvector centrality. Social
+
+Networks, 29(4):555–564, 2007.
+
+[4] R. Bourqui, F. Gilbert, P. Simonetto, F. Zaidi, U. Sharan et
+F. Jourdan : Detecting structural changes and command hierarchies
+in dynamic social networks. In Social Network Analysis and Mining,
+
+8
+
+2009. ASONAM’09. International Conference on Advances in, pages
+83–88, 2009.
+
+[5] L. Chapelon : L’accessibilité, marqueur des inégalités de rayonne-
+ment des villes portuaires en Europe. Cybergeo, 2006 (http ://cyber-
+geo.revues.org/index2463.html).
+
+[6] M.N. Comin : Réseaux de villes et réseaux d’innovation en Europe :
+Structuration du système des villes européennes par les réseaux de re-
+cherches sur les technologies convergentes. Thèse de doctorat, Université
+de Paris I Sorbonne, 2009.
+
+[7] C. Ducruet : Hub dependence in constrained economies : the case of
+
+North Korea. Maritime Policy & Management, 35(4):377–394, 2008.
+
+[8] C. Ducruet : Les mesures globales d’un réseau. Groupe fmr, 8p., 2010
+
+(http ://halshs.archives-ouvertes.fr/halshs-00541902).
+
+[9] M. Girvan et M.E.J. Newman : Community structure in social and
+biological networks. Proceedings of the National Academy of Sciences
+of the United States of America, 99(12):7821, 2002.
+
+[10] J.F. Gleyze :
+
+Eﬀets spatiaux et eﬀets réseau dans l’évalua-
+tion d’indicateurs sur les nœuds d’un réseau d’infrastructure. Cy-
+bergeo : European Journal of Geography, 2007 (http ://cyber-
+geo.revues.org/index5532.html).
+
+[11] R. Guimera, S. Mossa, A. Turtschi et L.A.N. Amaral : The world-
+wide air transportation network : Anomalous centrality, community
+structure, and cities’ global roles. Proceedings of the National Academy
+of Sciences of the United States of America, 102(22):7794–7799, 2005.
+[12] Y. Hu et D. Zhu : Empirical analysis of the worldwide maritime trans-
+
+portation network. Physica A, 388:2061–2071, 2009.
+
+[13] M.E.J. Newman : Assortative mixing in networks. Physical Review
+
+Letters, 89(20):208701, 2002.
+
+[14] M.E.J. Newman : Mixing patterns in networks. Physical Review E,
+
+67(2):26126, 2003.
+
+[15] M.E.J. Newman : A measure of betweenness centrality based on ran-
+
+dom walks. Social networks, 27(1):39–54, 2005.
+
+[16] T. Opsahl, F. Agneessens et J. Skvoretz : Node centrality in weigh-
+ted networks : Generalizing degree and shortest paths. Social Networks,
+32(3):245–251, 2010.
+
+[17] J.G. Puebla : Spatial structures of network ﬂows : A graph theoretical
+
+approach. Transportation Research Part B, 21(6):489–502, 1987.
+
+[18] J.P. Rodrigue, C. Comtois et B. Slack : The geography of transport
+
+systems. Routledge, Taylor and Francis Books, 2009.
+
+9
+
+[19] C. Rozenblat : Opening the black box of agglomeration economies for
+measuring cities’ competitiveness through international ﬁrm networks.
+Urban Studies, 47(13):2841–2865, 2010.
+
+[20] J. Wang, H. Mo, F. Wang et F. Jin : Exploring the network struc-
+ture and nodal centrality of China’s air transport network : A complex
+network approach. Journal of Transport Geography, 2010.
+
+[21] S. Wasserman et K. Faust : Social Network Analysis. Methods and
+Applications. Structural analysis in the social sciences. Cambridge Uni-
+versity Press, 1994.
+
+Table des matières
+
+1 Les mesures locales de voisinage
+
+2 Les mesures locales d’ensemble
+
+3 Des mesures locales aux mesures globales
+
+1
+
+4
+
+7
+
+10
+
+

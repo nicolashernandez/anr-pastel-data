@@ -1,0 +1,6272 @@
+http://www.math-evry.cnrs.fr/_media/publications/birmele_hdr.pdf
+
+Etude structurelle des r´eseaux : mod`eles al´eatoires,
+
+motifs et cycles.
+
+Etienne Birmel´e
+
+Laboratoire Statistique et G´enome (UMR CNRS 8071),
+
+Tour ´Evry 2, 523 pl. des Terrasses de l’Agora,
+
+91000 ´Evry, France
+
+e-mail: etienne.birmele@genopole.cnrs.fr
+
+url: stat.genopole.cnrs.fr/∼ebirmele
+
+Habilitation `a diriger des recherches
+
+Soutenue le 3 novembre 2011 `a l’Universit´e d’´Evry-Val d’Essonne
+
+devant un jury compos´e de
+
+Pr. Christophe
+Pr. Gilles
+Pr. Adrian
+Dr. Matthieu
+Pr. G´abor
+Dr. Marie-France
+Pr. Korbinian
+
+AMBROISE
+BLANCHARD
+BONDY
+LATAPY
+LUGOSI
+SAGOT
+STRIMMER
+
+Rapporteur
+Rapporteur
+Pr´esidente
+Rapporteur
+
+1
+
+2
+
+Etienne Birmel´e
+
+Table des mati`eres
+
+Remerciements . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Contexte
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+L’objet graphe . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Organisation du m´emoire . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+4 Un mod`ele de m´elange `a classes chevauchantes
+
+2.1 Mod`eles pas `a pas vs mod`eles `a tirage simultan´e
+
+I Mod`eles al´eatoires pour les r´eseaux
+1 Caract´eristiques topologiques des r´eseaux . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+2 Mod`eles al´eatoires existants . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . .
+3 Approche bay´esienne du mod`ele de m´elange . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.1 Contexte . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.2 Approche variationnelle bay´esienne . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.3 Un crit`ere de choix de mod`ele . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.4 Exp´eriences comparatives . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.4.1 Donn´ees d’aﬃliation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.4.2 Donn´ees d’aﬃliation avec hubs . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.4.3 R´eseau m´etabolique d’Escherichia coli . . . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.1 Contexte . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.2 Le mod`ele OSBM . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.3
+Identiﬁabilit´e . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.3.1 Correspondance avec SBM . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.3.2 Permutations et inversions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.3.3
+Identiﬁabilit´e g´en´erique . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.4 Estimation des param`etres . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.5 Exp´eriences comparatives . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.5.1
+Simulations . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.5.2 Blogosph`ere politique fran¸caise . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.5.3 R´eseau de r´egulation de la levure . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.6 Un crit`ere de choix de mod`ele . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+5 Un mod`ele bas´e sur les graphes bipartis . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+5.1 Contexte . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+5.2 Le mod`ele . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+5.3 Propri´et´es topologiques des graphes g´en´er´es . . . . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+5.3.1 Distribution des degr´es
+5.3.2 Densit´es globale et locale . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+5.3.3 Composante g´eante et diam`etre . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+5
+6
+6
+9
+
+11
+11
+12
+12
+18
+18
+19
+20
+21
+21
+21
+22
+23
+23
+25
+26
+26
+27
+28
+29
+30
+32
+33
+34
+34
+35
+35
+36
+37
+37
+38
+39
+
+Etude structurelle des r´eseaux
+
+5.4 Conclusion . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+6 Perspectives . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+II Recherche de motifs dans les r´eseaux biologiques
+7
+
+Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+7.1 Motivations . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+7.2 Sch´emas et occurrences
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+7.3 Le probl`eme du comptage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+8 Motifs globaux dans le mod`ele EDD . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+9 Recherche de motifs locaux . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+9.1 Motifs locaux . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+9.2 Le mod`ele al´eatoire . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+9.3 Approximation de Poisson pour la p-valeur
+. . . . . . . . . . . . . . . . . . . . . . . . . .
+9.3.1 Borne locale . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+9.3.2 Borne globale . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+9.3.3 Proc´edure de ﬁltrage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+9.3.4 Aspects algorithmiques
+9.4 Borne inf´erieure de la p-valeur . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+9.5 Simulations et application . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+9.5.1 Donn´ees simul´ees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+9.5.2
+Inﬂuence du mod`ele choisi . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+9.5.3 R´eseaux r´eels . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+9.6 Perspectives . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+III Cycles dans les r´eseaux
+10 Bornes pour la largeur d’arborescence . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+10.1 Largeur d’arborescence . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+10.2 Mineurs interdits . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+10.3 Borne polynˆomiale pour la largeur d’arborescence des graphes sans longs cycles . . . . . .
+10.4 Perspectives . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+11 Cycles et r´eseaux m´etaboliques . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+11.1 R´eseaux m´etaboliques consistants . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+11.2 Organisations chimiques et complexit´e de leur ´enum´eration . . . . . . . . . . . . . . . . .
+11.3 Cycles bloquants . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+11.4 Algorithme . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+11.5 Perspectives . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+R´ef´erences . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Publications . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+3
+
+39
+39
+
+41
+41
+41
+42
+43
+43
+45
+47
+48
+49
+49
+51
+52
+52
+54
+55
+55
+56
+58
+59
+
+63
+63
+63
+64
+66
+68
+68
+68
+69
+71
+73
+75
+77
+83
+
+4
+
+Etienne Birmel´e
+
+Liste des co-auteurs
+
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+85
+
+Remerciements
+
+Etude structurelle des r´eseaux
+
+5
+
+Je tiens `a remercier Matthieu Latapy, G´abor Lugosi et Korbinian Strimmer d’avoir accept´e la tˆache
+fastidieuse consistant `a ´ecrire un rapport sur ce travail. Merci ´egalement `a Marie-France Sagot, Chris-
+tophe Ambroise, Gilles Blanchard et Adrian Bondy pour leur participation au jury.
+
+Parmi toutes les personnes qui ont jalonn´e mon parcours scientiﬁque, je voudrais tout particuli`erement
+remercier Adrian Bondy , qui m’a d´eﬁnitivement inocul´e le virus de la th´eorie des graphes, si riche en
+probl`emes qui s’´enoncent en deux minutes et se r´esolvent en autant de d´ecennies (ou pas). Un grand
+merci ´egalement `a Christophe Ambroise pour l’initiation aux joies de l’encadrement et de la classiﬁca-
+tion et `a Marie-France Sagot pour l’ouverture sur le monde de l’informatique th´eorique appliqu´ee. Enﬁn,
+Bernard Prum et son ´equipe d’alors ont pris le risque de faire conﬁance `a un jeune non-biologiste `a-
+peine-probabiliste pour int´egrer leur laboratoire. J’esp`ere que la lecture de ce document leur laissera le
+sentiment d’un pari r´eussi.
+
+Depuis mes d´ebuts en th`ese, j’ai eu l’occasion de travailler avec de nombreux co-auteurs, sans qui mes
+travaux n’auraient pas vu le jour et que je tiens `a saluer. Merci ´egalement `a toutes celles et ceux dont les
+remarques ou suggestions m’ont ouvert de nouvelles perspectives.
+
+Je voudrais ensuite remercier tous les membres pass´es et pr´esents du laboratoire Statistique et G´enome
+pour l’ambiance de travail particuli`erement agr´eable dans laquelle j’ai la chance d’´evoluer. S’il est vrai que
+partager un caf´e et mieux se connaˆıtre am´eliore les collaborations, l’avenir du laboratoire est assur´e ! Mes
+remerciements vont ´egalement aux membres des groupes SSB et Simbiosi, en esp´erant avoir l’occasion de
+partager encore de nombreux piques-niques post-s´eminaires ou de repas vin/fromage.
+
+Enﬁn, je tire mon chapeau `a Elo¨ıse et Romane qui n’ont jamais mis en doute que mon travail puisse
+consister `a remplir des bloc-notes entiers de triangles et de ﬂ`eches, ce que mˆeme leur petit fr`ere serait
+capable de faire.
+
+6
+
+Etienne Birmel´e
+
+Introduction
+
+Contexte
+
+Suite `a mes ´etudes de math´ematiques, je me suis sp´ecialis´e lors de mon DEA puis de ma th`ese en
+combinatoire et plus sp´ecialement en th´eorie des graphes. J’y ai ´etudi´e, sous la direction de J.A. Bondy,
+des bornes th´eoriques sur la largeur d’arborescence qui est une caract´eristique des graphes associ´ee aux
+performances algorithmiques des probl`emes qu’on cherche `a y r´esoudre.
+
+Mon int´egration au sein du laboratoire Statistique et G´enome en 2005 m’a amen´e `a changer totalement
+de th`emes de recherche. En eﬀet, les ann´ees 2000 ont ´et´e marqu´ees par une tr`es grande augmentation
+des donn´ees disponibles en biologie. Une des cons´equences de cette abondance a ´et´e l’organisation de ces
+donn´ees en r´eseaux, c’est-`a-dire en donn´ees structur´ees sous forme de graphes aﬁn d’en avoir une vue
+d’ensemble. Ces r´eseaux biologiques contenant plusieurs centaines ou milliers de noeuds, les statistiques
+sont naturellement devenues un outil indispensable de leur ´etude.
+
+Historiquement, le laboratoire Statistique et G´enome ´etait surtout sp´ecialis´e dans l’´etude statistique
+des s´equences. La volont´e de cr´eer une ´equipe de recherche centr´ee autour de l’´etude des r´eseaux s’est
+traduite par le recrutement ou la conversion th´ematique de plusieurs chercheurs ayant des formations en
+statistique, th´eorie des graphes et/ou informatique. Cette ´equipe de recherche est ´elargie `a des chercheurs
+de l’INRA issu de l’´ecole d’Agronomie de Paris et du centre de Jouy-en-Josas pour former le groupe
+SSBNet. Notre but principal est la recherche des motifs sur-repr´esent´es dans les r´eseaux, c’est-`a-dire des
+petites structures dont la pr´esence importante indique potentiellement une s´election positive au cours de
+l’´evolution. Notre interaction avec le Laboratoire de Biom´etrie et de Biologie Evolutive a donn´e lieu au
+projet ANR NeMo.
+
+Depuis deux ans, je participe ´egalement `a un autre groupe de recherche (´equipe associ´ee SIMBIOSI
+de l’INRIA) s’int´eressant `a la propagation des ﬂux dans les r´eseaux m´etaboliques, dans le but de mieux
+comprendre les m´ecanismes de la symbiose. Ces travaux portent pour le moment sur des probl`emes
+algorithmiques d’´enum´eration, une partie statistique ´etant `a pr´evoir dans le futur.
+
+L’objet graphe
+
+Mes travaux scientiﬁques ont ´et´e r´ealis´es dans des cadres assez diﬀ´erents, mˆelant les math´ematiques
+discr`etes, les statistiques, l’application `a la biologie et l’informatique. L’ensemble a cependant un ´el´ement
+commun qui est l’objet graphe.
+
+Cet objet math´ematique a l’avantage d’ˆetre `a la fois simple `a appr´ehender et capable de receler des
+structures complexes. Ainsi, un graphe G est la donn´ee d’un ensemble V de sommets et d’un ensemble
+E d’arˆetes les reliant. Il peut ˆetre repr´esent´e `a l’aide d’une matrice d’adjacence ou d’un liste d’arˆetes.
+Lorsqu’il a une taille qui le permet, il est ´egalement tr`es simple `a repr´esenter graphiquement.
+
+Cependant, le fait qu’il introduise les relations entre sommets en fait un objet permettant de d´ecrire de
+nombreux ph´enom`enes r´eels. Parmi les principaux champs d’application des graphes, citons la sociologie,
+
+Etude structurelle des r´eseaux
+
+7
+
+l’informatique et la biologie. Dans chacun de ces domaines, les applications sont elles-mˆemes tr`es vari´ees.
+Dans le cas de la biologie cellulaire, on peut par exemple citer l’´etude des interactions entre prot´eines, de
+la r´egulation entre g`enes ou de l’enchaˆınement de r´eactions dans le m´etabolisme.
+
+Types de graphes
+
+Tout au long de ce m´emoire, je d´esignerai par r´eseau les interactions observ´ees et par graphe les objets
+math´ematiques manipul´es pour ´etudier le r´eseau d’interˆet. En fonction du type de r´eseau ´etudi´e, les
+graphes peuvent ˆetre de plusieurs types aﬁn de correspondre au mieux `a la r´ealit´e :
+
+graphe orient´e ou non-orient´e : les arˆetes d’un graphe non-orient´e sont des relations sym´etriques, au
+contraire des arˆetes d’un graphe orient´e. Des interactions physiques entre prot´eines seront mod´elis´ees
+par des graphes non orient´es alors que des processus de r´egulation entre g`enes le seront `a l’aide de
+graphes orient´es.
+
+graphe avec ou sans auto-arˆetes : une auto-arˆete, ou boucle, est une arˆete reliant un sommet `a lui-
+mˆeme. Les boucles sont par exemple pr´esentes dans les r´eseaux de r´egulation entre g`enes, un g`ene
+pouvant s’auto-r´eguler.
+
+graphe biparti : un graphe biparti est un graphe dont les sommets peuvent ˆetre s´epar´es en deux groupes
+
+tels que toute arˆete du graphe relie deux sommets de groupes diﬀ´erents.
+
+graphe color´e : un graphe color´e est un graphe dont les sommets ou les arˆetes ont une couleur. Il est
+alors possible de mod´eliser des contraintes du probl`eme ´etudi´e via des contraintes sur les couleurs
+du graphe. Les r´eactions d’un graphe m´etaboliques peuvent ˆetre par exemple color´ees suivant un
+code correspondant `a la classiﬁcation des enzymes qui les gouvernent.
+
+graphe valu´e : un graphe valu´e est un graphe dont les arˆetes, qui sont une relation binaire, sont rem-
+plac´es par une fonction de poids, permettant `a nouveau d’introduire de nouvelles donn´ees. La
+similarit´e de s´equences entre deux prot´eines est ainsi plus ﬁnement cod´ee par une arˆete portant un
+score obtenu par alignement de s´equences que par une arˆete simple.
+
+graphe dynamique : un graphe dynamique est un graphe ´evoluant en fonction du temps. Par opposi-
+
+tion, un graphe n’´evoluant pas est dit statique.
+
+La liste pr´ec´edente permet de voir la grande diversit´e des probl`emes pouvant ˆetre mod´elis´es `a l’aide
+de graphes. Dans le suite de ce m´emoire, je ne consid´ererai cependant que des graphes non color´es, non
+valu´es et statiques. Les diﬀ´erents r´esultats seront ´enonc´es soit dans le cadre orient´e, soit non-orient´e mais
+sauf mention contraire, ils peuvent ˆetre ´etendus `a chacune des deux situations.
+
+Notations li´ees aux graphes
+
+Un graphe non orient´e est un couple G = (V, E) o`u V est un ensemble de sommets et E ⊂ V ×
+V un ensemble d’arˆetes. Une arˆete entre les sommets u et v est not´ee (u, v). n(G) et e(G) d´esignent
+
+8
+
+Etienne Birmel´e
+
+respectivement le nombre de sommets et le nombre d’arˆetes du graphe, en omettant la r´ef´erence `a G
+quand il n’y a pas d’ambiguit´e. Sauf pr´ecision contraire, la lettre n est reserv´ee `a cet usage.
+
+La densit´e D(G) du graphe est le rapport du nombre d’arˆetes pr´esentes sur le nombre d’arˆetes possibles,
+
+c’est-`a-dire, dans le cas des graphes sans boucles,
+
+D(G) =
+
+2e(G)
+
+n(G)(n(G) − 1)
+
+Dans le cas des graphes avec boucles, le d´enominateur est remplac´e par n(G)(n(G) + 1).
+
+Un graphe H est un sous-graphe d’un graphe G si H peut ˆetre obtenu `a partir de G par suppression de
+sommets et d’arˆetes (la suppression d’un sommet entraˆınant automatiquement la suppression de toutes
+les arˆetes qui lui sont incidentes). H est un sous-graphe induit s’il est obtenu `a partir de G en supprimant
+uniquement des sommets. Un exemple de comparaison des deux d´eﬁnitions est donn´e Figure 1. Pour tout
+sous-ensemble U de V (G), la notation G[U ] d´esigne le sous-graphe de G induit par les sommets de U ,
+c’est-`a-dire le sous graphe induit de G obtenu en ne gardant que les sommets de U et toutes les arˆetes
+les reliant.
+
+G
+
+a
+
+c
+
+G[{a, b, d}]
+
+G[{a, b, c}]
+
+b
+
+d
+
+Figure 1. Exemples de sous-graphes induits d’un graphe sur deux ensembles de sommets. Le chemin compos´e de trois
+arˆetes est un sous-graphe de G (il est pr´esent six fois) mais n’en est pas un sous-graphe induit.
+
+Pour un sommet v donn´e, on note N (v) le voisinage de v, c’est-`a-dire l’ensemble des sommets reli´es `a
+
+v par une arˆete. Le cardinal de N (v) est not´e dv et est appel´e le degr´e de v.
+
+Dans le cas d’un graphe orient´e, une arˆete est un couple ordonn´e de sommets. On note −→uv l’arˆete
+de u vers v. Toutes les d´eﬁnitions pr´ec´edentes se g´en´eralisent sans mal aux graphes orient´es. Les seules
+diﬀ´erences notables sont le facteur 2 de la densit´e qui disparait et le fait que le voisinage d’un sommet est
+s´epar´e en un voisinage entrant N−(v) regroupant les sommets d’o`u sortent des arˆetes dirig´ees vers v et
+un voisinage sortant N +(v) regroupant les sommets atteints par les arˆetes partant de v. Cette s´eparation
+induit l’existence de deux degr´es d−v et d+
+
+v , appel´es degr´e entrant et degr´e sortant de v.
+
+Dans le cadre des graphes al´eatoires, la variable Xij d´esigne, pour tous sommets i et j, la variable
+indicatrice de la pr´esence de l’arˆete entre i et j. On note alors pij = P(Xij = 1) = E(Xij ) la probabilit´e
+d’apparition d’une arˆete entre i et j.
+
+Etude structurelle des r´eseaux
+
+9
+
+Organisation du m´emoire
+
+Le pr´esent m´emoire reprend les principaux travaux auxquels j’ai particip´e en les organisant autour de
+
+trois th`emes principaux.
+
+La premi`ere partie est consacr´ee `a la mise au point de mod`eles de graphes al´eatoires. Le principe de
+tels mod`eles est de permettre de d´eduire les caract´eristiques topologiques des r´eseaux r´eels en cherchant
+les diﬀ´erences entre les r´eseaux r´eels et les familles al´eatoires de graphes. Aﬁn de d´eterminer des ca-
+ract´eristiques topologiques de plus en plus ﬁnes, il faut ˆetre capable de g´en´erer des graphes al´eatoires
+ayant des topologies aussi proches que possible des r´eseaux observ´es. Une seconde application, li´ee `a
+l’utilisation de mod`eles de m´elanges, est la classiﬁcation des sommets d’un r´eseau en groupes ayant un
+comportement topologique similaire.
+
+La seconde partie est d´edi´ee `a une caract´eristique topologique particuli`ere qui est le comptage et
+la r´epartition des petits sous-graphes. Plus pr´ecis´ement, elle traite de la recherche de motifs dans les
+r´eseaux, c’est-`a-dire de petits sous-graphes dont le nombre est signiﬁcativement plus ´elev´e que dans un
+mod`ele al´eatoire donn´e. L’hypoth`ese biologique sous-jacente `a cette recherche est que si une telle structure
+apparaˆıt plus souvent dans les r´eseaux r´eels que dans des r´eseaux similaires mais al´eatoires, sa pr´esence est
+due `a un m´ecanisme de s´election positive au cours de l’´evolution. Ces structures ont donc potentiellement
+un interˆet biologique. L’apport principal de mon travail est la d´eﬁnition et la mise au point de motifs
+locaux, c’est-a-dire la prise en compte de la r´epartition des petits sous-graphes et pas seulement de leur
+comptage.
+
+La troisi`eme partie s’int´eresse `a une structure particuli`ere des graphes qui est le cycle. Elle se diﬀ´erencie
+des deux premi`eres parties dans la mesure o`u elle ne fait pas appel aux probabilit´es ou aux statistiques.
+Elle regroupe une partie de mon travail de th`ese et des travaux r´ecents qui portent respectivement sur la
+largeur d’arborescence, c’est-`a-dire un outil d’informatique th´eorique li´e `a la complexit´e des algorithmes
+sur certaines familles de graphes, et sur l’´enum´eration de structures chimiques stables dans les r´eseaux
+m´etaboliques. Ces deux th`emes `a priori tr`es diﬀ´erents ont en commun le fait de voir leur complexit´e
+directement li´ee `a l’organisation des cycles dans les graphes trait´es, et plus pr´ecis´ement `a la recherche
+d’un ensemble transversal pour les cycles.
+
+Quelques-unes de mes publications, ne s’inscrivant pas dans les trois th`emes pr´ec´edents, ne sont pas
+d´evelopp´ees dans ce m´emoire. Certaines correspondant `a des probl`emes de th´eorie des graphes non motiv´es
+par l’analyse des r´eseaux biologiques. Elles traitent respectivement de coloration des arˆetes d’un graphe
+dirig´e [B3], d’existence de cordes dans les plus long cycles des graphes planaires 3-connexes [B5] et de
+performances en moyenne d’algorithmes correspondant au probl`eme du Vertex Cover [B8,B18]. [B12]
+porte au contraire sur une proc´edure de classiﬁcation des g`enes dans les r´eseaux de r´egulations inf´er´es
+par [41] et `a l’´etude de sa pertinence `a l’aide d’une analyse des annotations Gene Ontology des g`enes
+regroup´es.
+
+10
+
+Etienne Birmel´e
+
+11
+
+Premi`ere partie
+
+Mod`eles al´eatoires pour les r´eseaux
+
+1. Caract´eristiques topologiques des r´eseaux
+
+Il est important pour un mod`ele al´eatoire de respecter un maximum de caract´eristiques topologiques
+de r´eseaux biologiques. Guimera et al. [51] sugg`erent de comparer chaque r´eseau `a une suite de mod`eles
+de complexit´e croissante. A chaque ´etape, il s’agit d’imaginer un mod`ele al´etoire respectant `a la fois les
+propri´et´es du mod`ele pr´ec´edent et les caract´eristiques du r´eseau mises `a jour lors de l’´etape pr´ec´edente.
+Les propri´et´es du r´eseau d´ecrites `a l’aide du nouveau mod`ele sont ainsi ind´ependantes de celles mises en
+lumi`ere pr´ec´edemment.
+
+Certaines caract´eristiques topologiques sont communes `a tous les r´eseaux dit r´eels, c’est-`a-dire issus
+essentiellement de la biologie, des sciences sociales ou de l’informatique [4]. Elles sont les suivantes, class´ees
+suivant ce qui me semble ˆetre l’ordre dans lequel elles doivent ˆetre prises en compte :
+
+1. les r´eseaux r´eels ont une composante connexe g´eante. On entend par ce terme que si quelques
+sommets peuvent ˆetre isol´es ou former de petites composantes connexes, l’essentiel du r´eseau est
+constitu´e d’une seule composante connexe.
+
+2. les r´eseaux r´eels sont creux, c’est-`a-dire qu’ils ont un nombre faible d’arˆetes par rapport au nombre
+d’arˆetes possibles. La croissance du nombre d’arˆetes pr´esentes se fait de fa¸con lin´eaire en le nombre
+de sommets, alors que le nombre d’arˆetes possibles est quadratique.
+
+3. les r´eseaux contiennent des sommets de grand degr´e, commun´ement appel´es hubs par analogie
+avec le r´eseau de transport a´erien. En d’autres termes, la distribution des degr´es a une queue de
+distribution lourde.
+
+Jeong et al. [63] d´ecrivent la distribution des degr´es dans des r´eseaux issus de sources diverses
+comme suivant la distribution d’une loi puissance. Autrement dit,
+
+P(d(v) = k) ∼ k−γ,
+
+γ > 0
+
+On parle alors de r´eseau sans ´echelle (scale-free graph). Cette assertion est commun´ement admise,
+mˆeme si elle est de plus en plus critiqu´ee, notamment car les r´eseaux observ´es sont des sous-r´eseaux
+des r´eseaux r´eels et qu’ˆetre sans ´echelle n’est pas une propri´et´e stable par ´echantillonnage [103]. De
+plus, la loi puissance n’est en g´en´eral une bonne approximation que pour les grands degr´es. D’autres
+lois sur les degr´es, en particulier les lois de m´elange [33], permettent un meilleur ajustement sur les
+degr´es faibles tout en maintenant l’existence de hubs.
+
+La pr´esence des hubs dans les r´eseaux a des cons´equences topologiques fortes. La premi`ere est
+appel´ee eﬀet petit monde et consiste en l’existence de courts chemins entre toute paire de sommets.
+La seconde est l’existence de nombreux chemins entre diﬀ´erentes parties du r´eseau, assurant une
+meilleure r´esistance du r´eseau aux attaques al´eatoires. Par contre, ces r´eseaux sont vuln´erables aux
+attaques cibl´ees sur les hubs.
+
+12
+
+Ces deux propri´et´es ont des interpr´etations ´evidentes en termes de r´eseaux sociaux ou de routage
+mais leur interˆet biologique est moins ´evident. Cependant, il a ´et´e d´emontr´e que la l´etalit´e de la
+suppression d’une prot´eine est consid´erablement plus forte si cette prot´eine est un hub d’un PPI
+[64].
+
+4. du fait de leur faible nombre d’arˆetes, les r´eseaux sont de densit´e globale tr`es faible. Malgr´e cela,
+ils sont localement denses, `a savoir que le r´eseau r´eduit au voisinage d’un sommet est plus riche en
+arˆetes que l’ensemble du r´eseau.
+
+L’indice commun´ement utilis´e pour mettre en valeur ce ph´enom`ene est le coeﬃcient de clustering.
+Celui-ci est d´eﬁni comme la valeur moyenne de la densit´e des voisinages, `a savoir
+
+CC(G) =
+
+1
+
+n Xv∈V (G)
+
+D(G[N (v)])
+
+Le graphe de la Figure 2 montre un exemple de calcul de densit´e et de coeﬃcient de clustering
+et illustre le fait que l’organisation en module m`ene `a une densit´e locale moyenne sup´erieure `a la
+densit´e globale.
+
+u
+
+v
+
+Figure 2. La densit´e de ce graphe est de 11
+
+22 = 1
+
+2 , mais le coeﬃcient de clustering est de 172
+
+210 > 4
+5 .
+
+5. enﬁn, il existe dans la plupart des r´eseaux des structures sous-jacentes menant `a des connexions
+plus probables entre certains sommets du r´eseau. Ces structures sont d’origines diﬀ´erentes suivant
+les cas : elles sont, par exemple, spatiales dans le cas d’un r´eseau de neurones o`u les connections
+longue distance sont rares, ou fonctionnelles dans le cadre d’un r´eseau PPI. Cette structuration des
+r´eseaux en groupes de connectivit´e est au coeur des mod`eles de m´elange d´etaill´es dans les sections
+3 et 4.
+
+2. Mod`eles al´eatoires existants
+
+2.1. Mod`eles pas `a pas vs mod`eles `a tirage simultan´e
+
+Les mod`eles existants de graphes al´eatoires peuvent ˆetre class´es en deux grandes familles, que j’ap-
+pelerai respectivement les mod`eles pas `a pas et les mod`eles `a tirage simultan´e suivant le mode de tirage
+al´eatoire des arˆetes.
+
+Les mod`eles pas `a pas sont des mod`eles o`u les graphes al´eatoires sont construits ou modiﬁ´es arˆete
+par arˆete. Il existe de nombreux mod`eles de ce type mais qui sont `a ma connaissance des adaptations
+
+13
+
+diverses de trois mod`eles principaux que sont les mod`eles de Watts et Strogatz, le mod`ele d’attachement
+pr´ef´erentiel et le mod`ele de stub-rewiring.
+
+Watts-Strogatz : Ce mod`ele [107] consiste `a consid´erer n sommets num´erot´es de 1 `a n et `a relier toute
+paire de sommets (i, j) v´eriﬁant |i − j| ≤ k. On obtient ainsi un graphe dont tous les sommets sont
+de degr´e 2k.
+
+Chacune des arˆetes (i, j), i < j, est alors redirig´ee avec probabilit´e β, la redirection consistant `a la
+remplacer par une arˆete (i, j′) o`u j′ est choisi de fa¸con uniforme parmi les sommets non voisins de
+i.
+Ce mod`ele appliqu´e pour n ≫ k a pour avantage de cr´eer des graphes de densit´e faible mais de
+densit´e locale forte. La distribution des degr´es est cependant trop proche de la distribution uniforme.
+
+Attachement pr´ef´erentiel : Ce mod`ele [12], ´egalement appel´e mod`ele de Barabasi-Albert, g´en`ere des
+graphes en introduisant des sommets un par un. A l’´etape t, le nouveau sommet est connect´e `a
+l’un des sommets d´ej`a pr´esents. Ce sommet est choisi al´eatoirement suivant une distribution de
+probabilit´es proportionnelle `a la distribution des degr´es apr`es l’´etape t − 1.
+Chaque nouveau sommet ne cr´eant qu’une seule arˆete, le mod`ele initial tel que pr´esent´e dans [12] ne
+permet pas de cr´eer de cycles et ne g´en`ere donc que des arbres. Il a ´et´e adapt´e de plusieurs fa¸cons
+[39, 69, 71], aﬁn de pouvoir g´en´erer des topologies plus complexes. Cependant, l’id´ee principale
+reste, `a savoir que plus un sommet est de degr´e important, plus il est probable qu’il soit reli´e `a
+tout nouveau sommet ou toute nouvelle arˆete. Ce processus, connu sous le nom de rich get richer,
+permet d’imiter la cr´eation de r´eseaux internet puisque les hyperliens d’une page nouvellement cr´e´ee
+auront tendance `a pointer vers des pages d´ej`a hautement r´ef´erenc´ees.
+
+Les mod`eles de cette famille g´en`erent des distributions des degr´es proches des distributions observ´ees
+mais la densit´e locale n’est pas respect´ee.
+
+stub-rewiring : Ce mod`ele introduit par Milo et al. [80] est de loin le plus utilis´e dans les applications
+en biologie. Il permet en eﬀet de g´en´erer des graphes ayant la mˆeme distribution de degr´es que le
+r´eseau observ´e.
+
+La g´en´eration de tels graphes se fait en partant du r´eseau observ´e et en appliquant un grand nombre
+de fois l’op´eration consistant `a choisir quatre sommets u1, u2, v1 et v2 tels que (u1, v1) et (u2, v2)
+sont des arˆetes alors que (u1, v2) et (u2, v1) n’en sont pas. On supprime alors les arˆetes (u1, v1) et
+(u2, v2) pour les remplacer par (u1, v2) et (u2, v1).
+Cette technique peut se g´en´eraliser sans mal aux graphes orient´es en rempla¸cant −−→u1v1 et −−→u2v2 par
+−−→u1v2 et −−→u2v1. Elle permet ´egalement de prendre en compte la couleur des noeuds si n´ecessaire [114].
+En raison de son caract`ere markovien, cette proc´edure permet de tirer de mani`ere uniforme parmi
+les graphes ayant la mˆeme distribution de degr´es que le r´eseau initial. Cette raison ainsi que son
+adaptabilit´e, la simplicit´e de son impl´ementation et le fait qu’elle g´en`ere des graphes de mˆeme
+distribution de degr´es font de ce mod`ele l’un des plus utilis´es pour comparer un r´eseau r´eel `a de
+l’al´ea. Il sert de r´ef´erence dans les algorithmes les plus populaires de recherche de motifs [80, 108].
+
+14
+
+Cependant, cette m´ethode reste criticable du point de vue de la densit´e locale qu’elle n´eglige to-
+talement. En eﬀet, les arˆetes du r´eseau initial, qui traduisent le plus souvent des relations locales,
+sont ´echang´ees au proﬁt d’arˆetes de plus longue port´ee, ´eliminant de fait la propri´et´e du coeﬃcient
+de clustering ´elev´e.
+
+De plus, elle ne permet pas de prendre pas en compte la cr´eation pr´ef´erentielle de liens entre
+certaines classes de sommets. [8] montrent que cela conduit `a une mauvaise mod´elisation al´eatoire
+dans le cas des r´eseaux neuronaux.
+
+Au contraire des mod`eles pas `a pas, les mod`eles `a tirage simultan´e sont d´eﬁnis par le fait que la totalit´e
+du graphe al´eatoire est g´en´er´ee en mˆeme temps. Les arˆetes ne sont donc plus d´ependantes les unes des
+autres via une histoire ´evolutive du graphe. Aﬁn de mod´eliser la d´ependance entre arˆetes, il sera donc
+n´ecessaire d’introduire des variables latentes.
+
+Voici `a nouveau une liste non exhaustive des principaux mod`eles `a tirage simultan´e :
+
+Erd˝os-R´enyi : Le mod`ele d’Erd˝os-R´enyi est le plus ancien et le plus simple des mod`eles de graphes
+al´eatoires. Erd˝os et R´enyi [42] l’ont utilis´e pour montrer qu’il existe des graphes ayant un nombre
+chromatique sup´erieur `a k tout en n’ayant pas de cycle de longueur inf´erieure `a m, et ce pour tous
+entiers k et m. Pour ce faire, ils ont montr´e que l’ensemble des graphes v´eriﬁant cette propri´et´e
+est de mesure non nulle sous ce mod`ele. La nouveaut´e de cette approche probabiliste ´evitant la
+construction explicite de graphes et la simplicit´e du mod`ele ont popularis´e ce dernier, au point que
+le terme graphes al´eatoires est parfois utilis´e dans la litt´erature sans autre pr´ecision pour y faire
+r´ef´erence.
+Le mod`ele d’Erd˝os-R´enyi d´epend d’un seul param`etre p ∈ [0, 1] et suppose que les variables
+(Xij)i,j∈V (G) sont ind´ependantes et identiquement distribu´ees suivant une loi binomiale de pa-
+ram`etre p. En d’autres termes, toutes les arˆetes sont consid´er´ees comme ind´ependantes et la pro-
+babilit´e d’apparition des arˆetes est uniforme.
+
+L’extrˆeme simplicit´e de ce mod`ele en fait cependant la faiblesse dans la mesure o`u il ne permet pas
+de retranscrire la complexit´e de la structure des r´eseaux r´eels. En eﬀet, le seul ajustement possible
+est de choisir une valeur de p telle que les graphes g´en´er´es ont en moyenne la bonne densit´e. Le
+nombre moyen d’arˆetes dans un graphe al´eatoire de ce type ´etant de n(n−1)
+p et le nombre d’arˆetes
+dans les r´eseaux r´eels croissant lin´eairement en le nombre de sommets [29], cela revient `a choisir p
+de la forme p = c
+n .
+
+2
+
+Les graphes g´en´er´es ont ainsi une densit´e satisfaisante et poss`edent bien une composante g´eante
+pour c > 1 [20]. Cepandant, il sont homog`enes et ne satisfont pas les autres crit`eres requis. Ainsi,
+la ditribution des degr´es suit une loi de Poisson qui n’est suﬃsamment lourde ni pour les grands
+degr´es ni pour les tr`es petits degr´es. Les graphes g´en´er´es ne pr´esentent en particulier pas de hub. De
+plus, l’esp´erance du coeﬃcient de clustering est ´egale `a p et tend donc vers 0 et aucune modularit´e
+n’apparaˆıt grˆace `a ce mod`ele.
+
+Je me r´efererai cependant `a ce mod`ele dans le partie II car il est un bon outil pour tester la faisabilit´e
+d’une m´ethode en tant que mod`ele le plus simple `a manipuler d’un point de vue math´ematique.
+
+15
+
+Conﬁguration model : Molloy et Reed [83] ont propos´e un mod`ele qui permet de g´en´erer des graphes
+de distribution de degr´es donn´ee avec un tirage simultan´e. Il consiste `a faire sortir de tout sommet
+v un nombre dv de demi-arˆetes. Ces demi-arˆetes sont alors regroup´ees par paires selon un tirage
+uniforme aﬁn de former des arˆetes. Le graphe ainsi obtenu est alors un graphe al´eatoire ayant la
+distribution de degr´es voulus, `a ceci pr`es qu’il peut y avoir plusieurs arˆetes reliant le mˆeme couple
+de sommets. Cependant, pour un nombre de demi-arˆetes croissant lin´eairement en n, il est ais´e de
+montrer que ces ph´enom`enes sont asymptotiquement de probabilit´e nulle.
+
+Ce mod`ele a ´et´e abondamment utilis´e et adapt´e [1, 28, 82, 84, 86]. Cependant, la modularit´e n’y
+est pas pr´esente et la relation complexe de d´ependance entre les arˆetes ne permet pas l’´etude de la
+loi de comptage d’un sous-graphe.
+
+Expected Degree Distribution (EDD) : Le mod`ele de Molloyet Reed se r´ev`ele tr`es diﬃcile `a mani-
+puler d’un point de vue th´eorique car la contrainte de l’´egalit´e stricte entre les degr´es des graphes
+al´eatoires et du graphe observ´e est trop forte. Aﬁn de pouvoir mener des calculs, il est pr´ef´erable
+de relˆacher cette contrainte en n’imposant qu’une ´egalit´e des degr´es en esp´erance.
+
+Ceci permet, via la d´eﬁnition d’une probabilit´e pij de connection pour tout couple de sommets i et
+j, de supposer les (Xij )i,j∈V (G) ind´ependants tout en pr´eservant l’h´et´erog´en´eit´e de la distribution
+des degr´es. Plus pr´ecis´ement, soit di et dj les degr´es respectifs de i et j dans le r´eseau r´eel. On pose
+alors
+
+pij = P (Xij = 1) =
+
+didj
+C
+
+.
+
+La constante C doit ˆetre choisie de fa¸con `a ce que chacune des probabilit´es de connexion soit
+
+inf´erieure ou ´egale `a 1. En pratique, le choix C =Pi di convient. Ce choix est le plus pertinent car
+
+il permet de g´en´erer des graphes dont la distribution des degr´es est proche de celle du graphe r´eel.
+En eﬀet, on a alors
+
+Xij) = di
+
+E(Xj
+
+ce qui revient `a dire que chaque sommet a en moyenne son degr´e ´egal au degr´e observ´e.
+
+Il est naturellement possible de modiﬁer le mod`ele EDD en interdisant les auto-arˆetes ou en lui
+faisant g´en´erer des graphes orient´es. Dans ce dernier cas, la probabilit´e de connexion devient
+
+P (Xij = 1) =
+
+d+
+i d−j
+C
+
+,
+
+ce qui permet de g´en´erer des graphes ayant en moyenne les degr´es entrants et sortants correspon-
+dants aux degr´es observ´es.
+
+Ce mod`ele est le plus simple des mod`eles `a tirage simultan´e permettant de respecter l’h´et´erog´en´eit´e
+des degr´es dans les r´eseaux r´eels et de calculer les premiers moments des comptages de motifs en
+respectant cette contrainte [B2].
+
+Cependant, ce mod`ele a deux inconv´enients majeurs. Le premier est de g´en´erer des graphes non
+localement denses et syst´ematiquement assortatifs, c’est-`a-dire pour lesquels les hubs ont une forte
+
+16
+
+tendance `a ˆetre reli´es les uns aux autres. Le second est que d’un point de vue pratique, la seule
+am´elioration possible des performances est le regroupemebt des sommets ayant le mˆeme degr´e.
+Cependant, un graphe r´eel pr´esentant en g´en´eral plusieurs dizaines de degr´es diﬀ´erents, les calculs
+r´ealisables en pratique sont r´eduits.
+
+Stochastic Block Model (SBM) : Le mod`ele EDD permet d’introduire des comportements topolo-
+giques diﬀ´erents suivant les sommets en fonction d’un param`etre qui est le degr´e observ´e. Ce-
+pendant, les classes correspondant `a des comportements topologiques similaires ne correspondent
+g´en´eralement pas aux sommets de mˆeme degr´e.
+
+Il est donc naturel d’introduire cette notion de classes topologiques `a l’aide d’un mod`ele de m´elange
+de graphes d’Erd˝os-R´enyi. Ceci permet de mod´eliser des structures plus complexes de d´ependances
+entre arˆetes grˆace `a des variables latentes d’appartenance `a des classes.
+
+D’un point de vue formel, ce mod`ele est param´etr´e par un nombre Q de classes de sommets, un
+
+vecteur de r´epartition α ∈ RQ tel que P1≤i≤Q αi = 1 et une matrice Π de dimension Q × Q
+constitu´ee de probabilit´es de connection.
+Pour tout sommet i, un vecteur latent Zi est tir´e suivant une loi multinomiale M(1, α). Ainsi, tout
+sommet appartient `a une unique classe qui est l’indice q tel que Ziq = 1. Les arˆetes sont ensuite
+tir´ees suivant des lois de Bernoulli ind´ependantes conditionnellement aux classes :
+
+Xij|ZiqZjl = 1 ∼ B(πql),
+
+Figure 3. Exemple de graphe tir´e suivant un mod`ele SBM `a trois classes avec α = (1/3, 1/3, 1/3), πi,i = 0, 5 pour tout
+1 ≤ i ≤ 3 et πi,j = 0, 02 pour tout i 6= j.
+
+Ce mod`ele, appel´e Stochastic Block Model `a la suite des travaux de Nowicki et Snijders [87], a ´et´e
+introduit en sciences sociales d`es les ann´ees 80 [44, 46, 57] suite aux travaux de White et al. [109].
+
+17
+
+Sa souplesse en terme de sch´emas de connectivit´e permet de g´en´erer des graphes de structures
+tr`es diﬀ´erentes, et notamment contenant des hubs [33]. L’estimation des vecteurs latents permet
+de plus de disposer d’un outil de classiﬁcation des sommets d’un r´eseau suivant leur comportement
+topologique [56, 85].
+
+Bollobas-Jensen-Riordan : Les auteurs de [21] ont propos´e un mod`ele encore plus complet bas´e sur
+
+un noyau.
+En r´esum´e, il s’agit de consid´erer un espace mesurable S, une mesure de probabilit´e µ sur cet espace
+et une fonction noyau κ mesurable de S × S dans [0, 1]. A chaque sommet i est alors associ´e un
+´el´ement xi de S tir´e suivant la loi µ et pij est d´eﬁni comme ´egal `a κ(xi, xj).
+Bollob´as et ses co-auteurs d´emontrent alors que pour une large classe de fonctions noyau κ, les
+graphes obtenus ont une composante g´eante, un petit diam`etre et une distribution des degr´es
+correspondant `a un m´elange de loi de Poisson. De plus, suivant le choix de la mesure µ, ce m´elange
+peut correspondre `a une loi puissance.
+Ce mod`ele est une g´en´eralisation du pr´ec´edent dans la mesure o`u le choix S = {1, . . . , Q}, µ(q) = αq
+pour tout 1 ≤ q ≤ Q et κ(q, l) = πql correspond au mod`ele de m´elange. Cependant, le probl`eme
+de l’identiﬁabilit´e du mod`ele et l’estimation de κ n’est `a ma connaissance pas trait´e. De plus, en
+sortant du cadre du m´elange, on perd la notion de classes de sommets, qui est un ´el´ement important
+de l’interpr´etation des r´esultats.
+
+Du point de vue de la loi des comptages des sous-graphes, les mod`eles pas `a pas se r´ev`elent impossibles
+`a g´erer de par le fait que les changements en terme de comptages impliqu´es par chaque ´etape de cr´eation
+ou de remplacement d’un sommet ou d’une arˆete ne sont pas maˆıtrisables. Les mod`eles `a tirage simultan´e
+sont par contre plus abordables, ne serait-ce qu’au niveau du calcul des moments des comptages. Il est
+ainsi ais´e de se convaincre que dans un mod`ele d’Erd˝os-R´enyi de param`etre p, l’esp´erance du nombre T
+de triangles sera
+
+E(T ) =(cid:18)n
+
+3(cid:19)p3
+
+Le ﬁl directeur de mon travail sur les mod`eles al´eatoires ´etant la recherche de motifs dans les r´eseaux
+
+`a l’aide des lois de comptage, la suite de ce travail n’abordera que des mod`eles `a tirage simultan´e.
+
+Dans la suite de ce chapitre, je pr´esente les travaux auxquels j’ai particip´e concernant trois types de
+mod`eles simultan´es. Le chapitre 3 concerne l’estimation des param`etres du mod`ele SBM dans un cadre
+bay´esien. La partie 4 g´en´eralise ce mod`ele au cas de groupes pouvant avoir des sommets communs. Il est
+`a noter que ces deux parties correspondent `a des travaux en commun avec Pierre Latouche et Christophe
+Ambroise et ont fait l’objet de la th`ese de Pierre [75]. Le dernier de ces travaux, pr´esent´e au chapitre
+5, consiste `a ´elaborer un mod`ele tirant parti de la structure bipartie sous-jacente de nombreux graphes
+r´eels.
+
+18
+
+3. Approche bay´esienne du mod`ele de m´elange
+
+3.1. Contexte
+
+Le mod`ele SBM permet de d´ecrire des types de graphes tr`es diﬀ´erents [33]. Pourtant, la simplicit´e de
+sa d´eﬁnition permet d’´ecrire la vraisemblance d’une observation. En eﬀet, dans le cas de graphes non
+dirig´es et sans auto-arˆetes :
+
+p(X| Z, Π)p(Z | α)
+
+p(X| Π, α) =XZ
+=XZ Yi<j
+=XZ Yi<jYq,l (cid:16)πXij
+
+ql (1 − πql)1−Xij(cid:17)Ziq Zjl
+
+N
+
+Q
+
+Yi=1
+
+Yq=1
+
+αZiq
+
+q
+
+.
+
+p(Xij| Zi, Zj, Π)
+
+M(Zi; 1, α)
+
+N
+
+Yi=1
+
+Le mˆeme calcul peut ˆetre men´e pour les graphes dirig´es et/ou avec auto-arˆete, en adaptant l’indice du
+premier produit. Dans tous les cas, on aboutit `a un somme de QN termes qu’on ne sait pas optimiser
+directement. L’algorithme EM [35], classiquement utilis´e pour r´esoudre ce type de probl`emes dans les
+mod`eles de m´elange, ne peut ˆetre utilis´e directement dans ce cas. En eﬀet, il n´ecessite une ´ecriture sous
+la forme factoris´ee de p(Z | X, Π, α), ce qui n’est pas possible ici [33].
+
+Nowicki et Snijders [87] ont propos´e une approche bay´esienne dont l’estimation des hyper-param`etres
+est r´ealis´ee `a l’aide d’´echantillonnages de Gibbs. L’algorithme BLOCKS correspondant, disponible dans
+le package StoCNET [19], est cependant limit´e `a des r´eseaux de moins de 200 noeuds. La m´ethode,
+´egalement bay´esienne, de Hofman et Wiggins [56] permet de traiter des r´eseaux beaucoup plus grands
+mais se limite au mod`ele d’aﬃliation, qui revient `a imposer deux probabilit´es λ et ǫ telles que une Π est
+´egale `a λ sur la diagonale et `a ǫ en-dehors. Daudin et al. [33] ont d´evelopp´e une m´ethode fr´equentiste
+bas´ee sur une approche variationnelle. Enﬁn, Vazquez [105] a d´evelopp´e un mod`ele de m´elange bas´e sur la
+structure d’hypergraphe qu’il applique entre autres `a des graphes pour en retrouver les groupes de som-
+mets topologiquement similaire. Son approche n´ecessite cependant de faire une hypoth`ese d’ind´ependance
+entre les lignes de la matrice d’adjacence, ce qui est faux dans les cas des graphes.
+
+Nous proposons d’adapter pour SBM l’approche variationnelle dans un cadre bay´esien. Les d´etails des
+calculs sont d´evelopp´es dans [B9]. Le but est de d´evelopper un nouveau crit`ere de choix de mod`ele. En
+eﬀet, en raison du nombre de termes dans p(X| α, Π), les crit`eres bas´es sur cette quantit´e tels que BIC
+ou AIC ne peuvent ˆetre utilis´es. Daudin et al. [33] et Mariadassou et al. [76] utilisent un crit`ere nomm´e
+ICL, introduit par Biernacki [15] dans le cadre des m´elanges gaussiens. Il est bas´e sur une approximation
+asymptotique de p(X, Z| α, Π). Cependant, Biernacki et al. [16] a montr´e qu’en raison de son caract`ere
+asymptotique, ce crit`ere a tendance `a sous-estimer le nombre de classes pour les donn´ees de taille trop
+faible, ce qui est conﬁrm´e par des exp´eriences men´ees dans le cas du mod`ele SBM [76].
+
+3.2. Approche variationnelle bay´esienne
+
+Dans un cadre bay´esien les param`etres α et Π de SBM deviennent des variables al´eatoires, dont les
+
+distributions `a priori sont choisies conjugu´ees aux distributions de SBM et non-informatives [61].
+Ainsi, comme p(Zi |α) est une multinomiale, α est mod´elis´e par une distribution de Dirichlet
+
+19
+
+p(cid:16) α| n0 = {n0
+
+1, . . . , n0
+
+Q}(cid:17) = Dir(α; n0),
+
+o`u n0
+
+q = 1/2, ∀q.
+De mˆeme, comme p(Xij| Zi, Zj, Π) est une distribution de Bernoulli, la matrice de connectivit´e Π est
+
+mod´elis´ee `a partir de lois Beta
+
+p(cid:16) Π| η0 = (η0
+
+ql)(cid:17) =Yq≤l
+
+ql), ζ 0 = (ζ0
+
+Beta(πql; η0
+
+ql, ζ0
+
+ql),
+
+avec η0
+
+ql = ζ0
+
+ql = 1/2,∀q.
+
+Aﬁn d’estimer les lois `a posteriori, nous appliquons l’approche variationnelle [52], qui consiste `a
+
+d´ecomposer la vraisemblance des donn´ees observ´ees en
+
+log p(X) = L (q(Z, α, Π)) + KL (q(Z, α, Π) || p(Z, α, Π | X)) ,
+
+L(q) =XZ Z Z q(Z, α, Π) log(cid:26) p(X, Z, α, Π)
+
+q(Z, α, Π) (cid:27) d α d Π,
+
+(1)
+
+(2)
+
+avec
+
+et
+
+KL (q(Z, α, Π) || p(Z, α, Π| X))
+
+= −XZ Z Z q(Z, α, Π) log(cid:26) p(Z, α, Π| X)
+
+q(Z, α, Π) (cid:27) d α d Π .
+
+(3)
+
+o`u KL d´esigne la distance de Kullback-Leibler.
+
+Trouver la distribution q(Z, α, Π) minimisant (3) est alors ´equivalent `a maximiser la borne inf´erieure
+de la vraisemblance donn´ee par (2). Aﬁn de pouvoir mener les calculs `a bien, l’espace des distributions
+est restreint `a celles pouvant se factoriser sous la forme
+
+avec
+
+N
+
+N
+
+q(Z, α, Π) = q(α)q(Π)q(Z).
+
+Les τ i correspondent alors aux probabilit´es d’appartenance `a posteriori des sommets du r´eseau aux
+
+q(Z) =
+
+q(Zi) =
+
+Yi=1
+
+M(Zi; 1, τ i),
+
+Yi=1
+
+diﬀ´erentes classes.
+
+20
+
+Chacune des distributions q(α), q(Π) et q(Zi) pour 1 ≤ i ≤ N est alors optimis´ee `a tour de rˆole
+en consid´erant toutes les autres comme ﬁxes. Les choix ´enonc´es pr´ec´edemment des formes initiales de
+ces distributions assurent que la forme de la distribution optimale trouv´ee `a chaque ´etape est la mˆeme
+que celle de d´epart. La remise `a jour des distributions revient donc uniquement `a une remise `a jour des
+param`etres.
+
+Ce proc´ed´e est appel´e Variational Bayes EM par analogie avec l’algorithme EM classique, la mise `a jour
+des (τ i)1≤i≤N correspondant `a l’´etape E alors que celles des param`etres des lois de α et Π correspondent
+`a l’´etape M.
+
+Optimiser l’un de ces param`etres en ﬁxant les autres revient `a calculer l’esp´erance de la vraisemblance
+p(X, Z, α, Π) par rapport `a toutes les variables sauf celle gouvern´ee par le param`etre d’interˆet [17, 75],
+puis `a renormaliser. Ceci am`ene `a des ´equations de mise `a jour qui sont d´etaill´ees dans [B9].
+
+L’algorithme complet permettant d’estimer les param`etres du mod`ele pour une valeur ﬁx´ee de Q
+commence par la cr´eation d’une partition initiale des sommets suivant un algorithme de classiﬁcation
+hi´erarchique. La distance prise en compte est d(i, j) = PN
+k=1(Xik − Xjk)2, ce qui consiste `a consid´erer
+deux sommets comme d’autant plus proches que leurs voisinages se ressemblent. L’algorithme Variational
+Bayes EM est ensuite appliqu´e jusqu’`a ce que la croissance de L(q) entre deux cycles soit inf´erieure `a
+un seuil pr´ed´eﬁni. Le coˆut en terme de temps de calcul de cet algorithme est en O(Q2N 2), ce qui est du
+mˆeme ordre de grandeur que le coˆut de l’approche fr´equentiste de [33].
+
+3.3. Un crit`ere de choix de mod`ele
+
+L’algorithme du paragraphe pr´ec´edent permet de r´esoudre le probl`eme de l’estimation pour un nombre
+de classes Q ﬁx´e. Aﬁn de d´eterminer le nombre de classes optimal, nous proposons de chercher la valeur
+Q∗ pour laquelle la log-vraisemblance marginale log p(X|Q) est maximale. Celle-ci ne peut s’optimiser
+directement car elle s’´ecrit
+
+log p(X|Q) = log(XZ Z Z p(X, Z, α, Π |Q) d α d Π) .
+
+Cependant, l’´egalit´e (1) assure que log p(X|Q) est minor´ee par la fonction L (q(·)). Cette fonction
+est maximis´ee en q(·) par l’algorithme Variational Bayes EM et la diﬀ´erence entre la valeur obtenue
+et la vraisemblance marginale est la distance de Kullback-Leibler donn´ee par (3). Il n’y a pas `a priori
+de raison pour que cette distance soit faible ou ind´ependante de Q, mais nous proposons de faire cette
+approximation. Ceci m`ene `a l’introduction du crit`ere non asymptotique ILvb correspondant `a la valeur
+de L (q(·)) apr`es maximisation :
+q)QQ
+ILvb = log( Γ(PQ
+q=1 nq)QQ
+Γ(PQ
+
+o`u τiq est la probabilit´e `a posteriori pour i d’appartenir `a la classe q et (nq)q, (ηql)ql, (ζql)ql sont les
+
+ql)Γ(ηql)Γ(ζql)
+ql)Γ(ζ0
+
+q=1 Γ(nq)
+q=1 Γ(n0
+
+q)) +
+
+log( Γ(η0
+
+Xi=1
+
+Xq=1
+
+ql)) −
+
+τiq log τiq,
+
+(4)
+
+q=1 n0
+
+Q
+
+Xq≤l
+
+ql + ζ0
+
+Γ(ηql + ζql)Γ(η0
+
+N
+
+Q
+
+hyper-param`etres remis `a jour.
+
+En pratique, l’algorithme du Variational Bayes EM est ex´ecut´e pour toutes les valeurs de Q d’un
+
+intervalle d’interˆet et Q∗ est d´etermin´e `a l’aide du crit`ere ILvb.
+
+3.4. Exp´eriences comparatives
+
+Des exp´eriences de comparaison ont ´et´e men´ees entre le crit`ere ILvb introduit ci-dessus, le crit`ere ICL
+de Daudin et al. [33] bas´e sur une estimation fr´equentiste et le crit`ere VBMOD de Hofman et Wiggins
+[56] d´evelopp´e dans le cadre des mod`eles d’aﬃliation.
+
+21
+
+3.4.1. Donn´ees d’aﬃliation
+
+Le premier type de donn´ees auxquels les trois algorithmes d’estimation ont ´et´e appliqu´es sont des
+graphes d’aﬃliation, c’est-`a-dire des graphes g´en´er´es par un mod`ele SBM dont la matrice est ´egale `a λ
+sur sa diagonale et `a ǫ ailleurs :
+
+Π =
+
+λ
+
+ǫ
+...
+ǫ
+
+
+
+
+
+ǫ
+
+λ
+
+. . .
+
+. . .
+
+. . .
+ǫ
+
+ǫ
+...
+
+ǫ
+λ
+
+.
+
+
+
+
+
+Pour tout Q ∈ {3 . . . 7}, 100 graphes de 50 sommets ont ´et´e g´en´er´es suivant ce mod`ele avec α1 =
+. . . = αQ = 1
+Q , λ = 0.9 et ǫ = 0.1. Pour chacun de ces graphes, cinq initialisations diﬀ´erentes ont
+´et´e d´etermin´ees et les trois m´ethodes ont ´et´e appliqu´ees. La meilleure des cinq estimations pour chaque
+m´ethode a ensuite ´et´e retenue suivant le crit`ere correspondant (VBMOD, ICL ou ILvb).
+
+La Table 1 montre les r´esultats obtenus. On y voit que les crit`eres ont tendance `a sous-estimer le
+nombre de classes quand celui-ci grandit. Ce ph´enom`ene s’explique par la petite taille des classes pour un
+graphe `a 50 noeuds et 6 ou 7 classes. Le meilleur comportement de VBMOD s’explique par le fait qu’il est
+destin´e aux graphes d’aﬃliation et estime directement les deux param`etres λ et ǫ quand les deux autres
+algorithmes estiment une matrice Q × Q. Cependant, on observe que le ph´enom`ene de sous-estimation
+des classes est moins prononc´e pour ILvb, en raison de son caract`ere non asymptotique.
+
+3.4.2. Donn´ees d’aﬃliation avec hubs
+
+Aﬁn de complexiﬁer la structure des graphes, la proc´edure pr´ec´edente a ´et´e r´ep´et´ee pour des graphes
+
+g´en´er´es `a l’aide de la matrice Π suivante :
+
+Π =
+
+λ
+
+ǫ
+
+. . .
+
+ǫ
+
+λ
+
+ǫ
+...
+λ . . .
+
+. . .
+. . .
+
+. . .
+
+
+
+
+
+,
+
+λ
+...
+...
+λ
+
+
+
+
+
+22
+
+QT rue\QV BM OD
+
+QT rue\QICL
+
+QT rue\QILvb
+
+2
+0
+0
+0
+0
+0
+
+2
+0
+0
+0
+0
+0
+
+3
+
+100
+
+0
+0
+0
+0
+
+3
+
+100
+
+0
+0
+1
+8
+
+4
+0
+
+100
+
+0
+0
+0
+
+4
+0
+
+100
+23
+28
+49
+
+3
+4
+5
+6
+7
+
+3
+4
+5
+6
+7
+
+2
+0
+0
+0
+0
+0
+
+3
+
+100
+
+0
+0
+0
+2
+
+4
+0
+
+100
+
+0
+4
+14
+
+3
+4
+5
+6
+7
+
+Table 1
+
+5
+0
+0
+
+100
+
+0
+2
+
+6
+0
+0
+0
+97
+14
+
+7
+0
+0
+0
+3
+84
+
+5
+0
+0
+77
+59
+42
+
+5
+0
+0
+99
+23
+44
+
+6
+0
+0
+0
+12
+1
+
+6
+0
+0
+1
+73
+27
+
+7
+0
+0
+0
+0
+0
+
+7
+0
+0
+0
+0
+13
+
+Nombre de classes s´electionn´es par les crit`eres VBMOD, ICL et ILvb pour des r´eseaux d’aﬃliation. 100 graphes ont ´et´e
+
+g´en´er´es pour QT rue ∈ {3, . . . , 7}, avec λ = 0.9 et ǫ = 0.1.
+
+Cela revient `a consid´erer un mod`ele d’aﬃliation `a Q−1 classes auquel on ajoute une classe de sommets
+
+ayant une forte probabilit´e d’ˆetre connect´es `a tout le monde, c’est-`a-dire de hubs.
+
+La Table 1 pr´esente les r´esultats obtenus. On y observe que VBMOD s’adapte mal `a cette complexiﬁ-
+cation puisque la classe de hubs est int´egr´ee aux autres classes dans environ 9 cas sur 10. Les crit`eres ICL
+et ILvb retrouvent parfaitement le vrai nombre de classes quand celui-ci est suﬃsamment faible mais le
+sous-estiment lorsque le nombre de sommets par classe devient trop faible. Cependant, ce ph´enom`ene de
+sous-estimation est nettement plus faible pour ILvb.
+
+3.4.3. R´eseau m´etabolique d’ Escherichia coli
+
+Pour ﬁnir, nous avons consid´er´e le r´eseau m´etabolique d’Escherichia coli
+
+[73] dont les sommets
+repr´esentent les r´eactions et o`u deux r´eactions sont connect´ees si un produit de l’une est un substrat
+de l’autre. Ce graphe de 605 sommets et 1782 arˆetes avait d´ej`a ´et´e ´etudi´e `a l’aide du crit`ere ICL [33].
+Nous lui avons appliqu´e `a nouveau les crit`eres V BM OD, ICL et ILvb, en ayant estim´e les param`etres
+par les trois algorithmes associ´es pour Q ∈ {1 . . . 40}. Les crit`eres atteignent leurs maxima respectifs pour
+QV BMOD = 14, QICL = 21 et QILvb = 22.
+
+L’estimation plus basse de VBMOD s’explique par le fait que le mod`ele d’aﬃliation ne permet pas de
+retrouver certain types de structures. En eﬀet, consid´erons la matrice d’adjacence du r´eseau r´eordonn´e
+suivant les classes estim´ees par notre proc´edure d’estimation, pr´esent´ee en Figure 4. On y voit que la
+structure dominante est la structure d’aﬃliation avec des arˆetes nombreuses `a l’int´erieur des classes
+et rares entre elles. Cependant, comme observ´e par Daudin et al. [33], certains couples de classes, par
+
+23
+
+QT rue\QV BM OD
+
+QT rue\QICL
+
+QT rue\QILvb
+
+3
+4
+5
+6
+7
+
+3
+4
+5
+6
+7
+
+2
+95
+1
+0
+0
+0
+
+3
+0
+95
+0
+0
+0
+
+4
+3
+4
+94
+1
+2
+
+3
+
+100
+
+0
+0
+0
+3
+
+3
+
+100
+
+0
+0
+0
+0
+
+4
+0
+
+100
+12
+19
+29
+
+4
+0
+
+100
+
+2
+1
+3
+
+5
+0
+0
+6
+83
+15
+
+5
+0
+0
+88
+59
+56
+
+6
+0
+0
+0
+16
+78
+
+6
+0
+0
+0
+22
+12
+
+5
+0
+0
+98
+29
+34
+
+6
+0
+0
+0
+70
+45
+
+7
+2
+0
+0
+0
+5
+
+7
+0
+0
+0
+0
+0
+
+7
+0
+0
+0
+0
+18
+
+3
+4
+5
+6
+7
+
+2
+0
+0
+0
+0
+0
+
+2
+0
+0
+0
+0
+0
+
+Table 2
+
+Nombre de classes s´electionn´ees par les crit`eres VBMOD, ICL et ILvb pour des r´eseaux d’aﬃliation avec hubs. 100
+
+graphes ont ´et´e g´en´er´es pour QT rue ∈ {3, . . . , 7}, avec λ = 0.9 et ǫ = 0.1.
+
+exemple les classes 1 et 17, pr´esentent une connectivit´e plus forte entre elles. Ces classes sont distinctes
+au sens du mod`ele SBM car leurs relations aux autres classes sont diﬀ´erentes mais sont regroup´ees dans
+le mod`ele d’aﬃliation en raison de leur grand nombre de liens.
+
+Les r´esultats obtenus en utilisant les crit`eres ICL et ILvb sont comparables, aussi bien au niveau du
+
+nombre de classes qu’au niveau des sommets qu’elles contiennent.
+
+4. Un mod`ele de m´elange `a classes chevauchantes
+
+4.1. Contexte
+
+La classiﬁcation issue du mod`ele de m´elange consid´er´e au chapitre pr´ec´edent poss`ede une lacune vis-
+`a-vis des r´eseaux observ´es, `a savoir l’impossibilit´e pour un sommet d’ˆetre class´e simultan´ement dans
+plusieurs classes. Il existe cependant des prot´eines, appel´ees moonlighting proteins, qui participent `a
+plusieurs fonctions au sein de la cellule [60]. De mˆeme, une classiﬁcation pertinente en sciences sociales
+doit pouvoir permettre `a des sujets d’appartenir `a plusieurs groupes d’interˆet simultan´ement [90]. Il est
+donc naturel de chercher `a d´evelopper un mod`ele similaire `a SBM autorisant de telles classiﬁcations.
+
+Une approche algorithmique de ce probl`eme a ´et´e propos´ee par Palla et al. [90] et est disponible dans le
+logiciel CFinder [91]. Elle consiste `a ﬁxer un entier k correspondant `a la granularit´e de l’algorithme. Toutes
+les cliques de taille k du r´eseau sont ensuite ´enum´er´ees et deux d’entre elles sont reli´ees si elles partagent
+k−1 sommets. Les composantes connexes de ce graphe des cliques d´eﬁnissent alors des communaut´es. Une
+granularit´e trop forte entraˆıne des communaut´es tr`es homog`enes mais petites et couvrant une faible partie
+
+24
+
+Figure 4. Dot-plot de la matrice d’adjacence du r´eseau m´etabolique d’ Escherichia coli, une fois reordonn´ee suivant les 22
+classes selectionn´ees par ILvb.
+
+du graphe alors qu’une granularit´e trop faible renvoie des communaut´es correspondant essentiellement
+aux composantes connexes du r´eseau. La granularit´e conseill´ee par les auteurs est alors la plus petite ne
+faisant pas apparaˆıtre de communaut´e g´eante.
+
+Airoldi et al. [3] ont propos´e le mod`ele Mixed Membership Stochastic Block model (MMSB) et l’ont
+appliqu´e aux r´eseaux d’interactions entre prot´eines [2]. Ce mod`ele est semblable `a SBM mis `a part que
+la classe de chaque sommet change suivant le sommet avec lequel on cherche `a le relier. Plus pr´ecis´ement,
+un vecteur de poids πi est tir´e suivant une loi de Dirichlet pour chaque sommet i. Pour tout i et tout
+j, un vecteur Zi→j est alors tir´e suivant une loi multinomiale M(1, πi). Il repr´esente la classe `a laquelle
+appartient i dans le cadre de sa relation avec j. La probabilit´e de l’arˆete entre i et j est alors de la forme
+Z⊺
+i→j B Zi→j , o`u B est une matrice de connectivit´e semblable `a la matrice Π du mod`ele SBM. Le vecteur
+de classiﬁcation du sommet i est alors le vecteur πi, ce qui permet `a i d’interagir au sein de diﬀ´erentes
+classes via la pr´esence de plusieurs coeﬃcients non nuls au sein de ce vecteur. Cependant, la probabilit´e
+d’apparition de l’arˆete (i, j) est ind´ependante de l’interaction de ces sommets avec le reste du graphe. De
+plus, les vecteurs πi que nous avons observ´e en pratique apr`es convergence de l’algorithme d’estimation
+´etaient compos´es de 0 et d’un 1, ce qui ´elimine de fait l’appartenance multiple.
+
+Fu et Banerjee[47] ont propos´e un mod`ele `a classes chevauchantes adapt´ees `a des matrices de donn´ees
+dont les lignes et les colonnes sont ind´ependantes. Il ne peut donc pas s’appliquer directement aux donn´ees
+issues d’un r´eseau. Cependant, les coordonn´ees des vecteurs latents Zi sont tir´ees suivant des lois de Ber-
+noulli ind´ependantes plutˆot que suivant une multinomiale, ce qui permet d’obtenir des chevauchements.
+Nous avons repris cette id´ee pour construire un mod`ele de graphes al´eatoires `a classes chevauchantes
+nomm´e Overlapping Stochastic Block Model (OSBM). Ce mod`ele est d´ecrit et ´etudi´e dans la suite de
+cette section. Les d´emonstrations des propri´et´es cit´ees sont d´etaill´ees dans [B10].
+
+25
+
+Figure 5. Exemple de r´eseau `a classes chevauchantes.
+
+4.2. Le mod`ele OSBM
+
+Nous nous pla¸cons pour d´ecrire le mod`ele OSBM dans le cadre des graphes orient´es et sans auto-arˆete.
+La th´eorie d´ecrite ci-dessous pourrait cependant ˆetre re´ecrite dans le cadre non-orient´e et si besoin avec
+auto-arˆetes.
+
+Soit Q le nombre de classes envisag´e. Un vecteur latent Zi compos´e de Q variables bool´eennes est
+associ´e `a tout sommet i, comme dans les cas du mod`ele SBM. Cependant, aﬁn de permettre l’appartenance
+multiple `a des classes, il est tir´e suivant une loi de Bernoulli multivari´ee :
+
+Zi ∼
+
+Q
+
+Yq=1
+
+B(Ziq; αq) =
+
+Q
+
+Yq=1
+
+αZiq
+
+q
+
+(1 − αq)1−Ziq .
+
+(5)
+
+Il est important de noter que sous ce mod`ele, le vecteur Zi peut ˆetre nul, ce qui veut dire que le sommet i
+peut n’appartenir `a aucune classe. Ceci repr´esente un avantage au niveau de l’interpr´etation car, dans la
+plupart des cas, une estimation de classes d’un mod`ele SBM sur un r´eseau r´eel cr´ee une classe de sommets
+n’ayant d’autre point commun que leur faible connexion au reste du r´eseau. Ce ph´enom`ene est illustr´e
+par la plus grande classe de la ﬁgure 4.
+
+Les lois des arˆetes connaissant les classes sont alors donn´ees par
+
+avec g la fonction logistique d´eﬁnie par g(x) = (1 + e−x)−1 et
+
+Xij| Zi, Zj ∼ B(cid:0)Xij; g(aZi,Zj )(cid:1) = eXij aZi ,Zj g(−aZi,Zj ),
+
+aZi,Zj = Z⊺
+
+i W Zj + Z⊺
+
+i U + V⊺ Zj +W ∗,
+
+(6)
+
+26
+
+La matrice W d´ecrit les interactions des sommets suivant leurs classes, au mˆeme titre que la matrice
+Π du mod`ele SBM. Le vecteur U mod´elise la capacit´e g´en´erale des classes `a ´emettre des arˆetes, le vecteur
+V celle `a en recevoir. Enﬁn, le terme W ∗ permet d’adapter le nombre moyen d’arˆetes, et sert en pratique
+`a mod´eliser la faible densit´e des r´eseaux r´eels.
+
+Aﬁn de simpliﬁer les notations, consid´erons le vecteur ˜Zi =(cid:0)Zi
+
+1(cid:1) et la matrice
+
+˜W = W U
+
+V⊺ W ∗! .
+
+Le coeﬃcient aZi,Zj peut alors s’´ecrire
+
+De plus, les ˜Zi sont toujours tir´es suivant des lois de Bernoulli multivari´ees en posant αQ+1 = 1.
+
+aZi,Zj = ˜Zi
+
+⊺ ˜W ˜Zj.
+
+(7)
+
+4.3. Identiﬁabilit´e
+
+Avant de chercher `a estimer les param`etres du mod`ele, il faut se poser la question de l’identiﬁabilit´e,
+c’est-`a-dire de l’unicit´e du jeu de param`etres g´en´erant une distribution de graphes al´eatoires donn´ees.
+Cette question a ´et´e r´esolue dans le cas de SBM par Allman et al. [5], qui ont montr´e que mis `a part sur un
+ensemble de mesure nulle de l’espace des param`etres, SBM est un mod`ele identiﬁable aux permutations
+pr`es. SBM est alors dit g´en´eriquement identiﬁable aux permutations pr`es.
+
+Nous avons d´emontr´e un th´eor`eme du mˆeme ordre pour le mod`ele OSBM, un autre type d’op´eration
+
+laissant la distribution invariante devant cependant ˆetre introduit.
+
+4.3.1. Correspondance avec SBM
+
+Consid´erons deux sommets i et j tels que Zi = Zj. Alors i et j ont la mˆeme probabilit´e de se connecter
+`a tout autre sommet k. Il existe donc une fonction associant naturellement une distribution de type SBM
+`a 2Q classes `a toute distribution de type OSBM.
+
+Formellement, soit ΘOSBM l’espace des param`etres du mod`ele OSBM `a Q classes :
+
+et ΘSBM celui du mod`ele SBM `a 2Q classes :
+
+ΘOSBM = {(α, ˜W) ∈ [0, 1]Q × R(Q+1)2
+
+},
+
+ΘSBM = {(γ, Π) ∈ [0, 1]2Q
+
+× [0, 1]22Q
+
+, XC∈C
+
+γC = 1}.
+
+Consid´erons la fonction
+
+φ :
+
+ΘOSBM → ΘSBM
+(α, ˜W) → (γ, Π)
+
+,
+
+27
+
+avec
+
+et
+
+γC =
+
+Q
+
+Yq=1
+
+q (1 − αq)1−Cq , ∀ C ∈ {0, 1}Q,
+αCq
+
+ΠC,D = g(C⊺ W D + C⊺ U + V⊺ D +W ∗), ∀(C, D) ∈ {0, 1}Q × {0, 1}Q.
+
+Un param`etre θ ∈ ΘOSBM g´en`ere alors la mˆeme distribution sur l’ensemble des graphes `a n sommets
+que le param`etre φ(θ) ∈ ΘSBM . Par cons´equent, θ et θ′ engendrent la mˆeme distribution si et seulement
+si φ(θ) et φ(θ′) engendrent la mˆeme distribution. Or, Allman et al. [5] ont d´emontr´e le th´eor`eme suivant
+SBM ⊂ ΘSBM de mesure nulle tel que tous (γ, Π) et (γ′, Π′)
+SBM g´en`erent la mˆeme loi de graphes al´eatoires si et seulement si il existe Pν tel
+
+Th´eor`eme 1. Il existe un sous-espace Θbad
+n’appartenant pas `a Θbad
+
+que (γ′, Π′) = Pν(cid:0)(γ, Π)(cid:1), avec :
+– ν est une permutation de {0, 1}Q,
+– γ′C = γν(C), ∀ C ∈ {0, 1}Q,
+– Π′C,D = Πν(C),ν(D), ∀(C, D) ∈ {0, 1}Q × {0, 1}Q.
+Par cons´equent, il suﬃt pour ´etudier l’identiﬁabilit´e du mod`ele OSBM de caract´eriser les param`etres
+
+pour lesquels φ(θ′) = Pν(φ(θ)) pour une permutation ν de {0, 1}Q.
+
+4.3.2. Permutations et inversions
+
+Comme dans le cas de SBM, une permutation des classes du mod`ele OSBM laisse la distribution
+
+induite inchang´ee. En eﬀet, soit σ une permutation de {1, . . . , Q}. On d´eﬁnit (α′, ˜W′) = Pσ(α, ˜W) par :
+
+et
+
+α′q = ασ(q), ∀q ∈ {1, . . . , Q},
+
+˜W′
+
+q,l = ˜Wσ(q),σ(l), ∀(q, l) ∈ {1, . . . , Q + 1}2.
+
+Soit ν la permutation de {0, 1}Q deﬁnie par
+
+ν(C) = (Cσ(1), . . . , Cσ(Q)), ∀ C ∈ {0, 1}Q.
+
+Alors, pour tout θ ∈ ΘOSBM , φ(Pσ(θ)) = Pν(φ(θ)).
+
+Il existe une autre op´eration qui ne modiﬁe pas la distribution. En eﬀet, chaque coordonn´ee des vecteurs
+Zi partage les sommets en deux sous-ensembles suivant qu’elle vaut 0 ou 1. Remplacer tous les 0 par des
+1 et inversement ne change pas cette information et il est possible de reparam´etrer la matrice ˜W aﬁn que
+les probabilit´es de connexion ne changent pas.
+
+Soit A ∈ {0, 1}Q et MA la matrice d´eﬁnie par
+
+MA = I − 2diag(A) A
+1! ,
+
+0 . . . 0
+
+28
+
+o`u diag(A) d´esigne la matrice diagonale de taille Q × Q dont la diagonale est le vecteur A.
+
+L’inversion suivant A, not´ee IA, est le reparam´etrage d´eﬁni par
+
+o`u
+
+et
+
+IA :
+
+ΘOSBM → ΘOSBM
+(α, ˜W) → (α′, ˜W′)
+
+,
+
+α′j =( 1 − αj
+
+αj
+
+si Aj = 1
+sinon
+
+, ∀j ∈ {1, . . . , Q},
+
+˜W′ = M⊺
+
+A
+
+˜W MA .
+
+Soit ν la permutation de {0, 1}Q d´eﬁnie par
+
+∀ C ∈ {0, 1}Q, ν(C)i =( 1 − Ci
+
+Ci
+
+si Ai = 1
+sinon
+
+.
+
+En d’autres termes, ν inverse les coordonn´ees ´egales `a 1 dans le vecteur A. On peut alors montrer que,
+
+pour tout θ ∈ ΘOSBM , φ(IA(θ)) = Pν (φ(θ)) .
+
+4.3.3. Identiﬁabilit´e g´en´erique
+
+On d´eﬁnit dans l’ensemble ΘOSBM la relation d’´equivalence
+
+θ ∼ θ′
+
+si ∃σ, A |
+
+θ′ = IA(Pσ(θ)).
+
+Il s’agit bien d’une relation d’´equivalence car IA ◦ Pσ = Pσ ◦ Iσ−1(A).
+
+D’apr`es le paragraphe pr´ec´edent, deux param`etres ´equivalents g´en`erent la mˆeme loi de graphes al´eatoires.
+
+Nous avons d´emontr´e qu’`a part sur un ensemble de mesure nulle, les classes d’´equivalence sont en fait en
+bijection avec les lois g´en´er´ees.
+Th´eor`eme 2. Pour tout α ∈]0, 1[Q, soit β ∈ RQ le vecteur deﬁni par βk = − ln( αk
+1−αk
+
+), pour tout k.
+OSBM l’ensemble des param`etres (α, ˜W) v´eriﬁant au moins une des conditions suivantes :
+
+Soit Θbad
+– il existe 1 ≤ k ≤ Q tel que αk = 0 ou αk = 1 ou αk = 1
+2 ,
+– il existe 1 ≤ k, l ≤ Q tels que αk = αl,
+– il existe C, D ∈ {0, 1}Q × {0, 1}Q tels que Pk βkCk =Pk βkDk.
+
+OSBM est un sous-ensemble de ΘOSBM de mesure nulle et
+
+Alors Θbad
+
+∀ θ, θ′ ∈ (ΘOSBM \ Θbad
+
+OSBM )2,
+
+φ(θ) = φ(θ′) ⇔ θ ∼ θ′ .
+
+En d’autres termes, le mod`ele OSBM est g´en´eriquement identiﬁable aux permutations et inversions
+
+pr`es.
+
+1
+
+De plus, chaque classe d’´equivalence contient un param`etre θ = (α, ˜W) tel que α1 ≤ α2 ≤ . . . ≤ αQ ≤
+2 . Si toutes les coordonn´ees du vecteur α de ce param`etre sont distinctes et strictement inf´erieures `a 1
+2 ,
+il est de plus unique. Ce param`etre particulier est celui qui sera rendu par les algorithmes d’estimation
+car il est celui qui s’interpr`ete le plus facilement.
+
+4.4. Estimation des param`etres
+
+Comme dans le cas du mod`ele SBM, les probabilit´es p(Z| α) et p(X| Z, ˜W) s’´ecrivent facilement, ce
+
+qui permet d’´ecrire la vraisemblance sous la forme
+
+29
+
+p(X| ˜W, α) =XZ
+=XZ
+
+p(X| Z, ˜W)p(Z| α)
+
+N
+
+Yi6=j
+
+eXij aZi ,Zj g(−aZi,Zj )
+
+N
+
+Q
+
+Yi=1
+
+Yq=1
+
+αZiq
+
+q
+
+(1 − αq)1−Ziq .
+
+Cette somme contenant 2nQ ne peut ˆetre maximis´ee directement. La d´emarche adopt´ee est alors la
+mˆeme que dans le cas de SBM, c’est-`a-dire un algorithme de type EM appliqu´e `a une approximation
+variationnelle. Pour ce faire, la log-vraisemblance est d´ecompos´ee en
+
+avec
+
+et
+
+ln p(X| α, ˜W) = L(cid:16)q; α, ˜W(cid:17) + KL(cid:16)q(Z) || p(Z | X, α, ˜W)(cid:17),
+
+L(cid:16)q; α, ˜W(cid:17) =XZ
+
+q(Z) ln{
+
+p(X, Z| α, ˜W)
+
+q(Z)
+
+},
+
+KL(cid:16)q(Z) || p(Z| X, α, ˜W)(cid:17) = −XZ
+
+q(Z) ln{
+
+p(Z| X, α, ˜W)
+
+q(Z)
+
+}.
+
+La borne inf´erieure L est alors maximis´ee par rapport `a q, α et ˜W, en se restreignant aux distributions
+
+factoris´ees de la forme
+
+(8)
+
+(9)
+
+(10)
+
+(11)
+
+(12)
+
+avec
+
+q(Zi) =
+
+Q
+
+Yq=1
+
+B(Ziq; τiq) =
+
+τ Ziq
+iq (1 − τiq)1−Ziq .
+
+q(Z) =
+
+q(Zi)
+
+n
+
+Yi=1
+Yq=1
+
+Q
+
+L’interpr´etation des τiq reste la mˆeme que dans le cas de SBM, `a savoir qu’il s’agit de la probabilit´e `a
+
+posteriori pour le sommet i d’appartenir `a la classe q.
+
+On peut alors montrer que
+
+L(cid:16)q; α, ˜W(cid:17) =
+
+N
+
+N
+
+Q
+
++
+
+⊺ ˜W ˜τ j + EZi,Zj [ln g(−aij)]o
+Xi6=jnXij ˜τ i
+Xq=1
+Xi=1
+{τiq ln αq + (1 − τiq) ln(1 − αq)}
+Xq=1
+Xi=1
+
+{τiq ln τiq + (1 − τiq) ln(1 − τiq)} .
+
+−
+
+N
+
+Q
+
+(13)
+
+30
+
+Malheureusement, trouver les param`etres maximisant cette expression reste diﬃcile dans la mesure
+o`u le terme EZi,Zj [ln g(−aZi,Zj )] n’admet pas d’´ecriture plus simple. Nous introduisons alors un second
+niveau d’approximation en utilisant une in´egalit´e introduite par Jaakkola et Jordan [58] qui ont montr´e
+que, pour tout r´eel ξij ,
+
+EZi,Zj [ln g(−aij)] ≥ ln g(ξij ) −
+
+( ˜τ i
+
+⊺ ˜W ˜τ j + ξij)
+
+2
+
+− λ(ξij )(cid:16)EZi,Zj [( ˜Zi
+
+ij(cid:17).
+⊺ ˜W ˜Zj)2] − ξ2
+
+Ceci permet de d´eterminer une borne inf´erieure de la premi`ere borne inf´erieure :
+
+(14)
+
+(15)
+
+o`u
+
+L(cid:16)q; α, ˜W, ξ(cid:17) =
+
+ln p(X| α, ˜W) ≥ L(cid:16)q; α, ˜W(cid:17) ≥ L(cid:16)q; α, ˜W, ξ(cid:17).
+Xi6=j ((cid:0)Xij −
+
+ξij
+2
+
+1
+
+N
+
+i
+
+˜W ˜τ j + ln g(ξij ) −
+⊺ ˜Ei ˜W Σj(cid:17) + ˜τ ⊺
+
+j
+
+˜W
+
+⊺ ˜Ei ˜W˜τ j − ξ2
+
+ij!)
+
+N
+
+2(cid:1)˜τ ⊺
+− λ(ξij ) Tr(cid:16) ˜W
+Xi=1
+Xi=1
+
+Xq=1
+Xq=1
+
+−
+
++
+
+N
+
+Q
+
+Q
+
+{τiq ln αq + (1 − τiq) ln(1 − αq)}
+
+{τiq ln τiq + (1 − τiq) ln(1 − τiq)} .
+
+Cette derni`ere borne est alors optimis´ee par un algorithme de type EM consistant `a optimiser suc-
+cessivement le param`etre ξ, le couple (α, ˜W) et les param`etres τ i d´eﬁnissant la distribution q (cf Algo-
+rithme 1).
+
+La complexit´e de cet algorithme est en O(N 2Q3), ce qui le rend comparable aux algorithmes varia-
+
+tionnels pour SBM ([33] et [B9]) dont la complexit´e est en O(N 2Q2).
+
+4.5. Exp´eriences comparatives
+
+Nous avons men´e des exp´eriences `a partir de donn´ees simul´ees et r´eelles aﬁn d’´evaluer les performances
+du mod`ele OSBM en terme de classiﬁcation des sommets dans les diﬀ´erents groupes. Les classiﬁcations
+obtenues ont ´et´e compar´ees `a celles estim´ees pour SBM par la proc´edure varationnelle bay´esienne (sec-
+tion 3), pour MMSB [3] et par l’algorithme CFinder [91].
+
+CFinder renvoie directement une classiﬁcation des sommets. Les trois autres proc´edures renvoient des
+probabilit´es `a posteriori d’appartenance aux classes. Pour SBM, les vecteurs Zi sont obtenus en mettant
+`a 1 la coordonn´ee la plus grande de τ i et `a 0 toutes les autres. Pour OSBM et MMSB, les coordonn´ees
+de Zi ﬁx´ees `a 1 correspondent aux coordonn´ees de τ i sup´erieures `a un certain seuil. Ce seuil est ﬁx´e `a
+0.5 pour OSBM, le choix du seuil n’inﬂuant pas en pratique car toutes les coordonn´ees des τ i sont tr`es
+proches soit de 0, soit de 1. Pour MMSB en revanche, le seuil est ﬁx´e `a 1/Q car pour un choix plus grand,
+tous les chevauchements ont tendance `a ˆetre ´elimin´es.
+
+31
+
+// INITIALIZATION;
+
+Initialize τ with an Ascendant Hierarchical Classiﬁcation algorithm;
+Sample ˜W from a zero mean σ2 spherical Gaussian distribution;
+
+// OPTIMIZATION;
+
+repeat
+
+// ξ-transformation;
+for (i, j) ∈ V do
+
+ξij ← rTr(cid:16) ˜W⊺ ˜Ei ˜W Σj (cid:17) + ˜τ j
+
+⊺ ˜W⊺ ˜Ei ˜W ˜τ j ;
+
+end
+// M-step;
+for q=1 :Q do
+PN
+
+αq ←
+
+i=1 τiq
+
+N
+
+;
+
+end
+
+Optimize L(cid:16)q; α, ˜W, ξ(cid:17) with respect to ˜W, with a gradient based optimization algorithm ;
+
+// E-step;
+repeat
+
+for i=1 :N do
+
+Optimize L(cid:16)q; α, ˜W, ξ(cid:17) with respect to τ i, with a box constrained (τiq ∈ [0, 1]) gradient based
+
+optimization algorithm ;
+
+end
+
+until τ converges;
+
+until L(cid:16)q; α, ˜W, ξ(cid:17) converges;
+
+Algorithm 1: Estimation des param`etres du mod`ele OSBM par approche variationnelle
+
+32
+
+4.5.1. Simulations
+
+Dans un premier temps, nous avons g´en´er´e 100 graphes d’aﬃliation en consid´erant la matrice W d´eﬁnie
+
+par
+
+W =
+
+les vecteurs U et V d´eﬁnis par
+
+
+λ −ǫ
+−ǫ λ
+...
+−ǫ
+
+
+. . . −ǫ
+...
+. . . −ǫ
+. . . −ǫ λ
+
+
+
+
+
+,
+
+et les valeurs Q = 4, λ = 4, ǫ = 1, et W ∗ = −5.5.
+
+U = V =(cid:16)ǫ
+
+. . .
+
+ǫ(cid:17) ,
+
+Nous comparons les classiﬁcations ˆZ estim´ees avec le vrai vecteur de classe Z avec un crit`ere proche de
+celui de [54] et [55], `a savoir la distance || Z Z⊺, ˆZ ˆZ
+||2. En eﬀet, ces deux matrices sont invariantes par
+permutation des classes et leurs coeﬃcients indiquent le nombre de classes communes pour chaque paire
+de sommets. Leur distance L2 est alors une bonne fa¸con de mesurer `a quel point la structure en classes
+du mod`ele initial a ´et´e retrouv´ee.
+
+⊺
+
+Les r´esultats sont pr´esent´es `a la Figure 6(c).
+
+L’exp´erience a ensuite ´et´e r´ep´et´ee en prenant une matrice W de la forme
+
+W =
+
+
+
+
+
+λ
+
+. . .
+
+. . .
+
+λ −ǫ
+−ǫ −λ −ǫ
+...
+λ
+...
+...
+...
+−ǫ
+
+−ǫ
+λ −ǫ
+... −ǫ −λ −ǫ
+...
+...
+. . .
+
+...
+...
+. . .
+
+−ǫ
+...
+. . .
+
+. . .
+
+. . .
+
+. . .
+
+. . . −ǫ
+...
+. . .
+...
+...
+. . . −ǫ −ǫ
+−ǫ
+λ
+. . . −ǫ −ǫ
+
+. . .
+
+λ
+
+.
+
+
+
+
+
+Si une classe i a une forte connectivit´e interne sous ce mod`ele, ses sommets sont ´egalement fortement
+connect´es `a ceux de la classe i + 1, qui a elle-mˆeme une connectivit´e interne faible (Figure 6(b)). Les
+r´esultats sont pr´esent´es `a la Figure 6(d).
+
+On observe dans les deux cas qu’OSBM est l’algorithme retrouvant le mieux la structure de classes
+initiale. Les mauvais r´esultats de SBM s’expliquent par le fait qu’il ne mod´elise pas les chevauchements.
+La d´egradation des r´esultats de Cﬁnder dans la deuxi`eme ﬁgure s’explique ´egalement par le type de
+situation mod´elis´ee car cet algorithme ne permet de retrouver que les classes ayant une forte connectivit´e
+interne.
+
+(a)
+
+(b)
+
+33
+
+(c)
+
+(d)
+
+Figure 6. (a) Exemple de r´eseau d’aﬃliation. Les sommets noirs repr´esentent les chevauchements. (b) Exemple de r´eseau
+d’aﬃliation avec des ´etoiles. (c-d) Comparaison des algorithmes de classiﬁcation pour chacun de ces deux mod`eles.
+
+4.5.2. Blogosph`ere politique fran¸caise
+
+Nous avons ensuite consid´er´e un r´eseau de 196 blogs fran¸cais d´edi´es `a la politique extraits le 14 octobre
+2006 par le projet Observatoire Pr´esidentielle [112]. Les noeuds y sont les adresses des blogs et une arˆete
+correspond `a un hyperlien d’un blog vers un autre. Le jeu de donn´ees contient ´egalement pour chaque
+blog le nom du parti politique auquel appartient son auteur ou la mention Analyste.
+
+Les r´esultats des classements des diﬀ´erents noeuds par OSBM sont indiqu´es `a la Figure 7. Une case de
+la forme a + b indique que a sommets du parti indiqu´es sont class´es uniquement dans cette classe alors
+que b sommets correspondent `a des chevauchements.
+
+Les cinq principaux clusters sont quasiment identiques `a ceux retrouv´es par MMSB et SBM. OSBM
+retrouve cependant plus de chevauchements que MMSB. De plus, ces chevauchements semblent pertinents
+dans la mesure o`u ils concernent principalement des blogs appartenant `a la fois aux groupes UMP et UDF
+ou `a des analystes politiques, l’un de ces derniers apparaissant mˆeme dans trois des clusters.
+
+L’algorithme Cﬁnder a ´egalement ´et´e utilis´e pour ce r´eseau mais ses r´esultats sont diﬃcilement com-
+parables car les communaut´es renvoy´ees sont beaucoup plus petites en raison de la condition de densit´e
+
+34
+
+Figure 7. Classement des blogs par OSBM
+
+interne tr`es forte. Ainsi, 95 blogs ne sont pas class´es, mais les communaut´es trouv´ees sont des sous-
+communaut´es de celles trouv´ees par les trois autres algorithmes.
+
+4.5.3. R´eseau de r´egulation de la levure
+
+Enﬁn, nous avons compar´e les quatre algorithmes en utilisant un sous-r´eseau du r´eseau de r´egulation
+de la levure compos´e de 197 sommets pour 303 arˆetes. Ce r´eseau est compos´e notamment de trois couples
+de r´egulateurs et de leurs g`enes co-r´egul´es.
+
+Nous avons par cons´equent OSBM avec Q = 6 classes et SBM et MMSB avec Q = 7 classes. Les
+trois algorithmes ont isol´es les trois couples de r´egulateurs et les trois groupes correspondant aux g`enes
+co-r´egul´es pour chacun des couples. Cependant, OSBM est le seul `a avoir rep´er´e 5 g`enes correspondant
+`a des chevauchements parmi les groupes de g`enes co-r´egul´es.
+
+L’algorithme Cﬁnder ne trouve aucune structure d’interˆet car ce r´eseau est si peu dense que sa plus
+
+grande clique est un triangle.
+
+4.6. Un crit`ere de choix de mod`ele
+
+L’algorithme pr´esent´e au paragraphe pr´ec´edent permet d’estimer les param`etres du mod`ele pour une
+valeur de Q ﬁx´ee. Se pose alors la question d’un crit`ere permettant de choisir le nombre de classes optimal.
+Le traitement de cette question est actuellement en cours de ﬁnition, toujours en collaboration avec Pierre
+Latouche et Christophe Ambroise. L’id´ee est similaire `a celle d´evelopp´ee pour le crit`ere ILvb dans le cas
+non-chevauchant (section 3.3), `a savoir adapter l’estimation variationnelle des param`etres `a un cadre
+bay´esien et maximiser dans ce cadre la log-vraisemblance marginale log p(X|Q).
+
+35
+
+cluster
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+size
+
+2
+
+33
+
+2
+
+32
+
+2
+
+19
+
+operons
+
+STE12 TEC1
+
+YBR070C MID2 YEL033W SRD1 TSL1 RTS2 PRM5 YNL051W PST1
+YJL142C SSA4 YGR149W SPO12 YNL159C SFP1 YHR156C YPS1
+YPL114W HTB2 MPT5 SRL1 DHH1 TKL2 PGU1 YHL021C RTA1
+
+WSC2 GAT4 YJL017W TOS11 YLR414C BNI5 YDL222C
+
+MSN4 MSN2
+
+CPH1 TKL2 HSP12 SPS100 MDJ1 GRX1 SSA3 ALD2 GDH3
+
+GRE3 HOR2 ALD3 SOD2 ARA1 HSP42 YNL077W HSP78 GLK1
+
+DOG2 HXK1 RAS2 CTT1 HSP26 TPS1 TTR1 HSP104 GLO1
+
+SSA4 PNC1 MTC2 YGR086C PGM2
+
+YAP1 SKN7
+
+YMR318C CTT1 TSA1 CYS3 ZWF1 HSP82 TRX2 GRE2 SOD1
+
+AHP1 YNL134C HSP78 CCP1 TAL1 DAK1 YDR453C TRR1
+
+LYS20 PGM2
+
+Table 3
+
+Classiﬁcation des op´erons en Q = 6 clusters. Les op´erons indiqu´es en gras appartiennent `a plusieurs clusters.
+
+5. Un mod`ele bas´e sur les graphes bipartis
+
+5.1. Contexte
+
+Certains types de r´eseaux pr´esentent une structure particuli`ere dans la mesure o`u leurs sommets
+sont de deux types diﬀ´erents et o`u toute arˆete relie des sommets de types diﬀ´erents. On parle alors
+de structure bipartite. Cette structure peut ˆetre pr´esente de fa¸con explicite, par exemple dans le cas
+des r´eseaux m´etaboliques. Ceux-ci sont form´es de r´eactions et de m´etabolites, les arˆetes repr´esentant la
+consommation ou la production d’un m´etabolite par une r´eaction (cf Figure 5.1).
+
+D-erythrose
+
+4-phosphate
+
+2.2.1.2
+
+D-sedoheptulose
+
+7-phosphate
+
+2.2.1.1
+
+D-xylulose
+
+5-phosphate
+
+D-fructose
+
+6-phosphate
+
+D-glyceraldehyde
+
+3-phosphate
+
+2.7.6.1
+
+D-ribose
+
+5-phosphate
+
+2.2.1.1
+
+5-phospho-
+
+alpha-D-ribose-
+
+1-diphosphate
+
+AMP
+
+ATP
+
+Figure 8. Partie du r´eseau m´etabolique de la levure tir´e de [63]. Chaque r´eaction (rectangles noirs) est caract´eris´ee par
+la classiﬁcation de l’enzyme qui la gouverne (ovales bleus) et est reli´e aux m´etabolites qu’elle consomme et produit.
+
+Cependant, la structure bipartite peut ´egalement ˆetre pr´esente de fa¸con sous-jacente. Il peut ainsi ˆetre
+int´eressant d’´etudier le r´eseau des enzymes r´egulant des r´eactions du m´etabolisme, deux enzymes ´etant
+
+36
+
+reli´ees si l’une r´egule la production d’un m´etabolite dont l’autre r´egule la consommation [72]. Dans ce cas,
+on oublie le m´etabolite interm´ediaire aﬁn d’obtenir un r´eseau de sommets homog`enes. Ceci est ´egalement
+le cas dans le cas des r´eseaux de r´egulation de g`enes o`u le facteur de transcription est assimil´e au g`ene
+qui l’encode.
+
+Cette structure permet dans certains cas de comprendre l’origine des caract´eristiques structurelles des
+r´eseaux. Par exemple, un m´etabolite participant `a de nombreuses r´eactions assurera `a chacune d’elles
+un fort degr´e dans le graphe des r´eactions. Elle a par cons´equent ´et´e utilis´ee par Guillaume et Latapy
+[50] ou Newman [84] pour construire des mod`eles de g´en´eration de graphes al´eatoires par simulation. Je
+propose d’en tirer parti pour d´ecrire un mod`ele stationnaire g´en´erant des graphes ayant des propri´et´es
+topologiques satisfaisantes [B6].
+
+5.2. Le mod`ele
+
+Un graphe biparti non orient´e est un triplet H = (⊤,⊥, E) o`u ⊤ et ⊥ sont des ensembles de sommets
+disjoints et E ⊆ ⊤ × ⊥ est l’ensemble des arˆetes. Chaque arˆete du graphe relie donc un sommet de ⊤ et
+un sommet de ⊥.
+
+La ⊥-projection de H est le graphe G = (⊥, E′) tel que (u, v) est une arˆete de E′ si et seulement si u
+
+et v sont reli´es `a un mˆeme sommet de ⊤ dans H (cf Figure 9).
+
+=⇒
+
+A
+
+A
+
+B
+
+C
+
+D
+
+C
+
+B
+
+D
+
+Figure 9. Un graphe biparti et sa ⊥-projection
+
+Soit n et m deux entiers et α > 1. Consid´erons le mod`ele de graphes bipartis suivant, que nous notons
+
+BGn,m,α :
+(i) soit deux ensembles de sommets, not´es ⊥ et ⊤, et de tailles respectives n et m ;
+(ii) pour tout 1 ≤ n, on tire de fa¸con ind´ependante un entier pi ∈ {1, . . . , m} suivant une loi de puissance
+
+tronqu´ee de param`etre α.
+
+P(pi = k) =( Cα(m)
+
+kα
+0
+
+si 1 ≤ k ≤ m
+sinon
+
+,
+
+o`u Cα(m) est une constante de normalisation.
+
+(iii) pour tout (i, j) ∈ ⊥ × ⊤, on trace une arˆete entre i et j avec probabilit´e pi
+
+m . Conditionellement aux
+
+valeurs des pi, ces tirages sont ind´ependants.
+
+37
+
+Intuitivement, ce mode de g´en´eration revient `a tirer un degr´e `a priori pi pour chacun des sommets de
+⊥ puis `a tirer les arˆetes qui en sortent suivant une binomiale d’esp´erance pi. Le degr´e eﬀectif du sommet
+i sera donc en moyenne ´egal `a son degr´e `a priori.
+
+Le mod`ele ﬁnal de graphes al´eatoires, not´e SF Gn,m,α consiste alors `a g´en´erer un graphe suivant
+
+BGn,m,α et `a en prendre la ⊥-projection.
+
+Il est `a noter que ce mod`ele se g´en´eralise sans diﬃcult´es aux graphes orient´es. Il suﬃt pour cela de
+g´en´erer un degr´e sortant et un degr´e entrant `a priori pour chaque sommet de ⊥, suivant des lois de
+puissance de param`etres αout et αin, puis de g´en´erer le graphe biparti al´eatoire comme pr´ec´edemment.
+La ⊥-projection se fait en ajoutant une arˆete entre deux sommets u1 et u2 s’il existe un chemin de
+longueur 2 les reliant dans le graphe biparti.
+
+5.3. Propri´et´es topologiques des graphes g´en´er´es
+
+Dans ce paragraphe, nous listons les caract´eristiques topologiques des graphes g´en´er´es sous SF Gn,m,α
+lorsque n et m tendent vers l’inﬁni en restant du mˆeme ordre de grandeur. On suppose de plus que
+2 < α < 3 et on note λα = Cα
+Cα−1
+
+o`u Cα = ζ−1(α) est la limite des Cα(m) lorsque m tend vers l’inﬁni.
+
+Les d´emonstrations sont d´etaill´ees dans [B6].
+
+5.3.1. Distribution des degr´es
+
+Les auteurs de [50] ´etudient le probl`eme consistant `a partir d’un graphe G quelconque, `a retrouver le
+plus petit graphe H possible tel que G est une ⊥-projection de H. Ce probl`eme se ram`ene `a un probl`eme
+de couverture minimale par des cliques et est par cons´equent NP-diﬃcile. Cependant, ils mettent au point
+une heuristique satisfaisante dans la mesure o`u les graphes H obtenus ont un nombre de sommets du
+mˆeme ordre dans ⊥ et ⊤. Les distributions de degr´es qu’ils obtiennent en appliquant leur heuristique sur
+des graphes r´eels sont des distributions de Poisson pour les sommets de ⊤ et des distributions en loi de
+puissance pour des sommets de ⊥.
+
+Ces distributions sont ´egalement celles retrouv´ees dans notre mod`ele.
+
+Proposition 1. Dans le cadre du mod`ele BGn,m,α,
+
+1. soit
+
+m
+
+p⊤ =
+
+Xp=1
+
+p
+m
+
+Cα(m)
+
+pα =
+
+Cα(m)
+
+mCα−1(m) ≈
+
+λα
+m
+
+.
+
+Alors le degr´e des sommets de ⊤ suit une loi binomiale de param`etres n et p⊤, qui peut ˆetre approch´ee
+par une loi de Poisson pour m et n grands.
+
+2. soit Hα(k) = limm→∞ P(dH (v) = k), v ∈ ⊥. Alors Hα(k) existe pour tout k positif et
+
+Hα(k) =
+
+Cα
+k!
+
++∞
+
+Xp=1
+
+pk−αe−p ∼k→+∞
+
+Cα
+kα
+
+La distribution des degr´es est donc asymptotiquement une distribution de type scale-free.
+
+38
+
+Le mod`ele ´etant suﬃsamment simple conditionnellement aux valeurs des pi, il est ´egalement possible
+de d´eterminer une formule exprimant la loi des degr´es dans la ⊥-projection en fonction de celle des
+sommets de ⊥ dans le graphe biparti. L’´etude asymptotique de cette formule am`ene au r´esultat principal
+concernant le mod`ele SF Gn,m,α, `a savoir qu’´ıl g´en`ere des graphes en loi de puissance de param`etre α.
+
+Th´eor`eme 3. Consid´erons le mod`ele SF Gn,m,α et soit Gα(k) = limm→∞ P(dG(v) = k). Alors Gα(k)
+existe pour tout k ≥ 1 et
+
+Gα(k) =
+
+1
+k!
+
++∞
+
+Xj=0
+
+e−λαj(λαj)kHα(j) ∼k→+∞
+
+Cαλα−1
+
+α
+kα
+
+.
+
+0
+
+.
+
+1
+−
+
+5
+
+.
+
+1
+−
+
+.
+
+0
+2
+−
+
+.
+
+5
+2
+−
+
+.
+
+0
+3
+−
+
+5
+
+.
+
+3
+−
+
+.
+
+0
+4
+−
+
+5
+
+.
+
+4
+−
+
+0.0
+
+0.5
+
+1.0
+
+1.5
+
+2.0
+
+Figure 10. Trac´e log-log de la distribution empirique des degr´es d´etermin´ee `a partir de 1000 graphes tir´es sous le mod`ele
+SF G200,200,2.2 . La droite correspond `a l’´equivalent issu du Th´eor`eme 3.
+
+5.3.2. Densit´es globale et locale
+
+En plus de la distribution des degr´es, le mod`ele SF Gn,m,α concorde avec la r´ealit´e en termes de densit´e.
+
+En eﬀet, d’un point de vue global, l’esp´erance du nombre d’arˆetes v´eriﬁe
+
+E(e(G)) ∼n→∞
+
+λ2
+α
+2
+
+n,
+
+et, pour tout ǫ < 2−α
+2 ,
+
+P(cid:0)|e(G) − E(e(G))| >
+
+E(e(G))
+
+nǫ
+
+(cid:1) ≤
+
+n2ǫV ar(e(G))
+
+E(e(G))2 ∼n→∞
+
+4K
+λ4
+α
+
+n2−α+2ǫ
+
+.
+
+En d’autres termes, le nombre d’arˆetes est concentr´e autour de son esp´erance, qui elle-mˆeme croˆıt
+
+lin´eairement en le nombre de sommets.
+
+D’un point de vue local, on observe un ph´enom`ene d’attachement pr´ef´erentiel. En eﬀet, la probabilit´e
+
+39
+
+pour de deux sommets d’ˆetre voisins sachant qu’ils ont un voisin commun varie en O(cid:0) 1
+
+plus grande que la probabilit´e g´en´erale pour deux sommets d’ˆetre voisins, qui est elle ´equivalente `a λ2
+n .
+Ceci se traduit ´egalement par un coeﬃcient de clustering ne tendant pas vers 0 puisque
+
+nα−1(cid:1). Elle est donc
+
+α
+
+5.3.3. Composante g´eante et diam`etre
+
+lim
+n→∞
+
+P(cid:0)C(G) ≤
+
+e − 2
+2e2 (cid:1) = 0.
+
+Pour ﬁnir, le mod`ele SF Gn,m,α est ´egalement ﬁd`ele `a la r´ealit´e en termes de composante g´eante et
+de diam`etre. Pour d´emontrer cela, il est `a noter qu’un autre graphe al´eatoire est obtenu `a partir d’un
+graphe al´eatoire biparti en projetant ce dernier sur les sommets de ⊤. Celui-ci a la particularit´e d’avoir
+des arˆetes ind´ependantes deux `a deux, c’est-`a-dire d’ˆetre un graphe d’Erd˝os-R´enyi de param`etre
+
+ρ = 1 −
+
+p2
+i
+
+m2(cid:1)
+
+m
+
+Yi=1(cid:0)1 −
+
+Celui-ci est asymptotiquement presque sˆurement sup´erieur `a 1
+
+m , ce qui assure que le projet´e sur les
+sommets de ⊤ admet une composante g´eante et un diam`etre en O(log(m)) [20, 27]. Partant de l`a, on
+peut en d´eduire que le graphe biparti puis les projet´e sur ⊥ v´eriﬁent les mˆemes propri´et´es.
+
+5.4. Conclusion
+
+Le mod`ele SF Gn,m,α est un mod`ele `a tirage simultan´e, dont le nombre de param`etres est parti-
+culi`erement faible par rapport aux autres mod`eles `a tirage simultan´e existants. Pourtant, il g´en`ere des
+graphes ayant les principales caract´eristiques topologiques des r´eseaux biologiques, grˆace `a l’utilisation
+de la projection d’un graphe biparti.
+
+Malheureusement, si l’´ecriture de la vraisemblance ou de l’esp´erance de comptages divers est envisa-
+geable pour le mod`ele biparti sous-jacent, la multiplicit´e des structures biparties ayant les mˆemes projec-
+tions rend impossible ces ´ecritures dans le mod`ele ﬁnal. De plus, si la structure bipartie sous-jacente est
+eﬀectivement pr´esente dans certains r´eseaux r´eels, les topologies de ces structures ne se retrouvent pas
+dans le mod`ele BGn,m,α. Un exemple en est la distribution des degr´es de ⊤ qui suit une loi de Poisson
+dans BGn,m,α, ce qui ne correspond pas `a la distribution du nombre de substrats ou de produits dans les
+r´eseaux m´etaboliques.
+
+6. Perspectives
+
+Les perspectives principales en termes de d´eveloppement de mod`eles al´eatoires me semblent r´esider
+dans la sp´ecialisation des mod`eles. En eﬀet, les caract´eristiques ´enum´er´ees au chapitre 1 sont tr`es g´en´erales
+
+40
+
+au sens o`u elles sont communes `a tous les types de r´eseaux, qu’ils soient biologiques, sociaux ou infor-
+matiques. Or, les m´ecanismes r´egissant le d´eveloppement des r´eseaux sont h´et´eroclites, ce qui induit des
+diﬀ´erences de structure. Ainsi, il a ´et´e observ´e, notamment par Aiello et al. [1], que la queue de la distri-
+bution des degr´es est plus lourde pour les graphes biologiques que pour les autres. De mˆeme, les motifs
+apparaissent de fa¸con group´ee dans les graphes de r´egulation, contrairement au cas des graphes issus de
+l’´electronique comme illustr´e au chapitre 9.
+
+Un premier pas a ´et´e fait en ce sens par Chung et Lu [30] qui ont d´evelopp´e un mod`ele bas´e sur
+le ph´enom`ene de duplication, qui est le m´ecanisme principal d’´evolution des r´eseaux de r´egulation et
+d’interactions entre prot´eines. Ils ´etudient la distribution des degr´es correspondante et d´emontrent que
+sous leur mod`ele, l’exposant β de la loi de puissance obtenue v´eriﬁe 1 < β < 2, ce qui correspond bien
+au plus grand nombre de hubs observ´es dans ce type de graphes. Cependant, si leur mod`ele est conforme
+aux m´ecanismes biologiques r´egissant la duplication, il est quasi-impossible `a exploiter d’un point de vue
+statistique autrement que par simulations. En eﬀet, les relations complexes de d´ependance dans le r´eseau
+ﬁnal rendent par exemple impossible l’´ecriture de la probabilit´e d’apparition d’une arˆete.
+
+Le besoin de sp´ecialisation des mod`eles se fait encore plus particuli`erement ressentir dans le cadre
+des r´eseaux m´etaboliques. En eﬀet, un tel r´eseau est compos´e de r´eactions et de m´etabolites, ces deux
+types de sommets jouant des rˆoles tr`es diﬀ´erents. L’approche par graphes bipartis propos´ee au chapitre 5
+ne permet pas de maˆıtriser suﬃsamment le degr´e des sommets correspondant aux r´eactions, celles-ci ne
+faisant jamais intervenir plus de cinq composants dans les r´eseaux r´eels. Une autre solution est de recourir
+`a la notion d’hypergraphes [111], comme cela sera d´etaill´e au chapitre 11. La taille des hyper-arˆetes pourra
+alors ˆetre introduite comme un param`etre du mod`ele. Mithani et al. [81] ont propos´e un mod`ele adapt´e `a
+la structure d’hypergraphe. Un ´equivalent `a tirage simultan´e permettant l’´etude de motifs reste cependant
+`a construire.
+
+Deuxi`eme partie
+
+Recherche de motifs dans les r´eseaux
+
+41
+
+biologiques
+
+7. Introduction
+
+7.1. Motivations
+
+Une mani`ere de synth´etiser l’information structurelle d’un r´eseau est de s’int´eresser au comptage des
+petits sous-graphes aﬁn de voir si certains d’entre eux apparaissent en nombre plus important qu’at-
+tendu. Il est alors int´eressant d’´etudier ces sous-graphes, appel´es motifs, aﬁn de d´eterminer si leur sur-
+repr´esentation est li´ee `a une fonction biologique qui a favoris´e leur apparition au cours de l’´evolution.
+
+Cette id´ee est apparue dans les ann´ees 70 en sciences sociales avec l’´etude des relations entre groupes
+de trois personnes ou triad censuses [34, 106]. Elle a ´et´e reprise et popularis´ee en biologie par l’algorithme
+de recherche de motifs de Milo et al. [80]. Cet algorithme, bas´e sur le proc´ed´e de stub-rewiring (cf 2) et
+l’approximation normale de la loi des comptages, a depuis ´et´e am´elior´e et compl´et´e [67, 68, 108]. Picard et
+al. [92] ont montr´e que l’approximation devient meilleure en rempla¸cant le stub-rewiring par un mod`ele de
+m´elange et la loi normale par une loi de Poisson compos´ee. Berg et L¨assig [14] ont propos´e une approche
+diﬀ´erente bas´ee sur l’alignement de graphes pour d´etecter les motifs. Finalement, Banks et al. [11] et
+Schbath et al. [100] ont ´etendu l’id´ee initiale `a la notion de motifs color´es dans des r´eseaux dot´es d’une
+classiﬁcation de leurs sommets.
+
+Parmi les articles oﬀrant une ´etude biologique des motifs trouv´es, on peut citer les travaux de Wuchty
+et al. [110] qui d´emontrent le lien entre motifs et structures conserv´ees lors de l’´evolution ou ceux de
+Alon [6] ou Kaplan et al. [65] qui ´etudient l’utilit´e d’un motif particulier appel´e feed-forward loop (cf
+Figure 11) dans l’introduction de d´elais en terme de r´egulation. Enﬁn, de nombreux travaux n’ont pas les
+motifs comme sujet principal mais les utilisent comme outil de d´emonstration des ph´enom`enes ´etudi´es
+[10, 79, 93, 94].
+
+Si l’utilisation des motifs comme ´el´ement d’analyse de la structure des r´eseaux est devenue relativement
+commune, plusieurs questions restent ouvertes d’un point de vue th´eorique sur leur d´etection. La premi`ere
+est d’ordre algorithmique et concerne la mise au point de m´ethodes de comptage syst´ematiques et eﬃcaces
+de tous les sous-graphes d’un r´eseau. Les algorithmes actuels se limitent en eﬀet essentiellement aux motifs
+de taille au plus 8 dans un r´eseau d’au plus quelques milliers de noeuds. La seconde question est la loi du
+comptage d’un sous-graphe particulier dans un mod`ele al´eatoire r´ealiste du type SBM. Les algorithmes
+de d´etection de motifs existants sont en eﬀet bas´es sur une approximation normale non justiﬁ´ee de cette
+loi. Enﬁn, il est n´ecessaire de pouvoir s´electionner uniquement les structures d’interˆet et non toutes les
+structures contenant une structure d’interˆet.
+
+42
+
+7.2. Sch´emas et occurrences
+
+Par la suite, je d´esignerai par sch´ema un petit graphe donn´e dont on cherche `a d´eterminer s’il est sur-
+repr´esent´e dans le r´eseau observ´e ou non. Le terme motif d´esigne un sch´ema qui est sur-repr´esent´e. En
+th´eorie, un sch´ema peut ˆetre de taille quelconque mais les contraintes en termes de temps de calcul ainsi
+que la volont´e d’en avoir une interpr´etation biologique am`enent `a consid´erer uniquement des sch´emas de
+moins d’une dizaine de sommets.
+
+Un automorphisme du sch´ema m est une permutation φ de ses sommets telle que, pour toute paire
+φ(a)φ(b) dans le cas orient´e) est une arˆete si et seulement
+
+(a, b) de sommets, (φ(a), φ(b)) (respectivement −−−−−→
+si (a, b) (respectivement −→ab) est une arˆete. Soit R la relation d´eﬁnie par aRb s’il existe un automorphisme
+de m dont l’image de a est b. R est une relation d’´equivalence sur les sommets de m, qui peuvent donc
+ˆetre partitionn´es en classes d’´equivalence. Par exemple, le motif bi-fan de la Figure 11 pr´esente deux
+classes d’´equivalence qui sont {a, b} et {c, d}. Le nombre d’automorphismes de m est d´esign´e par aut(m).
+Soit (C1, . . . , CK ) les classes d’´equivalence de m et (i1, . . . , iK) leurs tailles respectives. Une position
+potentielle U pour m dans G est une liste (V1, . . . , VK) d’ensembles de sommets disjoints de G de tailles
+respectives (i1, . . . , iK). Cette position est une occurrence de m si le sous-graphe de G induit par U est
+isomorphe `a m.
+
+La d´eﬁnition d’une occurrence comme un ensemble de sous-ensembles correspondant aux classes
+d’´equivalence induit deux possibilit´es pour l’´enum´eration des occurrences. Ce choix se pose `a la fois
+dans les ´ecritures math´ematiques et dans la mise au point des algorithmes de comptage (cf 7.3). On peut
+ainsi
+
+– soit parcourir l’ensemble des positions potentielles et compter une unique fois chaque occurrence du
+
+sch´ema d’interˆet ;
+
+– soit parcourir l’ensemble des listes de k sommets et diviser le r´esultat par aut(m), chaque occurrence
+
+ayant ´et´e parcourue aut(m) fois.
+
+Une autre mani`ere de d´eﬁnir une occurrence est ´egalement utilis´ee dans la litt´erature, `a savoir que
+l’on consid`ere comme une occurrence d’un sch´ema tout sous-graphe de G de taille k contenant le sch´ema
+d’interˆet. Cela revient dans la d´eﬁnition pr´ec´edente `a consid´erer qu’il suﬃt qu’il existe une injection du
+sch´ema dans G[U ], o`u en d’autres termes `a consid´erer tous les sous-graphes de G plutˆot que ses seuls sous-
+graphes induits. Dans la suite de ce travail, je privil´egierai les occurrences telles que d´eﬁnies initialement,
+c’est-`a-dire que je consid´ererai des sous-graphes induits. Ce choix est li´e d’une part au fait qu’il me semble
+biologiquement plus pertinent de consid´erer des sous-graphes induits car, dans la mesure o`u les r´eseaux
+biologiques sont creux, la pr´esence d’une arˆete suppl´ementaire est porteuse d’information ; d’autre part,
+dans la mesure o`u les sch´emas consid´er´es sont petits, les relations lin´eaires reliant les comptages des
+sous-graphes et les comptages des sous-graphes induits peuvent ˆetre explicit´ees si besoin.
+
+43
+
+7.3. Le probl`eme du comptage
+
+Pour pouvoir ´etudier la sur-repr´esentation d’un sch´ema, il faut commencer par compter ses occurrences.
+Il peut ´egalement ˆetre int´eressant de les ´enum´erer, c’est-`a-dire de garder en m´emoire leurs positions. Ce
+probl`eme est crucial d’un point de vue des performances algorithmiques des proc´edures de d´etection
+de motifs. En eﬀet, l’approche na¨ıve consistant `a parcourir toutes les positions potentielles induit une
+complexit´e en nk qui la rend tr`es rapidement inutilisable. Deux options se pr´esentent pour am´eliorer les
+performances du comptage. Elles reposent toutes deux sur le principe du backtracking, qui permet de
+tirer proﬁt du caract`ere creux des r´eseaux r´eels.
+
+La premi`ere option est d’´enum´erer simultan´ement tous les sous-graphes de taille k en parcourant
+tous les ensembles connexes de taille k. L’utilisation du backtracking permet de traiter la condition
+de connexit´e en ´etendant la recherche uniquement aux voisins des sommets de l’ensemble courant. Ce
+proc´ed´e, associ´e `a un ordre des sommets du r´eseau permettant d’´eviter la prise en compte multiple d’une
+mˆeme occurrence, est impl´ement´e dans l’algorithme FANMOD de Wernicke et Rasche [108]. L’avantage
+de cette m´ethode est qu’elle parcourt une fois et une seule fois tout sous-graphe induit de taille k tout en
+ne faisant aucune recherche inutile. Elle implique cependant une phase de mise sous forme canonique et
+de tri des occurrences ainsi obtenues aﬁn de regrouper celles qui correspondent `a un mˆeme sch´ema.
+
+Aﬁn d’´eviter la phase ﬁnale de l’algorithme FANMOD, qui se r´ev`ele assez coˆuteuse en temps, il
+est possible de travailler pour un sch´ema donn´e. Grochow et Kellis [49] proposent alors un algorithme
+d’´enum´eration bas´e sur un backtracking qui permet d’obtenir directement les sommets de l’occurrence
+dans un ordre correspondant `a une forme canonique. Cette m´ethode peut encore ˆetre acc´el´er´ee dans le
+cas du comptage seul en ne parcourant pas les sommets de degr´e 1 du sch´ema et en optimisant l’ordre
+de parcours des autres sommets. Cependant, ´etablir la liste de tous les sch´emas possibles de taille k n’est
+faisable que pour un k petit (il y a par exemple plus de 11 millions de graphes connexes `a dix sommets).
+Cette m´ethode ne peut donc ˆetre utilis´ee que pour des valeurs petites de k ou pour un sch´ema donn´e de
+taille plus importante. L’algorithme MODA de Omidi et al. [89] bas´e sur la r´eutilisation des occurences
+des sch´emas plus petits est confront´e au mˆeme probl`eme.
+
+La m´ethode de Grochow et Kellis [49] et son am´elioration limit´ee aux comptages seront disponibles dans
+le package R NeMo en cours d’ach`evement. Des ´evaluations de leurs performances respectives compar´ees
+`a FANMOD sont disponibles dans [B19].
+
+Il est ´egalement `a noter que pour pouvoir traiter de grands r´eseaux, il est ´egalement possible d’avoir
+
+recours `a de l’´echantillonnage plutˆot qu’au comptage exact des occurrences [7, 68, 89, 108]
+
+8. Motifs globaux dans le mod`ele EDD
+
+La notion de sur-repr´esentation d´epend d’une hypoth`ese nulle, c’est-`a-dire d’un mod`ele de graphes
+al´eatoires. En 2006, les m´ethodes existantes de recherche de motifs ´etaient toutes bas´ees sur le principe
+du stub rewiring. Or, comme indiqu´e en 2, ce principe est discutable du point de vue des graphes cr´e´es
+et ne permet pas de calcul analytique.
+
+44
+
+Une premi`ere ´etape dans l’introduction de mod`eles simultan´es a ´et´e de consid´erer le mod`ele EDD
+d´ecrit en 2 et de d´eterminer les deux premiers moments du comptage des petits sch´emas. Ce travail a
+´et´e fait pour les sch´emas non-orient´es de taille 3 et 4, et a donn´e lieu `a la publication [B2]. Le principe
+est d´evelopp´e ci-dessous uniquement pour le sch´ema m correspondant `a un triangle, les autres sch´emas
+se traitant de mani`ere tout `a fait similaire. Pour rappel, les probabilit´es de connexion dans le cadre du
+mod`ele EDD non dirig´e et sans auto-arˆetes sont donn´ees par :
+
+P (Xij = 1) = πij =
+
+didj
+C
+
+et P (Xii = 1) = πii = 0
+
+Soit Ik l’ensemble des k-uplets de sommets et, pour tout ensemble J, notons Ik(J) les ´el´ements de Ik
+n’intersectant pas J. I3 est alors l’ensemble des positions possibles pour un triangle, ce qui implique que
+le comptage du nombre N (m) de triangles s’´ecrit
+
+o`u Yα(m) est la variable indicatrice de la pr´esence d’un triangle en position α.
+
+L’esp´erance du comptage est donc donn´ee par
+
+N (m) = Xα∈I3
+
+Yα(m)
+
+E(N (m)) = Xα∈Ik
+
+E(Yα(m))
+
+= X{i,j,k}∈I3
+= X{i,j,k}∈I3
+
+πij πjkπik
+
+j d2
+i d2
+d2
+k
+C3
+
+.
+
+Le moment d’ordre 2 peut se d´ecomposer en
+
+E(N 2(m)) = Xα∈I3 Xβ∈I3
+= X|α∩β|=0
++ X|α∩β|=2
+
+E(Yα(m)Yβ(m))
+
+E(Yα(m))E(Yβ (m))
+
+E(Yα(m))E(Yβ (m)) + X|α∩β|=1
+E(Yα(m)Yβ(m)) + Xα∈Ik
+
+E(Y 2
+
+α (m))
+
+E(Yi,j,k(m))E(Yℓ,u,v(m))
+
+= X{i,j,k}∈I3 X{ℓ,u,v}∈I3(ijk)
+
++ X1≤i≤n X{j,k}∈I2(i) X{ℓ,u}∈I2(ijk)
++ X{i,j}∈I2 Xk∈I1{ij} Xℓ∈I1(ijk)
+
+E(Yi,j,k(m))E(Yi,ℓ,u(m))
+
+E(Yi,j,k(m)Yi,j,ℓ(m)) + X{i,j,k}∈I3
+
+E(Y 2
+
+i,j,k(m)).
+
+L’esp´erance du produit a pu ˆetre remplac´ee par le produit des esp´erances dans les deux premi`eres
+sommes car l’ind´ependance entre arˆetes assure l’ind´ependance entre les occurrences du triangle en deux
+positions `a moins que celles-ci partagent au moins deux sommets.
+
+Le produit Yi,j,k(m)Yi,j,ℓ(m) est ´egal `a l’indicatrice de la pr´esence simultan´ee des arˆetes ij, ik, il, jk
+
+et jl donc
+
+E(Yi,j,k(m)Yi,j,ℓ(m)) = πij πjkπikπjℓπiℓ =
+
+kd2
+ℓ
+
+j d2
+d3
+i d3
+C5
+
+.
+
+(16)
+
+Enﬁn, Y 2
+
+i,j,k(m) = Yi,j,k(m) car il s’agit d’une variable indicatrice. Finalement, en comptant le nombre
+
+de r´ep´etitions de chaque terme,
+
+45
+
+E(N 2(m)) = 20 X{i,j,k,ℓ,u,v}∈I6
+
+i d2
+d2
+
+j d2
+
+ℓ d2
+
+ud2
+v
+
+kd2
+C6
+
++6Xi∈I1 X{j,k,ℓ,u}∈I4(i)
++2 X{i,j}∈12 X{k,ℓ}∈I2(ij)
++ X{i,j,k}∈I3
+
+i d2
+j d2
+d2
+k
+C3
+
+.
+
+d4
+i d2
+
+ℓ d2
+u
+
+j d2
+kd2
+C6
+
+kd2
+ℓ
+
+j d2
+d3
+i d3
+C5
+
+Il est `a noter que dans [B2], les comptages ne sont pas les comptages des sous-graphes induits mais des
+sous-graphes en g´en´eral (ce qui revient au mˆeme dans le cas du triangle). Cependant, l’´ecriture directe en
+termes de comptage de sous-graphes induits est possible modulo l’apparition suppl´ementaire de termes
+en (1− πik) `a chaque non arˆete. De mˆeme, l’extension `a des graphes dirig´es ne poserait pas de probl`emes
+particuliers.
+
+Le triangle ´etant le sch´ema pour lequel les calculs sont les plus simples, il est ais´e de voir que cette
+approche est vou´ee `a l’´echec pour des sch´emas de taille plus grande. En eﬀet, outre la complexit´e de
+l’´ecriture, la programmation de ces formules n´ecessite de parcourir toutes les fa¸cons de choisir k sommets
+dans le r´eseau. Cette op´eration peut ˆetre l´eg`erement simpliﬁ´ee en regroupant les sommets de mˆeme
+degr´es mais le nombre de degr´es diﬀ´erents pr´esents dans un r´eseau est suﬃsamment grand pour que cette
+am´elioration reste marginale.
+
+Par la suite, Picard et al. [92] ont introduit le mˆeme genre d’approche sur le mod`ele SBM, qui a l’avan-
+tage d’ˆetre stationnaire. Le calcul de l’esp´erance se ram`ene alors au calcul de la probabilit´e d’apparition
+en une position donn´ee, que l’on multiplie par le nombre de positions possibles. Cette am´elioration permet
+de traiter des sch´emas plus grand et de l’appliquer `a des r´eseaux de plusieurs centaines de noeuds.
+
+9. Recherche de motifs locaux
+
+Les m´ethodes pr´ec´edemment d´evelopp´ees consid`erent toutes les motifs de fa¸con globale, `a savoir qu’elles
+s’int´eressent au comptage total du nombre d’occurrences d’un sch´ema dans un r´eseau. Je propose de
+consid´erer une autre d´eﬁnition des motifs, bas´ee sur la notion de sur-repr´esentation locale.
+
+46
+
+La premi`ere raison de ce changement de d´eﬁnition est la constatation par Dobrin et al. [38] du fait que
+les occurrences des motifs d´etect´es par la m´ethode globale dans le r´eseau de r´egulation de la levure sont
+en fait fortement concentr´ees en certaines r´egions du r´eseau. Cette constatation est reprise par Alon [6]
+qui d´eﬁnit des modules de r´egulation, correspondants aux deux principales formes de regroupement des
+motifs de r´egulation.
+
+Ce ph´enom`ene est ´egalement mis en lumi`ere par l’´etude plus biologique de Zhang et al. [114], dont
+les auteurs introduisent la notion de th`eme de motifs, qu’il d´eﬁnissent par ≪recurring higher-order in-
+terconnection patterns that encompass multiple occurrences of network motifs ≫. En d’autres termes, les
+th`emes correspondent `a plusieurs occurrences d’un mˆeme motif partageant certains de leurs sommets. Les
+auteurs recherchent les th`emes dans un r´eseau dont les sommets sont les g`enes de la levure et les arˆetes
+repr´esentent des interactions entre g`enes. Ces interactions peuvent ˆetre de plusieurs types (interactions
+g´en´etiques, co-expression, homologie de s´equence, r´egulation, interaction entre les prot´eines cod´ees), ce
+qui induit un graphe color´e. Les motifs globaux sont d´etect´es de fa¸con automatique puis les th`emes sont
+trouv´es manuellement et analys´es d’un point de vue biologique.
+
+Il en ressort que la notion de th`emes peut ˆetre un outil de pr´ediction, du point de vue des interactions
+ou des fonctions de g`enes. Par exemple, un des th`emes d´ecrits correspond `a la cor´egulation par les g`enes
+M cm1 et Swi4 d’un grand nombre de g`enes. La majorit´e d’entre eux ´etant li´es au contrˆole ou `a l’ex´ecution
+du cycle cellulaire, il est probable que ceux d’entre eux ayant une fonction inconnue soient ´egalement li´es
+au cycle cellulaire. Cette pr´ediction a de plus l’avantage de reposer sur la pr´esence simultan´ee d’un grand
+nombre d’arˆetes, diminuant ainsi le risque li´e aux arˆetes correspondant `a de faux positifs.
+
+La seconde raison du changement de d´eﬁnition est la prise en compte des sous-sch´emas d’un sch´ema.
+En eﬀet, comme cela a ´et´e relev´e d`es les premiers articles concernant les motifs [80], un sch´ema peut
+ˆetre sur-repr´esent´e uniquement en raison de la sur-repr´esentation de l’un de ses sous-sch´emas. Celui-ci
+est alors la structure ayant biologiquement un sens, le sch´ema initial ne m´eritant d’ˆetre ´etudi´e que s’il
+apparaˆıt lui-mˆeme en nombre important par rapport au nombre de sous-sch´emas. Ce conditionnement
+est pris en compte dans le cas des motifs globaux pour l’´etude des motifs de taille k = 3 ou k = 4 [11, 80]
+mais ne l’est plus pour des motifs plus grands. En eﬀet, l’´etude des motifs de taille k `a l’aide de mod`eles
+pas `a pas n´ecessite la g´en´eration de graphes ayant le mˆeme nombre de sous-graphes que le r´eseau ´etudi´e,
+pour tout sous-graphe de taille 2 `a k − 1. Pour k = 3, cela revient `a ﬁxer les degr´es, ce qui est fait dans
+le cas du stub-rewiring. Pour k = 4, le recours `a un algorithme de type recuit-simul´e permet de g´en´erer
+des graphes avec le bon nombre de sous-graphes de taille 3 mais la m´ethode ne semble pas g´en´eralisable
+`a des tailles plus importantes.
+
+Ce chapitre est d´evolu `a la d´eﬁnition de la notion de motif local et `a la recherche de motifs locaux
+dans les r´eseaux. Il a fait l’objet de [B14] et [B17]. Les d´emonstrations des propri´et´es math´ematiques sont
+d´etaill´ees dans les annexes du second article.
+
+47
+
+9.1. Motifs locaux
+
+Tout au long de ce chapitre, G d´esigne un r´eseau orient´e `a n sommets, ayant ´eventuellement des boucles
+ou une arˆete dans chaque sens entre certaines paires de sommets. Tous les r´esultats pr´esent´es peuvent
+ˆetre ´etendus sans diﬃcult´e aux graphes non orient´es.
+
+Dans ce contexte, les sch´emas consid´er´es sont ´egalement orient´es, avec possibilit´e de boucles ou d’arˆetes
+oppos´ees. Par convention, les lettres (a, b, . . . ) d´esignent les sommets du sch´ema m consid´er´e, alors que
+les lettres (u, v, . . .) d´esignent les sommets du r´eseau G.
+
+Un sous-sch´ema de m d´esigne une paire (C, m′), o`u C est une classe d’´equivalence de m et m′ le
+
+sch´ema `a k − 1 sommets obtenu en supprimant l’un des sommets de C (cf Figure 11).
+
+La relation d’´equivalence entre les sommets de C assure que le sch´ema m′ est bien le mˆeme quelque
+soit le sommet de C qui est supprim´e. Cependant, l’inverse n’est pas vrai : les sous-sch´emas obtenus
+en supprimant des sommets a ou b peuvent ˆetre isomorphes sans que a et b appartiennent `a la mˆeme
+classe d’´equivalence. Le sch´ema FFL de la Figure 11 en est un exemple puisque la suppression de chaque
+sommet am`ene `a une arˆete simple alors que les sommets ne sont pas topologiquement ´equivalents.
+
+Aﬁn de repr´esenter en un seul dessin un sch´ema et l’un de ses sous-sch´emas, j’adopte la convention
+consistant `a repr´esenter par un carr´e plein l’un des sommets de la classe d’´equivalence consid´er´ee et `a
+mettre en pointill´es les arˆetes qui lui sont incidentes. La suppression de ce sommet et des arˆetes pointill´ees
+est alors une repr´esentation de m′.
+
+Soit m un sch´ema et (C, m′) l’un de ses sous-sch´emas. Une occurrence V de m est une extension d’une
+occurrence U de m′ si les sommets de U sont un sous-ensemble des sommets de V . Un (m, C)-th`eme
+en U est alors le sous-graphe induit par l’occurrence de m′ en U et de ses extensions. Le nombre de ces
+extensions est appel´e l’ordre du th`eme (cf Figure 12).
+
+La sur-repr´esentation locale, c’est-`a-dire la d´eﬁnition de motif local, peut alors ˆetre d´eﬁnie par l’appari-
+tion de th`emes d’ordres plus grands qu’attendus. Cela n´ecessite des tests statistiques, avec une correction
+li´ee aux multiples positions test´ees. Plus pr´ecis´ement, aﬁn de d´etecter les motifs locaux de taille inf´erieure
+ou ´egale `a k, je propose la proc´edure suivante, dont les parties seront d´etaill´ees dans les sections suivantes :
+
+1. Inf´erence des param`etres d’un mod`ele de graphes al´eatoires `a tirage simultan´e qui servira d’hy-
+
+poth`ese nulle ;
+
+2. Enum´eration et calcul de l’ordre des th`emes de tout couple (sch´ema ; sous-sch´ema) `a l’aide d’un
+
+algorithme de comptage (cf Section 7.3) ;
+
+3. Calcul d’une p-valeur pour tout couple (sch´ema ; sous-sch´ema). Ce calcul se fait `a l’aide d’une
+approximation de Poisson pour la loi de l’ordre des th`emes et d’une correction pour tests multiples ;
+
+4. L’application d’une proc´edure de ﬁltrage qui permet d’assurer que tout nouveau motif local d´etect´e
+
+apporte une information par rapport aux motifs locaux plus petits.
+
+Il est `a noter que cette d´eﬁnition est r´eellement diﬀ´erente de celle des motifs globaux, un motif pouvant
+
+ˆetre local sans ˆetre global et r´eciproquement.
+
+48
+
+Sch´ema
+
+Feed-forward loop
+
+c
+
+ 
+
+ 
+
+
+a
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+ 
+
+ 
+
+
+b
+
+Bi-fan
+
+c
+
+ 
+
+ 
+
+
+  
+
+  
+
+
+d
+
+a
+
+
+ 
+
+ 
+
+ 
+
+
+  
+
+  
+
+  
+
+b
+
+Sous-sch´ema
+
+Repr´esentation
+
+{a},
+
+{b},
+
+ 
+
+ 
+
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+ 
+
+ 
+
+
+{c},
+
+
+ 
+
+ 
+
+ 
+
+
+  
+
+  
+
+  
+
+{a, b},
+
+{c, d},
+
+ 
+
+ 
+
+
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+ 
+
+
+ 
+
+ 
+
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+ 
+
+
+  
+
+  
+
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+ 
+
+
+  
+
+  
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+  
+
+  
+
+
+  
+
+  
+
+
+
+  
+
+  
+
+  
+
+ 
+
+ 
+
+
+ 
+
+ 
+
+
+ 
+
+ 
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+ 
+
+
+Figure 11. Les sch´emas FFL et bi-fan et la liste de leur sous-sch´emas. La derni`ere colonne montre le sch´ema et le
+sous-sch´ema consid´er´e en un seul dessin.
+
+9.2. Le mod`ele al´eatoire
+
+Le mod`ele al´eatoire adopt´e est proche des mod`eles de m´elange ou `a classes empi´etantes trait´es en
+partie I, `a savoir que la probabilit´e de lien entre deux sommets d´epend de leurs classes respectives.
+Cependant, pour des raisons de d´eveloppement math´ematique, les classes sont suppos´ees connues et non
+pas latentes. Il d´epend donc d’un quadruplets de donn´ees (n, Q, Z, Π) o`u
+
+– n est le nombre de sommets,
+– Q est le nombre de classes du mod`ele,
+– Z ∈ {1, . . . , Q}n est un vecteur donnant la classe de chaque sommet,
+– Π est une matrice de connectivit´e de taille Q × Q.
+Sous ce mod`ele, les arˆetes sont tir´ees de mani`ere ind´ependante suivant des lois de Bernoulli, c’est-`a-dire
+
+Xuv ∼ B(ΠZ(u),Z(v)).
+
+m1
+
+  
+
+  
+
+  
+
+
+ 
+
+ 
+
+ 
+
+
+m2
+
+  
+
+  
+
+
+
+  
+
+  
+
+  
+
+
+ 
+
+ 
+
+ 
+
+P DR1
+
+ 
+
+ 
+
+
+P DR3
+
+  
+
+  
+
+
+49
+
+P DR5
+
+ 
+
+ 
+
+ 
+
+
+  
+
+  
+
+
+Y OR1
+
+IP T 1
+
+ 
+
+ 
+
+
+ 
+
+ 
+
+ 
+
+
+SN Q2
+
+ 
+
+ 
+
+
+HXT 9
+
+ 
+
+ 
+
+ 
+
+
+HXT 11
+
+Figure 12. Sous-graphe du r´eseau de r´egulation de la levure, qui est un (m1, C1)-th`eme d’ordre 6 en position
+({P DR1, P DR3}) et un (m2, C2)-th`eme d’ordre 5 en position ({P DR1, P DR3}, {P DR5}), o`u C1 et C2 sont les classes
+d’´equivalences respectives des sommets carr´es.
+
+L’estimation des param`etres est faite en utilisant l’une des m´ethodes d´ecrites en partie I, et en assignant
+
+`a chaque sommet sa classe de probabilit´e `a post´eriori la plus grande.
+
+9.3. Approximation de Poisson pour la p-valeur
+
+Consid´erons un sch´ema m de taille k, un sous-sch´ema (C, m′) de m et une position potentielle U de
+
+m′ dans G.
+
+Soit NU (m, m′) l’ordre du (m, C)-th`eme situ´e en U (cf Figure 13). Si U ne correspond pas `a une
+
+occurrence de m′, NU (m, m′) = 0.
+
+Posons λU (m, m′) = E(NU (m, m′)|G[U ] ∼ m′) et
+
+∆U (m, m′) =
+
+NU (m, m′) − λU (m, m′)
+
+λU (m, m′)
+
+.
+
+Les th`emes dont les ordres sont signiﬁcativement plus grands qu’attendu correspondent aux positions
+
+pour lesquelles ∆U (m, m′) est signiﬁcativement plus grand que 1.
+
+Aﬁn d’all´eger les notations, les arguments m et m′ des quantit´es NU , λU et ∆U ne seront ´ecrits que
+si n´ecessaire. De mˆeme, le cas o`u la nullit´e de λU implique un probl`eme de d´eﬁnition pour ∆U n’est pas
+abord´e car les m´ethodes utilis´ees pour l’inf´erence des param`etres du mod`ele assurent que λU est non nul
+d`es lors que NU est non nul.
+
+9.3.1. Borne locale
+
+Soit U une occurrence de m′. Pour tout sommet v /∈ U , soit I v
+
+U ∪ {v} est une extension de m′ et pv
+
+U = P(I v
+
+U = 1). Alors NU = Pv /∈U I v
+
+U et λU = Pv /∈U pv
+
+U la variable indicatrice du fait que
+U . Comme
+
+50
+
+m
+
+ 
+
+ 
+
+ 
+
+
+G
+
+v1
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+ 
+
+ 
+
+
+  
+
+  
+
+
+u1
+
+ 
+
+ 
+
+ 
+
+
+v4
+
+  
+
+  
+
+  
+
+
+v3
+
+  
+
+  
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+u2
+
+  
+
+  
+
+  
+
+
+u3
+
+  
+
+  
+
+  
+
+
+v2
+
+ 
+
+ 
+
+ 
+
+
+v5
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+
+v6
+
+Figure 13. Pour U = {u1, u2, u3}, NU (m, m′) = 3, car les sommets menant `a des extensions sont v4, v5 et v6. Dans un
+mod`ele d’Erd˝os o`u chaque arˆete potentielle est pr´esente avec probabilit´e p, chaque sommet n’appartenant pas `a U donne
+une extension avec une probabilit´e pv
+
+U = p2(1 − p)4. Par cons´equent, λU (m, m′) = 6p2(1 − p)4.
+
+les variables (I v
+U )v /∈U sont ind´ependantes, la loi de NU peut ˆetre approch´ee par une loi de Poisson de
+param`etre λU en utilisant la m´ethode de Chen-Stein [13, 25]. Plus pr´ecis´ement, en notant dT V la distance
+en variation totale entre deux distributions,
+
+dT V(cid:0)L(NU ),L(P o(λU ))(cid:1) ≤ min(1, λ−1
+
+U )Xv /∈U
+
+(pv
+
+U )2.
+
+Cette approximation peut encore ˆetre am´elior´ee pour la queue de la distribution, en appliquant toujours
+la m´ethode de Chen-Stein. Ceci a ´et´e fait par Barbour et al. [13] qui d´emontrent un r´esultat (Theorem
+2.R, p44) impliquant
+
+∀K > 2λU , P(NU ≥ K|G[U ] ∼ m′) ≤
+
+Pour K = ⌈λU (1 + t)⌉ avec t > 1, cela implique
+∀t > 1, P(∆U ≥ t) ≤ P(G[U ] ∼ m′)
+
+K − λU
+K − 2λU
+
+P o(λU )([K, +∞)),
+
+√t + 1
+
+√2πλU (t − 1)
+
+e−λU ((1+t) log(1+t)−t)
+
+(17)
+
+(18)
+
+Une autre approche consiste `a appliquer une in´egalit´e de concentration. Il existe en eﬀet un grand
+nombre d’in´egalit´es permettant d’´etablir que des variables de la forme f (Z1, . . . , Zn) sont concentr´ees
+autour de leur moyenne pour certaines formes de fonctions f et des variables al´eatoires Z1, . . . , Zn
+ind´ependantes [9, 22, 77, 104].
+
+Dans le cas pr´esent, NU est une somme de variables al´eatoires de Bernoulli ind´ependantes. On peut
+
+alors utiliser le Th´eor`eme 2.3 de MacDiarmid [77] qui implique
+
+∀t > 0, P(∆U ≥ t) ≤ P(G[U ] ∼ m′)e−λU ((1+t) log(1+t)−t).
+
+(19)
+
+Une comparaison des bornes (18) et (19) montre que la seconde est meilleure pour les petites valeurs de
+t mais que l’approche par approximation de Poisson se r´ev`ele plus pr´ecise quand le nombre d’extensions
+observ´e est tr`es sup´erieur au nombre attendu. Le choix de la meilleure des deux bornes suivant la valeur
+de t implique le th´eor`eme suivant :
+
+51
+
+Th´eor`eme 4. Soit, pour tous λ > 0 et t > 0,
+
+tλ = 1 +
+
+1
+
+4πλ
+
+(1 + √1 + 16πλ)
+
+et
+
+h(λ, t) =(
+
+1
+
+√t+1
+
+√2πλ(t−1)
+
+si
+si
+
+t ≤ tλ,
+t > tλ.
+
+Alors, pour tout sch´ema m, tout sous-sch´ema (C, m′), toute position U et tout t > 0,
+
+P(∆U ≥ t) ≤ P(G[U ] ∼ m′)h(λU , t)e−λU ((1+t) log(1+t)−t).
+
+On obtient ainsi une d´ecroissance exponentielle pour la queue de distribution de l’ordre d’un th`eme
+
+en une position donn´ee.
+
+9.3.2. Borne globale
+
+Le th´eor`eme pr´ec´edent permet de mettre en place un test de sur-repr´esentation locale en une position
+donn´ee. Cependant, le nombre de positions potentielles pour m′ est proportionnel `a nk−1, ce qui induit
+un probl`eme de tests multiples. Plutˆot que de recourir aux corrections standard pour tests multiples, je
+propose de d´eterminer une borne pour la probabilit´e d’avoir au moins une sur-repr´esentation locale en
+une position quelconque du graphe.
+
+Pour cela, consid´erons la fonction g : (]0, +∞[)2 → R d´eﬁnie par
+
+g(λ, t) = λ(cid:0)(1 + t) log(1 + t) − t(cid:1) − log(h(λ, t)).
+
+(20)
+
+Pour une valeur ﬁx´ee de λ, la fonction g(λ, .) est une bijection croissante de ]0, +∞[ sur lui-mˆeme. Un
+∆U tr`es grand, c’est-`a-dire une sur-repr´esentation locale en position U , se traduit alors par le fait que
+g(λU , ∆U ) est tr`es grand.
+
+Plus pr´ecis´ement, en appliquant le Th´eor`eme 4 `a y tel que g(λU , y) = t, la fonction g permet de re´ecrire
+
+la borne du Th´eor`eme 4 en supprimant la d´ependance en U dans le terme exponentiel.
+
+∀t > 0,
+
+P(cid:0)g(λU , ∆U ) ≥ t(cid:1) ≤ P(G[U ] ∼ m′)e−t.
+
+Il devient alors possible, en notant que Et = {maxU (g(λU , ∆U )) ≥ t} est l’union sur toutes les positions
+U = {g(λU , ∆U ) ≥ t}, d’obtenir une borne pour la probabilit´e de l’existence d’un
+
+U des ´ev`enements Et
+grand th`eme n’importe o`u dans le graphe.
+
+52
+
+Th´eor`eme 5. Soit g la fonction d´eﬁnie par l’´equation (20) et N (m′) le nombre d’occurrences de m′
+dans G. Alors, pour tout t > 0,
+
+P(cid:0) max
+
+U
+
+(g(λU , ∆U )) ≥ t(cid:1) ≤ EN (m′)e−t
+
+(21)
+
+On obtient ainsi une borne sup´erieure pour la p-valeur du test consistant `a chercher s’il existe quelque
+
+part dans le graphe un th`eme d’ordre beaucoup plus grand qu’attendu.
+
+9.3.3. Proc´edure de ﬁltrage
+
+Le Th´eor`eme 5 permet de s´electionner les sch´emas sur-repr´esent´es localement dans le r´eseau.
+Cependant, consid´erons les deux sch´emas et sous-sch´emas respectifs de la Figure 12 et soit C1 et C2
+les classes d’´equivalence dont un sommet est supprim´e. La ﬁgure permet de voir que tout (m2, C2)-th`eme
+d’ordre k est ´egalement un (m1, C1)-th`eme d’ordre k + 1. Dans ce cas, l’existence d’un (m2, C2)-th`eme
+de taille signiﬁcative est donc redondante avec la mˆeme information concernant les (m1, C1)-th`emes.
+
+Aﬁn d’´eviter un telle redondance dans la liste ﬁnale des motifs, nous consid´erons qu’un sch´ema m est
+
+un motif local par rapport au sous-sch´ema (C, m′) si les deux conditions suivantes sont remplies :
+
+1. m est localement sur-repr´esent´e par rapport `a (C, m′), c’est-`a-dire que la p-valeur donn´ee par le
+
+Th´eor`eme 5 est plus petite qu’un seuil ﬁx´e ;
+
+2. Soit a un sommet de m appartenant `a C. Il n’existe pas d’ensemble A de sommets de m tel que
+
+– il n’y a pas d’arˆete entre a et A,
+– m\A est localement sur-repr´esent´e par rapport `a (D, m\(A∪{a}), o`u D est la classe d’´equivalence
+
+de {a} dans m \ A .
+
+S’il existe un ensemble A satisfaisant les deux conditions, la sur-repr´esentation locale de m par rapport
+`a (C, m \ {a}) est une cons´equence de la sur-repr´esentation de m \ A par rapport `a (D, m \ (A ∪ {a})).
+Par cons´equent, la paire (m, C) est ´elimin´ee par la proc´edure de ﬁltrage.
+
+La Figure 14 illustre cette proc´edure : le premier sch´ema n’est pas consid´er´e comme un motif local car
+les conditions de ﬁltrage sont r´ealis´ees pour A = {b}. Par contre, le second sch´ema est conserv´e `a cause
+de l’arˆete entre b et a. En eﬀet, celle-ci oblige la pr´esence de k arˆetes suppl´ementaires dans le r´eseau pour
+qu’il y ait un th`eme d’ordre k. Or, les probabilit´es de pr´esence des arˆetes ´etant faibles dans les r´eseaux
+r´eels, la pr´esence de ces k arˆetes est porteuse d’information.
+
+La proc´edure de ﬁltrage est plus simple `a voir sur la repr´esentation graphique des sch´emas et de
+leurs sous-sch´emas. En eﬀet, soit (m1, C1) et (m2, C2) deux paires s´electionn´ees par l’application du
+Th´eor`eme 5, m1 ayant moins de sommets que m2. Si m1 est un sous-graphe induit de m2 en se faisant
+correspondre les deux sommets carr´es et si les sommets carr´es ont mˆeme degr´e dans (m1, C1) et (m2, C2),
+alors (m2, C2) est ﬁltr´e par la proc´edure.
+
+9.3.4. Aspects algorithmiques
+
+D’un point de vue algorithmique, l’application de cette proc´edure `a un r´eseau donn´e et une taille de
+sch´ema k n´ecessite une partie ´enum´erative des couples (sch´ema, sous-sch´ema) et de leur positions, une
+
+(1)
+
+a
+
+c
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+ 
+
+ 
+
+
+d
+
+(2)
+
+b
+
+ 
+
+ 
+
+
+a
+
+c
+
+ 
+
+ 
+
+
+ 
+
+ 
+
+
+d
+
+(3)
+
+b
+
+ 
+
+ 
+
+
+a
+
+c
+
+ 
+
+ 
+
+
+ 
+
+ 
+
+
+d
+
+53
+
+u
+
+ 
+
+ 
+
+
+ 
+
+ 
+
+ 
+
+
+u
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+ 
+
+
+u
+
+v
+
+ 
+
+ 
+
+
+ 
+
+ 
+
+ 
+
+
+v
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+ 
+
+
+v
+
+ 
+
+ 
+
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+ 
+
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+ 
+
+
+w
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+ 
+
+ 
+
+
+w
+
+  
+
+  
+
+  
+
+
+  
+
+  
+
+
+  
+
+        
+
+  
+
+               
+ 
+    
+
+
+
+            
+
+        
+
+  
+
+               
+ 
+    
+
+
+
+            
+
+        
+
+               
+ 
+    
+
+
+
+            
+
+        
+
+               
+ 
+    
+
+
+
+            
+
+        
+
+               
+ 
+    
+
+
+
+            
+
+        
+
+               
+ 
+    
+
+
+
+            
+
+        
+
+               
+ 
+    
+
+
+
+            
+
+        
+
+               
+ 
+    
+
+
+
+            
+
+        
+
+               
+ 
+    
+
+
+
+            
+
+        
+
+               
+ 
+    
+
+
+
+            
+
+        
+
+               
+ 
+    
+
+
+
+            
+
+        
+
+               
+    
+
+
+            
+
+        
+
+    
+
+            
+
+        
+
+    
+
+            
+
+        
+
+    
+
+            
+
+        
+
+    
+
+            
+
+  
+
+        
+
+    
+
+            
+
+  
+
+        
+
+  
+
+  
+
+        
+
+  
+
+        
+
+  
+
+
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+
+Figure 14. Illustration de la proc´edure de ﬁltrage. (1) On suppose que le sch´ema FFL est localement sur-repr´esent´e par
+rapport `a la suppression de a. Un th`eme associ´e est situ´e en position {u, v}. (2) Le sch´ema repr´esent´e est localement
+sur-repr´esent´e par rapport `a la suppression de a. Il n’est cependant pas ajout´e `a la liste des motifs car A = {b} satisfait les
+conditions pour le ﬁltrage par rapport au motif FFL. (3) Le sch´ema repr´esent´e est ´egalement localement sur-repr´esent´e par
+rapport `a la suppression de a. Il est consid´er´e comme un motif local `a cause de l’arˆete entre b et a. En eﬀet, elle implique
+la pr´esence de 5 arˆetes dans le th`eme, ce qui est porteur d’informations dans un r´eseau creux.
+
+partie d’estimation du mod`ele al´eatoire et une partie de calcul des p-valeurs.
+
+L’estimation des param`etres du mod`ele peut ˆetre faite ind´ependamment du reste comme indiqu´e au
+
+paragraphe 9.2.
+
+La partie ´enum´erative peut ˆetre trait´ee par tout algorithme d’´enum´eration cit´e en 7.3. Cependant,
+en raison du caract`ere creux des r´eseaux biologiques, il est plus rentable d’un point de vue du temps
+d’´enum´erer toutes les occurrences des sch´emas et d’en d´eduire ensuite les positions des sous-sch´emas
+que l’inverse. En eﬀet, la d´emarche inverse implique la recherche d’une nombre potentiellement grand
+d’occurrences du sous-sch´ema qui n’ont pas d’extension.
+
+Enﬁn, le calcul de la p-valeur se divise en deux parties. La premi`ere consiste `a calculer, pour tout couple
+(sch´ema, sous-sch´ema) et toute position U list´ee dans la partie ´enum´erative, la valeur λU correspondante.
+Ce coeﬃcient correspondant `a une somme simple, son calcul est rapide, de mˆeme que celui des ∆U , gU et
+maxU gU . La seconde est le calcul du terme E(N (m′)), qui est l’´etape la plus p´enalisante de l’algorithme.
+En eﬀet, elle peut uniquement ˆetre simpliﬁ´ee en regroupant les occurrences potentielles partageant la
+
+54
+
+mˆeme r´epartition des sommets dans les classe de degr´es, ce qui implique une complexit´e de l’ordre de
+Qk−1, o`u Q est le nombre de degr´es distincts de G.
+
+L’algorithme r´esultant de cette d´emarche est en cours d’impl´ementation en collaboration avec Gilles
+
+Grasseau et donnera lieu `a la diﬀusion du package R paloma.
+
+9.4. Borne inf´erieure de la p-valeur
+
+La borne sup´erieure de la queue de distribution donn´e par le Th´eor`eme 5 permet de contrˆoler la
+proportion de faux-positifs. Cependant, la pr´ecision de cette borne m´erite d’ˆetre ´etudi´ee pour savoir ce
+qu’il en est des faux-n´egatifs.
+
+Pour des d´eviations mod´er´ees, il est possible d’´evaluer la pr´ecision de la borne sup´erieure donn´ee par
+
+le Th´eor`eme 4 pour la queue de distribution en une position donn´ee :
+
+Proposition 2. Soit m un sch´ema et (C, m′) un sous-sch´ema de m. Soit U une position correspondant
+U )2 et LBU (t) la borne sup´erieure de P(∆U ≥ t) donn´ee
+
+`a une occurrence de m′ dans G , λ2,U =Pv /∈U (pv
+
+par le Th´eor`eme 4.
+
+Supposons que λ2,U < 1
+
+4 . Alors, pour tout t v´eriﬁant 1 < t <
+
+1
+
+8√λ2,U − 1,
+
+P(∆U ≥ t)
+LBU (t) ≥(cid:16)1 − 52
+
+λ2,U
+λU
+
+(1 + t)(cid:17)(cid:16)1 −
+
+2
+
+1 + t(cid:17)(cid:16)1 −
+
+1
+
+10λU (1 + t)(cid:17)
+
+Ce th´eor`eme implique que pour une suite de nombres t(n), de graphes G(n) et de positions U (n) tels que
+U ≥ t(n))
+
+t(n) et (tλU )(n) tendent vers l’inﬁni et (tλ2,U /λU )(n) tend vers 0, la borne sup´erieure de P(∆(n)
+est asymptotiquement atteinte.
+
+Consid´erons par exemple le mod`ele d’Erd˝os-R´enyi de param`etre p(n) = c
+
+n . Soit k et n les tailles
+respectives de m et G et soit r le nombre d’arˆetes pr´esentes dans m mais non dans m′. Alors, pour toute
+position U ,
+
+λ(n)
+U
+
+= (n − k + 1)pr ∼n→+∞
+λ(n)
+2,U = (n − k + 1)p2r ∼n→+∞
+
+cr
+
+nr−1
+c2r
+
+n2r−1
+
+(22)
+
+(23)
+
+Ainsi, pour r ≥ 2, la suite t(n) ∼ nα avec r − 1 < α < r est une suite de seuils pour lesquels la borne
+
+sup´erieure du th´eor`eme 4 est asymptotiquement optimale.
+
+L’optimalit´e de la borne globale du Th´eor`eme 5 est plus compliqu´ee `a ´etudier en raison de la maximisa-
+U = {g(λU , ∆U ) >
+
+tion sur un grand nombre de positions. En notant Et = {maxU (g(λU , ∆U )) > t} et Et
+t}, une borne inf´erieure pour la probabilit´e de Et peut ˆetre obtenue en utilisant que
+
+P(Et) ≥XU
+
+P(Et
+
+U ) −
+
+1
+
+2 XU6=V
+
+P(Et
+
+U ∩ Et
+
+V ).
+
+de borner sup´erieurement les probabilit´es des intersections Et
+
+U ) correspond `a la borne sup´erieure donn´ee par le th´eor`eme. Il suﬃt par cons´equent
+V . Cependant, pour certains sch´emas, les
+
+Le terme PU
+
+P(Et
+
+U∩Et
+
+55
+
+ordres des th`emes en deux positions chevauchantes U et V peuvent ˆetre fortement corr´el´es. Le sch´ema m2
+de la Figure 12 en est un exemple : le nombre d’extensions de l’occurrence de m′2 en position U =(PDR1,
+PDR3, PDR5) est ´egal au nombre d’extensions de l’occurrence de m′2 en position V =(PDR1, PDR3,
+V n’est pas n´egligeable devant celle de Et
+IPT1). Par cons´equent, la probabilit´e de l’intersection Et
+U
+et Et
+v.
+
+U ∩ Et
+
+Cependant, cette approche simple permet de montrer que la borne sup´erieure est asymptotiquement op-
+timale pour certains couples (sch´ema ;sous-sch´ema) pour un mod`ele d’ Erd˝os-R´enyi g´en´erant des graphes
+suﬃsamment creux.
+
+Proposition 3. Soit m un sch´ema de taille k ayant un sommet a reli´e `a tous les autres sommets de m.
+Soit (C, m′) le sous-sch´ema o`u C est la classe d’´equivalence de a.
+
+Consid´erons le mod`ele d’Erd˝os-R´enyi de param`etre ρ avec ρ = O(n− 1
+
+valeurs de λU et λ2,U , qui ne d´ependent pas de U sous ce mod`ele.
+
+2−ǫ), ǫ > 1
+
+2k−1 . Soit λ et λ2 les
+
+Soit 0 < t < nǫ et GB(t) la borne globale donn´ee par le Th´eor`eme 5. Alors, si λ2 < 1
+
+4 , et si y > 0 tel
+
+que g(λ, y) = t v´eriﬁe 1 < y < 1
+
+8√λ2 − 1,
+λ2
+λ
+
+P(Et)
+
+GB(t) ≥ (1 − η)(cid:16)1 − 52
+
+(1 + y)(cid:17)(cid:16)1 −
+
+2
+
+1 + y(cid:17)(cid:16)1 −
+
+1
+
+10λ(1 + y)(cid:17) − kn2ke−nǫ+t
+
+o`u η = O(n−ǫ).
+La condition sur ρ permet une croissance du nombre d’arˆetes en O(n
+
+lin´eaire observ´ee sur les donn´ees r´eelles [29].
+
+3
+
+2−ǫ), ce qui comprend la croissance
+
+La combinaison des Propositions 2 et 3 implique l’optimalit´e asymptotique de la borne de la p-valeur
+dans certains cas : consid´erons `a nouveau le mod`ele d’Erd˝os-R´enyi de param`etre p(n) = c
+n et un couple
+(sch´ema, sous-sch´ema) v´eriﬁant les hypoth`eses de la Proposition 3. Pour tout 0 < δ < 1
+2 , le choix t(n) ∼
+nδ log(nk−1+δ) correspond `a y(n) ∼ nk−1+δ. Le premier terme du second membre de la Proposition 3
+tend alors vers 1 alors que le second tend vers 0 puisque δ < ǫ = 1
+2 .
+
+9.5. Simulations et application
+
+9.5.1. Donn´ees simul´ees
+
+J’ai g´en´er´e 500, 000 graphes dirig´es de 90 sommets, que j’appelle les graphes de r´ef´erence. Les sommets
+y sont r´epartis en trois classes de 30 sommets et, pour toute paire de sommets (u, v), l’arˆete de u vers
+v est pr´esente avec probabilit´e 0.04 si u et v sont dans la mˆeme classe et 0.01 s’ils sont dans des classes
+diﬀ´erentes. Le degr´e sortant moyen et le degr´e entrant moyen dans ce mod`ele sont tous deux de 1.76.
+
+Ma m´ethode est illustr´ee avec les sch´ema FFL et bi-fan (cf Figure 11). Les sous-sch´emas consid´er´es
+sont obtenus en supprimant le sommet de degr´e entrant 2 dans le cas de FFL et l’un des sommets de
+degr´e entrant 2 pour BIFAN. Ce choix ne joue aucun rˆole ici en raison de la sym´etrie du mod`ele.
+
+Les parties (a) et (b) de la Figure 15 montrent les p-valeurs empiriques ainsi que leusr bornes sup´erieures
+
+donn´ees par le Th´eor`eme 5, en fonction de la valeur de t.
+
+10
+
+12
+
+14
+
+16
+
+10
+
+12
+
+t
+
+t
+
+t
+
+14
+
+16
+
+10
+
+15
+
+56
+
+(a) Empirical p−value and upper bound for the feed−forward loop
+
+l
+
+e
+u
+a
+v
+−
+p
+
+l
+
+e
+u
+a
+v
+−
+p
+
+o
+
+i
+t
+
+a
+r
+
+.
+
+0
+1
+
+8
+0
+
+.
+
+6
+
+.
+
+0
+
+4
+
+.
+
+0
+
+2
+
+.
+
+0
+
+0
+
+.
+
+0
+
+0
+
+.
+
+1
+
+.
+
+8
+0
+
+6
+0
+
+.
+
+4
+
+.
+
+0
+
+2
+
+.
+
+0
+
+0
+0
+
+.
+
+0
+1
+
+.
+
+8
+
+.
+
+0
+
+6
+
+.
+
+0
+
+4
+0
+
+.
+
+2
+
+.
+
+0
+
+0
+0
+
+.
+
+5
+
+10
+
+t
+
+(b) Empirical p−value and upper bound for the bifan
+
+5
+
+10
+
+t
+
+15
+
+15
+
+(c) Ratio between empirical p−value and upper−bound
+
+l
+
+e
+u
+a
+v
+−
+p
+
+l
+
+e
+u
+a
+v
+−
+p
+
+o
+
+i
+t
+
+a
+r
+
+0
+2
+0
+0
+0
+
+.
+
+0
+1
+0
+0
+0
+
+.
+
+0
+0
+0
+0
+
+.
+
+0
+
+4
+0
+−
+e
+8
+
+4
+0
+−
+e
+4
+
+0
+0
++
+e
+0
+
+0
+1
+
+.
+
+8
+
+.
+
+0
+
+6
+
+.
+
+0
+
+4
+0
+
+.
+
+2
+
+.
+
+0
+
+0
+0
+
+.
+
+2
+
+4
+
+6
+
+8
+
+10
+
+12
+
+14
+
+16
+
+5
+
+t
+
+Figure 15. (a) p-valeurs empiriques et bornes sup´erieures correspondantes pour le sch´ema FFL dans les 500.000 graphes
+de r´ef´erence ; zoom sur la queue de distribution. (b) Idem pour le sch´ema BIFAN. (c) Ratio entre la p-valeur empirique
+et la borne sup´erieure pour les graphes de r´ef´erence (points noirs), les graphes denses (carr´es bleus) et les grands graphes
+(losanges rouges).
+
+Aﬁn d’estimer la sur-´evaluation de la p-valeur, la partie (c) de la Figure 15 montre la valeur du
+ratio entre les deux grandeurs pr´ec´edentes. Ce ratio a ´egalement ´et´e trac´e pour des graphes plus denses
+(30.000 graphes tir´es en multipliant les probabilit´es de connection par 5) et pour des graphes plus grands
+mais de mˆemes degr´es moyens (30, 000 graphes form´es de trois classes de 120 sommets chacune avec des
+probabilit´es de connection de 0.01 et 0.0025). On voit que, dans les graphes de r´ef´erence, le rapport reste
+relativement stable en fonction de t et ce pour les deux sch´emas. Sa valeur est environ de 1/10. De plus,
+il devient meilleur quand le graphe grandit ou se densiﬁe.
+
+9.5.2. Inﬂuence du mod`ele choisi
+
+Les p-valeurs obtenues d´ependent des coeﬃcients de la matrice Π. Aﬁn d’´etudier l’inﬂuence de la
+m´ethode utilis´ee pour inf´erer cette matrice, les motifs locaux de taille 3 et 4 ont ´et´e cherch´es sur un
+mˆeme jeu de donn´ees avec diﬀ´erentes m´ethodes d’estimation des coeﬃcients de Π :
+
+– l’estimation correspondant au mod`ele d’Erd˝os-R´enyi ;
+– celle correspondant au mod`ele EED d´ecrit au chapitre 2.1. Pour rappel, la probabilit´e d’une arˆete
+
+allant de u vers v y est proportionnelle au produit du degr´e sortant de u et du degr´e entrant de v ;
+
+– l’estimation bay´esienne du mod`ele de m´elange SBM propos´ee dans [B9] et d´ecrite au chapitre 3 ;
+– l’estimation du mod`ele de m´elange par l”algorithme BLOCKS [87] disponible au sein du logiciel
+
+STOCNET (http ://stat.gamma.rug.nl/stocnet/).
+
+57
+
+Erd˝os
+
+EDD
+
+SBM
+
+BLOCKS
+
+  
+
+  
+
+
+  
+
+  
+
+
+4.3 e-46
+
+5.7 e-7
+
+1.3 e-6
+
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+
+5.2 e-14
+
+5.8 e-4
+
+8.2 e-6
+
+3.9 e-5
+
+ 
+
+ 
+
+
+  
+
+  
+
+
+1.3 e-30
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+ 
+
+ 
+
+
+3.2 e-14
+
+2.9 e-5
+
+3.1 e-8
+
+9.6 e-5
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+
+ 
+
+ 
+
+ 
+
+
+  
+
+  
+
+  
+
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+ 
+
+
+  
+
+  
+
+  
+
+
+  
+
+  
+
+
+(4.6 e-45)
+
+9.6 e-4
+
+(4.1 e-9)
+
+(1.2 e-6)
+
+(1.9 e-30)
+
+3.5 e-2
+
+3.8 e-2
+
+1.6 e-4
+
+Table 4
+
+Motifs locaux trouv´es suivant diﬀ´erentes proc´edures d’estimation de Π. Les valeurs indiqu´ees sont celles donn´ees par
+
+l’in´egalit´e (21). Celles entre parenth`eses d´esignent les motifs potentiels ult´erieurement rejet´es par la proc´edure de ﬁltrage.
+
+BLOCKS ne pouvant pas traiter des graphes de plus de 200 sommets, l’application a ´et´e men´ee sur
+un sous-r´eseau connexe de 194 sommets du r´eseau de r´egulation de la levure. La Table 4 montre tous les
+motifs locaux trouv´es avec une p-valeur inf´erieure `a 0, 05 pour au moins l’une des m´ethodes d’inf´erence.
+On peut voir que la m´ethode se r´ev`ele relativement stable vis-`a-vis de la proc´edure d’estimation choisie.
+
+La seule m´ethode qui se d´emarque des autres, tant au niveau du nombre de motifs trouv´es que des
+p-valeurs, est celle correspondant au mod`ele d’Erd˝os-R´enyi. Cela est dˆu `a l’absence de densit´e locale sous
+ce mod`ele, ce qui explique la sous-´evaluation des p-valeurs calcul´ees.
+
+On constate d’autre part que la m´ethode s´electionnant le moins de motifs locaux est celle associ´ee au
+mod`ele EDD. Le premier sch´ema de la Table 4 n’est en particulier pas s´electionn´e, alors qu’il l’est pour
+SBM et BLOCKS. Cependant, un th`eme d’ordre k pour ce motif correspond `a un th`eme d’ordre k − 1
+pour le motif bi-fan (5eme ligne du la Table 4), qui est selectionn´e comme un motif local pour le mod`ele
+EDD. Les th`emes consid´er´es comme signiﬁcatifs par les trois m´ethodes se correspondent donc.
+
+Finalement, les deux m´ethodes qui tiennent compte `a la fois de la distribution des degr´es et de la
+
+modularit´e du r´eseau trouvent les mˆemes motifs locaux avec des p-valeurs proches.
+
+58
+
+9.5.3. R´eseaux r´eels
+
+Aﬁn d’´etudier le caract`ere local ou non des motifs globaux, j’ai appliqu´e la proc´edure de recherche
+des motifs locaux au r´eseau de r´egulation de la levure et `a deux r´eseaux ´electroniques, tous ´etudi´es au
+niveau des motifs globaux dans [80] et disponibles `a l’adresse http ://weizmann.ac.il/mcb/UriALon. La
+recherche a ´et´e eﬀectu´ee pour les motifs locaux de taille 3 `a 5.
+
+La m´ethode d’inf´erence choisie est la m´ethode SBM bay´esienne. Cependant, cette approche a un
+d´efaut qui est une tendance `a cr´eer une classe de hubs qui est inhomog`ene en termes de degr´es et fausse
+l’interpr´etation. Ainsi, dans le cas du r´eseau de r´egulation de la levure, une classe est cr´e´ee avec les deux
+sommets de degr´es sortants maximaux, `a savoir 71 et 44. Cette classe est alors consid´er´ee par le mod`ele
+comme g´en´erant des sommets de degr´e sortant moyen ´egal `a 57, 5. En raison de la pr´esence du sommet de
+degr´e 71, tout motif en ´etoile sera alors s´electionn´e comme un motif local. Aﬁn de pallier `a cet artefact,
+j’ai lanc´e la proc´edure avec SBM puis je l’ai relanc´e avec EDD lorsque le motif selectionn´e ´etait une ´etoile
+dont le th`eme correspondant ´etait centr´e sur le sommet de degr´e sortant 71.
+
+ 
+
+ 
+
+
+ 
+
+ 
+
+
+
+  
+
+  
+
+  
+
+Local motif
+
+  
+
+  
+
+
+ 
+
+ 
+
+
+ 
+
+ 
+
+
+ 
+
+ 
+
+
+ 
+
+ 
+
+
+p-value bound
+
+2.0 e-16
+
+2.3 e-9
+
+4.6 e-4
+
+8.6 e-4
+
+N ∗
+U
+
+38
+
+15
+
+5
+
+3
+
+Motifs locaux de taille 3 pour le r´eseau de r´egulation de la levure.
+
+Table 5
+
+La Table 5 indique les motifs locaux de taille 3 trouv´es pour le r´eseau de la levure avec un seuil de
+
+0, 001, la ligne N∗U repr´esentant l’ordre du th`eme en la position pour laquelle ∆U est maximal.
+
+Deux motifs apparaissent avec des p-valeurs largement inf´erieures au seuil. Le premier correspond
+`a deux r´egulateurs co-r´egulant un grand nombre de g`enes. Les diﬀ´erents algorithmes de recherche de
+motifs globaux ayant servi `a analyser ce r´eseau [14, 80, 108] n’ont pas d´etect´e ce sch´ema, mais ont tous
+selectionn´e le sch´ema bi-fan. Or, tout th`eme d’ordre k correspondant au motif local trouv´e implique
+l’existence de k(k−1)
+occurrences du bi-fan. Les trois plus grands th`emes, qui sont respectivement d’ordre
+38, 32 et 18, repr´esentent ainsi `a eux seuls 73% des occurrences bi-fan dans le r´eseau. Ceci indique que la
+sur-repr´esentation globale du bi-fan est une cons´equence de la sur-repr´esentation locale du motif indiqu´e.
+
+2
+
+Le second motif local correspond au sch´ema FFL, qui est ´egalement trouv´e par tous les algorithmes
+de recherche globaux. Il correspond d’un point de vue biologique `a un r´egulateur initial X r´egulant un
+g`ene Y , X et Y co-r´egulant ensuite un troisi`eme g`ene Z. Ce m´ecanisme permet d’induire diﬀ´erentes
+dynamiques dans le processus de r´egulation suivant le caract`ere inhibiteur ou activateur des r´egulations
+[6]. Cependant, ma m´ethode permet de mettre `a jour `a l’aide uniquement de m´ethodes statistiques
+l’assym´etrie dans les rˆoles des trois g`enes impliqu´es. Le sch´ema FFL est en eﬀet fortement sur-repr´esent´e
+par rapport `a la suppression de son sommet de degr´e entrant ´egal `a 2. Un grand th`eme de ce motif
+correspond alors `a un mˆeme couple (X, Y ) co-r´egulant un grand nombre de g`enes cibles Z1, . . . , Zk. Ce
+
+ph´enom`ene a ´et´e d´ecrit par Alon [6] sous le nom de Multi-output feed-forward loops.
+
+Le sch´ema FFL apparaˆıt encore comme localement sur-repr´esent´e par rapport `a la suppression du
+r´egulateur initial X mais la p-valeur est beucoup plus faible et le plus grand th`eme n’est que de taille
+3. Enﬁn, ce sch´ema n’apparaˆıt pas du tout comme sur-repr´esent´e par rapport `a la suppression du g`ene
+interm´ediaire Y , indiquant qu’il n’existe nulle part dans le r´eseau un r´egulateur initial X utilisant un
+grand nombre de g`enes interm´ediaires Y aﬁn de r´eguler la dynamique d’un g`ene Z particulier.
+
+59
+
+Local motif
+
+  
+
+  
+
+
+  
+
+  
+
+
+  
+
+  
+
+
+ 
+
+ 
+
+
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+ 
+
+ 
+
+  
+
+  
+
+
+  
+
+  
+
+
+
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+
+ 
+
+ 
+
+ 
+
+
+  
+
+  
+
+  
+
+p-value bound
+
+6.5 e-15
+
+3.4 e-6
+
+1.4 e-4
+
+5.6 e-4
+
+9.2 e-4
+
+N ∗
+U
+
+7
+
+2
+
+2
+
+1
+
+1
+
+Motifs locaux de taille 4 pour le r´eseau de r´egulation de la levure.
+
+Table 6
+
+La Table 6 indique les motifs de taille 4 s´electionn´es. Le premier d’entre eux correspond `a l’occurrence
+d’une multi-output feed-forward loop avec un troisi`eme g`ene r´egulant 7 des sorties. Ce motif est ´egalement
+s´electionn´e par les m´ethodes globales mais seulement en sixi`eme position parmi les motifs de taille 4. Les
+quatre autres motifs s´electionn´es semblent peu pertinents dans la mesure o`u la taille du plus grand th`eme
+associ´e est de 1 ou 2. La raison de la s´election de ces motifs est donc li´ee `a leur tr`es faible probabilit´e
+d’apparition plutˆot qu’`a leur sur-repr´esentation locale. Il en est de mˆeme pour tous les motifs locaux de
+taille 5 d´etect´es. Ceci semble indiquer que les motifs locaux pertinents sont de petite taille, ph´enom`ene
+r´ecemment illustr´e ´egalement dans le cas des motifs globaux [59].
+
+J’ai ensuite appliqu´e la recherche des motifs locaux aux r´eseaux ´electroniques cit´es plus haut. Aucun
+motif local n’y est pr´esent, pour k compris entre 2 et 5 et pour un seuil pourtant large de 0, 01. Milo et al.
+[80] ont pourtant trouv´e trois motifs globaux dans ces circuits. Cette constatation indique une diﬀ´erence
+de structure entre les deux types de r´eseaux encore plus forte que celle sugg´er´ee dans [80], dont les auteurs
+ne comparent que la topologie des motifs trouv´es : leur r´epartition dans le r´eseau est ´egalement diﬀ´erente.
+
+9.6. Perspectives
+
+L’introduction des motifs locaux ouvre plusieurs perspectives. La premi`ere est d’ordre math´ematique et
+consiste `a adapter le travail expos´e ci-dessus aux mod`eles de m´elanges pr´esent´es au chapitre I, c’est-`a-dire
+un mod`ele o`u les classes des sommets sont des variables latentes. Ceci rendrait l’algorithme de recherche
+plus eﬃcace car la stationnarit´e de ces mod`eles permet d’´ecrire l’esp´erance du nombre d’occurences de
+m′ comme le produit de sa probabilit´e d’apparition en une position donn´ee par le nombre de positions
+possibles. Cependant, l’approximation de Poisson devient plus compliqu´ee `a ´etablir car les arˆetes cessent
+d’ˆetre ind´ependantes.
+
+La seconde perspective est celle de la comparaison de r´eseaux, et en particulier de leur alignement.
+
+60
+
+L’alignement des graphes d’interaction entre prot´eines peut en eﬀet ˆetre un compl´ement `a la comparai-
+son de s´equence pour l’annotation fonctionnelle de g`enes par similarit´e avec leurs orthologues [70, 113].
+Le probl`eme de l’isomorphisme de graphes ´etant NP-complet, il est n´ecessaire de passer par des heuris-
+tiques d’alignement. De grands th`emes communs entre organismes pourraient ˆetre des points de rep`ere
+permettant de jouer le rˆole d’ancres pour l’alignement de r´eseaux.
+
+Enﬁn, les motifs ´etudi´es jusqu’ici, qu’ils soient locaux ou globaux, ne sont d´eﬁnis que par leur topologie,
+c’est-`a-dire par leurs arˆetes. Aucune condition n’y est ´enonc´ee pour les sommets, ce qui repr´esente une
+perte d’information qui peut se r´ev´eler pertinente. En eﬀet, la question peut se poser de savoir comment
+sont r´epartis les sch´emas reliant uniquement certains types de noeuds. Ce probl`eme a ´et´e abord´e dans le
+cas des motifs globaux si l’on demande aux noeuds d’une occurrence d’appartenir `a des familles donn´ees.
+C’est notamment le cas de l’´etude de [11] qui ´etudient un r´eseau PPI dont les prot´eines sont ´etiquet´ees
+par leur annotation GO ou de celle de [100] qui classent les r´eactions d’un graphe m´etabolique en fonction
+des classiﬁcations E.C. de leurs enzymes.
+
+La distinction entre types de sommets peut ´egalement avoir un lien ´etroit avec les motifs locaux.
+Ainsi, parmi les th`emes d´ecouverts par Zhang [114] dans les diﬀ´erents r´eseaux de la levure, certains
+correspondent `a des couples de g`enes dupliqu´es ayant de nombreux voisins dans le r´eseau.
+
+Or, un couple de g`enes partageant de nombreux voisins revient `a l’existence d’un th`eme de taille
+signiﬁcative pour l’un des motifs de la Figure 16. L’utilisation des scores associ´ees aux th`emes de ces
+motifs pourrait servir `a conﬁrmer des paires de dupliqu´es inf´er´es dans l’optique de la reconstruction des
+familles de dupliqu´es. Elle aurait en eﬀet l’avantage de reposer sur une information biologique (le r´eseau
+d’interactions entre prot´eines) d’une autre nature que l’alignement de s´equences habituellement utilis´e
+pour inf´erer ces familles.
+
+ 
+
+ 
+
+
+  
+
+  
+
+
+ 
+
+ 
+
+
+ 
+
+ 
+
+
+Figure 16. Motifs dont un th`eme sur-repr´esent´e dans un r´eseau d’interaction entre prot´eines correspond `a deux sommets
+ayant de nombreux voisins communs et donc possiblement dupliqu´es.
+
+D’autre part, l’analyse des th`emes impliquant des paires de dupliqu´es pourrait ˆetre une m´ethode
+d’´etude de diﬀ´erents types d’´evolution suite `a la duplication. En eﬀet, il est admis que durant le phase de
+divergence qui fait suite au ph´enom`ene de duplication, a lieu l’un des trois sc´enarii que sont la redondance
+fonctionnelle, la sp´ecialisation ou la cr´eation d’une nouvelle fonction [88]. L’importance relative des ces
+trois ph´enom`enes est cependant encore discut´ee [48, 53]. Une des mani`eres de l’´etudier est la comparaison
+des voisinages des dupliqu´es dans le r´eseau d’interaction entre prot´eines, qui ´evolue diﬀ´eremment suivant le
+sc´enario suivi comme le montre la Figure 17. L’utilisation de scores li´es aux th`emes pourrait se r´ev´eler plus
+riche en informations que la distance de Czekanowski-Dice utilis´ee classiquement pour l’´etude comparative
+de voisinages [23, 53].
+
+61
+
+duplication
+
+R
+
+SF
+
+NF
+
+Figure 17. Sc´enarii post-duplication. R : redondance, SF : sous-fonctionalisation, NF : n´eo-fonctionalisation
+
+62
+
+63
+
+Troisi`eme partie
+
+Cycles dans les r´eseaux
+
+Le dernier chapitre de ce m´emoire est consacr´e `a l’´etude de la r´epartition d’un autre type de sous-
+graphes, `a savoir les cycles. Ces derniers conf`erent leur complexit´e topologique aux graphes puisque les
+graphes acycliques ne sont autres que les unions disjointes d’arbres. De nombreux probl`emes complexes
+devenant simples dans le cas des arbres, il est par cons´equent souvent utile de voir dans quel mesure la
+structure d’un graphe quelconque peut ˆetre ramen´ee `a une structure d’arbre aﬁn d’adapter les algorithmes
+correspondants.
+
+Je pr´esente ici deux probl`emes `a priori tr`es diﬀ´erents auxquels j’ai travaill´e. Le premier consiste
+en la recherche de bornes pour la largeur d’arborescence de certaines familles de graphes non dirig´es
+[B1,B4,B7,B11]. Le second concerne l’´enum´eration des organisations chimiques d’un r´eseau m´etabolique
+[B15]. Ils reposent cependant sur une approche commune qui est la suivante :
+
+1. Identiﬁer la famille C de cycles qui donnent au probl`eme sa diﬃcult´e ;
+2. Trouver un transversal H de C, c’est-`a-dire un ensemble de sommets interceptant tous les cycles de
+
+C ;
+
+3. R´esoudre le probl`eme sur le graphe priv´e de H puis ´etendre la solution au graphe entier.
+
+10. Bornes pour la largeur d’arborescence
+
+10.1. Largeur d’arborescence
+
+La largeur d’arborescence a ´et´e introduite par Robertson et Seymour dans une s´erie d’articles [96–
+99]. Elle repose sur la notion de d´ecomposition arborescente, appel´ee suivant les domaines d’application
+tree-decomposition ou junction tree.
+
+D´eﬁnition 1. Une d´ecomposition arborescente d’un graphe non orient´e G est un arbre T dont les
+sommets sont index´es par des sous-ensembles (Wt)t∈V (T ) de sommets de G de telle fa¸con que :
+(C1) pour tout sommet u de G, l’ensemble des sommets de T tels que u est contenu dans Wt forme un
+
+sous-arbre Tu de T ;
+
+(C2) pour toute arˆete (u, v) de G, Tu et Tv ont une intersection non vide.
+
+La ﬁgure 10.1 donne un exemple de d´ecomposition arborescente.
+D’un point de vue algorithmique, la structure d’arbre est int´eressante dans la mesure o`u une solution
+partielle au probl`eme donn´e peut ˆetre cherch´ee sur un des Wt jouant le rˆole de racine puis ´etendue de
+proche en proche le long de l’arbre. A chaque ´etape, on choisit une arˆete (t, t′) de T telle que Wt a d´ej`a ´et´e
+trait´e mais pas Wt′ et on ´etend la solution partielle de Wt `a Wt′ . L’absence de cycle dans l’arbre T ainsi
+que les conditions (C1) et (C2) assurent qu’`a aucun ´etape l’extension requise ne contredit les d´ecisions
+prises pr´ec´edemment.
+
+64
+
+G
+
+A
+
+B
+
+C
+
+D
+
+F
+
+E
+
+G
+
+T
+
+A
+
+C
+
+B
+
+E
+
+B
+
+D
+
+E
+
+D
+
+F
+
+E
+
+E
+
+G
+
+Figure 18. Exemple de d´ecomposition arborescente.
+
+Cependant, la complexit´e de tels algorithmes d´epend de la taille des ensembles Wt sur lesquels il faut
+propager l’information pas `a pas. Ils seront donc d’autant plus eﬃcaces que les Wt seront petits, et leur
+complexit´e d´epend de la taille maximale des Wt. Ceci explique l’introduction de la largeur d’arborescence.
+
+D´eﬁnition 2. La largeur d’une d´ecomposition arborescente est l’entier
+maxt∈V (T )(|Wt| − 1).
+
+La largeur d’arborescence d’un graphe G est la plus petite des largeurs de ses d´ecompositions arbores-
+
+centes. Elle est not´ee T W (G).
+
+Cette largeur est bien toujours d´eﬁnie dans la mesure o`u tout graphe admet au moins la d´ecomposition
+triviale constitu´ee d’un noeud index´e par l’ensemble des sommets du graphe. Le terme −1 a ´et´e ajout´e
+dans la d´eﬁnition de la largeur aﬁn que les arbres soient de largeur d’arborescence ´egale `a 1 mais il ne
+joue pas d’autre rˆole.
+
+Les algorithmes pour lesquels une m´ethode bas´ee sur la propagation est possible deviennent de com-
+plexit´e polynˆomiale quand on les restreint `a des familles de graphes de largeur d’arborescence born´ee. Ceci
+concerne de nombreux probl`emes d’algorithmique classiques comme la recherche du nombre chromatique
+ou de la plus grande clique d’un graphe. Courcelle et Mosbah [32] ont montr´e que cette complexit´e de-
+vient mˆeme lin´eaire pour tous les probl`emes pouvant s’´ecrire `a l’aide d’une formule utilisant uniquement
+les op´erations logiques (∧,∨,¬,⇒) et les quantiﬁcateurs (∃,∀) appliqu´es `a des ensembles de sommets et
+d’arˆetes ou `a des tests d’appartenance ou d’adjacence.
+
+Les d´ecompositions arborescentes sont ´egalement utilis´ees pour la r´esolution pratique de probl`emes
+tels que la factorisation des matrices de Cholesky, la construction d’arbres d’´evolution des esp`eces ou la
+recherche de la distribution de probabilit´e des r´eseaux bay´esiens [17, 62]. On se reportera `a [18] ou [95]
+pour une bibliographie plus fournie.
+
+10.2. Mineurs interdits
+
+Aﬁn de caract´eriser les familles de graphes ayant une largeur d’arborescence born´ee, il faut introduire
+
+la notion de mineur et de graphe planaire :
+
+D´eﬁnition 3. Un graphe est planaire s’il peut ˆetre repr´esent´e dans le plan sans croisement d’arˆetes.
+
+La contraction d’une arˆete (u, v) consiste `a supprimer u et v pour les remplacer par un nouveau sommet
+
+w dont le voisinage est l’union des voisinages de u et v.
+
+Un graphe H est un mineur d’un graphe G s’il peut ˆetre obtenu `a partir de G par suppression de
+
+sommets ou d’arˆetes et/ou contraction d’arˆetes (Figure 10.2).
+
+65
+
+Figure 19. Le graphe de droite est un mineur du graphe de gauche obtenu en supprimant le sommet blanc en contractant
+l’arˆete en gras.
+
+Robertson et Seymour [99] puis Diestel et al. [36] ont d´emontr´e qu’une famille de graphes F est de
+largeur d’arborescence born´ee si et seulement si il existe une famille de graphes planaires H telle que tout
+graphe de F ne contient aucun graphe de H comme mineur. Les bornes d´emontr´ees dans ces articles sont
+cependant exponentielles en la taille des mineurs interdits. Dans l’optique d’une utilisation pratique, la
+question se pose de savoir s’il existe des bornes polynˆomiales en fonction de ces tailles.
+
+Les articles [B1,B4,B7,B11] d´eveloppent cette question. Plus pr´ecis´ement, ils ´etablissent des bornes
+
+polynˆomiales en la taille des mineurs interdits pour les mineurs suivants :
+
+1. le cycle de longueur k, k ≥ 3 ;
+2. l’union disjointe de p cycles de longueur k, p ≥ 1, k ≥ 3 ;
+3. le prisme de taille l, l ≥ 3, qui correspond `a deux cycles disjoints de sommets respectifs u1, . . . , ul
+
+et v1, . . . , vl reli´es par les l arˆetes de type uivi (Figure 10.2(a)) ;
+
+4. la grille 3 × 3 (Figure 10.2(b)).
+
+(a)
+
+(b)
+
+Figure 20. Le prisme de taille 8 et la grille 3 × 3
+
+Ces travaux ont fait l’objet de ma th`ese, o`u ils sont compl´et´es par des bornes pour d’autres familles
+
+de cycles interdits ou des bornes plus pr´ecises quand on se restreint `a certains types de graphes.
+
+66
+
+10.3. Borne polynˆomiale pour la largeur d’arborescence des graphes sans longs cycles
+
+Soit k et p deux entiers, k ´etant au moins ´egal `a 3. Le traitement du second cas de la liste pr´ec´edente,
+c’est-`a-dire l’interdiction du mineur compos´e de p cycles disjoints de longueur k, est une bonne illustration
+de la m´ethode d´ecrite dans l’introduction de ce chapitre.
+
+Un k-long cycle est un cycle de longueur sup´erieure ou ´egale `a k. Alors, un graphe G n’admet pas
+l’union disjointe de p cycles de longueur k comme mineur si et seulement si il ne contient pas p k-longs
+cycles disjoints.
+
+Notons C la famille de tous les k-longs cycles de G. Pour tout transversal X de C, on observe que
+
+T W (G) ≤ T W (G \ X) + |X|
+
+(24)
+
+En eﬀet, toute d´ecomposition arborescente de G \ X peut ˆetre ´etendue en une d´ecomposition arbo-
+rescente de G en gardant le mˆeme arbre et en ajoutant tous les ´el´ements de X `a chacun des ensembles
+Wt.
+
+De plus, la largeur d’arborescence de G \ X est born´ee d’apr`es le th´eor`eme suivant [B1].
+
+Th´eor`eme 6. Soit k ≥ 3 et G un graphe ne contenant aucun k-long cycle. Alors T W (G) ≤ k − 2.
+D´emonstration. Consid´erons un graphe G sans k-long cycle et soit T un arbre de parcours en profondeur
+de G. Indexons chaque sommet t de T par la liste Wt de k − 1 sommets compos´ee de t et de ses k − 2
+ancˆetres directs (ou t et tous ses ancˆetres si t est `a distance inf´erieure `a k − 2 de la racine).
+
+On obtient ainsi une d´ecomposition arborescente de G de largeur k − 2. En eﬀet,
+
+(C1) Tv est compos´e de v et de l’ensemble de ses descendants sur k − 2 g´en´erations dans l’arbre T ,
+
+c’est-`a-dire un sous-arbre de T .
+
+(C2) Consid´erons une paire de sommets u et v reli´es par une arˆete dans G. Alors, de par la structure
+des arbres en profondeur, on peut supposer que v est descendant de u. Comme G n’a pas de k-
+long cycle, il y a au plus k − 1 g´en´erations d’´ecart entre les deux sommets, ce qui implique que v
+appartient `a Tu. Tu et Tv sont donc bien d’intersection non vide.
+
+Il suﬃt donc de montrer qu’il existe un transversal X de taille polynˆomiale pour pouvoir conclure, ce
+
+qui est d´emontr´e dans [B4].
+
+Th´eor`eme 7. Soit G un graphe qui ne contient pas p k-longs cycles disjoints. Alors il existe un transversal
+des k-longs cycles de G de taille au plus 13k(p − 1)(p − 2) + (2k + 3)(p − 1).
+
+La d´emonstration de ce th´eor`eme n’est pas reproduite ici en raison de sa longueur et de son cˆot´e tr`es
+technique. L’id´ee directrice de son raisonnement est l’utilisation du th´eor`eme de Menger [78] qui aﬃrme
+que pour tous ensembles de sommets A et B et tout entier p, il existe soit p chemins disjoints entre A et
+B, soit un ensemble de p − 1 sommets interceptant tous les chemins entre A et B.
+
+Aﬁn de donner une illustration de l’utilisation de ce th´eor`eme, supposons le th´eor`eme 7 vrai pour p = 2
+
+et d´emontrons qu’il est v´eriﬁ´e pour p = 3.
+
+Soit G un graphe n’ayant pas 3 k-longs cycles disjoints. On peut supposer que G admet 2 k-longs
+
+cycles disjoints C1 et C2, puisque dans le cas contraire le th´eor`eme 7 s’applique pour p = 2.
+
+Supposons qu’il existe 26k chemins disjoints reliant C1 et C2. Alors il en existe 26 dont les extremit´es
+sont `a distance au moins k le long de C1. De plus, Erd˝os et Szekeres [43] ont d´emontr´e que pour tous
+entiers p et q, toute suite de (p − 1)(q − 1) + 1 termes contient soit une sous-suite de p termes croissants,
+soit une sous-suite de q termes d´ecroissants. Il existe donc 6 chemins parmi les 26 pr´ec´edents dont les
+extr´emit´es sur C1 et C2 apparaissent dans le mˆeme ordre. L’union de C1, C2 et de ces six chemins permet
+de construire trois k-longs cycles comme le montre la ﬁgure 10.3.
+
+67
+
+C1
+
+C2
+
+Figure 21. Exemple de d´ecomposition arborescente.
+
+Par cons´equent, C1 et C2 ne sont pas reli´es par 26k chemins disjoints ce qui implique, via le th´eor`eme
+
+de Menger, qu’il existe un ensemble X d’au plus 26k qui s´epare C1 et C2.
+
+Soit A une composante connexe de G \ X. Si A contient un k-long cycle, elle n’en contient pas deux
+disjoints. En eﬀet, C1 ou C2 ne rencontre pas A car X les s´epare et on obtiendrait ainsi trois k-longs
+cycles disjoints. D’apr`es le th´eor`eme 7 pour p = 2, il existe donc un transversal de taille 2k + 3 pour les
+k-longs cycles de A.
+
+Comme seules deux composantes de G \ X peuvent contenir un k-long cycle `a moins d’en construire
+trois disjoints, on obtient ﬁnalement un transversal de taille au plus 26k + 2(2k + 3) pour l’ensemble des
+k-longs cycles de G. Le th´eor`eme est donc vrai pour p = 3.
+
+Les autres ´etapes de la r´ecurrence sont techniquement plus compliqu´ees `a ´ecrire mais reposent sur le
+
+mˆeme principe.
+
+Finalement, les th´eor`emes 7 et 6 combin´es avec l’in´egalit´e 24 permettent de conclure que, pour tout
+
+graphe G ne contenant pas p k-longs cycles disjoints,
+
+T W (G) ≤ 13k(p − 1)(p − 2) + (2k + 3)(p − 1) + k − 2
+
+68
+
+Au moment de la construction de la d´ecomposition arborescente, on peut s’apercevoir que certains des
+sommets du transversal construit dans la d´emonstration du th´eor`eme 7 sont superﬂus et aﬃner l´eg`erement
+le r´esultat pour obtenir
+
+Th´eor`eme 8. Soit G un graphe ne contenant pas k p-longs cycles disjoints. Alors
+
+T W (G) ≤ 13k(p − 1)(p − 2) + 3k + 1
+
+10.4. Perspectives
+
+Le but initial de ce travail, `a savoir trouver une borne polynomiale en la taille du mineur interdit quelque
+soit la forme du mineur, semble extrˆemement diﬃcile `a atteindre. De plus, de nombreuses heuristiques
+eﬃcaces ont ´et´e mises au point pour d´eterminer des d´ecompositions de largeur aussi faible que possible
+ainsi que des bornes inf´erieures `a la largeur d’arborescence d’un graphe (http ://www.treewidth.com/
+pour une bibliographie et une comparaison des diﬀ´erents algorithmes).
+
+Il me semble par cons´equent plus int´eressant d’utiliser les d´ecompositions arborescentes dans l’ana-
+lyse des r´eseaux biologiques plutˆot que de chercher `a aﬃner les heuristiques existantes. Elles ont par
+exemple d´ej`a ´et´e utilis´ees dans le cadre de la comparaison de r´eseaux de prot´eines par Dost et al. [40] ou
+d’alignement de r´eseaux m´etaboliques par Cheng et al. [26].
+
+11. Cycles et r´eseaux m´etaboliques
+
+Une collaboration r´ecente, et toujours en cours, m’a amen´e `a travailler sur un probl`eme totalement
+diﬀ´erent mais o`u la diﬃcult´e du probl`eme peut `a nouveau ˆetre contourn´ee `a l’aide de transversaux d’un
+certains types de cycles. Ce travail a donn´e lieu `a la publication [B15].
+
+11.1. R´eseaux m´etaboliques consistants
+
+Un r´eseau m´etabolique est un ensemble de r´eactions chimiques. Il peut ˆetre mod´elis´e par un graphe
+biparti comme au chapitre 5 mais ´egalement sous la forme d’un hypergraphe dirig´e et pond´er´e G = (M, R).
+L’ensemble M des sommets est constitu´e des m´etabolites pr´esents dans la cellule et l’ensemble R des
+hyperarcs correspond aux r´eactions possibles. Une r´eaction r ∈ R est une paire ordonn´ee d’ensemble de
+m´etabolites r = (subs(r), prod(r)), o`u subs(r) d´esigne les substrats de r et prod(r) ses produits.
+
+A chaque r´eaction x correspond un ensemble de poids appel´es coeﬃcients stoichiom´etriques : tout sub-
+strat x de r se voit attribuer un coeﬃcient n´egatif correspondant au nombre d’unit´es de x consomm´ees
+par r, et tout produit a un coeﬃcient positif correspondant au nombre d’unit´es produites. La matrice stoi-
+chiom´etrique S a |M| lignes et |R| colonnes et le coeﬃcient Sx,r correspond au coeﬃcient stoichiom´etrique
+du m´etabolite x dans la r´eaction r. Un mˆeme m´etabolite pouvant ˆetre `a la fois substrat et produit d’une
+mˆeme r´eaction, Sx,r est alors la somme du coeﬃcient (n´egatif) en tant que substrat et du coeﬃcient en
+tant que produit. Il est `a noter qu’en raison de cette possibilit´e, des hypergraphes diﬀ´erents peuvent avoir
+la mˆeme matrice stoichiom´etrique.
+
+69
+
+Un r´eseau m´etabolique poss`ede des entr´ees et des sorties, c’est-`a-dire des m´etabolites qu’il consomme
+ou produit uniquement et qui sont ´echang´es avec le milieu. Pour des raisons de simpliﬁcation des ´ecritures
+math´ematiques, chaque entr´ee est consid´er´ee comme produite par une r´eaction dont le substrat est l’en-
+semble vide. De mˆeme, chaque sortie initie une r´eaction donnant l’ensemble vide.
+
+Le graphe sous-jacent de l’hyper-graphe G est le graphe dirig´e dont les sommets sont les m´etabolites
+
+et ayant une arˆete −→xy entre deux m´etabolites si il existe une r´eaction r tel que x ∈ subs(r) et y ∈ prod(r).
+
+Dans la repr´esentation des graphes m´etaboliques en graphes bipartis, H est le projet´e sur l’ensemble des
+m´etabolites. Par la suite, les termes cycle et chemin dans G d´esigneront un cycle orient´e ou un chemin
+orient´e dans H. Le fait qu’un m´etabolite puisse ˆetre `a la fois substrat et produit implique qu’il peut y
+avoir des auto-arˆetes dans le graphe sous-jacent. Celles-ci sont consid´er´ees comme des cycles.
+
+a
+
+b
+
+r1
+
+r2
+
+c
+
+d
+
+r3
+
+e
+
+a
+
+b
+
+c
+
+d
+
+e
+
+S =
+
+−1
+−1
+1
+1
+0
+
+
+
+
+0
+0
+0
+1
+0
+−1
+−1 −1
+0
+1
+
+
+
+
+Figure 22. Exemple de r´eseau m´etabolique et sa matrice stoichiom´etrique.
+
+Un ﬂux dans l’hypergraphe G est un vecteur v ∈ R|R| o`u chaque v[i] repr´esente le taux d’activation
+de la r´eaction i. Dans un r´eseau m´etabolique fonctionnant `a l’´equilibre, chaque m´etabolite est consomm´e
+autant qu’il est produit, ce qui se traduit par le fait que Sv = 0.
+
+Aﬁn de correspondre le mieux possible `a la r´ealit´e, les hypergraphes consid´er´es par la suite satisfont
+
+´egalement deux conditions de consistance :
+
+– ils sont consistants d’un point de vue de la masse, c’est-`a-dire qu’il existe un vecteur de masse qui
+attribue une masse `a chaque m´etabolite et qui est compatible avec l’´equation de masse des r´eactions.
+Ceci correspond `a un vecteur m ∈ R|M| dont toutes les coordonn´ees sont strictement positives et tel
+que mT S = 0.
+L’exemple donn´e en Figure 11.1 est consistant en masse car un vecteur aﬀectant une masse de 1 `a
+a, b, c et d et une masse de 2 `a e convient.
+
+– ils sont consistants d’un point de vue des ﬂux, c’est-`a-dire qu’il existe un ﬂux strictement positif
+
+correspondant `a l’´equilibre. Autrement dit, il existe un vecteur v > 0 tel que Sv = 0.
+L’exemple donn´e en Figure 11.1 n’est pas consistant d’un point de vue du ﬂux car, `a l’´equilibre,
+les ﬂux `a travers r1 et r3 doivent ˆetre ´egaux pour que le m´etabolite c soit consomm´e autant que
+produit. Or cela entraˆıne que le ﬂux `a travers r2 doit ˆetre nul.
+
+11.2. Organisations chimiques et complexit´e de leur ´enum´eration
+
+Un r´eseau m´etabolique est une structure statique qui d´ecrit les r´eactions chimiques ayant lieu dans
+une cellule, ce qui est un processus dynamique. En d’autres termes, la question se pose de savoir quels
+
+70
+
+sont les sous-ensembles de r´eactions pouvant constituer le r´eseau actif `a un moment donn´e.
+
+L’approche la plus courante de cette question est l’´etude des modes ´el´ementaires, c’est-`a-dire des
+ensembles minimaux sur lesquels peut ˆetre d´eﬁni un ﬂux assurant un fonctionnement `a l’´equilibre [74, 101].
+En eﬀet, tout ﬂux correspondant `a un ´etat d’´equilibre peut s’´ecrire comme une combinaison lin´eaire des
+ﬂux des modes ´el´ementaires. Le fait qu’un r´eseau est consistant du point de vue du ﬂux revient alors `a dire
+qu’il existe pour toute r´eaction un mode ´el´ementaire la contenant. Cependant, les modes ´el´ementaires
+ne permettent pas d’´etudier le passage d’un ´etat d’´equilibre `a un autre, phase pendant laquelle une
+accumulation de m´etabolites est possible. Nous nous sommes donc interess´es au concept d’organisation
+chimique, introduit par Dittrich et di Fenizio [37] `a partir des travaux de Fontana et Buss [45].
+
+D´eﬁnition 4. Un ensemble C ⊆ M est ferm´e si, pour toute r´eaction r ∈ RC , subs(r) ⊆ C entraˆıne
+prod(r) ⊆ C.
+
+Un ensemble de m´etabolites C est auto-subsistant s’il existe un vecteur de ﬂux v tel que :
+1. pour toute r´eaction r ∈ RC , v[r] > 0 ;
+2. pour toute r´eaction r /∈ RC , v[r] = 0 ;
+3. pour tout m´etabolite x ∈ C, (Sv)[x] > 0.
+Un ensemble de m´etabolites C est une organisation si il est ferm´e et auto-subsistant.
+Une organisation est r´eactive si tout m´etabolite participe `a au moins une r´eaction en tant que substrat
+
+ou produit. Elle est connexe si le graphe orient´e sous-jacent est connexe.
+
+L’auto-subsistance empˆeche qu’il y ait un m´etabolite qui soit plus consomm´e que produit, mais permet
+par contre une production sup´erieure `a la consommation. De mˆeme, elle entraˆıne que toute r´eaction dont
+tous les substrats sont pr´esents a bien lieu. Les produits ainsi g´en´er´es font bien partie de l’organisation
+de par son caract`ere ferm´e.
+
+Il est `a noter que les entr´ees du r´eseau ´etant produites `a partir l’ensemble vide, tout ensemble ferm´e
+
+et donc toute organisation les contient.
+
+Dittrich et di Fenizio [37] ont d´emontr´e que d´eterminer si un r´eseau contient une organisation est
+NP-complet. Cependant, le r´eseau utilis´e pour r´eduire le probl`eme `a partir de 3-SAT n’est consistant ni
+du point de vue de la masse ni du point de vue du ﬂux.
+
+Centler et al. [24] ont d´evelopp´e deux algorithmes pour ´enum´erer les organisations. Le premier ´enum`ere
+les ensembles ferm´es puis v´eriﬁe leur auto-suﬃsance, le second ´enum`ere les ensembles auto-suﬃsants puis
+v´eriﬁe leur caract`ere ferm´e.
+
+Les r´eseaux m´etaboliques r´eels ´etant consistants, la question se pose de savoir si le probl`eme devient
+polynomial quand on les restreint aux r´eseaux consistants et si un algorithme plus eﬃcace peut ˆetre mis
+au point.
+
+Pour tout ensemble C ⊆ M , il existe un plus petit ensemble ferm´e contenant C. Cet ensemble, not´e
+ClC , est appel´e fermeture de C. La fermeture de C peut ˆetre obtenue `a partir de C par propagation, c’est-
+`a-dire en ajoutant, tant que possible, les produits des r´eactions dont les substrats sont dans l’ensemble
+courant.
+
+71
+
+Figure 23. La propagation depuis l’ensemble des sommets noirs s´electionne les deux sommets gris. Elle est par contre
+stopp´ee par le second cycle.
+
+La r´eponse `a la question de savoir s’il existe une organisation dans un r´eseau consistant devient
+triviale car le r´eseau entier lui-mˆeme est une organisation. Plus pr´ecis´ement, il existe deux organisations,
+´eventuellement confondues.
+
+Proposition 4. Soit G un r´eseau m´etabolique consistant d’un point de vue du ﬂux. Alors le r´eseau entier
+et la fermeture de l’ensemble vide sont des organisations.
+
+Par la suite, ces deux organisations sont appel´ees les organisations triviales du r´eseau.
+
+D´emonstration. Le r´eseau entier est une organisation car il est forc´ement ferm´e et un ﬂux garantissant
+l’auto-subsistance peut ˆetre obtenu en additionnant les ﬂux correspondants `a tous les modes ´el´ementaires
+du r´eseau.
+
+La fermeture de l’ensemble vide est ´egalement auto-subsistante car tout ﬂux sur cet ensemble peut
+
+ˆetre augment´e autant que n´ecessaire puisque les entr´ees sont disponibles en quantit´e illimit´ee.
+
+Le probl`eme de l’existence d’une organisation non triviale et, par cons´equent, de l’´enum´eration, reste
+
+cependant non polynomial comme le montre le th´eor`eme suivant.
+
+Th´eor`eme 9. D´ecider si un r´eseau consistant du point de vue du ﬂux et de la masse contient une
+organisation non triviale est NP-complet.
+
+La d´emonstration de ce r´esultat repose sur une r´eduction de 3-SAT. Plus pr´ecis´ement, ´etant donn´ee une
+formule logique sous forme CNF d’ordre 3, il est possible de construire explicitement un r´eseau consistant
+du point de vue du ﬂux et de la masse dont les organisations sont en bijection avec les ensembles de
+litt´eraux satisfaisant toutes les clauses. Cette construction est d´etaill´ee dans l’annexe de [B15].
+
+11.3. Cycles bloquants
+
+Consid´erons un r´eseau acyclique, c’est-`a-dire que le graphe orient´e sous-jacent ne contient pas de cycle
+orient´e. Alors la proc´edure de propagation `a partir de l’ensemble vide g´en`ere tout le r´eseau et la seule
+organisation est le r´eseau entier. Par cons´equent, la complexit´e de l’´enum´eration mise en lumi`ere par le
+Th´eor`eme 9 provient des cycles du r´eseau.
+
+Cependant, tout cycle ne repr´esente pas un obstacle `a la propagation comme le montre la Figure 11.3(a).
+
+72
+
+Un cycle potentiellement bloquant est un cycle tel qu’il existe une r´eaction r de substrats {s1, . . . , sh}
+
+et de produits {p1, . . . , pk} satisfaisant les conditions suivantes :
+
+1. il existe i et j tels que (si, pj) est une arˆete du cycle ;
+
+2. il existe l tel que sl n’est pas dans le cycle.
+
+Un tel cycle est dit potentiellement bloquant car il peut interrompre ou non la propagation suivant la
+
+conﬁguration du r´eseau, comme le montre la Figure 11.3(b) et (c).
+
+(a)
+
+(b)
+
+c
+
+a
+
+b
+
+(c)
+
+c
+
+b
+
+a
+
+c
+
+b
+
+a
+
+Figure 24. (a) le cycle abca n’est pas potentiellement bloquant. (b) Le cycle potentiellement bloquant aca ne bloque pas la
+propagation. (c) Le cycle potentiellement bloquant aca bloque la propagation.
+
+Th´eor`eme 10. Soit H un transversal de l’ensemble des cycles potentiellement bloquants d’un hypergraphe
+dirig´e G. Alors l’ensemble O des organisations r´eactives et connexes de G v´eriﬁe
+
+O ⊂ [C⊂H
+
+{ClC}
+
+D´emonstration. Soit A une organisation r´eactive et connexe et C = A ∩ H. Il suﬃt alors de montrer que
+A = ClC . A ´etant ferm´e, il est clair que ClC ⊆ A. Supposons que A contient des m´etabolites qui ne sont
+pas dans ClC . On les colore en blanc, et ceux de ClC en noir.
+
+A ´etant une organisation connexe, il existe des m´etabolites blancs {xi}1≤i≤k qui sont les produits de
+r´eactions ayant au moins un substrat noir. Pour chaque m´etabolite xi, soit ri une telle r´eaction. Alors ri
+a au moins un substrat blanc not´e wi, car sinon xi serait noir par fermeture.
+
+S’il existe un indice i tel que xi = wi, il y a une auto-arˆete sur le xi qui forme un cycle potentiellement
+bloquant avec la r´eaction ri. Comme xi n’est pas contenu dans H, ceci contredit le fait que H est un
+transversal. On peut donc supposer chaque wi distinct de xi.
+
+Pour tout i, on d´eﬁnit alors Ti comme l’union de wi et de l’ensemble des m´etabolites blancs w tels
+qu’il existe un chemin blanc de w `a wi. On peut de plus supposer que T1 est de cardinal minimal parmi
+les Ti. Comme T1 est non vide et qu’il existe un ﬂux strictement positif sur toutes les r´eactions de A, il
+existe un chemin reliant une des entr´ees du r´eseau `a T1. Or les entr´ees sont toutes des m´etabolites noirs
+donc T1 contient forc´ement l’un des xi.
+
+Si T1 contient x1, il existe un chemin blanc de x1 `a w1. En y ajoutant l’arˆete −−−→w1x1 et le fait que r1 a
+un substrat noir, on obtient un cycle potentiellement bloquant compos´e uniquement de sommets blancs.
+Ceci contredit le fait que H est un transversal.
+
+73
+
+ClC
+
+x1
+
+w1
+
+x2
+
+w2
+
+A
+
+Figure 25. Construction d’un cycle blanc potentiellement bloquant qui contredit la transversalit´e de H.
+
+Sinon, on peut supposer que T1 contient x2. Il contient alors aussi w2 puis T2 dans son ensemble. Par
+minimalit´e du cardinal de T1, on obtient alors T1 = T2. Ainsi, il existe un chemin blanc de x2 `a w1 car
+x2 ∈ T1 et un chemin blanc de w1 `a w2 car w1 ∈ T1 = T2. En d’autres termes, il existe un chemin blanc
+de x2 `a w2, qui peut ˆetre compl´et´e en un cycle potentiellement bloquant et enti`erement blanc par l’ajout
+de −−−→w2a2. On obtient donc `a nouveau une contradiction avec le fait que H est un transversal des cycles
+potentiellement bloquants.
+
+On obtient ainsi un ensemble d’au plus 2|H| ensembles ferm´es dont il faut v´eriﬁer s’il sont auto-
+subsistants aﬁn d’´enum´erer toutes les organisations. Cette borne de 2|H| est optimale, mˆeme dans le
+cas des organisations r´eactives et connexes dans un r´eseau consistant, comme le montre l’exemple de la
+Figure 11.3.
+
+11.4. Algorithme
+
+L’approche par cycles potentiellements bloquants d´evelopp´e au paragraphe pr´ec´edent permet de mettre
+au point un algorithme qui eﬀectue un premier tri parmi les ensembles ferm´es du r´eseau. L’algorithme
+de programmation lin´eaire n´ecessaire pour v´eriﬁer l’auto-suﬃsance de l’ensemble est ainsi appliqu´e aux
+
+74
+
+b1
+
+b2
+
+bk
+
+a1
+
+a2
+
+ak
+
+c1
+
+c2
+
+ck
+
+Figure 26. Le plus petit transversal pour les cycles de ce r´eseau est l’ensemble des (bi)1≤i≤k qui est de taille k. Par
+ailleurs, le r´eseau comprend 2k organisations puisque y construire une organisation revient `a d´ecider pour chacun des
+couples (bi, ci)1≤i≤k s’il est compris ou non.
+
+ensembles d´ecrits par le Th´eor`eme 10 plutˆot qu’`a tous les ensembles ferm´es. Cependant, trouver un en-
+semble transversal minimal pour les cycles d’un graphe dirig´e est un probl`eme NP-complet car ´equivalent
+au probl`eme du Feedback vertex set [66]. Des algorithmes d’approximation tels que celui d´evelopp´e par
+Seymour [102] peuvent ˆetre utilis´es pour r´ealiser cette ´etape.
+
+Cependant, dans la mesure o`u tout cycle potentiellement bloquant ne se r´ev`ele pas forc´ement bloquant
+en pratique (cf Figure 11.3), il est plus eﬃcace de s’int´eresser `a une version locale de notre approche.
+Celle-ci consiste `a appliquer la proc´edure de propagation jusqu’au blocage, `a chercher un transversal des
+cycles bloquant eﬀectivement cette proc´edure puis `a d´ebloquer successivement tout sous-ensemble de ces
+cycles.
+
+Pour cela, consid´erons un ensemble C de m´etabolites, obtenu en appliquant la proc´edure de propaga-
+tion. Un cycle C-bloquant est un cycle dont les sommets sont ext´erieurs `a C et qui contient une r´eaction
+dont l’un des substrats est dans C.
+
+Consid´erons alors l’algorithme 11.4, consistant `a ne chercher des transversaux que lorsque la propaga-
+tion est r´eellement bloqu´ee. Il permet de r´eduire les ensembles de cycles dont on cherche des transversaux
+puisque les cycles sont trait´es au fur et `a mesure qu’il bloquent la propagation et que les cycles poten-
+tiellement bloquants travers´es par la propagation sont ignor´es.
+
+On est cependant certain du fait que toute organisation r´eactive et connexe fait partie de l’ensemble
+
+d’organisations potentielles CO retourn´ee par l’algorithme grˆace au th´eor`eme suivant :
+Th´eor`eme 11. Soit C un ensemble ferm´e et H un transversal des cycles C-bloquants. Soit A une
+organisation r´eactive et connexe contenant C. Alors C = A ou il existe un sous-ensemble non-vide B de
+H tel que ClC∪B ⊆ C.
+
+Data: Un graphe m´etabolique sous forme d’hypergraphe dirig´e
+Result: Une liste CO d’organisations potentielles
+CO ← Cl{} ;
+for tout ´el´ement de CO non trait´e encore do
+
+D´eterminer un transversal H des cycles C-bloquants ;
+for tout B ⊆ H do
+
+D´eterminer ClC∪B et l’ajouter `a CO s’il n’y est pas d´ej`a;
+
+end
+
+end
+
+75
+
+Ce th´eor`eme se d´emontre de la mˆeme fa¸con que le Th´eor`eme 10. Pour toute organisation r´eactive et
+connexe A, son application `a un ´el´ement maximal C de CO inclus dans A entraˆıne que C = A et donc
+que A ∈ CO.
+
+Cette m´ethode donnera de meilleurs r´esultats que l’approche d’´enum´eration locale de tous les ensembles
+ferm´es d´evelopp´ee par Centler et al. [24]. En eﬀet, les ensembles potentiels retenus sont un sous-ensemble
+des ensembles potentiels de cet algorithme. L’impl´ementation de notre m´ethode et son application `a des
+donn´ees r´eelles sont en cours.
+
+11.5. Perspectives
+
+Concernant les organisations, la question se pose de savoir s’il est possible, selon un sch´ema similaire,
+d’´enum´erer plutˆot les ensembles auto-suﬃsants pour v´eriﬁer ensuite leur caract`ere ferm´e. Outre la simpli-
+cit´e de cette derni`ere v´eriﬁcation, cela permettrait d’´etudier, tout en tenant compte de la stoichiom´etrie,
+le probl`eme des pr´ecurseurs, c’est-`a-dire les ensembles minimaux d’entr´ees n´ecessaires `a produire un
+sous-ensemble donn´e de m´etabolites cibles [31].
+
+D’un point de vue plus large, l’´etude de la structure des cycles se r´ev`ele cruciale dans d’autres probl`emes
+li´es aux r´eseaux biologiques. Au sein du mˆeme groupe de travail, nous avons notamment commenc´e la
+recherche de ce que nous nommons des histoires m´etaboliques, c’est-`a-dire des ensembles de r´eactions
+dont l’activation permet d’expliquer l’´evolution des m´etabolites dont la concentration est mesur´ee. Dans
+ce cadre, les cycles, et plus pr´ecis´ement les ensembles transversaux d’arˆetes, jouent un rˆole d´eterminant.
+
+76
+
+77
+
+R´ef´erences
+
+[1] Aiello, W., Chung, F. and Lu, L. (2000). A random graph model for massive graphs. In Pro-
+
+ceedings of the Thirtysecond Annual ACM Symposium on Theory of Computing 171-180.
+
+[2] Airoldi, E., Blei, D., Fienberg, S. and Xing, E. (2006). Mixed membership stochastic block
+models for relational data with application to protein–protein interactions. In Proceedings of the
+International Biometrics Society Annual Meeting.
+
+[3] Airoldi, E., Blei, D., Fienberg, S. and Xing, E. (2008). Mixed membership stochastic block-
+
+models. Journal of Machine Learning Research 9 1981-2014.
+
+[4] Albert, R. and Barab´asi, A. L. (2002). Statistical mechanics of complex networks. Reviews of
+
+Modern Physics 74 47-97.
+
+[5] Allman, E. S., Matias, C. and Rhodes, J. A. (2009). Identiﬁability of parameters in latent
+
+structure models with many observed variables. Annals of Statistics 37 3099-3132.
+
+[6] Alon, U. (2007). Network motifs : theory and experimental approaches. Nature Reviews Genetics
+
+8 450-461.
+
+[7] Alon, N., Dao, P., Hajirasouliha, I., Hormozdiari, F. and Sahinalp, S. C. (2008). Biomo-
+
+lecular network motif counting and discovery by color coding. Bioinformatics 24 241-249.
+
+[8] Artzy-Randrup, Y., Fleishman, S. J., Ben-Tal, N. and Stone, L. (2004). Comment on
+”Network Motifs : Simple Building Blocks of Complex Networks” and ”Superfamilies of Evolved
+and Designed Networks”. Science 305.
+
+[9] Azuma, K. (1967). Weighted sums of certain dependant random variables. Tokuku Math. Journal
+
+19 357-367.
+
+[10] Babu, M. M., Luscombe, N. M., Aravind, L., Gerstein, M. and Teichmann, S. A. (2004).
+Structure and evolution of transcriptional regulatory networks. Current Opinion in Structural Bio-
+logy 14 283 - 291.
+
+[11] Banks, E., Nabieva, E., Chazelle, B. and Singh, M. (2008). Organization of Physical Inter-
+
+actomes as Uncovered by Network Schemas. PLoS Comput. Biol. 4 e1000203.
+
+[12] Barab´asi, A. L. and Albert, R. (1999). Emergence of scaling in random networks. Science 286
+
+509-512.
+
+[13] Barbour, A. D., Holst, L. and Janson, S. (1992). Poisson approximation. Oxford University
+
+Press.
+
+[14] Berg, J. and L¨assig, M. (2004). Local graph alignment and motif search in biological networks.
+
+Proc. Nat. Acad. Sci. 101 14689-14694.
+
+[15] Biernacki, C., Celeux, G. and Govaert, G. (2000). Assessing a mixture model for clustering
+
+with the integrated completed likelihood. IEEE Trans. Pattern Anal. Machine Intel 7 719-725.
+
+[16] Biernacki, C., Celeux, G. and Govaert, G. (2010). Exact and monte carlo calculations of
+integrated likelihoods for the Latent Class Model. Journal of Statistical Planning and Inference
+140 2991-3002.
+
+[17] Bishop, C. M. (2006). Pattern Recognition and MAchine Learning. Springer.
+[18] Bodlaender, H. L. (1993). A tourist guide through tree-width. Acta Cybernetica 11 1-23.
+
+78
+
+[19] Boer, P., Huisman, M., Snijders, T. A. B., Steglich, C. E. G., Wichers, L. H. Y. and
+Zeggelink, E. P. H. (2006). StOCNET : an open software system for the advanced statistical
+analysis of social networks Version 1.7.
+
+[20] Bollob´as, B. (2001). Random Graphs. Cambridge University Press.
+[21] Bollob˝as, B., Janson, S. and Riordan, O. (2007). The phase transition in inhomogeneous
+
+random graphs. Random structures and algorithms 31 3-122.
+
+[22] Boucheron, S., Lugosi, G. and Massart, P. (2003). Concentration inequalities using the en-
+
+tropy method. Ann. Probab. 31 1583-1614.
+
+[23] Brun, C., Herrmann, C. and Gu´enoche, A. (2004). Clustering proteins from interaction net-
+

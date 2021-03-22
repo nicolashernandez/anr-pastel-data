@@ -1,0 +1,4901 @@
+https://www.math.univ-toulouse.fr/~msablik/CoursIUT/Graphe/GrapheNotes.pdf
+
+GRAPHE ET LANGAGE
+
+Mathieu SABLIK
+
+Table des matières
+
+I Différentes notions de graphes
+
+.
+
+.
+
+.
+
+.
+
+I.1 Différents problèmes à modéliser . . . . . . . . . . . . . . . . . . . . . . . . .
+I.2 Différentes notions de graphes
+. . . . . . . . . . . . . . . . . . . . . . . . . .
+I.2.1 Graphe orienté ou non . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Isomorphisme de graphe . . . . . . . . . . . . . . . . . . . . . . . . .
+I.2.2
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+I.2.3 Degré .
+I.2.4 Construction de graphes à partir d’un autre
+. . . . . . . . . . . . . .
+I.3 Différents modes de représentation d’un graphe . . . . . . . . . . . . . . . .
+I.3.1
+Représentation sagittale . . . . . . . . . . . . . . . . . . . . . . . . . .
+I.3.2 Déﬁnition par propriété caractéristique . . . . . . . . . . . . . . . . .
+I.3.3
+Listes d’adjacence . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+I.3.4 Matrices d’adjacence . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+I.3.5 Matrice d’incidence . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+I.3.6 Comparaison des différentes méthodes . . . . . . . . . . . . . . . . .
+I.4 Quelques classes de graphe importantes . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+I.4.1 Graphes isolés .
+I.4.2 Graphes cycliques
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+I.4.3 Graphes complets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+I.4.4 Graphe biparti
+.
+I.4.5 Graphes planaires
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+I.4.6 Arbres .
+
+.
+
+.
+
+.
+
+.
+
+.
+
+II Problèmes de chemins dans un graphe
+
+.
+.
+
+.
+.
+
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+II.1 Notion de chemin .
+II.1.1 Déﬁnitions .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+II.1.2 Longueur d’un chemin . . . . . . . . . . . . . . . . . . . . . . . . . . .
+II.1.3 Longueur d’un chemin et matrice d’adjacence . . . . . . . . . . . . .
+II.2 Connexité .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+II.3 Chemin Eulérien et Hamiltoniens . . . . . . . . . . . . . . . . . . . . . . . . .
+II.3.1 Chemin Eulérien . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+II.3.2 Chemins hamiltonien . . . . . . . . . . . . . . . . . . . . . . . . . . .
+II.4 Deux mots sur le Page-rank . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+5
+5
+6
+6
+8
+8
+9
+9
+9
+9
+9
+10
+11
+11
+11
+11
+11
+12
+12
+12
+13
+
+15
+15
+15
+15
+16
+17
+18
+18
+20
+20
+
+TABLE DES MATIÈRES
+
+III Graphes acycliques ou sans-circuits
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+.
+
+III.1 Notion d’arbres .
+
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+III.1.1 Nombre d’arêtes d’un graphe acyclique . . . . . . . . . . . . . . . . .
+.
+III.1.2 Arbres et forêts .
+. . . . . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+III.1.3 Arbres orientés .
+III.1.4 Notion de rang dans un graphe orienté sans circuit
+. . . . . . . . . .
+III.2 Initiation à la théorie des jeux . . . . . . . . . . . . . . . . . . . . . . . . . . .
+III.2.1 Jeux combinatoires . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . .
+III.2.2 Modélisation .
+.
+III.2.3 Noyau d’un graphe .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+III.2.4 Exemples de jeux .
+.
+III.3 Parcours dans un graphe .
+. . . . . . . . . . . . . . . . . . . . . . . . . . .
+.
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+III.3.1 Notion générale .
+III.3.2 Parcours en largeur .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . .
+III.3.3 Parcours en profondeur . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+.
+
+.
+
+.
+
+.
+
+IV Problèmes de coloriages
+
+IV.1 Coloriage de sommets .
+
+IV.2 Résolution algorithmique .
+
+.
+
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+IV.1.1 Position du problème
+. . . . . . . . . . . . . . . . . . . . . . . . . . .
+IV.1.2 Exemples d’applications . . . . . . . . . . . . . . . . . . . . . . . . . .
+IV.1.3 Nombre chromatique de graphes classiques
+. . . . . . . . . . . . . .
+IV.1.4 Comment calculer un nombre chromatique ? . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . . . . .
+IV.2.1 Algorithme glouton . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+IV.2.2 Algorithme de Welsh-Powell
+. . . . . . . . . . . . . . . . . . . . . . .
+IV.2.3 Existe t’il un algorithme pour trouver le nombre chromatique d’un
+. . . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+graphe ? .
+
+. . . .
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+IV.3 Cas des graphes planaires .
+
+V Problèmes d’optimisation pour des graphes valués
+
+.
+
+.
+
+.
+
+.
+
+.
+
+V.1 Recherche d’arbre couvrant de poids maximal/minimal . . . . . . . . . . . .
+V.1.1 Problème .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+V.1.2 Algorithme de Prim . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+V.1.3 Algorithme de Kruskal . . . . . . . . . . . . . . . . . . . . . . . . . . .
+V.2 Problème de plus court chemin . . . . . . . . . . . . . . . . . . . . . . . . . .
+V.2.1 Position du problème
+. . . . . . . . . . . . . . . . . . . . . . . . . . .
+V.2.2 Principe des algorithmes étudiés . . . . . . . . . . . . . . . . . . . . .
+V.2.3 Algorithme de Bellman-Ford-Kalaba . . . . . . . . . . . . . . . . . . .
+V.2.4 Algorithme de Bellman . . . . . . . . . . . . . . . . . . . . . . . . . .
+V.2.5 Algorithme de Dijkstra-Moore . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+V.2.6 Remarques .
+V.2.7 Ordonnancement et gestion de projet
+. . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . . . . .
+.
+. . . . . . . . . . . . . . . . . . . . . . . . . . .
+V.3.1 Position du problème
+V.3.2 Lemme de la coupe .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . .
+V.3.3 Algorithme de Ford-Fulkerson . . . . . . . . . . . . . . . . . . . . . .
+
+V.3 Flots dans les transports .
+
+.
+
+.
+
+.
+
+.
+
+.
+
+2
+
+21
+21
+21
+22
+23
+24
+24
+24
+25
+25
+26
+28
+28
+29
+30
+
+33
+33
+33
+33
+34
+34
+35
+35
+35
+
+37
+37
+
+39
+39
+39
+40
+41
+42
+42
+43
+43
+45
+46
+48
+48
+49
+49
+50
+51
+
+3
+
+TABLE DES MATIÈRES
+
+VI Notion de théorie des langages
+
+.
+
+.
+
+.
+.
+.
+.
+
+.
+.
+.
+.
+
+VI.1 Notion de langage .
+
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+VI.1.1 Exemples de problèmes . . . . . . . . . . . . . . . . . . . . . . . . . .
+VI.1.2 Mots sur un alphabet ﬁni
+. . . . . . . . . . . . . . . . . . . . . . . . .
+.
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+VI.1.3 Langage .
+.
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+VI.2 Langage rationnel .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+VI.3 Automates ﬁni .
+.
+VI.3.1 Déﬁnitions .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+VI.3.2 Stabilité aux opérations usuelles . . . . . . . . . . . . . . . . . . . . .
+VI.3.3 Théorème de Kleene . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+VI.4 Comment montrer qu’un langage n’est pas rationnel ? . . . . . . . . . . . . .
+VI.5 Déterminisation, minimisation, epsilon transition . . . . . . . . . . . . . . .
+. . . .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+VI.6 Applications .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+VI.7 D’autres types de langages . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+VI.5.1 D’autres modèles de calcul pour déﬁni les langages rationels
+VI.5.2 Déterminisation .
+VI.5.3 Automate minimal
+
+VI.7.1 Langage décidable/indécidable
+VI.7.2 Grammaires .
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+53
+53
+53
+53
+54
+55
+56
+56
+57
+59
+60
+61
+61
+62
+62
+62
+62
+62
+63
+
+TABLE DES MATIÈRES
+
+4
+
+ChapitreI
+
+Différentes notions de graphes
+
+I.1 Différents problèmes à modéliser
+
+On peut considérer que l’article fondateur de la théorie des graphe fut publié par le
+mathématicien suisse Leonhard Euler en 1741. Il traitait du problème des sept ponts de
+Königsberg : est il possible de réaliser une promenade dans la ville de Königsberg partant
+d’un point donné et revenant à ce point en passant une et une seule fois par chacun des
+sept ponts de la ville ?
+
+Cette théorie va connaitre un essor au cours du XIXème par l’intermédiaire du pro-
+blème suivant : quel est le nombre minimal de couleurs nécessaires pour colorier une
+carte géographique de telle sorte que deux régions limitrophe n’ont pas la même cou-
+leur ? Le théorème des quatre couleurs afﬁrme que seulement quatre sont nécessaires. Le
+résultat fut conjecturé en 1852 par Francis Guthrie, intéressé par la coloration de la carte
+des régions d’Angleterre, mais ne fût démontré qu’en 1976 par deux Américains Kenneth
+Appel et Wolfgang Haken. Ce fut la première fois que l’utilisation d’un ordinateur a per-
+mis de conclure leur démonstration en étudiant les 1478 cas particulier auxquels ils ont
+ramené le problème.
+
+Au XXème siècle, la théorie des graphes va connaître un essor croissant avec le déve-
+loppement des réseaux dont il faut optimiser l’utilisation. On peut citer quelques exemples
+de manière non exhaustive :
+
+— réseaux de transports routier, d’eau, d’électricité : les sommets représentent les car-
+
+refours et les arêtes les rues ;
+
+— réseaux informatiques : les sommets représentent les ordinateurs et les arêtes les
+
+connexions physiques ;
+
+— réseaux sociaux : les sommets représentent les membres du groupe, deux per-
+sonnes sont reliées par une arête si elles se connaissent (Facebook : graphe non
+orienté, twiter : graphe orienté, combien de poignées de main on est du président ?. . .
+) ;
+
+— graphe du web : les sommets représentent les pages web et chaque arc correspond
+
+a un hyperliens d’une page vers une autre ;
+
+— réseau de transports de données (téléphonie, wiﬁ, réseaux informatique. . . ) ;
+— représentation d’un algorithme, du déroulement d’un jeu ;
+— réseaux de régulation génétique ;
+
+Chapitre I. DIFFÉRENTES NOTIONS DE GRAPHES
+
+6
+
+— organisation logistique : les sommets représentent des évènements, deux évène-
+
+ments sont reliées par une arête s’ils ne peuvent pas avoir lieu en même temps ;
+
+— ordonnancement de projet : les sommets représentent les différentes tâches com-
+posant un projet, deux tâches sont reliés par une ﬂèche si la deuxième ne peut pas
+commencer avant que la première soit terminée ;
+
+— et beaucoup d’autres encore. . .
+L’étude des graphes se réalise sous deux point de vues complémentaire. L’étude de
+propriétés structurelles de graphes ou de familles de graphes et l’étude algorithmique de
+certaines propriétés.
+
+I.2 Différentes notions de graphes
+I.2.1 Graphe orienté ou non
+
+Dans les exemples que l’on a vus, un graphe est un ensemble ﬁni de sommets reliés
+par des arêtes. Ces arêtes peuvent être orientées ou non, de plus une valeur peut être
+associée à chaque arête ou aux sommets.
+
+Déﬁnition I.1. Un graphe orienté G = (S, A) est la donnée :
+
+— d’un ensemble S dont les éléments sont des sommets ;
+— d’un ensemble A ⊂ S × S dont les éléments sont les arcs.
+
+Un arc a = (s, s(cid:48)) est aussi noté s → s(cid:48), s est l’origine de a et s(cid:48) l’extrémité. On dit aussi
+
+que s(cid:48) est le successeur de s et s le prédécesseur de s(cid:48).
+
+On peut souhaiter qu’il y ait plusieurs arcs entre deux mêmes sommets. On parle alors
+
+de graphe orienté multi-arcs. Formellement, G = (S, A, i, f) c’est la donnée :
+
+— d’un ensemble S dont les éléments sont des sommets ;
+— d’un ensemble A dont les éléments sont les arcs ;
+— de deux fonctions i : A → S et f : A → S qui à chaque arcs a ∈ A associe son
+prédécesseur i(a) et son successeur f(a).
+
+Exemple I.1. Exemple de graphe orienté :
+
+1
+
+4
+
+2
+
+3
+
+Exemple de graphe orienté multi-arcs :
+
+G = (S, A) où
+
+— S = {1, 2, 3, 4},
+— A = {(1, 2), (2, 1), (2, 4), (3, 4), (3, 3)}.
+
+c
+
+a
+b
+
+e
+
+d
+
+2
+
+f
+
+3
+
+1
+
+4
+
+G = (S, A, i, f) où
+
+— S = {1, 2, 3, 4},
+— A = {a, b, c, d, e, f , g, h},
+
+g
+
+— i :
+
+et f :
+
+a
+b
+c
+d
+e
+f
+g
+
+(cid:55)→ 1
+(cid:55)→ 2
+(cid:55)→ 2
+(cid:55)→ 2
+(cid:55)→ 3
+(cid:55)→ 3
+(cid:55)→ 3
+
+a
+b
+c
+d
+e
+f
+g
+
+(cid:55)→ 2
+(cid:55)→ 1
+(cid:55)→ 4
+(cid:55)→ 4
+(cid:55)→ 4
+(cid:55)→ 3
+(cid:55)→ 3
+
+.
+
+Déﬁnition I.2. Un graphe non orienté G = (S, A) est la donnée :
+
+7
+
+I.2. Différentes notions de graphes
+
+— d’un ensemble S dont les éléments sont les sommets du graphe,
+— d’un ensemble A dont les éléments, les arêtes du graphe, sont des parties à un
+ou deux éléments de S.
+
+Le ou les sommets d’une arête sont appelés extrémités de l’arête. Les arêtes n’ayant qu’une
+seule extrémité sont des boucles.
+
+On peut de la même façon un graphe non-orienté multi-arêtes. Formellement, G =
+
+(S, A, α) est la donnée :
+
+— d’un ensemble S dont les éléments sont des sommets ;
+— d’un ensemble A dont les éléments sont les arêtes ;
+— d’une fonction α de A dans les parties à un ou deux éléments de S.
+
+Exemple I.2. Exemple de graphe non-orienté :
+
+1
+
+4
+
+2
+
+3
+
+G = (S, A) où
+
+— S = {1, 2, 3, 4},
+— A = {{1, 2},{2, 4},{3, 4},{3}}.
+
+Exemple de graphe non orienté multi-arêtes :
+
+c
+
+a
+b
+
+e
+
+d
+
+2
+
+f
+
+3
+
+1
+
+4
+
+g
+
+G = (S, A, α) où
+
+— S = {1, 2, 3, 4},
+— A = {a, b, c, d, e, f , g, h},
+(cid:55)→ {1, 2}
+(cid:55)→ {1, 2}
+(cid:55)→ {2, 4}
+(cid:55)→ {2, 4}
+(cid:55)→ {3, 4}
+(cid:55)→ {3}
+(cid:55)→ {3}
+
+— α :
+
+a
+b
+c
+d
+e
+f
+g
+
+.
+
+Si un arc ou une arête à ses deux extrémités constituées du même sommet, on dit que
+
+c’est une boucle.
+
+et s’il n’a pas de boucle.
+
+Un graphe est simple s’il est non-orienté, s’il a au plus une arête entre deux sommets
+L’ordre d’un graphe est le nombre de sommets |S| et la taille d’un graphe est le nombre
+
+d’arêtes ou d’arcs.
+
+On appèle valuation sur les sommets (resp. sur les arcs ou arêtes) toutes fonctions pre-
+nant en argument les sommets (resp. sur les arcs ou arêtes) et renvoyant un réels ou élé-
+ment dans un ensemble donné.
+Soit G = (S, A) un graphe orienté, on associe le graphe non orienté G(cid:48) = (S, A(cid:48)) ayant
+le même ensemble de sommets S et dont l’ensemble d’arêtes A(cid:48) vériﬁe {x, y} ∈ A(cid:48) ⇐⇒
+(x, y) ∈ A ou (y, x) ∈ A.
+Exemple I.3. Les trois graphes suivants
+
+sont associés au graphe non orienté suivant
+
+Chapitre I. DIFFÉRENTES NOTIONS DE GRAPHES
+
+8
+
+I.2.2 Isomorphisme de graphe
+
+Deux graphes orientés G = (S, A) et G(cid:48) = (S(cid:48), A(cid:48)) sont isomorphes s’il existe une appli-
+cation bijective ϕ : S → S(cid:48) telle que pour tout s, s(cid:48) ∈ S on (s, s(cid:48)) ∈ A ⇐⇒ (ϕ(s), ϕ(s(cid:48))) ∈ A.
+L’application ϕ est alors un isomorphisme de graphes orientés.
+Exemple I.4. Les deux graphes suivants sont isomorphes par l’isomorphisme ϕ : 1 (cid:55)→
+A, 2 (cid:55)→ B, 3 (cid:55)→ C, 4 (cid:55)→ D, 5 (cid:55)→ E.
+
+3
+
+4
+
+2
+
+5
+
+1
+
+B
+
+E
+
+D
+
+C
+
+A
+
+De même, deux graphes non-orientés G = (S, A) et G(cid:48) = (S(cid:48), A(cid:48)) sont isomorphes s’il
+existe une application bijective ϕ : S → S(cid:48) telle que pour tout s, s(cid:48) ∈ S on {s, s(cid:48)} ∈ A ⇐⇒
+{ϕ(s), ϕ(s(cid:48))} ∈ A. L’application ϕ est alors un isomorphisme de graphes non-orientés.
+
+I.2.3 Degré
+
+Pour un graphe orienté, on appèle degré entrant d’un sommet s, noté d−(s) (resp. degré
+sortant d’un sommet s, noté d+(s)) le nombre d’arcs dont le sommet est prédécesseur (resp.
+successeur).
+
+Pour un graphe non-orienté, on appelle degré d’un sommet s, noté d(s) le nombre
+
+d’arêtes dont le sommet est une extrémité.
+Théorème I.1 Lemme de la poignée de main
+
+Soit G = (S, A) un graphe orienté. On alors les égalités suivantes :
+
+d+(s) =
+
+d−(s) = |A|.
+
+(cid:88)
+
+s∈S
+
+(cid:88)
+
+s∈S
+
+Soit G = (S, A) un graphe non-orienté. On a alors l’égalité suivante :
+
+(cid:88)
+
+s∈S
+
+d(s) = 2|A|.
+
+Démonstration : Pour un graphe orienté G = (S, A), chaque arc a un successeur et un prédé-
+
+cesseur d’ou la première égalité.
+
+Pour obtenir la deuxième égalité, il sufﬁt d’orienté le graphe non-orienté et remarquer
+
+que pour chaque sommet d(s) = d+(s) + d−(s).
+
+Une conséquence directe de ce théorème est que dans un graphe, le nombre de som-
+
+mets dont le degré est impair est toujours pair.
+
+Corollaire I.2
+
+Dans un graphe, le nombre de sommets dont le degré est impair est toujours pair.
+
+9
+
+I.3. Différents modes de représentation d’un graphe
+
+I.2.4 Construction de graphes à partir d’un autre
+
+Soit G = (S, A) un graphe (orienté ou non).
+Un sous-graphe de G est un graphe G(cid:48) = (S(cid:48), A(cid:48)) tel que S(cid:48) ⊂ S et A(cid:48) ⊂ A.
+Un sous-graphe G(cid:48) = (S(cid:48), A(cid:48)) d’un graphe G = (S, A) est un sous-graphe induit si A(cid:48)
+est formé de tous les arcs (ou arêtes) de G ayant leurs extrémités dans S(cid:48) (c’est à dire
+∀s, s(cid:48) ∈ S(cid:48), (s, s(cid:48)) ∈ A(cid:48) si et seulement si (s, s(cid:48)) ∈ A).
+Un sous-graphe G(cid:48) = (S(cid:48), A(cid:48)) d’un graphe G = (S, A) est couvrant s’il contient tous les
+sommets de G (c’est à dire S(cid:48) = S).
+Exemple I.5. On considère un graphe G, un sous-graphe quelconque G1, un sous-graphe
+induit G2 et un sous-graphe couvrant G3.
+
+1
+
+3
+
+G
+
+2
+
+4
+
+5
+
+1
+
+3
+
+5
+
+2
+
+4
+
+G1
+
+1
+
+3
+
+G2
+
+1
+
+3
+
+G3
+
+2
+
+4
+
+5
+
+I.3 Différents modes de représentation d’un graphe
+
+Compte tenu de l’essor des graphes en informatique, il est naturel de s’intéresser aux
+différentes manières de les représenter. Différents modes de représentation peuvent être
+envisagées suivant la nature des traitements que l’on souhaite appliquer aux graphes
+considérés.
+
+I.3.1 Représentation sagittale
+
+La représentation sagittale est la représentation sous forme d’un dessin. Un même
+
+graphe peut avoir des représentations sagittales en apparence très différentes.
+
+I.3.2 Déﬁnition par propriété caractéristique
+
+Une même propriété caractérise les relation entre les différents sommets.
+
+Exemple I.6. On considère le graphe G = (S, A) avec S = {1, 2, 3, 4, 5, 6} et pour tout
+s, s(cid:48) ∈ S on a
+
+(s, s(cid:48)) ∈ A ⇐⇒ s divise strictement s(cid:48).
+
+Sa représentation sagittale est :
+
+4
+
+1
+
+5
+
+2
+
+6
+
+3
+
+I.3.3 Listes d’adjacence
+
+Un graphe peut être représenté à l’aide d’un dictionnaire : il s’agit d’une table à simple
+entrée où chaque ligne correspond à un sommet et comporte la liste des successeurs (ou
+des prédécesseurs) de ce sommet.
+
+Chapitre I. DIFFÉRENTES NOTIONS DE GRAPHES
+
+10
+
+En pratique pour stocker un graphe orienté G = (S, A), on ordonne les sommets
+s1, . . . , sn et le graphe G est représenté par deux listes d’adjacences (LS, TS) déﬁnies par :
+— LS : liste de longueur |A| appelé liste des successeurs, elle contient les successeurs du
+sommets s1, puis ceux de s2 jusqu’à ceux de sn, si un sommet n’a pas de successeur,
+on passe au sommet suivant.
+— TS : liste de longueur |S| + 1 appelé liste des têtes successeurs qui indique la position
+du premier successeur de chaque sommet dans LS. La liste TS est déﬁnit comme
+suit :
+— TS(1) = 1 ;
+— pour si ∈ S, si si a un successeur alors TS(si) est le numéro de la case de LS du
+— TS(n + 1) = |A| + 1
+
+premier successeur de si, sinon TS(si) = TS(si+1) ;
+
+Exemple I.7. Pour décrire un graphe, il sufﬁt de donner le dictionnaire des successeurs ou
+bien le dictionnaire des prédécesseurs.
+
+1
+
+4
+
+2
+
+3
+
+La représentation sous forme de liste est :
+TS = (1, 2, 4, 6, 6)
+
+LS = (2, 1, 4, 3, 4)
+
+I.3.4 Matrices d’adjacence
+
+Sommets
+
+Successeurs
+
+1
+2
+3
+4
+
+2
+1,4
+3,4
+∅
+
+Sommets
+
+Prédecesseurs
+
+1
+2
+3
+4
+
+2
+1
+3
+2,3
+
+Soit G = (S, A) un graphe dont les sommets sont numérotés de 1 à n. La matrice
+
+d’adjacence de G est la matrice carrée (mi,j)(i,j)∈[1,n]2 déﬁnie par
+
+(cid:40)k s’il y a k arêtes allant de i à j
+
+mi,j =
+
+0 sinon
+
+Si le graphe n’est pas orienté, la matrice est symétrique.
+Exemple I.8. Exemples de matrices d’adjacence de graphes orientés :
+
+Ö
+Ö
+
+M =
+
+2
+
+3
+
+0
+1
+0
+0
+
+1
+0
+0
+0
+
+0
+0
+1
+0
+
+M =
+
+2
+
+3
+
+0
+1
+0
+0
+
+1
+0
+0
+1
+
+0
+0
+1
+1
+
+et de graphes non orientés associés :
+
+1
+
+4
+
+1
+
+4
+
+è
+è
+
+0
+1
+1
+0
+
+0
+1
+1
+0
+
+1
+
+4
+
+1
+
+4
+
+2
+
+3
+
+2
+
+3
+
+Ö
+Ö
+
+M =
+
+M =
+
+è
+è
+
+0
+1
+0
+0
+
+0
+1
+0
+0
+
+1
+0
+0
+0
+
+1
+0
+0
+3
+
+0
+0
+2
+0
+
+0
+0
+2
+1
+
+0
+3
+1
+0
+
+0
+3
+1
+0
+
+11
+
+I.4. Quelques classes de graphe importantes
+
+I.3.5 Matrice d’incidence
+
+La matrice d’incidence d’un graphe orienté G = (S, A) est une matrice à coefﬁcients
+dans {−1, 0, 1} indicée par l’ensemble S × A tel que pour (i, j) ∈ S × A on a mi,j = 1
+si le sommet i est l’extrémité de l’arête j, mi,j = −1 si i est l’origine de j, et 0 sinon. On
+remarque que, puisque chaque colonne correspond à une arête, il doit y avoir exactement
+un 1 et un −1 sur chaque colonne.
+
+I.3.6 Comparaison des différentes méthodes
+
+On s’intéresse ici à l’espace nécessaire pour stocker un graphe G = (S, A), les diffé-
+
+rentes méthodes ont leurs avantages et inconvénients. En voici un aperçu :
+
+Méthode de représentation Espace de stockage Autre avantage
+
+2|A|
+
+|S| + |A| + 1
+
+Liste des arcs
+
+Liste d’adjacence
+
+Matrice d’adjacence
+
+Matrice d’incidence
+
+- efﬁcace pour stocker des graphes creux
+- efﬁcace pour implémenter des algorithmes de
+parcours (section III.3)
+- efﬁcace pour stocker des graphes denses
+- donne des informations sur la longueur d’un
+chemin (section II.1.2)
+- utiliser pour le calcule de circuit électique
+
+|S|2
+
+|S| × |A|
+
+I.4 Quelques classes de graphe importantes
+
+On s’intéresse ici à déﬁnir quelques classes de graphes non-orientés dont la plupart
+
+sont simple (non multi-arête et sans boucle).
+
+I.4.1 Graphes isolés
+
+Le graphe isolé d’ordre n est un graphe à n sommets sans arête, on le note In.
+
+I3
+
+I4
+
+I5
+
+I6
+
+I7
+
+I.4.2 Graphes cycliques
+
+Le graphe cyclique d’ordre n est le graphe à n sommets S = {s1, . . . , sn} tels que les arêtes
+
+sont A = {{si, si+1} : i ∈ [1, n]} ∪ {{sn, s1}}, on le note Cn.
+
+Chapitre I. DIFFÉRENTES NOTIONS DE GRAPHES
+
+12
+
+C3
+
+C4
+
+C5
+
+C6
+
+C7
+
+I.4.3 Graphes complets
+
+Le graphe complet d’ordre n est le graphe simple à n sommets dont tous les sommets
+
+sont reliés deux à deux, on le note Kn.
+
+K3
+
+K4
+
+K5
+
+K6
+
+K7
+
+I.4.4 Graphe biparti
+
+Un graphe est biparti s’il existe une partition de son ensemble de sommets en deux
+
+sous-ensembles X et Y telle que chaque arête ait une extrémité dans X et l’autre dans Y.
+
+On déﬁnit le graphe biparti complet entre un ensemble de n sommets et un ensemble à m
+sommets comme le graphe simple tel que chaque sommet du premier ensemble est relié à
+chaque sommet su deuxième ensemble. On le note Kn,m.
+
+A
+
+1
+
+B
+
+2
+K3,3
+
+C
+
+3
+
+I.4.5 Graphes planaires
+
+Un graphe non-orienté (pas forcément simple) est planaire s’il admet une représenta-
+
+tion sagittale dans un plan sans que les arêtes se croisent.
+Exemple I.9. K4 est planaire puisque on peut le représenter de la façon suivante :
+
+K4
+
+Est ce que K5 et K3,3 sont planaires ?
+
+13
+
+I.4. Quelques classes de graphe importantes
+
+I.4.6 Arbres
+
+Déﬁnition I.3. Un arbre se déﬁnit de manière inductive par :
+
+— le graphe formé par un sommet est un arbre ;
+— si G = (S, A) est un arbre, alors pour s ∈ S et x un élément quelconque n’appar-
+tenant pas à S, le graphe G(cid:48) = (S ∪ {x}, A ∪ {{x, s}}) est un arbre.
+
+Un exemple d’arbre :
+
+Remarque I.1. A la section III on verra une déﬁnition équivalente liée à la connexité.
+
+Chapitre I. DIFFÉRENTES NOTIONS DE GRAPHES
+
+14
+
+ChapitreII
+
+Problèmes de chemins dans un graphe
+
+II.1 Notion de chemin
+II.1.1 Déﬁnitions
+
+Déﬁnition II.1. Soit G = (S, A) un graphe orienté (resp. non-orienté). Un chemin (resp.
+une chaîne) dans G est une suite de sommets C = (s0, s1, s2, . . . , sk) telle qu’il existe un arc
+(resp. une arête) entre chaque couple de sommets successifs de C. Ce qui s’écrit :
+— si G = (S, A) est orienté alors pour tout i ∈ [0, k − 1] on a (si, si+1) ∈ A,
+— si G = (S, A) est non-orienté alors pour tout i ∈ [0, k − 1] on a {si, si+1} ∈ A,
+
+On appellera :
+
+Chemin (resp. chaîne) simple : un chemin (resp. chaîne) dont tous les arcs (resp. arêtes)
+
+sont différents.
+
+Chemin (resp. chaîne) élémentaire : un chemin (resp. chaîne) dont tous les sommets sont
+différents sauf peut être le départ et l’arrivée (pour autoriser les circuits ou cycles).
+
+Circuit dans un graphe orienté : un chemin simple ﬁnissant à son point de départ.
+Cycle dans un graphe non-orienté : une chaîne simple ﬁnissant à son point de départ.
+
+II.1.2 Longueur d’un chemin
+
+Longueur du chemin (de la chaîne) : nombre d’arcs (ou arêtes) du chemin.
+Distance entre deux sommets : longueur du plus petit chemin (chaîne) entre ces deux som-
+
+mets.
+
+Diamètre d’un graphe : plus grande distance entre deux sommets de ce graphe.
+Remarque II.1. Dans le cas d’un graphe valué où l’on associe un réel à chaque arcs (ou
+arêtes), la longueur d’un chemin correspond à la somme des valeur de chaque arcs (ou
+arêtes) du chemin.
+Exemple II.1. On peut calculer le diamètre des graphes classiques :
+
+— diamètre de Kn : 1 ;
+— diamètre de Kn,m : 2 ;
+2(cid:99).
+— diamètre de Cn : (cid:98) n
+
+Chapitre II. PROBLÈMES DE CHEMINS DANS UN GRAPHE
+
+16
+
+II.1.3 Longueur d’un chemin et matrice d’adjacence
+
+On cherche a déterminer le nombre de chemins (resp. chaînes) de longueur n reliant
+
+deux sommets d’un graphe G. On note M la matrice d’adjacence de G.
+Proposition II.1
+
+Soit G = (S, A) un graphe de matrice d’adjacence M, le nombre de chemins (resp.
+chaînes) de longueur n reliant le sommets i au sommet j correspond au coefﬁcient
+d’indice (i, j) de la matrice Mn.
+
+Démonstration : Initialisation : Les chemins (resp. chaînes) de longueur 1 qui joignent i à j
+
+correspondent au coefﬁcient d’indice (i, j) de la matrice d’adjacence M.
+
+Induction : On suppose que le nombre de chemins (resp. chaînes) de longueur n qui
+joignent deux sommets quelconques i à j correspond au coefﬁcient Mn
+(i,j). Soit i, j, k trois
+sommets, le nombre de chemins (resp. chaînes) de longueur n + 1 allant de i à j tels que
+le premier arc (resp. arête) soit (i, k) (resp. {i, k}) correspond au nombre de chemins (resp.
+chaînes) de longueur 1 allant de i à k fois le nombre de chemins (resp. chaînes) de longueur
+n allant de k à j, c’est à dire M(i,k)Mn
+k,j. Ainsi le nombre de chemins (resp. chaînes) de
+longueur n + 1 qui joignent deux sommets i à j est :
+
+(cid:88)
+
+k∈S
+
+M(i,k)Mn
+
+(k,j) = Mn+1
+(i,j) .
+
+On en déduit une méthode pour calculer la distance entre deux sommets ainsi que le
+
+diamètre d’un graphe.
+Proposition II.2
+
+Soit G = (S, A) un graphe de matrice d’adjacence M.
+La distance entre deux sommets i et j est le plus petit n ∈ N tel que le coefﬁcient
+Le diamêtre de G est le plus petit n ∈ N tel que tous les coefﬁcients de (M + Id)n
+
+d’indice (i, j) de Mn soit non nul.
+
+soient non nul.
+
+Démonstration : Seul le deuxième point est non trivial. Cela vient du fait que
+
+Exemple II.2. On cherche à compter le nombre de cycles de longueur k dans Kn,n. Par
+exemple, pour n = 3 on a le graphe suivant :
+
+Si k est pair : Ak =
+Comme Ak
+
+cycles de longueur k est donc :
+
+et si k est impair : Ak =
+
+0
+nk−1
+
+(i,j) correspond au nombre de chemin de i à j de longueur k, le nombre de
+
+(M + Id)n =
+
+Cr
+nAr.
+
+n(cid:88)
+
+r=0
+
+á
+
+Ç
+
+nk−1
+0
+
+A =
+
+0
+0
+0
+1
+1
+1
+
+å
+(cid:40)2n × nk−1 = 2nk
+
+0
+nk−1
+
+2n(cid:88)
+
+i=1
+
+Ak
+
+i,i =
+
+0
+
+ë
+Ç
+
+1
+1
+1
+0
+0
+0
+
+0
+0
+0
+1
+1
+1
+
+0
+0
+0
+1
+1
+1
+
+1
+1
+1
+0
+0
+0
+
+1
+1
+1
+0
+0
+0
+
+si k est pair
+sinon.
+
+å
+
+nk−1
+0
+
+17
+
+II.2. Connexité
+
+II.2 Connexité
+
+Déﬁnition II.2 (Connexité et forte connexité). Un graphe non-orienté est connexe si pour
+tout couple de sommets s et s(cid:48), il existe une chaîne reliant s à s(cid:48).
+Un graphe orienté est connexe si le graphe non orienté associé est connexe. Un graphe
+orienté est fortement connexe si pour tout couple de sommets s et s(cid:48), il existe une chemin
+reliant s à s(cid:48).
+Exemple II.3 (Graphe connexe et fortement connexe). G1 est fortement connexe tandis que
+G2 est connexe mais non fortement connexe.
+
+B
+
+A
+
+C
+
+B
+
+A
+
+C
+
+G1
+
+G1
+
+Déﬁnition II.3 (Composantes connexes et fortement connexes). Une composante connexe
+(resp. fortement connexe) C d’un graphe G = (S, A) est un sous-ensemble maximal de
+sommets tels que deux quelconques d’entre eux soient reliés par une chaîne (resp. un
+chemin). Formellement, si s ∈ C alors on a :
+
+— pour tout s(cid:48) ∈ C il existe une chaîne (resp. un chemin) reliant s à s(cid:48),
+— pour tout s(cid:48) ∈ S \ C, il n’existe pas de chaîne (resp. chemin) reliant s à s(cid:48).
+
+Quelques propriétés :
+— Les composantes connexes (resp. fortement connexe) d’un graphe G = (S, A)
+
+forment une partition de S.
+
+— Un graphe est connexe (resp. fortement connexe) si et seulement s’il a une seule
+
+composante connexe (resp. fortement connexe).
+
+— Le sous-graphe induit par une composante connexe (resp. fortement connexe) est
+— La composante connexe C qui contient un sommet s ∈ S est
+
+connexe (resp. fortement connexe).
+
+C = {s(cid:48) ∈ Sil existe une chaîne reliant s à s(cid:48)}
+
+— La composante fortement connexe C qui contient un sommet s ∈ S est
+
+C = {s(cid:48) ∈ Sil existe un chemin reliant s à s(cid:48) et un chemin reliant s(cid:48) à s}
+
+Exemple II.4 (Composantes connexes). Les composantes connexes de G1 sont {A, C, E} et
+{B, D, F} tandis que celles de G4 sont {1}, {2, 6}, {3, 5, 7} et {4}.
+
+B
+
+F
+
+A
+
+D
+
+C
+
+E
+
+G1
+
+4
+
+5
+
+2
+
+7
+
+1
+
+3
+
+6
+
+G2
+
+Chapitre II. PROBLÈMES DE CHEMINS DANS UN GRAPHE
+
+18
+
+Exemple II.5 (Composantes fortement connexes). Les composantes fortement connexes de
+G1 sont {A, B} et {C} tandis que celles de G2 sont {1, 7}, {2, 3, 5, 6} et {4}.
+
+B
+
+A
+
+C
+
+G1
+
+4
+
+5
+
+2
+
+7
+
+1
+
+3
+
+6
+
+G2
+
+II.3 Chemin Eulérien et Hamiltoniens
+
+II.3.1 Chemin Eulérien
+
+Problématique
+
+Au XVIIIème siècle un casse-tête est populaire chez les habitants de Königsberg : est-il
+possible de se promener dans la ville en ne passant qu’une seule fois par chacun des sept
+ponts de Königsberg ? C’est le célèbre mathématicien Euler qui montre le premier que ce
+problème n’a pas de solution, en utilisant pour la première fois la notion de graphe. Le
+problème se reformule ainsi en terme de graphes : existe-t-il un cycle qui passe exactement
+une fois par toutes les arêtes dans le graphe (multi-arête) ci-dessous ?
+
+Ville de Königsberg
+
+G
+
+Déﬁnition II.4. Soit G un graphe non orienté. Une chaîne (resp. un cycle) eulérienne est
+une chaîne (resp. un cycle) qui passe une et une seule fois par toutes les arêtes de G.
+
+On déﬁnit les mêmes notions pour un graphe orienté G : un chemin (resp. un circuit
+eulérien) est un chemin (resp. un circuit) passant une et une seule fois par tous les arcs de
+G.
+
+Exemple II.6. Le graphe G1 admet un cycle eulérien. Le graphe G2 admet un chemin eulé-
+rien mais pas un circuit.
+
+G1
+
+G2
+
+19
+
+II.3. Chemin Eulérien et Hamiltoniens
+
+Caractérisation des chemins eulériens
+
+Avant de prouver la caractérisation des chemin eulériens, on a besoin du résultat sui-
+
+vant.
+Proposition II.3
+
+Un graphe dont tous les sommets sont de degré supérieur ou égal à 2 possède au
+
+moins un cycle.
+
+Démonstration : La preuve utilise un algorithme de marquage. Initialement tous les sommets
+sont non marqués. Un sommet s1 est marqué arbitrairement. L’algorithme construit alors
+une séquence s1, . . . , sk de sommets marqués en choisissant arbitrairement pour si+1 un
+sommet non marqué adjacent à si. L’algorithme s’arrête lorsque sk ne possède plus de
+voisin non marqué. Puisque ce sommet est de degré au moins 2, il possède un voisin sj (cid:54)=
+sk−1 dans la séquence, j < k − 1. On en déduit que (sk, sj, sj+1, . . . , sk−1, sk) est un cycle.
+
+Théorème II.4
+
+Soit G = (S, A) un graphe non orienté connexe. Il admet un cycle eulérien si et
+
+seulement si d(s) est pair pour tout s ∈ S.
+
+Si seulement deux sommets ne vériﬁent pas les conditions précédentes alors G
+
+admet une chaîne Eulériene.
+
+Démonstration : Soit G = (S, A) un graphe connexe. Pour qu’il admette un cycle Eulérien il
+faut qu’en chaque sommet lorsqu’on arrive par une arête on puisse repartir par un autre
+arête. On obtient donc que d(s) est pair si le graphe est orienté pour chaque sommet s ∈ S.
+Réciproquement, on démontre par récurrence sur le nombre d’arcs que pour un graphe
+connexe G, si chaque sommet s ∈ S est de degré pair alors G admet un cycle eulérien.
+Initialisation : Si |A| = 0, on a un graphe connexe sans arêtes, c’est à dire un seul
+
+sommet isolé qui admet un cycle eulérien.
+
+Induction : On suppose que le théorème est vrai pour tout graphe ayant un nombre
+d’arêtes inférieur ou égal à n (hypothèse de récurrence forte). Soit G = (S, A) un graphe
+connexe tel que |A| = n + 1 et pour chaque sommet s ∈ S est de degré pair. Comme le
+graphe est connexe et que le degré de chaque sommet est pair, on en déduit que G admet
+un cycle élémentaire C = (s1, s2, . . . , sk, s1).
+Soit G(cid:48) le sous-graphe de G auquel on a supprimé les arêtes de C. Le graphe G(cid:48) n’est
+pas forcément connexe mais vériﬁe d(s) pairs pour chacun de ses sommet s. On applique
+l’hypothèse de récurrence sur chacune de ses composantes qui admettent donc des cycles
+eulériens. On combine alors ces différents cycles eulériens avec le cycle C, pour former un
+cycle eulérien sur G de la façon suivante : on parcourt C depuis un sommet initial arbitraire
+et, à chaque fois que l’on rencontre une des composantes connexes de G(cid:48) pour la première
+fois, on insère le cycle eulérien considéré sur cette composante. S’agissant d’un cycle, on
+est assuré de pouvoir poursuivre le parcours de C après ce détour. Il est facile de vériﬁer
+qu’on a ainsi bien construit un cycle eulérien sur G.
+
+Si G admet une chaîne Eulérienne et admet un sommet de degré impair, soit c’est le
+point de départ de la chaîne, soit il arrive un moment où l’on ne pourra plus repartir ce
+qui constitue le sommet terminal de la chaîne. Ainsi, si seulement deux sommets sont de
+degré impair il peuvent servir de point de départ et d’arrivé d’un chemin passant par tous
+les arêtes du graphe, le graphe peut donc admettre une chaîne Eulérienne.
+
+Dans le cas orienté on montre de manière similaire le résultat suivant.
+
+Théorème II.5
+
+Soit G = (S, A) un graphe orienté fortement connexe. Il admet un circuit eulérien
+
+si et seulement si d+(s) = d−(s) pour tout s ∈ S.
+
+Chapitre II. PROBLÈMES DE CHEMINS DANS UN GRAPHE
+
+20
+
+Si seulement deux sommets vériﬁent |d+(s) − d−(s)| = 1 alors G admet un chemin
+
+Eulérien.
+
+II.3.2 Chemins hamiltonien
+
+Déﬁnition II.5. Soit G un graphe non orienté. Un cycle (respectivement une chaîne) hamil-
+tonien est un cycle (resp. une chaîne) qui passe une et une seule fois par tous les sommets
+de G.
+
+On déﬁnit les mêmes notions pour un graphe orienté G : un circuit ou un chemin hamil-
+tonien est un circuit ou un chemin passant une et une seule fois par tous les sommets de
+G
+Exemple II.7. G1 admet un circuit hamiltonien, G2 n’admet ni chaîne ni cycle hamiltoniens,
+G3 admet une chaîne hamiltonienne mais pas de cycles hamiltoniens et G4 admet un cycle
+hamiltonien.
+
+G1
+
+G2
+
+G3
+
+G4
+
+On ne connaît pas de condition nécessaire et sufﬁsante exploitable dans la pratique
+pour décider si un graphe est hamiltonien ou non. De manière générale, la recherche de
+cycle, chaîne, circuit ou chemin Hamiltonien est un problème algorithmiquement difﬁcile.
+En fait, on peut montrer que c’est un problème NP-complet.
+
+II.4 Deux mots sur le Page-rank
+
+To do:
+
+ChapitreIII
+
+Graphes acycliques ou sans-circuits
+
+III.1 Notion d’arbres
+III.1.1 Nombre d’arêtes d’un graphe acyclique
+
+Proposition III.1
+
+Un graphe connexe d’ordre n comporte au moins n − 1 arêtes.
+
+Démonstration : On montre le résultat récurrence sur l’ordre du graphe n.
+
+conduit à 2|A| =(cid:80)
+
+Initialisation : Le résultat est évident pour n = 1 et n = 2.
+Induction : Supposons la propriété prouvée sur les graphes connexes d’ordre n. Soit
+G = (S, A) un graphe connexe à n + 1 sommets. La connexité assure que chaque sommet
+est de degré au moins 1. On a alors deux cas :
+— si chaque sommet est de degré au moins 2, alors le lemme de la poignée de main
+— s’il existe un sommet s de degré 1 alors, le graphe induit G(cid:48) obtenu en éliminant s et
+l’arête dont il est l’extrémité, est un graphe connexe de n sommets qui possède exacte-
+ment une arête de moins que G. D’après l’hypothèse de récurrence, G(cid:48) possède donc
+au moins n − 1 arêtes, d’où G en possède au moins n.
+
+s∈S d(S) ≥ 2n donc |A| ≥ n ;
+
+Proposition III.2
+
+Un graphe dont tous les sommets sont de degré supérieur ou égal à 2 possède un
+
+cycle. En particulier, un graphe acyclique admet un sommet de degré 0 ou 1.
+
+Démonstration : La preuve utilise un algorithme de marquage. Initialement tous les sommets
+sont non marqués. Un sommet s1 est marqué arbitrairement. L’algorithme construit alors
+une séquence s1, . . . , sk de sommets marqués en choisissant arbitrairement pour si+1 un
+sommet non marqué adjacent à si. L’algorithme s’arrête lorsque sk ne possède plus de
+voisin non marqué. Puisque ce sommet est de degré au moins 2, il possède un voisin sj (cid:54)=
+sk−1 dans la séquence, j < k − 1. On en déduit que (sk, sj, sj+1, . . . , sk−1, sk) est un cycle.
+
+Nous pouvons lier cette fois l’absence de cycle dans un graphe avec le nombre d’arêtes.
+
+Proposition III.3
+
+Un graphe acyclique à n sommets possède au plus n − 1 arêtes.
+
+Chapitre III. GRAPHES ACYCLIQUES OU SANS-CIRCUITS
+
+22
+
+Démonstration : On va montrer cette propriété par récurrence sur le nombre de sommets du
+
+graphe G = (S, A).
+
+Initialisation : Si G est d’ordre 1, comme G est acyclique il n’y a pas de boucle, il ne
+
+possède donc aucune arête et la propriété est vériﬁée.
+
+Induction : Supposons la propriété vrai au rang n et montrons la au rang n + 1. Comme
+G est acyclique, par la propriété III.2, il existe un sommet s de degré 0 ou 1. Considérons le
+graphe induit G(cid:48) par les sommets S \ {s}. Ce graphe est acyclique et possède n sommets,
+par hypothèse d’induction G(cid:48) a au plus n − 1 arêtes. On en déduit que G a au plus n arêtes
+car d(s) ≤ 1.
+
+III.1.2 Arbres et forêts
+
+Déﬁnition III.1. Un arbre est un graphe non orienté, connexe, sans cycle.
+
+Une forêt est un graphe non orienté sans cycle (chacune de ses composantes connexes
+
+est un arbre).
+
+Les sommets de degré 1 ou 0 sont appelés feuilles, les autres sommets sont appelés
+
+noeuds.
+
+Théorème III.4
+
+Soit G un graphe non orienté à n sommets. Les propositions suivantes sont équi-
+
+valentes :
+
+— G est connexe sans cycle ;
+— G est connexe et a n − 1 arêtes ;
+— G est connexe et la suppression de n’importe quelle arête le déconnecte ;
+— G est sans cycle et a n − 1 arêtes ;
+— G est sans cycle et l’ajout de n’importe quel arête crée un cycle ;
+— entre toute paire de sommets de G il existe une unique chaîne élémentaire ;
+— G est déﬁni de manière inductive comme à la déﬁnition I.3.
+
+Théorème III.5
+
+Tout graphe connexe peut s’obtenir par ajout d’un certain nombre d’arêtes à un
+
+arbre ayant le même nombre de sommets.
+
+Démonstration : On raisonne par récurrence sur le nombre n de cycles élémentaires du graphe.
+Initialisation : Si n = 0, le graphe est connexe et sans cycle, c’est donc un sommet isolé,
+
+il s’agit donc d’un arbre.
+
+Induction : Supposons que le résultat soit établi pour tout graphe connexe n’ayant pas
+plus de n cycles élémentaires. Soit G un graphe connexe avec n + 1 cycles élémentaires.
+On considère alors le sous-graphe G(cid:48) obtenu en enlevant uniquement une arête (s1, s2)
+qui appartient à un cycle (s1, s2, . . . , sk). Il est clair qu’ainsi on brise au moins un cycle
+élémentaire parmi ceux de G. De plus, tous les cycles de G(cid:48) sont des cycles de G, donc
+G(cid:48) possède au plus n cycles élémentaires (peut-être en a-t-on brisé plus d’un). De plus, le
+graphe G(cid:48) est encore connexe, puisque si l’on veut passer de s1 à s2, il sufﬁt de faire le tour
+via le chemin (s2, s3, . . . , sk, s1). D’après l’hypothèse de récurrence, on sait que G(cid:48) peut-être
+obtenu à partir d’un arbre T par ajout d’un certain nombre d’arêtes. Il sufﬁt alors d’ajouter
+l’arête (s1, s2) pour retrouver G, ce qui achève la démonstration.
+
+23
+
+III.1. Notion d’arbres
+
+III.1.3 Arbres orientés
+
+Les arbres utilisés en algorithmique ont le plus souvent une orientation et un sommet
+
+qui joue un rôle particulier, la racine : c’est ce type d’arbre que l’on va voir maintenant.
+
+Déﬁnition III.2. Un graphe non orienté est un arbre enraciné s’il est connexe sans cycle et
+si un sommet particulier a été distingué, on l’appellera la racine.
+
+Un arbre enraciné est souvent muni d’une orientation naturelle : on oriente chaque
+arête de telle sorte qu’il existe un chemin de la racine à tout autre sommet. Le graphe
+orienté résultant est aussi appelé arbre orienté.
+Proposition III.6
+
+Un graphe orienté est un arbre enraciné si et seulement si
+— il est connexe,
+— il a un unique sommet sans prédécesseur (la racine),
+— et tous ses autres sommets ont exactement un prédécesseur.
+
+Remarque III.1. Un graphe orienté sans circuit n’est pas forcément un arbre orienté.
+
+On appellera :
+— racine de l’arbre : le sommet qui n’a pas de prédécesseur
+— feuilles de l’arbre : les sommets qui n’ont pas de successeur ;
+— nœuds de l’arbre : tous les autres sommets ;
+— branche de l’arbre : tout chemin de la racine vers une feuille,
+— descendant de s : les successeurs de s,
+— ascendant de s : le prédécesseur de s.
+
+Lorsque chaque sommet a au plus 2 successeurs on parle aussi d’arbre binaire.
+Proposition III.7
+
+Un arbre à n sommets peut être déﬁni par une liste de n éléments, appelé liste des
+prédécesseurs, qui contient le prédécesseur de chaque sommet (ou ∅ pour la racine de
+l’arbre) :
+
+pour tout s ∈ S on pose Pred(s) =
+
+(cid:40)∅ si s est la racine de l’arbre
+
+s(cid:48)
+
+si (s(cid:48), s)
+
+Ainsi stocker un arbre n’est pas trop gourmand d’un point de vu informatique.
+
+Exemple III.1. La liste Pred = [∅, 1, 1, 2, 3, 2, 3, 5, 3, 6, 4, 4, 7, 8, 14, 10] représente l’arbre sui-
+vant :
+
+r(s)
+
+0
+
+1
+
+5
+
+4
+
+16
+
+14
+
+15
+
+1
+
+2
+
+3
+
+3
+
+10
+
+11
+
+12
+
+8
+
+13
+
+2
+
+6
+
+4
+
+5
+
+7
+
+9
+
+Chapitre III. GRAPHES ACYCLIQUES OU SANS-CIRCUITS
+
+24
+
+Le sommet 1 est la racine, les sommets 9, 11, 12, 13, 15 et 16 sont les feuilles, une branche
+de l’arbre est (1, 3, 5, 8, 14, 15).
+
+III.1.4 Notion de rang dans un graphe orienté sans circuit
+
+Théorème III.8
+
+Un graphe orienté G est sans circuit si et seulement si on peut attribuer à chaque
+sommet s un nombre r(s), appelé le rang de s, tel que pour tout arc (s, t) de G on ait
+r(s) < r(t).
+
+Démonstration : Si G = (S, A) comporte un circuit C, il n’est pas possible de trouver une telle
+fonction r : S → R. Sinon, il existe t ∈ S tel que r(t) = max{r(s) : s ∈ C} et en considérant
+l’arc (t, u) ∈ C, on aurait r(t) ≤ r(u) ce qui est en contradiction avec la déﬁnition du rang.
+Réciproquement, si G n’a pas de circuit, il existe au moins un sommet sans prédéces-
+seur dans G (sans cela, en remontant successivement d’un sommet à un prédécesseur, on
+ﬁnirait par fermer un circuit). Ainsi, on peut attribuer séquentiellement des valeurs aux
+sommets du graphe à l’aide de l’algorithme 1, ce qui conclura la démonstration.
+
+Algorithm 1: Algorithme de calcul du rang
+Data: Un graphe orienté sans circuit G = (S, A)
+Result: Une fonction rang r : S → N de G
+
+rang← 0;
+X ← S;
+R ← ensemble des sommets de X sans prédécesseur dans X ;
+while X (cid:54)= ∅ do
+r(v) ← rang pour tout sommet v ∈ R;
+X ← X \ R;
+R ← les sommets sans prédécesseur du graphe induit par les sommets X ;
+r ← r + 1;
+
+Initiation à la théorie des jeux
+
+III.2
+III.2.1 Jeux combinatoires
+
+Voici un jeu simple qui se joue à deux, sur un graphe orienté :
+— On place un pion sur un sommet du graphe.
+— A tour de rôle, chaque joueur doit déplacer le pion en suivant un arc du graphe.
+— Le premier joueur qui ne peut pas déplacer le pion a perdu.
+On cherche à savoir s’il existe une stratégie gagnante pour l’un des joueurs, c’est à dire
+s’il existe une méthode qui permet de le faire gagner quel que soit les coups réalisé par
+l’adversaire.
+
+Ce jeu simple permet en fait de modéliser toute une classe de jeux : les jeux combi-
+natoires à deux joueurs et à information complète. Par combinatoire on entend de réﬂexion,
+c’est-à-dire que ce n’est pas un jeu d’habileté (type ﬂéchettes) et sans hasard (ce qui exclut
+
+25
+
+III.2. Initiation à la théorie des jeux
+
+quasiment tous les jeux de cartes ou de dés). A deux joueurs signiﬁe que les deux joueurs
+jouent à tour de rôle (ce qui exclut des jeux type pierre-feuille-ciseau). A information com-
+plète signiﬁe que à tous moments les joueurs ont accès à l’état exact du jeu, il n’y a pas
+d’éléments cachés.
+
+Cette classe de jeux comprend par exemple les échecs, les dames, le jeu de go, othello,
+
+puissance 4, morpion, tic-tac-toe, jeu de petits carreaux...
+
+III.2.2 Modélisation
+
+Etant donné un jeu combinatoire à information parfaite à deux joueurs, on lui associe
+un graphe orienté de la façon suivante (on laisse de côté la possibilité de parties nulles) :
+
+— l’ensemble des sommets est l’ensemble des états possibles du jeu,
+— deux sommets sont reliés par un arc s’il existe un coup amenant de la première
+
+position à la deuxième.
+
+Il existe des parties qui ne se termine jamais si et seulement si le graphe admet un cycle.
+C’est pour cela que certain jeux comme le go ou les échecs interdisent de se retrouver
+plusieurs fois dans la même situation.
+
+Si le jeu admet des parties nulles, on peut modiﬁer le problème en considérant que le
+
+joueur ne doit pas perdre.
+Remarque III.2. Si on joue à qui perd gagne à un jeu combinatoire à information parfaite à
+deux joueurs, alors on peut se ramener à un jeu combinatoire à information parfaite.
+
+III.2.3 Noyau d’un graphe
+
+On cherche un ensemble N tel que quel que soit le coup de l’adversaire, on peut tou-
+
+jours se ramener à un sommet de N.
+Déﬁnition III.3. Soit G = (S, A) un graphe orienté, on dit que N ⊂ S est un noyau de G
+s’il vériﬁe :
+— pour tout s ∈ N les successeurs de s ne sont pas dans N (on dit que N est stable),
+— pour tout s ∈ S \ N alors s admet un successeur dans N (on dit que N est absor-
+bant).
+
+Exemple III.2. On a les exemples suivants de noyaux :
+
+A
+
+A
+
+A
+
+B
+
+C
+
+B
+
+C
+
+D
+
+B
+
+D
+
+E
+
+Noyau : {B, D, E}
+
+F
+
+Noyau : {A, D, E, F}
+
+D
+
+E
+
+C
+
+Noyau : {A, C}
+et aussi {B, D}
+
+C
+
+D
+
+B
+
+E
+
+A
+
+Pas de noyau
+
+Un graphe ne possède pas nécessairement de noyau. En général c’est un problème
+difﬁcile (NP-complet) de décider si un graphe donné admet un noyau. Par contre dans le
+cas des graphes sans circuits, on a le résultat suivant :
+Théorème III.9
+
+Tout joueur dont la position initiale n’est pas dans le noyau a une stratégie non
+
+perdante.
+
+Chapitre III. GRAPHES ACYCLIQUES OU SANS-CIRCUITS
+
+26
+
+Démonstration : On montre qu’un joueur qui peut choisir s dans le noyau ne peut pas perdre.
+Si s n’a pas de successeur, l’adversaire ne peut plus jouer, il a perdu. Sinon, l’adversaire va
+choisir un sommet s(cid:48) dans les successeurs de s. On a s(cid:48) ∈ S \ N donc s(cid:48) admet au moins un
+successeur dans N.
+
+Théorème III.10
+
+Un graphe orienté sans circuit possède un unique noyau.
+
+Démonstration : On remarque que tout graphe sans circuit admet un puits et que tous les
+
+puits doivent appartenir au noyau.
+
+On va raisonner par récurrence sur le nombre n de sommets.
+Initialisation : Si n = 1, l’unique sommet est un puits et donc le seul élément du noyau.
+Induction : Soit s un puits du graphe G sans circuit. Notons P(s) l’ensemble des préde-
+cesseurs de s. Par hypothèse de récurrence, le graphe G privé du sommet s et de ceux de
+P(s) a un noyau unique N. On en déduit que N ∪ {s} est l’unique noyau de G.
+
+Remarque III.3. Il est facile d’adapter l’énoncé pour prendre en compte les nulles : un des
+deux joueurs a une stratégie non-perdante.
+Remarque III.4. Le graphe d’un jeu est en général tellement énorme qu’il est impossible
+de déterminer une stratégie gagnante (et heureusement). Un jeu est résolu quand une
+stratégie gagnante a été déterminée (exemple de jeu résolu : puissance 4).
+
+III.2.4 Exemples de jeux
+
+Chomp
+
+Principe du jeu Chomp est joué avec une “tablette de chocolat”, c’est-à-dire un rectangle
+composé de blocs carrés. Les joueurs choisissent un carré à tour de rôle, et le “mange”,
+ainsi que tous les carrés situés à sa droite ou plus bas. Le carré en haut à gauche est
+empoisonné et celui qui le mange perd la partie.
+
+Voici un exemple de partie à partir d’une tablette de taille 3x5 :
+
+Initialement
+
+A joue
+
+B joue
+
+A joue
+
+B joue
+
+A a perdu
+
+Stratégie gagnante Comme le graphe associé est sans cycle, on sait qu’un des deux
+joueurs a une stratégie gagnante. Par un argument de “vol de stratégie”, on peut mon-
+trer que le joueur 1 a une stratégie gagnante. En effet, supposons que le joueur 2 possède
+une stratégie gagnante contre tous les premiers coups possibles du premier joueur. Sup-
+posons ensuite que le joueur 1 effectue son premier coup en mangeant le carré en bas à
+droite. Le joueur 2 répond avec sa stratégie gagnante en mangeant un certain carré (n, m).
+Mais dans ce cas, le joueur 1 aurait pu lui-même jouer le coup (n, m) dès le début, et appli-
+quer ensuite lui-même la stratégie gagnante. Ceci prouve que le deuxième joueur ne peut
+pas posséder de stratégie gagnante. On parle de preuve par vol de stratégie parce que le
+deuxième joueur se fait voler toute stratégie potentielle possible par le premier.
+
+Cependant à part une exploration informatique, on ne connait pas la stratégie ga-
+
+gnante.
+
+27
+
+Jeux de Nim
+
+III.2. Initiation à la théorie des jeux
+
+Les jeux de Nim sont des jeux très courants. Chaque jeu se joue à deux au tour par tour.
+Il s’agit en général de déplacer ou de prendre des objets selon des règles qui indiquent
+comment passer d’une position du jeu à une autre, en empêchant la répétition cyclique des
+mêmes positions. Le nombre de positions est ﬁni et la partie se termine nécessairement, le
+joueur ne pouvant plus jouer étant le perdant (ou selon certaines variantes, le gagnant).
+
+Le jeu de Nim trivial ou (jeu de Nim à un seul tas) Ce est constitué d’un seul tas de
+n allumettes, chaque joueur prenant le nombre d’allumettes qu’il veut. Celui qui ne peut
+plus prendre à perdu. La stratégie gagnante consiste évidemment à prendre toutes les
+allumettes.
+Le graphe associé est S = {0, . . . , n} et A = {(x, y) ∈ S2 : y < x} le noyau est réduit à
+{0}.
+
+Il consiste à prendre entre 1 et m
+Le jeu de Nim un peu moins trivial (Fort Boyaux)
+allumette dans un tas de n allumettes. Celui qui ne peut plus prendre d’allumette a perdu.
+Le deuxième joueur gagne si et seulement si m + 1 divise n.
+Le graphe associé est S = {0, . . . , n} et A = {(x, y) ∈ S2 : x − m ≤ y < x} le
+noyau est réduit à (m + 1)N ∩ S. On en déduit que le joueur 1 a une stratégie gagnante si
+n /∈ (m + 1)N.
+
+Le jeu de Nim un peu moins trivial inversé C’est le ‘’qui perd gagne” du jeu précédent.
+Ainsi celui qui prend la dernière allumette a perdu.
+Le graphe associé est S = {1, . . . , n} et A = {(x, y) ∈ S2 : x − m ≤ y < x} le noyau
+est réduit à (m + 1)N + 1 ∩ S. On en déduit que le joueur 1 a une stratégie gagnante si
+n − 1 /∈ (m + 1)N.
+
+Jeu de Nim classique ou jeu de Marienbad C’est les mêmes règles que précédemment
+mais avec plusieurs tas et à chaque coup, on ne peut prendre des allumette que dans un
+seul tas.
+
+Jeu de Grundy Le jeu de Grundy se joue en séparant l’un des tas en deux tas de taille
+distincte, jusqu’à ce qu’il ne reste que des tas à un objet.
+
+Jeu de Wythoff Le jeu de Wythoff se joue à deux tas. Chaque joueur réduit d’un même
+nombre d’objets les deux tas à la fois, ou bien réduit un seul tas du nombre d’objets qu’il
+veut.
+
+Sprouts
+
+Principe du jeu Sprouts (germe en anglais) se joue à deux joueurs avec un stylo et une
+feuille de papier. Au départ, il y a n points sur la feuille. Chaque joueur, à tour de rôle,
+relie deux points existants par une ligne et ajoute un nouveau point sur cette ligne de telle
+sorte que :
+
+— les lignes ne peuvent se croiser (le graphe doit rester planaire),
+— un point ne peut pas être relié à plus de trois lignes (le degré maximal des sommets
+
+est 3).
+
+Chapitre III. GRAPHES ACYCLIQUES OU SANS-CIRCUITS
+
+28
+
+Celui qui ne peut plus jouer sans enfreindre les deux contraintes a perdu. Il existe
+
+également une version misère, où celui qui ne peut plus jouer est cette fois le gagnant.
+
+Le nombre de points tracés sur la feuille augmente à chaque coup, on peut donc se
+
+demander si la partie se termine en un nombre ﬁni de coups.
+
+Proposition III.11
+
+Toute partie de Sprout à partir de n sommets se termine en au plus 3n − 1 coups.
+
+Démonstration : On appelle liberté d’un sommet s le nombre 3 − d(s). Etant donné une conﬁ-
+guration de Sprout, lorsqu’on on relie deux sommet on perd deux libertés correspondant
+aux sommets reliés et on rajoute une liberté correspondant au nouveau sommet. Ainsi,
+après avoir joué le nombre total de liberté a baissé de un. Le jeu s’arrête nécessairement s’il
+reste une seule liberté.
+
+Ainsi le nombre de coup correspond au plus au nombre de liberté initiale moins 1, c’est
+
+à dire 3n − 1.
+
+On peut aussi contrôler la durée d’une partie et montrer qu’une partie se termine au
+
+minimum en 2n coups.
+
+Stratégie gagnante Si n = 1, le joueur 1 est certain de perdre. En effet, il ne peut que
+faire une boucle sue le sommet et le joueur 2 relie les deux sommets.
+
+En partant de deux points, n = 2, l’analyse du jeu est déjà moins évidente, mais on
+peut établir la liste de toutes les conﬁgurations et le joueur qui commence perdra toujours
+si son adversaire joue convenablement.
+
+On a établit des stratégie gagnante informatiquement pour des valeurs de n inférieure
+à 50, la conjecture actuelle étant qu’avec n points au départ, le jeu sprout est gagnant pour
+le second joueur si n = 0, 1 ou 2 modulo 6 et il est gagnant pour le joueur 1 dans les autres
+cas.
+
+III.3 Parcours dans un graphe
+
+III.3.1 Notion générale
+
+Un parcours de graphe est un algorithme consistant à explorer les sommets de proche
+en proche à partir d’un sommet initial. Dans cette section on considèrera que les graphes
+traités sont orientés. Les algorithmes fonctionnent pour le cas non-orienté en transformant
+chaque arête en deux arcs à double sens.
+Soit G = (S, A) un graphe et s ∈ S un sommet, un parcours du graphe G à partir de
+s est une visite de chaque sommet accessible depuis s. Un parcours peut être représenté
+par un sous-graphe de G qui est un arbre de racine s. Lors d’un parcours de graphe, on
+doit marquer les sommets visités pour ne pas les traiter plusieurs fois. Lorsqu’on marque
+un sommet on réalise le traitement de ce sommet, le moment où l’on réalise ce marquage
+peut donner des parcours différents.
+
+D’un point de vue algorithmique, un parcours correspond à la procédure suivante.
+Il reste à préciser dans quel ordre on prend les sommets de L. On déﬁnira alors le
+
+parcours en largeur et le parcours en profondeur.
+
+29
+
+III.3. Parcours dans un graphe
+
+Algorithm 2: Algorithme de parcours
+
+Data: Un graphe orienté G = (S, A) et un sommet s
+
+L ← Liste des sommets à traiter (vide au départ);
+Mettre s dans L (Début traitement de s);
+while L (cid:54)= ∅ do
+
+sortir x le premier sommet de L (x en cours de traitement);
+for y voisin non marqué de x do
+
+P(y) ← x;
+Mettre y dans L (Début traitement de y);
+
+Fin du traitement de x;
+
+III.3.2 Parcours en largeur
+
+A partir d’un sommet s, un parcours en largeur traite d’abord les voisins de s pour
+ensuite les explorer un par un. Ce mode de fonctionnement utilise donc une ﬁle dans la-
+quelle on ajoute les voisins non encore explorés par le bas (enﬁler) et on retire les sommets
+à traiter par le haut (déﬁler).
+
+Si on veut récupérer la liste des prédécesseurs P qui permet de retrouver l’arbre de
+
+parcours en largeur depuis le sommet s on utilise l’algorithme suivant :
+
+Algorithm 3: Algorithme de parcours en largeur
+
+Data: Un graphe orienté G = (S, A) et un sommet s
+
+L = File des sommets à traiter (vide au départ);
+P = Liste de taille |S| où toutes les valeurs sont affectées de ∅ (liste des
+prédécesseurs dans l’arbre de parcours);
+Marquer le sommet s et l’enﬁler dans L;
+while L (cid:54)= ∅ do
+
+déﬁler x le premier sommet de L;
+for y voisin non marqué de x do
+
+Marquer y;
+P(y) ← x;
+enﬁler y dans L;
+
+Remarque III.5. La liste L des sommets à traiter est l’exemple type d’une Pile de type FIFO
+(First In, First Out) :
+
+— on ajoute les éléments “par le bas” de la ﬁle,
+— on retire les éléments “par le haut” de la ﬁle.
+
+Le parcours en largeur explore tous les sommets accessibles depuis le sommet initial.
+Il permet de calculer les composantes connexes du graphe avec une complexité linéaire.
+De plus, lors de ce parcours, les sommets sont explorés par distance croissante au
+sommet de départ. Grâce à cette propriété, on peut utiliser l’algorithme pour résoudre
+
+Chapitre III. GRAPHES ACYCLIQUES OU SANS-CIRCUITS
+
+30
+
+le plus simple des problèmes de cheminement : calculer le plus court chemin entre deux
+sommets.
+Exemple III.3. On réalise un parcours en largeur de G en commençant par le sommet 1 et
+en choisissant les sommet voisins dans l’ordre croissant.
+
+4
+
+1
+
+5
+
+6
+
+7
+
+2
+
+3
+
+4
+
+Arbre de parcours P = (∅, 1, 1, 1, 2, 2, 3)
+
+2
+
+6
+
+5
+
+1
+
+3
+
+7
+
+G
+
+III.3.3 Parcours en profondeur
+
+C’est un algorithme de recherche qui progresse à partir d’un sommet s en s’appelant
+récursivement pour chaque sommet voisin de s. Le nom d’algorithme en profondeur est
+dû au fait que, contrairement à l’algorithme de parcours en largeur, il explore en fait “à
+fond” les chemins un par un : pour chaque sommet, il marque le sommet actuel, et il prend
+le premier sommet voisin jusqu’à ce qu’un sommet n’ait plus de voisins (ou que tous ses
+voisins soient marqués), et revient alors au sommet père.
+
+Comme pour le parcours en largeur on peut écrire l’algorithme permettant de récupé-
+
+rer l’arbre de parcours en profondeur :
+
+Algorithm 4: Algorithme de parcours en profondeur
+Data: Un graphe orienté G = (S, A) et un sommet s
+
+L = Pile des sommets à traiter (vide au départ);
+P = Liste de taille |S| où toutes les valeurs sont affectées à ∅ (liste des
+prédécesseurs dans l’arbre de parcours);
+Enﬁler s dans L;
+while L (cid:54)= ∅ do
+
+dépiler x le premier sommet de L;
+if x non marqué then
+
+for y voisin de x non marqué do
+
+P(y) ← x;
+Mettre y au début de L;
+
+Marquer x;
+
+Cet algorithme admet aussi une formulation récursive plus simple à programmer :
+
+Remarque III.6. La liste L des sommets à traiter est l’exemple type d’une Pile de type LIFO
+(Last In, First Out) :
+
+— on ajoute les éléments “par le haut” de la pile,
+— on retire les éléments “par le haut” de la pile.
+
+31
+
+III.3. Parcours dans un graphe
+
+Algorithm 5: Algorithme de parcours en profondeur récursif
+
+Data: Un graphe orienté sans circuit G = (S, A) et un sommet s
+Data: P = DFS(G, s)
+
+Marquer s;
+for x voisin non marqué de s do
+
+P(y) ← x;
+ParcoursPro f ondeur(G, x);
+
+Exemple III.4. On réalise un parcours en profondeur de G en commençant par le sommet
+1 et en choisissant les sommet voisins dans l’ordre croissant.
+
+2
+
+6
+
+5
+
+1
+
+3
+
+7
+
+G
+
+4
+
+1
+
+2
+
+5
+
+4
+
+3
+
+6
+
+7
+
+Arbre de parcours P = (∅, 6, 1, 1, 2, 4, 3)
+
+Chapitre III. GRAPHES ACYCLIQUES OU SANS-CIRCUITS
+
+32
+
+ChapitreIV
+
+Problèmes de coloriages
+
+IV.1 Coloriage de sommets
+
+IV.1.1 Position du problème
+
+Déﬁnition IV.1. Soit G = (S, A) un graphe non orienté simple (sans boucle et pas multi-
+arêtes). Un coloriage de G consiste à assigner une couleur (ou un nombre) à chaque sommet
+de telle sorte que deux sommets adjacents soient de couleurs différentes. Un graphe G est
+k-coloriable s’il existe un coloriage avec k couleurs.
+
+Le nombre chromatique du graphe G, noté χ(G) est le nombre minimal de couleurs
+
+nécessaire pour colorier un graphe.
+
+IV.1.2 Exemples d’applications
+
+Problème de compatibilité Dans un groupe de 14 étudiants, on doit former des groupes
+de telle sorte que les étudiants d’un même groupe ne s’entendent pas trop mal. On
+connaît les incompatibilités suivantes :
+
+l’étudiant
+
+A
+
+B
+
+C
+
+D
+
+E
+
+F
+
+G
+
+H
+
+ne s’entend pas avec
+B,E,F,H A,C,E,G B,D C,E,G A,D,F,H A,E,H B,D,H A,E,F,G
+Le nombre minimal de groupes nécessaire correspond au nombre chromatique du
+graphe des incompatibilités.
+
+E
+
+D
+
+F
+
+C
+
+G
+
+B
+
+H
+
+A
+
+Chapitre IV. PROBLÈMES DE COLORIAGES
+
+34
+
+Problème d’emploi du temps Pendant un festival, on veut organiser des tournois de scrable
+
+(S), échecs (E), go (G), dames (D), tarot (T) et master-mind (M). Plusieurs personnes
+se sont inscrites à la fois pour les tournois E, S, G, d’autres personnes pour les tour-
+nois G, D, M, et enﬁn d’autres personnes pour les tournois M, T, S. Il est entendu
+qu’une participation simultanée à plusieurs tournois est impossible et que les or-
+ganisateurs veulent satisfaire tout le monde.
+Quel est le nombre maximum de tournois qui pourraient se dérouler en même
+temps ?
+
+G
+
+E
+
+D
+
+S
+
+T
+
+M
+
+Coloriage de carte On cherche à colorier une carte de telle sorte que deux pays frontaliers
+soient de couleurs différentes. Pour résoudre ce problème, plus historique qu’autre
+chose, on peut se ramener au coloriage d’un graphe planaire construit de la façon
+suivante : les sommet correspondent aux pays et il y a une arête entre deux som-
+mets si les pays correspondant sont frontaliers.
+
+IV.1.3 Nombre chromatique de graphes classiques
+
+Il est facile de déterminer le nombre chromatique de certains graphes classiques :
+— graphe isolé d’ordre n : χ(In) = 1 ;
+— graphe cyclique d’ordre n : χ(Cn) = 2 si n pair et 3 si n impair ;
+— graphe complet d’ordre n : χ(Kn) = n ;
+— G graphe biparti avec au moins une arête : χ(G) = 2 (en fait un graphe est 2-
+
+coloriable si et seulement s’il est biparti) ;
+
+— G arbre avec au moins une arête : χ(G) = 2.
+
+IV.1.4 Comment calculer un nombre chromatique ?
+
+Il est intéressant d’avoir des outils pour encadrer le nombre chromatique. On note
+qu’obtenir un coloriage à k couleurs d’un graphe G permet d’afﬁrmer que χ(G) ≤ k. La
+difﬁculté réside pour trouver une minoration.
+Proposition IV.1
+
+Soit G un graphe et G(cid:48) un sous graphe, on a χ(G(cid:48)) ≤ χ(G).
+
+On va introduire deux nouvelles notions.
+
+Déﬁnition IV.2. Soit G un graphe non orienté.
+Une clique est un sous-graphe complet de G.
+Une stable est un sous-graphe induit de G sans arcs (ou arêtes).
+
+Ces notions donnes des informations sur le nombre chromatique :
+— les sommets d’une même clique doivent être coloriés d’une couleur différente, ainsi
+
+trouver une clique à k sommets permet d’afﬁrmer que χ(G) ≥ k ;
+
+— les sommets d’une même stable peuvent être coloriés de la même couleur.
+
+35
+
+IV.2. Résolution algorithmique
+
+IV.2 Résolution algorithmique
+
+Dans cette section on s’intéresse aux algorithmes qui permettent de trouver un colo-
+
+riage ou le nombre chromatique.
+
+IV.2.1 Algorithme glouton
+
+On considère ici un coloriage comme une fonction des sommets dans les entiers. L’al-
+gorithme glouton nous donne facilement un coloriage du graphe, le principe consiste à
+prendre les sommets les uns après les autres et pour chaque sommet s d’affecter la cou-
+leur minimale qui n’apparait pas dans les voisins coloriés de s.
+
+Algorithm 6: Algorithme glouton de coloriage d’un graphe
+Data: Un graphe G = (S, A)
+Result: Une coloration ϕ : S → N∗ de G
+
+for s ∈ S do
+
+ϕ(s) ← plus petite couleur non utilisé par les voisins de s;
+
+Terminaison L’algorithme termine une fois que l’on a visité tous les sommets.
+
+Correction A chaque fois que l’on attribue une couleur à un sommet, elle est diffé-
+rentes des couleurs des sommets voisins pour lesquels on a attribué une couleur. Ainsi le
+coloriage obtenu est valide.
+
+Complexité On passe |S| fois dans la boucle, chaque fois que l’on passe dans la boucle
+on regarde tous les voisins du sommet considéré, on a au plus ∆(G) voisin à regarder où
+∆(G) est le degré maximal du graphe. Dans le pire des cas, on une complexité O(∆(G)|S|).
+
+A t’on un coloriage optimal avec cet algorithme ? Le résultat dépend généralement de
+l’ordre dans lequel on choisit les sommets et il est facile de trouver des exemples ou l’ordre
+donné ne donne pas un coloriage optimal. On peut jouer sur l’ordre des sommets choisis,
+par exemple les prendre dans l’ordre des degrés décroissants.
+
+IV.2.2 Algorithme de Welsh-Powell
+
+Il est possible d’améliorer cet algorithme en coloriant d’abord les sommets qui im-
+posent le plus de contraintes (sommet de plus haut degré) et en utilisant la couleur que
+l’on vient d’utiliser là ou cela est possible. On appèle ce principe l’algorithme de Welsh-
+Powell. Pour certaine classe de graphe cet algorithme donne même systématiquement le
+
+Chapitre IV. PROBLÈMES DE COLORIAGES
+
+36
+
+coloriage optimal.
+
+Algorithm 7: Algorithme de Welsh-Powell pour colorier un graphe
+Data: Un graphe G = (S, A)
+Result: Une coloration ϕ : S → N de G
+
+L ← liste des sommets ordonnés par degré décroissant ;
+couleur-courante ← 0;
+while L (cid:54)= ∅ do
+
+couleur-courante ← couleur-courante +1;
+Colorier s le premier sommet de L avec couleur-courante;
+Eliminer s de L;
+V ← voisins de s;
+for x ∈ L do
+if x /∈ V then
+
+Colorier x avec la couleur-courante;
+Eliminer x de L;
+Ajouter les voisins de x à V;
+
+Terminaison Il est clair que, puisque le nombre de sommets dans L (et donc non colo-
+riés) diminue d’au moins une unité à chaque fois que l’on exécute la boucle.
+
+Correction Cette algorithme fournit bien un coloriage de G, en effet chaque fois que l’on
+colorie un sommet, on place dans V les sommets voisins à ce sommet de telle sorte que
+l’on ne colorie plus de cette couleur les sommets de V. Ainsi deux sommets voisins sont
+de couleurs différentes.
+
+Complexité De manière grossière, on passe |S| fois dans la boucle while puis |S| fois
+dans la boucle for, on a donc une complexité grossière en O(|S|2). Cependant, on peut
+être plus précis. Dans la preuve de la proposition IV.2, on voit que l’on passe au maximum
+∆(G) + 1 fois dans la boucle while. On a donc une complexité en O(∆(G)|S|).
+Proposition IV.2
+
+Soit ∆(G) le degré maximal d’un graphe G, on a χ(G) ≤ ∆(G) + 1.
+
+Démonstration : Soit s le dernier sommet colorié par l’algorithme 6. Si s n’a pas été colorié
+avant, c’est que pour chacune des couleurs précédentes, un sommet adjacent à s a été
+colorié de cette couleur. Par suite, le nombre de couleurs utilisées avant de colorier s ne
+peut dépasser d(s). Ainsi, en tenant compte de la couleur de s, on déduit que le nombre
+total de couleurs utilisées par l’algorithme ne dépasse pas d(s) + 1.
+
+A t’on un coloriage optimal avec cet algorithme ? Là encore il existe des exemples ou
+cet algorithme n’est pas optimal même si dans la majorité des cas il donne un coloriage
+optimal.
+
+37
+
+IV.3. Cas des graphes planaires
+
+IV.2.3 Existe t’il un algorithme pour trouver le nombre chromatique d’un graphe ?
+
+On cherche un algorithme qui prend en argument un graphe G = (S, A) et renvoie
+le nombre chromatique de ce graphe. Pour cela on teste tous les 2-coloriages, il y en a
+2|S| s’il y a en a un valide, on a χ(G) = 2, sinon on teste tous les 3-coloriages et ainsi de
+suite. L’algorithme termine car il y a un coloriage à ∆(G) + 1 couleurs et il nous donne un
+coloriage optimal car on a essayer toutes les possibilités avec moins de couleurs.
+Cependant cet algorithme a une complexité en O((∆(G) + 1)|S|) dans le pire des cas,
+cette complexité est par exemple atteinte pour le graphe complet. Cette complexité est
+exponentielle en la taille du graphe et en pratique, pour des graphes un peu grand, il faut
+attendre des temps extrêmement long pour le voir terminer. On estime que les complexités
+qui permettent d’avoir un algorithme utilisable sont les complexité en O(nd) pour une
+valeur d donnée. Pour le problème du nombre chromatique on ne sait pas s’il existe un
+algorithme polynomial qui permet de le résoudre.
+
+Toutefois, il existe des classes de graphes pour lesquelles l’algorithme glouton (et donc
+de complexité polynomiale) donne même systématiquement le coloriage optimal. En TD
+on verra qu’un algorithme glouton avec un bon ordre sur les sommets donne un coloriage
+optimal pour les graphes d’intervalles.
+Remarque IV.1. En général on s’intéresse aux problèmes de décisions, par exemple :
+
+Problème 1 : Etant donné a, b, c ∈ Z, est ce que ax2 + bx + c = 0 admet une solution
+rélle ?
+Problème 2 : Etant donné un graphe G est ce que G admet un 3-coloriage ?
+
+problèmes suivant :
+
+On s’intéresse aux complexités qui résolvent ces problèmes, on déﬁnit les classes de
+— Classe P : classe de problèmes que l’on peut résoudre en temps polynomial (par
+exemple Problème 1) ;
+— Classe NP : classe de problèmes tel que si on donne une solution on peut vériﬁer
+que c’est bien une solution du problème (par exemple Problème 2) ;
+— Classe E xp : classe de problèmes que l’on peut résoudre en temps exponentiel.
+On a P ⊂ NP ⊂ E xp. On sait que P (cid:54)= E xp mais on ne sait pas si P = NP, c’est le
+problème ouvert de l’informatique théorique.
+Il existe une autre classe, la classe des problèmes NP-complet, ce sont les problèmes
+tels que si on les résout en temps polynomial, on résout tous les problèmes NP en temps
+polynomial. En particulier le problème de 3-coloriage est NP-complet.
+
+IV.3 Cas des graphes planaires
+
+Les graphes planaires sont une classe graphe avec des propriétés intéressantes du
+
+point de vu du coloriage.
+Déﬁnition IV.3 (Graphe planaire). Un graphe G = (S, A) est planaire s’il existe une repré-
+sentation dans le plan où les arêtes ne s’intersectent pas.
+Exemple IV.1. Le graphe suivant est planaire si on déplace les sommets
+
+G3
+
+Chapitre IV. PROBLÈMES DE COLORIAGES
+
+38
+
+Etant donné une représentation planaire d’un graphe, les arêtes délimitent des régions
+que l’on appellera face. La formule d’Euler, montré en 1758, relie le nombre de sommets,
+d’arêtes et de face.
+Théorème IV.3 Formule d’Euler
+
+Soit G un graphe planaire connexe dont une représentation planaire possède s
+
+sommets, a arêtes et f faces. On a
+
+s − a + f = 2.
+
+Si G possède k composantes connexes, on a alors
+
+s − a + f = 1 + k
+
+Démonstration : Soit G un graphe planaire connexe. D’après la propriété III.5, il sufﬁt de
+prouver que la formule est vraie pour les arbres et que la quantité s-a+f reste invariante
+par ajout d’une arête en restant planaire. On ramarque que si G est planaire tout graphe
+qui permet de construire G par ajout d’arête est lui-même planaire.
+Pour un arbre, s’il y a s sommets alors il y a a = s − 1 arêtes. De plus, la seule face est
+la face non bornée, puisque toute face bornée ferait apparaître un cycle. Donc f = 1 et on a
+s − a + f = s − (s − 1) + 1 = 2.
+Si la formule est vraie pour un graphe connexe planaire G(cid:48) qui admet s(cid:48) sommets, a(cid:48)
+arêtes et f (cid:48) faces, et que l’on ajoute une arête sans briser la planarité. Le nouveau graphe
+possède s = s(cid:48) sommets, a = a(cid:48) + 1 arêtes. De plus, la nouvelle arête partage une face
+en deux nouvelles faces (puisqu’elle ne traverse aucune autre arête, elle est entièrement
+contenue dans une des anciennes faces et comme G(cid:48) est connexe, aucune extrémité de
+cette arête n’est isolée). Le nouveau graphe a donc f = f (cid:48) + 1 faces. Ainsi s − a + f =
+s(cid:48) − (a(cid:48) + 1) + ( f (cid:48) + 1) = 2.
+
+Supposons maintenant que G ait k composantes connexes. Puisqu’elles sont deux à
+deux disjointes, on peut les représenter de sorte que chacune appartienne à la face non
+bornée de chacune des autres. On peut utiliser la formule précédente pour chacune des
+composantes connexes. En sommant toutes ces relations, la somme des nombres de som-
+mets (resp. d’arêtes) donne exactement le nombre total de sommets (resp. d’arêtes) de
+G, et la somme des faces donne exactement le nombre total de faces de G augmenté de
+k − 1 unités puisque la face non bornée a été comptée k fois en tout. On obtient donc
+s − a + f + (k − 1) = 2k, c’est à dire s − a + f = 1 + k.
+
+En TD on utilisera ce résultat pour montrer que K3,3 et K5 ne sont pas planaire. On
+
+peut aussi facilement montrer qu’un graphe planaire est 5-coloriable.
+
+En fait, le nombre de couleur maximal pour colorié un graphe planaire est 4. Ce théo-
+rème est connu comme l’un des premiers ou la preuve nécessite un ordinateur pour ex-
+plorer l’explosion combinatoire des différents cas de base.
+Théorème IV.4
+
+Tout graphe planaire est coloriable avec 4 couleurs, son nombre chromatique est
+
+donc inférieur ou égal à 4.
+
+ChapitreV
+
+Problèmes d’optimisation pour des graphes
+valués
+
+Dans cette section on considère un graphe G = (S, A) orienté ou non pour lequel
+chaque arête est attribué d’un certain poids λ : A → R appelé valuation. Etant donné un
+sous-graphe G(cid:48) = (S(cid:48), A(cid:48)) (S(cid:48) ⊂ S et A(cid:48) ⊂ A) on déﬁnit le poids du graphe G(cid:48)
+
+(cid:88)
+
+a∈A(cid:48)
+
+λ(G(cid:48)) =
+
+λ(a).
+
+Un graphe simple valué est donné par la matrice de poids W = (wi,j)(i,j)∈S2 tel que wi,j
+
+est la valeur de l’arc allant de i à j.
+
+On s’intéresse à différents problème d’optimisation qui consiste à chercher un sous
+
+graphe avec une certaine propriété qui minimise ou maximise son poids.
+
+V.1 Recherche d’arbre couvrant de poids maximal/minimal
+V.1.1 Problème
+
+Quand on travaille sur un graphe connexe, certains problèmes obligent à transfor-
+mer ce graphe en un arbre (graphe connexe sans cycle) qui contient tous les sommets du
+graphe et quelques arêtes. Un arbre couvrant d’un graphe non orienté G = (S, A) est un
+sous graphe de G dont les sommet sont S et qui est un arbre. On a vu que tout graphe
+admet un arbre couvrant (théorème III.5).
+Si G admet une valuation λ : A → R, parmi les arbres couvrant, il en existe un de
+poids minimal (resp. maximal). Les algorithmes de Prim et Kruskal permettent de trouver
+ces arbres.
+Exemple V.1. Un réseau maritime peut être modélisé par un graphe, chercher un arbre
+couvrant revient à le simpliﬁer au maximum. On peut alors s’intéresser à supprimer les
+liaisons maritimes les moins rentables en préservant l’accessibilité aux différents ports.
+
+On va considérer deux approches pour résoudre ce problème :
+— Approche locale : à chaque étapes, parmi les sommets connectés, on rajoute l’arête
+optimale qui relie un sommet déjà connecté à un sommet non connecté. On utilisera
+cette approche dans l’algorithme de Prim.
+
+Chapitre V. PROBLÈMES D’OPTIMISATION POUR DES GRAPHES VALUÉS
+
+40
+
+— Approche globale : on choisit l’arête optimale de façon que l’are rajouté ne relie
+pas des sommets déjà connectés. On utilisera cette approche dans l’algorithme de
+Kurskal.
+
+V.1.2 Algorithme de Prim
+
+Description de l’algorithme L’algorithme de Prim consiste à choisir arbitrairement un
+sommet et à faire croître un arbre à partir de ce sommet de telle sorte que chaque augmen-
+tation se fait en prenant l’arête de poids optimal (maximal ou minimal suivant le cas).
+
+Algorithm 8: Algorithme de Prim
+Data: Un graphe non orienté G = (S, A) valué par λ : A → R et un sommet s
+Result: Un arbre T = (S, A(cid:48))
+
+Poids← 0 (Poids total de l’arbre couvrant);
+A(cid:48) ← ∅;
+Marquer s;
+while il reste des sommets non marqués do
+
+a ← arête de poids minimal joignant un sommet marqué x et un sommet non
+marqué y;
+Marquer y;
+A(cid:48) ← A(cid:48) ∪ {a};
+Poids←Poids+λ(a);
+
+Terminaison Chaque fois que l’on passe dans la boucle on marque un sommet, l’algo-
+rithme s’arête quand on a marqué tous les sommets. Comme il y a un nombre ﬁni de
+sommet l’algorithme termine.
+
+Correction L’algorithme de Prim repose sur le résultat suivant :
+Proposition V.1
+
+Si on cherche un arbre à coût minimal contenant un sous-arbre G(cid:48) imposé, alors
+il existe parmi les solutions optimales contenant G(cid:48), une solution qui contient l’arête
+(ou une des arêtes) de coût minimal adjacente à G(cid:48) et ne formant pas de cycle avec G(cid:48)
+(c’est-à-dire une extrémité dans A et l’autre à l’extérieur de G(cid:48)).
+
+Démonstration : On va faire un raisonnement par l’absurde. Considérons un graphe G =
+(S, A) et considérons un sous-graphe G1 = (S1, A1) qui soit un arbre. Soit G2 = (S, A2) un
+arbre de recouvrement de G qui contient l’arbre G1, mais qui ne contient aucune des arêtes
+de coût minimal dont une de ses extrémités est dans S1 et l’autre extrémité dans S \ S1.
+Soit a une des arêtes de coût minimal entre S\ S1 et S1. Si on l’ajoute à l’arbre G2, on crée
+obligatoirement un cycle. Ce cycle contient exactement deux arêtes ayant une extrémité
+dans S \ S1 et une extrémité dans S1, a et une autre arête b. Si on enlève b, on casse ce cycle.
+On a donc un graphe sans cycle de n − 1 arêtes, c’est donc un arbre et comme le coût de a
+est strictement plus petit que celui de b, on a construit un arbre de recouvrement de poids
+strictement inférieur à celui de l’arbre minimal considéré qui n’était donc pas minimal.
+
+41
+
+V.1. Recherche d’arbre couvrant de poids maximal/minimal
+
+Complexité On passe |S| fois dans la boucle, et chaque fois que l’on passe dans la boucle,
+on teste au plus |A| arêtes. La complexité est donc O(|A||S|).
+
+Cette complexité est obtenue avec une représentation des graphes naïve, comme une
+simple liste d’adjacence et des recherches dans celle-ci. Cependant, la complexité de l’al-
+gorithme dépend fortement de la manière dont est implémenté le choix de l’arête/sommet
+à ajouter dans l’ensemble à chaque étape. Si l’on utilise un tas min binaire, la complexité
+devient alors O(|A| log|S|). En utilisant un tas de Fibonacci, on peut encore descendre à
+O(|A| + |S| log|S|).
+
+V.1.3 Algorithme de Kruskal
+
+Description de l’algorithme L’algorithme consiste à ranger par ordre de poids croissant
+ou décroissant les arêtes d’un graphe, puis à retirer une à une les arêtes selon cet ordre et
+à les ajouter à l’arbre couvrant cherché tant que cet ajout ne fait pas apparaître un cycle
+dans l’arbre couvrant.
+
+Algorithm 9: Algorithme de Kruskal
+
+Data: G = (S, A, λ) graphe valué
+Result: Un arbre T = (S, A(cid:48))
+
+Poids← 0 (Poids total de l’arbre couvrant);
+A(cid:48) ← ∅;
+for s ∈ S do
+for {s, s(cid:48)} ∈ A dans l’ordre croissant do
+
+E(s) ← {s} (E(s) : sommets reliés à s)
+if E(s) (cid:54)= E(s(cid:48)) then
+A(cid:48) ← A(cid:48) ∪ {s, s(cid:48)} Poids←Poids+λ({s, s(cid:48)});
+F ← E(s) ∪ E(s(cid:48));
+for z ∈ F do
+E(z) ← F;
+
+Terminaison Chaque fois que l’on passe dans la boucle on prend une nouvelle arête.
+Comme il y a un nombre ﬁni d’arêtes l’algorithme termine.
+
+Résultat sur lequel repose l’algorithme L’algorithme de Kruskal repose sur la proposi-
+tion suivante :
+Proposition V.2
+
+Parmi les arbres de recouvrement minimaux du graphe G = (S, A) pour lesquels
+le sous-ensemble d’arêtes A(cid:48) est imposé, il en existe au moins un qui contient une des
+plus petites arêtes de A \ A(cid:48) qui ne crée pas de cycle lorsqu’on l’ajoute à A(cid:48).
+
+Démonstration : Le théorème est évidemment vrai lorsque A(cid:48) est vide.
+
+Supposons maintenant que A(cid:48) soit non vide et contienne moins de n − 1 arêtes. On
+suppose que toutes des arêtes de coût minimal qui ne sont pas déjà dans A(cid:48) tout en ne
+créant pas de cycles avec A(cid:48) ne soit pas retenue.
+
+Chapitre V. PROBLÈMES D’OPTIMISATION POUR DES GRAPHES VALUÉS
+
+42
+
+Considérons un arbre de coût minimal T qui contient A(cid:48) et pas les arêtes refusées pré-
+cédemment. Soit a une des arêtes refusées précédemment. Si on l’ajoute à T, on crée un
+cycle. Comme a ne créait pas de cycle en l’ajoutant à A(cid:48). Obligatoirement, une des arêtes
+de ce cycle, adjacente à a, n’est pas dans A(cid:48) et a donc un coût strictement supérieur à a qui
+était une des arêtes de coût minimal. Soit b l’une des arêtes adjacente à a et ajoutée à A(cid:48)
+après avoir refusé a. En ôtant b de T et en ajoutant a, on supprime le cycle et on garde la
+connexité, ce qui nous fournit un arbre de coût strictement inférieur à l’arbre supposé de
+coût minimal.
+
+Complexité
+
+V.2 Problème de plus court chemin
+
+V.2.1 Position du problème
+
+Soient G = (S, A, λ) un graphe valué et s, s(cid:48) ∈ S deux sommets de G. On appelle
+distance de s à s’ et on note d(s, s(cid:48)) le minimum des valuations des chemins (resp. chaînes)
+allant de s à s(cid:48). On recherche plus court chemin (resp. plus courte chaîne) de s à s(cid:48).
+
+De nombreux problèmes concrets peuvent se modéliser comme des recherches de plus
+
+courts chemins dans des graphes valués. Par exemple :
+
+— recherche de l’itinéraire le plus rapide en voiture entre deux villes, ou en méro
+
+entre deux stations ;
+
+— routage dans des réseaux de télécommunications ;
+— certains problèmes d’ordonnancement font aussi appel à des recherches de plus
+
+longs chemins.
+
+On étudiera des algorithmes qui résolvent le problème suivant : étant donné un som-
+met s, déterminer pour chaque sommet s(cid:48) la distance et un plus court chemin de s à s(cid:48).
+Plusieurs cas se présentent :
+
+— il n’y a pas de chemins (chaînes) de s à s(cid:48) ;
+— il existe un ou plusieurs plus courts chemins (chaînes) de s à s(cid:48) ;
+— il existe des chemins (chaînes)de s à s(cid:48) mais pas de plus court (dans le cas où il y a
+
+un cycle négatif).
+
+Remarque V.1. Dans un graphe non orienté, on a toujours d(s, s(cid:48)) = d(s(cid:48), s), et toute plus
+courte chaîne de s à s(cid:48) parcourue à l’envers est une plus courte chaîne de s(cid:48) à s.
+
+Un circuit absorbant est un circuit de valuation négative.
+
+Proposition V.3
+
+Soit G un graphe orienté valué n’ayant pas de circuits absorbants, et s et s(cid:48) deux
+sommets de G. S’il existe un chemin allant de s à s(cid:48), alors la distance d(s, s(cid:48)) est bien
+déﬁnie et il existe au moins un plus court chemin de s à s(cid:48).
+
+On déﬁnit de la même manière un cycle absorbant dans un graphe non orienté. Le théo-
+rème reste vrai en remplaçant chemin par chaîne.
+
+Dans la suite, les graphes seront donc sans circuits absorbants.
+
+Proposition V.4
+
+Tout sous-chemin d’un plus court chemin est un plus court chemin.
+
+43
+
+V.2. Problème de plus court chemin
+
+Démonstration : Soit C0 = (s0, s1, s2, . . . , sn) un plus court chemin entre x0 et xn. Supposons
+qu’il existe C = (sp, sp+1, . . . , sq−1, sq) un sous-chemin de C0, avec 0 ≤ p ≤ q ≤ n qui n’est
+pas un plus court chemin entre sp et sq. Il existe un autre chemin C(cid:48) = (sp, s(cid:48)
+r−1, s(cid:48)
+entre sp et sq, et dont la longueur est strictement plus petite que celle de C. Or le chemin
+C1 = (s0, s1, . . . , sp−1, sp, sp, s(cid:48)
+r, sq, sq+1, . . . , sn), obtenu en remplaçant C par C(cid:48)
+dans C0, est alors strictement plus court que C0, ce qui est absurde.
+
+2, . . . , s(cid:48)
+
+1, s(cid:48)
+
+1, s(cid:48)
+
+2, . . . , s(cid:48)
+
+r, sq)
+
+Proposition V.5
+
+S’il existe un plus court chemin entre deux sommets s et s(cid:48), alors il existe un plus
+
+court chemin élémentaire entre s et s(cid:48).
+
+Démonstration : Soit C0 = (s0, s1, s2, . . . , sn) un plus court chemin entre x0 et xn. Si C0 n’est
+pas élémentaire, il existe deux indices p et q, 0 ≤ p < q ≤ n, tels que sp = sq. Le sous-
+chemin C1 = (sp, sp+1, . . . , sq−1, sq) est alors un circuit, et c’est aussi un plus court chemin
+d’après la propriété précedente. Il est donc au moins aussi court que le chemin trivial
+(sp), de valuation 0. Si la valuation de C1 est strictement négative, alors C1 est un circuit
+absorbant, et il n’existe pas de plus court chemin entre s = s0 et s(cid:48) = sn, ce qui est absurde.
+Si la valuation de C1 est nulle, le chemin C(cid:48)
+0 = (s0, s1, . . . , sp−1, sp, sq+1, sq+2, . . . , sn−1, sn) a
+la même longueur que C0, c’est donc encore un plus court chemin. On construit ainsi un
+plus court chemin élémentaire entre s et s(cid:48).
+
+Cette proposition implique que étant donné un sommet initial, les chemins optimaux
+
+pour aller de ce sommet à tous les autres peut être représenté par un arbre enraciné.
+
+V.2.2 Principe des algorithmes étudiés
+
+Les algorithmes étudiés prennent en entrée un graphe valué et renvoie tous les plus
+courts chemin allant d’un sommet initial s à tous les autres sommets. On stoque toute
+l’information dans deux listes de taille |S| :
+
+— Dist qui à la ﬁn de l’algorithme donne d(s, x) pour tout sommet x ∈ S ;
+— Pred qui à la ﬁn de l’algorithme donne le prédécesseur du sommet x ∈ S dans
+
+l’arbre des plus court chemin.
+
+Les trois algorithmes que nous allons étudier fonctionnent de la façon suivante :
+— on initialise les tableaux Dist et Pred
+— on calcule Dist(s) et Pred(s) par approximations successives, ce qui signiﬁe qu’à
+
+chaque étape, on essaye d’améliorer les valeurs obtenues précédemment ;
+— l’amélioration, au niveau local, se vériﬁe ainsi : pour un sommet s et un successeur
+s(cid:48) de s, on compare la valeur Dist(s(cid:48)) obtenue à l’étape précédente avec la valeur
+qu’on obtiendrait en passant par s, c’est-à-dire Dist(s) + W(s, s(cid:48)) on a alors deux
+cas :
+— si cette deuxième valeur est plus petite, alors Dist(s(cid:48)) ← Dist(s) + W(s, s(cid:48)) et
+
+Pred(s(cid:48)) ← s ;
+
+— sinon on ne fait rien.
+Cette technique est appelée technique du relâchement.
+
+V.2.3 Algorithme de Bellman-Ford-Kalaba
+
+Description de l’algorithme
+Exemple V.2. On cherche les distance depuis le sommet A.
+
+Chapitre V. PROBLÈMES D’OPTIMISATION POUR DES GRAPHES VALUÉS
+
+44
+
+Algorithm 10: Algorithme de Bellman-Ford
+Data: W matrice des distances d’un graphe orienté G = (S, A) et un sommet s
+Result: L’algorithme donne deux tableaux de taille 1 × |S| :
+
+— Dist : table des distance telle que Dist(s(cid:48)) est la distance de s à s(cid:48).
+— Pred : table des prédécesseurs telle que Dist(s(cid:48)) est le prédécesseur de s(cid:48) dans le
+
+chemin optimal depuis s.
+
+Pred tableau des prédécesseur initialisé à ∅;
+Dist tableau des distances initialisé à +∞;
+W matrice des poids des arcs;
+Dist(s) ← 0;
+k ← 1;
+while k ≤ n et il y’a eu des modiﬁcations à l’étape précédente do
+
+for x ∈ S do
+
+for y successeur de x do
+
+if Dist(x) + W(x, y) < Dist(y) then
+
+Dist(y) ← Dist(x) + W(x, y);
+Pred(y) ← x;
+
+k ← k + 1;
+
+A
+
+2
+
+8
+
+6
+
+B
+
+D
+
+-5
+
+2
+
+C
+
+7
+
+1
+
+E
+
+Dist(B)
+
++∞
+8
+8
+8
+8
+8
+8
+8
+8
+8
+
+Dist(C)
+
++∞
+6
+6
+6
+6
+3
+3
+3
+3
+3
+
+Dist(D)
+
++∞
+2
+2
+2
+2
+2
+2
+2
+2
+2
+
+Dist(E)
+
++∞
++∞
++∞
+7
+7
+7
+7
+4
+4
+4
+
+Pred(A)
+
+∅
+∅
+∅
+∅
+∅
+∅
+∅
+∅
+∅
+∅
+
+Pred(B)
+
+∅
+A
+A
+A
+A
+A
+A
+A
+A
+A
+
+Pred(C)
+
+∅
+A
+D
+D
+D
+C
+C
+C
+C
+C
+
+Pred(D)
+
+∅
+A
+A
+A
+A
+A
+A
+A
+A
+A
+
+Pred(E)
+
+∅
+∅
+∅
+C
+C
+C
+C
+C
+C
+C
+
+Itération
+
+Initialisation
+
+1
+1
+1
+1
+1
+2
+2
+2
+3
+
+sommets traités
+
+Dist(A)
+
+A
+D
+C
+E
+B
+
+A, D
+C
+E, B
+
+A, D, C, E, B
+
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+
+Terminaison On passe au plus |S| fois dans la boucle While.
+
+Correction On fait d’abord les remarques suivantes :
+
+— les valeurs de Dist(x) ne peuvent que diminuer au cours du déroulement de l’al-
+
+gorithme ;
+
+— à chaque étape de l’algorithme, pour tout sommet x, la valeur Dist(x) est soit +∞,
+— à chaque étape de l’algorithme Dist(x) ≥ d(s, x).
+
+soit égale à la longueur d’un chemin de s à x.
+
+45
+
+V.2. Problème de plus court chemin
+
+— quand Dist(x) atteins la valeur d(s, x), elle ne varie plus dans la suite de l’algo-
+
+rithme.
+
+Montrons par récurrence la propriété suivante : Pk : si un plus cout chemin élémentaire
+
+comporte k arc alors après k passages dans la boucle Dist(x) = d(s, x).
+
+— L’initialisation est claire car seul s peut être atteint avec 0 arcs.
+— On suppose la que Pk est vrai et soit x un sommet tel que le plus court chemin
+de s à x comporte au plus k + 1 arcs. Soit p un prédécesseur de x. Le plus court
+chemin reliant s à p comporte donc k arcs. Après k passages dans la boucle on a
+Dist(p) = d(s, p) d’après l’hypothèse de récurrence. Après le k-ième passage, on
+compare Dist(s) et Dist(p) + W(p, x) = d(s, p) + W(p, x) = d(s, x) et on affecte à
+Dist(s) la valeur d(s, x) si ce n’est pas le cas. Ceci prouve l’hypothèse de récurrence
+au rang k + 1.
+
+Complexité O(|S|3) étapes sont nécessaire dans le pire des cas.
+
+Remarques L’algorithme permet de détecter la présence de circuits absorbants : si les
+valeurs d(s) ne sont pas stabilisées après |S| passages de boucles, alors le graphe contient
+au moins un circuit absorbant.
+
+V.2.4 Algorithme de Bellman
+
+Si le graphe n’a pas de circuit, il est possible de renuméroter les sommets de façon à
+
+ne jamais revenir en arrière. Pour cela on réalise d’abord un tri topologique :
+
+Algorithm 11: Algorithme de tri
+Data: Un graphe orienté G = (S, A) valué par λ : A → R
+Result: Une numérotation des sommet r : S → N
+
+k ← 1;
+while k < n do
+r(x) ← k;
+
+k ← k + 1;
+
+for x ∈ S dont tous les prédécesseurs sont numéroté do
+
+L’algorithme de Bellman est un algorithme de type glouton, c’est-à-dire que, contrai-
+rement à l’algorithme de Bellman-Ford, il ne revient jamais en arrière. A chaque étape,
+on trouve un plus court chemin pour un nouveau sommet en se basant sur les prédéces-
+seurs qui sont déjà tous traités. Ceci est possible grâce à la possibilité d’effectuer un tri
+topologique. On obtient l’algorithme suivant :
+
+Exemple V.3. On cherche les distance depuis le sommet A.
+
+Chapitre V. PROBLÈMES D’OPTIMISATION POUR DES GRAPHES VALUÉS
+
+46
+
+Algorithm 12: Algorithme de Bellman
+
+Data: W matrice des distances d’un graphe orienté G = (S, A), sommet s, une
+Result: L’algorithme donne deux tableaux de taille 1 × |S| :
+
+fonction niveau r : S → N donné par l’algorithme de tri topologique.
+
+— Dist : table des distance telle que Dist(s(cid:48)) est la distance de s à s(cid:48).
+— Pred : table des prédécesseurs telle que Dist(s(cid:48)) est le prédécesseur de s(cid:48) dans le
+
+chemin optimal depuis s.
+
+Pred tableau des prédécesseur initialisé à ∅;
+Dist tableau des distances initialisé à +∞;
+W matrice des poids des arcs;
+Dist(s) ← 0;
+for k = r(s) + 1 jusqu’à max(r) do
+
+for y ∈ S tel que r(y) = k do
+for x prédecesseur de y do
+
+if Dist(x) + W(x, y) < Dist(y) then
+
+Dist(y) ← Dist(x) + W(x, y);
+Pred(y) ← x;
+
+B
+
+8
+
+6
+
+7
+
+1
+
+E
+
+D
+
+-5
+
+2
+
+A
+
+2
+
+On commence par ordonner les sommets
+
+8
+
+2
+
+A
+
+B
+
+D
+
+6
+
+-5
+
+2
+
+C
+
+7
+
+C
+
+E
+
+1
+
+Niveau
+
+Initialisation
+
+1
+2
+3
+
+Dist(A) Dist(B) Dist(C) Dist(D) Dist(E)
++∞
++∞
+∞
+4
+
++∞
+2
+2
+2
+
++∞
++∞
+3
+3
+
+0
+0
+0
+0
+
++∞
+8
+8
+8
+
+Pred(A)
+
+∅
+∅
+∅
+∅
+
+Pred(B)
+
+∅
+A
+A
+A
+
+Pred(C)
+
+∅
+∅
+B
+B
+
+Pred(D)
+
+∅
+A
+A
+A
+
+Pred(E)
+
+∅
+∅
+∅
+C
+
+V.2.5 Algorithme de Dijkstra-Moore
+
+Description de l’algorithme
+
+47
+
+V.2. Problème de plus court chemin
+
+Algorithm 13: Algorithme de Dijkstra-Moore
+Data: W matrice des distances d’un graphe orienté G = (S, A) et un sommet s
+Result: L’algorithme donne deux tableaux de taille 1 × |S| :
+
+— Dist : table des distance telle que Dist(s(cid:48)) est la distance de s à s(cid:48).
+— Pred : table des prédécesseurs telle que Dist(s(cid:48)) est le prédécesseur de s(cid:48) dans le
+
+chemin optimal depuis s.
+
+Pred tableau des prédécesseur initialisé à ∅;
+Dist tableau des distances initialisé à +∞;
+W matrice des poids des arcs;
+Dist(s) ← 0;
+D ← ∅ (listes des sommets déjà traités);
+while D (cid:54)= S do
+x ← sommet de S \ D tel que Dist(x) minimal;
+D ← {x} ∪ D;
+for y /∈ D et y successeur de x do
+
+if Dist(x) + W(x, y) < Dist(y) then
+
+Dist(y) ← Dist(x) + W(x, y);
+Pred(y) ← x;
+
+Exemple V.4. On cherche les distance depuis le sommet A.
+
+A
+
+1
+
+4
+
+6
+
+3
+
+1
+
+D
+
+1
+
+B
+
+1
+
+C
+
+x
+
+A
+D
+C
+B
+
+D
+∅
+{A}
+{A, D}
+{A, D, C}
+{A, D, C, B}
+
+0
+0
+0
+0
+0
+
++∞
+4
+4
+3
+3
+
++∞
+6
+2
+2
+2
+
++∞
+1
+1
+1
+1
+
+∅
+∅
+∅
+∅
+∅
+
+Dist(A) Dist(B) Dist(C) Dist(D)
+
+Pred(A) Pred(B) Pred(C) Pred(D)
+
+∅
+A
+A
+C
+C
+
+∅
+A
+D
+D
+D
+
+∅
+A
+A
+A
+A
+
+Terminaison On passe au plus |S| fois dans la boucle While.
+
+Correction La correction découle du résultat suivant :
+Proposition V.6
+
+Après chaque passage dans la boucle, les deux propriétés suivantes sont vériﬁées :
+— pour x ∈ D, Dist(x) = d(s, x) et le chemin le plus court de s à x reste dans D ;
+
+Chapitre V. PROBLÈMES D’OPTIMISATION POUR DES GRAPHES VALUÉS
+
+48
+
+— pour v /∈ D, Dist(x) ≥ d(s, x), et Dist(x) est la longueur du plus court chemin
+
+de u0 vers v dont tous les noeuds internes sont dans S.
+
+Démonstration :
+
+Complexité L’algorithme de Dijkstra sur un graphe se termine en un temps de l’ordre
+O(|S|2).
+
+V.2.6 Remarques
+
+Le tableau ci-dessous récapitule les graphes sur lesquels chaque algorithme peut s’ap-
+pliquer ainsi que leur complexité. On notera n le nombre de sommets et a le nombre d’arcs
+du graphe. La complexité de l’algorithme de Dijkstra peut être améliorée en choisissant
+une structure de données plus perfectionnée (ﬁle de Fibonacci).
+
+Algorithme
+Bellman-Ford
+
+Bellman
+Dijkstra
+
+Type de graphe
+
+tout type de graphe
+graphe sans circuit
+
+graphe de valuation positive
+
+Complexité
+
+O(n3)
+O(n2)
+O(n2)
+
+V.2.7 Ordonnancement et gestion de projet
+
+Les algorithmes de recherche de plus court chemin sont très utilisé dans l’ordonnan-
+
+cement
+
+Tâches Opérations et contraintes
+
+Durée en jour
+
+A
+B
+
+C
+
+D
+E
+
+Début du projet
+commence au plus tôt 7 jour après la ﬁn de la tâche A
+commence au plus tard 5 jour après le début de la tâche C
+commence au plus tôt 6 jour après le début de la tâche A
+commence au plus tôt 1 jour après la ﬁn de la tâche D
+commence au plus tôt 1 jour après la ﬁn de la tâche A
+commence après la ﬁn de la tâche C
+commence 4 jours après la ﬁn de la tâche B
+Fin du projet
+
+Si on traduit les contraintes sur un graphe, on obtient :
+
+1
+3
+
+1
+
+1
+0
+
+8
+
+2
+
+A
+
+B
+
+D
+
+6
+
+-5
+
+2
+
+7
+
+C
+
+E
+
+1
+
+Si on recherche l’ordonnancement au plus tôt, cela revient à chercher les chemins maxi-
+maux. On décompose en niveau et on utilise Bellmon simpliﬁé. Pour l’exemple on obtient :
+
+A B C D E
+Dist
+15
+0
+Pred ∅ A A A B
+
+8
+
+2
+
+6
+
+49
+
+V.3. Flots dans les transports
+
+Si l’on veut réaliser le projet en 17 jours au plus et que l’on cherche l’ordonnancement
+au plus tard on inverse les arêtes et on applique Bellman pour rechercher les chemins les
+plus longs (attention les niveaux peuvent changer).
+
+8
+
+2
+
+A
+
+B
+
+D
+
+6
+
+-5
+
+2
+
+7
+
+C
+
+E
+
+1
+
+A B C D E
+Dist
+0
+15
+Pred B E E C ∅
+
+7
+
+1
+
+3
+
+Ainsi la tâche A doit être faite dans [0, 2], la tâche B doit être faite dans [8, 10], la tâche
+C doit être faite dans [2, 16], la tâche D doit être faite dans [6, 15] et la tâche E doit être faite
+dans [15, 17].
+
+V.3 Flots dans les transports
+V.3.1 Position du problème
+
+Déﬁnition V.1. Un réseau de transport R = (S, A, s, p, c) est déﬁnit par :
+
+— un graphe orienté G = (S, A) sans circuit,
+— un sommet s ∈ S appelé source ;
+— un sommet p ∈ S appelé puits ;
+— une fonction capacité c : A →]0, +∞[ ;
+— il existe au moins un chemin de s à p.
+
+Ce type de graphe permet de modéliser de nombreuses situations :
+— Réseau routier ; les capacités représentent le nombre maximal de voitures par heure
+— Réseau de distribution d’eau, électricité, etc. ; les capacités représentent alors le
+
+débit maximal pouvant être fourni par chaque partie du réseau.
+
+Exemple V.5. Le graphe suivant est un réseau de transport :
+
+s
+
+[2]
+
+[1]
+
+b
+
+[1]
+
+a
+
+[2]
+
+[2]
+
+p
+
+Le problème qui nous intéresse est alors d’optimiser le parcours global du réseau en
+tenant compte des contraintes données par les capacités limitées de chaque partie du ré-
+seau.
+
+— pour tout arcs a ∈ A, f (a) ≤ c(a) ;
+— pour tout s ∈ S et x ∈ S \ {s, p}, on a
+(cid:125)
+f (z, x)
+
+z∈Pred(x)
+
+(cid:88)
+
+(cid:123)(cid:122)
+
+(cid:124)
+
+=
+
+(cid:124)
+
+y∈Succ(x)
+
+(cid:123)(cid:122)
+
+f (x, y)
+
+(cid:125)
+
+ﬂot entrant dans x
+
+ﬂot sortant de x
+
+On appelle valeur du ﬂot la quantité
+
+(cid:88)
+
+(cid:88)
+
+(cid:88)
+
+Chapitre V. PROBLÈMES D’OPTIMISATION POUR DES GRAPHES VALUÉS
+
+50
+
+Déﬁnition V.2. Soit un réseau de transport R = (S, A, s, p, c). Un ﬂot sur R est une fonction
+f : A → R+ telle que
+
+v( f ) =
+
+f (s, y) =
+
+f (z, p)
+
+y∈Succ(s)
+
+z∈Pred(p)
+
+Un arc a ∈ A est saturé par le ﬂot f si f (a) = c(a).
+
+Exemple V.6. On indique sur chaque arc la valeur du ﬂot à côté de la capacité. Le graphe
+ci-dessous représente un ﬂot f dans le réseau de transport de l’exemple précédent qui a
+pour valeur v( f ) = 2.
+
+b
+
+1[2]
+
+2[2]
+
+s
+
+1[1]
+
+p
+
+1[1]
+
+0[2]
+
+a
+
+V.3.2 Lemme de la coupe
+
+Déﬁnition V.3. Une coupe sur un réseau de transport R est un sous-ensemble X de S tel
+que s ∈ X et p /∈ X.
+de X à S \ X noté par
+
+On déﬁnit alors la capacité d’une coupe comme la somme des capacités des arcs allant
+
+(cid:88)
+
+C(X) =
+
+c(x, y)
+
+(x,y)∈A,x∈X,y∈X
+
+Exemple V.7. Les coupes possibles de l’exemple V.5 sont :
+
+X
+{s}
+{s, a}
+{s, b}
+{s, a, b}
+
+X
+{a, b, p}
+{b, p}
+{a, p}
+{p}
+
+C(X)
+
+3
+5
+3
+4
+
+Il est clair qu’un ﬂot ne pourra pas avoir une valeur supérieure à la capacité d’une
+coupe. La recherche d’une coupe de capacité la plus petite possible nous permettra donc
+de connaître les limites du réseau. La réciproque est vraie, on a le résultat suivant.
+Théorème V.7
+
+Soit R = (S, A, s, p, c) un réseau de transport, il existe un ﬂot maximal f tel que
+
+v( f ) = min
+coupe X
+
+C(X).
+
+51
+
+V.3. Flots dans les transports
+
+V.3.3 Algorithme de Ford-Fulkerson
+
+On peut alors se demander comment calculer concrètement un ﬂot de valeur maxi-
+male ainsi qu’une coupe de capacité minimale associée. L’idée est de considérer un che-
+min et d’augmenter progressivement les valeurs du ﬂots jusqu’à arriver à saturation. On
+continue ensuite sur les autres chemins.
+
+Déﬁnition V.4. Etant donné un réseau de transport R = (S, A, s, p, c) et un ﬂot f , un
+chemin γ de s à p est appelé chemin augmentant si pour tout arc a du chemin γ, on a
+f (a) < c(a). On peut alors augmenter le ﬂot sur ce chemin. On appelle valeur résiduelle
+d’un chemin γ de s à p le nombre r(γ) = mina∈γ{c(a) − f (a)}.
+
+On a alors l’algorithme de Ford-Fulkerson :
+
+Algorithm 14: Algorithme de Ford-Fulkerson
+
+Data: Un réseau de transport R = (S, A, s, p, c)
+Result: Un ﬂot maximal
+
+f ← ﬂot de départ (éventuellement nul);
+while il existe un chemin γ augmentant do
+
+augmenter f le long du chemin γ;
+
+Chapitre V. PROBLÈMES D’OPTIMISATION POUR DES GRAPHES VALUÉS
+
+52
+
+ChapitreVI
+
+Notion de théorie des langages
+
+VI.1 Notion de langage
+VI.1.1 Exemples de problèmes
+
+La notion de langage est utilisé pour modéliser différents problèmes où l’information
+
+est stoquer sous une forme de chaine de caractères. Voici quelques exemples :
+
+— Langage naturel : chaque mot est formé par un ensemble de lettre concaténé. L’en-
+semble des mots forme un dictionnairs. Puis ces mots sont organisé pour formé
+des phrases. Dans ce cas une structure apparaît qui est régit par la grammaire de
+la langue utilisé.
+
+— Stoquer de l’information sur un disque dur : Toutes information stoquer sur un
+disque dur est codé par une succession de bits (0 ou 1), que ce soit du texte, image,
+musique... On peut se demander s’il est possible de compresser cette information,
+c’est à dire trouver une fonction qui a un chaine de {0, 1} renvoie de manière bijec-
+tive une chaîne plus courte.
+
+— Recherche de chaîne de caractères dans un texte.
+— Compilation : Un programme est une suite de caractère. Un compilateur s’intéresse
+
+essentiellement aux deux choses suivantes :
+— Analyse lexicale : on cherche les éléments de bases qui structure le programme
+— Analyse syntaxique : vériﬁe que les expressions sont correctes (ex : var + var ∗
+
+(If, For, While, affectation...).
+var va être interprété comme var + (var ∗ var)).
+
+— Bio-informatique : L’ADN code l’information génétique à l’aide de 4 bases azotées :
+
+adénine (A), cytosine (C), guanine (G) ou thymine (T).
+
+VI.1.2 Mots sur un alphabet ﬁni
+
+Mots sur un alphabet ﬁni Soit Σ un alphabet ﬁni. Un mot est une suite ﬁni d’éléments de
+Σ on le note u = u1u2 . . . un et n est la longueur du mot u, noté |u|. Le mot vide est noté ε.
+
+On note Σ∗ l’ensemble des mots sur Σ et Σ+ l’ensemble des mots sans le mot vide.
+
+Opérations sur les mots Soient u et v deux mots de Σ∗, on déﬁnit la concaténation w =
+u.v comme le mot de longueur |u| + |v| tel que w = u1u2 . . . u|u|v1v2 . . . v|v|.
+
+Chapitre VI. NOTION DE THÉORIE DES LANGAGES
+
+54
+
+On dit que v est un préﬁxe de u s’il existe un mot w tel que u = v.w et v est un sufﬁxe
+
+de u s’il existe un mot w tel que u = w.v.
+
+Ordre sur les mots
+Il existe différentes notions pour ordonner les mots d’un langage. Le
+plus connu est certainement l’ordre lexicographique qui permet de faire un dictionnaire.
+
+Si on a un ordre ≤ sur Σ on déﬁnit l’ordre lexicographique sur Σ∗ par
+u ≤lex v ⇐⇒ (u préﬁxe de v) ou (∃m ∈ N tel que u1 . . . um = v1 . . . vm et um+1 ≤ vm+1)
+
+Distance sur les mots On peut déﬁnir différentes distances sur les mots. On s’intéressera
+ici à la distance édition déﬁnie comme étant le plus petit nombre d’opérations d’édition
+élémentaires nécessaires pour transformer le mot u en le mot v. Les opérations d’édition
+élémentaires sont la suppression ou l’insertion d’un symbole.
+
+De multiples variantes de cette notion de distance ont été proposées, qui utilisent des
+ensembles d’opérations différents et/ou considèrent des poids variables pour les diffé-
+rentes opérations. Pour prendre un exemple réel, si l’on souhaite réaliser une application
+qui « corrige » les fautes de frappe au clavier, il est utile de considérer des poids qui
+rendent d’autant plus proches des séquences qu’elles ne diffèrent que par des touches
+voisines sur le clavier, permettant d’intégrer une modélisation des confusions de touches
+les plus probables.
+
+L’utilitaire Unix diff implante une forme de calcul de distances. Cet utilitaire permet
+de comparer deux ﬁchiers et d’imprimer sur la sortie standard toutes les différences entre
+leurs contenus respectifs.
+
+VI.1.3 Langage
+
+Un langage L sur un alphabet ﬁni Σ est un ensemble de mots déﬁnis sur Σ autrement
+
+dit L ⊂ Σ∗.
+Exemple VI.1. Exemple d’un langage sur Σ = {0, 1} :
+
+— ∅ ;
+— {ε} ;
+— Σ∗ = {ε, 0, 1, 00, 01, 10, 11, 000, 001, . . .} ;
+— Σ+ = {0, 1, 00, 01, 10, 11, 000, 001, . . .} ;
+— tout ensemble ﬁni de mots ;
+— {0n : n ∈ N} ;
+— {0n : n ∈ N} ;
+— {0n1m : n, m ∈ N} ;
+— {0n1n : n ∈ N} ;
+— {0p : p ∈ N nombre premier} ;
+— {u ∈ Σ∗ : u est le codage en binaire d’un nombre premier} ;
+— {u ∈ Σ∗ : u est un palindrome} ;
+— {u ∈ Σ∗ : u est un code html certiﬁé} (cid:54)= {u ∈ Σ∗ : u est un code html bien interprété par Firefox} ;
+— {u ∈ Σ∗ : u est le codage en MP3 de votre chanson préférée} ;
+— {u ∈ Σ∗ : u est le codage en assembleur d’un programme qui s’arête sur l’entrée vide} ;
+— . . .
+
+Soient L, L1 et L2 des langages sur un alphabet ﬁni Σ. On peut déﬁnir différentes
+— Union : L1 ∪ L2 langage comportant des mots de L1 ou de L2 ;
+
+opérations sur les langages :
+
+55
+
+VI.2. Langage rationnel
+
+— Intersection : L1 ∩ L2 langage comportant des mots de L1 et de L2 ;
+— Compémentaire : L langage comportant des mots de Σ∗ qui ne sont pas dans L ;
+— Concaténation : L1.L2 langage comportant les mots formés en concaténant un mot
+
+L1 à un mot de L2
+
+L1.L2 = {u1.u2 : u1 ∈ L1 et u2 ∈ L2};
+
+— Puissance : On déﬁnit par récurrence la puissance nème de L, noté Ln par
+
+L0 = {ε} et Ln+1 = L.Ln.
+
+Attention, il ne faut pas confondre, on a Ln = {u ∈ Σ∗ :
+L tel que u = u1.u2.· · · .un} qui en général est différent de {un : n ∈ N}.
+(cid:91)
+
+— Fermeture de Kleene : On déﬁnit
+
+L∗ =
+
+Ln
+
+et
+
+il existe u1, u2, . . . , un ∈
+
+L+ =
+
+Ln.
+
+n>0
+
+(cid:91)
+
+n≥0
+
+VI.2 Langage rationnel
+
+Langage rationnel On déﬁnit les langages rationnels comme le plus petit ensemble de
+langages qui contient tout les singletons et clos par les opérations usuelles : union, inter-
+section et concaténation.
+
+Déﬁnition VI.1. Soit Σ un alphabet ﬁni. Les langages rationnels sont déﬁnis inductivement
+par :
+
+— ∅ et {ε} sont des langages rationnels ;
+— pour tout a ∈ Σ, {a} est un langage rationnel ;
+— si L1 et L2 sont des langages rationnels, alors L1 ∪ L2, L1.L2 et L∗
+langages rationnels.
+
+1 sont des
+
+Exemple VI.2. Voilà quelques exemples de langages rationnels :
+
+— tous les langages ﬁnis sont rationnels et en particulier Σ ;
+— Σ∗ est rationnel ;
+— Σ+ = Σ.Σ∗ ;
+— le langage des mots sur Σ = {0, 1} qui contient au moins une fois le mot 111 est
+rationnel car il s’écrit Σ∗.{111}.Σ∗ ;
+— le langage des mots sur Σ = {0, 1} qui contient un nombre pair de fois la lettre 1
+est rationnel car il s’écrit ({b}∗.{a}.{b}∗.{a}.{b}∗)∗ ;
+
+Expression rationnelle Les expressions rationnelles déﬁnissent un système de formules
+qui simpliﬁent et étendent ce type de notation des langages rationnels.
+
+Déﬁnition VI.2. Soit Σ un alphabet on déﬁnit de manière inductive les expressions ra-
+tionnelles :
+
+— ∅ et ε sont des expressions rationnelles ;
+— pour tout a ∈ Σ, a est une expression rationnelle ;
+— si e1 et e2 sont deux expressions rationnelles, alors e1 + e2, e1.e2 et e∗
+ment des expressions rationnelles.
+
+1 sont égale-
+
+Chapitre VI. NOTION DE THÉORIE DES LANGAGES
+
+56
+
+Tout langage rationnel peut être représenté par une expression rationnelle : ε dénote le
+langage {ε} et ∅ dénote le langage vide, a dénote le langage {a} pour a ∈ Σ, e1 + e2 (resp.
+e1.e2, e∗
+1) dénote l’union (resp. la concaténation, l’étoile) des langages dénotés par e1 et par
+e2.
+
+Une question naturelle est : Etant donné deux expressions rationnelles est ce que les
+
+deux langages associés sont identiques ?
+
+Application : Recherche de motifs dans un texte Les expressions rationnelles consti-
+tuent un outil pour décrire des langages simples (rationnels). Ces formules sont par exemple
+utilisé pour effectué des recherche des occurrence d’un motif. On notera deux applications
+concrètes notables :
+
+— Sous UNIX, il existe par exemple un utilitaire grep qui permet de rechercher les
+occurrences d’un motif dans un ﬁchier texte. La commande suivante imprime sur
+la sortie standard toutes les lignes du ﬁchier ‘cours.pdf’ contenant au moins une
+occurrence du mot graphe :
+> grep ’graphe’ cours.pdf
+Il est possible de faire des recherche de répétition (e+) ...
+
+— L’analyse lexicale se trouve tout au début de la chaîne de compilation. C’est la tâche
+consistant à décomposer une chaîne de caractères en lexèmes, qui vont ensuite être
+analysé par l’analyseur syntaxique qui va ensuite les interpréter.
+
+VI.3 Automates ﬁni
+VI.3.1 Déﬁnitions
+
+Les automates ﬁnis est un modèle qui permet de déﬁnir la notion de calcul de lan-
+gage simple. On les représente par un graphe orienté dont les arcs sont étiquetés par des
+symboles. On part d’un état initial et on parcoure le graphe telle sorte qu’on lise le mot.
+
+start
+
+q0
+
+j
+
+q1
+
+o
+
+q2
+
+u
+
+q3
+
+o
+
+e
+
+q4
+
+q5
+
+n
+
+n
+
+z
+
+s
+
+q6
+
+q7
+
+s
+
+t
+
+q8
+
+Déﬁnition VI.3. Un automate ﬁni A est déﬁnit par un un quintuplet (Σ, Q, i, F, ∆) où :
+
+— Σ est un alphabet ﬁni ;
+— Q est un ensemble d’états ;
+— i ∈ Q est l’état initial ;
+— F ⊂ Q est l’ensemble des états ﬁnaux ;
+— ∆ ⊂ Q × Σ × Q est l’ensemble des transition de A.
+
+Un automate ﬁni est complet si de tout état p et toute lettre a il existe une transition de
+
+la forme (p, a, q).
+
+On représente un automate ﬁni par un graphe dont les sommets sont les états et on a
+
+un arcs de l’état q1 à l’état q2 avec la valuation a ∈ Σ si (q1, a, q2) ∈ ∆.
+
+Quitte à avoir un état puits, il est possible de complété un automate ﬁni en rajoutant
+
+des transition vers cet état puits lorsqu’elle manque.
+
+57
+
+VI.3. Automates ﬁni
+
+Déﬁnition VI.4. Un mot u = u1 . . . un est reconnu par un automate A = (Σ, Q, q0, F, ∆) s’il
+existe une suite d’états q0, q1, . . . , qn tel que (qi−1, ui, qi) ∈ ∆ pour tout i ∈ [1, n]. Autrement
+dit s’il existe un chemin dans le graphe de l’état initial à l’état ﬁnal tel que les valuations
+correspondent au mot u.
+Déﬁnition VI.5. Etant donné un automate A = (Σ, Q, q0, F, ∆), on déﬁnit le langage re-
+connu par A, noté L(A), comme l’ensemble des mots reconnus par l’automate A.
+
+Un langage est régulier s’il existe un automate ﬁni qui le reconnaît.
+Exemple VI.3. Considérons l’automate suivant A = (Σ, Q, q0, F, ∆) où
+
+— Σ = {a, b} ;
+— Q = {q0, q1, q2} ;
+— F = {q2} ;
+— δ = {(q0, b, q0), (q0, a, q1), (q1, b, q1), (q1, a, q2), (q2, b, q2), (q2, a, q0)}.
+
+Sa représentation graphique est :
+
+b
+
+q0
+
+a
+
+start
+
+b
+
+q2
+
+a
+
+b
+
+q1
+
+a
+
+abaa, ab...
+
+Des exemples de mots reconnu : aa, abaabbaba... Des exemples de mots non reconnu ;
+En fait L(A) = {u ∈ Σ∗ : u contient 3n + 2 lettres a avec n ∈ N}.
+
+VI.3.2 Stabilité aux opérations usuelles
+
+Proposition VI.1
+
+Les langages suivants sont réguliers :
+— ∅ ;
+— {} ;
+— {a} pour a ∈ Σ ;
+— Σ∗.
+
+Démonstration : Les automates ﬁnis suivants reconnaissent les langages de la proposition :
+
+start
+
+q0
+
+start
+
+q0
+
+start
+
+q0
+
+a
+
+q1
+
+start
+
+a
+
+q0
+
+b
+
+Proposition VI.2
+
+L’union de deux langages réguliers est un langage régulier.
+
+Démonstration : Soient A1 = (Σ, Q1, i1, F1, ∆1) et A = (Σ, Q2, i2F2, ∆2) deux automates ﬁnis.
+Quitte à re-numéroter les états, on peut supposer que Q1 ∩ Q2 = ∅. On déﬁnit l’automate
+A = (Σ, Q, i, F, ∆) tel que :
+
+Chapitre VI. NOTION DE THÉORIE DES LANGAGES
+
+58
+
+— Q = Q1 ∪ Q2 ∪ {i} où i /∈ Q1 ∪ Q2 ;
+— F = F1 ∪ F2 ;
+— ∆ = ∆1 ∪ ∆2 ∪ {(i, a, q) ∈ Q × Σ × Q tel que (i1, a, q) ∈ ∆1 où (i2, a, q) ∈ ∆2}.
+Si u ∈ L(A) alors il existe un chemin dans A de i dans F. Si l’état ﬁnal est dans F1,
+il sufﬁt de remplacer l’état initial par i1 pour trouver un chemin de i1 à F1 dans A1 qui
+reconnait u. De même, si l’état ﬁnal est dans F2 on trouve un chemin dans A2 qui reconnait
+u. Ainsi L(A) ⊂ L(A1) ∪ L(A2).
+Réciproquement si u ∈ L(A1) on trouve un chemin de i1 à F1 dans A1 qui reconnait
+u. En remplaçant le premier état par i on a bien un chemin acceptant de u dans A d’ou
+L(A1) ⊂ L(A). De même si u ∈ L(A2). Ainsi L(A1) ∪ L(A2) ⊂ L(A).
+
+On en déduit que L(A1) ∪ L(A2) = L(A).
+
+Proposition VI.3
+
+L’intersection de deux langages réguliers est un langage régulier.
+
+Démonstration : Soient A1 = (Σ, Q1, i1, F1, ∆1) et A = (Σ, Q2, i2F2, ∆2) deux automates ﬁnis.
+Quitte à re-numéroter les états, on peut supposer que Q1 ∩ Q2 = ∅. On déﬁnit l’automate
+A = (Σ, Q, i, F, ∆) tel que :
+— Q = Q1 × Q2 ;
+— i = (i1, i2),
+— F = F1 × F2 ;
+— ∆ = {((p1, p2), a, (q1, q2)) ∈ Q × Σ × Q tel que ( p1, a, q2) ∈ ∆1 et (p2, a, q2) ∈ ∆2}
+
+On vériﬁe que L(A) = L(A1) ∩ L(A2)
+
+Proposition VI.4
+
+Le complémentaire d’un langage régulier est un langage régulier.
+
+Démonstration : Soit A = (Σ, Q, i, F, ∆) un automate ﬁni. D’abord on le complète à l’aide d’un
+état poubelle poub /∈ Q : pour tout état q ∈ Q et lettre a ∈ Σ, soit il existe une transition
+(q, a, q(cid:48)) ∈ ∆ soit on rajoute la transition (q, a, poub).
+
+Ensuite on déﬁnit l’automate A = (Σ, Q ∪ {poub}, i, (Q ∪ {poub}) \ F, ∆).
+Si u est reconnu par A alors il n’est pas reconnu par A et réciproquement s’il est re-
+
+connu par A alors il n’est pas reconnu par A.
+
+Proposition VI.5
+
+La concaténation de deux langages réguliers est un langage régulier.
+
+Démonstration : Soient A1 = (Σ, Q1, i1, F1, ∆1) et A = (Σ, Q2, i2F2, ∆2) deux automates ﬁnis.
+Quitte à re-numéroter les états, on peut supposer que Q1 ∩ Q2 = ∅. On déﬁnit l’automate
+A = (Σ, Q, i, F, ∆) tel que :
+— Q = Q1 ∪ Q2 ;
+— i = i1 ;
+— F = F1 ∪ F2 si i2 ∈ F2 ou bien F = F2 sinon ;
+— ∆ = ∆1 ∪ ∆2 ∪ {(p, a, q) ∈ Q × Σ × Q tel que p ∈ Q1 et (i2, a, q) ∈ ∆2}.
+On vériﬁe que L(A) = L(A1).L(A2).
+
+Proposition VI.6
+
+L’étoile d’un langage régulier est un langage régulier.
+
+Démonstration : Soit A = (Σ, Q, i, F, ∆) un automate. Soit q /∈ Q un nouvel état, on déﬁnit
+
+l’automate A∗ = (Σ, Q ∪ {i(cid:48)}, i(cid:48), F ∪ {i(cid:48)}, ∆(cid:48)) tel que i(cid:48) /∈ Q et
+
+∆(cid:48) = ∆ ∪ {(p, a, q) ∈ Q × Σ × Q tel que p ∈ F ∪ {i(cid:48)} et (i, a, q) ∈ ∆2}.
+
+59
+
+VI.3. Automates ﬁni
+
+On vériﬁe que L(A∗) = L(A)∗.
+
+Proposition VI.7
+
+La différence symétrique de deux langages réguliers est un langage régulier.
+
+Démonstration : En effet, si L1 et L2 sont régulier alors L1 \ L2 = L1 ∩ L2 est aussi régulier
+
+d’après les propriétés précédentes.
+
+VI.3.3 Théorème de Kleene
+
+Nous allons établir le lien entre langage régulier et langage rationnel.
+
+Théorème VI.8 Théorème de Kleene
+
+Un langage est régulier si et seulement s’il est rationnel.
+
+Démonstration : L’ensemble des langages réguliers contient les langages ∅, {ε} et {a} pour
+a ∈ Σ et qu’il est stable par union, concaténation et étoile. On en déduit que tout langage
+rationnel est régulier.
+
+Etant donné un langage reconnu par un automate A = (Σ, Q, q0, F, ∆), pour donner
+l’expression régulière correspondant au langage L(A) on cherche à éliminer pas à pas les
+sommets et les transitions suivant deux règles :
+
+1. supprimer les états intermédiaires :
+
+b
+
+qb
+
+a
+
+qa
+
+c
+
+qc
+
+(cid:55)−→
+
+qa
+
+2. supprimer les transitions multiples apparus après l’étape 1.
+
+qa
+
+a
+
+b
+
+qb
+
+(cid:55)−→
+
+qa
+
+ab∗c
+
+qb
+
+a|b
+
+qc
+
+qb
+
+L’algorithme consiste à supprimer des arcs aﬁn d’aboutir à un automate de la forme
+
+suivante dont l’expression régulière associée est a∗bc∗ :
+
+start
+
+qa
+
+a
+
+b
+
+qb
+
+c
+
+start
+
+qa
+
+(cid:55)−→
+
+a∗bc∗
+
+qb
+
+On prouve la correction de cet algorithme par récurrence.
+
+Exemple VI.4. Cherchons l’expression rationnelle associée à l’automate suivant
+
+Chapitre VI. NOTION DE THÉORIE DES LANGAGES
+
+60
+
+start
+
+b
+
+q0
+
+a
+
+b
+
+a
+
+a
+
+q1
+
+q2
+
+b
+
+start
+
+q0
+
+q1
+
+q2
+
+ba∗bb
+ab∗a
+
+q3
+
+b
+
+q4
+
+a
+
+q3
+
+q4
+
+a
+
+Corollaire VI.9
+
+q1
+
+ba∗b
+
+start
+
+q0
+
+a
+
+a
+
+q2
+
+b
+
+q3
+
+b
+
+q4
+
+a
+
+q3
+
+start
+
+q0
+
+q1
+
+q2
+
+ba∗bb | ab∗a
+
+q4
+
+a
+
+start
+
+q0
+
+a
+
+start
+
+q0
+
+q1
+
+q2
+
+b
+
+q1
+
+q2
+
+ba∗bb
+
+a
+
+q3
+
+q4
+
+a
+
+q3
+
+(ba∗bb | ab∗a)a∗
+
+q4
+
+L’ensemble des langages rationnels est stable par complémentaire, intersection,
+
+différence symétrique.
+
+VI.4 Comment montrer qu’un langage n’est pas rationnel ?
+
+Exemple VI.5. Considérons le langage L = {anbn} on peut se demander si ce langage est
+rationnel. Supposons qu’il le soit, il existe un automate A = (Σ, Q, i, F, ∆) qui le reconnait.
+Cet automate reconnait donc le mot a|Q|b|Q|. Lors de la lecture du mot a|Q| , on passe deux
+fois par le même état on a une boucle de longueur i ≥ 1, ainsi le mot a|Q|+ib|Q| est reconnu
+par l’automate mais n’est pas dans L.
+
+On utilise la stabilité de l’intersection et cet exemple pour montrer que le langage
+
+HTML certiﬁé n’est pas rationnel.
+
+On peut généraliser cet exemple avec le résultat suivant.
+
+Théorème VI.10 Lemme de pompage
+
+Soit L un langage rationnel. Il existe un entier k (le nombre d’état d’un automate
+qui reconnait L) tel que pour tout mot x ∈ L on a une factorisation x = uvw ou u,v et
+w sont des mots qui vériﬁent :
+
+— |v| ≥ 1,
+— |uv| ≤ k,
+— pour tout i ∈ N∗ on a uviw dans L.
+
+Démonstration : Soit A un automate ﬁni à k états reconnaissant L. S’il n’existe pas de mot de
+L de longueur supérieure ou égale à k, le résultat est immédiat. Sinon, soit x un mot de
+L, de longueur supérieure ou égale à k. La reconnaissance de x dans A correspond à une
+suite d’états q0 . . . q|x|. Comme A n’a que k états, le préﬁxe de longueur k de cette séquence
+
+61
+
+VI.5. Déterminisation, minimisation, epsilon transition
+
+contient nécessairement deux fois le même état q, aux indices i et j, avec 0 ≤ i < j ≤ k. Si
+l’on note u = x1 . . . xi et v = xi+1 . . . xj alors on a bien les deux première condition tu du
+théorème. Comme lors du calcul de x on est sur q au début de la lecture de v et on termine
+sur l’état q, ainsi en court-circuitant ou en itérant les parcours le long du circuit q . . . q on
+en déduit que le mot uviw est accepté par A.
+
+Exemple VI.6. On peut montrer avec ce lemme que les langages suivants ne sont pas ra-
+tionnels :
+— {uu tel que u ∈ Σ∗} = {u ∈ Σ∗ tel que u est un palindrome} où u est le mot
+miroir de u ;
+— {an : n premier} ;
+— {anbncn : n ∈ N} ;
+— . . .
+
+Si un langage est inﬁni, alors il contient des mots de longueur arbitrairement grande.
+Ce que dit ce lemme, c’est essentiellement que dès qu’un mot de L est assez long, il
+contient un facteur différent de  qui peut être itéré à volonté tout en restant dans L. En
+d’autres termes, les mots ‘’longs” de L sont construits par répétition d’un facteur s’insé-
+rant à l’intérieur de mots plus courts. Lorsque le langage n’est pas inﬁni, le lemme devient
+trivial car on peut choisir un k qui majore la longueur de tous les mots du langage. Avec
+le même type de raisonnement, on peut montrer a proposition suivante.
+Proposition VI.11
+
+Si A est un automate ﬁni contenant k états :
+— L(A) est non vide si et seulement si A reconnaît un mot de longueur stricte-
+— L(A) est inﬁni si et seulement si A reconnaît un mot u tel que k ≤ |u| < 2k.
+
+ment inférieure à k.
+
+On en déduit un algorithme pour savoir si un automate à k états reconnait l’ensemble
+vide, un lavage ﬁni ou un langage inﬁni.
+Pour savoir si deux automates A1 et A2 reconnaissent le même langage, il sufﬁt de
+construire l’automate qui reconnait L(A1)\L(A2) = (L(A1)∩L(A2))∪ (L(A1)∩L(A2))
+et de voir si cet automate reconnait le mot vide.
+
+VI.5 Déterminisation, minimisation, epsilon transition
+VI.5.1 D’autres modèles de calcul pour déﬁni les langages rationels
+
+On peut modiﬁer la déﬁnition d’automate ﬁni pour déﬁnir d’autre type de reconnais-
+
+sance
+Déﬁnition VI.6. Un automate ﬁni à ε-transition A est déﬁnit par un un quintuplet (Σ, Q, i, F, ∆)
+où :
+
+— Σ est un alphabet ﬁni ;
+— Q est un ensemble ﬁni d’états ;
+— i ∈ Q est l’état initial ;
+— F ⊂ Q est l’ensemble des états ﬁnaux ;
+— ∆ ⊂ Q × (Σ ∪ {ε}) × Q est l’ensemble des transition de A.
+
+Déﬁnition VI.7. Un automate ﬁni déterministe A = (Σ, Q, i, F, ∆) est un automate ﬁni tel
+que pour tout état p ∈ Q et tout lette a ∈ Σ, il existe au plus un état q tel que (p, a, q) ∈ ∆.
+On représente alors ∆ par une fonction δ : Q × Σ → Q.
+
+Chapitre VI. NOTION DE THÉORIE DES LANGAGES
+
+62
+
+Ainsi un automate ﬁni déterministe est déﬁnit par un un quintuplet (Σ, Q, i, F, δ) où :
+
+— Σ est un alphabet ﬁni ;
+— Q est un ensemble ﬁni d’états ;
+— i ∈ Q est l’état initial ;
+— F ⊂ Q est l’ensemble des états ﬁnaux ;
+— δ : Q × Σ −→ Q est la fonction de transition de A.
+
+On déﬁni la notion de langage reconnu de façon analogue au langage reconnu par un
+
+automate ﬁni non déterministe.
+Théorème VI.12
+
+Les langages reconnus par les automates déterministe ou les automates à ε-transition
+
+sont exactement les langages rationnels.
+
+VI.5.2 Déterminisation
+
+Soit A = (Σ, Q, i, F, ∆) un automate ﬁni, on déﬁnit det(A) = (Σ,P (Q),{i}, F(cid:48), δ) où
+— Σ est un alphabet ﬁni ;
+— P (Q) est l’ensemble des parties de Q ;
+— {i} est un élément de P (Q), c’est le singleton contenant l’état initial de A ;
+— F(cid:48) = {M ∈ P (Q) tel que M ∩ F (cid:54)= ∅} est l’ensemble des parties de Q qui contient
+— δ : P (Q) × Σ −→ P (Q) tel que pour M ∈ P (Q) et a ∈ Σ on pose
+
+au moins un état ﬁnal ;
+
+δ(M, a) = {q ∈ Q tel qu’il existe p ∈ M vériﬁant (p, a, q) ∈ ∆} ∈ P (Q),
+
+c’est la fonction de transition de det(A).
+
+Clairement det(A) est déterministe, nous allons montrer que L(A) = L(det(A)).
+
+VI.5.3 Automate minimal
+VI.6 Applications
+
+Il existe de nombreuses applications que l’on verra en TD :
+— recherche d’un motif dans un texte (adn, éditeur de texte. . . ) ;
+— analyse lexicale qui se trouve tout au début de la chaîne de compilation ;
+— linguistique ;
+— reconnaissance d’ensemble d’entiers ;
+— décidabilité de formule arithmétique (Presburger).
+
+VI.7 D’autres types de langages
+
+On a vu que tout les langages ne sont pas rationnels, dans cette section on va donner
+
+une ouverture sur les différents types de langages.
+
+VI.7.1 Langage décidable/indécidable
+
+Un langage L est décidable s’il existe un programme qui prend en entrée un mot u et
+renvoie 1 si u ∈ L et 0 sinon. En fait il existe des langages indécidables, c’est à dire qu’il
+n’existe pas de programmes qui décide si un mot est dans le langage ou non.
+
+63
+
+VI.7. D’autres types de langages
+
+Considérons le langage
+LTuring = {u ∈ Σ∗ : u est le code d’un programme qui s’arête sur l’entrée vide}.
+
+Supposons que ce langage est décidé par un programme SuperProg. Construisons le
+programme Bug de la manière suivante :
+
+(cid:40)1
+
+Bug(u) =
+
+boucle inﬁni
+
+si SuperProg(Bug) = 0
+sinon
+
+Que vaut Bug(∅) ?
+— si Bug(∅) s’arrête alors SuperProg(Bug) = 1 et on devrait avoir une boucle inﬁni,
+— sinon SuperProg(Bug) = 0 et Bug(∅) s’arrête sur l’entrée vide.
+De même on montre que
+L(cid:48)
+Turing = {u.v ∈ Σ∗ : u est le code d’un programme qui s’arête sur l’entrée v}
+
+est indécidable.
+
+VI.7.2 Grammaires
+
+Déﬁnition VI.8. Une grammaire formelle est constituée des quatre objets suivants :
+
+— un ensemble ﬁni de symboles V appelé vocabulaire formé de deux sous ensembles
+V = T ∪ N :
+— des symboles terminaux T = Σ ∪ {ε}, où Σ est l’alphabet du langage),
+— des symboles non-terminaux N (notés conventionnellement par des ma- jus-
+
+cules) ;
+
+— Un élément de l’ensemble des non-terminaux, appelé axiome, noté S0,
+— Un ensemble de règles de la forme α → β où α ∈ V∗NV∗ contient un non-
+terminal et β ∈ V∗ est une concaténation de terminaux et de non-terminaux.
+
+Le langage associé à une grammaire est l’ensemble des mots contenant uniquement
+des symboles terminaux obtenus en appliquant successivement les règles en partant de
+S0.
+Exemple VI.7.
+
+— Σ = {a, b} et N = {S0} on déﬁnit pour règle S0 → ε et S0 → aS0b.
+On obtient le langage {anbn : n ∈ N}.
+— Σ = {a, b} et N = {S0} on déﬁnit pour règle S0 → ε, S0 → aaS0 et S0 → bS0. On
+obtient le langage {u ∈ Σ∗ : tout block de a contient un nombre pair de a}.
+— Σ = {a, b} et N = {S0, S1} on déﬁnit pour règle S0 → ε, S0 → bS0, S1 → bS1,
+S0 → aS1 et S1 → aS0. On obtient le langage {u ∈ Σ∗ : u contient un nombre pair de a}.
+— Σ = {a, b, c} et N = {S0} on déﬁnit pour règle S0 → ε, S0 → aS0S1b, S1b → bS1,
+bS1 → c et cS1 → c. On obtient le langage {anbncn : n ∈ N}.
+A partir de là on peut déﬁnir la hiérarchie de Chomsky. Soit L un langage formel sur un
+alphabet Σ déﬁni par un vocabulaire V = N ∪ T où T = Σ ∪ {ε} et N = T. Suivant les
+propriétés des règles, L appartient à une des catégorie suivante :
+Langages de type 3 ou rationnel : Ce sont les langages dont la grammaire est linéaire à
+gauche (ou à droite). C’est à dire que les règles sont de la forme A → aB où A → a.
+Langage de type 2 ou langage algébriques : Ce sont les langages dont les règles sont de
+
+la forme A → aBb ou A → a avec A, B ∈ N et a, b ∈ T.
+
+Chapitre VI. NOTION DE THÉORIE DES LANGAGES
+
+64
+
+Langage de type 1 ou langage contextuels : Ce sont les langages dont les règles sont de
+
+la forme αAβ → αγβ avec A ∈ N et α, β, γ ∈ V avec β (cid:54)= ε.
+
+Langage de type 0 ou langage récursivement écumérable : Tous les langages décrient par
+
+une grammaire formelle.
+
+

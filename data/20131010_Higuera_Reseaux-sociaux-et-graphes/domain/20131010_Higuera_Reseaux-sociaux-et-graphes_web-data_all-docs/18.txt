@@ -1,0 +1,1406 @@
+http://cedric.cnam.fr/vertigo/Cours/RCP216/docs/RCP216-ReseauxSociaux1.pdf
+
+RCP216
+
+Fouille de graphes et réseaux sociaux
+
+Auteurs: Raphaël Fournier-S’niehotta, Michel Crucianu, Marin Ferecatu
+(fournier@cnam.fr, michel.crucianu@cnam.fr, marin.ferecatu@cnam.fr)
+
+Département d’informatique
+
+Conservatoire National des Arts & Métiers, Paris, France
+
+1 / 71
+
+Plan
+
+1 Introduction
+
+2 Mesure
+
+3 Modélisation
+
+4 Analyse
+
+5 Algorithmique
+
+6 Outils
+
+Plan du cours
+
+Introduction
+
+1 / 71
+
+1 Introduction
+
+Expérience de Milgram
+Exemples de réseaux/graphes
+Éléments de théorie des graphes
+Présentation du cours
+
+Expérience de Milgram (1967)
+
+Introduction
+
+Expérience de Milgram
+
+2 / 71
+
+Stanley Milgram (1933-1984), psychologue social américain. Connu
+notamment pour les expériences de soumission à l’autorité.
+
+Objectif de l’expérience : faire transiter une lettre de Omaha, NE à Boston, MA
+
+Règle :
+
+une personne initie la chaîne
+
+transition de la main à la main à des
+personnes que l’on connaît, chacune
+étant supposée se rapprocher de la
+destination
+
+Introduction
+
+Expérience de Milgram
+
+3 / 71
+
+Expérience de Milgram (1967)
+
+Résultats
+
+64 lettres sur 296 arrivent
+Chemins avec 5 intermédiaires en moyenne.
+
+Remarques :
+
+Chemin interrompu (cid:54)= Il n’existe pas de chemin.
+Chemin de longueur x (cid:54)= Il n’existe pas de chemin de longueur <x
+
+Conclusions :
+
+Il existe des chemins courts.
+Les intermédiaires arrivent à les trouver sans connaissance globale du réseau.
+
+Expérience de Milgram : modélisation
+
+Introduction
+
+Expérience de Milgram
+
+4 / 71
+
+Objectif : formaliser l’expérience de Milgram
+
+Travail de D. Watts/S. Strogatz, puis de J. Kleinberg
+
+Initialement une grille (amis proches).
+
+On ajoute q voisins quelconques à chaque sommet (amis lointains).
+
+Expérience de Milgram : modélisation
+
+Introduction
+
+Expérience de Milgram
+
+5 / 71
+
+Un sommet connaît :
+
+Sa position, celle de ses voisins, celle de la destination.
+Il envoie le message à son voisin le plus proche de la destination.
+
+Expérience de Milgram : modélisation
+
+Introduction
+
+Expérience de Milgram
+
+6 / 71
+
+Un seul lien supplémentaire pour chaque sommet u.
+
+La destination choisie avec une probabilité dépendant de sa distance à u.
+
+Dans la majorité des cas, pas de chemins courts
+
+Petits mondes
+
+Introduction
+
+Expérience de Milgram
+
+7 / 71
+
+On parle de “petit monde” si tous les individus d’un réseau peuvent être connectés
+par un chemin court
+
+Des chercheurs ont mis en évidence ce phénomène dans des réseaux de domaines
+très variés (neurones de C. elegans, électricité aux USA)
+
+modèle
+
+structure sous-jacente traduisant les liens entre la plupart des nœuds
+quelques liens aléatoires expliquent le diamètre faible
+spécialisation régionale avec transfert eﬃcace d’information entre zones
+
+Réseau personnel : LinkedIn Maps
+
+Introduction
+
+Exemples de réseaux/graphes
+
+8 / 71
+
+Réseau routier national
+
+Introduction
+
+Exemples de réseaux/graphes
+
+9 / 71
+
+Noeuds : les villes / communes
+Arêtes : (auto)routes
+Valuation possible : distance, ou temps de parcours
+Orientation possible
+
+Des questions :
+
+quel est le plus court chemin passant par des villes données ?
+
+quel chemin traverse le moins de villes pour aller d’un point à un autre ?
+
+peut-on passer par toutes les villes sans passer deux fois par la même route ?
+(voyageur de commerce)
+
+Individus : nombre d’Erdős
+
+Introduction
+
+Exemples de réseaux/graphes
+
+10 / 71
+
+Paul Erdős (1913-1996), mathématicien hongrois très prolifique et qui eut
+plus de 500 collaborateurs directs.
+
+Graphe de collaboration :
+
+Deux scientifiques sont connectés s’ils ont co-écrit un article
+Chaque scientifique à un nombre d’Erdős :
+
+0 = Erdős
+1 = collaborateurs d’Erdős
+2 = collaborateurs de collaborateurs d’Erdős
+
+Erdős Number project : http://www.oakland.edu/enp/
+
+Récupération de la liste des co-auteurs de tous les articles scientifiques
+
+Ensuite il ne reste qu’à faire des calculs de plus courts chemins d’Erdős vers les
+autres chercheurs.
+
+Individus : Kevin Bacon Game
+
+Introduction
+
+Exemples de réseaux/graphes
+
+11 / 71
+
+Kevin Bacon (1958–), acteur américain, qui a joué dans plus de 75 films.
+
+Graphe d’acteurs
+
+Deux acteurs sont reliés s’ils ont joué dans un même film.
+Distance entre acteurs ?
+
+http://oracleofbacon.org/
+Distance entre Tom Cruise et Clint Eastwood ? 2 (acteur commun entre Space Cowboys et
+Eyes Wide Shut)
+Distance entre Mickey Mouse et Omar Sy ? 4
+
+graphes produits à partir de http://www.imdb.com/interfaces
+
+calculs de plus courts chemins
+
+Individus : possesseurs de fichiers P2P
+
+Introduction
+
+Exemples de réseaux/graphes
+
+12 / 71
+
+Propagation d’un fichier d’utilisateurs en utilisateurs
+
+♠ video
+
+Problèmes et biais de mesure
+
+dynamicité du réseau
+parcours non exhaustif et depuis une source
+
+Individus : communications téléphoniques
+
+Introduction
+
+Exemples de réseaux/graphes
+
+13 / 71
+
+Suivi de communications :
+
+Date, heure, durée, type, correspondant
+Type d’appelant, mobilité, …
+http://senseable.mit.edu
+
+Autres types de réseaux étudiés
+
+Introduction
+
+Exemples de réseaux/graphes
+
+14 / 71
+
+informatique : pages Web, routeurs, P2P, etc.
+
+biologie : protéines, neurones cérébraux, etc.
+
+sciences sociales : amitiés, collaboration, contacts sexuels, etc.
+
+économie : échanges financiers
+
+histoire : mariages
+
+linguistique : synonymie, co-occurrence
+
+transports : réseau aérien, électrique
+
+Propriétés et problématiques communes
+
+Définitions
+
+Introduction
+
+Éléments de théorie des graphes
+
+15 / 71
+
+Un graphe est défini par un couple G = (V,E) tel que :
+
+V (pour l’anglais vertices) est un ensemble fini de sommets
+
+E (pour l’anglais edges) est un ensemble fini d’arêtes
+
+Un graphe peut être orienté, ou non :
+
+si oui, les couples (vi ,vj ) ∈ E sont ordonnés, vi est le sommet initial, vj est le
+sommet terminal.
+on appelle alors le couple (vi ,vj ) un arc, représenté graphiquement par vi → vj.
+
+si non, les couples ne sont pas orientés et (vi ,vj ) est équivalent à (vj ,vi ), et on
+l’appelle arête, représenté par vi −vj
+
+Terminologie
+
+Introduction
+
+Éléments de théorie des graphes
+
+16 / 71
+
+l’ordre d’un graphe, c’est son nombre de sommets (souvent désigné par n).
+une boucle est un arc/une arête reliant un sommet à lui-même
+un graphe dépourvu de boucle est dit élémentaire
+un graphe simple ne comporte pas de boucle et au plus une arête entre deux
+sommets
+un graphe partiel est le graphe obtenu en supprimant certains arcs ou arêtes
+un sous-graphe est le graphe obtenu en supprimant certains sommets et tous les
+arcs/arêtes incidents aux sommets supprimés.
+un sommet vi est dit adjacent à un autre s’il existe une arête entre eux (on parle de
+voisins).
+le degré d’un sommet est le nombre d’arêtes incidentes à ce sommet.
+un graphe est dit complet s’il comporte une arête (vi ,vj ) pour toute paire de
+sommets (vi ,vj ) ∈ E2.
+
+Objectifs
+
+Introduction
+
+Présentation du cours
+
+17 / 71
+
+Comprendre le comportement des entités
+
+qui interagissent dans le système étudié, et les lois qui les gouvernent
+
+On cherche donc :
+
+quelle est la structure des graphes
+quelle est l’évolution de cette structure
+quels sont les phénomènes reposant sur l’existence de ce réseau
+
+Graphes et fouille de données
+
+Introduction
+
+Présentation du cours
+
+18 / 71
+
+d’un point de vue Data Mining, un réseau social (graphe), c’est :
+
+un jeu de données souvent très hétérogène
+
+multirelationnel et de grande taille
+
+les noeuds (sommets) sont les objets
+
+les arêtes sont les relations
+
+nœuds et arêtes peuvent avoir des attributs, rendant complexe l’analyse
+
+Applications
+
+Introduction
+
+Présentation du cours
+
+19 / 71
+
+Informatique
+
+Réseaux : routage, protocoles, sécurité
+P2P : conception de systèmes, déviances
+Web : indexation, moteurs de recherche
+Dessin de graphes
+
+Sociologie :
+
+Diffusion d’innovations, rumeurs
+Identification de communautés
+
+Épidémiologie
+
+Diffusion de virus, vaccination
+
+Avantages
+
+Introduction
+
+Présentation du cours
+
+20 / 71
+
+Identification du rôle des individus :
+
+Leader
+Suiveur
+Intermédiaire
+
+Identification de l’importance d’un groupe en analysant :
+
+la taille
+la cohésion
+les profils
+les relations internes et externes
+
+Repérer les doublons (même réseau)
+
+Méthodologie
+
+Introduction
+
+Présentation du cours
+
+21 / 71
+
+Outils formels
+
+Théorie des graphes
+Analyse statistique
+Modélisation probabiliste
+
+Études expérimentales
+
+Simulation
+Utilisation de données réelles
+
+Étudier des applications
+
+Comprendre en profondeur certains réseaux
+Extraction de concepts généraux
+
+Ce cours
+
+Introduction
+
+Présentation du cours
+
+22 / 71
+
+Problématiques classées dans 4 grandes catégories :
+
+Mesure
+
+Comment mesurer les réseaux réels ?
+
+Modélisation
+
+A quoi ressemblent-ils ?
+Peut-on créer des réseaux artificiels similaires ?
+
+Analyse
+
+quelles sont leur propriétés ?
+
+Algorithmique
+
+Comment calculer sur de grands graphes ?
+
+Détection de communautés (clustering)
+
+Réputation, prédiction, innovations et leaders
+
+Plan du cours
+
+Mesure
+
+22 / 71
+
+2 Mesure
+
+Métrologie : exemple de l’Internet
+
+Métrologie
+
+Mesure
+
+23 / 71
+
+En général : impossibilité d’étudier l’objet réel, seulement une mesure
+
+Questions :
+
+qui a fait la mesure ?
+quelle proportion a été mesurée ?
+combien de temps la mesure a-t-elle duré ?
+quelles étaient les contraintes / biais ?
+la mesure peut-elle être reproduite ?
+
+Métrologie
+
+Mesure
+
+24 / 71
+
+Étude du biais introduit par l’observation
+
+Que dire de l’objet réel à partir de l’observation ?
+
+Nouveaux protocoles de mesures, etc.
+
+Évaluer la représentativité des “cartes”
+
+Une approche
+
+Mesure
+
+25 / 71
+
+On simule la mesure sur un graphe aléatoire
+
+Modélisation du processus de mesure :
+
+Internet : traceroute = chemins courts
+Web : crawl = parcours en largeur
+
+Modélisation du réseau :
+
+Graphes aléatoires
+Respect des degrés, du clustering, etc.
+
+Mesure de l’Internet
+
+Mesure
+
+26 / 71
+
+Processus de mesure par parcours en largeur depuis plusieurs sources
+
+Réseau : orienté, non connexe, dynamique
+
+Mesure de l’Internet
+
+Mesure
+
+26 / 71
+
+Processus de mesure par parcours en largeur depuis plusieurs sources
+
+Réseau : orienté, non connexe, dynamique
+
+Mesure de l’Internet
+
+Mesure
+
+26 / 71
+
+Processus de mesure par parcours en largeur depuis plusieurs sources
+
+Réseau : orienté, non connexe, dynamique
+
+Mesure
+
+27 / 71
+
+Mesure de réseaux sociaux
+
+Processus de mesure :
+Réseau égocentrés
+
+Listes de diffusion, communautés
+
+Réseau : orienté, non connexe, dynamique
+
+Mesure
+
+27 / 71
+
+Mesure de réseaux sociaux
+
+Processus de mesure :
+Réseau égocentrés
+
+Listes de diffusion, communautés
+
+Réseau : orienté, non connexe, dynamique
+
+Métrologie de l’Internet
+
+Mesure Métrologie : exemple de l’Internet
+
+28 / 71
+
+Processus de mesure :
+
+Traceroute, plus courts chemins de plusieurs sources vers plusieurs destinations
+
+Réseau : (non) orienté, pondéré (RTT,…)
+
+Métrologie de l’Internet
+
+Mesure Métrologie : exemple de l’Internet
+
+28 / 71
+
+Processus de mesure :
+
+Traceroute, plus courts chemins de plusieurs sources vers plusieurs destinations
+
+Réseau : (non) orienté, pondéré (RTT,…)
+
+Métrologie de l’Internet
+
+Mesure Métrologie : exemple de l’Internet
+
+28 / 71
+
+Processus de mesure :
+
+Traceroute, plus courts chemins de plusieurs sources vers plusieurs destinations
+
+Réseau : (non) orienté, pondéré (RTT,…)
+
+Questions
+
+Mesure Métrologie : exemple de l’Internet
+
+29 / 71
+
+Influence sur le résultat de :
+
+Nombre de sources et destinations
+Propriétés du réseau
+Localisation des sources et destinations
+
+Modélisation :
+
+Traceroute = plus courts chemins (un ou tous)
+Graphe = graphe aléatoire (modèle à choisir)
+
+Que voit-on ?
+
+Mesure Métrologie : exemple de l’Internet
+
+30 / 71
+
+D’une source vers tout le monde
+
+liens rouges découverts (sur plus courts chemins)
+on répète pour les autres destinations
+liens noirs invisibles
+
+Que voit-on ?
+
+Mesure Métrologie : exemple de l’Internet
+
+30 / 71
+
+D’une source vers tout le monde
+
+liens rouges découverts (sur plus courts chemins)
+on répète pour les autres destinations
+liens noirs invisibles
+
+Mesure Métrologie : exemple de l’Internet
+
+30 / 71
+
+Que voit-on ?
+
+D’une source vers tout le monde
+
+liens rouges découverts (sur plus courts chemins)
+on répète pour les autres destinations
+liens noirs invisibles
+
+Zones dures à mesurer
+
+Mesure Métrologie : exemple de l’Internet
+
+31 / 71
+
+Sommet de degré 1 : uniquement visible si source ou destination
+
+graphe complet : visiter tous les liens
+
+Mesure Métrologie : exemple de l’Internet
+
+32 / 71
+
+Distribution de degrés
+
+différences entre original et mesuré
+
+beaucoup de sommets de faible degré
+peu de sommets de fort degré
+
+mauvaise estimation de la propriété réelle
+
+Plan du cours
+
+Modélisation
+
+32 / 71
+
+3 Modélisation
+
+Qu’est-ce que la modélisation ?
+Application : robustesse
+
+Générer des graphes réalistes
+
+Modélisation
+
+Qu’est-ce que la modélisation ?
+
+33 / 71
+
+Est-ce que les propriétés observées sur les graphes réels sont “normales”
+
+On peut comparer avec un graphe aléatoire ayant certaines propriétés
+
+Simulation de phénomènes (attaques, diffusion, etc.)
+
+Évaluation de protocoles
+
+Compréhension
+
+Prévision
+
+Modélisation
+
+Qu’est-ce que la modélisation ?
+
+34 / 71
+
+Tout aléatoire
+
+Créer n sommets/nœuds
+
+Ajouter au hasard m liens (m <= n2)
+
+Propriété attendue
+
+Modélisation
+
+Qu’est-ce que la modélisation ?
+
+35 / 71
+
+Graphe aléatoire, n = m = 4950
+
+Graphe réel : clique de 100 sommets, autres nœuds de degré 0
+
+Probable ?
+
+n )n ∼ 0.14
+
+proba degré 0 : p = (1− 2
+on attend donc : n×p ∼ 683 sommets de degré 0
+graphe réel peu probable
+
+Propriétés observées
+
+Modélisation
+
+Qu’est-ce que la modélisation ?
+
+36 / 71
+
+densité fixée
+
+Connexité : composante géante de taille O(n)
+Distance moyenne, diamètre ∼ log(n)
+
+Distribution des degrés homogène
+
+Clustering proche de 0
+
+Pas de structure communautaire
+
+Basé sur la distribution de degrés
+
+Modélisation
+
+Qu’est-ce que la modélisation ?
+
+37 / 71
+
+Attachement préférentiel
+
+ajout de sommets un à un
+ajout de lien à des sommets déjà connectés
+
+Modèle configurationnel (configuration model)
+
+on prend n sommets
+on fixe le degré de chaque sommet
+on ajoute des liens au hasard en respectant les degrés
+
+ne génèrent pas de clustering
+
+Basé sur le Coefficient de clustering
+
+Modélisation
+
+Qu’est-ce que la modélisation ?
+
+38 / 71
+
+Mélanger un graphe très rigide :
+
+Donne du clustering et une distance moyenne courte
+Ne donne pas de degrés hétérogènes !
+
+Application : robustesse
+
+Modélisation
+
+Application : robustesse
+
+39 / 71
+
+Étude des phénomènes visant des sommets :
+Internet : pannes ou attaques sur routeurs.
+Réseaux sociaux : maladies, rumeurs, …
+Échanges d’e-mails : virus informatiques.
+
+Deux types d’atteintes
+Pannes : aléatoires.
+Attaques : ciblées.
+
+But : Comprendre ces phénomènes pour pouvoir :
+
+Prédire.
+Construire des stratégies d’attaque/défense.
+
+Modélisation
+
+Application : robustesse
+
+40 / 71
+
+Impact d’une panne/attaque
+
+Critères :
+
+Basés sur la distance.
+Tailles des composantes connexes.
+etc.
+
+Résultats
+
+Modélisation
+
+Application : robustesse
+
+41 / 71
+
+Suppression :
+
+Panne = aléatoire
+Attaque = ciblée (plus fort degré d’abord)
+
+Question : qui vacciner pour limiter une épidémie ?
+
+Analyse
+
+41 / 71
+
+Plan du cours
+
+4 Analyse
+
+Propriétés classiques
+Étude de cas
+
+Analyse ?
+
+Analyse
+
+Propriétés classiques
+
+42 / 71
+
+Objectifs de l’analyse (statistique) :
+
+Description (statistique)
+Obtenir de l’information pertinente
+Interprétation des résultats obtenus
+
+Comment ?
+
+Propriétés connues
+Définition de propriétés (statistiques) pertinentes
+Corrélations entre ces propriétés
+Comparaison avec des graphes aléatoires
+Observation de la croissance des graphes, etc.
+
+Propriétés classiques
+
+Analyse
+
+Propriétés classiques
+
+43 / 71
+
+Longueur des chemins : distance moyenne
+
+Propriétés classiques
+
+Analyse
+
+Propriétés classiques
+
+44 / 71
+
+Clustering
+
+densité de liens autour d’un nœud
+comparé à la densité globale
+
+c(i) = 2∗|(x,y)∈E ,x,y∈N(i)|
+
+ki (ki−1)
+
+(ou 0 si d(i) < 2))
+
+Propriétés classiques
+
+Analyse
+
+Propriétés classiques
+
+45 / 71
+
+Distribution de degrés
+
+Taille ou salaire des individus
+
+Pd ∼ e−λ· λd
+d!
+
+Pd ∼ d−α
+
+Propriétés classiques
+
+Analyse
+
+Propriétés classiques
+
+46 / 71
+
+Composantes connexes
+
+Ensemble maximal de sommets tel qu’il existe un chemin entre toute paire de sommets
+de l’ensemble
+Graphe connexe = une seule composante connexe
+
+Propriétés classiques
+
+Analyse
+
+Propriétés classiques
+
+47 / 71
+
+Communautés
+
+ensemble de nœuds très densément liés
+peu de connexion en dehors de l’ensemble
+
+Propriétés classiques
+
+Analyse
+
+Propriétés classiques
+
+48 / 71
+
+Autres propriétés
+
+Centralité
+degré
+intermédiarité : Nombre de plus courts chemins passant par un sommet.
+C(v) = ∑s(cid:54)=t(cid:54)=v∈V
+proximité : Inverse de la distance à tous les autres sommets C(x) =
+
+sst (v)
+sst
+
+1
+
+∑y d(y,x)
+
+Taille des cliques
+
+Propriétés des réseaux réels
+
+Analyse
+
+Propriétés classiques
+
+49 / 71
+
+faible densité
+
+fort clustering
+
+faible distance moyenne
+
+distribution de degré fortement hétérogène
+
+composante géante
+
+présence de communautés
+
+propriétés différentes de celles des graphes aléatoires
+
+Exemple d’analyse : réseau de contacts
+
+Analyse
+
+Étude de cas
+
+50 / 71
+
+Nombreux équipements avec capacités sans-fil :
+
+Ordinateurs, téléphones, PDA, GPS, cartes Navigo…
+Réseaux sans-fils de plus en plus omniprésents
+
+Contacts physiques ou virtuels permanents :
+
+Rencontres physiques, appels téléphoniques, envoi de mails…
+
+Objectifs :
+
+Tirer parti des contacts naturels des individus
+Transmission de l’information de proche en proche
+Réseau dynamique, non connexe : problèmes de routage …
+
+Proximité physique ou radio
+
+Analyse
+
+Étude de cas
+
+51 / 71
+
+Quels contacts entre individus ?
+
+Physique
+proximité géographique
+déplacements
+
+mesure de la mobilité
+
+suivi de déplacements
+géolocalisation : couteux, dur à mettre en œuvre
+équipement de chaque individu
+
+application informatique/télécom : déploiement de réseau dans des environnements
+“hostiles” (zones militaire, forêts)
+
+Étude de cas
+
+Analyse
+
+Étude de cas
+
+52 / 71
+
+Conférence INFOCOM 2005, dans un hôtel à Miami (USA)
+
+3 jours
+
+54 capteurs Bluetooth initialement (perte, pannes, 41 après)
+
+Fonctions :
+
+recherche de contact (5s)
+attente (110s env)
+pas de géolocalisation
+
+données
+
+ensemble de liens à chaque instant
+liens non symétriques
+http://plausible.lip6.fr
+
+Analyse
+
+Étude de cas
+
+53 / 71
+
+Étude de cas
+
+Effets sociologiques :
+
+jour/nuit, repas, pauses, etc.
+beaucoup de petites variations
+50% de sommets isolés
+max 34 sommets connectés
+
+Étude de cas
+
+Analyse
+
+Étude de cas
+
+54 / 71
+
+Durée de contacts
+
+Analyse
+
+Étude de cas
+
+55 / 71
+
+distribution en loi de puissance
+
+certains liens sont fréquents, d’autres pas
+
+liens non fréquents pour atteindre des zones spécifiques
+
+Composantes connexes
+
+Analyse
+
+Étude de cas
+
+56 / 71
+
+Composantes connexes
+
+Analyse
+
+Étude de cas
+
+57 / 71
+
+Petites composantes : densité variable.
+Grosse composantes : faible densité (max(nb_liens) ∼ 4.5×nb_sommets)
+
+Algorithmique
+
+57 / 71
+
+Plan du cours
+
+5 Algorithmique
+
+Algorithmique
+
+58 / 71
+
+Matrices de description des graphes
+
+Matrice d’adjacence : mij = 1 si l’arête (vi ,vj ) existe, 0 sinon.
+
+Matrice des degrés : mij = d(vj ) pour i = j, 0 sinon.
+
+Matrice de Laplace (ou “laplacienne”) : L = D - A (cf théorie spectrale)
+
+Représentation des graphes
+
+Algorithmique
+
+59 / 71
+
+Il y a deux représentations classiques possibles pour les graphes :
+
+liste d’adjacence (listes chaînées ou tableau de longueurs variables)
+
+eﬃcace pour énumérer les successeurs d’un nœud, beaucoup moins les prédecesseurs
+
+matrice d’adjacence
+
+attention au coût pour des graphes “creux”
+représentations optimisées dans les langages/frameworks modernes
+
+Besoin d’algorithmes spécifiques
+
+Algorithmique
+
+60 / 71
+
+Gros problème = taille :
+
+Internet = Millions de sommets (routeurs)
+Facebook = plus de 800 millions d’utilisateurs actifs
+Web = Google connaît plus de 1 000 milliards d’URL distinctes
+
+il est non trivial de
+
+stocker le graphe en mémoire
+faire des calculs sur le graphe
+
+Exemples
+
+Algorithmique
+
+61 / 71
+
+Compter les triangles d’un graphe (clustering) :
+
+naïvement O(n*n*n)
+O(m∗n(1/a)) si distribution des degrés en loi de puissance d’exposant a
+
+Diamètre :
+
+complexité théorique : O(nm)
+approximation en O(m)
+
+Problèmes NP-complets
+
+Beaucoup de problèmes spécifiques aux graphes réels (détection de communautés).
+Approximation (non prouvée) linéaire.
+
+Algorithmique
+
+62 / 71
+
+Parcours en profondeur
+
+En anglais, DFS, pour Depth First Search
+
+progresse à partir d’un sommet S en s’appelant récursivement pour chaque sommet
+voisin de S.
+
+pour chaque sommet, on prend le premier sommet voisin, on explore tous ses voisins
+(non marqués) avant de revenir au “père”
+
+Ordre de visite : A, B, D, F, E, C, G
+
+s’implémente avec une pile (LIFO)
+
+Parcours en largeur
+
+Algorithmique
+
+63 / 71
+
+En anglais, BFS, pour Breadth First Search
+
+pour chaque sommet, on repère tous ses voisins, on stocke ceux qui ne sont pas
+marqués dans une file (queue)
+
+Ordre de visite : A, B, C, E, D, F, G
+
+s’implémente avec une file (FIFO)
+
+on obtient les plus courts chemins à la racine
+
+Outils
+
+63 / 71
+
+Plan du cours
+
+6 Outils
+
+Frameworks et bibliothèques
+
+Outils
+
+64 / 71
+
+Pregel : Google, 2010. Passage de messages entre nœuds. Diverses implémentations
+sur Hadoop.
+
+GraphLab : projet de CMU, 2009. GraphX dans Spark
+
+Facebook : “Unicorn” (non public) ou Giraph ?
+
+Titan (HBase + Faunus) : Aurelius, 2013.
+
+Neo4j : base de données “graphe” open source.
+
+FlockDB (Twitter), AllegroGraph, GraphDB, …
+
+Outils
+
+65 / 71
+
+Logiciels
+
+Gephi
+
+Linkurious
+
+Tulip
+
+Guess
+
+Démarche sur un problème réel
+
+Outils
+
+66 / 71
+
+définir les sommets (page web, compte FB/TW, etc.)
+
+définir les arêtes (appels 5x/mois, 2x/mois ?)
+
+identifier les hubs (traiter séparément, enlever)
+
+identifier les mesures pertinentes (PageRank, degree, triangle, LCC)
+
+construire la source de données
+
+écrire le code de traitement
+
+analyser
+
+recommencer !
+
+GraphX
+
+Outils
+
+67 / 71
+
+librairie de Spark pour gérer les calculs sur les graphes
+
+en particulier, le parallèlisme
+
+introduit une abstraction Graph (au-dessus de RDD) :
+
+un multigraphe orienté, avec des propriétés attachées à chaque sommet et chaque arête
+facilite les cas où il y a plusieurs arêtes entre des noeuds
+
+https://spark.apache.org/docs/latest/graphx-programming-guide.html
+
+GraphX
+
+Outils
+
+68 / 71
+
+GraphX
+
+Outils
+
+69 / 71
+
+val sc: SparkContext
+// Create an RDD for the vertices
+val users: RDD[(VertexId, (String, String))] =
+
+sc.parallelize(Array((3L, (”rxin”, ”student”)), (7L, (”jgonzal”, ”postdoc”)),
+
+(5L, (”franklin”, ”prof”)), (2L, (”istoica”, ”prof”))))
+
+// Create an RDD for edges
+val relationships: RDD[Edge[String]] =
+
+sc.parallelize(Array(Edge(3L, 7L, ”collab”),
+
+Edge(2L, 5L, ”colleague”), Edge(5L, 7L, ”pi”)))
+
+Edge(5L, 3L, ”advisor”),
+// Define a default user in case there are relationship with missing user
+val defaultUser = (”John Doe”, ”Missing”)
+// Build the initial Graph
+val graph = Graph(users, relationships, defaultUser)
+
+GraphX : opérateurs
+
+Outils
+
+70 / 71
+
+val graph: Graph[(String, String), String]
+// Use the implicit GraphOps.inDegrees operator
+val inDegrees: VertexRDD[Int] = graph.inDegrees
+
+D’autres opérateurs :
+
+numEdges/numVertices
+
+collectNeighbors
+
+subgraph
+
+connectedComponents
+
+triangleCount
+
+Références
+
+Conclusion
+
+71 / 71
+
+Ce cours repose sur les travaux de :
+
+l’équipe ComplexNetworks du LIP6 (UPMC), http://www.complexnetworks.fr
+(membres passés et présents)
+en particulier les cours de Jean-Loup Guillaume (PR, U. de La Rochelle) et de
+Clémence Magnien
+le livre Mining Massive datasets (http://www.mmds.org), de Jure Leskovec, Anand
+Rajaraman, Jeff Ullman
+
+

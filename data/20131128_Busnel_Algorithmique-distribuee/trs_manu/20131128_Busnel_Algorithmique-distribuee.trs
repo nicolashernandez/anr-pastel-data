@@ -1,0 +1,2913 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Trans SYSTEM "trans-14.dtd">
+<Trans audio_filename="20131128" version="2" version_date="170609">
+<Speakers>
+<Speaker id="spk8" name="Yann Busnel" check="yes" type="male" dialect="native" accent="" scope="local"/>
+</Speakers>
+<Episode>
+<Section type="report" startTime="0" endTime="4589.824">
+<Turn startTime="0" endTime="1.520">
+<Sync time="0"/>
+
+</Turn>
+<Turn startTime="1.520" speaker="spk8" endTime="150.993" mode="planned" fidelity="high" channel="studio">
+<Sync time="1.520"/>
+alors je me présente, moi c'est yann busnel, je suis maître de conférences au département informatique et aujourd'hui, je vais vous parler
+<Sync time="6.843"/>
+d'algorithmique distribuée.
+<Sync time="8.359"/>
+alors qu'est-ce que c'est que l'algorithmique distribuée ?
+<Sync time="11.554"/>
+donc l'algorithmique, c'est bon, vous maîtrisez : vous voyez à peu près ce que c'est, depuis le début du semestre on en fait
+<Sync time="16.639"/>
+donc vous voyez
+<Sync time="18.200"/>
+tout ce qu'on peut faire avec un algorithme, *quelles sont les difficultés qui tournent autour d'un algorithme et cetera.
+<Sync time="24.710"/>
+et distribuée, ça veut dire quoi ?
+<Sync time="26.59"/>
+bah distribuée, ça veut dire en fait, si je regarde sur le dictionnaire du cnrtl, donc c'est le dictionnaire
+<Sync time="31.801"/>
+de la langue française du cnrs,
+<Sync time="33.770"/>
+ça me dit : répartir une ou plusieurs choses.
+<Sync time="36.693"/>
+c'est pour ça que dans la littérature, parfois vous verrez écrit "algorithmique répartie",
+<Sync time="41.212"/>
+distribuée étant un anglicisme.
+<Sync time="43.070"/>
+alors l'idée qu'il y a derrière le "distribuée", elle est très simple :
+<Sync time="46.26"/>
+c'est que votre algorithme, on peut voir les instructions comme des cartes
+<Sync time="50.380"/>
+et que vous parcourez votre paquet de cartes les unes à la suite des autres pour exécuter votre algorithme.
+<Sync time="55.732"/>
+donc ça, c'est ce qu'on appelle un algorithme centralisé classique.
+<Sync time="59.130"/>
+eh bien non
+<Sync time="60.458"/>
+l'idée du "distribuée", ça va être exactement comme quand vous jouez aux cartes, vous allez donner
+<Sync time="64.49"/>
+une partie
+<Sync time="65.838"/>
+de vos cartes à plusieurs joueurs.
+<Sync time="67.909"/>
+et chaque joueur va se charger donc d'exécuter
+<Sync time="71.222"/>
+un sous-ensemble d'instructions
+<Sync time="73.21"/>
+et du coup, s'ils font tous ça en parallèle, ça ira normalement plus vite.
+<Sync time="76.890"/>
+donc c'est l'idée qui se cache derrière.
+<Sync time="79.042"/>
+avant de commencer
+<Sync time="80.247"/>
+euh vraiment dans le vif du sujet, je voudrais vous raconter un peu la petite histoire de l'informatique
+<Sync time="85.406"/>
+*parce que je pense que vous en avez eu très peu depuis le début du semestre, et euh je trouve ça assez intéressant de voir euh
+<Sync time="90.076"/>
+d'où ça vient l'informatique et ce que c'est,
+<Sync time="92.123"/>
+et comment est-ce qu'on est arrivé à bah internet et le monde numérique de nos jours.
+<Sync time="96.111"/>
+puis on regardera un petit peu les définitions de distribuée, de répartition et autres,
+<Sync time="100.462"/>
+on regardera si ça existe vraiment dans la réalité ou si c'est juste un rêve de chercheurs,
+<Sync time="105.140"/>
+et puis on regardera après bah comment est-ce qu'on le modélise, comment est-ce qu'on le représente, comment est-ce que vous, vous allez pouvoir jouer avec finalement
+<Sync time="110.991"/>
+en algorithmique, et les différents problèmes qui y sont associés.
+<Sync time="114.356"/>
+donc petit rappel, vous avez l'habitude :
+<Sync time="116.840"/>
+le transparent de prise de notes,
+<Sync time="118.577"/>
+donc il sera représenté par ce joli crayon
+<Sync time="121.510"/>
+pour k() dire que c'est un transparent relativement
+<Sync time="123.95"/>
+intéressant, et surtout qui demande
+<Sync time="126.244"/>
+à être recopié parce que
+<Sync time="128.046"/>
+il fait passer une notion essentielle.
+<Sync time="131.143"/>
+alors d'après vous,
+<Sync time="132.433"/>
+quel est le
+<Sync time="133.930"/>
+la première machine à calculer ? donc je parle pas d'ordinateur, mais quelle est la première machine à calculer qui a existé ?
+<Sync time="145.042"/>
+la plus ancienne ?
+<Sync time="148.050"/>
+elle date de quel siècle alors ?
+</Turn>
+<Turn mode="spontaneous" fidelity="high" channel="studio" startTime="150.993" endTime="152.048">
+<Sync time="150.993"/>
+
+<Event desc="conv" type="noise" extent="instantaneous"/>
+
+</Turn>
+<Turn speaker="spk8" mode="spontaneous" fidelity="high" channel="studio" startTime="152.048" endTime="153.502">
+<Sync time="152.048"/>
+vingtième ? bien avant
+</Turn>
+<Turn mode="spontaneous" fidelity="high" startTime="153.502" endTime="154.699">
+<Sync time="153.502"/>
+
+<Event desc="conv" type="noise" extent="instantaneous"/>
+
+</Turn>
+<Turn startTime="154.699" speaker="spk8" endTime="868.37" mode="spontaneous" fidelity="high" channel="studio">
+<Sync time="154.699"/>
+je parle de la machine à calculer, hein.
+<Sync time="156.880"/>
+la première machine à calculer, elle date de seize cent
+<Sync time="159.93"/>
+quarante-deux.
+<Sync time="162.630"/>
+on l'appelle la pascaline ;
+<Sync time="164.680"/>
+inventée
+<Sync time="166.071"/>
+par blaise pascal,
+<Sync time="167.592"/>
+c'était une machine qui permettait de faire des calculs automatiquement
+<Sync time="171.237"/>
+sans être obligé de passer par un papier et un crayon ou par un boulier.
+<Sync time="175.808"/>
+il a fallu attendre deux cents ans pour qu'on perfectionne cette machine à calculer, pour que tout ce qui est industrie
+<Sync time="182.34"/>
+se développe
+<Sync time="183.72"/>
+et que on invente
+<Sync time="185.483"/>
+l'*arithmomètre.
+<Sync time="186.878"/>
+donc l'*arithmomètre, dix-huit cent vingt
+<Sync time="189.940"/>
+donc c'est un petit peu foncé, je suis désolé.
+<Sync time="192.446"/>
+l'idée de l'*arithmomètre, c'est que c'est le premier calculateur produit en masse. alors qu'est-ce que ça veut dire, en masse ?
+<Sync time="197.42"/>
+en masse, ça veut dire quelques centaines d'exemplaires, hein. *c'est-à-dire que c'était pas quelqu'un qui était dans son garage en train de tripatouiller une machine
+<Sync time="203.706"/>
+on a () on l'a produit,
+<Sync time="205.009"/>
+mais à quelques centaines d'exemplaires.
+<Sync time="208.592"/>
+à la suite de cet *arithmomètre, on a commencé à le grossir, à le développer pour pouvoir faire des calculs plus complexes
+<Sync time="214.036"/>
+et bah qui dit calculs plus complexes dit plus de rouages et donc dit
+<Sync time="218.077"/>
+la machine à calculer, qui s'appelle la machine 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+, dix ans plus tard
+<Sync time="221.699"/>
+construite quand même à cinquante mille exemplaires.
+<Sync time="224.666"/>
+cette machine à calculer
+<Sync time="226.149"/>
+pesait la () faisait la taille d'une armoire, quand même. vous pouvez voir que
+<Sync time="229.302"/>
+pour la faire fonctionner, il y avait un homme qui faisait fou() qui faisait tourner
+<Sync time="232.201"/>
+une manivelle qui enclenchait
+<Sync time="233.770"/>
+des rouages et qui faisait les calculs.
+<Sync time="235.468"/>
+donc on est quand même relativement loin d'un ordinateur.
+<Sync time="239.404"/>
+à la même période,
+<Sync time="241.173"/>
+dix-neuvième siècle, un siècle de beaucoup d'inventeurs,
+<Sync time="244.120"/>
+on a l'invention
+<Sync time="246.006"/>
+d'une autre révolution du numérique, qui est la téléphonie.
+<Sync time="249.454"/>
+je vous présente graham bell qui parle dans son premier prototype de téléphone
+<Sync time="253.383"/>
+dix-huit cent soixante-sept, donc milieu du dix-neuvième siècle. et quelques années plus tard,
+<Sync time="258.490"/>
+l'invention du télégraphe sans fil, en dix-huit cent quatre-vingt-seize.
+<Sync time="262.363"/>
+le télégraphe sans fil vous permettait de pouvoir communiquer à distance
+<Sync time="266.747"/>
+sans fil, comme son nom l'indique ; c'est l'ancêtre du wi-fi.
+<Sync time="270.763"/>
+mais on en est loin encore, hein
+<Sync time="272.610"/>
+il est apparu réellement que cent ans plus tard, le wi-fi
+<Sync time="275.622"/>
+et encore, à ses prémisses, enfin nai() dans les années quatre-vingt-dix.
+<Sync time="280.310"/>
+qu'est-ce qui, d'après vous, a révolutionné l'histoire de l'informatique ? *c'est-à-dire informatique, *c'est-à-dire je parle plus de machine à calculer, mais là je commence à parler de ordinateur.
+<Sync time="289.737"/>
+c'est quoi la révolution qui a fait qu'une machine à calculer est devenue un ordinateur ?
+<Sync time="296.328"/>
+nan, personne ?
+<Sync time="299.360"/>
+c'est ça :
+<Sync time="300.324"/>
+c'est le transistor.
+<Sync time="302.330"/>
+le transistor, c'est cette petite bébête électronique qui possède trois brins
+<Sync time="306.801"/>
+et qui permet de contrôler le passage
+<Sync time="309.28"/>
+d'un courant d'un brin à l'autre, en utilisant le troisième.
+<Sync time="312.762"/>
+donc c'est en fait une sorte d'interrupteur automatique
+<Sync time="315.323"/>
+qui vous permet donc de faire des calculs
+<Sync time="317.540"/>
+et qui évite tout ce qui est
+<Sync time="319.968"/>
+eh bien roue crantée, et cetera
+<Sync time="322.571"/>
+pour euh ajouter ou retirer
+<Sync time="325.089"/>
+des informations.
+<Sync time="326.354"/>
+donc l'intérêt, c'est que si on avait un zéro, on pouvait faire un un. *c'est-à-dire si on mai() si on fait passer du courant,
+<Sync time="330.932"/>
+on pouvait le recréer ou à l'inverse, on pouvait supprimer le courant
+<Sync time="334.560"/>
+qui venait sur un des brins,
+<Sync time="336.302"/>
+et donc on pouvait commencer à faire des portes logiques avec les avec les transistors ;
+<Sync time="340.453"/>
+on pouvait faire un "non" facilement,
+<Sync time="342.081"/>
+et puis on pouvait les enchaîner ensemble pour faire
+<Sync time="344.047"/>
+des "ou" ou des "et".
+<Sync time="345.751"/>
+alors
+<Sync time="346.641"/>
+en réalité, le brevet
+<Sync time="348.305"/>
+déposé date de dix-neuf cent vingt-six, *c'est-à-dire que l'invention date de dix-neuf cent vingt-six. le premier prototype, lui, date des années quarante
+<Sync time="354.960"/>
+et voici la tête qu'il avait dans son laboratoire,
+<Sync time="357.95"/>
+le premier transistor qu'ils ont réussi à faire fonctionner réellement
+<Sync time="361.538"/>
+donc euh
+<Sync time="362.593"/>
+on est très loin du tr() des milliards de transistors qu'on arrive à mettre sur des puces de silicium aujourd'hui dans tous vos téléphones portables et vos calculatrices.
+<Sync time="371.186"/>
+mais ça a donné naissance au tout premier ordinateur. le tout premier ordinateur il s'appelle eniac,
+<Sync time="376.244"/>
+il est américain
+<Sync time="378.780"/>
+et il fait en tout et pour tout soixante mètres cubes.
+<Sync time="382.250"/>
+donc un bel entrepôt. cent soixante-sept mètres carrés
+<Sync time="385.036"/>
+uniquement
+<Sync time="386.41"/>
+composé de relais
+<Sync time="387.989"/>
+et quelques transistors.
+<Sync time="390.375"/>
+il faut
+<Sync time="392.060"/>
+beaucoup de gens pour le faire fonctionner hein, comme on voit il y a beaucoup de gens qui s'affairent tout autour en règle générale euh
+<Sync time="396.838"/>
+une dizaine de personnes est toujours là pour euh
+<Sync time="399.009"/>
+pour faire fonctionner eniac.
+<Sync time="400.614"/>
+alors officiellement, sa naissance officielle est en dix-neuf cent quarante-six.
+<Sync time="405.520"/>
+en fait, il a été conçu pendant la guerre par l'armée américaine pour pouvoir
+<Sync time="411.254"/>
+calculer des trajectoires de tir optimales,
+<Sync time="414.420"/>
+chose qu'on pouvait pas faire sur papier. mais officiellement, eniac
+<Sync time="417.516"/>
+est réellement opérationnel
+<Sync time="419.478"/>
+qu'en février quarante-six, c'est-à-dire à la sortie de la guerre.
+<Sync time="423.090"/>
+officiellement, bien sûr.
+<Sync time="425.652"/>
+et puis, ben là tout s'accélère :
+<Sync time="427.870"/>
+après eniac, le premier ordinateur de grande série, mille cinq cents exemplaires. alors on voit assez mal :
+<Sync time="433.233"/>
+*il *faut *savoir que cet ordinateur, donc la dame est assise devant un lecteur de bande ;
+<Sync time="437.478"/>
+derrière, on a deux blocs armoires plus ce bloc ici qui est une imprimante
+<Sync time="442.120"/>
+mais une imprimante pas comme on l'imagine aujourd'hui :
+<Sync time="444.666"/>
+c'était une imprimante de bandes perforées
+<Sync time="446.628"/>
+avec () il y a un trou si c'est un un zéro, et il y a pas de trous si c'est un un
+<Sync time="450.767"/>
+et c'est comme ça qu'on codait et qu'on en() on arrivait. donc on avait des des piles de bandes perforées qu'on donnait à manger à l'ordinateur,
+<Sync time="457.358"/>
+il lisait les zéros et les uns sur les bandes perforées,
+<Sync time="459.843"/>
+et ensuite, il nous ressortait le résultat de notre calcul.
+<Sync time="464.391"/>
+il y avait pas d'écran, il y avait pas de clavier, il y avait rien de tout ça, hein.
+<Sync time="468.080"/>
+le côté euh utilisateur euh
+<Sync time="471.260"/>
+et euh et content avec son sa belle interface graphique, ça ça n'existait pas.
+<Sync time="474.643"/>
+donc cet ordinateur-là, vous avez quand même trois armoires, ça représentait une euh une masse conséquente
+<Sync time="479.005"/>
+mais on commence déjà à avoir une miniaturisation par rapport à eniac ;
+<Sync time="482.095"/>
+c'est seulement sept ans plus tard qu'eniac
+<Sync time="484.260"/>
+et on passe de soixante mètres cubes à trois armoires ; c'est pas mal.
+<Sync time="488.156"/>
+quelques années plus tard, en dix-neuf cent soixante et un, est arrivé le dec pdp un.
+<Sync time="493.378"/>
+c'est le premier mini-ordinateur. pourquoi mini ? parce qu'il tient dans une seule armoire
+<Sync time="498.320"/>
+*voyez ? juste derrière lui là, le monsieur il a qu'une seule armoire.
+<Sync time="502.372"/>
+et
+<Sync time="503.047"/>
+il a aussi une autre un autre aspect intéressant cet ordinateur, c'est ce que vous avez dans le dos
+<Sync time="507.746"/>
+de la personne :
+<Sync time="509.130"/>
+c'est pas un écran encore hein, c'est un oscilloscope
+<Sync time="512.286"/>
+mais ça vous permettait de récupérer des informations en direct, au même titre qu'un écran peut vous renvoyer de l'information.
+<Sync time="518.600"/>
+on n'a pas de clavier, hein. à côté c'est la machine à écrire, c'est pas un clavier, d'accord ? ça communique pas directement avec l'ordinateur.
+<Sync time="527.040"/>
+il faut savoir qu'à cette époque-là, quand vous receviez cet ordinateur-là, il arrivait en kit ;
+<Sync time="530.587"/>
+et il fallait être électronicien pour savoir le monter
+<Sync time="532.780"/>
+hein et pour savoir l'utiliser.
+<Sync time="534.542"/>
+donc le premier ordinateur tout monté, il date seulement de mille neuf cent soixante-douze.
+<Sync time="539.300"/>
+c'est le micral n. cocorico, un ordinateur français
+<Sync time="542.844"/>
+c'est le premier qui arrivait tout monté.
+<Sync time="544.890"/>
+alors il a il a bien marqué sa génération, parce que son interface utilisateur a été commune à beaucoup d'ordinateurs de l'époque
+<Sync time="552.195"/>
+c'est-à-dire que vous pouvez voir ici
+<Sync time="555.680"/>
+huit séries d'interrupteurs.
+<Sync time="557.852"/>
+ces interrupteurs, c'est on off
+<Sync time="559.940"/>
+ou un zéro.
+<Sync time="561.630"/>
+vous rentriez les informations octet par octet
+<Sync time="564.35"/>
+donc vous mettiez une série de zéros et de () de huit zéros et de uns, et puis vous validiez ;
+<Sync time="568.92"/>
+l'octet. puis vous recommenciez et vous validiez l'octet ; et vous recommenciez ça
+<Sync time="573.510"/>
+itérativement jusqu'à ce que vous ayez rentré toutes vos données et *tout votre programme.
+<Sync time="577.492"/>
+vous faisiez une erreur : on recommence tout à zéro.
+<Sync time="581.936"/>
+c'était pas super pratique.
+<Sync time="587.519"/>
+après, quelques années plus tard, seulement deux ans plus tard est arrivé selbi
+<Event desc="?" type="lexical" extent="previous"/>
+
+<Sync time="590.902"/>
+alors selbi
+<Event desc="?" type="lexical" extent="previous"/>
+, c'est le premier micro-ordinateur. c'est-à-dire, c'est sur le pro() c'est sur cet ordinateur-là qu'on a réussi à faire tenir
+<Sync time="597.191"/>
+des transistors sur des puces de silicium,
+<Sync time="599.647"/>
+et donc on a réussi à avoir des processeurs. alors c'est dommage c'est très foncé,
+<Sync time="603.601"/>
+parce que normalement on voit les puces euh les puces sur euh sur cette image, là vous voyez pas grand-chose.
+<Sync time="609.158"/>
+et donc cet cet euh cet ordinateur-là, il s'appelle selbi
+<Event desc="?" type="lexical" extent="previous"/>
+ pourquoi ? parce que selbi
+<Event desc="?" type="lexical" extent="previous"/>
+, c'est 
+<Event desc="en" type="language" extent="begin"/>
+scientific electronic and biological
+<Event desc="en" type="language" extent="end"/>
+
+<Sync time="616.116"/>
+*c'est-à-dire que on était rendu au niveau biologique de euh de l'ordinateur tellement c'était
+<Sync time="621.490"/>
+minuscule, microscopique et et réduit euh
+<Sync time="624.377"/>
+réduit à un simple euh à des simples 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ des simples plus.
+<Sync time="627.865"/>
+ce qu'on peut voir, c'est que le l'interface utilisateur ici, c'est toujours
+<Sync time="631.247"/>
+*huit interrupteurs, hein. toujours () on rentre toujours les octets un par un.
+<Sync time="638.328"/>
+à l'époque,
+<Sync time="640.010"/>
+une entreprise que vous connaissez bien, qui qui marchait déjà,
+<Sync time="642.962"/>
+ibm a sorti le premier ordinateur portable.
+<Sync time="646.2"/>
+enfin quand je dis portable, c'est plutôt portatif : il faisait vingt-cinq kilos.
+<Sync time="650.025"/>
+c'était euh c'était déjà une belle bête
+<Sync time="652.081"/>
+mais ce qui est intéressant *sur cet ordinateur, c'est qu'on commence à avoir un petit peu toutes les interfaces d'un ordinateur moderne.
+<Sync time="657.020"/>
+c'est-à-dire que vous aviez un lecteur de bande, qui vous permettait
+<Sync time="660.812"/>
+d'éviter de retaper votre programme à chaque fois, ça permettait de sauvegarder votre travail
+<Sync time="664.609"/>
+et vous aviez ici un écran.
+<Sync time="667.017"/>
+alors cet écran, c'était juste euh un écran euh quatre-vingts lignes sur douze hein euh juste des caractères
+<Sync time="671.83"/>
+écrits en vert sur fond noir, comme vous pouvez voir dans euh
+<Sync time="674.515"/>
+dans matrix ou autre, par exemple.
+<Sync time="676.896"/>
+il y avait rien d'autre, il y avait pas d'interface utilisateur, il y avait il y avait il y avait rien du tout, hein.
+<Sync time="681.056"/>
+on était vraiment quand même sur le sur le début
+<Sync time="683.847"/>
+des euh
+<Sync time="685.178"/>
+de l'interaction homme machine.
+<Sync time="687.941"/>
+dans un même temps, il y a deux personnes qui ont quitté ibm
+<Sync time="690.927"/>
+à cette époque-là ; ces deux personnes sont très connues pour leurs travaux futurs
+<Sync time="694.820"/>
+elles ont travaillé ensemble dans un garage et puis elles se sont séparées aussi pour monter chacune leur entreprise
+<Sync time="699.592"/>
+il y a une de ces personnes qui est morte il y a quelques il y a quelques années, qui s'appelle steve jobs.
+<Sync time="704.113"/>
+vous avez dû connaître ? le fondateur d'apple.
+<Sync time="706.243"/>
+eh bien c'est à cette époque-là qu'il a qu'il a créé son premier ordinateur
+<Sync time="710.070"/>
+premier le pr() l'apple one.
+<Sync time="712.283"/>
+l'apple one, déjà orienté sur le design : tout en bois.
+<Sync time="717.232"/>
+avec, ici, une possibilité de rajouter un écran
+<Sync time="721.079"/>
+pour pouvoir converser avec votre ordinateur.
+<Sync time="724.261"/>
+donc l'apple one, mille neuf cent soixante-seize.
+<Sync time="727.967"/>
+et puis après
+<Sync time="730.970"/>
+on avait tout ce qu'il fallait pour faire des ordinateurs modernes ; la seule chose qui manquait
+<Sync time="735.770"/>
+c'était ben cette course à la performance. donc ce qu'on a fait, c'est que on a continué
+<Sync time="739.628"/>
+à miniaturiser tout ça, pour faire tenir ça dans un pc. et dans les années quatre-vingts,
+<Sync time="744.28"/>
+apparition, démocratisation du pc.
+<Sync time="746.452"/>
+vous avez dû voir ce type de pc dans vos euh
+<Sync time="748.808"/>
+dans vos cdi, j'imagine, quand vous étiez euh au collège ou au lycée. parce que dans les cdi, on
+<Sync time="753.073"/>
+on met rarement à jour les machines.
+<Sync time="756.100"/>
+alors ces machines-là, il y avait toujours pas d'interface
+<Sync time="759.498"/>
+graphique hein, on était toujours sur des caractères écrits en vert sur fond noir
+<Sync time="763.645"/>
+on avait toujours le clavier, les lecteurs de disquette donc on était sur un format classique
+<Sync time="768.213"/>
+mais ce qui a vraiment transformé
+<Sync time="770.539"/>
+la façon dont on va utiliser les ordinateurs, c'est c'est ce que vous voyez ici. alors vous le voyez mal,
+<Sync time="775.380"/>
+c'est ce qu'on appelle le système de pointage, la souris.
+<Sync time="778.485"/>
+la souris n'est apparue sur les ordinateurs qu'à la fin des années quatre-vingts en fait. avant il y avait pas de souris, tout était sur clavier et c'était uniquement
+<Sync time="785.266"/>
+des euh uniquement des des caractères.
+<Sync time="789.296"/>
+et donc
+<Sync time="790.651"/>
+tous les systèmes de pointage sont apparus avec leurs utilisations euh propres
+<Sync time="794.872"/>
+donc chez apple, on avait déjà les premiers euh
+<Sync time="797.267"/>
+on avait déjà les premières versions de euh de mac os.
+<Sync time="800.790"/>
+euh chez euh chez windows chez microsoft, on venait de sortir windows trois
+<Sync time="805.068"/>
+qui était euh une révolution parce que () avec l'utilisation de fenêtres et cetera.
+<Sync time="810.062"/>
+dans les années quatre-vingt-dix, il y a pas eu de révolution en soi
+<Sync time="813.7"/>
+en termes de euh de puissance de l'ordinateur,
+<Sync time="816.763"/>
+mais il y a eu une amélioration des performances, une miniaturisation : toujours plus petit, toujours plus de transistors sur les puces de silicium,
+<Sync time="822.930"/>
+des ordinateurs de plus en plus puissants, de plus en plus rapides.
+<Sync time="826.186"/>
+alors bon, on avait toutes sortes d'ordinateurs donc des ordinateurs classiques avec effectivement la souris et des interfaces graphiques
+<Sync time="831.800"/>
+fin des années quatre-vingt-dix, début des années () fin des années quatre-vingts, début des années quatre-vingt-dix ;
+<Sync time="836.584"/>
+des tours qu'on reconnaît maintenant, qui pourraient () qui sont () qui pourraient être toujours vendues même si elles manquent un peu de design
+<Sync time="841.800"/>
+apple avec son mac g3 qui était aussi tout en plastique, bleu fluo, je sais pas si vous vous en souvenez ?
+<Sync time="846.675"/>
+là on le voit assez mal, le bleu fluo sur cette euh sur cette image mais
+<Sync time="850.421"/>
+ils avaient euh la mode de l'époque était particulière.
+<Sync time="853.620"/>
+
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ tout ça pour dire que c'est que () on a toujours toujours été dans la performance.
+<Sync time="857.761"/>
+d'ailleurs, est-ce que vous savez comment est-ce qu'on mesure la performance d'un ordinateur ?
+<Sync time="864.750"/>
+comment est-ce qu'on sait
+<Sync time="865.920"/>
+comment est-ce qu'on peut définir la puissance d'un ordinateur ?
+</Turn>
+<Turn startTime="868.37" endTime="870.08">
+<Sync time="868.370"/>
+
+<Event desc="conv" type="noise" extent="instantaneous"/>
+
+</Turn>
+<Turn speaker="spk8" mode="planned" fidelity="high" channel="studio" startTime="870.08" endTime="994.876">
+<Sync time="870.080"/>
+oui, alors cette capacité de calcul elle a une métrique
+<Sync time="872.668"/>
+et quelle est cette métrique, vous la connaissez ?
+<Sync time="876.115"/>
+c'est les flops.
+<Sync time="878.250"/>
+les flops, ça vient de l'anglais, ça veut dire 
+<Event desc="en" type="language" extent="begin"/>
+float operation per second
+<Event desc="en" type="language" extent="end"/>
+,
+<Sync time="882.210"/>
+et ça signifie le nombre d'opérations arithmétiques
+<Sync time="885.274"/>
+par virgule () à virgule flottante que l'on peut faire sont des nombres à virgule flottante.
+<Sync time="889.069"/>
+*c'est-à-dire que faire des opérations arithmétiques : multiplications,
+<Sync time="892.039"/>
+soustractions, additions, sur des entiers c'est très facile
+<Sync time="894.965"/>
+parce que on a des portes logiques qui peuvent accélérer les calculs, faire passer par des chemins
+<Sync time="899.062"/>
+particuliers : par exemple, on supprime
+<Sync time="901.544"/>
+le bit de poids faible, on divise par deux. on rajoute un zéro à la fin
+<Sync time="905.109"/>
+à la fin d'un nombre binaire, on multiplie par deux.
+<Sync time="907.552"/>
+donc les multiplications et les divisions sur des nombres entiers sur des nombres entiers sont très simples.
+<Sync time="912.280"/>
+par contre, sur des nombres à virgule, avec les représentations mantisse et exposant et cetera,
+<Sync time="916.561"/>
+c'est pas facile du tout. donc du coup
+<Sync time="919.330"/>
+c'est c'est pour ça qu'on a pris cette cette métrique-là.
+<Sync time="922.910"/>
+alors après, c'est à l'échelle classique du système métrique international,
+<Sync time="926.555"/>
+c'est-à-dire que euh un kiloflops, c'est mille opérations par seconde ; un mégaflops, c'est un million d'opérations par seconde
+<Sync time="932.39"/>
+gigaflops, téraflops, pétaflops, hexaflops.
+<Sync time="936.720"/>
+aujourd'hui, à votre avis,
+<Sync time="939.815"/>
+où est-ce
+<Sync time="940.8"/>
+qu'est rendu l'ordinateur le plus puissant
+<Sync time="944.446"/>
+du monde ?
+<Sync time="945.320"/>
+je parle pas de votre ordinateur à vous, hein. je parle de l'ordinateur le plus puissant du monde :
+<Sync time="949.850"/>
+où est-ce qu'il est dans l'échelle ici ?
+<Sync time="952.530"/>
+est-ce qu'on a dépassé le mégaflops ?
+<Sync time="955.940"/>
+oui ?
+<Sync time="956.696"/>
+à votre avis il est où ?
+<Sync time="958.566"/>
+alors on va on va faire un petit vote :
+<Sync time="960.247"/>
+qui pense qu'on a dépassé le gigaflops ?
+<Sync time="964.160"/>
+*c'est-à-dire
+<Sync time="964.981"/>
+un milliard d'opérations par seconde
+<Sync time="967.200"/>
+qui pense qu'on a dépassé
+<Sync time="969.187"/>
+le téraflops ?
+<Sync time="972.230"/>
+qui pense qu'on a dépassé le pétaflops ?
+<Sync time="976.170"/>
+qui pense qu'on a dépassé l'hexaflops ?
+<Sync time="980.440"/>
+alors en réalité, aujourd'hui on est entre le péta et l'hexa.
+<Sync time="984.124"/>
+c'est-à-dire que l'ordinateur le plus puissant au monde, il est capable de faire plus d'un milliard de milliards d'opérations par seconde.
+<Sync time="991.968"/>
+cet ordinateur, je vous le présente, il s'appelle roadrunner
+</Turn>
+<Turn startTime="994.876" endTime="997.013">
+<Sync time="994.876"/>
+
+<Event desc="conv" type="noise" extent="instantaneous"/>
+
+</Turn>
+<Turn speaker="spk8" mode="planned" fidelity="high" channel="studio" startTime="997.013" endTime="1846.62">
+<Sync time="997.013"/>
+et roadrunner, on retourne à des ordinateurs qui prennent la taille d'un entrepôt pour le coup, parce que il faut que ce soit ultra puissant
+<Sync time="1003.712"/>
+donc c'est des centaines et des centaines de processeurs interconnectés entre eux avec des mémoire partagées
+<Sync time="1009.640"/>
+et donc qui arrivent à faire des calculs
+<Sync time="1012.326"/>
+donc comme on dit des calculs parallèles : on va faire des bouts de calculs en parallèle, et l'intégralité de l'ordinateur
+<Sync time="1017.745"/>
+va vous faire un calcul rapide.
+<Sync time="1019.771"/>
+alors c'est pas tricher que de mettre des ordin() des ca() des calculateurs en parallèle : dans toutes vos machines aujourd'hui
+<Sync time="1025.2"/>
+vous avez
+<Sync time="1026.37"/>
+des calculateurs parallèles dedans.
+<Sync time="1028.465"/>
+on () vous avez déjà entendu parler de biprocesseurs, quadriprocesseurs
+<Sync time="1032.294"/>
+ben c'est ça que ça veut dire, avoir deux coeurs de processeurs qui vont faire des calculs en parallèle.
+<Sync time="1037.876"/>
+quadriprocesseurs, quatre processeurs. on arrive à à des machines qui sont vendues avec huit coeurs aujourd'hui.
+<Sync time="1045.226"/>
+alors
+<Sync time="1046.127"/>
+ça, c'est le premier à avoir passé le pétaflops, en deux mille huit. mais en fait
+<Sync time="1050.150"/>
+la puissance d'un ordinateur,
+<Sync time="1052.620"/>
+elle euh elle est elle est de progression exponentielle.
+<Sync time="1056.051"/>
+c'est-à-dire que depuis la création des micro-ordinateurs,
+<Sync time="1059.300"/>
+donc on a commencé à mesurer et à faire des concours
+<Sync time="1061.782"/>
+euh fin des années quatre-vingts, début des années quatre-vingt-dix,
+<Sync time="1064.683"/>
+donc on voit ici que au fur et à mesure des années,
+<Sync time="1067.043"/>
+la puissance des ordinateurs suit une loi exponentielle.
+<Sync time="1069.788"/>
+c'est-à-dire que la puissance d'un ordinateur va doubler tous les douze mois.
+<Sync time="1076.930"/>
+on va avoir un or() un ordinateur qui va être créé qui va être deux fois plus puissant que le plus puissant de l'année dernière.
+<Sync time="1082.599"/>
+donc autant vous dire que si vous achetez un ordinateur portable aujourd'hui,
+<Sync time="1086.169"/>
+que vous allez à la fnac deux ans plus tard, votre ordinateur sera complètement caduc.
+<Sync time="1091.988"/>
+c'est triste à dire,
+<Sync time="1093.238"/>
+mais ça veut pas dire que il sera plus puissant, ça veut pas dire qu'il sera mauvais
+<Sync time="1096.787"/>
+mais effectivement, il y a une course à la performance que suivent les records
+<Sync time="1101.760"/>
+de des ordinateurs les plus puissants,
+<Sync time="1103.95"/>
+mais elle () on poursuit aussi ça pour les ordinateurs
+<Sync time="1106.959"/>
+personnels.
+<Sync time="1109.670"/>
+alors ce qu'on voit effectivement, c'est qu'en deux mille huit on a passé
+<Sync time="1113.526"/>
+le pétaflops par roadrunner.
+<Sync time="1117.560"/>
+les ordinateurs les plus puissants, ils sont mesurés
+<Sync time="1120.500"/>
+par un grand concours qui est organisé tous les ans
+<Sync time="1123.65"/>
+où les
+<Sync time="1125.412"/>
+les entreprises les plus riches et les états
+<Sync time="1127.622"/>
+les plus riches, ou du moins ceux qu'ont envie de mettre de l'argent dedans,
+<Sync time="1130.264"/>
+vont construire un ordinateur ultra puissant et calculer à quelle vitesse va leur ordinateur.
+<Sync time="1134.171"/>
+et de ça, on en fait un top cinq cents.
+<Sync time="1136.403"/>
+le top des cinq cents plus gros ordinateurs.
+<Sync time="1139.219"/>
+celui qui est resté au top pendant trois ans, c'est lui :
+<Sync time="1143.270"/>
+c'est séquoia, de ibm.
+<Sync time="1145.808"/>
+c'est lui qui a réussi à passer le premier les seize
+<Sync time="1148.906"/>
+pétaflops, donc deux puissance quatre
+<Sync time="1150.874"/>
+pétaflops.
+<Sync time="1152.408"/>
+et le premier qui a réussi à passer les deux puissance cinq pétaflops, c'est-à-dire les trente-deux pétaflops,
+<Sync time="1157.432"/>
+il est chinois
+<Sync time="1159.150"/>
+il s'appelle tianhe deux.
+<Sync time="1160.851"/>
+eh oui, pour la première fois () c'était une course effrénée entre les japonais
+<Sync time="1164.339"/>
+et les américains, cette course à la p() à la surpuissance, et pour la première fois les chinois les ont coiffés au poteau
+<Sync time="1169.770"/>
+avec leur ordinateur
+<Sync time="1171.288"/>
+qui s'appelle aussi milky way deux.
+<Sync time="1174.350"/>
+et donc c'est une université chinoise qui possède l'ordinateur le plus puissant au monde aujourd'hui,
+<Sync time="1180.240"/>
+*c'est-à-dire en juin deux mille treize hein, le concours est renouvelé tous les tous les mois de juin.
+<Sync time="1184.990"/>
+donc si on regarde
+<Sync time="1187.380"/>
+si on continue à avoir cette croissance exponentielle ici
+<Sync time="1190.870"/>
+eh bien on se rend compte
+<Sync time="1192.632"/>
+que on on règ() on risque de passer l'hexaflops
+<Sync time="1196.383"/>
+donc c'est-à-dire
+<Sync time="1197.695"/>
+le million de millions de milliards d'opérations
+<Sync time="1201.160"/>
+donc ça commence à devenir totalement inenvisageable
+<Sync time="1204.436"/>
+en deux mille dix-neuf
+<Sync time="1206.301"/>
+donc demain.
+<Sync time="1209.690"/>
+donc ça c'est la puissance de calcul d'un ordinateur, ça en a fait sa révolution, ça a aidé au développement de l'informatique, à la *démocratisation de l'informatique
+<Sync time="1217.435"/>
+mais il y a une deuxième chose qui a fait que l'informatique s'est démocratisée.
+<Sync time="1222.590"/>
+on a vu un un démarrage tout à l'heure avec graham bell, et puis à la suite avec le télégraphe
+<Sync time="1227.970"/>
+que () ça a donné naissance à quoi, tout ça ?
+<Sync time="1230.850"/>
+à la communication. et la communication, c'est internet.
+<Sync time="1233.863"/>
+la grosse révolution des années quatre-vingt-dix, c'est l'apparition d'internet.
+<Sync time="1240.925"/>
+alors petite histoire d'internet, juste pour vous refixer les dates, parce que je suppose que beaucoup d'entre vous ne le connaisse pas
+<Sync time="1245.912"/>
+à votre avis, l'ancêtre d'internet c'est quelle année ?
+<Sync time="1256.040"/>
+eh bien c'est milieu du vingtième siècle.
+<Sync time="1260.770"/>
+en mille neuf cent soixante-cinq,
+<Sync time="1263.299"/>
+la première connexion longue distance de données, et pas uniquement téléphonique,
+<Sync time="1268.189"/>
+mais de données, de données numériques
+<Sync time="1271.426"/>
+a eu lieu entre le massachussets
+<Sync time="1273.860"/>
+et la californie, c'est-à-dire
+<Sync time="1276.280"/>
+de la côte est à la côte ouest. on a réussi à transférer de l'information sur une très longue distance
+<Sync time="1281.641"/>
+ça, ça a d() ça s'est développé, ça a donné des idées et quelques années plus tard,
+<Sync time="1285.698"/>
+en mille neuf cent soixante-neuf, l'ancêtre d'internet est créé
+<Sync time="1289.692"/>
+c'est arpanet.
+<Sync time="1291.110"/>
+donc arpanet, c'est un réseau de quatre universités américaines
+<Sync time="1294.694"/>
+donc ucla
+<Event desc="en" type="language" extent="previous"/>
+
+<Sync time="1296.658"/>
+donc
+<Sync time="1297.340"/>
+euh l'université de californie los angeles, stanford,
+<Sync time="1300.719"/>
+santa barbara et l'université d'utah
+<Sync time="1302.913"/>
+qui se sont liées toutes les quatre ensemble
+<Sync time="1305.331"/>
+pour interconnecter leurs réseaux et pouvoir échanger des données.
+<Sync time="1309.570"/>
+alors au départ, on échangeait que des fichiers, c'est-à-dire qu'on mettait des fichiers
+<Sync time="1312.764"/>
+à disposition
+<Sync time="1314.014"/>
+sur nos euh sur nos
+<Sync time="1316.017"/>
+sur nos mémoires de masse, et on arrivait par un réseau à aller chercher un fichier.
+<Sync time="1320.380"/>
+et puis ils se sont dit que c'était vachement intéressant
+<Sync time="1323.418"/>
+pour faire passer des informations, mais que des fois ils étaient obligés de créer un fichier,
+<Sync time="1326.931"/>
+mettre un petit message à leurs collègues, laisser le fichier sur le serveur,
+<Sync time="1330.582"/>
+que le collègue vienne le chercher, lise le fichier, rajoute son petit message et l'envoie et cetera. ils se sont dit que c'était quand même pas super pratique pour communiquer
+<Sync time="1337.350"/>
+comme ça,
+<Sync time="1338.142"/>
+donc ils ont créé quelques années plus tard la messagerie électronique.
+<Sync time="1341.241"/>
+donc le mail date de mille neuf cent soixante-douze,
+<Sync time="1344.110"/>
+qui était un protocole qui permettait de converser
+<Sync time="1347.530"/>
+entre euh différents utilisateurs du réseau arpanet sans être obligés de passer par des fichiers.
+<Sync time="1356.250"/>
+et ça a bien marché. ça a tellement bien marché que, à la fin des années quatre-vingts,
+<Sync time="1360.560"/>
+la nfs, donc c'est la 
+<Event desc="en" type="language" extent="begin"/>
+national science foundation
+<Event desc="en" type="language" extent="end"/>
+, c'est grosso modo la fondation qui va financer
+<Sync time="1366.233"/>
+la plus grande partie
+<Sync time="1367.667"/>
+euh de la recherche en sciences aux états-unis,
+<Sync time="1370.109"/>
+elle a décidé de mettre de l'argent sur arpanet, elle a développé arpanet,
+<Sync time="1373.45"/>
+elle a créé cinq serveurs surpuissants
+<Sync time="1376.120"/>
+euh répartis sur le territoire américain
+<Sync time="1378.438"/>
+et ça a permis à toutes les universités qui le souhaitaient de pouvoir se communi() de s() pouvoir communiquer
+<Sync time="1383.229"/>
+et intégrer le réseau arpanet,
+<Sync time="1384.826"/>
+et donc pouvoir mettre en partage toute l'information qui était disponible
+<Sync time="1388.140"/>
+sur le réseau arpanet et sur les différentes universités.
+<Sync time="1390.946"/>
+donc là on commence à avoir quelque chose avec une échelle qui grandit : on n'est plus sur quatre noeuds, on est sur plusieurs centaines voire milliers de noeuds
+<Sync time="1397.52"/>
+avec des serveurs surpuissants qui régissent un petit peu toute cette () tout ce réseau ;
+<Sync time="1401.810"/>
+on est à l'ancêtre clair d'internet, c'est plus un ancêtre là puisque ça a donné naissance
+<Sync time="1407.440"/>
+quelques années plus tard, en mille neuf cent quatre-vingt-douze, à l'
+<Event desc="en" type="language" extent="begin"/>
+internet society
+<Event desc="en" type="language" extent="end"/>
+
+<Sync time="1410.778"/>
+donc internet qui signifie inter network, *c'est-à-dire entre les réseaux
+<Sync time="1414.887"/>
+donc pour () qui permet d'interconnecter les réseaux existants entre eux pour créer
+<Sync time="1419.072"/>
+un très grand réseau mondial.
+<Sync time="1421.610"/>
+et au début des *années quatre-vingt-dix, donc naissance de l'internet comme on le connaît aujourd'hui
+<Sync time="1425.914"/>
+et de la première application d'internet
+<Sync time="1428.736"/>
+qui a vraiment fait
+<Sync time="1429.863"/>
+exploser internet et l'a démocratisé, c'est le web.
+<Sync time="1432.913"/>
+*parce que le web, donc tout ce qui est aller sur des pages web,
+<Sync time="1435.76"/>
+aller sur vos euh sur vos sites internet préférés et cetera, ce n'est qu'une application d'internet
+<Sync time="1439.799"/>
+le mail en étant une autre, le partage de fichiers en étant une autre, et cetera.
+<Sync time="1444.778"/>
+alors on
+<Sync time="1445.828"/>
+je dis comme on le connaît aujourd'hui, oui ou non hein : au milieu des années quatre-vingt dix
+<Sync time="1449.410"/>
+les pages web, c'était seulement un peu de texte,
+<Sync time="1452.428"/>
+deux tailles différentes, parfois vous aviez la chance de pouvoir euh mettre de la couleur à la naissance des premières versions de html
+<Sync time="1458.516"/>
+euh quelques images, mais on n'était pas du tout dans le web dynamique avec les vidéos, les j() les j() les les réseaux sociaux et cetera
+<Sync time="1464.883"/>
+tout ça, c'est apparu vraiment dans les années deux mille.
+<Sync time="1469.406"/>
+mais c'est un réseau qui a marché très très bien.
+<Sync time="1471.710"/>
+aujourd'hui, alors on ne sait pas exactement combien il y a d'utilisateurs d'internet. c'est impossible de savoir combien il y a d'utilisateurs d'internet.
+<Sync time="1478.261"/>
+pourquoi ? parce que bah
+<Sync time="1480.834"/>
+sur internet, vous avez quoi ?
+<Sync time="1482.797"/>
+vous avez des gens qui utilisent internet
+<Sync time="1485.820"/>
+et vous avez des machines qui se connectent à internet de manière automatique, et qui communiquent entre elles de manière automatique.
+<Sync time="1491.302"/>
+donc on peut pas regarder les connexions entre deux points sur internet en se disant : c'est deux personnes
+<Sync time="1495.789"/>
+deux utilisateurs qui parlent ensemble, parce que il y a de plus en plus d'objets
+<Sync time="1498.871"/>
+bientôt, vos frigos vont être connectés à internet pour aller commander du jambon s'il voit que dans l'espace réservé au jambon, il y en a plus.
+<Sync time="1504.340"/>
+vous rigolez mais ça existe déjà au japon.
+<Sync time="1508.160"/>
+donc les objets communicants, on peut pas les compter comme étant des utilisateurs d'internet.
+<Sync time="1512.812"/>
+autre problème :
+<Sync time="1514.589"/>
+
+<Event desc="conv" type="noise" extent="begin"/>
+vous,
+<Sync time="1515.519"/>
+vous avez
+<Sync time="1516.780"/>
+plusieurs machines. vous pouvez vous connecter sur votre () sur internet avec votre ordinateur
+<Event desc="conv" type="noise" extent="end"/>
+,
+<Sync time="1521.181"/>
+avec votre téléphone portable, avec votre tablette si vous en avez une, et cetera.
+<Sync time="1525.424"/>
+et un utilisateur peut partager un même ordinateur ; c'est le cas
+<Sync time="1529.129"/>
+dans les réseaux de la fac :
+<Sync time="1530.626"/>
+un même ordinateur sert à plusieurs personnes. donc du coup,
+<Sync time="1533.596"/>
+on peut pas détecter le nombre d'utilisateurs en fonction du nombre de machines connectées.
+<Sync time="1537.660"/>
+donc il y a beaucoup d'études qui sont faites euh de statistiques, de corrélations et cetera qui permettent
+<Sync time="1542.723"/>
+d'estimer le nombre d'utilisateurs. ce qu'il faut voir, c'est que cette estimation, exactement comme le la puissance d'un ordinateur, elle est exponentielle
+<Sync time="1549.562"/>
+*c'est-à-dire qu'elle elle elle elle croît
+<Sync time="1552.660"/>
+de manière exponentielle.
+<Sync time="1554.175"/>
+et en deux mille treize, la royal pingdom, donc qui est une des sociétés qui s'occupe de faire euh
+<Sync time="1559.441"/>
+ces estimations du nombre d'utilisateurs, elle estimait en début deux mille treize, en janvier deux mille treize
+<Sync time="1563.419"/>
+à deux virgule cinq milliards d'utilisateur sur internet.
+<Sync time="1566.74"/>
+faut savoir que dans le monde,
+<Sync time="1568.420"/>
+on est sept milliards.
+<Sync time="1570.340"/>
+donc ça veut dire qu'il y a plus d'un tiers de la population mondiale qui est connecté à internet.
+<Sync time="1574.916"/>
+sachant que dans les pays
+<Sync time="1576.670"/>
+sous-développés
+<Sync time="1578.120"/>
+d'afrique et d'amérique du sud, par exemple
+<Sync time="1580.823"/>
+on est en dessous de dix pourcent de la population connectée.
+<Sync time="1583.423"/>
+donc vous imaginez dans les pays développés, type amérique ou europe,
+<Sync time="1586.930"/>
+le taux de pénétration d'internet dans la population.
+<Sync time="1591.378"/>
+la carte d'internet de nos jours, bah voilà : vu que c'est foncé, elle est illisible, désolé.
+<Sync time="1595.518"/>
+donc c'est une jolie galaxie, en fait. si on représente par un point
+<Sync time="1600.480"/>
+un ordinateur connecté, et par un trait
+<Sync time="1603.222"/>
+un lien réseau entre deux ordinateurs, ça nous fait un joli un une jolie galaxie
+<Sync time="1608.055"/>
+qu'on voit très mal ici
+<Sync time="1610.202"/>
+et sachant que un tout petit tout petit tout petit point éclairé sur cette galaxie, ça va être en fait
+<Sync time="1616.120"/>
+*une grappe de plein plein plein d'ordinateurs.
+<Sync time="1620.230"/>
+alors je vous ai parlé de plein de choses,
+<Sync time="1622.093"/>
+je vous ai parlé qu'on pouvait communiquer,
+<Sync time="1624.430"/>
+je vous ai parlé qu'on pouvait faire des ordinateurs parallèles avec les ordinateurs surpuissants, c'est-à-dire cal() faire des calculs en parallèle
+<Sync time="1631.148"/>
+et
+<Sync time="1631.890"/>
+euh je vous ai parlé d'algorithmique distribuée. alors c'est quoi la différence entre parallèle et distribuée ?
+<Sync time="1636.905"/>
+eh bien en fait, un superordinateur type
+<Sync time="1639.915"/>
+euh séquoia ou roadrunner
+<Sync time="1642.200"/>
+ou euh milky way deux,
+<Sync time="1643.596"/>
+l'idée, c'est que c'est des ordinateurs qui vont répartir la tâche sur plusieurs processeurs.
+<Sync time="1648.723"/>
+donc on va avoir plusieurs calculateurs qu'on va faire communiquer entre eux par des par des liens de communications surpuissants
+<Sync time="1655.700"/>
+et ils vont aller chacun effectuer des tout petits calculs en parallèle
+<Sync time="1658.729"/>
+et ensuite, on va récupérer tous les résultats de ces petits calculs et on va les agréger ensemble pour avoir le résultat global.
+<Sync time="1663.933"/>
+ça, c'est le fonctionnement d'un superordinateur.
+<Sync time="1666.390"/>
+souvent, ces ordinateurs ils ont une seule mémoire, une énorme mémoire qui est partagée par tous ses () dans lequel ils peuvent donc avoir une connaissance commune.
+<Sync time="1674.690"/>
+le problème de ces superordinateurs, c'est comme toujours () c'est le nerf de la guerre : c'est le prix.
+<Sync time="1680.580"/>
+c'est plusieurs millions voire milliards de dollars pour certains ordinateurs.
+<Sync time="1685.000"/>
+autant vous dire que
+<Sync time="1686.721"/>
+sur la course à la performance, vous avez pas beaucoup de pays ou d'entreprises européennes qui ont été au () en haut du top cinq cents ces dernières années,
+<Sync time="1693.798"/>
+parce que ça coûte beaucoup trop cher que cette course à la performance.
+<Sync time="1697.672"/>
+du coup, à la fin des années quatre-vingt-dix, on s'est posé la question :
+<Sync time="1701.100"/>
+est-ce qu'on peut faire pareil qu'un supercalculateur,
+<Sync time="1704.03"/>
+sauf que plutôt que d'utiliser et d'acheter et de concevoir un supercalculateur,
+<Sync time="1707.881"/>
+on met plein de machines en réseau,
+<Sync time="1709.705"/>
+on met un réseau relativement rapide hein donc qui va à une vitesse euh
+<Sync time="1713.231"/>
+de l'ordre du gigabit
+<Sync time="1714.970"/>
+et on essaye
+<Sync time="1716.170"/>
+de faire faire à ces ordinateurs de bureau classiques, que vous pourriez acheter à la fnac, mis en réseau,
+<Sync time="1720.982"/>
+la même chose que ces superordinateurs.
+<Sync time="1724.544"/>
+donc ça a été euh les premières recherches en grappes de calcul, ou en cluster computing comme on l'entend souvent,
+<Sync time="1731.365"/>
+c'est-à-dire faire la même chose qu'un superordinateur, mais pour un tarif bien moindre.
+<Sync time="1735.791"/>
+et c'est ce qui a donné l'idée de ces grappes de calcul. donc
+<Sync time="1738.412"/>
+d'un supercalculateur, donc ça c'est une euh
+<Sync time="1741.259"/>
+une baie
+<Event desc="?" type="lexical" extent="previous"/>
+ du du calculateur euh
+<Sync time="1743.18"/>
+blue jean, que je vous ai montré tout à l'heure,
+<Sync time="1745.680"/>
+on est passé à des ordinateurs de bureau classiques : vous voyez, j'ai des ordinateurs qui sont posés sur une étagère,
+<Sync time="1751.132"/>
+je les ai branchés sur un réseau rapide
+<Sync time="1753.018"/>
+et je les ai sé() je les ai fait calculer
+<Sync time="1755.395"/>
+des petites choses les uns en parallèle des autres, comme sur un multiprocesseur.
+<Sync time="1759.680"/>
+sauf que là on n'est plus sur du calcul parallèle. pourquoi ?
+<Sync time="1763.162"/>
+bah parce que chaque machine elle a sa propre mémoire ici ;
+<Sync time="1766.010"/>
+elles ont plus une seule et même mémoire pour tout le monde.
+<Sync time="1769.470"/>
+donc c'est pour ça qu'on appelle ça un calcul distribué, *c'est-à-dire qu'on va répartir les tâches
+<Sync time="1774.341"/>
+mais on va aussi répartir la mémoire ; on va pas répartir que le temps de processeur, on va répartir la mémoire
+<Sync time="1779.347"/>
+sur tous les ordinateurs
+<Sync time="1781.659"/>
+qui composent ben une grappe de calcul. et c'est pour ça qu'on commence à *parler de calcul distribué.
+<Sync time="1786.819"/>
+ensuite, on peut aller encore plus loin
+<Sync time="1789.690"/>
+en disant que cette fois-ci, nos grappes de calcul ils vont plus être composés de
+<Sync time="1793.859"/>
+deux cents machines, toutes les mêmes, toutes identiques, interchangeables
+<Sync time="1796.989"/>
+mais de toutes les machines possibles et inimaginables qui existent au monde.
+<Sync time="1801.146"/>
+d'accord ?
+<Sync time="1801.940"/>
+on pourrait imaginer que la puissance de calcul de tous vos ordinateurs qui est inutilisée,
+<Sync time="1806.645"/>
+parce que bah l'ordinateur est allumé mais que vous utilisez que vingt pour cent,
+<Sync time="1810.006"/>
+bah les quatre-vingts pour cent qui restent, on pourrait les utiliser pour faire d'autres calculs pour d'autres gens.
+<Sync time="1814.190"/>
+et vous, vous pourriez utiliser le () quand vous avez besoin de faire beaucoup de calculs, utiliser la puissance des autres ordinateurs
+<Sync time="1819.680"/>
+qui sont connectés à internet.
+<Sync time="1821.218"/>
+donc c'est l'idée d'un ordinateur global, mondial ; on n'y est pas encore.
+<Sync time="1824.664"/>
+on n'y est pas encore, mais on s'en rapproche. on s'en rapproche avec la dernière révolution en date
+<Sync time="1829.64"/>
+au niveau des réseaux informatiques, c'est le cloud computing.
+<Sync time="1833.031"/>
+vous avez déjà entendu parler ? l'informatique dans les nuages
+<Sync time="1835.730"/>
+je suis sûr que vous l'utilisez tous aujourd'hui :
+<Sync time="1838.421"/>
+euh qui a un compte euh dropbox ?
+<Sync time="1843.230"/>
+voilà.
+<Sync time="1843.969"/>
+qui a l'équivalent chez gmail, pour google drive ?
+</Turn>
+<Turn startTime="1846.62" endTime="1848.426">
+<Sync time="1846.620"/>
+
+<Event desc="conv" type="noise" extent="instantaneous"/>
+
+</Turn>
+<Turn speaker="spk8" mode="planned" fidelity="high" channel="studio" startTime="1848.426" endTime="2199.752">
+<Sync time="1848.426"/>
+voilà.
+<Sync time="1849.180"/>
+qui a un compte gmail
+<Sync time="1850.943"/>
+tout court ?
+<Sync time="1852.090"/>
+ouais, j'ai de plus en plus de mains qui se lèvent ; et je peux aller sur plein d'applications comme ça.
+<Sync time="1855.564"/>
+ces applications-là, ce sont des applications dites de cloud.
+<Sync time="1858.250"/>
+pourquoi ? l'idée du cloud,
+<Sync time="1860.090"/>
+c'est d'avoir mes données ou ma puissance disponibles sur internet
+<Sync time="1864.784"/>
+directement
+<Sync time="1866.191"/>
+et accessible de n'importe où.
+<Sync time="1868.361"/>
+en fait l'idée du cloud, elle est partie sur l'idée de l'informatique utile. je vais payer
+<Sync time="1874.252"/>
+l'ordinateur comme je l'utilise
+<Sync time="1876.631"/>
+et non pas
+<Sync time="1877.530"/>
+acheter un ordinateur que je sous-utiliserai. *c'est-à-dire que je vais finalement louer du temps de calcul
+<Sync time="1881.931"/>
+ou louer de l'espace mémoire.
+<Sync time="1884.671"/>
+sur dropbox, si vous voulez avoir cinq gigas ou vingt gigas,
+<Sync time="1887.971"/>
+vous allez payer par mois, *c'est-à-dire que vous allez louer
+<Sync time="1890.623"/>
+une partie de la mémoire des serveurs de dropbox.
+<Sync time="1894.221"/>
+eh bien l'idée du cloud, c'est ça :
+<Sync time="1895.963"/>
+c'est l'idée de l'informatique élastique, au même titre que vous avez ()
+<Sync time="1900.640"/>
+on voit en fait finalement la puissance d'un ordinateur comme l() comme une énergie à part.
+<Sync time="1905.968"/>
+l'électricité :
+<Sync time="1907.190"/>
+vous voulez brancher votre sèche-cheveux,
+<Sync time="1910.015"/>
+qu'est-ce que vous faites ? vous branchez dans une prise électrique, n'importe laquelle, vous appuyez sur le bouton, ça marche, vous vous *séchez les cheveux.
+<Sync time="1915.788"/>
+vous vous en fichez bien de savoir si l'électricité
+<Sync time="1918.601"/>
+qui active votre sèche-cheveux, elle vient
+<Sync time="1921.394"/>
+euh de euh l'usine de fessenheim ou euh si elle vient de l'usine marémotrice de la rance ou si elle vient de du champ d'éoliennes
+<Sync time="1928.915"/>
+euh de euh de nozay et cetera et cetera ; vous vous en fichez ?
+<Sync time="1933.108"/>
+le but, pour vous, c'est juste que il y ait de l'électricité qui sorte
+<Sync time="1936.644"/>
+de votre prise.
+<Sync time="1937.687"/>
+eh bien c'est pareil pour le cloud :
+<Sync time="1939.610"/>
+vous vous fichez bien de savoir si vos données elles sont stockées
+<Sync time="1943.051"/>
+à boston, à new york ou à paris. ce qui vous intéresse, c'est que quand vous vous connectez à internet sur votre dropbox, vous récupérez vos données.
+<Sync time="1949.391"/>
+eh ben c'est ça, l'idée qui se cache derrière le cloud
+<Sync time="1951.457"/>
+et donc on va louer du temps de calcul, louer de la mémoire aux gens.
+<Sync time="1956.510"/>
+alors voilà, ça fait un petit peu le tour de
+<Sync time="1959.260"/>
+de mon euh de mon petite histoire de l'informatique.
+<Sync time="1962.902"/>
+donc on va rebasculer sur ce qui nous intéresse vraiment aujourd'hui, c'est les systèmes distribués.
+<Sync time="1967.413"/>
+donc un système distribué, c'est quoi ?
+<Sync time="1969.720"/>
+donc en tant que bon informaticien, un système distribué
+<Sync time="1973.812"/>
+je regarde sur wikipédia.
+<Sync time="1975.780"/>
+wikipédia il me dit quoi ?
+<Sync time="1977.48"/>
+il me dit qu'un système informatique distribué, c'est une collection de postes ou de calculateurs
+<Sync time="1982.320"/>
+autonomes qui sont connectés à l'aide d'un réseau de communication.
+<Sync time="1987.981"/>
+qu'est-ce que c'est que ça ?
+<Sync time="1989.170"/>
+ça me dit que j'ai grosso modo des ordinateurs
+<Sync time="1992.680"/>
+que je mets en réseau
+<Sync time="1994.3"/>
+et qui arrivent
+<Sync time="1995.809"/>
+à calculer des choses ensemble. super !
+<Sync time="1999.096"/>
+*donc le point-clé de la définition ici, c'est que les machines sont autonomes. qu'est-ce que ça veut dire, autonomes ?
+<Sync time="2003.944"/>
+autonomes, ça veut dire que
+<Sync time="2005.662"/>
+elles arrivent avec leur propre puissance de calcul, avec leur propre mémoire,
+<Sync time="2008.948"/>
+elles choisissent elles-mêmes ce qu'elles vont stocker dans leur mémoire ; c'est pas quelqu'un d'autre qui va leur dire quoi stocker.
+<Sync time="2014.463"/>
+elles ont le droit de se déconnecter, de se reconnecter au réseau
+<Sync time="2018.435"/>
+sans avoir dem() besoin de demander l'aval à quelqu'un, et cetera et cetera.
+<Sync time="2021.773"/>
+mais cette définition-là, moi elle ne me convient pas.
+<Sync time="2025.180"/>
+alors j'ai été le chercher
+<Sync time="2026.675"/>
+dans le bouquin de andrew tanenbaum, qui est euh un des pères euh
+<Sync time="2030.57"/>
+un des pères d'unix,
+<Sync time="2032.530"/>
+qui est donc professeur à l'université libre d'amsterdam,
+<Sync time="2035.927"/>
+et lui dans son livre, il dit quoi ? il dit qu'un système distribué
+<Sync time="2038.811"/>
+c'est
+<Sync time="2040.106"/>
+une collection d'ordinateurs indépendants,
+<Sync time="2042.477"/>
+qui sont connectés par l'intermédiaire d'un réseau, donc jusque-là
+<Sync time="2045.405"/>
+on retrouve à peu près : il a mis indépendants au lieu d'autonomes, mais c'est () la la sémantique est la même, connectés par un réseau
+<Sync time="2050.850"/>
+mais ce qui est ce qui est () ce qui change tout, c'est la fin de la phrase :
+<Sync time="2054.603"/>
+ça doit apparaître à l'utilisateur
+<Sync time="2056.61"/>
+comme
+<Sync time="2057.540"/>
+étant un unique
+<Sync time="2059.820"/>
+utilis() un unique ordinateur. *c'est-à-dire que on doit
+<Sync time="2062.593"/>
+avoir de la transparence, on doit complètement masquer la complexité
+<Sync time="2066.997"/>
+de la distribution.
+<Sync time="2068.328"/>
+vous, en tant qu'utilisateurs,
+<Sync time="2069.950"/>
+vous vous fichez bien, quand vous vous connectez à skype,
+<Sync time="2072.475"/>
+que derrière il utilise quarante-sept serveurs pour vous connecter
+<Sync time="2075.507"/>
+ou un seul pour vous connecter.
+<Sync time="2078.723"/>
+d'accord ? le but, c'est que vous vous utilisiez une application et que cette application doit vous rendre un service
+<Sync time="2083.149"/>
+donc on doit complètement masquer la complexité
+<Sync time="2086.380"/>
+de euh de cette euh
+<Sync time="2089.229"/>
+des systèmes distribués.
+<Sync time="2093.340"/>
+alors une troisième définition
+<Sync time="2095.841"/>
+euh qu'on peut trouver aussi, c'est la définition de leslie lamport. je sais pas si vous avez déjà entendu parler de leslie lamport ?
+<Sync time="2100.930"/>
+est-ce que vous avez déjà entendu parler de LaTeX ?
+<Sync time="2103.720"/>
+nan, non plus ? donc LaTeX, c'est un langage de
+<Sync time="2106.177"/>
+c'est un langage d'édition qui permet de faire de l'édition euh
+<Sync time="2109.063"/>
+bien mieux que tout langage wysiwyg
+<Sync time="2111.690"/>
+type word ou openoffice.
+<Sync time="2115.760"/>
+et ce leslie lamport euh c'est avant tout un des pères des systèmes et des *algorithmes distribués.
+<Sync time="2120.197"/>
+avant d'avoir inventé LaTeX, il a surtout participé à l'élaboration des algorithmes distribués,
+<Sync time="2124.56"/>
+et il a inventé notamment les lo() les horloges de lamport qui sont utilisées tous les jours
+<Sync time="2128.409"/>
+sur vos ordinateurs et dans les réseaux.
+<Sync time="2130.756"/>
+donc leslie lamport, qu'est-ce qu'il dit lui ?
+<Sync time="2132.683"/>
+il dit que un système distribué,
+<Sync time="2135.017"/>
+c'est un système qui vous empêche de *travailler
+<Sync time="2137.474"/>
+quand une machine dont vous n'avez jamais entendu parler tombe en panne.
+<Sync time="2140.900"/>
+donc clairement, c'est une définition humoristique sur ce que ne doit pas être un système distribué.
+<Sync time="2145.599"/>
+*c'est-à-dire que imaginez : vous mettez cinq mille machines en réseau
+<Sync time="2149.380"/>
+il y en a une qui tombe en panne
+<Sync time="2151.161"/>
+pour un un prétexte quelconque, hein ; quelqu'un débranche la prise en passant l'aspirateur, il y a un bulldozer qui passe à côté, qui fait des vibrations qui débranchent la *prise, n'importe quoi :
+<Sync time="2159.130"/>
+ça fait planter les quatre mille neuf cent quatre-vingt-dix-neuf mille autres.
+<Sync time="2162.450"/>
+c'est pas possible, d'accord ? on peut pas accepter ça.
+<Sync time="2165.152"/>
+donc dans les systèmes distribués, chose qu'on n'a pas avant
+<Sync time="2168.190"/>
+dans les algorithmes classiques, on va avoir dans les algorithmes distribués des bugs
+<Sync time="2172.992"/>
+à résoudre d() des bugs
+<Sync time="2174.467"/>
+réseau. *c'est-à-dire donc une tolér() il va falloir insérer de la tolérance aux défaillances,
+<Sync time="2178.303"/>
+tolérer que certains certains des des ordinateurs qui participent aux systèmes distribués
+<Sync time="2182.832"/>
+bah ils puissent tomber en panne, et que ça mette pas en carafe tout le système.
+<Sync time="2189.003"/>
+alors
+<Sync time="2190.400"/>
+à votre avis,
+<Sync time="2191.920"/>
+est-ce que les systèmes distribués existent aujourd'hui ? j'en ai déjà dit pas mal,
+<Sync time="2195.911"/>
+je vous ai déjà mis pas mal sur la voie, mais est-ce que c'est un rêve ou est-ce que c'est une réalité ?
+</Turn>
+<Turn startTime="2199.752" endTime="2200.674">
+<Sync time="2199.752"/>
+
+<Event desc="conv" type="noise" extent="instantaneous"/>
+
+</Turn>
+<Turn speaker="spk8" mode="planned" fidelity="high" channel="studio" startTime="2200.674" endTime="2328.065">
+<Sync time="2200.674"/>
+réalité
+<Sync time="2202.550"/>
+donc les questions qu'on va se poser, c'est : est-ce qu'il existe des systèmes distribués ? oui
+<Sync time="2206.876"/>
+oui, il en existe.
+<Sync time="2208.650"/>
+où est-ce qu'on trouve ces systèmes distribués ? ben va regarder ça ensemble.
+<Sync time="2212.007"/>
+et concrètement, qu'est-ce qu'on fait avec les systèmes distribués ?
+<Sync time="2214.768"/>
+le plus vieux système distribué qu'il existe, vous l'utilisez tous les jours :
+<Sync time="2221.311"/>
+c'est la téléphonie.
+<Sync time="2223.170"/>
+vous avez tous un téléphone portable, ou si vous avez pas de téléphone portable, vous appelez tous au moins votre maman, votre grand-maman pour lui donner des nouvelles régulièrement
+<Sync time="2230.939"/>
+donc vous utilisez un système distribué. c'est quoi un système distribué ?
+<Sync time="2233.970"/>
+c'est des en() c'est des z() si je reprends la définition,
+<Sync time="2236.897"/>
+c'est des machines autonomes : mes téléphones.
+<Sync time="2239.283"/>
+je peux déconnecter mon téléphone si je veux, je mets je mets dans la mémoire de mon téléphone ce que je veux ;
+<Sync time="2244.120"/>
+qui sont interconnectées par un réseau :
+<Sync time="2246.273"/>
+oui, le réseau cellulaire pour les réseaux mobiles, ou le réseau filaire
+<Sync time="2249.735"/>
+pour la téléphonie fixe, sachant qu'ils sont tous reliés entre eux ;
+<Sync time="2252.800"/>
+et qui participent de manière complètement transparente
+<Sync time="2255.755"/>
+à vous fournir une application, un service : le service, c'est communiquer par voie orale avec un autre utilisateur.
+<Sync time="2262.420"/>
+donc
+<Sync time="2263.177"/>
+la téléphonie finalement est un système distribué.
+<Sync time="2266.415"/>
+un autre système distribué que certains d'entre vous utilisent, j'en suis sûr, c'est les jeux en réseau.
+<Sync time="2271.553"/>
+c'est quoi ?
+<Sync time="2272.455"/>
+c'est des centaines de gens qui se mettent en réseau, alors soit dans une grande salle comme ça ou dans un entrepôt si c'est un
+<Sync time="2278.293"/>
+un une lan party, soit chez eux
+<Sync time="2280.860"/>
+pour euh dans dans les types de jeux type euh mmorpg, c'est-à-dire
+<Sync time="2284.960"/>
+les jeux
+<Sync time="2285.922"/>
+euh massivement multi-utilisateurs
+<Sync time="2288.546"/>
+euh type jeux de rôle.
+<Sync time="2290.400"/>
+c'est dé() c'est dé() c'est *distribué, vous avez créé un monde virtuel
+<Sync time="2293.595"/>
+ce monde virtuel
+<Sync time="2294.868"/>
+il est complètement
+<Sync time="2296.540"/>
+masqué. *c'est-à-dire la complexité de où est-ce qu'est stocké les mondes virtuels, où est-ce que sont stockés vos avatars et cetera,
+<Sync time="2301.831"/>
+c'est réparti un peu partout.
+<Sync time="2303.650"/>
+c'est pas () vous savez pas où c'est et vous vous en fichez de savoir où c'est ; ce que vous voulez, c'est que quand vous lancez le jeu,
+<Sync time="2307.582"/>
+ben vous vous connectiez avec tous les autres joueurs et v() vous participiez
+<Sync time="2310.604"/>
+à l'élaboration de ce monde virtuel.
+<Sync time="2312.840"/>
+un autre système distribué qui se cache derrière quelque chose de transparent, et qu'on a l'impression que c'est une seule et même fenêtre, c'est ce type de réseaux
+<Sync time="2320.410"/>
+les réseaux types dits appelés grands réseaux sociaux : facebook, twitter et toute la collection.
+<Sync time="2325.710"/>
+qui ici a un compte facebook ?
+</Turn>
+<Turn startTime="2328.065" endTime="2328.93">
+<Sync time="2328.065"/>
+
+</Turn>
+<Turn speaker="spk8" mode="spontaneous" fidelity="high" channel="studio" startTime="2328.93" endTime="2817.27">
+<Sync time="2328.930"/>
+nan on va faire l'inverse : qui n'a pas de compte facebook ?
+<Sync time="2332.07"/>
+oh la vache !
+<Sync time="2333.890"/>
+c'est la première fois
+<Sync time="2335.486"/>
+que j'ai plus de trois mains qui se lèvent.
+<Sync time="2338.010"/>
+ah, félicitations : peut-être que peut-être que avec
+<Sync time="2341.385"/>
+les nouvelles générations vont commencer à faire attention à ce qu'ils font et ne pas mettre n'importe quoi
+<Sync time="2345.42"/>
+sur internet ;
+<Sync time="2347.097"/>
+c'est très bien !
+<Sync time="2348.380"/>
+est-ce que vous savez ce qui se cache en fait derrière facebook ?
+<Sync time="2352.790"/>
+eh bien derrière facebook c'est une batterie de serveurs
+<Sync time="2356.660"/>
+qui vont () vous, vous allez attaquer le le serveur facebook, vous allez demander à facebook de vous afficher votre profil ou votre votre fil d'actualités
+<Sync time="2363.981"/>
+mais derrière,
+<Sync time="2365.433"/>
+c'est des centaines et des centaines de serveurs qui vont servir à
+<Sync time="2369.003"/>
+récupérer les requêtes des utilisateurs. ces requêtes ça peut être n'importe quoi, ça peut être
+<Sync time="2373.040"/>
+euh mets s() mets-moi cette photo sur mon profil
+<Sync time="2375.496"/>
+ou affiche-moi euh le euh le le dernier statut de de untel
+<Sync time="2380.161"/>
+ou euh montre () fais-moi jouer au () tel quiz débile
+<Sync time="2383.238"/>
+que euh untel m'a recommandé
+<Sync time="2384.877"/>
+et cetera et cetera.
+<Sync time="2386.430"/>
+eh bien ça, vous allez avoir des centaines de serveurs qui *ne *vont faire que traiter les requêtes, c'est-à-dire
+<Sync time="2390.755"/>
+si ça concerne une photo,
+<Sync time="2392.284"/>
+je l'envoie vers le datacenter qui gère
+<Sync time="2395.450"/>
+les les les données de manière permanente ;
+<Sync time="2398.088"/>
+si c'est euh affiche-moi euh le dernier statut et cetera,
+<Sync time="2401.454"/>
+ça va regarder les données partagées récentes ; si c'est fais-moi jouer au dernier quiz débile,
+<Sync time="2405.811"/>
+ça va envoyer vers
+<Sync time="2407.245"/>
+les autres services qui sont produits par des euh entreprises extérieures à facebook et qui fournissent des applications pour *facebook
+<Sync time="2414.190"/>
+et cetera. en fait facebook est un énorme système distribué.
+<Sync time="2417.855"/>
+d'ailleurs,
+<Sync time="2418.720"/>
+ce qu'il faut voir ici, c'est que
+<Sync time="2420.669"/>
+dans les dans les euh disques durs là,
+<Sync time="2423.185"/>
+qui stockent toutes vos photos, vidéos
+<Sync time="2425.643"/>
+euh et cetera que vous mettez sur facebook,
+<Sync time="2427.286"/>
+il y a un mot-clé qui apparaît ici, là :
+<Sync time="2430.230"/>
+"permanente".
+<Sync time="2431.952"/>
+ce permanent, il est vrai parce que il vous fournit n'importe quelle photo que vous avez mise sur facebook,
+<Sync time="2437.299"/>
+même si vous l'avez mis il y a plusieurs années ;
+<Sync time="2439.325"/>
+mais il est vrai aussi si vous l'avez supprimée.
+<Sync time="2441.867"/>
+c'est-à-dire que
+<Sync time="2443.630"/>
+si vous mettez une photo sur facebook,
+<Sync time="2446.735"/>
+par exemple vous êtes complètement bourré, on est jeudi soir, il est trois heures du matin, vous mettez une photo où vous êtes pas vraiment
+<Sync time="2452.368"/>
+dans votre avantage ;
+<Sync time="2454.632"/>
+elle va être publiée sur facebook par vous ou par un de vos amis
+<Sync time="2457.28"/>
+qui vous veut du bien
+<Sync time="2459.303"/>
+et vous allez vous dire : euh nan, cette photo je veux pas donc je vais la supprimer.
+<Sync time="2463.063"/>
+ce qu'il faut savoir, c'est qu'à partir du moment où elle a été mise,
+<Sync time="2464.996"/>
+vous avez donné
+<Sync time="2466.354"/>
+vous avez libéré les droits
+<Sync time="2467.810"/>
+de propriété commerciale à facebook. c'est-à-dire que
+<Sync time="2471.792"/>
+vos droits de propriété intellectuelle, ils sont inaliénables, ils peuvent pas () vous pouvez pas les changer, vous pouvez pas les donner
+<Sync time="2476.583"/>
+donc facebook peut pas vous les voler. par contre, à partir du moment où ils sont stockés
+<Sync time="2479.540"/>
+cette photo sur ses serveurs,
+<Sync time="2481.410"/>
+il a le droit
+<Sync time="2483.007"/>
+de l'utiliser comme bon lui semble.
+<Sync time="2485.450"/>
+quand vous mettez une photo, quand vous utilisez facebook, vous acceptez les termes *générals du contrat.
+<Sync time="2489.826"/>
+et s'il a envie de faire une pub pour le prochain événement apéro facebook qui va avoir lieu sur nantes,
+<Sync time="2494.805"/>
+et mettre la photo où vous êtes pas du tout, du tout à votre avantage
+<Sync time="2498.023"/>
+sur des affiches quatre mètres par trois mètres dans le centre-ville de nantes, il a le droit :
+<Sync time="2502.570"/>
+faites quand même vachement gaffe à ce que vous mettez sur facebook.
+<Sync time="2505.255"/>
+sachant que, officiellement, ils sont censés retirer les photos que vous demandez à supprimer ;
+<Sync time="2509.432"/>
+en fait, ce qu'il se passe, c'est que les photos il les laisse
+<Sync time="2511.500"/>
+il ne les affiche plus
+<Sync time="2513.608"/>
+sur son sur son site internet.
+<Sync time="2515.411"/>
+par contre, elles persistent, elles re() elles sont toujours sur les serveurs
+<Sync time="2518.345"/>
+jusqu'à ce qu'il y ait une autre donnée qui les remplace. mais comme leurs serveurs sont tellement grands
+<Sync time="2522.127"/>
+que parfois il y a des parties qui ne sont jamais effacées, même si vous avez demandé à ce qu'elles soient effacées.
+<Sync time="2526.738"/>
+donc faites vraiment attention :
+<Sync time="2529.246"/>
+c'est pas seulement supprimer qui est important, c'est aussi ne pas mettre tout court.
+<Sync time="2533.266"/>
+bon
+<Sync time="2534.467"/>
+soit. d'autres systèmes
+<Sync time="2536.064"/>
+type webservice utilisent des s() des euh des systèmes distribués.
+<Sync time="2539.668"/>
+tout ce qui est les systèmes classiques
+<Sync time="2541.9"/>
+qu'on appelle les crawlers web, qui vous permettent de vous présenter sur une belle interface
+<Sync time="2545.561"/>
+la liste de tous les tarifs des compagnies aériennes pour *organiser votre prochain voyage.
+<Sync time="2549.044"/>
+en fait, elle euh possède aucune information
+<Sync time="2551.216"/>
+les informations, elle va les chercher chez les autres.
+<Sync time="2553.410"/>
+donc quand vous dites : bah donne-moi le billet de nantes euh à à rome pour les prochaines vacances de noël
+<Sync time="2558.618"/>
+eh bien il va aller chercher sur air france, sur euh
+<Sync time="2561.123"/>
+sur alitalia, sur et cetera les tarifs et il va vous les afficher, vous les présenter bien
+<Sync time="2565.161"/>
+de manière complètement transparente ; vous avez l'impression d'utiliser une seule appli
+<Sync time="2569.094"/>
+mais en fait, vous en utilisez plein. c'est () il y a tout un système distribué qui se cache derrière.
+<Sync time="2572.670"/>
+c'est pareil
+<Sync time="2573.757"/>
+le courtage en temps réel
+<Sync time="2575.559"/>
+tout ce qui est euh tout ce qui va être euh les applications bancaires : maintenant toutes les
+<Sync time="2579.8"/>
+toutes les banques et tous les euh toutes les bourses sont reliées sur des réseaux ultrarapides
+<Sync time="2584.058"/>
+où on peut acheter et vendre des actions
+<Sync time="2585.964"/>
+en quelques microsecondes,
+<Sync time="2587.418"/>
+ce que font bon ce que font tous les traders euh
+<Sync time="2589.631"/>
+au jour d'aujourd'hui.
+<Sync time="2591.700"/>
+vous savez que il y a quand même une course,
+<Sync time="2593.79"/>
+il y a des il y a
+<Sync time="2595.139"/>
+les
+<Sync time="2596.754"/>
+les loyers
+<Sync time="2598.400"/>
+qui j() entourent les bourses s() font partie des loyers les plus chers au monde,
+<Sync time="2602.427"/>
+parce que du coup si on peut se connecter directement à la bourse, on peut gagner les quelques millisecondes qui vont faire qu'on va vendre
+<Sync time="2608.323"/>
+avant quelqu'un d'autre, qui va être situé un petit peu plus loin à plus longue distance, et donc le lan() le temps de latence de son message va être plus long
+<Sync time="2614.200"/>
+et donc du coup, on pourra vendre à meilleur prix que lui, qui aura perdu quelques millicentimes
+<Event desc="néologisme" type="lexical" extent="previous"/>
+ d'euros dans sa vente.
+<Sync time="2619.48"/>
+donc on arrive à des euh
+<Sync time="2620.920"/>
+à des aspects
+<Sync time="2622.539"/>
+très euh très impressionnants, même pour l'utilisation des systèmes distribués.
+<Sync time="2626.700"/>
+un autre système distribué classique,
+<Sync time="2628.975"/>
+c'est le peer to peer.
+<Sync time="2631.310"/>
+qui ici n'a jamais téléchargé quelque chose en utilisant une application pair à pair ?
+<Sync time="2637.450"/>
+ah ! il y a beaucoup moins de mains levées que pour facebook, déjà.
+<Sync time="2640.404"/>
+bon, bien sûr hein, les applications pair à pair sont censées être du partage de fichiers dont vous êtes les propriétaires, ou vous avez le droit de diffusion sur internet.
+<Sync time="2649.129"/>
+tout
+<Sync time="2650.256"/>
+téléchargement
+<Sync time="2651.770"/>
+d'oeuvres protégées est bien sûr illégal,
+<Sync time="2655.399"/>
+on est bien d'accord.
+<Sync time="2657.759"/>
+alors faut savoir que le pair à pair, c'est pas seulement du partage de fichiers
+<Sync time="2661.311"/>
+même si c'est un système distribué où vous avez des gens qui mettent en partage des ressources interconnectées par un réseau.
+<Sync time="2667.432"/>
+par exemple skype
+<Sync time="2669.170"/>
+qui n'a pas de compte skype ?
+<Sync time="2672.110"/>
+voilà, vous êtes quand même relativement nombreux à avoir déjà utilisé skype.
+<Sync time="2675.565"/>
+eh ben skype, c'est en fait une communication voix sur ip
+<Sync time="2680.132"/>
+qui est pair à pair.
+<Sync time="2681.301"/>
+*c'est-à-dire le la base de skype est peer to peer.
+<Sync time="2685.980"/>
+d'autres euh d'autres utilisations des systèmes distribués : la modélisation trois d.
+<Sync time="2690.730"/>
+il aurait fallu plusieurs dizaines d'années pour pouvoir réaliser le film avatar si on était sur une simple machine de bureau ;
+<Sync time="2697.22"/>
+il fallait bien des supercalculateurs qui nous permettaient de calculer les images de synthèse rapidement.
+<Sync time="2704.500"/>
+alors les systèmes distribués, ils sont apparus par des euh applications au départ grand public relativement étonnantes :
+<Sync time="2710.801"/>
+une application qui est connue, qui s'appelle seti at home. est-ce que vous avez déjà entendu parler de seti at home ?
+<Sync time="2717.020"/>
+donc seti, ça veut dire 
+<Event desc="en" type="language" extent="begin"/>
+search for extra-terrestrial intelligence
+<Event desc="en" type="language" extent="end"/>
+,
+<Sync time="2721.431"/>
+donc recherche d'intelligence extraterrestre.
+<Sync time="2723.941"/>
+le but de cette application, c'est quoi ?
+<Sync time="2726.800"/>
+vous 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ utilisez votre ordinateur ; quand vous êtes partis manger, boire, faire quoi que ce soit d'autre, l'ordinateur souvent il se met en veille, il y a un écran de veille qui se lance.
+<Sync time="2734.36"/>
+en général, quand il y a un écran de veille, c'est que votre ordinateur n'est pas utilisé.
+<Sync time="2737.708"/>
+donc le projet seti, qu'est-ce qui vous proposait ? il vous proposait de télécharger un petit économiseur d'écran
+<Sync time="2742.566"/>
+chez lui
+<Sync time="2743.430"/>
+et donc quand votre i() votre 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ quand votre utili() roh ! quand votre machine n'était pas utilisée,
+<Sync time="2749.600"/>
+elle euh elle lançait l'économiseur d'écran, et 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ l'économiseur d'écran se lançant, il allait chercher des informations sur internet
+<Sync time="2756.160"/>
+donc une partie des données
+<Sync time="2757.861"/>
+qui cherchait à décoder pour voir s'il y avait des gens sur euh qui existaient
+<Sync time="2761.077"/>
+au-delà de notre monde,
+<Sync time="2762.285"/>
+et puis il décodait ça sur votre machine et il renvoyait le résultat, il en retéléchargeait d'autres jusqu'à ce que
+<Sync time="2766.458"/>
+vous, vous arrêtiez l'économiseur d'écran et que vous repreniez votre travail.
+<Sync time="2769.300"/>
+alors quelles sont les données qu'il décode ? bah il y a des énormes des énormes antennes dans le désert du nevada
+<Sync time="2774.551"/>
+qui vont capter tout ce qui se passe dans l'espace, tout.
+<Sync time="2777.42"/>
+toutes les ondes qui viennent de l'espace, ils vont les prendre
+<Sync time="2779.500"/>
+donc normalement, ce qui vient de l'espace c'est que du bruit, d'accord ? c'est des ondes électromagnétiques qui sont émis par les étoiles
+<Sync time="2785.342"/>
+qui vont rebondir sur d'autres étoiles, d'autres planètes, qui vont arriver sur nous
+<Sync time="2788.549"/>
+c'est () normalement c'est s() que du bruit.
+<Sync time="2790.643"/>
+mais si, parmi ces ondes électromagnétiques, on arrive à détecter une certaine régularité
+<Sync time="2796.525"/>
+c'est que ça n'a pas pu être émis
+<Sync time="2798.475"/>
+par un astre sans vie.
+<Sync time="2800.320"/>
+c'est que automatiquement, ça a été une intelligence quelconque qui a cherché à émettre un message,
+<Sync time="2806.243"/>
+et donc ça voudrait dire qu'on a trouvé
+<Sync time="2808.470"/>
+une euh intelligence extraterrestre qui cherche à rentrer en communication,
+<Sync time="2812.439"/>
+alors avec nous ou avec d'autres mondes.
+<Sync time="2814.568"/>
+alors à votre avis, est-ce que seti at home a déjà trouvé quelque chose ?
+</Turn>
+<Turn startTime="2817.27" endTime="2819.45">
+<Sync time="2817.270"/>
+
+<Event desc="conv" type="noise" extent="instantaneous"/>
+
+</Turn>
+<Turn speaker="spk8" mode="planned" fidelity="high" channel="studio" startTime="2819.45" endTime="2859.738">
+<Sync time="2819.450"/>
+voilà, elle a pas trouvé de d'intelligence extraterrestre ; ce serait écrit dans les journaux, je pense.
+<Sync time="2823.997"/>
+par contre, elle a déjà trouvé quelque chose
+<Sync time="2825.870"/>
+par exemple, il est arrivé () donc vous pouvez lire ça euh sur slash dot
+<Sync time="2829.578"/>
+une petite anecdote :
+<Sync time="2831.012"/>
+c'est euh la femme d'un des fondateurs de seti at home avait bien sûr, sur son ordinateur portable,
+<Sync time="2836.851"/>
+le euh l'économiseur d'écran et un jour elle s'est fait voler son ordinateur portable.
+<Sync time="2840.681"/>
+donc quand les voleurs ont ouvert l'ordinateur pour l'utiliser,
+<Sync time="2843.800"/>
+à un moment, l'économiseur d'écran s'est mis en route ; et en se mettant en route,
+<Sync time="2847.139"/>
+il a été chercher des données
+<Sync time="2848.616"/>
+sur le serveur de seti at home pour pouvoir les décoder
+<Sync time="2851.183"/>
+et donc
+<Sync time="2852.040"/>
+en récupérant l'adresse ip de la machine, ils ont réussi
+<Sync time="2854.986"/>
+à retrouver l'ordinateur de la femme, mais c'est la seule chose qu'ils ont réussi à retrouver jusqu'à aujourd'hui.
+</Turn>
+<Turn mode="planned" fidelity="high" startTime="2859.738" endTime="2861.220">
+<Sync time="2859.738"/>
+
+<Event desc="rire en fond" type="noise" extent="instantaneous"/>
+
+</Turn>
+<Turn speaker="spk8" mode="planned" fidelity="high" channel="studio" startTime="2861.220" endTime="3989.685">
+<Sync time="2861.220"/>
+par contre, ce type de () ce type de calcul, c'est ce qu'on appelle le calcul volontaire
+<Sync time="2866.42"/>
+ça a un nom, c'est c'est le calcul distribué volontaire, *c'est-à-dire vous
+<Sync time="2869.930"/>
+vous pouvez télécharger le petit économiseur d'écran de seti at home et participer à ça.
+<Sync time="2873.786"/>
+mais il y a des choses un petit peu moins
+<Sync time="2875.680"/>
+hurluberlu, un petit peu plus sérieuses, comme par exemple génome at home.
+<Sync time="2880.083"/>
+et genome at home permet de participer au décodage du génome, en fournissant le petit
+<Sync time="2887.059"/>
+puissance de calcul que vous pouvez l() laisser à euh à ce projet.
+<Sync time="2892.749"/>
+vous avez aussi lhc at home ; est-ce que vous avez déjà entendu parler de du lhc ?
+<Sync time="2897.204"/>
+le lhc, donc 
+<Event desc="en" type="language" extent="begin"/>
+large hadron collider
+<Event desc="en" type="language" extent="end"/>
+, c'est l'accélérateur de particules qui est sur la frontière franco-suisse.
+<Sync time="2902.242"/>
+cet accélérateur de particules, à chaque fois qu'il y a une expérience,
+<Sync time="2906.060"/>
+ça va être des téras et des téraoctets de données qui vont être générés.
+<Sync time="2909.800"/>
+donc ces téraoctets de données, il faut bien les traiter
+<Sync time="2912.310"/>
+donc ils vont avoir, eux, une grappe de calcul surpuissante
+<Sync time="2915.757"/>
+avec plein, plein, plein d'ordinateurs, plein de pays participants qui fournissent de la puissance de calcul
+<Sync time="2920.089"/>
+mais vous,
+<Sync time="2920.909"/>
+utilisateurs lambda,
+<Sync time="2922.283"/>
+vous pouvez aller sur lhc at home et télécharger le petit économiseur d'écran
+<Sync time="2927.052"/>
+qui vous fera participer au décodage des dernières expériences du lhc.
+<Sync time="2930.840"/>
+bon, dernier exemple et après on passe euh on passe à quelque chose d'un peu plus concret :
+<Sync time="2934.81"/>
+les réseaux de capteurs.
+<Sync time="2936.428"/>
+les réseaux de capteurs, ce sont des systèmes distribués.
+<Sync time="2939.010"/>
+c'est-à-dire un réseau de capteurs, c'est quoi ? ben si on prend l'exemple de surveillance de feux de forêt,
+<Sync time="2942.91"/>
+vous avez des tout petits capteurs. les capteurs, euh c'est des () c'est en général des choses () on est sur de la nanotechnologie, hein
+<Sync time="2948.171"/>
+c'est des capteurs qu'on peut poser sur une abeille ou qui font la taille d'une pièce de un centime,
+<Sync time="2951.771"/>
+c'est des choses très très petites qui tiennent sur un ongle
+<Sync time="2954.960"/>
+mais alors le problème, c'est qu'ils possèdent pas de puissance de calcul, quasiment pas de mémoire ni rien. c'est vraiment des des des des mini
+<Sync time="2960.828"/>
+des mini-ordinateurs.
+<Sync time="2962.180"/>
+le but,
+<Sync time="2963.410"/>
+pour la surveillance de feux de forêt, ça va être par exemple de
+<Sync time="2967.000"/>
+détecter ici
+<Sync time="2969.650"/>
+euh on va balancer d'un avion des centaines de petits capteurs
+<Sync time="2973.959"/>
+sur un sur une forêt ;
+<Sync time="2975.607"/>
+une forêt sensible au feu, par exemple.
+<Sync time="2977.671"/>
+ces capteurs, qu'est-ce qu'ils vont faire ? toute la journée, ils vont calculer la température et l'hydrométrie ;
+<Sync time="2982.703"/>
+tout le temps.
+<Sync time="2984.700"/>
+et
+<Sync time="2985.490"/>
+ils se rendent compte que s'il y a une augmentation de la température qui est corrélée avec une diminution de l'é() du du taux d'hydrométrie,
+<Sync time="2991.244"/>
+on peut se dire que potentiellement, il y a un départ de feux de forêt.
+<Sync time="2994.430"/>
+et donc, ça va lancer une petite alerte qui va être reprise par un autre capteur, par un autre capteur pour arriver
+<Sync time="2999.112"/>
+jusqu'à une station de base, station de base qui envoie une alerte
+<Sync time="3002.028"/>
+aux pompiers
+<Sync time="3003.138"/>
+et donc qui va pouvoir intervenir directement sur le foyer de démarrage du feu de forêt, et sauver des hectares et des hectares de forêt.
+<Sync time="3008.336"/>
+donc ça, c'est des applications qui existent déjà.
+<Sync time="3011.010"/>
+bon après,
+<Sync time="3011.891"/>
+elles ont des problèmes écologiques
+<Sync time="3013.672"/>
+qu'on peut bien imaginer, comme balancer des centaines et des centaines de capteurs dans une forêt ;
+<Sync time="3019.522"/>
+je suis pas sûr que le côté d() biodégradable des puces euh des puces en silicium soit complètement prouvé aujourd'hui.
+<Sync time="3025.746"/>
+alors en résumé
+<Sync time="3027.079"/>
+les systèmes distribués sont partout, vous les utilisez tout le temps sans même le savoir
+<Sync time="3033.840"/>
+et c'est justement ça qui est bien :
+<Sync time="3035.541"/>
+c'est que finalement, la définition d'un système distribué, qui est que l'utilisateur ne doit pas se rendre compte de la complexité du système,
+<Sync time="3041.595"/>
+eh bien aujourd'hui c'est mature et c'est vrai.
+<Sync time="3044.371"/>
+les utilisateurs se rendent pas compte qu'ils utilisent des systèmes distribués très complexes.
+<Sync time="3049.494"/>
+donc comment est-ce que fonctionnent ces systèmes ? eh bien ils fonctionnent en collaboration,
+<Sync time="3054.630"/>
+et comment est-ce qu'on fait collaborer plusieurs machines ensemble ? eh bien on leur fait exécuter à chacune des algorithmes distribués.
+<Sync time="3061.706"/>
+et c'est là
+<Sync time="3062.670"/>
+où
+<Sync time="3063.204"/>
+ça vous intéresse plus particulièrement.
+<Sync time="3067.440"/>
+bien que j'espère que depuis le début du cours, c'était pas totalement inintéressant.
+<Sync time="3072.106"/>
+donc ces algorithmes distribués, on va voir comment est-ce qu'on les modélise, comment est-ce qu'on les analyse, comment est-ce qu'on travaille dessus
+<Sync time="3077.553"/>
+et puis on va voir quels problèmes on a,
+<Sync time="3079.459"/>
+qui sont différents
+<Sync time="3080.773"/>
+des problèmes de l'algorithmique standard que vous avez vus depuis le début
+<Sync time="3083.847"/>
+du semestre.
+<Sync time="3085.937"/>
+donc
+<Sync time="3088.497"/>
+un algorithme distribué,
+<Sync time="3090.054"/>
+comment est-ce qu'on le modélise ?
+<Sync time="3092.050"/>
+eh bien
+<Sync time="3093.054"/>
+on va avoir besoin de deux notions supplémentaires par rapport à l'algorithme classique
+<Sync time="3096.84"/>
+donc l'algorithme classique, je vous rappelle hein, on avait juste
+<Sync time="3099.361"/>
+la *modélisation temporelle avec un historique d'exécution
+<Sync time="3102.329"/>
+et donc on pouvait suivre
+<Sync time="3104.015"/>
+euh l'évolution de votre algorithme en fonction
+<Sync time="3106.367"/>
+de l'historique d'exécution. ben là on va avoir besoin de deux notions : on va avoir besoin d'une notion d'espace,
+<Sync time="3111.473"/>
+c'est-à-dire comment est-ce que sont reliés les différents ordinateurs entre  eux, les différents processus ;
+<Sync time="3117.016"/>
+est-ce que () qui a le droit de communiquer avec qui,
+<Sync time="3119.271"/>
+donc on va pouvoir dessiner un petit peu la carte des communications
+<Sync time="3122.677"/>
+et on va avoir besoin d'une notion de temps.
+<Sync time="3124.690"/>
+parce que dans un algorithme classique, on a le côté itératif, on est sûr que
+<Sync time="3128.89"/>
+les aides () les () toutes les instructions vont se faire dans un ordre déterminé par vous, le concepteur de l'algo.
+<Sync time="3134.419"/>
+mais si j'ai deux algos qui s'exécutent en parallèle,
+<Sync time="3137.370"/>
+qu'est-ce qui me dit que cette instruction-là
+<Sync time="3139.680"/>
+va s'exécuter avant cette instruction-là, ou l'inverse ?
+<Sync time="3143.144"/>
+rien.
+<Sync time="3143.879"/>
+donc il va falloir pouvoir modéliser ça.
+<Sync time="3146.445"/>
+donc comment est-ce qu'on modélise l'espace ? eh ben l'espace, on le modélise par un graphe.
+<Sync time="3149.639"/>
+donc le graphe, vous en avez *vu plusieurs, vous en avez vu en réseaux sociaux,
+<Sync time="3152.647"/>
+vous avez vu aussi euh
+<Sync time="3154.225"/>
+en
+<Sync time="3155.474"/>
+traitement automatique des langues, où on utilise des graphes particuliers qu'on at() qu'on appelle des automates.
+<Sync time="3159.852"/>
+donc un graphe, c'est quoi ? ben c'est une série de sommets, ces petits ronds, avec des arcs qui relient les sommets
+<Sync time="3166.301"/>
+donc
+<Sync time="3166.917"/>
+un sommet, ça va représenter un participant
+<Sync time="3169.29"/>
+un participant aux systèmes distribués, donc classiquement un ordinateur ou un processus ou quelque chose,
+<Sync time="3173.937"/>
+et les actes vont représenter la liaison réseau,
+<Sync time="3176.394"/>
+la possibilité de communiquer entre deux points.
+<Sync time="3179.573"/>
+par exemple, a ici, il peut communiquer avec b,
+<Sync time="3182.805"/>
+avec c, avec e, mais par contre a ne peut pas communiquer avec d directement.
+<Sync time="3187.954"/>
+pour que a communique avec d,
+<Sync time="3189.738"/>
+il faut qu'il passe par b
+<Sync time="3191.873"/>
+puis par e
+<Sync time="3192.898"/>
+puis par c
+<Sync time="3194.552"/>
+pour finir par d, par exemple ; ou il peut aller juste par c pour finir par d.
+<Sync time="3198.380"/>
+mais
+<Sync time="3199.050"/>
+il est obligé en tout cas de passer par un
+<Sync time="3201.503"/>
+participant intermédiaire pour pouvoir communiquer avec un autre.
+<Sync time="3204.854"/>
+c'est le cas dans les réseaux informatiques hein
+<Sync time="3206.835"/>
+vous pouvez pas atteindre directement le datacenter de euh de google ; en général, quand vous allez sur votre gmail,
+<Sync time="3212.65"/>
+vous allez passer par plein plein plein de serveurs avant d'arriver là-bas.
+<Sync time="3217.119"/>
+alors
+<Sync time="3217.960"/>
+un réseau qui pourrait ressembler à celui de du cie
+<Event desc="épelé" type="pronounce" extent="previous"/>
+ par exemple, du centre informatique de
+<Sync time="3222.980"/>
+de la fac de sciences, ce serait celui-là,
+<Sync time="3225.194"/>
+par exemple. ce serait les différentes salles de cours qui sont interconnectées
+<Sync time="3229.31"/>
+à
+<Sync time="3230.530"/>
+par euh une machine particulière, qui vont les interconnecter à un routeur particulier
+<Sync time="3235.353"/>
+et qui vont pouvoir après aller connecter sur différentes autres salle de cours.
+<Sync time="3239.410"/>
+donc on a on a une sorte de ramification en en fleur, comme on voit ici.
+<Sync time="3244.137"/>
+bon, bien sûr, vous recopiez pas le graphe hein.
+<Sync time="3249.488"/>
+et
+<Sync time="3250.586"/>
+ces réseaux-là, on va pouvoir
+<Sync time="3252.446"/>
+on va pouvoir *modéliser plein de choses
+<Sync time="3254.134"/>
+par exemple un réseau social.
+<Sync time="3256.540"/>
+le réseau social, on a vu aujourd'hui
+<Sync time="3258.900"/>
+vous avez vu déjà avec euh 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ que ça peut ressembler à ce type de choses :
+<Sync time="3263.406"/>
+c'est-à-dire que un lien, ça va être un lien d'amitié : je suis ami avec toi ou t'es ami avec moi.
+<Sync time="3268.177"/>
+mais sauf que le problème, c'est que ces graphes ils commencent à être très gros
+<Sync time="3271.394"/>
+extrêmement gros, donc on va avoir besoin de modéliser ces graphes.
+<Sync time="3274.330"/>
+si ch() si on r() on regarde les interconnexions des gens sur facebook, par exemple, il va falloir utiliser un ordinateur pour pouvoir
+<Sync time="3281.708"/>
+bah
+<Sync time="3282.590"/>
+traiter la modélisation du réseau social. donc on commence à avoir un double degré d'abstraction qui commence à compliquer pas mal les choses.
+<Sync time="3290.294"/>
+donc ces interconnexions, elles se font de plusieurs façons différentes :
+<Sync time="3293.243"/>
+la première façon, classique, c'est ce qu'on appelle la communication client serveur.
+<Sync time="3297.803"/>
+une *communication client serveur, c'est que
+<Sync time="3299.912"/>
+toute l'information elle est là ;
+<Sync time="3302.300"/>
+le producteur d'information il est central
+<Sync time="3304.590"/>
+et tous les *gens qui sont autour, ce ne sont que des satellites. c'est-à-dire ce sont des clients, ils vont être uniquement consommateurs.
+<Sync time="3310.866"/>
+c'est votre
+<Sync time="3311.910"/>
+c'est votre action, lorsque vous utilisez un serveur par *exemple type euh
+<Sync time="3315.507"/>
+euh bah wikipédia ou autre, où vous allez consulter wikipédia quand vous () pas quand vous modifiez, mais quand vous consultez wikipédia,
+<Sync time="3322.700"/>
+vous 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ interrogez le serveur de wikipédia,
+<Sync time="3325.283"/>
+et vous consommez de l'information.
+<Sync time="3328.090"/>
+à l'inverse, l'architecture pair à pair, si on enlève tout le côté illégal du téléchargement de fichiers,
+<Sync time="3333.295"/>
+c'est en fait une architecture
+<Sync time="3336.102"/>
+prometteuse pour l'avenir. pourquoi ? parce que aujourd'hui,
+<Sync time="3339.050"/>
+chaque serveur, c'est plusieurs centaines de milliers de connexions
+<Sync time="3342.2"/>
+voire millions de connexions.
+<Sync time="3343.635"/>
+facebook,
+<Sync time="3344.610"/>
+ils s() ils préconisent, je sais plus, je crois que c'est un virgule cinq milliard d'utilisateurs actifs
+<Sync time="3349.139"/>
+de facebook aujourd'hui.
+<Sync time="3350.950"/>
+donc vous imaginez s'il y avait qu'un seul serveur qui récupère toutes les requêtes de un virgule cinq milliards de gens ?
+<Sync time="3355.338"/>
+non, c'est pas possible. donc c'est pour ça qu'ils ont des batteries de serveurs derrière.
+<Sync time="3358.097"/>
+mais même ces batteries de serveurs, plus il y a de gens, plus faut de serveurs.
+<Sync time="3361.327"/>
+donc ça s() on dit que ça passe pas à l'échelle.
+<Sync time="3363.478"/>
+*c'est-à-dire qu'il y a touj() il y aura toujours un moment où le serveur sera débordé.
+<Sync time="3366.867"/>
+donc ce qu'on fait,
+<Sync time="3368.564"/>
+c'est qu'on utilise une architecture pair à pair ; cette architecture pair à pair, c'est en fait
+<Sync time="3372.311"/>
+vous allez chercher l'information non pas sur un serveur,
+<Sync time="3374.928"/>
+mais directement là où elle se situait au départ
+<Sync time="3377.874"/>
+c'est-à-dire
+<Sync time="3378.835"/>
+que bah vous allez chercher par exemple
+<Sync time="3381.070"/>
+votre rapport que vous êtes en train de coécrire avec
+<Sync time="3384.158"/>
+euh votre collègue, votre binôme, vous allez le chercher sur l'ordinateur du binôme directement en passant par le réseau
+<Sync time="3389.090"/>
+et non plus via une dropbox ou un google drive ou autre.
+<Sync time="3392.280"/>
+donc ça, c'est l'architecture pair à pair. donc c'est deux types d'architecture où là on n'a plus du tout () on est complètement décentralisés
+<Sync time="3397.297"/>
+on n'a plus le phénomène centralisateur
+<Sync time="3399.510"/>
+du serveur.
+<Sync time="3402.525"/>
+en plus de ça, on a besoin d'une notion de temps.
+<Sync time="3405.440"/>
+cette notion de temps, ça va permettre
+<Sync time="3408.61"/>
+de savoir comment est-ce que les
+<Sync time="3410.514"/>
+choses se sont exécutées. donc () c'est-à-dire on va regarder finalement les différents messages
+<Sync time="3415.308"/>
+qui vont passer entre les différents acteurs.
+<Sync time="3417.563"/>
+donc pour ça, chaque
+<Sync time="3418.936"/>
+chaque noeud du graphe
+<Sync time="3421.142"/>
+qu'est à gauche va avoir une ligne temporelle.
+<Sync time="3423.413"/>
+cette ligne temporelle,
+<Sync time="3424.914"/>
+ça va
+<Sync time="3425.72"/>
+être en fait une frise chronologique des différentes actions qui se sont passées
+<Sync time="3429.104"/>
+sur
+<Sync time="3429.904"/>
+ce noeud-là en particulier.
+<Sync time="3431.603"/>
+et ce qui va se passer, c'est que pour chaque communication,
+<Sync time="3434.164"/>
+si a envoie un message à c, par exemple comme ici,
+<Sync time="3437.295"/>
+eh bien on va dessiner une petite flèche qui va de a vers c, pour dire il y a eu un message de a vers c.
+<Sync time="3442.640"/>
+et on va faire ça pour tous les messages qui passent pendant l'exécution de votre algorithme distribué.
+<Sync time="3448.210"/>
+alors il y a des choses intéressantes : ça permet de détecter par exemple certaines
+<Sync time="3452.700"/>
+erreurs
+<Sync time="3453.806"/>
+dans l'ordonnancement de réception.
+<Sync time="3455.897"/>
+regardez ici, par exemple :
+<Sync time="3457.414"/>
+le dern() les deux derniers messages échangés
+<Sync time="3459.990"/>
+ici, d il a envoyé son message à c après celui de b,
+<Sync time="3464.740"/>
+et pourtant b l'a reçu av() c l'a reçu avant () que celui de b
+<Sync time="3468.447"/>
+parce que bah le réseau euh était plus lent pour b que pour c et k() que pour d et cetera.
+<Sync time="3473.625"/>
+donc du coup, c il a l'impression que d lui a parlé avant b,
+<Sync time="3477.109"/>
+alors qu'en fait c'est exactement l'inverse.
+<Sync time="3478.871"/>
+donc il va falloir trouver des mécanismes pour être capable de bien ordonnancer
+<Sync time="3482.230"/>
+toutes les réceptions de messages
+<Sync time="3483.969"/>
+en corrélation avec les émissions de messages.
+<Sync time="3488.680"/>
+donc en gros,
+<Sync time="3490.086"/>
+si on ass() si avec le diagramme de séquence qui est ici,
+<Sync time="3493.358"/>
+on lui associe l'historique d'exécution qui est à gauche,
+<Sync time="3496.713"/>
+on obtient un historique d'exécution d'algorithme
+<Sync time="3500.265"/>
+réparti.
+<Sync time="3501.966"/>
+donc on va prendre
+<Sync time="3504.140"/>
+les f() les lignes temporelles
+<Sync time="3506.276"/>
+de d'échange de messages, on va prendre l'exécution séquentielle sur chacun des
+<Sync time="3511.253"/>
+des euh des participants au système, et on se retrouve avec un comportement
+<Sync time="3515.564"/>
+global,
+<Sync time="3516.490"/>
+donc un historique d'exécution du système.
+<Sync time="3526.203"/>
+alors ça,
+<Sync time="3527.500"/>
+ça vous donne
+<Sync time="3529.460"/>
+la modélisation de votre algorithme réparti.
+<Sync time="3531.793"/>
+maintenant, quels sont les problèmes, les nouveaux problèmes qui vont être générés ?
+<Sync time="3535.171"/>
+c'est ce qu'on va regarder ensemble tout de suite.
+<Sync time="3537.017"/>
+donc il y a plein d'autres catégories de problèmes qu'on va avoir dans les systèmes distribués, ou dans les algorithmes distribués.
+<Sync time="3543.624"/>
+ces problèmes, ça va être lié à des notions de efficacité,
+<Sync time="3546.943"/>
+de synchronisation, de robustesse
+<Sync time="3549.01"/>
+ou d'auto.
+<Sync time="3550.640"/>
+
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ on appelle auto : auto-stabilisation, auto-adaptation, auto-organisation ; il y a toute une catégorie
+<Sync time="3555.4"/>
+d'auto-choses
+<Sync time="3556.447"/>
+dont je vais vous parler à la fin.
+<Sync time="3558.260"/>
+donc on les appelle les self stars, les euh les auto-étoiles, c'est tous les mots qui commencent par auto.
+<Sync time="3563.129"/>
+alors le
+<Sync time="3564.314"/>
+l'efficacité
+<Sync time="3565.580"/>
+en fait ici
+<Sync time="3567.403"/>
+eh bien quand on regardait un algorithme classique, son efficacité c'était le temps d'exécution de l'algorithme.
+<Sync time="3572.033"/>
+*c'est-à-dire entre le moment où je commençais et le moment où je terminais, c'était
+<Sync time="3575.378"/>
+quelle était la taille mémoire que j'avais besoin, et puis combien de temps il mettait à s'exécuter.
+<Sync time="3578.810"/>
+le problème d'un algorithme distribué,
+<Sync time="3581.552"/>
+c'est que
+<Sync time="3582.58"/>
+on n'est pas capable de déterminer exactement () enfin c'est pas forcément qu'une bonne définition, le temps d'exécution.
+<Sync time="3588.175"/>
+pourquoi ?
+<Sync time="3589.281"/>
+bah parce que
+<Sync time="3590.310"/>
+dans un algorithme distribué,
+<Sync time="3593.328"/>
+vous pourriez par exemple avoir une un un un des processeurs qui ne fait rien pendant quatre-vingt-dix pourcent du temps,
+<Sync time="3599.060"/>
+parce qu'il est en attente d'un message d'un autre
+<Sync time="3602.117"/>
+participant
+<Sync time="3603.142"/>
+pour pouvoir continuer.
+<Sync time="3604.534"/>
+donc du coup, si s() le temps d'exécution de cet algorithme-là,
+<Sync time="3608.335"/>
+en fait ça va être seulement dix pourcent
+<Sync time="3610.975"/>
+de la différence entre le temps d'exécution global.
+<Sync time="3614.169"/>
+donc par exemple,
+<Sync time="3616.220"/>
+ce qu'il faut regarder,
+<Sync time="3617.120"/>
+c'est qu'en plus du temps total pour accomplir la tâche comme on regardait comme avant sur les autres algorithmes,
+<Sync time="3621.811"/>
+on va regarder en plus le pourcentage d'utilisation de chacun des acteurs.
+<Sync time="3625.472"/>
+si un algorithme distribué
+<Sync time="3627.36"/>
+va utiliser vingt pour cent
+<Sync time="3629.750"/>
+de cent machines
+<Sync time="3631.983"/>
+la puissance de cent machines, est-ce que en utilisant seulement vingt machines
+<Sync time="3635.344"/>
+à cent pourcent, il aurait pu
+<Sync time="3637.100"/>
+faire exactement la même chose dans le même temps ? si la réponse est oui,
+<Sync time="3640.193"/>
+alors la version qui utilise cent machines est beaucoup moins efficace que la version qui en utilise que vingt, bien sûr.
+<Sync time="3646.204"/>
+tout comme, puisque on est sur des choses avec communication, il va falloir prendre en compte le nombre de messages échangés :
+<Sync time="3652.233"/>
+si on passe notre temps à parler, et pas à exécuter des actions en local,
+<Sync time="3656.149"/>
+on va ralentir, on sera pas efficace ; on va surcharger le réseau
+<Sync time="3659.368"/>
+de communications, ce qui sera pas efficace du tout.
+<Sync time="3661.541"/>
+donc le nombre de messages échangés
+<Sync time="3663.16"/>
+est une métrique qui nous permet de détecter
+<Sync time="3665.470"/>
+la euh l'efficacité d'un algorithme réparti.
+<Sync time="3669.130"/>
+alors on dit qu'un algorithme réparti,
+<Sync time="3671.466"/>
+tout comme un *algorithme d'ailleurs,
+<Sync time="3672.698"/>
+son exécution classique doit être
+<Sync time="3675.457"/>
+inf() doit être dans un temps raisonnable. et le raisonnable pour un informaticien, c'est la durée
+<Sync time="3680.088"/>
+de vie d'un humain.
+<Sync time="3681.720"/>
+alors ça va peut-être vous faire sourire, parce qu'en se disant : la durée de vie d'un humain, oui
+<Sync time="3684.966"/>
+effectivement, quand je lance un algo, j'aimerais bien qu'il ait fini avant que je meure.
+<Sync time="3687.995"/>
+*donc jusque-là, c'est c'est cohérent.
+<Sync time="3690.196"/>
+mais
+<Sync time="3690.914"/>
+on n'a pas pu trouver mieux. pourquoi ? bah parce que
+<Sync time="3694.091"/>
+si on dit qu'un algo est efficace s'il s'exécute en moins d'une heure,
+<Sync time="3697.694"/>
+bah je suis désolé mais il y a des algorithmes qui demandent trois, quatre jours pour s() pour résoudre des algorithmes de calculs scientifiques qui vont *demander trois, quatre jours.
+<Sync time="3703.611"/>
+si on dit : bon bah d'accord, alors on va placer ça à quinze jours, à un mois
+<Sync time="3706.95"/>
+oui pour pour *décoder le euh pour décoder par exemple euh l'adn humain,
+<Sync time="3711.396"/>
+il a fallu huit ans
+<Sync time="3712.540"/>
+de calcul intensif.
+<Sync time="3714.098"/>
+donc c'est pareil
+<Sync time="3715.169"/>
+c'est pas déraisonnable, huit ans pour décoder la complexité de l'adn humain.
+<Sync time="3719.663"/>
+donc euh c'est pour ça : tout ça fait que
+<Sync time="3721.71"/>
+ben on est arrivé sur un consensus où tant qu'on a la réponse avant de mourir, on est content.
+<Sync time="3728.672"/>
+alors
+<Sync time="3729.310"/>
+on va avoir besoin de synchronisation, *c'est-à-dire qu'on va avoir besoin de coordonner nos actions
+<Sync time="3733.798"/>
+pour dire : bah voilà, puisque je dois m'exécuter
+<Sync time="3736.780"/>
+et que j'attends une réponse de toi pour pouvoir continuer, eh bah je vais avoir un phénomène ce qu'on appelle de synchronisation, *c'est-à-dire que je vais me mettre en attente
+<Sync time="3743.09"/>
+que tu me répondes
+<Sync time="3744.482"/>
+pour pouvoir continuer à travailler, moi, en local.
+<Sync time="3747.5"/>
+le problème, c'est : imaginons que celui que vous attendez, il est planté ()
+<Sync time="3750.870"/>
+on l'ait débranché, toujours la même histoire de euh
+<Sync time="3753.572"/>
+la même histoire d'aspirateur,
+<Sync time="3755.430"/>
+eh ben du coup l() celui qui l'attend, il va l'attendre ad vitam aeternam parce qu'il aura jamais, jamais sa réponse.
+<Sync time="3760.452"/>
+ça s() pose des problèmes.
+<Sync time="3762.909"/>
+donc du coup, ce qu'on va faire c'est qu'on va utiliser des tor() des bornes d'attente, *c'est-à-dire des time out qui vont dire : bon bah si
+<Sync time="3768.44"/>
+au bout de tant de temps, il a pas répondu bah il considère qu'il est mort et puis euh
+<Sync time="3772.29"/>
+essaye d'avancer sans sa réponse.
+<Sync time="3774.505"/>
+de même, on va essayer d'éviter les interblocages ; on va voir tout de suite ce que c'est qu'un interblocage.
+<Sync time="3778.338"/>
+d'a() d'abord, les deux modèles de synchronisation qui existent :
+<Sync time="3782.716"/>
+donc le premier modèle, c'est le modèle synchrone. donc ce qu'on appelle le modèle synchrone,
+<Sync time="3786.834"/>
+c'est en fait () grosso modo, les participants ont la même notion de temps.
+<Sync time="3789.790"/>
+cette *notion de temps est rela() est considérée comme instantanée parce que généralement elle est bornée
+<Sync time="3794.38"/>
+*c'est-à-dire qu'on sait que
+<Sync time="3795.875"/>
+vous recevrez le message dans les cent millisecondes.
+<Sync time="3798.251"/>
+si vous avez pas reçu le message dans les cent millisecondes,
+<Sync time="3801.04"/>
+c'est que la machine est plantée.
+<Sync time="3802.730"/>
+d'accord ?
+<Sync time="3803.59"/>
+donc s() ça, les () l'ins() la messagerie instantanée, type msn ou type euh
+<Sync time="3807.778"/>
+le tchat de facebook ou autre, c'est considéré comme de la communication synchrone. le téléphone, c'est de la communication synchrone.
+<Sync time="3813.811"/>
+si vous avez pas la réponse de ce que vous avez posé comme question à votre personne tout de suite,
+<Sync time="3818.047"/>
+et que vous l'avez dans trois heures, ça sert à rien. donc vous considérez que la personne n'a pas entendu, vous allez lui redemander.
+<Sync time="3822.722"/>
+donc comment ça marche ? bah on lui envoie un message : est-ce qu'on se retrouve *après le cours ?
+<Sync time="3826.31"/>
+et de l'autre côté, il vous répond : oui, ok, on se retrouve à treize heures.
+<Sync time="3831.573"/>
+le problème,
+<Sync time="3832.610"/>
+c'est que on a aussi des possibilités de messagerie dit asynchrone, c'est-à-dire que dans les messageries asynchrones,
+<Sync time="3839.018"/>
+on est sûr d'avoir la même notion du temps
+<Sync time="3841.990"/>
+mais
+<Sync time="3843.290"/>
+par contre,
+<Sync time="3844.48"/>
+ce qu'on ne sait pas, c'est en combien de temps il va arriver. on est sûr qu'il va arriver, le message
+<Sync time="3848.940"/>
+il va arriver mais il peut arriver demain,
+<Sync time="3851.213"/>
+il peut arriver dans trois semaines ou il peut arriver dans un mois.
+<Sync time="3854.139"/>
+imaginons que la personne soit partie en vacances à l'autre bout du monde
+<Sync time="3857.126"/>
+et ne lise votre mail que à son retour,
+<Sync time="3859.540"/>
+eh bien vous pouvez pas savoir qu'il a lu le mail avant, mais vous savez qu'il a l() qu'il va le lire un jour ; le prochain jour où il lancera sa boîte mail, il au() il aura le message.
+<Sync time="3867.084"/>
+donc par exemple, si je donne un exemple de communication asynchrone
+<Sync time="3870.941"/>
+eh bien euh au début du cours, vous avez envoyé un mail à votre collègue
+<Sync time="3874.48"/>
+euh pour lui demander : est-ce qu'on se retrouve à treize heures ?
+<Sync time="3876.582"/>
+lui, à onze heures quarante-cinq, il se fait suer pendant le cours donc il regarde ses mails sur son téléphone portable, ce qui est totalement interdit hein,
+<Sync time="3883.887"/>
+et il va lui répondre "ok" par mail. donc à midi et quart, dans quelques minutes, vous s() commencez à avoir faim, vous vous dites : tiens,
+<Sync time="3890.5"/>
+est-ce qu'il m'a répondu ? vous regardez
+<Sync time="3893.086"/>
+mais il dit : ah ouais mais attends,
+<Sync time="3894.397"/>
+parce que moi je sais
+<Sync time="3895.298"/>
+que j'ai eu son message, donc il y a pas de souci
+<Sync time="3897.205"/>
+mais est-ce que lui, il sait que j'ai eu mon message ?
+<Sync time="3898.876"/>
+ben non
+<Sync time="3899.675"/>
+il peut pas savoir que j'ai lu sa réponse, puisque
+<Sync time="3901.906"/>
+ben i() je peux mettre un temps plus ou moins long à le lire.
+<Sync time="3904.574"/>
+donc je vais lui renvoyer un message pour lui dire : eh,
+<Sync time="3906.562"/>
+j'ai bien eu ton message comme quoi on se retrouve.
+<Sync time="3909.145"/>
+l'autre
+<Sync time="3910.850"/>
+il () comment ? il regarde à midi quarante-cinq ses mails, et il découvre que
+<Sync time="3914.66"/>
+ben l'autre a bien accusé de réception de son mail. mais il se dit : ah oui mais
+<Sync time="3918.980"/>
+est-ce qu'il sait que j'ai reçu
+<Sync time="3920.719"/>
+la confirmation de son mail ?
+<Sync time="3922.950"/>
+ah bah non !
+<Sync time="3923.733"/>
+bah du coup je suis obligé de lui envoyer un message
+<Sync time="3925.537"/>
+un message de m() de mi() de d'acquittement de l() de son propre acquittement que l'autre reçoit à treize heures quinze : le rendez-vous est passé.
+<Sync time="3932.189"/>
+alors ça vous fait rire, mais sachez que cette
+<Sync time="3934.91"/>
+série d'exécutions-là,
+<Sync time="3936.509"/>
+elle apparaît des millions de fois par seconde sur internet.
+<Sync time="3940.408"/>
+c'est
+<Sync time="3941.268"/>
+ce qu'on appelle le processus de démarrage
+<Sync time="3944.002"/>
+d'une communication tcp, où tcp c'est le protocole de communication de base
+<Sync time="3948.507"/>
+synchrone ; ça permet justement de synchroniser des choses
+<Sync time="3952.140"/>
+non synchronisées. parce que internet, par définition, est asynchrone ; il est pas synchrone.
+<Sync time="3956.867"/>
+et donc ça, c'est le début d'une communication tcp, donc vous en avez des millions par seconde sur tous les réseaux du monde.
+<Sync time="3963.077"/>
+sauf que bon, on se donne pas rendez-vous, on demande juste : est-ce que c'est possible de rentrer en communication avec toi ?
+<Sync time="3968.995"/>
+autre question : l'interblocage. je vous ai parlé de l'interblocage tout à l'heure.
+<Sync time="3972.460"/>
+l'interblocage, c'est quoi ? ben c'est ce type d'action
+<Sync time="3975.320"/>
+si on est bien élevé,
+<Sync time="3977.06"/>
+qu'on respecte bien code de la route
+<Sync time="3980.100"/>
+et que tous les véhicules sont dans cette position actuelle,
+<Sync time="3983.584"/>
+si les rouges ne changent pas d'avis et décident d'aller tout droit, tout le monde va mourir dans sa voiture.
+</Turn>
+<Turn startTime="3989.685" endTime="3993.160">
+<Sync time="3989.685"/>
+
+<Event desc="rire en fond" type="noise" extent="instantaneous"/>
+
+</Turn>
+<Turn startTime="3993.160" speaker="spk8" endTime="4118.746" mode="planned" fidelity="high" channel="studio">
+<Sync time="3993.160"/>
+et ça, le problème c'est que on est humain, au bout d'un moment on a faim, on a envie de dormir alors un des rouges va changer de direction, va laisser passer quelques bleus et du coup
+<Sync time="4001.389"/>
+ça va finir par s() on aura eu un gros embouteillage, ça finira par se résoudre.
+<Sync time="4004.817"/>
+un ordinateur, il a pas cette capacité-là. il a pas faim,
+<Sync time="4007.809"/>
+il a pas envie de dormir ; un ordinateur, si vous lui dites : "attends un siècle", il va *attendre un siècle.
+<Sync time="4012.598"/>
+et bon () donc il va falloir faire attention à ce que ce genre de cas n'apparaisse pas dans vos algos. ça peut arriver très facilement,
+<Sync time="4019.270"/>
+par exemple :
+<Sync time="4020.438"/>
+ici,
+<Sync time="4021.350"/>
+je suis le la personne a
+<Sync time="4023.48"/>
+et j'envoie un message à e
+<Sync time="4024.956"/>
+en lui *disant : donne-moi la réponse à cette question que je ne connais pas.
+<Sync time="4027.834"/>
+e ne possède pas la réponse, il va donc transmettre ce message directement à c.
+<Sync time="4032.520"/>
+c va faire de même parce qu'il ne connaît pas non plus la réponse, il va l'envoyer à d.
+<Sync time="4036.226"/>
+décidément, c'est que des ignares là-dedans :
+<Sync time="4038.234"/>
+d non plus n'a pas la réponse, il l'envoie à b qui connaît pas non plus la réponse, qui l'envoie à a.
+<Sync time="4042.339"/>
+mais le problème, c'est que a
+<Sync time="4044.420"/>
+bah il s'en fiche de ce qu'il a() il attend la réponse de e, et tant qu'il a pas la réponse de e, il fera rien d'autre.
+<Sync time="4048.960"/>
+donc du coup, ici tout le monde attend la réponse de l'autre et c'est bloqué. et si on n'a pas prévu un mécanisme qui permet de débloquer ces situations
+<Sync time="4055.363"/>
+au moment où on écrit l'algorithme,
+<Sync time="4057.332"/>
+ben là, vous avez ce qu'on appelle un plantage
+<Sync time="4060.150"/>
+d() dit interblocage. là, toutes les machines ont planté, votre système distribué il a planté, vous pouvez r() tout rebooter pour recommencer.
+<Sync time="4068.539"/>
+donc ce type de plantage justement, c'est ce qui va amener à un problème de robustesse
+<Sync time="4073.108"/>
+dans les algorithmes distribués. donc ne recopiez pas
+<Sync time="4076.713"/>
+la partie du haut hein, c'est juste la définition que je vous ai remis.
+<Sync time="4079.197"/>
+ce qui est important, c'est la partie du bas,
+<Sync time="4080.978"/>
+c'est-à-dire que avant
+<Sync time="4082.920"/>
+avant, on devait résoudre des bugs dans un zin() dans un algo. vous aviez des bugs dans votre algo, ben une boucle infinie parce que vous aviez mal fait votre
+<Sync time="4089.962"/>
+votre condition de "tant que" et cetera
+<Sync time="4091.781"/>
+maintenant, en plus des bugs, parce que ça les enlève pas, mais en plus
+<Sync time="4095.337"/>
+on va devoir résoudre des bugs réseau.
+<Sync time="4097.790"/>
+donc il va falloir éviter l'in() l'interblocage, et si on peut pas l'éviter, arriver à le détecter et à le supprimer ;
+<Sync time="4104.129"/>
+il va falloir prévenir en cas de plantage de machines, donc en cas de défaillance
+<Sync time="4107.925"/>
+donc c'est ce qu'on appelle () tout ça c'est ce qu'on appelle la tolérance aux défaillances.
+<Sync time="4111.981"/>
+tiens d'ailleurs, petite question
+<Sync time="4113.780"/>
+pendant que vous recopiez :
+<Sync time="4115.072"/>
+est-ce que vous savez d'où vient le mot bug ?
+</Turn>
+<Turn startTime="4118.746" endTime="4120.99">
+<Sync time="4118.746"/>
+
+<Event desc="conv" type="noise" extent="instantaneous"/>
+
+</Turn>
+<Turn speaker="spk8" mode="planned" fidelity="high" channel="studio" startTime="4120.99" endTime="4221.873">
+<Sync time="4120.990"/>
+ça vient d'un cafard, effectivement. ça vient du mot "bug" en anglais
+<Sync time="4124.519"/>
+en fait, en dix-neuf cent quarante-cinq, dans les premiers ordinateurs qui étaient des ordinateurs dits relais,
+<Sync time="4130.282"/>
+eh bien un relais, c'était un relais mécanique hein, c'est-à-dire que on on on v() on basculait un relais euh pour pass() pour faire passer ou pas faire passer l'information
+<Sync time="4137.853"/>
+et donc il y a
+<Sync time="4139.224"/>
+un bout de scotch qu'on peut retrouver
+<Sync time="4141.230"/>
+sur un cahier de d'un des d'un des chercheurs qu'utilisait la machine où il a scotché effectivement un cafard
+<Sync time="4146.640"/>
+et il a marqué que dans le relais numéro soixante-dix du panneau f,
+<Sync time="4150.608"/>
+il a trouvé un bug, donc un cafard
+<Sync time="4153.611"/>
+à cet endroit-là ; et depuis le mot bug est resté.
+<Sync time="4155.482"/>
+il a été traduit par les canadiens et par tous ceux qui aiment beaucoup franciser tout
+<Sync time="4159.681"/>
+par "bogue", ce qui est donc l'enveloppe qui euh entoure une châtaigne, ce qui n'a absolument rien à voir avec un cafard.
+<Sync time="4165.610"/>
+mais bon, ça sonnait à peu près pareil que "bug" alors on a pris "bogue".
+<Sync time="4169.662"/>
+d'ailleurs, est-ce que vous connaissez
+<Sync time="4171.55"/>
+le bug le plus cher de l'histoire ?
+<Sync time="4175.620"/>
+le bug le plus cher de l'histoire, c'est le vol
+<Sync time="4178.633"/>
+inaugural d'ariane cinq. vol inaugural d'ariane cinq, après des milliers et des milliers de tests parce que
+<Sync time="4184.858"/>
+parce que on lance pas une fusée sans avoir fait des milliers de tests,
+<Sync time="4187.816"/>
+le quatre juin mille neuf cent quatre-vingt-seize, la visibilité est ok, il est neuf heures trente-cinq,
+<Sync time="4192.28"/>
+on a le décompte classique
+<Sync time="4194.187"/>
+euh à kourou, en guyane et
+<Sync time="4196.515"/>
+décolle
+<Sync time="4197.540"/>
+avec à son bord quatre sondes de la mission cluster.
+<Sync time="4200.958"/>
+ces quatre sondes représentent trois cent soixante-dix millions de dollars
+<Sync time="4205.159"/>
+et voici ce qui s'est passé le jour du décollage
+<Sync time="4210.673"/>
+d'ariane cinq.
+<Sync time="4212.690"/>
+donc au démarrage, si ça veut bien partir
+<Sync time="4215.699"/>
+ah, il marche plus !
+<Sync time="4219.192"/>
+ah, attendez j() je vous le retrouve tout de suite.
+</Turn>
+<Turn startTime="4221.873" endTime="4226.894">
+<Sync time="4221.873"/>
+
+<Event desc="conv" type="noise" extent="instantaneous"/>
+
+</Turn>
+<Turn speaker="spk8" mode="spontaneous" fidelity="high" channel="studio" startTime="4226.894" endTime="4228.778">
+<Sync time="4226.894"/>
+
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+
+</Turn>
+<Turn mode="spontaneous" fidelity="high" startTime="4228.778" endTime="4246.656">
+<Sync time="4228.778"/>
+
+<Event desc="conv" type="noise" extent="instantaneous"/>
+
+</Turn>
+<Turn speaker="spk8" mode="spontaneous" fidelity="high" channel="studio" startTime="4246.656" endTime="4273.020">
+<Sync time="4246.656"/>
+non plus
+<Sync time="4249.182"/>
+on va y arriver
+<Sync time="4250.450"/>
+donc voilà ce qui s'est passé le jour du décollage d'ariane cinq :
+<Sync time="4253.968"/>
+à neuf heures trente-cinq tout va bien,
+<Sync time="4255.788"/>
+on lance les fusées
+<Sync time="4257.930"/>
+la la la fusée décolle, applaudissements dans la salle de contrôle, ça décolle bien droit, tout se passe bien
+<Sync time="4262.989"/>
+et au bout de *quelques secondes de vol, la fusée
+<Sync time="4265.287"/>
+fait un volte-face et explose en plein ciel.
+<Sync time="4268.519"/>
+trois cent soixante-dix millions de dollars qui partent en fumée.
+</Turn>
+<Turn startTime="4273.020" endTime="4276.620">
+<Sync time="4273.020"/>
+
+<Event desc="conv" type="noise" extent="instantaneous"/>
+
+</Turn>
+<Turn startTime="4276.620" speaker="spk8" endTime="4589.824" mode="planned" fidelity="high" channel="studio">
+<Sync time="4276.620"/>
+alors qu'est-ce qui s'est passé ? eh ben il s'est passé ce qu'on appelle classiquement un bug d'algorithme réparti
+<Sync time="4284.096"/>
+c'est-à-dire que ce jour-là,
+<Sync time="4286.062"/>
+ce qui s'est passé, c'est que
+<Sync time="4288.029"/>
+on a un guid() un système de guidage distribué, un système de guidage réparti qui va reposer sur plein de modules qui vont communiquer entre eux. ces modules, on va avoir
+<Sync time="4294.815"/>
+un a() un accéléromètre euh un gyroscope pour vérifier que la fusée soit bien droite, des a() plein d'appareils informatiques et cetera
+<Sync time="4302.538"/>
+et euh ce qui s'est passé, c'est que le guid() le système de guidage euh réparti se base sur un truc particulier qui s'appelle le système de guidage inertiel
+<Sync time="4310.338"/>
+qui permet de vérifier que euh tout va bien et que la fusée va bien dans le bon sens.
+<Sync time="4314.749"/>
+et en fait, il y a une un des composants de ce système réparti
+<Sync time="4318.600"/>
+qui en fait a été repr() repris d'ariane quatre, parce qu'il fonctionnait super s() super bien sur ariane quatre, on l'avait testé plein de fois.
+<Sync time="4324.436"/>
+sauf que le problème, c'est que entre ariane quatre et ariane cinq, on est passé d'un calcul seize bits à un calcul trente-deux bits
+<Sync time="4331.363"/>
+et que le petit module qui était sur seize bits
+<Sync time="4334.040"/>
+eh ben
+<Sync time="4335.250"/>
+comme il faisait des calculs sur trente-deux bits, bah ça rentrait pas ; physiquement, ça rentrait pas
+<Sync time="4339.347"/>
+et les ingénieurs s'en sont pas rendu compte.
+<Sync time="4341.110"/>
+donc ce qui s'est passé, c'est qu'au bout d'un moment ce petit module il a fait 
+<Event desc="bb" type="noise" extent="instantaneous"/>
+
+<Sync time="4344.979"/>
+et en faisant 
+<Event desc="bb" type="noise" extent="instantaneous"/>
+, il rendait que des choses
+<Sync time="4347.250"/>
+qui qui voulaient rien dire.
+<Sync time="4348.889"/>
+donc au bout de trente-sept secondes de vol,
+<Sync time="4350.856"/>
+le premier euh le premier calculateur ben est tombé hs,
+<Sync time="4355.796"/>
+donc du coup
+<Sync time="4357.020"/>
+i()
+<Sync time="4357.717"/>
+heureusement
+<Sync time="4359.000"/>
+ils sont pas fous, ils en mettent toujours un de secours dans les fusées.
+<Sync time="4361.926"/>
+tout est en double, parce que faudrait pas que la fusée explose en plein ciel avec plein d'argent dedans.
+<Sync time="4365.691"/>
+mais le problème, c'est que le deuxième système
+<Sync time="4367.730"/>
+c'est le même ;
+<Sync time="4368.777"/>
+c'est aussi celui d'ariane quatre, donc il a aussi planté de la même façon.
+<Sync time="4373.560"/>
+et ce qui s'est passé a() au bout de quarante secondes de vol, le pilote automatique s'est lancé
+<Sync time="4377.594"/>
+il a récupéré les informations du système de guidage inertiel,
+<Sync time="4380.664"/>
+qui étaient des informations complètement erronées du genre bah
+<Sync time="4383.171"/>
+f() attention la fusée est en train de pencher à droite, donc il a fait un gros virage à gauche
+<Sync time="4386.690"/>
+elle s'est retournée, il y a eu () ça ça a lancé toutes les alertes et il y a eu le système d'auto euh
+<Sync time="4391.264"/>
+d'autodestruction qui s'est lancé dans la foulée.
+<Sync time="4394.000"/>
+tout ça pour juste un tout petit bug,
+<Sync time="4395.798"/>
+*une toute petite spécification qui avait pas été respectée.
+<Sync time="4399.983"/>
+dernière chose et puis je vous euh je vous laisse aller manger.
+<Sync time="4403.920"/>
+je vous parlais d'auto-organisation, d'auto-stabilisation, d'auto tout ça
+<Sync time="4408.056"/>
+eh bien en fait tout ça c'est c'est des aspects qui sont apparus avec les réseaux pair à pair.
+<Sync time="4412.550"/>
+l'idée, c'est que jusqu'à présent, quasiment tous les systèmes distribués reposent sur un serveur central
+<Sync time="4418.650"/>
+et ce serveur central, qu'est-ce qu'il fait ? il coordonne tout. il dit : toi tu fais ça, toi tu fais ça, toi tu fais ça.
+<Sync time="4425.470"/>
+le problème, c'est que quand il y a beaucoup d'utilisateurs, on l'a vu, le serveur central il est débordé
+<Sync time="4430.106"/>
+il est obligé de dire à tout le monde ce qu'il est en train de faire et au bout d'un moment il en peut plus.
+<Sync time="4433.545"/>
+donc l'idée, c'est que il y a eu beaucoup de recherches qui ont commencé à porter sur comment est-ce qu'on pourrait faire des systèmes
+<Sync time="4438.517"/>
+qui ne nécessitent pas
+<Sync time="4440.053"/>
+de coordinateur ?
+<Sync time="4442.622"/>
+et donc
+<Sync time="4443.381"/>
+le but
+<Sync time="4444.530"/>
+ça va être que chaque o() chaque acteur, chaque participant du système
+<Sync time="4447.974"/>
+il soit autonome et indépendant : qu'il prenne ses propres décisions,
+<Sync time="4451.428"/>
+qu'il ait besoin de personne d'autre pour se coordonner
+<Sync time="4453.89"/>
+et qu'on ait finalement l'émergence d'un comportement global
+<Sync time="4456.969"/>
+uniquement par des petites interactions locales en-dessous.
+<Sync time="4460.050"/>
+alors un petit exemple pour vous montrer comment ça marche :
+<Sync time="4463.950"/>
+si on devait calculer un o() un "ou" booléen, donc le ou vous le connaissez hein
+<Sync time="4467.783"/>
+c'est celui qui va dire "faux" si l'un des deux () si les deux opérandes sont faux et vrai si au moins l'un des deux opérandes est vrai.
+<Sync time="4473.458"/>
+eh bien
+<Sync time="4475.330"/>
+cet opérateur "ou", si on a deux personnes, c'est facile à calculer.
+<Sync time="4478.559"/>
+si on a cent mille personnes,
+<Sync time="4480.290"/>
+eh bien il faudrait que chacun de ces cent mille personnes donne sa propre valeur
+<Sync time="4484.410"/>
+au coordinateur, que le coordinateur il calcule le "ou" et qu'il redonne la valeur à tout le monde.
+<Sync time="4488.574"/>
+donc là, quand on n() passe à cent mille, à un million, c'est plus raisonnable.
+<Sync time="4492.035"/>
+donc ce qu'on va faire,
+<Sync time="4493.224"/>
+c'est qu'on va se baser sur une propriété, la propriété qui dit que si au moins un des acteurs parmi les millions est vrai,
+<Sync time="4498.990"/>
+alors le ré() le r() le
+<Sync time="4501.109"/>
+le résultat doit être vrai pour tout le monde. donc ce qu'on fait
+<Sync time="4504.010"/>
+c'est que on va faire ce qu'on appelle une communication épidémique, ou une communication type gossip
+<Sync time="4508.507"/>
+*c'est-à-dire rumeur
+<Sync time="4509.644"/>
+*c'est-à-dire une communication deux à deux :
+<Sync time="4511.257"/>
+je vais donner mon () je vais te donner un peu d'infos
+<Sync time="4513.186"/>
+et puis comme un principe de rumeurs qui va s'étendre, mon info va se répartir partout.
+<Sync time="4516.614"/>
+donc comment ça marche ? au départ, tout le monde aura choisi une valeur
+<Sync time="4519.992"/>
+vrai ou faux, en fonction de l'application
+<Sync time="4521.870"/>
+imaginons qu'on ait quelques acteurs là qui soient tous à faux
+<Sync time="4525.018"/>
+sauf un qui est à vrai, *c'est-à-dire qu'on va représenter vrai par un un et faux par un zéro.
+<Sync time="4529.280"/>
+eh bien ce qui va se passer, c'est que
+<Sync time="4531.240"/>
+il y en a un des deux qui va initier une communication avec un autre
+<Sync time="4534.385"/>
+et qui va lui dire : bah tiens, t'as quoi comme valeur ? bah moi j'ai un, moi j'ai zéro, ah bah alors on doit tous les deux passer à un.
+<Sync time="4540.110"/>
+si c'est deux zéros qui se rencontrent,
+<Sync time="4542.16"/>
+bah ils bougent pas, ils restent à zéro.
+<Sync time="4544.060"/>
+et puis comme ça, on va laisser s'exécuter
+<Sync time="4546.760"/>
+deux à deux,
+<Sync time="4548.05"/>
+de manière complètement aléatoire, les gens vont choisir avec qui ils parlent deux à deux
+<Sync time="4552.065"/>
+et au bout d'un moment, on se rend compte que quand tout le monde aura parlé avec tout le monde
+<Sync time="4556.118"/>
+ou que une bonne partie des gens auront parlé avec une bonne partie des gens
+<Sync time="4559.274"/>
+eh bien on aura une convergence, et le système ne bougera plus
+<Sync time="4562.029"/>
+et tout le monde possédera la bonne réponse sans qu'il y ait eu besoin
+<Sync time="4565.710"/>
+qu'un seul organe coordinateur dise à chacun ce qu'il est censé faire.
+<Sync time="4570.134"/>
+c'est le principe de l'auto-organisation,
+<Sync time="4572.198"/>
+c'est encore en phase de balbutiements, c'est très peu utilisé actuellement dans les systèmes lambda parce que
+<Sync time="4576.825"/>
+ça demande beaucoup de communications comme vous pouvez le voir, mais c'est grosso modo
+<Sync time="4579.716"/>
+ce type de systèmes qui sont l'avenir des algorithmes distribués.
+<Sync time="4583.480"/>
+voilà. je vous remercie, je vous souhaite un bon appétit.
+</Turn>
+</Section>
+</Episode>
+</Trans>

@@ -1,0 +1,1428 @@
+http://pierre.senellart.com/talks/gemo-20081211.pdf
+
+Introduction aux réseaux sociaux sur le Web
+
+Extraits d’un tutoriel présenté à BDA 2008 avec Talel Abdessalem
+
+Pierre Senellart
+
+11 décembre 2008
+
+Plan de l’exposé
+
+Exemples de réseaux sociaux
+
+Typologie
+Delicious
+Flickr
+Wikipedia
+LinkedIn
+
+Modèles et algorithmes
+Modèles de graphes
+Recherche sur le Web
+Recherche de communautés
+Utilisation des liens sociaux pour améliorer la recherche
+
+Conclusion
+
+2 / 80
+
+Plan de l’exposé
+
+Exemples de réseaux sociaux
+
+Typologie
+Delicious
+Flickr
+Wikipedia
+LinkedIn
+
+Modèles et algorithmes
+Modèles de graphes
+Recherche sur le Web
+Recherche de communautés
+Utilisation des liens sociaux pour améliorer la recherche
+
+Conclusion
+
+3 / 80
+
+Réseaux sociaux les plus populaires
+
+Sites de réseaux sociaux les plus populaires dans le monde et en
+France (rang des sites Web avec le plus de traﬁc, selon Alexa)
+
+Monde France
+
+SkyRock
+YouTube
+MySpace
+Facebook
+Dailymotion
+EBay
+Wikipedia
+Meetic
+ImageShack
+hi5
+Megavideo
+Adult Friendﬁnder
+Wat.tv
+Flickr
+Orkut
+V Kontakte
+Friendster
+
+51
+3
+17
+5
+61
+18
+8
+565
+47
+15
+133
+55
+1568
+33
+19
+28
+39
+
+3
+4
+7
+8
+11
+12
+13
+27
+53
+59
+80
+82
+88
+94
+>100
+>100
+>100
+
+4 / 80
+
+Typologie des réseaux sociaux
+
+5 / 80
+
+Site de réseau socialOrienté contenuOrienté utilisateurCataloguePartageÉditionVenteDiscussionPurCommunautés de blogsRencontreLivresMusiqueLiensFilmsPublicationsJeuxImagesVidéosAdulteeverything2WikipediaEBayYahoo! AnswersFlickr (Yahoo!)Photobucket (Fox)YouTube (Google)DailymotionMegavideoWat (TF1)PersonnelProfessionnelMélangéSkyRockTwitterFriendFinderMeeticMySpace (Fox)hi5FriendsterLinkedInFacebookOrkut (Google)V KontakteLibraryThingShelfari (Amazon)Last.fm (CBS)Delicious (Yahoo!)FlixsterYahoo! MoviesCiteULikeMobyGamesTypologie des réseaux sociaux
+
+5 / 80
+
+Site de réseau socialOrienté contenuOrienté utilisateurCataloguePartageÉditionVenteDiscussionPurCommunautés de blogsRencontreLivresMusiqueLiensFilmsPublicationsJeuxImagesVidéosAdulteeverything2WikipediaEBayYahoo! AnswersFlickr (Yahoo!)Photobucket (Fox)YouTube (Google)DailymotionMegavideoWat (TF1)PersonnelProfessionnelMélangéSkyRockTwitterFriendFinderMeeticMySpace (Fox)hi5FriendsterLinkedInFacebookOrkut (Google)V KontakteLibraryThingShelfari (Amazon)Last.fm (CBS)Delicious (Yahoo!)FlixsterYahoo! MoviesCiteULikeMobyGamesTypologie des réseaux sociaux
+
+5 / 80
+
+Site de réseau socialOrienté contenuOrienté utilisateurCataloguePartageÉditionVenteDiscussionPurCommunautés de blogsRencontreLivresMusiqueLiensFilmsPublicationsJeuxImagesVidéosAdulteeverything2WikipediaEBayYahoo! AnswersFlickr (Yahoo!)Photobucket (Fox)YouTube (Google)DailymotionMegavideoWat (TF1)PersonnelProfessionnelMélangéSkyRockTwitterFriendFinderMeeticMySpace (Fox)hi5FriendsterLinkedInFacebookOrkut (Google)V KontakteLibraryThingShelfari (Amazon)Last.fm (CBS)Delicious (Yahoo!)FlixsterYahoo! MoviesCiteULikeMobyGamesTypologie des réseaux sociaux
+
+5 / 80
+
+Site de réseau socialOrienté contenuOrienté utilisateurCataloguePartageÉditionVenteDiscussionPurCommunautés de blogsRencontreLivresMusiqueLiensFilmsPublicationsJeuxImagesVidéosAdulteeverything2WikipediaEBayYahoo! AnswersFlickr (Yahoo!)Photobucket (Fox)YouTube (Google)DailymotionMegavideoWat (TF1)PersonnelProfessionnelMélangéSkyRockTwitterFriendFinderMeeticMySpace (Fox)hi5FriendsterLinkedInFacebookOrkut (Google)V KontakteLibraryThingShelfari (Amazon)Last.fm (CBS)Delicious (Yahoo!)FlixsterYahoo! MoviesCiteULikeMobyGamesTypologie des réseaux sociaux
+
+5 / 80
+
+Site de réseau socialOrienté contenuOrienté utilisateurCataloguePartageÉditionVenteDiscussionPurCommunautés de blogsRencontreLivresMusiqueLiensFilmsPublicationsJeuxImagesVidéosAdulteeverything2WikipediaEBayYahoo! AnswersFlickr (Yahoo!)Photobucket (Fox)YouTube (Google)DailymotionMegavideoWat (TF1)PersonnelProfessionnelMélangéSkyRockTwitterFriendFinderMeeticMySpace (Fox)hi5FriendsterLinkedInFacebookOrkut (Google)V KontakteLibraryThingShelfari (Amazon)Last.fm (CBS)Delicious (Yahoo!)FlixsterYahoo! MoviesCiteULikeMobyGamesTypologie des réseaux sociaux
+
+6 / 80
+
+Site de réseau socialOrienté contenuOrienté utilisateurCataloguePartageÉditionVenteDiscussionPurCommunautés de blogsRencontreLivresMusiqueLiensFilmsPublicationsJeuxImagesVidéosAdulteeverything2WikipediaEBayYahoo! AnswersFlickr (Yahoo!)Photobucket (Fox)YouTube (Google)DailymotionMegavideoWat (TF1)PersonnelProfessionnelMélangéSkyRockTwitterFriendFinderMeeticMySpace (Fox)hi5FriendsterLinkedInFacebookOrkut (Google)V KontakteLibraryThingShelfari (Amazon)Last.fm (CBS)Delicious (Yahoo!)FlixsterYahoo! MoviesCiteULikeMobyGamesPlan de l’exposé
+
+Exemples de réseaux sociaux
+
+Typologie
+Delicious
+Flickr
+Wikipedia
+LinkedIn
+
+Modèles et algorithmes
+Modèles de graphes
+Recherche sur le Web
+Recherche de communautés
+Utilisation des liens sociaux pour améliorer la recherche
+
+Conclusion
+
+7 / 80
+
+8 / 80
+
+Delicious•Outil de «Social bookmarking»•Destinéàla sauvegarde et au partage (publication) de ses favoris (bookmarks). •Permet d’annoter et de classer ses favoris en y associant des mots-clés(tags). •Pas de partage d’informations personnelles comme MySpaceou Facebookhttp://delicious.comhttp://del.icio.us9 / 80
+
+Delicious•Favoris (pages web)–adresses, titre et note associée.•Mots-clés (données par l’utilisateur) –nom du tag et sa description•Utilisateurs –Login, e-mail, nom et page personnelleUsers/BookmarksTagsPagesPrincipales entités gérées :subscriptionsNetwork10 / 80
+
+Delicious•Favoris publiques : visibles àtous (lien, annotations et tags)•Favoris privés : visibles àleur propriétaire•Réseau : liste d’utilisateurs –Donne un accès direct àla partie publique de leurs bookmarks–Peut être publique ou privé•Souscription àun tag :–Donne un accès direct aux favoris publiques auxquelles le tag est associéUsers/BookmarksTagsPagesConfidentialité, réseaux et souscriptions :subscriptionsNetwork11 / 80
+
+Delicious•Par mots-clés•Parmi :–Mes favoris–Mon réseaux –Favoris publiques•Explore : –les tags, –les titres de pages –et les notesRecherche d’information :12 / 80
+
+DeliciousFavoris :titres, adresses,et notes associéesTagsOccurrencesLes tags de l’utilisateurExemple de favoris : 13 / 80
+
+DeliciousRecherche dans les tags, les titres de pages et les notesExemple de recherche : BDA 200814 / 80
+
+DeliciousMes souscriptionsSouscriptions àun tag :àpartir des favorisd’un utilisateur donnéou de l’ensemble des favoris publiques15 / 80
+
+DeliciousTags associésàObamaTag associés :16 / 80
+
+DeliciousTags associésàMcCainTag associés :17 / 80
+
+DeliciousMembres du réseau de gromuadSes fansRéseau et fans :Plan de l’exposé
+
+Exemples de réseaux sociaux
+
+Typologie
+Delicious
+Flickr
+Wikipedia
+LinkedIn
+
+Modèles et algorithmes
+Modèles de graphes
+Recherche sur le Web
+Recherche de communautés
+Utilisation des liens sociaux pour améliorer la recherche
+
+Conclusion
+
+18 / 80
+
+19 / 80
+
+Flickr•Gestion d’albums photos •Permet de stocker des images, de leur associer des mots-clés et de les partager (rendre visible) avec ses contacts ou avec tous.•Des fonctions sociales permettent aux utilisateurs de se découvrir, se retrouver, d’échanger, de se regrouper en communautés etc. •http://flickr.com20 / 80
+
+Flickr•Photos –Titre, description, tags, dates (données EXIF, Exchangeableimage file format).•Mots-clés –nom du tag et sa description•Utilisateurs –pseudo, e-mail, nom, page personnelle, sexe, ville pays, centres d’intérêt, Aéroport le plus proche, etc.Users/GalerieTagsPhotos/SéquencesPrincipales entités gérées :Famille, amis, groupes21 / 80
+
+Flickr•Les contacts sont organisés en trois cercles: –famille, amis et public –laisser-passer: permettent de partager des photos avec des personnes non inscrites sur Flickr•Groupes : –Objet : la mise en commun des photos–Groupes privés : •Accessibles sur invitation et masqués lors de la recherche de groupes–Public, sur invitation : •Visible au public et contrôle sur les membres–Public, ouverts àtous : •Accès public •Les discussions peuvent être masquées aux non membres.Confidentialité, réseaux et partage :22 / 80
+
+Flickr•Photos–Description des photos et/ou tags •Groupes–Noms et descriptions ou discussions•Personnes–Nom et e-mail ou profilRecherche d’information :23 / 80
+
+FlickrGéoTagging: les photos peuvent être situées sur une carteLe droit de voir la localisation d’une photo sur la carte est gérépar le propriétaire24 / 80
+
+FlickrTags populaires :Nuage de Mots-clésDernières 24hDernière semaine25 / 80
+
+FlickrInterestingness: les photos intéressantes.Critères affichés : origine du cliché, commentaires, date des commentaires, qui l’a ajoutéàses favoris, tags, etc.Plan de l’exposé
+
+Exemples de réseaux sociaux
+
+Typologie
+Delicious
+Flickr
+Wikipedia
+LinkedIn
+
+Modèles et algorithmes
+Modèles de graphes
+Recherche sur le Web
+Recherche de communautés
+Utilisation des liens sociaux pour améliorer la recherche
+
+Conclusion
+
+26 / 80
+
+Wikipedia
+
+(cid:73) Encyclopédie collaborative
+(cid:73) Plus un réseau social d’articles qu’un réseau social
+
+d’utilisateurs (pas de relation d’amitié)
+
+(cid:73) Mais réseaux sociaux implicites : utilisateurs collaborant
+
+aux mêmes articles, etc.
+
+(cid:73) Historique complet disponible (permet d’étudier la
+
+dynamique du réseau)
+
+(cid:73) http://www.wikipedia.org
+
+27 / 80
+
+Wikipedia – Entités
+
+Utilisateurs
+
+Articles
+
+Liens hypertexte,
+catégories
+
+Utilisateurs Login ou adresse IP, page de présentation
+
+Article Titre, texte, médias, catégories, liens
+
+Aucune gestion de conﬁdentialité (tout est public)
+
+28 / 80
+
+Wikipedia – Recherche d’information
+
+(cid:73) Recherche en texte intégral dans les articles
+(cid:73) Accès à la liste des modiﬁcations d’un article
+(cid:73) Accès à la liste des contributions d’un utilisateur
+(cid:73) Graphe de Wikipedia ∼ graphe du Web en miniature
+
+(mais beaucoup plus propre !)
+
+29 / 80
+
+Wikipedia – Articles
+
+30 / 80
+
+navigationMain pageContentsFeaturedcontentCurrent eventsRandom articleinteractionAbout WikipediaCommunityportalRecent changesContactWikipediaDonate toWikipediaHelp   Log in / create account     search  Wikipedia is sustained by people like you. Please donate today.Wikipedia – Historique
+
+31 / 80
+
+navigationMain pageContentsFeaturedcontentCurrent eventsRandom articleinteractionAbout WikipediaCommunityportalRecent changesContactWikipediaDonate toWikipediaHelp   Log in / create account                          search  Make a donation to Wikipedia and give the gift of knowledge!Wikipedia – Utilisateur
+
+32 / 80
+
+navigationMain pageContentsFeaturedcontentCurrent eventsRandom articleinteractionAbout WikipediaCommunityportalRecent changesContactWikipediaDonate toWikipediaHelp   Log in / create account search  Help us provide free content to the world by donating today!Wikipedia – Contributions
+
+33 / 80
+
+navigationMain pageContentsFeaturedcontentCurrent eventsRandom articleinteractionAbout WikipediaCommunityportalRecent changesContactWikipediaDonate toWikipediaHelpLog in / create account               search  Your continued donations keep Wikipedia running!Plan de l’exposé
+
+Exemples de réseaux sociaux
+
+Typologie
+Delicious
+Flickr
+Wikipedia
+LinkedIn
+
+Modèles et algorithmes
+Modèles de graphes
+Recherche sur le Web
+Recherche de communautés
+Utilisation des liens sociaux pour améliorer la recherche
+
+Conclusion
+
+34 / 80
+
+LinkedIn
+
+(cid:73) Réseau social résolument orienté vers les professionnels
+(cid:73) Donc pas d’amis, mais des connexions
+(cid:73) But :
+
+(cid:73) Étendre son réseau
+(cid:73) Pouvoir contacter des gens par l’intermédiaire de
+
+connaissances
+
+(cid:73) Augmenter sa visibilité dans le milieu professionnel
+
+(cid:73) Utilisé par certains employeurs pour recruter
+(cid:73) http://www.linkedin.com/
+
+35 / 80
+
+LinkedIn – Entités
+
+connexions
+
+Groupes
+
+Utilisateurs
+
+Institutions
+
+Groupes Nom, Description, Messages, Membres
+Institution Nom, Membres passés et présents
+Utilisateur CV, connexions
+
+36 / 80
+
+LinkedIn – Conﬁdentialité et droits d’accès
+
+(cid:73) Inscription obligatoire
+(cid:73) Le proﬁl complet d’un utilisateur n’est accessible qu’à ses
+
+connexions
+
+(cid:73) On peut savoir si on est à distance ≤ 3 d’un individu, et le
+
+chemin correspondant dans le graphe (partiellement
+anonymisé !)
+
+(cid:73) On peut choisir ou non de divulguer la liste de ses
+
+connections à ses connections (et à elle seulement !)
+
+(cid:73) Pour ajouter quelqu’un comme connexion, il faut connaître
+son email, avoir été dans la même institution, ou demander
+une introduction à une connexion commune
+
+(cid:73) Contacter directement un inconnu est possible, mais payant
+
+37 / 80
+
+LinkedIn – Recherche d’information
+
+(cid:73) Recherche d’utilisateurs par mots-clés, nom, emplacement,
+
+etc.
+
+(cid:73) Afﬁchage de la liste des utilisateurs de LinkedIn qui sont
+
+dans la même institution
+
+(cid:73) Recherches avancées possibles
+
+38 / 80
+
+LinkedIn – Proﬁl
+
+39 / 80
+
+CurrentPastEducationRecommendedYou haven’t been recommendedGet RecommendedConnections25 connectionsIndustryWebsitesPublic ProfileAssociate Professor at TELECOM ParisTech[ Edit ]Teaching assistant at ENS CachanPostdoc at MPIIPhD candidate at INRIAsee all...Université Paris Sud (Paris XI)Ecole normale supérieureResearch  [ Edit ]My Website [ Edit ]My Company [ Edit ]http://www.linkedin.com/in/pierresenellart [ Edit ]Public Profile setting: FULL VIEW [ Edit ]Promote your public profile!Link to your full profile from blogs andEdit My ProfileView My ProfileEdit Public Profile SettingsProfileForward this profileLinkedIn – Connexions
+
+40 / 80
+
+Showing 25 of 25 connections.5 outstanding sent invitationsgConnectionsABConnectionsImported ContactsNetwork StatisticsAdd Connections Remove ConnectionsContactsShow contacts with new connectionsadvanced optionsABCDEFGHIJKLMNOPQRSTUVWXYZ#LinkedIn – Réseau
+
+41 / 80
+
+Total users you can contact directly — try a search now!26,000,000+REGIONAL ACCESSTop locations in your network:13% 12% 4% 4% 3% 1. Paris Area, France2. San Francisco Bay Area3. Greater New York City Area4. Romania5. FranceHere you see statistics about your network, including how many users you can reach through yourconnections. Your network grows every time you add a connection — invite connections now.Your Network of Trusted ProfessionalsYou are at the center of your network. Your connections can introduceyou to 62,100+ professionals — here’s how your network breaks down: Your ConnectionsYour trusted friends and colleagues25Two degrees awayFriends of friends; each connected to one of your connections700+Three degrees awayReach these users through a friend and one of their friends61,300+Total users you can contact through an Introduction62,100+1,267 new people in your network since September 26The LinkedIn NetworkThe total of all LinkedIn users, who can be contacted directly through InMail.  Your region: Paris Area, France: 8,100+ usersLinkedIn – Recherche
+
+42 / 80
+
+LinkedIn – Recherche avancée
+
+43 / 80
+
+LinkedIn Network (top 20)Search ResultsCheck out the Google Company Profile What do these icons mean?Keywords: engineerLocated in or near: United StatesUsers currently at: googleSorted by: degrees away from youWe found 371 users in your network matching your criteria.refine search resultsMichael Van RiperCurrent:Past:Keywords:Experienced Software Developer and DesignerSan Francisco Bay Area InternetFounder & Leader at Silicon Valley Google Technology User Group ; PrincipalEngineer at Krillion, Inc. ; Local Ambassador at UXnet ; Co-Chair at BayDUX ; Founder& Leader at Silicon Valley Web Developer JUG ; Steering Committee Member atBayCHIVeriSign; Finaline Technologies; Tirata/Soltima; Icarian; Adobe Systems;... see more... Principal Engineer at Krillion, Inc. ... Sr. Software Engineer at VeriSign ... Sr.Software Engineer at Finaline Technologies ... Sr. Software Engineer at Tirata/Soltima...4384Omar BenjellounCurrent:Past:Keywords:Software Engineer at GoogleSan Francisco Bay Area InternetSoftware Engineer at GoogleINRIASoftware Engineer at Google ...16Jean TessierCurrent:Past:Keywords:Software CraftsmanSan Francisco Bay Area Computer SoftwareSoftware Engineer at Google Inc. ; Principal at Dependency Finder (Self-employed)LinkedIn Corp.; Vignette Corp.; Epicentric, Inc.; AT&T Labs; Teleglobe... see more... I am a Software Engineer. I spend (almost) all ... Software Engineer at Google Inc. ...Senior Software Engineer at LinkedIn Corp. ... Software Engineer at Teleglobe Canada...6237Pierre-Yves LaligandPlan de l’exposé
+
+Exemples de réseaux sociaux
+
+Typologie
+Delicious
+Flickr
+Wikipedia
+LinkedIn
+
+Modèles et algorithmes
+Modèles de graphes
+Recherche sur le Web
+Recherche de communautés
+Utilisation des liens sociaux pour améliorer la recherche
+
+Conclusion
+
+44 / 80
+
+Plan de l’exposé
+
+Exemples de réseaux sociaux
+
+Typologie
+Delicious
+Flickr
+Wikipedia
+LinkedIn
+
+Modèles et algorithmes
+Modèles de graphes
+Recherche sur le Web
+Recherche de communautés
+Utilisation des liens sociaux pour améliorer la recherche
+
+Conclusion
+
+45 / 80
+
+Graphes de réseaux sociaux
+
+(cid:73) Modélisation naturelle : réseau social = graphe
+(cid:73) Entités = noeuds, Relations = arêtes
+(cid:73) Suivant les cas :
+
+(cid:73) graphes orientés ou non
+(cid:73) bipartite, n-partites
+(cid:73) arêtes annotées, pondérées
+
+46 / 80
+
+Graphe non orienté
+
+Adapté pour les réseaux sociaux purs avec relations
+symétriques (p. ex., LinkedIn)
+
+47 / 80
+
+Graphe multipartite
+
+Adapté à la plupart des réseaux sociaux de partage avec
+annotations, utilisateurs, contenu, etc. (p. ex., Flickr)
+
+france
+
+chateau
+
+mason.ﬂickr
+
+manufrakass
+
+48 / 80
+
+Graphe orienté
+
+Rare dans le cas des réseaux sociaux, mais c’est le modèle du
+Web (p. ex., Wikipedia)
+
+Conﬂict
+
+Trade
+
+Social network
+
+Graph
+
+Node
+
+Social networking service
+
+Facebook
+
+49 / 80
+
+Réseaux implicites et explicites : aspect sociologique
+
+(cid:73) Deux types de réseaux sociaux d’individus :
+
+(cid:73) donnés explicitement par l’application (amis, connections. . .)
+(cid:73) dérivables implicitement des proﬁls (mêmes intérêts, édition
+
+des mêmes articles. . .)
+
+(cid:73) Sociologiquement, déﬁnit quatre types de connections entre
+
+individus [Smith et al., 2007, Lin, 2001, Houard and
+Jacquemain, 2006], suivant la forme de capital social
+considéré :
+
+Lien implicite
+
+Oui
+
+Non
+
+Lien explicite
+
+Oui
+Non Bonding potentiel Bridging potentiel
+
+Bridging réel
+
+Bonding réel
+
+(cid:73) Bonding : lien « agglutinant »
+(cid:73) Bridging : lien « reliant »
+
+50 / 80
+
+Six degrés de séparation
+
+(cid:73) Idée que deux personnes quelconques sur Terre sont
+
+séparées par une chaîne de six personnes se connaissant
+deux à deux
+
+(cid:73) Mis en évidence par une expérience de Stanley
+
+Milgram [Travers and Milgram, 1969] (courrier à transmettre
+de proche en proche)
+
+(cid:73) Popularisé dans de nombreux médias
+(cid:73) Le chiffre 6 n’est pas à prendre au sérieux ! Mais principe
+
+validé dans des expériences plus récentes
+
+(cid:73) Dans d’autres domaines :
+
+(cid:73) Nombre d’Erd˝os pour les publications scientiﬁques
+(cid:73) Kevin Bacon pour les ﬁlms d’Hollywood
+
+Caractéristique commune (de la plupart) des réseaux sociaux !
+
+51 / 80
+
+Caractéristique des graphes de réseaux sociaux
+Quatre caractéristiques importantes [Newman et al., 2006] :
+
+Graphes creux : beaucoup moins d’arêtes qu’un graphe
+
+complet
+
+Faible distance typique : plus court chemin entre deux nœuds
+
+en général petit (logarithmique) par rapport à la
+taille du graphe
+
+Haute transitivité : si a est relié à b et b à c, alors b a plus de
+
+chances d’être relié à c
+
+Degrés suivant une loi en puissance : le nombre de sommets
+
+de degré k est de l’ordre de k−γ (γ constante)
+
+nb
+
+k
+
+52 / 80
+
+Pas seulement les réseaux sociaux !
+
+(cid:73) Mêmes caractéristiques dans :
+
+(cid:73) le World Wide Web
+(cid:73) les systèmes nerveux
+(cid:73) les graphes d’interaction de protéines
+(cid:73) les graphes de citations
+(cid:73) etc.
+
+(cid:73) Contre-exemples : graphes planaires, graphes de transports
+
+(plus de régularité, pas forcément de transitivité, plus
+grande distance typique, etc.).
+
+Modèles de graphes de réseaux sociaux ?
+
+53 / 80
+
+Graphes aléatoires
+
+(cid:73) Principe :
+
+1. On se ﬁxe un nombre n de noeuds et un nombre p d’arêtes.
+2. On sélectionne aléatoirement (uniformément) p arêtes parmi
+
+possibles.
+
+les n(n−1)
+
+2
+
+(cid:73) Creux si p est bien choisi
+(cid:73) Distance typique (à l’intérieure d’une même composante
+
+connexe) petite !
+(cid:73) Pas de transitivité
+(cid:73) Pas de loi en puissance des degrés
+
+54 / 80
+
+Graphes petit-monde
+
+(cid:73) Principe [Watts and Strogatz, 1998, Watts, 1999] :
+1. On part d’un treillis régulier (une grille) périodique
+2. Avec probabilité p, on reroute chacune des arêtes
+
+aléatoirement
+
+(cid:73) Creux si le treillis initial est bien choisi
+(cid:73) Distance typique (à l’intérieure d’une même composante
+
+[Watts and Strogatz, 1998]
+
+connexe) petite (vient des reroutages)
+(cid:73) Transitivité forte (vient du treillis initial)
+(cid:73) Pas de loi en puissance des degrés
+
+55 / 80
+
+Graphes sans échelle : attachement préférentiel
+
+(cid:73) Principe [Barabási and Albert, 1999, Newman et al., 2006] :
+
+1. On part d’un petit graphe de taille m0, on se ﬁxe une
+2. On ajoute tour à tour n − m0 nœuds au graphe, en les
+
+constante m < m0
+
+connectant chacun à m nœuds existants ; la probabilité de
+connexion à un nœud existant est proportionnelle à son
+degré
+
+(cid:73) Creux si m et n sont bien choisis
+(cid:73) Distance typique (à l’intérieure d’une même composante
+
+connexe) petite
+(cid:73) Transitivité forte
+(cid:73) Loi en puissance des degrés (en fait, exposant −3, mais
+
+des variations du modèle permettent de changer l’exposant)
+
+56 / 80
+
+Plan de l’exposé
+
+Exemples de réseaux sociaux
+
+Typologie
+Delicious
+Flickr
+Wikipedia
+LinkedIn
+
+Modèles et algorithmes
+Modèles de graphes
+Recherche sur le Web
+Recherche de communautés
+Utilisation des liens sociaux pour améliorer la recherche
+
+Conclusion
+
+57 / 80
+
+PageRank [Brin and Page, 1998]
+
+Idée
+Sur le Web, les pages importantes sont les pages pointées par
+des pages importantes.
+
+Déﬁnition (Tentative)
+Probabilité qu’un surfeur suivant une marche aléatoire dans le
+graphe du Web G arrive à la page i à un point distant dans le
+futur.
+
+(cid:18)
+k→+∞(tG)kv
+lim
+
+(cid:19)
+
+pr(i) =
+
+où v est un vecteur colonne initial.
+
+i
+
+58 / 80
+
+Calcul itératif de PageRank
+
+59 / 80
+
+0.1000.1000.1000.1000.1000.1000.1000.1000.1000.100Calcul itératif de PageRank
+
+59 / 80
+
+0.0330.3170.0750.1080.0250.0580.0830.1500.1170.033Calcul itératif de PageRank
+
+59 / 80
+
+0.0360.1930.1080.1630.0790.0900.0740.1540.0940.008Calcul itératif de PageRank
+
+59 / 80
+
+0.0540.2120.0930.1520.0480.0510.1080.1490.1060.026Calcul itératif de PageRank
+
+59 / 80
+
+0.0510.2470.0780.1430.0530.0620.0970.1530.0990.016Calcul itératif de PageRank
+
+59 / 80
+
+0.0480.2320.0930.1560.0620.0670.0870.1380.0990.018Calcul itératif de PageRank
+
+59 / 80
+
+0.0520.2260.0920.1480.0580.0640.0980.1460.0960.021Calcul itératif de PageRank
+
+59 / 80
+
+0.0490.2380.0880.1490.0570.0630.0950.1410.0990.019Calcul itératif de PageRank
+
+59 / 80
+
+0.0500.2320.0910.1490.0600.0660.0940.1430.0960.019Calcul itératif de PageRank
+
+59 / 80
+
+0.0500.2330.0910.1500.0580.0640.0950.1420.0980.020Calcul itératif de PageRank
+
+59 / 80
+
+0.0500.2340.0900.1480.0580.0650.0950.1430.0970.019Calcul itératif de PageRank
+
+59 / 80
+
+0.0490.2330.0910.1490.0580.0650.0950.1420.0980.019Calcul itératif de PageRank
+
+59 / 80
+
+0.0500.2330.0910.1490.0580.0650.0950.1430.0970.019Calcul itératif de PageRank
+
+59 / 80
+
+0.0500.2340.0910.1490.0580.0650.0950.1420.0970.019PageRank avec sauts aléatoires
+
+Peut ne pas converger.
+Pour réparer ça, le surfeur aléatoire peut, à chaque étape, sauter
+aléatoirement vers n’importe quelle page du Web avec
+probabilité d (1 − d : damping factor).
+
+(cid:18)
+
+pr(i) =
+
+k→+∞((1 − d)tG + dU)kv
+lim
+où U est la matrice dont tous les valeurs sont à 1
+nœuds).
+
+n (n : nombre de
+
+(cid:19)
+
+i
+
+60 / 80
+
+PageRank et réseaux sociaux
+
+(cid:73) Mesure d’importance globale utilisée pour ordonner les
+
+résultats des moteurs de recherche sur le Web
+
+(cid:73) Très utile pour les graphes ressemblant au graphe du Web
+
+(p. ex., Wikipedia)
+
+(cid:73) Notion inappropriée pour les graphes non orientés : mesure
+
+d’équilibre de la marche aléatoire = degré du nœud
+
+(cid:73) Nombreuses variantes adaptées à certains cas particuliers :
+
+(cid:73) HITS [Kleinberg, 1999] pour distinguer portails et autorités
+(cid:73) Généralisation de HITS [Blondel et al., 2004] pour comparer
+
+deux graphes arbitraires
+
+(cid:73) Mesures de Green [Ollivier and Senellart, 2007] pour biaiser
+
+le PageRank
+
+61 / 80
+
+Plan de l’exposé
+
+Exemples de réseaux sociaux
+
+Typologie
+Delicious
+Flickr
+Wikipedia
+LinkedIn
+
+Modèles et algorithmes
+Modèles de graphes
+Recherche sur le Web
+Recherche de communautés
+Utilisation des liens sociaux pour améliorer la recherche
+
+Conclusion
+
+62 / 80
+
+Recherche de communautés
+
+(cid:73) Problème classique dans les réseaux sociaux : identiﬁer
+
+des communautés d’utilisateurs (ou de contenu) en utilisant
+la structure de graphe
+
+(cid:73) Deux sous-problèmes :
+
+1. Étant donné un nœud ou ensemble de nœuds initial, trouver
+
+la communauté correspondante
+
+2. Étant donné le graphe dans son ensemble, trouver une
+
+partition en communautés
+
+63 / 80
+
+Flot maximal / Coupe minimale
+
+(cid:73) Utilisation d’un algorithme de calcul de ﬂot
+
+maximal [Goldberg and Tarjan, 1988] pour séparer une
+graine d’utilisateurs du reste du graphe
+
+(cid:73) Complexité : O(n2m) (n : nœuds, m : arêtes)
+(cid:73) Versions en ligne de ces techniques [Flake et al., 2002,
+
+Senellart, 2005] permettant de faire le calcul sans avoir à
+stocker le graphe localement
+
+64 / 80
+
+/6/2/1/5/2/3sinksource/4Flot maximal / Coupe minimale
+
+(cid:73) Utilisation d’un algorithme de calcul de ﬂot
+
+maximal [Goldberg and Tarjan, 1988] pour séparer une
+graine d’utilisateurs du reste du graphe
+
+(cid:73) Complexité : O(n2m) (n : nœuds, m : arêtes)
+(cid:73) Versions en ligne de ces techniques [Flake et al., 2002,
+
+Senellart, 2005] permettant de faire le calcul sans avoir à
+stocker le graphe localement
+
+64 / 80
+
+/6/2/1/5/2/3source403214/41sinkFlot maximal / Coupe minimale
+
+(cid:73) Utilisation d’un algorithme de calcul de ﬂot
+
+maximal [Goldberg and Tarjan, 1988] pour séparer une
+graine d’utilisateurs du reste du graphe
+
+(cid:73) Complexité : O(n2m) (n : nœuds, m : arêtes)
+(cid:73) Versions en ligne de ces techniques [Flake et al., 2002,
+
+Senellart, 2005] permettant de faire le calcul sans avoir à
+stocker le graphe localement
+
+64 / 80
+
+/6/2/1/5/2/3sinksource403214/41Markov Cluster Algorithm (MCL) [van Dongen, 2000]
+
+(cid:73) Algorithme de classiﬁcation (clustering) de graphe
+(cid:73) Aussi basé sur le ﬂot maximal, dans le graphe tout entier
+(cid:73) Itération d’un calcul matriciel alternant :
+
+(cid:73) Expansion (multiplication matricielle, correspondant à la
+
+(cid:73) Inﬂation (opération non linéaire pour augmenter
+
+propagation de ﬂot)
+
+l’hétérogénéité)
+
+(cid:73) Complexité : O(n3) pour un calcul exact, O(n) pour un
+
+calcul approché
+
+[van Dongen, 2000]
+
+65 / 80
+
+Markov Cluster Algorithm (MCL) [van Dongen, 2000]
+
+(cid:73) Algorithme de classiﬁcation (clustering) de graphe
+(cid:73) Aussi basé sur le ﬂot maximal, dans le graphe tout entier
+(cid:73) Itération d’un calcul matriciel alternant :
+
+(cid:73) Expansion (multiplication matricielle, correspondant à la
+
+(cid:73) Inﬂation (opération non linéaire pour augmenter
+
+propagation de ﬂot)
+
+l’hétérogénéité)
+
+(cid:73) Complexité : O(n3) pour un calcul exact, O(n) pour un
+
+calcul approché
+
+[van Dongen, 2000]
+
+65 / 80
+
+Suppression des arêtes les plus
+« au milieu » [Newman and Girvan, 2004]
+
+(cid:73) Algorithme descendant de classiﬁcation de graphe
+(cid:73) Degré de « betweenness »d’une arête : nombre de chemins
+
+minimaux entre deux sommets quelconques qui passent
+par cette arête
+
+(cid:73) Principe général :
+
+1. Calculer la betweenness de chaque arête du graphe
+2. Enlever l’arête avec la plus haute betweenness
+3. Recommencer, le calcul de betweenness compris
+
+(cid:73) Complexité : O(n3) pour un graphe creux
+
+[Newman and Girvan, 2004]
+
+66 / 80
+
+Plan de l’exposé
+
+Exemples de réseaux sociaux
+
+Typologie
+Delicious
+Flickr
+Wikipedia
+LinkedIn
+
+Modèles et algorithmes
+Modèles de graphes
+Recherche sur le Web
+Recherche de communautés
+Utilisation des liens sociaux pour améliorer la recherche
+
+Conclusion
+
+67 / 80
+
+Utilisation des liens sociaux pour améliorer la
+recherche
+
+Est-il possible d’exploiter les liens entre utilisateurs et le contenu
+des réseaux sociaux pour améliorer la recherche d’information ?
+
+(cid:73) Utilisation des tags associés à des contenus
+(cid:73) Contenu recommandé pour un utilisateur donné
+(cid:73) Recherche par mots-clefs biaisée par le réseau social d’un
+
+individu
+
+68 / 80
+
+Utilisation des marque-pages de Delicious [Heymann
+et al., 2008]
+
+Tags dans Delicious : utilisables dans une recherche par
+mots-clefs ?
+
+Avantages
+
+(cid:73) Termes de requêtes et tags se recoupent
+(cid:73) Cohérents, pertinents
+(cid:73) Dynamiques
+
+Inconvénients
+
+(cid:73) Faible couverture
+(cid:73) Manquent souvent de contexte
+
+69 / 80
+
+Systèmes de recommandation [Resnick et al., 1994]
+
+(cid:73) Filtrage collaboratif
+(cid:73) Ensemble de produits, ensemble d’utilisateurs
+(cid:73) Utilisateurs vu comme un vecteur dans l’espace des
+
+produits (pondération : plus un produit est courant, moins il
+a d’importance)
+
+(cid:73) Mesure de similarité entre utilisateurs (p. ex., cosinus entre
+
+les vecteurs)
+
+(cid:73) Recommandations pour un utilisateur donné :
+
+1. Calculer les utilisateurs les plus similaires
+2. Proposer les produits associés
+(cid:73) Utile pour les sites de rencontre !
+
+Problèmes
+
+(cid:73) Passe mal à l’échelle avec un grand nombre d’utilisateurs
+(cid:73) Fonctionne mal pour un nouvel utilisateur
+
+70 / 80
+
+Amazon.com : recommandation produit-à-produit
+[Linden et al., 2003]
+
+(cid:73) Filtrage collaboratif produit-à-produit
+(cid:73) Produits : vecteurs dans l’espace des utilisateurs
+(cid:73) Similarité entre produits
+(cid:73) Précalcul des similarités entre paires de produit (coûteux,
+
+mais change peu)
+
+(cid:73) Recommandations pour un utilisateur donné :
+
+Proposer les objets les plus similaires aux objets de
+l’utilisateur
+
+71 / 80
+
+Recherche d’information classique
+
+(cid:73) Index en texte intégral d’une collection de documents, sous
+la forme de listes « terme → (document, poids) », triées par
+poids
+
+(cid:73) Fonction de pondération : par exemple tf-idf (term
+
+frequency-inverse document frequency)
+
+(cid:73) Requête par mots-clefs :
+
+t1 AND . . . AND tn
+
+(cid:73) k premiers résultats ?
+
+Notations :
+
+s(t, d) pondération de t dans d (p. ex., tf-idf)
+
+g(s1, . . . , sn) fonction croissante calculant le score global (p. ex.,
+
+addition)
+
+72 / 80
+
+Algorithme de seuil de Fagin [Fagin et al., 2001]
+
+1. Soit R la liste vide, et m = +∞.
+2. Pour tout 1 ≤ i ≤ n :
+
+2.1 Récupérer le document d (i) contenant le terme ti avec le
+
+meilleur score s(ti , d (i)) (parmi ceux non encore récupérés).
+2.2 Calculer le score global gd (i) = g(s(t1, d (i)), . . . , s(tn, d (i))) en
+récupérant chacun des s(tj , d (i)) avec j (cid:54)= i.
+
+2.3 Si R contient moins de k documents, ou si gd (i) est plus
+
+grand que le minimum des scores des documents dans R,
+ajouter d (i) à R (en enlevant éventuellement le document
+avec le score minimum).
+
+3. Soit m = g(s(t1, d (1)), s(t2, d (2)), . . . , s(tn, d (n))).
+4. Si R contient plus de k documents, et le minimum des
+
+scores des documents dans R est supérieur ou égal à m,
+retoruner R.
+
+5. Répéter l’étape 2.
+
+73 / 80
+
+Recherche d’information avec fonction de score
+sociale [Schenkel et al., 2008]
+
+(cid:73) Cadre : graphe multi-partite, p. ex., Flickr
+(cid:73) But : biaiser les résultats de requête en fonction de son
+
+réseau social
+
+(cid:73) Pondération sociale :
+
+(cid:73) Étant donnée une relation d’amitié F (u, u(cid:48)) (explicite ou
+implicite) entre deux utilisateurs, on calcule une relation
+d’amitié étendue
+˜F (u, u(cid:48)) =
+
+k−1(cid:89)
+
+max
+
+α
+
+|U| + (1 − α)
+
+chemin u = u0 . . . uk = u(cid:48)
+
+F (ui , ui+1)
+
+i=0
+
+(0 < α < 1 constante ; |U| : nombre d’utilisateurs)
+
+(cid:73) Au lieu de prendre une pondération globale
+tf-idf(t, d) = tf(t, d) × idf(t, d)
+
+on prend une pondération sociale dépendant de u :
+
+(cid:32)(cid:88)
+
+u(cid:48)∈U
+
+(cid:33)
+
+tf-idfu(t, d) =
+
+F (u, u(cid:48)) · tfu(cid:48)(t, d)
+
+× idf(t, d)
+
+74 / 80
+
+Top-k avec score social [Benedikt et al., 2008]
+
+(cid:73) Possibilité d’adapter l’algorithme de seuil de Fagin. . .
+(cid:73) . . . mais impossible de précalculer les scores tf-idfu(t, d)
+
+pour chacun des utilisateurs
+
+(cid:73) Pour éviter une trop grande complexité :
+
+1. Partitionner le graphe des utilisateurs en composantes
+
+d’utilisateurs fortement similaires
+
+2. Utiliser les scores au sein de ces composantes comme
+3. ⇒ donne des résultats approchés, mais de bonne qualité
+
+estimations du seuil dans l’algorithme de Fagin
+
+75 / 80
+
+Plan de l’exposé
+
+Exemples de réseaux sociaux
+
+Typologie
+Delicious
+Flickr
+Wikipedia
+LinkedIn
+
+Modèles et algorithmes
+Modèles de graphes
+Recherche sur le Web
+Recherche de communautés
+Utilisation des liens sociaux pour améliorer la recherche
+
+Conclusion
+
+76 / 80
+
+En résumé
+
+(cid:73) Webs communautaires, réseaux sociaux : partout sur le
+
+Web !
+
+(cid:73) Modélisation naturelle avec des graphes (le plus souvent,
+
+non orientés)
+
+(cid:73) Intérêts
+
+(cid:73) Nouveaux types de recherches (p. ex., recherches de
+
+(cid:73) Nombreuses techniques de fouille de graphes applicables :
+
+(cid:73) à la recherche d’information
+(cid:73) à l’évaluation de la conﬁance
+
+77 / 80
+
+communautés)
+
+(cid:73) Utilisation des tags et des réseaux sociaux pour améliorer et
+
+personnaliser les résultats de recherche
+
+Pour aller plus loin
+
+Modèles de graphes
+
+[Watts and Strogatz, 1998, Newman et al., 2006]
+[Kleinberg, 2007]
+
+Aspects sociologiques
+[Lin, 2001]
+
+Graphe du Web, PageRank et cie
+[Chakrabarti, 2003]
+
+Web et réseaux sociaux
+
+[Brusilovsky, 2008]
+
+78 / 80
+
+Perspectives de recherche
+
+(cid:73) Applications des diverses techniques
+
+à la grande diversité des réseaux
+sociaux :
+
+(cid:73) un moteur de recherche intelligent
+
+dans Wikipedia
+
+(cid:73) à qui faire conﬁance sur un site de
+
+rencontres ?
+
+(cid:73) . . .
+
+(cid:73) Comment se réapproprier les
+
+données des réseaux ? Architecture
+distribuée pour un réseau social.
+(cid:73) Gestion de droits d’accès plus ﬁn
+
+que l’existant, se basant sur la
+conﬁance a priori en les utilisateurs.
+
+79 / 80
+
+MERCI.
+
+Bibliographie I
+
+Albert-László Barabási and Réka Albert. Emergence of scaling
+in random networks. Science, 286(5439):509–512, October
+1999.
+
+Michael Benedikt, Sihem Amer Yahia, Laks Lakshmanan, and
+
+Julia Stoyanovich. Efﬁcient network-aware search in
+collaborative tagging sites. In Proc. VLDB, Auckland, New
+Zealand, August 2008.
+
+Vincent D. Blondel, Anahí Gajardo, Maureen Heymans, Pierre
+
+Senellart, and Paul Van Dooren. A measure of similarity
+between graph vertices: applications to synonym extraction
+and Web searching. SIAM Review, 46(4):647–666, 2004.
+
+Sergey Brin and Lawrence Page. The anatomy of a large-scale
+
+hypertextual Web search engine. Computer Networks and
+ISDN Systems, 30(1–7):107–117, 1998.
+
+81 / 80
+
+Bibliographie II
+
+Peter Brusilovsky. Social information access: The other side of
+
+the social Web. SOFSEM 2008: Theory and Practice of
+Computer Science, pages 5–22, 2008.
+
+Soumen Chakrabarti. Mining the Web: Discovering Knowledge
+from Hypertext Data. Morgan Kaufmann, San Fransisco, USA,
+2003.
+
+Ronald Fagin, Amnon Lotem, and Moni Naor. Optimal
+
+aggregation algorithms for middleware. In Proc. PODS, Santa
+Barbara, USA, May 2001.
+
+Gary William Flake, Steve Lawrence, C. Lee Giles, and Frans
+Coetzee. Self-organization of the Web and identiﬁcation of
+communities. IEEE Computer, 35(3):66–71, 2002.
+
+Andrew V. Goldberg and Robert E. Tarjan. A new approach to
+
+the maximum-ﬂow problem. Journal of the ACM, 35(4):
+921–940, October 1988.
+
+82 / 80
+
+Bibliographie III
+
+Paul Heymann, Georgia Koutrika, and Hector Garcia-Molina.
+
+Can social bookmarking improve web search? In Proc.
+WSDM, pages 195–206, Palo Alto, USA, February 2008.
+
+Jean Houard and Marc Jacquemain. Capital social et
+
+dynamique régionale. De Boek, Bruxelles, Belgium, 2006.
+
+Jon Kleinberg. The structure of information networks.
+
+http://www.cs.cornell.edu/courses/cs685/2007fa/,
+2007. Cornell University Course.
+
+Jon M. Kleinberg. Authoritative sources in a hyperlinked
+
+environment. Journal of the ACM, 46(5):604–632, 1999.
+
+Nan Lin. Social Capital: A Theory of Social Structure and Action.
+
+Cambridge University Press, Cambridge, United Kingdom,
+2001.
+
+Greg Linden, Brent Smith, and Jeremy York. Amazon.com
+
+recommendations: Item-to-item collaborative ﬁltering. IEEE
+Internet Computing, 7(1):76–80, 2003.
+
+83 / 80
+
+Bibliographie IV
+
+M. E. J. Newman and M. Girvan. Finding and evaluating
+
+community structure in networks. Physical Review E, 69(2),
+2004.
+
+Mark Newman, Albert-László Barabási, and Duncan J. Watts.
+
+The Structure and Dynamics of Networks. Princeton
+University Press, 2006.
+
+Yann Ollivier and Pierre Senellart. Finding related pages using
+Green measures: An illustration with Wikipedia. In Proc. AAAI,
+pages 1427–1433, Vancouver, Canada, July 2007.
+
+Paul Resnick, Neophytos Iacovou, Mitesh Suchak, Peter
+
+Bergstrom, and John Riedl. GroupLens: an open architecture
+for collaborative ﬁltering of netnews. In Proc. CSCW, Chapel
+Hill, United States, October 1994.
+
+Ralf Schenkel, Tom Crecelius, Mouna Kacimi, Sebastian Michel,
+Thomas Neumann, Josiane X. Parreira, and Gerhard Weikum.
+Efﬁcient top-k querying over social-tagging networks. In Proc.
+SIGIR, pages 523–530, Singapore, Singapore, July 2008.
+
+84 / 80
+
+Bibliographie V
+
+Pierre Senellart. Identifying Websites with ﬂow simulation. In
+Proc. ICWE, pages 124–129, Sydney, Australia, July 2005.
+
+M. Smith, C. Giraud-Carrier, and B Judkins. Implicit afﬁnity
+
+networks. In Proc. Workshop on Information Technologies and
+Systems, pages 1–7, Montreal, Canada, December 2007.
+
+Jeffrey Travers and Stanley Milgram. An experimental study of
+the small world problem. Sociometry, 34(4), December 1969.
+Stijn Marinus van Dongen. Graph Clustering by Flow Simulation.
+
+PhD thesis, University of Utrecht, May 2000.
+
+Duncan J. Watts. Small Worlds. Princeton University Press,
+
+1999.
+
+Duncan J. Watts and Steven H. Strogatz. Collective dynamics of
+
+‘small-world’ networks. Nature, 393(6684):440–442, 1998.
+
+85 / 80
+
+

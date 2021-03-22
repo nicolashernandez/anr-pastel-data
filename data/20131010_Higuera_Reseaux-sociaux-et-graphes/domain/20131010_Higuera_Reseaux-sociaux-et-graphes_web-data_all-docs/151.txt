@@ -1,0 +1,548 @@
+https://blog.octo.com/introduction-aux-graphes-avec-neo4j-et-gephi/
+
+
+
+
+
+
+Introduction aux graphes avec Neo4j et Gephi | OCTO Talks !
+
+
+
+
+
+
+
+
+
+
+
+		
+
+
+
+
+
+
+
+
+.wpml-ls-statics-shortcode_actions, .wpml-ls-statics-shortcode_actions .wpml-ls-sub-menu, .wpml-ls-statics-shortcode_actions a {border-color:#cdcdcd;}.wpml-ls-statics-shortcode_actions a {color:#444444;background-color:#ffffff;}.wpml-ls-statics-shortcode_actions a:hover,.wpml-ls-statics-shortcode_actions a:focus {color:#000000;background-color:#eeeeee;}.wpml-ls-statics-shortcode_actions .wpml-ls-current-language>a {color:#444444;background-color:#ffffff;}.wpml-ls-statics-shortcode_actions .wpml-ls-current-language:hover>a, .wpml-ls-statics-shortcode_actions .wpml-ls-current-language>a:focus {color:#000000;background-color:#eeeeee;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              hit._highlightResult[key].value = _.escape(hit._highlightResult[key].value);
+              hit._highlightResult[key].value = hit._highlightResult[key].value.replace(/__ais-highlight__/g, '<em>').replace(/__\/ais-highlight__/g, '</em>');
+            }
+
+            for (var key in hit._snippetResult) {
+              /* We do not deal with arrays. */
+              if (typeof hit._snippetResult[key].value !== 'string') {
+                continue;
+              }
+
+              hit._snippetResult[key].value = _.escape(hit._snippetResult[key].value);
+              hit._snippetResult[key].value = hit._snippetResult[key].value.replace(/__ais-highlight__/g, '<em>').replace(/__\/ais-highlight__/g, '</em>');
+            }
+
+            return suggestion_template(hit);
+          }
+        }
+      });
+
+    });
+
+    /* Setup dropdown menus */
+      };
+
+      if (algolia.powered_by_enabled) {
+        config.templates.footer = wp.template('autocomplete-footer');
+      }
+
+      /* Instantiate autocomplete.js */
+      var autocomplete = algoliaAutocomplete($searchInput[0], config, sources)
+      });
+    });
+
+Code permettant la creation d’une relation “projet” entre deux noeuds
+public Relationship linkOctos(final Node octoToLinkNode, final Node otherOctoNode, Project project, RelTypes type, Object value) {
+	Transaction tx = graphDb.beginTx();
+	Relationship relation = null;
+	try {
+		if (RelTypes.PROJECT.equals(type)) {
+			relation = octoToLinkNode.createRelationshipTo(otherOctoNode, RelTypes.PROJECT);
+			relation.setProperty("name", project.getName());
+			relation.setProperty("Weight", value);
+			relation.setProperty("Id", project.getReference());
+			relation.setProperty("Label", project.getReference());
+		} …
+
+		tx.success();
+	} finally {
+		tx.finish();
+	}
+	return relation;
+}
+Une fois les données stockées dans Neo4j, on utilise le connecteur adapté pour traiter le graphe dans Gephi. Pour la « mise en forme » et la visualisation du graphe, nous avons utilisé un algorithme de clustering basé sur des forces d’attraction et répulsion, Force Atlas.
+
+Cet algorithme a la propriété de regrouper les nœuds connectés et d’écarter les nœuds les moins connectés. En fait, il utilise la propriété « Weight » des relations pour gérer en quelque sorte un niveau de gravité entre les nœuds. On voit alors clairement – chacun des nœuds représentant une personne – des clusters et des « lonesome poor cowboys » un peu plus isolés aux bords du graphe (les points les plus extérieurs représentant soit les « business unit » – donc la relation « belongs to », soit des personnes nouvellement arrivées).
+On détecte également et très rapidement des personnes qui interviennent sur beaucoup de projets (plus le nœud a une couleur qui tend vers le rouge, plus il a de liens entrants).
+
+Exemple 2 : Analyse/Audit de code
+Les audits d’architecture et de code sont très consommateurs de solutions comme Sonar, et JavaDepend ou NDepend suivant que l’on utilise Java ou .Net. Ces outils ont néanmoins quelques limitations :
+
+ils ne nous permettent pas toujours de bien détecter du code mort sur une analyse statique, entre autres à cause des problèmes induits par la programmation par interface (une classe qui utilise une interface voit l’interface comme dépendance et non l’implémentation), mais aussi par les frameworks qui font de l’injection de dépendance (on ne sait qu’à l’exécution ce qui sera réellement injecté et donc utilisé).
+ces outils ne proposent pas de vue d’ensemble de l’application nous montrant quelle classe ou quel composant utilise quoi dans l’application. En effet quand une application devient vraiment grosse, en avoir une bonne représentation visuelle s’avère difficile.
+
+En somme, modéliser le code sous la forme d’un graphe permettrait de lever ces limitations et d’aider à l’analyse d’impacts.
+Dans ce domaine, un logiciel open source intéressant est CDA (Class Dependencies Analyzer). Cet outil permet de charger les jars d’une application, et via le bytecode il est capable de reconstruire le graphe des dépendances de l’application, y compris par les interfaces. Par dépendances on entend : les dépendances d’héritage, d’implémentation mais également les dépendances d’import, de code (appels de méthodes, instanciation d’objets…).
+Reste que la visualisation fournie par l’outil ne nous satisfait pas : pas d’analyse, pas de possibilité de grouper, visualisation uniquement d’une liste d’adjacence….
+La première option a été de de générer des images avec GraphViz à partir des XML exportés par CDA, mais nous ne pouvions produire que des images statiques gigantesques. Il était donc impossible d’avoir un parcours de l’image du graphe sans une machine de compétition et tout aussi impossible d’organiser les nœuds afin d’améliorer le visuel de l’information.
+Une autre option a alors été envisagée : stocker ce graphe dans Neo4j. D’une part, Neo4j est une solution optimisée pour le stockage de graphe, nous n’aurions aucun problème avec de gros graphes (9000 nœuds et des centaines de milliers de relations dans notre cas). Neo4j est capable d’en gérer plusieurs millions mais pour beaucoup de systèmes de graphes (GraphViz par exemple) cela commence à faire beaucoup ! De plus, Neo4j possède un langage de requête puissant, Cypher, qui permet d’interroger le graphe pour obtenir toutes sortes d’informations sur les nœuds, leurs liens et le contenu de ces derniers.
+Nous avons donc implémenté un parseur XML permettant d’exploiter les fichiers exportés de CDA et de créer le graphe équivalent (nœuds et relations) dans Neo4J. Pour les aspects visualisation et analyse, il ne restait plus qu’à utiliser Gephi.
+Voici le résultat sur une application qui compte pas loin d’un million de LOC et plus de 90000 classes après analyse / clustering dans Gephi.
+
+ 
+Une belle « pelote de laine », même si Gephi nous aide grandement pour manipuler ce graphe, zoomer, mettre en place des algorithmes de spatialization pour « écarter » les nœuds et avoir un rendu un peu plus correct, mais aussi cliquer sur les nœuds pour récupérer les informations voulues. Ainsi on peut graphiquement chercher un nœud puis le tirer vers l’extérieur pour voir à quoi il est connecté.
+En zoomant et après traitement (spacialisation entre autre),
+
+On voit nettement:
+
+que certains nœuds (classes) sont très connectés et donc très utilisés par toute l’application. Cela permet donc de révéler le nombre de dépendances visiblement trop important pointant de potentiels problèmes de design.
+que certains nœuds ne sont connectés à rien, il y a de fortes chances qu’ils soient peu utilisés, voire qu’il s’agisse de code mort.
+
+Ensuite selon votre application, c’est à vous de déduire à quoi correspondre les amas de nœuds (cela peut correspondre au module de votre application et s’ils sont bien rassemblés c’est plutôt bon signe )
+De plus, la modélisation du code dans Neo4j nous a permis de requêter avec le langage dédié Cypher ou simplement d’analyser en Java notre graphe objet et obtenir des informations utiles sur notre application tels que :
+
+les nœuds qui n’ont aucune relation (orphelins) et donc utilisés nulle part.
+
+public void findOrpheanNodes() {
+	NodeManager nodeManager = ((EmbeddedGraphDatabase) graphDb).getConfig()
+		.getGraphDbModule().getNodeManager();
+
+	long number = nodeManager.getNumberOfIdsInUse(Node.class);
+	int nbNodesWithoutRelationShips = 0;
+	for (int idx = 0; idx < number; idx++) {
+		Node n = nodeManager.getNodeById(idx);
+
+		if (!n.hasRelationship()) {
+			System.out.println("This one has no relationships");
+			nbNodesWithoutRelationShips++;
+			for (String key : n.getPropertyKeys()) {
+				System.out.println(key + " : " + n.getProperty(key));
+			}
+		}
+	}
+}
+
+les nœuds qui n’ont aucun lien entrant (qui ont donc de fortes chances d’être du code mort)
+Ici on exclut d’office les nœuds dont le nom finit par Command car on sait qu’il s’agit d’un point d’entrée. (Comme quoi de bonnes conventions de nommages sont bien utiles)
+
+public void findNodesWithNoEntranceLinks() {
+	NodeManager nodeManager = ((EmbeddedGraphDatabase) graphDb).getConfig()
+		.getGraphDbModule().getNodeManager();
+
+	long number = nodeManager.getNumberOfIdsInUse(Node.class);
+	int counter = 0;
+	for (int idx = 0; idx < number; idx++) {
+		Node n = nodeManager.getNodeById(idx);
+		int nb = 0;
+		for (Relationship r : n.getRelationships(Direction.INCOMING)) {
+			nb++;
+		}
+
+		if (nb == 0) {
+			for (String key : n.getPropertyKeys()) {
+				if (key.startsWith("className") && ! ((String)n.getProperty(key)).endsWith("Command")) {
+					counter++;
+					System.out.println(key + " : " + n.getProperty(key));
+				}
+			}
+		}
+	}
+	System.out.println("Number of node without incoming relations : " + counter + " theses node represent dead code (classes not used), you should delete application entrance point of this list");
+}
+
+Les relations d’une classe. Dans cet exemple, Cypher a été utilisé pour le requêtage. Deux choses sont intéressantes dans cette requête : d’une part la requête Cypher permet de récupérer les relations sortantes de la classe en n, ici ClassWithAlotOfRelationShips… qui serait une classe supposée comme ayant trop de liens sortants, cela va permettre de les visualiser. Ce langage est plutôt visuel : on décrit le sens des relations avec des flèches. Dans la suite, on parcourt le résultat avec un itérateur, ce qui ne devrait pas vous changer de vos habitudes en Java.
+
+@Test
+public void searchRelationShipsForNode() {
+	Map params = new HashMap();
+	params.put("query", "className:com.octo.server.ClassWithALotOfRelationShipsWhichAreDept");
+
+	ExecutionResult result = engine.execute( "START n=node:nodes({query}) MATCH (n)-[r]->() RETURN r", params);
+
+	Iterator it = result.columnAs("r");
+	while (it.hasNext()) {
+		Relationship res = it.next();
+		System.out.println(res.getType().toString());
+	}
+}
+Bien entendu, cela implique de bien connaître les classes qui sont des points d’entrées de l’application (WebServices, Servlet, BackingBeans JSF…) pour les éliminer des résultats de ces requêtes, de même que pour les classes uniquement utilisées et/ou injectées par les frameworks tels que Spring.
+Conclusion
+Cet article est loin d’aborder tous les sujets autour des graphes, mais Neo4j – même si d’autres implémentations existent – est un outil qui démocratise ce type de stockage. Les notions de communautés, la détection d’influenceurs, la mesure du « customer churn », l’implémentation de recommandations, et bien entendu le graphe social… sont autant d’usages possibles des structures de graphes très en vogue à l’ère du web social.
+Reste que la principale limite du stockage de graphe est sa scalabilité. Il est encore aujourd’hui délicat de distribuer un graphe, de parcourir un graphe distribué. Dans l’univers du distribué, la modélisation communément admise est la liste d’adjacence. Cela a des impacts sur la manière de parcourir et de requêter le graphe et des algorithmes se développent (on notera les travaux autour de Bulk Synchronous Processing et Apache Hama pour l’intégration avec Hadoop par exemple). D’autres ont travaillé leur cas d’usage et FlockDB s’en sort en modélisant une liste d’adjacence userid : list(friends) et en partitionnant sur les userid. Un choix fort qui colle bien aux types de requêtes effectués (principalement par userid…)
+Dans d’autres cas, les big JVM de type Azul semblent prometteuses et pourraient permettre de repousser en partie ces limitations. Autant de sujets à suivre.
+ 
+
+
+
+Tweet
+
+
+
+
+Share
+0
+
+
+
+
++1
+
+
+
+
+LinkedIn
+0
+
+
+Related posts:
+no:sql(eu) et NoSQL : qu’en est il? 
+Installer Cassandra en 10 minutes 
+Utiliser Hadoop pour le calcul de la Value At Risk Partie 5 
+Vers des API haut niveau pour Java et NoSQL avec Spring Data 
+Bases de données graphes : un tour d’horizon 
+
+
+
+
+        Cet article a été posté dans Archi & techno et taggué Graph Databases, Java, NoSQL.    
+
+
+ Articles récents 
+
+Meetup PerfUG [19/09/2018] : Angular et performances
+
+
+What’s up agile : La bonne communication, un facteur de succès en Agile ?
+
+
+Vais-je tromper mon Mac avec Windows 10 ? (Windows Subsystem for Linux)
+
+
+Devenir coach Agile : 5 pièges à éviter !
+
+
+Afterwork à Genève le 9 mardi octobre « DevOps : C’est arrivé près de chez vous »
+
+
+
+
+
+                });
+            });
+
+        
+6 commentaires sur “Introduction aux graphes avec Neo4j et Gephi”
+
+
+
+ 
+
+Guillaume ALLEE 
+
+09/02/2012 à 14:51
+
+
+
+            Bon article. 
+
+Pour info, Jim Webber a dit dans un webcast que le board de Neotechnology lui avait donné la mission de rendre Neo4j scalable ;-)
+
+Sur le "on voit qu’il devient possible de réaliser des opérations qui étaient extrêmement coûteuses en performances dans un système relationnel", OracleDB et SQLServer fournissent le "connect by" qui permet de représenter des arbres facilement et les performances sont très bonne sur des gros parcours d'arbres (qq secondes pour parcourir 1 millions de relations) ...
+Par contre l écriture de telles requêtes demandent une expertises SQL.        
+
+
+
+
+
+
+ 
+
+omallassi 
+
+09/02/2012 à 15:22
+
+
+
+            on n'a pas dit que c'était pas scalable (ou la formulation est maladroite) :o) 
+Mais c'est vrai que c'est un sujet tout de même. 
+
+Sinon merci pour l'info, je ne connaissais pas le "connect by". Ca serait marrant de "comparer" les deux approches :o)        
+
+
+
+
+
+
+ 
+
+Thomas 
+
+12/02/2012 à 19:26
+
+
+
+            Le "connect by" SQL n'a pas une syntaxe très compliquée, par contre il ne permet de traiter que des arbres, dont les noeuds sont tous du même type (1 table requêtée). Ce sont des relations purement hiérarchiques, pas associations entre entités au sens large.
+
+Une autre limite, c'est de ne proposer qu'une énumération "en liste" des noeuds de l'arbre, alors que les algos de parcours de graphes sont très très riches, et connus depuis longtemps. Exit le pattern matching par exemple. Et lorsque le graphe n'est pas orienté ou que le use case ne permet pas d'identifier une racine du parcours, la syntaxe est juste inadaptée.
+
+Ca n'enlève rien à l'apport de ce type de syntaxe par rapport à SQL "de base" :) Perso je l'ai vu utilisé 1 fois en vrai.        
+
+
+
+
+
+
+ 
+
+diarra 
+
+13/04/2012 à 09:46
+
+
+
+            Bonjour, j'ai essayé de comprendre comment fonctionne néo4j. Donc j'ai créé 2 noeuds de graphe et généré le dossier de base de donnée ou il y a une génération de fichiers .db mais je ne sais pas comment lire les fichiers .db est ce que vous pourriez me le dire svp        
+
+
+
+
+
+
+ 
+
+Diane Gamache 
+
+13/12/2012 à 16:09
+
+
+
+            Je suis présentement au doctorat.
+Mon sujet traite d'un procédé d'évaluation de la pertinence de faire à l'aide d'une représentation de connaissances sous forme de graphe. Cette cartographie de pertinence se construit à partir de références croisées entre 2 formulations vidéo.
+À votre connaissance, existe-t-il une application Neo4J spécialisée dans la représentation de structures de type hypervidéo (links between 2 hot-spot video) ou hypertexte propre à la vidéo. 
+Merci de m'informer s.v.p.        
+
+
+
+
+
+
+ 
+
+Cédric Fauvet 
+
+14/02/2013 à 19:17
+
+
+
+            Bonjour à tous,
+
+merci pour ce joli tableau concernant cette technologie qui est promise à un grand avenir selon nous :)
+
+Diane, ce genre de cas est facilement réalisable avec Neo4j, la clé de la réussite se trouve dans la méthode de modélisation du graphe adaptée à votre cas d'usage. Nullement besoin d'une version "spéciale" de Neo pour ça :)
+
+A bientôt,
+Cédric        
+
+
+ 
+Laisser un commentaire Annuler la réponse 
+Votre adresse de messagerie ne sera pas publiée. Les champs obligatoires sont indiqués avec *Commentaire 
+
+Me notifier par mail en cas de nouveaux commentaires
+Nom * 
+Adresse de messagerie * 
+Site web 
+Laisser un commentaireCe formulaire est protégé par Google Recaptcha 
+
+ 
+
+
+
+
+ 
+
+
+
+
+
+
+            Chercher        
+
+
+
+Les start-ups incubées chez OCTO :
+
+
+
+
+
+Les prochaines formations :
+
+Théorie UDesign Thinking : culture et pratiqueData Science : niveau avancéFacilitation graphique par la pratiqueOptimiser son temps et son attention pour gagner en efficacité - Ismaël Hery 
+
+
+
+
+
+
+
+
+
+Suivez l’aventure sur leur blog
+
+
+
+
+
+
+
+            Plus d'informations sur le site de la conférence USI Events
+
+
+            Retrouvez toute l'actu de nos speakers et de l'évènement sur notre blog Stay inspired
+
+
+
+Nos livres blancs :
+
+
+
+Culture Code
+Software Craftsmanship : better places with better code
+
+
+
+
+
+Hadoop, feuille de route
+Socle technique, écosystème et sa place dans le SI
+
+
+
+
+
+Banque digitale : les FinTech cannibalisent la banque
+
+
+
+
+
+
+Les géants du web
+Comment mieux faire en s’inspirant des géants du web ?
+
+
+
+
+
+
+
+
+Nous connaître
+
+Pourquoi OCTO ?
+Où trouver OCTO ?
+Nos produits
+Nos partenaires
+Investisseurs
+
+
+
+Notre mission
+
+Ce que nous faisons
+Comment nous le faisons
+Publications
+Évènements
+OCTO Academy
+
+
+
+Nous rejoindre
+
+OCTO Recrute !
+Découvrez OCTO de l'intérieur
+Nos tribus
+
+
+
+International
+
+Paris
+Rabat
+Lausanne
+Sydney
+
+
+
+
+
+
+
+
+Paris
+Rabat
+Lausanne
+Sydney
+
+
+
+Siège:
+34 avenue de l'Opéra,
+75002 Paris, 
+France
++33 (0)1 58 56 10 00
+
+
+Contact
+Mentions legales
+
+
+
+
+
+
+
+
+
+
+
+
+hljs.initHighlightingOnLoad();
+
+

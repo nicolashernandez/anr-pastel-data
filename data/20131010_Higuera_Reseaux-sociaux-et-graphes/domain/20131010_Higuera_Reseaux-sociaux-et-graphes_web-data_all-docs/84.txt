@@ -1,0 +1,601 @@
+http://lipn.fr/~kanawati/marami2016-actes/MARAMI2016_paper_3.pdf
+
+Un modèle de génération de graphes
+« petit monde » imitant les réseaux sociaux
+
+Jason Vallet, Bruno Pinaud, Guy Melançon
+
+LaBRI, Univ. Bordeaux, Unité CNRS 5044
+Bordeaux, France
+jason.vallet@labri.fr,bruno.pinaud@labri.fr,guy.melancon@labri.fr
+
+RÉSUMÉ. Lors de la construction ou l’évaluation de méthodes d’analyse de réseaux sociaux, il
+est important de pouvoir tester sa solution sur des données viables. Cependant, et malgré leur
+grande popularité, les structures internes de ces réseaux, indiquant les relations inter-individus,
+ne sont que rarement ouvertes ou diffusées, forçant les chercheurs à se tourner vers des réseaux
+construits par des modèles de génération aléatoire. Nous présentons un nouveau modèle de
+génération permettant la création de graphes. Notre solution est paramétrable et peut être utili-
+sée pour construire un large éventail de graphes, allant des réseaux sociaux petit monde –avec
+certaines caractéristiques des réseaux invariants d’échelle– à des graphes complètement aléa-
+toires.
+ABSTRACT. Whenever one wishes to try out or ﬁne tune a social network analysis solution, being
+able to apply the said solution to an appropriate data set is of the utmost importance. However,
+and despite their established popularity, such network structures are rarely open or available
+in their entirety, thus developing the need for random generative models able to create graphs
+with properties close to those of real-world networks. We introduce a new generative model
+allowing the creation of such graphs. Our solution can be ﬁne-tuned and used to build a wide
+array of graphs, ranging from small-world networks –with some of the free-scale networks
+characteristics– to completely random graphs.
+MOTS-CLÉS : modèle, génération, réseaux sociaux, graphe, aléatoire, petit monde.
+KEYWORDS: model, generation, social network, graph, random, small-world.
+
+DOI:10.3166/HSP.V.1-12 c(cid:13) 2016 Lavoisier
+
+Hermès Science Publication – no N/2016, 1-12
+
+2 HSP. Volume V – no N/2016
+
+1. Introduction
+
+Bien que de nombreuses plate-formes de réseaux sociaux existent, les données les
+concernant, et plus particulièrement la structure exhaustive de ces réseaux, ne sont
+que rarement mises à disposition du public ou des chercheurs. Aﬁn de valider leurs
+modèles, algorithmes ou approches analytiques, les spécialistes de l’analyse des ré-
+seaux sociaux n’ont souvent d’autre choix que de se contenter de réseaux générés
+aléatoirement. Cette approche n’est toutefois pas sans avantages puisque les proprié-
+tés des réseaux générés, telles que le nombre d’utilisateurs ou la densité de connexions,
+peuvent alors être paramétrées aﬁn de générer des réseaux aux caractéristiques sou-
+haitées. Cette création sur-mesure permet ainsi d’évaluer dans différentes conditions
+les solutions que l’on souhaite tester.
+
+L’utilisation de générateurs de données n’est pas réservée aux seuls réseaux so-
+ciaux, en effet, de nombreux modèles permettant de créer des graphes aux caractéri-
+stiques spéciﬁques existent. Le plus connu d’entre eux est sans nul doute le modèle
+ER, proposé par Erd˝os et Rényi (Erd˝os, Rényi, 1959) à la ﬁn des années 50. Bien que
+nous déﬁnissions un réseau social comme un graphe G = (V, E), où V désigne l’en-
+semble des membres du réseau comme ses nœuds et E ⊆ V × V l’ensemble de liens
+reliant certains nœuds ensembles, n’importe quel générateur ne peut être utilisé pour
+obtenir un graphe s’apparentant à un réseau social.
+
+Nous sommes intéressés par deux types de graphe particuliers souvent associés
+aux réseaux sociaux : les réseaux « petit monde » et les réseaux invariants d’échelle.
+La première catégorie a été introduite par Watts et Strogatz (Watts, Strogatz, 1998) et
+baptisé d’après le phénomène du même nom décrit par Milgram (Milgram, 1967). Un
+graphe peut être qualiﬁé de « petit monde » lorsque son coefﬁcient d’agglomération
+moyen est haut tandis que la longueur moyenne de ses chemins s’avère faible. 1 Les
+réseaux invariants d’échelle, présenté par Barabási et Albert (Barabási, Albert, 1999),
+sont, quant à eux, identiﬁables par la distribution des degrés de leur nœuds : cette der-
+nière devant suivre une loi de puissance pour que le réseau soit désigné ainsi. De nom-
+breuses variations de ces deux modèles initiaux existent et plusieurs proposent notam-
+ment de générer des réseaux présentant à la fois les caractéristiques des réseaux « petit
+monde » et invariant d’échelle (par exemple : (Holme, Kim, 2002; Klemm, Eguíluz,
+2002; Sallaberry et al., 2013; Wang et al., 2006)). Chacun de ces modèles peut ainsi
+générer des réseaux aux caractéristiques données. Néanmoins, les démarches suivies
+lors des processus de génération sont complètement orientées vers une approche ma-
+thématique et manquent du caractère organique inhérent aux réseaux de relations entre
+êtres humains.
+
+Nous présentons dans ce papier un nouveau modèle de génération de graphe.
+Celui-ci à la particularité d’être conçu de façon à construire un « simili » réseau social
+car suivant les règles établies par les plate-formes de réseaux sociaux actuelles (rela-
+tions pair-à-pair et visibilité des voisins de voisins). Les transformations et construc-
+
+1. Les formules pour calculer ces mesures sont spéciﬁées dans la section 3.
+
+Modèle de génération imitant les réseaux sociaux
+
+3
+
+tions que nous orchestrons suivent également les comportements sociaux observés
+et décrits dans la littérature (voir ﬁn de section 2). Le modèle propose un nombre
+de nœuds et d’arêtes paramétrable et l’utilisateur peut choisir le pourcentage de con-
+nexions aléatoires à rajouter dans le réseau. Ce point permet à notre modèle de générer
+un large spectre de graphes allant du graphe complètement aléatoire au réseau « petit
+monde » avec une distribution de degrés s’approchant d’un réseau invariant d’échelle.
+Dans la suite de ce papier, nous présentons notre modèle et décrivons la démarche
+de génération utilisée. Une analyse des réseaux générés est ensuite proposée pour éta-
+blir leurs caractéristiques en fonction des paramètres de génération choisis et quelques
+exemples de graphes construit par notre modèle sont présentés.
+
+2. Présentation de notre solution
+
+Aﬁn de créer un modèle se rapprochant au plus prêt d’un réseau social réel, il
+nous faut cerner puis recréer au mieux le comportement des membres de ces réseaux.
+À l’opposé des approches mathématiques des autres modèles, nous utilisons ici une
+approche imitant les démarches suivies dans un véritable réseau social. Le processus
+génératif est divisé en trois phases, chacune permettant d’accomplir un aspect différent
+de l’évolution des liens entre personnes au sein du réseau. Dans un premier temps,
+nous générons un graphe simple et acyclique, connectant chaque individu rejoignant le
+réseau à la personne qui l’a invité. Lors de la seconde phase, des arêtes additionnelles
+sont créées aléatoirement lorsque les individus se connectent avec les personnes qu’ils
+connaissent à l’extérieur du réseau. La dernière phase permet ﬁnalement de créer ou
+renforcer des communautés : les membres du réseau se familiarisent et se connectent
+avec les amis de leurs amis.
+Initialisation et paramètres Avant de démarrer, les paramètres du modèle doivent
+être établis. Par défaut, le processus que nous proposons permet de créer un graphe
+G = (V, E), de |V | nœuds et |E| arêtes, simple, connexe et qui sera orienté ou non
+selon le choix de l’utilisateur. Nous introduisons également le paramètre ρ ∈ [0; 1]
+qui spéciﬁera le ratio d’arêtes aléatoires qui seront créées par le modèle lors de la
+génération.
+
+Le graphe que nous générons dans cette approche et les analyses que nous réalisons
+par la suite ont été réalisées sur des graphes non orientés, néanmoins, l’implémenta-
+tion du modèle discutée en section 3 gère l’orientation des arêtes. Nous créons G
+de façon à obtenir une seule composante connexe, néanmoins, plusieurs composantes
+non connexes peuvent être construites en réutilisant le modèle successivement et en
+adaptant les valeurs |V | et |E| passées comme paramètres. Nous pouvons établir que
+les limites autorisées du nombre d’arêtes |E| sont telles que suit : (1) puisque G est
+simple et non orienté 2, sa borne supérieure est déﬁnie telle que |E| ≤ |V |×(|V |−1)
+, et
+(2) comme G est connexe, sa borne inférieure est telle que : |E| ≥ |V |− 1. Notre mo-
+
+2
+
+2. Respectivement, |E| ≤ |V | × (|V | − 1) si G est orienté.
+
+4 HSP. Volume V – no N/2016
+
+dèle peut garantir le nombre de nœuds et d’arêtes qui sera généré tant que les valeurs
+demandées restent dans les limites permises.
+Phase 1 : création des nœuds La première étape permet l’ajout de nouveaux indi-
+vidus au sein du réseau social. Chaque fois qu’une personne rejoint un réseau social,
+son nombre de connexions est très limité, et souvent ne représente que l’utilisateur
+qui l’a introduit dans le réseau. Cette nouvelle personne a néanmoins maintenant l’op-
+portunité d’inviter un ou plusieurs amis à la rejoindre. Bien évidemment, chaque ami
+joignant le réseau est par la suite considéré comme un nouvel utilisateur qui peut éga-
+lement à son tour inviter d’autres personnes.
+
+Nous utilisons l’algorithme 1 pour initier la génération de G. Le graphe obtenu
+en résultat comporte le nombre attendu de nœuds (|V |) mais n’atteint pas encore le
+nombre d’arêtes escomptées. Cette première étape nous retourne en effet un graphe
+connexe, simple et acyclique, présentant donc une topologie similaire à un arbre.
+Celui-ci représente le réseau initial évoluant alors que de nouveaux utilisateurs sont
+rajoutés et connectés à la personne les ayant invité. Les phases suivantes vont nous
+permettre d’enrichir le graphe en arêtes.
+
+Algorithme 1 : Création du graphe et ajout des individus dans le réseau social
+
+Entrées : n : nombre de noeuds à créer
+Sorties : G = (V, E(cid:48)) avec |V | = n et |E(cid:48)| = n − 1
+initialisation de G
+création d’un noeud dans G
+i ← 1
+// G n’aura jamais plus de n noeuds
+tant que i < n faire
+
+i ← i + 1
+u ← un noeud aléatoire de G
+v ← création d’un noeud dans G
+création d’une arête (u, v) dans G
+
+ﬁn
+
+Phase 2 : ajout d’arêtes aléatoires La seconde phase permet de mettre en contact
+des membres du réseau social de manière aléatoire. Cette étape sert à reproduire le
+processus de mise en relation entre individus se connaissant soit avant de rejoindre
+le réseau ou en dehors de celui-ci. L’ajout de ces liens pré-existants va permettre de
+réduire le diamètre du graphe généré, ainsi que la longueur moyenne de ses chemins
+(voir Déf. 1). Le nombre d’arêtes aléatoires ajoutées au réseau de cette manière est
+décidé par la valeur choisie pour le paramètre ρ. Ce dernier est un ratio, compris entre
+0 et 1 inclus, qui permet d’établir, parmi les arêtes restant à ajouter au début de la
+phase actuelle, combien seront construites aléatoirement.
+
+L’algorithme 2 présente la démarche suivie lors de cette phase. Les connexions
+sont réalisées entre deux individus pris au hasard dans le graphe, mais il convient
+néanmoins de s’assurer que le nombre d’arêtes créées est en adéquation avec le résul-
+
+Modèle de génération imitant les réseaux sociaux
+
+5
+
+Algorithme 2 : Ajout des arêtes aléatoires
+Entrées : G = (V, E(cid:48)),
+
+ρ : ratio d’arêtes à rajouter aléatoirement à G,
+|E| : nombre d’arêtes à atteindre à la ﬁn de la génération
+
+Sorties : G = (V, E(cid:48)(cid:48)) avec |E(cid:48)(cid:48)| = |E(cid:48)| + ρ.(|E| − |E(cid:48)|)
+limite ← ρ.(|E| − |E(cid:48)|)
+noeudsU ← ensemble des noeuds de G
+i ← 0
+// limite arêtes sont ajoutées à G
+tant que i < limite ET nombre d’éléments dans noeudsU > 0 faire
+
+u ← un élément aléatoire de noeudsU
+noeudsV ← ensemble des noeuds de G - u
+arˆeteCr´e´ee ← f aux
+tant que nombre d’éléments dans noeudsV > 0 ET arˆeteCr´e´ee = f aux faire
+
+v ← un élément aléatoire de noeudsV
+suppression de v de noeudsV
+si l’arête (u, v) n’existe pas dans G alors
+
+création d’une arête (u, v) dans G
+i ← i + 1
+arˆeteCr´e´ee ← vrai
+
+ﬁn
+
+ﬁn
+si arˆeteCr´e´ee = f aux alors
+
+suppression de u de noeudsU
+
+ﬁn
+
+ﬁn
+
+tat demandé aﬁn de garantir les propriétés du graphe généré à la ﬁn. La modulation
+du paramètre ρ nous permet de générer différents types de réseaux, allant d’un graphe
+complètement aléatoire lorsque ρ = 1, à un graphe où la phase actuelle sera complète-
+ment ignorée si ρ = 0, laissant la génération de toutes les arêtes à la phase 3. Dans ce
+dernier cas, le modèle construira un réseau où les membres ne peuvent se reconnaître
+que par l’intermédiaire du réseau et où leurs cercles de connaissance ne pourront donc
+grandir qu’en passant par des amis communs déclarés comme appartenant eux aussi
+au réseau social.
+Phase 3 : renforcement des communautés Cette étape correspond au moment où
+les membres du réseau commencent à nouer des relations avec les autres membres
+qui partagent les mêmes amis. Deux personnes qui ne se connaissaient pas auparavant
+peuvent ainsi potentiellement devenir amis, ce qui mènera à la création d’un lien entre
+eux. La construction d’arêtes suivant ce schéma permet le renforcement des commu-
+nautés, augmentant en conséquence le coefﬁcient d’agglomération (voir Déf. 2) du
+réseau généré.
+
+6 HSP. Volume V – no N/2016
+
+Algorithme 3 : Ajout des arêtes renforçant les communautés
+Entrées : G = (V, E(cid:48)(cid:48)),
+
+|E| : nombre d’arêtes à atteindre à la ﬁn de la génération
+
+Sorties : G = (V, E)
+limite ← |E| − |E(cid:48)(cid:48)|
+noeuds ← ensemble des noeuds de G
+i ← 0
+// limite arêtes sont ajoutées à G
+tant que i < limite ET nombre d’éléments dans noeuds > 0 faire
+
+u ← un élément aléatoire de noeuds
+voisins ← ensemble formé par les noeuds voisins de u, ordonnés aléatoirement
+arˆeteCr´e´ee ← f aux
+tant que |voisins| > 0 ET arˆeteCr´e´ee = f aux faire
+
+v ← un élément aléatoire de voisins
+suppression de v de voisins
+pour chaque w ← un élément de voisins faire
+si l’arête (v, w) n’existe pas dans G alors
+
+création d’une arête (v, w) dans G
+i ← i + 1
+arˆeteCr´e´ee ← vrai
+sortie de la boucle
+
+ﬁn
+
+ﬁn
+
+ﬁn
+si arˆeteCr´e´ee = f aux alors
+
+suppression de u de noeuds
+
+ﬁn
+
+ﬁn
+
+L’algorithme 3 décrit les opérations réalisées pour assurer la bonne construction
+des arêtes. Le nombre d’éléments à générer durant cette étape est directement dépen-
+dant du nombre de connexions ajoutées dans la phase 2, donc de ρ, et du nombre total
+d’arêtes à générer. Tout comme précédemment, l’algorithme est implémenté de ma-
+nière à assurer la création du nombre attendu de liens aﬁn de garantir que le graphe
+généré G ait bien les caractéristiques attendues.
+Généralisation aux réseaux orientés
+Les instructions spéciﬁées dans les algo-
+rithmes concernant la création des arêtes peuvent aisément être adaptées de manière à
+permettre leur orientation. Dans l’algorithme 1, il sufﬁt ainsi de créer aléatoirement,
+entre les nœuds u et v, soit l’arête (u, v), soit (v, u). Dans les deux autres algorithmes,
+il faut évidemment vériﬁer l’existence de l’arête orientée (u, v) –respectivement (v, w)
+pour l’algorithme 3– mais il est possible d’ajouter l’arête inverse (v, u) (resp. (w, v)),
+une fois son existence non avérée, si la première existe déjà.
+
+Lors de la phase 3, le processus de pensée suivit pour la construction des arêtes
+orientées repose sur le principe de l’accointance entre personnes, ainsi que sur l’évo-
+
+Modèle de génération imitant les réseaux sociaux
+
+7
+
+lution des relations entre individus appartenant à des cercles sociaux proches. Plus
+particulièrement, nous nous sommes inspirés de l’idée de balance sociale initiale-
+ment développée par Heider (Heider, 1946) puis reprise et généralisée par Cartwright
+et al. (Cartwright, Harary, 1956). Dans leurs travaux, ces auteurs décrivent les rela-
+tions à trois individus (triades) et étudient les différents scénarios pouvant se réaliser
+lorsqu’une personne réagit à l’opinion de deux autres. Bien que, dans ces études, les
+liens entre individus peuvent être marqués comme positifs ou négatifs, peu de plate-
+formes de réseaux sociaux proposent cette distinction. Nous pouvons noter tout de
+même comme exceptions celles proposant des systèmes de vote (comme pour l’élec-
+tion des administrateurs de Wikipédia (Leskovec et al., 2010a; West et al., 2014)) ou
+de transmission d’opinion (comme la notation de produits ou la conﬁance en un reven-
+deur (Chen et al., 2011; Leskovec et al., 2010b; Richardson et al., 2003)). En consé-
+quence, nous nous basons sur un travail plus récent de Leskovec et al. (Leskovec et
+al., 2010b) aﬁn de sélectionner les différents contextes de triades à signe positif uni-
+quement et les utiliser dans notre modèle.
+
+3. Analyse des graphes générés
+
+Aﬁn d’analyser les réseaux créés par notre modèle, nous devons étudier certaines
+caractéristiques des graphes construits. Bien que la connaissance du nombre de nœuds
+et de liens nous indique la densité du réseau, ce paramètre ne permet en aucun cas de
+déﬁnir entièrement le graphe créé. Nous proposons donc de nous appuyer sur deux
+mesures bien connues de la communautés aﬁn d’étudier les graphes générés en fonc-
+tion des paramètres soumis à l’algorithme. Les deux mesures utilisées sont la lon-
+gueur moyenne des chemins et le coefﬁcient d’agglomération (respectivement, et plus
+communément, désignés en anglais sous les termes de Characteristic Path Length et
+Clustering Coefﬁcient) telles que déﬁnies dans (Watts, Strogatz, 1998).
+DÉFINITION 1 (Longueur moyenne des chemins). — La longueur moyenne des che-
+mins est déﬁnie par la moyenne du nombre de liens dans le chemin le plus court entre
+toute paire de nœuds. Soit un graphe G = (V, E), la longueur moyenne des chemins
+L se calcule par la formule:
+
+(cid:88)
+
+L =
+
+1
+|E|
+
+da,b
+
+∀a,b∈V
+
+où da,b représente le nombre minimal de liens à emprunter pour relier a à b.
+DÉFINITION 2 (Coefﬁcient d’agglomération). — Dans un graphe G = (V, E), un
+nœud v ∈ V possède kv voisins. En conséquence, un maximum de kv(kv−1)
+arêtes
+peuvent exister entre tous ses voisins; ce cas ne se produit que lorsque tous les voisins
+de v, noté N (v), sont entre-connectés deux à deux. Nous désignons Cv comme le
+pourcentage existant de ces liens entre les kv voisins de v,
+
+2
+
+(cid:88)
+
+Cv =
+
+1
+
+kv(kv − 1)/2
+
+∆(a, b)
+
+∀a,b∈N (v)
+
+8 HSP. Volume V – no N/2016
+
+avec ∆(a, b) =
+
+(cid:40)
+
+1
+0
+
+si da,b est égal à 1
+sinon
+
+et nous déﬁnissons le coefﬁcient d’agglomération C comme la valeur moyenne de ce
+pourcentage pour l’ensemble des nœuds du graphe:
+
+(cid:88)
+
+∀v∈V
+
+C =
+
+1
+|V |
+
+Cv
+
+Aﬁn d’étudier l’évolution de ces deux mesures pour notre modèle en fonction
+des paramètres choisis, nous avons générés plusieurs graphes avec, pour paramètre
+ﬁxé, leur nombre de nœuds (|V | = 1000) et, comme paramètres variables, le nombre
+d’arêtes (|E| est porté à 2 000, 5 000, 10 000, 20 000, 50 000 et 100 000) ainsi que le
+ratio ρ d’arêtes créées aléatoirement. Concernant cette dernière variable, nous avions
+initialement prévu de la tester en avançant par tranche de 10% mais nos premiers
+tests nous ont permis d’établir que beaucoup de changements se produisaient dans le
+premier décile, aussi avons-nous réalisé des itérations par pas de 1% pour les dix pre-
+mières mesures puis par pas de 10% par la suite. Enﬁn, nous avons réalisé 10 mesures
+pour chaque tuple de ces paramètres et utilisé les valeurs moyennes obtenues pour
+étudier les résultats.
+
+(a)
+
+(b)
+
+Figure 1. Suivi, en fonction de la valeur de ρ, de l’évolution de (a) la longueur
+moyenne des chemins et (b) du coefﬁcient d’agglomération pour des graphes de
+1 000 nœuds. Le nombre de liens pour chaque graphe testé est spéciﬁé dans la
+
+légende.
+
+Les courbes (a) et (b) de la Figure 1 représentent respectivement les suivis de
+l’évolution de la longueur moyenne des chemins ainsi que du coefﬁcient d’agglomé-
+ration, tous deux calculés pour chacun des graphes testés en fonction de la valeur de
+
+Modèle de génération imitant les réseaux sociaux
+
+9
+
+ρ choisie. L’analyse des longueurs moyennes observées, voir Fig. 1a, ne présente pas
+de réelle surprise, en effet, il est connu que plus la densité d’arêtes est élevée dans
+un graphe simple, plus la distance du chemin moyen en est réduite. Lorsque ρ est ini-
+tialisé à 1, le graphe généré sera l’équivalent d’un graphe aléatoire tel que déﬁni par
+le modèle d’Erd˝os-Rényi (Erd˝os, Rényi, 1959), et la longueur moyenne atteint alors
+son minimum, quel que soit son nombre d’arêtes considérées. Nous nous apercevons
+tout de même que plus la densité d’arêtes ajoutées au graphe est importante, plus ce
+minimum sera atteint rapidement, et ce pour des valeurs de plus en plus petites de ρ.
+L’étude de l’évolution du coefﬁcient d’agglomération en fonction de ρ et de la
+densité d’arêtes (voir Fig. 1b) nous renseigne sur les conditions limites du modèle.
+5 de sa
+Lorsque ρ est égal à zéro, le coefﬁcient d’agglomération atteint pratiquement 4
+valeur maximale pour tous les graphes sauf celui avec 2 000 arêtes où le nombre limité
+de connexions de ce dernier l’empêche d’atteindre une valeur aussi haute que les autres
+graphes. Pour les valeurs intermédiaires de ρ, le coefﬁcient d’agglomération décroît
+plus rapidement pour les graphes avec une forte densité d’arêtes. Si nous poussons la
+valeur du paramètre ρ à 1, le coefﬁcient d’agglomération retombe aux alentours de
+0, à part pour les graphes les plus denses où leur grand nombre d’arêtes garantit des
+valeurs minimales d’agglomération plus élevées que pour les autres.
+
+Avec ces résultats, nous nous apercevons que le modèle permet de générer des
+graphes avec une longueur de chemin moyenne courte et un coefﬁcient d’agglomé-
+ration élevé si l’on utilise des petites valeurs pour le paramètre ρ. Ces deux caracté-
+ristiques combinées nous indiquent que les réseaux ainsi obtenus sont de type « petit
+monde ».
+
+(a)
+
+(b)
+
+Figure 2. Histogramme de la fréquence d’apparition des degrés pour un graphe G de
+
+10 000 nœuds et 50 000 arêtes. Les deux graphiques représentent la même
+
+information mais (b) utilise une échelle logarithmique.
+
+10 HSP. Volume V – no N/2016
+
+Nous souhaitons également découvrir si le réseau généré pourrait être qualiﬁé de
+réseau invariant d’échelle. Pour avoir une idée indicative avant tout calcul poussé,
+nous pouvons observer la distribution des fréquences des degrés dans un des graphes
+générés. La Figure 2 montre une telle distribution pour un réseau de 10 000 nœuds et
+50 000 arêtes, généré pour ρ = 0. Le détail donnée par la sous-ﬁgure 2b nous montre
+que la fréquence des degrés ne suit pas exactement une loi de puissance, qui devrait
+former une pente décroissante assez régulière lorsque représentée sur une échelle log-
+log. La distribution observée s’en approche néanmoins énormément si l’on ne tient pas
+compte des nœuds de degré inférieur à 6. Plusieurs graphes ont été générés avec diffé-
+rents paramètres aﬁn d’observer l’évolution de la distribution des fréquences mais sans
+résultat concluant. Néanmoins, nous avons remarqué qu’augmenter la valeur de ρ fait
+transiter le réseau vers un graphe aléatoire, changeant en conséquence sa distribution
+de degré en une loi de Poisson typique de ce type de graphe. Au bout du compte, nous
+ne pouvons donc pas qualiﬁer notre modèle comme générant des réseaux invariants
+d’échelle mais seulement des graphes s’en rapprochant lorsque ρ est très petit.
+
+Pour ﬁnir, nous présentons quelques représentations de graphes générés à l’aide de
+notre modèle dans la Figure 3. Les réseaux proposés ici sont volontairement laissés
+petits aﬁn de les rendre facile à visualiser et de permettre l’observation de l’impact
+qu’a le paramètre ρ sur les structures obtenues. Cependant, l’implémentation du mo-
+dèle réalisée en C++ à travers le logiciel de visualisation d’information Tulip 3 (Auber
+et al., 2014) permet la génération de grands graphes très facilement. Par exemple,
+la création d’un réseau comptant un million de nœuds et dix millions d’arêtes (avec
+ρ = 0.05) a été réalisée en environ 15 secondes sur une station de travail relativement
+récente.
+
+4. Conclusion
+
+Nous avons présenté dans cet article un nouveau modèle de génération de graphes.
+Bien que celui-ci ait été créé en s’inspirant des démarches existantes sur les plate-
+formes de réseaux sociaux, notre solution reste modulaire de telle façon que les graphes
+produits peuvent proposer différentes caractéristiques selon les paramètres utilisés
+lors de la génération. Nous avons montré que le modèle permettait notamment de
+construire des réseaux « petit monde » et que, lorsque la valeur de ρ était adaptée, la
+distribution de ses degrés pouvait se rapprocher de celles rencontrées dans les réseaux
+invariants d’échelle.
+
+Ce modèle a été produit en se basant entièrement sur une méthode empirique,
+reproduisant de manière automatique les comportements qui avaient été observés dans
+des cas réels. Le résultat s’est avéré néanmoins des plus satisfaisant, marquant ce type
+d’approche comme tout à fait fonctionnel. Pour nos travaux futurs, nous prévoyons de
+nous intéresser à la modélisation d’autres types de réseaux sociaux et notamment ceux
+
+3. Tulip est disponible sur le site http://tulip.labri.fr
+
+Modèle de génération imitant les réseaux sociaux
+
+11
+
+(a) ρ = 0
+
+(b) ρ = 0.01
+
+(c) ρ = 0.02
+
+(d) ρ = 1
+
+Figure 3. Exemples de réseaux générés par notre modèle. Chacun des graphes
+possède 2 000 nœuds et 10 000 arêtes. Le ratio ρ utilisé lors de chacune des
+
+générations est donné en légende pour chaque graphe.
+
+supportant les relations positives, négatives, ou marquées par un spectre de ressentis
+des membres entre-eux.
+
+Bibliographie
+
+Auber D., Archambault D., Bourqui R., Delest M., Dubois J., Pinaud B. et al. (2014). Tulip
+In R. Alhajj, J. Rokne (Eds.), Encyclopedia of social network analysis and mining,
+
+III.
+
+12 HSP. Volume V – no N/2016
+
+p. 2216-2240. Springer New York.
+
+Barabási A.-L., Albert R. (1999). Emergence of scaling in random networks. Science, vol. 286,
+
+no 5439, p. 509–512.
+
+Cartwright D., Harary F. (1956). Structural balance: a generalization of Heider’s theory. Psy-
+
+chological Review, vol. 63, p. 277–293.
+
+Chen W., Collins A., Cummings R., Ke T., Liu Z., Rincón D. et al. (2011). Inﬂuence maximi-
+zation in social networks when negative opinions may emerge and propagate. In Proc. of
+the 11th SIAM Int. Conf. on Data Mining, SDM, p. 379–390.
+
+Erd˝os P., Rényi A. (1959). On Random Graphs I. Publicationes Mathematicae (Debrecen),
+
+vol. 6, p. 290-297.
+
+Heider F. (1946). Attitudes and cognitive organization. The Journal of Psychology, vol. 21,
+
+no 1, p. 107-112.
+
+Holme P., Kim B. J. (2002, Jan). Growing scale-free networks with tunable clustering. Phys.
+
+Rev. E, vol. 65, p. 026107.
+
+Klemm K., Eguíluz V. M. (2002, May). Growing scale-free networks with small-world beha-
+
+vior. Phys. Rev. E, vol. 65, p. 057102.
+
+Leskovec J., Huttenlocher D., Kleinberg J. (2010a). Predicting positive and negative links in
+online social networks. In Proc. of the 19th Int. Conf. on World Wide Web, p. 641–650.
+ACM.
+
+Leskovec J., Huttenlocher D., Kleinberg J. (2010b). Signed networks in social media. In Proc.
+
+of the SIGCHI Conf. on Human Factors in Computing Systems, p. 1361–1370. ACM.
+
+Milgram S. (1967). The small world problem. Psychology Today, vol. 2, p. 60–67.
+
+Richardson M., Agrawal R., Domingos P. (2003). Trust management for the semantic web.
+In D. Fensel, K. Sycara, J. Mylopoulos (Eds.), The Semantic Web - ISWC 2003: 2nd Int.
+Semantic Web Conf. Proc., p. 351–368. Springer Berlin.
+
+Sallaberry A., Zaidi F., Melançon G. (2013). Model for generating artiﬁcial social networks
+having community structures with small-world and scale-free properties. Social Network
+Analysis and Mining, vol. 3, no 3, p. 597–609.
+
+Wang L., Du F., Dai H. P., Sun Y. X. (2006). Random pseudofractal scale-free networks with
+small-world effect. The European Physical Journal B - Condensed Matter and Complex
+Systems, vol. 53, no 3, p. 361-366.
+
+Watts D. J., Strogatz S. H. (1998). Collective dynamics of ‘small-world’ networks. Nature,
+
+vol. 393, p. 440–442.
+
+West R., Paskov H. S., Leskovec J., Potts C. (2014). Exploiting social network structure for
+
+person-to-person sentiment analysis. CoRR, vol. abs/1409.2450.
+
+

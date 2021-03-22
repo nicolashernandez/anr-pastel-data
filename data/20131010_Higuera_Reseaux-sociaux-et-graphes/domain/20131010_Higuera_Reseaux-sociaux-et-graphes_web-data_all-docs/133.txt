@@ -1,0 +1,1535 @@
+https://abiteboul.com/College/lecon-inaugurale.pdf
+
+Sciences	  des	  données	  :	  
+
+De	  la	  Logique	  du	  premier	  ordre	  	  
+
+à	  la	  Toile	  	  
+
+Serge	  Abiteboul	  
+
+Chaire	  informa3que	  et	  sciences	  numériques	  
+
+3/16/12	  
+
+1	  
+
+À	  l’étudiante	  	  
+
+	  en	  informa1que,	  	  
+
+	  	  	   	  en	  mathéma1ques	  	  
+	  	  	   	  ou	  en	  sciences	  
+
+3/16/12	  
+
+2	  
+
+Je	  ne	  connais	  pas	  d’être	  vivant,	  de	  cellule,	  1ssu,	  organe,	  individu	  et	  
+peut-­‐être	  même	  espèce,	  dont	  on	  ne	  puisse	  pas	  dire	  qu’il	  stocke	  de	  
+l’informa1on,	  qu’il	  traite	  de	  l’informa1on,	  qu’il	  émet	  et	  qu’il	  reçoit	  de	  
+l’informa1on. 	  
+
+	  	  	  	  	  	  	  
+
+	  
+
+	  Michel	  Serres	  
+
+	  
+
+	  
+
+	  
+
+Introduc:on	  	  "
+Deux	  réalisa3ons	  du	  20e	  siècle	  
+	  Les	  systèmes	  rela3onnels	  	  
+	  Les	  moteurs	  de	  recherche	  de	  la	  Toile	  
+
+Deux	  déﬁs	  du	  21e	  siècle	  
+
+	  Réseaux	  et	  connaissances	  collec3ves	  
+	  La	  Toile	  des	  connaissances
+
+	  	  
+
+Conclusion	  
+
+3/16/12	  
+
+3	  
+
+Sciences	  des	  données	  :	  de	  la	  Logique	  du	  
+
+premier	  ordre	  à	  la	  Toile	  
+
+Les	  systèmes	  informa3ques	  servent	  à	  calculer	  
+
+–  Simula3on	  de	  la	  météo	  
+–  Cryptographie	  
+–  Etc.	  
+
+Ils	  servent	  beaucoup	  à	  stocker/gérer	  des	  données	  
+
+Inventaire	  
+
+–  Comptabilité	  
+–  Catalogue	  de	  produits	  
+– 
+–  Agenda	  
+–  Contacts	  	  
+–  Bibliothèque	  
+–  Médiathèque,	  etc.	  
+
+3/16/12	  
+
+	  
+
+4	  
+
+Sciences	  des	  données	  :	  de	  la	  Logique	  du	  
+
+premier	  ordre	  à	  la	  Toile	  
+
+Les	  systèmes	  informa3ques	  jouent	  le	  rôle	  de	  médiateurs	  entre	  
+des	  u3lisateurs	  intelligents	  et	  des	  objets	  qui	  stockent	  
+l’informa3on	  
+
+	  	  ∃	  t,d	  (	  Film(t,	  d,	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  
+«	  Bogart	  »)	  ∧	  
+Séance(t,	  s,	  h)	  )	  
+
+Où et à 
+quelle heure 
+puis-je voir 
+un film avec 
+Bogart? 
+
+intget(intkey){	  
+inthash=(key
+%TS);while(table
+[hash]=NULL&&t
+able[hash]-­‐
+>getKey()=key)	  
+hash=(hash…	  
+
+	  
+
+3/16/12	  
+
+5	  
+
+Sciences	  des	  données	  :	  de	  la	  Logique	  du	  
+
+premier	  ordre	  à	  la	  Toile	  
+
+	  
+
+Aujourd’hui,	  on	  trouve	  l’informa3on	  sur	  la	  Toile	  	  
+
+•  «	  World	  Wide	  Web	  »,	  lijéralement	  la	  «	  toile	  
+
+d’araignée	  mondiale	  »	  
+
+La	  Toile	  est	  un	  système	  hypertexte	  (*)	  public	  
+
+fonc3onnant	  sur	  Internet	  (**)	  qui	  permet	  de	  
+consulter,	  avec	  un	  navigateur,	  des	  pages	  accessibles	  
+notamment	  via	  des	  moteurs	  de	  recherche	  
+
+3/16/12	  
+
+(*)	  Hypertext	  
+
+(**)	  Internet	  
+
+Un	  réseau	  qui	  permet	  
+de	  transférer	  des	  ﬂux	  
+d’informa3on	  entre	  
+des	  machines	  
+6	  
+connectées	  au	  réseau	  
+(TCP)	  
+
+Success	  stories	  sur	  la	  Toile	  
+
+e
+
+e
+
+C ’
+
+t 	   d
+
+s
+
+r m a 4 o
+
+n 	   d ’ i n f o
+
+Google	  :	  ges3on	  des	  pages	  du	  Web	  
+Facebook	  :	  informa3ons	  personnelles	  et	  communautés	  
+Wikipedia	  :	  encyclopédie	  
+Amazon,	  eBay	  :	  catalogues	  de	  vente	  sur	  le	  Web	  
+s 4 o
+YouTube,	  Dailymo3on	  :	  vidéos	  
+e 	  l a 	   g
+Twijer	  :	  communica3on,	  news	  
+Flickr,	  Picasa	  :	  photos	  
+iTunes,	  Kazaa,	  Emule,	  Batanga,	  BearShare	  :	  musique	  en	  ligne	  
+Myspace	  :	  pages	  personnelles	  
+o m m u
+Mee3c	  :	  ﬁches	  individuelles	  
+Wikileaks	  :	  secrets	  d’Etats	  
+	  
+3/16/12	  
+
+e l	   e
+
+t 	  l e
+
+s
+
+r 	   p
+
+u
+
+t 	   c
+
+o i n
+
+n 	  
+
+Q u
+
+n 	   ? 	  
+
+7	  
+
+Le	  quan3ta3f	  :	  le	  monde	  numérique	  
+
+Des	  milliards	  d’objets	  communicants	  
+Des	  centaines	  de	  millions	  de	  sites	  de	  la	  Toile	  
+1000	  milliards	  de	  pages	  (Septembre	  2008)	  
+Plus	  de	  10	  milliards	  de	  recherches	  sur	  le	  Web/mois	  (Avril	  2008)	  
+
+e 	  
+
+u
+
+r i q
+
+u m é
+
+e 	   n
+
+d
+
+n
+e 	  
+
+n 	   m o
+u
+q
+s
+e
+
+s 	   u
+n
+
+t
+
+a
+
+n
+
+a
+s 	   d
+t 	   g i g
+
+n
+n
+
+o
+n
+a i g
+b l e m e
+
+s 	   b
+u
+a
+r i t
+
+N o
+é
+v
+
+3/16/12	  
+
+8	  
+
+Le	  quan3ta3f	  :	  le	  volume	  de	  données	  	  
+
+	  
+8	  bits
+1	  téraoctet
+
+	  =	  1	  octet	   	  
+	  =	  1012	  octets	  	  
+
+	  	  	  
+
+200	  téraoctets	  =	  tous	  les	  livres	  écrits	  à	  ce	  jour	  
+
+1	  pétaoctet	  
+
+	  =	  1015	  octets	  
+
+– 
+
+– 
+
+– 
+
+100	  pétaoctet	  =	  la	  quan3té	  de	  données	  produites	  par	  le	  collisionneur	  de	  
+par3cules	  du	  CERN	  en	  une	  minute	  
+
+1	  exaoctet	  
+
+	  =	  1018	  octets	  	  
+
+5	  exaoctets	  =	  le	  volume	  des	  mots	  prononcés	  depuis	  que	  l’homme	  parle	  
+
+1	  zejaoctet	  
+
+s 	   1
+–  ½	  zeLa	  =	  le	  traﬁc	  Internet	  en	  2012	  –	  0.5.1021	  
+– 
+
+	  =	  1021	  octets	  
+o
+a l	   d
+s 	   d i g i t
+
+b l e 	   t
+
+s 	  l e
+
+o
+
+u
+
+66	  zeja	  :	  l'informa3on	  visuelle	  envoyée	  au	  cerveau	  en	  une	  année	  
+L ' u
+
+	  
+Source	  :	  Cisco	  Visual	  Networking	  Index	  –	  Forecast,	  2007-­‐201	  -­‐	  Via	  Michael	  Brodie	  
+3/16/12	  
+
+n i
+
+e
+
+v
+
+r
+
+	  
+
+	  
+
+	  	  
+
+u
+
+9	  
+
+8 	   m o i s 	  
+
+Le	  qualita3f	  :	  données,	  informa3ons	  et	  connaissances	  	  	  	  	  	  	  
+
+Données	  
+
+Informa3ons	  
+
+Connaissances	  
+
+Descrip3on	  élémentaire	  
+d’une	  réalité	  
+Données	  avec	  un	  sens	  	  	  	  
+(pour	  construire	  une	  
+représenta3on	  de	  la	  
+réalité)	  
+	  
+Informa3ons	  avec	  une	  
+vérité,	  plus	  généralement	  
+une	  loi	  qui	  est	  considérée	  
+comme	  vraie	  
+
+Mesures	  de	  températures	  
+dans	  une	  sta1on	  météo	  
+Une	  courbe	  donnant	  
+l’évolu1on	  des	  minimas	  &	  
+maximas	  moyens	  en	  un	  lieu	  
+suivant	  le	  mois	  de	  l’année	  
+
+Le	  fait	  que	  la	  température	  
+sur	  terre	  augmente	  du	  fait	  
+de	  l’ac1vité	  humaine	  
+
+3/16/12	  
+
+10	  
+
+Logic	  is	  the	  beginning	  of	  wisdom,	  not	  the	  end.	  	  	  	  	  	  	  	  	  	  	  	  Mr.	  Spock,	  Star	  Trek	  	  	  
+
+Introduc3on"
+Deux	  réalisa3ons	  du	  20e	  siècle	  
+	  Les	  systèmes	  rela:onnels
+	  Les	  moteurs	  de	  recherche	  de	  la	  Toile	  
+
+	  	  
+
+Deux	  déﬁs	  du	  21e	  siècle	  
+
+	  Réseaux	  et	  connaissances	  collec3ves	  
+	  La	  Toile	  des	  connaissances
+
+	  	  
+
+Conclusion	  
+
+3/16/12	  
+
+	  
+
+11	  
+
+La	  ges3on	  de	  données	  «	  classique	  »	  	  
+
+Un	  grand	  succès	  de	  l’informa3que	  du	  20e	  siècle	  
+
+–  Recherche	  industrielle	  et	  académique	  	  
+–  Fondements	  théoriques	  
+–  Systèmes	  commerciaux	  comme	  Oracle,	  DB2,	  SQL	  Server	  
+–  Logiciels	  libres	  comme	  mySQL	  
+
+Modèle	  rela3onnel,	  Tedd	  Codd-­‐1970	  
+Fortement	  inspiré	  par	  la	  Logique	  du	  premier	  ordre	  	  
+
+–  Développée	  à	  la	  ﬁn	  du	  19e	  par	  des	  mathéma3ciens	  
+–  Pour	  formaliser	  le	  langage	  des	  mathéma3ques	  
+
+3/16/12	  
+
+12	  
+
+Les	  données	  sont	  organisées	  en	  rela3ons	  
+
+Film	  
+
+Titre	  
+
+Séance	  
+
+Réalisateur	   Acteur	  
+
+Titre	  	  
+
+Salle	  	  
+
+Casablanca	  
+
+M.	  Cur3z	  
+
+H.	  Bogart	  
+
+Casablanca	  
+
+Le	  Grand	  Rex	  
+
+Heure	  
+
+19:00	  
+
+Casablanca	  
+
+M.	  Cur3z	  
+
+P.	  Lore	  
+
+Casablanca	   Max	  Linder	  Panorama	   20:00	  
+
+Les	  400	  coups	  
+
+F.	  Truﬀaut	  
+
+J.-­‐P.	  Leaud	  
+
+Star	  Wars	  
+
+Sèvres	  Espace	  Loisirs	  
+
+20:30	  
+
+Star	  Wars	  
+
+G.	  Lucas	  
+
+H.	  Ford	  
+
+Star	  Wars	  
+
+Sèvres	  Espace	  Loisirs	  
+
+20:45	  
+
+3/16/12	  
+
+13	  
+
+Les	  requêtes	  sont	  exprimées	  	  
+
+en	  calcul	  rela3onnel	  
+
+qHB	  =	  {	  salle,	  heure	  |	  ∃	  réalisateur,	  1tre	  	  
+
+	  (	  
+	  
+
+	  Film(	  1tre,	  réalisateur,	  «	  Humphrey	  Bogart	  »)	  ∧	  	  
+	  Séance(	  1tre,	  salle,	  heure	  )	  }	  
+
+	  
+En	  pra3que	  les	  systèmes	  rela3onnels	  u3lisent	  une	  syntaxe	  
+encore	  plus	  simple	  à	  comprendre	  :	  
+SQL	  :	  
+
+select	  salle,	  heure	  
+from	  Film,	  Séance	  
+where	  Film.1tre	  =	  Séance.1tre	  and	  acteur=	  «Humphrey	  Bogart»	  
+
+	  
+
+3/16/12	  
+
+14	  
+
+Les	  requêtes	  sont	  
+traduites	  en	  
+expressions	  
+algébriques	  
+
+3/16/12	  
+
+15	  
+
+Op3misa3on	  de	  requêtes	  
+
+C’est-­‐à-­‐dire	  :	  choisir	  le	  plan	  d’exécu3on	  le	  moins	  coûteux	  
+possible	  (typiquement	  en	  temps)	  pour	  calculer	  la	  requête	  
+Problème	  :	  	  	  
+
+L’	  «	  espace	  de	  recherche	  »,	  c’est-­‐à-­‐dire	  l’espace	  dans	  lequel	  nous	  
+voulons	  trouver	  le	  plan	  d’exécu3on,	  est	  poten3ellement	  gigantesque.	  
+On	  u3lise	  des	  «	  heuris3ques	  »	  pour	  éviter	  de	  le	  parcourir	  
+
+–  On	  doit	  être	  capable	  d’es3mer	  très	  rapidement	  le	  coût	  de	  chaque	  
+
+plan	  candidat	  (pour	  trouver	  le	  moins	  coûteux)	  	  
+
+– 
+
+– 
+
+Les	  op3miseurs	  de	  systèmes	  rela3onnels	  comme	  Oracle	  ou	  DB2	  
+font	  des	  merveilles	  sur	  des	  requêtes	  simples	  
+
+En	  pra3que,	  la	  plupart	  des	  requêtes	  posées	  sont	  simples	  
+
+	  
+
+3/16/12	  
+
+16	  
+
+De	  la	  complexité	  des	  requêtes	  
+
+Certaines	  proposi3ons	  ne	  peuvent	  être	  ni	  démontrées	  ni	  réfutées	  
+&	  certains	  problèmes	  ne	  peuvent	  être	  résolus	  [Church-­‐Turing]	  
+
+Certaines	  tâches	  sont	  trop	  coûteuses	  à	  réaliser	  
+
+Par	  exemple,	  factoriser	  un	  très	  grand	  en3er	  en	  nombres	  premiers	  
+
+– 
+
+– 
+– 
+– 
+
+Complexité	  d’une	  tâche	  
+
+Pour	  nous	  :	  en	  fonc3on	  de	  la	  taille	  des	  données	  
+En	  temps	  :	  quel	  temps	  est	  nécessaire	  pour	  la	  réaliser	  ?	  	  
+En	  espace	  :	  quel	  espace	  disque	  (ou	  quelle	  mémoire)	  est	  nécessaire	  ?	  
+
+Exemple	  	  
+
+– 
+– 
+– 
+3/16/12	  
+
+Temps	  linéaire	  :	  si	  je	  double	  la	  taille	  des	  données,	  je	  double	  le	  temps	  
+Temp	  P	  ;	  en	  nk	  où	  n	  est	  la	  taille	  des	  données	  
+Temps	  exp1me	  :	  en	  kn	  
+
+17	  
+
+Les	  raisons	  du	  succès	  de	  ces	  systèmes	  
+
+Les	  requêtes	  sont	  exprimées	  dans	  le	  calcul	  rela:onnel	  
+
+un	  langage	  logique,	  simple	  et	  compréhensible	  surtout	  dans	  des	  variantes	  
+comme	  SQL	  	  
+
+Une	  requête	  du	  calcul	  est	  traduite	  en	  une	  requête	  de	  l’algèbre	  
+
+facile	  à	  évaluer;	  Th.	  de	  Codd	  
+
+– 
+
+– 
+
+– 
+
+On	  peut	  op:miser	  l’évalua3on	  d’expressions	  de	  l’algèbre	  
+
+parce	  que	  c’est	  un	  modèle	  de	  calcul	  limité	  (qui	  ne	  permet	  pas	  de	  calculer	  
+n’importe	  quelle	  fonc3on)	  
+
+Le	  parallélisme	  permet	  de	  passer	  à	  l’échelle	  de	  très	  grandes	  bases	  
+
+de	  données	  
+– 
+– 
+
+les	  requêtes	  du	  calcul	  rela3onnel	  sont	  dans	  la	  classe	  de	  complexité	  AC0	  	  
+très	  parallélisables	  
+
+3/16/12	  
+
+18	  
+
+Un	  problème	  ouvert	  
+
+Toute	  requête	  du	  calcul	  rela3onnel	  peut	  être	  évaluée	  en	  P	  
+Réciproquement,	  peut-­‐on	  exprimer	  en	  calcul	  toutes	  les	  requêtes	  
+
+	  
+
+calculables	  en	  P? 	  
+– 
+Étant	  donné	  un	  graphe	  G,	  et	  deux	  points	  a,	  f	  de	  ce	  graphe,	  est-­‐ce	  qu’il	  
+existe	  un	  chemin	  de	  a	  à	  f	  ?	  	  
+-  On	  peut	  demander	  s’il	  existe	  un	  chemin	  de	  longueur	  3	  ou	  même	  k,	  pour	  
+
+	  Non	  
+
+un	  k	  ﬁxé	  
+
+Trouver	  un	  langage	  logique	  qui	  permejrait	  d’exprimer	  toutes	  les	  
+
+requêtes	  calculables	  en	  temps	  polynomial	  mais	  qui	  ne	  
+permejrait	  d’exprimer	  que	  des	  requêtes	  en	  temps	  polynomial	  
+
+Un	  pont	  entre	  le	  logiquement	  exprimable	  et	  le	  facilement	  
+
+calculable	  
+
+3/16/12	  
+
+19	  
+
+Playboy	  :	  Is	  your	  company	  moQo	  really	  "Don't	  be	  evil"?	  
+Brin	  :	  Yes,	  it's	  real.	  
+Playboy	  :	  Is	  it	  a	  wriQen	  code?	  
+Brin	  :	  Yes.	  We	  have	  other	  rules,	  too.	  
+Page	  :	  We	  allow	  dogs,	  for	  example.	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  Sergey	  Brin	  et	  Larry	  Page,	  	  	  	  	  	  	  	  	  	  
+
+fondateurs	  de	  Google.	  	  
+Interview	  dans	  le	  magasine	  Playboy,	  2004	  	  
+
+Introduc3on"
+Deux	  réalisa3ons	  du	  20e	  siècle	  
+	  Les	  systèmes	  rela3onnels	  	  
+	  Les	  moteurs	  de	  recherche	  de	  la	  Toile	  	  
+
+Deux	  déﬁs	  du	  21e	  siècle	  
+
+	  Réseaux	  et	  connaissances	  collec3ves	  
+	  La	  Toile	  des	  connaissances
+
+	  	  
+
+Conclusion	  
+
+3/16/12	  
+
+	  
+
+20	  
+
+Ce	  qui	  a	  changé	  avec	  la	  Toile	  
+
+L’informa3on	  résidait	  sur	  des	  iles	  
+avec	  des	  formats,	  des	  langages	  
+de	  programma3on,	  des	  
+applica3ons,	  des	  systèmes	  
+d’exploita3ons	  diﬀérents	  
+
+Grâce	  à	  des	  standards	  universels	  
+
+pour	  échanger	  de	  l’informa3on,	  
+nous	  avons	  maintenant	  :	  	  
+1.  Un	  accès	  uniforme	  et	  universel	  
+2.  L’accès	  à	  des	  volumes	  
+
+à	  l’informa3on	  
+
+gigantesques	  d’informa3on	  	  
+
+3/16/12	  
+
+21	  
+
+Parallélisme	  
+
+Illustra3on	  :	  deux	  types	  
+d’organisa3ons	  sont	  possibles	  
+pour	  la	  diﬀusion	  de	  ﬁlms	  
+
+–  Chaque	  ﬁlm	  sur	  un	  serveur	  
+–  Architecture	  pair-­‐à-­‐pair,	  
+
+unique	  vite	  saturé	  
+
+chaque	  machine	  est	  à	  la	  fois	  
+serveur	  et	  client	  
+
+Essen3el	  pour	  gérer	  de	  gros	  
+volumes	  de	  données	  
+
+–  Meilleure	  disponibilité,	  
+
+performance,	  etc.	  
+
+Quel	  parallélisme?	  
+
+–  Les	  machines	  sont	  de	  plus	  en	  
+plus	  mul3	  processeurs	  
+–  Collabora3on	  entre	  les	  
+
+serveurs	  des	  diﬀérents	  sites	  
+d’une	  entreprise	  
+–  Centaines	  voire	  milliers	  de	  
+serveurs	  d’une	  «	  grappe	  »	  	  
+–  Millions	  de	  serveurs	  de	  la	  
+
+Toile	  	  
+
+	  
+3/16/12	  
+
+22	  
+
+Index	  de	  la	  Toile	  
+
+L’index	  donne,	  pour	  chaque	  mot,	  la	  liste	  des	  pages	  qui	  con3ennent	  
+ce	  mot	  
+
+	  
+
+Mot	  
+…	  
+collège	  
+…	  
+france	  
+…	  
+informa3que	  
+…	  
+
+3/16/12	  
+
+Numéro	  de	  page	  
+
+34,56,223,9900,111111…	  
+
+56,778,6560,9900,9999…	  
+
+9890,11122290…	  
+
+num	   url	  
+1	  
+2	  
+3	  
+4	  
+
+www.inria.fr	  
+www.bnf.com	  
+www.inria.fr/~bhe	  	  	  
+www.inria.fr/a/b	  
+…	  
+
+23	  
+
+Passage	  à	  l’échelle	  
+
+Plus	  le	  moteur	  indexe	  de	  pages,	  plus	  l’index	  grandit	  
+
+–  Des	  milliards	  de	  pages	  	  
+– 
+– 
+
+L’index	  est	  du	  même	  ordre	  de	  grandeur	  que	  les	  pages	  indexées	  
+Chaque	  requête	  devient	  de	  plus	  en	  plus	  coûteuse	  à	  évaluer	  
+Plus	  le	  moteur	  a	  d’u3lisateurs,	  plus	  il	  reçoit	  de	  requêtes	  
+–  Des	  dizaines	  de	  milliards	  de	  requêtes	  de	  recherche	  par	  mois	  
+
+Solu3on	  :	  le	  parallélisme	  
+
+3/16/12	  
+
+24	  
+
+Prouesse	  et	  magie	  
+
+On	  vous	  a	  dit	  	  
+
+– 
+Non	  
+– 
+
+	  La	  Toile	  est	  extraordinaire	  par	  la	  quan3té	  d’informa3ons	  qu’elle	  con3ent	  
+
+Plus	  il	  y	  a	  d’informa3ons,	  plus	  c’est	  compliqué	  de	  trouver	  la	  bonne	  
+informa3on	  
+
+	  
+La	  prouesse	  :	  indexer	  des	  milliards	  de	  pages	  
+En	  u3lisant	  des	  techniques	  comme	  le	  hachage	  
+
+– 
+
+La	  magie	  :	  trouver	  ce	  que	  vous	  voulez	  (en	  général)	  
+
+– 
+
+En	  u3lisant	  des	  «	  mesures	  »	  pour	  classer	  les	  pages	  comme	  PageRank	  et	  
+TFIDF	  
+
+3/16/12	  
+
+25	  
+
+La	  prouesse	  :	  	  
+hacher	  les	  	  
+données	  
+
+3/16/12	  
+
+26	  
+
+La	  magie	  :	  les	  classer	  avec	  PageRank	  
+
+Surfeur	  aléatoire	  de	  la	  Toile	  
+
+–  Popularité	  =	  probabilité	  de	  se	  trouver	  sur	  la	  page	  
+–  Probabilité	  est	  plus	  forte	  pour	  lemonde.fr	  que	  pour	  la	  page	  
+
+personnelle	  de	  Madame	  Michu	  
+
+•  toutes	  les	  pages	  sont	  supposées	  aussi	  populaires	  
+
+Mise	  en	  équa3on	  :	  pop	  =	  Θ	  ×	  pop	  	  
+Et	  comment	  on	  calcule	  cela	  ?	  
+–  pop0	  déﬁni	  par	  pop0[i]	  =	  1/N	  
+–  pop1	  =	  Θ×	  pop0	  	  
+–  pop2	  =	  Θ	  ×	  pop1	  	  
+–  pop3	  =	  Θ	  ×	  pop2	  …	  
+
+Le	  point	  ﬁxe	  donne	  la	  popularité	  
+
+3/16/12	  
+
+27	  
+
+Des	  problèmes	  ouverts	  
+
+Simplisme	  des	  requêtes	  actuelles	  
+
+– 
+– 
+– 
+
+Langue	  primi3ve	  quasiment	  sans	  grammaire	  :	  Liste	  de	  mots-­‐clés	  
+Résultat	  imprécis	  :	  liste	  de	  pages	  	  
+Il	  est	  sûrement	  possible	  de	  faire	  mieux	  
+
+Simplisme	  de	  PageRank	  
+
+Privilégie	  la	  popularité;	  encourage	  l’uniformité	  
+
+– 
+–  Ne	  3ent	  pas	  compte	  des	  opinions	  néga3ves	  
+
+	  
+	  
+	  
+Et	  pourquoi	  le	  secret	  sur	  les	  critères	  de	  classement	  des	  pages	  ?	  
+
+3/16/12	  
+
+28	  
+
+Les	  systèmes	  rela:onnels	  
+comment	  on	  en	  est	  arrivé	  là	  
+
+L’améliora3on	  d’une	  fonc3on	  
+existante	  ou	  une	  nouvelle	  
+fonc3onnalité	  
+
+Des	  ou3ls	  mathéma3ques	  
+
+Maths	  
+
+Des	  algorithmes	  intelligents	  
+
+Informa3que	  
+
+Un	  engineering	  solide	  
+
+Engineering	  
+
+Et	  tout	  cela	  en	  tenant	  compte	  des	  
+progrès	  sur	  les	  machines	  
+
+Progrès	  sur	  les	  
+
+matériels	  
+
+Notamment,	  des	  modèle	  plus	  
+abstraits	  pour	  gérer	  des	  données	  
+
+Notamment,	  la	  logique	  et	  
+l’algèbre	  rela3onnelles	  
+Notamment,	  pour	  l’op3misa3on	  
+de	  requête	  
+Notamment	  la	  reprise	  sur	  pannes	  	  
+et	  la	  ges3on	  de	  la	  concurrence	  
+Améliora3on	  de	  la	  capacité	  des	  
+disques	  
+
+3/16/12	  
+
+29	  
+
+Moteurs	  de	  recherche	  de	  la	  Toile	  
+
+comment	  on	  en	  est	  arrivé	  là	  
+
+L’améliora3on	  d’une	  fonc3on	  
+existante	  ou	  une	  nouvelle	  
+fonc3onnalité	  
+
+Des	  ou3ls	  mathéma3ques	  
+
+Maths	  
+
+Des	  algorithmes	  intelligents	  
+
+Informa3que	  
+
+Un	  engineering	  solide	  
+
+Engineering	  
+
+Progrès	  sur	  les	  
+
+Et	  tout	  cela	  en	  tenant	  compte	  des	  
+progrès	  sur	  les	  machines	  
+
+matériels	  
+
+	  
+Meilleur	  classement	  des	  pages	  
+	  
+Notamment,	  les	  techniques	  de	  
+point	  ﬁxe	  	  
+Notamment,	  l’u3lisa3on	  du	  
+parallélisme	  massif	  
+Notamment,	  faire	  fonc3onner	  des	  
+fermes	  de	  machines	  
+
+Baisse	  du	  prix	  des	  mémoires	  
+
+3/16/12	  
+
+30	  
+
+Avoir	  ou	  ne	  pas	  avoir	  de	  réseau	  :	  that’s	  the	  ques1on.	  
+
+	  Bruno	  Latour	  
+
+Introduc3on"
+Deux	  réalisa3ons	  du	  20e	  siècle	  
+	  Les	  systèmes	  rela3onnels	  	  
+	  Les	  moteurs	  de	  recherche	  de	  la	  Toile	  
+
+Deux	  déﬁs	  du	  21e	  siècle	  
+
+	  Réseaux	  et	  connaissances	  collec:ves	  	  
+	  La	  Toile	  des	  connaissances
+
+	  	  
+
+Conclusion	  
+
+	  
+
+3/16/12	  
+
+31	  
+
+Après	  les	  réseaux	  de	  machines,	  puis	  de	  
+contenus,	  les	  réseaux	  d’u:lisateurs	  	  
+
+La	  Toile	  n’est	  pas	  juste	  faite	  pour	  obtenir	  des	  données	  
+Tout	  le	  monde	  peut	  par3ciper	  :	  tweets,	  Wikipédia,	  mashups	  
+Mots-­‐clés	  :	  interac3on,	  communauté,	  communica3on,	  réseaux	  
+
+3/16/12	  
+
+32	  
+
+Connaissances	  collec3ves	  
+
+Plusieurs	  approches	  	  
+•  La	  nota3on	  par	  l’internaute	  	  
+•  L’évalua3on	  de	  l’exper3se	  des	  internautes	  	  	  
+•  La	  recommanda3on	  	  	  
+•  La	  collabora3on	  	  
+•  Le	  crowdsourcing	  
+
+3/16/12	  
+
+33	  
+
+La	  nota3on	  
+
+Connaître	  l’avis	  de	  l’internaute	  
+
+– 
+– 
+
+quan3ta3f	  (notes)	  
+qualita3f	  (restaurant	  d’ambiance)	  
+
+eBay	  :	  	  les	  clients	  notent	  les	  vendeurs	  
+De	  plus	  en	  plus	  répandu	  
+–  Cinéma	  comme	  Allociné	  
+–  Restaurant	  comme	  ViaMichelin	  
+–  Pages	  de	  la	  Toile	  :	  annota3ons	  	  
+	  	  	  	  dans	  Delicious	  
+
+3/16/12	  
+
+34	  
+
+L’évalua3on	  de	  l’exper3se	  
+
+Evaluer	  	  
+
+	  la	  qualité	  de	  l’informa3on	  	  
+	  la	  qualité	  des	  sources	  d’informa3on	  
+
+Illustra3on	  :	  travail	  récent	  sur	  la	  corrobora3on	  
+	  
+Comment	  se	  construit	  l’exper3se	  sur	  la	  Toile	  ?	  
+
+–  Des	  blogs,	  comme	  celui	  de	  Maitre	  Eolas	  pour	  les	  aﬀaires	  juridiques	  
+–  Blogs	  de	  simples	  citoyens	  en	  Tunisie	  ou	  en	  Syrie	  
+
+Elle	  sera	  un	  jour	  déterminée	  par	  des	  programmes	  ?	  	  
+
+3/16/12	  
+
+35	  
+
+La	  recommanda3on	  
+
+U3liser	  les	  données	  du	  Web	  pour	  «	  recommander	  »	  
+
+–  Mee3c	  organise	  des	  rencontres	  
+–  Ne(cid:136)lix	  suggère	  des	  ﬁlms	  	  
+–  Amazon	  des	  livres	  
+
+Analyses	  sta3s3ques	  pour	  mejre	  en	  évidence	  des	  
+«	  proximités	  »	  	  
+
+–  Entre	  clients	  dans	  Mee3c	  
+–  Entre	  clients	  et	  produits	  dans	  Ne(cid:136)lix	  et	  Amazon	  
+
+3/16/12	  
+
+36	  
+
+La	  collabora3on	  
+
+Des	  internautes	  réalisent	  collec3vement	  une	  tâche	  qui	  les	  
+
+dépasse	  individuellement	  
+
+Wikipédia	  :	  encyclopédie	  
+
+–  281	  édi3ons	  ;	  3	  millions	  d’ar3cles	  pour	  la	  version	  anglaise	  
+–  Place	  considérable	  dans	  la	  diﬀusion	  des	  connaissances	  
+–  Couverture	  bien	  plus	  large	  qu’une	  encyclopédie	  tradi3onnelle	  
+–  Qualité	  très	  controversée	  
+
+Linux	  :	  opera3ng	  system	  en	  logiciel	  libre	  
+Web	  des	  données	  (linked	  data)	  :	  corpus	  de	  données	  ouvertes	  
+	  
+
+3/16/12	  
+
+37	  
+
+Le	  crowdsourcing	  
+
+Publica3on	  de	  ques3ons	  	  ☛	  réponses	  des	  internautes	  	  
+Mechanical	  Turk	  d’Amazon	  	  
+
+–  Référence	  au	  Turc	  mécanique,	  un	  automate	  joueur	  d'échecs	  
+
+de	  la	  ﬁn	  	  du	  18e	  siècle	  
+
+Foldit	  :	  décodage	  de	  la	  structure	  d’une	  enzyme	  proche	  de	  
+
+celle	  du	  virus	  du	  sida	  
+–  Comprendre	  comment	  ceje	  enzyme	  se	  replie	  dans	  un	  espace	  
+
+en	  trois	  dimensions	  pour	  construire	  sa	  structure	  
+
+–  Jeu	  
+
+3/16/12	  
+
+38	  
+
+Des	  problèmes	  ouverts	  
+
+Analyses	  sta3s3ques	  	  
+
+–  Grand	  nombre	  de	  personnes	  et	  gros	  volumes	  de	  données	  
+–  Nécessité	  de	  vériﬁer	  l’informa3on,	  évaluer	  sa	  qualité,	  résoudre	  les	  
+
+contradic3ons	  
+
+Manque	  d’explica3on	  
+
+– 
+
+– 
+– 
+
+Les	  systèmes	  ne	  savent	  pas	  expliquer	  des	  choix	  qui	  font	  intervenir	  de	  
+gros	  calculs	  
+
+Ajeintes	  à	  la	  conﬁden3alité	  :	  conﬂit	  entre	  
+
+L’u3lisateur	  qui	  veut	  protéger	  ses	  données	  conﬁden3elles	  
+Les	  systèmes	  qui	  veulent	  ces	  données	  pour	  oﬀrir	  un	  meilleur	  service,	  
+plus	  personnalisé	  
+
+	  
+
+3/16/12	  
+
+39	  
+
+Mais	  de	  l'arbre	  de	  la	  connaissance	  du	  bien	  et	  du	  mal,	  tu	  n'en	  mangeras	  
+pas;	  car,	  au	  jour	  que	  tu	  en	  mangeras,	  tu	  mourras	  certainement.	  	  
+
+	  
+
+	  
+
+	  
+
+	  
+
+	  
+
+	  
+
+	  
+
+	  Genèse	  2:17	  	  
+
+Introduc3on"
+Deux	  réalisa3ons	  du	  20e	  siècle	  
+	  Les	  systèmes	  rela3onnels	  	  
+	  Les	  moteurs	  de	  recherche	  de	  la	  Toile	  
+
+Deux	  déﬁs	  du	  21e	  siècle	  
+
+	  Réseaux	  et	  connaissances	  collec3ves	  
+	  La	  Toile	  des	  connaissances	   	  	  
+
+Conclusion	  
+
+	  
+
+3/16/12	  
+
+40	  
+
+Du	  texte	  aux	  connaissances	  
+
+La	  Toile	  des	  documents	  est	  basée	  sur	  le	  fait	  que	  les	  gens	  aiment	  
+
+écrire,	  lire,	  dire,	  écouter	  du	  texte	  
+
+Les	  machines	  comprennent	  mieux	  des	  connaissances	  plus	  
+
+formatées	  
+
+	  
+	  
+	  
+
+Texte	  
+Je	  suis	  presque	  certain	  que	  
+Bob	  est	  amoureux	  d’Alice	  
+
+Connaissance	  
+Aime(Bob,	  Alice,	  95%)	  
+	  
+
+3/16/12	  
+
+41	  
+
+Le	  Web	  séman3que	  	  
+
+Ajouter	  des	  indica3ons	  séman3ques	  pour	  expliquer	  le	  sens	  des	  
+documents	  de	  la	  Toile	  
+	  
+Sur	  un	  document	  
+
+auteur	  =	  Serge	  Abiteboul	  ;	  3tre	  =	  Sciences	  des	  données	  
+nature	  =	  leçon	  inaugurale	  ;	  date	  =	  Mars	  2012	  ;	  langue	  =	  français	  
+
+A	  l’intérieur	  d’un	  document	  
+
+Woody	  Allen	  <dbpedia:Woody_Allen>	  était	  à	  Cannes	  <geo:ville_France>	  
+pour	  la	  première	  de	  …	  	  
+
+Les	  bases	  de	  connaissances	  comme	  dbpedia	  sont	  appelées	  des	  
+ontologies	  
+
+3/16/12	  
+
+42	  
+
+Ontologies	  
+
+Des	  phrases	  logiques	  comme	  :	  
+
+–  classes	  sa:Personne,	  sa:Réalisateur,	  sa:Cinéaste	  
+–  sa:Réalisateur	  sous	  classe	  de	  sa:Personne	  
+–  sa:Réalisateur	  synonyme	  de	  sa:Cinéaste	  
+–  sa:Woody_Allen	  est	  un	  sa:Réalisateur	  	  
+–  rela4on	  sa:a_réalisé	  
+–  sa:Woody-­‐_Allen	  sa:a_réalisé	  sa:movie_ManhaQan	  
+
+A	  quoi	  ça	  sert	  ?	  
+
+–  Répondre	  plus	  ﬁnement	  aux	  requêtes	  
+–  Permejre	  d’	  «	  intégrer	  »	  plusieurs	  sources	  d’informa3on	  et,	  à	  terme,	  
+
+intégrer	  toutes	  les	  connaissances	  de	  la	  Toile	  
+
+3/16/12	  
+
+43	  
+
+Problème	  :	  l’acquisi3on	  de	  connaissances	  
+
+Les	  internautes	  
+
+–  aiment	  publier	  sur	  la	  Toile	  dans	  leur	  langue	  naturelle	  
+–  n’apprécient	  pas	  les	  contraintes	  d’un	  éditeur	  de	  connaissances	  
+–  veulent	  garder	  leur	  visibilité	  
+
+Les	  connaissances	  vont	  être	  générées	  automa3quement	  
+
+– 
+	  
+
+– 
+– 
+
+	  
+
+	  
+
+Recherche	  de	  formes	  syntaxiques	  comme	  
+	  <personne>	  est	  mort	  à	  <lieu>	  
+	  
+	  	  Napoléon	  	  
+
+Sainte-­‐Hélène	  
+Construc3on	  de	  grosses	  bases	  de	  connaissances	  	  
+Tâche	  complexe	  	  
+
+Compréhension	  de	  la	  langue	  
+La	  Toile	  fourmille	  d’imprécisions,	  d’erreurs,	  de	  faits	  controversés	  
+
+3/16/12	  
+
+44	  
+
+Problème	  :	  le	  raisonnement	  distribué	  
+
+En	  u3lisant	  des	  faits	  comme	  
+
+Psychose	  est	  un	  ﬁlm	  d’Hitchcock	  et	  Alice	  ne	  l’a	  pas	  vu	  
+
+Et	  des	  règles	  comme	  	  
+
+SouhaiteVoir(	  Alice,	  t	  )	  ←	  Film(	  t,	  Hitchcock,	  a	  ),	  not	  Vu(	  Alice,	  t	  )	  
+
+On	  peut	  déduire	  des	  faits	  «	  inten3onnels	  »	  comme	  
+
+Alice	  souhaiterait	  voir	  le	  ﬁlm	  Psychose	  
+
+Répondre	  à	  une	  requête	  est	  devenu	  plus	  compliqué	  
+
+–  Inférence	  de	  nouveaux	  faits	  en	  évitant	  de	  les	  inférer	  tous	  
+–  Collabora3on	  entre	  des	  systèmes	  qui	  ont	  et	  infèrent	  des	  faits	  	  
+
+Changement	  de	  contexte	  
+
+–  Immersion	  dans	  un	  monde	  de	  systèmes	  qui	  ont/échangent/	  infèrent	  
+–  Modiﬁca3on	  de	  notre	  manière	  de	  savoir	  et	  de	  penser	  	  
+
+des	  connaissances	  
+
+3/16/12	  
+
+45	  
+
+Where	  is	  the	  wisdom	  we	  have	  lost	  in	  knowledge	  ?	  Where	  is	  the	  
+knowledge	  we	  have	  lost	  in	  informa1on	  ?
+
+	  
+
+	  
+
+	  	  	  	  	  	  	  	  	  T.S.	  Eliot	  	  
+
+Introduc3on"
+Deux	  réalisa3ons	  du	  20e	  siècle	  
+	  Les	  systèmes	  rela3onnels	  	  
+	  Les	  moteurs	  de	  recherche	  de	  la	  Toile	  
+
+Deux	  déﬁs	  du	  21e	  siècle	  
+
+	  Réseaux	  et	  connaissances	  collec3ves	  
+	  La	  Toile	  des	  connaissances
+
+	  	  
+
+Conclusion	  	  
+
+	  
+
+3/16/12	  
+
+46	  
+
+La	  Toile	  est	  mul3forme	  
+
+Industrie,	  santé,	  culture,	  gouvernement,	  sciences,	  écologie…	  	  
+Incontournable	  
+
+–  Trouver	  du	  travail,	  travailler,	  se	  loger,	  gérer	  ses	  comptes	  bancaires,	  
+
+faire	  par3e	  d’une	  associa3on…	  
+
+L’hébergeur	  de	  toutes	  les	  connaissances	  de	  l’humanité	  ?	  
+
+–  Des	  plus	  horribles	  fantasmes,	  de	  toutes	  les	  violences	  
+–  De	  toutes	  les	  imprécisions,	  les	  erreurs	  
+–  Un	  fantas3que	  gisement	  de	  connaissances	  
+	  
+
+3/16/12	  
+
+47	  
+
+La	  Toile	  est	  mul3forme	  
+
+Vision	  dépassée	  1	  :	  hypertexte	  
+Vision	  dépassée	  2	  :	  bibliothèque	  universelle	  de	  documents	  
+Et	  tous	  les	  Web	  
+–  Web	  des	  téléphones	  «	  intelligents	  »	  	  
+–  Web	  des	  réseaux	  sociaux	  (d’avant	  7	  à	  plus	  de	  77	  ans)	  
+–  Web	  séman3que	  
+–  Web	  des	  objets	  communicants	  et	  intelligence	  ambiante	  
+–  Web	  des	  mondes	  virtuels	  (jeux	  3D)	  
+
+–  …	  	  
+
+3/16/12	  
+
+48	  
+
+Les	  écueils	  de	  la	  Toile	  
+
+Eviter	  la	  noyade	  dans	  un	  océan	  de	  données	  
+–  Un	  des	  ﬁls	  conducteurs	  de	  ceje	  présenta3on	  
+
+Accès	  à	  l’informa3on	  pour	  tous	  
+
+–  Fracture	  sociale	  	  
+CREDOC	  2009	  :	  en	  France,	  	  
+40%	  de	  la	  popula3on	  n'u3lise	  	  
+jamais	  l'informa3que	  
+–  Nord/Sud	  
+–  Enseignement	  
+
+	  
+
+3/16/12	  
+
+49	  
+
+Les	  écueils	  de	  la	  Toile	  (ﬁn)	  
+
+Démocra3e	  ou	  pas	  ?	  
+
+Et	  la	  vie	  privée	  ?	  	  
+Pour	  des	  individus	  meilleurs	  ou	  pires	  ?	  	  
+	  
+
+o il e 	  
+t
+r 	   f u
+
+r 	  	  
+
+u
+
+e 	  l a 	   T
+u
+e 	   q
+u
+n 	   m e ill e
+
+o i r
+r 	   u
+
+r
+
+e
+
+r 	   à 	   c
+d
+n
+o
+
+c
+
+e
+
+é
+
+u
+n 4 n
+a 	   à 	   f
+
+o
+e
+
+r
+
+x 	   c
+i p
+
+u
+e
+r 4 c
+
+J
+
+e 	   v
+a
+p
+
+3/16/12	  
+
+50	  
+
+Predic1on	  is	  very	  diﬃcult,	  especially	  about	  the	  future.	  
+
+	  	  	  	  	  	  Niels	  Bohr	  
+
+Et	  demain…	  
+
+Choix	  poli3ques	  
+Nouveaux	  ou3ls	  informa3ques	  qui	  restent	  à	  inventer	  
+
+3/16/12	  
+
+51	  
+
+Et	  pour	  ce	  qui	  concerne	  les	  aspects	  scien3ﬁques	  
+	  
+La	  prochaine	  étape	  des	  sciences	  des	  données,	  que	  l’on	  re3endra,	  
+a	  déjà	  commencé	  :	  c’est	  	  
+
+la	  Toile	  des	  connaissances	  
+
+	  
+Des	  données,	  	  
+
+	  à	  l’informa3on,	  	  
+	  
+
+	  aux	  connaissances…	  
+
+	  
+	  
+	  3/16/12	  
+
+52	  
+
+Merci ! 
+
+Remerciements	  :	  Mar(cid:138)n	  Abadi,	  Jérémie	  Abiteboul,	  Manon	  Abiteboul,	  
+Gilles	  Dowek,	  Emmanuelle	  Fleury,	  Laurent	  Fribourg,	  Sophie	  Gamerman,	  
+Bernadeje	  Goldstein,	  Florence	  Hachez-­‐Leroy,	  Tova	  Milo,	  Marie-­‐Chris3ne	  
+Rousset,	  Luc	  Segouﬁn,	  Pierre	  Senellart	  et	  Victor	  Vianu	  
+
+3/16/12	  
+3/16/12	  
+
+53	  
+53	  
+
+

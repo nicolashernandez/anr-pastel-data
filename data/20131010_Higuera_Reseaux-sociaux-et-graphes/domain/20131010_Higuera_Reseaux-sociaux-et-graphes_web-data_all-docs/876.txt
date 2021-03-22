@@ -1,0 +1,1655 @@
+http://www.univ-tebessa.dz/fichiers/master/master_525.pdf
+
+Analyse intégrée des réseaux sociaux pour la
+détection et la visualisation de communautés
+
+Juan David Cruz 1, Cécile Bothorel 1, François Poulet 2
+
+1. Département LUSSI
+Télécom - Bretagne
+Technopôle Brest - Iroise, 29238, Plouzané, France
+{juan.cruzgomez,cecile.bothorel}@telecom-bretagne.eu
+
+2. Université de Rennes I
+
+IRISIA
+Campus de Beaulieu, 35042, Rennes, France
+francois.poulet@irisa.fr
+
+RÉSUMÉ. Les réseaux sociaux contiennent une quantité importante d’information qui peut être
+divisée en deux dimensions : d’abord une dimension structurelle composée par l’information
+concernant les connexions entre les acteurs du réseau, puis une dimension de composition qui
+décrit chacun des acteurs de façon individuelle. Pour analyser un réseau, dans la plupart de
+cas, seulement une des dimensions est prise en compte. Cela implique une restriction de la
+portée de l’information qui peut être extraite du réseau. Nous proposons donc, une approche
+conçue pour intégrer les deux dimensions dans un processus de détection de communautés. En-
+suite, nous proposons un modèle visuel pour analyser et exploiter l’information produite par le
+processus de détection de communautés.
+ABSTRACT. Social networks contain an important amount of information that can be divided into
+two dimensions: ﬁrst a structural dimension, containing all the information about the connec-
+tions and relationship types between the actors of the network; then a compositional dimension
+that describes each actor of the network individually. Due to the nature of each of these dimen-
+sions most of the analyzes are made using only one of them, discarding the other. This implies a
+restriction on the scope of information that can be extracted from the network. In this paper we
+propose, ﬁrst an approach for integrating both dimensions in a community detection process,
+and second a visual model that allows for the analysis and use of the partition produced by the
+community detection process.
+MOTS-CLÉS : Détection de communautés, graphes avec attributs, visualisation des graphes de
+communautés, interaction entre communautés
+KEYWORDS: Attributed graphs, community detection, clustered graphs layout, community inter-
+action
+
+DOI:10.3166/TSI.31.1-29 c(cid:13) 2013 Lavoisier
+
+Technique et science informatiques – no 1/2013, 1-29
+
+2
+
+TSI. Volume 31 – no 1/2013
+
+1. Introduction
+
+A l’heure actuelle les sites de réseaux sociaux en ligne sont devenus un composant
+intégral des usages professionnels et personnels. Les entreprises intègrent dorénavant
+leurs clients dans leur chaîne de valeur, depuis les travaux de R&D jusqu’au service
+après vente. Dans leur sphère personnelle, les internautes interagissent et partagent
+différents types de médias à travers le monde entier.
+
+Il est important de différencier ici les réseaux sociaux des sites de réseautage so-
+cial. Un réseau social est l’ensemble des relations sociales entre les membres d’un
+groupe. Il est communément déﬁni par des connexions entre acteurs, les acteurs peuvent
+être des personnes ou des organisations, les liens peuvent être de plusieurs types : ami-
+tié, afﬁliation, dépendance ou communication. Les réseaux sociaux existent, qu’ils
+soient médiatés par internet ou non, qu’ils soient explicites ou non.
+
+Les sites de réseautage social sont, quant à eux, des sites Web conçus pour pra-
+tiquer le réseautage social sur Internet. Ces services permettent à un individu ou une
+organisation de constituer leur réseau social en ligne. Selon le site, les internautes dé-
+clarent des liens d’amitié, des relations professionnelles ; ils sont amenés à développer
+leur réseau et interagissent, souvent autour de contenus.
+
+Les approches classiques pour l’analyse de réseaux sociaux considèrent les ré-
+seaux sociaux comme des graphes, où les acteurs sont représentés par des nœuds et
+les relations par des arêtes. Toutefois, un réseau social contient plus d’informations
+que seulement le graphe de relations : il contient également des informations à pro-
+pos de chaque acteur, par exemple ses préférences de lecture, son âge, sa localisation
+géographique, et de manière générale, d’autres informations relatives au contexte du
+réseau (en ligne ou hors ligne).
+
+Selon (Wasserman, Faust, 1994), un réseau social, est composé de deux variables :
+une variable structurelle, qui décrit les connexions entre les acteurs, une variable de
+composition, qui décrit chaque acteur de façon individuelle selon son information
+propre. Une troisième variable peut être déﬁnie, elle décrit des groupes d’acteurs ;
+cette variable est dite d’afﬁliation et reﬂète ainsi l’appartenance à une équipe, à une
+école. Mais cette variable peut être inférée à partir des autres variables, et peut ainsi
+reﬂéter des communautés détectées à travers la variable structurelle ou caclulées grâce
+à des points communs du proﬁl de la variable de composition.
+
+Nous proposons dans ce travail une nouvelle approche pour analyser et visuali-
+ser des graphes avec attributs. Il s’agit d’abord d’intégrer l’information des variables
+du réseau social dans une variable d’afﬁliation puis, ensuite, de proposer un modèle
+de visualisation qui permet d’analyser ces trois variables et d’exploiter ces relations
+implicites en mettant en évidence les interactions entre les communautés.
+
+La suite de cet article est organisé de la façon suivante : la section 2 présente la
+déﬁnition du problème et son contexte, la section 3 présente des travaux précédents
+connexes. Dans la section 4 le modèle d’intégration des variables du réseau social
+est proposé ainsi que quelques expériences pour tester le modèle. Enﬁn la section
+
+Détection et visualisation de communautés
+
+3
+
+5 présente l’algorithme de visualisation et d’analyse de communautés, et quelques
+expériences, avant de conclure et d’énoncer les perspectives.
+
+2. Déﬁnition du problème
+
+L’analyse d’un réseau social vu comme un graphe avec attributs se doit d’ intégrer
+les variables qui le composent, ce qui n’est pas un processus simple. Cette intégration
+de variables exige d’établir des relations entre elles, mais aussi de créer un mécanisme
+exploitant leur uniﬁcation aﬁn d’extraire de nouvelles connaissances, en complément
+des mécanismes d’analyse basés sur chacune d’elles prise séparément.
+
+Le problème peut être divisé en deux sous problèmes : d’abord, comment repré-
+senter les variables de sorte qu’elles puissent être utilisées et analysées de façon ho-
+listique, et par quelle méthode ? Ensuite, comment utiliser un modèle visuel pour re-
+présenter l’intégration des trois variables concernées ?
+
+Pour ce faire nous rappelons ici les déﬁnitions des différentes variables et introdui-
+sons la déﬁnition de réseau social augmenté, ainsi que la notion de point de vue. Soit
+G = (V, E) un graphe non orienté représentant la structure du réseau social, où V est
+l’ensemble des nœuds et E est l’ensemble des arêtes, ce graphe contient uniquement
+l’information concernant les connexions des nœuds, c’est-à-dire la variable structu-
+relle. La variable de composition de ce réseau peut être déﬁnie comme un vecteur F ∗
+modélisant les caractéristiques de chaque acteur : ce vecteur est déﬁni dans un espace
+p-dimensionnel où p peut varier selon la nature du proﬁl décrivant les acteurs.
+
+Cette représentation devient difﬁcile à gérer quand la valeur de p croît : un nombre
+élevé de dimensions produit l’effet connu sous le nom de la malédiction de la dimen-
+sion qui, à mesure que les dimensions augmentent, diminue la pertinence des mesures
+mathématiques employées. De plus, utiliser toutes les caractéristiques qui décrivent un
+acteur peut introduire du bruit pour certaines applications et tout simplement ne pas
+être pertinent, en occultant l’impact de certaines caractéristiques, qui, par contre si
+elles sont bien choisies, peuvent nous renseigner sur la structuration du réseau social.
+La variable d’afﬁliation peut être dérivée soit de la variable structurelle, soit de la
+variable compositionnelle, soit d’une combinaison des deux telle que proposée dans
+ce travail.
+DÉFINITION 1 (Point de vue P oVF ∗). — Étant donné un vecteur de caractéristiques
+de la variable compositionnelle F ∗, un point de vue P oVF ∗ est l’une des 2f − 1
+combinaisons des f éléments de F ∗.
+
+Le point de vue est un sous-ensemble des caractéristiques contenues dans F ∗.
+Grâce au point de vue, le réseau social peut être décrit selon différentes perspectives,
+chacune d’elle étant déﬁnie par un point de vue.
+DÉFINITION 2 (Réseau social augmenté S +). — Étant donné un réseau social avec
+attributs S = (G, P oVF ∗ ) où G est un graphe représentant la variable structurelle
+et P oVF ∗ représentant la variable de composition sous la forme d’un point de vue,
+
+TSI. Volume 31 – no 1/2013
+
+4
+le réseau social augmenté est déﬁni par S + = (G, P oVF ∗ ,A), où A est la variable
+d’afﬁliation dérivée des deux autres variables.
+
+En conséquence, le réseau social augmenté peut être décrit par des perspectives dif-
+férentes qui permettent de réaliser une analyse pour chaque perspective. Par exemple,
+les nœuds peuvent être groupés de différentes manières : une par point de vue, en
+rendant possible les contrastes selon les caractéristiques sélectionnées.
+
+Dans ce travail, A représente la variable d’afﬁliation qui résulte d’un processus de
+partitionement dont le résultat est une partition C = {C1, C2, . . . , Ck} de l’ensemble
+V des nœuds en k sous-ensembles disjoints. Notre but est que les nœuds de chaque
+communauté Ci présentent des points communs compositionnels selon le P oVF ∗ et
+soient fortement connectés selon la variable structurelle.
+
+Dans la suite, nous noterons e (u, v) ∈ E l’arête entre les nœuds u et v. e (u) est
+l’ensemble de toutes les arêtes depuis et vers le nœud u. Soit E (Ci, Cj) , 1 ≤ i, j ≤ k
+l’ensemble des arêtes connectant les groupes i et j. E (Ci, Ci) = E (Ci) , 1 ≤ i ≤ k
+est l’ensemble des arêtes connectant les nœuds présents seulement dans le groupe i.
+
+FIGURE 1. Schéma général du système d’intégration des variables
+
+La ﬁgure 1 montre le schéma général du système : à partir d’un réseau social, l’in-
+tégration des variables structurelle et de composition est faite en produisant un réseau
+social augmenté. Ce réseau contient donc la troisième variable, appelée afﬁliation qui
+représente l’affectation de chacun de nœuds à un groupe de nœuds similaires et bien
+connectés. L’étape ﬁnale est la visualisation du réseau social augmenté en exploitant
+toute l’information intégrée.
+
+3. Travaux précédents
+
+Ce travail a deux parties principales : d’abord un modèle de détection de commu-
+nautés qui produit un réseau social augmenté, ensuite un modèle de visualisation qui
+permet d’exploiter et d’extraire l’information non-visible du réseau social augmenté.
+Cette section commence par présenter les travaux représentatifs de la détection de
+communautés. Suivront les travaux concernant la visualisation de graphes de commu-
+nautés.
+
+StructurelleCompositionR´eseauSocialInt´egrationdesVariablesStructurelleAﬃliationCompositionR´eseauSocialAugment´eVisualisationetExplorationDétection et visualisation de communautés
+
+5
+
+3.1. Détection de communautés
+
+Dans la littérature ils existent plusieurs méthodes dédiées à la détection des com-
+munautés dans les réseaux sociaux, cependant elles ont été conçues pour n’exploiter
+que l’information structurelle du graphe ; plusieurs de ces méthodes utilisent des me-
+sures liées uniquement à la topologie du réseau, comme le coverage, la performance,
+la conductance (Gaetler, 2005) et la modularité (Newman, Girvan, 2004). Une revue
+de littérature de ces mesures est faite par (Brandes et al., 2008) et les méthodes clas-
+siques de clustering de graphe sont examinées par (Fortunato, 2010).
+
+Récemment plusieurs chercheurs ont abordé la question de l’intégration de l’infor-
+mation contenue dans les réseaux sociaux pour mieux guider le processus de détection
+de communautés. Les différents approches déﬁnissent l’information de composition
+comme une fonction w : V → Rf , c’est-à-dire, un vecteur réel de norme f est affecté
+a chacun des nœuds du réseau.
+
+(Neville et al., 2003) présentent une méthode de détection de de communautés
+pour des graphes avec attributs qui utilise une mesure de similarité Sij pour modiﬁer
+le poids des arêtes du graphe, puis qui trouve des communautés en utilisant soit une
+approche du type Monte-Carlo ou soit une approche du type k-means. La similarité
+entre deux nœuds est déterminée par le nombre d’attributs communs et est condition-
+née par l’existence d’une arête entre ces nœuds. La mesure de similarité est déﬁnie
+par
+
+(cid:40)(cid:80)
+
+Sij =
+
+0
+
+où
+
+k sk (i, j)
+
+if eij ∈ E or eji ∈ E
+sinon
+
+(cid:40)
+
+1
+0
+
+sk (i, j) =
+
+if ki = kj
+sinon
+
+Une fois les poids modiﬁés et normalisés, chaque nœud est affecté à une commu-
+nauté. Le processus démarre avec autant de communautés que de nœuds. L’algorithme
+sélectionne ensuite une des arêtes selon la probabilité donnée par les poids ; quand une
+arête est choisie, les communautés sont fusionnées. Une approche similaire est présen-
+tée par (Steinhaeuser, Chawla, 2008). Cette méthode utilise le coefﬁcient de Jaccard
+comme mesure de similarité des attributs pour déﬁnir les poids des arêtes. Le proces-
+sus de fusion des communautés est réalisé en prenant chacune des arêtes et en évaluant
+si le poids est supérieur à un seuil 0 < t < 1. Finalement, la qualité de la partition
+ﬁnale est mesurée avec la modularité proposée par (Newman, Girvan, 2004).
+
+(Dang, Viennet, 2012) présentent deux approches qui utilisent une combinaison
+linéaire de deux mesures de similarité : une pour l’aspect structurel et une autre pour
+l’aspect de composition des acteurs. La première approche se base sur la modularité
+pour l’aspect structurel ; pour l’aspect de composition ils proposent d’utiliser une me-
+sure de similarité choisie parmi les mesures existantes comme la distance Euclidienne.
+La combinaison linéaire est donnée par :
+
+6
+
+TSI. Volume 31 – no 1/2013
+
+(cid:88)
+
+(cid:88)
+
+Q =
+
+C∈C
+
+i,j∈C
+
+(α · S (i, j) + (1 − α) · simA (i, j))
+
+où C est la partition du graphe, S (i, j) est la valeur initiale de la modularité, simA (i, j)
+est la mesure de similarité des attributs des nœuds et 0 ≤ α ≤ 1 est une constante de
+pondération. Ensuite les auteurs utilisent cette nouvelle mesure de qualité Q intégrant
+la dimension compositionnelle. Ils ont adapté aussi la façon de calculer le ∆ (Q) avec
+la nouvelle mesure ce qui leur permet d’utiliser la méthode de Louvain (Blondel et al.,
+2008).
+
+La deuxième approche est aussi une combinaison linéaire mais les auteurs utilisent
+une généralisation de la mesure de similarité structurelle : celle-ci peut être le coefﬁ-
+cient de Jaccard ou la distance du cosinus entre les voisinages. La mesure est déﬁnie
+par :
+
+S (i, j) = α · Gi,j + (1 − α) · simA (i, j)
+
+où Gi,j est le lien entre les nœuds i et j, simA (i, j) est la mesure de similarité des
+attributs des nœuds et 0 ≤ α ≤ 1 est une constante de pondération pour moduler l’in-
+ﬂuence de chaque mesure. Avec cette déﬁnition les auteurs construisent un nouveau
+k-NN graphe et puis utilisent la méthode de Louvain pour trouver les communautés.
+(Combe et al., 2012) proposent eux-aussi une combinaison linéaire pondérée par
+
+une valeur 0 ≤ α ≤ 1 déﬁnie par :
+
+dT S (i, j) = α · dT (i, j) + (1 − α) dS (i, j)
+
+où les mesures de similarité structurelle et de composition peuvent être choisies parmi
+des mesures existantes. Cette approche est similaire à celle de (Dang, Viennet, 2012),
+cependant les auteurs laissent ouvert le choix de la méthode de clustering et permettent
+ainsi d’exploiter des techniques classiques de clustering pour opérer la détection ﬁnale
+de communautés. Comme les méthodes classiques n’ont pas de contraintes de connec-
+tivité, le résultat peut potentiellement être un ensemble de clusters déconnectés.
+
+(Ge et al., 2008) proposent la méthode Connected k Centers (CkC) pour trouver k
+communautés dans un réseau social en imposant deux contraintes sur les clusters : une
+contrainte de similarité compositionnelle sur les nœuds à la manière des k-means, as-
+sortie d’une contrainte de connectivité. Les auteurs déﬁnissent le réseau social comme
+un graphe G = (V, E) où V est l’ensemble des nœuds et E est l’ensemble des arêtes.
+Les attributs des acteurs sont déﬁnis comme une fonction w : V → Rd, c-à-d. que cha-
+cun des nœuds est caractérisé avec un vecteur d’attributs de dimension d. La méthode
+commence par sélectionner aléatoirement k nœuds qui seront utilisés comme centres
+des groupes. Ensuite chacun des autres nœuds est affecté à un des groupes ; pour faire
+cette affectation le graphe est parcouru en largeur en gardant ainsi la contrainte de
+connectivité, tout en gardant la similarité entre les acteurs avec une mesure (cid:107) · (cid:107) pour
+les vecteurs d’attributs. Ces étapes sont répétées tant que les groupes sont instables.
+
+Plus récemment, (Villa-Vialaneix et al., 2013) présentent une méthode fondée sur
+des cartes auto-organisatrices. Ils déﬁnissent une fonction à noyau multiple pour me-
+
+Détection et visualisation de communautés
+
+7
+
+surer la similarité des nœuds en termes de structure et d’attributs et projeter les don-
+nées originales dans un espace euclidien où peuvent être appliquées les cartes auto-
+organisatrices. La fonction multi-noyau est déﬁnie par :
+
+(cid:88)
+quette du nœud i et αd pour (d = 0, 1, . . . , D) : (cid:80)
+
+KT (i, j) = α0K0 (i, j) +
+
+d
+
+pondération pour chacun des noyaux.
+
+où K0 (i, j) est le noyau pour mesurer la similarité structurelle, cd
+
+(cid:0)cd
+
+(cid:1)
+
+αdKd
+
+i , cd
+j
+
+i est la d-ième éti-
+d αd = 1 est une constante de
+
+La carte auto-organisatrice est composée par des prototypes induits par le noyau
+KT . Chaque acteur est présenté à la carte et comparé avec chaque prototype ; le pro-
+totype sélectionné comme gagnant est celui dont la distance avec l’acteur est la plus
+petite. Ce processus est exécuté jusqu’à ce que l’affectation des acteurs aux neurones
+gagnants soit stabilisée ou tant que l’erreur n’est pas minimisée. Cette approche per-
+met d’utiliser la capacité des cartes auto-organisatrices à réduire la dimension de l’es-
+pace initial. L’autre avantage est de transformer l’espace initial en un espace deux-
+dimensionnel, et ainsi d’offrir visuellement une présentation combinée dans le même
+plan de la structure des communautés et de l’information des attributs.
+
+(Zhou et al., 2009) présentent une méthode qui commence par créer un graphe
+augmenté avec les attributs des graphes ; puis ils utilisent un surfeur aléatoire qui, en
+utilisant la probabilité donnée par les attributs et la structure, parcourt le graphe aug-
+menté et trouve une matrice de transition avec laquelle ils peuvent trouver k groupes
+dans le réseau.
+
+(Li et al., 2008) présentent une méthode pour classiﬁer des documents où les docu-
+ments sont des nœuds et les liens sont donnés par l’existence des références partagées
+par les documents. L’information de composition est déﬁnie par le texte du document.
+L’algorithme identiﬁe un groupe de noyaux, qui sont les documents les plus référencés
+du corpus et qui sont utilisés pour initialiser les groupes. Ensuite l’algorithme combine
+les noyaux ayant une similarité qui dépasse certain seuil ; puis les nœuds sont affectés
+à un des groupes selon leur similarité avec le noyau. Finalement, l’algorithme exécute
+un processus d’afﬁnement pour éliminer des faux positifs potentiels.
+
+Nous avons proposé nous-mêmes dans (J. D. Cruz et al., 2011) un autre algorithme
+qui utilise l’entropie et la modularité pour trouver des partitions avec des groupes de
+nœuds similaires et fortement connectés. L’algorithme commence par exécuter une
+étape de clustering comme celle présentée par (Blondel et al., 2008). Ensuite l’entro-
+pie de cette partition initiale est minimisée en utilisant une approche de Monte-Carlo.
+Finalement l’algorithme produit un clustering hiérarchique comme celui de la mé-
+thode de Louvain.
+
+L’approche décrite dans cet article est réalisée en deux étapes. D’abord la classiﬁ-
+cation des nœuds selon l’information de composition. Cette classiﬁcation initiale est
+exécutée en utilisant des cartes auto-organisatrices, ce qui permet de trouver une parti-
+tion intermédiaire avec des groupes des nœuds similaires. Ensuite, avec l’information
+
+8
+
+TSI. Volume 31 – no 1/2013
+
+de cette partition, les poids des arêtes du graphe sont modiﬁés de façon à inﬂuen-
+cer la détection de communautés opéré avec un algorithme classique de détection de
+communautés pouvant traiter des graphes pondérés.
+
+Nous verrons que cette approche nous permet d’obtenir des connaissances à pro-
+pos d’une typologie compositionnelle existante dans l’ensemble de nœuds. De plus,
+à la différence de la méthode de (Steinhaeuser, Chawla, 2008), notre méthode est
+robuste au bruit ou aux éléments manquants. Enﬁn, grâce au choix des cartes auto-
+organisatrices, nous pouvons envisager de décrire les acteurs par des vecteurs de
+grande dimension, et ainsi adresser des problématiques de réseautage sur le web social
+où les contenus peuvent être décrits par du texte par exemple, ou des marqueurs sur
+des vidéos, etc.
+
+A notre connaissance, aucune de ces publications ne mentionne la notion de point
+de vue. Nous montrerons ici que pour un analyste, cette étape préliminaire de sélection
+des attributs à solliciter pour l’analyse, est un point fort de notre travail.
+
+3.2. Visualisation de graphes de communautés
+
+Un graphe de communautés est un type de graphe hiérarchique dont la distance
+
+entre deux nœuds de l’arbre d’inclusion est au maximum égale à un.
+
+La ﬁgure 2(a) présente un exemple de graphe de communautés et la ﬁgure 2(b)
+présente l’arbre d’inclusion de la partition. Cet arbre est utilisé pour visualiser les
+différents niveaux qui représentent les groupes.
+
+(a) Exemple d’un graphe de commu-
+nautés C (G, T )
+
+(b) Arbre d’inclusion T issu d’un
+graphe de groupes
+
+FIGURE 2. Exemple d’un graphe de communautés et son arbre d’inclusion associé
+
+Cette déﬁnition est proposée et utilisée par (Eades, Feng, 1997) lors de la présen-
+tation de leur méthode de visualisation. Cette méthode représente chaque niveau de
+l’arbre d’inclusion comme une couche tridimensionelle. D’abord, pour la première
+couche, les nœuds feuilles de chaque communauté sont placés, dans la deuxième
+couche, un cercle est ensuite dessiné au-dessus de chaque groupe. Ce processus est
+répété jusqu’à la racine de l’arbre d’inclusion. La ﬁgure 3(a) présente un exemple de
+visualisation avec la méthode de Eades et Feng.
+
+Level3Level2Level1Level0λ=1Détection et visualisation de communautés
+
+9
+
+(a) Exemple de graphe de communautés dessiné
+avec l’algorithme multi-niveaux
+
+(b) Exemple d’un graphe de communautés
+dessiné avec la représentation orthogonale
+
+FIGURE 3. Exemple de résultats des algorithmes de layout – I
+
+(Tamassia, 1987) présente un algorithme qui utilise des rectangles pour représen-
+ter les nœuds et des lignes droites avec des angles droits pour représenter les arêtes,
+l’auteur utilise cette approche pour dessiner des circuits VLSI. Les groupes sont re-
+présentés par des rectangles autour des nœuds. Un exemple de cette représentation est
+montré dans la ﬁgure 3(b). L’algorithme présenté par (Giacomo et al., 2007) utilise
+aussi une approche orthogonale, mais appliquée à la représentation de sites web.
+
+(Noack, 2003) présente un algorithme dirigé par des forces qui utilise d’une part un
+modèle linéaire pour représenter l’attraction entre deux nœuds voisins et, d’autre part,
+un modèle logarithmique pour modéliser la répulsion entre deux nœuds non connectés.
+Ce modèle n’utilise pas un graphe déjà groupé : il constitue aussi une méthode pour
+identiﬁer graphiquement des communautés dans un réseau social.
+
+(Bourqui et al., 2007) présentent une méthode de visualisation qui prend en compte
+
+les poids des arêtes. Cette méthode impose quatre contraintes :
+
+1. interdire le chevauchement des groupes pour faciliter l’interprétation du dessin,
+2. garder l’arbre d’inclusion pour visualiser la hiérarchie produite par l’algorithme
+
+de détection de communautés,
+
+3. utiliser un polygone convexe pour déﬁnir chaque groupe,
+4. respecter les poids des arêtes du graphe en utilisant des fonctions de minimisa-
+
+tion de l’énergie.
+
+Avec la déﬁnition de graphe de communautés de (Eades, Feng, 1997) et avec la
+déﬁnition de graphe quotient de (Brockenauer, Cornelsen, 2001), les auteurs com-
+mencent par placer les nœuds individuels, puis les nœuds des niveaux suivants. À
+
+n1n2n4n3n5n6n7n9n8n10n12n14n15n1310
+
+TSI. Volume 31 – no 1/2013
+
+l’inclusion de chaque niveau, l’espace de visualisation est divisé en utilisant des dia-
+grammes de Voronoï. La ﬁgure 4(a) présente un exemple de ce modèle de visualisa-
+tion.
+
+(a) Exemple de graphe de communautés dessiné
+avec l’algorithme pour des graphes pondérés
+
+(b) Exemple d’un graphe de communau-
+tés dessiné avec la représentation des com-
+munautés chevauchantes
+
+FIGURE 4. Exemple de résultats des algorithmes de layout – II
+
+En général les méthodes de visualisation de graphes de communautés ont été
+conçues pour mettre en évidence les différences entre chaque groupe, ce qui implique
+de présenter chaque groupe éloigné des autres. (Santamaría, Therón, 2008) proposent
+une méthode pour dessiner des communautés non disjointes. Ils utilisent une version
+modiﬁée de l’algorithme dirigé par des forces dont la force d’attraction est modélisée
+par un ressort et la répulsion par un modèle de gravitation. Pour éviter l’encombre-
+ment des éléments visuels, les arêtes ne sont pas dessinées, par contre les groupes
+sont modélisés par des polygones convexes. Ainsi, les nœuds appartenant à différents
+groupes sont placés à la frontière de ces polygones de telle façon que le partage soit
+évident. La ﬁgure 4(b) présente un exemple de cette visualisation, les nœuds parta-
+gés sont dessinés sous la forme d’un camembert indiquant le degré d’appartenance à
+chaque groupe.
+
+Les algorithmes classiques n’utilisent que la structure du graphe pour placer les
+nœuds et en général il n’est pas facile de leur ajouter d’autres critères, comme la
+similarité d’attributs entre nœuds, pour trouver la position de chacun des nœuds.
+
+4. Intégration des variables dans un réseau social
+
+Nous avons indiqué précédemment que les composants d’un réseau social sont
+divisés en trois variables : la variable structurelle, qui représente les connexions entre
+les acteurs, la variable de composition qui décrit chaque acteur de façon individuelle
+
+n5Détection et visualisation de communautés
+
+11
+
+et la variable d’afﬁliation qui décrit l’appartenance de chaque acteur à un ou plusieurs
+groupes.
+
+La variable structurelle peut être utilisée pour décrire le réseau social en termes
+de connectivité entre acteurs. En revanche, la variable de composition permet de dé-
+crire chaque acteur de façon individuelle, par exemple à partir de ses préférences,
+compétences professionnelles, langues ou livres favoris. Cette information peut être
+utilisée pour créer et d’analyser des typologies d’acteurs. L’idée générale est de faire
+émerger des connaissances non évidentes a priori à propos de l’ensemble des acteurs
+et de surcroît des connaissances qui ne sont pas forcement liées à la structure du ré-
+seau. La troisième variable est spéciale dans le sens où elle peut être générée à partir
+des autres variables : si elle est générée à partir de la première variable, l’affectation
+reﬂète l’appartenance aux communautés de nœuds fortement connectés, si elle est gé-
+nérée à partir de la deuxième variable, l’affectation représente l’appartenance à des
+communautés de nœuds similaires.
+
+Cette section présente la partie du modèle dédiée à l’intégration des variables com-
+posant un réseau social augmenté. L’intégration proposée est réalisée à travers la créa-
+tion de variables d’afﬁliation issues de la combinaison de la variable structurelle et des
+différents points de vue dérivés de la variable de composition.
+
+Avant de décrire l’algorithme d’intégration nous avons besoin de déﬁnir deux va-
+riables intermédiaires. Soit AG une variable d’afﬁliation dérivée de la variable struc-
+turelle. La partition décrite par cette variable est déﬁnie par des groupes de nœuds
+fortement connectés. Soit AP oVF ∗ une variable dérivée de la variable de composition
+conditionnée par un point de vue, les groupes dans cette partition sont proches en
+terme de la similarité du proﬁl dans P oVF ∗.
+
+Notons que les partitions générées à partir des différentes variables ont été créées
+avec des critères différents, donc les mesures de qualité utilisées pour chacune sont
+différentes. Ce fait sera abordé ultérieurement lors de l’intégration des deux variables.
+L’intégration des variables structurelles et de composition permet de guider le pro-
+cessus d’identiﬁcation des communautés en ajoutant la similarité de chaque nœud aux
+critères de la structure utilisés pendant l’identiﬁcation des communautés. Pour ce faire,
+nous divisons le processus de détection de communautés en deux phases : d’abord, un
+clustering de nœuds selon leur similarité de proﬁl, puis, un algorithme de clustering
+structurel exploitant la partition de composition, c’est-à-dire inﬂuencé d’une façon
+telle que les groupes contiennent les nœuds similaires et connectés.
+
+4.1. Première phase : clustering de composition
+
+Étant donné un point de vue dérivé d’un ensemble P oVF ∗, chaque nœud peut
+être caractérisé par son vecteur d’attributs ou une instance u du point de vue. Il est
+possible d’utiliser ces vecteurs en entrée d’un algorithme de classiﬁcation non super-
+visée comme les cartes auto-organisatrices (Kohonen, 1997). Cela permet de créer des
+groupes de nœuds suivant la similarité de leurs attributs, c’est-à-dire les instances de
+
+12
+
+TSI. Volume 31 – no 1/2013
+
+u sont les données en entrée de l’algorithme. L’avantage de cet algorithme est que, à
+la différence des approches comme les k-means, l’utilisateur n’a pas besoin de ﬁxer a
+priori le nombre ﬁnal de groupes.
+
+L’algorithme de cartes de Kohonen utilisé a un réseau N basé sur une grille carrée
+de taille de f × f neurones, avec f = |P oVF ∗|, le nombre d’attributs utilisés dans
+le point de vue. Les valeurs initiales des poids sont tirées aléatoirement. Les poids
+des neurones sont ajustés selon leur proximité au neurone gagnant. Un taux d’appren-
+tissage η est utilisé pour éviter les maxima locaux et des convergences prématurées.
+Après chaque itération, le taux d’apprentissage est réduit par un facteur ε, 0 < ε < 1.
+Le voisinage est calculé avec une taille t et le neurone gagnant est de centre c.
+
+L’intérêt de classiﬁer les nœuds selon l’information de composition est celui de
+trouver des groupes qui peuvent être trouvés avec plusieurs algorithmes de classiﬁca-
+tion, notamment nous utilisons ici des cartes auto-organisatrices. Le choix des cartes
+auto-organisatrices est fondé d’abord sur la robustesse de la méthode à des attributs
+manquants ou au bruit dans les donnés. Ensuite, elle offre la possibilité d’utiliser
+plusieurs types de donnés, binaires, categorielles, etc., comme présenté par (Villa-
+Vialaneix et al., 2013).
+
+La sortie est alors une partition CSOM formée par des groupes de nœuds similaires
+selon le point de vue choisi 1. Pour mesurer la qualité de la partition nous utilisons la
+distance moyenne entre les points de chaque groupe, laquelle a été mise à l’échelle
+pour avoir des valeurs entre 0 et 1.
+
+4.2. Deuxième phase : inﬂuence de la composition sur le clustering structurel
+
+Une fois que la partition compositionnelle CSOM a été calculée, on peut alors
+entrer dans la seconde phase de la méthode. Dans cette étape, on utilise un algorithme
+classique de détection de communautés, la méthode de Louvain, proposé par (Blondel
+et al., 2008). Cet algorithme utilise un processus de Monte-Carlo pour optimiser la
+modularité Q, présentée par (Newman, Girvan, 2004).
+
+Avant l’exécution de la méthode de Louvain, il s’agit d’inclure les informations
+obtenues lors de la première phase. Cela est effectué par le changement des poids
+des arêtes en fonction de la partition obtenue CSOM . Pour chaque paire de sommets
+vi, vj ∈ V , ∀vi (cid:54)= vj, le poids de l’arête e (vi, vj) est modiﬁé par la distance eucli-
+dienne des instances du point de vue correspondant à chaque nœud. Cette distance est
+fournie par SOM et nous permet ainsi de construire un poids qui vaut 1 en cas de non
+appartenance au même cluster CSOM , et une grandeur d’autant plus supérieure à 1
+que la distance issue de SOM est petite :
+
+wij = 1 + α(1 − d(Nij))δij
+
+(1)
+
+1. Ici nous considérons que le point de vue est ﬁxé au préalable par un analyste. La découverte automatique
+de points de vue discriminants à proposer à l’analyste fait partie des perspectives.
+
+13
+avec α ≥ 1 une constante, d (Nij) la distance entre les prototypes des neurones i et j,
+et δij = 1 si vi et vj appartiennent au même cluster dans CSOM et 0 sinon.
+
+Détection et visualisation de communautés
+
+Le paramètre α ≥ 0 est utilisé pour modiﬁer les poids des arêtes du graphe se-
+lon l’information de la partition de l’information de composition. Cette modiﬁca-
+tion inﬂuence l’algorithme de détection de communautés en privilégiant la création
+de groupes avec des nœuds similaires et bien connectés. Cependant cette modiﬁca-
+tion change aussi la structure du graphe et aussi la structure de communauté : quand
+α → ∞, la partition est très loin d’une partition créée à partir de la structure du graphe
+ou, autrement dit, plus similaire à une partition créée uniquement avec l’information
+de composition des nœuds. Cette notion de distance entre partition pourraît être ap-
+profondie avec le Adjusted Rand Index – ARI (Hubert, Arabie, 1985) comme nous
+l’avons fait dans un travail connexe pour comparer CSOM et CP oVF ∗ (J. Cruz et al.,
+2013 ; J. Cruz, Bothorel, 2013).
+
+Une fois que les poids sont modiﬁés selon l’équation 1, une partition, CSOM−Lo
+est calculée en utilisant la méthode de Louvain. Cette nouvelle partition contient l’en-
+semble des communautés ﬁnales et l’information structurelle. En modiﬁant les poids
+du graphe avec l’équation 1, le graphe devient pondéré et les arêtes avec un poids plus
+grand ont une probabilité plus élevée d’être affectées à la même communauté.
+
+Données : S + = (G, F ∗,A) , α
+Résultat : CP oVF∗
+P oVF ∗ ←choix_point_de_vue(F ∗);
+CSOM ←SOM_algorithme(P oVF ∗); // Part. de la variable de
+composition
+pour e ∈ E faire
+ns ← e.source;
+nt ← e.cible;
+e.w = 1;
+si C (ns) = C (nt) alors // C (ns) , C (nt) ∈ CSOM
+
+ﬁn
+CP oVF ∗ ← Louvain_algorithme(G = (V, E, w));
+retourner CP oVF ∗
+Algorithme 1: Algorithme d’intégration des variables structurelle et de composition
+
+e.w+ = α (1 − d (Nns,nt));
+
+ﬁn
+
+La variable d’afﬁliation AS+ résultante reﬂète l’ensemble des communautés avec
+des groupes de nœuds similaires et fortement connectés, qui intègrent l’information
+des variables structurelle et de composition. Le processus d’intégration est synthétisé
+dans l’algorithme 1.
+
+14
+
+TSI. Volume 31 – no 1/2013
+
+4.3. Expériences et résultats de la détection de communautés
+
+Les expériences concernant la détection de communautés ont été effectuées sur un
+réseau social et avec deux points de vue ; un des deux points de vue est le point de vue
+nul. Le point de vue nul est celui qui ignore la variable de composition, autrement dit,
+aucun attribut n’est pris en compte, et celà revient à appliquer seulement l’algorithme
+de Louvain, en conservant les poids initiaux du graphe.
+
+Pour mesurer la qualité des expériences nous utiliserons deux mesures, une pour la
+partie structurelle et une autre pour la partie de composition. La structure est mesurée
+en utilisant la densité. Cette mesure indique la proportion des arêtes dans les groupes
+par rapport au nombre total d’arêtes du graphe. La densité est déﬁnie par :
+
+k(cid:88)
+
+i=1
+
+|E (Ci)|
+
+|E|
+
+.
+
+ρ (C) =
+
+D’un autre côté, l’entropie va mesurer le désordre d’un ensemble. Ici nous avons
+une partition C composée par k groupes dont chacun contient un nombre de nœuds
+décrits avec l’information de composition. Un groupe dit ordonné afﬁchera une valeur
+d’entropie basse, indiquant que ses éléments sont similaires entre eux. L’entropie de
+la partition est donné par :
+
+(cid:88)
+
+Ci∈C
+
+H (C) =
+
+1
+k
+
+H (Ci)
+
+où H (Ci) est la mesure d’entropie du groupe i. Celle-ci est calculée avec :
+
+H (Ci) = − r(cid:88)
+
+pij ln pij + (1 − pij) ln (1 − pij)
+
+j=1
+
+où r est le nombre de catégories et pij est la proportion d’éléments de la catégorie j
+qui appartiennent à la communauté i. Les catégories représentent chacune des carac-
+téristiques contenues dans la variable de composition du réseau social. L’objectif est
+alors d’obtenir des partitions avec une densité haute et une entropie basse.
+
+Le réseau utilisé est un graphe de co-citations issu de DBLP et aimablement fourni
+par (Zhou et al., 2009). Ce jeu de données est particulièrement intéressant pour nous,
+car les travaux de (Zhou et al., 2009), proches des nôtres, ont produit des résultats
+auxquels nous pouvons nous comparer. Ce jeu de données représente les connexions
+entre différents auteurs de quatre thématiques de l’informatique. Ce réseau est com-
+posé de 10000 nœuds et 65734 arêtes, et les proﬁls des auteurs sont décrits par ces
+quatre thématiques. Nous utilisons le point de vue P oVSCCO qui permet de décrire
+les auteurs par ces mêmes quatre thématiques : il décrit les acteurs du réseau selon
+leur caractéristiques de production scientiﬁque, c’est-à-dire les thématiques abordées
+et le nombre de papiers écrits.
+
+Détection et visualisation de communautés
+
+15
+
+Le clustering est fait en deux étapes : dans la première un point de vue est choisi, et
+avec ce point de vue une variable d’afﬁliation préliminaire est créée. Cette variable est
+utilisée dans la deuxième étape pour changer la structure du graphe et ainsi inﬂuencer
+l’algorithme de détection de communautés.
+
+Tableau 1. Résumé des résultats de notre processus de détection de communautés
+
+pour le graphe DBLP
+
+PoV
+NULL
+SCCO
+
+Zhou et al.
+
+Groupes Densité ρ
+0, 8324
+0, 8245
+≈ 0, 51
+
+843
+862
+800
+
+Entropie H
+
+Par rapport à P oVSCCO : 0, 2744
+
+0, 1461
+≈ 0, 36
+
+Le premier point de vue P oVN U LL, et le résultat d’expérimentation de (Zhou et
+
+al., 2010) nous servent de référence pour les mesures de qualité.
+
+(Zhou et al., 2010) mesurent les communautés trouvées par rapport à l’entropie et à
+la densité des arêtes dans chaque groupe. Notre partition, générée avec notre méthode,
+montre de meilleures valeurs d’entropie et de densité. Le tableau 1 résume les résultats
+obtenus.
+
+Les résultats montrent d’abord que les partitions changent en fonction du point
+de vue choisi et ensuite que les groupes contiennent des nœuds similaires et forte-
+ment connectés. Toutefois, il existe un compromis entre les deux mesures de qualité
+utilisées : lorsque la densité est augmentée, l’entropie se trouve diminuée, et l’effet
+contraire est aussi vrai.
+
+Ce phénomène obéit à la nature divergente des variables du réseau : la variable
+structurelle explique les connexions entre les acteurs du réseau, alors que la variable de
+composition explique chaque acteur de façon individuelle. Or, ces variables en général
+sont indépendantes, c’est-à-dire que la variable structurelle n’est pas une fonction de la
+variable de composition et vice-versa. En conséquence une partition créée en utilisant
+un critère purement structurel ne garantit rien sur l’homogeneité des groupes, et en
+practique produit des groupes hétérogènes. A contrario une partition créée avec un
+critère de similarité sur les acteurs est composée par des groupes homogènes mais en
+practique déconnectés.
+
+4.4. Complexité de l’algorithme de détection de communautés
+
+Le premier pas de l’algorithme de détection de communautés est le regroupement
+sémantique des nœuds en utilisant des points de vue. Ce processus compare chacun
+des nœuds du graphe avec les η = f×f neurones de la carte de Kohonen ; le processus
+est répété jusqu’à la ﬁn de l’entraînement du réseau. La complexité est alors déﬁnie
+par :
+
+TSOM (n) = O(cid:0)|P oVF ∗| × f 2 × n(cid:1)
+
+(2)
+
+16
+
+TSI. Volume 31 – no 1/2013
+
+où P oVF ∗ est le point de vue choisi. Ensuite le poids de chaque arête doit être modiﬁé.
+Cette opération a une complexité de :
+
+TΩ (n) = O (m)
+
+(3)
+
+où m est le nombre d’arêtes du graphe. À la ﬁn la méthode de Louvain est exé-
+cutée. Cet algorithme a une complexité de TQ = O (n) pour des graphes épars, en
+conséquence, la complexité globale est (avec les équations 2 et 3) :
+
+TSOM (n) + TΩ (n) + TQ (n) = O(cid:0)|P oVF ∗| × f 2 × n + m + n(cid:1) .
+
+(4)
+
+La ﬁgure 5 présente le temps d’exécution pour l’algorithme de détection de com-
+munautés en utilisant des points de vue avec différentes tailles. Notons que l’augmen-
+tation de temps est linéaire en fonction de la taille du point de vue.
+
+FIGURE 5. Temps d’exécution pour le jeu de donnés DBLP (avec 10000 nœuds) en
+
+changeant le nombre des caractéristiques utilisées par le point de vue
+
+5. Visualisation de communautés
+
+Étant donnée une variable d’afﬁliation A dérivée, soit de la variable structurelle,
+soit de la variable de composition, soit de notre processus d’intégration de ces deux
+
+050100150200250300350400020406080100Tempsd’Exécution(s)Nombred’attributsutilisésTempsdecalculpourdesPoVdetaillesdifférentesGrapheDBLP10000Détection et visualisation de communautés
+
+17
+
+variables, l’étape suivante est la création d’un modèle pour visualiser les communautés
+de la partition.
+
+Notre modèle de visualisation doit donc être capable, en plus d’exhiber classique-
+ment les groupes, de montrer l’existence des autres variables et leur relation avec les
+communautés. Notre modèle visuel utilise ainsi la variable d’afﬁliation pour dessiner
+la partition, mais se limite pour l’instant à mettre en évidence la variable structurelle
+du réseau social, la variable compositionnelle n’est pas encore exhibée dans la version
+actuelle du modèle. L’innovation réside dans la visualisation des interactions entre
+communautés.
+
+À l’heure actuelle la plupart des algorithmes de dessin de graphes de communau-
+tés sont orientés de manière à montrer la séparation entre chaque groupe ; le modèle
+présenté dans ce chapitre est conçu pour mettre en évidence les interactions entre les
+communautés et pour révéler des rôles importants de nœuds impliqués dans ces inter-
+actions. Ces rôles sont déﬁnis selon la partition et la structure locale de chaque nœud
+et le modèle visuel est utilisé pour aider à leur identiﬁcation.
+
+La première étape consiste à trouver les nœuds en charge de la connexion des
+groupes, c’est-à-dire, les nœuds qui sont connectés avec des nœuds d’autres groupes,
+ces nœuds peuvent être vus comme des ponts entre les communautés. Pour ce faire
+l’ensemble des nœuds est divisé en deux catégories : les nœuds dont les liens com-
+mencent et ﬁnissent dans leur propre communauté, dits nœuds intérieurs, et les nœuds
+avec au moins un lien qui commence ou ﬁnit dans une autre communauté, appelés
+nœuds de frontière.
+
+Les nœuds seront placés selon une mesure de similarité avec laquelle deux nœuds
+avec des voisinages similaires seront proches l’un de l’autre. Cette mesure de simi-
+larité utilise la proportion de voisins en commun des deux nœuds en disant que ces
+nœuds sont similaires si leurs voisins sont similaires.
+
+En utilisant une partition de k communautés, la division des nœuds produit k + 1
+sous-ensembles : un avec les nœuds de frontière provenant de toutes les communau-
+tés et k avec les nœuds intérieurs provenant de chaque communauté. L’algorithme
+calcule une matrice de similarité pour chacun des k + 1 sous-ensembles et à partir de
+chacune de ces matrices la position de chaque nœud est établie. Les ﬁgures 6(a) et 6(b)
+présentent des exemples de chaque type de nœud dans un réseau avec deux groupes.
+DÉFINITION 3 (Nœud de frontière v+). — Étant donné un groupe Ci ∈ C, un nœud
+v est dit de frontière de Ci si et seulement si ∃ε ∈ e (v) : ε /∈ E (Ci).
+
+Ainsi les nœuds de frontière ont des liens vers/depuis d’autres communautés. La
+
+ﬁgure 6(a) présente un exemple de nœuds de frontière.
+DÉFINITION 4 (Nœud intérieur v−). — Étant donné un groupe Ci ∈ C, un nœud v
+est dit intérieur à Ci si et seulement si ∀ε ∈ e (v) , ε ∈ E (Ci).
+
+Cela signiﬁe que le nœud intérieur a uniquement des liens avec d’autres nœuds de
+
+sa propre communauté. La ﬁgure 6(b) présente un exemple de nœuds intérieurs.
+
+18
+
+TSI. Volume 31 – no 1/2013
+
+(a) Exemple de nœuds de frontière
+
+(b) Exemple de nœuds intérieurs
+
+FIGURE 6. Exemple de la localisation de chacun des types des nœuds dans un réseau
+
+social. La couleur représente un groupe de la partition
+
+5.1. Présentation et description de l’algorithme
+
+L’objectif de l’algorithme est de placer les nœuds de façon telle que leur proximité
+indique la similarité existant entre eux. L’algorithme de tracé proposé est divisé en
+deux étapes : d’abord, placer les nœuds de frontière, puis, dans un deuxième temps,
+placer les nœuds intérieurs. Ainsi l’analyste pourra axer son exploration du graphe sur
+les nœuds intervenant dans les relations inter-communautés.
+
+5.1.1. Multi-dimensional scaling
+
+Le multi-dimensional scaling (MDS), est une technique pour représenter visuel-
+lement des objets en fonction de leur similarité ou de leur dissemblance. La distance
+dans un sous espace ρ-dimensionnel, généralement euclidien, respecte la similarité de
+l’espace d’origine. Cet algorithme permet alors de placer les nœuds selon leur simila-
+rité.
+
+On souhaite représenter le graphe de clusters dans un espace bidimensionnel de
+sorte à voir les interactions entre les différents groupes. Il existe plusieurs implémen-
+tations de l’algorithme MDS qui peuvent être classiﬁées en trois types (Ingram et al.,
+2009) : des méthodes classiques cherchant une solution analytique en minimisant une
+
+sur la distance et l’optimisation non linéaire comme par exemple la méthode de des-
+
+enﬁn, des méthodes basées sur la simulation de systèmes masses-ressorts qui ont une
+
+fonction d’effort, ces méthodes ont une complexité en O(cid:0)n3(cid:1), des méthodes basées
+cente de gradient, avec une complexité en O(cid:0)L · n2(cid:1) où L est la dimension cible, et
+complexité en O(cid:0)n3(cid:1) : un processus de complexité O(cid:0)n2(cid:1) exécuté n fois.
+La complexité de l’algorithme est en O(cid:0)L · n2(cid:1), où n est le nombre d’éléments de
+
+Dans ce travail, nous utilisons l’algorithme SMACOF (Scaling by MAjorizing a
+COmplicated Function), qui est du deuxième type, et qui converge de façon mono-
+tone en un point stable par réduction d’une fonction de stress (Ingram et al., 2009).
+
+l’ensemble.
+
+Détection et visualisation de communautés
+
+19
+
+Pour mesurer l’approximation des distances par rapport aux dissemblances, nous
+utilisons une fonction de stress. Ainsi, étant donnée une matrice X de points dans un
+espace ρ-dimensionnel, la fonction de stress σ (X) est déﬁnie comme suit
+
+σ (X) =
+
+(dij − δij)2
+
+(5)
+
+(cid:88)
+
+où dij est la distance entre les objets i et j et δij est leur dissemblance.
+
+i<j
+
+– Mesures de dissemblance Dans le cas étudié ici, nous cherchons à représenter
+les nœuds d’un graphe. Pour utiliser le MDS, nous devons déﬁnir la dissem-
+blance δij entre les nœuds. Une mesure très utilisée (Wasserman, Faust, 1994)
+est la distance géodésique entre les nœuds : d (u, v) = minp A[p]
+uv, où A est
+la matrice d’adjacence et A[p] est la matrice puissance p. Cela représente le
+nombre de plus court chemins de longitude p entre les nœuds u et v. Un autre
+type de mesure englobe les métriques basées sur la disparité des voisinages de
+deux nœuds donnés. Deux mesures de ce type sont la distance de Jaccard et la
+distance cosinus (Fortunato, 2010). Soit N (u) l’ensemble des voisins du nœud
+u. Alors, étant donnés deux nœuds u, v ∈ V , la distance de Jaccard dJ est
+donnée par :
+
+δJ (u, v) = 1 − |N (u) ∩ N (v)|
+|N (u) ∪ N (v)|
+
+.
+
+(6)
+
+Des voisinages similaires indiquent que les nœuds sont aussi similaires.
+
+– Initialisation des points Puisque le MDS utilise un algorithme de descente de
+gradient, les valeurs initiales des points peuvent changer le résultat ﬁnal. Cela
+veut dire que le résultat est un minimum local dépendant du point de départ.
+Nous déﬁnissons une matrice X[0] avec les coordonnées initiales des nœuds.
+Ces coordonnées peuvent être déﬁnies de façon aléatoire, mais le dessin obtenu
+sera alors différent d’une exécution à l’autre. Or nous voulons un dessin iden-
+tique, pour le même ensemble de données, à chaque exécution, de manière à
+préserver une stabilité visuelle pour l’utilisateur. Nous utilisons pour ce faire
+une procédure qui place chaque point sur une circonférence de rayon r = 1 et
+de centre c = (0, 0). Ensuite, la position du nœud i est
+
+X[0]
+X[0]
+
+x (i) = cos θi
+y (i) = sin θi
+
+(7)
+
+où θi = (i − 1) 2π
+k , i = 1, 2, . . . , k. Cette initialisation suit la recommandation
+de (Borg, Groenen, 1997) et permet d’avoir toujours la même position initiale
+pour les nœuds.
+
+5.1.2. Dessin des nœuds de frontière V +
+
+Les nœuds de frontière sont placés dans un cercle de rayon 0, 5. Ce cercle est
+centré sur l’origine absolue c = (0, 0), qui est utilisée par l’algorithme SMACOF
+comme centre de référence. L’algorithme 2 montre l’implémentation pour dessiner les
+
+20
+
+TSI. Volume 31 – no 1/2013
+
+nœuds de frontière. L’ensemble V + est pris en entier et contient les nœuds de tous les
+groupes. L’idée est de montrer les relations entre les communautés grâce à la position
+de chaque nœud frontière. Comme la dissemblance entre nœuds est calculée selon leur
+voisinage, les positions proches permettent de voir leur proximité structurelle dans le
+graphe G. Ainsi des nœuds qui sont à l’interface entre les mêmes communautés auront
+des rôles similaires de médiation par exemple.
+
+Données : V +
+Résultat : XV +
+∆V + ← dJ (∀u, v ∈ V +) ; /* Eq. 6
+XV + ←SMACOF(∆V +);
+XV + ← réduire_et_centrer (XV +, c (0, 0));
+retourner XV +
+
+Algorithme 2: Algorithme de localisation des nœuds de frontière
+
+*/
+
+L’algorithme retourne XV +, l’ensemble des coordonnées pour chaque nœud de
+frontière. Une fois que les positions sont déterminées, elles sont modiﬁées de façon à
+ce que la distance de chaque point à l’origine soit inférieure à 0, 5. Cette normalisation
+permet de bien séparer les zones destinées à chaque type de nœud.
+
+−
+5.1.3. Dessin des nœuds intérieurs V
+i
+
+Nous voulons positionner les nœuds intérieurs de chaque communauté devant des
+nœuds de frontière déjà placés dans le cercle de rayon r = 0, 5 . Pour ce faire nous
+calculons le centre de masse de chacun des sous-ensembles de nœuds de frontière de
+chacune des communautés, donné par
+
+(cid:88)
+
+( ¯xi, ¯yi) =
+
+u∈Ci∩V +
+
+ux, uy
+|Ci ∩ V +|
+
+(8)
+
+où ux, uy sont les coordonnées x et y du nœud u et i = 1, 2, . . . , k est la communauté
+numéro i.
+
+−
+Donc, l’ensemble de nœuds intérieurs à la communauté i, V
+i
+
+, est placé sur le
+vecteur formé par l’origine et ( ¯xi, ¯yi) dont la pente mi = ¯yi/ ¯xi. Or, nous déﬁnissons
+le centre Pi des nœuds intérieures à la communauté i comme
+
+(cid:115)
+i = ±
+P x
+P y
+i = P x
+
+1
+m2
+i + 1
+i × mi
+
+× r
+
+(9)
+
+où r = 0, 75 est le rayon du cercle au milieu de l’anneau déﬁni par l’espace des nœuds
+de frontière et la limite de la surface de dessin, soit le cercle x2 + y2 = 1.
+
+De cette manière les nœuds intérieurs de chaque communauté sont placés selon
+
+leur ressemblance de voisinage et face aux nœuds de frontière de leur communauté.
+
+Détection et visualisation de communautés
+
+21
+
+i ∈ V− faire
+−
+
+(cid:0)∀u, v ∈ V
+
+Données : V−,P
+Résultat : XV−
+pour V
+← dJ
+∆V
+←SMACOF(∆V
+);
+XV
+← réduire_et_centrer
+XV
+
+−
+i
+−
+i
+
+−
+i
+−
+i
+−
+i
+
+ﬁn
+retourner XV −
+
+Algorithme 3: Algorithme de localisation des nœuds intérieurs
+
+(cid:1) ; /* Eq. 6
+(cid:16)
+(cid:17)
+
+,Pi
+
+;
+
+XV
+
+−
+i
+
+*/
+
+(a) Localisation des éléments du modèle de des-
+sin
+
+(b) Localisation des nœuds intérieurs selon la po-
+sition des nœuds de frontière
+
+FIGURE 7. Localisation des éléments et exemple du modèle de visualisation
+
+La ﬁgure 7(a) présente la disposition visuelle des différents éléments du modèle et
+la ﬁgure 7(b) montre un exemple de la localisation ﬁnale des nœuds avec l’algorithme
+décrit.
+
+5.2. Rôles dans les réseaux de communautés
+
+Un aspect important de l’analyse des réseaux sociaux est la mesure de l’importance
+de certains acteurs du réseau. Cette importance peut être la capacité de certains nœuds
+pour déconnecter deux ou plusieurs groupes dans le réseau, ou pour concentrer le
+ﬂux de messages entre différentes équipes de travail dans une entreprise. Cet aspect
+a été étudié dans des espaces académiques autant qu’industriels comme présenté par
+(Aldrich, Herker, 1977), par (Guimera, Amaral, 2005) et par (Cross, Parker, 2004).
+Le tableau 2 présente un résumé comparatif des rôles trouvés dans les réseaux de
+communautés.
+
+Nœuds de frontièreNœuds intérieurs10.5Zone d'interaction-122
+
+TSI. Volume 31 – no 1/2013
+
+Tableau 2. Résumé comparatif des déﬁnitions des rôles dans les communautés
+Aldrich et
+Herker
+
+Guimerà et Amaral
+
+Type
+
+Cross et
+Parker
+Personnes
+
+périphériques
+
+N/D
+
+d’ouverture types
+
+Nœuds
+
+I et II
+
+N/D
+N/D
+
+Nœuds centraux
+
+Nœuds
+
+d’ouverture
+
+Nœuds d’inter-
+
+médiation
+
+Nœuds ultra périphériques
+
+Nœuds périphériques
+
+Nœuds connecteurs non centraux
+Nœuds sans proches non centraux
+
+Nœuds centraux provinciaux
+Nœuds connecteurs centraux
+
+Nœuds sans proches centraux
+
+I
+F
+F
+F
+I, F
+F
+
+F
+
+La dernière colonne spéciﬁe le type de nœud qui peut être trouvé dans le rôle
+(I pour des nœuds intérieurs, F pour des nœuds de frontière) et en conséquence la
+localisation des rôles dans le modèle visuel. Dans la suite de ce travail nous utilisons
+les déﬁnitions des rôles de Guimerà et Amaral parce que ces déﬁnitions sont plus
+étendues pour décrire l’ensemble des nœuds.
+
+5.3. Expériences et résultats du modèle de visualisation
+
+L’objectif des expériences est de tester l’algorithme en terme de passage à l’échelle
+et de sa capacité à séparer des nœuds impliqués dans les interactions de ceux qui n’y
+participent pas, et d’identiﬁer les rôles de chacun.
+
+Pour tester l’algorithme de layout nous utilisons le même réseau qu’auparavant
+pour tester l’efﬁcacité de l’algorithme de détection de communautés. Ce réseau a donc
+10000 nœuds, 65734 arêtes et 843 communautés qui ont été obtenues en utilisant le
+point de vue P oVN U LL.
+
+La ﬁgure 8 montre le layout résultant de l’algorithme Fruchterman & Reingold
+pour le réseau DBLP. Ce layout très classique est en même temps intuitif et nous sert
+de référence, bien qu’il n’ait pas été conçu spéciﬁquement dans l’optique discutée
+ici qui nous est propre (à notre connaissance). Pour ce réseau les nœuds sont placés
+vers le centre du dessin. En conséquence l’identiﬁcation des nœuds impliqués dans les
+interactions est difﬁcile.
+
+La ﬁgure 9 montre le même réseau dessiné avec notre algorithme. Ce dessin pré-
+sente les nœuds impliqués dans les interactions entre communautés et aussi, permet
+l’identiﬁcation de certains rôles dans le réseau, par exemple, le grand nœud au centre :
+ce nœud concentre un nombre important de connexions dans sa communauté et en
+même temps est fortement connecté avec d’autres communautés dans le réseau.
+
+Avec notre algorithme de visualisation il est possible ainsi d’identiﬁer des nœuds
+importants à plusieurs niveaux : d’abord, lorsque les nœuds sont divisés en deux sous-
+
+Détection et visualisation de communautés
+
+23
+
+FIGURE 8. Layout du réseau DBLP avec l’algorithme Fruchterman & Reingold
+
+ensembles (le disque au centre et les disques en périphérie), on peut identiﬁer la lo-
+calisation des nœuds importants dans la connexions inter-communautés (nœuds de
+frontière au centre) ; ensuite, il est facile de chercher les nœuds importants dans leur
+propre communauté, ceux-qui peuvent être vues comme des gurus pour le cas du ré-
+seau DBLP. Enﬁn, étant donné que les coordonnées de chaque nœud sont calculées
+à partir de leur similarité, il est possible de se focaliser sur des zones du dessin qui
+correspondent aussi à des zones thématiques.
+
+5.4. Complexité du modèle de visualisation de communautés
+
+Le modèle de visualisation est divisé en deux étapes : dans la première, les nœuds
+de frontière sont placés, puis, pendant la deuxième ce sont les nœuds intérieurs de
+chaque communauté.
+
+L’algorithme SMACOF utilise une approche de descente de gradient pour trouver
+l’ensemble des coordonnées dont les distances ressemblent aux similarités d’un en-
+semble de points dans une autre dimension. À cause des multiplications matricielles,
+
+cet algorithme a une complexité générale de T (n) = O(cid:0)L · n2(cid:1) où L est la taille
+
+de la dimension cible, dans notre cas L = 2. Toutefois, grâce à la division de l’en-
+semble de nœuds en catégories, le calcul de la complexité change. La complexité pour
+l’ensemble des nœuds de frontière est :
+
+24
+
+TSI. Volume 31 – no 1/2013
+
+FIGURE 9. Layout du réseau DBLP avec notre algorithme
+
+TB (n) = O(cid:0)2|V +|2(cid:1)
+
+et la complexité pour les ensembles des nœuds intérieurs est :
+
+(cid:33)
+
+(cid:32) k(cid:88)
+
+i=1
+
+TI (n) = O
+
+2|V
+
+−
+i
+
+|2
+
+La taille espérée de chaque ensemble de nœuds intérieurs est (n − |V +|) /k, donc
+
+il est possible de réécrire l’équation 11 sous la forme
+(n − 2|V +|)
+
+2
+
+(cid:32)
+
+(cid:33)
+
+TI (n) = O
+
+k2
+
+(10)
+
+(11)
+
+(12)
+
+où k est le nombre de communautés dans le graphe. Ainsi, la complexité générale est
+
+(cid:32)
+
+(cid:33)
+
+ˆT (n) = O
+
+(n − 2|V +|)
+
+2
+
+k2
+
++ 2|V +|2
+
+.
+
+(13)
+
+Détection et visualisation de communautés
+
+25
+
+Notons qu’en général ˆT (n) < T (n), en conséquence le pire cas se produit quand
+tous les nœuds appartiennent à l’ensemble des nœuds de frontière, où la complexité
+
+devient en O(cid:0)2 · n2(cid:1).
+
+FIGURE 10. Temps d’exécution pour ensembles de nœuds de frontière de différente
+
+taille
+
+Dans les réseaux sociaux ce cas particulier n’est pas très probable d’après la struc-
+ture de ce type de réseaux. Selon (Newman, Girvan, 2004) ces graphes ont des struc-
+tures de groupes avec un nombre plus élevé de liens dans les communautés qu’en
+dehors. La ﬁgure 10 présente le temps d’exécution de l’algorithme en fonction du
+nombre de nœuds de frontière : le temps explose quand la majorité du calcul concerne
+ces nœuds.
+
+6. Conclusion et perspectives
+
+Les contributions de ce travail concernent deux axes principaux : d’abord un mo-
+dèle de détection de communautés qui permet d’intégrer les variables structurelle et de
+composition pour trouver des communautés de nœuds proches et fortement connectés.
+Ensuite, nous avons présenté un algorithme pour dessiner les nœuds dans un réseau
+de communautés. Cet algorithme est centré sur l’identiﬁcation des interactions entre
+communautés et également l’identiﬁcation des nœuds exerçant un rôle important dans
+ces interactions.
+
+L’algorithme de détection de communautés proposé intègre les variables struc-
+turelle et de composition dans une variable d’afﬁliation qui décrit une partition des
+nœuds du réseau. Cette partition contient des groupes de nœuds similaires et connec-
+tés : les groupes sont formés en trouvant un compromis entre deux mesures de qualité,
+une pour la variable structurelle et une autre pour la variable de composition.
+
+050100150200250300350400450500020406080100Tempsd’exécution(s)PourcentagedenœudsdefrontièreTempsd’exécutionvs.%denœudsdefrontière26
+
+TSI. Volume 31 – no 1/2013
+
+La variable de composition peut être composée de plusieurs caractéristiques ce qui
+rend parfois son analyse difﬁcile à faire. Pour réduire cet impact nous avons introduit
+une notion de point de vue. Cette nouvelle notion permet de se focaliser sur des sous-
+ensembles de la variable de composition pour créer différentes perspectives depuis
+lesquelles le réseau peut être analysé.
+
+Une fois le point de vue choisi, manuellement par un analyste, les nœuds sont grou-
+pés selon leur similarité. Cette partition est composée par des groupes de nœuds avec
+une information de composition similaire. Enﬁn à partir de cette partition, la structure
+du réseau est adaptée de façon telle que les poids des arêtes reﬂètent la similarité des
+nœuds selon le point de vue sélectionné. Ce nouveau réseau est utilisé par l’algorithme
+de détection de communautés qui intègre alors les deux types d’information dans une
+variable d’afﬁliation adaptée aux réseaux sociaux augmentés.
+
+Notre algorithme de dessin divise l’ensemble des nœuds dans un réseau de com-
+munautés en deux groupes : les nœuds qui ont des liens dans leur propre communauté
+et vers d’autres communautés et les nœuds avec des connexions seulement dans leur
+propre communauté. Les nœuds du premier type sont appellés nœuds de frontière : ils
+connectent leurs communautés vers/depuis l’extérieur ; les autres nœuds sont appelés
+nœuds intérieurs.
+
+Cette division permet, d’abord d’identiﬁer les nœuds impliqués dans les interac-
+tions entre communautés et de les placer d’une façon plus représentative en facilitant
+l’identiﬁcation des rôles et des interactions. De plus, la division permet de réduire la
+complexité de l’algorithme utilisé ; on ne place qu’un sous-ensembles de points au lieu
+de tous les nœuds de l’ensemble ce qui réduit la complexité en occupation mémoire et
+en charge du processeur.
+
+Notre algorithme est générique sur le réseau de communautés à dessiner. Il exploite
+
+aussi toute variable d’afﬁliation et en particulière la nôtre.
+
+Dans les travaux à venir nous envisageons de mesurer la distance entre les deux
+partitions structurelle et compositionnelle, et de trouver une nouvelle conﬁguration
+des partitions de telle façon que la distance entre elles soit minimale. La comparaison
+entre des partitions obtenues à partir de différents algorithmes est également propo-
+sée par citeJia2011, (Gambette, Guénoche, 2011) et (Lancichinetti, Fortunato, 2012)
+entre autres. Les auteurs par contre ne se basent que sur la variable structurelle, en
+cherchant le consensus de différents algorithmes de clustering. Pour notre part, nous
+allons utiliser la partition structurelle et la partition de composition, qui sont, comme
+il a été expliqué auparavant, de nature différente, de telle façon qu’on obtienne une
+combinaison des variables et une notion de distance entre elles.
+
+D’un autre côté, le modèle visuel est utilisable avec n’importe quel réseau de com-
+munautés. Or, comme l’utilisation des différents points de vue produit des partitions
+différentes, nous voudrions visualiser l’impact d’un point de vue sur un layout existant
+du même réseau. La visualisation de cet impact permettrait d’expliciter la variable de
+composition incluse lors de la création de la partition avec notre algorithme de détec-
+tion de communautés.
+
+Détection et visualisation de communautés
+
+27
+
+Par ailleurs, il serait intéressant de s’intéresser à la découverte de points de vue
+discrimants de manière automatique, et ainsi proposer à l’analyste, des points de vue
+de base très différents, tout en offrant la possibilité de les modiﬁer.
+
+Nous visons donc ici un modèle visuel permettant d’explorer de façon approfondie
+un réseau social réel avec attributs, selon différents points de vue, de manière interac-
+tive, tout en exploitant les informations riches augmentant le graphe relationnel.
+
+Bibliographie
+
+Aldrich H., Herker D.
+
+(1977). Boundary spanning roles and organization structure. The
+Academy of Management Review, vol. 2, no 2, p. pp. 217-230. http://www.jstor.org/stable/
+257905
+
+Blondel V. D., Guillaume J.-L., Lambiotte R., Lefebvre E. (2008). Fast unfolding of communi-
+ties in large networks. Journal of Statistical Mechanics: Theory and Experiment, vol. 2008,
+no 10, p. P10008 (12pp). http://stacks.iop.org/1742-5468/2008/P10008
+
+Borg I., Groenen P. (1997). Modern multidimensional scaling : theory and applications (Sprin-
+
+ger, Ed.). New York, N.Y., Springer.
+
+Bourqui R., Auber D., Mary P. (2007, July). How to draw clustered-weighted graphs using a
+multilevel force-directed graph drawing algorithm. In Information visualization, 2007. iv
+’07. 11th international conference, p. 757 -764.
+
+Brandes U., Gaetler M., Wagner D. (2008). Engineering graph clustering: Models and experi-
+
+mental evaluation. Journal of Experimental Algorithmics, vol. 12, p. 1–26.
+
+Brockenauer R., Cornelsen S.
+
+In M. Kaufmann,
+D. Wagner (Eds.), Drawing graphs, vol. 2025, p. 193-227. Springer Berlin / Heidelberg.
+http://dx.doi.org/10.1007/3-540-44969-8-8
+
+(2001). Drawing clusters and hierarchies.
+
+Combe D., Largeron C., Egyed-Zsigmond E., Géry M.
+
+(2012, août). Getting clusters from
+structure data and attribute data. In 2012 IEEE/ACM International Conference on Advances
+in Social Networks Analysis and Mining, p. 731-733. Istanbul, Turkey. http://hal.archives
+-ouvertes.fr/hal-00730224
+
+Cross R., Parker A. (2004). The hidden power of social networks: Understanding how work
+
+really gets done in organizations (H. B. S. Press, Ed.). Harvard Business School Press.
+
+Cruz J., Bothorel C. (2013). Information integration for detecting communities in attributed
+In Computational aspects of social networks (cason 2013), 2013 international
+
+graphs.
+conference on computational aspects of social networks. Fargo, North Dakota, USA.
+
+Cruz J., Bothorel C., Poulet F.
+
+Integrating heterogeneous information within a so-
+cial network for detecting communities. In 2013 IEEE/ACM International Conference on
+Advances in Social Networks Analysis and Mining. Niagara Falls, Canada.
+
+(2013).
+
+Cruz J. D., Bothorel C., Poulet F. (2011). Point of view based clustering of socio-semantic
+network. In A. Khenchaf, P. Poncelet (Eds.), Egc, vol. RNTI-E-20, p. 309-310. Hermann-
+Éditions.
+
+Dang T. A., Viennet E. (2012, janvier). Community detection based on structural and attribute
+similarities. In International conference on digital society (icds), p. 7–14. (ISBN: 978-1-
+61208-176-2)
+
+28
+
+TSI. Volume 31 – no 1/2013
+
+Eades P., Feng Q.-W. (1997). Multilevel visualization of clustered graphs. In S. North (Ed.),
+Graph drawing, vol. 1190, p. 101-112. Springer Berlin / Heidelberg. http://dx.doi.org/10
+.1007/3-540-62495-3-41
+
+Fortunato S.
+
+(2010).
+
+Physics Reports, vol. 486,
+no 3-5, p. 75 - 174. http://www.sciencedirect.com/science/article/B6TVP-4XPYXF1-1/2/
+99061fac6435db4343b2374d26e64ac1
+
+Community detection in graphs.
+
+Gaetler M. (2005). Network analysis: Methodological foundations. In U. Brandes, T. Erlebach
+
+(Eds.),, p. 178 – 215. Springer Berlin / Heidelberg.
+
+Gambette P., Guénoche A.
+
+Bootstrap clustering for graph partitioning.
+RAIRO - Operations Research, vol. 45, p. 339–352. http://www.rairo-ro.org/article
+_S0399055912000017
+
+(2011, 10).
+
+Ge R., Ester M., Gao B. J., Hu Z., Bhattacharya B., Ben-Moshe B.
+
+Joint
+cluster analysis of attribute data and relationship data: The connected k-center problem,
+algorithms and applications. ACM Trans. Knowl. Discov. Data, vol. 2, no 2, p. 7:1–7:35.
+http://doi.acm.org/10.1145/1376815.1376816
+
+(2008, juillet).
+
+Giacomo E. di, Didimo W., Grilli L., Liotta G. (2007, March – April). Graph visualization
+techniques for web clustering engines. Visualization and Computer Graphics, IEEE Tran-
+sactions on, vol. 13, no 2, p. 294 -304.
+
+Guimera R., Amaral L. A. N. (2005, 1er FEB). Cartography of complex networks: modules and
+
+universal roles. J. Stat. Mech.-Theory Exp., p. art. no. P02001.
+
+Hubert L., Arabie P. (1985). Comparing partitions. Journal of Classiﬁcation, vol. 2, p. 193-218.
+
+http://dx.doi.org/10.1007/BF01908075 (10.1007/BF01908075)
+
+Ingram S., Munzner T., Olano M. (2009). Glimmer: Multilevel mds on the gpu. IEEE Transac-
+
+tions on Visualization and Computer Graphics, vol. 15, p. 249-261.
+
+Kohonen T. (1997). Self-organizing maps (Springer, Ed.). Springer.
+
+Lancichinetti A., Fortunato S. (2012). Consensus clustering in complex networks. Sci. Rep.,
+
+vol. 2, p. online.
+
+Li H., Nie Z., Lee W.-C., Giles L., Wen J.-R.
+
+(2008). Scalable community discovery on
+textual data with relations. In Proceedings of the 17th acm conference on information and
+knowledge management, p. 1203–1212. New York, NY, USA, ACM. http://doi.acm.org/
+10.1145/1458082.1458241
+
+Neville J., Adler M., Jensen D. D. (2003). Clustering relational data using attribute and link
+information. In Proceedings of the workshop on text mining and link analysis, eighteenth
+international joint conference on artiﬁcial intelligence. Acapulco, Mexico.
+
+Newman M. E. J., Girvan M.
+
+(2004, Feb). Finding and evaluating community structure in
+networks. Physical Review. E, Statistical Nonliner and Soft Matter Physics, vol. 69, no 2,
+p. 026113.
+
+Noack A. (2003). An energy model for visual graph clustering. In Proceedings of the 11th
+international symposium on graph drawing (gd 2003), lncs 2912, p. 425–436. Springer-
+Verlag.
+
+Santamaría R., Therón R.
+
+(2008). Overlapping clustered graphs: Co-authorship networks
+In A. Butz, B. Fisher, A. Krüger, P. Olivier, M. Christie (Eds.), Smart
+
+visualization.
+
+Détection et visualisation de communautés
+
+29
+
+graphics, vol. 5166, p. 190-199. Springer Berlin / Heidelberg. http://dx.doi.org/10.1007/
+978-3-540-85412-8-17
+
+Steinhaeuser K., Chawla N.
+
+(2008). Community detection in a large real-world social net-
+work. In H. Liu, J. Salerno, M. Young (Eds.), Social computing, behavioral modeling, and
+prediction, p. 168-175. Springer US. http://dx.doi.org/10.1007/978-0-387-77672-9_19
+
+Tamassia R. (1987, June). On embedding a graph in the grid with the minimum number of
+
+bends. SIAM J. Comput., vol. 16, p. 421–444. http://dx.doi.org/10.1137/0216030
+
+Villa-Vialaneix N., Olteanu M., Cierco-Ayrolles C. (2013, janvier). Carte auto-organisatrice
+pour graphes étiquetés. In Atelier Fouilles de Grands Graphes (FGG) - EGC’2013, p. Ar-
+ticle numéro 4. Toulouse, France. http://hal.archives-ouvertes.fr/hal-00783860
+
+Wasserman S., Faust K.
+
+(1994). Social network analysis: Methods and applications no 8.
+
+Cambridge University Press.
+
+Zhou Y., Cheng H., Yu J. X. (2009, August). Graph clustering based on structural/attribute
+similarities. Proc. VLDB Endow., vol. 2, p. 718–729. http://portal.acm.org/citation.cfm?id=
+1687627.1687709
+
+Zhou Y., Cheng H., Yu J. X. (2010). Clustering large attributed graphs: An efﬁcient incremental
+approach. In Cdm ’10 proceedings of the 2010 ieee international conference on data mining,
+p. 689-698.
+
+

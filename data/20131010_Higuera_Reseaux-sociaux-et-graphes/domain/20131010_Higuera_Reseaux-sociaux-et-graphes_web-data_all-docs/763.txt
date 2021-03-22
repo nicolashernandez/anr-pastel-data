@@ -1,0 +1,1041 @@
+http://www.cpt.univ-mrs.fr/~barrat/CPPM_07052011.pdf
+
+De la caractérisation des 
+
+réseaux complexes
+à l’épidémiologie
+
+Alain Barrat
+Centre de Physique Théorique, Marseille
+
+ 
+
+ 
+
+http://www.cpt.univ-mrs.fr/~barrat
+http://sites.google.com/site/cxnets
+http://www.sociopatterns.org
+
+Etude des réseaux complexes
+
+•Etudes empiriques et phénoménologiques:
+
+dégager des caractéristiques générales
+
+•Modélisation:  
+
+comprendre les mécanismes 
+
+•Conséquences: 
+
+comprendre l’importance des différentes caractéristiques pour 
+différents phénomènes, par exemple la propagation d’épidémies, la 
+fragilité en face de pannes ou d’attaques...
+
+•Perspectives et nouveaux développements: réseaux dynamiques
+
+ 
+
+ 
+
+Qu’est-ce qu’un réseau ?
+
+Points/sites reliés par des liens
+
+individus
+
+ordinateurs
+pages web
+aéroports
+molécules
+....
+
+ 
+
+ 
+
+relations sociales 
+(ex:collaborations scientifiques)
+câbles
+hyperliens
+connexions aériennes
+réactions chimiques
+....
+
+Réseau des collaborations 
+
+scientifiques
+
+Sites: chercheurs
+Liens: articles co-écrits
+
+Poids sur les liens: dépendent du
+•nombre d’articles co-écrits
+•nombre d’auteurs 
+•nombre de citations…
+
+ 
+
+ 
+
+Réseau des collaborations scientifiques
+
+Weights: depending on
+•number of co-authored papers
+•number of authors of each paper
+•number of citations…
+
+ 
+
+M. E. J. Newman and M. Girvan, Physical Review E 69, 026113 (2004). 
+Image: MEJ Newman, http://www-personal.umich.edu/~mejn/networks/
+
+ 
+
+Réseau d’interactions
+
+de protéines
+Liens: interactions 
+
+Sites: protéines                       
+
+Réseau 
+
+métabolique
+
+Sites: metabolites                         
+
+Liens: réactions chimiques 
+
+ 
+
+ 
+
+Food-webs
+
+ 
+
+N. Martinez, R. Williams
+
+ 
+
+Réseau de transport
+
+TRANSIMS
+
+Sites=lieux (bureaux, domiciles, magasins…)
+Liens pesés=flux de personnes
+
+ 
+
+ 
+
+Réseaux de transport aérien
+
+ 
+
+ 
+
+Internet
+
+•Computers (routers)
+•Satellites
+•Modems 
+•Phone cables
+•Optic fibers
+•EM waves
+
+ 
+
+ 
+
+World-Wide-Web
+
+Réseau virtuel
+
+•pages web 
+•hyperliens
+
+ 
+
+ 
+
+Caractéristiques des réseaux
+
+Réseaux: d’origines très différentes
+
+Ont-ils quelque chose en commun?
+Propriétés communes?
+
+Le caractère abstrait de la représentation en 
+termes de graphes et de la théorie des graphes 
+permet de répondre….
+ 
+
+ 
+
+Réseaux sociaux:
+
+l’expérience de Milgram
+
+Milgram, Psych Today 2, 60 (1967)
+Dodds et al., Science 301, 827 
+(2003)
+
+“Six degrés de séparation”:
+     “petit-monde”
+
+ 
+
+ 
+
+L’Internet: un autre “petit-monde”
+
+Histogramme des distances
+entre deux sites:
+
+distances typiques très petites
+par rapport à la taille d’Internet
+
+Autres exemples: WWW, réseaux de transports, etc...
+
+ 
+
+ 
+
+Une autre caractéristique répandue: 
+
+“Clustering”
+
+n
+
+3
+
+2
+
+Plus grande probabilité d’être connectés 
+
+1
+
+Clustering: Mes amis se connaissent très probablement entre eux 
+(exemple typique: réseaux sociaux)
+
+Effet quantifié par
+le coefficient de clustering,
+entre 0 et 1
+
+ 
+
+ 
+
+Hétérogénéité
+
+P(k)=Nk/N=probabilité qu’un site choisi au 
+hasard ait k voisins
+
+Deux types de distributions
+
+•Réseaux homogènes: P(k) décroit rapidement
+•Réseaux hétérogènes: P(k) a une queue large
+
+ 
+
+ 
+
+Hétérogénéité
+
+Échelle lin
+
+Poisson 
+vs.
+Loi de puissance
+Échelle log
+
+ 
+
+ 
+
+Réseau de transport aérien
+
+ 
+
+ 
+
+Hétérogénéité empirique
+
+Distributions
+larges
+
+(souvent proches de lois 
+de puissance
+P(k) » k-g   , 2< g  <3)
+
+Pas d’échelle 
+caractéristique
+
+Internet
+
+ 
+
+ 
+
+Principales caractéristiques des 
+
+réseaux complexes
+
+•Nombreux éléments en interaction
+•Nombreux éléments en interaction
+•Evolution dynamique
+•Evolution dynamique
+•Auto-organisation
+•Auto-organisation
+
+Internet,
+World-Wide-Web,
+Réseaux sociaux
+etc...
+
+Architecture non-triviale
+Propriétés émergentes 
+Phénomènes coopératifs
+
+ 
+
+ 
+
+petit-monde
+clustering
+hétérogénéité
+
+Modèle le plus “simple” de réseaux:
+
+Erdös-Renyi (1960)
+
+N points, liés avec probabilité p:
+
+Réseau 
+-statique
+-distances courtes (log N)
+-sans cohésion locale
+-homogène: nombre de voisins similaire pour tous
+
+ 
+
+ 
+
+Modélisation des réseaux complexes
+
+Processus microscopiques des composants
+
+Physique
+
+Statistique
+
+Propriétés statistiques et dynamiques
+
+au niveau macroscopique
+
+ 
+
+ 
+
+Exemple de mécanisme:
+L’attachement préférentiel
+
+1)Les réseaux croissent par l’addition de nouveaux sites
+
+Exemples:
+WWW : addition de nouvelles pages webs                  
+ Internet : nouveaux ordinateurs, serveurs
+
+2) Les nouveaux sites se connectent plutôt vers des sites ayant déjà de
+nombreux voisins
+Exemples:
+WWW : liens vers des pages webs connues
+Internet : liens vers des fournisseurs d’accès bien connectés
+
+ 
+
+1) + 2) => réseau hétérogène (P(k) » k-3 )
+
+ 
+
+Un autre exemple
+
+Copying model
+
+Réseau en croissance:
+a. Introduction d’un nouveau site
+b. Choix d’un ancien site
+c. Le nouveau site copie m liens
+du site sélecté
+d. Chaque nouveau lien est maintenu avec proba a
+changé au hasard avec proba 1-a
+
+1-
+
+, 
+
+ 
+
+Réseau hétérogène
+
+ 
+
+(P(k) » (k+k0)-g  )
+
+a
+a
+Conséquences des 
+
+propriétés des réseaux sur 
+les processus dynamiques
+
+Exemple:épidémiologie
+
+ 
+
+ 
+
+Modèles de propagation d’épidémies 
+
+Description schématique des individus et de leur état:
+
+Les individus peuvent se trouver dans certains états: 
+   Sain/Susceptible * Infecté * Immunisé/Remis
+
+-Propagation par contact
+I
+
+S
+
+I
+
+p
+
+-Guérison/immunisation
+
+I
+
+ 
+
+ 
+
+R/S
+  / 
+
+I
+
+Modèles 
+typiques de 
+physique 
+statistique
+
+Modèles de propagation d’épidémies 
+
+Réseau de contacts:
+•Individus=sites
+•Liens=possibilité de propagation
+
+Réseau 
+dont la topologie
+joue un rôle important
+
+ 
+
+ 
+
+Importance de la topologie
+
+du réseau de contacts
+
+Virus sur ordinateurs
+
+Topologie d’Internet
+
+“Vers” propagés par email
+
+Topologie du réseau d’email
+
+Epidémiologie
+
+ 
+
+ 
+
+Topologie des réseaux sociaux, 
+des réseaux de transports
+
+Importance de la topologie
+
+du réseau de contacts
+S
+
+I
+
+I
+
+I
+
+Graphes homogènes
+
+Graphes hétérogènes
+
+p
+
+L’épidémie
+meurt
+
+L’épidémie se 
+propage
+
+L’épidémie se 
+propage
+
+0
+
+ 
+
+pc
+
+p
+
+0
+
+ 
+
+pc=0 (ou très petit) 
+
+p
+
+Importance de la topologie
+
+du réseau de contacts
+
+Stratégies de défense (vaccination)
+
+Graphes homogènes:
+
+Graphes hétérogènes
+
+La vaccination aléatoire
+est efficace
+
+Nécessité de nouvelles 
+stratégies de vaccination
+(ciblées)
+
+ 
+
+ 
+
+Un autre exemple de modèle
+de propagation d’une épidémie
+
+c
+
+b
+
+a
+
+Ville A
+
+ 
+
+ 
+
+d
+
+Ville B
+
+Un autre exemple;
+
+propagation d’une épidémie
+
+c
+
+d
+
+a
+
+Ville A
+
+Ville B
+
+=>Importance du réseau de transport !
+
+ 
+
+b
+
+ 
+
+Une épidémie ancienne
+
+Peste Noire
+Peste Noire
+14ème siècle
+14ème siècle
+
+Dec. 1350
+
+June 1350
+
+Dec. 1349
+
+Dec. 1347
+
+June 1349
+
+Dec. 1348
+
+June 1348
+
+Dec. 1347
+
+Dec. 1347
+
+Dec. 1350
+
+ 
+
+ 
+
+Une épidémie récente
+
+SARS
+SARS
+
+Nov. 2002
+
+Mar. 2003
+
+ 
+
+ 
+
+ Modèles de propagation globale
+
+description à plusieurs niveaux :
+
+-propagation 
+à l’intérieur 
+de chaque ville
+
+-voyage 
+(transport aérien)
+ entre les villes
+
+Ravchev, Longini. Mathematical Biosciences (1985)
+ 
+
+ 
+
+Epidémies: Modèle
+
+modèle “compartimental”  +  transport aérien 
+Susceptible
+
+NN55
+
+NN22
+
+NN33
+
+NN00
+
+NN11
+
+NN44
+
+Infected
+
+Recovered
+
+Modèle de type réaction-diffusion sur réseau
+ 
+
+ 
+
+Réseau de transport aérien
+
+Zones urbaines
+
++
+
+Flux 
+
+Réseau mondial de transport aérien
+Réseau mondial de transport aérien
+
+ Base de données IATA
+  V = 3100 aéroports
+  E = 17182 liens pondérés
+  wij   #sièges / jour
+
+> 99% du trafic total
+
+ Nj   population des zones urbaines
+
+ 
+
+ 
+
+Une fois le modèle construit:
+
+ caractérisation du réseau de transport
+(essentiellement: transport aérien)
+ reproduire a posteriori le déroulement d’une épidémie
+pour valider le modèle
+ étude, dans le cadre du modèle, de l’influence des 
+différents niveaux de complexité du réseau
+ étude de la prévisibilité
+ étude de scénarios de propagation
+ étude de mesures d’endiguement
+
+ 
+
+ 
+
+Application: l’épidémie de SRAS
+
+City a
+
+City i
+
+City j
+
+Transport aérien
+
+ 
+
+ 
+
+Prédictions…
+
+ 
+
+ 
+
+Prédictions…
+
+ 
+
+ 
+
+Quantitativement
+
+ 
+
+NB: populations de millions de personnes!!
+
+ 
+
+Etonnant?
+
+• Prédictions correctes pour 204 pays sur 220
+• Correct quantitativement
+
+Malgré la complexité en 
+jeu: 
+-bruit stochastique
+-réseau complexe
+
+ 
+
+ 
+
+L’avantage de la complexité…
+
+• Deux effets opposés
+
+• Nombreux chemins (hétérogénéité des degrés)
+• Sélection par le trafic (accumulation hétérogène du trafic sur 
+
+des chemins spécifiques)
+
+• Définition de chemins épidémiques par les 
+
+connections dominant la propagation
+
+ 
+
+ 
+
+Les chemins de propagation
+
+ 
+
+ 
+
+Développements
+
+• Intégration de détails supplémentaires dans le 
+
+modèle: 
+
+• autres modes de transport, à l’échelle locale
+
+     www.gleamviz.org
+   modèle numérique modulable de propagation au 
+
+niveau mondial, utilisé pendant la pandémie de 
+H1N1
+
+• Hétérogénéité des habitudes de voyage
+• …
+
+• Réponse des individus à une crise: 
+
+changement de comportement, etc… 
+
+ 
+
+ 
+
+http://www.gleamviz.org
+
+ 
+
+ 
+
+ 
+
+ 
+
+http://www.gleamviz.org
+
+comparison 
+with data
+
+http://www.gleamviz.org
+
+Perspectives
+
+• Réseaux couplés, interdépendants
+• Intégration 
+
+(ex: réseaux sociaux en ligne- hors ligne)
+• Réseaux à plusieurs échelles 
+
+(ex: www.gleamviz.org)
+
+• Réseaux dynamiques
+
+(ex: réseaux de transport, réseaux sociaux…)
+
+ 
+
+ 
+
+Réseaux dynamiques
+
+•Quelle dynamique?
+•Comment la caractériser?
+•Modèles?
+•Conséquences sur les phénomènes dynamiques?
+(e.g. propagation d’épidémies, d’informations…)
+
+Point fondamental= données empiriques!!!
+
+ 
+
+ 
+
+Dynamique des réseaux sociaux
+
+• email (Eckmann et al 2004)
+
+• Téléphones mobiles (Onnela et al, 2007, Gonzalez et al 2009)
+
+– Localisation
+– Mobilité
+– Réseaux cumulés
+
+• Réseaux d’interaction
+
+– Bluetooth, wifi (O’ Neill et al 2006; Scherrer et al 2008; Eagle, 
+
+Pentland 2009)
+
+– MIT Reality mining project (sociometric badges)
+– MOSAR european project (hôpitaux)
+
+ 
+
+Pas de projet de collecte systématique de données à 
+
+grande échelle dans des environnements divers
+
+ 
+
+Le projet SocioPatterns
+
+Quelles sont les propriétés statistiques et  
+dynamiques du réseau de contact d’individus en 
+interaction sociale?
+
+Haute résolution spatiale (~ m) et temporelle (<min)
+
+Détection de contacts
+
+badges RFID actifs, 2.4 Ghz
+
+Distance faible (~1m):
+Echange de paquets à 
+très faible puissance
+
+“42 a vu 10”
+
+10
+
+42
+
+Détection de contacts
+
+• Courte distance (~1 à 2m)
+• Détection de situations de face à face
+• Détection statistique => résolution de 
+20s
+• Petit
+• Possible à grande échelle
+
+Déploiements de l’infrastructure
+‣Conférences:
+‣Epiwork (Turin, octobre 2008)
+‣25C3 (Berlin, décembre 2008)
+‣European Semantic Web Conference (Heraklion, juin 2009, mai 2010)
+‣SFHH Congress (Nice, juin 2009)
+‣ACM Hypertext (Turin, juin 2009)
+‣Musée:
+
+Infectious exhibition, Science Gallery, Dublin (mi-avril-mi juillet)
+
+         => flux de visiteurs 
+‣Ecole (Lyon, octobre 2009)
+‣Hôpitaux (Rome, novembre 2009, Lyon, décembre 2010)
+‣Incubateur de start-up (Italie, juillet 2010)
+
+Expérience de détection de contacts
+
+Etude pilote: conférence à ISI, Turin, Italie
+
+Détection des interactions sociales
+
+Visualisation
+
+Hôpital
+
+Hôpital
+
+12 jours
+~250 personnes
+
+Text
+
+docteurs
+
+enfants
+
+infirmièr
+
+es
+
+auxiliaire
+
+s
+
+61
+
+parents
+
+Matrices de contact
+
+N
+
+D
+
+A
+
+C
+
+P
+
+L. Isella et al., PLoS ONE 6(2), e17144 (2011)
+
+Science Gallery, 
+Dublin
+2 mois
+~30,000 personnes
+
+http://www.sciencegallery.com/infectious
+
+Musée
+
+ 
+
+ 
+
+http://www.sociopatterns.org/gallery/infectious-sociopatterns-poster
+
+ 
+
+ 
+
+Ecole
+
+ 
+
+ 
+
+Réseaux sociaux réels vs en-ligne
+
+Réseaux sociaux en ligne
+
+•Feedback pour les participants
+•Suggestions de nouvelles relations en ligne
+•Comparaison des réseaux 
+
+•Plus de contacts réels entre “amis” en ligne
+•Contacts plus longs entre “amis” en ligne
+•Prédiction des liens en ligne
+
+Perspectives/travail en cours
+
+‣ contextes très divers
+ conférences, bureaux, musée, école, hôpital
+    => analyse des données
+‣ dynamiques humaines
+‣ réseaux dynamiques
+‣caractérisation, définition de nouveaux outils
+‣modèles 
+‣processus dynamiques, en particulier: épidémiologie
+‣ réseaux sociaux, lien avec réseaux en-ligne
+‣ nouvelle génération de badges
+ => déploiements longue durée
+
+• http://www.cpt.univ-mrs.fr/~barrat
+• http://sites.google.com/site/cxnets
+• http://www.sociopatterns.org
+
+ 
+
+ 
+
+(Recent) collaborators
+
+SocioPatterns project:
+
+Ciro Cattuto (ISI, Turin)
+Wouter Van den Broeck (ISI, Turin)
+
+Vittoria Colizza (ISI, Turin)
+Lorenzo Isella (ISI, Turin)
+André Panisson (ISI, Turin & Politecnico, Turin)
+Jean-François Pinton (ENS Lyon)
+Anna Machens (CPT, Marseille)
+Juliette Stehlé (CPT, Marseille)
+Arnab Chatterjee (CPT, Marseille)
+Alessandro Vespignani (Indiana University & ISI)
+
+

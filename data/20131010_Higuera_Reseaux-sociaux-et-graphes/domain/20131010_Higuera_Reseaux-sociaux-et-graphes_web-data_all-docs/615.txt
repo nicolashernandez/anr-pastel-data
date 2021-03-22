@@ -1,0 +1,1601 @@
+https://www.info.ucl.ac.be/~yde/Papers/jfpc2007_iso.pdf
+
+Actes JFPC 2007
+
+Filtrage pour l’isomorphisme de sous-graphe
+
+S. Zampelli(1) Y. Deville(1) C. Solnon(2) S. Sorlin(2) P. Dupont(1)
+
+Department of Computing Science and Engineering, Place Sainte-Barbe 2
+
+Universit´e catholique de Louvain(1)
+
+1348 Louvain-la-Neuve (Belgium)
+
+{sz,yde,pdupont}@info.ucl.ac.be
+
+LIRIS, CNRS UMR 5205, Universit´e de Lyon I(2)
+
+43 Bd du 11 Novembre
+
+69622 Villeurbanne Cedex (France)
+
+{christine.solnon,sebastien.sorlin}@liris.cnrs.fr
+
+R´esum´e
+
+On introduit ici un algorithme de ﬁltrage d´edi´e au
+probl`eme de l’isomorphisme de sous-graphe consistant
+`a d´ecider s’il existe une copie d’un graphe motif dans
+un graphe cible. L’id´ee principale est d’´etiqueter chaque
+sommet en fonction de ses relations avec les autres som-
+mets du graphe. Cet ´etiquetage peut ˆetre renforc´e en
+ajoutant des informations sur les ´etiquettes des som-
+mets voisins de chaque sommet. Un tel renforcement
+peut ˆetre eﬀectu´e it´erativement jusqu’`a l’obtention d’un
+point ﬁxe. On d´eﬁnit un ordre partiel sur les ´etiquettes
+aﬁn d’exprimer leur compatibilit´e pour l’isomorphisme de
+sous-graphe. Cet ordre partiel est utilis´e pour ﬁltrer les
+domaines. Les r´esultats exp´erimentaux montrent que ce
+ﬁltrage permet de r´esoudre plus eﬃcacement le probl`eme
+de l’isomorphisme de sous-graphe que des approches d´e-
+di´ees, pour des instances “scale free”.
+
+1 Introduction
+
+Les graphes sont utilis´es dans de nombreuses ap-
+plications pour repr´esenter des objets structur´es, e.g.,
+des mol´ecules, des images, ou des r´eseaux biologiques.
+Dans beaucoup de ces applications, on recherche une
+copie d’un graphe motif dans un graphe cible [3]. Ce
+probl`eme, appel´e probl`eme d’isomorphisme de sous-
+graphe, est NP-complet dans le cas g´en´eral.
+
+Il existe des algorithmes d´edi´es `a ce probl`eme,
+comme par exemple [18, 4]. Cependant, ces algo-
+rithmes d´edi´es sont diﬃcilement utilisables pour r´e-
+soudre des probl`emes plus g´en´eraux, comportant des
+
+contraintes suppl´ementaires, comme par exemple celui
+introduit dans [20].
+
+Une alternative ´el´egante `a ces approches d´edi´ees r´e-
+side dans la Programmation Par Contraintes (PPC),
+qui
+fournit un cadre g´en´erique pour la r´esolution
+de n’importe quel probl`eme formul´e en termes de
+contraintes. En eﬀet, le probl`eme d’isomorphisme de
+sous-graphe peut ˆetre ais´ement formul´e sous la forme
+de contraintes [15, 16]. Aﬁn de rendre la PPC comp´e-
+titive avec les approches d´edi´ees `a ce probl`eme, [11] a
+introduit une contrainte globale, et un algorithme de
+ﬁltrage associ´e, combin´e avec des contraintes globales
+de diﬀ´erence. [20] a ´etendu ce travail au probl`eme plus
+g´en´eral d’isomorphisme de sous-graphe approxim´e, et
+a montr´e que la PPC est comp´etitive avec les ap-
+proches d´edi´ees. La contrainte globale de [11] est algo-
+rithmiquement globale [2] : elle exploite un ensemble de
+contraintes binaires (exprimant des contraintes d’ap-
+pariement d’arˆetes) de fa¸con globale aﬁn d’´etablir la
+consistance d’arc plus eﬃcacement ; cependant, elle
+´etablit la mˆeme consistance que si l’on avait consid´er´e
+l’ensemble original de contraintes binaires.
+
+Contribution. On introduit ici un nouvel algorithme
+de ﬁltrage pour le probl`eme d’isomorphisme de sous-
+graphe qui exploite la structure globale du graphe aﬁn
+d’´etablir une consistance partielle plus forte. Ce travail
+est inspir´e de la proc´edure de raﬃnement de partition
+utilis´ee dans Nauty [12] et Saucy [5] pour le probl`eme
+d’automorphisme de graphes : l’id´ee est d’´etiqueter
+
+chaque sommet par une propri´et´e invariante, comme
+par exemple le degr´e des sommets, et d’´etendre it´erati-
+vement ces ´etiquettes en consid´erant les ´etiquettes des
+sommets voisins. Un ´etiquetage similaire est ´egalement
+utilis´e dans [17] pour d´eﬁnir un algorithme de ﬁltrage
+pour le probl`eme de l’isomorphisme de graphes, l’id´ee
+´etant de supprimer du domaine d’une variable asso-
+ci´ee `a un sommet v tout sommet ayant une ´etiquette
+diﬀ´erente de celle de v. L’extension d’un tel ﬁltrage
+bas´e sur les ´etiquettes au probl`eme d’isomorphisme de
+sous-graphe n´ecessite la d´eﬁnition d’un ordre partiel
+sur les ´etiquettes exprimant leur compatibilit´e pour le
+probl`eme de l’isomorphisme de sous-graphe, cet ordre
+partiel ´etant alors utilis´e pour supprimer du domaine
+d’une variable associ´ee `a un sommet v tout sommet
+ayant une ´etiquette non compatible avec celle de v.
+
+Organisation de l’article. On pr´esente en 2 le pro-
+bl`eme de l’isomorphisme de sous-graphe, et sa mod´e-
+lisation en PPC. On d´ecrit en 3 le cadre th´eorique de
+notre ﬁltrage : on introduit la notion d’´etiquetage, et
+on montre comment utiliser ces ´etiquetages pour ﬁltrer
+les domaines ; on montre ensuite comment renforcer
+un ´etiquetage en ajoutant des informations sur les ´eti-
+quettes des voisins, ce renforcement pouvant ˆetre it´er´e
+jusqu’`a l’obtention d’un point ﬁxe. On discute ensuite
+en 4 de la mise-en-œuvre de cet algorithme de ﬁltrage,
+et on propose deux algorithmes pour calculer eﬃcace-
+ment l’ordre partiel sur les ´etiquettes : un algorithme
+exact et un algorithme approch´e, dont la complexit´e en
+temps est inf´erieure. On donne ensuite en 5 quelques
+r´esultats exp´erimentaux, montrant que cet algorithme
+de ﬁltrage est plus eﬃcace que les algorithmes d´edi´es
+pour les instances “scale free”.
+
+2 Isomorphisme de sous-graphe
+
+2.1 D´eﬁnitions
+
+Un graphe non orient´e G = (S, A) est constitu´e d’un
+ensemble S de sommets et d’un ensemble A ⊆ S × S
+d’arˆetes, o`u une arˆete (u, v) est une paire de sommets.
+Un probl`eme d’isomorphisme de sous-graphe partiel
+entre un graphe motif Gm = (Sm, Am) et un graphe
+cible Gc = (Sc, Ac) consiste `a d´ecider s’il existe une
+injection f : Sm → Sc telle que
+∀(u, v) ∈ Sm × Sm, (u, v) ∈ Am ⇒ (f(u), f(v)) ∈ Ac
+Notons que l’on impose de retrouver toutes les arˆetes
+du graphe motif dans le graphe cible, mais qu’il est
+possible que des arˆetes du graphe cible ne se retrouvent
+pas dans le graphe motif.
+
+Dans un probl`eme d’isomorphisme de sous-graphe
+induit, on impose une ´equivalence stricte entre les
+
+arˆetes des sommets appari´es,
+Sm, (u, v) ∈ Am ⇔ (f(u), f(v)) ∈ Ac.
+
+i.e., ∀(u, v) ∈ Sm ×
+
+Dans la suite de cet article, nous consid´erons le pro-
+bl`eme de l’isomorphisme de sous-graphe partiel, que
+nous appellerons “probl`eme d’isomorphisme de sous-
+graphe” aﬁn d’all´eger la lecture. La fonction f sera
+appel´ee fonction d’isomorphisme de sous-graphe.
+
+Dans la suite, on supposera que l’instance du pro-
+bl`eme d’isomorphisme de sous-graphe `a r´esoudre est
+d´eﬁnie par le graphe motif Gm = (Sm, Am) et le
+graphe cible Gc = (Sc, Ac). On d´eﬁnit ´egalement
+S = Sm ∪ Sc, A = Am ∪ Ac, sm = #Sm, sc = #Sc,
+dm et dc le degr´e maximal des graphes Gm et Gc, et
+d = max(dm, dc). L’ensemble des nombres naturels est
+d´enot´e par N.
+
+2.2 Mod´elisation en PPC
+
+Un probl`eme d’isomorphisme de sous-graphe peut
+ˆetre facilement formul´e en termes de contraintes [15,
+16, 11]. Une variable xu est associ´ee `a chaque som-
+met u du graphe motif, son domaine ´etant l’ensemble
+des sommets du graphe cible. Une premi`ere contrainte
+globale de diﬀ´erence (Alldiﬀ) [14] contraint la fonc-
+tion d’isomorphisme `a ˆetre injective. L’appariement
+des arˆetes est assur´e par un ensemble de contraintes
+binaires, appel´ees c2 dans [11] : ∀(u, v) ∈ Sm × Sm,
+
+c2(xu, xv) ≡ ((u, v) ∈ Am ⇒ (xu, xv) ∈ Ac)
+
+Aﬁn de r´eduire la complexit´e en temps pour ´etablir
+la consistance d’arc sur cet ensemble de contraintes
+binaires, [11] a introduit une contrainte globale. Cette
+contrainte est algorithmiquement globale, dans le sens
+o`u elle ´etablit la mˆeme consistance que l’ensemble ori-
+ginal de contraintes binaires, mais plus eﬃcacement.
+[11] a ´egalement propos´e d’ajouter des contraintes re-
+dondantes, appel´ees c3, pour contraindre le nombre
+de sommets disponibles dans l’union des domaines des
+voisins de xu dans le graphe cible `a ˆetre sup´erieur ou
+´egal au nombre de voisins de u dans le graphe motif.
+
+3 Cadre th´eorique
+
+On introduit ici un nouvel algorithme de ﬁltrage
+pour l’isomorphisme de sous-graphe ; on montrera
+dans la section suivante comment ce ﬁltrage peut ˆetre
+mis en œuvre en pratique.
+
+3.1 Etiquetage consistant pour l’isomorphisme de
+
+sous-graphe
+
+D´eﬁnition 1. Un ´etiquetage l est d´eﬁni par un triplet
+(L,(cid:22), α) tel que
+
+– L est un ensemble d’´etiquettes pouvant ˆetre asso-
+
+ci´ees aux sommets ;
+
+– (cid:22)⊆ L × L est un ordre partiel sur L ;
+– α : S → L est une application aﬀectant une ´eti-
+
+quette α(v) `a chaque sommet v.
+
+Un ´etiquetage induit une relation de compatibilit´e
+entre les sommets du graphe motif et ceux du graphe
+cible.
+
+D´eﬁnition 2. L’ensemble des couples compatibles de
+sommets induit par un ´etiquetage l = (L,(cid:22), α) est
+d´eﬁni par CCl = {(u, v) ⊆ Sm × Sc | α(u) (cid:22) α(v)}
+
+Cette relation de compatibilit´e peut ˆetre utilis´ee
+
+pour ﬁltrer les domaines de la fa¸con suivante :
+
+Filtre(l)
+
+Pour chaque u ∈ Sm faire :
+
+D(xu) ← D(xu) ∩ {v ∈ Sc | (u, v) ∈ CCl}
+
+En supposant que la comparaison de deux ´etiquettes
+se fasse en temps constant, la complexit´e de Filtre
+est en O(sm.sc).
+
+Notre but est de trouver un ´etiquetage qui ﬁltre
+le plus fortement possible les domaines des variables,
+sans pour autant supprimer de solutions, i.e., si un
+sommet v du graphe motif peut ˆetre appari´e `a un som-
+met u du graphe cible, alors l’´etiquette de v doit ˆetre
+compatible avec celle de u. Cette propri´et´e est appel´ee
+consistance d’isomorphisme de sous-graphe.
+
+D´eﬁnition 3. Un ´etiquetage l est consistant pour
+l’isomorphisme de sous-graphe (IS-consistant) ssi pour
+toute fonction d’isomorphisme de sous-graphe f, on a :
+∀v ∈ Sm, (v, f(v)) ∈ CCl.
+
+Pour les probl`emes d’isomorphisme et d’automor-
+phisme de graphes, comme par exemple dans Nauty
+[12], un tel ´etiquetage est appel´e un “invariant”. Dans
+ce cas, l’ordre partiel est remplac´e par une relation
+d’´equivalence : deux sommets sont compatibles s’ils
+ont la mˆeme ´etiquette.
+
+De nombreuses propri´et´es des graphes, qui sont
+“invariantes” pour l’isomorphisme de sous-graphe,
+peuvent ˆetre utilis´ees pour d´eﬁnir des ´etiquetages IS-
+consistants. Par exemple, les trois ´etiquetages suivants
+sont IS-consistants :
+– ldeg = (N,≤, deg) o`u deg est la fonction qui re-
+tourne le degr´e des sommets ;
+– ldistance = (N,≤, distancek) o`u distancek est la
+fonction qui retourne le nombre de sommets qui
+sont atteignables par un chemin de longueur inf´e-
+rieure `a k ;
+– lclique = (N,≤, cliquek) o`u cliquek est la fonc-
+tion qui retourne le nombre de cliques de taille k
+contenant le sommet.
+
+Fig. 1 – Instance du probl`eme d’isomorphisme de
+sous-graphe.
+
+Exemple. Consid´erons par exemple l’instance de pro-
+bl`eme d´ecrite dans la ﬁgure 1. Notons que cette ins-
+tance n’a pas de solution car Gm ne peut ˆetre appari´e
+`a un sous-graphe de Gc. La ﬁgure 2 d´ecrit l’´etiquetage
+ldeg = (N,≤, deg) pour ces graphes.
+
+3.2 Renforcement d’´etiquetages
+
+Nous proposons de commencer `a partir d’un ´etique-
+tage IS-consistant basique, comme par exemple l’´eti-
+quetage ldeg d´eﬁni pr´ec´edemment, et de le renforcer
+it´erativement. La “force” d’un ´etiquetage est d´eﬁnie
+par rapport `a l’ensemble des couples compatibles in-
+duits.
+
+D´eﬁnition 4. Etant donn´es deux ´etiquetages l et l0 :
+- l0 est strictement plus fort que l ssi CCl0 ⊂ CCl,
+- l0 est ´equivalent `a l ssi CCl0 = CCl.
+
+Un ´etiquetage plus fort permet un meilleur ﬁltrage
+
+puisqu’il contient moins de couples compatibles.
+
+Pour renforcer un ´etiquetage, l’id´ee est d’´etendre
+l’´etiquette de chaque sommet en ajoutant des infor-
+mations sur les ´etiquettes de ses voisins. Comme plu-
+sieurs voisins peuvent avoir une mˆeme ´etiquette, cette
+information est un multi-ensemble. Nous utiliserons les
+notations suivantes pour ces multi-ensembles.
+
+D´eﬁnition 5. Etant donn´e un ensemble de r´ef´e-
+rence A, un multi-ensemble est une fonction m :
+A → N, telle que m(a) est la multiplicit´e (i.e., le
+nombre d’occurrences) de l’´el´ement a dans m. Le
+multi-ensemble m peut ´egalement ˆetre repr´esent´e par
+le “bag” {a0, . . . , a0, a1, . . .} o`u chaque ´el´ement est r´e-
+p´et´e autant de fois que d’occurrences.
+
+Par exemple, le multi-ensemble m contenant 3 oc-
+currences de a, 2 occurrences de b et 1 occurrence de
+c est d´eﬁni par m(a)=3, m(b)=2, m(c)=1 et, ∀x 6∈
+{a, b, c}, m(x)=0 ; ce multi-ensemble peut ´egalement
+ˆetre repr´esent´e par {a, a, a, b, b, c}.
+
+ACBDEFGGraphe cible G123456Graphe motif GmcL’´etiquetage ldeg = (N,≤, deg) aﬀecte les ´etiquettes suivantes aux sommets des graphes de la ﬁgure 1 :
+
+deg(A) = deg(B) = deg(D) = deg(2) = deg(4) = 4
+deg(C) = deg(E) = deg(F ) = deg(G) = deg(1) = deg(3) = 3
+deg(5) = deg(6) = 2
+
+Par cons´equent, l’ensemble des couples compatibles induit par cet ´etiquetage est
+
+CCldeg = {(u, v) | u ∈ {2, 4}, v ∈ {A, B, D}}
+
+∪ {(u, v) | u ∈ {1, 3, 5, 6}, v ∈ {A, B, C, D, E, F, G}}
+
+Cet ensemble de couples compatibles permet `a Filtre(ldeg) de supprimer les valeurs C, E, F et G des domaines
+des variables associ´ees aux sommets 2 et 4.
+
+Fig. 2 – Etiquetage ldeg = (N,≤, deg) pour les sommets des graphes de la ﬁgure 1
+
+Etant donn´e un ordre partiel d´eﬁni sur un ensemble
+A, on ´etend cet ordre partiel aux multi-ensembles d´e-
+ﬁnis sur A comme suit.
+
+D´eﬁnition 6. Etant donn´es deux multi-ensembles m
+et m0 d´eﬁnis sur un ensemble A, et un ordre partiel
+(cid:22)⊆ A× A, on d´eﬁnit m (cid:22) m0 ssi il existe une injection
+t : m → m0 telle que ∀ai ∈ m, ai (cid:22) t(ai).
+Autrement dit, m (cid:22) m0 ssi pour chaque occur-
+rence d’´el´ement de m il existe une occurrence d’´el´e-
+ment diﬀ´erente de m0 qui est plus grande ou ´egale.
+Par exemple, si on consid`ere l’ordre classique sur N,
+on a {3, 3, 4} (cid:22) {2, 3, 5, 5}, tandis que {3, 3, 4} n’est
+pas comparable avec {2, 5, 6}. Notons que la compa-
+raison de deux multi-ensembles n’est pas triviale dans
+le cas g´en´eral, notamment si la relation d’ordre sur
+l’ensemble de d´epart A n’est pas totale. Ce point est
+abord´e dans la section suivante.
+
+Nous pouvons maintenant d´eﬁnir la proc´edure de
+
+renforcement d’´etiquetage.
+
+D´eﬁnition 7. Etant donn´e un ´etiquetage l = (L,(cid:22)
+, α), l’´etiquetage renforc´e de l est l’´etiquetage l0 =
+(L0,(cid:22)0, α0) tel que :
+
+– chaque ´etiquette de L0 est compos´ee d’une ´eti-
+quette de L suivie d’un multi-ensemble d’´eti-
+quettes de L, i.e., L0 = L · (L → N) ;
+– la fonction d’´etiquetage α0 ´etend chaque ´etiquette
+α(v) par le multi-ensemble des ´etiquettes des voi-
+sins de v, i.e., α0(v) = α(v) · m o`u ∀li ∈ L,
+m(li) = #{u | (u, v) ∈ A ∧ α(u) = li} ;
+– l’ordre partiel sur les ´etiquettes ´etendues de L0 est
+d´eﬁni par l1 · m1 (cid:22)0 l2 · m2 ssi l1 (cid:22) l2 et m1 (cid:22) m2.
+Le th´eor`eme suivant montre que l’´etiquetage ren-
+forc´e d’un ´etiquetage IS-consistant est ´egalement IS-
+consistant et est plus fort que (ou ´equivalent `a) l’´eti-
+quetage initial.
+
+Th´eor`eme 1. Soient deux ´etiquetages l = (L,(cid:22), α)
+et l0 = (L0,(cid:22)0, α0) tels que l soit IS-consistant et l0 soit
+l’´etiquetage renforc´e de l.
+(i) l0 est aussi IS-consistant
+(ii) l0 est plus fort que (ou ´equivalent `a) l.
+
+(i) : Soient une fonction d’isomorphisme de
+Preuve.
+sous-graphe f et un sommet v ∈ Sm. Il s’agit de
+montrer que α0(v) (cid:22)0 α0(f(v)), autrement dit α(v) (cid:22)
+α(f(v)) et m (cid:22) m0, o`u m (resp. m0) est le multi-
+ensemble contenant les ´etiquettes des voisins de v
+dans Gm (resp. des voisins de f(v) dans Gc). On a
+α(v) (cid:22) α(f(v)) car l est IS-consistant. On a m (cid:22) m0
+car m0 contient, pour chaque voisin u de v,
+l’´eti-
+quette α(f(u)) du sommet appari´e `a u par la fonc-
+tion d’isomorphisme de sous-graphe f ; comme l est
+IS-consistant, α(u) (cid:22) α(f(u)) et donc m (cid:22) m0.
+(ii) : C’est une cons´equence directe de la d´eﬁnition
+7 qui ´etend l’ordre partiel aux ´etiquettes ´etendues :
+α(u) (cid:22) α(v) est une condition n´ecessaire pour avoir
+α0(u) (cid:22) α0(v). (cid:3)
+
+Exemple. Consid´erons de nouveau l’instance de la ﬁ-
+gure 1, et l’´etiquetage ldeg d´eﬁni en 3.1. L’´etiquetage
+renforc´e de ldeg est d´ecrit dans la ﬁgure 3.
+
+3.3 Renforcement it´eratif d’´etiquetages
+
+L’id´ee est de renforcer it´erativement les ´etiquettes,
+
+en partant d’un ´etiquetage IS-consistant l donn´e.
+
+D´eﬁnition 8. Soit un ´etiquetage IS-consistant initial
+l = (L,(cid:22), α). On d´eﬁnit la suite d’´etiquetages IS-
+consistants lk = (Lk,(cid:22)k, αk) :
+
+– l0 = l
+– lk+1 = ´etiquetage renforc´e de lk (k ≥ 0)
+
+L’´etiquetage renforc´e de ldeg est l’´etiquetage l0 = (L0,(cid:22)0, α0) d´ecrit ci-dessous. Notons que l’on ne mentionne
+que les relations de compatibilit´e li (cid:22)0 lj pour lesquelles li est une ´etiquette du graphe motif et lj une ´etiquette
+du graphe cible, les autres relations n’´etant d’aucune utilit´e pour le ﬁltrage.
+
+α0(A) = 4 · {3, 3, 4, 4}
+α0(B) = α0(D) = 4 · {3, 3, 3, 4}
+α0(2) = α0(4) = 4 · {2, 2, 3, 3} (cid:22)0 4 · {3, 3, 4, 4} et 4 · {3, 3, 3, 4}
+
+α0(C) = 3 · {4, 4, 4}
+α0(E) = α0(F ) = α0(1) = α0(3) = 3 · {3, 4, 4}
+α0(G) = 3 · {3, 3, 4}
+
+α0(5) = α0(6) = 2 · {4, 4}
+
+(cid:22)0 4 · {3, 3, 4, 4}, 3 · {4, 4, 4} et 3 · {3, 4, 4}
+(cid:22)0 4 · {3, 3, 4, 4}, 3 · {4, 4, 4} et 3 · {3, 4, 4}
+
+Ainsi, l’ensemble des couples compatibles induits par cet ´etiquetage est
+
+CCl0 = {(u, v) | u ∈ {2, 4}, v ∈ {A, B, D}} ∪ {(u, v) | u ∈ {1, 3, 5, 6}, v ∈ {A, C, E, F}}
+
+Cet ensemble de couples compatibles permet `a Filtre(l0) de supprimer les valeurs B, D et G des domaines des
+variables associ´ees aux sommets 1, 3, 5 et 6.
+
+Fig. 3 – Renforcement de l’´etiquetage ldeg pour l’instance de la ﬁgure 1
+
+Un ﬁltrage th´eorique peut ˆetre imagin´e `a partir de
+cette suite. Partant d’un ´etiquetage IS-consistant ini-
+tial l = l0, on calcule it´erativement lk+1 `a partir
+de lk, et on applique la proc´edure Filtre(lk+1) jus-
+qu’`a ce qu’un domaine devienne vide (indiquant ainsi
+que l’instance n’a pas de solution), ou bien jusqu’`a ce
+qu’une condition d’arrˆet soit v´eriﬁ´ee.
+
+Une condition d’arrˆet peut ˆetre l’atteinte d’un point
+ﬁxe,
+i.e., une it´eration `a partir de laquelle les r´e-
+´etiquetages suivants ne renforceront plus l’´etiquetage.
+On montre dans [22] que ce point ﬁxe est atteint
+lorsque `a la fois l’ensemble des couples compatibles
+induits et le nombre d’´etiquettes diﬀ´erentes sont in-
+chang´es par le r´e-´etiquetage. Ce point ﬁxe est atteint
+en au plus O(sm.sc) it´erations.
+
+Exemple. Consid´erons de nouveau l’instance de la
+ﬁgure 1, et supposons que la suite d’´etiquetages IS-
+consistants est commenc´ee `a partir de l0 = ldeg comme
+d´eﬁni en 3.1. La ﬁgure 4 montre que le renforcement
+it´er´e de cet ´etiquetage initial permet de d´etecter l’in-
+consistance de cette instance en 2 it´erations.
+
+Notons cependant que pour d’autres instances, la
+proc´edure de ﬁltrage peut ne r´eduire aucun domaine.
+C’est le cas en particulier si l’´etiquetage initial est ldeg,
+et si le degr´e maximal du graphe motif est inf´erieur ou
+´egal au degr´e minimal du graphe cible, ou plus g´en´era-
+lement, si l’´etiquetage initial est tel que toute ´etiquette
+associ´ee `a un sommet du graphe motif est inf´erieure ou
+´egale `a toute ´etiquette associ´ee `a un sommet du graphe
+cible. Dans ce cas, chaque sommet du graphe motif est
+compatible avec tous les sommets du graphe cible de
+sorte qu’aucun domaine n’est r´eduit.
+
+3.4 Filtrage dans le contexte d’une recherche par
+
+s´eparation et propagation
+
+Nous introduisons ici diﬀ´erentes optimisations qui
+peuvent ˆetre apport´ees dans le contexte d’une re-
+cherche par s´eparation et propagation, quand une va-
+leur est aﬀect´ee `a une variable `a chaque ´etape de la
+recherche.
+
+Au d´epart, le domaine d’une variable xu (associ´ee `a
+un sommet u du graphe motif) contient l’ensemble des
+sommets du graphe cible, i.e., D(xu) = Sc. Si au cours
+de la recherche un sommet du graphe cible n’appar-
+tient `a aucun domaine D(xu), alors ce sommet peut
+ˆetre ignor´e. Plus pr´ecis´ement, la cible `a consid´erer est
+le sous-graphe de Gc induit par les sommets apparais-
+sant dans les domaines des variables xu.
+
+c = (S0
+
+c = ∪i∈Sm D(xi) et A0
+
+D´eﬁnition 9. A chaque ´etape de la recherche,
+le
+graphe cible courant est le graphe G0
+c, A0
+c) tel
+c = {(u, v) ∈ Ac | u, v ∈ S0
+c}
+que S0
+Une premi`ere optimisation est faite lorsque les
+graphes cibles courants issus de deux ´etapes succes-
+sives de la recherche sont isomorphes : ´etant donn´e
+que le graphe motif ne change pas, il n’est pas n´eces-
+saire d’ex´ecuter de nouveau l’algorithme de ﬁltrage.
+Notons que pour tester si le graphe cible courant n’a
+pas chang´e, il suﬃt de tester si le nombre de sommets
+a chang´e.
+
+Une seconde optimisation est faite lorsqu’`a une
+´etape de la recherche la plus grande ´etiquette du
+graphe motif est inf´erieure ou ´egale `a la plus petite
+´etiquette du graphe cible : dans ce cas, chaque som-
+met du graphe motif a une ´etiquette compatible avec
+les ´etiquettes de tous les sommets du graphe cible de
+
+Apr`es la premi`ere it´eration, l’´etiquetage renforc´e de l’´etiquetage l0 d´ecrit dans la ﬁgure 3 est l’´etiquetage l1 =
+(L1,(cid:22)1, α1) d´ecrit ci-dessous (aﬁn de faciliter la lecture, nous avons renomm´e les ´etiquettes).
+
+α1(A) = 4 · {3, 3, 4, 4}
+α1(B) = α1(D) = 4 · {3, 3, 3, 4}
+α1(2) = α1(4) = 4 · {2, 2, 3, 3}
+
+α1(C) = 3 · {4, 4, 4}
+α1(E) = α1(F ) = α1(1) = α1(3) = 3 · {3, 4, 4}
+α1(G) = 3 · {3, 3, 4}
+
+α1(5) = α1(6) = 2 · {4, 4}
+
+renomm´e en m1
+renomm´e en m2
+renomm´e en m3 (cid:22)1 {m1, m2}
+renomm´e en m4
+renomm´e en m5 (cid:22)1 {m1, m4, m5}
+renomm´e en m6
+renomm´e en m7 (cid:22)1 {m1, m4, m5}
+
+L’´etiquetage renforc´e de l1 est l’´etiquetage l2 = (L2,(cid:22)2, α2) tel que
+
+α2(A) = m1 · {m2, m2, m4, m5}
+α2(B) = m2 · {m1, m4, m5, m6}
+α2(C) = m4 · {m1, m2, m2}
+α2(D) = m2 · {m1, m4, m5, m5}
+α2(E) = m5 · {m1, m2, m6}
+α2(F ) = m5 · {m2, m2, m6}
+α2(G) = m6 · {m2, m5, m5}
+α2(1) = α2(3) = m5 · {m3, m3, m5}
+α2(2) = α2(4) = m3 · {m5, m5, m7, m7}
+α2(5) = α2(6) = m7 · {m3, m3}
+
+renomm´e en n1
+renomm´e en n2
+renomm´e en n3
+renomm´e en n4
+renomm´e en n5
+renomm´e en n6
+renomm´e en n7
+renomm´e en n8 (cid:22)2 {n1, n3}
+renomm´e en n9 (cid:22)2 {n4}
+renomm´e en n10 (cid:22)2 {n1, n3, n5, n6}
+
+L’ensemble des couples compatibles induits par cet ´etiquetage est
+
+CCl2 = {(2, D), (4, D), (1, A), (1, C), (3, A), (3, C)} ∪ {(u, v) | u ∈ {5, 6}, v ∈ {A, C, E, F}}
+
+Cet ensemble de couples compatibles permet `a Filtre(l2) de supprimer les valeurs A et B des domaines des
+variables associ´ees aux sommets 2 et 4. Par cons´equent, les domaines de ces deux variables ne contiennent plus
+qu’une seule valeur (D), et grˆace `a la contrainte globale alldiﬀ, une inconsistance est d´etect´ee.
+Fig. 4 – Suite d’´etiquetages IS-consistants partant de l0 = ldeg = (N,≤, deg) pour l’instance de la ﬁgure 1.
+
+sorte qu’aucun domaine ne pourra ˆetre r´eduit.
+
+Une troisi`eme optimisation est faite lorsqu’au cours
+de la recherche une variable associ´ee `a un sommet du
+graphe motif est aﬀect´ee `a un sommet du graphe cible.
+Dans ce cas, la proc´edure de renforcement d’´etiquetage
+est modiﬁ´ee aﬁn d’obliger les deux sommets `a avoir la
+mˆeme nouvelle ´etiquette (incompatible avec les autres
+´etiquettes) de la fa¸con suivante :
+
+telle que luv 6∈ L ;
+
+D´eﬁnition 10. Soit l = (L,(cid:22), α), un ´etiquetage IS-
+consistant, et soit (u, v), un couple de sommets de
+Sm × Sc tel que v ∈ xu. La propagation de xu = v
+sur l est le nouvel ´etiquetage l0 = (L0,(cid:22)0, α0) tel que
+– L0 = L ∪ {luv} o`u luv est une nouvelle ´etiquette
+– (cid:22)0=(cid:22) ∪{(luv, luv)} de sorte que la nouvelle ´eti-
+quette luv n’est comparable avec aucune autre ´eti-
+quette `a part elle-mˆeme ;
+– α0(u)=α0(v)=luv et ∀w ∈ S \ {u, v}, α0(w)=α(w).
+Cet ´etiquetage l0 est utilis´e comme point de d´epart
+d’une nouvelle suite de renforcements d’´etiquetages.
+Notons que cette propagation est faite `a chaque fois
+qu’un domaine est r´eduit `a un singleton.
+
+4 Mise-en-œuvre pratique
+
+L’objectif de la proc´edure de ﬁltrage est de calcu-
+ler, `a chaque it´eration k, l’ensemble CClk des couples
+compatibles induits par l’´etiquetage lk. Cet ensemble
+ne peut que diminuer d’une it´eration `a l’autre : si un
+couple n’est pas compatible `a l’it´eration k, alors il ne
+le sera plus aux it´erations suivantes. Ainsi, il s’agit de
+d´eterminer `a chaque it´eration k, pour chaque couple
+(u, v) ∈ CClk−1, si l’´etiquette de u est compatible avec
+l’´etiquette de v, i.e., si αk(u) (cid:22)k αk(v).
+Le calcul de la fonction d’´etiquetage αk `a partir
+de la fonction d’´etiquetage αk−1 peut ˆetre fait en
+temps lin´eaire par rapport au nombre d’arˆetes des
+deux graphes, sous r´eserve que les ´etiquettes soient
+renomm´ees `a chaque it´eration (aﬁn de permettre leur
+comparaison en temps constant).
+La calcul de l’ordre partiel (cid:22)k est plus d´elicat. Nous
+montrons en 4.1 comment le calculer de fa¸con exacte
+en O(sm· sc· d5/2). On montre ensuite en 4.2 comment
+calculer un ordre induisant un ﬁltrage plus faible, en
+O(sc· dm·(sm + dc·log sc)). Ces deux algorithmes sont
+compar´es exp´erimentalement en 5.
+
+4.1 Calcul exact de l’ordre partiel
+
+Etant donn´es l’ordre partiel (cid:22)k−1 et l’ensemble de
+couples compatibles CClk−1 calcul´es `a l’it´eration k−1,
+il s’agit de d´eterminer, pour chaque couple de sommets
+(u, v) ∈ CClk−1, si αk(u) (cid:22)k αk(v). Notons mk
+u et mk
+
+v
+
+u et αk(v) = αk−1(v).mk
+
+les multi-ensembles contenant les ´etiquettes des voi-
+sins des sommets u et v `a l’it´eration k, de sorte que
+αk(u) = αk−1(u).mk
+v. Pour
+d´eterminer si αk(u) (cid:22)k αk(v), il suﬃt donc de d´e-
+v, i.e., s’il existe pour chaque
+terminer si mk
+u une occurrence d’´el´ement
+occurrence d’´el´ement de mk
+(distincte) dans mk
+v qui soit sup´erieure ou ´egale selon
+l’ordre partiel (cid:22)k−1.
+
+u (cid:22)k mk
+
+Propri´et´e 1. Soit G = (S = (Su, Sv), A), le graphe
+non orient´e bipartie tel que Su (resp. Sv) associe un
+sommet diﬀ´erent `a chaque occurrence d’´el´ement du
+multi-ensemble mk
+v), et A contient l’en-
+semble des arˆetes (i, j) telles que i (cid:22)k−1 j. On a :
+u (cid:22)k mk
+v ssi il existe un appariement couvrant l’en-
+mk
+semble de sommets Su dans le graphe bipartie G.
+
+u (resp. mk
+
+√
+
+Hopcroft [10] propose un algorithme pour ce pro-
+
+dm + dc), c’est-`a-dire O(d5/2).
+
+bl`eme en O(dm.dc
+Ce calcul devant ˆetre eﬀectu´e pour chaque couple
+d’´etiquettes (αk(u), αk(v)) tel que (u, v) ∈ CClk−1, et
+le nombre d’´etiquettes diﬀ´erentes pour chaque graphe
+´etant born´e par son nombre de sommets, le calcul de
+(cid:22)k `a partir de (cid:22)k−1 est en O(sm.sc.d5/2).
+
+4.2 Transformation de l’ordre partiel en un ordre
+
+total
+
+Le calcul de l’ordre partiel (cid:22)k est simpliﬁ´e lorsque la
+relation d’ordre (cid:22)k−1 de l’it´eration pr´ec´edente est un
+ordre total : dans ce cas, il suﬃt de parcourir le multi-
+ensemble mk
+u, de son plus petit ´el´ement `a son plus
+grand ´el´ement, en cherchant `a chaque fois le plus petit
+´el´ement du multi-ensemble mk
+v qui soit compatible et
+qui n’ait pas encore ´et´e appari´e `a un ´el´ement de mk
+u.
+Chaque multi-ensemble comportant O(d) occurrences
+d’´el´ements, et le nombre d’´etiquettes ´etant sm + sc,
+le tri de tous les multi-ensembles est en O((sm + sc) ·
+d · log d). Il faut ensuite comparer O(sm · sc) paires
+d’´etiquettes, et chaque comparaison est en O(d) (les
+multi-ensembles ´etant tri´es). Par cons´equent, lorsque
+(cid:22)k−1 est une relation d’ordre totale, le calcul de (cid:22)k
+est en O(sm.sc.d).
+On montre maintenant que lorsque (cid:22)k−1 n’est pas
+un ordre total, on peut l’´etendre en un ordre total1, et
+utiliser cet ordre total pour calculer un sur-ensemble
+de l’ensemble CClk des couples compatibles induits
+par l’´etiquetage lk. Ce sur-ensemble, calcul´e plus eﬃ-
+cacement que l’ensemble exact, induira cependant un
+ﬁltrage moins fort.
+
+La d´eﬁnition suivante donne une condition simple
+sur l’ordre total nous assurant sa validit´e par rapport
+`a l’ordre partiel.
+
+1Les nouvelles ´etiquettes introduites pour propager une af-
+fectation (cf d´eﬁnition 10) sont exclues du calcul de l’ordre total
+car elles ne sont compatibles avec aucune autre ´etiquette.
+
+D´eﬁnition 11. Soit un ´etiquetage l = (L,(cid:22), α). Un
+ordre total valide pour l est un ordre total ≤ sur L tel
+que ∀u ∈ Sm, v ∈ Sc : α(u) (cid:22) α(v) ⇒ α(u) ≤ α(v)
+On ´etend l’ordre ≤ aux multi-ensembles, de fa¸con
+similaire `a ce qui est fait pour les ordres partiels dans
+la d´eﬁnition 6, i.e., m ≤ m0 ssi il existe une injec-
+tion t : m → m0 telle que ∀ai ∈ m, ai ≤ t(ai). Ainsi,
+nous avons m (cid:22) m0 ⇒ m ≤ m0. Notons cependant
+que cette extension de ≤ aux multi-ensembles n’induit
+qu’un ordre partiel sur les multi-ensembles, certains
+multi-ensembles pouvant ˆetre non comparables.
+
+On peut alors d´eﬁnir une nouvelle proc´edure de ren-
+forcement d’´etiquetage bas´ee sur un ordre total valide.
+
+D´eﬁnition 12. Soient l = (L,(cid:22), α), un ´etiquetage, et
+≤, un ordre total valide pour l. Le renforcement de l
+bas´e sur ≤ est l’´etiquetage l0
+– L0 et α0 sont d´eﬁnis comme pour l’´etiquetage ren-
+≤⊆ L0 × L0 est d´eﬁnie par :
+– la relation d’ordre (cid:22)0
+
+forc´e de l (cf d´eﬁnition 7) ;
+
+≤ = (L0,(cid:22)0
+
+≤, α0) o`u
+
+l1 · m1 (cid:22)0
+
+≤ l2 · m2 ssi l1 (cid:22) l2 ∧ m1 ≤ m2
+
+Le th´eor`eme suivant montre que l’´etiquetage ren-
+≤ bas´e sur l’ordre total ≤ peut ˆetre utilis´e dans
+forc´e l0
+notre proc´edure d’´etiquetage it´eratif, et permet plus
+(ou autant) de ﬁltrage que l. Cependant, ce ﬁltrage
+peut ˆetre moins bon que celui obtenu avec l’´etiquetage
+renforc´e bas´e sur l’ordre partiel (cid:22) : de fait, l’ordre total
+induit plus de couples compatibles que l’ordre partiel.
+
+Th´eor`eme 3. Soient l = (L,(cid:22), α), l0 = (L0,(cid:22)0, α0) et
+≤ = (L0,(cid:22)0
+l0
+≤, α0), trois ´etiquetages tels que l0 soit l’´eti-
+quetage renforc´e de l et l0
+≤ soit l’´etiquetage renforc´e de
+l bas´e sur un ordre total valide ≤.
+Si l est IS-consistant, alors (i) l0
+(ii) l0
+fort que (ou ´egal `a) l0
+≤.
+
+≤ est IS-consistant,
+≤ est plus fort que (ou ´egal `a) l, et (iii) l0 est plus
+
+≤ ⊆ CCl.
+
+(ii) et (iii) : Pour l’´etiquetage l0, on a l1 ·
+Preuve.
+m1 (cid:22)0 l2 · m2 ssi l1 (cid:22) l2 ∧ m1 (cid:22) m2. Etant donn´e que
+≤ est un ordre total valide pour l, on a m (cid:22) m0 ⇒
+m ≤ m0. Par cons´equent CCl0 ⊆ CCl0
+(i) est une cons´equence directe de (ii), ´etant donn´e que
+l0 est IS-consistant (propri´et´e (i) du Th´eor`eme 1). (cid:3)
+Diﬀ´erents ordres totaux valides peuvent ˆetre d´eri-
+v´es `a partir d’un ordre partiel, permettant des ﬁl-
+trages plus ou moins forts : le ﬁltrage est d’autant plus
+fort que l’ordre total introduit le moins de nouveaux
+couples de sommets compatibles. Dans le cas particu-
+lier o`u tous les sommets ont des ´etiquettes diﬀ´erentes,
+cela revient `a chercher l’ordre total introduisant le
+moins de nouveaux couples d’´etiquettes compatibles.
+Malheureusement, le probl`eme consistant `a chercher
+
+l’ordre total valide minimisant le nombre de nouveaux
+couples d’´etiquettes compatibles est NP-diﬃcile.
+
+Th´eor`eme 4. Le probl`eme de la recherche d’un ordre
+total valide introduisant au plus k nouveaux couples
+d’´etiquettes compatibles est NP-complet.
+
+Preuve. On montre que le probl`eme de la recherche
+d’un “Feedback Arc Set” dans une orientation d’un
+graphe bipartie complet (FAS), qui est NP-complet
+[8, 9], se ram`ene `a notre probl`eme. Etant donn´ee
+une orientation d’un graphe complet bipartie G =
+(S = (S1, S2), A) tel que pour tout couple de sommets
+(u1, u2) ∈ S1× S2, soit (u1, u2) ∈ A, soit (u2, u1) ∈ A,
+le probl`eme FAS consiste `a d´ecider s’il est possible
+de rendre G acyclique en supprimant au plus k arcs.
+Pour r´esoudre une instance de ce probl`eme, on peut
+d´eﬁnir l’ordre partiel (cid:22)⊆ S1 × S2 tel que u1 (cid:22) u2
+ssi (u1, u2) ∈ A. Il s’agit alors de d´ecider s’il existe
+un ordre total ≤ valide pour (cid:22) qui introduit au plus k
+nouveaux couples compatibles (u1, u2) ∈ S1× S2 pour
+lesquels u1 ≤ u2 mais u1 6(cid:22) u2. (cid:3)
+
+Algorithme heuristique pour calculer un ordre total
+valide. Nous proposons maintenant un algorithme
+heuristique visant `a construire un ordre total intro-
+duisant peu de nouveaux couples de sommets compa-
+tibles (sans garantie d’optimalit´e). Notons Lm (resp.
+Lc) l’ensemble des ´etiquettes associ´ees `a des sommets
+du graphe motif Gm (resp. cible Gc). Nous suppo-
+serons que Lm ∩ Lc = ∅ sans perte de g´en´eralit´e2.
+L’id´ee est alors de s´equencer l’ensemble des ´etiquettes
+de Lm ∪ Lc, d´eﬁnissant de la sorte un ordre total entre
+ces ´etiquettes, selon le principe glouton suivant : par-
+tant d’une s´equence vide, on ajoute it´erativement une
+ou plusieurs nouvelles ´etiquettes en ﬁn de s´equence, et
+on les supprime des ensembles Lm et Lc, jusqu’`a ce
+que Lm ∪ Lc = ∅.
+
+Pour choisir les ´etiquettes ajout´ees dans la s´equence
+`a chaque it´eration, notre heuristique se base sur le fait
+que les nouveaux couples de sommets compatibles sont
+introduits par des nouveaux couples d’´etiquettes com-
+patibles (em, ec) tels que em ∈ Lm et ec ∈ Lc. Par
+cons´equent, l’objectif est de s´equencer le plus tard pos-
+sible les ´etiquettes de Lm. Pour cela, on commence
+par chercher l’ensemble des ´etiquettes ec ∈ Lc qui mi-
+nimisent le nombre d’´etiquettes em ∈ Lm pour les-
+quelles em (cid:22) ec. Dans le cas o`u cet ensemble comporte
+plusieurs ´etiquettes, on choisit alors une ´etiquette ec
+c ∈ Lc
+qui minimise le nombre moyen d’´etiquettes e0
+2Si une ´etiquette e appartient `a la fois `a Lm et `a Lc, alors il
+est toujours possible de renommer e en e0 dans Lc (o`u e0 est une
+nouvelle ´etiquette), et d’ajouter l’ensemble des relations e00 (cid:22) e0
+pour chaque ´etiquette e00 ∈ Lm telle que e00 (cid:22) e.
+
+telles que em (cid:22) e0
+c, pour chaque ´etiquette em ∈ Lm
+telle que em (cid:22) ec. On introduit alors dans la s´e-
+quence l’´etiquette ec pr´ec´ed´ee de l’ensemble des ´eti-
+quettes em ∈ Lm pour lesquelles em (cid:22) ec.
+La complexit´e en temps de cet algorithme heuris-
+tique est en O(sc · log sc · dm · dc) ; il doit ˆetre ex´ecut´e
+`a chaque it´eration. Une fois l’ordre total ≤ d´etermin´e,
+il faut encore calculer (cid:22)k≤, ce qui peut ˆetre fait en
+O(sm.sc.d). Ainsi, chaque renforcement d’´etiquetage
+bas´e sur un ordre total a une complexit´e en temps en
+O(sc.d.(sm + dc · log sc)).
+
+5 R´esultats exp´erimentaux
+
+L’objectif des premi`eres exp´erimentations rappor-
+t´ees ici est d’apporter des ´el´ements de r´eponse aux
+questions suivantes :
+
+– Pour quelles familles de graphes notre algorithme
+de ﬁltrage donne-t’il de meilleurs r´esultats que
+les approches existantes pour l’isomorphisme de
+sous-graphe ?
+
+– Quelles sont les performances du renforcement ap-
+proch´e bas´e sur l’ordre total, par rapport au ren-
+forcement exact bas´e sur l’ordre partiel ?
+
+– Quel est le nombre optimal d’it´erations pour ob-
+tenir un bon ´equilibre entre la force du ﬁltrage et
+son temps d’ex´ecution ?
+
+Approches consid´er´ees. Pour r´esoudre le probl`eme
+d’isomorphisme de sous-graphe `a l’aide de la PPC, on
+peut consid´erer diﬀ´erentes mod´elisations et diﬀ´erents
+niveaux de consistance.
+
+– On note “c2+AllDiﬀ” la formulation PPC bas´ee
+sur un ensemble de contraintes c2 telles que d´eﬁ-
+nies en 2.2 et une contrainte globale AllDiﬀ.
+
+– On note “c2+AllDiﬀ+c3” la formulation PPC
+ajoutant en plus la contrainte redondante c3 de
+[11] (cf 2.2).
+
+Pour ces deux formulations, on peut consid´erer deux
+niveaux de propagation :
+
+– on note “FC” l’approche bas´ee sur une simple pro-
+
+pagation des contraintes par forward checking ;
+
+– on note“AC”l’approche ﬁltrant les domaines pour
+´etablir la consistance d’arc, en consid´erant pour
+cela l’algorithme propos´e dans [11].
+
+On compare ´egalement des ﬁltrages bas´es sur diﬀ´e-
+rents ´etiquetages. On consid`ere tout d’abord l’´etique-
+tage l0 = ldeg tel que d´eﬁni en 3.1. On consid`ere en-
+suite diﬀ´erents ´etiquetages renforc´es lk, obtenus apr`es
+k it´erations de la proc´edure de renforcement, et on
+note l∞ l’´etiquetage obtenu au point ﬁxe. On consi-
+d`ere enﬁn diﬀ´erents ´etiquetages lk≤ obtenus apr`es k
+it´erations de la proc´edure de renforcement bas´ee sur
+un ordre total, induisant un ﬁltrage moins fort que lk.
+
+Notons cependant que pour k = 1, l1 = l1≤ puisque la
+relation d’ordre dans l0 = ldeg est totale. Pour chacun
+de ces ´etiquetages diﬀ´erents, on combine le ﬁltrage tel
+que d´eﬁni par la proc´edure Filtre avec une propaga-
+tion par forward checking sur le mod`ele “c2+AllDiﬀ”.
+Tous les mod`eles PPC compar´es ici ont ´et´e im-
+pl´ement´es en Gecode (http ://www.gecode.org), en
+utilisant CP(Graph) et CP(Map) [7] [6]. CP(Graph)
+introduit des variables de type “graphe” tandis que
+CP(Map) introduit des variables de type “fonction”.
+L’impl´ementation est en C++.
+
+Nous avons par ailleurs compar´e ces diﬀ´erentes ap-
+proches PPC avec vflib, une impl´ementation en C++
+d’un algorithme de l’´etat de l’art d´edi´e au probl`eme
+d’isomorphisme de sous-graphe [4].
+
+Instances consid´er´ees. Nous avons consid´er´e des ins-
+tances g´en´er´ees al´eatoirement aﬁn de pouvoir observer
+le passage `a l’´echelle des algorithmes compar´es, ainsi
+que la sensibilit´e de leurs performances `a diﬀ´erentes ca-
+ract´eristiques. On regroupe sous l’appellation SIP-n-
+dmin-dmax-λ-ps-pa un ensemble de 20 instances g´e-
+n´er´ees de la fa¸con suivante.
+
+– On g´en`ere un graphe cible non orient´e connexe
+comportant n sommets en utilisant l’algorithme
+de [19]. Les degr´es des sommets, born´es entre dmin
+et dmax, sont g´en´er´es selon une loi de distribution
+exponentielle P (x = k) = k(−λ) : cette distribu-
+tion correspond aux r´eseaux “scale-free”, qui mo-
+d´elisent en pratique un grand nombre de r´eseaux
+r´eels, e.g., les r´eseaux sociaux, les r´eseaux d’inter-
+action ou les r´eseaux neuronaux [1].
+
+– Un graphe motif connexe est extrait `a partir du
+graphe cible en s´electionnant al´eatoirement un
+pourcentage ps de sommets, puis un pourcentage
+pa d’arˆetes entre les couples de sommets s´election-
+n´es.
+
+Les graphes motifs ´etant des sous-graphes partiels des
+graphes cibles, ces instances sont toutes satisﬁables.
+
+Nous avons ´egalement g´en´er´e des instances non sa-
+tisﬁables, d´enot´ees par SIP-n-dmin-dmax-λ-ps-(pa +
+p0
+a), selon le principe pr´ec´edent, mais en ajoutant dans
+le graphe motif un pourcentage p0
+a de nouvelles arˆetes
+entre les couples de sommets s´electionn´es. Notons que
+si rien ne garantit que des instances g´en´er´ees de la
+sorte n’admettent pas de solution, toutes les instances
+de notre jeu d’essai se sont av´er´ees insatisﬁables.
+
+Enﬁn, nous avons aussi consid´er´e une classe d’ins-
+tances orient´ees : le graphe cible est orient´e en choisis-
+sant pour chaque arˆete une orientation de fa¸con ´equi-
+probable ; le graphe motif orient´e est extrait comme
+dans le cas non orient´e. La proc´edure de renforcement
+d’´etiquetage est adapt´ee au cas des graphes orient´es en
+´etendant l’´etiquetage par deux multi-ensembles conte-
+
+vﬂib
+
+c2+AllDiﬀ
+
+c2+AllDiﬀ+c3
+AC
+
+FC
+
+l∗+FC(c2+AllDiﬀ)
+
+l0
+
+l1
+
+l2
+
+l∗
+≤+FC(c2+AllDiﬀ)
+
+l8≤
+
+SIP-200
+5-8-2.5
+90-90
+SIP-600
+5-8-2.5
+90-90
+
+SIP-1000
+5-8-2.5
+90-90
+
+SIPdir-600
+
+5-8-2.5
+90-90
+
+35%
+251.43
+-
+0%
+-
+-
+0%
+-
+-
+100%
+0.84
+-
+
+2.17
+440
+
+0.61
+14
+
+22.28
+0
+
+23.38
+0
+
+FC
+
+AC
+
+l2≤
+
+1.27
+13
+
+l4≤
+100% 100% 100% 100% 100% 100% 100% 100% 100%
+1.87
+57.05
+165239
+0
+0%
+-
+-
+0%
+-
+-
+
+l∞
+≤
+55% 100%
+321.91
+3.19
+0
+0
+0%
+0% 100% 100% 100% 100% 100% 100%
+-
+59.64
+0
+-
+0%
+45% 100% 100% 100%
+-
+227,81
+-
+0
+0% 100% 100% 100% 100% 100% 100%
+0%
+-
+56.32
+0.00
+0
+0
+-
+
+38.66
+19
+0%
+-
+-
+0%
+-
+-
+100% 100%
+81.70
+7.89
+2402
+0
+
+61.35
+5.63
+1314
+8
+45% 100%
+26.26
+13
+
+439.19
+1750
+
+26.89
+67
+0%
+-
+-
+0%
+-
+-
+5%
+542.72
+0
+
+-
+-
+0%
+-
+-
+
+144.22
+0
+
+495.84
+0
+
+101.84
+2
+
+110,36
+0
+
+7.49
+0
+
+24.67
+0
+
+2.58
+0
+
+99.64
+0
+
+24.50
+3
+
+28.66
+0
+
+0.71
+2
+
+Fig. 5 – R´esultats sur des instances pour lesquelles le nombre n de sommets du graphe cible varie entre 200 et
+1000 (avec dmin=5, dmax=8, λ=2.5 et ps=pa=90%). Les trois premi`eres classes d’instances sont non orient´ees ;
+la quatri`eme est orient´ee. Pour chaque classe d’instances, on donne le pourcentage d’instances r´esolues en moins
+de 600s, le temps d’ex´ecution moyen et le nombre de feuilles ´echec dans l’arbre de recherche pour les instances
+r´esolues.
+
+nant respectivement les ´etiquettes des pr´ed´ecesseurs et
+des successeurs.
+
+R´esultats d´etaill´es. Chaque ex´ecution consiste `a re-
+chercher toutes les solutions d’une instance. Toutes les
+ex´ecutions ont ´et´e faites sur un Intel Xeon 3,06 Ghz
+avec 2Go de RAM, et ont ´et´e limit´ees `a 600 secondes
+de temps CPU.
+
+Nous avons compar´e les r´esultats obtenus sur des
+instances g´en´er´ees avec diﬀ´erentes valeurs du para-
+m`etre λ (variant entre 1 et 5), aﬁn de varier la distribu-
+tion des degr´es du graphe cible, et nous avons remar-
+qu´e que les r´esultats ´etaient similaires pour toutes les
+valeurs de λ consid´er´ees, indiquant que les approches
+compar´ees ne sont pas sensibles `a ce param`etre. Dans
+les ﬁgures 5 et 6, nous rapportons les r´esultats obtenus
+avec λ = 2.5.
+
+Nous avons compar´e les r´esultats obtenus avec dif-
+f´erentes valeurs pour le degr´e minimum, dmin, et dif-
+f´erentes valeurs du param`etre ps contrˆolant le nombre
+de sommets du graphe motif par rapport au graphe
+cible. Nous avons constat´e que lorsque dmin ≤ 4 ou
+lorsque ps ≤ 70% les instances sont “faciles” et sont
+donc mieux r´esolues par des ﬁltrages ´el´ementaires, tels
+qu’un simple forward checking sans la contrainte c3 re-
+dondante, ou un ´etiquetage ´el´ementaire par les degr´es
+des sommets ldeg. Pour ces instances, des propagations
+plus pouss´ees, comme la consistance d’arc ou nos ´eti-
+quetages renforc´es, ne font qu’augmenter les temps de
+r´esolution. Dans les ﬁgures 5 et 6, nous rapportons les
+r´esultats obtenus sur des instances plus diﬃciles, pour
+lesquelles ps = 90% et dmin a ´et´e ﬁx´e `a 5 puis `a 20.
+
+La ﬁgure 5 compare les r´esultats obtenus avec des
+instances de taille croissante, pour lesquelles le nombre
+
+n de sommets du graphe cible varie de 200 `a 1000.
+Pour les instances non orient´ees des trois premi`eres
+classes, on remarque que les r´esultats sont relativement
+similaires pour les trois valeurs de n. L’approche d´e-
+di´ee vﬂib est clairement moins performante que les ap-
+proches PPC. Les approches PPC bas´ees sur une pro-
+pagation des contraintes c2, allDiﬀ et c3 permettent de
+r´esoudre les instances de petite taille, quand n = 200,
+mais pas les instances plus grandes (dans un temps li-
+mite de 600s). Pour ces instances, une propagation par
+consistance d’arc diminue tr`es fortement le nombre de
+feuilles ´echec par rapport `a un simple forward che-
+cking, mais comme l’´etablissement de la consistance
+d’arc est coˆuteux en temps, le temps CPU n’est que
+l´eg`erement r´eduit.
+
+Si l’on ´etudie maintenant les r´esultats obtenus avec
+des ﬁltrages bas´es sur les ´etiquetages, on constate
+qu’ils r´eduisent tr`es fortement `a la fois le nombre
+de feuilles ´echec et le temps d’ex´ecution. Un simple
+´etiquetage par les degr´es des sommets am´eliore d´ej`a
+consid´erablement les performances. Le meilleur com-
+promis entre force et temps de ﬁltrage est obtenu ici
+avec l1, correspondant `a une seule extension par ren-
+forcement de l’´etiquetage initial ; les ´etiquetages ob-
+tenus apr`es un plus grand nombre d’it´erations per-
+mettent de r´eduire encore le nombre de points de
+choix, mais le temps mis pour eﬀectuer les renforce-
+ments ´etant plus important, les temps d’ex´ecution sont
+augment´es par rapport `a l1.
+
+La ﬁgure 5 nous permet ´egalement de comparer l’ef-
+ﬁcacit´e des ´etiquetages l∗
+≤ bas´es sur des ordres totaux
+par rapport `a ceux bas´es sur des ordres partiels. En
+eﬀet, l’utilisation d’un ordre total introduit une pre-
+mi`ere approximation, et l’algorithme calculant l’ordre
+
+l∗+FC(c2+AllDiﬀ)
+l2
+
+l1
+
+l∗
+≤+FC(c2+AllDiﬀ)
+l2≤
+
+SIP-300
+20-300-2.5
+
+90-90
+
+SIP-300
+20-300-2.5
+90-(90+10)
+
+vﬂib
+
+-
+-
+-
+
+c2+AllDiﬀ
+AC
+FC
+0% 0%
+5%
+361.98
+-
+154
+-
+-
+-
+0% 0%
+0%
+-
+-
+-
+-
+-
+-
+
+-
+-
+-
+
+c2+AllDiﬀ+c3
+AC
+20%
+397.64
+7
+-
+5%
+346.50
+14
+-
+
+FC
+33%
+319.54
+21
+-
+10%
+381.74
+52
+-
+
+l0
+80%
+126.72
+4438
+-
+23%
+186.40
+18958
+-
+
+-
+-
+-
+
+35.16
+39
+1.93
+
+l4≤
+60% 0% 75% 80%
+18.77
+98.57
+13
+159
+-
+3.87
+20% 0% 38% 63%
+10.45
+481
+3.87
+
+45.01
+2323
+1.78
+
+109.91
+3304
+-
+
+-
+-
+-
+
+l∞
+l8≤
+≤
+0%
+85%
+-
+36.68
+-
+7
+-
+7.84
+68% 73%
+3.94
+5.15
+107
+20
+5.74
+6.1
+
+Fig. 6 – R´esultats sur des instances pour lesquelles n = 300, dmin=20, dmax=300, λ=2.5 et ps=pa=90%). La
+premi`ere classe contient des instances satisﬁables, la seconde des instances insatisﬁables pour lesquelles on a
+ajout´e al´eatoirement 10% d’arˆetes dans le graphe motif. Pour chaque classe d’instances, on donne le pourcentage
+d’instances r´esolues en moins de 600s, le temps d’ex´ecution moyen et le nombre de feuilles ´echec dans l’arbre
+de recherche pour les instances r´esolues ; pour les approches bas´ees sur un ´etiquetage renforc´e it´erativement, on
+donne le nombre moyen d’it´erations eﬀectu´ees `a chaque ´etape.
+
+total est bas´e sur une heuristique sans garantie d’op-
+timalit´e, de sorte que la qualit´e de l’approximation ne
+peut ˆetre ´evalu´ee qu’exp´erimentalement. On constate
+en pratique que l2 est plus fort que l2≤ qui est lui
+mˆeme plus fort que l1. Si pour n=200 le nombre de
+feuilles ´echec pour l2≤ est `a peine inf´erieur au nombre
+de feuilles ´echec pour l1, pour n=600 et n=1000, le
+nombre de feuilles ´echec pour l2≤ est plus proche de
+l2 que de l1, montrant que l’approximation est plu-
+tˆot bonne. En ce qui concerne les temps d’ex´ecution,
+on constate en pratique que les temps de r´esolution
+obtenus avec l2≤ sont tr`es nettement inf´erieurs `a ceux
+obtenus avec l2.
+
+La quatri`eme classe de la ﬁgure 5 contient des ins-
+tances orient´ees. Pour ces instances faciles, vﬂib et l0
+obtiennent les meilleurs r´esultats, l’augmentation du
+nombre d’it´erations ne faisant qu’augmenter les temps
+de r´esolution pour l∗ et l∗
+≤. Notons que pour ces ins-
+tances, l’introduction de la contrainte redondante c3 a
+un eﬀet tr`es n´egatif sur la r´esolution.
+
+La ﬁgure 6 permet de comparer les approches sur des
+graphes plus denses et moins r´eguliers : les instances de
+la ﬁgure 5 sont assez peu denses et relativement “r´egu-
+li`eres”, les degr´es des sommets ´etant toujours compris
+entre 5 et 8 ; on consid`ere maintenant des graphes plus
+denses et moins r´eguliers, o`u les degr´es des sommets
+varient entre 20 et 300, le nombre de sommets ´etant
+´egal `a 300. Ces instances apparaissent clairement plus
+diﬃciles, et ne sont jamais r´esolues en moins de 600 se-
+condes par vﬂib, et que rarement r´esolues par les mo-
+d`eles classiques de la PPC, les meilleurs r´esultats ´etant
+obtenus par une propagation par forward checking sur
+les contraintes c2, c3 et AllDiﬀ. En revanche, sur ces
+instances, un ﬁltrage bas´e sur des ´etiquetages renfor-
+c´es permet de r´eduire `a la fois la combinatoire et les
+
+temps d’ex´ecution de fa¸con drastique. Il est int´eressant
+de noter que pour ces instances les meilleurs r´esultats
+sont obtenus avec des ´etiquetages obtenus apr`es un
+grand nombre de renforcements (bas´es sur des ordres
+totaux, les renforcements bas´es sur des ordres partiels
+augmentant trop les temps de r´esolution). Ce compor-
+tement est ´egalement observ´e pour les instances non
+satisﬁables de la seconde ligne : pour ces instances,
+les meilleurs r´esultats sont obtenus lorsque les ´etique-
+tage sont renforc´es jusqu’`a l’obtention du point ﬁxe ; ce
+point ﬁxe est obtenu, en moyenne, apr`es 6 it´erations.
+Notons que pour les instances satisﬁables de la pre-
+mi`ere ligne, l∞
+≤ ne permet de r´esoudre aucune instance
+en moins de 600s car le nombre d’it´erations n´ecessaires
+pour atteindre le point ﬁxe est trop ´elev´e.
+
+6 Conclusion
+
+Nous avons introduit un nouvel algorithme de ﬁl-
+trage pour le probl`eme de l’isomorphisme de sous-
+graphe, bas´e sur un renforcement it´eratif d’´etique-
+tages. Les premi`eres exp´erimentations montrent que
+ce ﬁltrage est plus eﬃcace que les approches de l’´etat
+de l’art pour les graphes “scale free” dont les degr´es
+suivent une distribution exponentielle. Cependant, le
+nombre d’it´erations de renforcement apparait un pa-
+ram`etre critique : pour les instances tr`es faciles, les
+meilleurs r´esultats sont obtenus par l’´etiquetage ini-
+tial l0 = ldeg ; pour les instances de diﬃcult´e inter-
+m´ediaire, les meilleurs r´esultats sont obtenus par l’´eti-
+quetage renforc´e une fois l1 ; pour les instances les plus
+diﬃciles, les meilleurs r´esultats sont obtenus par des
+´etiquetages obtenus apr`es un plus grand nombre de
+renforcements, pouvant aller jusqu’au point ﬁxe.
+
+Ainsi, nos perspectives concernent principalement la
+recherche de crit`eres de terminaison dynamiques, per-
+
+mettant d’adapter le nombre d’it´erations de renforce-
+ment `a l’instance `a r´esoudre. Nous souhaitons ´egale-
+ment ´etudier les possibilit´es d’int´egration de ces tech-
+niques de ﬁltrage avec des techniques d’´elimination de
+sym´etries [13, 21].
+
+R´ef´erences
+
+[1] Albert-Laszlo Barabasi. Linked : How Every-
+thing Is Connected to Everything Else and What
+It Means. Plume, 2003.
+
+[2] Christian Bessi`ere and Pascal Van Hentenryck.
+To be or not to be a global constraint. In Fran-
+cesca Rossi, editor, Principles and Practice of
+Constraint Programming ? CP 2003 : 9th Inter-
+national Conference, CP 2003, pages 789–794.
+Springer, September 2003.
+
+[3] Donatello Conte, Pasquale Foggia, Carlo Sansone,
+and Mario Vento. Thirty years of graph matching
+in pattern recognition. IJPRAI, 18(3) :265–298,
+2004.
+
+[4] Luigi Pietro Cordella, Pasquale Foggia, Carlo
+Sansone, and Mario Vento. An improved algo-
+rithm for matching large graphs. In 3rd IAPR-
+TC15 Workshop on Graph-based Representations
+in Pattern Recognition, pages 149–159. Cuen,
+2001.
+
+[5] P. T. Darga, M. H. Liﬃton, K. A. Sakallah, and
+I. L. Markov. Exploiting structure in symmetry
+detection for cnf.
+In Proc. Design Automation
+Conference (DAC), pages 530–534. IEEE/ACM,
+June 2004.
+
+[6] Yves Deville, Gr´egoire Dooms, St´ephane Zam-
+pelli, and Pierre Dupont. Cp(graph+map) for
+approximate graph matching. 1st International
+Workshop on Constraint Programming Beyond
+Finite Integer Domains, CP2005, pages 33–48,
+2005.
+
+[7] Gr´egoire Dooms, Yves Deville, and Pierre Du-
+pont. Cp(graph) : Introducing a graph compu-
+tation domain in constraint programming. Prin-
+ciples and Pratice of Constraint Programming,
+pages 211–225, 2005.
+
+[8] M. R. Garey and David S. Johnson. Computer
+and Intractability : A Guide to the Theory of NP-
+Completeness. W. H. Freeman, 1979.
+
+[9] Jiong Guo, Falk H¨uﬀner, and Hannes Moser.
+Feedback arc set in bipartite tournaments is np-
+complete. Information Processing Letters, 102(2-
+3) :62–65, 2007.
+
+[10] John E. Hopcroft and Richard M. Karp. An n5/2
+algorithm for maximum matchings in bipartite
+graphs. SIAM J. Comput., 2(4) :225–231, 1973.
+
+[11] Javier Larrosa and Gabriel Valiente. Constraint
+satisfaction algorithms for graph pattern mat-
+ching. Mathematical. Structures in Comp. Sci.,
+12(4) :403–422, 2002.
+
+[12] B. D. McKay. Practical graph isomorphism.
+
+Congressus Numerantium, 30 :45–87, 1981.
+
+[13] Jean-Fran¸cois Puget. Breaking symmetries in all
+diﬀerent problems. Fourth International Work-
+shop on Symmetry in Constraint Satisfaction
+Problems (SymCon’04), 2004.
+
+[14] J.-C. Regin. A ﬁltering algorithm for constraints
+of diﬀerence in CSPs.
+In Proc. 12th Conf.
+American Assoc. Artiﬁcial Intelligence, volume 1,
+pages 362–367. Amer. Assoc. Artiﬁcial Intelli-
+gence, 1994.
+
+[15] Jean-Charles R´egin. D´eveloppement d’Outils Al-
+gorithmiques pour l’Intelligence Artiﬁcielle. Ap-
+plication `a la Chimie Organique. PhD thesis,
+1995.
+
+[16] Michael Rudolf. Utilizing constraint satisfaction
+techniques for eﬃcient graph pattern matching.
+In Theory and Application of Graph Transforma-
+tions, number 1764 in Lecture Notes in Computer
+Science, pages 238–252. Springer, 1998.
+
+[17] S´ebastien Sorlin and Christine Solnon. A new ﬁl-
+tering algorithm for the graph isomorphism pro-
+blem. 3rd International Workshop on Constraint
+Propagation and Implementation, CP2006, 2006.
+[18] Julian R. Ullmann. An algorithm for subgraph
+
+isomorphism. J. ACM, 23(1) :31–42, 1976.
+
+[19] Fabien Viger and Matthieu Latapy. Eﬃcient and
+simple generation of random simple connected
+graphs with prescribed degree sequence. In Lu-
+sheng Wang, editor, COCOON, volume 3595 of
+Lecture Notes in Computer Science, pages 440–
+449. Springer, 2005.
+
+[20] St´ephane Zampelli, Yves Deville, and Pierre Du-
+pont. Approximate constrained subgraph mat-
+ching. Principles and Pratice of Constraint Pro-
+gramming, 2005.
+
+[21] St´ephane Zampelli, Yves Deville, and Pierre Du-
+pont. Symmetry breaking in subgraph pattern
+matching. Sixth International Workshop on Sym-
+metry in Constraint Satisfaction Problems (Sym-
+Con’06), 2006.
+
+[22] St´ephane Zampelli, Yves Deville, Christine Sol-
+non, S´ebastien Sorlin, and Pierre Dupont. Fil-
+tering for subgraph matching. Technical Report
+1054, Universit´e Catholique de Louvain, 2007.
+available at http ://www.info.ucl.ac.be/∼sz/FSI-
+INGIReport1054.pdf.
+
+

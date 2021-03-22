@@ -1,0 +1,1910 @@
+https://neamar.fr/Res/Fouille_Sociale/fouille_donnees.pdf
+
+Synth`ese bibliographique
+
+Fouille de r´eseaux sociaux en ligne
+
+Matthieu,
+Ga¨etan,
+Benoˆıt,
+St´ephane
+
+1
+
+Table des mati`eres
+
+1 Introduction
+
+2 Les processus pour la fouille de donn´ees
+
+. . . . . . . . . . . . . . . . . . . . . . . .
+2.1 Pr´ediction de liens
+2.2
+. . . . . .
+2.3 Extraction de communaut´es . . . . . . . . . . . . . . . . . . .
+
+Identiﬁcation des acteurs importants et des experts
+
+3
+
+4
+4
+7
+9
+
+3 Vie priv´ee dans les r´eseaux sociaux
+
+14
+3.1 Lecture des donn´ees publiques . . . . . . . . . . . . . . . . . . 14
+3.2 Lecture des donn´ees priv´ees
+. . . . . . . . . . . . . . . . . . . 15
+. . . . . . . . 17
+3.3 Fouille de donn´ees dans le respect de vie priv´ee
+
+4 Marketing des donn´ees
+
+20
+4.1 Prospection de nouveaux clients . . . . . . . . . . . . . . . . . 20
+4.2 Marketing viral
+. . . . . . . . . . . . . . . . . . . . . . . . . . 22
+4.3 Ciblage des entit´es inﬂuentes . . . . . . . . . . . . . . . . . . . 24
+
+5 Conclusion
+
+27
+
+A Mod´elisation des r´eseaux sociaux
+
+28
+A.1 Propri´et´es des r´eseaux sociaux . . . . . . . . . . . . . . . . . . 30
+A.1.1 Vocabulaire . . . . . . . . . . . . . . . . . . . . . . . . 30
+A.1.2 Loi de distribution des degr´es . . . . . . . . . . . . . . 31
+A.1.3 Diam`etre et (cid:28) petit monde (cid:29) . . . . . . . . . . . . . . . 33
+A.1.4 Dynamique et ´evolution . . . . . . . . . . . . . . . . . 34
+A.1.5 Clusterisation . . . . . . . . . . . . . . . . . . . . . . . 35
+A.2 Mod´elisation des r´eseaux sociaux . . . . . . . . . . . . . . . . 36
+
+A.2.1 Mod´elisation de la structure d’un r´eseau social par
+
+g´en´eration al´eatoire . . . . . . . . . . . . . . . . . . . . 36
+
+A.2.2 Mod´elisation de la structure d’un r´eseau social par les
+
+(cid:28) petits mondes (cid:29) . . . . . . . . . . . . . . . . . . . . . 37
+A.2.3 Mod´elisation de la dynamique et de l’´evolution . . . . . 40
+
+2
+
+1
+
+Introduction
+
+Les r´eseaux sociaux sont omnipr´esents depuis l’av`enement d’Internet.
+
+Ils permettent aux diﬀ´erents utilisateurs d’interagir en communaut´e et de se
+regrouper selon des crit`eres qui leur sont importants.
+
+Ces r´eseaux sociaux sont de diﬀ´erents types. Certains sont connus de
+tous (Facebook, Twitter, LinkedIn) et comptent des millions de membres.
+D’autres exploitent des niches moins connus et peuvent passer relativement
+inaper¸cus ou rester conﬁdentiels, tels les r´eseaux d’entreprise.
+Enﬁn, certains des ´echanges peuvent aussi ˆetre assimil´es `a des r´eseaux so-
+ciaux : c’est le cas des mails et des SMS, qui d´eﬁnissent des ´echanges entre
+diﬀ´erents groupes d’individus.
+
+Tous ces r´eseaux sociaux amassent de tr`es nombreuses donn´ees : les amis,
+les messages, les images, la fr´equence d’utilisation... tous ces ´echanges et
+informations sont soigneusement enregistr´es. D`es lors se pose le probl`eme de
+l’exploitation de cette masse d’informations.
+
+Il faut tout d’abord mod´eliser le r´eseau sous forme math´ematique. La
+structure de base est bien entendu le graphe : l’analyse des ﬁgures produites
+permet de tirer un grand nombre d’informations, et aussi de pr´edire en partie
+l’´evolution future du r´eseau. Tous ces m´ecanismes seront abord´es dans la
+partie 2 (page 4).
+
+D`es lors se pose la question de la vie priv´ee. Les donn´ees r´ecolt´es et
+analys´ees, comme dit pr´ec´edemment, permettent d’intuiter un grand nombre
+d’informations qu’un utilisateur ne souhaite pas forc´ement divulguer. Au
+cœur des d´ebats se trouve bien entendu l’´ethique de la fouille : des m´ecanismes
+sont donc mis en palce pour prot´eger l’utilisateur de la curiosit´e parfois mal
+plac´ee du fouilleur. Ces m´ecanismes sont d´etaill´es dans la partie 3 (page 14).
+Dans la partie 4 (page 20) seront d´etaill´es les m´ecanismes mis en place
+pour rentabiliser ces informations en cr´eant des strat´egies marketing depuis
+les donn´ees pr´ec´edemment analys´ees et prot´eg´ees.
+
+3
+
+2 Les processus pour la fouille de donn´ees
+
+Certains r´esultats issus de l’analyse des r´eseaux sociaux doivent ˆetre assi-
+mil´es avant d’aborder le contenu de cette section. Ces r´esultats sont d´etaill´es
+dans l’annexe A de ce document. On pourra rappeler ici quelques propri´et´es
+caract´erisant les graphes repr´esentants des r´eseaux sociaux :
+
+– les degr´es des nœuds du graphe suivent une distribution en loi de puis-
+
+sance ;
+
+– le diam`etre de ces graphes est g´en´eralement faible et en O(log n) ;
+– le taux de clusterisation est ´elev´e ;
+– ces graphes deviennent de plus en plus denses et leur diam`etre diminue
+
+avec le temps.
+
+L’´etat de l’art pour la Fouille de Donn´ees dans les r´eseaux sociaux se
+
+divise en plusieurs axes principaux :
+
+– pr´ediction de liens (pour am´eliorer l’eﬃcacit´e du marketing viral par
+
+exemple) ;
+
+– identiﬁcation des acteurs importants et des experts ;
+– extraction de communaut´es ;
+– identiﬁcation des rˆoles jou´es par les individus en fonction de leurs liens
+
+(link mining) ;
+
+– diﬀusion de l’information (diﬀusion des ´epid´emies, contagion, etc.) ;
+– recommandations et conﬁance ;
+– recherche dans les r´eseaux sociaux (am´elioration des algorithmes de
+
+routage, etc.) ;
+
+– anonymisation et Vie Priv´ee.
+Seuls les trois premiers points ´enum´er´es ci-dessus seront trait´es dans cette
+partie. On pourra noter que le dernier point fera l’objet d’une partie d´edi´ee
+dans cette synth`ese.
+
+2.1 Pr´ediction de liens
+
+Le probl`eme de la pr´ediction de liens a ´et´e vu, pour l’instant, comme un
+probl`eme de reconstitution de liens manquants sur un graphe. Il s’agit donc
+d’un proc´ed´e qui fait intervenir de l’apprentissage.
+
+4
+
+Mod`ele de pr´ediction selon la distance
+
+L’approche de [LNK04] se base le principe que les liens se forment selon
+la distance topologique entre les deux nœuds du lien. Il s’agit donc pour eux
+d’une caract´eristique de la topologie du graphe. Pour d´emontrer cela, ils ont
+eﬀectu´e une simulation sur le r´eseau ArXiv en utilisant plusieurs m´ethodes
+de calcul de rang en se basant sur les donn´ees connues entre 1994 et 1996 et
+en essayant de pr´edire les liens apparus entre 1997 et 1999.
+
+Figure 1 – [LNK04] Pour information, d´eﬁnition des diﬀ´erentes mesures
+ayant ´et´e compar´ees entre elles durant cette ´etude.
+
+Les r´esultats obtenus ne sont pas satisfaisants (le meilleur d’entre eux
+est correct sur seulement 16 % de ses pr´edictions) mais ceux-ci permettent
+clairement de montrer que la topologie des graphes joue quand mˆeme un rˆole
+sur les liens entre les nœuds.
+
+5
+
+Figure 2 – [LNK04] Comparaison de la performance des mesures utilis´ees
+par rapport `a une pr´ediction al´eatoire et par rapport `a une pr´ediction sim-
+plement bas´ee sur la distance.
+
+Mod`ele Hierarchical Random Graphs
+
+Parmi les mod`eles propos´es pour mod´eliser un r´eseau social a ´et´e r´ecemment
+
+propos´e Hierarchical Random Graphs par [CMN08]. Ce mod`ele se base sur
+le principe que les r´eseaux sont organis´es hi´erarchiquement. Cette approche
+permet entre autres de retrouver les propri´et´es caract´eristiques des r´eseaux
+sociaux que sont les lois de distribution des degr´es, des coeﬃcients de clus-
+terisation ´elev´es et des petits chemins.
+
+Figure 3 – [CMN08] `A droite, un r´eseau dit hi´erarchique avec son Hierarchi-
+cal Random Graph. Le dendrogramme correspondant poss`ede, pour chaque
+nœud, une probabilit´e pr telle que les deux sous-arbres de ce nœud soient li´es
+par un lien.
+
+Cette approche n’a n´eanmoins pas fait beaucoup de bruit dans la com-
+munaut´e puisque celle-ci n’en n’est qu’`a ses d´ebuts. Cependant, des tests de
+pr´ediction de liens ont ´et´e eﬀectu´es et se sont r´ev´el´es concluants.
+
+6
+
+Figure 4 – [CMN08] Comparaisons des r´esultats des diﬀ´erentes mesures
+utilis´ees pour faire de la pr´ediction de liens. La m´ethode Hierarchical Random
+Graph est plutˆot eﬃcace en comparaison avec les autres.
+
+2.2
+
+Identiﬁcation des acteurs importants et des ex-
+perts
+
+L’identiﬁcation des acteurs et des experts au sein d’un r´eseau social est un
+probl`eme issu du fait que nous disposions d’un nombre important de donn´ees
+sur les liens entre les diﬀ´erents nœuds d’un graphe. Cette connaissance sur
+les relations entre les individus a amen´e les chercheurs `a ´etendre les tˆaches
+de Fouilles de Donn´ees classiques puisqu’il est envisageable de faire des clas-
+siﬁcations `a partir des liens que poss`ede un nœud (et non plus `a partir de
+ses attributs seuls) par exemple.
+
+Identiﬁcation des acteurs importants
+
+Cette approche de d´eduire certaines propri´et´es d’un nœud `a partir de ses
+liens se retrouve dans la th´eorie de [Kle97], o`u il identiﬁe les nœuds dit hubs
+ainsi que ceux qui sont dits autorit´es. L’algorithme le plus connu du grand
+public concernant cet aspect de la recherche est certainement l’algorithme
+utilis´e par Google, PageRank, cit´e dans le document de [BP99].
+
+Cette importance peut ´egalement ˆetre mesur´ee par diverses mesures bas´ees
+sur la centralit´e des nœuds (centralit´e vis-`a-vis des degr´es, de la proximit´e,
+etc.).
+
+7
+
+Identiﬁcation des experts
+
+Une identiﬁcation des experts sur un domaine est ´egalement possible
+et a fait l’objet de plusieurs recherches. Ces identiﬁcations sont bas´ees sur
+une analyse d’informations issues de publications ou d’´echanges informatis´es
+(mails) pour identiﬁer les diﬀ´erents acteurs d’un document et en d´eduire leur
+expertise sur des domaines particuliers.
+
+Un exemple de recherches `a ce sujet l`a est le travail de [STLS05] qui
+utilise les citations d’un document pour construire le proﬁl ExpertiseNet d’un
+individu, constitu´e de plusieurs domaines dans lesquels l’individu en question
+est plus ou moins comp´etent. Cette comp´etence est ensuite quantiﬁ´ee pour
+ˆetre restitu´ee lors d’une requˆete.
+
+Figure 5 – [STLS05] Fonctionnement du syst`eme ExpertiseNet.
+
+Figure 6 – [STLS05] R´esultats obtenus apr`es une requˆete sur Expertise-
+Net. On notera que l’expertise d’un individu dans des domaines donn´es est
+fonction du temps.
+
+Un autre exemple de syst`eme d’identiﬁcation d’experts est propos´e dans
+les travaux de [LTZ+07], sur l’Enterprise Oriented Search (EOS) Using Social
+Networks, qui a amen´e `a l’impl´ementation du moteur de recherche disponible
+`a l’adresse suivante : http ://www.arnetminer.net, recensant des informa-
+tions sur plus de 500 000 chercheurs dans le domaine de l’informatique et en
+bˆatissant un r´eseau social bas´e sur leurs relations d’auteurs et de co-auteurs.
+
+8
+
+Figure 7 – Captures d’´ecran de l’outil ArnetMiner.
+
+L’algorithme utilis´e pour l’EOS est bas´e sur les mˆemes principes que
+pour les autres algorithmes de recherche d’experts, avec l’utilisation de deux
+sources ici : la DBLP pour le proﬁl d’un chercheur et le Citeseer pour les
+classements de publications et de citations.
+
+2.3 Extraction de communaut´es
+
+Il est possible d’utiliser un nombre important d’algorithmes classiques de
+d´etection de groupes (qui ne seront pas abord´es dans ce document), bas´es
+sur les proc´ed´es suivants :
+
+– partitionnement de graphe (par coupures minimales) 1 mais cela sup-
+
+pose de connaˆıtre `a l’avance le nombre de partitions `a r´ealiser ;
+
+– clustering hi´erarchique mais il s’agit d’une m´ethode en g´en´eral coˆuteuse
+en O(n2 log n) et qui n’est bien sˆur pas adapt´ee aux structures n’ayant
+pas de hi´erarchie `a la base ;
+
+– clustering en partitions (k-means) mais comme pour les proc´ed´es de
+partitionnement de graphe, le nombre de partitions est `a d´eﬁnir `a
+l’avance ;
+
+– clustering spectral utilisant les repr´esentations matricielles des graphes
+ainsi que leurs propri´et´es (valeurs propres) pour d´eﬁnir les clusters pour
+lequel nous pourrons nous reporter `a [LV07].
+
+Nous nous int´eresserons ici `a des m´ethodes adapt´ees `a la topologie parti-
+
+culi`ere des r´eseaux sociaux en lignes.
+
+1. Pour rappel, un partitionnement d’un graphe est tel que chaque nœud appartient `a
+
+un, et un seul, cluster.
+
+9
+
+Algorithme de Girvan-Newman
+
+Une nouvelle approche de d´etection de communaut´es a ´et´e propos´ee par
+[GN01]. Cet algorithme est bas´e sur la d´ecomposition d’un graphe en enlevant
+un par un les liens ponts, ces derniers ´etant identiﬁ´es par leur mesure de
+betweeness, `a l’oppos´e des anciennes m´ethodes qui se contentaient de trouver
+les liens les plus forts.
+
+En eﬀet, les liens ponts sont les liens s´eparant deux communaut´es. Ceux-
+ci peuvent ˆetre identiﬁ´es `a l’aide d’une mesure de betweeness qui quantiﬁe
+le nombre de courts chemins dans l’ensemble du graphe passants par ce lien.
+L’algorithme est donc le suivant :
+
+1. calculer les valeurs de betweeness pour tous les liens ;
+
+2. enlever le lien qui a la plus grande valeur de betweeness (s’il y a ´egalit´e,
+
+en choisir un au hasard parmi les ex-æquo) ;
+
+3. refaire le calcul des valeurs de betweeness pour tous les liens restants ;
+
+4. r´ep´eter les ´etapes 2 et 3.
+
+Figure 8 – [GN01] Application de l’algorithme de Givran-Newman sur le
+club de karat´e de [Zac77]. Mis `a part le nœud 3, la classiﬁcation correspond
+aux observations.
+
+Cet algorithme a une complexit´e de O(m2n) ou de O(n3) dans le cas d’un
+graphe peu dense avec m le nombre de liens et n le nombre de nœuds, un
+graphe ´etant peu dense si m (cid:28) n, ce qui est bien le cas avec les r´eseaux
+sociaux.
+
+Algorithme de Newman
+
+mesure de modularit´e suivante : Q = (cid:80)
+
+L’algorithme propos´e par [New03] permet de d´etecter des communaut´es
+dans des tr`es grands graphes eﬃcacement. Cet algorithme se base sur la
+i ), avec eii la proportion
+
+i(eii − a2
+
+10
+
+de liens internes `a une communaut´e et ai = (cid:80)
+
+j(eij) la proportion de liens
+faisant intervenir des nœuds de cette communaut´e avec des nœuds d’une
+autre communaut´e.
+
+Cette mesure de modularit´e doit ˆetre maximis´ee en utilisant l’algorithme
+
+glouton suivant :
+
+1. isoler chaque nœud dans des communaut´es s´epar´ees ;
+
+2. calculer ∆Q pour chaque combinaison de communaut´es possibles ;
+
+3. fusionner les communaut´es ayant le plus haut incr´ement ∆Q ;
+
+4. r´ep´eter les ´etapes 2 et 3 jusqu’`a avoir une valeur de la mesure Q maxi-
+
+male.
+
+La complexit´e de cet algorithme est de O((m + n)× n) avec m le nombre
+de liens et n le nombre de nœuds ou de O(n2) dans le cas d’un graphe peu
+dense.
+
+Am´elioration de l’algorithme de Newman
+
+Cet algorithme a ´et´e am´elior´e par [CNM04] pour atteindre une complexit´e
+de O(md log n) avec m le nombre de liens, d la profondeur du dendrogramme
+d´ecrivant les communaut´es et n le nombre de nœuds. En sachant de plus qu’en
+g´en´eral, m ∼ n et que d ∼ log n, on obtient une complexit´e de O(n log2 n).
+Cette am´elioration consiste juste en une meilleure gestion des donn´ees (par
+exemple, pas besoin de calculer ∆Q pour des communaut´es ne pouvant ˆetre
+fusionn´ees parce qu’il n’existe aucun pont ou meilleur suivi des ∆Q en utili-
+sant un tas max).
+
+Un jeu de test a ´et´e constitu´e `a partir des donn´ees d’Amazon d’aoˆut 2003,
+soit un graphe de 409 687 nœuds et de 2 464 630 liens. Ce graphe repr´esente
+des produits vendus sur Amazon, li´es entre eux par des liens, un lien existant
+entre A et B si B est souvent achet´e par les acheteurs de A. Le temps de calcul
+n’est pas donn´e mais voici la division en communaut´es qui a ´et´e obtenue :
+
+11
+
+Figure 9 – [CNM04] R´esultats de l’´etude avec `a gauche la modularit´e Q que
+l’on fait augmenter et avec `a droite la repr´esentation ﬁnale du graphe.
+
+D´etection de communaut´es superpos´ees
+
+L’ensemble des m´ethodes abord´ees jusqu’ici ne traitaient que de commu-
+naut´es ne pouvant ˆetre superpos´ees. En r´ealit´e, de nombreux nœuds peuvent
+appartenir `a plusieurs communaut´es en mˆeme temps. Cette probl´ematique a
+´et´e abord´ee dans les travaux de [PDFV05] et a d´ebouch´e sur la m´ethode de
+percolation des cliques 2.
+
+L’id´ee de cet algorithme est, `a partir de k-cliques (des cliques avec k
+nœuds), de construire petit `a petit les communaut´es, consid´er´ees ici comme
+un ensemble de cliques. Cette union est alors d´eﬁnie comme ´etant une (cid:28) com-
+munaut´e k-clique (cid:29). Nous pouvons pr´eciser que l’union de deux k-cliques est
+r´ealis´ee si ces cliques sont dites adjacentes donc si elles partagent k−1 nœuds.
+
+Figure 10 – [PDFV05] Superposition de communaut´es.
+
+D´etection de communaut´es dynamiques
+
+´Etant donn´e la non ﬁabilit´e actuelle et la marge d’am´elioration possible
+des algorithmes de d´etection de communaut´es statiques, tr`es peu de travaux
+sont entrepris dans le domaine de la d´etection des communaut´es ´evoluant
+
+2. Pour rappel, une clique est un sous-graphe dont la particularit´e est qu’il existe un
+
+lien entre n’importe lequel des nœuds de ce sous-graphe.
+
+12
+
+dans le temps. Cette dynamique des communaut´es peut notamment s’expri-
+mer par les ph´enom`enes de croissance, de r´eduction, de fusion, de division,
+de naissance ou de mort de communaut´es.
+
+13
+
+3 Vie priv´ee dans les r´eseaux sociaux
+
+Avec l’´emergence des r´eseaux sociaux, de nouvelles probl´ematiques propres
+`a la vie priv´ee sont soulev´ees. Nous verrons dans cette partie que des dan-
+gers, souvent n´eglig´es, existent pour les internautes. Par ailleurs, nous nous
+int´eresserons aux proc´ed´es pour exploiter les donn´ees de ces utilisateurs sans
+leur porter atteinte.
+
+3.1 Lecture des donn´ees publiques
+
+Dans cette premi`ere partie, nous verrons ensemble qu’il est relativement
+
+facile de r´ecup´erer l´egalement des informations personnelles.
+
+Partage canap´e et vie priv´ee
+
+Des chercheurs se sont pench´es sur le site CouchSurﬁng 3 dans le but de
+d´eterminer les informations que les internautes consid´eraient conﬁdentielles
+[PS09]. Sur ce site, les utilisateurs proposent litt´eralement leur canap´e `a qui
+voudrait s´ejourner temporairement chez eux, et ce, gratuitement. Pour en-
+trer dans le r´eseau, l’internaute est appel´e `a partager un grand nombre d’in-
+formations avec les autres membres. Les r´esultats de cette ´etude soul`event
+un certain nombre de points int´eressants. Les trois quarts des utilisateurs
+aﬃchent clairement leur code postal, genre, ˆage mais aussi leur photo de
+proﬁl, leur emploi et leur nom complet. Pour certains, cela va plus loin avec
+la date de naissance, e-mail, photos de leur maison, adresse compl`ete ou en-
+core num´ero de t´el´ephone. Les raisons qui justiﬁent de telles divulgations
+sont multiples. Aucun sond´e ne semble particuli`erement s’inqui´eter par ces
+agissements. Certains ´evoquent le fait que ces mˆemes informations sont ac-
+cessibles dans l’annuaire t´el´ephonique ou sur Google directement. Beaucoup
+reconnaissent divulguer des informations priv´ees, mais ne voient pas l’int´erˆet
+qu’une personne pourrait avoir `a les tracer et se doutent encore moins des
+exploitations malsaines, telles que l’usurpation d’identit´e. Mais le risque est
+bien l`a. Croiser ces informations avec d’autres sources peut permettre d’ob-
+tenir un proﬁl tr`es complet de la personne recherch´ee.
+
+3. http ://www.couchsurﬁng.org/
+
+14
+
+Portrait vol´e
+
+`A ce sujet, le magazine fran¸cais Le Tigre poss`ede une rubrique intitul´ee
+Portrait Google. Le principe est tr`es simple : dresser le proﬁl d’une personne
+inconnue via les informations qu’elle laisse sur internet. Fin 2008, le journa-
+liste Rapha¨el Metz s’est lanc´e dans le cadre de cette rubrique `a l’assaut d’un
+certain Marc L., une personne choisie au hasard [Met09]. Apr`es quelques re-
+cherches plus ou moins fructueuses sur les r´eseaux sociaux tels que Copains
+d’avant, Facebook, Flickr, Youtube, ou mˆeme Google, de nombreuses infor-
+mations ont pu ˆetre r´ecup´er´ees. Tout cela lui a permis de r´ediger une biogra-
+phie relativement fournie en s’attachant `a la fois aux relations amoureuses,
+exp´eriences professionnelles, r´ecits de vacances, ou encore coordonn´ees. In-
+dividuellement, comme dans l’´etude pr´ec´edente, les informations n’ont pas
+forc´ement une grande valeur. Mais une fois recoup´ees entre elles et en multi-
+pliant les sources, le r´esultat peut faire peur. En soit, la d´emarche n’a rien de
+scandaleuse, ces informations ´etant publiques. D’ailleurs, les recruteurs ont
+r´eguli`erement recours `a ces pratiques pour en savoir plus sur les personnes
+qu’ils s’apprˆetent `a engager. Le journaliste aurait mˆeme pu aller plus loin
+en s’inventant un personnage ﬁctif coh´erent avec le pass´e de sa cible, avec
+les mˆemes int´erˆets ou en ´evoquant une rencontre pass´ee imaginaire entre les
+deux dans un lieu identiﬁ´e. Cet article a cr´e´e la pol´emique dans les m´edias
+[Lau09]. En d´ecouvrant ce r´ecit de sa vie, l’int´eress´e a fait supprimer toutes
+les informations le concernant sur internet et a demand´e d’anonymiser l’ar-
+ticle en question.
+
+Ainsi, les internautes laissent globalement un grand nombre d’informa-
+tions personnelles sur les r´eseaux sociaux, et internet plus g´en´eralement, sans
+se soucier trop des cons´equences sur leur vie priv´ee.
+
+3.2 Lecture des donn´ees priv´ees
+
+Nous avons pu voir pr´ec´edemment que beaucoup d’informations `a ca-
+ract`ere priv´e ´etaient visibles et donc accessibles `a tous sur les r´eseaux sociaux.
+Maintenant, nous allons nous int´eresser `a la lecture et surtout l’exploitation
+des donn´ees priv´ees.
+
+15
+
+Google et la publicit´e
+
+En 1998, Google a lanc´e son c´el`ebre moteur. Quelques ann´ees plus tard,
+ce mˆeme moteur de recherche se retrouve en position de monopole. Cette
+position a permis `a la soci´et´e de Montain View d’ˆetre au premier rang des
+attentes des utilisateurs, en voyant les requˆetes que ces derniers formulaient.
+Il n’a pas fallu attendre tr`es longtemps pour que ces informations soient ex-
+ploit´ees. En eﬀet, d`es l’ann´ee 2000, soit seulement deux ans apr`es la cr´eation
+de l’entreprise, Google lance AdWords. Ce syst`eme va permettre d’aﬃcher
+de la publicit´e en rapport avec les recherches des internautes. Ce nouveau
+type de publicit´e pr´esente un gros int´erˆet car elle se situe `a l’endroit et au
+moment o`u l’utilisateur a le plus de chance de s’y int´eresser. C’est le premier
+pas de la soci´et´e de ce que l’on appelle maintenant la publicit´e cibl´ee. Depuis
+ce temps, cette activit´e repr´esente la majeure partie des revenus du groupe.
+En 2010, la publicit´e a atteint 96% des 29 milliards de ses entr´ees d’argent
+[Goo11].
+
+Ciblage indiscret
+
+Pour proposer une publicit´e de plus en plus cibl´ee, Google et les r´egies
+publicitaires ont besoin d’en savoir plus sur les internautes. Les cookies du na-
+vigateur internet sont d’ailleurs assez bavards `a ce sujet. Mais cette recherche
+d’information sur les internautes est ´egalement le ﬁl conducteur des services
+gratuits que Google lance. On peut notamment noter la suite bureautique 4,
+le partage de photos 5 ou encore le courrier ´electronique 6. Ces services encou-
+ragent les internautes `a d´eposer leurs informations personnelles directement
+sur les serveurs de Google. Ensuite, ce dernier peut analyser `a souhait les
+donn´ees qu’il r´ecup`ere, dans le but de proposer des publicit´es personnalis´ees.
+Ceci est particuli`erement visible avec le service GMail o`u le courrier est au-
+tomatiquement analys´e par des robots [Dum04]. Par exemple, si un ami vous
+propose de l’accompagner `a un s´ejour `a la montagne, des oﬀres pour des sta-
+tions de ski apparaˆıtront dans la mˆeme fenˆetre. Cette publicit´e est d’ailleurs
+tr`es mal accept´ee [Ast04]. Le courrier, qu’il soit ´electronique ou papier, a
+toujours ´et´e per¸cu comme une ressource critique au niveau de la conﬁden-
+tialit´e. Le fait qu’une entreprise priv´ee le lise ouvertement est perturbant
+
+4. Google Docs, https ://docs.google.com/
+5. Picasa, http ://picasa.google.fr/
+6. GMail, https ://mail.google.com/
+
+16
+
+vis-`a-vis des libert´es individuelles. Pour compl´eter ces informations sur les
+internautes, Google doit se tourner vers une nouvelle source tr`es riche : les
+r´eseaux sociaux.
+
+R´eseaux sociaux : mine d’or du ciblage
+
+Leader incontest´e des r´eseaux sociaux, Facebook compte aujourd’hui plus
+de 800 millions d’utilisateurs [Fac11]. Tr`es peu aurait imagin´e qu’un jour plus
+d’un dixi`eme de la population se soit cr´e´e un proﬁl riche en informations
+personnelles sur un site internet priv´e. La mon´etisation de ses informations
+peut ˆetre tr`es juteuse pour la jeune entreprise. Et pour cause ! Facebook
+propose aux annonceurs des options de ciblage extrˆeme, comme les donn´ees
+d´emographiques, g´eographiques, ou encore les centres d’int´erˆet pour ne citer
+qu’eux. Il devient alors possible d’aﬃcher des banni`eres aux personnes de
+la r´egion parisienne, ˆag´ees de 26 `a 30 ans et travaillant dans une entreprise
+concurrente. Quoi de mieux pour d´ebaucher toute une ´equipe ? Ceci n’est
+qu’une des nombreuses possibilit´es envisageables. Cette activit´e est d’autant
+plus int´eressante pour Facebook que les informations personnelles sont four-
+nies gratuitement et volontairement par les utilisateurs. C’est justement `a ce
+niveau que Google a pris du retard [Pui11]. Ce dernier a donc lanc´e l’´et´e der-
+nier son propre r´eseau social pour essayer de compl´eter son oﬀre publicitaire.
+Mais il faut encore que le nombre d’utilisateurs atteigne une masse critique
+pour que la plate forme soit adopt´ee et fr´equent´ee.
+
+Ainsi, nous avons vu que les services gratuits sur internet ´etaient une mine
+d’or pour les r´egies publicitaires. Les r´eseaux sociaux sont particuli`erement
+int´eressants car ils fournissent gratuitement des informations pour un ciblage
+extrˆeme et donc payant.
+
+3.3 Fouille de donn´ees dans le respect de vie priv´ee
+
+Nous avons pu constater que la vie priv´ee des individus pouvait ˆetre mis
+`a mal sur internet, notamment `a partir des r´eseaux sociaux. Pour essayer de
+pr´eserver cette vie priv´ee, diﬀ´erentes proc´ed´es ont ´et´e mis en place.
+
+Anonymisation d´elicate
+
+Simplement, nous pouvons penser qu’enlever les attributs tels que le nom
+et les coordonn´ees peut ˆetre suﬃsant mais ce n’est pas le cas. Comme nous
+
+17
+
+l’avons vu pr´ec´edemment, les donn´ees peuvent ˆetre recoup´ees et ainsi mettre
+en p´eril tout la vie priv´ee d’une personne. Une femme de 62 ans a justement
+´et´e identiﬁ´ee et ses habitudes mises `a nue suite `a une erreur sur une base
+de donn´ees d’AOL, bien que son nom et autres informations critiques aient
+´et´e masqu´es [Bar06]. Nous pouvons ´egalement citer le cas du Netﬂix Prize
+Dataset. L’entreprise Netﬂix propose des services de location de ﬁlms, ﬁlms
+que ses clients peuvent noter. Pour am´eliorer leur service, la soci´et´e a lanc´e
+un concours en mettant comme mati`ere les notes enregistr´ees par presque
+un demi million de ses utilisateurs. Les informations d’identiﬁcation avait
+pr´ealablement ´et´e retir´ees, mais des chercheurs ont prouv´e que cela n’´etait pas
+suﬃsant pour anonymyser l’ensemble [NS06]. En eﬀet, ils ont d´evelopp´e pour
+l’occasion une m´ethode pour d´esanonymiser les donn´ees de ce type de jeu de
+donn´ees 7. Ils ont ainsi d´emontr´e que la connaissance de quelques informations
+sur un individu permettait de savoir s’il ´etait pr´esent dans l’´echantillon et
+de le retrouver. Alors, il devient possible d’en d´eduire des informations telles
+que ses orientations politiques et sexuelles, `a partir des notations de ﬁlms
+qu’il a eﬀectu´ees. Nous allons donc nous pencher sur les m´ethodes reconnues
+pour travailler sur des donn´ees en pr´eservant la vie priv´ee.
+
+Ajout de bruit
+
+Une premi`ere approche consiste `a faire varier de mani`ere al´eatoire les
+donn´ees recueillies [AA01]. Par exemple, dans le cas o`u l’´etude cherche `a ana-
+lyser la distribution de l’ˆage des individus pour en ´etablir une classiﬁcation,
+il est possible d’ajouter une valeur de distorsion 8 `a chacune des valeurs lors
+de l’acquisition des donn´ees. L’algorithme d’esp´erance-maximisation [Dem97]
+est recommand´e pour assurer la vraisemblance de l’ensemble collect´e. G´en´eralement,
+la fouille de donn´ees n’a pas vraiment besoin d’informations individuelles
+mais plus de distributions sur les propri´et´es ´etudi´ees. Pour cette raison, il
+est tout `a fait envisageable de rajouter du bruit al´eatoire et contrˆol´e sur
+les donn´ees tout en retrouvant la distribution initiale du groupe et donc en
+pr´eservant l’objet de l’´etude. Cependant, cette approche n’est pas suﬃsante
+car elle permet de d´eduire certaines propri´et´es sp´eciﬁques du groupe d’´etude.
+Il a ´et´e en eﬀet d´emontr´e que l’ajout d’une petite perturbation aux donn´ees
+entraˆınait toujours une violation importante de la vie priv´ee [DN04].
+
+7. Tr`es grande base avec des micro-data telles que les pr´ef´erences sur un site web, les
+
+recommandations ou encore les transactions enregistr´ees
+
+8. Via une distribution uniforme sur un segment ou une distribution Gaussienne
+
+18
+
+Randomisation
+
+Pour rem´edier `a ce probl`eme, une approche a ´et´e entreprise en 2003 par
+des chercheurs de l’Universit´e de Cornell et d’IBM pour compl´eter celle que
+nous venons d’´evoquer [AES03]. Celle-ci consiste `a appliquer une ampliﬁca-
+tion aux valeurs. Cette ampliﬁcation consiste `a utiliser un op´erateur de ran-
+domisation qui v´eriﬁe certaines conditions. Cet op´erateur diminue la proba-
+bilit´e de retrouver la valeur initiale `a partir de la valeur initial et inversement.
+L’int´erˆet de cette approche est qu’il n’est pas n´ecessaire d’avoir des connais-
+sances ou de faire des hypoth`eses sur la distribution initiale. Par contre, il
+est diﬃcile de quantiﬁer son impact sur la pr´ecision de la fouille et donc de
+calibrer le param´etrage n´ecessaire `a un certain degr´e respect de la vie priv´ee.
+Il s’agit d’un domaine tr`es actif de la recherche, notamment `a cause de l’ef-
+fervescence des r´eseaux sociaux, les approches pr´esent´ees ne sont donc pas
+exhaustives et d’autres sont encore en cours de d´eveloppement.
+
+Nous avons pu constater que des moyens plus ou moins eﬃcaces exis-
+taient pour anonymiser les sources pour la fouille de donn´ees. Cela pourrait,
+`a l’avenir, r´eduire le risque de divulgations d’informations sur les internautes.
+Encore faut-il que les entreprises prennent conscience des dangers de leurs
+activit´es et qu’elles fassent les eﬀorts n´ecessaires pour y rem´edier.
+
+Aﬁn de conclure cette partie, les r´eseaux sociaux peuvent r´ev´eler des infor-
+mations pr´ecieuses sur leurs utilisateurs. L’apprentissage sur ces derniers peut
+ˆetre d’autant plus grand que les sources sont multiples et crois´ees. De plus,
+les groupes qui r´ecup`erent ces donn´ees ne se gˆenent pas pour les mon´etiser,
+sans forc´ement se soucier des risques de divulgation. Des m´ethodes ont ´et´e
+d´evelopp´ees pour justement essayer d’anonymiser ces donn´ees et ainsi limi-
+ter l’atteinte qu’une divulgation peut avoir sur les utilisateurs. Nous pouvons
+donc esp´erer que les risques diminuent `a l’avenir.
+
+19
+
+4 Marketing des donn´ees
+
+La fouille de donn´ees des r´eseaux sociaux repr´esente une mine d’or d’in-
+formations qui fait l’objet d’un v´eritable marketing. Dans cette partie nous
+allons nous pencher sur l’utilisation de ces informations par des entreprises
+dans le but de prospecter de nouveaux clients ou de cibler les entit´es inﬂuentes
+aﬁn d’introduire une strat´egie marketing dite ”virale”.
+
+4.1 Prospection de nouveaux clients
+
+Une des principales applications du datamining est d’aider les entreprises
+`a d´eterminer qui est susceptible de repr´esenter un client potentiel, et qui n’est
+pas enclin `a acheter son produit. Cette fouille de donn´ees peut jouer un rˆole
+crucial dans la strat´egie commerciale et marketing d’une entreprise. Il existe
+deux principaux types de d´emarchages qui sont le marketing de masse et
+le marketing direct [Bou05].
+Le premier vise un public large appartenant `a un mˆeme segment 9 via des
+m´edias de masse comme la t´el´evision, le radio ou les journaux. C’est une
+m´ethode tr`es eﬃcace quand un produit est tr`es demand´e par les clients,
+comme par exemple l’´electrom´enager apr`es la seconde guerre mondiale. Au-
+jourd’hui avec l’abondance de produits et la forte concurrence, les mœurs ont
+chang´e et ce type de marketing est jug´e peu eﬃcace.
+Le second type de marketing, le marketing direct, cible un public `a fort po-
+tentiel d’achat sur un produit sp´eciﬁque. Ce public est vis´e en se basant
+seulement sur ses caract´eristiques et ses besoins. La fouille de donn´ees joue
+un rˆole cl´e dans le marketing direct puisqu’il permet de donner un mod`ele
+pr´evisionnel du comportement d’un client en fonction de ses derniers achats
+(habitudes de consommation, mode de paiement...) et d’informations person-
+nelles (situation g´eographique, centres d’int´erˆets...).
+
+Limiter ainsi sa cible `a des clients ayant un fort potentiel d’achat est ce que
+l’on appelle en marketing le ”scoring client”. La prospection coˆute cher aux
+entreprises, c’est pourquoi il leur est primordial de limiter le nombre de cibles
+`a d´emarcher et de viser seulement les individus jug´es les plus susceptibles
+d’acheter leurs produits. Avec l’arriv´ee d’Internet et des r´eseaux sociaux,
+les informations personnelles sur les individus sont beaucoup plus riches et
+facilement accessibles. Il est possible d’extrapoler ces informations et d’en
+
+9. Un segment marketing (ou de client`ele) est une cat´egorie identiﬁable de clients vis´es.
+
+20
+
+d´eduire le comportement et les habitudes de consommation d’un individu.
+Ces informations une fois recoup´ees et analys´ees vont permettre d’assimiler
+ses individus `a une niche de clients. Chaque niche est susceptible de pr´esenter
+un fort potentiel d’achat `a l’´egard de certains produits et d’ˆetre r´eticent `a
+d’autres.
+
+Ainsi le datamining s’av`ere tr`es eﬃcace et donc tr`es utilis´e dans le mar-
+keting direct pour cibler un public `a mˆeme d’ˆetre int´eress´e par le produit
+publicis´e. Cependant, le datamining ne doit pas ˆetre consid´er´e comme une
+solution miracle `a l’ensemble des probl`emes des entreprises. Il correspond
+`a une avanc´ee technologique qui permet de faire face au volume croissant
+des donn´ees collect´ees mais les entreprises devront instaurer un climat de
+conﬁance aﬁn de ne pas porter atteinte `a la vie priv´ee des clients en exploi-
+tant les donn´ees collect´ees.
+
+Les premi`eres applications de datamining concernaient l’´etude des tickets
+de caisse des clients de grande surface. Cela a permis de montrer que pour
+certaines cat´egories de clients les promotions mises en place pour des produits
+qu’ils avaient l’habitude d’acheter simultan´ement n’´etaient pas eﬃcaces et
+n’engendraient pas d’augmentation de chiﬀre d’aﬀaires.
+
+D’apr`es les ´etudes de l’universit´e de Western Ontario [LL98], la d´emarche
+pour cibler un public pr´esentant un fort potentiel d’achat pour un produit
+sp´eciﬁque est toujours similaire `a celle-ci :
+
+1. R´ecup´erer les donn´ees de tous les clients possibles (retours des derni`eres
+
+prospections, informations personnelles sur des individus...)
+
+2. Dataminer `a cette base de donn´ees, c’est-`a-dire :
+– ajouter des informations g´eo-d´emographiques
+– traiter les valeurs manquantes (d´eduites des autres donn´ees compl`etes)
+– s´eparer la base de donn´ees en deux jeux, qu’on appelle le ”testing
+
+set” et ”training set”
+
+– appliquer les algorithmes au ”training set” pour estimer leur com-
+portement en fonction des analyses d´eduites de l’´etude du ”testing
+set”
+
+3. ´Evaluer le mod`ele d´eduit du ”testing set”. Recommencer la deuxi`eme
+
+´etape s’il n’est pas satisfaisant.
+
+4. Utiliser le mod`ele d´eduit pour s´eparer les clients potentiels des non-
+
+acheteurs.
+
+5. Promouvoir le produit aux clients potentiels retenus.
+
+21
+
+Cette d´emarche th´eorique et math´ematique a fait ses preuves dans la pra-
+tique. Elle permet r´eellement de rentabiliser les op´erations de prospection, en
+diminuant les coˆuts engendr´es par l’acquisition de nouveaux clients. En met-
+tant en place une solution de datamining, les entreprises essaient d’allonger la
+”dur´ee de vie” d’un client en rep´erant les raisons et les risques de son d´epart.
+Par exemple, les soci´et´es de vente par correspondance r´ealisent des catalogues
+sp´ecialis´es en plus de leur catalogue g´en´eraliste. L’utilisation du datamining
+permet de s´electionner parmi les clients principaux ceux pour lesquels il est
+utile d’envoyer un catalogue sp´ecialis´e. C’est en eﬀet grˆace `a l’historique des
+achats qu’il est possible de d´eterminer quel client est susceptible d’acheter
+un article sur catalogue sp´ecialis´e [PK09].
+
+Cependant l’une des principales limites `a cette d´emarche th´eorique vient
+du fait que la d´ecision d’achat d’un client est consid´er´ee comme ind´ependante
+des autres alors qu’en r´ealit´e, cette d´ecision est grandement inﬂuenc´ee par
+ses coll`egues, ses amis, son entourage... N´egliger l’inﬂuence d’un membre
+du r´eseau sur un autre est donc une mauvaise estimation du comportement
+d’un r´eseau puisque c’en est presque l’un des fondements. Cette inﬂuence
+est d’ailleurs ajourd’hui utilis´ee `a des ﬁns commerciales dans des campagnes
+marketing dites ”virales”.
+
+4.2 Marketing viral
+
+Comme nous venons de le voir, ignorer les eﬀets de r´eseaux quand on
+d´ecide quels clients d´emarcher peut mener `a des d´ecisions peu optimales. Le
+d´epartement informatique de l’universit´e de Washington a ´etudi´e ce sujet
+et propose la mod´elisation d’une valeur de r´eseau [DR01], qui ´evalue l’in-
+ﬂuence qu’un client a sur les autres. En plus de la valeur intrins`eque du proﬁt
+potentiel qu’un client peut repr´esenter, cette ´etude propose donc d’ajouter
+une valeur qui repr´esente l’importance de son r´eseau et donc son inﬂuence
+sur les autres clients. Ainsi un client potentiel repr´esentant peu de proﬁt mais
+´etant tr`es inﬂuent m´eriterait tout de mˆeme d’ˆetre d´emarch´e. Inversement, il
+serait redondant de d´emarcher un client avec un proﬁt potentiel ´elev´e puis-
+qu’il a de fortes chances d’ˆetre inﬂuenc´e par son r´eseau. C’est le fondement de
+ce qui est appel´e le marketing viral. Quand cette approche fonctionne, cela
+permet `a l’entreprise d’augmenter signiﬁcativement ses proﬁts et de limiter
+son budget de communication et de publicit´e.
+
+Le marketing viral est bas´e sur le r´eseau du ”bouche `a oreille” et propose
+un bien meilleur rapport qualit´e/prix qu’un marketing conventionnel puis-
+
+22
+
+qu’il s’appuie sur les clients eux-mˆemes pour faire la promotion d’un produit.
+C’est l`a que r´eside l’un des ´el´ements essentiels du marketing viral : chaque
+client devient un vendeur involontaire, simplement en utilisant le produit. Il
+est plus puissant que la publicit´e classique car il v´ehicule l’approbation im-
+plicite d’un ami. Un ´el´ement cl´e de la consommation de marque est d’ailleurs
+l’aﬃliation `a un groupe : ”je veux ˆetre un membre du groupe, le groupe
+´etant dans ce cas les amis qui utilisent ledit produit”. Ce type de marketing
+est essentiellement op´er´e via Internet, notamment sur les r´eseaux sociaux, et
+non les autres m´edias plus classiques auxquels les individus deviennent de
+plus en plus r´eticents. Le marketing viral exploite donc ces r´eseaux sociaux
+pour encourager les clients `a partager des informations sur leurs produits. Ce
+type de marketing n’est donc pas eﬃcace sur tous les types produits et il est
+diﬃcile de mesurer son impact.
+
+Un exemple des plus ´eloquents, d´evelopp´e dans le magazine Red Herring
+[Juv00], est celui du service de courriers ´electroniques ”Free Hotmail” qui est
+pass´e de z´ero `a douze millions d’utilisateurs en moins d’un an et demi avec
+un budget publicitaire minime (cinquante mille dollars 10), et ce grˆace aux
+messages promotionnels inclus dans le pied de page de chaque email envoy´e
+depuis leur service.
+
+L’universit´e de Canergie Mellon propose un mod`ele pour identiﬁer quels
+types de produits sont susceptibles d’ˆetre promus par le marketing viral
+[JLA07]. Ce mod`ele est bas´e sur quelques principes ´evidents mais dont l’´etude
+a lev´e quelques points int´eressants.
+
+Par analogie avec les maladies ”virales”, on peut distinguer les indivi-
+dus dits ”sains”, qui en l’occurence ne sont pas int´eress´es par le produit
+plubicis´e ou qui n’en connaissent encore pas l’existence, des individus dits
+”infect´es”, qui utilisent le produit et qui sont donc suscpetibles d’inﬂuen-
+cer leur entourage `a l’acheter ´egalement. Il apparaˆıt notamment que comme
+toute ´epid´emie, n’importe quelle interaction entre une personne ”infect´ee”
+et une personne ”saine” peut r´esulter `a une contamination. Cependant, il
+semble que la probabilit´e de propagation diminue `a interactions r´ep´et´ees.
+Par ailleurs, contrairement `a une ´epid´emie virale, le nombre de contacts entre
+une personne ”infect´ee” avec une personne ”saine” augmente la probabilit´e
+de contamination jusqu’`a un certain seuil puis semble stagner. Ainsi, les in-
+
+10. `A la mˆeme ´epoque, la compagnie Juno a d´epens´e plus de vingt millions de dollars
+
+sur une campagne conventionnelle pour un eﬀet moindre.
+
+23
+
+dividus semblent ˆetre imperm´eables aux recommandations de leur entourage
+si le produit ne les int´eresse vraiment pas.
+
+Comme ´evoqu´e pr´ec´edemment, chaque individu poss`ede une valeur de
+r´eseau qui indique l’inﬂuence de celui-ci sur les autres clients potentiels. Cer-
+tains semblent tr`es inﬂuents, ils sont appel´es les super-spreaders [JLA07]
+car ils ”infectent” un grand nombre de personnes. Le mod`ele prend donc en
+compte qu’un super-spreader poss`ede une plus forte probabilit´e de contami-
+nation. N´eanmoins, il apparaˆıt que lorsqu’un individu ´emet de plus en plus
+de recommandations, celles-ci s’av`erent de moins en moins eﬃcaces. Ce qui
+laisserait supposer qu’un super-spreader a beaucoup d’inﬂuence sur quelques
+membres de son entourage, mais pas sur toutes les personnes qu’il connaˆıt.
+Enﬁn, il semble que les produits les plus susceptibles de b´en´eﬁcier d’une
+strat´egie de marketing viral sont les produits technologiques ou id´eologiques
+(religieux par exemple), puisqu’ils sont utilis´es dans des contextes favorables
+comme une ´ecole, au travail ou sur un lieu de culte, des endroits ou tout un
+r´eseau est regroup´e dans une mˆeme zone g´eographique et partage des centres
+d’int´erˆet communs.
+
+Le marketing viral peut donc ˆetre tr`es b´en´eﬁque puisque s’il fonctionne,
+le produit se r´epandra avec succ`es `a moindre coup. Cependant c’est une
+strat´egie risqu´ee et limit´ee qui n’est pas adapt´ee `a tous les produits et qui
+reste en grande partie abstraite malgr´e les nombreuses ´etudes sur le sujet.
+
+4.3 Ciblage des entit´es inﬂuentes
+
+La principale diﬃcult´e d’une strat´egie de marketing virale est de cibler les
+individus ou entit´es les plus inﬂuents. La fouille de donn´ees semble ˆetre une
+m´ethode eﬃcace pour d´eterminer qui est inﬂuent et qui poss`ede un grand
+r´eseau. C’est en tout cas ce qu’indiquent les ´etudes de l’universit´e de Cornell
+[DKT03].
+
+Pour estimer la valeur du r´eseau d’un individu, une entreprise a besoin de
+connaˆıtre les relations entre les diﬀ´erents membres de son r´eseau. La source
+principale de ces informations est disponible sur Internet via les forums ou les
+r´eseaux sociaux. Les sites communautaires sont tr`es souvent orient´es sur les
+produits de consommation, il est donc possible de recueillir beaucoup d’in-
+formations sur les habitudes de consommation et les liens entre les diﬀ´erents
+membres de la communaut´e. On peut notamment trouver sur ces sites des
+tests complets de produits divers et vari´es, des ´evaluations, des classements,
+des comparaisons, des avis, des retours d’utilisation...
+
+24
+
+Supposons que nous disposons de donn´ees sur un r´eseau social, avec des
+estimations de l’inﬂuence mutuelle des individus, et que nous aimerions pro-
+mouvoir un nouveau produit, qui nous l’esp´erons, sera adopt´e par une large
+partie de ce r´eseau.
+Nous l’avons vu, le principe du marketing viral est qu’en ciblant d’abord
+quelques individus ”inﬂuents” (par exemple, en leur donnant des ´echantillons
+gratuits des produits), il est possible de d´eclencher une cascade d’inﬂuence.
+Des amis recommandent le produit `a d’autres amis, et ainsi de nombreux
+individus ﬁniront par essayer. Mais comment doit-on choisir ces quelques in-
+dividus cl´es (super-spreaders) `a utiliser pour lancer ce processus au mieux ?
+Une ´etude s’est fond´ee sur la fusion de deux algorithmes math´ematiques
+imitant le comportement d’un r´eseau [DR02]. Le premier est basique et
+lin´eaire, le second prend en compte l’inﬂuence d’un membre sur les autres,
+il est dit ”en cascade”. Avec cette mod´elisation, il est possible de mesurer la
+dynamique d’un r´eseau de fa¸con cyclique. `A chaque cycle, un individu entre
+en contact avec son entourage et le contamine ou non.
+Le probl`eme r´eside alors dans le choix du noyau cible pour infecter le r´eseau le
+plus eﬃcacement possible. Des chercheurs ont r´eﬂ´echi `a une fonction permet-
+tant de calculer pour chaque individu du r´eseau, en s’appuyant sur sa valeur
+de r´eseau, l’impact qu’il aura sur son entourage s’il est infect´e [Dom04]. Cette
+fonction est ensuite optimis´ee aﬁn de s´electionner un nombre d´eﬁni de super-
+spreaders et en limitant les eﬀets de redondance (par exemple en tentant de
+contaminer un individu d´ej`a infect´e). Ainsi est d´etermin´e un noyau inﬂuent
+au sein d’un r´eseau, qui inﬂuence la grande majorit´e du r´eseau en quelques
+cycles seulement.
+
+La limite `a ses recherches est ´evidemment la qualit´e et la quantit´e des in-
+formations sur les relations entre les membres d’un r´eseau ainsi que l’´evaluation
+de leur valeur de r´eseau. Cette technique de marketing est pour autant tr`es
+prometteuse et continue `a faire l’objet de nombreuses ´etudes.
+
+La fouille de donn´ees s’av`ere donc ˆetre un outil puissant et tr`es utilis´e
+dans les strat´egies de marketing actuelles. Appliqu´ee `a la mine d’or d’in-
+formations que repr´esente aujourd’hui les r´eseaux sociaux et internet, cette
+science est largement exploit´ee par les entreprises. Celle-ci leur permet de
+cibler leur client`ele potentielle et de limiter leurs d´epenses en prospection, en
+ne s’adressant qu’aux individus jug´es susceptibles d’ˆetre demandeurs. C’est
+le fondement d’un nouveau type de marketing : le marketing viral. Il vise `a
+cibler les personnes les plus inﬂuentes au sein d’un r´eseau aﬁn de s´eduire un
+maximum d’individus en n’en d´emarchant qu’une petite partie. Ce marke-
+
+25
+
+ting tr`es prometteur fait l’objet de nombreuses ´etudes et semble se peauﬁner,
+notamment dans la s´election du noyau d’individus inﬂuents.
+
+26
+
+5 Conclusion
+
+La fouille de donn´ees s’av`ere ˆetre un outil incroyablement riche et puissant
+
+lorsqu’elle est appliqu´ee aux r´eseaux sociaux.
+
+La masse de donn´ees produites est riche et remplie d’informations perti-
+nentes, ce qui permet aux processus de datamining de fonctionner correcte-
+ment.
+L’existence de tr`es nombreuses recherches autour du sujet prouve, si besoin
+´etait, l’importance du ph´enom`ene et ses am´eliorations constantes.
+
+N’oublions pas que ce domaine est extrˆemement r´ecent : pourtant, il ca-
+pitalise d´ej`a un nombre immense de publications et des avanc´ees se font `a
+un rythme presque quotidien.
+Les outils math´ematiques s’aﬀˆutent, gagnant en complexit´e aﬁn de permettre
+de traiter des volumes de donn´ees toujours plus grands. Les th´eories de
+pr´ediction et d’analyse deviennent de plus en plus ﬁables et se d´emocratisent,
+permettant `a tous de proﬁter de la richesse des informations contenues.
+
+Mais si les scientiﬁques avancent `a grands pas, les experts marketing
+ne sont pas en reste. Les th´eories et les avanc´ees sont nombreuses dans ce
+domaine aussi : voil`a quelques ann´ees, le concept mˆeme de marketing viral
+n’existait pas, alors qu’il est aujourd’hui devenu l’un des fers de lance de la
+communication par Internet.
+
+Malheureusement, les probl´ematiques de vie priv´ees ´evoluent au moins
+aussi vite. La somme d’informations qu’un individu est prˆet `a mettre en
+ligne est presque sans limite, contrairement `a sa volont´e de les partager avec le
+monde. ´Echanger avec un cercle contrˆol´e, oui ; avec le monde entier ou le gou-
+vernement, non. Ces attentes doivent ˆetre prises en compte par les diﬀ´erents
+r´eseaux lors de l’exploitation des donn´ees grˆace aux diﬀ´erents m´ecanismes
+d´esormais mis en place.
+
+Comme souvent, au vu de l’´etat de l’art dans le domaine, une grande
+question demeure : qu’en sera-t-il dans dix ans ? Quelle probl´ematique l’em-
+portera, les math´ematiques, le marketing ou le repli face au public ? La ques-
+tion en elle-mˆeme manque de pertinence, tant les concepts pr´esent´es ici sont
+neufs et risquent d’´evoluer en quelques mois seulement.
+
+27
+
+A Mod´elisation des r´eseaux sociaux
+
+(cid:28) MySpace is doubly awkward because it makes public what should
+be private. It doesn’t just create social networks, it anatomizes
+them. It spreads them out like a digestive tract on the autopsy
+table. You can see what’s connected to what, who’s connected to
+whom. (cid:29) [TI06]
+
+L’analyse des r´eseaux sociaux est une probl´ematique assez ancienne qui
+n’est pas n´ee avec l’av`enement des r´eseaux sociaux modernes tels que Fa-
+cebook ou Twitter. En eﬀet, l’analyse des donn´ees issues des relations so-
+ciales a occup´e depuis plusieurs d´ecennies de nombreux domaines tels que la
+sociologie, la psychologie ou encore l’anthropologie. Ces relations autrefois
+transparentes sont d´esormais rendues visibles grˆace `a l’informatique.
+
+On pourra notamment citer les travaux de [Zac77], suivant les relations
+existantes entre les 34 membres d’un club de karat´e sur une p´eriode de 3 ans.
+On trouve notamment dans cet ouvrage un exemple de mod´elisation en
+graphe des r´eseaux sociaux, les individus ´etant repr´esent´es par des nœuds,
+les liens entre ces individus ´etant repr´esent´es par des arˆetes, lesdits nœuds
+et lesdites arˆetes pouvant avoir des attributs sp´eciﬁques.
+
+Figure 11 – [Zac77] Repr´esentation graphique des relations sociales entre les
+34 membres du club de karat´e. Un lien existe entre deux membres si ceux-ci
+entretiennent des relations sociales en dehors du contexte du club de karat´e.
+
+Au cours de cette ´etude s’est d´eroul´e un ph´enom`ene inattendu qui a ´et´e
+la division de ce club en deux `a cause de divergences sur l’organisation du
+
+28
+
+club. Zachary a alors remarqu´e que cette division s’est caract´eris´ee par une
+coupure du graphe repr´esentatif des membres du club par sa coupe minimale,
+s´eparant ainsi les personnes ayant des opinions diﬀ´erentes sur le probl`eme 11.
+Cette particularit´e illustre l’existence d’une clusterisation de ces graphes : les
+personnes se groupent en communaut´es. Cette exp´erimentation a aussi mis
+en ´evidence la notion de hubs, sur laquelle nous reviendrons plus tard.
+
+L’exemple donn´e ne traite que d’un graphe `a petite ´echelle mais nous ver-
+rons qu’historiquement, deux axes de recherches sont apparus, pour l’´etude
+de petits graphes par les scientiﬁques du domaine du social et par l’´etude des
+propri´et´es des grands graphes.
+
+Aujourd’hui, il est beaucoup plus simple de r´ecolter les donn´ees n´ecessaires
+pour r´ealiser les recherches. Celles-ci proviennent en g´en´eral de trois cat´egories
+de sources : les r´eseaux sociaux (MySpace, Facebook, LiveJournal, Flickr,
+etc.), les r´eseaux de communication en ligne (e-mail et messagerie instan-
+tan´ee, blogs, e-commerce, etc.) et les r´eseaux de publications en ligne (arXiv,
+etc.).
+
+Contextualisons pour donner des exemples de dimensionnement. Dans les
+ann´ees 1970, l’´etude portait sur des graphes de 34 nœuds sur 3 ans issus d’un
+club de karat´e [Zac77]. En 2005, ce sont 436 nœuds issus d’´echanges mails
+entre chercheurs des HP Labs qui sont ´etudi´es sur 3 mois [AA05], puis 43
+553 nœuds issus d’´echanges mails sur une universit´e pendant 1 an [KW06].
+D’autres recherches ont ´egalement port´es sur des grands r´eseaux comme les
+travaux de [LNNK+05] traitant un r´eseau de 1 312 454 nœuds ou des travaux
+de [LH07] qui ont r´evolutionn´e le domaine sur 240 millions d’individus, issus
+du r´eseau Microsoft Messenger.
+
+Figure 12 – [AA05] R´eseau d’´echange mails entre les membres des HP Labs,
+les liens gris ´etant les liens hi´erarchiques et les liens gris les ´echanges mails.
+
+11. Ce r´esultat est bien ´evidemment sp´eciﬁque `a ce cas l`a et ne peut ˆetre g´en´eralis´e sans
+
+pr´ecautions.
+
+29
+
+Il est aussi `a noter que la taille de ces graphes pose actuellement des
+probl`emes en mati`ere de stockage, surtout si ceux-ci sont dynamiques, jusqu’`a
+repr´esenter 100 GB de donn´ees par jour selon [Hof09] pour des graphes de
+107 nœuds, 102 liens par nœuds et en prenant les m´etadonn´ees rattach´ees
+aux nœuds et aux liens ainsi que le dynamisme du graphe.
+
+Figure 13 – [LH07] Utilisateurs du r´eseau Microsoft Messenger repr´esent´es
+g´eographiquement. La couleur est repr´esentative de la densit´e `a une position
+donn´ee.
+
+Nous pouvons d`es lors aller plus loin et essayer, dans un premier temps, de
+caract´eriser ces graphes pour ensuite essayer de retrouver ces comportements
+dans des mod`eles.
+
+A.1 Propri´et´es des r´eseaux sociaux
+
+A.1.1 Vocabulaire
+
+R´eseau social
+
+Structure par laquelle des individus sont li´es entre eux par un lien. Un
+tel r´eseau est g´en´eralement repr´esent´e par un graphe dont les nœuds sont les
+acteurs du r´eseau et dont les liens illustrent les relations entre ces acteurs.
+
+Communaut´es, Clusters et Groupes
+
+Une communaut´e est un ensemble de nœuds ayant de nombreuses connexions
+
+entre eux mais ayant un tr`es faible nombre de connexions vers l’ext´erieur.
+
+Figure 14 – Communaut´es dans un graphe.
+
+30
+
+Les communaut´es, aussi appel´ees modules, ne sont pas `a confondre avec
+les groupes, ces derniers ´etant une caract´eristique des nœuds. En eﬀet, chaque
+nœud peut d´eclarer qu’il appartient `a un ou plusieurs groupes (comme c’est le
+cas avec les groupes Facebook par exemple). Un groupe est donc constitu´e de
+membres adh´erents et ne doit donc pas ˆetre confondu avec les communaut´es.
+Enﬁn, la diﬀ´erence entre la d´etection de communaut´es et le clustering
+consiste en ce que le premier cherche `a diviser le graphe en des structures se-
+lon leurs connexions (c’est uniquement de la topologie) alors que le deuxi`eme
+consiste en un regroupement de structures selon une mesure de similarit´e,
+mesure qui est `a d´eﬁnir au pr´ealable. Cependant, ces deux notions sont si-
+milaires et sont souvent confondues.
+
+A.1.2 Loi de distribution des degr´es
+
+Tout d’abord, il faut savoir que les ´etudes sur les graphes de r´eseaux
+sociaux ont montr´e que ces graphes poss`edent des caract´eristiques parti-
+culi`eres. L’une de ces caract´eristiques est la loi de distribution des degr´es de
+ces graphes.
+
+En eﬀet, il a ´et´e observ´e par [Pri65] 12 puis v´eriﬁ´e plus tard avec exp´erimentations
+
+que dans un graphe repr´esentant les r´eseaux sociaux, les degr´es des nœuds
+suivent une distribution de type loi de puissance, de type P (k) ∝ k−α avec
+k les degr´es d’un nœud.
+
+Figure 15 – [Pri65] Distribution des degr´es obtenue avec en abscisses k et
+en ordonn´ees P(k).
+
+Ces graphes sont alors dits `a (cid:28) invariance d’´echelle (cid:29) et sont bien diﬀ´erents
+de la r´epartition classique des degr´es d’un graphe totalement al´eatoire qui,
+
+12. En l’occurrence, l’´etude de [Pri65] est bas´ee sur les citations entre les documents de
+
+recherche de l’´epoque.
+
+31
+
+dans un tel cas, suit une distribution binomiale de type P (k) = (cid:0)n
+
+(cid:1)pk(1 −
+
+p)n−k.
+
+k
+
+D’une fa¸con plus g´en´erale, les lois de puissance se retrouvent souvent dans
+les r´eseaux d’informations comme les degr´es des routeurs Internet. On parle
+d’une distribution heavy-tailed dont l’expression v´eriﬁe limx→∞ eλxP r[X >
+x] = ∞, ∀λ > 0.
+
+Figure 16 – [Les08] Distribution des degr´es dans le r´eseau social Flickr. Le
+graphique de droite reprend les donn´ees de celui de gauche sur des axes en
+log-log. Il y a bien une loi de puissance avec ici un coeﬃcient α = 1, 75.
+
+L’une des cons´equences de cette loi de distribution des degr´es est qu’en-
+viron 20 % des nœuds ont 80 % des liens, donnant alors une importance
+capitale aux hubs (nœuds ayant beaucoup de liens sortants) et aux autorit´es
+(nœuds ayant beaucoup de liens entrants). En eﬀet, la cons´equence de ce type
+de propri´et´e est qu’une attaque sur seulement 5 % des nœuds pr´ealablement
+bien choisis suﬃt `a d´efaire le r´eseau selon [Jac09].
+
+Figure 17 – Diﬀ´erence entre un graphe al´eatoire (avec une loi de distribution
+des degr´es binomiale) et un graphe repr´esentant un r´eseau social. On notera
+la pr´esence de nœuds sp´eciaux appel´es (cid:28) hubs (cid:29) et (cid:28) autorit´es (cid:29) dont on
+reviendra dans la suite de ce document.
+
+32
+
+A.1.3 Diam`etre et (cid:28) petit monde (cid:29)
+
+En plus de la loi de distribution des degr´es, il a ´et´e v´eriﬁ´e par [TM69]
+que les graphes ont, en g´en´eral, un faible diam`etre, qui rappelons-le est la
+distance la plus longue de toutes les plus courtes distances d’un graphe.
+Cette th´eorie est plus connue sous le nom des (cid:28) 6 degr´es de s´eparation (cid:29) et
+caract´erise un r´eseau dans lequel il est possible de trouver un chemin tr`es
+court entre toute paire de points, chemin trouvable sans mˆeme connaˆıtre le
+r´eseau dans sa totalit´e. En g´en´eral, le diam`etre d’un graphe repr´esentant un
+(cid:28) petit monde (cid:29) ou d’un graphe al´eatoire est de l’ordre de O(log n) avec n le
+nombre de nœuds du graphe.
+
+Figure 18 – [TM69] Longueur des chaˆınes compl´et´ees lors de l’exp´erience
+de Milgram, la moyenne ´etant ici de 6,2 ´etapes avant la r´eception ﬁnale.
+
+Cette th´eorie se retrouve plus ou moins avec de vrais graphes tels que
+celui pr´esent´e par [LH07], pr´esentant la r´epartition des distances sur le r´eseau
+Microsoft Messenger et qui repr´esent´ee ci-dessous.
+
+Figure 19 – [LH07] (cid:28) Degr´es de s´eparation (cid:29) observ´es sur le r´eseau Microsoft
+Messenger. La moyenne est ici de 6,6 ´etapes.
+
+Une autre ´etude de [MMG+07] nous montre qu’en 2006/2007, le r´eseau
+YouTube avait un diam`etre de 21 (1,1 millions d’utilisateurs, 4,9 millions
+de liens, longueur moyenne des chaˆınes de 5,10), que le r´eseau Flickr avait
+un diam`etre de 27 (1,8 millions d’utilisateurs, 22 millions de liens, longueur
+moyenne des chaˆınes de 5,67) et que le r´eseau LiveJournal avait un diam`etre
+de 20 (5,2 millions d’utilisateurs et 72 millions de liens, longueur moyenne
+des chaˆınes de 5,88).
+
+33
+
+A.1.4 Dynamique et ´evolution
+
+Tout d’abord, en opposition `a ce qui se croyait auparavant, [LKF05] ont
+observ´e qu’a l’oppos´e de graphes (cid:28) normaux (cid:29), les graphes des r´eseaux so-
+ciaux devenaient de plus en plus denses avec l’augmentation des degr´es des
+nœuds des graphes selon la loi de puissance suivante : E(t) ∝ N (t)a avec
+N (t) les nœuds au temps t, E(t) les liens au temps t et a l’exposant de
+densiﬁcation, 1 ≤ a ≤ 2.
+
+Figure 20 – [LKF05] `A gauche, augmentation du degr´e des nœuds et `a
+droite, corr´elation avec la loi de densiﬁcation propos´ee. Cette ´etude a ´et´e
+r´ealis´ee `a partir de quatre sources de donn´ees.
+
+On pourra remarquer que la loi de densiﬁcation pr´esent´ee suppose que le
+nombre de liens augmente plus vite que le nombre de nœuds. Enﬁn, ceux-ci
+ont ´egalement observ´es une diminution du diam`etre du graphe.
+
+Figure 21 – [LKF05] Observation de la diminution du diam`etre des graphes
+´etudi´es.
+
+34
+
+A.1.5 Clusterisation
+
+Un r´eseau social se d´emarque ´egalement par son haut taux de cluste-
+risation, qui peut se mesurer par la proportion de (cid:28) mes (cid:29) amis qui sont
+amis entre eux. Ce taux, pour un nœud i est calcul´e de la mani`ere suivante :
+ki(ki−1), Ci ∈ [0, 1] avec ei le nombre de liens entre les voisins de i et
+Ci = 2ei
+avec ki le degr´e de i. Le taux de clusterisation peut ´egalement ˆetre calcul´e
+pour un graphe en eﬀectuant la moyenne de tous les coeﬃcients de chaque
+nœud, C = 1
+N
+
+(cid:80)N
+
+i Ci.
+
+Ce haut taux se retrouve dans les ´etudes de [New03] et de [New01] `a partir
+desquelles nous savons que pour un r´eseau d’auteurs d’articles de recherche
+en physique constitu´e de 52 909 nœuds le taux de clusterisation est de 56
+%. Il en est de mˆeme pour un r´eseau d’acteurs de cin´ema pour lequel ce
+taux atteint les 78 %. Ce clustering peut s’apparenter `a des communaut´es
+d’individus.
+
+Figure 22 – [New03] Quelques donn´ees sur divers r´eseaux sociaux.
+
+Cette propri´et´e de clustering peut ˆetre expliqu´ee par la propri´et´e de simi-
+larit´e (les amis de x lui sont similaires) et par une transitivit´e de la similarit´e
+
+35
+
+o`u si x et y sont amis avec u alors x et u sont similaires, de mˆeme entre y
+et u d’o`u par transitivit´e x et y sont similaires ou encore x et y sont amis.
+Cette propri´et´e est appel´ee homophily.
+
+A.2 Mod´elisation des r´eseaux sociaux
+
+(cid:28) We want Kepler’s Laws of Motion for the Web (cid:29)(Mike Steuer-
+walt, NSF KDI Workshop, 1998)
+
+Les r´esultats d´etaill´es pr´ec´edemment sur la mod´elisation des r´eseaux so-
+ciaux ont ´et´e le fruit des recherches des dix derni`eres ann´ees. `A l’heure des
+r´eseaux sociaux num´eriques, de nouveaux probl`emes se posent, ce que nous
+allons voir dans la partie qui suit. Deux grands axes de recherche sont dis-
+tinguables :
+
+– ´Etude de la structure des r´eseaux sociaux (ce que nous allons traiter
+
+dans cette partie) ;
+
+– ´Etude des propri´et´es et des motifs retrouvables dans les r´eseaux sociaux
+
+(trait´es dans la partie suivante).
+
+Les techniques habituellement utilis´ees pour faire de la Fouille de Donn´ees
+ne sont pas adapt´ees `a la nature mˆeme des graphes repr´esentant les r´eseaux
+sociaux. En eﬀet, de nombreux obstacles rendent ces algorithmes ineﬃcaces
+dont notamment ceux de la taille des graphes soumis (qui ne cesse d’aug-
+menter de par la facilit´e d’acquisition des donn´ees) et de la dynamique de
+ces graphes.
+
+De plus, comme nous venons de le mentionner, l’aspect dynamique de ces
+
+r´eseaux sociaux soul`eve des probl´ematiques jusqu’alors non abord´ees.
+
+Les mod`eles pr´esent´es dans la suite de cette synth`ese ont tous ´et´e con¸cus
+dans le but de reproduire les m´ecanismes r´egissant les propri´et´es observ´ees
+pr´ec´edemment et ce aﬁn de pouvoir (cid:28) pr´edire (cid:29) d’autres propri´et´es jusqu’alors
+insoup¸conn´ees.
+
+A.2.1 Mod´elisation de la structure d’un r´eseau social par g´en´eration
+
+al´eatoire
+
+Des mod`eles de r´eseaux sociaux ont ´et´e ´elabor´es dans le but d’am´eliorer
+la compr´ehension globale de ces r´eseaux. Parmi ceux-ci nous pourrons citer
+celui de [ER60] qui est g´en´er´e al´eatoirement 13. Un mod`ele aussi simple qui
+
+13. Les liens du graphe sont cr´e´es entre des nœuds choisis al´eatoirement.
+
+36
+
+celui-l`a permet eﬀectivement d’obtenir l’existence de courts chemins mais ne
+permet pas d’obtenir des degr´es suivant la bonne distribution de degr´es ni
+de retrouver une clusterisation caract´eristique des petits mondes.
+
+En eﬀet, nous pouvons rappeler que les graphes obtenus de cette mani`ere
+ont des degr´es suivant une distribution de type binomiale ce qui ne correspond
+pas `a ce qui est caract´eristique aux r´eseaux sociaux, mˆeme si leur diam`etre
+est bien de l’ordre de O(log n).
+
+A.2.2 Mod´elisation de la structure d’un r´eseau social par les (cid:28) pe-
+
+tits mondes (cid:29)
+
+Il a fallu attendre les mod`eles de [WS98] g´en´erant des graphes avec de
+la clusterisation et un petit diam`etre ainsi que le mod`ele de [Kle00] qui per-
+mettent tous les deux de retrouver algorithmiquement les caract´eristiques
+des petits mondes sur des graphes g´en´er´es, c’est-`a-dire les propri´et´es de petit
+diam`etre et un taux de clusterisation ´elev´ee.
+
+Mod`ele de Watts & Strogatz
+
+Le mod`ele de [WS98] est pr´esent´e ci-dessous. Celui-ci consiste simplement,
+`a partir d’un graphe r´egulier (un nœud est reli´e `a ses k voisins), de parcourir
+chacun des nœuds de ce graphe et de choisir, pour chaque nœud, un lien que
+l’on va, ou non, reconnecter avec une autre extr´emit´e selon une probabilit´e
+p `a d´eﬁnir.
+
+Figure 23 – [WS98] `A gauche, la construction du graphe selon le choix de
+p. `A droite, l’´equilibre entre la longueur des cours chemins L du graphe et
+son taux de clusterisation C. Pour rappel, p doit ˆetre choisi tel que L soit
+petit et que C soit le plus grand possible.
+
+En eﬀet, comme nous pouvons le voir sur la ﬁgure ci-dessus, les r´eseaux
+sociaux sont consid´er´es comme ayant une structure `a partir de laquelle on
+ajoute une perturbation al´eatoire param´etr´e avec un certain coeﬃcient p.
+
+37
+
+De tels graphes ne sont cependant pas consid´er´es comme des (cid:28) petits
+mondes (cid:29) puisque leur propri´et´e de navigation n’est que tr`es diﬃcilement
+r´ealisable.
+
+Mod`ele de Kleinberg
+
+L’id´ee de [Kle00] est de disposer n individus sur une grille de dimension
+k et de connecter chaque individu avec, d’une part, leurs voisins les plus
+proches mais aussi avec d’autres personnes ´eloign´ees avec la probabilit´e de
+P r[u → v] ∝ 1
+d(u,v)α si on observe le lien entre un nœud u et un nœud distant
+v.
+
+Figure 24 – [Kle00] Construction d’un graphe selon le mod`ele pr´esent´e.
+
+Kleinberg a d´emontr´e que si α (cid:54)= k, alors il n’existe pas d’algorithme
+local permettant de trouver des courts chemins mais que si α = k (la dimen-
+sion de la grille) alors il est possible de trouver de tels chemins en utilisant
+l’algorithme glouton suivant : si on veut atteindre une cible c alors on doit
+choisir d’aller vers notre ami qui aime le plus c. Ces chemins ont alors une
+longueur de O(log2 n). Cette diﬀ´erence d’avec le mod`ele de [KW06] permet
+de retrouver l’eﬀet des petits mondes : ces graphes sont dits routables.
+
+Ces algorithmes de routage sont actuellement exploit´es dans les r´eseaux
+d’´echanges Peer-to-Peer, comme celui de [CSWH00] qui est utilis´e dans le
+r´eseau Freenet.
+
+Adaptations de l’approche de Kleinberg
+
+Mˆeme si l’approche de Kleinberg permet eﬀectivement d’obtenir un eﬀet
+de petit monde, celle-ci a ´echou´ee dans la mod´elisation des donn´ees d’un vrai
+r´eseau social tel que celui de LiveJournal comme l’ont montr´es [LNNK+05].
+Ces derniers ont eﬀectivement montr´es que la r´epartition en P r[u → v] ∝
+d(u, v)−2 (la surface de la Terre est de dimension 2) n’est pas v´eriﬁ´ee, le
+th´eor`eme de Kleinberg ne se basant que sur une grille de r´epartition des
+nœuds uniformes.
+
+38
+
+Figure 25 – [LNNK+05] Non uniformit´e des positions g´eographiques des
+utilisateurs du r´eseau social LiveJournal. Les cercles bleues repr´esentent des
+paliers de 50 000 individus.
+
+1
+
+ranku(v) avec ranku(v) = |{n : d(u, n) < d(u, v)}| et qui
+
+L’aspect g´eographique des individus repr´esent´es par les nœuds du r´eseau
+a donc son importance, importance retrouv´ee dans les approches faisant in-
+tervenir les rangs entre deux nœuds en lieu et place des distances. On a
+alors P r[u → v] ∝
+repr´esente donc le nombre de nœuds s´eparant u et v. Il a ´et´e d´emontr´e que
+cette approche bas´ee sur le rang et donc sur la densit´e permet d’obtenir, de
+la mˆeme mani`ere que celle de [Kle00], des petits mondes avec des chemins de
+longueur en O(log3 n) cette fois-ci.
+Il est ´egalement `a noter que cette recherche a abouti sur une estimation de
+la probabilit´e que u et v soient amis suivante : P r[u → v] =  + f (d(u, v)) o`u
+f (d(u, v)) repr´esente les amis g´eographiquement proches et o`u  repr´esentent
+les autres amis ´eloign´es. Dans le cas de LiveJournal, cet  repr´esente 33 %
+des amis ce qui est non n´egligeable.
+
+Figure 26 – [LNNK+05] Relation entre la probabilit´e d’ˆetre amis et le rang.
+On remarquera que la loi donn´ee ci-dessus avec les rangs est bien respect´ee.
+
+39
+
+Autres approches (cid:28) petits mondes (cid:29)
+
+D’autres approches similaires `a celles abord´ees pr´ec´edemment ont ´et´e
+´etudi´ees, toutes utilisant un graphe augment´e not´e (H, φ), avec H un graphe
+et φu(v) la probabilit´e qu’un nœud v soit en lien avec un nœud u.
+
+Autres approches issues d’autres domaines scientiﬁques
+
+Pour sortir de l’approche (cid:28) petits mondes (cid:29), de nombreux autres mod`eles
+ont ´egalement ´et´e con¸cus pour repr´esenter les r´eseaux sociaux. Ces mod`eles
+sont historiquement issus d’autres disciplines comme des Statistiques (p*
+Models [WP96], Stochastic Actor Oriented Model [SSS05], etc.), de la Socio-
+logie, de la Physique (mod`ele d’Albert et de Barab´asi [AB02], etc.) ou des
+Math´ematiques.
+
+A.2.3 Mod´elisation de la dynamique et de l’´evolution
+
+Maintenant que des mod`eles sont capables de reproduire la structure glo-
+bale d’un graphe repr´esentant un r´eseau social, nous pouvons nous int´eresser
+au cˆot´e dynamique derri`ere ces r´eseaux et notamment `a ce qui se passe lors
+de l’ajout d’un nouveau nœud dans le graphe.
+
+Approche guid´ee par la pr´ef´erence
+
+Dans le but d’obtenir une distribution des degr´es qui suit une loi de
+puissance, les nouveaux nœuds arrivants ne peuvent pas avoir des degr´es
+choisis sans pr´ecautions.
+
+Un mod`ele int´eressant de [Pri65] propose de r´ealiser des graphes tels que
+la probabilit´e d’avoir un lien entre un nouveau nœud u et un nœud existant
+v est li´e au degr´e de la mani`ere suivante : P r[u → v] = deg(v)
+w deg(w) avec w les
+autres nœuds du graphe, v y compris.
+
+(cid:80)
+
+Ce mod`ele est souvent appel´e (cid:28) le ph´enom`ene du riche qui devient de
+plus en plus riche (cid:29) et permet bien de garder une loi de distribution des
+degr´es en loi de puissance. Cette analogie peut ˆetre ´etendue aux travaux de
+recherches puisqu’eﬀectivement, comme l’observe [Pri65], les chances de nou-
+velles citations d’un papier de recherches sont proportionnelles aux citations
+qu’il poss`ede d´ej`a.
+
+40
+
+Figure 27 – [Pri65] Observations quant `a la chance d’avoir de nouvelles
+citations selon les citations d´ej`a poss´ed´ees.
+
+D’autres mod`eles, tous bas´es sur le principe du guidage par la pr´ef´erence,
+ont ´et´e con¸cus pour compl´eter ce mod`ele qui ne prend pas en compte plusieurs
+param`etres comme la topologie du graphe par exemple.
+
+Mod`ele du feu de forˆet
+
+Le mod`ele dit du feu de forˆet a ´et´e con¸cu par [LH07]. Celui-ci est tr`es
+simple mais permet de mod´eliser la dynamique d’un graphe de r´eseau social
+en le densiﬁant tout en r´eduisant son diam`etre.
+
+L’algorithme est le suivant : pour chaque nouveau nœud v qui arrive,
+choisir au hasard (loi uniforme) un nœud w qui servira (cid:28) d’ambassadeur (cid:29). `A
+partir de ce nœud, d´eterminer au hasard un nombre de connexions entrantes
+et sortantes de w et r´ep´eter ces ´etapes jusqu’`a ce que le (cid:28) feu (cid:29) s’arrˆete. Cette
+approche est bas´ee sur le principe que chaque nouveau nœud dispose d’un
+centre de gravit´e et que la probabilit´e que celui-ci soit li´es `a d’autres nœuds
+d´ecroˆıt selon la distance `a laquelle les autres nœuds ce trouvent par rapport
+`a ce centre. Le nouveau nœud v est alors attach´e `a tous les nœuds ayant ´et´e
+touch´es par le feu.
+
+41
+
+Figure 28 – [LKF05] Densiﬁcation et r´eduction du diam`etre d’un graphe
+apr`es l’ajout de nouveaux nœuds selon l’algorithme du feu de forˆet.
+
+Mod`ele bas´e sur les produits de Kronecker
+
+Un nouveau mod`ele assez r´ecent propos´e par [LCKF05] et par [LCK+10]
+permet de g´en´erer des graphes ayant des sous-graphes se r´ep´etant. En eﬀet,
+les observations font part de parties de graphes qui se r´ep`etent d’o`u l’utilisa-
+tion du produit de Kronecker pour g´en´erer de tels graphes. Pour rappel, le
+produit de Kronecker (not´e ⊗) s’exprime de la fa¸con suivante :
+
+
+
+ a11B ···
+
+. . .
+
+...
+
+A ⊗ B =
+
+a1nB
+
+...
+
+am1B ··· amnB
+
+Le r´esultat d’un produit de Kronecker peut alors s’assimiler `a des matrices
+d’adjacences, dont la taille est continuellement en augmentation. Un graphe
+1 = Kk = K1⊗ K1⊗
+de Kronecker est alors d´eﬁni de la mani`ere suivante : K [k]
+... ⊗ K1 = Kk−1 ⊗ K1. La matrice K1 sert `a initialiser la g´en´eration et est
+dite matrice d’initialisation.
+
+Figure 29 – [LCK+10] Exemple de g´en´eration de matrices de Kronecker
+avec des matrices d’initialisations diﬀ´erentes.
+
+Le mod`ele de Kronecker nous permet de g´en´erer des graphes v´eriﬁant la
+
+plupart des caract´eristiques list´ees pr´ec´edemment.
+
+42
+
+Figure 30 – [LCK+10] Corr´elation entre l’´evolution du mod`ele bas´e sur le
+produit de Kronecker avec ce qui est observ´e.
+
+Le mod`ele de Kronecker nous oﬀre un cadre permettant de nombreuses
+possibilit´es puisque celui-ci permet de faciliter les simulations d’algorithmes,
+de faire des pr´edictions, de d´etecter des anomalies et bien d’autres applica-
+tions.
+
+43
+
+R´ef´erences
+
+[AA01]
+
+[AA05]
+
+[AB02]
+
+[AES03]
+
+[Ast04]
+
+[Bar06]
+
+[Bou05]
+
+[BP99]
+
+[CMN08]
+
+[CNM04]
+
+D. Agrawal and C. C. Aggarwal, 2001. URL : http ://charuag-
+garwal.net/private.pdf.
+
+Adamic and Adar. How to search a social network, 2005.
+
+Albert and Barab´asi. Statistical mechanics of complex networks,
+2002.
+
+Johannes Gehrke
+makrishnan
+http
+privacy.pdf.
+
+Srikant.
+
+Alexandre
+
+Ra-
+:
+://www.cs.cornell.edu/johannes/papers/2003/pods03-
+
+Evﬁmievski
+
+ACM,
+
+2003.
+
+and
+
+URL
+
+Philippe Astor. Un groupe de d´efense de la vie priv´ee porte
+plainte contre le service gmail de google.
+ztndet.fr, 2004.
+URL : http ://www.zdnet.fr/actualites/un-groupe-de-defense-
+de-la-vie-privee-porte-plainte-contre-le-service-gmail-de-google-
+39148165.htm.
+
+Michael Barbaro. A face is exposed for aol searcher no.
+4417749.
+URL :
+http ://www.nytimes.com/2006/08/09/technology/09aol.html ?pagewanted=all.
+
+The New York Times, August 2006.
+
+Marie Boulain. Marketing de masse ou marketing direct. 2005.
+URL : http ://www.fcsq.qc.ca/publications/savoir/Decembre-
+2005/Page-6.pdf.
+
+Brin and Page. The anatomy of a large-scale hypertextual web
+search engine, 1999.
+
+Clauset, Moore, and Newman. Hierarchical structure and the
+prediction of missing links in networks, 2008.
+
+Clauset, Newman, and Moore. Finding community structure in
+very large networks, 2004.
+
+[CSWH00] Clarke, Sandberg, Wiley, and Hong. Freenet : A distributed
+
+anonymous information storage and retrieval system, 2000.
+
+[Dem97]
+
+A.P. Dempster. Journal of the Royal Statistical Society, 1997.
+
+[DKT03]
+
+Jon Kleinberg David Kempe and Eva Tardos. Maximizing
+the spread of
+in[U+FB02]uence through a social network,
+2003. URL : http ://www.cs.cornell.edu/home/kleinber/kdd03-
+inf.pdf.
+
+44
+
+[DN04]
+
+[Dom04]
+
+[DR01]
+
+[DR02]
+
+[Dum04]
+
+[ER60]
+
+[Fac11]
+
+[GN01]
+
+[Goo11]
+
+[Hof09]
+
+[Jac09]
+
+[JLA07]
+
+[Juv00]
+
+Dinur
+
+Irit
+http ://www.cs.bgu.ac.il/ kobbi/papers/psd.pdf, 2004.
+
+Kobbi
+
+Nissi.
+
+and
+
+URL
+
+:
+
+Domingos.
+
+Pedro
+works
+http
+marketing/10.1.1.76.4474.pdf.
+
+net-
+:
+://dl.dropbox.com/u/18765753/mrk6092/9.viral-
+
+viral marketing,
+
+Mining
+2004.
+
+social
+
+URL
+
+for
+
+Pedro Domingos
+ning the network value of
+http ://www.cs.washington.edu/homes/pedrod/papers/kdd01a.pdf.
+
+and Matthew Richardson.
+
+customers, 2001.
+
+Mi-
+URL :
+
+Mining
+Pedro Domingos
+knowledge-sharing sites for viral marketing, 2002. URL :
+http ://www.cs.washington.edu/homes/pedrod/papers/kdd02b.pdf.
+
+and Matthew Richardson.
+
+la pub
+Estelle Dumout. Nouveau cr´eneau pour google :
+cibl´ee dans le courrier priv´e.
+URL :
+http ://www.zdnet.fr/actualites/nouveau-creneau-pour-google-
+la-pub-ciblee-dans-le-courrier-prive-39147650.htm.
+
+ztndet.fr, 2004.
+
+Erd˜os and R´enyi. On the evolution of random graphs, 1960.
+
+Facebook.
+https ://www.facebook.com/press/info.php ?factsheet.
+
+Brochure,
+
+2011.
+
+URL
+
+:
+
+Girvan and Newman. Community structure in social and biolo-
+gical networks, 2001.
+
+Google. Google’s income statement information, 2011. URL :
+http ://investor.google.com/ﬁnancial/tables.html.
+
+Hofman. Social network analysis with hadoop, 2009.
+
+Jacomy. Introduction `a l’exploration du web par la th´eorie des
+graphes, 2009.
+
+Bernardo A. Huberman Jure Leskovec and Lada A. Adamic.
+The dynamics of voral marketing, 2007. URL : http ://www-
+personal.umich.edu/ ladamic/papers/viral/viralTWeb.pdf.
+
+Steve Juvertson. What exactly is viral marketing ? 2000. URL :
+http
+://currypuﬀandtea.ﬁles.wordpress.com/2008/03/viral-
+marketing.pdf.
+
+[Kle97]
+
+Kleinberg. Authoritative sources in a hyperlinked environment,
+1997.
+
+45
+
+[Kle00]
+
+[KW06]
+
+[Lau09]
+
+Kleinberg. The small-world phenomenon : An algorithmic pers-
+pective, 2000.
+
+Kossinets and Watts. Empirical analysis of an evolving social
+network, 2006.
+
+sur
+
+traces
+
+Un internaute mis `a nu `a partir
+Samuel Laurent.
+de ses
+le web.
+Le Figaro, January 2009.
+URL : http ://www.leﬁgaro.fr/hightech/2009/01/15/01007-
+20090115ARTFIG00625-un-internaute-mis-a-nu-a-partir-de-
+ses-traces-sur-le-web-.php.
+
+[LCK+10]
+
+Leskovec, Chakrabarti, Kleinberg, Faloutsos, and Ghahramani.
+Kronecker graphs : An approach to modeling networks, 2010.
+
+[LCKF05] Leskovec, Chakrabarti, Kleinberg, and Faloutsos. Realistic and
+mathematically tractable graph generation and evolution and
+using kronecker multiplication, 2005.
+
+[Les08]
+
+[LH07]
+
+[LKF05]
+
+[LL98]
+
+[LNK04]
+
+Leskovec. Dynamics of large networks, 2008.
+
+Leskovec and Horvitz. Planetary-scale views on an instant-
+messaging network, 2007.
+
+Leskovec, Kleinberg, and Faloutsos. Graphs over time : Densi-
+ﬁcation laws and shrinking, 2005.
+
+Charles X. Ling and Chenghui Li. Data mining for direct mar-
+keting : Problems and solutions, 1998.
+
+Liben-Nowell and Kleinberg. The link prediction problem for
+social networks, 2004.
+
+[LNNK+05] Liben-Nowell, Novakz, Kumarz, Raghavanx, and Tomkinsz.
+
+Geographic routing in social networks, 2005.
+
+[LTZ+07]
+
+[LV07]
+
+[Met09]
+
+Li, Tang, Zhang, Luo, Liu, and Hong. Eos : Expertise oriented
+search using social networks, 2007.
+
+Luxburg and V. A tutorial on spectral clustering, 2007.
+
+Rapha¨el Metz. Marc l***. Le Tigre, January 2009. URL :
+http ://www.le-tigre.net/Marc-L.html.
+
+[MMG+07] Mislove, Marcon, Gummadi, Druschel, and Bhattacharjee. Mea-
+
+surement and analysis of online social networks, 2007.
+
+[New01]
+
+Newman. Scientiﬁc collaboration networks, 2001.
+
+46
+
+[New03]
+
+[NS06]
+
+Newman. Fast algorithm for detecting community structure in
+networks, 2003.
+
+Arvind Narayanan and Vitaly Shmatikov. Ancien titre : How
+To Break Anonymity of the Netﬂix Prize Dataset, URL :
+http ://arxiv.org/PS cache/cs/pdf/0610/0610105v2.pdf, 2006.
+
+[PDFV05] Palla, Der´enyi, Farkas, and Vicsek. Uncovering the overlapping
+community structure of complex networks in nature and society,
+2005.
+
+[PK09]
+
+[Pri65]
+
+[PS09]
+
+[Pui11]
+
+Delphine Manceau Bernard Dubois Philip Kotler, Kevin Keller.
+Marketing Management. Pearson, 2009.
+
+Price. Networks of scientiﬁc papers, 1965.
+
+Katherin Peterson and Katie A. Siek. Analysis of information
+disclosure on a social networking site. 2009.
+
+Florian Puisais. La plateforme google+ contre facebook, ou
+l’enjeu des donn´ees personnelles pour la publicit´e online. presse-
+citron.net, 2011. URL : http ://www.presse-citron.net/la-
+plateforme-google-contre-facebook-ou-l%E2%80%99enjeu-des-
+donnees-personnelles-pour-la-publicite-online.
+
+[SSS05]
+
+[STLS05]
+
+Snijders, Steglich, and Schweinberger. Modeling the co-evolution
+of networks and behavior, 2005.
+
+Song, Tseng, Lin, and Sun. Expertisenet : Relational and evo-
+lutionary expert modeling, 2005.
+
+[TI06]
+
+[TM69]
+
+[WP96]
+
+[WS98]
+
+[Zac77]
+
+Tossell and I. Love to hate myspace ? check out the buzz, 2006.
+
+Travers and Milgram. An experimental study of the small world
+problem, 1969.
+
+Wasserman and Pattison. Logit models and logistic regressions
+for social networks : I. an introduction to markov graphs and
+p*, 1996.
+
+Watts and Strogatz. Collective dynamics of ‘small-world’ net-
+works, 1998.
+
+Zachary. An information ﬂow model for conﬂict and ﬁssion in
+small groups, 1977.
+
+47
+
+

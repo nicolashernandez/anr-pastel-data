@@ -1,0 +1,420 @@
+http://lptms.u-psud.fr/membres/anicolas/Files/Reseaux_sociaux_PSC.pdf
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+PSC 
+MAT01 
+
+CORMAN Laura       
+CARRÉ Nathaniel   
+MORALES Juan-Pablo  
+MORILLEAU Rémi 
+NICOLAS Alexandre 
+ 
+Projet encadré par :    
+ANANTHARAMAN Nalini 
+ROTH Camille 
+ 
+04/05/2009 
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+[ANALYSE MATHÉMATIQUE 
+DES RÉSEAUX SOCIAUX] 
+RAPPORT FINAL  
+
+PSC MAT01, Rapport nal, 04/05/2009
+
+Introduction
+L'étude des réseaux sociaux est en premier lieu un problème de sociologues. Com-
+ment catégoriser les entités sociales ? Comment se forment et évoluent les communautés
+humaines ? Le sujet est aujourd'hui plus que jamais sur le devant de la scène, avec l'émer-
+gence de méta-réseaux sociaux de grande ampleur sur Internet, via le Web 2.0 (Facebook,
+Twitter, les blogs...). Qui détient le pouvoir (pouvoir d'opinion, d'innovation) dans ce nou-
+veau contexte ? Comment s'organise la diusion des idées ?
+
+Face à ces multiples problématiques, nul ne saurait se contenter d'une approche pure-
+ment qualitative, ni d'une observation de la réalité en catégories prédénies telle que le
+propose la sociologie traditionnelle. Une analyse mathématique des données, qui va au-delà
+du traitement statistique, est nécessaire pour étayer les modèles et appuyer des résultats
+probants. Un seul exemple : c'est par une application des méthodes d'analyse de réseaux
+sociaux que les épidémiologistes établissent leurs modèles de propagation des pan-
+démies, utilisés comme outils de décision cruciaux face au risque de pandémie de grippe
+porcine[1].
+
+L'analyse mathématique des réseaux sociaux se fonde sur un formalisme qui conçoit les
+réseaux en termes de sommets et de liens. Les sommets sont les individus et les liens re-
+présentent les relations qui les unissent : des relations d'amitié, de famille, professionnelles,
+ou universitaires selon les problèmes considérés (Voir annexe pour une introduction au
+formalisme de graphe).
+
+L'étude des réseaux sociaux se distingue à la fois des approches traditionnelles en sciences
+sociales et des mathématiques pures en ce sens qu'elle permet l'expérimentation. Prenons
+l'exemple de l'hypothèse de petit-monde émise en 1967 par Stanley Milgram à la suite
+d'une célèbre expérience. Cette hypothèse est l'idée révolutionnaire selon laquelle chacun
+d'entre nous pourrait être relié à n'importe quelle personne sur Terre, par l'intermédiaire
+d'un nombre très restreint de liens, typiquement moins de six. Cette découverte a stimulé
+un regain d'intérêt pour une recherche conceptuelle foisonnante sur les graphes aléatoires,
+menée notamment par Erdös, puis plus tard par Watts et Strogatz, recherche qui a permis
+en retour d'éclairer les origines de ce phénomène.
+
+Notre projet a été d'explorer les méthodes qui permettent d'élucider les structures
+sous-jacentes à un réseau social, et de comprendre leurs fondements conceptuels. Le
+campus de l'Ecole nous a fourni un champ d'expérimentation idoine, puisqu'il nous a
+permis d'obtenir des données sur le réseau des étudiants.
+
+Fig. 0.1.: Le réseau social en termes de sommets et de liens. Exemple d'un graphe de
+
+relations d'amitié sur Facebook
+
+1
+
+Table des matières
+
+I. Présentation de la démarche
+
+II. Graphes sociaux et analyse de structure
+
+3
+
+5
+
+1. Comment récupérer les données d'un graphe social ?
+
+1.1. Simulation de graphes aléatoires . . . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . .
+1.1.1. Le Modèle d'Erdös-Rényi
+. . . . . . . . . . . . . . . . . . . . . . .
+1.1.2. Graphe de Barabási-Albert
+1.1.3. Graphe de Watts et Strogatz . . . . . . . . . . . . . . . . . . . . . .
+1.2. La récupération de graphes sociaux : le graphe de Facebook . . . . . . . . .
+1.2.1.
+Informations disponibles . . . . . . . . . . . . . . . . . . . . . . . . .
+1.2.2. Programmation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+6
+6
+6
+7
+7
+8
+9
+9
+1.3. Données sur le réseau étudiant : binets et forums de discussion . . . . . . 11
+
+2. Structures statiques
+
+2.1. Recherche de communautés
+
+2.2. Vitesse de convergence des chaînes de Markov et recherche de communautés
+
+12
+. . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+2.1.1. Deux approches opposées
+. . . . . . . . . . . . . . . . . . . . . . . . 12
+2.1.2. Algorithmes classiques . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+17
+2.2.1. Présentation de l'algorithme . . . . . . . . . . . . . . . . . . . . . . . 17
+2.2.2. Justication mathématique des vitesses de convergence diérentes . . 18
+2.2.3. Expérimentation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
+2.2.4. Une amélioration de l'algorithme . . . . . . . . . . . . . . . . . . . . 23
+2.2.5. Test de la validité de l'hypothèse mathématique . . . . . . . . . . . . 25
+
+3. Structures dynamiques
+
+28
+3.1. Recherche des individus inuents d'un réseau . . . . . . . . . . . . . . . . . 28
+3.1.1. Formulation du problème
+. . . . . . . . . . . . . . . . . . . . . . . . 28
+3.1.2. Algorithme de hill-climbing . . . . . . . . . . . . . . . . . . . . . . . 29
+3.1.3. Eléments de démonstration . . . . . . . . . . . . . . . . . . . . . . . 29
+Individus inuents et invulnérabilité . . . . . . . . . . . . . . . . . . 30
+3.1.4.
+3.2. Prédiction des liens futurs . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
+3.2.1. Programme de prédiction des liens futurs
+. . . . . . . . . . . . . . . 31
+3.2.2. Vérications . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
+3.3. Liens entre structures statiques et dynamiques . . . . . . . . . . . . . . . . . 34
+3.4. Analyse de la structure locale des réseaux sociaux . . . . . . . . . . . . . . . 35
+3.4.1. Recherche de motifs
+. . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+3.4.2. Recherche d'une structure type . . . . . . . . . . . . . . . . . . . . . 39
+
+III. Travail en équipe
+
+41
+
+2
+
+Première partie .
+
+Présentation de la démarche
+
+3
+
+PSC MAT01, Rapport nal, 04/05/2009
+
+Des allers-retours constants entre théorie mathématique et expérimentation
+
+Dès lors que l'on considère une modélisation mathématique de si grande ampleur, il
+convient de développer des outils mathématiques en rapport étroit avec la réalité.
+L'approche traditionnelle d'un problème mathématique est bien souvent compliquée, dans
+le sens où les raisonnements nécessaires sont eux-mêmes diciles, mais leur enchaînement
+est linéaire : tel lemme entraîne tel théorème dont le corollaire nous intéresse. Ici nous
+devons faire face à la gestion de beaucoup de paramètres qui agissent simultanément,
+rendant l'approche non pas compliquée mais complexe. S'il est facile de dénir certains
+paramètres sur les graphes, comme le coecient de clustering, le degré moyen, le diamètre,
+la diculté est de déterminer l'inuence de ces indices sur le comportement des individus
+du graphe.
+
+C'est pourquoi il nous a paru intéressant de voir à quel point nous pouvions modéliser ces
+graphes réels, en élaborant notamment un ensemble d'algorithmes qui caractérisent leurs
+propriétés intéressantes. Notre démarche a donc été plutôt expérimentale. Nous avons fait
+des allers-retours permanents entre les graphes théoriques, les diérents algorithmes et
+les graphes réels : l'amélioration des algorithmes nous a permis d'évaluer la pertinence des
+graphes aléatoires par rapport au problème considéré et réciproquement, la génération de
+graphes possédant des caractéristiques particulières a permis d'évaluer la pertinence des
+résultats obtenus sur les graphes réels.
+
+Notre démarche s'est donc partagée entre ces principales tâches : chercher des données
+(sur le réseau polytechnicien, ou sur Facebook) et surtout les exploiter, c'est-à-dire y
+rechercher des structures signicatives et les corrélations entre ces structures.
+
+Le l directeur : détection des structures sous-jacentes aux réseaux sociaux.
+
+Modéliser un réseau social sous forme de graphe social est une prémière étape qui apporte
+peu d'informations en soi. Les graphes ainsi obtenus sont souvent immenses, illisibles, et
+leurs structures ne sont pas accessibles directement à l'oeil humain. Voici tout l'enjeu qui
+a guidé notre travail : déployer des méthodes pour détecter des structures sous-jacentes.
+Ce sont bien ces structures qui nous renseigneront sur le réseau initial.
+
+Néanmoins, lorsque nous disons : notre travail consiste à mettre en jeu des méthodes
+mathématiques et des algorithmes pour détecter des structures dans un graphe social,
+l'interêt de notre projet n'apparaît pas immédiatement. Il faut bien voir les divers enjeux
+que revêt l'expression générique recherche de structure. Ainsi, nous nous sommes penchés
+sur les problèmes suivants :
+
+ regrouper les individus en communautés
+ trouver les individus les plus inuents
+ prévoir les liens futurs entre individus
+ catégoriser les diérents graphes sociaux (appliquée à la catégorisation des forums
+
+et des ls de discussion)
+
+Comme support de ces expérimentations, nous avons recueilli des informations sur le réseau
+étudiant de l'École polytechnique, via deux moyens : les appartenances aux binets, et les
+échanges sur les forums de discussion. Nous avons également recueilli un graphe de très
+grande taille sur le réseau Facebook. In ne, il est pertinent de tester si les structures
+trouvées sont indépendantes ou corrélées. Ainsi, vérier que la création de nouveaux liens
+se fait préférentiellement à l'intérieur des communautés permet de valider les méthodes de
+recherche de communautés et de prévision des liens.
+
+4
+
+Deuxième partie .
+
+Graphes sociaux et analyse de
+
+structure
+
+5
+
+1. Comment récupérer les données d'un
+
+graphe social ?
+
+1.1. Simulation de graphes aléatoires
+
+Les graphes aléatoires, introduits par Erdös, sont, tout comme la théorie des graphes en
+général, un domaine des mathématiques relativement jeune. Ils se développent bien entendu
+en étroite interaction avec l'étude de phénomènes réels dans le domaine de l'épidémiolo-
+gie, de l'informatique (avec les enjeux inhérents à l'obtention du graphe d'Internet) et des
+graphes sociaux. En eet, dans les simulations, ils peuvent remplacer les réseaux réels, dif-
+ciles à obtenir. Nous avons choisi quelques modèles importants pour les graphes aléatoires
+par rapport à leurs propriétés, que nous avons ensuite programmés an d'y eectuer nos
+simulations. Nous les présentons ici.
+
+1.1.1. Le Modèle d'Erdös-Rényi
+
+Soit n un nombre de sommets xé. On peut alors construire 2n(n−1)/2 graphes non
+orientés, non pondérés. Cependant, on ne contrôle pas du tout les caractéristiques du
+graphe tiré. C'est pourquoi il est intéressant de dénir des règles plus précises de tirage de
+graphe.
+
+Le modèle d'Erdös permet de dénir la probabilité de présence d'une arête. On choisit
+un nombre p entre 0 et 1, et on construit le graphe de manière à ce que chaque arête
+existe avec une probabilité p. Cette construction est l'une des plus simples qu'on puisse
+imaginer. Néanmoins, ce type de graphe possède des propriétés intéressantes qui en font un
+objet utile pour simuler des graphes de manière générale. Dans l'ensemble des graphes que
+nous avons étudiés, nous avons déterminé quelques paramètres qui permettent de décrire
+de manière ecace les graphes sociaux. Le type d'étude sera donc le même pour tous les
+graphes aléatoires. Il faut préciser que la plupart des résultats mathématiques concernant
+ce graphe sont obtenus dans le cas où pn → λ et n → ∞.
+
+Degré Le degré d'un sommet d'un graphe est le nombre de ses voisins. On regarde alors
+la distribution du degré, c'est-à-dire le nombre de sommets ayant un degré xé en fonction
+du degré. Quand le nombre de sommets tend vers l'inni, on s'intéresse à un équivalent de
+cette distribution. Des études [10] ont montré que la répartition du degré de graphes réels
+était asymptotiquement équivalente à une fonction puissance, ie
+
+P(di = k) ∝ k−α
+
+où di est le degré du sommet i et α un nombre souvent compris entre 1 et 3.
+Pour le graphe d'Erdös-Rényi cependant, la distribution du degré est exponentielle,
+
+c'est-à-dire qu'on a plutôt P(di = k) ∝ exp(−λk) (distribution de Poisson).
+
+Composante connexe Une propriété très importante des graphes est leur connexité. Par
+exemple, si le graphe du réseau physique du Web (routeurs...) n'est pas connexe, cela signie
+
+6
+
+PSC MAT01, Rapport nal, 04/05/2009
+
+qu'il existe deux machines non reliées qui ne peuvent donc pas échanger d'information - ou
+au contraire que l'une ne peut pas attaquer l'autre. Dans un graphe de type Erdös-Rényi,
+plusieurs cas de gure peuvent se produire :
+
+ λ < 1 : Le graphe se compose de plusieurs composantes non reliées entre elles. De
+
+plus, aucune composante ne peut être trop grande.
+
+Théorème Soient λ < 1, Cx la composante connexe contenant x, α = λ − 1 − log(λ) et
+a > 1/α. Alors
+
+P( max
+1(cid:54)x(cid:54)n
+
+|Cx| (cid:62) a ln n) → 0
+
+ce qui signie qu'aucune composante connexe ne peut être trop grande.
+ λ > 1 : Le graphe possède une composante connexe géante de taille O(n), les autres
+composantes ayant une probabilité tendant vers 0 d'avoir plus de O(ln n) sommets.
+ λ = a ln n, a > 1/2 : Avec une probabilté qui tend vers 1 lorsque n tend vers l'inni,
+
+les graphes obtenus comportent une composante géante et des sommets isolés.
+
+Le cas λ = 1 nécessite une analyse plus ne, on considère souvent λ comme une fonction
+de n qui tend vers 1 en l'inni, et dont on fait un développement asymptotique.
+
+Diamètre Il est intéressant de savoir quelle est la distance moyenne entre deux sommets.
+Dans les réseaux sociaux, en général, si le nombre de sommets est très grand, cette distance
+est courte :
+
+Théorème Soit λ > 1 et x et y deux points choisis au hasard dans la plus grande com-
+posante connexe. Alors si d(x, y) est la distance entre les sommets, d(x, y)/ ln n → 1/ ln λ
+en probabilité.
+
+Structure locale On comprend facilement que la probabilité qu'il existe des triangles dans
+un graphe réel est élevée : si A connaît B et C, il est probable que B et C se connaissent.
+Dans un graphe d'Erdös-Rényi, il est peu probable que cela se produise, donc ce graphe
+modélise mal la structure locale des graphes sociaux.
+
+1.1.2. Graphe de Barabási-Albert
+
+Ce graphe se construit étape par étape. À chaque instant, on ajoute un sommet a qui a
+un nombre de voisins k xé. La probabilité que a s'attache au sommet b est proportionnelle
+à f(db) où f est une fonction croissante et db le degré de b (par exemple la probabilité est
+proportionnelle à db). Ainsi ce graphe est naturellement connexe, et sa répartition de degré
+suit une fonction puissance.
+Si la probabilité est proportionnelle à db, alors P(di = k) ∝ k−3. Des choix judicieux
+de f peuvent faire varier l'exposant de la fonction puissance de 2 à l'inni. La distance
+moyenne entre deux sommets est toujours de l'ordre de O(ln n). Ce modèle est donc plus
+proche des graphes sociaux que celui d'Erdös. Cependant la structure locale n'est toujours
+pas bien représentée.
+
+1.1.3. Graphe de Watts et Strogatz
+
+Ce graphe respecte la structure locale des graphes sociaux où la probabilité de trouver
+des triangles est forte. On part de n sommets que l'on dispose en cercle. Chaque sommet
+
+7
+
+PSC MAT01, Rapport nal, 04/05/2009
+
+est relié à ses k voisins à droite et à gauche. On détermine ensuite une probabilité de
+rebranchement p. Toutes les arêtes qui vont du sommet i à ses voisins de droite voient leur
+destination modiée avec une probabilité p, la destination étant choisie au hasard parmi
+tous les sommets possibles.
+
+On observe gure 1.2 diérents résultats de tirage de graphe.
+En ce qui concerne la répartition du degré, elle est inuencée par la distribution initiale,
+
+et a un écart-type qui augmente (cf gure 1.1).
+
+Fig. 1.1.: Répartition du degré cumulée pour diérentes valeurs de p. Tests eectués sur
+
+20 graphes tel que n = 2000 et k = 20.
+
+En ce qui concerne la distance moyenne, on voit qu'elle est grande lorsque les arêtes ne
+sont pas redirigées (équivalente à n/(4k)). En revanche quand on modie quelques arêtes,
+certaines distances sont raccourcies brusquement. Cependant cette diminution de distance
+n'est pas très importante [11] : supposons qu'on modie seulement un nombre ni de liens
+α, ce qui revient à choisir p = α/n. Alors la distance moyenne entre deux sommets reste
+un O(n).
+
+(a) p = 0
+
+(b) p = 0.2
+
+(c) p = 1
+
+Fig. 1.2.: Diérents graphes de Watts et Strogatz pour n = 20 et k = 3
+
+1.2. La récupération de graphes sociaux : le graphe de
+
+Facebook
+
+Le fait que l'organisation des réseaux sociaux puisse se modéliser sous forme de graphe
+est assez intuitif. Malheureusement, quand il s'agit de récupérer des données relatives à
+cette structure sous-jacente, on se rend compte des dicultés que cela représente (possibilité
+
+8
+
+PSC MAT01, Rapport nal, 04/05/2009
+
+d'un sondage, respect des informations privées...) surtout si ces données ont pour but d'être
+traitées comme des données expérimentales.
+
+A la disposition des chercheurs se trouvent certains types de graphes facilement acces-
+sibles et libres de droits, en nombre limité. Ce sont par exemple les graphes de citation
+d'articles scientiques, les graphes décrivant la structure d'Internet, les graphes relatifs aux
+blogs... Mais leur format impose parfois d'aller jusqu'à récupérer les données à la main sur
+diérents sites.
+
+Pourtant, certains sites comme  MySpace ,  Copains d'avant  sont les témoins pri-
+vilégiés de la structure sociale de leurs utilisateurs. À ce titre, le site de Facebook est
+idéal : il est quasiment l'exacte traduction des rapports entre personnes, car il n'apporte
+pas d'autres services. En eet, on peut comparer l'information qu'apporte Facebook à celle
+apportée par les forums de discussion ; sur un forum, deux personnes peuvent discuter et
+se connaître parce qu'elles ont un intérêt commun véhiculé uniquement par le titre et le
+contenu du message, alors que sur Facebook, les gens se parlent parce qu'ils se connaissent.
+C'est pourquoi il nous paraissait naturel de voir si nous pouvions avoir accès au graphe
+de Facebook, même si nos espoirs étaient faibles car nous pensions que outre les Conditions
+d'Utilisation, Facebook devait avoir une politique très stricte de protection des données.
+Nous fûmes alors surpris de découvrir que les informations qui n'étaient pas cachées par
+l'utilisateur étaient accessibles très facilement à partir du code source de la page.
+
+1.2.1. Informations disponibles
+
+Soit ident un identiant Facebook (nombre ayant jusqu'à 7 chires). Alors, dans le code
+
+source de la page http ://www.facebook.com/friends/ ?id=ident on trouve la fonction
+

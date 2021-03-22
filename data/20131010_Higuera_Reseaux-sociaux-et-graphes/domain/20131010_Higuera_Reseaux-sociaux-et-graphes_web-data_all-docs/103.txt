@@ -1,0 +1,3866 @@
+http://math.univ-lyon1.fr/irem/IMG/pdf/parcours.pdf
+
+Parcours d’un graphe
+
+ISN 2013
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+1 / 97
+
+Exercices `a rendre
+
+Trois exercices sont `a rendre.
+
+L’ exercice 1 pourra ˆetre rendu sur papier mardi 2 avril (ou en version
+´electronique si vous pr´ef´erez).
+
+Les exercices 2 et 3 sont `a rendre dans les casiers num´eriques de vos
+enseignants lundi 1 avril.
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+2 / 97
+
+A savoir
+
+A la suite de cette s´eance, vous devrez savoir parcourir un graphe en
+profondeur et en largeur.
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+3 / 97
+
+L’essentiel de la notion de graphe
+
+On peut appr´ehender la notion de graphe par l’une de ses repr´esentations
+classiques : des points (sommets du graphe) et des courbes reliant certains
+de ces points (arˆetes du graphe).
+
+4
+
+7
+
+h
+
+2
+
+5
+
+a
+
+b
+
+e
+
+6
+
+f
+
+8
+
+1
+
+3
+
+g
+
+11
+
+d
+
+1
+
+0
+
+9
+
+2
+1
+
+c
+
+Les sommets de ce graphe sont a, b, c, d, e, f , g , h. Les sommets e et c
+sont adjacents (voisins) : ils sont en eﬀet reli´es par l’arˆete 10. Le sommet
+b a pour voisins h, f et c. Le sommet a est incident aux arˆetes 2 et 3.
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+4 / 97
+
+L’essentiel de la notion de graphe
+
+On peut appr´ehender la notion de graphe par l’une de ses repr´esentations
+classiques : des points (sommets du graphe) et des courbes reliant certains
+de ces points (arˆetes du graphe).
+
+4
+
+7
+
+h
+
+2
+
+5
+
+a
+
+b
+
+e
+
+6
+
+f
+
+8
+
+1
+
+3
+
+g
+
+11
+
+d
+
+1
+
+0
+
+9
+
+2
+1
+
+c
+
+Lorsqu’on passe d’un sommet `a un autre en se d´epla¸cant le long d’arˆetes et
+de sommets, on dit que l’on d´eﬁnit un chemin dans le graphe. On peut par
+exemple d´eﬁnir le chemin g, 3, a, 2, h, 5, b, 7, f dans le graphe ci-dessus.
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+4 / 97
+
+Exemples de situations mod´elis´ees par un graphe
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+5 / 97
+
+Exemples de situations mod´elis´ees par un graphe
+
+Le web : chaque page est un sommet du graphe, chaque lien
+hypertexte est une arˆete entre deux sommets.
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+5 / 97
+
+Exemples de situations mod´elis´ees par un graphe
+
+Le web : chaque page est un sommet du graphe, chaque lien
+hypertexte est une arˆete entre deux sommets.
+
+Un r´eseau ferroviaire : chaque gare est un sommet, les voies entre
+deux gares sont les arˆetes. Idem avec un r´eseau routier.
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+5 / 97
+
+Exemples de situations mod´elis´ees par un graphe
+
+Le web : chaque page est un sommet du graphe, chaque lien
+hypertexte est une arˆete entre deux sommets.
+
+Un r´eseau ferroviaire : chaque gare est un sommet, les voies entre
+deux gares sont les arˆetes. Idem avec un r´eseau routier.
+
+Un r´eseau social : les sommets sont les personnes, deux personnes
+sont adjacentes dans ce graphe lorsqu’elles sont “amies”.
+Si la notion d’amiti´e n’est pas r´eciproque, le graphe est orient´e.
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+5 / 97
+
+Exemples de situations mod´elis´ees par un graphe
+
+Le web : chaque page est un sommet du graphe, chaque lien
+hypertexte est une arˆete entre deux sommets.
+
+Un r´eseau ferroviaire : chaque gare est un sommet, les voies entre
+deux gares sont les arˆetes. Idem avec un r´eseau routier.
+
+Un r´eseau social : les sommets sont les personnes, deux personnes
+sont adjacentes dans ce graphe lorsqu’elles sont “amies”.
+Si la notion d’amiti´e n’est pas r´eciproque, le graphe est orient´e.
+
+La structure de graphe est en science de l’informatique une structure
+abstraite omnipr´esente.
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+5 / 97
+
+Repr´esentation informatique d’un graphe
+
+Une structure th´eorique comme un graphe est susceptible de nombreuses
+impl´ementations, selon le type de probl`emes `a r´esoudre.
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+6 / 97
+
+Repr´esentation informatique d’un graphe
+
+Une structure th´eorique comme un graphe est susceptible de nombreuses
+impl´ementations, selon le type de probl`emes `a r´esoudre.
+
+On peut par exemple utiliser la matrice d’adjacence du graphe.
+
+a
+
+b
+
+c
+
+d
+
+e
+
+h
+
+f
+
+g
+
+a
+b
+c
+d
+e
+f
+g
+h
+
+
+
+a b c
+1
+0
+0
+1
+0
+1
+0
+1
+0
+0
+0
+0
+0
+0
+0
+0
+
+1
+0
+0
+1
+1
+0
+0
+0
+
+d
+0
+1
+1
+0
+1
+0
+0
+0
+
+e
+0
+1
+0
+1
+0
+1
+1
+0
+
+f
+0
+0
+0
+0
+1
+0
+1
+0
+
+g
+0
+0
+0
+0
+1
+1
+0
+1
+
+h
+0
+0
+0
+0
+0
+0
+1
+0
+
+
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+6 / 97
+
+Exemple de codage : utilisation d’un dictionnaire python
+
+Python
+G=dict()
+G[’a’]=[’b’,’c’]
+G[’b’]=[’a’,’d’,’e’]
+G[’c’]=[’a’,’d’]
+G[’d’]=[’b’,’c’,’e’]
+G[’e’]=[’b’,’d’,’f’,’g’]
+G[’f’]=[’e’,’g’]
+G[’g’]=[’e’,’f’,’h’]
+G[’h’]=[’g’]
+
+a
+
+b
+
+c
+
+d
+
+e
+
+h
+
+f
+
+g
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+7 / 97
+
+PILE et FILE
+
+Les notions de pile et de file sont deux structures de donn´ees abstraites
+importantes en informatique.
+On limite ci-dessous la pr´esentation de ces notions aux besoins des
+parcours de graphes envisag´es ci-apr`es.
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+8 / 97
+
+PILE (stack)
+
+La structure de pile est celle d’une pile d’assiettes :
+
+Pour ranger les assiettes, on les empile les unes sur les autres.
+
+Lorsqu’on veut utiliser une assiette, c’est l’assiette qui a ´et´e empil´ee
+en dernier qui est utilis´ee.
+
+Structure LIFO (last in, ﬁrst out)
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+9 / 97
+
+FILE (queue)
+
+La structure de file est celle d’une ﬁle d’attente `a un guichet :
+
+Les nouvelles personnes qui arrivent se rangent `a la ﬁn de la ﬁle
+d’attente.
+
+La personne servie est celle qui est arriv´ee en premier dans la ﬁle.
+
+Structure FIFO (ﬁrst in, ﬁrst out).
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+10 / 97
+
+Parcours de graphe
+
+Parcours en largeur
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+11 / 97
+
+Parcours en largeur : principe de l’algorithme
+
+Vous devez parcourir toutes les pages d’un site web. Les pages sont les
+sommets d’un graphe et un lien entre deux pages est une arˆete entre ces
+deux sommets.
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+12 / 97
+
+Parcours en largeur : principe de l’algorithme
+
+Vous devez parcourir toutes les pages d’un site web. Les pages sont les
+sommets d’un graphe et un lien entre deux pages est une arˆete entre ces
+deux sommets.
+
+1 Dans le parcours en largeur, on utilise une ﬁle. On enﬁle le sommet de
+
+d´epart (on visite la page index du site).
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+12 / 97
+
+Parcours en largeur : principe de l’algorithme
+
+Vous devez parcourir toutes les pages d’un site web. Les pages sont les
+sommets d’un graphe et un lien entre deux pages est une arˆete entre ces
+deux sommets.
+
+1 Dans le parcours en largeur, on utilise une ﬁle. On enﬁle le sommet de
+
+d´epart (on visite la page index du site).
+
+2 On visite les voisins de la tˆete de ﬁle (pages cibl´ees par la page de
+
+tˆete de ﬁle). On les enﬁle (en les num´erotant au fur et `a mesure de
+leur d´ecouverte) s’ils ne sont pas d´ej`a pr´esents dans la ﬁle, ni d´ej`a
+pass´es dans la ﬁle.
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+12 / 97
+
+Parcours en largeur : principe de l’algorithme
+
+Vous devez parcourir toutes les pages d’un site web. Les pages sont les
+sommets d’un graphe et un lien entre deux pages est une arˆete entre ces
+deux sommets.
+
+1 Dans le parcours en largeur, on utilise une ﬁle. On enﬁle le sommet de
+
+d´epart (on visite la page index du site).
+
+2 On visite les voisins de la tˆete de ﬁle (pages cibl´ees par la page de
+
+tˆete de ﬁle). On les enﬁle (en les num´erotant au fur et `a mesure de
+leur d´ecouverte) s’ils ne sont pas d´ej`a pr´esents dans la ﬁle, ni d´ej`a
+pass´es dans la ﬁle.
+
+3 On d´eﬁle (c’est `a dire : on supprime la tˆete de ﬁle).
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+12 / 97
+
+Parcours en largeur : principe de l’algorithme
+
+Vous devez parcourir toutes les pages d’un site web. Les pages sont les
+sommets d’un graphe et un lien entre deux pages est une arˆete entre ces
+deux sommets.
+
+1 Dans le parcours en largeur, on utilise une ﬁle. On enﬁle le sommet de
+
+d´epart (on visite la page index du site).
+
+2 On visite les voisins de la tˆete de ﬁle (pages cibl´ees par la page de
+
+tˆete de ﬁle). On les enﬁle (en les num´erotant au fur et `a mesure de
+leur d´ecouverte) s’ils ne sont pas d´ej`a pr´esents dans la ﬁle, ni d´ej`a
+pass´es dans la ﬁle.
+
+3 On d´eﬁle (c’est `a dire : on supprime la tˆete de ﬁle).
+
+4 On recommence au point 2 (tant que c’est possible, c’est `a dire tant
+
+que la ﬁle n’est pas vide).
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+12 / 97
+
+Parcours en largeur : principe de l’algorithme
+
+Vous devez parcourir toutes les pages d’un site web. Les pages sont les
+sommets d’un graphe et un lien entre deux pages est une arˆete entre ces
+deux sommets.
+
+1 Dans le parcours en largeur, on utilise une ﬁle. On enﬁle le sommet de
+
+d´epart (on visite la page index du site).
+
+2 On visite les voisins de la tˆete de ﬁle (pages cibl´ees par la page de
+
+tˆete de ﬁle). On les enﬁle (en les num´erotant au fur et `a mesure de
+leur d´ecouverte) s’ils ne sont pas d´ej`a pr´esents dans la ﬁle, ni d´ej`a
+pass´es dans la ﬁle.
+
+3 On d´eﬁle (c’est `a dire : on supprime la tˆete de ﬁle).
+
+4 On recommence au point 2 (tant que c’est possible, c’est `a dire tant
+
+que la ﬁle n’est pas vide).
+
+En d’autres termes, on traite toujours en priorit´e les liens des pages le plus
+tˆot d´ecouvertes.
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+12 / 97
+
+Parcours en largeur d’un arbre
+
+Parcourir en largeur le graphe ci-dessous `a partir du sommet s :
+
+s
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+13 / 97
+
+Parcours en largeur d’un arbre
+
+1
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+14 / 97
+
+Parcours en largeur d’un arbre
+
+1
+
+3
+
+8
+
+4
+
+9
+
+10
+
+2
+
+5
+
+6
+
+7
+
+11
+
+12
+
+13
+
+14
+
+Enﬁler : passage en gris. D´eﬁler : passage en noir.
+L’ordre pour enﬁler les voisins (ni gris, ni noirs) d´epend de l’implantation.
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+15 / 97
+
+Parcours en largeur d’un arbre
+
+1
+
+3
+
+8
+
+4
+
+9
+
+10
+
+2
+
+5
+
+6
+
+7
+
+11
+
+12
+
+13
+
+14
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+16 / 97
+
+Parcours en largeur d’un arbre
+
+1
+
+3
+
+8
+
+4
+
+9
+
+10
+
+2
+
+5
+
+6
+
+7
+
+11
+
+12
+
+13
+
+14
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+17 / 97
+
+Parcours en largeur d’un arbre
+
+1
+
+3
+
+8
+
+4
+
+9
+
+10
+
+2
+
+5
+
+6
+
+7
+
+11
+
+12
+
+13
+
+14
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+18 / 97
+
+Parcours en largeur d’un arbre
+
+1
+
+3
+
+8
+
+4
+
+9
+
+10
+
+2
+
+5
+
+6
+
+7
+
+11
+
+12
+
+13
+
+14
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+19 / 97
+
+Parcours en largeur d’un arbre
+
+1
+
+3
+
+8
+
+4
+
+9
+
+10
+
+2
+
+5
+
+6
+
+7
+
+11
+
+12
+
+13
+
+14
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+20 / 97
+
+Parcours en largeur d’un arbre
+
+1
+
+3
+
+8
+
+4
+
+9
+
+10
+
+2
+
+5
+
+6
+
+7
+
+11
+
+12
+
+13
+
+14
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+21 / 97
+
+Parcours en largeur d’un arbre
+
+1
+
+3
+
+8
+
+4
+
+9
+
+10
+
+2
+
+5
+
+6
+
+7
+
+11
+
+12
+
+13
+
+14
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+22 / 97
+
+Parcours en largeur d’un arbre
+
+1
+
+3
+
+8
+
+4
+
+9
+
+10
+
+2
+
+5
+
+6
+
+7
+
+11
+
+12
+
+13
+
+14
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+23 / 97
+
+Parcours en largeur d’un arbre
+
+1
+
+3
+
+8
+
+4
+
+9
+
+10
+
+2
+
+5
+
+6
+
+7
+
+11
+
+12
+
+13
+
+14
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+24 / 97
+
+Parcours en largeur d’un arbre
+
+1
+
+3
+
+8
+
+4
+
+9
+
+10
+
+2
+
+5
+
+6
+
+7
+
+11
+
+12
+
+13
+
+14
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+25 / 97
+
+Parcours en largeur d’un arbre
+
+1
+
+3
+
+8
+
+4
+
+9
+
+10
+
+2
+
+5
+
+6
+
+7
+
+11
+
+12
+
+13
+
+14
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+26 / 97
+
+Parcours en largeur d’un arbre
+
+1
+
+3
+
+8
+
+4
+
+9
+
+10
+
+2
+
+5
+
+6
+
+7
+
+11
+
+12
+
+13
+
+14
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+27 / 97
+
+Parcours en largeur d’un arbre
+
+1
+
+3
+
+8
+
+4
+
+9
+
+10
+
+2
+
+5
+
+6
+
+7
+
+11
+
+12
+
+13
+
+14
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+28 / 97
+
+Parcours en largeur : une propri´et´e
+
+Une fa¸con de comprendre l’algorithme est d’utiliser une notion de
+distance :
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+29 / 97
+
+Parcours en largeur : une propri´et´e
+
+Une fa¸con de comprendre l’algorithme est d’utiliser une notion de
+distance :
+
+une page est `a distance 1 de la page de d´epart si on l’atteint par un
+lien direct depuis la page 1,
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+29 / 97
+
+Parcours en largeur : une propri´et´e
+
+Une fa¸con de comprendre l’algorithme est d’utiliser une notion de
+distance :
+
+une page est `a distance 1 de la page de d´epart si on l’atteint par un
+lien direct depuis la page 1,
+
+elle est `a distance 2 de la page de d´epart si on peut l’atteindre (par le
+plus court chemin) en passant par une page `a distance 1 du d´epart,
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+29 / 97
+
+Parcours en largeur : une propri´et´e
+
+Une fa¸con de comprendre l’algorithme est d’utiliser une notion de
+distance :
+
+une page est `a distance 1 de la page de d´epart si on l’atteint par un
+lien direct depuis la page 1,
+
+elle est `a distance 2 de la page de d´epart si on peut l’atteindre (par le
+plus court chemin) en passant par une page `a distance 1 du d´epart,
+
+elle est `a distance 3 du d´epart si on peut l’atteindre (par le plus court
+chemin) en passant par une page `a distance 1 et une page `a distance
+2. . .
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+29 / 97
+
+Parcours en largeur : une propri´et´e
+
+Une fa¸con de comprendre l’algorithme est d’utiliser une notion de
+distance :
+
+une page est `a distance 1 de la page de d´epart si on l’atteint par un
+lien direct depuis la page 1,
+
+elle est `a distance 2 de la page de d´epart si on peut l’atteindre (par le
+plus court chemin) en passant par une page `a distance 1 du d´epart,
+
+elle est `a distance 3 du d´epart si on peut l’atteindre (par le plus court
+chemin) en passant par une page `a distance 1 et une page `a distance
+2. . .
+
+L’algorithme de parcours en largeur va visiter en premier lieu toutes les
+pages `a distance 1 du d´epart, puis toutes les pages `a distance 2 du d´epart,
+puis toutes les pages `a distance 3. . .(c’est en fait cette propri´et´e qui donne
+son nom `a ce type de parcours).
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+29 / 97
+
+BFS (breadth ﬁrst search) : programmation python
+
+Exercice avec corrig´e.
+Avec la repr´esentation d’un graphe par un dictionnaire comme
+pr´ec´edemment, programmer en langage python le BFS avec les variables
+suivantes :
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+30 / 97
+
+BFS (breadth ﬁrst search) : programmation python
+
+Exercice avec corrig´e.
+Avec la repr´esentation d’un graphe par un dictionnaire comme
+pr´ec´edemment, programmer en langage python le BFS avec les variables
+suivantes :
+
+Un dictionnaire P. En ﬁn de parcours, pour tout sommet s du graphe
+P[s] sera le p`ere de s, c’est `a dire le sommet `a partir duquel le
+sommet s a ´et´e d´ecouvert lors du parcours.
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+30 / 97
+
+BFS (breadth ﬁrst search) : programmation python
+
+Exercice avec corrig´e.
+Avec la repr´esentation d’un graphe par un dictionnaire comme
+pr´ec´edemment, programmer en langage python le BFS avec les variables
+suivantes :
+
+Un dictionnaire P. En ﬁn de parcours, pour tout sommet s du graphe
+P[s] sera le p`ere de s, c’est `a dire le sommet `a partir duquel le
+sommet s a ´et´e d´ecouvert lors du parcours.
+
+Un dictionnaire couleur. Pour tout sommet s, couleur[s] vaut blanc si
+le sommet s n’est pas pass´e dans la ﬁle, gris s’il est dans la ﬁle, noir
+lorsqu’il est sorti de la ﬁle.
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+30 / 97
+
+BFS (breadth ﬁrst search) : programmation python
+
+Exercice avec corrig´e.
+Avec la repr´esentation d’un graphe par un dictionnaire comme
+pr´ec´edemment, programmer en langage python le BFS avec les variables
+suivantes :
+
+Un dictionnaire P. En ﬁn de parcours, pour tout sommet s du graphe
+P[s] sera le p`ere de s, c’est `a dire le sommet `a partir duquel le
+sommet s a ´et´e d´ecouvert lors du parcours.
+
+Un dictionnaire couleur. Pour tout sommet s, couleur[s] vaut blanc si
+le sommet s n’est pas pass´e dans la ﬁle, gris s’il est dans la ﬁle, noir
+lorsqu’il est sorti de la ﬁle.
+
+Une liste Q utilis´ee comme ﬁle (ﬁfo) : on enﬁle un sommet lorsqu’il
+est d´ecouvert, on le d´eﬁle lorsqu’il est termin´e (traitement prioritaire
+des sommets d´ecouverts au plus tˆot).
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+30 / 97
+
+Exemple d’ex´ecution
+
+D´eroulement attendu du programme, avec l’appel bfs(G,’b’), sur le graphe
+ci-dessous :
+
+Python
+G=dict()
+G[’a’]=[’b’,’c’]
+G[’b’]=[’a’,’d’,’e’]
+G[’c’]=[’a’,’d’]
+G[’d’]=[’b’,’c’,’e’]
+G[’e’]=[’b’,’d’,’f’,’g’]
+G[’f’]=[’e’,’g’]
+G[’g’]=[’e’,’f’,’h’]
+G[’h’]=[’g’]
+
+a
+
+b
+
+c
+
+d
+
+e
+
+h
+
+f
+
+g
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+31 / 97
+
+D´eroulement
+
+b
+
+e
+
+f
+
+a
+
+d
+
+g
+
+c
+
+h
+
+P={ ’b’ : None}
+Q=[’b’]
+D´ecouverts (gris ou noirs) =[’b’]
+Ferm´es (noirs) =[]
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+32 / 97
+
+D´eroulement
+
+b
+
+e
+
+f
+
+a
+
+d
+
+g
+
+c
+
+h
+
+P={ ’b’ : None, ’a’ :’b’, ’d’ :’b’, ’e’ :’b’}
+Q=[’b’,’a’,’d’,’e’]
+D´ecouverts =[’b’,’a’,’d’,’e’]
+Ferm´es=[]
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+33 / 97
+
+D´eroulement
+
+b
+
+e
+
+f
+
+a
+
+d
+
+g
+
+c
+
+h
+
+P={ ’b’ : None, ’a’ :’b’, ’d’ :’b’, ’e’ :’b’}
+Q=[’a’,’d’,’e’]
+D´ecouverts=[’b’,’a’,’d’,’e’]
+Ferm´es=[’b’]
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+34 / 97
+
+D´eroulement
+
+b
+
+e
+
+f
+
+a
+
+d
+
+g
+
+c
+
+h
+
+P={ ’b’ : None, ’a’ :’b’, ’d’ :’b’, ’e’ :’b’,’c’ :’a’}
+Q=[’d’,’e’,’c’]
+D´ecouverts=[’b’,’a’,’d’,’e’,’c’]
+Ferm´es=[’b’,’a’]
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+35 / 97
+
+D´eroulement
+
+b
+
+e
+
+f
+
+a
+
+d
+
+g
+
+c
+
+h
+
+P={ ’b’ : None, ’a’ :’b’, ’d’ :’b’, ’e’ :’b’,’c’ :’a’}
+Q=[’e’,’c’]
+D´ecouverts=[’b’,’a’,’d’,’e’,’c’]
+Ferm´es=[’b’,’a’,’d’]
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+36 / 97
+
+D´eroulement
+
+b
+
+e
+
+f
+
+a
+
+d
+
+g
+
+c
+
+h
+
+P={ ’b’ : None, ’a’ :’b’, ’d’ :’b’, ’e’ :’b’,’c’ :’a’,’f’ :’e’,’g’ :’e’}
+Q=[’c’,’f’,’g’]
+D´ecouverts=[’b’,’a’,’d’,’e’,’c’,’f’,’g’]
+Ferm´es=[’b’,’a’,’d’,’e’]
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+37 / 97
+
+D´eroulement
+
+a
+
+b
+
+c
+
+e
+
+f
+
+d
+
+g
+
+h
+
+P={ ’b’ : None, ’a’ :’b’, ’d’ :’b’, ’e’ :’b’,’c’ :’a’,’f’ :’e’,’g’ :’e’}
+Q=[’f’,’g’]
+D´ecouverts=[’b’,’a’,’d’,’e’,’c’,’f’,’g’]
+Ferm´es=[’b’,’a’,’d’,’e’,’c’]
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+38 / 97
+
+D´eroulement
+
+a
+
+b
+
+c
+
+e
+
+f
+
+d
+
+g
+
+h
+
+P={ ’b’ : None, ’a’ :’b’, ’d’ :’b’, ’e’ :’b’,’c’ :’a’,’f’ :’e’,’g’ :’e’}
+Q=[’g’]
+D´ecouverts=[’b’,’a’,’d’,’e’,’c’,’f’,’g’]
+Ferm´es=[’b’,’a’,’d’,’e’,’c’,’f’]
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+39 / 97
+
+D´eroulement
+
+a
+
+b
+
+c
+
+e
+
+f
+
+d
+
+g
+
+h
+
+P={ ’b’ : None, ’a’ :’b’, ’d’ :’b’, ’e’ :’b’,’c’ :’a’,’f’ :’e’,’g’ :’e’,’h’ :’g’}
+Q=[’h’]
+D´ecouverts=[’b’,’a’,’d’,’e’,’c’,’f’,’g’,’h’]
+Ferm´es=[’b’,’a’,’d’,’e’,’c’,’f’,’g’]
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+40 / 97
+
+D´eroulement
+
+a
+
+b
+
+c
+
+d
+
+e
+
+h
+
+f
+
+g
+
+P={ ’b’ : None, ’a’ :’b’, ’d’ :’b’, ’e’ :’b’,’c’ :’a’,’f’ :’e’,’g’ :’e’,’h’ :’g’}
+Q=[]
+D´ecouverts=[’b’,’a’,’d’,’e’,’c’,’f’,’g’,’h’]
+Ferm´es=[’b’,’a’,’d’,’e’,’c’,’f’,’g’,’h’]
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+41 / 97
+
+Arborescence associ´ee au parcours
+
+b
+
+d
+
+f
+
+e
+
+a
+
+c
+
+g
+
+h
+
+L’ordre de parcours est : ligne apr`es ligne (de la racine vers les feuilles) et
+de gauche `a droite pour une ligne.
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+42 / 97
+
+BFS : un codage en python
+
+Python
+def bfs(G,s) :
+
+couleur=dict()
+for x in G : couleur[x]=’blanc’
+P=dict()
+P[s]=None
+couleur[s]=’gris’
+Q=[s]
+while Q :
+
+u=Q[0]
+for v in G[u] :
+
+if couleur[v]==’blanc’ :
+
+P[v]=u
+couleur[v]=’gris’
+Q.append(v)
+
+Q.pop(0)
+couleur[u]=’noir’
+
+return P
+
+BFS en python
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+43 / 97
+
+En ne gardant que l’essentiel
+
+Python
+def bfs(G,s) :
+
+P,Q={s :None},[s]
+while Q :
+
+u=Q.pop(0)
+for v in G[u] :
+
+if v in P : continue
+P[v]=u
+Q.append(v)
+
+return P
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+44 / 97
+
+Exercice `a rendre 1
+
+Vous donnerez, sur papier, un codage python du graphe ci-dessous suivant
+le mod`ele pr´ec´edemment donn´e puis le d´eroulement de bfs(G,’b’)
+correspondant `a ce codage :
+b
+
+f
+
+a
+
+c
+
+d
+
+h
+
+e
+
+i
+
+g
+
+j
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+45 / 97
+
+Application
+
+Exercice `a rendre 2. En utilisant le programme pr´ec´edent, on d´eﬁnit la
+fonction suivante :
+
+Python
+def f(G,s,v) :
+
+P=bfs(G,s)
+ch=[v]
+while P[v] :
+
+ch.append(P[v])
+v=P[v]
+
+ch.reverse()
+return ch
+
+print f(G,’b’,’h’)
+
+Quel est son rˆole ?
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+46 / 97
+
+Parcours de graphe
+
+Parcours en profondeur
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+47 / 97
+
+Parcours en profondeur : principe de l’algorithme
+
+Vous devez parcourir toutes les pages d’un site web. Les pages sont les
+sommets d’un graphe et un lien entre deux pages est une arˆete entre ces
+deux sommets.
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+48 / 97
+
+Parcours en profondeur : principe de l’algorithme
+
+Vous devez parcourir toutes les pages d’un site web. Les pages sont les
+sommets d’un graphe et un lien entre deux pages est une arˆete entre ces
+deux sommets.
+
+1 Dans le parcours en profondeur, on utilise une pile. On empile le
+
+sommet de d´epart (on visite la page index du site).
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+48 / 97
+
+Parcours en profondeur : principe de l’algorithme
+
+Vous devez parcourir toutes les pages d’un site web. Les pages sont les
+sommets d’un graphe et un lien entre deux pages est une arˆete entre ces
+deux sommets.
+
+1 Dans le parcours en profondeur, on utilise une pile. On empile le
+
+sommet de d´epart (on visite la page index du site).
+
+2 Si le sommet de la pile pr´esente des voisins qui ne sont pas dans la
+
+pile, ni d´ej`a pass´es dans la pile :
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+48 / 97
+
+Parcours en profondeur : principe de l’algorithme
+
+Vous devez parcourir toutes les pages d’un site web. Les pages sont les
+sommets d’un graphe et un lien entre deux pages est une arˆete entre ces
+deux sommets.
+
+1 Dans le parcours en profondeur, on utilise une pile. On empile le
+
+sommet de d´epart (on visite la page index du site).
+
+2 Si le sommet de la pile pr´esente des voisins qui ne sont pas dans la
+
+pile, ni d´ej`a pass´es dans la pile :
+
+alors on s´electionne l’un de ces voisins et on l’empile (en le marquant
+de son num´ero de d´ecouverte),
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+48 / 97
+
+Parcours en profondeur : principe de l’algorithme
+
+Vous devez parcourir toutes les pages d’un site web. Les pages sont les
+sommets d’un graphe et un lien entre deux pages est une arˆete entre ces
+deux sommets.
+
+1 Dans le parcours en profondeur, on utilise une pile. On empile le
+
+sommet de d´epart (on visite la page index du site).
+
+2 Si le sommet de la pile pr´esente des voisins qui ne sont pas dans la
+
+pile, ni d´ej`a pass´es dans la pile :
+
+alors on s´electionne l’un de ces voisins et on l’empile (en le marquant
+de son num´ero de d´ecouverte),
+sinon on d´epile (c’est `a dire on supprime l’´el´ement du sommet de la
+pile).
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+48 / 97
+
+Parcours en profondeur : principe de l’algorithme
+
+Vous devez parcourir toutes les pages d’un site web. Les pages sont les
+sommets d’un graphe et un lien entre deux pages est une arˆete entre ces
+deux sommets.
+
+1 Dans le parcours en profondeur, on utilise une pile. On empile le
+
+sommet de d´epart (on visite la page index du site).
+
+2 Si le sommet de la pile pr´esente des voisins qui ne sont pas dans la
+
+pile, ni d´ej`a pass´es dans la pile :
+
+alors on s´electionne l’un de ces voisins et on l’empile (en le marquant
+de son num´ero de d´ecouverte),
+sinon on d´epile (c’est `a dire on supprime l’´el´ement du sommet de la
+pile).
+
+3 On recommence au point 2 (tant que la pile n’est pas vide).
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+48 / 97
+
+Parcours en profondeur : principe de l’algorithme
+
+Vous devez parcourir toutes les pages d’un site web. Les pages sont les
+sommets d’un graphe et un lien entre deux pages est une arˆete entre ces
+deux sommets.
+
+1 Dans le parcours en profondeur, on utilise une pile. On empile le
+
+sommet de d´epart (on visite la page index du site).
+
+2 Si le sommet de la pile pr´esente des voisins qui ne sont pas dans la
+
+pile, ni d´ej`a pass´es dans la pile :
+
+alors on s´electionne l’un de ces voisins et on l’empile (en le marquant
+de son num´ero de d´ecouverte),
+sinon on d´epile (c’est `a dire on supprime l’´el´ement du sommet de la
+pile).
+
+3 On recommence au point 2 (tant que la pile n’est pas vide).
+
+En d’autres termes, on traite toujours en priorit´e les liens des pages les
+plus tard d´ecouvertes.
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+48 / 97
+
+Parcours en profondeur d’un arbre
+
+Parcourir en profondeur le graphe ci-dessous `a partir du sommet s :
+
+s
+
+7
+
+2
+
+12
+
+3
+
+4
+
+8
+
+9
+
+11
+
+10
+
+5
+
+6
+
+13
+
+14
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+49 / 97
+
+Parcours en profondeur d’un arbre
+
+1
+
+7
+
+2
+
+12
+
+3
+
+4
+
+8
+
+9
+
+11
+
+10
+
+5
+
+6
+
+13
+
+14
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+50 / 97
+
+Parcours en profondeur d’un arbre
+
+1
+
+7
+
+2
+
+12
+
+3
+
+4
+
+8
+
+9
+
+11
+
+10
+
+5
+
+6
+
+13
+
+14
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+51 / 97
+
+Parcours en profondeur d’un arbre
+
+1
+
+7
+
+2
+
+12
+
+3
+
+4
+
+8
+
+9
+
+11
+
+10
+
+5
+
+6
+
+13
+
+14
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+52 / 97
+
+Parcours en profondeur d’un arbre
+
+1
+
+7
+
+2
+
+12
+
+3
+
+4
+
+8
+
+9
+
+11
+
+10
+
+5
+
+6
+
+13
+
+14
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+53 / 97
+
+Parcours en profondeur d’un arbre
+
+1
+
+7
+
+2
+
+12
+
+3
+
+4
+
+8
+
+9
+
+11
+
+10
+
+5
+
+6
+
+13
+
+14
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+54 / 97
+
+Parcours en profondeur d’un arbre
+
+1
+
+7
+
+2
+
+12
+
+3
+
+4
+
+8
+
+9
+
+11
+
+10
+
+5
+
+6
+
+13
+
+14
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+55 / 97
+
+Parcours en profondeur d’un arbre
+
+1
+
+7
+
+2
+
+12
+
+3
+
+4
+
+8
+
+9
+
+11
+
+10
+
+5
+
+6
+
+13
+
+14
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+56 / 97
+
+Parcours en profondeur d’un arbre
+
+1
+
+7
+
+2
+
+12
+
+3
+
+4
+
+8
+
+9
+
+11
+
+10
+
+5
+
+6
+
+13
+
+14
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+57 / 97
+
+Parcours en profondeur d’un arbre
+
+1
+
+7
+
+2
+
+12
+
+3
+
+4
+
+8
+
+9
+
+11
+
+10
+
+5
+
+6
+
+13
+
+14
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+58 / 97
+
+Parcours en profondeur d’un arbre
+
+1
+
+7
+
+2
+
+12
+
+3
+
+4
+
+8
+
+9
+
+11
+
+10
+
+5
+
+6
+
+13
+
+14
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+59 / 97
+
+Parcours en profondeur d’un arbre
+
+1
+
+7
+
+2
+
+12
+
+3
+
+4
+
+8
+
+9
+
+11
+
+10
+
+5
+
+6
+
+13
+
+14
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+60 / 97
+
+Parcours en profondeur d’un arbre
+
+1
+
+7
+
+2
+
+12
+
+3
+
+4
+
+8
+
+9
+
+11
+
+10
+
+5
+
+6
+
+13
+
+14
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+61 / 97
+
+Parcours en profondeur d’un arbre
+
+1
+
+7
+
+2
+
+12
+
+3
+
+4
+
+8
+
+9
+
+11
+
+10
+
+5
+
+6
+
+13
+
+14
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+62 / 97
+
+Parcours en profondeur d’un arbre
+
+1
+
+7
+
+2
+
+12
+
+3
+
+4
+
+8
+
+9
+
+11
+
+10
+
+5
+
+6
+
+13
+
+14
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+63 / 97
+
+Parcours en profondeur d’un arbre
+
+1
+
+7
+
+2
+
+12
+
+3
+
+4
+
+8
+
+9
+
+11
+
+10
+
+5
+
+6
+
+13
+
+14
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+64 / 97
+
+Parcours en profondeur d’un arbre
+
+1
+
+7
+
+2
+
+12
+
+3
+
+4
+
+8
+
+9
+
+11
+
+10
+
+5
+
+6
+
+13
+
+14
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+65 / 97
+
+Parcours en profondeur d’un arbre
+
+1
+
+7
+
+2
+
+12
+
+3
+
+4
+
+8
+
+9
+
+10
+
+10
+
+5
+
+6
+
+13
+
+14
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+66 / 97
+
+Parcours en profondeur d’un arbre
+
+1
+
+7
+
+2
+
+12
+
+3
+
+4
+
+8
+
+9
+
+10
+
+10
+
+5
+
+6
+
+13
+
+14
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+67 / 97
+
+Parcours en profondeur d’un arbre
+
+1
+
+7
+
+2
+
+11
+
+3
+
+4
+
+8
+
+9
+
+10
+
+12
+
+5
+
+6
+
+13
+
+14
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+68 / 97
+
+Parcours en profondeur d’un arbre
+
+1
+
+7
+
+2
+
+11
+
+3
+
+4
+
+8
+
+9
+
+10
+
+12
+
+5
+
+6
+
+13
+
+14
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+69 / 97
+
+Parcours en profondeur d’un arbre
+
+1
+
+7
+
+2
+
+11
+
+3
+
+4
+
+8
+
+9
+
+10
+
+12
+
+5
+
+6
+
+13
+
+14
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+70 / 97
+
+Parcours en profondeur d’un arbre
+
+1
+
+7
+
+2
+
+11
+
+3
+
+4
+
+8
+
+9
+
+10
+
+12
+
+5
+
+6
+
+13
+
+14
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+71 / 97
+
+Parcours en profondeur d’un arbre
+
+1
+
+7
+
+2
+
+11
+
+3
+
+4
+
+8
+
+9
+
+10
+
+12
+
+5
+
+6
+
+13
+
+14
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+72 / 97
+
+Parcours en profondeur d’un arbre
+
+1
+
+7
+
+2
+
+11
+
+3
+
+4
+
+8
+
+9
+
+10
+
+12
+
+5
+
+6
+
+13
+
+14
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+73 / 97
+
+Parcours en profondeur d’un arbre
+
+1
+
+7
+
+2
+
+11
+
+3
+
+4
+
+8
+
+9
+
+10
+
+12
+
+5
+
+6
+
+13
+
+14
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+74 / 97
+
+Parcours en profondeur d’un arbre
+
+1
+
+7
+
+2
+
+11
+
+3
+
+4
+
+8
+
+9
+
+10
+
+12
+
+5
+
+6
+
+13
+
+14
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+75 / 97
+
+Parcours en profondeur d’un arbre
+
+1
+
+7
+
+2
+
+11
+
+3
+
+4
+
+8
+
+9
+
+10
+
+12
+
+5
+
+6
+
+13
+
+14
+
+arbre DFS en python
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+76 / 97
+
+DFS (depth ﬁrst search) : programmation python
+
+Exercice `a rendre 3.
+Avec la repr´esentation d’un graphe par un dictionnaire comme
+pr´ec´edemment, programmer en langage python le DFS avec les variables
+suivantes :
+
+Un dictionnaire P. En ﬁn de parcours, pour tout sommet s du graphe
+P[s] sera le p`ere de s, c’est `a dire le sommet `a partir duquel le
+sommet s a ´et´e d´ecouvert lors du parcours.
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+77 / 97
+
+DFS (depth ﬁrst search) : programmation python
+
+Exercice `a rendre 3.
+Avec la repr´esentation d’un graphe par un dictionnaire comme
+pr´ec´edemment, programmer en langage python le DFS avec les variables
+suivantes :
+
+Un dictionnaire P. En ﬁn de parcours, pour tout sommet s du graphe
+P[s] sera le p`ere de s, c’est `a dire le sommet `a partir duquel le
+sommet s a ´et´e d´ecouvert lors du parcours.
+
+Un dictionnaire couleur. Pour tout sommet s, couleur[s] vaut blanc si
+le sommet s n’est pas encore d´ecouvert, gris s’il est d´ej`a d´ecouvert
+mais non encore ferm´e (c’est `a dire si l’algorithme n’ a pas encore
+d´ecouvert tous ses voisins), noir lorsque ce sommet est ferm´e.
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+77 / 97
+
+DFS (depth ﬁrst search) : programmation python
+
+Exercice `a rendre 3.
+Avec la repr´esentation d’un graphe par un dictionnaire comme
+pr´ec´edemment, programmer en langage python le DFS avec les variables
+suivantes :
+
+Un dictionnaire P. En ﬁn de parcours, pour tout sommet s du graphe
+P[s] sera le p`ere de s, c’est `a dire le sommet `a partir duquel le
+sommet s a ´et´e d´ecouvert lors du parcours.
+
+Un dictionnaire couleur. Pour tout sommet s, couleur[s] vaut blanc si
+le sommet s n’est pas encore d´ecouvert, gris s’il est d´ej`a d´ecouvert
+mais non encore ferm´e (c’est `a dire si l’algorithme n’ a pas encore
+d´ecouvert tous ses voisins), noir lorsque ce sommet est ferm´e.
+
+Une liste Q utilis´ee comme pile (lifo) : on empile un sommet lorsqu’il
+est d´ecouvert, on le d´epile lorsqu’il est termin´e (traitement prioritaire
+des sommets d´ecouverts au plus tard).
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+77 / 97
+
+Exemple d’ex´ecution
+
+D´eroulement attendu du programme, avec l’appel dfs(G,’g’), sur le graphe
+ci-dessous :
+
+Python
+G=dict()
+G[’a’]=[’b’,’c’]
+G[’b’]=[’a’,’d’,’e’]
+G[’c’]=[’a’,’d’]
+G[’d’]=[’b’,’c’,’e’]
+G[’e’]=[’b’,’d’,’f’,’g’]
+G[’f’]=[’e’,’g’]
+G[’g’]=[’e’,’f’,’h’]
+G[’h’]=[’g’]
+
+a
+
+b
+
+c
+
+d
+
+e
+
+h
+
+f
+
+g
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+78 / 97
+
+D´eroulement
+
+b
+
+e
+
+f
+
+a
+
+d
+
+g
+
+c
+
+h
+
+P={ g : None}
+Q=[g]
+D´ecouverts (gris ou noirs)=[g]
+Ferm´es (noirs) =[]
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+79 / 97
+
+D´eroulement
+
+b
+
+e
+
+f
+
+a
+
+d
+
+g
+
+c
+
+h
+P={ g : None, e : g}
+Q=[g,e]
+D´ecouverts=[g,e]
+Ferm´es=[]
+
+u=g, R=[e,f,h],v=e,
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+80 / 97
+
+D´eroulement
+
+b
+
+e
+
+f
+
+a
+
+d
+
+g
+
+c
+
+h
+
+P={ g : None, e : g,b : e}
+Q=[g,e,b]
+D´ecouverts=[g,e,b]
+Ferm´es=[]
+
+u=e, R=[b,d,f],v=b,
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+81 / 97
+
+D´eroulement
+
+b
+
+e
+
+f
+
+a
+
+d
+
+g
+
+c
+
+h
+
+P={ g : None, e : g,b : e, a :b}
+Q=[g,e,b,a]
+D´ecouverts=[g,e,b,a]
+Ferm´es=[]
+
+u=b, R=[a,d],v=a,
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+82 / 97
+
+D´eroulement
+
+b
+
+e
+
+f
+
+a
+
+d
+
+g
+
+c
+
+h
+
+u=a, R=[c],v=c,
+
+P={ g : None, e : g,b : e, a :b,c :a}
+Q=[g,e,b,a,c]
+D´ecouverts=[g,e,b,a,c]
+Ferm´es=[]
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+83 / 97
+
+D´eroulement
+
+b
+
+e
+
+f
+
+a
+
+d
+
+g
+
+c
+
+h
+
+u=c, R=[d],v=d,
+
+P={ g : None, e : g,b : e, a :b,c :a, d :c}
+Q=[g,e,b,a,c,d]
+D´ecouverts=[g,e,b,a,c,d]
+Ferm´es=[]
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+84 / 97
+
+D´eroulement
+
+b
+
+e
+
+f
+
+a
+
+d
+
+g
+
+c
+
+h
+
+u=d, R=[],
+
+P={ g : None, e : g,b : e, a :b,c :a, d :c}
+Q=[g,e,b,a,c]
+D´ecouverts=[g,e,b,a,c,d]
+Ferm´es=[d]
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+85 / 97
+
+D´eroulement
+
+e
+
+f
+
+d
+
+g
+
+a
+
+b
+
+c
+
+h
+
+u=c, R=[],
+
+P={ g : None, e : g,b : e, a :b,c :a, d :c}
+Q=[g,e,b,a]
+D´ecouverts=[g,e,b,a,c,d]
+Ferm´es=[d,c]
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+86 / 97
+
+D´eroulement
+
+e
+
+f
+
+d
+
+g
+
+a
+
+b
+
+c
+
+h
+
+u=a, R=[],
+
+P={ g : None, e : g,b : e, a :b,c :a, d :c}
+Q=[g,e,b]
+D´ecouverts=[g,e,b,a,c,d]
+Ferm´es=[d,c,a]
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+87 / 97
+
+D´eroulement
+
+e
+
+f
+
+d
+
+g
+
+a
+
+b
+
+c
+
+h
+
+u=b, R=[],
+
+P={ g : None, e : g,b : e, a :b,c :a, d :c}
+Q=[g,e]
+D´ecouverts=[g,e,b,a,c,d]
+Ferm´es=[d,c,a,b]
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+88 / 97
+
+D´eroulement
+
+e
+
+f
+
+d
+
+g
+
+a
+
+b
+
+c
+
+h
+
+u=e, R=[f], v=f,
+
+P={ g : None, e : g,b : e, a :b,c :a, d :c,f :e}
+Q=[g,e,f]
+D´ecouverts=[g,e,b,a,c,d,f]
+Ferm´es=[d,c,a,b]
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+89 / 97
+
+D´eroulement
+
+b
+
+e
+
+f
+
+a
+
+d
+
+g
+
+c
+
+h
+
+u=f, R=[],
+P={ g : None, e : g,b : e, a :b,c :a, d :c,f :e}
+Q=[g,e]
+D´ecouverts=[g,e,b,a,c,d,f]
+Ferm´es=[d,c,a,b,f]
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+90 / 97
+
+D´eroulement
+
+b
+
+e
+
+f
+
+a
+
+d
+
+g
+
+c
+
+h
+
+u=e, R=[],
+P={ g : None, e : g,b : e, a :b,c :a, d :c,f :e}
+Q=[g]
+D´ecouverts=[g,e,b,a,c,d,f]
+Ferm´es=[d,c,a,b,f,e]
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+91 / 97
+
+D´eroulement
+
+e
+
+f
+
+d
+
+g
+
+a
+
+b
+
+c
+
+h
+
+u=g, R=[h], v=h,
+
+P={ g : None, e : g,b : e, a :b,c :a, d :c,f :e,h :g}
+Q=[g,h]
+D´ecouverts=[g,e,b,a,c,d,f,h]
+Ferm´es=[d,c,a,b,f,e]
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+92 / 97
+
+D´eroulement
+
+a
+
+b
+
+c
+
+d
+
+e
+
+h
+
+f
+
+g
+
+u=h, R=[],
+
+P={ g : None, e : g,b : e, a :b,c :a, d :c,f :e,h :g}
+Q=[g]
+D´ecouverts=[g,e,b,a,c,d,f,h]
+Ferm´es=[d,c,a,b,f,e,h]
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+93 / 97
+
+D´eroulement
+
+a
+
+b
+
+c
+
+d
+
+e
+
+h
+
+f
+
+g
+
+u=g, R=[],
+
+P={ g : None, e : g,b : e, a :b,c :a, d :c,f :e,h :g}
+Q=[ ]
+D´ecouverts=[g,e,b,a,c,d,f,h]
+Ferm´es=[d,c,a,b,f,e,h,g]
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+94 / 97
+
+Arborescence associ´ee au parcours
+
+h
+
+f
+
+g
+
+e
+
+b
+
+a
+
+c
+
+d
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+95 / 97
+
+tri topologique
+
+Exemple d’application du parcours en profondeur.
+D´ebut d’ann´ee, vos enseignants pr´eparent le cours d’ISN.
+Pour cela, ils d´ecoupent les notions en chapitres a, b, c, d. . .
+Sur le graphe ci-dessous, une ﬂ`eche du chapitre x vers le chapitre y signiﬁe
+que x doit ˆetre trait´e avant y.
+
+i
+
+h
+
+g
+
+a
+
+j
+
+b
+
+d
+
+e
+
+f
+
+k
+
+c
+
+Pour une meilleure organisation et savoir o`u commencer , on aimerait
+r´eorganiser la repr´esentation du graphe de fa¸con `a ce que tous les sommets
+soient dessin´es align´es, toutes les ﬂ`eches du sch´ema devant ˆetre orient´ees
+vers la droite.
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+96 / 97
+
+tri topologique
+
+L’´enum´eration des sommets du graphe en ordre inverse de leur date de
+fermeture dans l’algorithme de parcours en profondeur permet d’obtenir un
+ordre des sommets satisfaisant la demande.
+
+Python
+def lancement(G) :
+
+for s in G :
+
+if couleur[s]==’blanc’ : parcours(G,s)
+
+def parcours(G,s) :
+couleur[s]=’gris’
+for v in G[s] :
+
+if couleur[v]==’blanc’ : parcours(G,v)
+
+P.append(s)
+# # # # # #
+couleur=dict()
+for v in G :couleur[v]=’blanc’
+P=list()
+lancement(G)
+P.reverse()
+print P
+
+tri topo python
+
+Jean-Manuel M´eny – IREM de LYON ()
+
+Algorithmique
+
+ISN 2013
+
+97 / 97
+
+

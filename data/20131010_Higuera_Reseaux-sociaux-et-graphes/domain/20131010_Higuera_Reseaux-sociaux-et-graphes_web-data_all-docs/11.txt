@@ -1,0 +1,3662 @@
+http://biblos.hec.ca/biblio/memoires/m2017no9.pdf
+
+Algorithmes parallèles en détection de communautésdans les réseaux complexesparPhilippe GagnonSciences de la gestion(Analytique d’affaires)Mémoire présenté en vue de l’obtentiondu grade de maîtrise ès sciences en gestion(M. Sc.)Janvier 2017©Philippe Gagnon, 2017Résumé
+
+La détection de communautés dans les réseaux consiste en la recherche de regroupements de
+noeuds fortement connectés ensemble, tout en présentant des relations relativement éparses avec
+les autres noeuds externes. Le problème est NP-complet dans la grande majorité des définitions
+formelles acceptées par la communauté scientifique, ce qui rend sa résolution en des temps utiles
+particulièrement difficile. Or, le problème est aussi particulièrement important, et a des applications
+dans des domaines diversifiés tels que la sociologie, l’informatique, l’ingénierie et la biologie. Une
+avenue permettant l’étude de réseaux de plus grande taille est la parallélisation des algorithmes. Tou-
+tefois, la majorité des algorithmes de pointe en détection de communautés consistent en des procé-
+dures inhéremment séquentielles, ce qui rend cette tâche difficile. Ce mémoire étudie des méthodes
+et relaxations visant à faciliter la parallélisation. Dans un premier temps, les réseaux complexes sont
+présentés et l’état de l’art en détection de communautés est exploré, et certaines bases en parallé-
+lisme en informatique sont ensuite expliquées. Des algorithmes parallèles sont ensuite développées,
+implémentées et évaluées. Ces algorithmes seront distribués au public sous une licence libre.
+
+Mots-clefs Réseaux complexes, Détection de communautés, Algorithmes parallèles
+
+i
+
+Abstract
+
+Community detection in networks is the process by which groups of elements that are densely
+connected together, but sparsely connected with other elements, are identified. Under most of its
+accepted definitions, the problem is NP-complete, which makes solving it particularly difficult. It
+is also very important, as it has wide-ranging applications in diverse fields such as sociology, infor-
+matics, engineering and biology. A popular avenue that is often exploited to make slow algorithms
+perform faster is to parallelize their execution. However, in community detection, most state-of-the-
+art algorithms are of an inherently sequential nature, which makes parallelization non-trivial. This
+thesis studies methods and relaxations that aim to alleviate this problem. We first introduce net-
+work science and review the state of the art in community detection, and discuss parallelization in a
+general context. We then develop and implement two parallel algorithms for community detection,
+and benchmark their outputs against a variety of evaluation datasets. These algorithms are set to be
+released to the public under a free software license.
+
+Keywords Complex Networks, Community Detection, Parallel Algorithms
+
+ii
+
+Remerciements
+
+Dans un premier temps, je tiens à remercier mes directeurs de recherche, Gilles Caporossi et Syl-
+vain Perron. Ces derniers ont su me guider et me motiver non seulement tout au long de ce processus
+de rédaction de mémoire, mais aussi tout au long de mes études à HEC Montréal. Je tiens à souligner
+ma grande appréciation face à leur flexibilité et à la confiance qu’ils m’ont accordée. Je tiens aussi à
+remercier Églantine Camby pour ses commentaires constructifs dans le cadre de la révision de ce
+travail.
+
+En second lieu, je tiens à remercier mes parents, qui me soutiennent inconditionnellement depuis
+des temps immémoriaux. Ces derniers connaissent mieux que quiconque la valeur que je leur accorde.
+Troisièmement, je remercie mes amis et collèges étudiants aux cycles supérieurs à HEC Mont-
+réal. Ils ont, par leur présence, rendu mon passage à HEC Montréal inoubliable. Je tiens toutefois à
+mentionner spécialement mes amis Morgan Martin et Lou Bonatesta, sans qui ces deux dernières
+années n’auraient jamais été les mêmes.
+
+Finalement, je me dois de remercier l’Institut des sciences mathématiques et la Fondation HEC
+
+Montréal pour leur soutien financier dans le cadre de mes études de deuxième cycle.
+
+iii
+
+Table des matières
+
+Avant-propos
+
+1 Introduction
+
+2 Les réseaux complexes
+
+.
+
+.
+
+.
+
+.
+.
+
+.
+.
+.
+
+.
+.
+.
+
+.
+.
+.
+
+2.1 Systèmes réels sous forme de réseau .
+.
+.
+
+.
+2.2 Concepts de base en théorie des graphes
+.
+
+.
+.
+2.1.1 Réseaux sociaux .
+.
+2.1.2 Réseaux technologiques .
+.
+2.1.3 Réseaux biologiques et écologiques .
+2.1.4 Réseaux de connaissances .
+.
+.
+.
+.
+.
+.
+2.3.1 Définitions .
+.
+2.3.2 Méthodes, modèles et algorithmes .
+
+.
+.
+.
+Indices et coefficients importants .
+.
+Structures de données .
+.
+.
+.
+.
+
+2.3 La structure de communauté .
+.
+
+2.2.1 Définitions .
+2.2.2
+2.2.3
+
+.
+.
+.
+
+.
+.
+.
+
+.
+.
+.
+
+.
+.
+.
+
+.
+.
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+3 Le parallélisme en informatique
+
+.
+.
+.
+.
+
+.
+.
+.
+.
+
+3.1.1
+3.1.2
+3.1.3
+
+3.2 Les plateformes matérielles
+
+.
+La taxinomie de Flynn .
+.
+La taxinomie de Feng .
+La taxinomie de Handler .
+.
+
+3.1 Les taxinomies d’architectures d’exécution parallèle .
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+3.2.1 Central Processing Unit (CPU) .
+.
+.
+3.2.2 Graphics Processing Unit (GPU) .
+3.2.3
+.
+.
+3.2.4 Application-Specific Integrated Circuit (ASIC)
+.
+.
+
+.
+.
+.
+.
+.
+.
+Field Programmable Gate Array (FPGA)
+
+3.3 Modèles de traitement et de calcul .
+
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+iv
+
+ix
+
+1
+
+3
+.
+3
+.
+3
+.
+4
+.
+4
+.
+5
+.
+5
+.
+5
+.
+7
+.
+7
+.
+9
+.
+9
+. 11
+
+17
+. 17
+. 17
+. 20
+. 20
+. 21
+. 21
+. 22
+. 22
+. 23
+. 23
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+3.5 Facteurs de performance en calcul parallèle .
+
+3.4 Modèles de communication en calcul parallèle .
+
+.
+
+.
+.
+.
+
+.
+.
+.
+
+.
+.
+.
+
+.
+.
+.
+
+.
+.
+.
+
+.
+.
+.
+
+.
+.
+.
+
+3.3.1
+3.3.2
+
+Le traitement par lots (Batch Processing) .
+.
+Le traitement par flux (Stream Processing) .
+.
+
+.
+.
+.
+.
+.
+.
+3.4.1 Communication par mémoire partagée (Shared Memory) .
+.
+3.4.2 Communication par échange de messages (Message Passing)
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+L’intensité de calcul (Computational Intensity) .
+.
+Le parallélisme inhérent aux données (Data Parallelism) .
+La localité des données (Data Locality) .
+.
+.
+.
+.
+.
+
+.
+.
+Situation de compétition (Race Condition) .
+Interblocage (Deadlock) .
+.
+
+3.5.1
+3.5.2
+3.5.3
+
+3.6.1
+3.6.2
+
+.
+.
+.
+.
+
+.
+.
+.
+.
+
+.
+.
+.
+.
+
+.
+.
+.
+.
+
+.
+.
+.
+.
+
+.
+.
+.
+.
+
+.
+.
+
+.
+.
+
+.
+.
+
+.
+.
+
+.
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+3.6 Problématiques touchant le calcul parallèle .
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+4.3 Parallel Community Detection .
+.
+.
+.
+.
+Sparsity Exploitation .
+
+4 Parallel Methods for Community Detection in Complex Networks
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+4.1 Introduction .
+.
+4.2 Methods for Community Detection in Networks .
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+4.2.1 Methods Based on Block Models
+4.2.2 Methods Based on Null Models .
+4.2.3 Methods based on Flow Models .
+.
+4.2.4 Other Heuristics .
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+4.4.1
+.
+4.4.2 Description of our Algorithms .
+.
+Implementation and Platform .
+.
+.
+.
+.
+
+4.3.1
+4.3.2 Concrete Issues .
+Previous Works .
+4.3.3
+.
+
+Problem Statement
+.
+.
+.
+
+4.5.1
+4.5.2 Datasets
+4.5.3
+4.5.4 Results .
+.
+
+.
+Experimental Protocol .
+.
+.
+
+4.5 Evaluation and Results .
+
+4.4 Proposed Solution .
+
+4.6 Conclusion .
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+
+.
+.
+.
+.
+
+.
+.
+.
+.
+
+.
+.
+.
+.
+
+.
+.
+.
+
+.
+.
+
+.
+.
+
+.
+.
+
+.
+.
+
+.
+.
+
+.
+.
+
+.
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+5 Conclusion
+
+Bibliographie
+
+v
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+. 23
+. 23
+. 24
+. 24
+. 24
+. 25
+. 25
+. 25
+. 25
+. 26
+. 26
+. 27
+
+28
+. 28
+. 30
+. 30
+. 31
+. 32
+. 32
+. 33
+. 33
+. 33
+. 35
+. 35
+. 35
+. 36
+. 37
+. 37
+. 40
+. 43
+. 43
+. 49
+
+50
+
+52
+
+Table des figures
+
+2.2.1 Graphe non orienté avec 20 sommets et 19 arcs
+.
+2.2.2 Graphe complet à dix sommets
+2.2.3 Graphe simple à quatre sommets
+.
+
+.
+.
+
+.
+.
+
+.
+.
+
+.
+.
+
+.
+.
+
+.
+.
+
+.
+
+.
+.
+.
+
+.
+.
+.
+
+.
+.
+.
+
+.
+.
+.
+
+.
+.
+.
+
+.
+.
+.
+
+.
+.
+.
+
+.
+.
+.
+
+.
+.
+.
+
+.
+.
+.
+
+.
+.
+.
+
+.
+.
+.
+
+.
+.
+.
+
+.
+.
+.
+
+.
+.
+.
+
+.
+.
+.
+
+.
+.
+.
+
+.
+.
+.
+
+.
+.
+.
+
+.
+.
+.
+
+.
+.
+
+6
+6
+8
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+4.1.1 Visualization of the community structure of Zachary’s Karate Club Network .
+.
+.
+4.3.1 Node swapping in a simple graph .
+.
+.
+4.5.1 An artificial undirected network displaying a community structure .
+.
+4.5.2 Community structure inferred from a dataset representing the interconnections of
+.
+.
+.
+.
+
+.
+4.5.3 plouvain runtime benchmark for tests run on real-world datasets .
+4.5.4 plpam runtime benchmark for tests run on real-world datasets
+.
+.
+4.5.5 Adjusted mutual information benchmarks for LFR generated datasets
+
+the Western United States power grid .
+
+.
+.
+.
+.
+
+.
+.
+.
+.
+
+.
+.
+.
+.
+
+.
+.
+.
+.
+
+.
+.
+.
+.
+
+.
+.
+.
+.
+
+.
+.
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+.
+
+.
+.
+
+.
+
+.
+.
+.
+
+.
+.
+
+.
+.
+
+. 29
+. 34
+. 41
+
+. 42
+. 44
+. 45
+. 47
+
+vi
+
+Liste des tableaux
+
+3.1.1 La taxonomie de Flynn .
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+4.4.1 Features of the algorithms described in subsection 4.4.2 .
+.
+4.5.1 LFR benchmark graphs parameters .
+.
+4.5.2 Properties of our selected real-world datasets .
+.
+4.5.3 Speedup factor for benchmarks run on real-world datasets
+4.5.4 Quality results for benchmarks run on real-world datasets .
+
+.
+.
+.
+
+.
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+.
+
+.
+.
+
+.
+.
+
+.
+.
+
+.
+
+.
+.
+.
+.
+.
+
+.
+
+.
+.
+.
+.
+.
+
+.
+
+.
+.
+.
+.
+.
+
+.
+
+.
+.
+.
+.
+.
+
+.
+
+.
+.
+.
+.
+.
+
+.
+
+.
+.
+.
+.
+.
+
+.
+
+.
+.
+.
+.
+.
+
+.
+
+.
+.
+.
+.
+.
+
+.
+
+.
+.
+.
+.
+.
+
+.
+
+.
+.
+.
+.
+.
+
+.
+
+.
+.
+.
+.
+.
+
+.
+
+.
+.
+.
+.
+.
+
+.
+
+.
+.
+.
+.
+.
+
+. 18
+
+. 39
+. 40
+. 42
+. 46
+. 48
+
+vii
+
+Liste des algorithmes
+
+4.4.1 Pseudo-code of our parallel Louvain implementation .
+.
+4.4.2 Pseudo-code of our parallel LPAm implementation .
+
+.
+.
+
+.
+.
+
+.
+.
+
+.
+.
+
+.
+.
+
+.
+.
+
+.
+.
+
+.
+.
+
+.
+.
+
+.
+.
+
+.
+.
+
+.
+.
+
+.
+.
+
+.
+.
+
+.
+.
+
+.
+.
+
+. 38
+. 39
+
+viii
+
+Avant-propos
+
+Le chapitre 4 de ce mémoire est un manuscrit intitulé «Parallel methods for community detection
+in complex networks », écrit sous la supervision et avec la collaboration de Gilles Caporossi et Sylvain
+Perron. Ce manuscrit est actuellement en préparation. La définition et la caractérisation du problème,
+la confection des algorithmes, leur implémentation et leur évaluation sont l’oeuvre principale de Phi-
+lippe Gagnon. Ce manuscrit est écrit en anglais puisqu’il s’agit de la lingua franca de l’informatique et
+de la recherche opérationnelle, domaines principaux dans lesquels se situe ce travail.
+
+ix
+
+Chapitre 1
+
+Introduction
+
+En 1736, Euler proposait sa maintenant célèbre solution au problème des ponts de Königsberg
+[Eul41]. La publication de ce travail a lancé une sous-discipline mathématique nommée théorie des
+graphes, qui consiste en l’étude de structures mathématiques représentant des propriétés relation-
+nelles entre différents éléments. L’intérêt pour ces structures découle de leur pouvoir descriptif. Mal-
+gré leur généralité qui découle du fait qu’ils puissent être utilisés pour représenter des relations de
+tous types, les graphes sont en mesure d’être extrêmement explicites par le rattachement de proprié-
+tés à leurs éléments et leurs liens. L’étude des graphes sous cet angle est une discipline scientifique
+connue sous le nom de science des réseaux.
+
+Les réseaux peuvent être utilisés pour modéliser des systèmes provenant de divers horizons.
+En particulier, ces derniers ont été utilisés pour représenter des relations sociales, des systèmes
+technologiques, des systèmes biologiques et écologiques, ou encore des réseaux de connaissances.
+Les graphes constitués afin de modéliser des systèmes réels diffèrent généralement de graphes plus
+simples tels que des grilles ou des graphes aléatoires. Les premiers présentent souvent des caracté-
+ristiques topologiques non triviales, et sont par conséquent appelés réseaux complexes [New03].
+
+La caractéristique topologique étudiée principalement dans le cadre de ce mémoire est la struc-
+ture de communauté. Un réseau exhibe une structure de communauté si les éléments qui le com-
+posent peuvent être regroupés de manière à ce que les éléments faisant partie du même groupe soient
+densément connectés, mais avec des connexions éparses envers les éléments membres des autres
+groupes.
+
+La recherche de communautés dans un réseau est un problème communément nommé détection
+de communauté. Ce problème est extrêmement difficile à résoudre puisqu’il est NP-complet. Or, un
+grand nombre de jeux de données relationnelles est amassé sur une base régulière, et la taille de ces
+derniers ne cesse de croitre.
+
+La confection d’algorithmes heuristiques ou approximatifs capables de détecter des structures de
+communauté de bonne qualité en temps restreints a donc fait l’objet de multiples études. Toutefois,
+les principaux algorithmes de pointe du domaine sont basés sur des principes itératifs inhéremment
+
+1
+
+séquentiels. Il est donc difficile de les exécuter en parallèle afin d’exploiter des ressources de calcul
+additionnelles, et ainsi obtenir des solutions à des problèmes de grande taille dans des temps raison-
+nables.
+
+Ce mémoire vise à contribuer à la résolution de ce problème en proposant des méthodes parallèles
+pour détecter des communautés dans des réseaux complexes de grande taille. L’exposé est structuré
+ainsi : le chapitre 2 introduit et révise l’état de l’art en étude des réseaux complexes. La section 2.2
+consiste en un exposé de concepts de base en théorie des graphes, et peut être outrepassée par un
+lecteur déjà familier avec le domaine. Le chapitre 3 consiste en une introduction au calcul parallèle,
+dans un contexte général. Le manuscrit «Parallel methods for community detection in complex net-
+works » est reproduit intégralement dans le chapitre 4. Dans ce chapitre, la section 4.2 constitue une
+courte revue de littérature en détection de communauté, avec un accent sur les méthodes de pointe,
+et la sous-section 4.3.3 un exposé encore plus succinct des méthodes parallèles en détection de com-
+munauté. La brièveté de ces revues, rendue nécessaire par le format manuscrit du chapitre, rehausse
+la pertinence du chapitre 2, dont l’objectif est de situer le travail dans le champ plus large de la science
+des réseaux. Finalement, le chapitre 5 conclut le mémoire.
+
+2
+
+Chapitre 2
+
+Les réseaux complexes
+
+Les réseaux complexes sont des réseaux dont la caractéristique principale est de présenter des
+particularités topologiques que l’on ne retrouve que rarement dans des réseaux plus simples. Curieu-
+sement, l’on découvre ces particularités lorsque plusieurs systèmes que l’on retrouve dans le monde
+réel sont modélisés sous forme de réseau. L’objectif de ce chapitre est de fournir au lecteur un survol
+de la recherche de pointe en science des réseaux complexes. Le chapitre commence par une revue de
+travaux scientifiques traitant de modélisation de systèmes complexes sous forme de réseaux, avec la
+section 2.1. Ensuite, la section 2.2 présente certains concepts de base de la théorie des graphes, dont
+la connaissance est essentielle à la compréhension de la suite du mémoire. Finalement, la section 2.3
+traite de la structure de communauté, la propriété que l’on cherche à étudier avec les algorithmes
+présentés au chapitre 4.
+
+2.1 Systèmes réels sous forme de réseau
+
+Tel que mentionné en introduction, plusieurs systèmes complexes peuvent être modélisés sous
+forme de réseaux et étudiés avec les outils mathématiques issus de la théorie des graphes. Plusieurs
+travaux précédents se sont concentrés sur l’étude de réseaux sociaux, technologiques, biologiques et
+d’information.
+
+2.1.1 Réseaux sociaux
+
+La modélisation sous forme de réseaux est fréquemment employée afin de représenter des re-
+lations sociales. Cette pratique, l’analyse de réseaux sociaux, provient des travaux de Jacob Moreno
+[Mor34]. Dans le cadre de l’analyse d’une problématique de fugues dans une école pour filles à New
+York, ce dernier a découvert que le facteur explicatif principal de la problématique était la position
+d’une élève dans le réseau social composé par le corps étudiant. C’est cette étude qui est créditée
+comme ayant lancé le champ de la sociométrie, dont l’un des principaux outils est l’analyse de ré-
+seaux sociaux [BMBL09].
+
+3
+
+Peu de temps après, Davis et al. [DGG41] étudient les relations sociales entre les femmes d’une
+ville du sud des États-Unis en 1936. Ces derniers sont en mesure de caractériser les relations sociales
+de ces femmes en fonction de leur position hiérarchique au sein du groupe. Plus tard, plusieurs autres
+études se sont concentrées sur l’étude des relations amicales entre différents individus [FS64, RH61].
+En 1969, Milgram et Travers déterminent que deux individus aléatoires sont séparés par, en
+moyenne, 5.2 intermédiaires [Mil67, TM69]. Ces travaux ont donnés naissance au phénomène de
+«petit monde » (small-world), bien connu dans la culture populaire. C’est ce qui aura inspiré le mo-
+dèle de réseau complexe «small-world ».
+
+Plus récemment, les chercheurs se sont particulièrement intéressés aux relations d’affaires [GM78,
+Mar75] et aux relations sexuelles entre individus [HK07, BMS04, DSW+04]. Toutefois, un développe-
+ment récent particulièrement important consiste en l’acquisition de données sur les relations sociales
+avec des moyens autres que l’observation directe.
+
+Ce développement aura permis d’obtenir des données sur des réseaux sociaux d’une taille beau-
+coup plus importante que par le passé. En particulier, [ML12] introduit des jeux de données basés
+sur Facebook, Twitter and Google+, et [YL15] introduit 230 jeux de données basés sur des réseaux
+sociaux en ligne. Certains chercheurs ont eu accès à des réseaux composés de métadonnées concer-
+nant des communications sans-fils [BDK15], ce qui permet entre autres d’étudier la mobilité et la
+distribution géographiques des individus.
+
+2.1.2 Réseaux technologiques
+
+On regroupe généralement sous la bannière des réseaux technologiques les réseaux de distribu-
+tion d’information ou de distribution électrique, qui sont couramment étudiés. Un réseau similaire
+fréquemment étudié est le réseau formé par les routeurs qui permettent la distribution de données
+à l’échelle de l’internet [BC01]. Ces réseaux sont généralement obtenus à l’aide d’observations des
+routes empruntées par les données pour se rendre d’un ordinateur à l’autre.
+
+La catégorie des réseaux technologiques ne comporte toutefois pas seulement des réseaux in-
+formatiques. Certains chercheurs ont étudié les propriétés des réseaux de distribution électrique
+[WS98]. D’autres ont étudié, par exemple, les réseaux routiers [LGH06], ou les réseaux de trafic aérien
+[LHY+11].
+
+2.1.3 Réseaux biologiques et écologiques
+
+Un grand nombre de systèmes biologiques peuvent être représentés sous forme de réseaux. Par
+exemple, les réactions qui résultent de l’interaction entre différentes protéines peuvent être modéli-
+sées sous la forme d’arcs rejoignant des noeuds (représentant des protéines) [JMBO01, TLT07].
+
+Les écologistes étudient fréquemment les interactions entre les prédateurs et leurs proies dans
+un environnement naturel. Ces interactions peuvent être représentées sous forme de réseaux, avec
+les prédateurs et les proies représentés par les noeuds, et les relations entre des derniers par les arcs
+
+4
+
+[DM04]. L’étude de ces réseaux peut, par exemple, permettre de mieux comprendre les implications
+de la disparition d’une espèce animale sur la chaine alimentaire [SLJRT10].
+
+Finalement, un autre type de travaux d’intérêt consiste en études qui modélisent des réseaux de
+neurones [WSTB86]. Ces réseaux sont particulièrement difficiles à reconstituer, mais l’étude de ces
+derniers permet d’obtenir un aperçu intéressant de la structure qui sous-tend le fonctionnement du
+système nerveux [CS07].
+
+2.1.4 Réseaux de connaissances
+
+Les chercheurs se sont rapidement intéressés à l’étude des réseaux formés par les citations entre
+les articles scientifiques [Seg92, New01]. Ces réseaux sont par définition orientés et généralement
+acycliques. Les travaux dans ce domaine sont historiquement significatifs, puisque l’étude de ces ré-
+seaux qui aura pour la première fois permis l’identification de réseaux dont la distribution du degré
+des noeuds suit une loi de puissance [Pri65]. Il s’agit d’une caractéristique commune à des réseaux
+représentant plusieurs phénomènes naturels complexes (nommés réseaux invariants d’échelle).
+
+Le réseau le plus notoire dans cette catégorie constitue sans aucun doute le Web (WWW). Ce der-
+nier a été étudié par Barabásil et Albert [BA99], qui ont montré non seulement que la distribution des
+degrés des noeuds dans le réseau suit une loi de puissance, mais aussi que cette structure émerge du
+processus de construction du réseau. En effet, il semblerait que les liens entre les éléments s’ajoutent
+selon un processus nommé attachement préférentiel, qui dicte que les éléments ont tendance à se lier
+avec une plus grande probabilité avec ceux qui possèdent un plus grand nombre de liens préexistants.
+Les auteurs proposent de plus que ce processus puisse sous-tendre la formation d’autres réseaux
+naturels. Ce constat est particulièrement significatif. En effet, si la distribution du degré des noeuds
+d’un réseau suit une loi de puissance, il est possible de poser une hypothèse concernant le processus
+qui sous-tend le phénomène de construction du réseau en tant que tel.
+
+2.2 Concepts de base en théorie des graphes
+
+Cette section vise à présenter certains concepts basiques de la théorie de graphes, la discipline
+mathématique sur laquelle repose l’étude des réseaux. L’accent dans cette section est porté sur les
+concepts qui sont fréquemment utilisés dans le cadre de l’étude de réseaux complexes présentant
+une structure de communauté. Pour un traitement plus complet, le lecteur peut se référer à [Tru94],
+un texte introductif très accessible.
+
+2.2.1 Définitions
+
+Définition 2.2.1. Un graphe est une paire G = (V, E), avec V l’ensemble des sommets, ou noeuds,
+qui composent le réseau, et E ⊆ V 2 l’ensemble des arêtes, ou arcs, qui relient ces sommets ensemble.
+Deux sommets sont dits adjacents s’il existe un arc qui les relie. Le nombre de sommets présents
+
+5
+
+Fig. 2.2.1: Graphe non-orienté avec 20 sommets et 19 arcs. Ce graphe ne contient aucun cycle et
+appartient donc à la famille des arbres.
+
+Fig. 2.2.2: Graphe complet à dix sommets
+
+dans un graphe, dénoté |V |, est appelé l’ordre du graphe, tandis que le nombre d’arcs, dénoté |E|, est
+nommé la taille du graphe.
+Définition 2.2.2. Un sous-graphe est un graphe contenu dans un autre graphe, soit G(cid:31) ⊂ G.
+Définition 2.2.3. Un graphe connexe est un graphe au sein duquel il existe un chemin entre toutes
+les paires de sommets.
+
+Définition 2.2.4. Une composante connexe est un sous-graphe de G étant à la fois maximal et
+connexe.
+
+Définition 2.2.5. Un graphe complet est un graphe au sein duquel il existe un arc entre toutes les
+paires de sommets, soit ∃ (u, v) ∈ V 2 ∀ u, v ∈ V . Par définition, un graphe complet est connexe. Le
+graphe représenté dans la figure 2.2.2 est un exemple de ce type de graphe.
+
+Définition 2.2.6. Un graphe est orienté s’il existe une relation directionnelle sur les arcs qui relient
+les sommets. Dans ce cas, E est un ensemble de paires ordonnées.
+
+6
+
+Définition 2.2.7. Un graphe est pondéré s’il existe une fonction de pondération w(v ∈ V ) ou w(e ∈
+E) sur ses sommets ou ses arcs, respectivement.
+Définition 2.2.8. Une boucle est un arc e ∈ E := (v, v), soit un arc reliant un sommet à lui-même.
+Définition 2.2.9. Des arcs sont dits multiples s’ils relient la même paire de sommets, soit e, e
+(u, v).
+
+:=
+
+′
+
+Définition 2.2.10. La distance d(u, v) entre deux sommets est, dans un graphe non pondéré, le
+nombre d’arcs du plus court chemin entre u et v. Dans un graphe pondéré, il s’agit de la somme des
+poids du chemin le moins lourds entre u et v.
+
+Définition 2.2.11. Le degré d’un sommet v est le nombre d’arcs qui lui sont adjacents.
+
+Définition 2.2.12. Un invariant est une fonction f qui associe une valeur généralement scalaire à
+un graphe.
+
+2.2.2 Indices et coefficients importants
+
+Définition 2.2.13. Un graphe a un degré maximal ∆ := maxv∈V kv.
+
+Définition 2.2.14. Un graphe a un degré minimal δ := minv∈V kv.
+
+Définition 2.2.15. Un graphe possède une séquence des degrés, qui consiste en la séquence mono-
+tone non croissante dont les éléments sont les degrés des sommets du graphe.
+
+Définition 2.2.16. La densité est le nombre d’arcs présents dans le réseau, comparativement avec le
+nombre d’arc qui pourraient possiblement exister dans un réseau de la même taille. Pour un graphe
+non orienté, la densité est
+
+|V |×|V −1| pour un graphe orienté.
+
+|V |×|V −1|, et
+
+2|E|
+
+|E|
+
+Définition 2.2.17. L’excentricité d’un sommet v est la distance maximum entre u et tout autre
+sommet v du graphe, soit ϵ(v) = maxu d(v, u).
+
+Définition 2.2.18. Le diamètre d’un graphe est l’excentricité maximum présente dans le graphe, soit
+D(G) = maxv∈G ϵ(v).
+
+Définition 2.2.19. Le rayon d’un graphe est la l’excentricité minimum présente dans le graphe, soit
+r(G) = minv∈G ϵ(v).
+
+2.2.3 Structures de données
+
+Les graphes sont généralement étudiés à l’aide d’ordinateurs. Il est donc pertinent d’étudier les
+structures de données utilisées pour les représenter sous forme informatique, puisque la forme qu’elles
+prennent ont une incidence directe sur la performance des algorithmes utilisés pour les analyser. Il
+existe trois structures principales pour représenter un graphe, soit la matrice d’adjacence, la liste
+d’adjacence et la liste d’arêtes.
+
+7
+
+Fig. 2.2.3: Graphe simple à quatre sommets
+
+2.2.3.1 Matrice d’adjacence
+
+Une matrice d’adjacence est une matrice A := {aij} avec
+
+1 (i, j) ∈ E
+0 (i, j) /∈ E
+
+pour un graphe non pondéré, et aij = w[(i, j)] si le graphe est pondéré. Ainsi, la représentation sous
+forme de matrice d’adjacence de la figure 2.2.3 serait :
+
+aij =
+
+
+1 1 1 1
+
+1 1 1 0
+
+
+
+1 1 1 0
+
+1 0 0 1
+
+(2.2.1)
+
+La matrice d’adjacence est une représentation très utile d’un point de vue mathématique, puis-
+qu’elle permet de facilement utiliser les outils et les algorithmes issus de l’algèbre linéaire pour étudier
+les graphes. Toutefois, cette dernière nécéssite O(n2) d’espace de stockage et de mémoire.
+
+En outre, un avantage majeur de la matrice d’adjacence est vérifier si un arc existe entre deux
+sommets, ou obtenir le poids d’un arc, est une opération de complexité O(1) sous cette représenta-
+tion.
+
+2.2.3.2 Listes d’adjacence
+
+La représentation sous forme de listes d’adjacence est utile lorsque l’on traite avec un graphe
+éparse, c’est à dire un graphe dont la taille |E| (cid:23)V 2. En effet, alors que la représentation sous
+forme de matrice d’adjacence nécéssite O(n2) d’espace de stockage et de mémoire, la structure de
+listes d’adjacence en nécéssite O(n).
+
+La représentation sous forme de liste d’adjacence peut être conceptualisée sous la forme d’un
+
+8
+
+vecteur v := {ai∈V}, tel que les éléments de ai soient les sommets adjacents au sommet i. Pour la
+figure 2.2.3, l’on aurait :
+
+(2.2.2)
+
+
+
+{1, 2, 3}
+{0, 2}
+{0, 1}
+{0}
+
+
+
+À l’instar de la représentation sous forme de matrice d’adjacence, vérifier si un arc existe entre
+deux sommets, ou obtenir le poid d’un arc, est une opération de complexité O(n) dans le cadre de
+la représentation sous forme de listes d’adjacence. Obtenir tous les sommets adjacents à un sommet
+particulier est toutefois une opération plus simple et plus rapide sous ce régime, puisqu’il suffit alors
+de lire le vecteur ai dont la taille se limite au nombre de sommets adjacents, alors que sous le régime
+de la matrice d’adjacence, la lecture d’une ligne entière de la matrice est requise, ce qui constitue une
+opération O(|V |).
+
+2.2.3.3 Liste d’arêtes
+
+La liste d’arêtes est une représentation de graphes qui prend très peu d’espace, puisqu’elle est
+constituée d’un vecteur e := {e ∈ E}. La liste d’arêtes prend donc O(|E|) d’espace de stockage et de
+mémoire. La représentation sous cette forme de la figure 2.2.3 serait :
+
+{(0, 1), (0, 2), (0, 3), (1, 2)}
+
+(2.2.3)
+
+Il est toutefois difficile de travailler avec une liste d’arêtes, puisque la structure de cette dernière
+rend l’accès aux données moins flexible. Cette représentation est toutefois couramment utilisée afin
+de stocker un graphe dans un fichier pour une utilisation subséquente.
+
+2.3 La structure de communauté
+
+2.3.1 Définitions
+
+2.3.1.1 Définition classique
+
+De manière intuitive, un réseau comporte une structure de communauté s’il est possible de conce-
+voir un regroupement de ses sommets, de telle manière que les sommets membres d’un même groupe
+soient fortement connectés, tout en étant faiblement connectés avec les sommets membres d’autres
+groupes. Cette caractérisation générale nous permet de souligner le concept sans trop le circonscrire,
+et permet d’introduire deux définitions traditionnelles plus formelles. Radicchi et al. [RCC+04] pro-
+posent le concept de communauté au sens fort, soit une communauté au sein de laquelle, pour chaque
+noeud, le degré interne soit plus grand que le degré externe, et le concept de communauté au sens
+
+9
+
+faible, au sein de laquelle le degré interne de la communauté prise globalement soit plus grand que
+son degré externe.
+
+2.3.1.2 Définition moderne
+
+Les interprétations modernes du concept de communauté diffèrent toutefois sensiblement de la
+définition énoncée ci-haut. En effet, Fortunato et Hric [FH16] argumentent que de nos jours, une
+communauté est plutôt conceptualisée sur une base statistique ; c’est-à-dire que, au lieu d’identifier
+une communauté à l’aide du nombre absolu de liens entre ses différents membres et les autres som-
+mets d’un réseau, on l’identifie à l’aide de la probabilité qu’un lien soit présent entre deux sommets.
+Cette définition est beaucoup plus opérationnelle et aura permis la confection d’une grande variété
+d’algorithmes de détection de communauté, tel qu’exposé dans la section 2.3.2.
+
+2.3.1.3 Variantes
+
+En plus de la variante classique de structure de communauté, certaines extensions et généralisa-
+tions du modèle ont été introduites afin de modéliser certaines situations que l’on retrouve dans le
+monde réel.
+
+Structure de communauté classique La définition classique de structure de communauté corres-
+pond au modèle au sein duquel chaque noeud du réseau est affecté à une seule communauté. Ma-
+thématiquement, ce concept s’opérationnalise en représentant la structure en tant qu’une partition
+d’un graphe, soit pour un graphe G = (V, E) avec k communautés, G = {C1, C2, ..., Ck}.
+
+Structure de communauté hiérarchique La structure de communauté hiérarchique a été intro-
+duite en 2002 par Ravasz et Barabási [RB02a]. En effet, il existe certaines situations au sein des-
+quelles il est naturel de représenter les communautés de manière à ce que ces dernières puissent être
+enveloppées par une communauté parente. Ces structures sont souvent retrouvées dans le contexte
+de l’analyse de réseaux sociaux. Par exemple, on peut modéliser sous forme de communauté hiérar-
+chique un groupe scolaire, faisant partie d’un niveau, faisant partie d’une école. L’on peut intuitive-
+ment s’attendre à ce que les liens entre les invididus membres d’un même groupe soient plus pro-
+noncés à l’interne qu’avec les membres des autres classes, mais aussi que les liens entre les membres
+d’un même niveau soient plus prononcés que les liens avec les membres d’autres niveaux, et ainsi de
+suite.
+
+Structure de communauté chevauchante Dans [PDF05], un modèle de communauté chevauchante
+est présenté. En effet, il peut être naturel de représenter une situation au sein de laquelle un élé-
+ment du réseau à représenter peut faire partie de plusieurs communautés. Il est par exemple fréquent
+pour un individu de faire partie de plusieurs clubs sociaux, ou encore de faire partie de communautés
+
+10
+
+qui représentent des situations différentes telles que des situations familiales, amicales, scolaires ou
+sportives. Il peut être intéressant, dans ces instances, de modéliser la force du lien d’un élément avec
+une communauté, au lieu de simplement modéliser son appartenance ou sa non-appartenance à une
+communauté à l’étude.
+
+2.3.2 Méthodes, modèles et algorithmes
+
+Il est possible d’observer des réseaux à l’aide d’observation directe ou de collecte d’information
+à l’aide de techniques manuelles. Cette méthodologie permet toutefois seulement l’observation de
+réseaux de petite taille, et l’orientation de ces recherches était généralement basée sur l’étude des
+propriétés des éléments, ou de petits groupes d’éléments.
+
+L’évolution des méthodes de cueillette de données et la disponibilité de données concernant des
+réseaux de plus grande taille aura toutefois, dans plusieurs cas, rendu cette méthodologie imprati-
+cable. Les scientifiques oeuvrant dans le domaine se sont donc tournées vers des méthodes basées
+sur l’étude des propriétés statistiques des réseaux [For10].
+
+Sous le régime de la définition «moderne », l’identification des communautés s’opérationnalise en
+tant que l’analyse du réseau en fonction d’un modèle sous-jacent. Puisque le problème de détection
+de communautés peut être défini de plusieurs manières en fonction des objectifs de l’utilisateur,
+plusieurs modèles, techniques et algorithmes ont été développés.
+
+2.3.2.1 Modèles de blocs stochastiques
+
+Le modèle le plus connu est certainement le modèle de blocs stochastique (Stochastic block model
+- SBM), introduit par Holland, Laskey et Leinhardt [HLL83]. Ce dernier se décrit succinctement ;
+un modèle est composé de n sommets et de B blocs. La probabilité que les sommets membres d’un
+même bloc B soient connectés est de p, et la probabilité que les sommets membres de blocs différents
+soient connectés est q. Si p > q, un retrouve une structure associative au sein du réseau. Si p < q, on
+retrouve une structure disassociative. Si p = q, on retrouve un modèle aléatoire.
+
+Ce modèle simple et ses extensions a motivé une grande quantité de méthodes de détection de
+communauté. Une grande quantité de ces méthodes est basée sur la maximisation de la vraisem-
+blance d’observer un réseau sous un modèle donné. Cette mesure se calcule comme
+
+L(G|g) =∑rs
+
+mrs log
+
+mrs
+nrns
+
+(2.3.1)
+
+avec mrs le nombre de liens entre les sommets des groupes r et s, nret ns le nombre de sommets
+dans ces groupes. Il est à noter que G représente le graphe à l’étude et g le paramètre représentant
+les affectations de noeuds à des blocs.
+
+Une intéressante extension de ce modèle a été introduite par Karrer et al. [KN11] dans l’optique
+
+11
+
+de prendre en considération la séquence des degrés des noeuds d’un réseau. Cette extension s’écrit
+
+L(G|g) =∑rs
+
+mrs log
+
+mrs
+krks
+
+(2.3.2)
+
+avec kr et ks représentant le degré des noeuds compris dans r et s, respectivement. Cette extension
+modèle plus fidèlement les réseaux réels au sein desquels la séquence des degrés peut être d’une
+grande variabilité, et permet d’obtenir des solutions de meilleure qualité pour les réseaux complexes.
+Certaines méthodes ont été développées afin de rendre le processus opérationnel même pour des
+réseaux de grande taille [Pei14]. Toutefois, une lacune de cette méthodologie lorsque comparée à, par
+exemple, l’optimisation de la modularité (voir 2.3.2.2) est que le nombre de communautés recher-
+chées doit généralement être fourni à l’algorithme à titre de paramètre. Des méthodes de sélection
+de modèles courantes (AIC ou BIC, par exemple), peuvent être employées pour pallier à ce problème,
+toutefois, cela complexifie la méthodologie par rapport à des méthodes sans paramètres comme la
+modularité.
+
+2.3.2.2 Optimisation basée sur un modèle nul
+
+Une méthodologie similaire consiste à maximiser une mesure qui indique à quel point un réseau
+donné diffère d’un modèle nul, soit un modèle au sein duquel aucune communauté ne devrait exister
+en théorie.
+
+Modularité La mesure semblable la plus connue et la plus populaire en pratique est certainement
+la modularité [NG04], définie comme
+Q =
+
+(2.3.3)
+
+1
+
+2m∑ij [Aij − kikj
+
+2m] δ(Ci;Cj)
+
+avec m le poids total des arcs du réseau,A la matrice d’adjacence du réseau, ki et kj le poids des
+sommets i et j, et δ la fonction delta de Kronecker, définie comme
+
+δ(i, j) =
+
+i = j
+i ̸= j
+
+.
+
+La valeur de la modularité est comprise dans l’intervalle [−0.5, 1]. Elle est positive si le nombre
+de liens intracommunautés au sein d’un réseau est plus grand que le nombre de liens que l’on s’attend
+à retrouver au sein d’un réseau aléatoire. Un réseau avec une modularité de 1 est un graphe complet.
+En pratique, la modularité offre des résultats très intéressants, ce qui explique sa large adoption par
+la communauté scientifique. Elle a été utilisée pour trouver des communautés au sein de domaines
+variés tels que la sociologie et la chimie.
+
+1
+
+0
+
+12
+
+La modularité en tant que mesure comporte toutefois certains problèmes théoriques qui limitent
+son acceptation par la communauté scientifique. En particulier, une limite de résolution a été iden-
+tifiée par Fortunato et Bathelemy [FB07]. Cette problématique rend impossible l’identification de
+communautés à une échelle plus petite qu’un ratio de l’ordre de
+m. De plus, il a été démontré que la
+modularité a tendance à trouver des communautés dans certains graphes aléatoires, au sein desquels
+aucune communauté ne devrait réellement exister [GSPA04].
+
+√
+
+Plusieurs algorithmes ont été développés pour maximiser la modularité. Le premier d’entre eux
+est l’algorithme de Newman [New04], qui consiste en un algorithme agglomératif dans lequel les arcs
+du réseau sont ajoutés itérativement de manière à obtenir la plus grande modularité à chaque étape.
+Newman introduit ensuite une méthode spectrale pour maximiser la modularité [New06], en propo-
+sant une forme de la mesure adaptée à son étude à l’aide d’outils issus de l’algèbre linéaire. La popu-
+larité de la mesure s’est grandement accrue avec l’introduction de l’algorithme de Louvain [BGLL08],
+qui aura permis pour la première fois d’obtenir des résultats de grande qualité à des problèmes de
+détection de communautés en des temps raisonnables. Cet algorithme est de plus particulièrement
+intéressant puisqu’il permet de découvrir une hiérarchie de communautés, ce qui, intuitivement, ap-
+parait dans plusieurs réseaux naturels tels que les réseaux sociaux.
+
+Surprise La surprise est une mesure similaire introduite avec l’objectif de pallier à certains des
+problèmes identifiés par la recherche concernant la modularité. Introduite récemment par Aldecoa
+et Marín [AM11], la surprise représente l’écart entre un réseau observé et un modèle nul basé sur
+une distribution hypergéométrique. La mesure s’écrit
+
+S = − log
+
+min M;n∑j=p
+
+( M
+j )( F − M
+n − j )
+( F
+n )
+
+(2.3.4)
+
+avec F le nombre maximal de liens dans un réseau avec le même nombre de noeuds, n le nombre
+de liens observés dans le réseau, M le nombre maximal de liens internes, étant donné la partition
+considérée, et p le nombre de liens internes observés dans la partition considérée.
+
+Les auteurs expliquent que leur mesure décrit à quel point il est invraisemblable (ou surprenant,
+ce qui motive le nom de la mesure) d’observer la distribution des arcs et des noeuds du réseau. Il
+est ensuite démontré expérimentalement à l’aide de réseaux synthétiques que la mesure donne des
+résultats qui se rapprochent beaucoup plus des résultats attendus en fonction de l’information mu-
+tuelle que la modularité, et ce pour un grand nombre d’algorithmes de pointe utilisés fréquemment
+dans la littérature et en pratique.
+
+Peu d’algorithmes existent pour maximiser cette mesure. Toutefois, il est possible de modifier
+certains algorithmes à l’origine développés pour maximiser la modularité afin de l’utiliser. On peut
+
+13
+
+citer en exemple Combo [SCBR14], un algorithme générique développé dans le but d’être compatible
+avec un grand nombre de mesures de qualité.
+
+WCC La mesure WCC, pour weighted community clustering, a été introduite par Prat-Pérez et al. en
+2012 [PPDSBLP12]. Cette dernière vise à s’aligner avec certaines caractéristiques que l’on retrouve
+souvent dans les réseaux sociaux. En effet, les communautés dans les réseaux sociaux ont intuiti-
+vement une forte propension à montrer une structure interne avec une forte quantité de triangles.
+WCC tente de maximiser cette caractéristique au sein des communautés, et cherche aussi à minimiser
+le nombre de ponts présents dans ces dernières.
+
+La mesure, pour un graphe G = (V, E), s’écrit
+
+W CC(S) =
+
+1|S|∑x∈S
+
+W CC(x, S)
+
+(2.3.5)
+
+avec
+
+t(x;S)
+t(x;V )
+
+vt(x;V )
+
+|S\{x}+vt(x;V \S) .
+
+t(x, V ) ̸= 0
+t(x, V ) = 0
+
+(2.3.6)
+
+W CC(x, S) =
+
+0
+
+Dans ces formules, x représente un sommet faisant partie du réseau, S représente le réseau en tant
+que tel, t(x, S) le nombre de triangles fermés par x avec des sommets contenus dans S, vt(x, S) le
+nombre de sommets dans S qui composent un triangle avec x.
+
+À ce jour, un seul algorithme existe spécifiquement pour maximiser la WCC, soit l’algorithme
+introduit par les auteurs de la mesure quelques années suite à son introduction [PPDSLP14]. Cet
+algorithme est intéressant puisqu’il ne repose pas sur des hypothèses qui rendent son exécution en
+parallèle difficile. Ce dernier a, par ailleurs, été adapté pour l’exécution sur plates-formes hétérogènes
+[HVPPLP15].
+
+2.3.2.3 Modèles basés sur des flux sur les arcs
+
+Certains modèles sont basés sur la modélisation de flux sur les arcs du réseau, représentant
+des échanges ou des relations entre les différentes composantes. Sous ce régime, une communauté
+consiste en une partie du réseau dans laquelle il y a une forte activité en termes d’échanges ou de liens.
+En général, les méthodes de détection de communautés basées sur ce modèle utilisent un processus
+de diffusion sur les arcs du réseau afin de découvrir des groupes de noeuds fortement connectés, l’in-
+tuition étant qu’il y aura beaucoup d’activité au sein d’une communauté avec comparativement peu
+d’activité entre ces dernières. Deux méthodes basées sur ce principe sont revues dans cette section,
+soit Walktrap et Infomap.
+
+14
+
+Walktrap Walktrap a été proposé par Pons et Latapy [PL05]. Cet algorithme est basé sur l’utilisa-
+tion de marches aléatoires sur un réseau, selon l’intuition dictant qu’un marcheur aura tendance à
+rester longtemps dans une zone dense d’un réseau, et à en sortir relativement peu fréquemment. Ces
+zones denses constituent des communautés.
+
+Walktrap définit une mesure de distance entre deux noeuds d’un réseau
+
+rij =vuut
+n∑k=1
+rC1C2 =vuut
+n∑k=1
+
+(P t
+ik
+
+− P t
+d(k)
+
+jk)2
+
+(P t
+
+Cik
+
+− P t
+d(k)
+
+C2k)2
+
+(2.3.7)
+
+(2.3.8)
+
+et similairement la distance entre deux communautés d’un réseau
+
+Walktrap utilise ensuite une méthode similaire à la méthode de classification hiérarchique de
+
+Ward [War63] avec la mesure de distance r afin de détecter des communautés.
+
+Infomap Infomap [RB08] est un algorithme de détection de communautés aussi basé sur l’utili-
+sation de marches aléatoires. Cet algorithme est toutefois basé sur la minimisation d’une mesure
+nommée « map equation », basée sur la théorie de l’information définie comme
+
+L(M ) = qxH(Q) +
+
+pi(cid:8)H(P i)
+
+m∑i=1
+
+(2.3.9)
+
+avec qx le taux de transition entrantes au sein d’un module q, pi(cid:8) la fréquence d’utilisation d’un
+module pi et H(·) l’entropie de Shannon [Sha48] d’une distribution.
+
+Cette mesure représente la longueur minimale en bits de la description d’une marche aléatoire de
+longueur infinie sur le réseau. L’intuition derrière cet algorithme de détection de communautés est
+qu’il est possible de trouver une description plus courte dans un réseau comportant une structure de
+communauté. En effet, il est possible d’obtenir une description plus courte en compressant le réseau
+de manière à regrouper ensemble les noeuds qui communiquent fortement ensemble. La meilleure
+communauté constitue ainsi la communauté qui minimise L(M ).
+
+2.3.2.4 Autres méthodes heuristiques
+
+Certaines autres méthodes de détection de communautés ne peuvent pas être classifiées dans les
+catégories revues précédemment. Il s’agit, par exemple, de l’algorithme de Girvan-Newman [GN02],
+historiquement significatif, ou des algorithmes basés sur la propagation d’étiquettes, une méthodo-
+logie de détection de communautés intuitive et très rapide.
+
+15
+
+Algorithme de Girvan-Newman L’algorithme de Girvan-Newman [GN02] est une méthode de dé-
+tection de communautés divisive basée sur l’utilisation de mesures de centralité. Cet algorithme est
+particulièrement intuitif. La première étape consiste à, pour tous les arcs, calculer une généralisa-
+tion de la mesure de centralité nommée betweenness [Ant71, Fre77], définie comme le nombre de
+plus courts chemins passant par un arc. L’arc avec la plus grande betweenness est ensuite retiré du
+réseau. Ces deux opérations sont itérées en succession jusqu’à ce que le graphe devienne disjoint, et
+la procédure entière est répétée sur chaque composante connexe.
+
+Propagation d’étiquettes La détection de communautés par propagation d’étiquettes [RAK07] est
+une méthode de détection de communautés très rapide et très simple qui opère directement à l’échelle
+de la structure du réseau, et n’est pas basé sur l’optimisation d’une valeur. Dans un premier temps,
+chaque noeud du réseau est initialisé avec une étiquette unique. Ensuite, les noeuds sont visités ité-
+rativement dans un ordre aléatoire, et la valeur de leur étiquette prend la valeur la plus fréquemment
+observée chez les noeuds voisins. Cette procédure est répétée jusqu’à ce qu’il n’y ait plus de change-
+ments dans les étiquettes du réseau.
+
+16
+
+Chapitre 3
+
+Le parallélisme en informatique
+
+Le calcul en parallèle est, dans sa plus simple expression, l’exécution d’un travail informatique sur
+plusieurs unités d’exécution concurremment. La généralité de cette expression laisse sous-entendre
+qu’il s’agit d’un concept très large, et c’est tout à fait exact. L’objectif de ce chapitre est de présenter
+un aperçu général des éléments de base importants qui différencient le calcul en parallèle du calcul
+séquentiel afin de bien situer le lecteur de ce mémoire.
+
+Dans un premier temps, la section 3.1 présente différentes taxonomies dont l’objectif est de clas-
+sifier les différents modèles d’exécution en parallèle. La taxonomie de Flynn (sous-section 3.1.1) est
+particulièrement importante. Par la suite, la section 3.2 présente différentes familles de plateformes
+matérielles utilisées en calcul parallèle. La section 3.3 présente les deux modes de traitement majeurs
+utilisés pour structurer les calculs et les algorithmes, et la section 3.4 présente les modes de commu-
+nication entre les différentes unités de calcul, qui conditionnent la structure des programmes compte
+tenu de l’importance de la communication pour la performance. La section 3.5 présente certains fac-
+teurs et différentes mesures pour évaluer l’efficacité et la performance d’un algorithme parallèle. Fi-
+nalement, la section 3.6 présente certains problèmes qui affectent les algorithmes conçus pour opérer
+en parallèle.
+
+3.1 Les taxinomies d’architectures d’exécution parallèle
+
+3.1.1 La taxinomie de Flynn
+
+La taxinomie de Flynn, proposée par Michael J. Flynn en 1966 [Fly66], est une typologie gé-
+nérale qui classifie les différentes architectures d’ordinateurs selon deux dimensions, soit le flux de
+données et le flux d’instructions. Dans le cadre de cette taxinomie, un flux est défini macroscopique-
+ment comme une séquence d’éléments tel que vu par la machine lors de l’exécution et sur laquelle les
+unités d’exécution opèrent. Le lecteur peut se référer à [Fly72] pour la description publiée originale
+de cette classification.
+
+17
+
+Données
+Simple
+Multiple
+
+Instructions
+
+Simple Multiple
+SISD
+MISD
+SIMD MIMD
+
+Tab. 3.1.1: La taxonomie de Flynn
+
+Chacune de ces deux dimensions peut prendre deux valeurs, soit simple ou multiple. Cette taxi-
+
+nomie induit donc quatre architectures, résumées dans le tableau 3.1.1.
+
+3.1.1.1 Single Instruction - Single Data (SISD)
+
+L’architecture SISD réfère à un ordinateur exécutant une instruction à la fois sur un seul flux
+de données. Il s’agit donc d’un ordinateur exécutant des instructions de manière exclusivement sé-
+quentielle. Puisque cette architecture réfère spécifiquement à un mode d’opération qui exclut d’office
+le parallélisme, elle est de peu d’intérêt dans le cadre de ce travail. Toutefois, la présentation de cette
+dernière est essentielle à la compréhension de la taxinomie de Flynn, et son étude permet d’asseoir
+une base de comparaison pour les autres modèles de la taxinomie. À titre d’illustration, un ordinateur
+avec un seul processeur qui possède un seul cœur a une unité d’exécution unique, et répond donc aux
+critères qui permettent de le classifier dans la catégorie SISD.
+
+3.1.1.2 Single Instruction - Multiple Data (SIMD)
+
+L’architecture SIMD réfère à un ordinateur possédant plusieurs unités d’exécution, qui exécutent
+la même instruction appliquée à des données différentes au même moment. Lorsque l’exécution
+est terminée, les données sont généralement accessibles à toutes les unités d’exécution afin qu’elles
+puissent être utilisées à titre de résultat intermédiaire par des instructions subséquentes [Dun90].
+Les unités d’exécution dans une machine dont l’architecture s’apparente à la classe SIMD sont
+souvent logiquement représentées comme étant arrangées dans un vecteur ou un tableau dont les
+éléments sont interconnectés [Sve92]. Historiquement, la première implémentation matérielle ba-
+sée sur ce principe découle du projet ayant mené à la construction de l’ILLIAC IV [BBK+68], considéré
+comme le premier superordinateur. L’attention des chercheurs s’est ensuite tournée vers le dévelop-
+pement de processeurs, avec par exemple le DAP [Par83] et le MPP [Bat80, Pot85], deux processeurs
+antiques ayant été conçus pour opérer sous cette architecture. Finalement, le projet LUCAS [FKS86],
+digne de mention, était l’un des premiers projets universitaires dont l’objectif était le design et l’éva-
+luation d’un système massivement parallèle. Un nombre d’exemples historiques supplémentaires est
+détaillé dans le travail de Svensson précité [Sve92].
+
+Bien qu’une architecture SIMD impose des contraintes qui rendent la tâche de développer des
+programmes pour ce genre d’architecture plus fastidieuse, cette dernière est particulièrement adap-
+tée à certains types de problèmes décrits comme « data parallel » (voir la section 3.3). Par exemple, la
+
+18
+
+computation d’images et de graphiques constitue un problème qui entre dans cette catégorie, et l’im-
+portance pratique et commerciale de ce problème a motivé le développement de processeurs spécia-
+lisés de plus en plus puissants. La réalisation que le modèle SIMD tel qu’implémenté à faible cout par
+ces processeurs spécialisés a aussi des applications en calcul scientifique a par la suite à son tour mo-
+tivé le développement de plateformes de calcul comme OpenCL et CUDA (voir la sous-section 3.2.2),
+qui sont particulièrement appréciées par les chercheurs dans différents domaines scientifiques.
+
+3.1.1.3 Multiple Instruction - Single Data (MISD)
+
+L’architecture MISD réfère à une architecture qui exécute des instructions différentes sur le même
+flux de données. Certains auteurs doutent que ce type d’architecture parallèle n’ait jamais existé
+[Bar16a], tandis que d’autres affirment que certains exemples pourraient être, par exemple, des sys-
+tèmes redondants tel que le système de contrôle de vol de la navette spatiale américaine [GPHB09],
+ou encore certains systèmes de reconnaissance de formes configurés pour reconnaitre de multiples
+formes en même temps à partir du même ensemble de données [HSN+04].
+
+3.1.1.4 Multiple Instruction - Multiple Data (MIMD)
+
+L’architecture MIMD [Buz85] réfère à un système possédant plusieurs unités d’exécution auto-
+nomes, qui sont en mesure d’exécuter des instructions différentes sur des ensembles ou des flux de
+données distincts.
+
+Cette famille typologique constitue la plus fréquemment rencontrée en pratique. Par exemple,
+un ordinateur avec plusieurs microprocesseurs, ou bien un processeur multicœur, est un exemple
+d’architecture MIMD. Une grappe de serveurs (cluster), qui constitue un réseau d’ordinateurs inter-
+connectés généralement utilisés conjointement afin de résoudre un problème de grande taille, est un
+autre exemple d’architecture qui répond à la définition de la classification MIMD.
+
+L’architecture MIMD peut généralement être séparée en deux sous-classes, en fonction de la ma-
+nière avec laquelle les processeurs accèdent à la mémoire [Dun90]. Cette dernière peut être centralisée
+ou décentralisée.
+
+Dans le contexte centralisé, la mémoire est partagée entre tous les processeurs, qui y accèdent de
+la même manière. Dans un ordinateur avec un processeur multicœur, les unités d’exécution accèdent
+généralement à la mémoire de cette manière. Ce mode d’accès est expliqué dans la sous-section 3.4.1.
+Dans le contexte décentralisé, la mémoire peut être partagée entre les processeurs, auquel cas
+l’accès à cette dernière s’effectue de manière non uniforme, ou non, auquel cas l’application doit se
+charger de transférer les données par un autre canal. Dans tous les cas, dans le contexte décentralisé,
+la localisation des données par rapport aux unités d’exécution est un enjeu de performance majeur.
+Les grappes de serveurs accèdent généralement à la mémoire de cette manière. Ce mode de commu-
+nication est expliqué dans la sous-section 3.4.2.
+
+19
+
+3.1.2 La taxinomie de Feng
+
+La taxinomie de Feng [Fen72] est basée directement sur la dichotomie entre la computation en
+série et le calcul en parallèle. Cette taxinomie propose de classifier les architectures informatiques
+en fonction du degré de parallélisme que ces dernières sont en mesure d’exhiber. Le degré maximal
+de parallélisme est défini comme étant le nombre maximal de bits avec lesquels un ordinateur peut
+effectuer des calculs en un temps donné.
+
+Comme Flynn, Feng classifie les systèmes informatiques sur deux dimensions, soit selon les mots
+(qui constituent la plus petite unité de données sur laquelle un processeur peut travailler) et les bits.
+Ces deux dimensions sont caractérisées par leur degré de parallélisme maximal respectif. Bien que
+cette classification soit intéressante d’un point de vue historique et théorique, elle ne donne que peu
+d’information utile en pratique dans un contexte moderne.
+
+La classification permet de représenter le parallélisme d’une plateforme sous la forme d’une paire
+(b,w), où b est le nombre de bits sur lequel des calculs peuvent être effectués en même temps au sein
+d’un mot (degré maximal des bits), et w est le degré maximal de parallélisme des mots. Cette taxino-
+mie induit une classification générale, mais cette dernière est maintenant quelque peu désuète :
+
+Word Serial - Bit Serial (WSBS) Le calcul s’effectue exclusivement sur un bit à la fois. Il s’agit d’une
+forme extrême de calcul en série, que l’on ne retrouve pas en pratique.
+
+Word Parallel - Bit Serial (WPBS) L’ordinateur opère sur plusieurs mots à la fois, mais ces calculs
+opèrent sur un seul bit à la fois.
+
+Word Serial - Bit Parallel (WSBP) L’ordinateur opère sur un seul mot à la fois, mais les instructions
+peuvent s’opérer sur plusieurs bits en même temps au sein de ce mot.
+
+Word Parallel - Bit Parallel (WPBP)
+Il s’agit d’un ordinateur pleinement parallèle, en mesure d’ef-
+fectuer des calculs sur plusieurs mots en même temps, et d’agir sur plusieurs bits au sein de chacun
+de ces mots.
+
+3.1.3 La taxinomie de Handler
+
+Cette taxinomie, proposée par Wolfgang Händler [Hän86], étend et est beaucoup plus utile que
+celle de Feng présentée dans la section précédente. Cette dernière vise à identifier le degré de paral-
+lélisme inhérent au matériel informatique qui compose un ordinateur selon trois dimensions, soit :
+
+– Processor Control Unit (PCU)
+
+– Arithmetic Logic Unit (ALU)
+
+– Elementary Logic Circuit (ELC)
+
+20
+
+La dimension PCU correspond essentiellement à un processeur physique. La dimension ALU cor-
+respond à une unité de calcul. La dimension ELC correspond aux circuits physiques nécessaires afin
+d’effectuer des calculs sur un bit. Chaque PCU peut contenir plusieurs ALU effectuant la même opé-
+ration concurremment. Les ALU contiennent de multiples ELC, qui sont eux dédiés au calcul d’une
+position de bit. De cette manière, le parallélisme d’un ordinateur peut être donné sous la forme d’un
+triplet (k, d, w), où k est le nombre de PCU, d le nombre d’ALU et w le nombre d’ELC.
+
+3.2 Les plateformes matérielles
+
+3.2.1 Central Processing Unit (CPU)
+
+Le CPU réfère au microprocesseur « standard » qui accompagne un ordinateur. Ce dernier inclut
+en général de la mémoire, des registres, une unité logique et arithmétique et une unité de contrôle.
+Cet ensemble de composantes constitue l’architecture Von Neunmann [VG93].
+
+Le CPU exécute des instructions qui font partie d’un ensemble d’instructions. On réfère géné-
+ralement à cet ensemble d’instructions comme étant l’architecture du microprocesseur (Instruction
+Set Architecture, ou ISA). La plus commune de nos jours est l’architecture x86 (x64), utilisée par les
+plus grands manufacturiers de microprocesseurs que sont Intel et AMD.
+
+Les architectures sont généralement classifiées comme faisant partie de la famille ayant un en-
+semble d’instructions complexes (CISC) et les architectures ayant un ensemble d’instructions réduit
+(RISC). La différence principale entre les deux familles est que les architectures CISC possèdent un
+ensemble d’instructions beaucoup plus riche, qui permettent de créer des programmes en assembleur
+beaucoup plus simplement. Il est à noter que la famille RISC est beaucoup plus populaire, et inclut
+l’architecture dominante x86.
+
+Le développement de microprocesseurs toujours plus performants a suivi une tendance appelée
+la loi de Moore [Moo06]. Cette dernière dicte que le nombre de transistors que comprend un micro-
+processeur double à un intervalle approximatif de deux ans. Jusqu’au début des années 2000, cette
+loi était aussi applicable à la vitesse de l’horloge des processeurs, qui régule la fréquence à laquelle
+des instructions peuvent être exécutées en série. Ce n’est toutefois plus le cas de nous jours, puisque
+l’horloge des processeurs moderne opère à une vitesse tellement grande qu’elle est difficile à accélérer
+en miniaturisant les composantes électroniques.
+
+Les concepteurs de processeurs se sont donc tournés vers le calcul concurrent afin de continuer
+à produire des microprocesseurs plus performants. Ces derniers ont donc développé des micropro-
+cesseurs multicœur, qui consistent en fait en plusieurs processeurs sur la même puce, partageant
+certaines composantes, dont leur mémoire cache dans le but de rendre la communication entre les
+différentes unités de calcul plus rapide.
+
+Finalement, on doit mentionner que les concepteurs de microprocesseurs ont développé des ex-
+tensions à l’ensemble d’instructions x86 basées sur le paradigme SIMD afin de permettre aux déve-
+
+21
+
+loppeurs d’applications d’accélérer le calcul dans leurs programmes lorsque ce dernier se prête bien
+à l’exploitation du parallélisme. La première de ces extensions a été MMX (Matrix Math Extensions)
+par Intel, un ensemble d’instructions qui a ensuite été étendu par AMD avec 3DNow !. Intel a ensuite
+développé SSE (Streaming SIMD Extensions) at AVX (Advanced Vector Extensions).
+
+3.2.2 Graphics Processing Unit (GPU)
+
+Le GPU est un coprocesseur qui est, de manière typique, utilisé pour effectuer générer des images
+qui sont par la suite présentées à l’utilisateur sur un écran. Ces derniers sont particulièrement adaptés
+au calcul impliquant des vecteurs et des matrices. Le développement de programmes effectuant des
+calculs scientifiques sur GPU était toutefois particulièrement difficile à l’origine puisque le problème
+à résoudre devait être transformé de manière à se retrouver sous forme graphique.
+
+Pour résoudre ce problème, NVIDIA, un des principaux manufacturiers de GPU, a développé une
+API spécialisée nommée CUDA, qui permet de développer des logiciels en C sans avoir à transformer
+le problème visé par le programme sous forme graphique. Cette API est la plus utilisée en pratique,
+mais elle est propriétaire et ne fonctionne par conséquent qu’avec les GPU produits par NVIDIA.
+Une API plus générale, OpenCL [SGS10], est développée par le groupe Khonos. Cette API permet de
+développer des programmes qui sont en mesure d’être exécutés sur une multitude de plateformes
+d’exécution parallèle, incluant des microprocesseurs multicœur standard, et des GPU manufacturés
+par NVIDIA, AMD, Intel et autres. Il semble toutefois que l’API CUDA, plus mature que OpenCL, soit
+plus performante malgré son manque de généralité [FVS11, DWL+12]. Un standard similaire inté-
+ressant consiste en OpenACC, qui permet de transformer le code en code accéléré qui s’exécute sur
+un ou des GPU ou possiblement sur d’autres accélérateurs à l’aide d’annotations [WSTA12, XCC13].
+OpenACC utilise de cette manière le même modèle que OpenMP [DM98], un standard similaire pour
+CPU.
+
+Les GPU sont particulièrement utiles pour exécuter des programmes développés selon un para-
+digme nommé stream processing, qui consiste essentiellement à définir des fonctions à appliquer
+concurremment sur des séquences de données indépendantes. La section 3.3.2 de ce travail traite du
+stream processing plus en détail.
+
+3.2.3 Field Programmable Gate Array (FPGA)
+
+Un FPGA [KTR07] est un circuit programmable qui peut être configuré par l’utilisateur. Lors de
+la configuration, le FPGA est physiquement reconfiguré afin d’exécuter une application déterminée.
+De cette manière, il est possible de les configurer afin d’exécuter un nombre impressionnant d’opé-
+rations en même temps. En calcul scientifique, ces appareils sont essentiellement utilisés à titre de
+coprocesseurs, un peu comme un GPU, mais sans exhiber la même flexibilité.
+
+Même s’ils peuvent accélérer largement le traitement des données, ces appareils sont toutefois
+plutôt rarement utilisés en pratique. Une utilisation recensée concerne leur utilisation en forage de
+
+22
+
+bitcoins [BC15]. Microsoft les utilise aussi afin d’accélérer des algorithmes de data mining utilisés
+dans le cadre de son moteur de recherche [PCC+15].
+
+3.2.4 Application-Specific Integrated Circuit (ASIC)
+
+Un ASIC est un circuit construit spécifiquement pour effectuer une tâche dédiée. Leur utilisation
+s’apparente à celle qui est faite des FPGA, toutefois, les ASICs ne sont pas reprogrammables. Leur
+utilisation est très marginale en recherche pour le moment. Une utilisation recensée est, encore une
+fois, leur utilisation pour le forage de bitcoins [Tay13], ou bien leur utilisation pour implémenter un
+réseau de neurones dans un contexte de vision par ordinateur [FMA+10].
+
+3.3 Modèles de traitement et de calcul
+
+3.3.1 Le traitement par lots (Batch Processing)
+
+Le traitement par lots, ou batch processing, est un modèle de programmation au sein duquel le
+programmeur sépare un jeu de données en plus petits morceaux afin de les distribuer à des unités de
+travail indépendantes.
+
+Le traitement par lots est un modèle employé fréquemment pour le traitement de jeux de don-
+nées de très grande taille (big data). Sa popularité s’est fortement accrue au courant des dernières
+années, avec le lancement public de la technologie MapReduce [DG04] par Google. Dans ce modèle,
+les données sont segmentées et distribuées à des unités de travail (étape map), qui effectuent des
+calculs et obtiennent des résultats intermédiaires. Ces résultats intermédiaires sont ensuite combi-
+nés afin d’obtenir un résultat final (étape reduce). Plusieurs implémentations de ce modèle existent,
+la plus populaire étant Hadoop [Whi15], un projet Apache lancé officiellement en 2011.
+
+3.3.2 Le traitement par flux (Stream Processing)
+
+Le traitement par flux, ou stream processing, est un modèle de programmation qui permet à
+un programmeur de modeler son application de manière à bien découpler les dépendances entre les
+tâches et les données, ce qui permet de rendre le calcul parallèle beaucoup plus aisée. Le traitement
+par flux est une condition nécessaire pour la programmation visant l’exécution sur des GPU modernes
+[Mac03].
+
+Le traitement par flux consiste à créer des fonctions, nommées kernels, qui sont appliquées sur
+des flux de données. Cette méthodologie propose deux avantages majeurs. Premièrement, elle per-
+met de traiter des données sans les stocker, un avantage majeur pour les jeux de données de très
+grande taille. Deuxièmement, elle explicite les dépendances entre les données et les tâches, ce qui
+rend l’identification de tâches à haut cout, tel que le chargement des données d’un espace mémoire
+à un autre, relativement aisé. De plus, structurer un programme de cette manière permet d’exploiter
+au maximum l’architecture SIMD, en exploitant le pipelining d’un GPU, par exemple.
+
+23
+
+On peut représenter mentalement un programme développé avec cette architecture sous la forme
+d’un graphe, au sein duquel les kernels sont représentés par les nœuds et les flux de données par les
+arcs. Cette représentation permet de visualiser facilement les dépendances entre les tâches et les
+données. Les données traversent ce graphe d’exécution indépendamment lors du traitement.
+
+On peut faire un parallèle entre le traitement par flux et le modèle de programmation fonction-
+nel, proposé par Backus [Bac78]. Dans son argumentaire, Bakus proposait qu’il serait plus facile de
+structurer des programmes sous la forme d’une composition d’une multitude de fonctions sans effets
+de bord, ce qui permet d’aisément découpler les dépendances entre les données entre les différentes
+fonctions qui composent un programme. Ce modèle de programmation obtient beaucoup d’attention
+de la part des développeurs de logiciels depuis quelques années, spécialement en calcul parallèle ; s’il
+n’y a pas de dépendance entre deux fonctions, ces dernières peuvent être exécutées simultanément
+de manière sécuritaire par défaut.
+
+3.4 Modèles de communication en calcul parallèle
+
+Dans la grande majorité des algorithmes parallèles, les différentes unités de calcul doivent être en
+mesure de communiquer entre elles à certaines étapes de l’algorithme afin de synchroniser le travail
+effectué. Deux modèles majeurs de communication existent, soit le modèle de communication par
+mémoire partagée et le modèle de communication par échange de messages.
+
+3.4.1 Communication par mémoire partagée (Shared Memory)
+
+Dans ce modèle, plusieurs tâches ont accès au même espace mémoire de manière concurrente.
+Les unités d’exécution sont donc en mesure d’avoir accès directement aux mêmes données, et aussi
+par conséquent de communiquer de l’information entre elles respectivement en écrivant et en lisant
+à la même position en mémoire ; ce mode d’accès est donc très rapide.
+
+À haut niveau, ce modèle simplifie la programmation des algorithmes. Toutefois, il introduit aussi
+certains problèmes. Par exemple, si deux processus écrivent au même endroit dans la mémoire sans
+en obtenir l’accès exclusif pour la durée de l’opération, les données peuvent être laissées dans un état
+inconsistant1. Un certain niveau de synchronisation est donc requis afin de coordonner les différents
+processus et les différents fils d’exécution (threads) qui partagent le même espace.
+
+3.4.2 Communication par échange de messages (Message Passing)
+
+Dans ce modèle, les différentes tâches ont accès à un espace de mémoire locale qui leur est réservé.
+Les tâches ne peuvent pas accéder à la mémoire disponible aux autres tâches. Ces dernières doivent
+
+1. Pour certaines architectures, cette affirmation n’est pas strictement vraie. Par exemple, l’architecture x86 offre cer-
+taines opérations qui permettent d’implémenter des fonctionnalités communes telles que load, store, exchange,
+fetch_and_add de manière atomique.
+
+24
+
+donc envoyer et recevoir des messages afin d’échanger de l’information lorsque cela est nécessaire
+pour synchroniser leur calcul.
+
+En calcul scientifique, l’implémentation la plus fréquemment rencontrée est MPI (Message Pas-
+sing Interface) [Bar16b]. Cette dernière est une spécification basée sur le consensus du MPI Forum,
+un regroupement industriel chargé de piloter le projet. Cette spécification permet à différentes com-
+posantes de communiquer de manière standardisée.
+
+3.5 Facteurs de performance en calcul parallèle
+
+3.5.1 L’intensité de calcul (Computational Intensity)
+
+L’intensité de calcul est définie comme étant le nombre d’opérations de calcul par opération d’ac-
+cès à la mémoire. Ce concept est important ; dans bien des instances de calcul parallèle, le temps de
+calcul est dominé par le temps requis pour transférer des données dans la mémoire locale de l’unité
+d’exécution, et par le temps requis pour synchroniser des résultats intermédiaires entre les diffé-
+rentes unités d’exécution. La problématique ici est due au fait que les couts de communication entre
+les différentes unités d’exécution augmentent généralement avec le nombre d’unités d’exécution, ce
+qui réduit l’efficience du parallélisme. Améliorer l’intensité de calcul permet par conséquent de passer
+plus de temps à effectuer des calculs importants et moins de temps sur des tâches accessoires.
+
+3.5.2 Le parallélisme inhérent aux données (Data Parallelism)
+
+Le parallélisme inhérent aux données est défini comme étant la possibilité d’effectuer des opéra-
+tions sur une séquence de données de manière indépendante d’autres séquences [HS86]. Le parallé-
+lisme inhérent aux données est en dichotomie avec le parallélisme inhérent aux tâches, qui consiste
+en l’exécution de tâches différentes sur plusieurs unités d’exécution au même moment, mais en uti-
+lisant le même ensemble de données. Dans la taxinomie de Flynn, le premier type de parallélisme
+s’apparente au modèle SIMD, tandis que le deuxième au modèle MISD.
+
+3.5.3 La localité des données (Data Locality)
+
+La localité des données est l’agencement des données de manière à pouvoir avoir accès à ces der-
+nières de manière plus rapide en plaçant les données les plus chaudes, soit celles sur lesquelles le plus
+de calculs sont effectués, plus près des unités d’exécution [Den05].
+
+La localité des données est spécialement importante dans le cadre de calculs effectués sur GPU
+ou à l’aide de système distribués. En effet, la performance d’un algorithme exécuté sur une de ces
+plateformes est souvent directement reliée à la localité des données [KM92].
+
+La localité des données est aussi importante pour améliorer la performance d’algorithmes qui
+opèrent sur microprocesseurs traditionnels ; transférer des données de la mémoire de l’ordinateur
+
+25
+
+vers le processeur est beaucoup plus difficile que de transférer des données à partir du cache dispo-
+nible sur le circuit. Plusieurs techniques ont été développées afin de rendre des programmes plus
+efficaces vis-à-vis la localité des données. Toutefois, leur utilisation complexifie souvent indument
+le programme, et il faut faire attention à ne pas optimiser l’algorithme prématurément [Nys14]. Le
+même principe s’applique pour des algorithmes qui s’exécutent sur systèmes distribués et sur copro-
+cesseurs (GPU ou autre).
+
+3.6 Problématiques touchant le calcul parallèle
+
+Deux problématiques sont rencontrées particulièrement fréquemment en calcul parallèle. La pre-
+
+mière est nommée situation de compétition (race condition) et la deuxième interblocage (deadlock).
+
+3.6.1 Situation de compétition (Race Condition)
+
+Une situation de compétition [NM92] est une problématique fréquente au sein d’algorithmes
+parallèles qui communiquent à l’aide de mémoire partagée. Le problème est rencontré lorsque par
+deux processus accèdent à la même ressource sans être adéquatement synchronisés. Ces processus
+peuvent alors entrer en compétition pour la ressource et y accéder dans un ordre qui n’était pas prévu
+au préalable, ce qui peut corromptre les résultats.
+
+Pour illustrer, prenont un algorithme au sein duquel deux processus A et B tentent d’incrémenter
+une valeur x = 0 concuremment. Si les processus sont bien synchronisés, les opérations s’exécute-
+raient dans cet ordre :
+
+Étape
+
+Procesus A
+
+Processus B
+
+Valeur de x
+
+Lire x
+
+Incrémenter x
+
+Lire x
+
+1
+2
+3
+4
+
+Incrémenter x
+Dans une situation de compétition, cet ordre pourrait être :
+
+0
+1
+1
+2
+
+Étape
+
+Procesus A
+
+Processus B
+
+Valeur de x
+
+Lire x
+
+Incrémenter x
+
+1
+2
+3
+4
+
+Lire x
+
+Incrémenter x
+
+0
+0
+1
+1
+
+Les situations de compétition peuvent être évitées par l’emploi d’opérations atomiques offertes
+par la plateforme matérielle pour des opérations simples, ou par l’utilisation de primitives de syn-
+chronisation telles que des exclusions mutuelles (mutex), qui permettent à un processus d’obtenir
+l’accès exclusif à une ressource. Ces dernières primitives doivent toutefois être utilisées avec soin
+puisqu’elles introduisent un autre problème, soit l’interblocage.
+
+26
+
+3.6.2 Interblocage (Deadlock)
+
+L’interblocage est un problème décrit par Edward G. Coffman Jr. en 1971 [CE71]. Ce problème
+survient dans le cadre d’un algorithme parallèle lorsqu’une tâche est mise en attente d’une ressource
+présentement monopolisée par une autre tâche, qui est elle-même en attente d’une ressource qui
+dépend de la première tâche. L’on se retrouve alors dans une situation de dépendance circulaire, et le
+travail effectué par l’algorithme est interrompu.
+
+Une solution pour faire face à ce problème consiste en la confection d’algorithmes sans blocage.
+
+Ces derniers sont classifiés selon trois catégories, qui offrent des garanties différentes :
+
+Algorithmes sans attente (Wait-Free) Un algorithme sans attente [Her91] est un algorithme qui
+garantit que n’importe quel processus est en mesure de compléter son exécution, sans considération
+pour les autres processus qui pourraient opérer en même temps.
+
+Algorithmes sans verrous (Lock-Free) Un algorithme sans verrous [MP92] est un algorithme qui
+garantit qu’au moins un processus de l’algorithme puisse progresser, et ce, à n’importe quel point de
+l’exécution.
+
+Algorithmes sans obstructions (Obstruction-Free) Un algorithme sans obstructions [HLM03]
+est un algorithme qui garantit qu’un processus va progresser dans son exécution s’il est isolé des
+autres processus qui opèrent concurremment.
+
+27
+
+Chapitre 4
+
+Parallel Methods for Community Detection
+in Complex Networks
+
+Philippe Gagnon, Gilles Caporossi, Sylvain Perron
+
+Abstract Community detection in networks is an important problem with applications in various
+scientific fields, including sociology, business, informatics, engineering, biology and chemistry. Most
+state-of-the-art methods rely on the assumption that the algorithm will be executed in a sequential
+manner, which can be problematic as the community detection problem isNP-complete under most
+of its accepted definitions and approximations. As the size of networks under study grows, faster
+methods must be developed in order to obtain results in reasonable amounts of time. In this work,
+we develop and implement parallel community detection methods based on current state-of-the-art
+fast methods and evaluate their effectiveness against natural and benchmark graphs.
+
+Keywords Complex Networks, Community Detection, Parallel Algorithms
+
+4.1 Introduction
+
+A network (graph) is defined as a set of elements, called vertices or nodes, related to each other
+by connections named links or edges. The study of these structures is a field of mathematics named
+graph theory, which is studied since Euler introduced it in 1736 in his celebrated solution to the
+Königsberg Bridge Problem [Eul41, Shi12].
+
+More formally, a graph G = (V, E) is a pair of sets where V is the set of vertices in the graph,
+and E = {(x, y) ⊆ V 2} is the set of edges denoting relations between the vertices. A graph can be
+directed, in which case E is a set of ordered pairs, or undirected, in which case this information is not
+available. Properties are often attached to vertices and edges. In that aspect, it is worth mentioning
+
+28
+
+Figure 4.1.1: Visualization of the community structure of Zachary’s Karate Club Network [Zac77],
+as detected by modularity maximization using simulated annealing. In this case, modularity maxi-
+mization detected four communities and two unassigned vertices (which technically form singleton
+communities, but in our view this interpretation would be improper from a practical standpoint).
+This is in contrast with the ground-truth communities provided by Zachary, in which only two com-
+munities are present.
+
+that weights are often attached to edges, denoting the importance or magnitude of the relation they
+represent in the network. Networks in which edges have this property are called weighted networks.
+Many complex systems which are found in the real world can be modeled as networks and further
+studied using techniques derived from graph theory [MMG+07, LAH07, FLG00, PDF05]. Since these
+networks model complex systems, they are called complex networks in the literature. Interestingly,
+these networks generally have properties which cannot be found in simpler graphs, such as regular
+lattices or random graphs. In this work, we focus on a property, inherent to some complex networks,
+known as community structure. In [RCC+04], Radicchi et al. further refine the community structure
+definition and introduce definitions of communities in a weak and strong sense.
+
+Community structure (see figure 4.1.1 for an example) is present in networks where vertices
+can be grouped such they are densely connected to other vertices that are members of the same
+community, while being sparsely connected with vertices that are members of other communities.
+Determining the community structure of a complex network is known as community detection.
+
+Many methods and algorithms have recently been proposed for community detection. However,
+under most of its generally accepted definitions, community detection is a NP-hard problem. Effi-
+cient algorithms to find exact solutions are thus not currently available, and even heuristics currently
+have difficulty finding high-quality solutions in reasonable amounts of time. Efficient parallel algo-
+
+29
+
+rithms would offer an opportunity to tackle the larger problems which are becoming more common
+today, but most mainstream methods are of inherently sequential nature and exhibit a high degree
+of data dependency. As such, executing these algorithms in parallel is a non-trivial task. This is the
+problem on which we focus in this work. Our contributions are as follows:
+
+1. We further explain the challenges related to parallel community detection in complex net-
+
+works;
+
+2. We present parallel implementations of community detection algorithms inspired from major
+
+community detection methods from the relevant literature;
+
+3. We evaluate and benchmark the proposed algorithms using graphs representing artificial and
+
+real-world data.
+
+4.2 Methods for Community Detection in Networks
+
+This section reviews a selection of the more popular community detection methods that have
+been recently proposed by various researchers. Many methods for community detection have been
+proposed in recent years. While some of them are based on unique or novel principles, the main
+current methods can be grouped in three different families:
+
+1. Methods based on block models;
+
+2. Methods based on null models;
+
+3. Methods based on flow models;
+
+Since so many community detection methods have been proposed in recent years, the aim of this
+section is not to provide the reader with a comprehensive overview but to outline the main methods
+on which the current state of the art is based. For a more in-depth treatment, the reader is referred
+to [For10], which is an excellent review of the field as of 2010, or to [CGP11] for an alternative per-
+spective. One could also refer to [FH16] for a more recent albeit more limited treatment.
+
+4.2.1 Methods Based on Block Models
+
+Block models were first introduced in [WBB76] for the study of social networks. In that work the
+authors proposed block models as a tool to represent the ties, roles and positions between different
+individuals in social contexts. This methodology was further extended in [HLL83], in which a stochas-
+tic generalization of the prior work, the stochastic block model, was introduced. In the stochastic
+block model, vertices are partitioned (grouped in blocks) in such a way that the probability of an
+edge being present between two vertices is dependent on their respective block memberships. Com-
+munity assignments can thus be recovered by maximizing the likelihood of observing a graph G with
+respect to community assignments g.
+
+30
+
+An extension to this model was proposed by Karrer and Newman [KN11] in order to account for
+the variation in the degree of the vertices composing the graph. This model appears to give more
+realistic results in practice and is in usage by state-of-the-art community detection methods such as
+[Pei14]. Interestingly, [New16] recently demonstrated an equivalence between the degree-corrected
+stochastic block model and modularity maximization described in subsection 4.2.2.
+
+4.2.2 Methods Based on Null Models
+
+A similar methodology consists of maximizing a measure that indicates to which extent a net-
+work differs from a null model, in which no community should in theory exist. The most popular
+measure based on this principle is named modularity [NG04].
+

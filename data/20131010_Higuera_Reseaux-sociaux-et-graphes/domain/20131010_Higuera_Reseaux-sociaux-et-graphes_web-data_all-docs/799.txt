@@ -1,0 +1,587 @@
+http://www.labri.fr/perso/melancon/Visual_Analytics_Course/lib/exe/fetch.php?media=bordeaux20132014:dessin_graphes.pdf
+
+Dessin de graphes
+Dessin de graphes
+
+Bruno Pinaud
+
+bruno.pinaud@labri.fr
+
+1
+
+Dessin de graphes
+Dessin de graphes
+
+La représentation automatique de graphe est un domaine 
+de recherche à part entière.
+
+Origine dans la construction de circuit imprimés
+Mais aussi pour la visualisation des informations relationnelles 
+(réseaux d'interactions, réseaux sociaux, réseaux 
+internet/informatiques,...)
+
+2
+
+Ce que l'on cherche à éviter...
+Ce que l'on cherche à éviter...
+
+3
+
+Le résultat souhaité
+Le résultat souhaité
+
+Il s'agit bien du même graphe...
+
+4
+
+Formalisation du problème
+Formalisation du problème
+
+ Entrée
+
+✔ Un graphe G=(V,E) avec un ensemble V de sommets et un 
+
+ensemble E d'arêtes
+
+5
+
+Formalisation du problème
+Formalisation du problème
+
+ Entrée
+
+✔ Un graphe G=(V,E) avec un ensemble V de sommets et un 
+
+ensemble E d'arêtes
+
+ Sortie
+
+✔ Un tracé de G lisible et compréhensible par l'utilisateur
+
+6
+
+Formalisation du problème
+Formalisation du problème
+
+ Entrée
+
+✔ Un graphe G=(V,E) avec un ensemble V de sommets et un 
+
+ensemble E d'arêtes
+
+ Sortie
+
+✔ Un tracé de G lisible et compréhensible par l'utilisateur
+
+ 4 concepts de base [Di-Battista et al. 1999]
+1) Contraintes de supports (feuille A4, écran d'ordinateur)
+2) Convention de tracé
+3) Critères esthétiques
+4) Contraintes sémantiques
+
+7
+
+Convention de tracé
+Convention de tracé
+
+8
+
+Convention de tracé
+Convention de tracé
+
+9
+
+Convention de tracé
+Convention de tracé
+
+4 tracés du même graphe. 
+Pris dans : Di-Battista, G.; Eades, P.; Tamassia, R. & Tollis, I.-G. Graph drawing -- Algorithms for the visualization of graphs Prentice-
+Hall, 1999
+
+10
+
+Critères esthétiques
+Critères esthétiques
+
+Modélisent la lisibilité et la mémorisation des informations
+
+✔ Minimisation du nombre de croisements d'arêtes (un des plus importants 
+[Purchase:2000])
+✔ Minimisation des coudes des arêtes
+✔ Minimisation de la longueur des arêtes
+✔ Longueur d’arête maximale, longueur d’arête uniforme
+✔ Nombre de points de contrôle 
+✔ Nombre maximum de points de contrôle sur une arête.
+✔ Résolution angulaire : angle minimum formé par deux arêtes
+✔ Ratio : proportion entre la hauteur et la largeur du dessin
+✔ Symétrie : mise en évidence des symétrie dans le graphe
+✔ ...
+
+11
+
+Critères esthétiques
+Critères esthétiques
+
+Modélisent la lisibilité et la mémorisation des informations
+
+✔ Minimisation du nombre de croisements d'arêtes (un des plus importants 
+[Purchase:2000])
+✔ Minimisation des coudes des arêtes
+✔ Minimisation de la longueur des arêtes
+✔ Longueur d’arête maximale, longueur d’arête uniforme
+✔ Nombre de points de contrôle 
+✔ Nombre maximum de points de contrôle sur une arête.
+✔ Résolution angulaire : angle minimum formé par deux arêtes
+✔ Ratio : proportion entre la hauteur et la largeur du dessin
+✔ Symétrie : mise en évidence des symétrie dans le graphe
+✔ ...
+
+- Optimisation de plusieurs critères simultanément : problème difficile
+- Bien souvent, il faut trouver le meilleur compromis
+
+12
+
+Contraintes sémantiques
+Contraintes sémantiques
+
+Critères pour aider à l'interprétation des composantes du graphe
+
+✔ proximité entre les sommets (clustering), 
+✔ formes particulières des sommets et des arêtes,
+✔ …
+
+13
+
+Dessin de graphes
+Dessin de graphes
+
+- Tracé hiérarchique ou en niveaux 
+
+- Tracé par analogies physiques
+
+14
+
+Dessin hiérarchique : l'heuristique 
+Dessin hiérarchique : l'heuristique 
+
+de Sugiyama
+de Sugiyama
+
+Publiée par K. Sugiyama, S. Tagawa et M. Toda en 1981
+
+15
+
+Dessin hiérarchique : l'heuristique 
+Dessin hiérarchique : l'heuristique 
+
+de Sugiyama
+de Sugiyama
+
+Un graphe à tracer avec une représentation hiérarchique
+
+16
+
+Heuristique de Sugiyama : 
+Heuristique de Sugiyama : 
+suppression des cycles
+suppression des cycles
+
+Un graphe à tracer avec une 
+représentation hiérarchique
+
+Suppression des cycles
+
+Suppression des cycles : minimiser le nombre d'arêtes à retourner pour rendre le graphe 
+acyclique → NP-Difficile [Karp, 72]
+
+Maximum acyclic subgraph problem : trouver un ensemble maximum          tel que le 
+graphe           soit sans cycle.
+
+V α⊂V
+
+(V , Eα)
+
+Feedback arc set problem : trouver un ensemble minimum         tel que le graphe              
+(V , E ∖ E f )
+soit sans cycle.
+
+E f⊂ E
+
+Les arêtes sont-elles supprimées ?
+
+17
+
+Heuristique de Sugiyama : 
+Heuristique de Sugiyama : 
+suppression des cycles
+suppression des cycles
+
+Un graphe à tracer avec une 
+représentation hiérarchique
+
+Suppression des cycles
+
+Suppression des cycles : minimiser le nombre d'arêtes à retourner pour rendre le graphe 
+acyclique → NP-Difficile [Karp, 72]
+
+Maximum acyclic subgraph problem : trouver un ensemble maximum          tel que le 
+graphe           soit sans cycle.
+
+V α⊂V
+
+(V , Eα)
+
+Feedback arc set problem : trouver un ensemble minimum         tel que le graphe              
+(V , E ∖ E f )
+soit sans cycle.
+
+E f⊂ E
+
+Les arêtes sont-elles supprimées ? Non , on les retourne en les marquant.
+
+18
+
+Heuristique de Sugiyama : 
+Heuristique de Sugiyama : 
+
+ordonnancement dans les niveaux
+ordonnancement dans les niveaux
+
+Un graphe à tracer avec une 
+représentation hiérarchique
+
+Suppression des cycles
+
+Ordonnancement dans les niveaux
+
+19
+
+Notion de graphe propre
+Notion de graphe propre
+
+• Une arête (u,v) ne doit connecter que deux niveaux consécutifs 
+• Longueur maximale des arêtes (nombre de niveaux traversés) = 1
+
+ Ajout de sommets et d’arêtes virtuels dans chaque niveau traversé 
+par l'arête
+
+20
+
+Heuristique de Sugiyama : 
+Heuristique de Sugiyama : 
+
+ordonnancement dans les niveaux
+ordonnancement dans les niveaux
+
+Un graphe à tracer avec une 
+représentation hiérarchique
+
+Suppression des cycles
+
+Ordonnancement dans les niveaux 
+
+et ajout des sommets virtuels
+
+● Les sommets sont rangés dans des niveaux. Les niveaux peuvent être vus comme une 
+partition de V.
+• Nombreuses heuristiques possibles : minimiser le nombre de niveaux, nombre maximum 
+de sommets par niveau, longueur des arêtes minimales, ...
+● Attention : minimiser le nombre de niveaux avec un nombre maximum de sommets par 
+niveaux donnés est NP-Difficile.
+
+21
+
+Heuristique de Sugiyama : réduction 
+Heuristique de Sugiyama : réduction 
+
+du nombre de croisements
+du nombre de croisements
+
+Un graphe à tracer avec une 
+représentation hiérarchique
+
+Suppression des cycles
+
+Ordonnancement dans les niveaux 
+
+et ajout des sommets virtuels
+
+Minimisation du nombre de croisements entre deux 
+niveaux même si seulement 2 niveaux 
+→ NP-Difficile [Eades and Wormald 1994]
+
+Réduction du nombre de 
+
+croisements
+
+22
+
+Réduction du nombre de croisements
+Réduction du nombre de croisements
+
+permutations
+
+des 
+
+sommets
+
+L1
+
+L2
+
+L3
+
+L5
+Trouver l'ensemble des permutations  sur chaque niveau qui minimise le 
+
+L3
+
+L1
+
+L4
+
+L2
+
+Lh
+
+L4
+
+nombre de croisements c
+
+✔ Nombre de solutions :             avec       le nombre de sommets du niveau i
+
+∣Li∣!
+
+l
+
+∏
+
+i=1
+
+∣Li∣
+
+✔ Principe des heuristiques : balayage successifs des niveaux jusqu'à convergence
+✔ Idée : mettre les sommets au milieu de leurs voisins
+23
+
+Réduction du nombre de croisements
+Réduction du nombre de croisements
+
+3 opérateurs majeurs pour le positionnement des sommets : inversions de sommets (greedy 
+switch), barycentre et médiane. Le barycentre est connu pour être le plus efficace.
+
+ 
+
+La médiane sur le niveau Lk
+|Lk­1|=8, |Lk|=4, |Lk+1|=6
+Nombre de voisins
+|Nk­1(u1)|=5, |Nk+1(u1)|=3
+
+N(u1)=(1/8, 3/8, 3/6, 
+5/8, 6/8, 5/6, 6/6, 8/8)
+
+m(u1)=6/8, m(u2)=3/8
+m(u3)=3/6, m(u4)=7/8
+
+Tracé original : 27 croisements
+
+Après permutation des sommets 
+du niveau Lk : 9 croisements
+
+Nouvel ordre des sommets après classement : {u2, u3, u1, u4}
+
+24
+
+Heuristique de Sugiyama
+Heuristique de Sugiyama
+
+Un graphe à tracer avec une 
+représentation hiérarchique
+
+Suppression des cycles
+
+Ordonnancement dans les niveaux 
+
+et ajout des sommets virtuels
+
+Tracé final : suppression des sommets virtuels, remise 
+des arcs dans le bon sens, optimisation coordonnées y, 
+
+optimisation critères esthétiques secondaires
+
+Réduction du nombre de 
+
+croisements
+
+25
+
+Heuristique de Sugiyama
+Heuristique de Sugiyama
+
+26
+
+Dessin par analogie physique
+Dessin par analogie physique
+
+● Basé sur la simulation de systèmes physiques
+● Deux approches principales :
+
+✔ Modèle de force (spring embedder)
+✔ Par minimisation du niveau d'énergie
+
+● ≈ duales:
+
+✔ Modèle de force: 
+
+déplacement => minimisation niveau d'énergie
+
+✔ Minimisation niveau d'énergie: 
+
+minimisation => placement « optimal »
+
+27
+
+Algorithmes à modèle de forces
+Algorithmes à modèle de forces
+
+Drawing Graphs, Methods and Models. M. Kaufmann and D. 
+Wagner (Eds.), Springer, 2001
+
+28
+
+Algorithme à modèle de forces
+Algorithme à modèle de forces
+
+● Calculer la force de répulsion (Frep) appliquée à chaque sommet.
+● Calculer la force d’attraction (Fattr) appliquée à chaque sommet. 
+● Déplacer chaque sommet : Pos(v) = Pos(v) + k * (Frep(v) + Fattr(v)).
+● Répéter tant que les déplacement sont importants.
+
+29
+
+Algorithme à modèle de forces
+Algorithme à modèle de forces
+
+Avantages
+
+Favorise le critère d’esthétisme de longueur des arêtes uniforme.
+L’analogie du modèle physique est très facile à comprendre.
+Implémentation est simple.
+Pour de petits graphes, les dessins produits sont généralement 
+agréable visuellement.
+
+Inconvénients
+
+Temps de calcul 
+Dépend de la position initiale
+
+30
+
+Algorithmes à modèle de forces
+Algorithmes à modèle de forces
+
+Force: ressort électrique vs ressort mécanique
+Approximation de Eades (84)
+Optimisation de Fruchterman and Reingold (91)
+Optimisation de Frick et al (95)
+
+31
+
+Algorithmes à modèle de forces
+Algorithmes à modèle de forces
+
+Eades, P. (1984). A heuristic for graph drawing. Congressus Numerantium, 42:149–160
+
+Force d'attraction : 
+
+Force de répulsion : 
+
+Force totale : 
+
+32
+
+Algorithmes à modèle de forces
+Algorithmes à modèle de forces
+
+Eades, P. (1984). A heuristic for graph drawing. Congressus Numerantium, 42:149–160
+
+Force d'attraction : 
+
+Force de répulsion : 
+
+Force totale : 
+
+Problème principal : les sommets sont déplacés de manière synchrone
+ 
+
+33
+
+Algorithmes à modèle de forces
+Algorithmes à modèle de forces
+
+Eades, P. (1984). A heuristic for graph drawing. Congressus Numerantium, 42:149–160
+
+Force d'attraction : 
+
+Force de répulsion : 
+
+Force totale : 
+
+Problème principal : les sommets sont déplacés de manière synchrone
+=> Limitation du déplacement : 
+
+34
+
+Algorithmes à modèle de forces
+Algorithmes à modèle de forces
+
+Frutcherman, T. M. J., and Reingold, E. M. (1991). Graph Drawing by force directed 
+placement. Software – Practice and Experience, 21(11):1129–1164
+
+Force d'attraction :
+
+Force de répulsion :
+
+Force totale :
+
+Optimisation de la convergence:
+
+ n'est plus une constante (fonction de l'itération, 
+principe du recuit simulé)
+par grille
+
+35
+
+Algorithmes à modèle de forces
+Algorithmes à modèle de forces
+
+36
+
+Algorithmes à modèle de forces
+Algorithmes à modèle de forces
+
+37
+
+Algorithmes à modèle de forces
+Algorithmes à modèle de forces
+
+38
+
+Algorithmes à modèle de forces
+Algorithmes à modèle de forces
+
+Frick, A., Ludwig, A., and Mehldau, H. (1995). A fast adaptive layout algorithm for 
+undireced graphs. In Proc. of the DIMACS Int. Work. On Graph Drawing (GD'94). 
+Springer LNCS 894, pp 388–403
+
+Force d'attraction :                                        avec
+
+Force de répulsion :
+
+Force totale :
+
+Autre optimisation:  est propre à chaque sommet
+
+39
+
+

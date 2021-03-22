@@ -1,0 +1,2608 @@
+https://www.irit.fr/publis/SMAC/DOCUMENTS/RAPPORTS/RapportM2RICSC_NicolasBrax2009.pdf
+
+Modélisation de réseaux, de
+
+l’auto-réparation à l’auto-organisation
+
+Rapport de Master 2 Recherche
+
+Interaction, Coopération et Systèmes Complexes (ICSC)
+
+à l’Université Paul Sabatier (UPS) – Toulouse III
+
+15 juin 2008
+
+Nicolas Brax
+
+Laboratoire d’accueil : Institut de Recherche en Informatique de Toulouse (IRIT)
+
+Directeur de recherche : Frédéric Amblard
+
+Equipe d’accueil : Systèmes Multi-Agents Coopératifs (SMAC)
+
+Mots-clés : résiliance de graphe, robustesse, auto-réparation, graphes dynamiques,
+simulation multi-agents, auto-organisation, réseaux aléatoires, réseaux scale-free
+
+Résumé : Actuellement, de nombreux systèmes réels peuvent être modélisés sous la
+forme de graphes, notamment des systèmes ayant une structure de réseau, qu’elle soit
+concrète comme les réseaux informatiques ou abstraite comme les réseaux sociaux.
+Une caractéristique importante pour ces réseaux est la robustesse aux pannes et aux
+attaques. Plusieurs méthodes ont été proposées pour augmenter la résistance de ses
+systèmes mais sont souvent destinées à être appliquées avant la panne ou l’attaque.
+Dans ce rapport, nous allons voir des méthodes dynamiques permettant aux réseaux
+de se réparer eux-mêmes tandis qu’ils sont soumis à un nombre importants d’attaques
+et de pannes. En étudiant ces stratégies sur des réseaux scale-free et sur des graphes
+aléatoires, nous avons découvert une stratégie permettant de conserver le réseau
+entièrement connecté. Cette stratégie semble prometteuse car peu coûteuse à implé-
+menter dans des réseaux réels et fournissant une réponse immédiate à ce genre de
+problème. De plus nous pensons que cette stratégie peut être adaptée pour permettre
+aux différents acteurs du réseau de modiﬁer la structure globale pour satisfaire à des
+objectifs individuels et collectifs.
+
+TABLE DES MATIÈRES
+
+Table des matières
+
+1
+
+Introduction
+
+2 État de l’art
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+2.1 Historique .
+.
+2.2 Outils mathématiques
+2.3 Théories principales
+
+. . . . . . . . . . . . . . . . . . . . . . . . . . . .
+.
+.
+. . . . . . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+2.3.1 Graphes aléatoires . . . . . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+2.3.2
+.
+. .
+2.3.3
+. . . . . . . . . . . . . . . . . . . . . . . . . . .
+2.4 Autres disciplines .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+2.5 Attaques, résistance et auto-organisation . . . . . . . . . . . . . . . . . .
+2.6 Dilemme du prisonnier .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+Small-world .
+.
+Scale-free .
+.
+
+.
+.
+.
+
+3 Résistance et auto-réparation
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+.
+.
+
+.
+.
+.
+
+.
+.
+.
+
+.
+.
+.
+.
+.
+
+.
+.
+.
+.
+.
+
+.
+Indicateurs .
+.
+
+3.1 Modèles
+.
+3.2 Pannes et attaques .
+.
+3.3 Stratégies .
+3.4
+.
+.
+3.5 Résultats .
+
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . .
+.
+.
+. . . . . . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.5.1 A) Stratégie aléatoire . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.5.2 B) Stratégie du glouton . . . . . . . . . . . . . . . . . . . . . . . . .
+3.5.3 C) Stratégie du second voisin . . . . . . . . . . . . . . . . . . . . .
+3.5.4 D) Stratégie du pire voisin . . . . . . . . . . . . . . . . . . . . . . .
+3.5.5 E) Stratégie du voisin glouton . . . . . . . . . . . . . . . . . . . . .
+3.5.6
+. . . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+F) Stratégie du circuit
+
+3.6 Synthèse .
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+4 Dilemme du prisonnier et auto-organisation
+
+.
+.
+.
+
+.
+.
+.
+
+.
+.
+.
+
+4.2 Dilemme du prisonnier .
+
+.
+4.1 Apprentissage .
+4.1.1 Modèle .
+.
+4.1.2 Résultats .
+
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+. .
+. . . . . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . .
+. .
+. . . . . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.3 Dilemme du prisonnier et auto-organisation . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+. .
+4.3.1 Modèle .
+4.3.2 Résultats attendus
+
+4.2.1 Modèle .
+.
+4.2.2 Résultats .
+
+.
+.
+
+.
+.
+
+.
+.
+
+.
+
+.
+
+.
+
+.
+
+5 Conclusion
+.
+.
+5.1 Bilan .
+5.2 Limitations .
+.
+5.3 Perspectives .
+
+.
+
+.
+
+.
+.
+.
+
+.
+.
+.
+
+.
+.
+.
+
+.
+.
+.
+
+.
+.
+.
+
+. . . . . . . . . . . . . . . . . . . . . . . . . . . .
+.
+.
+. . . . . . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+2
+
+5
+
+7
+7
+10
+11
+11
+12
+14
+16
+17
+18
+
+20
+20
+20
+21
+23
+24
+24
+27
+28
+31
+33
+35
+37
+
+40
+40
+41
+44
+45
+45
+47
+48
+48
+49
+
+51
+51
+51
+52
+
+TABLE DES MATIÈRES
+
+A Annexes
+
+.
+A.1 NetLogo .
+.
+A.2 Présentation .
+.
+A.3 Articles ECCS 2009 .
+
+.
+.
+
+.
+
+.
+.
+
+.
+.
+
+.
+.
+.
+
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+3
+
+56
+56
+56
+56
+
+TABLE DES FIGURES
+
+Table des ﬁgures
+
+.
+
+.
+
+.
+.
+
+.
+.
+
+.
+
+.
+.
+
+.
+
+.
+.
+
+.
+.
+
+.
+.
+
+Graphe aléatoire .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1
+Distribution graphe aléatoire . . . . . . . . . . . . . . . . . . . . . . . . .
+2
+. . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Small-World .
+3
+Scale-free .
+.
+. . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4
+Distribution d’un réseau scale-free . . . . . . . . . . . . . . . . . . . . . .
+5
+Nœuds attaqué et affectés . . . . . . . . . . . . . . . . . . . . . . . . . . .
+6
+Recablage aleatoire et glouton . . . . . . . . . . . . . . . . . . . . . . . . .
+7
+Recablage second voisins et pire voisin . . . . . . . . . . . . . . . . . . . .
+8
+Recablage voisin glouton et circuit
+. . . . . . . . . . . . . . . . . . . . . .
+9
+Stratégie aléatoire sur graphe aléatoire . . . . . . . . . . . . . . . . . . . .
+10
+Translation d’une distribution normale . . . . . . . . . . . . . . . . . . . .
+11
+12
+Stratégie aléatoire sur réseau scale-free . . . . . . . . . . . . . . . . . . . .
+13 Distribution en loi de puissance . . . . . . . . . . . . . . . . . . . . . . . .
+Stratégie glouton sur graphe aléatoire . . . . . . . . . . . . . . . . . . . .
+14
+Stratégie glouton sur réseau scale-free . . . . . . . . . . . . . . . . . . . .
+15
+Stratégie second voisin sur graphe aléatoire . . . . . . . . . . . . . . . . .
+16
+17 Distribution en loi de puissance (second voisin)
+. . . . . . . . . . . . . .
+Stratégie second voisin sur réseau scale-free . . . . . . . . . . . . . . . . .
+18
+Stratégie pire voisin sur graphe aléatoire . . . . . . . . . . . . . . . . . . .
+19
+Stratégie pire voisin sur réseau scale-free . . . . . . . . . . . . . . . . . .
+20
+21
+Stratégie voisin glouton sur graphe aléatoire . . . . . . . . . . . . . . . .
+Stratégie voisin glouton sur réseau scale-free . . . . . . . . . . . . . . . .
+22
+23
+Stratégie circuit sur graphe aléatoire . . . . . . . . . . . . . . . . . . . . .
+24 Distribution loi de puissance (circuit) . . . . . . . . . . . . . . . . . . . . .
+25
+Stratégie circuit sur réseau scale-free . . . . . . . . . . . . . . . . . . . . .
+26 Diamètre .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . .
+27 Réseau après recablage circuit . . . . . . . . . . . . . . . . . . . . . . . . .
+28
+. . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Transitions de phases .
+29
+Processus d’apprentissage . . . . . . . . . . . . . . . . . . . . . . . . . . .
+30 Notations des differentes stratégies . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . .
+31 Dilemme du prisonnier .
+32 Courbe perdue .
+.
+. . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+4
+
+12
+13
+13
+15
+16
+22
+22
+23
+23
+25
+26
+26
+27
+28
+29
+30
+30
+31
+32
+33
+34
+35
+36
+37
+37
+38
+38
+42
+43
+45
+47
+57
+
+1
+
+INTRODUCTION
+
+1 Introduction
+
+5
+
+Les systèmes complexes sont des structures d’éléments interagissants. L’analyse de
+différents aspects de ses systèmes dans différentes disciplines (biologie, informatique,
+sociologie, ...) a permis d’identiﬁer des caractéristiques communes comme par exem-
+ple la structure scale-free d’un réseau. Cependant, de nombreux aspects sont encore à
+étudier, notamment au niveau de la dynamique de ces structures. Dans cette optique,
+la modélisation grâce à des systèmes multi-agents semble être une approche adéquate
+pour tenter d’en comprendre le fonctionnement.
+
+Dans le cadre de ce stage, nous allons ainsi nous servir d’un système multi-agents
+pour modéliser différents types de réseaux sous la forme de graphes. Nous allons par-
+ticulièrement nous pencher sur deux aspects de la dynamique qui peut s’appliquer sur
+de tels systèmes : l’auto-réparation et l’auto-organisaton. L’objectif principal est de pou-
+voir adapter les raisonnements et appliquer les mécanismes étudiés sur des graphes
+représentant des réseaux sociaux pour en appréhender, au moins en partie, les proces-
+sus actifs qui permettent au réseau de se modiﬁer dans le temps. Toutefois, il faut noter
+que la même logique peut être appliquée sur de nombreux autres systèmes dont le
+fonctionnement peut être modélisé par des graphes, un exemple parmi d’autres étant
+le réseau de télécommunication d’un pays.
+
+Dans un premier chapitre, nous allons voir une introduction aux réseaux sociaux
+et comment l’analyse de ces réseaux s’est développée pour devenir une discipline sci-
+entiﬁque à part entière, particulièrement sous l’inﬂuence de quelques théories prin-
+cipales. Nous verrons aussi que l’apport des outils mathématiques et informatiques
+a aidé à l’épanouissement de cette discipline en autorisant des études à la fois plus
+rigoureuses et de manière plus simples. Nous continuerons cette partie en examinant
+quelques théories principales puis en nous penchant enﬁn sur les différentes études
+qui vont nous guider dans le développement de modèles pertinents pour tester nos
+théories.
+
+Dans le deuxième chapitre de ce rapport, nous allons nous pencher sur l’aspect
+d’auto-réparation des réseaux. Quelques études existent sur l’impact des pannes et des
+attaques sur des réseaux mais sont surtout centrées sur la robustesse aux défaillances.
+En effet, il y a relativement peu de travaux concernant la réparation d’un réseau après
+une cassure de celui-ci, ni sur les conséquences structurelles qui s’en suivent. Nous
+allons donc voir dans ce chapitre comment nous pouvons mettre en œuvre différentes
+stratégies autorisant le réseau à résister et à se réparer lui-même malgré le fait qu’il soit
+soumis à des agressions constantes.
+
+Dans la troisième partie, nous verrons comment nous pouvons adapter les résultats
+obtenus pour permettre au réseau de s’auto-organiser. L’auto-organisation permet à un
+
+1
+
+INTRODUCTION
+
+6
+
+système de s’adapter à l’environnement dans lequel il se trouve, quel qu’il soit, en util-
+isant quelques processus de base. Nous parlerons aussi d’emergence avec l’apparition
+d’un comportement non prévu dans la modélisation du système. Lors ce stage, nous
+utiliserons les notions de coopérations et de trahisons pour qualiﬁer les agents, dans
+ce cas les nœuds du réseau, et mettre en œuvre des règles pour tenter d’obtenir une
+communauté de nœuds ﬁables, i.e. coopératifs.
+
+En conclusion, nous ferons un bilan sur les résultats obtenus et observés et nous
+verrons les limitations de ces modèles et comment nous pourrions les surpasser. Enﬁn,
+nous verrons quelques exemples de cas réels pour lesquels l’application de ces résultats
+pourraient s’avérer utile.
+
+2 ÉTAT DE L’ART
+
+2 État de l’art
+
+7
+
+2.1 Historique de l’analyse des réseaux sociaux
+
+Un réseau social est une structure composée de nœuds, représentant généralement
+un individu ou une organisation, et d’arêtes, représentant les liens entre deux nœuds.
+Ces liens peuvent représenter différentes relations comme l’amitié, le commerce, un
+conﬂit, une relation sexuelle, une relation de travail, . . . Ainsi, l’analyse des réseaux
+sociaux modélise l’interaction sociale à l’aide de graphes où les nœuds sont les acteurs
+individuels ou collectifs et les arêtes les relations qui interviennent entre eux.
+
+Les graphes résultants sont le plus souvent complexes en raison de la grande di-
+versité de nœuds et de liens possibles. Les recherches ont montré que de tels réseaux
+se retrouvent à différents niveaux d’organisation, allant du réseau familial au réseau
+composé par les membres d’une même nation [30, Freeman et al. 2006]. De plus, il faut
+ajouter que le réseau considéré a un impact sur les méthodes d’analyse que l’on va
+utiliser et sur les résultats que l’on peut attendre, notamment de par le comportement
+des différents acteurs.
+
+Quelques exemples de réseaux sociaux et d’études associées sont les relations amour-
+euses au sein d’un lycée [8, Bearman et al. 2004], le réseau des collaborations scien-
+tiﬁques [44, Newman 2001], le réseau des contacts par courrier électronique [26, Ebel et
+al. 2002], les participations croisées des dirigeants aux conseils d’administration d’en-
+treprises américaines [18, Davis et al. 2003], les acteurs hollywoodiens [46, Newman et
+al. 2002], les connaissances entres Mormons de l’Utah [9, Bernard et al. 1988] et nombre
+d’autres.
+
+Emile Durkheim et Ferdinand Tonnies sont considérés comme les précurseurs des
+réseaux sociaux vers la ﬁn du XIXesiècle. Tonnies argumentait que les groupes sociaux
+pouvaient être considérés commes des liens personnels et sociaux, que ce soit entre
+individus partageant des valeurs et des croyances (gemeinschaft), ou que ce soit des
+liens plus formels et impersonnels (gesellschaft)[53, Tonnies 1887]. Durkheim, quand à
+lui, donna une explication des faits sociaux, explication non centrée sur l’individu mais
+basée sur l’idée que les phénomènes sociaux apparaissent avec l’interaction sociale,
+c’est à dire sans prendre en compte les caractéristiques propres de chaque acteur [25,
+Durkheim 1988].
+
+Dans les années 1930, José-Luis Moreno fut le premier à systématiquement enreg-
+istrer et analyser les interactions sociales dans de petits groupes, particulièrement les
+salles de classes et les groupes de travail, ce qui a donné naissance à la sociométrie [42,
+Moreno 1934]. Puis en 1940, Alfred Radcliffe-Brown a pris position en faveur de l’é-
+tude systématique des réseaux sociaux au sein des populations étudiées [47, Radcliffe-
+Brown 1940]. Dans le même temps, un groupe de chercheurs de Harvard, mené par
+
+2 ÉTAT DE L’ART
+
+8
+
+Lloyd Warner et Elton Mayo, a exploré les relations interpersonnelles sur les lieux de
+travail [39, Mayo 1945].
+
+Nous pouvons ainsi dire que ces anthropologues sont les fondateurs de la soci-
+ologie moderne [21, Degenne et al. 1994] et de l’intérêt porté à l’analyse des réseaux
+sociaux. Cette nouvelle discipline a ensuite développé des ramiﬁcations dans d’autres
+branches telles que les communications, la socio-linguistique ou même la biologie et
+la géographie. En effet, la connotation usuelle de réseau social est celle d’un ensemble
+plus ou moins complexe de relations entre les membres d’un système social quel qu’il
+soit. A partir de 1954, J.A. Barnes utilise ce terme plus spéciﬁquement, en parlant de
+groupes restreints, tels la famille ou la tribu, ou de catégories sociales. Ensuite, dans
+les années 1960, de nombreux universitaires ont travaillé ensemble pour combiner dif-
+férentes études. C’est ainsi que l’on a vu apparaître, parmi d’autres, la thèse des six
+degrés de séparation de Stanley Milgram [41, Milgram 1967] et celle de la force des
+liens faibles de Mark Granovetter [32, Granovetter 1973], qui ont participé à la popu-
+larisation de l’analyse des réseaux sociaux.
+
+Expérience de Milgram : En 1967, le psychologue Stanley Milgram a mené une ex-
+périmentation sur l’existence d’un petit nombre de liens entre deux personnes.
+Il a demandé à un groupe de citoyens américains de faire parvenir un courrier
+à une personne en passant par leurs connaissances. La personne à joindre n’était
+pas connue et seuls quelques indices, comme le métier, le nom et la situation so-
+ciale, permettaient d’orienter le courrier vers une personne adéquate. Milgram a
+constaté que les courriers arrivés à bon port n’avaient transité que par un faible
+nombre de personnes, s’arrêtant à une moyenne de cinq intermédiaires, soit six
+liens. Même si depuis des études ont montré que ce nombre peut être plus élevé
+selon les cas [36, Kleinfeld 2002], ces six degrés de séparation sont maintenant
+bien connus du public. Récemment, une étude similaire a été menée par l’univer-
+sité de Columbia et a montré que cinq à sept degrés sont sufﬁsants pour relier
+deux personnes par mail [55, Watts 2004].
+
+Théorie de Granovetter : En 1973, Mark Granovetter a développé une théorie sur l’im-
+portance des liens faibles [32, Granovetter 1973]. Un lien faible rattache un indi-
+vidu à une connaissance éloignée et constitue tout de même, d’un point de vue
+structurel, une base d’échange. Il résulte de cette étude qu’avoir de nombreux
+liens faibles est important quand on cherche une information ou à diffuser une
+innovation. Si un individu a tendance à créer des liens forts avec des person-
+nes partageant des opinions et des traits communs (on parlera d’homophilie [40,
+McPherson et al. 2001]), cela limite aussi les connaissances qu’il peut acquérir par
+eux car ces connaissances sont similaires à chacun. Pour augmenter leurs connais-
+sances, les membres d’un tel groupe, ou clique, devront chercher l’information
+
+2 ÉTAT DE L’ART
+
+9
+
+parmi des individus avec lesquels ils ont créé des liens moins importants. C’est
+ce que Granovetter appelle la force des liens faibles.
+
+L’analyse des réseaux sociaux est ainsi passée de la métaphore à un champ de
+recherche à part entière, avec ses propres théories, ses méthodes, ses chercheurs et ses
+outils, principalement informatiques et statistiques. Les analyses partent de la structure
+globale pour se focaliser ensuite sur une relation particulière entre deux individus, du
+comportement global de la population considérée à l’attitude d’un membre particulier.
+On peut alors caractériser l’analyse de réseaux sociaux comme suit [57, Wellman et al.
+1988] :
+
+– les groupes ne sont pas forcément le composant principal d’une société
+– les liens entres individus inﬂuencent les comportements individuels et non l’in-
+
+verse
+
+– la structure et la composition d’un réseau affectent les normes
+De ce fait, l’analyse des réseaux sociaux propose une vue différente des sciences
+sociales traditionnelles en considérant que l’individu et ses attributs sont moins im-
+portants que sa position et ses relations au sein du réseau. En 1988, Robin Dunbar [23,
+Dunbar 1988] suggère qu’un réseau social ne peut dépasser plus de 150 membres en
+raison des limitations dans la capacité de communication d’un être humain. Mais cette
+étude se base sur des communautés où chacun à un rôle déﬁni, on parlera souvent d’é-
+covillage. En effet, on peut voir des groupes plus grands avec certains membres d’une
+communauté ne participant pas au bénéﬁce de celle-ci, notamment avec les nouvelles
+technologies de communication. De telles analyses ont aussi été utilisées pour exam-
+iner les interactions entre organisations en caractérisant les connexions informelles qui
+existent entre les dirigeants et les employés : relations de pouvoir, inﬂuence, . . . [54,
+Wasserman et al. 1994]. Dans les années, 2000, il a été montré que les cultures asiatiques
+sont basées sur le concept communément appelé Guanxi [58, Wellman et al. 2002], que
+l’ont peut résumer par l’inﬂuence personnelle. Dans ces sociétés, deux personnes sont
+liées par un jeu de faveurs et de services, de pouvoir et de soumission et les castes so-
+ciales jouent une rôle prépondérant. Une approche par réseau social permet de mieux
+en appréhender le fonctionnement.
+
+Comme nous pouvons le voir, petit à petit, cette approche s’est révélée fructueuse
+pour expliquer de nombreux phénomènes observés dans le monde réel, bien que cela
+donne une moindre importance aux actions individuelles. L’analyse des réseaux so-
+ciaux représente maintenant un large champ d’investigation. Cependant, même si la
+dynamique des processus peut permettre de comprendre les mécanismes qui apparais-
+sent dans le monde réel, elle reste peu étudiée. De ce point de vue, la modélisation de
+réseaux complexes, notamment grâce aux outils mathématiques et informatiques, est
+un atout car elle permet l’analyse de réseaux plus grands et offrant des outils de visual-
+
+2 ÉTAT DE L’ART
+
+10
+
+isation importants pour comprendre les données collectées et les résultats observés [29,
+Freeman 2000]. Pendant ce stage, nous avons d’ailleurs utilisé l’environnement NetL-
+ogo pour construire et étudier nos modèles. Pour plus d’information sur NetLogo, se
+reporter à l’annexe A.1 page 56.
+
+2.2 Les outils mathématiques et physique, la théorie des graphes
+
+La section qui suit s’appuie principalement sur les travaux d’Alan Gibbons [31,
+Gibbons 1985] et Norman Biggs [11, Biggs et al. 1986] sur la théorie des graphes. Nous
+avons vu qu’un réseau social peut être vu comme un ensemble de nœuds et de liens
+constituant un modèle représenté sous la forme d’un graphe. Pour standardiser et
+mesurer les résultats observés, de nombreux outils algébriques ont donc été empruntés
+à la théorie des graphes et différents indicateurs de l’état d’un réseau, d’un nœud ou
+d’un lien en sont sortis. Chacun peut-être utilisé sur le réseau entier ou sur un sous-
+ensemble de celui-ci, allant du sous-réseau au nœud simple.
+
+Les indicateurs locaux
+
+La centralité : Elle peut prendre trois formes dans un réseau.
+
+– la centralité de degré qui représente l’importance d’un nœud en fonction du
+nombre de liens qu’il possède avec les autres acteurs. Nous parlerons plus sou-
+vent de degré d’un nœud.
+
+– la centralité d’intermédiarité mesurée par le nombre de plus courts chemins
+passant par un individu et représentant le fait qu’un individu puisse être in-
+contournable ou non dans un réseau.
+
+– la centralité de proximité qui est la distance moyenne d’un individu aux autres
+
+individus.
+
+Le plus court chemin : Le plus court chemin représente la distance la plus courte pour
+
+relier deux nœuds.
+
+Les indicateurs globaux
+
+Le coefﬁcient de clusterisation : Le coefﬁcient de clusterisation est une mesure per-
+mettant de représenter le fait que deux nœuds voisins d’un troisième nœud soient
+voisins ou non entre eux. Le coefﬁcient global se calcule ainsi : C = nb triplets f ermes
+Dans cette équation, un triplet représente un ensemble de trois nœuds connectés
+par deux liens, et un triplet fermé représente trois nœuds connectés par trois liens.
+La cohésion : La cohésion permet de mettre en évidence les liens directs entre chaque
+individu d’un même réseau. Si chaque individu est relié à chacun des autres in-
+dividus, on parlera alors d’une clique.
+
+nb triplets
+
+.
+
+2 ÉTAT DE L’ART
+
+11
+
+La densité : La densité d’un réseau est mesurée par le nombre de liens existants par
+rapport au nombre total de liens possibles. Si ce rapport égale 1, aucun autre lien
+ne peut être créé et on aura alors un graphe complet.
+
+Le diamètre : Le diamètre d’un réseau est le plus long plus court chemin présent.
+Le chemin moyen : Le chemin moyen est la distance moyenne entre tous les nœuds
+d’un réseau. C’est en fait la moyenne de tous les plus courts chemins du graphe.
+La distribution de degré : La distribution d’un graphe est la courbe représentant le
+nombre de nœuds de chaque degré possible au sein du graphe. Nous verrons que
+cette distribution constitue un signature de la topologie du graphe considéré.
+
+Les indicateurs locaux et globaux
+
+La centralisation : La centralisation d’un nœud se mesure par le nombre de liens di-
+visé par la somme de tous les liens du réseau. Un nœud central possède un nom-
+bre de liens beaucoup plus important que les autres. La centralisation est à as-
+socier à la centralité de degré. Par extension, un réseau fortement centralisé sera
+alors composé de quelques nœuds principaux, appelés hubs, auxquels seront rat-
+tachés la majorité des autres nœuds.
+
+Cette liste d’indicateurs n’est pas exhaustive et ne prend pas en compte les réseaux
+dirigés (où un arc peut-être entrant ou sortant), ce mémoire n’ayant pas étudié cet as-
+pect.
+
+2.3 Développement de quelques théories principales
+
+Nous allons maintenant voir les principaux modèles de graphes et de réseaux étu-
+diés dans la littérature. Il faut noter que dans la majorité des études, les graphes con-
+sidérés sont des graphes non pondérés et non orientés, i.e. les arêtes et les nœuds ont
+une signiﬁcation mais pas de valeur et les arêtes sont non dirigées.
+
+2.3.1 Les graphes aléatoires, le modèle d’Erdos-Renyi
+
+Un graphe aléatoire est un graphe mathématiquement généré par un processus
+aléatoire. la théorie des graphes aléatoires étudie les propriétés caractéristiques de tels
+graphes et se trouve entre la théorie des graphes et celle des probabilités.
+
+Modèle : Un graphe aléatoire est obtenu à partir d’un ensemble de N nœuds et en
+ajoutant des arêtes aléatoirement entre ces nœuds. Différents modèles donneront dif-
+férentes distributions probabilistiques. Le modèle le plus communément étudié est le
+premier déﬁni, celui de Erdos-Rényi [27, Erdos et al. 1959], que l’on notera G(N,p), où
+
+2 ÉTAT DE L’ART
+
+12
+
+FIG. 1 – Graphe aléatoire
+
+chaque arête est créée indépendemment avec la probabilité p. Le graphe se construit en
+partant d’un ensemble N de nœuds et en y ajoutant n arêtes reliant un nœud à l’un des
+(N - 1) restants. Nous utiliserons ici le modèle binomial admettant que chaque paire de
+nœuds se verra créée avec une probabilité p.
+
+Caractéristiques : De tels graphes ont des propriétés caractéristiques comme la dis-
+tribution de degré qui suit une loi de Poisson [27, Erdos et al. 1959](cf. image 2 page 13),
+un faible diamètre comparé à celui d’un graphe régulier équivalent [14, Chung 2001]
+ainsi qu’un faible coefﬁcient de clusterisation [56, Watts 1998]. De plus, les graphes aléa-
+toires sont largement utilisés en probabilité. En effet, grâce au lemme de Szemeredi [51,
+Szemeredi 1969], nous pouvons dire que si une propriété existe pour un graphe aléa-
+toire, alors elle existe pour la majorité des graphes.
+
+2.3.2 Les réseaux small-world, le modèle de Watts-Strogatz
+
+Un autre type de réseau couramment étudié sont les réseaux petit-monde, ou small-
+world qui s’inspirent de la thèse des six degrés de séparation de Milgram [41, Milgram
+1967]. Dans ces réseaux, bien que n’étant pas directement voisin, chaque nœud peut
+atteindre tous les nœuds du réseau en un petit nombre de pas. De nombreux graphes,
+comme la représentation d’internet ou les réseaux de gênes, présentent des caractéris-
+tiques de petit-monde.
+
+2 ÉTAT DE L’ART
+
+13
+
+FIG. 2 – Distribution graphe aléatoire
+
+FIG. 3 – Réseau Small-World
+
+Modèle : Watts et Strogatz ont identiﬁé en 1998 une certaine catégorie de réseaux
+comme une sous-partie des graphes aléatoires et les ont qualiﬁés de small-world [56,
+Watts et al. 1998]. Ils ont ainsi noté que ces graphes peuvent être identiﬁés par deux in-
+dicateurs indépendants : le coefﬁcient de clusterisation et la distance nœud à nœud, ou
+plus court chemin moyen. Si les graphes construits à partir du modèle d’Erdos et Renyi
+admettent un faible chemin moyen (généralement corrélé au logarithme du nombre de
+nœuds) et un faible coefﬁcient de clusterisation, Watts et Strogatz ont mesuré que la
+plupart des réseaux réels présentaient en fait un coefﬁcient signiﬁcativement plus im-
+portant que si il était dû au simple hasard. Ils ont donc proposé un nouveau modèle de
+réseau, couramment appelé le modèle de Watts et Strogatz, qui comporte (i) un faible
+plus court chemin moyen et (ii) un fort coefﬁcient de clusterisation. Le modèle de con-
+
+2 ÉTAT DE L’ART
+
+14
+
+struction proposé est le suivant : on construit dans un premier temps un réseau régulier
+de connectivité k où chaque nœud est connecté à ses k plus proches voisins. Une fois
+le réseau construit, chaque nœud remplace ses liens existants en créant de nouveaux
+liens, avec une probabilité p et avec un nœud choisit de manière uniforme, en évitant
+les boucles et la redondances des liens.
+
+Depuis, des réseaux de type petit-monde ont été découvert dans de nombreux sys-
+tèmes naturels et artiﬁciels : réseaux d’intéraction des protéines, de transcription des
+gênes, les cartes routières, les chaînes alimentaires, . . . En 2004, Solla et al. ont con-
+struit un modèle informatique de mémoire à court terme en se basant sur un réseau
+petit-monde. Ce modèle a permit de démontrer la bistabilité, processus important de
+la mémoire [50, Solla et al. 2004].
+
+Caractéristiques :
+Les caractéristiques d’un réseau small-world découlent de la déf-
+inition même d’un tel réseau. Un réseau petit monde va donc être composé de sous-
+graphes qui seront presque totalement connectés, conséquence d’un fort clustering. De
+plus, le lien entre deux nœuds sera le composant d’au moins un plus court chemin,
+assurant par là un faible plus court chemin moyen. Certaines études tendent à mon-
+trer que les réseaux small-world exhibent des caractéristiques de réseaux scale-free
+(cf. 2.3.3 page 14). Cependant, ceux-ci ne constituent pas les seuls exemples de réseaux
+petit-mondes, des graphes topologiquement différents satisfaisant les deux conditions
+initiales auront le même qualiﬁcatif.
+
+2.3.3 Les réseaux scale-free, le modèle de Barabasi-Albert
+
+Un réseau scale-free, ou sans échelle, présente une distribution de degré qui suit
+une loi de puissance, une notion qui vient de la physique. De tels réseaux ne sont pas
+anodins car de nombreuses observations empiriques font apparaître que de nombreux
+réseaux réels, comme le web, les réseaux de protéines ou de citations et certains réseaux
+sociaux, sont de type scale-free.
+
+Modèle :
+L’étude des réseaux de citations entre articles scientiﬁques, menée par
+Derek de Solla Price en 1965, a montré que le nombre de citation d’un article suit une
+loi de puissance [19, de Solla Price 1965]. En 1976, il propose un mécanisme pour expli-
+quer l’apparition de cette distribution qu’il appelle "avantage cumulatif" [20, de Solla
+Price 1976], aujourd’hui plus connu sous le nom d’attachement préférentiel.
+
+Plus récemment, l’intérêt pour les réseaux de type scale-free s’est accentué avec
+les travaux d’Albert-Laszlo Barabasi et ses collègues qui ont donné une représentation
+topologique d’une portion du web et montré que certains nœuds, appelés hubs, possè-
+dent un nombre beaucoup plus grand de connexions que la majorité des autres nœuds
+
+2 ÉTAT DE L’ART
+
+15
+
+FIG. 4 – Réseau scale-free
+
+[5, Barabasi et al. 1999]. De plus, le réseau dans son ensemble présente une distribution
+en loi de puissance. Cependant, la loi de puissance de ces réseaux est particulière car
+possède la caractéristique dite fat-tail. D’autres études ont montré que d’autres réseaux,
+sociaux et biologiques, suivaient le même comportement. Barabasi et ses collaborateurs
+ont alors utilisé le terme scale-free pour qualiﬁquer cette classe de réseaux.
+
+En même temps, Barabasi et Albert ont proposé un mécanisme pour expliquer l’ap-
+parition de cette distribution spéciﬁque et l’ont appelé "attachement préférentiel" [5,
+Barabasi et al. 1999], sensiblement le même que celui proposé par Price. On considère
+un réseau complet initial de nœuds et nous y ajoutons itérativement des nœuds qui se
+rattachent au réseau existant selon l’attachement préférentiel, i.e. la probabilité pour un
+nouveau nœud de se connecter à un nœud existant dépend linéairement du degré de ce
+nœud. Des preuves analytiques ont été présentées par Dorogovtsev et al. [22, Dorogot-
+sev et al. 2000], puis indépendemment par le mathématicien Bela Bollobas. Ce modèle
+est actuellement le plus connu pour générer un réseau de type scale-free. Cependant, il
+faut noter que ce mécanisme ne produit qu’un sous-ensemble de réseau scale-free que
+sont les réseaux en étoile et que d’autres modèles ont été proposés.
+
+Caractéristiques : Comme de nombreux systèmes basés sur une loi de puissance,
+la caractéristique la plus notable dans un réseau de type scale-free est la présence
+régulière de nœuds ayant un degré beaucoup plus important que le degré moyen. Ce
+sont ces nœuds que nous appelons hubs et ils sont supposés avoir un rôle spéciﬁque
+dans le réseau, dépendant principalement du domaine considéré. De plus, la distribu-
+
+2 ÉTAT DE L’ART
+
+16
+
+tion du réseau inﬂue grandement la topologie du réseau et l’on constate que les hubs
+sont liés à des hubs plus petits qui sont liés à des nœuds de moindre degré et ainsi de
+suite.
+
+FIG. 5 – Distribution d’un réseau scale-free
+
+Un autre point important des réseaux scale-free est le coefﬁcient de clusterisation
+d’un nœud qui est inversement proportionnel au degré du nœud. En fait, les nœuds de
+faible degré font partie de sous-graphes relativement denses et que ces sous-graphes
+sont connectés entre eux par les hubs. De plus, la présence de ces hubs implique que
+les réseaux de type scale-free possèdent généralement un faible diamètre et un faible
+plus court chemin moyen [2, Albert et al. 2002].
+
+Il faut enﬁn noter que ces caractéristiques sont celles d’un réseau de type scale-
+free construit par attachement préférentiel selon le modèle de Barabasi-Albert. En effet,
+d’autres modèles ont depuis été proposés qui génèrent des réseaux de type scale-free
+mais ayant des caractéristiques différentes. Rappelons toutefois que ces modèles de
+construction de réseaux scale-free sont peu nombreux et souvent dérivés d’un modèle
+existant [38, Li et al. 2005]. Enﬁn, notons que l’intérêt du terme scale-free en matière
+d’analyse de réseaux est encore en débat au sein de la communauté scientiﬁque. Cer-
+taines critiques s’élèvent quand au fait d’utiliser ce qualiﬁcatif pour les réseaux, ar-
+guant que les caractéristiques de ceux-ci se retrouvent dans d’autres réseaux ayant des
+topologies différentes et pourraient donc ne pas être signiﬁcatives.
+
+2.4 L’analyse des réseaux sociaux dans d’autres disciplines
+
+L’analyse de réseaux sociaux est depuis quelques années largement utilisée dans de
+
+nombreuses disciplines.
+
+Par exemple, en épidémiologie pour aider à comprendre comment les contacts hu-
+mains favorisent ou inhibent la diffusion des maladies, comme par exemple le VIH,
+dans une population donnée [13, Christley et al. 2005]. Ces modèles peuvent être légère-
+ment modiﬁés, sur la base d’un système d’agents, permettant de greffer des règles de
+
+2 ÉTAT DE L’ART
+
+17
+
+communication et autorisant ainsi l’analyse de la diffusion d’une information ou d’une
+rumeur [6, Baryshnikov et al. 2004].
+
+Une autre utilisation de l’analyse des réseaux sociaux est la surveillance de masse.
+Par exemple, la Total Information Awareness (cf. Information Awareness Ofﬁce) est
+un programme qui vise à analyser les liens entre citoyens américains et déceler les
+éventuelles menaces politiques. Dans le même ordre d’idée, la diffusion des innova-
+tions utilise aussi l’analyse des réseaux sociaux pour déterminer les acteurs inﬂuants,
+les leaders d’opinion dans une population, qui permettront ainsi à l’ensemble d’ac-
+cepter ou rejeter une nouveauté, bien que l’innovation elle-même soit un facteur à ne
+pas négliger.
+
+D’autres disciplines ont aussi repris des idées de l’analyse des réseaux sociaux pour
+les adapter comme, par exemple, la biologie dans l’agencement des cellules [35, Jeong
+et al. 2000], l’étude de l’interaction entre protéines [34, Jeong et al. 2001], ou encore la
+sémantique [7, Bastian et al. 2008] et les réseaux de citations scientiﬁques [49, Redner
+98]. Nous pouvons même remonter plus loin avec une utilisation que tous les écoliers
+connaissent qui est celle de la modélisation des molécules en chimie [48, Ray Dias 1996].
+Nous pouvons aussi citer d’autres études sur les réseaux de collaboration, met-
+tant en avant différents types de liens entre individus : amitié, attirance, amour, haine,
+colère, . . . Ces liens peuvent être utilisés pour tenter de prédire l’évolution du réseau
+au court du temps et ou le réorganiser en fonction des besoins. De même, une étude
+tend à montrer que la joie ou la tristesse d’un individu semble avoir une inﬂuence sur
+l’humeur de ses voisins dans un réseau [24, Duncan 1984].
+
+2.5 Attaques, résistance et auto-organisation
+
+Nous avons donc vu les principaux modèles de réseaux et quelques exemples d’u-
+tilisation de ces réseaux pour tenter de comprendre des phénomènes réels. L’analyse
+des réseaux est un vaste champ d’investigation et nous allons nous concentrer sur la
+résistance des réseaux aux attaques et aux pannes. En effet, des réseaux comme l’In-
+ternet sont souvent sujets à des pannes et nous pouvons imaginer les problèmes qui
+apparaîtraient si les points centraux d’internet devaient subir une défaillance. Bien que
+d’autres réseaux soient tout aussi sensibles à de telles pannes ou attaques, les réseaux
+de télécommunication et informatiques sont les principaux demandeurs de stratégies
+efﬁcaces.
+
+De tels réseaux sont supposés avoir une topologie scale-free. Ces réseaux sont très
+résistants aux pannes mais aussi hautement vulnérables aux attaques, i.e. quand les
+hubs sont les cibles principales [3, Albert et al. 2000]. D’un autre côté, il a été montré
+que les réseaux aléatoires possèdent une tolérance similaire aux pannes et aux attaques.
+Nous pouvons donc dire que la résistance d’un réseau est directement liée à sa topolo-
+
+2 ÉTAT DE L’ART
+
+gie [16, Crucitti et al. 2004].
+
+18
+
+Pour parer à de tels problèmes, des solutions ont été envisagées comme la modiﬁ-
+cation de la topologie des réseaux pour améliorer la robustesse de ceux-ci [10, Beygelz-
+imer et al. 2005]. L’idée de telles méthodes est de prévenir les dommages que pourrait
+subir un réseau en modiﬁant les liens entre les nœuds. Cependant, dans beaucoup de
+cas, on ne peut pas recabler une réseau avant qu’une panne ou qu’une attaque arrive.
+De fait, de nombreux algorithmes sont mis en place pour réagir aux défaillances et
+compenser les pertes [37, Kuhn et al. 2005]. Csardi et al. 2004 ont quand à eux proposé
+une solution où le réseau offre une réaction immédiate à la disparition d’un nœud [17,
+Csardi et al. 2004]. Cependant, cette solution n’empêche pas l’effondrement du réseau
+et nous allons donc tenter de proposer une solution alternative.
+
+Avec une stratégie dynamique permettant de répondre efﬁcacement à une panne
+ou une attaque, nous pouvons adapter le mécanisme pour tenter de réorganiser un
+réseau donné. En utilisant le dilemme du prisonnier [28, Flood 1952] que nous ferons
+jouer aux nœuds du réseau, nous pourront déterminer les nœuds ﬁables d’un réseau
+et ceux qui doivent être écartés.
+
+2.6 Adaptation du dilemme du prisonnier à l’analyse des réseaux sociaux
+
+Le dilemme du prisonnier est un exemple de la théorie des jeux dans lequel chaque
+joueur, dans notre cas un nœud, doit maximiser ses bénéﬁces sans en faire autant avec
+ceux de son partenaire. La forme habituelle de ce dilemme est celle de deux prisonniers,
+complices d’un délit, retenus dans des cellules séparées et qui ne peuvent communi-
+quer. Ce dilemme peut se résumer par la matrice des gains suivante :
+
+1 - 2
+
+coopère
+trahit
+
+coopère
+(-1/2 ;-1/2)
+
+(0 ;-10)
+
+trahit
+(-10 ;0)
+(-5 ;-5)
+
+Cette matrice peut se lire ainsi :
+– si un des deux prisonniers dénonce l’autre, il est remis en liberté alors que le
+
+second obtient la peine maximale (10 ans)
+
+– si les deux se dénoncent entre eux, ils seront condamnés à une peine plus légère
+
+(5 ans)
+
+– si les deux refusent de dénoncer, la peine sera minimale (6 mois), faute d’éléments
+
+au dossier
+
+Nous pouvons voir que quel que soit le choix de son complice, un prisonnier à intérêt à
+coopérer avec la police et dénoncer l’autre suspect. Le dilemme intervient car si chacun
+suit le même raisonnement, les deux prisonniers se retrouvent dans le pire des cas.
+
+Plus généralement, le dilemme du prisonnier fournit un cadre global pour penser
+les situations où deux ou plusieurs acteurs ont un intérêt à coopérer, mais un intérêt
+
+2 ÉTAT DE L’ART
+
+19
+
+encore plus fort à ne pas le faire si l’autre le fait, et aucun moyen de contraindre l’autre.
+Certains domaines ne considèrent que la nature purement mathématique du problème
+en donnant un sens concret aux paramètres, tandis que d’autres ne retiennent que le
+concept quand les gains et pertes sont peu quantiﬁables. Citons par exemple la poli-
+tique internationale avec des situation de guerre froide ou la sociologie pour parler de
+situations bloquées dans un état défavorable, la difﬁculté de la coordination d’agents
+ou encore la punition de déviances égoïstes.
+
+Il faut aussi noter que le dilemme du prisonnier a souvent été mis en œuvre sur
+des réseaux pour étudier les comportements de coopération au sein de ces réseaux
+[43, Myerson 1977], en fonction de la topologie du réseau considéré [1, Abramson et
+al. 2001] ou encore pour déterminer des stratégies efﬁcaces d’apprentissage par multi-
+agents [12, Bouzy 2007]. Enﬁn, quelques études plus récentes en théorie des jeux et
+analyse des réseaux sociaux ont été menées sur la réorganisation de réseaux. Hales et
+al. ont proposé un algorithme, SLACER, pour que les nœuds d’un réseau peer-to-peer
+gèrent leur voisinage en fonction de notions de ﬁabilité et de méﬁance des / envers les
+autres nœuds [33, Hales et al. 2005]. A travers l’étude du dilemme du prisonnier sur un
+ensemble d’agents liés par un graphe régulier, Szolnoki et al. ont montré que les agents
+sont capables de réorganiser le réseau pour favoriser la coopération, même en cas d’une
+forte tentation à trahir [52, Szolnoki et al. 2008]. La plupart du temps, ce dilemme est
+résolu par la mise en place de processus de socialisation, autrement dit la mise en place
+de moyens permettant de rendre stable une stratégie coopérative : mémorisation des
+comportements passés et établissement d’un code de conduite.
+
+Nous allons voir dans une dernière partie comment nous pouvons mettre en place
+le dilemme du prisonnier, associé à des stratégies efﬁcaces de réparation d’un réseau,
+pour permettre une auto-organisation favorisant les nœuds ﬁables et rejettant les nœuds
+ne garantissant pas la bonne santé du réseau.
+
+3 RÉSISTANCE ET AUTO-RÉPARATION
+
+20
+
+3 Résistance des nœuds et auto-réparation du réseau
+
+Comme nous l’avons vu, Albert et al. ont mené une étude sur l’impact des pannes
+et des attaques sur des réseaux de type scale-free [3, Albert et al. 2000]. Leur prin-
+cipale découverte est que si un réseau scale-free est plus résistant aux pannes qu’un
+graphe aléatoire, le rapport s’inverse lors d’attaques intentionnelles. Cependant, peu
+de travaux existent apportant des solutions efﬁcaces de réparation des réseaux après
+une défaillance. Nous allons étudier six stratégies relativement simples permettant à
+un réseau de s’auto-réparer, ainsi que l’impact de ses stratégies sur la topologie, locale
+et globale, et les caractéristiques du réseau considéré.
+
+3.1 Les modèles de réseaux étudiés
+
+Pour des raisons de simplicité et pour faciliter la comparaison avec les approches
+existantes, nous considérons uniquement les réseaux et graphes non pondérés et non
+dirigés. Deux modèles différents vont être utilisés :
+
+– dans un premier lieu, le modèle de graphe aléatoire d’Erdos et Renyi [27, Erdos
+et al. 1959], construit à partir d’un ensemble initial de N nœuds et en ajoutant K
+liens entre des paires de nœuds choisis aléatoirement, en évitant les répétitions et
+les boucles. Si la condition K ≤ 2N, le modèle fournit une distribution de degré
+suivant une loi de Poisson.
+
+– dans un second temps, nous allons étudier des réseaux scale-free construits sur
+le modèle de l’attachement préférentiel de Barabasi - Albert. Pour ce faire, nous
+considérons un réseau complet initial de nœuds et nous y ajoutons itérativement
+des nœuds qui se rattachent au réseau existant selon la règle de l’attachement
+préférentiel, i.e. la probabilité pour un nouveau nœud de se connecter à un nœud
+existant dépend linéairement du degré de ce nœud. Ce réseau présentera une
+distribution suivant une loi de puissance fat-tail [5, Barabasi et al. 1999]
+
+3.2 Les modèles de pannes et d’attaques
+
+Nous allons étudier les effets des pannes et des attaques sur ces deux différents
+types de graphes. Une panne signiﬁe la suppression aléatoire d’un nœud dans le réseau.
+Cela permet de représenter des phénomènes réels comme des accidents ou des coupures
+sur, par exemple, un réseau de télécommunication. Une attaque, en revanche, corre-
+spond à la suppression d’un nœud possédant un fort degré et représente, par exemple,
+une attaque intentionnelle où l’attaquant tente de provoquer le plus de dommage pos-
+sible. Il existe des méthodes pour trouver de tels nœuds sans connaître pour autant la
+structure totale du réseau. Nous avons adapté et utilisé l’heuristique proposée par Co-
+hen et al. [15, Cohen et al. 2003] : l’attaquant choisit dans un premier temps un nœud
+
+3 RÉSISTANCE ET AUTO-RÉPARATION
+
+21
+
+aléatoire dans le réseau puis un voisin aléatoire de ce nœud. Le nœud attaqué a ainsi
+une probabilité kpk d’être de degré k, avec pk la distribution de degré du réseau. Il en
+résulte une forte probabilité pour le nœud choisi d’être de haut degré.
+
+3.3 Les différentes stratégies de resistance appliquées
+
+Quand une suppression survient, que ce soit suite à une panne ou à une attaque, les
+nœuds voisins (que nous appellerons nœuds affectés, cf. image 6 page 22) du nœud
+attaqué vont essayer de réagir de manière à conserver le réseau connecté en un seul
+bloc. Nous avons donc considérés six stratégies de recablage possibles :
+A) le recablage aléatoire (cf. image 7.gauche page 22) où les nœuds affectés se recon-
+
+nectent aléatoirement dans le réseau ;
+
+B) le recablage glouton (cf. image 7.droite page 22) où les nœuds affectés tentent de se
+connecter à un fort voisin d’un voisin aléatoire (par fort, nous entendons de haut
+degré) ;
+
+C) le recablage dit de second voisin (cf. image 8.gauche page 23) proposé par Csardi
+
+et al. (2004) où les nœuds affectés vont tenter de se reconnecter entre eux ;
+
+D) le recablage dit du pire voisin (cf. image 8.droite page 23.droite) ou chaque nœud
+
+affecté va tenter de se connecter au pire nœud affecté autre que lui-même ;
+
+E) le recablage du voisin glouton (cf. image 9.gauche page 23) où les nœuds affectés
+
+tentent de se connecter à un fort voisin de l’un des autres nœuds affectés ;
+
+F) le recablage en circuit (cf. image 9.droite page 23) pour lequel chaque nœud affecté
+n’est autorisé qu’à accepter et envoyer une demande de connexion avec l’un des
+autres nœuds affectés.
+
+Intuitivement, nous pouvons dire que la première stratégie ne modiﬁera pas ex-
+cessivement la structure d’un graphe aléatoire tandis qu’un réseau de type scale-free
+deviendra relativement rapidement aléatoire en cas d’attaques ciblées. Nous pouvons
+aussi penser que les stratégies B et E n’empêcheront pas l’effondrement du réseau tan-
+dis que les trois dernières stratégies (C, D et F) vont tenter de conserver la structure
+du graphe en reconnectant les nœuds affectés entre eux, essayant ainsi de remplacer le
+nœud disparu par un ensemble de nœuds.
+
+Pour étudier la topologie résultante d’un nombre important d’attaques ou de pannes
+et suivant l’utilisation d’une stratégie, nous devons garder le nombre de nœuds con-
+stant. C’est pour cette raison que chaque perte d’un nœud se voit compensée par la
+création d’un nouveau nœud qui se rattachera au réseau existant en accord avec la
+topologie initiale, aléatoire ou scale-free. De plus, nous gardons aussi le nombre de
+liens constants. En effet, dans un réseau réel, la création et le maintien d’un lien ont un
+
+3 RÉSISTANCE ET AUTO-RÉPARATION
+
+22
+
+FIG. 6 – Nœud attaqué (rouge) et nœuds affectés (noirs)
+
+FIG. 7 – Stratégie de recablage aleatoire (gauche) et glouton (droite)
+
+coût et nous admettons que les nœuds ne peuvent pas créer une inﬁnité de liens tout
+en faisant le maximum pour conserver le même nombre d’arêtes. Cette solution per-
+met d’éviter une disparition totale du réseau après un petit nombre d’attaques. Ainsi,
+lorsqu’un nœud disparaît, ses n liens disparaissent et n - 1 liens sont attribués aux
+nœuds affectés et utilisés selon la stratégie considérée. Le dernier lien est utilisé pour
+connecter au réseau le nouveau nœud créé pour compenser la perte.
+
+3 RÉSISTANCE ET AUTO-RÉPARATION
+
+23
+
+FIG. 8 – Stratégie de recablage second voisin (gauche) et pire voisin (droite)
+
+FIG. 9 – Stratégie de recablage du voisin glouton (gauche) et en circuit (droite)
+
+3.4 Les indicateurs utilisés pour l’efﬁcacité d’une stratégie
+
+Il y a de nombreuses caractéristiques mesurables sur un réseau comme le chemin
+moyen, le diamètre, le coefﬁcient de clusterisation et nombre d’autres, chacune perme-
+ttant l’étude d’un aspect particulier d’un réseau [45, Newman et al. 2006]. Nous avons
+choisi de considérer la taille de la plus grande composante connexe, i.e. le nombre de
+nœuds connectés en un seul réseau ou sous réseau. C’est un indicateur relativement
+basique mais qui permet de se rendre facilement compte de la santé d’un réseau tout
+en autorisant facilement l’étude d’autres paramètres.
+
+3 RÉSISTANCE ET AUTO-RÉPARATION
+
+24
+
+En raison des méthodes de construction des réseaux, la taille initiale de cette com-
+posante sera de N dans un réseau scale-free et d’environ 0.9N pour un graphe aléatoire.
+Ceci car le rattachement d’un nouveau nœud au réseau initial est automatique dans le
+cas de l’attachement préférentiel et est soumis à une probabilité p dans le cas d’un
+graphe aléatoire, ce qui peut laisser certains nœuds orphelins. Il a cependant été mon-
+tré qu’il existe une transition et que, pour une certaine densité et un degré moyen assez
+grand, une composante connexe reliant la majorité des nœuds est créée tandis que les
+autres sous-réseaux sont relativement petits.
+
+Enﬁn, pour appuyer l’observation de quelques modiﬁcations topologiques des ré-
+seaux étudiés, nous nous baserons ponctuellement sur la distribution de degré obtenue
+qui, comme nous l’avons vu, semble être caractéristique de la structure du réseau.
+
+3.5 Résultats sur l’efﬁcacité des stratégies sur des réseaux soumis à des pannes
+
+ou des attaques
+
+Dans cette section, nous allons présenter en détail les stratégies considérées et les
+appliquer sur des réseaux soumis à des pannes aléatoires ou à des attaques ciblées.
+Nous verrons ensuite les effets de ces stratégies sur le comportement et l’aspect du
+réseau visé.
+
+3.5.1 A) Stratégie aléatoire
+
+La première stratégie (cf. 3.3 page 21) est aussi la plus simple : les nœuds affectés
+se reconnectent avec un nœud aléatoirement choisi dans le réseau. Dans un cas réel,
+cela n’a que peu de pertinence car cela implique que chaque nœud du réseau con-
+naît la structure totale du réseau ainsi que chaque autre nœud existant pour pouvoir
+en choisir un et créer un lien. L’objectif premier de cette hypothèse est d’établir une
+base de comparaison avec des stratégies plus raisonnables en terme de mise en œu-
+vre. Plus concrètement, cette simulation va nous permettre de vériﬁer si la structure du
+réseau se modiﬁe ou reste stable et dans quelle mesure. De plus, nous vériﬁerons que le
+réseau exhibe toujours une composante géante malgré les suppressions et nous allons
+surveiller l’évolution de sa taille.
+
+Graphes aléatoires : Dans le cas de pannes sur un graphe aléatoire, comme la sup-
+pression de nœuds et la création de nouveaux liens suit un processus aléatoire, il n’y
+a pas d’effondrement du réseau et la taille de la plus grande composante reste rela-
+tivement constante au cours de la simulation. De plus, si le graphe initial est composé
+de quelques nœuds isolés, ils peuvent être sélectionnés par l’algorithme de recâblage
+avec une probabilité de 1/N par les nœuds affectés. Ainsi ils peuvent devenir mem-
+bre du graphe et de la composante géante. Cela explique pourquoi, sur la courbe 10.A
+
+3 RÉSISTANCE ET AUTO-RÉPARATION
+
+25
+
+page 25, nous pouvons observer une augmentation du ratio taille composante sur le
+nombre de nœuds qui ﬁnit par atteindre la valeur maximale de 1, ce qui signiﬁe que
+tous les nœuds sont membres du réseau et qu’il n’y a pas de sous partie isolée.
+
+Dans le cas de graphes aléatoires, le processus d’attaques et de recablage aléatoire
+a sensiblement le même effet que des pannes successives, que nous venons juste de
+décrire. En effet, nous pouvons voir sur l’image 10.B page 25 que la courbe présente
+des caractéristiques similaires. Même si les nœuds supprimés sont prioritairement ceux
+avec un fort degré, la structure du graphe assure, au moins dans les premiers temps,
+une distribution relativement égalitaire des liens sur l’ensemble du graphe, i.e. tous
+les nœuds ont un degré comparable. Le recablage aléatoire ne modiﬁe pas la distribu-
+tion globale des liens au sein du graphe et cette stratégie, de part sa nature, permet au
+graphe de garder une topologie aléatoire. Pour le dire plus simplement, c’est parce que
+les nœuds sont pratiquement égaux en terme de degré et de position au sein du graphe
+que les attaques ne sont pas plus efﬁcaces que les pannes sur ce type de graphes. Nous
+pouvons mettre en relation cette conclusion avec celle de Barabasi et Albert [3, Albert
+et al. 2000]. Cependant, il faut mentionner que la distribution caractéristique en loi de
+Poisson du graphe initial est légèrement altérée avec la disparition de la partie droite
+de la courbe (cf. image 11 page 26) représentant les nœuds préférentiellement sélec-
+tionnés par les attaques. Il s’en suit que la courbe gaussienne caractéristique subit une
+translation vers des degrés plus faibles, montrant aussi l’augmentation du nombre de
+nœuds de bas et moyens degrés. Nous pouvons donc dire que, si le recablage aléatoire
+conserve une distribution égalitaire, la distribution particulière aux graphes aléatoires
+tend à disparaître avec l’augmentation du nombre d’attaques.
+
+FIG. 10 – Pannes (A) et attaques (B) sur graphe aléatoire, stratégie aléatoire
+
+Réseaux scale-free : Barabasi et Albert on démontré la robustesse des réseaux scale-
+free aux pannes aléatoires et leur forte sensibilité aux attaques, en comparaison avec les
+graphes aléatoires [2, Albert et al. 2002]. Nos simulations nous permettent d’observer le
+
+3 RÉSISTANCE ET AUTO-RÉPARATION
+
+26
+
+FIG. 11 – Translation vers la gauche d’une distribution normale
+
+même comportement. Avec la stratégie de recablage aléatoire, nous pouvons constater
+une forte résistance du réseau aux pannes comme le montre la courbe 12.A page 26. En
+revanche, la distribution de degré se modiﬁe au cours des suppressions et ajouts. En
+effet, nous commencons avec une distribution suivant une loi de puissance typique des
+réseaux scale-free, et nous pouvons observer une modiﬁcation de la courbe représenta-
+tive qui tend à devenir une courbe en cloche amputée de la partie gauche (cf. image 13
+page 27), approchant la distribution suivant une loi de Poisson des graphes aléatoires
+soumis aux mêmes pannes.
+
+Comme on peut le voir sur la courbe de la ﬁgure 12.B page 26, notre simulation
+montre que la stratégie aléatoire permet de conserver une taille constante de la plus
+grande composante. Cependant, comme dans le cas de pannes, la distribution en loi de
+puissance tend à disparaître au proﬁt d’une distribution approchant celle d’un graphe
+aléatoire. Une étude un peu plus approfondie de la structure permet de se rendre
+compte que le réseau tend à devenir un graphe aléatoire tout en conservant des pro-
+priétés de petit monde et en augmentant le coefﬁcient de clusterisation.
+
+FIG. 12 – Pannes (A) et attaques (B) sur réseau scale-free, stratégie aléatoire
+
+3 RÉSISTANCE ET AUTO-RÉPARATION
+
+27
+
+FIG. 13 – Modiﬁcation de la loi de puissance
+
+3.5.2 B) Stratégie du glouton
+
+La stratégie précédente donne de bons résultats et permet de conserver le réseau
+connecté en une seule composante. Cependant, c’est une stratégie qui n’est pas facile à
+implémenter dans un réseau réel car cela implique une connaissance totale du réseau
+pour chaque nœud. C’est pour cette raison qu’une stratégie plus locale semble être un
+meilleur compromis. Dans cette optique, la stratégie du glouton (cf. 3.3 page 21) peut
+s’implémenter au niveau local et semble pertinente. Sachant qu’un nœud affecté ne
+connait que ses voisins immédiats, il tentera de créer un nouveau lien avec ce même
+voisinage. Ainsi, le nœud selectionné pour la suppression va choisir un de ses voisins
+au hasard puis le meilleur, i.e. avec le plus haut degré, voisin de ce voisin.
+
+Graphes aléatoires : La ﬁgure 14.A page 28 montre que la taille de la plus grande
+composante chute rapidement. Au niveau du réseau, il en résulte un éclatement de
+celui-ci. Cela s’explique facilement par le fait que la stratégie du glouton se trouve
+dans l’incapacité de reconnecter deux sous-réseaux séparés par la suppression d’un
+nœud. En effet, si un nœud avec une forte centralité est selectionné, le réseau se di-
+visera inévitablement sans possibilité de reconnexion des différentes parties, ce qui a
+pour conséquence une diminution de la taille de la plus grande composante. Et nous
+pouvons même observer, après un certain temps, une cassure nette de cette taille. Cela
+s’explique par la topologie du réseau résultant : comme les sous-parties ne peuvent
+pas être reconnectées, après plusieurs pannes, nous obtenons de nombreux graphes de
+petites tailles avec un coefﬁcient de clusterisation relativement élevé. Nous avons donc
+une plus forte probabilité de choisir aléatoirement l’un des nœuds avec la plus forte
+centralité et donc de diviser le graphe auquel il appartient. Il s’en suit un effondrement
+rapide du réseau complet.
+
+Nous pouvons le constater sur l’image 14.B page 28 que nous avons le même com-
+
+3 RÉSISTANCE ET AUTO-RÉPARATION
+
+28
+
+portement lors d’attaques ciblées, à l’exception d’une chute plus brutale de la taille de
+la plus grande composante. Ceci en raison du fait qu’un nœud important d’un réseau
+possède souvent une forte centralité d’intermédiarité, ce qui explique que la séparation
+du réseau en au moins deux sous-parties apparaisse plus rapidement.
+
+FIG. 14 – Pannes (A) et attaques (B) sur graphe aléatoire, stratégie glouton
+
+Réseaux scale-free : Comme dans le cas d’un graphe aléatoire, l’application de cette
+stratégie sur deux réseaux de type scale-free n’autorise pas la connexion de ses deux
+réseaux. Ainsi, dès la suppression d’un nœud avec une forte intermédiarité, le réseau
+risque de se séparer déﬁnitivement en plusieurs sous-réseaux. Ce schéma apparaît plus
+rapidement que sur un graphe aléatoire car ces nœuds intermédiaires correspondent
+généralement aux hubs d’un réseau scale-free. Ceci ajouté au fait que les voisins d’un
+hubs sont relativement peu connectés entre eux, la suppression d’un nœud central
+d’un réseau scale-free entraînera l’affaissement du réseau sans possibilité de répara-
+tion, comme nous pouvons le voir sur la ﬁgure 15.A page 29.
+
+Dans le cas d’une attaque sur un réseau scale-free, l’effet de la suppression d’un
+nœud et de l’application de la stratégie du glouton a le même effet que dans le cas
+d’une panne. Il faut relever cependant une destruction plus rapide du réseau (cf. 15.B
+page 29) car les hubs seront les premières cibles et donc les premiers nœuds à être
+supprimés. Après un certain temps, il arrive même que le réseau initial soit totalement
+désintégré et nous n’avons alors plus qu’un ensemble de nœuds isolés, sans connexion
+entre eux.
+
+3.5.3 C) Stratégie du second voisin
+
+Nous venons de voir que la stratégie du glouton n’est pas à retenir si l’objectif prin-
+cipal est de conserver le réseau majoritairement connecté. En effet, la séparation du
+réseau en deux ou plusieurs sous-parties est directement liée à la suppression d’un
+nœud ayant une haute intermédiarité, ce risque étant d’autant plus important dans
+
+3 RÉSISTANCE ET AUTO-RÉPARATION
+
+29
+
+FIG. 15 – Pannes (A) et attaques (B) sur réseau scale-free, stratégie glouton
+
+le cas d’un réseau scale-free. Pour tenter d’éviter ce phénomène d’effondrement, nous
+avons mis en place la stratégie du second voisin (cf. 3.3 page 21) selon laquelle, chaque
+nœud tente de recréer un lien avec l’un de ses voisins. A nouveau, la connaissance
+totale du réseau n’est pas nécessaire et seuls les voisins des voisins, i.e. les seconds
+voisins, doivent être connus pour pouvoir s’y connecter lors de la disparition du nœud
+intermédiaire.
+
+Graphes aléatoires : La courbe sur la ﬁgure 16.A page 30 montre une légère baisse
+de la taille de la plus grande composante, qui s’explique par la séparation ponctuelle
+de quelques nœuds. En effet, de temps en temps, quelques nœuds sont déconnectés du
+réseau et ne peuvent pas s’y reconnecter en raison de la mise en œuvre de la stratégie.
+Visuellement, la simulation révèle que la topologie du réseau tend à changer pour
+s’approcher d’un modèle scale-free. D’autres investigations sont cependant nécessaires
+pour vériﬁer l’obtention réelle d’une distribution scale-free ou approchante, et les mé-
+canismes qui interviennent pour que cela arrive.
+
+Comme dans le cas de pannes aléatoires, il y a une faible baisse de la taille de la plus
+grande composante. Cependant, nous pouvons constater sur la ﬁgure 16.B page 30 que
+cette baisse est plus marquée. Cela s’explique par le changement topologique qui s’ef-
+fectue dans les premiers temps. Approchant un réseau scale-free de part sa distribution
+(cf. 17 page 30), le graphe aléatoire devient moins résistant aux attaques, ce qui accentue
+donc le délitement du réseau.
+
+Réseaux scale-free : Nous pouvons voir sur les courbes des images 18.A page 31
+et 18.B page 31 qu’après un effondrement brutal de la taille de la plus grande com-
+posante, il y a une stabilisation de cette taille sur une période relativement longue.
+Cette stabilisation est ensuite à nouveau suivi par une chute brutale et une nouvelle
+période de stabilisation. Un réseau scale-free n’offre que peu de résistance face aux
+
+3 RÉSISTANCE ET AUTO-RÉPARATION
+
+30
+
+FIG. 16 – Pannes (A) et attaques (B) sur graphe aléatoire, stratégie second voisin
+
+FIG. 17 – Distribution en loi de puissance d’un graphe aléatoire avec second voisin
+
+attaques en raison des hubs qui font ofﬁce de relais majeurs au sein du réseau. La de-
+struction d’un de ces relais entraîne automatiquement une désagrégation du réseau ou
+au moins d’une large partie. La stratégie du second voisin a pour objectif d’empêcher
+que cela arrive en reconnectant les nœuds affectés entre eux. En effet, les nœuds af-
+fectés essayent de remplacer le nœuds supprimé par des liens entre eux. En allant plus
+loin, nous pouvons même dire que les hubs supprimés sont en réalité remplacés par un
+ensemble de nœuds, les anciens voisins, qui possèdent un coefﬁcient de clusterisation
+relativement fort comparativement au reste du réseau. Ainsi, le réseau garde globale-
+ment une topologie de type scale-free et des clusters locaux prennent la place des hubs
+au cours des attaques.
+
+Ceci explique aussi la stabilisation de la taille de la plus grande composante. En
+effet, les hubs étant remplacés par des groupes de nœuds fortement connectés, la sup-
+pression d’un nœud avec un fort degré est moins destructeur que dans les premiers
+temps. De fait, la suppression d’un nœud de fort degré est compensée par les autres
+nœuds du "cluster-hub" qui permettent au réseau de conserver une composante géante.
+De plus, il faut noter que le réseau se trouvant largement divisé, d’autres nœuds de
+
+3 RÉSISTANCE ET AUTO-RÉPARATION
+
+31
+
+haut degré peuvent être ciblés bien que n’appartenant pas à la plus grande composante
+restante. Une nouvelle baisse soudaine de la taille de cette composante aura ensuite lieu
+quand ce "cluster-hub" ne sera plus composé que de un ou deux nœuds, ce qui ramène
+le réseau dans une topologie scale-free plus habituelle.
+
+Un point intéressant à noter et que nous avons des courbes similaires, que ce soit
+en cas de pannes ou d’attaques. Nous pouvons donc dire que même en cas d’attaques
+nombreuses et répétées, la stratégie du second voisin permet de conserver une grande
+composante relativement importante, empêchant par la même occasion la destruction
+du réseau. Ainsi, malgré l’éclatement du réseau en plusieurs parties et sons effon-
+drement total sur le très long terme, cet algorithme de recablage donne du temps pour
+trouver une réponse plus appropriée, en cas de crise majeure par exemple.
+
+De plus, nous pouvons observer sur la simulation qu’il n’y a pas une seule grande
+composante, mais plusieurs. En effet, la séparation du réseau donne, la plupart du
+temps, des sous-réseaux de tailles équivalentes. Cette stratégie offre donc aussi l’avan-
+tage de ne pas totalement isoler des nœuds après une attaque.
+
+FIG. 18 – Pannes (A) et attaques (B) sur réseau scale-free, stratégie second voisin
+
+3.5.4 D) Stratégie du pire voisin
+
+Dans le cas de la stratégie du second voisin, la création d’un "cluster-hub" permet
+pendant un certain temps de stabiliser la taille de la plus grande composante malgré
+les attaques répétées. Mais nous avons vu que cela n’empêche pas la destruction du
+réseau sur le long terme. La stratégie du pire voisin (cf. 3.3 page 21) est une tentative
+de créer un "cluster-hub" moins important en reconnectant chaque nœud affecté au
+nœud affecté de plus faible degré, autre que lui-même. L’idée principale et d’éviter de
+reconnecter les tous les nœuds affectés sur un nœud qui deviendrait de fait une cible
+potentielle importante. Ainsi, chaque nœud affecté examine chacun des autres nœuds
+et tente de créer un lien avec celui qui possède le degré le plus faible. Cela a aussi
+l’avantage de créer un lien avec un nœud affecté qui se retrouverait isolé suite à la
+
+3 RÉSISTANCE ET AUTO-RÉPARATION
+
+32
+
+défaillance.
+
+Graphes aléatoires : Nous pouvons observer sur la courbe de l’image 19.A page 32
+que cette stratégie permet une relative stabilité de la taille de la plus grande com-
+posante. En effet, même si il y a une légère pente montrant la diminution de cette taille,
+celle-ci est moins marquée que dans la stratégie du second voisin et nous n’observons
+pas de brisures de la courbe, brisure représentative de la séparation avec la composante
+géante d’un nombre important de nœuds.
+
+Nous constatons en revanche que nous avons une diminution plus régulière et plus
+rapide de la taille de la composante géante lors d’attaques massives (cf. 19.B page 32).
+Cela dit, l’éclatement du réseau est moins marqué qu’avec une stratégie glouton et nous
+pouvons mettre en correspondance les courbes avec celles de la stratégie de second
+voisin qui sont similaires. En effet, nous pouvons l’expliquer par le fait que le recablage
+utilisé fait que chaque nœud affecté va se reconnecter au nœud affecté le plus faible.
+La seule différence avec la stratégie de second voisin est le choix du nœud avec lequel
+créer des liens. Dans le cas du second voisin, le nœud est choisi aléatoirement parmis
+les autres nœuds affectés. Dans le cas du pire voisin, c’est le nœud le moins connecté
+qui est choisit, cela évite de créer un lien avec une future cible potentielle, dans le cas
+où, par exemple, une majorité des nœuds affectés vont se connecter avec un même
+nœud qui va voir son degré augmenter signiﬁcativement.
+
+FIG. 19 – Pannes (A) et attaques (B) sur graphe aléatoire, stratégie pire voisin
+
+Réseaux scale-free : A la différence du cas des graphes aléatoires, nous pouvons con-
+stater sur les courbes 20.A page 33 et 20.B page 33 un comportement similaire aux
+courbes de la stratégie du glouton mais avec une baisse relativement moins sensible et
+moins rapide de la taille de la plus grande composante. Il y a une différence en revanche
+avec la stratégie du glouton dans le sens où la baisse de la courbe est similaire que ce
+soit dans le cadre de pannes ou dans le cadre d’attaques. Mais nous pouvons quand
+
+3 RÉSISTANCE ET AUTO-RÉPARATION
+
+33
+
+même dire que si la stratégie du pire voisin semble donner de bons résultats sur des
+graphes aléatoires, son application sur des réseaux de type-scale-free n’empêche pas le
+délitement du réseau. D’autres études sont nécessaires pour comprendre les raisons de
+cette destruction du réseau.
+
+FIG. 20 – Pannes (A) et attaques (B) sur réseau scale-free, stratégie pire voisin
+
+3.5.5 E) Stratégie du voisin glouton
+
+La stratégie du pire voisin ne permet pas au réseau de rester connecter. La stratégie
+du voisin glouton (cf. 3.3 page 21) est dérivée de celle du glouton. Plutôt que de tenter
+de créer un lien avec le voisin d’un voisin, chaque nœud affecté va tenter de créer un
+lien avec un fort voisin d’un autre nœud affecté, choisi aléatoirement. Encore une fois,
+l’objectif est de conserver l’unité de la grande composante en essayant de relier deux
+parties du réseau qui se retrouveraient séparées par la suppression d’un nœud disparu.
+
+Graphes aléatoires : La courbe de l’image 21.A page 34 nous montre que la stratégie
+de voisin glouton ne permet pas à la composante géante de conserver sa taille ini-
+tiale quand le graphe est soumis à de nombreuses pannes. Nous avons une baisse
+régulière et relativement lente de cette taille. Contrairement à la stratégie du glouton,
+nous pouvons voir que nous n’avons pas de brisure dans la taille de la plus grande
+composante. Cela s’explique par le fait que ce sont des nœuds relativement isolés qui
+se détachent régulièrement du réseau sans possibilité de s’y reconnecter. Il faut aussi
+noter la courbe sur l’image 21.B page 34 qui montre un comportement semblable lors
+d’attaques. Cependant, la pente de la courbe est plus forte et le réseau se défait plus
+vite. En effet, le détachement de sous-ensembles de la composante principale arrive
+plus souvent que lors de pannes. Quand un nœud de haut degré est supprimé, par
+déﬁnition, il entraîne la deconnexion d’un nombre de nœuds plus important, ce qui
+augmente la probabilité qu’un nœud voisin ne soit pas pris dans le schéma de recon-
+nexion et se retrouve isolé du reste du réseau. De plus, pour la même raison, les nœuds
+
+3 RÉSISTANCE ET AUTO-RÉPARATION
+
+34
+
+entraînés dans cet isolement sont aussi plus nombreux. Ainsi, les nœuds qui se sépar-
+ent de la composante principale sont plus nombreux. Ce qui explique une chute en
+moyenne deux fois plus rapide de la taille de la composante principale.
+
+FIG. 21 – Pannes (A) et attaques (B) sur graphe aléatoire, stratégie voisin glouton
+
+Réseaux scale-free : Dans le cas où l’on applique la stratégie du voisin glouton sur
+des réseaux de type scale-free, il est intéressant de constater que nous obtenons des
+courbes similaires, d’une part que ce soit dans le cas de pannes ou dans celui d’attaques
+et d’autre part avec la courbe représentative de la taille de la plus grande composante
+d’un réseau scale-free utilisant la stratégie glouton lors d’attaques répétées. Les brisures
+importantes que nous pouvons voir sur les courbes des images 22.B page 35 et 22.B
+page 34 nous indiquent que le réseau se retrouve rapidement composé d’un ensemble
+de nœuds sans, ou avec très peu de connexions entre eux, et ce malgré l’utilisation de
+la stratégie du voisin glouton. Nous allons donc nous retrouver avec une multitude
+de "petits" réseaux, tous de tailles équivalentes. C’est pour cette raison que l’on peut
+observer une stabilisation de la taille de la plus grande composante, même si cette taille
+s’avère faible au regard du nombre de nœuds. En effet, si la composante la plus grande
+est ciblée et détruite, une composante de taille équivalente sera choisie par l’algorithme
+de calcul et il n’y aura pas, ou peu, d’interruption dans la courbe représentative. Jusqu’à
+ce que l’on se retrouve à nouveau dans le cas de plusieurs réseaux ayant tous une taille
+équivalente et que la "plus grande" composante restante soit soumise à une attaque,
+entraînant une nouvelle cassure de la courbe.
+
+Si la stratégie du voisin glouton est sensée reconnecter les nœuds affectés à la com-
+posante principale, il n’est pas difﬁcile de constater que ce n’est pas le cas. Des mesures
+plus approfondies devraient être menées mais le choix aléatoire d’un voisin fort d’un
+nœud affecté choisi lui aussi aléatoirement semble être un début d’explication. En ef-
+fet, nous nous retrouvons dans le cas décrit précédemment (cf. 3.2 page 20) où le choix
+aléatoire d’un nœud aléatoire donne une forte probabilité de sélectionner un nœud de
+
+3 RÉSISTANCE ET AUTO-RÉPARATION
+
+35
+
+haut degré [15, Cohen et al. 2003]. Avec cette méthode, de nombreux nœuds affectés
+se connecteraient donc à un nœud majeur du réseau, et avec une probabilité relative-
+ment élevée qu’ils sélectionnent tous le même. Cela expliquerait pourquoi, même dans
+le cas de pannes, la destruction d’un nœud entraîne la destruction du réseau, malgré
+une résistance relative de la composante principale au début de la simulation. En effet,
+si la majorité des nœuds se retrouvent connectés à un unique nœud, la disparition de
+ce nœud entraîne un effondrement du réseau car les probabilité de reconnecter tous les
+nœuds affectés de manière à ne conserver qu’une unique composante devient faible.
+Visuellement, nous serions dans le cas extrême d’un réseau en étoile : un nœud cen-
+tral et les seuls liens existants sont ceux entre celui-ci et les autres nœuds du réseau.
+Il en va de même lors des phases de relative stabilité, chaque sous-réseau offre une
+représentation en étoile et est donc d’autant moins résistant.
+
+FIG. 22 – Pannes (A) et attaques (B) sur réseau scale-free, stratégie voisin glouton
+
+3.5.6 F) Stratégie du circuit
+
+Nous venons de voir que les stratégies précédentes, plus ou moins efﬁcaces, n’évi-
+tent pas l’effondrement total du réseau, à plus ou moins long terme. En effet, il arrive
+qu’un nœud affecté se retrouve isolé des autres nœuds affectés et ne puisse plus alors se
+reconnecter à la composante géante, entraînant donc une baisse irréversible de la taille
+de cette composante. L’idée de la stratégie du circuit (cf. 3.3 page 21) est d’entourer le
+nœud supprimé, et la place laissée libre, par des liens entre les nœuds affectés. Pour
+ce faire, chaque nœud affecté (i) ne peut accepter qu’un seul lien venant d’un nœud
+affecté et (ii) ne peut demander à se connecter qu’avec un seul autre nœud affecté. Il en
+résulte que chaque lien perdu sera recréé par et avec un nœud ayant lui aussi perdu un
+lien. De ce fait, aucun nœud ne pourra être laissé de côté et la taille de la plus grande
+composante devrait être préservée.
+
+3 RÉSISTANCE ET AUTO-RÉPARATION
+
+36
+
+Graphes aléatoires : Nous pouvons voir sur l’image 23.A page 36 que la courbe
+représentant la taille de la plus grande composante reste stable pendant que les pannes
+ont lieu. Nous pouvons dire que cette stratégie donne au réseau un comportement
+similaire à une stratégie de recablage aléatoire. Il faut cependant noter une différence
+majeure. En effet, la courbe de distribution de degré du réseau se modiﬁe relativement
+rapidement pour offrir une courbe de distribution scale-free (cf. 24 page 37). La résis-
+tance aux pannes de tels réseaux empêche l’éclatement de celui-ci. Notons toutefois
+que dans le cas où l’objectif est de conserver une topologie aléatoire pour le graphe,
+cette stratégie n’est pas recommandée.
+
+En revanche, la courbe 23.B page 36 montre, dans le cas d’attaques ciblées, une
+légère baisse de la taille de la composante géante. Nous notons le même comportement
+de modiﬁcation vers un réseau qui tend à devenir scale-free et la baisse cette chute
+peut s’expliquer ainsi : d’une part le réseau scale-free en formation est vulnérable aux
+attaques, d’autre part, la topologie aléatoire initiale laisse des nœuds isolés qui ne font
+pas partie de la composante principale et enﬁn la stratégie de circuit ne permet pas
+de créer des liens avec des nœuds isolés et inconnus (i.e. n’ayant jamais appartenu
+au réseau). Encore une fois, notons la modiﬁcation importante de topologie qui est à
+prendre en compte dans le cas de la mise en œuvre de cette stratégie de recablage.
+
+FIG. 23 – Pannes (A) et attaques (B) sur graphe aléatoire, stratégie circuit
+
+Réseaux scale-free : Sur les images 25.A page 37 et 25.B page 37, nous pouvons con-
+stater un comportement identique de la courbe représentative de la taille de la plus
+grande composante. En réalité, cela nous montre que la stratégie de circuit empêche
+l’éclatement du réseau scale-free. De plus, la courbe de distribution reste sensiblement
+identique à la courbe initiale, mais on peut cependant noter une élévation conséquente
+du diamètre du réseau (cf. 26 page 38. En effet, si le réseau garde une topologie scale-
+free, nous constatons assez rapidement que les hubs vont se retrouver connectés en
+chaîne et les autres nœuds n’auront que très peu de connexions avec des nœuds autres
+
+3 RÉSISTANCE ET AUTO-RÉPARATION
+
+37
+
+FIG. 24 – Distribution en loi de puissance d’un graphe aléatoire avec stratégie circuit
+
+qu’un hub. Il faut relativiser cette augmentation par le fait que celle-ci cesse sur le long
+terme et le diamètre maximal se stabilise autour d’une valeur 1.5 à 2 fois supérieure
+au diamètre initial. De ce fait la stratégie de recablage en circuit permet aux réseaux
+scale-free de gagner une forte résistance aux attaques mais au détriment du diamètre
+du réseau et ainsi on observe une tendance relative à perdre la caractéristique de petit
+monde caractérisée par un faible diamètre.
+
+FIG. 25 – Pannes (A) et attaques (B) sur réseau scale-free, stratégie circuit
+
+Nous pouvons voir sur l’image 27 page 38 la représentation visuelle d’un réseau
+après un grand nombre d’attaque et de pannes compensées par l’application de la
+stratégie en circuit.
+
+3.6 Synthèse des différentes stratégies utilisées
+
+Nous venons de voir différentes stratégies de recablage pour permettre à un graphe
+ou un réseau un réaction directe quand il est soumis à un nombre important de pannes
+ou d’attaques1. Les différentes simulations nous ont permis de mesurer l’efﬁcacité, ou
+
+1Les résultats obtenus ont fait l’objet d’une présentation et d’un article, voir les annexes A.2 etA.3
+
+3 RÉSISTANCE ET AUTO-RÉPARATION
+
+38
+
+FIG. 26 – Augmentation du diamètre suite à la stratégie circuit
+
+FIG. 27 – Réseau résultant après l’utilisation de la stratégie de recablage en circuit
+
+l’inefﬁcacité, des stratégies considérées quand il s’agit de maintenir le réseau majori-
+tairement connecté, ce que nous pouvons observer grâce à la taille de la plus grande
+composante.
+
+Tout d’abord, nous avons pu constater que les stratégies du glouton (3.3 page 21)
+et du voisin glouton (3.3 page 21) sont à proscrire. En effet, elles n’empêchent pas
+l’écroulement total du réseau en un temps relativement court, et ce quelle que soit
+la topologie initiale du graphe. Ensuite, si le recablage dit du pire voisin (3.3 page 21)
+
+3 RÉSISTANCE ET AUTO-RÉPARATION
+
+39
+
+n’empêche pas la destruction de la plus grande composante d’un réseau de type scale-
+free, elle permet une certaine résistance aux pannes et aux attaques sur les graphes
+aléatoires. En revanche, nous avons pu constater que la stratégie similaire du second
+voisin (3.3 page 21) donne des résultats équivalents sur les graphes aléatoires, tout en
+ayant un avantage lorsqu’on l’applique sur des réseaux de type scale-free. En effet,
+nous avons pu voir qu’elle permet, du moins sur un moyen terme, de conserver une
+composante géante de taille relativement importante sur une longue période de temps,
+comparativement aux autres stratégies, et autorisant la mise en place de réponses ap-
+propriées. De plus, cette stratégie est plus efﬁcace pour éviter l’isolement complet des
+nœuds hors de la composante principale.
+
+Ensuite, les différentes graphiques nous montrent que la stratégie de recablage aléa-
+toire (3.3 page 21) donne aux graphes aléatoires et aux réseaux scale-free une excellente
+résistance aux attaques et aux pannes. En revanche, cette resistance se fait au détriment
+de la topologie du réseau, dans le cas d’un réseau initialement scale-free, qui tend à de-
+venir aléatoire. De plus, cette stratégie est une stratégie globale peut facile à mettre en
+œuvre car nécessitant la connaissance de tout le réseau pour chaque nœud de celui-ci,
+ce qui peut demander des ressources très importante dans le cas de réseaux réels.
+
+Enﬁn, la stratégie de recablage en circuit (3.3 page 21) offre un meilleur compromis
+car elle permet, comme la stratégie aléatoire, à tous les nœuds de rester membres de la
+composante principale tout en ne nécessitant que la connaissance des nœuds voisins
+et seconds voisins. En fait, les nœuds affectés vont se reconnecter entre eux de manière
+à entourer la zone laissée libre par le nœud supprimé. En revanche, dans le cas d’un
+graphe aléatoire, cette stratégie modiﬁe la structure de celui-ci pour en rapprocher la
+topologie de celle d’un réseau scale-free. Il faut aussi noter une hausse du diamètre du
+réseau qui affaiblit ainsi l’effet petit-monde.
+
+Nous pouvons donc dire que les stratégies de recablage aléatoire et de recablage en
+circuit sont les plus efﬁcaces quand l’objectif principal est de conserver une composante
+géante au sein du réseau. De plus amples études sont nécessaires pour approfondir les
+connaissances sur les effets et les conséquences autres que cela induit sur les réseaux.
+
+4 DILEMME DU PRISONNIER ET AUTO-ORGANISATION
+
+40
+
+4 Un apprentissage et le dilemme du prisonnier pour atteindre
+
+l’auto-organisation
+
+Nous venons de voir différentes stratégies permettant aux réseaux de s’auto-réparer
+quand ils sont soumis à un grand nombre d’attaques ou de pannes. Ces stratégies sont
+plus ou moins efﬁcaces et ont différents effets sur la structure du réseau de départ.
+Nous allons maintenant donner aux nœuds des capacités de réaction en fonction de
+divers indicateurs pour leur permettre de réagir au mieux en fonction d’un but donné.
+L’objectif ﬁnal est de laisser chaque nœud décider de la meilleure option pour garder
+le réseau connecté en un seul bloc, tout en modiﬁant sa place au sein du réseau pour
+satisfaire à divers critères. Dans un premier temps, nous allons mettre en place un mod-
+èle d’apprentissage simple pouc cibler les meilleures stratégies et nous analyserons
+sous quels conditions et avec quels effets. Ensuite, nous appliquerons le dilemme du
+prisonnier sur un réseau à divers stade de son évolution suivant la ou les stratégies
+retenues. Dans une dernière partie, nous allons voir un modèle possible d’utilisation
+de ces même stratégies en parallèle avec le dilemme du prisonnier pour permettre au
+réseau de s’auto-organiser.
+
+Notons que nous allons uniquement considérer des réseaux de type scale-free. En
+effet, ces réseaux sont plus représentatifs de réseaux réels que les graphes aléatoires.
+Ceux-ci ont été précédemment utilisé à titre de comparaison avec les résultats connus
+et les résultats observés sur les réseaux scale-free. Enﬁn, nous avons modiﬁé la stratégie
+de recablage aléatoire pour la rendre locale et non plus globale. En effet, pour une mise
+en œuvre plus pratique, la stratégie aléatoire n’est pas recommandée car, comme nous
+l’avons vu en 3.5.1 page 24, elle nécessite une connaissance globale du réseau. Pour
+pallier ce défaut, nous avons considéré que les nœuds affectés tenter de créer des liens
+avec un autre nœud choisit au hasard dans son champ de vision restreint au dixième
+de la taille totale du réseau. Ainsi, si le réseau est composé de N nœuds, chacun connaît
+ses N/10 plus proches voisins, ce facteur étant donné arbitrairement. Enﬁn, nous avons
+éliminé les stratégies de glouton et voisin glouton car nous avons pu constater leur
+inefﬁcacité à conserver une composante géante au sein du réseau.
+
+4.1 Apprendre pour trouver les meilleures stratégies
+
+Selon Bruno Bouzy, il existe de nombreuses méthodes d’apprentissages comme
+l’apprentissage bayésien, mono-agent ou multi-agents [12, Bouzy 2007]. Dans le cas
+présent nous allons utiliser un procédé relativement simple d’apprentissage par puni-
+tion et récompense des agents, ici les nœuds.
+
+4 DILEMME DU PRISONNIER ET AUTO-ORGANISATION
+
+41
+
+4.1.1 Modèle d’apprentissage
+
+Chaque nœud du réseau va se voir doté de capacités lui permettant de réagir à
+différentes observations sur le réseau environnant, i.e. sur ses voisins. Ainsi, un nœud
+connaît les quatres stratégies qu’il peut utiliser : la stratégie de recablage aléatoire (3.3
+page 21), la stratégie du second voisin (3.3 page 21), la stratégie du pire voisin (3.3
+page 21) et la stratégie en circuit (3.3 page 21). De plus, un nœud est capable de dif-
+fuser une information à ses voisins les plus proches. Cette information s’atténue dans
+le temps et il ne peut donc la diffuser qu’à ses k plus proches voisins. Suivant l’hy-
+pothèse des six degrés de séparations [41, Milgram 1967], nous avons ﬁxé ce paramètre
+k à 6. De manière à nous permettre de surveiller la diffusion de l’information au sein
+du réseau, chaque nœud est capable de stocker le nombre d’informations différentes
+reçu. Enﬁn, un nœud est capable de connaître les degrés de ses voisins pour en établir
+une moyenne, ainsi que la taille de la plus grande composante du réseau. Nous allons
+voir par la suite l’utilité de ses informations pour un nœud.
+
+Concernant la diffusion d’une information, plusieurs expérimentations sur des ré-
+seaux scale-free nous ont apporté quelques observations intéressantes. Tout d’abord,
+nous pouvons constater une transition de phase lorsque nous faisons varier le paramètre
+permettant de régler l’importance de l’atténuation (cf. 28 page 42). En effet, en accord
+avec les travaux de Milgram [41, Milgram 1967] et [55, Watts 2004], nous pouvons con-
+stater que pour des valeurs de k comprises entre 1 et 4, seuls quelques nœuds du réseau
+sont touchés par la diffusion de l’information. Entre 5 et 7 nous observons une aug-
+mentation rapide du nombre de nœuds touchés et, au delà de 7, l’ensemble du réseau,
+hormis les éventuels nœuds orphelins, ont reçu au moins une information. Ces obser-
+vations nous permettent de ﬁxer le taux d’atténuation à 6, ce qui signiﬁe donc que
+lorsqu’un nœud diffuse une information, celle-ci ne se propagera que sur 6 arêtes suc-
+cessives du graphe, soit jusqu’à tous les septièmes voisins du nœud initial.
+
+De plus nous avons pu constater que le nombre de nœuds diffuseurs, sur un réseau
+scale-free du moins, n’a que très peu d’impact sur la transition. En effet, pour N = 1000
+nœuds, nous pouvons à nouveau observer une transition de phase, plus marquée que
+la précédente et nous pouvons constater que 10 nœuds sont sufﬁsants pour diffuser
+des informations à une grande majorité des nœuds du réseau (cf. 28 page 42).
+
+Ainsi, lorsque nous utiliserons la diffusion de l’information, nous choisirons dix
+nœuds aléatoirement dans le réseau et nous propagerons une information jusqu’à leurs
+septièmes voisins, soit sur six degrés.
+
+Nous venons de voir que les nœuds peuvent effectuer différentes actions et acquérir
+diverses informations. De plus nous dotons chaque nœud d’objectifs à atteindre. L’ob-
+jectif principal est d’empêcher une baisse de la taille de la plus grande composante
+du réseau et, si possible, de l’augmenter. Ensuite, le nœud possède deux objectifs sec-
+
+4 DILEMME DU PRISONNIER ET AUTO-ORGANISATION
+
+42
+
+FIG. 28 – Transition de phases des six degrees (gauche) et du nombre de diffuseurs
+(droite)
+
+ondaires :
+
+– il doit posséder un bon indice de diffusion, autrement dit le nœud tente de max-
+
+imiser le nombre d’informations reçues
+
+– il doit harmoniser son degré avec les degré moyen de ses voisins
+
+Le premier but va permettre au nœud d’essayer d’atteindre une bonne place au sein
+du réseau tandis que le second fera ofﬁce de contrainte. En effet, le fait d’approcher
+son degré du degré moyen de ses voisins évite au nœud de devenir un nœud de trop
+haut degré et donc une cible potentielle lors d’attaques. Suivant ces différents objectifs,
+chaque nœud pourra donc tester les différentes stratégies à sa disposition et les évaluer
+pour en faire ressortir celles qui sont le plus efﬁcaces.
+
+Pour évaluer les stratégies, nous construisons un réseau scale-free de la même maniè-
+re que vu en 3.1 page 20 et nous effectuons plusieurs tours de simulations avec des
+pannes ou des attaques. A chaque pas de temps, nous effectuons dans un premier
+temps une diffusion d’information. Ensuite, chaque nœud enregistre les informations
+nécessaires à l’estimation des techniques de recablage : degré moyen des voisins, taille
+de la plus grande composante et information reçue. Puis, lorqu’un nœud est attaqué
+et supprimé les nœuds affectés réagissent en choisissant une stratégie de la manière
+suivante :
+
+– si aucune stratégie n’est mieux notée que les autres, le nœud effectue un choix
+
+aléatoire parmi celles-ci
+
+– si une stratégie est mieux notée que les autres, le nœud sélectionne cette stratégie
+Une fois la suppression du nœud attaqué effectuée et la stratégie de recablage ap-
+pliquée, le nœud réévalue les critères qu’il avait enregistrés et note la stratégie utilisée
+en fonction des résultats des comparaisons. Si la taille de la plus grande composante
+actuelle est inférieure à la taille enregistrée, le recablage utilisé subit un fort malus et
+sa note est baissée d’autant. Dans le cas contraire, le nœud augmente la note de la
+stratégie utilisée, avec un bonus si la taille de la plus grande composante a augmenté.
+
+4 DILEMME DU PRISONNIER ET AUTO-ORGANISATION
+
+43
+
+Une fois que les nœuds affectés ont évalué les stratégies qu’ils ont utilisées en fonction
+de la taille de la plus grande composante, il font une nouvelle évaluation en fonction
+du degré et des informations diffusées reçues. Cependant, ces objectifs n’ayant que peu
+d’importance par rapport à la taille de la plus grande composante, le bonus ou malus
+appliqué est moindre que celui utilisé dans l’évaluation précédente, avec un rapport
+ﬁxé arbitrairement à 1 pour 10. Enﬁn, une fois la stratégie évaluée, le nœud propage
+l’information à ses voisins directs pour leur donner les résultats en fonction de sa situ-
+ation précédente. Les nœuds qui recoivent cette information peuvent alors décider de
+la prendre en compte ou non, en fonction de leurs propres situations actuelles.
+
+FIG. 29 – Processus utilisé pour l’apprentissage des meilleures stratégies
+
+Pour résumer, lors d’une attaque, un nœud choisit une stratégie, soit en fonction
+d’une note soit aléatoirement, tente de recréer des liens avec cette stratégie, analyse les
+résultats produits, note la stratégie en fonction et envoie l’information à ses voisins.
+Plusieurs exécutions de la simulation avec N = 1000 nœuds nous ont permis de voir
+ressortir des stratégies préférentiellement choisies par les nœuds au sein du réseau.
+
+4 DILEMME DU PRISONNIER ET AUTO-ORGANISATION
+
+44
+
+4.1.2 Deux stratégies émergentes, conséquence de l’apprentissage
+
+Les courbes sur l’image 30 page 45 nous montrent l’évolution des notes données
+par les nœuds au cours de l’exécution d’une simulation. Les notes sont représentées
+comme suit
+
+– la stratégie de recablage en circuit est représentée par la courbe vert clair
+– la stratégie de recablage aléatoire est représentée par la courbe vert foncé
+– la stratégie de recablage du pire voisin est représentée par la courbe rouge
+– la stratégie de recablage du second voisin est représentée par la courbe orange
+
+Comme nous pouvons le constater, les stratégies de recablage en circuit et de recablage
+aléatoire sont les deux stratégies les plus utilisées sur le long terme. Nous pouvons
+donc en conclure que ce sont les deux stratégies qui satisfont le mieux aux objectifs
+donnés aux nœuds et que ces deux stratégies fonctionnent bien ensemble.
+
+Lorsque nous poussons les investigations sur ces deux stratégies nous pouvons re-
+marquer quelques caractéristiques particulières. En effet, la stratégie de recablage aléa-
+toire est plus souvent utilisée par des nœuds ayant une faible centralité de degré et
+recevant peu d’information lors des phases diffusion. En réalité, nous nous apercevons
+que la stratégie aléatoire permet au nœud qui l’applique de se rapprocher du centre du
+réseau et tenter d’augmenter son degré moyen. En revanche, la stratégie en circuit est
+plutôt utilisée par les nœuds centraux du réseau et leur permet de garder une certaine
+centralité, notamment dans le cas de la disparition d’un hub où les nœuds affectés
+appliquant cette stratégie vont remplacer le hub. Il est intéressant de remarquer une
+certaine symétrie dans le choix des stratégies à appliquer et de la position du nœud au
+sein du réseau.
+
+Ainsi, nous avons observé que les nœuds externes d’un réseau, i.e. en périphérie,
+ont une plus forte tendance à appliquer une stratégie de recablage aléatoire tandis que
+les nœuds au centre appliquerons plus souvent une stratégie de recablage en circuit.
+Par la suite, nous avons recommencé cet apprentissage en ne laissant le choix que sur
+ces deux stratégies et nous observons des résultats semblables avec cependant l’appli-
+cation plus régulière du recablage en circuit.
+
+Notons enﬁn que l’application des ces techniques de recablage ne modiﬁe pas la
+structure scale-free du réseau mais, comme dans le cas de la stratégie en circuit, nous
+pouvons constater une hausse du diamètre moyen du réseau, bien que celle-ci moins
+importante. De plus amples études pourraient être menées pour modiﬁer le comporte-
+ment des nœuds avec, par exemple, la minimisation du diamètre comme faisant partie
+des objectifs à remplir.
+
+4 DILEMME DU PRISONNIER ET AUTO-ORGANISATION
+
+45
+
+FIG. 30 – Notations des differentes stratégies
+
+4.2 Mise en œuvre du dilemme du prisonnier
+
+4.2.1 Modèle utilisé
+
+Comme nous l’avons vu en 2.6 page 18, le dilemme du prisonnier est un exem-
+ple célèbre de la théorie des jeux. Dans ce jeu, comme dans bien d’autres, il est fait
+l’hypothèse que chaque joueur prisonnier essaye de maximiser ses bénéﬁces. La forme
+habituelle de ce dilemme est celle de deux prisonniers (complices d’un délit) retenus
+dans des cellules séparées et qui ne peuvent communiquer. Ce dilemme peut se ré-
+sumer par la matrice suivante.
+
+1 - 2
+
+coopère
+trahit
+
+coopère
+(-1/2 ;-1/2)
+
+(0 ;-10)
+
+trahit
+(-10 ;0)
+(-5 ;-5)
+
+Que nous pouvons lire ainsi comme suit : chacun des prisonniers réﬂéchit de son côté
+en considérant les deux cas possibles de réaction de son complice.
+
+– Dans le cas où il me dénonce
+
+– si je me tais, je fais dix ans de prison
+– si je le dénonce je ne ferai que cinq ans
+
+– Dans le cas où il ne me dénonce pas
+
+4 DILEMME DU PRISONNIER ET AUTO-ORGANISATION
+
+46
+
+– si je me tais, je ferai six mois de prison
+– si je le dénonce, je serai libre
+
+Du coup, quel que soit le choix de l’autre, chacun des prisonnier à intérêt à dénoncer
+son complice. Ce jeu est à somme non nulle, c’est-à-dire que la somme des gains pour
+les participants n’est pas toujours la même : il soulève une question de coopération. La
+forme générale de la matrice des jeux coopératifs est la suivante :
+
+1 - 2
+
+coopère
+trahit
+
+coopère
+(R ;R)
+(T ;S)
+
+trahit
+(S ;T)
+(P ;P)
+
+Pour qu’il y ait dilemme, la tentation T (je le dénonce, il se tait) doit payer plus que la
+coopération R (on se tait tous les deux) , qui doit rapporter plus que la punition pour
+égoïsme P (je le dénonce, il me dénonce), qui doit être plus valorisante que la duperie
+S (je me tais, il me dénonce). Ce qui se formalise par T > R > P > S avec, dans notre
+modèle, T = 5, R = 3, P = 1 et S = 0.
+
+De plus, dans notre modèle, nous utiliseronts le jeu du dilemme du prisonnier
+répété où chaque joueur a l’opportunité de punir l’autre joueur pour sa précédente
+non-coopération. Ainsi, la coopération peut survenir dans cette conﬁguration car l’inci-
+tation à tricher est inférieure à la menace de punition, ce qui introduit la possibilité de
+coopérer. Pour qu’une collaboration puisse naître dans un dilemme répété, 2 coups de
+coopération R doivent être plus valorisants que l’alternat Tentation / Dupe. Ce qui fait
+la condition 2R > T + S, soit dans notre cas, 2 ∗ 3 > 5 + 0.
+
+Dans notre modèle, nous allons faire jouer le jeu du prisonnier répété à tous les
+couples de nœuds reliés par une arête, chaque nœud utilisant la stratégie donnant-
+donnant, ou œil pour œil [4, Axelrod 1984]. Dans cette stratégie, chaque nœud coopère
+au premier tour et agit ensuite en fonction de l’action de son partenaire : si le parte-
+naire a coopéré, le nœud coopèrera ; si le partenaire a trahit, le nœud trahira. On par-
+lera de punition immédiate et la menace de punition devrait entraîner la coopération.
+Pour notre simulation, chaque nœud se verra doté d’une tentation de trahison qui sera
+modulé par les actions précédentes du partenaire : plus le partenaire coopère, moins la
+tentation de trahir est forte.
+
+De plus, nous intégrons la notion de pardon. En effet, il est trivial de remarquer
+que la punition immédiate consistant en la trahison du partenaire donnera une nou-
+velle trahison de ce partenaire et ainsi de suite. Le pardon va être mis en place pour
+éviter que tous les nœuds du réseau ne se retrouve traîtres sitôt que l’un d’eux ne
+coopère plus. Enﬁn, comme nous allons mettre en œuvre le dilemme du prisonnier
+sur un réseau soumis à des pannes et des attaques, les nœuds attaqués ne seront plus
+déﬁnitivement supprimés mais isolés pendant un pas de temps limité et ﬁxé. Cela per-
+mettra de se souvenir de ces nœuds lors de leur réintégration dans le réseau, ainsi que
+
+4 DILEMME DU PRISONNIER ET AUTO-ORGANISATION
+
+47
+
+leurs actions passées. Lorsque la période d’isolement est terminée, le nœud se recon-
+necte au réseau selon la méthode de l’attachement préférentiel utilisée pour construire
+le réseau initial.
+
+Sur notre simulation, nous allons faire jouer le dilemme du prisonnier à intervalle
+de temps réguliers. Le réseau sera soumis à des attaques et pannes à chaque pas de
+temps et les nœuds affectés appliqueront la stratégie la mieux appropriée (cf. 4.1.2
+page 44). Nous allons ensuite surveiller l’évolution du nombre de nœuds coopérateurs
+et de nœuds traitres dans le réseau.
+
+4.2.2 Les conséquences du jeu du dilemme du prisonnier
+
+Nous pouvons voir sur l’image 31 page 47 que les courbes sont relativement sta-
+bles au cours de la simulation, malgré une légère brisure qui est en réalité due à une
+baisse de la taille de la plus grande composante. Sur cette ﬁgure, les courbes verte et
+verte claire représentent, respectivement, les nœuds coopérateurs et les nœuds anci-
+ennement coopérateurs. Les courbes rouge et oranges représentent les nœuds traîtres
+et anciennement traître. Par anciennement, nous entendons ici que l’avant-dernière ac-
+tion. Nous verrons plus tard comment nous pouvons étendre cette utilisation.
+
+FIG. 31 – Traîtres et coopérateurs dans le dilemme du prisonnier
+
+La symétrie que nous constatons s’explique par le fait que le nombre de nœuds reste
+constant dans le temps et qu’un nœud ne peut être à la fois coopérateur et traître. De
+plus, comme nous ne nous basons que sur l’action précédente pour les courbes orange
+et verte claire, il y a encore une fois symétrie entre les nœuds traîtres et coopérateurs. En
+fait, ces courbes ne nous permettent pas de conclure autre chose qu’une stabilité dans
+les choix des nœuds, stabilité induite par les probabilité de tentation à la trahison et de
+pardon. C’est l’une des limitations dans cette mise en œuvre du dilemme du prisonnier
+sur ce modèle, car elle se limite à une application des probabilités durant le temps de
+jeu. De plus, la punition immédiate n’a que peu de signiﬁcation car ne laissant pas de
+place à l’accident ou à la mauvaise compréhension.
+
+4 DILEMME DU PRISONNIER ET AUTO-ORGANISATION
+
+48
+
+Cela dit, nous pouvons tout de même faire quelques observations topologiques
+quand à la répartition des nœuds dans le réseau. En effet, nous pouvons observer une
+sorte de mouvement des nœuds traîtres au sein du réseau. Cela s’explique par le fait
+que la trahison d’un nœud entraîne celle de son voisin et ainsi de suite et que, dans le
+même temps, un nœud peut pardonner un traître et coopérer avec lui, lui augmentant
+ainsi la probabilité de coopérer au tour suivant. Nous allons donc avoir une sorte de
+mouvement des nœuds traîtres au sein du réseau, mouvement plus ou moins rapide en
+fonction des probabilités de tentation et de pardon. De plus, lorsque les itérations du
+jeu du dilemme du prisonnier répété sont terminées, nous avons les résultats suivants :
+
+– si un nœud hub est traître, tous ses voisins sont traîtres
+– si un nœud hub est coopérateur, la majorité de ses voisins sont coopérateurs
+Ces résultats s’expliquent par la topologie scale-free du réseau et nous permettent
+d’être en accord avec les différentes études démontrant l’importance d’un hub au sein
+d’un réseau de type scale-free. Mais, comme nous venons de le voir, cette application
+du dilemme du prisonnier ne permet pas de tirer de conclusion sur la dynamique du
+réseau, principalement en raison des limitations que nous avons exprimés : punition
+immédiate et utilisation de choix aléatoires, i.e. la coopération ou la trahison n’est pas
+motivée par un but particulier.
+
+4.3 Du dilemme du prisonnier à l’auto-organisation du réseau
+
+Dans la partie précédente, nous avons vu un moyen de mettre en œuvre le jeu du
+dilemme du prisonnier sur un réseau de type scale-free. Nous avons aussi vu que les
+résultats obtenus ne sont pas réellement utiles quand il s’agit d’observer la dynamique
+du-dit réseau. De plus, nous avons étudié diverses stratégies de recablage permettant
+de conserver le réseau dans un état connecté tout en gardant certaines de ses carac-
+téristiques. Nous allons donc maintenant adapter le modèle utilisé pour l’étude des
+stratégies de recablage et adapter le dilemme du prisonnier pour que celui-ci inﬂue sur
+la dynamique du réseau.
+
+4.3.1 Modèlisation et caractérisation des nœuds du réseau
+
+Dans un premier temps, nous allons modiﬁer la stratégie donnant-donnant util-
+isée lors du dilemme du prisonnier répété. En effet, nous avons vu que cette stratégie
+autorise une punition immédiate au détriment d’une coopération sur le long terme.
+Considérant que la trahison puisse être ponctuelle et accidentelle, nous avons mis en
+place la notion de pardon d’un nœud anciennement traître. Cependant, cette notion ne
+prend pas en compte qu’un nœud puisse passer alternativement du statut de traître à
+celui de coopérateur et nous pourrions avoir le cas extrême d’un nœud qui trahit ses
+
+4 DILEMME DU PRISONNIER ET AUTO-ORGANISATION
+
+49
+
+partenaires une fois sur deux et qui se trouve pardonné à chaque fois. Dans de telles
+conditions, la trahison n’est pas punie et la coopération ne peut pas se mettre en place.
+Pour cette raison, nous étendons encore la stratégie donnant-donnant en ne bas-
+ant plus la décision d’un nœud sur l’action précédente de son partenaire, mais sur la
+moyenne des actions précédentes. Ainsi, un nœud qui trahit son partenaire la majorité
+du temps verra ses chances de pardon diminuer, tandis qu’un nœud qui a une forte
+tendance à coopérer se verra plus facilement pardonné dans le cas d’une trahison car
+elle serait ponctuelle. Ainsi, chaque nœud du réseau tient à jour une liste des actions de
+chacun de ses partenaires et choisit de coopérer ou non en fonction des actions passées
+depuis la première partie. Nous parlerons donc de traitrise / coopération habituelle et
+ponctuelle.
+
+Enﬁn, pour induire une dynamique dans le réseau, nous allons adapter le mécan-
+isme de pannes et attaques pour qu’il réponde aux résultats du dilemme du prisonnier.
+Les études menées sur les différentes statégies nous ont permis d’en isoler deux per-
+mettant de recréer des liens de manière optimale pour garder l’intégrité du réseau.
+Nous allons donc nous servir de ces deux stratégies, recablage en circuit 3.5.6 page 35
+et recablage aléatoire 3.5.1 page 24, pour permettre une auto-organisation du réseau en
+fonction des nœuds habituellement traîtres et coopérateurs.
+
+Nous allons donc reprendre le modèle de réseau scale-free utilisé précédemment
+(cf. 3.1 page 20) et nous modiﬁons le processus de sélection d’un nœud en utilisant
+le dilemme du prisonnier. A chaque pas de temps de la simulation, nous jouons le
+dilemme du prisonnier répété et, une fois la partie terminée, un nœud traître habituel
+sera choisi aléatoirement au sein du réseau. A nouveau, ce nœud ne sera pas supprimé
+mais isolé du reste du réseau. Ses liens avec les autres nœuds seront détruits et les
+nœuds affectés vont tenter de recréer des liens avec d’autres nœuds du réseau en util-
+isant l’une des deux stratégie connue, en se basant donc principalement sur leurs local-
+isations au sein du réseau.
+
+4.3.2 Quels sont les résultats que nous pouvons en attendre ?
+
+Nous n’avons pas pu mener sufﬁsemment de simulations pour avoir des résultats
+probants. En revanche, nous pouvons spéculer sur les effets d’un tel comportement sur
+le réseau.
+
+Si les nœuds ayant une une forte propension à trahir leurs voisins sont écartés du
+réseau et que les nœuds affectés se reconnectent entre eux, nous pouvons supposer
+que sur le long terme, les nœuds traîtres seront tous séparés du réseau principal et
+nous verrons la plus grande composante constituée uniquement de nœuds coopérants
+entre eux. Nous aurions donc une communauté de nœuds coopérateurs, constituant la
+plus grande composante du réseau, et des nœuds traîtres qui gravitent autour de cette
+
+4 DILEMME DU PRISONNIER ET AUTO-ORGANISATION
+
+50
+
+communauté voire, éventuellement, des petites communautés en constante évolution
+de nœuds que nous pourrions qualiﬁer de peu ﬁables.
+
+Si ce comportement se révèle exact, nous pourrions alors mettre en place ce mé-
+canisme au sein d’un modèle pour que celle-ci s’auto-organise en écartant les nœuds
+traîtres et ne plus former qu’un groupe de nœuds stables et sûrs. Il faut toutefois noter
+qu’une méthode de décision améliorée serait sans doute à mettre en œuvre dans un tel
+modèle car la version simple du modèle du prisonnier ne permet pas de prendre en
+compte que les aspects de coopération entre deux joueurs et ne tient pas compte des
+objectifs individuels ou de groupes qui peuvent motiver les différents acteurs.
+
+5 CONCLUSION
+
+5 Conclusion
+
+5.1 Bilan
+
+51
+
+Lors de ce stage, nous avons étudié deux types de comportement différents que l’on
+
+peut observer sur des réseaux :
+
+– la résistance et l’auto-réparation des réseaux face aux pannes et attaques
+– l’auto-organisation des réseaux sur la base du dilemme du prisonnier
+Nous avons commencé par nous concentrer sur la résistance des graphes aléatoires
+et des réseaux scale-free aux pannes et aux attaques. Différentes stratégies de recablages
+ont été mises en place pour réagir immédiatement à la disparition d’un nœud au sein
+d’un réseau et permettre à celui-ci de s’auto-réparer et conserver ainsi une composante
+géante de taille maximale. Il en est ressorti que deux stratégies, aléatoire et en circuit,
+permettent au réseau de rester connecté en une seule composante. Une phase d’ap-
+prentissage nous a de plus permis de constater que ces deux stratégies sont efﬁcaces
+quand elles sont utilisées ensemble sur un réseau où les nœuds peuvent décider de la
+stratégie à appliquer.
+
+Nous nous sommes ensuite servi des résultats obtenus pour nous orienter vers
+l’auto-organisation des réseaux. En utilisant le dilemme du prisonnier et en adaptant
+les stratégies de recablage les plus efﬁcaces, nous avons pensé un modèle qui permet-
+traient à un réseau de se réorganiser de manière à ce que les nœuds qui ne coopèrent
+pas avec les autres soient écartés. Nous avons vu la mise en œuvre du dilemme du
+prisonnier sur un réseau et nous avons imaginé un modèle pour que les nœuds d’un
+réseaux puissent décider d’eux mêmes des nœuds à écarter et utiliser ensuite une
+stratégie adaptée pour recréer les liens perdus avec d’autres nœuds.
+
+5.2 Limitations
+
+Nous avons obtenus de bons résultats, notamment en ce qui concerne l’auto-répa-
+ration des réseaux, mais cela demande cependant plus d’études pour examiner com-
+plètement l’impact sur les réseaux. En effet, nous nous sommes basés sur un indica-
+teur unique, la taille de la plus grande composante, pour juger de l’efﬁcacité des dif-
+férentes stratégies, malgré quelques observations ponctuelles d’autres caractéristiques,
+et d’autres études seraient nécessaires pour voir si, et comment, les stratégies modi-
+ﬁent des particularités des réseaux comme le coefﬁcient de clusterisation, le plus court
+chemin, . . . De plus, nous avons supposé que le réseau n’était soumis qu’à la seule dy-
+namique des pannes et attaques et n’avons donc pas pu appréhender le comportement
+de celui-ci quand d’autres facteurs extérieurs interviennent. Enﬁn, concernant les ré-
+sultats obtenus suite à l’application du dilemme du prisonnier, ils sont principalement
+basés sur la probabilité que chaque nœud a de trahir et pardonner son partenaire. En
+
+5 CONCLUSION
+
+52
+
+effet, ils ne sont pas motivés par des objectifs individuels ou collectifs et nous avons
+donc un mécanisme qui est appliqué sur un réseau mais n’a pas d’effet sur ce réseau.
+
+5.3 Perspectives
+
+Le modèle de recablage que nous avons mis en place est un modèle relativement
+générique. Nous pouvons donc l’adapter pour l’appliquer sur des modèles particuliers
+et ainsi répondre à des attentes plus spéciﬁques. De plus, nous pouvons l’améliorer
+pour surveiller d’autres indicateurs de l’état général d’un réseau. De même, l’intégra-
+tion de la notion d’objectif, individuel et/ou global, en plus de celle de coopération,
+dans le comportement d’un nœud permettra d’inﬂuer sur les décisions de ce nœud et
+peut mener à l’étude d’un processus global. Cela peut ainsi permettre de comparer le
+comportement de notre modèle à celui de modèles de réseaux réels et étudier les dif-
+férences et les similitudes pour essayer de comprendre la dynamique qui entre en jeu
+dans les réseaux réels.
+
+De plus nous pouvons imaginer la mise en œuvre, après adaptation aux besoins
+spéciﬁques, des résultats obtenus dans une communauté d’agents qui serait ainsi capa-
+ble, dans une certaine mesure, de s’organiser sans intervention extérieure. Par exemple,
+des agents partageant et transmettant des informations pourraient alors être capables
+de déterminer les agents propageant des informations fausses ou peu ﬁables et de les
+écarter tout en conservant des liens avec les autres agents et donc sans perdre d’in-
+formations. Ce type de système serait particulièrement adapté pour un système basé
+sur l’intelligence ambiante : en effet, un système ambiant est constitué de plusieurs
+systèmes interconnectés et ayant des capacités ou des fonctions particulières. Nous au-
+rions ainsi un système autonome capable de décider des arrangements à réaliser pour
+un fonctionnement optimum. Une autre idée serait de permettre à une communauté
+de robots d’explorer une planète tout en ayant la capacité de faire face à la disparition
+de l’un d’entre eux et, en allant plus loin, les doter de capacités propres et d’un objectif
+commun nécessitant la coopération de l’ensemble.
+
+RÉFÉRENCES
+
+Références
+
+53
+
+[1] G Abramson and M Kuperman. Social games in a social network. Physical Review
+
+E, (63), 2001.
+
+[2] R Albert and A.-L Barabasi. Statistical mechanics of complex networks. Review of
+
+modern physics, (74), January 2002.
+
+[3] R Albert, H Jeong, and Barabasi A.-L. Error and attack tolerance of complex net-
+
+works. Nature, (406), 2000.
+
+[4] R Axelrod. The evolution of cooperation. Basic Books, 1984.
+[5] A.-L. Barabasi and R Albert. Emergence of scaling in random network. Science,
+
+(286), October 1999.
+
+[6] Y Baryshnikov and P Winkler. Network diagnosis from information spread. 2004.
+[7] M Bastian, M Jacomy, S Heymann, and J Bilcke. Semantic graphs of french intel-
+
+lectual property rights. Gephi - Graph Exploration & Manipulation, 2008.
+
+[8] P Bearman, J Moody, and K Stovel. Chains of affection : The structure of adolescent
+
+romantic and sexual. American Journal of Sociology, 2004.
+
+[9] R Bernard, P Killworth, M Evans, and C McCarty. Studying social relations cross-
+
+culturally. Ethnology, (27), 1988.
+
+[10] A Beygelzimer, G Grinstein, R Linsker, and I Rish. Improving network robustness
+
+by edge modiﬁcation. Physica A, (357), 2005.
+
+[11] N Biggs, E Lloyd, and R Wilson. Graph theory, 1736 - 1936. Oxford University
+
+Press, 1986.
+
+[12] B Bouzy. Apprentissage multi-agent. Communication personnelle - 2007.
+[13] R Christley, G Pinchbeck, R Bowers, D Clancy, N French, R Bennett, and J Turner.
+Infection in social networks : using networks analysis to identify high risk indi-
+viduals. American journal of epidemiology, (162), 2005.
+
+[14] F Chung and L Lu. The diameter of sparse random graphs. Adv. Appl. Math., (26),
+
+2001.
+
+[15] R Cohen, S Havlin, and D Avraham. Efﬁcient immunization strategies for com-
+
+puter networks and populations. Physical Review Letter, (91), 2003.
+
+[16] P Crucitti, V Latora, M Marchiori, and A Rapisarda. Error and attack tolerance of
+
+complex networks. Physica A, (340), 2004.
+
+[17] G Csardi, M Young, J Sager, and P Haga. Self-repairing peer-to-peer networks.
+
+arXiv :cond-mat/0408248v1, 2004.
+
+[18] G Davis, M Yoo, and W Baker. The small-world of the american corporate elite,
+
+1982 - 2001. Strategic organization, (1), 2003.
+
+[19] D de Solla Price. Networks of scientiﬁc papers. Science, (149), 1965.
+[20] D de Solla Price. A general theory of bibliometric and other cumulative advantage
+
+processes. Journal of the American Society for Information Science, (27), 1976.
+
+[21] A Degenne and M Forse. Les réseaux sociaux. Armand Colin, 2004.
+
+RÉFÉRENCES
+
+54
+
+[22] S Dorogotsev, J Mendes, and A Samukhin. Structure of growing networks : Exact
+
+solution of the barabasi-albert’s model. Physical Review Letter, (85), 2000.
+
+[23] R Dunbar. Primate social systems. Chapman Hall and Yale University Press, 1988.
+[24] J. Duncan. Perceived humor and social network patterns in a sample of task-
+oriented groups : A reexamination of prior research. Human Relations, (37), 1984.
+
+[25] E Durkheim. Les règles de la méthodes sociologique. Flammarion, 1988.
+[26] H Ebel, L.-I Mielsch, and S Bornholdt. Scale-free topology of e-mail networks.
+
+Physical Review E, (66), 2002.
+
+[27] P Erdos and A Renyi. On the evolution of random graphs. Publicationes Math-
+
+emacicæ, 1959.
+
+[28] M Flood. Some experimental games - Research memorandum RM-789. RAND corpo-
+
+ration, Santa Monica, CA, 1952.
+
+[29] L Freeman. Visualizing social networks. Journal of Social Structure, (01), 2000.
+[30] L Freeman. The development of social network analysis. Vancouver Empirical Press,
+
+2006.
+
+[31] A Gibbons. Algorithmic graph theory. Cambridge Univesity Press, 1985.
+[32] M Granovetter. The strength of weak ties. American journal of sociology, (78), 1973.
+[33] D Hales and S Arteconi. Friends for free : Self-organizing artiﬁcial social networks
+In Algorithmic Aspects of Large and Complex Networks,
+
+for trust and cooperation.
+2006.
+
+[34] H Jeong, S Mason, Barabasi A.-L, and N Oltvai. Lethality and centrality in protein
+
+networks. Nature, (411), 2001.
+
+[35] H Jeong, B Tombor, R Albert, Z Oltvai, and A.-L Barabasi. The large-scale organi-
+
+zation of metabolic networks. Nature, (407), 2000.
+
+[36] J Kleinfeld. Could it be a big world after all ? In Forthcoming society, 2002.
+[37] F Kuhn, S Schmid, and R Wattenhofer. A self-repairing peer-to-peer system re-
+silient to dynamic adversarial churn. Lecture Notes in Computer Science 3640, (3640),
+2005.
+
+[38] L Li, D Alderson, R Tanaka, J.C Doyle, and Willinger W. Towards a theory of
+Internet
+
+sf graphs : deﬁnition, properties and implications (extended version).
+Mathematics, (4), 2005.
+
+[39] E Mayo. The social problems of an industrial civilization. Harvard University Press,
+
+1945.
+
+[40] M McPherson, L Smith-Lovin, and J Cook. Birds of feather : homophily in social
+
+networks. Annual review of sociology, (27), 2001.
+
+[41] S. Milgram. The small-world problem. Psychology Today, (1), 1967.
+[42] J.L Moreno. Fondement de la sociométrie. Presses Universitaires de France, 1934.
+[43] R Myerson. Graphs and cooperation in games. Mathematics of operations research,
+
+(2), 1977.
+
+RÉFÉRENCES
+
+55
+
+[44] M.E.J Newman. Scientiﬁc collaboration networks part i & ii. Physical Review E,
+
+(64), 2001.
+
+[45] M.E.J Newman, A.-L Barabasi, and D Watts. Structure and dynamics of networks.
+
+Princeton, 2006.
+
+[46] M.E.J Newman, D Watts, and S Strogatz. Random graphs models of social net-
+
+works. Proceedings of the National Academy of Sciences of the USA, (99), 2002.
+
+[47] A Radcliffe-Brown. On social structure. Journal of the Royal Anthropological Institute,
+
+(70), 1940.
+
+[48] J Ray Dias. Almost-isospectral conjugated polyene molecules. Chemical Physics
+
+Letters, (253), 1996.
+
+[49] S Redner. How popular is your paper ? an empirical study of the citation distribu-
+
+tion. Eur. Phy. J. B., (4), 1998.
+
+[50] S Solla, S Gruber, D Surmeier, and J Houk. Modulation of striatal single units by
+expected rewards : A spiny neuron model displaying dopamine-induced bistabil-
+ity. J Neurophyiol, (90), 2003.
+
+[51] E Szemeredi. On sets of integers containing no four elements in arithmetic pro-
+
+gression. Acta Mathematics Academy of Sciences, (20), 1969.
+
+[52] A Szolnoki, M Perc, and Z Danku. Making new connections towards cooperation
+
+in the prisoner’s dilemma game. arXiv :0811.4372v1, 2008.
+
+[53] F Tonnies. Gemeinschaft und Gesellschaft. Abhandlung des Communismus und des So-
+
+cialismus als empirischer Culturformen. Darmstadt, 1887.
+
+[54] S Wasserman and K Faust. Social network analysis : methods and applications. Cam-
+
+bridge University Press, 1994.
+
+[55] D Watts. Six degrees : The science of connected age. Barnes & Noble, 2004.
+[56] D.J Watts and S.H Strogatz. Collective dynamics of small-world networks. Nature,
+
+(393), 1998.
+
+[57] B Wellman and S Berkowitz. Social structures : A network approach. Cambridge
+
+University Press, 1988.
+
+[58] B Wellman, W Chan, and D Weizhen. Networking guanxi. Social connections in
+
+China - D. Wank, 2002.
+
+A ANNEXES
+
+A Annexes
+
+A.1 NetLogo
+
+56
+
+NetLogo est un environnement de modélisation et de programmation multi-agents
+disponible sur plusieurs plate-forme. NetLogo a été conçu par Uri Wilensky en 1999 et
+est maintenant maintenu par le Center for Connected Learning, université de North-
+western.
+
+NetLogo permet facilement de modéliser des systèmes complexes qui évoluent au
+cours du temps et le développeur peut donner des instructions à plusieurs centaines
+d’agents qui sont agissent tous de manière indépendante. Cela rend possible l’étude
+entre le comportement individuel et le comportement global qui emerge. Pour réaliser
+de tels modèles, NetLogo fournit un environnement simple pour créer ses propres sim-
+ulations et est assez puissant pour être utilisé dans divers champs de recherches. Ainsi,
+NetLogo permet de créer des simulations biologiques, mathématiques, chimiques ou
+encore sociologiques pour étudier divers systèmes dans ces disciplines. De plus, NetL-
+ogo propose un servie de simulation participative via HubNet où différents utlisateurs
+peuvent jouer le rôle d’un agent ou donner des instructions particulières.
+
+NetLogo est pour moi un moyen rapide de mettre en place une simulation multi-
+agent tout en étant très puissant pour autoriser le développement d’agents ayant un
+comportement complexe et spéciﬁque.
+
+NetLogo est disponible à cette adresse : http ://ccl.northwestern.edu/netlogo/
+
+A.2 Présentation "A la recherche de la courbe perdue"
+
+Lors de mon stage, j’ai obtenu des résultats différents de ceux de Csardi et al., dans
+leur article Self-repairing Peer-to-Peer networks [17], sur la stratégie de recablage de
+second voisin. En effet, la courbe représentative de la taille de la plus grande com-
+posante que j’obtiens présente un comportement différent dans leur étude. L’organ-
+isation par Frédéric Amblard et Paul Chapron de réunions autour des réseaux soci-
+aux a donc été l’occasion pour moi de présenter cette partie de mon travail et ex-
+poser ces résultats différents. L’objectif était d’exposer les faits et d’essayer de com-
+prendre les raisons de cette différence dans les résultats. Je remercie les participants,
+Christophe Sibertin-Blanc, Frédéric Amblard, Paul Chapron, Rémy Cazabet, Françoise
+Adreit (SMAC) et Romain Boulet (OMP-LMTG) pour leur aide et leurs idées pour
+obtenir la courbe décrite dans l’article. Notons que, comme nous pouvons le voir sur
+les courbes 32 page 57, nous obtenons toujours des résultats différents.
+
+A.3 Article proposé à l’European Conference on Complex Systems 2009
+
+Après la mise en lumière des résultats différents, comme vu en annexe A.2, Frédéric
+Amblard et moi avons soumis un article à la Conférence Européenne sur les Systèmes
+Complexes (ECCS 2009) qui se déroulera du 21 au 25 septembre 2009 à l’université de
+Warwick. Voici le résumé de cet article.
+
+Robustness against failures and attacks is an important characteristic for real networks.
+Although methods have been proposed making networks more resistant, they are often designed
+to rehash networks before issues occur. In this paper, we investigate three dynamic methods
+
+A ANNEXES
+
+57
+
+FIG. 32 – Différence des résultats obtenus au cours du stage (gauche) et par Csardi et
+al. (droite)
+
+making the network being able to repair itself while under massive attacks and failures. We
+consider two different topologies, Erdos – Renyi random graphs and Barabasi – Albert scale-
+free networks, and ﬁnd out that a local strategy is able to maintain, at least for a moment, the
+network relatively connected. We believe this rewiring algorithm interesting because it might
+be not very difﬁcult to implant in real networks and it provides a dynamic response while other
+arrangements are taken to answer the threat or the issues.
+
+

@@ -1,0 +1,550 @@
+https://www.labri.fr/perso/preuter/asda2008/cours10.pdf
+
+02/12/2008
+
+Déroulement
+
+• CM mardi de 8h à 9h (salle 33)
+• TD
+
+- Groupe 1 : mardi, 13h30 – 15h00 (salle 51D)
+- Groupe 2 : mardi, 15h15 – 16h45 (salle 51D)
+
+Algorithmes et 
+
+structures de données 
+
+(avancées)
+
+Cours 10
+Patrick Reuter
+
+http://www.labri.fr/~preuter/asd2008
+
+(en alternance: salle TD et salle machine)
+
+(rendre la feuille à la prochaine séance)
+
+Programme
+
+Les graphes                            
+
+Graphes
+• Définitions
+• Connexités
+• Algorithmes sur les graphes
+• Retour sur le TD7
+
+• Un graphe G = (V E) un couple de deux
+• Un graphe G = (V,E) un couple de deux 
+
+ensembles 
+
+– Un ensemble V(G) = {v1, v2, …, vn} de sommets
+
+(anglais : one vertex, two vertices)
+
+– Un ensemble E(G) ⊆ V x V d’arêtes (anglais : edges)
+
+Définitions
+
+Isomorphisme
+
+• Orientation :
+
+– les graphes non orientés
+– les graphes orientés
+
+• degré
+• boucle
+• parité (sommets pairs et impairs)
+• adjacence voisin et voisinage
+• adjacence, voisin et voisinage
+• sommet isolé 
+• sous-graphe, clique
+• Chaîne
+• Chaîne simple (angl.: simple path: A path that repeats no vertex)
+• Cycle
+• Graphe régulier
+• Graphe complet
+• Graphe connexe
+
+•
+
+Isomorphisme
+
+• Deux graphes G1 = (V1,E1) et G2 = (V2,E2) 
+sont dites isomorphe s’il existe au moins 
+une fonction bijective f telle que 
+
+(u, v) ∈ E1 ⇔ (f(u), f(v)) ∈ E2
+
+1
+
+02/12/2008
+
+La notion de chaîne
+
+Exemple
+
+A
+
+C
+
+u
+f(u)
+
+B
+
+D
+
+5
+
+4
+
+C
+5
+
+3
+
+D
+2
+
+1
+
+2
+
+E
+1
+
+E
+
+A
+4
+
+B
+3
+
+La notion de chaîne
+
+La notion de chaîne
+
+• Il est souvent nécessaire de savoir si l'on peut 
+
+aller d'un sommet à un autre en suivant des 
+arêtes. 
+
+• Une chaîne dans un graphe est une suite
+
+[C = s1, e1, s2, e2, …, sk, ek, sk+1]
+
+• Exemple d'utilité : Est-ce possible de prendre un 
+
+ibl d
+
+l d' tilité E t
+
+E
+tramway
+– de St Croix à Meriadeck ? 
+– de Quinconces à la Gare St. Jean ?
+
+d
+
+La notion de chaîne exprime cette idée. 
+
+• de k+1 sommets et k arêtes en alternance, 
+
+telle que ∀i, 1 ≤ i ≤ k, les extrémités de ei
+sont si et si+1.  On dit alors que C est une 
+chaîne entre s1 et sk+1. 
+
+La notion de chaîne
+
+Chaîne simple
+
+• Une chaîne dans un graphe est une suite
+
+[C = s1, e1, s2, e2, …, sk, ek, sk+1]
+
+• Une sous-chaine
+
+[C = sa, ea, …,sb] avec 0<=a<=b<=k+1
+
+• Une chaîne 
+
+[C = s1, e1, s2, e2, …, sk, ek, sk+1]
+
+est simple si et seulement si
+est simple si et seulement si 
+
+∀ i, j ∈ [1,k], si = sJ → i = j et ∀ i, j ∈ [2,k+1], si = sJ→ i = j
+
+• Autrement dit « un sommet figure au plus une fois dans 
+la chaîne » [sauf pour le sommet de début et de fin.  S'ils 
+sont les mêmes, il s'agit d'un cycle]
+
+2
+
+02/12/2008
+
+Retour sur TD 7
+
+Retour sur TD 7
+
+Graphe complet avec 3 sommets
+• 3 aretes
+
+Graphe complet avec 4 sommets
+• 6 aretes
+
+longueur 1
+• s1, s3
+
+longueur 2
+• s1, s2, s3
+
+longueur 1  
+s1, s4
+
+longueur 2  
+s1, s2, s4
+s1, s3, s4
+
+longueur 3  (n-1)
+s1, s2, s3, s4
+s1, s3, s2, s4
+
+Retour sur TD 7
+
+Retour sur TD 7
+
+Graphe complet avec 5 sommets
+• 10 aretes
+longueur 1  
+s1, s5
+
+longueur 2  
+s1, s2, s5
+s1 s3 s5
+s1, s3, s5
+s1, s4, s5
+longueur 3  (n-2)
+s1, s2, s3, s5
+s1, s2, s4, s5
+s1, s3, s2, s5
+s1, s3, s4, s5
+s1, s4, s2, s5
+s1, s4, s3, s5
+longueur 4  (n-1)
+s1, s2, s3, s4, s5
+s1, s2, s4, s3, s5
+s1, s3, s2, s4, s5
+s1, s3, s4, s2, s5
+s1, s4, s2, s3, s5
+s1, s4, s3, s2, s5
+
+•
+•
+•
+•
+•
+••
+•
+
+c3 = 1 + 1
+c4 = 1 + 2*1 + 2*1
+c5 = 1 + 3 + 3*2 + 3*2*1
+c6 = 1 + 4 + 4*3 + 4*3*2 + 4*3*2*1
+c7 = 1 + 5 + 5*4 + 5*4*3 + 5*4*3*2 + 5*4*3*2*1
+....
+cn = (n-2)!/(n-2)! + (n-2)!/(n-3)! +  (n-2)!/(n-4)! + ... + (n-2)!/(1)! + (n-2)!/(0)!
+
+(n-2)
+
+cn =  ∑---------------
+
+(n-2)!
+
+i=0
+
+(i!)
+
+Connexité
+
+• La notion de connexité exprime la possibilité 
+d'aller de n'importe quel sommet du graphe à 
+n'importe quel autre sommet du graphe.
+
+Plus formellement :
+
+• Un graphe G est connexe si et seulement si 
+∀s, t ∈ V(G), il existe une chaîne entre s et t. 
+
+3
+
+Graphe connexe/complet
+
+• Un graphe G est connexe si et seulement 
+si ∀s, t ∈ V(G), il existe une chaîne entre s 
+et tet t. 
+
+• Un graphe G est complet si et seulement 
+si ∀s, t ∈ V(G), il existe une arête entre s 
+et t. 
+
+Connexité
+
+Définition :
+• Un graphe G est connexe si et seulement 
+si ∀s, t ∈ V(G), il existe une chaîne entre s 
+et t. 
+
+Théorème : 
+• Un graphe est connexe si et seulement si 
+
+à partir de n'importe quel sommet s du 
+graphe, il existe une chaîne entre s et 
+chacun des sommets du graphe. 
+
+02/12/2008
+
+4
+
+Connexité
+
+Preuves
+
+02/12/2008
+
+Récapitulatif des preuves
+
+1. Preuve preuve par induction
+
+ou preuve par récurrence
+
+1. Preuve par récurrence
+
+2. Preuve par contradiction
+
+3. Preuve par construction
+
+• Une preuve par induction contient deux 
+
+parties : 
+– le cas de base
+– et la partie d'induction. 
+
+d b
+
+l
+
+2. Preuve par contradiction
+
+3. Preuve par construction
+
+Raisonnement par l’absurde :
+
+• Cette preuve nous prouve non seulement l'existence 
+
+d'un objet, mais aussi une méthode pour le trouver
+
+L’idée d’une telle preuve est de supposer que 
+
+l’énoncé est fausse puis de montrer que cette
+l énoncé est fausse, puis de montrer que cette 
+supposition conduit à une contradiction.
+
+Puisque la logique ne peut être contradictoire , 
+
+c’est la supposition qui est fausse, et par 
+conséquent l’énoncé est vrai.
+
+• Une telle preuve est toujours plus appréciée par un 
+q
+
+informaticien qu'une preuve qui indique seulement qu'un 
+objet existe. 
+
+q
+
+p
+
+q
+
+q
+
+• La raison est que l'informaticien peut souvent convertir 
+une preuve constructive en un algorithme pour trouver 
+l'objet. 
+
+• De manière générale, une preuve constructive est 
+
+toujours plus convaincante qu'une preuve d'existence. 
+
+Connexité
+
+Définition :
+• Un graphe G est connexe si et seulement si ∀s, 
+
+t ∈ V(G), il existe une chaîne entre s et t. 
+
+Théorème : 
+• Un graphe est connexe si et seulement si à 
+
+partir de n'importe quel sommet s du graphe, il 
+existe une chaîne entre s et chacun des 
+sommets du graphe. 
+
+Preuve :
+
+Par contradiction
+
+5
+
+02/12/2008
+
+Preuve (partie « si »)
+
+Preuve (partie « seulement si »)
+
+La preuve est par contradiction :
+
+Nous allons supposer qu'à partir de n'importe quel sommet s 
+
+du graphe, il existe une chaîne entre s et chacun des 
+sommets du graphe, mais, ∃ s1, s2 ∈ V(G), tels qu'il 
+n'existe pas de chaîne entre s et s
+n'existe pas de chaîne entre s1 et s_2, puis montrer que 
+puis montrer que
+cela nous donne un résultat absurde.
+
+Il suffit pour cela de construire les chaînes C1 = s, …, s1 et 
+
+C2 = s, …, s2
+
+Puis, on regarde C1 C2 = s1, …, s, …, s2 qui est une chaîne 
+
+entre s1 et s2.
+(cid:198) Contradiction
+
+• Il faut prouver que si un graphe est 
+
+connexe, alors à partir de n'importe quel 
+sommet s du graphe, il existe une chaîne 
+entre s et chacun des sommets du
+entre s et chacun des sommets du 
+graphe.  
+
+• C'est une conséquence immédiate de la 
+
+définition de connexité.
+
+Algorithme sur les graphes
+
+TD6 sur machine
+
+else
+{
+}    
+
+}
+
+return $resultat;
+
+Retour sur TD7
+
+• Somme (itérative, récursif) 
+
+}
+
+Retour sur TD7
+
+
+}
+
+return $resultat;
+
+Retour sur TD7
+
+• Puissance itérative (itérative, récursif, efficace)
+
+Retour sur TD7
+
+8
+
+02/12/2008
+
+Retour sur TD7
+
+Retour sur TD7
+
+• Cet algorithme est décrit dans le Chandah
+
+Sutra d'Acharya Pingala (en Inde)
+(écrit avant 200 ans avant J.C.). 
+
+• 1ère possibilité
+
+– z = x4
+– z = x*x*x*x
+
+• 2ème possibilité
+
+– y =x*x
+– z = y*y
+
+Retour sur TD7
+
+return $resultat;
+
+}
+
+Connexité
+
+• Comment tester si un 
+graphe est connexe ?
+
+Connexité
+
+FONCTION marquerSommet(s, G, &visite)
+{
+
+visite[s] = true;
+POUR tous les voisins i de s FAIRE
+{
+
+SI visite[i] == false ALORS
+
+marquerSommet(i, G, visite)
+
+}
+
+}
+
+9
+
+TD8 sur machine
+
+• Aujourd'hui
+
+– Programmer un site commentaire
+– "Réseaux sociaux"
+
+• facebook
+• facebook
+• linkedin
+• xing
+• copainsdavant
+• …
+
+• Démo
+
+– Etablir un graphe
+– Bibliothèque GD
+
+02/12/2008
+
+10
+
+

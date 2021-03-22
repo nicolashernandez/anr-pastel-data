@@ -1,0 +1,129 @@
+https://pagesperso.g-scop.grenoble-inp.fr/~stehlikm/teaching/miashs/4-Coloration.pdf
+
+1
+
+2
+
+1
+
+3
+
+3
+
+Figure 1: Une coloration de G avec 3
+couleurs.
+
+Réseaux sociaux et graphes
+MIASHS
+
+4 Coloration
+Déﬁnition 4.1. étant donné un entier k ∈ N, une k-coloratin d’un
+graphe G = (V, E) est une fonction c : V → {1, . . . , k} telle que c(u) (cid:54)=
+c(v) pour toute arête uv ∈ E. L’entier k minimum tel qu’il existe un
+k-coloration de G est le nombre chromatique de G, qu’on note χ(G).
+
+Le nombre chromatique joue un rôle centrale en théorie des graphes ;
+il s’agit peut-être du parametre le plus étudié de toute la théorie des
+graphes. Cependant, le nombre chromatique est très difﬁcile de calcu-
+ler en général (plus présisément, décider si χ(G) ≤ k est un problème
+NP-difﬁcile pour tout k ≥ 3.) C’est pourquoi les bornes pour le nombre
+chromatique sont importantes.
+
+D’abord deux bornes inférieures pour le nombre chromatique.
+Proposition 4.2. Soit G un graphe quelconque. Alors, χ(G) ≥ ω(G).
+Démonstration. Soit H un sous-graphe complet de G à ω(G) sommets.
+Chaque sommet de H est relié à tous les autres sommets de H, donc il
+faut une couleur pour chaque sommet. Donc, χ(G) ≥ ω(G).
+Proposition 4.3. Soit G un graphe à n sommets. Alors, χ(G) ≥ n/α(G).
+Démonstration. Une coloration est une partition des sommets en stables.
+Comme chaque stable est de taille inférieure ou égale à α(G), il faut au
+moins n/α(G) stables pour recouvrir tous les sommets. Donc, χ(G) ≥
+n/α(G).
+
+Exemple 4.4. χ(Kn) = n, χ(Cn) = 2 si n est pair, χ(Cn) = 3 si n est
+impair.
+Déﬁnition 4.5. On note ∆(G) le degré maximum de G, déﬁni comme
+∆(G) = max{d(v) | v ∈ V(G)}.
+
+Remarque 4.6. — Coloration avec au maximum ∆ + 1 couleurs ;
+— Coloration pas toujours optimale ;
+— Il existe un ordre pour lequel la coloration est optimale.
+
+L’algorithme glouton démontre la proposition suivante :
+
+Proposition 4.7. Soit G un graphe quelconque. Alors, χ(G) ≤ ∆(G) + 1.
+On peut améliorer la borne de la proposition précédente dans la
+
+plupart des cas.
+Théorème 4.8 (Théorème de Brooks). Pour tout graphe G, on a χ(G) ≤
+∆(G), sauf si G est un graphe complet ou un cycle de longueur impaire.
+
+réseaux sociaux et graphes miashs
+
+2
+
+Exemples de graphes bipartis : arbres,
+cycles élémentaires de longueur paire.
+
+Algorithme 4.1 : Algorithme glouton de coloration
+Entrées : Un graphe G = (V, E).
+Sorties : Une coloration de G avec au plus ∆(G) + 1 couleurs.
+
+1 Choisir un ordre pour les sommets et pour les couleurs
+2 Prendre le premier sommet de la liste non colorié
+3 Le colorier avec la plus petite couleur non utilisee dans son
+
+voisinage
+
+4 Recommencer l’étape 2 jusqu’a ce que tous les sommets soient
+
+coloriés
+
+4.1 Graphes bipartis
+Déﬁnition 4.9. G = (V, E) est biparti si χ(G) ≤ 2. C’est-à-dire, on peut
+partitionner l’ensemble de sommets V en deux sous-ensembles stables
+A, B.
+
+Un cycle élémentaire de longueur impaire n’est pas biparti ; donc,
+une condition nécessaire pour qu’un graphe G soit biparti est que G
+ne contient pas de cycles élémentaires impairs. La proposition suivante
+montre que c’est aussi une condition sufﬁsante.
+
+Proposition 4.10. Un graphe est biparti si et seulement s’il ne contient pas
+de cycles impairs comme sous-graphe.
+
+Démonstration. Un graphe est biparti si et seulement chaque compo-
+sante connexe est biparti, et un graphe contient un cycle impair si et
+seulement si une composante connexe contient un cycle impair. Donc,
+il sufﬁt de considérer les graphes connexes.
+
+Soit G un graphe connexe biparti, avec bipartition (A, B). Les som-
+mets d’une chaîne quelconque alternent entre A et B. Donc, toutes les
+chaînes qui relient des sommets dans des différentes parties de la bi-
+partition sont de longueur impaire, et toutes les chaînes qui relient des
+sommets dans la même partie de la bipartition sont de longueur paire.
+Comme toutes les arêtes de G ont une extrémité dans A et l’autre dans
+B, tous les cycles de G doivent être bipartis.
+
+Supposons que G est un graphe connexe sans cycle impair. Grâce à
+la Proposition ??, G contient un arbre couvrant T. Soit r un sommet de
+T. Par le Théorème ??, il existe une chaîne unique entre r et tout autre
+sommet v. Soit A l’ensemble de sommets de G dont la distance à r est
+paire, est soit B = V \ A. Cela déﬁnit une bipartition (A, B) de T. On
+va montrer que (A, B) est aussi une bipartition de G. Soit e = uv une
+arête de E(G) \ E(T), et soit P la chaîne unique dans T qui relie u et v.
+Par l’hypothèse, le cycle P + e est pair, donc P est de longueur impaire.
+Donc, les sommets u et v sont dans des parties différentes de (A, B).
+Cela démontre que (A, B) est bien une bipartition de G.
+
+réseaux sociaux et graphes miashs
+
+3
+
+Déﬁnition 4.11. Le graphe biparti complet Ka,b est le graphe biparti avec
+bipartition (A, B), où |A| = a et |B| = b, et toutes les arêtes possibles
+entre A et B.
+
+Figure 2: Le graphe biparti complet K3,3.
+
+

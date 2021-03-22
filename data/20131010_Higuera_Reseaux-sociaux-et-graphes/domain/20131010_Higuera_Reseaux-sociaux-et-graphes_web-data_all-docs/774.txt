@@ -1,0 +1,1609 @@
+http://www.grappa.univ-lille3.fr/~gilleron/cours-web-semantique.pdf
+
+WEB S´emantique
+
+R´emi Gilleron
+
+Inria Lille - Nord Europe & LIFL & Univ Lille 3
+
+Cours donn´e en master 2 “informatique et document”
+
+Cours accompagn´e de nombreux TPs
+
+Cours inspir´e de “Programming the Semantic Web” de Segaran, Evans et Taylor
+
+septembre 2013
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+1 / 70
+
+Les pr´emisses du Web
+
+Les origines
+
+r´eﬂexions sur les documents ´electroniques
+
+architectures et protocoles r´eseaux
+
+web ≡ couche applicative sur le r´eseau Internet
+
+Dates cl´es
+
+90–92 : http, html 1.0, nextstep
+92–97 : d´eﬁnition des url, naissance du w3c, mosaic puis ie,
+html int`egre images, tableaux, applets.
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+2 / 70
+
+La maturit´e du Web
+
+S´eparer forme et contenu
+La n´ecessit´e de traiter et ´echanger les donn´ees du web font apparaˆıtre le
+besoin de s´eparer les donn´ees des traitements et de la pr´esentation dans le
+navigateur.
+web ≡ grande base de donn´ees de documents structur´es
+
+Dates cl´es
+
+96 : premi`ere d´eﬁnition des feuilles de style,
+98 : d´eﬁnition de xml 1.0,
+98–05 :
+langages xhtml, svg, mathml, ..., langages de manipulation
+xpath, xlink, xpointer, xsl, xslt, xquery.
+
+langages de sch´emas dtd, Xml Schema, Relax NG,
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+3 / 70
+
+La situation actuelle du Web
+
+Buzzword web 2.0
+g´en´eralisation du mod`ele `a tous les syst`emes d’information, clients l´egers
+(le navigateur), syndication et push, xhtml 5.0, petits objets portables
+communicants, r´eseaux sociaux
+web ≡
+
+ensemble de ressources de tr`es grande taille (web et web cach´e),
+outill´e pour le traitement et la repr´esentation de donn´ees et
+documents,
+
+outill´e pour l’adressage, la publication et l’´echange de donn´ees,
+
+outill´e pour la recherche par l’humain de ressources,
+
+permettant l’interaction des utilisateurs dans des r´eseaux.
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+4 / 70
+
+Le futur du web
+
+web ≡ ? ? ?
+Les ´evolutions sont tr`es diﬃciles `a pr´evoir car fortement d´ependantes des
+r´eactions des communaut´es `a des propositions d’´evolutions technologiques
+ou applicatives.
+R´ecemment les petits objets portables communicants, les donn´ees
+multimedia, les capteurs, les r´eseaux sociaux
+Demain la parole ? Nouvelles interfaces ? Nouveaux mod`eles de
+communaut´es ?
+
+Un besoin : des utilisateurs d´esireux de services de plus en plus
+sophistiqu´es. Alors pourquoi pas le web 3.0 ≡ Semantic web ?
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+5 / 70
+
+Plan
+
+1 Le WEB S´emantique
+
+2 Mod`ele de donn´ees graphes
+
+3 Les langages du WEB s´emantique
+
+4 Les ontologies
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+6 / 70
+
+RI sur le web
+
+La situation
+
+Le mode d’interaction de l’utilisateur avec le web passe
+prioritairement par un moteur de RI,
+
+L’interrogation et la recherche sont faites de fa¸con syntaxique
+
+L’utilisateur humain interpr`ete les r´esultats, i.e. leur attribue une
+s´emantique, et reformule sa requˆete au besoin
+
+Exemple de requˆete
+
+“Hugo”
+
+liste ordonn´ee de documents du Web contenant la chaˆıne de
+caract`eres Hugo sur des crit`eres syntaxiques
+
+L’utilisateur aﬃne sa requˆete selon qu’il cherche un titre de roman de
+Victor Hugo, la date de naissance de Victor Hugo, ou encore un
+calecon Hugo Boss.
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+7 / 70
+
+Services sur le web
+
+La situation
+La situation est identique car l’utilisateur humain doit lui-mˆeme
+d´ecomposer sa demande en des recherches de services et appels de services
+web .
+
+Exemple de service
+
+“3 jours `a Rome le week end de Toussaint”
+
+g´eolocaliser le point de d´epart, connaˆıtre les moyens de transport et
+d’h´ebergement, appeler les services correspondants de transport et
+d’h´ebergement, comparer les oﬀres, ...
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+8 / 70
+
+Que faut-il ajouter au web actuel ?
+
+Il faudrait que les programmes (les services) puissent interpr´eter les
+donn´ees : ce document correspond `a un hˆotel, un hˆotel est un mode
+d’h´ebergement, dans un hˆotel on peut r´eserver des chambres, une
+chambre ... Il serait alors possible d’appeler les services, de les
+combiner, d’ordonner les r´eponses `a la demande de service, ...
+
+Un pr´erequis est de repr´esenter les connaissances li´ees aux donn´ees
+pour faire des inf´erences : cette page repr´esente un hˆotel, un hˆotel est
+un mode d’h´ebergement donc cette page repr´esente un mode
+d’h´ebergement.
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+9 / 70
+
+Le web s´emantique
+
+Les challenges
+Repr´esenter les connaissances dans un monde ouvert (tout type de
+connaissance), `a l’´echelle du web et avec une tr`es large vari´et´e de
+protocoles, de langues, de culture, ... pour pouvoir manipuler les
+connaissances li´ees au contenu du web.
+
+Dates cl´es
+
+94 :
+
+98 :
+
+id´ees ´emises par Tim Berners Lee,
+formalisation des id´ees au w3c,
+langage de description rdf99, langage de sch´ema rdfs04, et
+
+98– :
+de raisonnement owl, langage de requˆete sparql, ...
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+10 / 70
+
+La pile du web s´emantique
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+11 / 70
+
+La pile r´eelle du web s´emantique
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+12 / 70
+
+Le web s´emantique
+
+Le cours
+Beaucoup de cours sont orient´es “repr´esentation des connaissances “ et
+“intelligence artiﬁcielle”. Ce cours aura plutˆot une approche pragmatique
+partant des donn´ees et de l’existant. Le cours est bas´e sur
+Programming the Semantic Web de Segaran, Evans et Taylor.
+
+Les questions
+
+Des exemples d’utilisation ?
+
+Id´ees d`es 96, va-t-il enﬁn percer ?
+
+Les entreprises vont-elles publier leurs donn´ees ?
+´Ethique et vie priv´ee ?
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+13 / 70
+
+Plan
+
+1 Le WEB S´emantique
+
+2 Mod`ele de donn´ees graphes
+
+3 Les langages du WEB s´emantique
+
+4 Les ontologies
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+14 / 70
+
+Le mod`ele de donn´ees du web s´emantique
+
+Mod`eles de donn´ees usuels
+Nous allons revoir les mod`eles de donn´ees les plus classiques : tabulaire,
+relationnel et arborescent et montrer leurs limites dans le contexte du web
+s´emantique sur les plans repr´esentation des connaissances et ´evolutivit´e.
+
+Un mod`ele ´evolutif de donn´ees et connaissances
+Nous allons introduire le mod`ele de donn´ees graphes, encore appel´e
+mod`ele de triplets.
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+15 / 70
+
+Mod`ele de donn´ees tabulaires
+
+Exemple
+
+A B
+
+16
+17
+18
+19
+
+nom
+Dupont
+Gilleron
+Lemoine
+
+Critiques du mod`ele
+
+C
+sexe
+1
+1
+
+D
+age
+35
+38
+30
+
+E
+ville
+Lille
+Lomme
+Leers
+
+simplicit´e qui en fait un mod`ele utilisable par tout utilisateur,
+
+des outils de recherche (ﬁltres) et de mise `a jour,
+
+des tableurs avec outils de calcul et d’analyse,
+
+limit´e en taille, diﬃcult´e `a g´erer plusieurs tables, mono-utilisateur,
+
+s´emantique externe et sch´ema peu ´evolutif
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+16 / 70
+
+Le mod`ele relationnel
+
+Dans un contexte o`u les donn´ees sont en volume important, o`u les
+donn´ees ´evoluent, o`u les utilisateurs sont nombreux avec des acc`es
+concurrents, il faut s’orienter vers des bases de donn´ees. Le mod`ele le plus
+utilis´e est le mod`ele relationnel
+
+bas´e sur des tables v´eriﬁant des propri´et´es de formes normales
+implant´e dans
+
+des SGBDR (syst`emes de gestion de bases de donn´ees relationnelles)
+tels que Oracle, PosGres, SQLite, ..., et utilisant
+
+un langage d’interrogation standardis´e SQL et
+
+des transactions v´eriﬁant les propri´et´es ACID : Atomicit´e, Coh´erence,
+Isolation et Durabilit´e.
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+17 / 70
+
+BD relationnelle
+
+Une base de donn´ees relationnelle est une base de donn´ees qui a ´et´e
+d´eﬁnie relativement au mod`ele relationnel en satisfaisant les
+propri´et´es de forme normale. La phase de conception est une tˆache
+complexe et de haut niveau.
+une BD relationnelle est d´eﬁnie par un sch´ema relationnel :
+
+(cid:73) les relations (ou tables). Une relation est d´eﬁnie par la liste des
+
+attributs, le domaine de chaque attribut, la pr´ecision de la cl´e primaire ;
+
+(cid:73) les associations (ou jointures) naturelles entre les tables ;
+(cid:73) les contraintes d’int´egrit´e : de domaine qui expriment des conditions
+remplies par les valeurs d’un attribut, de structure sur les cl´es et de
+r´ef´erence qui expriment des propri´et´es pour les associations et des
+contraintes li´ees `a la d´enormalisation.
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+18 / 70
+
+Base restaurants
+
+Les relations : Restaurants(numrestaurant, nomrestaurant,
+...), Typecuisine(numtypecuisine, ...), ...
+Les associations : Restaurants.reftypecuisine avec
+Typecuisine.numtypecuisine, ...
+Les contraintes d’int´egrit´e :
+toujours d´eﬁni et unique, Typecuisine.intitule prend ses valeurs
+dans la liste (“chinoise”, “rapide”, ...),
+Restaurants.reftypecuisine peut ˆetre NULL mais doit prendre
+ses valeurs dans les valeurs de Typecuisine.numtypecuisine
+La s´emantique est donn´ee par les relations, les noms et contenus des
+champs, les associations ou jointures et pr´ecis´ee dans un dictionnaire
+des donn´ees,
+
+: Restaurants.numrestaurant
+
+Il est diﬃcile de faire ´evoluer un mod`ele (voir exercices).
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+19 / 70
+
+Une base r´eelle
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+20 / 70
+
+Conclusion sur le mod`ele relationnel
+
+Critiques du mod`ele
+
+mod`ele le plus r´epandu de bases de donn´ees avec des outils tr`es murs
+et tr`es performants,
+
+un langage expressif et normalis´e (avec des dialectes),
+
+capable de maintenir la coh´erence des donn´ees dans un cadre
+multi-utilisateurs (avec des acc`es concurrents),
+
+mod`eles de donn´ees complexes, souvent plusieurs centaines de tables,
+
+les sch´emas sont peu ´evolutifs et l’int´egration de donn´ees et
+l’´evolution de sch´emas sont un secteur d’activit´es,
+
+la s´emantique reste externe au mod`ele et est parfois diﬃcile `a
+appr´ehender.
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+21 / 70
+
+Retour au Web s´emantique
+
+Rappel des challenges
+Repr´esenter les connaissances dans un monde ouvert (tout type de
+connaissance), `a l’´echelle du web et avec une tr`es large vari´et´e de
+protocoles, de langues, de culture, ... pour pouvoir manipuler les
+connaissances li´ees au contenu du web.
+
+Le besoin pour les donn´ees
+
+les donn´ees doivent contenir leur s´emantique pour pouvoir ˆetre
+r´eparties et utilis´ees ind´ependamment de leur d´eﬁnition,
+
+comme le Web ´evolue, il faut pouvoir constamment ajouter de
+nouvelles donn´ees et de nouvelles connaissances.
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+22 / 70
+
+Retour sur les restaurants
+
+Mod`ele relationnel
+
+Mod`ele avec une s´emantique globale au mod`ele
+
+Mod`ele diﬃcile `a maintenir et faire ´evoluer
+
+Reprenons l’´etude et les besoins
+
+on souhaite mod´eliser des restaurants et des bars ayant des propri´et´es
+comme type de cuisine et sp´ecialit´e,
+
+on souhaite aussi pouvoir retrouver leur localisation g´eographique,
+
+on souhaite mod´eliser les heures d’ouverture.
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+23 / 70
+
+Des triplets pour les restaurants et lieux
+
+Des triplets pour les bars et restaurants
+
+Supposons que l’on puisse identiﬁer les bars et restaurants,
+
+on peut alors repr´esenter les diﬀ´erentes propri´et´es par des triplets de
+la forme :
+(Venue1, name , “Deli Llama”)
+(Venue1, cuisine , “Deli”)
+(Venue1, price , “$”)
+
+Des triplets pour les lieux
+
+Supposons que l’on puisse identiﬁer les lieux,
+
+on obtient alors :
+(Loc1, containedBy , “San Francisco”)
+(Loc1, name , “North Beach”)
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+24 / 70
+
+Un mod`ele de triplets pour les restaurants
+
+On peut alors relˆacher la s´emantique de la premi`ere colonne et dire que
+cette premi`ere colonne identiﬁe un objet du monde (un restaurant, un lieu,
+un artiste, ...). On peut reprendre le mod`ele pr´ec´edent et mˆeme ajouter la
+localisation de nos restaurants et bars. On obtient alors un mod`ele de
+triplets :
+(S1, name , “Deli Llama”)
+(S1, cuisine , “Deli”)
+(S1, price , $)
+(S4, containedBy , “San Francisco”)
+(S4, name , “North Beach”)
+(S1, hasLocation , S4)
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+25 / 70
+
+Un mod`ele de triplets pour les restaurants
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+26 / 70
+
+Le mod`ele de triplets
+
+Un triplet est de la forme
+
+(sujet, pr´edicat, objet)
+
+o`u
+
+le sujet est une entit´e du monde repr´esent´ee par son identiﬁant,
+
+le pr´edicat est une propri´et´e de l’entit´e,
+
+l’objet est la valeur de la propri´et´e de l’entit´e d´esign´ee en sujet et de
+la propri´et´e donn´ee en pr´edicat. L’objet peut ˆetre une valeur ou un
+identiﬁant d’entit´e.
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+27 / 70
+
+Le mod`ele de triplets
+
+spo : (sujet, pr´edicat, objet)
+
+Premi`eres r´eﬂexions sur le mod`ele
+
+Le mod`ele de triplets peut ˆetre repr´esent´e par un graphe car sujet et
+objet peuvent d´esigner des entit´es. On parle aussi de mod`ele graphe.
+
+La s´emantique est contenue dans les triplets : l’entit´e d´esign´ee par S1
+sert de la cuisine indienne, ...
+
+Les donn´ees sont auto-d´ecrites avec pour seules r`egles la forme de
+triplets et la notion d’identiﬁcation d’entit´e.
+
+Le mod`ele est ´evolutif car on peut ajouter des entit´es, des nouvelles
+propri´et´es, ...
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+28 / 70
+
+Le mod`ele de triplets
+
+spo : (sujet, pr´edicat, objet)
+
+Premi`eres r´eﬂexions sur le mod`ele
+
+Le mod`ele de triplets peut ˆetre repr´esent´e par un graphe car sujet et
+objet peuvent d´esigner des entit´es. On parle aussi de mod`ele graphe.
+
+La s´emantique est contenue dans les triplets : l’entit´e d´esign´ee par S1
+sert de la cuisine indienne, ...
+
+Les donn´ees sont auto-d´ecrites avec pour seules r`egles la forme de
+triplets et la notion d’identiﬁcation d’entit´e.
+
+Le mod`ele est ´evolutif car on peut ajouter des entit´es, des nouvelles
+propri´et´es, ...
+
+MAIS la redondance n’est pas g´er´ee, les entrepˆots seront de grande
+taille et il faut g´erer l’eﬃcacit´e, le mod`ele d´epend fortement de la
+notion d’identiﬁant sur les entit´es du monde.
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+28 / 70
+
+Plan
+
+1 Le WEB S´emantique
+
+2 Mod`ele de donn´ees graphes
+
+3 Les langages du WEB s´emantique
+
+4 Les ontologies
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+29 / 70
+
+Introduction
+
+Nous avons introduit le mod`ele de donn´ees en triplets de la forme
+
+spo : (sujet, pr´edicat, objet)
+
+qui permet d’exprimer de la connaissance comme dans une phrase sujet
+verbe compl´ement. Les entrepˆots peuvent ˆetre interrog´es, reli´es, enrichis et
+´evoluer dans le temps. Il faut passer `a l’´echelle du web.
+
+Les questions
+
+Comment g´erer les identiﬁants `a l’´echelle du web ?
+Comment savoir quelles propri´et´es (quels pr´edicats) utiliser ?
+
+Comment savoir ce que repr´esente une valeur, c’est-`a-dire son type,
+l’unit´e, la langue, ...) ?
+
+Comment publier, ´echanger, interroger les donn´ees ?
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+30 / 70
+
+Contenu de la section : rdf, sparql
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+31 / 70
+
+rdf : langage de description du Web s´emantique
+
+rdf pour Resource Description Framework d´evelopp´e par le W3C et
+bas´e sur le
+rdf data model qui est le mod`ele introduit pr´ec´edemment,
+c’est-`a-dire le mod`ele d’entrepˆots de triplets de la forme (s,p,o).
+La norme rdf sp´eciﬁe ´egalement la fa¸con de d´ecrire les ressources
+(sujets et objets) et les pr´edicats,
+la norme rdf sp´eciﬁe ´egalement les formats d’´echange de ﬁchiers de
+ressources sur le web (s´erialisation)
+
+rdf : un langage pour rendre les machines intelligentes
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+32 / 70
+
+rdf sur un exemple
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+33 / 70
+
+rdf : identiﬁcation des ressources
+
+La norme rdf con¸coit toute chose de l’univers comme une ressource qui
+peut ˆetre identiﬁ´ee par une uri
+
+Les uris
+
+une uri (Uniform Resource Identiﬁer) identiﬁe toute ressource qu’elle
+soit accessible ´electroniquement ou pas. Exemple :
+http ://fr.dbpedia.org/page/Lille,
+toute url est une uri,
+L’uri n’est pas l’objet mais l’identiﬁant d’un objet qui peut ˆetre
+repr´esent´e dans un graphe rdf
+Les uris sont faites pour les machines, cependant les espaces de nom
+(´eventuellement locaux) vont permettre de simpliﬁer les ´ecritures.
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+34 / 70
+
+rdf : et si la ressource n’a pas d’uri ?
+
+Il se peut que l’on ne dispose pas d’uri pour la ressource dont on souhaite
+parler. Par exemple, dans les r´eseaux sociaux, on ne dispose pas d’uri
+pour les membres. On cr´ee alors un noeud vide (noeud blanc, noeud
+anonyme, “blank node”).
+
+Une personne de nom Toby Segaran auteur du blog kiwitobes connaˆıt une
+personne nomm´ee Jamie Taylor dont l’email est jamie@semprog.com
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+35 / 70
+
+s´emantique et syntaxe pour les noeuds vides
+
+Les noeuds vides
+
+La s´emantique : ∃X , ∃Y , (X , givenName, “Toby”), ..., (X , knows,
+Y ), ..., (Y , email, “jamiesemprog.com”)
+La syntaxe : noeuds vides abstraits par un nom de variable :id. Ce
+qui donne ( :person1, givenName, “Toby”), ..., ( :person1, knows,
+:person2), ..., ( :person2, email, “jamiesemprog.com”)
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+36 / 70
+
+Autre utilisation des noeuds vides
+
+Les noeuds vides sont ´egalement utilis´ees pour grouper des informations
+comme dans l’exemple ci-dessous
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+37 / 70
+
+Les valeurs en rdf
+
+Les valeurs litt´erales
+
+peuvent ˆetre typ´ees
+avec la sp´eciﬁcation de xml schema. Voir par exemple
+http ://www.w3.org/2001/XMLSchema#int,
+
+elles peuvent ˆetre exprim´ees dans une langue, en g´en´eral,
+
+en respectant souvent la norme ISO 639 (en, fr, ja, ...).
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+38 / 70
+
+R´esumons
+
+Un mod`ele de donn´ees en triplets de la forme spo : (sujet, pr´edicat, objet)
+repr´esent´e avec le langage
+rdf
+
+dans lequel
+
+les ressources sont identiﬁ´ees par des uris, les uris peuvent ˆetre
+simpliﬁ´ees par des espaces de nom, les uris peuvent r´ef´erer `a des
+vocabulaires (rdf, foaf, dbpedia, ...),
+ou repr´esent´ees par des noeuds vides avec des variables locales :id,
+les valeurs peuvent ˆetre typ´ees et associ´ees `a une langue.
+
+Voyons maintenant comment ´echanger des entrepˆots de triplets avec rdf
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+39 / 70
+
+S´erialisation en rdf
+
+Pour ´echanger des donn´ees de triplets, il faut les s´erialiser dans des ﬁchiers
+en respectant des contraintes communes pour ´emetteur et receveur.
+
+Les principaux formats
+
+N-triples : les triplets sont ´echang´es dans leur enti`eret´e. Tout est
+repr´esent´e par uri sauf les valeurs et les noeuds vides
+N3, Turtle : on condense l’´ecriture avec l’utilisation de pr´eﬁxes, des
+factorisations et des raccourcis de notation
+rdf/xml : syntaxe xml pour d´ecrire les ﬁchiers rdf. Cette syntaxe
+est tr`es utilis´ee mais pas facile `a lire (par l’humain).
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+40 / 70
+
+Illustration par l’exemple
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+41 / 70
+
+Format Ntriples
+
+Consulter le ﬁchier exemple au format ntriples qui contient les triplets
+s´epar´es par des .
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+42 / 70
+
+Format N3
+
+Consulter le ﬁchier exemple au format n3. On constate
+
+la d´eﬁnition de pr´eﬁxes et leur utilisation dans le document,
+
+la factorisation de sujet avec le ;. On peut factoriser sujet, pr´edicat
+avec la ,
+
+les noeuds vides peuvent ne pas ˆetre d´esign´es en sujet,
+a est un raccourci pour rdf:type et = est un raccourci pour
+owl:sameAs,
+le typage des litt´eraux avec ^^, par exemple ^^xs :string,
+la pr´ecision de la langue avec @.
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+43 / 70
+
+Format rdf/xml
+
+Consulter le ﬁchier exemple au format rdf/xml . On constate que
+
+l’entˆete permet de d´eclarer des espaces de nom,
+
+on a ensuite une suite de descriptions, une description d´ecrit un
+chemin dans le graphe rdf, une description commence par un noeud
+en utilisant rdf:Description, l’uri est sp´eciﬁ´ee par un rdf:about
+le choix de description du graphe par des chemins est libre
+<foaf:Person rdf:about="..."> ... </foaf:Person> est un
+raccourci pour <rdf:Description rdf:about="...">
+<rdf:type><foaf:Person> ... </rdf:Description>,
+le typage et pr´ecision du langage “`a la xml”,
+et beaucoup d’autres trucs et astuces qui le rendent peu lisible.
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+44 / 70
+
+r´esumons
+
+Un mod`ele de donn´ees en triplets de la forme spo : (sujet, pr´edicat, objet)
+repr´esent´e avec le langage
+rdf
+
+pour lequel
+
+les ressources sont identiﬁ´ees par des uris, les uris peuvent ˆetre
+simpliﬁ´ees par des espaces de nom, les uris peuvent ˆetre d´eﬁnis dans
+des vocabulaires (rdf, foaf, dbpedia, ...)
+ou repr´esent´ees par des noeuds vides avec des variables locales :id,
+on peut associer un type et une langue,
+il existe des formats (Ntriples, N3, xml/rdf) de s´erialisation et
+d’´echange de donn´ees rdf.
+
+Voyons maintenant comment interroger des entrepˆots de triplets
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+45 / 70
+
+Un langage de requˆetes de bases de donn´ees graphes
+
+sparql (“Simple Protocol And Rdf Query Language”) est le langage
+standardis´e d’interrogation de graphes rdf ,
+comme sql est le langage d’interrogation de bases de donn´ees
+relationnelles.
+Alors que sql est bas´e sur la notion de calcul relationnel et les
+requˆetes sont exprim´ees dans un langage logique de description du
+r´esultat : les champs s´electionn´es, les jointures, les ﬁltrages, les
+groupes et les op´erations de groupe,
+le langage sparql est bas´e sur la notion de graphes de triplets et les
+requˆetes sont d´ecrites par des motifs (patterns) et des variables.
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+46 / 70
+
+Forme g´en´erale d’une requˆete sparql
+
+Trois requˆetes principales
+SELECT pour interroger, CONSTRUCT pour ajouter de nouveaux triplets, et
+ASK pour tester une propri´et´e
+
+L’instruction SELECT
+BASE preﬁx :<namespace-uri >
+PREFIX preﬁx :<namespace-uri >
+SELECT variable-list
+FROM source-list
+WHERE pattern
+
+ORDER BY expression
+LIMIT integer > 0
+OFFSET integer > 0
+o`u prologue, head et body
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+47 / 70
+
+Proloque et Head d’une requˆete sparql
+Prologue
+
+PREFIX suivi d’une d´eclaration d’un raccourci pour des espaces de
+nom. Il est courant d’avoir plusieurs pr´eﬁxes.
+Exemple : PREFIX fb :<http ://rdf.freebase.com/ns/>
+BASE suivi d’un raccourci pour une uri de base auxquelles les uris
+seront concat´en´ees. Une seule base par requˆete.
+Exemple : BASE <http ://www.grappa.univ-Lille3/data/>
+
+Head
+
+SELECT suivi d’une liste de variables dont on souhaite connaˆıtre les
+valeurs r´epondant `a la requˆete. Note :
+d’autres variables.
+
+la requˆete peut utiliser
+
+CONSTRUCT suivi d’un template de triplets pour construire un
+entrepˆot des triplets r´epondant `a la requˆete.
+
+ASK pour tester s’il existe des solutions v´eriﬁant les conditions de la
+requˆete.
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+48 / 70
+
+Une premi`ere requˆete sparql
+
+Exemple courant
+Base Freebase de ﬁlms avec les pr´edicats
+ﬁlm.ﬁlm.directed by entre identiﬁant de ﬁlm et de personne,
+ﬁlm.ﬁlm.starring entre identiﬁant de ﬁlm et de personne,
+ﬁlm.ﬁlm.initial release date entre identiﬁant de ﬁlm et date,
+type.object.name entre identiﬁant d’objet et son nom
+pr´eﬁx´es par <http ://rdf.freebase.com/ns/>
+
+Une requˆete
+PREFIX fb :<http ://rdf.freebase.com/ns/>
+SELECT ?who ?ﬁlm
+WHERE{
+
+?ﬁlm fb :ﬁlm.ﬁlm.directed by ?who .
+?ﬁlm fb :ﬁlm.ﬁlm.starring ?who }
+
+qui fait quoi ?
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+49 / 70
+
+Le corps d’une requˆete sparql
+
+FROM est optionnel et permet de sp´eciﬁer diﬀ´erents graphes de
+triplets dans lesquels il faut chercher. Sinon, on suppose qu’un graphe
+a ´et´e sp´eciﬁ´e au processeur sparql.
+WHERE suivi d’une d´eclaration de pattern (motif) qui peut contenir
+plusieurs patterns, plusieurs patterns de base, des ﬁltres, des unions,
+des pr´esences optionnelles.
+
+ORDER BY comme son nom l’indique
+
+LIMIT pour donner un nombre maximal de r´eponses
+
+OFFSET pour commencer `a partir d’un num´ero de r´eponse
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+50 / 70
+
+Patterns de base en sparql
+
+sont des triplets contenant des noms de variables.
+Syntaxe : les triplets sont s´epar´es par le symbole .
+S´emantique : un tuple de variables satisfait le pattern si tous les triplets
+sont satisfaits par le tuple. On parle de requˆete conjonctive
+
+Exemple
+
+Aﬃcher les noms des artistes jouant dans un ﬁlm dirig´e par “Ron
+Shelton”. Note : on peut sp´eciﬁer Distinct dans le SELECT.
+
+Mˆeme question avec la date (de parution du ﬁlm)
+
+Aﬃcher les noms des artistes ayant jou´e dans un ﬁlm dont ils ´etaient
+le directeur
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+51 / 70
+
+Les contraintes OPTIONAL et FILTER
+
+OPTIONAL permet d’utiliser l’information requise si elle est pr´esente
+et de ne pas ´eliminer les solutions o`u elle est absente. Tr`es important
+pour le WEB s´emantique
+
+FILTER permet de poser des conditions de ﬁltrage sur les solutions
+trouv´ees avec les op´erateurs de comparaison usuels, BOUND() qui
+teste si une variable est li´ee `a une valeur, REGEX() pour test
+d’expression r´eguli`ere.
+
+Exemple
+
+Aﬃcher les noms des artistes jouant dans un ﬁlm dirig´e par “Ron
+Shelton” avec la date quand elle est pr´esente et vide sinon
+
+Aﬃcher les identiﬁants des ﬁlms sortis apr`es 2002
+
+Aﬃcher les identiﬁants des ﬁlms n’ayant pas de date de sortie
+
+Les noms des acteurs contenant “Russ”
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+52 / 70
+
+Combinaison de patterns
+
+Conjonction de patterns
+Un pattern complexe peut contenir plusieurs patterns de base.
+Syntaxe : les patterns de base sont entre accolades. Note : les patterns de
+base peuvent contenir des ﬁltres.
+S´emantique : les tuples solutions sont les tuples qui sont solution de tous
+les patterns. C’est-`a-dire qu’on eﬀectue l’intersection des solutions.
+
+Disjonction de patterns
+On peut faire l’union des solutions de patterns de base en ajoutant UNION
+entre les patterns de base.
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+53 / 70
+
+Calcul d’une requˆete sparql
+
+1 Le processeur construit le graphe correspondant aux sources du
+
+2
+
+3
+
+FROM,
+il construit les tuples de variables qui satisfont dans le graphe les
+conditions d´ecrites dans le pattern donn´e dans le WHERE,
+si le pattern est complexe on eﬀectue une intersection des solutions
+ou une union selon le cas,
+
+4 enﬁn, il Restreint les r´esultats aux variables pr´ecis´ees dans le
+
+SELECT, ou plus g´en´eralement dans l’entˆete de la requˆete
+
+Remarques importantes :
+
+Attention, cet ordre est important `a retenir pour ´ecrire vos requˆetes
+sparql. En particulier si vous utilisez des n´egations,
+l’ordre des r´eponses ne peut pas ˆetre connu `a l’avance,
+les r´esultats peuvent ˆetre de tr`es grande taille. Pensez donc `a utiliser
+LIMIT et OFFSET dans vos tests,
+on utilise des requˆetes sparql pour explorer un entrepˆot de triplets :
+quelles propri´et´es utilis´ees ? Quels sujets possibles pour un pr´edicat ?
+Quels objets possibles pour un pr´edicat ? ...
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+54 / 70
+
+Conclusion sur sparql
+
+sparql int´egr´e dans des plate-formes de WEB s´emantique comme
+ARQ dans JENA de APACHE ou
+
+entrepˆots g´er´es dans une base de donn´ees et interfa¸cage entre le
+SGBD et sparql
+les implantations existantes sont tr`es diverses et, de plus,
+sparql est une norme qui ´evolue :
+
+(cid:73) introduction de EXISTS (remplace BOUND),
+(cid:73) introduction de DELETE et UPDATE
+(cid:73) introduction de patterns ´elabor´es avec des chemins (utilisation de + et
+
+*) pour enrichir la description par triplets.
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+55 / 70
+
+Plan
+
+1 Le WEB S´emantique
+
+2 Mod`ele de donn´ees graphes
+
+3 Les langages du WEB s´emantique
+
+4 Les ontologies
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+56 / 70
+
+Contenu de la section : rdfs, owl et inf´erence
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+57 / 70
+
+Tentative de d´eﬁnition
+
+Introduction
+Nous avons utilis´e des d´eﬁnitions non formelles pour des domaines de sens
+commun avec une s´emantique intuitive en utilisant des propri´et´es telles
+que foaf:knows ou fb:film.film.starring ou des caract´erisations
+d’entit´es telles que foaf:Person.
+Mais qu’est-ce qu’un ﬁlm ? Un ﬁlm de cin´ema, de t´el´evision, un
+court-m´etrage ou une video ? Comment va-t-il ˆetre identiﬁ´e ? Quelles sont
+les propri´et´es que peut avoir un ﬁlm ? Avec quelles valeurs de sujet ? ...
+
+D´eﬁnition
+Une ontologie est une description formelle de la signiﬁcation du
+vocabulaire utilis´e dans un document rdf (ou un graphe de triplets ou un
+entrepˆot de triplets). Le terme ontologie est issu de la philosophie.
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+58 / 70
+
+Utilisation des ontologies
+
+Quelques caract´eristiques
+
+Une ontologie pour le Web s´emantique concerne les propri´et´es, les
+classes des sujets et objets des triplets, les entit´es qui peuvent ˆetre
+repr´esent´ees,
+
+une ontologie peut ˆetre vue comme un contrat entre le producteur de
+donn´ees et le consommateur des donn´ees,
+
+une bonne ontologie est utilis´ee, elle ne doit ˆetre ni trop simple, ni
+trop complexe,
+une ontologie est exprim´ee en rdf, souvent dans le mˆeme graphe de
+triplets : rdf vocabulary to describe rdf vocabularies
+
+Ontologies et inf´erence
+Une ontologie est une description formelle de la signiﬁcation du
+vocabulaire. Une ontologie permet d’inf´erer de nouveaux triplets et
+d’enrichir le r´esultat des requˆetes sous r´eserve du logiciel.
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+59 / 70
+
+Des exemples d’inf´erence
+
+en rdfs
+
+Robert Redford est typ´e comme Actor, Actor est une sous-classe de
+Person qui est une sous-classe de Object. On inf`ere que Robert
+Redford est une instance des classes Person et Object.
+La relation starring a pour domaine Actor. Marion Cotillard est
+sujet d’un triplet avec le pr´edicat starring. On inf`ere que Marion
+Cotillard est une instance de la classe Actor.
+
+en owl
+
+Marion Cotillard est une instance de la classe Actor. On inf`ere que
+Marion Cotillard est une instance de la classe Person. Marion
+Cotillard est de sexe Female. On inf`ere que Marion Cotillard est une
+instance de la classe Woman d´eﬁnie comme intersection des classes
+Person et Female.
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+60 / 70
+
+Les ontologies en pratique
+
+rdfs et owl
+sont les deux langages principaux pour exprimer des ontologies
+
+rdfs (rdf Schema) permet de d´eﬁnir des vocabulaires rdf. Il est
+simple, d’une expressivit´e r´eduite et il permet de r´ealiser des
+inf´erences simples.
+owl (Web ontology language) est la derni`ere norme du W3C. C’est
+un langage expressif (trop ?) permettant de r´ealiser des inf´erences
+complexes (trop ?).
+
+D´eﬁnir des ontologies
+
+Utilisation du logiciel Protege,
+
+on d´eﬁnit des ontologies de domaines sp´ecialis´es et on
+
+utilise au maximum les ontologies existantes et reconnues,
+
+on trouve le meilleur compromis entre simplicit´e et expressivit´e.
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+61 / 70
+
+Les classes et propri´et´es en rdfs
+Les classes
+
+Les ressources peuvent ˆetre partag´ees en classes,
+on pr´ecise la classe d’une ressource avec la propri´et´e rdf:type,
+on peut exprimer qu’une classe est sous-classe d’une autre qui signiﬁe
+que toutes les instances de la premi`ere sont instances de la seconde.
+
+Les propri´et´es
+
+Une propri´et´e est de type rdf:Property qui est une instance de
+rdfs:Class,
+on peut exprimer qu’une propri´et´e est sous-propri´et´e d’une autre qui
+signiﬁe que toutes les paires d’instances v´eriﬁant la premi`ere v´eriﬁent
+la seconde,
+
+on peut sp´eciﬁer le type du domaine (l’ensemble des valeurs de sujet
+possibles) et le type du co-domaine (l’ensemble des valeurs d’objet
+possibles).
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+62 / 70
+
+Syntaxe pour les classes et propri´et´es en rdfs
+Les classes rdf et rdfs
+
+rdfs:Resource : classe de toutes les resssources
+rdfs:Class : classe de toutes les classes
+rdfs:Property : classe de toutes les propri´et´es
+rdfs:XMLliteral : classe de toutes les XML literal values
+et les types, les listes, les sacs, containers
+
+Les propri´et´es rdf et rdfs
+
+rdf:type : pr´ecise la classe d’une ressource
+rdfs:subClassOf : propri´et´e d’inclusion de classes
+rdfs:subPropertyOf : propri´et´e d’inclusion de propri´et´es
+rdfs:domain : type du domaine
+rdfs:range : type du co-domaine
+et rdfs:label, rdfs:comment, rdfs:first, ...
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+63 / 70
+
+Juste un peu de owl
+Le langage owl
+est tr`es expressif et on se limite souvent `a un sous-ensemble owl-lite.
+Nous ne pr´esentons ici que les concepts les plus utilis´es.
+
+Les classes et propri´et´es owl
+
+owl:Thing et owl:Class : classes de tous les objets et de toutes les
+classes
+owl:DatatypeProperty et owl:ObjectProperty : classe des
+propri´et´es `a co-domaine de valeurs typ´ees et `a co-domaine d’instances
+de classes
+owl:FunctionalProperty : sous-classe de owl:ObjectProperty
+des propri´et´es fonctionnelles (au plus une valeur pour un sujet donn´e)
+owl:inverseOf : pour exprimer qu’une propri´et´e est l’inverse d’une
+autre
+et owl:equivalentClass, owl:equivalentProperty,
+owl:disjointWith, ...
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+64 / 70
+
+rdfs et owl en pratique sur movie (1)
+Le monde `a mod´eliser
+On consid`ere le domaine movie qui concerne des ﬁlms de cin´ema avec
+acteurs, directeurs, dates de sortie, ...
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+65 / 70
+
+rdfs et owl en pratique sur movie (2)
+La hi´erarchie de classes
+Au vu du monde r´eel tr`es simpliﬁ´e, nous allons consid´erer les classes
+Director, Actor et Film. Dans une mod´elisation plus compl`ete, vous
+auriez les producteurs, les professions diverses, les types de ﬁlm, ... On
+peut les organiser dans une hi´erarchie de classes.
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+66 / 70
+
+rdfs et owl en pratique sur movie (3)
+Les propri´et´es
+Sur notre vue r´eduite du monde, nous avons les propri´et´es starring,
+directedBy et name. Nous pouvons alors pr´eciser les domaines et
+co-domaines de ces propri´et´es ainsi que leur type. Note : verbosit´e (d’o`u
+logiciels comme Prot´eg´e), mod`ele dans les donn´ees, inf´erences.
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+67 / 70
+
+La question des associations complexes
+Sur le cas movie
+
+Harrison Ford joue Rick Deckard dans Blade Runner. Le rˆole n’est pas
+une propri´et´e de l’acteur, ni du ﬁlm, c’est une propri´et´e de la
+performance (du jeu) de l’acteur dans le ﬁlm.
+Il existe la possibilit´e de r´eiﬁcation en rdf, mais on pr´ef`ere modiﬁer
+le sch´ema et introduire une classe Performance :
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+68 / 70
+
+Conception d’ontologies
+
+Logiciels
+La syntaxe rdf et owl am`ene assez vite un grand nombre de classes, de
+propri´et´es et de relations entre ces classes et propri´et´es d’o`u l’utilisation
+d’environnements logiciels comme Prot´eg´e.
+
+Principes de base
+Tˆache de haut niveau comme toute mod´elisation
+
+une ontologie est pertinente si elle est utilis´ee,
+
+doit faire un compromis pour limiter le domaine de la mod´elisation :
+elle ne doit ˆetre ni trop simple, ni trop complexe,
+
+il faut r´eutiliser au maximum les ontologies de r´ef´erence (Dublin Core,
+foaf, dbpedia, geonames, ...)
+
+un mod`ele est ´evolutif et on peut toujours ajouter de nouvelles classes,
+propri´et´es et relations entre elles car le Web s´emantique est ´evolutif.
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+69 / 70
+
+Conlusion
+
+Un environnement ´eprouv´e avec en particulier la norme rdf et le
+langage d’interrogation sparql,
+des succ`es applicatifs comme le knowledge graph de Google, les
+applications avec g´eolocalisation pour les petits objets portables et
+communiquants, l’apparition de moteurs de recherche s´emantique,
+
+des initiatives gouvernementales pour la publication de donn´ees
+ouvertes (d´emographiques, g´eographiques, politiques, documentaires
+(BNF, INA), ...).
+
+la publication de donn´ees individuelles (Web,
+
+Questions en suspens :
+CMS, ...), la publication de donn´ees par les entreprises, le
+d´eveloppement d’applications intelligentes utilisant r´eellement les
+possibilit´es du Web s´emantique : “1 semaine `a New York pendant les
+prochains cong´es scolaires” 8-)
+
+R. Gilleron (Mostrare)
+
+Informatique M1 MIASHS
+
+septembre 2013
+
+70 / 70
+
+

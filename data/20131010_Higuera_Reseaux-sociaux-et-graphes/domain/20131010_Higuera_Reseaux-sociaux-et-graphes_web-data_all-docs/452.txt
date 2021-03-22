@@ -1,0 +1,1240 @@
+https://pdfs.semanticscholar.org/1534/709cc3635d6ecca42f5a8fffa286ae33bbaa.pdf
+
+Motifs abstraits et sous-communautés dans les réseaux
+
+attribués
+
+Henry Soldano1,2, Guillaume Santini1, and Dominique Bouthinon1
+
+1 Université Paris 13, Sorbonne Paris Cité, L.I.P.N UMR-CNRS 7030
+
+F-93430, Villetaneuse, France
+
+2 Atelier de BioInformatique, ISYEB - UMR 7205 CNRS MNHN UPMC EPHE, Museum
+
+National d’Histoire Naturelle, F-75005, Paris, France
+
+Résumé We consider attribute pattern mining in an attributed graph through
+recent developments of Formal Concept Analysis. The core idea is to restrain
+the extensional space ; i.e. the space of possible pattern extensions in the vertex
+set O, to vertex subsets satisfying structural properties. We consider two levels.
+At the global level, we reduce the extension of each pattern in such a way that the
+corresponding abstract extension induces a subgraph whose nodes satisfy some
+connectivity property. At the local level a pattern has various extensions each
+associated to a connected component of the abstract subgraph associated to the
+pattern. We obtain that way abstract closed patterns and local closed patterns,
+together with abstract and local implication rules. We consider in particular the
+detection and ordering of k-communities in subgraphs of an attributed network.
+
+1
+
+Introduction
+
+Nous nous intéressons ici à la découverte de motifs dans des graphes attribués,
+plus précisément des graphes représentant des réseaux complexes, au sens large. Les
+sommets sont alors des individus et les arêtes ou arcs représentent une certaine relation
+entre ces individus. Pour caractériser ce type de graphe on s’intéresse en particulier
+à la distribution des degrés de ses sommets et de la longueur d’une chaine liant une
+paire d’individus. Ces distributions dépendent peu de la taille du réseau. De nombreuses
+études ont porté sur les caractéristiques structurelles de ces réseaux, en particulier la
+manière de caractériser des sous-réseaux, appelés « communautés », connexes et denses
+et ayant peu de liens entre eux (voir [7], pour une revue sur le sujet). Une autre voie
+d’étude est la réduction du graphe à un sous graphe, non nécessairement connexe, dont
+les sommets satisfont une certaine propriété topologique P dans le sous-graphe réduit..
+Cela a d’abord été proposé dans [14] où P requiert que les sommets s du sous-graphe
+réduit aient un degré f (s) au moins égal à un certain k. Pour une valeur donnée de
+k on obtient alors le k-core (ou k-noyau) du graphe. Cette dernière idée a ensuite été
+étendue à une famille de fonctions f, ce qui conduit à des noyaux généralisés [3].
+Ces réductions induisent des communautés « structurelles »qui sont les composantes
+connexes du graphe réduit selon la propriété P , ou même d’un graphe dérivé de celui-
+ci dans le cas des k-communautés déﬁnies dans [11]. Dans ce qui suit, nous parlerons
+d’approches « locales »lorsque nous nous intéresserons à la notion de communauté, et
+d’approches « globales »lorsque nous nous ramènerons à un graphe réduit, c’est-à-dire
+constitué des parties denses du graphe.
+
+2
+
+Depuis quelques temps un intérêt marqué se porte sur les réseaux attribués, dans
+lesquels les sommets ou les arêtes sont étiquetés par une description, prise dans un
+langage de motifs contraignant les valeurs prises par un ensemble d’attributs. Dans le
+cadre de cette étude nous considérons que les étiquettes décrivent uniquement les som-
+mets du graphe. On s’intéresse alors à des motifs dont on observe les occurrences dans
+l’ensemble des sommets du graphe. Dans [4] on trouve un exemple d’approche indi-
+recte dans laquelle les motifs représentent des co-variations portant sur les valeurs des
+attributs décorant les sommets du graphe. Des attributs topologiques étant ajoutés à la
+description des sommets, on peut utiliser des méthodes de fouilles de motifs tradition-
+nelles ne faisant pas intervenir le graphe lui-même. Les approches directes considèrent
+des motifs constitués d’une partie extensionnelle, les sommets d’un sous-graphe dense,
+ainsi que d’une partie intensionnelle, une conjonction de contraintes portant sur les
+descriptions des sommets et qui doit être satisfaite dans le sous-graphe. Par la suite,
+nous employons le terme « motif »ou « motif d’attributs »pour cette partie intension-
+nelle. Par exemple [9] considère des motifs constitués d’attributs partagés dans des
+k-communautés de sous-graphes. Dans l’approche locale proposée dans [15] les au-
+teurs considèrent des motifs dont la partie extensionnelle est connexe et constituée de
+quasi-cliques. Dans [8] un ensemble restreint de motifs est extrait d’un graphe attribué
+en résolvant un problème d’optimisation. Dans ce dernier travail les motifs sont maxi-
+maux (ne peuvent être étendus) parmi ceux qui auraient la même partie extensionnelle.
+Dans cet article nous commençons par une approche globale dans laquelle nous
+énumérons des motifs maximaux, au sens déﬁni ci-dessus. Un motif a une extension
+dans le graphe, l’ensemble des sommets où il apparait, qui induit un sous-graphe qui
+est ensuite réduit relativement à une propriété P . Les sommets de celui-ci constituent
+ce que nous appelons l’extension abstraite du motif. Dans l’approche locale, nous pro-
+cèderons comme suggéré ci-dessus : on énumèrera par l’approche globale les motifs
+maximaux et leurs extensions abstraites, et pour chacun d’eux, à chacune des compo-
+santes connexes du sous-graphe réduit sera associé un motif, local, qui sera le motif
+le plus spéciﬁque partagé par ses sommets. Nous présenterons ensuite une approche
+locale indirecte, dans laquelle à chaque motif global sera associé l’ensemble des k-
+communautés du sous-graphe associé à ce motif global, ainsi que les motifs locaux
+correspondants.
+
+Techniquement, la première idée des travaux présentés dans cet article est de consi-
+dérer les motifs support-fermés, au sens d’un motif maximal dans le sous-ensemble des
+motifs ayant même extension, et de l’étendre au cas des extension abstraites puis lo-
+cales, nous permettant ainsi de considérer des motifs abstraits et locaux support-fermés
+dans les graphes attribués. La seconde, plus structurelle, est de se situer dans le champ
+de la fouille de motifs fermés et de l’analyse formelle de concept. Dans ce domaine,
+les motifs support-fermés sont obtenus, lorsque le langage de description est un treillis,
+en utilisant un opérateur de fermeture qui, étant donné un motif, renvoie l’unique motif
+support-fermé de même extension. Cette seconde idée bénéﬁcie d’avancées récentes en
+analyse formelle de concept, domaine au sein duquel a été proposée la notion d’abs-
+traction comme un moyen de réduire l’espace extensionnel, c’est-à-dire l’ensemble des
+parties 2O de l’ensemble des objets, tout en conservant l’unicité des motifs-support
+fermés pour une extension (abstraite). On garantit ainsi l’existence d’un opérateur de
+
+3
+
+fermeture pour les obtenir [13,22]. En conséquence i) les algorithmes classiques d’énu-
+mération des motifs fermés dans l’ordre général vers spéciﬁque ne nécessitent qu’une
+adaptation mineure pour énumérer les motifs fermés abstraits, ii) les motifs fermés abs-
+traits s’organisent en un treillis inclus dans le treillis des fermés déﬁnis sur 2O, iii) ce
+treillis est associé à un ensemble d’implications abstraites que l’on peut résumer en
+une base d’implications. Des travaux plus récents, motivés par la possibilité d’intro-
+duire une contrainte de connexité dans un language de motifs tout en gardant la notion
+de motif fermé [6], ont abouti à une généralisation de la structure de treillis, qui capture
+en particulier l’ordre partiel des sous-graphes connexes d’un graphe, et à une nouvelle
+extension de l’analyse formelle de concepts [18] dont nous tirons parti dans cet article
+pour formaliser la notion de motif local.
+
+Nous considérons dans ce qui suit un graphe attribué G(O, E) d’ensembles de
+sommets O et d’arêtes E et nous considérons que les sommets sont étiquetés par une
+description dans un language de motifs L ayant une structure de treillis, typiquement
+L = 2I où I est un ensemble d’attributs binaires ou items. On s’intéresse alors aux
+extensions des motifs de L dans l’ensemble des sommets O. Pour restreindre l’espace
+extensionnel 2O tout en gardant la notion de motif fermé, on le restreint à une abstrac-
+tion, c’est à dire à l’image d’un opérateur intérieur sur 2O. Dans le cas d’un graphe
+attribué, cet opérateur réduit un sous-ensemble de sommets e à un sous-ensemble maxi-
+mal plus petit p(e) dont les sommets satisfont une propriété P dans le sous-graphe qu’ils
+induisent. Nous appelons abstraction de graphe l’espace extensionnel obtenu comme
+image p[2O] de cet opérateur. Un exemple simple de propriété que doit respecter un
+sommet est que son degré doit être au moins k, le sous-ensemble p(e) est alors l’union
+des k-core du sous-graphe Ge induit par e. Un autre exemple simple est la propriété
+k-clique qui est satisfaite par un sommet x relativement à un sous-ensemble de som-
+mets e(cid:48) si x appartient à une k-clique du sous-graphe induit Ge(cid:48). A un motif donné q
+on associe alors son extension abstraite p ◦ ext(q) ainsi qu’un motif fermé abstrait : le
+plus grand motif parmi ceux de même extension abstraite. On note alors 2q → 2w
+l’implication abstraite qui est valide si l’extension abstraite de q est incluse dans l’ex-
+tension abstraite de w. Les abstractions de graphes et les motifs abstraits associés ont
+été présentées dans [19]. Ils font l’objet de la première partie du présent article.
+
+Dans des travaux récents [21], nous avons étendu l’analyse formelle de concept de
+manière analogue à ce qui avait été fait dans [18] pour le langage de motifs mais cette
+fois dans l’espace extensionnel, et introduit ainsi la notion de motif fermé local : dans
+le cas des graphes attribués, celui-ci est le motif le plus grand associé à un sous-graphe
+dense et connexe et contenant un certain sommet (ou groupe de sommets) i. Ce motif
+fermé local est obtenu en appliquant un opérateur de fermeture local fi. On obtient alors
+des implications locales, vraies près de i. Dans ce cas plusieurs opérateurs de fermeture
+fi peuvent être appliqués au même motif : un motif fermé sera alors local car associé
+au sommet ou groupe de sommets i. L’exemple le plus simple d’un tel espace exten-
+sionnel est l’ensemble des sous-ensembles de sommets du graphe G(O, E) induisant
+des sous-graphes connexes : l’extension ext(q) d’un motif q induit alors un sous-graphe
+constitué de plusieurs composantes connexes, chacune associée à un (quelconque) de
+ses sommets i. Chacune de ces composantes forme une extension locale pi ◦ ext(q)
+et le plus grand motif commun à ses sommets est le motif fermé local fi(q). Dans ce
+
+4
+
+qui suit le sous-graphe local (ou abstrait) induit par un motif q est simplement appelé
+le sous-graphe local (ou abstrait) du motif q. Formellement, les éléments de cet es-
+pace extensionnel inclus dans 2O forment une conﬂuence de 2O [18], une structure plus
+faible que celle d’abstraction, pouvant avoir plusieurs éléments minimaux (voir Section
+4). Le cas mentionné ci-dessus correspond à la plus simple conﬂuence de graphe, ses
+éléments minimaux sont les singletons {v}, où v est un sommet du graphe, et les élé-
+ments de cette conﬂuence sont appelés des sous-ensemble de sommets connexes. On
+obtient alors un ensemble de concepts locaux, c’est-à-dire de paires (support local, mo-
+tif fermé local). Les implications locales associées sont notées 2mq → 2mw où m
+est un élément minimal de la conﬂuence et ont la sémantique suivante : l’extension
+locale contenant m du motif q est incluse dans celle du motif w. Dans le cas évoqué
+ci-dessus, 2{v}q → 2{v}w est valide lorsque la composante connexe contenant v du
+sous-graphe induit par q est incluse dans celle du sous-graphe induit par w. On obtiendra
+tout un ensemble de conﬂuences de graphes, que nous nommerons des cc-conﬂuences
+en remarquant que l’espace extensionnel FA = F ∩ A, où A est une abstraction et F
+la conﬂuence de graphe mentionnée ci-dessus, est lui-même une conﬂuence. En pra-
+tique cela signiﬁe que l’on peut choisir une abstraction de graphe et ne considérer dans
+FA, que les sous-ensembles de sommets appartenant à A et formant un sous-graphe
+connexe. La ﬁgure 1 représente le sous-graphe induit par un motif d’un graphe de co-
+auteurs tiré de DBLP (voir Section 1). Les sommets et arêtes en rouge représentent le
+sous-graphe abstrait associé à la propriété degré ≥ 4 et constitué de deux composantes
+connexes. Un motif fermé local est associé à chacune de ces composantes. L’ensemble
+de ces travaux est présenté dans la Section 4.
+
+FIGURE 1. Le sous-graphe induit par le motif DMKD,IDArev dans le graphe de co-auteurs
+DBLP. Les sommets rouges (en gras) représentent l’extension abstraite degré ≥ 4
+
+Extension Abstraite Locale centrée sur le triangle6    dblp.nb5
+
+Les cc-conﬂuences de graphe ne capturent pas toujours la notion de communauté
+telle qu’on l’entend en analyse des réseaux sociaux. La ﬁgure 2 montre un graphe dont
+les sommets représentent des élèves d’un collège dans l’ouest de l’Écosse étiquetées par
+des attributs concernant leurs habitudes de vie, et les arêtes leurs relations d’amitié 3.
+Lorsqu’on applique une abstraction 3-clique au graphe entier on obtient le sous-graphe
+constitué d’arêtes et sommets en gras et colorés. On obtient 4 motifs fermés locaux li
+chacun associé à une des composantes connexes de ce sous-graphe abstrait. On constate
+alors que la plus grande composante connexe est constituée de plusieurs communautés
+que nous voudrions considérer lors de la recherche de motifs locaux. Ici ajouter une
+abstraction, par exemple de degré, ne permet pas d’isoler ces composantes. Cependant,
+les k-communautés d’un graphe G [11] sont déﬁnies comme les composantes connexes
+du graphe dérivé GT dont les sommets sont les k-cliques de G et les arêtes joignent
+deux k-cliques partageant k − 1 sommets. On peut donc considérer une cc-conﬂuence
+de ce nouveau graphe, associer à chaque sous-ensemble de sommets connexes dans
+GT un motif fermé local, puis revenir dans le graphe d’origine. Chaque sous-graphe
+coloré et entouré d’une ellipse de la ﬁgure 2 représente une telle 3-communauté de
+taille au moins 4 dans G. Chaque motif fermé local est le plus grand motif commun à
+la communauté correspondante.
+
+FIGURE 2. Un graphe d’amitié d’élèves de collège dans l’ouest de l’Écosse. Chaque ellipse re-
+présente une 3-communauté de taille au moins 4
+
+Enﬁn, lorsqu’on énumère exhaustivement un ensemble de motifs ou que l’on extrait
+un ensemble de règles d’un jeu de données, on ne peut se contenter de sélectionner des
+motifs fréquents, ce qui permet un élagage efﬁcace de l’énumération. La question de
+la sélection d’un sous-ensemble intéressant des motifs produits est cruciale. Nous pro-
+posons, dans l’approche globale comme dans l’approche locale, des mesures d’intérêt
+
+3. http://www.stats.ox.ac.uk/~snijders/siena/s50_data.htm
+
+6
+
+des motifs et règles obtenues. En ce qui concerne les motifs, nous nous inspirons de
+la mesure d’intérêt proposée dans [15] dans le cas des quasi-cliques, pour déﬁnir des
+mesures de spéciﬁcité des motifs abstraits et locaux produits. Dans le cas des règles abs-
+traites et locales, nous proposons des mesures d’informativité. Pour introduire celles-ci,
+rappelons que les règles abstraites et locales déﬁnies ci-dessus doivent être valides lors-
+qu’on réduit les extensions en requérant qu’un propriété topologique soit satisfaite ou
+en se focalisant dans une région du graphe. Les règles que nous considèrerons les plus
+informatives seront alors celles qui étaient le plus loin d’être valides, avant cette réduc-
+tion. Nous utiliserons pour cela une estimation de la probabilité conditionnelle de la
+conclusion connaissant la prémisse.
+
+La section 2 décrit les graphes attribués utilisés dans nos expériences. Nous pré-
+sentons les motifs fermés abstraits et les abstractions de graphes dans la section 3. Les
+motifs fermés locaux et les cc-conﬂuences sont présentés dans la section 4. Dans ces
+deux sections nous proposons également les mesures d’intérêt de motifs et d’implica-
+tions, propres aux niveaux abstraits et locaux décrites dans [20]. Nous décrivons dans
+la section 5 les cc-conﬂuences d’un graphe dérivé et les k-communautés associées aux
+sous-graphes induits par un motif. La section 6 discute les aspects algorithmiques de ce
+travail.
+
+2
+
+Jeux de données
+
+Les expériences des sections suivantes sont effectuées sur deux jeux de données.
+Dans les deux cas nous avons un graphe G = (O, E) dont les sommets ont des descrip-
+tions dans un vecteur attribut-valeur. Les algorithmes utilisés traitant des représentations
+par liste d’items, nous décrirons ci-dessous, s’il y a lieu, le processus de binarisation.
+
+2.1 Étudiantes écossaises et style de vie
+
+Le jeu de données s50-1 est un jeu de données classique pour les expériences sur
+les graphes attribués 4. Le graphe représente 148 relations d’amitié entre élèves d’un
+collège dans l’ouest de l’Écosse (des jeunes ﬁlles d’environ 13 ans au début de l’étude),
+les étiquettes concernant l’usage de différentes substances récréatives (tabac, cannabis,
+alcool) ainsi que la pratique sportive. Les attributs sont ordinaux. L’attribut T concerne
+la consommation de tabac et prend les valeurs 1 (non), 2 (occasionnelle) et 3 (régulière).
+L’attribut C concerne la consommation de cannabis et prend des valeurs entre 1 (non)
+et 4 (régulière). L’attribut D indique la consommation d’alcool et prend des valeurs
+entre 1 (non) et 5 (élevée). S concerne l’activité sportive et ne prend que les valeurs 1
+(occasionnelle) et 2 (régulière). Un item représente un intervalle de valeurs pour une
+variable. Par exemple l’item C23 est présent pour un sommet lorsque C a une valeur
+dans [2, 3]. Dans nos expériences nous avons fusionné les deux valeurs les plus élevées
+des variables T, C et D. Par exemple, les valeurs 4 et 5 de D sont fusionnées dans
+la valeur 45 . Dans la table ci-dessous nous donnons la liste des items utilisés. Tout
+intervalle de valeur d’une variable peut être représenté par un sous-ensemble d’items.
+Par exemple, D=2 est représenté par {D12,D234} :
+
+4. http://www.stats.ox.ac.uk/~snijders/siena/s50_data.htm
+
+Tobacco
+T1,T23 C1,C12,C234,C34 D1,D12,D123,D2345,D345,D45
+
+Cannabis
+
+Alcohol
+
+7
+
+2.2 Un graphe de co-auteurs de DBLP
+
+Le jeu de données de co-auteurs tiré de DBLP est décrit dans [4]. Il comprend 45
+131 auteurs (sommets) et 228 188 liens de co-publication (arêtes), le graphe résultant
+est composé de 555 composantes connexes. Les auteurs présents dans le graphe ont
+publié au moins un article dans un journal ou une conference dans le domaine des bases
+de données ou de la fouille de données 5entre janvier 1990 et février 2011. Une arête
+lie alors deux auteurs lorsqu’ils ont participé ensemble à au moins un article durant
+la même période. Pour enrichir le langage de motifs, les conférences sont regroupées
+en trois groupes : DB (bases de données), DM (fouille de données) et AI (intelligence
+artiﬁcielle) selon la nomenclature d’un site de classement de conférences 6. Les items
+sont les journaux et les conférences ainsi que les groupes de conférences.
+
+3 Motifs fermés abstraits dans les graphes attribués
+
+3.1 Motifs fermés abstraits
+
+Un problème de fouille de données revient souvent à s’intéresser aux occurrences
+de motifs d’un langage L dans un ensemble d’objets O. Un motif q est alors associé
+à ext(q), son ensemble-support, ou extension, dans O, qui est constitué des objets en
+lesquels le motif a une occurrence. Le langage est partiellement ordonné selon un ordre
+de spéciﬁcité et forme un treillis 7. De plus chaque objet o est décrit comme un motif
+particulier d(o). On dit alors que q a une occurrence dans o lorsque d(o) est plus spé-
+ciﬁque que q. Un motif q est dit support-fermé lorsqu’il n’y a pas de motif strictement
+plus spéciﬁque de même extension. Deux motifs ayant même extension sont considé-
+rés comme équivalents et les motifs support-fermés sont les éléments maximaux de ces
+classes. Dans le cadre évoqué ci-dessus il y a un unique motif support-fermé pour une
+extension donné e. Dans ce cas une fonction d’intension int(e) renvoie le motif support-
+fermé associé à e. On obtient alors, pour tout motif q le motif support-fermé de même
+extension en appliquant l’opérateur de fermeture int◦ ext. Nous dirons qu’un motif est
+fermé lorsqu’il est égal à sa fermeture, les motifs support-fermés sont donc les motifs
+fermés selon l’opérateur de fermeture décrit ci-dessus. Remarquons que hors du cadre
+
+5. Conférences : KDD, ICDM, ECML/PKDD, PAKDD, SIAM DM, AAAI, ICML, IJCAI,
+IDA, DASFAA, VLDB, CIKM, SIGMOD, PODS, ICDE, EDBT, ICDT, SAC, Journaux : IEEE
+TKDE, DAMI, IEEE Int. Sys., SIGKDD Exp., Comm. ACM, IDA J., KAIS, SADM, PVLDB,
+VLDB J., ACM TKDD.
+
+6. http://webdocs.cs.ualberta.ca/~zaiane/htmldocs/ConfRanking.
+
+html. DB = {VLDB, SIGMOD, PODS, ICDE, ICDT, EDBT, DASFAA, CIKM} ; DM=
+{SIGKDD Explorations, ICDM, PAKDD, ECML/PKDD, SDM} ; AI= {IJCAI, AAAI, ICML,
+ECML/PKDD}.
+
+7. Rappellons que dans un treillis toute paire d’éléments (x, y) a une borne inférieure x ∧ y
+
+(ou inf ) et une borne supérieure (ou sup) x ∨ y.
+
+8
+
+déﬁni ci-dessus les motifs support-fermés ne sont pas forcément uniques dans chaque
+classe d’équivalence, et ne sont pas obtenus comme des motifs fermés relativement à
+un opérateur de fermeture 8.
+
+L’ensemble des motifs peut alors être résumé en ne s’intéressant qu’aux classes
+fréquentes (les extensions de taille plus grande qu’un seuil) et en prenant comme re-
+présentant les maxima de ces classes, les motifs fermés. Le langage de motif L est
+typiquement l’ensemble des parties 2I d’un ensemble I d’items et le motif fermé est
+obtenu en faisant l’intersection des descriptions d’objets de l’extension correspondante.
+Par ailleurs, une implication q → w est dite valide sur O lorsque ext(q) est incluse dans
+ext(w) : lorsque le motif q a une occurrence dans o, le motif w a aussi une occurrence
+en o. L’ensemble des implications valides peut-être engendré par un sous-ensemble de
+celles-ci, qu’on appelle une base d’implications. Une classe d’équivalence a aussi des
+éléments minimaux, les générateurs et une base particulière leur est associée, la base
+min-max [12] déﬁnie comme suit :
+
+Deﬁnition 1 La base min-max m des implications valides sur 2O est déﬁnie comme
+suit : m = {g → f | f est un motif fermé , g est un générateur , f (cid:54)= g, ext(g) =
+ext(f )}
+
+Nous déﬁnissons maintenant formellement les opérateurs de fermeture ainsi que les
+opérateurs intérieurs qui seront utilisés pour déﬁnir les extensions abstraites. Dans ce
+qui suit tous les ensembles ordonnés 9sont ﬁnis.
+Deﬁnition 2 Soit E un ensemble ordonné et f : E → E une application telle que pour
+tout x, y ∈ E, f est croissante, c’est-à-dire x ≤ y =⇒ f (x) ≤ f (y) et idempotente,
+c’est-à-diref (f (x)) = f (x), alors :
+— Si f est extensive, c’est-à-dire f (x) ≥ x, f est appelé un opérateur de ferme-
+— Si f est intensive, c’est-à-diref (x) ≤ x, f est appelé un opérateur d’ouverture
+
+ture.
+
+ou opérateur intérieur, ou encore une projection.
+
+Dans le premier cas, f (x) est appelé le fermé de x, et un élément tel que x = f (x) est
+appelé un élément fermé. Dans le second, f (x) est appelé l’intérieur de x.
+
+L’image d’un opérateur intérieur sur un treillis est appelée ici une abstraction et est
+caractérisée par la proposition suivante :
+
+Proposition 1 [22] Un sous-ensemble A d’un treillis X est l’image p[X] d’un opéra-
+teur intérieur si et seulement si la borne supérieure de tout sous-ensemble de A appar-
+tient aussi à A, y compris le minimum ⊥ de X. On a alors :
+
+p(x) = ∨{a∈A|a≤x}a.
+
+Si p est l’opérateur intérieur associé à une abstraction A alors p(x) est le plus grand
+élément de A inclus dans x. L’analyse des motifs fermés a récemment été étendue à
+
+8. En fouille de données, on parle souvent de motifs fermés pour désigner des motifs support-
+
+fermés, ce qui peut entretenir une certaine confusion.
+
+9. Tout ensemble muni d’un ordre partiel est appelé ici ensemble ordonné
+
+9
+
+l’analyse des motifs fermés abstraits en remarquant qu’un opérateur intérieur sur un
+treillis préserve la notion de correspondance de Galois. En particulier en appliquant un
+tel opérateur sur l’espace extensionnel 2O on obtient encore un opérateur de fermeture
+sur le langage de motifs [13,22] :
+
+Proposition 2 Soit X = 2O et L = 2I liés par la correspondance de Galois (int, ext),
+p un opérateur intérieur sur 2O, et soit A = p[X] l’abstraction associée, alors (int, p◦
+ext) est une correspondance de Galois sur (A, L), et donc
+f = int ◦ p ◦ ext est un opérateur de fermeture sur L
+L’extension abstraite du motif q est alors extA(q) = p ◦ ext(q). Il y a donc un
+unique motif abstrait support fermé c’est-à-dire un unique motif maximalement spéci-
+ﬁque f (q) = intextA(q) dans la classe d’équivalence de tous les motifs ayant comme
+extension abstraite extA(q). f (q) est appelé un motif fermé abstrait. On obtient alors
+un treillis de concepts abstraits :
+
+Corollary 1 [22]. L’ensemble des paires (extension abstraite, motif fermé abstrait)
+(e = extA(c), c = int(e)), ordonné selon l’abstraction A forme un treillis appelé
+un treillis de concepts abstraits.
+
+Remarquons que, p étant par déﬁnition monotone, lorsque ext(q) ⊆ ext(w), c’est-
+à-dire q → w est valide, alors extA(p) ⊆ extA(w), et nous dirons que l’implication
+abstraite 2Aq → 2Aw, est aussi valide. Cette notation replace l’abstraction comme
+une modalité de type nécessité, et la logique modale associée est présentée en [16].
+
+Nous obtenons de cette manière une base min-max abstraite en reprenant la dé-
+ﬁnition de la section 3.1 dans laquelle extA remplace ext, et en reliant des éléments
+minimaux de ces nouvelles classe d’équivalence, les A-générateurs, à l’élément maxi-
+mum, le motif fermé abstrait, ou A-fermé :
+
+Deﬁnition 3 La base min-max abstraite mA des implications abstraites valides sur A
+est déﬁnie par :
+mA = {2Ag → 2Af | f est un motif A-fermé, g est un A-générateur , f (cid:54)= g,
+extA(g) = extA(f )}
+
+Une implication abstraite traduit donc l’inclusion de l’extension abstraite de la pré-
+misse dans celle de la conclusion. Si on appelle groupe abstrait un élément d’une
+abstraction, alors une implication abstraite 2Ag → 2Af s’interprète de la manière
+suivante : si un groupe abstrait partage le motif g alors il partage aussi le motif f.
+L’utilisation d’une telle implication pour un objet donné o nécessite donc de trouver un
+groupe abstrait contenant o et partageant le motif g, ce qui permet de déduire que le
+groupe et donc o satisfont le motif f. Remarquons que pour un objet donné seuls les
+groupes abstraits minimaux qui le contiennent sont à considérer. Dans les abstractions
+de graphe déﬁnies ci-après, ces groupes seront par exemple des k-cliques ou autres
+structures topologiques.
+
+10
+
+3.2 Abstractions de graphe
+
+Ces idées ont été appliquées aux graphes attribués en déﬁnissant les abstractions
+de graphe [19]. L’ensemble d’objets O est alors l’ensemble de sommets d’un graphe
+G = (O, E) et chaque sommet o est étiqueté par un motif d(o) ∈ 2I.
+
+On déﬁnit une abstraction de graphe à travers une propriété caractéristique P (x, e)
+qui requiert une forme de connectivité minimale du sommet x dans le sous-graphe Ge
+induit par le sous-ensemble de sommets e
+
+Lemma 1 Soit P tel que :
+
+— P (x, e) implique x ∈ e et
+— e ⊆ e(cid:48) et P (x, e) implique P (x, e(cid:48)),
+
+et soit la fonction q déﬁnie par q(e) = {x ∈ e|P (x, e)}, alors la fonction p déﬁnie par
+p(e) = pointFixe(q, e) est un opérateur intérieur sur 2O.
+
+p(e) représente le plus grand sous-ensemble de sommets dans e dont les sommets
+satisfont la propriété caractéristique P dans le sous-graphe qu’ils induisent Gp(e). Voici
+ci-dessous quelques exemples d’abstractions de graphe illustrées ﬁgure 3. On les repré-
+sente par la propriété P (x, e) que le sommet x doit satisfaire dans e.
+
+1. degré ≥ k. Un k-core est un sous-graphe maximal dont tous les sommets ont un
+degré au moins k. En appliquant l’opérateur intérieur correspondant à degré ≥ k
+à un ensemble de sommets on obtient l’union des k-cores (parfois aussi appelé le
+k-core) du sous-graphe induit par ces sommets. Il s’agit d’une notion classique
+d’analyse de la structure d’un réseau social et de ses communautés [14].
+
+2. k-club ≥ s : x doit appartenir à un k-club c de taille au moins s dans Ge. Il
+s’agit d’un affaiblissement de la notion de clique [1] : il existe une chaîne de
+longueur au plus k entre toute paire de sommets dans Gc. Un triangle, ou 3-
+clique, est un 1-club de taille 3 (ﬁgure 3-a). La ﬁgure 3-b représente un 2-club
+de taille 6.
+
+3. nearStar(k, d) : x doit avoir un degré au moins k ou il doit y avoir un chemin
+de longueur au plus d entre x et un sommet y de degré au moins k. Cette abs-
+traction est utile lorsqu’on veut préserver les hubs, c’est-à-dire les sommets de
+haut degré et leurs voisins [2] (voir ﬁgure 3-c).
+
+4. cc ≥ s : x doit appartenir à une composante connexe de taille au moins s dans
+
+Ge (voir ﬁgure 3-d).
+
+On peut combiner deux abstractions A1 and A2 de deux manières pour construire
+une nouvelle abstraction de graphe A. On peut, par exemple, déﬁnir un sous-graphe
+abstrait dont les sommets ont à la fois un degré plus grand que 10 et appartiennent à
+une composante connexe de taille au moins 30. On peut au contraire déﬁnir un sous-
+graphe abstrait dans lequel les sommets satisfont au moins une des deux propriétés
+caractéristiques. Nous pourrions ainsi considérer les sommets qui ont un degré plus
+grand que 10 ou sont liés à un sommet de degré au moins 50. Dans le premier cas on
+obtient une abstraction plus forte, c’est-à-dire A est inclus dans A1 et dans A2, dans
+l’autre une abstraction plus faible, c’est-à-dire A1 et A2 sont inclus dans A.
+
+11
+
+FIGURE 3. Abstractions de graphe. Dans chaque dessin les points et lignes pleines représentent
+un sous-graphe abstrait, les croix et les tiretés représentent la partie non abstraite. a) x appartient
+à un triangle, (b) x appartient à un 2-club de taille 6, (c) x a un degré au moins 6 ou est lié à un
+sommet de degré au moins 6. (d) x appartient à une composante connexe de taille au moins 3
+
+Proposition 3 Soit P1 et P2 deux propriétés caractéristiques et soient P1∧P2 et P1∨P2
+déﬁnies comme suit :
+
+— P1 ∧ P2(x, e) = P1(x, e) ∧ P2(x, e)
+— P1 ∨ P2(x, e) = P1(x, e) ∨ P2(x, e)
+
+P1 ∧ P2 et P1 ∨ P2 sont deux propriétés caractéristiques.
+
+3.3 Mesures d’intérêt des motifs et implications abstraites
+
+Nous nous intéressons maintenant aux mesures d’intérêt de ces motifs abstraits et
+implications abstraites, en fonction de leur relation à la topologie des sous-graphes abs-
+traits impliqués. Ces mesures ont été présentées dans [20]. Nous allons d’abord généra-
+liser la corrélation structurelle introduite par A. Silva et co-auteurs [15], pour mesurer
+la proportion d’un sous-graphe constituée de quasi-cliques :
+Deﬁnition 4 Soit un motif q et une abstraction A ⊆ 2O, la spéciﬁcité de q relativement
+à A est :
+
+sA(q) =
+
+| extA(q) |
+| ext(q) |
+
+Par exemple, si on considère une abstraction de triangles, lorsque sA(q) est proche
+de 1, le sous-graphe de q est essentiellement constitué de triangles. Au contraire si sA(q)
+est proche de 0, alors le motif q apparaît dans des sommets relativement isolés. Nous
+pouvons ainsi relier un motif à la manière dont il respecte la connectivité du graphe,
+selon une certaine propriété caractéristique.
+
+Example 1. La ﬁgure 4 représente un graphe dont les sommets sont décrits par un sous-
+ensemble d’items. Nous avons alors :
+
+— ext(a) = e = {1, 2, 3, 4, 5, 7} induit le sous-graphe G(e) (bleu+noir).
+— extA(a) = {1, 2, 3} car 4, 5, 7 n’appartiennent à aucun triangle dans G(e).
+— int ◦ extA(a) = ab ∩ ab ∩ ab = ab est un motif fermé abstrait
+— sA(a) = 1/2, sA(ab) = 3/4
+
+usefulwhenwewouldlikeabstractiontopreservehubs[2](i.ehighdegreevertices)togetherwiththeir(lowdegree)neighbors(seeFigure2-c).4.cc s:xhastobelongtoaconnectedcomponentofsizeatleastsinGe(seeFigure2-d).5.k-cliqueGroup s:xhastobelongtoak-cliquegroupofsizeatleasts.Ak-cliquegroupisaunionofk-cliques(cliquesofsizek)thatcanbereachedfromeachotherthroughaseriesofadjacentk-cliques(whereadjacencymeanssharingk-1nodes).Maximalk-cliquesgroupsaredenotedask-cliquescommunitiesandformalizetheideaofcommunityincomplexnetworks[10].⇥(a)⇥(b)⇥⇥(c)⇥⇥(d)Figure2.Graphabstractionscorrespondingtovariousvertexcharacteris-ticproperties.Ineachgraphplaincirclesandplainlinesformtheabstractsubgraph,crossesanddottedlinesrepresenttheverticesandedgesoutoftheabstractsubgraph.(a)xhastobelongtoatriangle,(b)xhastobelongtoa2-clanofsizeatleast6,(c)xhastobeconnectedtoavertexysuchthatthedegreeofyisatleast6,(d)xhastobelongtoaconnectedcomponentwhosesizeisatleast3.Finally,itisinterestingtonotethatwecancombinetwo(ormore)abstractionsA1andA2intwoways,deﬁninganewcompositeab-stractioneitherstrongerorweakerthanbothA1andA2.Forin-stance,wemaywanttoconsideranabstractsubgraphwhereverticesbothhaveadegreelargerthansomekandbelongtoaconnectedcomponentexceedingaminimalsizes.Onthecontrary,wemaywantanabstractsubgraphsuchthatatleastoneofthetwocharac-teristicpropertiesissatisﬁedbyallthevertices.Thiswouldbethecaseforinstance,ifwewanttokeepbothverticesthathaveadegreelargerthan,say10,andverticesinastar,i.econnectedtoahubwhichdegreeisatleast50.Thefollowinglemmastatesthatwecanfreelycombineabstractionsinbothdirections.Lemma2LetP1andP2twocharacteristicpropertiesofabstrac-tionsdeﬁnedonthesameobjectsetO,andletP1^P2andP1_P2bedeﬁnedasfollows:•P1^P2(x,e)=P1(x,e)^P2(x,e)•P1_P2(x,e)=P1(x,e)_P2(x,e)BothP1^P2andP1_P2arecharacteristicpropertiesofabstrac-tions.FinallynotethatrequiringafrequencypropertyalsocorrespondstoanabstractionwhosecharacteristicpropertyisPm(x,e)=|e| minsupp,andthatcanbethereforecombinedtoanyabstraction,thereforedeﬁningfrequentabstractclosedpatterns.3.2Graph-basedclosedpatternscomputationandanalysisWhenwehavedeﬁnedabstractionsandcorrespondingprojections,graph-basedabstractclosedpatternsarealsodefactodeﬁned.Usingtheprojectionoperatorp,wecancomputeabstractsupportsp ext(t)andabstractclosuresint p ext(t).Alltop-downgenerateandclosealgorithms,likeLCM[16]canthenbeadaptedtodirectcomputationofabstractclosedpatterns4.Intheexperimentsinthenextsectionwehaveusedanindirectapproach:weﬁrstcomputefrequentclosedpat-ternsandcorrespondinggeneratorsusingtheCORONsoftware[15].Startingfromtheclosedpatternstandtheirsupports,wethencom-putetheabstractclosedpatternsint p ext(t).FinallyweconsiderforeachabstractclosedpatterntAthegeneratorsofalltheclosedpat-ternsthathaveproducedtAandselecttheminimalelementsamongtheminordertoobtainthecorrespondingabstractgenerators5.Fromabstractgeneratorsandabstractclosedterms,computingthemin-maximplicationrulebasisisstraightforward.Ononehand,thein-directapproachneedspriorcomputationofthe(nonabstract)closedpatterns,andthiscanbemuchmorecostlythanthedirectcompu-tationofabstractclosedpatterns.Ontheotherhand,oncethisﬁrstcomputationisperformed,wecanapplyasmanyabstractcomputa-tionsweneed,varyinggraphabstractionsandtheirparameters,andthiscanbecost-savingwheninvestigatingsomenewlargeattributedgraph(seeSection4.3).Wedescribehereunderagenericalgorithm,relyingontheabstrac-tioncharacteristicproperty,tocomputetheprojectionofsomesubsetofthesetofobjectsO://Givene✓OandacharacteristicpropertyPu falsee0 eWhileu=falseu trueForallvertexxine0IfP(x,e0)isfalseu falsee0 e0 {x}endIfendForendWhile//Asu=false,P(x,e0)istrueforallxine0//e0=p(e0)istheabstractionofewithrespecttoPThisgenericalgorithmisinO(n2⇤d)wheredisthecostofcom-putingP(x,e0).Inthegraphabstractioncase,computingP(x,e0)requirestoupdatetheinducedsubgraphGe0whensomevertexisre-movedfrome0.Furthermore,thecostddependsonthecharacteristicpropertyandwillbesmallasfarasthepropertyneedstoconsideronlycloseneighborsofx.Forinstance,consideringthedegree kabstraction,ﬁrst,thereisnoneedtoaccessneighborsofx,andfur-thermore,ratherthanexplicitlyupdatingGe0whensomexisre-movedfrome0itismoreefﬁcienttodecreasethedegreeofthever-ticesconnectedtoxine0.Anotherexampleisthecc sgraphab-straction,inwhichcomputingtheabstractionofsomeecomesdowntocomputetheconnectedcomponentsofGeandremovethesmalloneswithnoneedtoiteratetheprocess.4ExperimentsWeconsiderheresomepreliminaryexperimentsinthreedatasets.Inallthreeexperiments,thedataisdescribedasagraphG=(O,E)4Workinprogress5RecallthateachclosedpatternthatproducesanabstractclosedpatterntArepresentsanequivalenceclassofpatternsthatwillbeincludedintheclassoftAinthenewequivalencerelationrelyingonabstractsupports.12
+
+FIGURE 4. Le sous-graphe du motif a est en trait plein, le sous-graphe abstrait selon l’abstraction
+de triangle est en bleu et en gras. Le motif fermé abstrait associé est ab
+
+Nous nous intéressons aussi à l’informativité des implications abstraites, c’est-à-
+dire à ce qui est apporté de nouveau par l’abstraction. Pour cela nous considérons des
+implications abstraites dont les parties gauche et droite ont même extension mais des ex-
+tensions abstraites différentes, comme dans la base min-max abstraite déﬁnie ci-dessus.
+Intuitivement, lorsque les parties gauche et droite d’une implication abstraite ont aussi
+même extension initiale, l’implication n’est pas informative. Nous mesurons simple-
+ment l’informativité d’une implication abstraite par la probabilité, au niveau non abs-
+trait, de ne pas avoir la conclusion sachant la prémisse :
+
+Deﬁnition 5 Soit une abstraction A de 2O, l’informativité de l’implication abstraite
+valide r : 2q → 2qw est déﬁnie par
+
+IA(r) = 1 − | ext(qw) |
+| ext(q) |
+
+Intuitivement l’informativité mesure ce que nous avons découvert lorsque nous avons
+constaté que q et qw ont même support abstrait.
+
+Example 2. En reprenant l’exemple 1 illustré ﬁgure 4 et l’implication abstraite r :
+2a → 2ab dont le sens est « si les sommets d’un triangle de G ont le motif a, ils
+ont aussi le motif ab », on obtient comme informativité de cette implication abstraite :
+IA(r) = 1 − 1/2 = 0.5.
+
+3.4 Experiences
+S50 Des expériences menées sur les deux jeux de données de la section 2 ont été pré-
+sentées dans [19]. Sur le jeu de données s50, une abstraction de triangle a abouti à 36
+motifs fermés de taille au moins 3 et 15 implications min-max. Ainsi le motif {C1,
+D123} est présent chez 28 élèves pour un support abstrait de 16, ce qui correspond à
+une spéciﬁcité de 0,57 et donne lieu à une règle abstraite {C1, D123} → T1 : « les
+élèves d’un triangle d’amies qui n’ont jamais essayé le cannabis et ont une consomma-
+tion d’alcool au plus modérée, sont également non fumeuses ». Cependant, si on réduit
+l’ensemble d’élèves concernées en ajoutant une activité sportive régulière, S2, il reste
+21 élèves mais l’extension abstraite devient vide, la spéciﬁcité tombant à 0. Comme
+on le voit dans la ﬁgure 5 ceci est dû au fait qu’ajouter S2 détruit les groupes abstraits
+d’élèves partageant {C1, D123}.
+
+1ab2ab3ab4ac5ac6bc7abc8bc13
+
+FIGURE 5. Sous-graphe d’élèves partageant un motif. Sommets et arêtes de chaque sous-graphe
+sont en noir et en gras. A gauche le sous-graphe (haut) et le sous-graphe abstrait degré ≥ 2 (bas)
+du motif {C1,D123,T1}. A droite, on observe qu’en ajoutant la pratique régulière du sport (S2)
+on préserve une partie de l’extension (haut) mais on détruit complètement l’extension abstraite
+(bas)
+
+14
+
+Pour le même jeu de données nous donnons dans le tableau 1 les 10 motifs fermés
+
+abstraits de plus haute spéciﬁcité.
+
+TABLE 1. 10 meilleures spéciﬁcités de motifs fermés 3−clique abstraits sur s50
+
+Motif fermé abstrait Support abstrait Spéciﬁcité
+
+"C12"
+
+∅
+
+"D345"
+
+"C12", "D345"
+"C12", "T1"
+
+"D2345"
+
+"D345", "S2"
+
+"C1"
+
+"C12", "D123", "T1"
+
+"C1", "T1"
+
+33
+39
+22
+15
+24
+30
+14
+23
+18
+20
+
+0,79
+0,78
+0,76
+0,71
+0,67
+0,67
+0,64
+0,64
+0,6
+0,61
+
+DBLP Sur le jeu de données DBLP, nous avons appliqué l’abstraction degré ≥ k avec
+des valeurs de k croissantes. Nous nous focalisons ici sur l’abstraction degré ≥ 16, ce
+qui correspond à une abstraction particulièrement forte : dans un sous-graphe abstrait
+chaque auteur doit être lié à 16 autres par un lien de co-publication. Parmi les motifs fer-
+més abstraits nous trouvons en particulier VLDBJ, ICDE, SIGMOD, VLDB et l’im-
+plication abstraite 2 VLDBJ → 2 ICDE, SIGMOD, VLDB. VLDBJ a un support
+abstrait de 38 pour un support total de 1276 auteurs. Le sous-graphe abstrait correspon-
+dant est présenté ﬁgure 6.
+
+Lorsqu’on recherche sur DBLP les publications de ces auteurs, on trouve en parti-
+
+culier un article dont le résumé commence par les mots suivants :
+
+A group of senior database researchers gathers every few years to assess the
+state of database research ...
+avec la référence suivante :
+
+C’est précisément le rôle de la fouille de données de distinguer des motifs cachés
+dans de grands jeux de données et de les interpréter. L’explication de l’observation d’un
+
+28/07/2015 15:18dblp: Serge AbiteboulPage 9 sur 26http://dblp.uni-trier.de/pers/hd/a/Abiteboul:SergeEntrepôts de contenu autour de XML et des services Web.EDA 2006: 1-2[c128]Serge Abiteboul, Ioana Manolescu, Emanuel Taropa:A Framework for Distributed XML Data Management. EDBT2006: 1049-1058[c127]Serge Abiteboul, Pierre Senellart:Querying and Updating Probabilistic Information in XML.EDBT 2006: 1059-1068[c126]Karl Schnaitter, Serge Abiteboul, Tova Milo, Neoklis Polyzotis:COLT: continuous on-line tuning. SIGMOD Conference 2006:793-7952005[j56]Serge Abiteboul, Rakesh Agrawal, Philip A. Bernstein, Michael J.Carey, Stefano Ceri, W. Bruce Croft, David J. DeWitt, Michael J.Franklin, Hector Garcia-Molina, Dieter Gawlick, Jim Gray, Laura M.Haas, Alon Y. Halevy, Joseph M. Hellerstein, Yannis E. Ioannidis,Martin L. Kersten, Michael J. Pazzani, Michael Lesk, David Maier,Jeﬀrey F. Naughton, Hans-Jörg Schek, Timos K. Sellis, AviSilberschatz, Michael Stonebraker, Richard T. Snodgrass, Jeﬀrey D.Ullman, Gerhard Weikum, Jennifer Widom, Stanley B. Zdonik:The Lowell database research self-assessment. Commun. ACM48(5): 111-118 (2005)[j55]Yannis E. Ioannidis, David Maier, Serge Abiteboul, Peter Buneman,Susan B. Davidson, Edward A. Fox, Alon Y. Halevy, Craig A.Knoblock, Fausto Rabitti, Hans-Jörg Schek, Gerhard Weikum:Digital library information-technology infrastructures. Int. J.on Digital Libraries 5(4): 266-274 (2005)[j54]Serge Abiteboul, Richard Hull, Victor Vianu, Sheila A. Greibach,Michael A. Harrison, Ellis Horowitz, Daniel J. Rosenkrantz, JeﬀreyD. Ullman, Moshe Y. Vardi:In memory of Seymour Ginsburg 1928 - 2004. SIGMOD Record34(1): 5-12 (2005)[j53]Tova Milo, Serge Abiteboul, Bernd Amann, Omar Benjelloun,Frederic Dang Ngoc:Exchanging intensional XML data. ACM Trans. Database Syst.30(1): 1-40 (2005)[c125]Serge Abiteboul, Susan B. Davidson, Tova Milo:Active XML and Data Activation. Abstract State Machines 2005:11-1615
+
+FIGURE 6. Le sous-graphe degré ≥ 16-abstrait du motif VLDBJ dans le graphe de co-auteurs
+DBLP
+
+sous-graphe si dense semble donc assez directe, mais, si les chercheurs du domaine
+sont évidemment conscients de ces rencontres, ce n’est pas forcément le cas de ceux
+qui fouillent ce jeu de données.
+Lorsqu’on applique une abstraction plus faible, précisément ici degré ≥ 4, nous
+observons plus de motifs abstraits parfois constitués de plusieurs composantes con-
+nexes. Ainsi, la ﬁgure 1 représente le sous-graphe abstrait du motif DMKD, IDArev.
+Le sous-graphe est constitué de deux composantes connexes (en rouge), celle ﬁgurant à
+droite est constituée de 10 sommets. Nous nous posons alors la question suivante : il y
+a-t-il un motif plus spéciﬁque que DMKD, IDArev qui serait partagé par les sommets
+de cette composante connexe ? Pour répondre à ce type de question il faut analyser le
+graphe à un niveau plus local, ce qui est le propos de la section suivante.
+
+4 Motifs fermés locaux
+
+Dans [18] nous avons introduit la notion de localité en analyse formelle de concept,
+avec pour objectif de réduire le langage de motifs. Les notions sont approfondies dans
+[17] de manière à permettre de réduire le domaine extensionnel, généralisant ainsi la
+notion d’abstraction extensionnelle. Nous exploitons et expérimentons ces notions pour
+la fouille de graphes attribués dans [21]. Dans ce qui suit nous exposons ces derniers
+travaux en donnant les déﬁnitions et résultats nécessaires.
+
+Nous devons d’abord déﬁnir deux structures d’ordre partiel. Les pré-conﬂuences,
+qui généralisent les treillis, et les conﬂuences de treillis qui généralisent les abstractions
+
+16
+
+[19,17]. Les conﬂuences d’un treillis des parties, en particulier, sont proches, mais dif-
+férentes, des familles conﬂuentes déﬁnies par M. Boley et co-auteurs [6].
+Dans ce qui suit nous noterons Ex la section ﬁnissante {y ∈ E|y ≥ x} d’un en-
+semble ordonné E, Ex la section commençante {y ∈ E|y ≤ x}, et min(E) l’ensemble
+des éléments minimaux de E. Comme dans le reste de cet article, tous les ensembles
+ordonnés sont de cardinal ﬁni.
+
+Nous déﬁnissons d’abord la notion de pré-conﬂuence :
+
+Deﬁnition 6 F est une pré-conﬂuence si et seulement si pour tout m ∈ min(F ), F m =
+{x ∈ F | x ≥ m} est un treillis.
+
+Un treillis ﬁni est donc une pré-conﬂuence ayant un élément minimum. Une pré-conﬂuence
+a plusieurs opérateurs de borne inférieure ∧m, mais les opérateurs de borne supérieure
+∨m coincident :
+Lemma 2 Pour tout x, y ∈ F m la borne supérieure ne dépend que de x et de y mais
+pas de m :
+
+— x ∨F y est le plus petit élément de F x ∩ F y
+
+Un cas important est celui où F est inclus dans un treillis hôte dont il conserve l’opéra-
+teur de borne supérieure :
+Deﬁnition 7 Soit T un treillis et F ⊆ T une pré-conﬂuence telle que ∨F = ∨T , F est
+appelée une conﬂuence de T .
+Une abstraction de T est donc une conﬂuence de T ayant ⊥T comme minimum.
+Proposition 4 Soit un treillis X, F ⊆ X est une conﬂuence de Xsi et seulement si
+pour tout x, y ∈ F m avec m ∈ min(F ), x ∨ y appartient à F .
+
+Cette propriété signiﬁe que toute partie F m est une abstraction du sous-treillis de
+X d’élément minimum m, et est donc associé à un opérateur intérieur (voir Proposition
+1), ce qui nous permettra, comme dans le cas des motifs fermés abstraits, de déﬁnir des
+opérateurs de fermeture :
+Proposition 5 Soit F une conﬂuence de X, et m ∈ min(F ),
+
+— pm : X m → X m, tel que pm(x) = ∨q∈F m∩Xxq, est un opérateur intérieur et
+
+pm[X m] = F m.
+
+Nous nous intéressons ici aux conﬂuences de X = 2O[17] qui généralisent les
+abstractions et, en particulier, les abstractions de graphe. Soit alors x un sous-ensemble
+de sommets contenant un certain m de F , alors pm(x) renvoie le plus grand sous-
+ensemble de x dans F qui contient m. Dans l’exemple ci-dessous nous déﬁnissons la
+plus simple des conﬂuences de graphe en ne considérant que les sous-ensembles de
+sommets connexes, au sens où ils induisent un sous-graphe connexe du graphe G =
+(O, E).
+
+17
+
+FIGURE 7. Un graphe carré (en bas) et le diagramme de la conﬂuence F 1+3 des sous-ensembles
+de sommets connexes contenant les sommets 1 ou 3
+
+Example 3. Soit le graphe G = (O, E), représenté au bas de la ﬁgure 7, avec O =
+{1, 2, 3, 4}. Soit F ⊆ 2O la famille des sous-ensembles de sommets connexes. L’en-
+semble de ses éléments minimaux est min(F ) = {{1},{2},{3},{4}}. L’union de
+sous-ensembles de sommets connexes ayant un sommet commun s, donc tous deux
+plus grands que {s}, est également connexe et donc F est une conﬂuence de 2O. Par
+abus de langage nous écrirons par la suite, ps et F s pour p{s} et F {s}. L’opérateur in-
+térieur ps projette ainsi tout sous-ensemble de sommets e contenant le sommet s dans
+la composante connexe contenant s du sous-graphe induit Ge. La section ﬁnissante F s
+est alors l’ensemble des sous-ensembles connexes contenant s. Cette conﬂuence est le
+cas le plus simple de ce que nous appellerons par la suite des cc-conﬂuences.
+La partie F 1+3 = F 1 ∪ F 3 représente l’ensemble des sous-ensembles de sommets
+connexes contenant les sommets 1 ou 3 et est aussi une conﬂuence. La ﬁgure 7 présente
+le diagramme de F 1+3.
+
+L’extension e d’un motif q sera alors ainsi projetée par les opérateurs intérieurs pi
+sur les extensions locales ei, correspondant dans l’exemple ci-dessus aux composantes
+connexes du sous-graphe induit Ge. Ces opérateurs intérieurs conduisent à des opéra-
+teurs de fermetures locaux [17] :
+
+Proposition 6 Soient F une conﬂuence de X = 2O, m un élément minimal de F et
+Lint(m) la section commençante du treillis de motifs L dont les éléments q sont tels que
+q ≥ int(m), on a alors :
+
+fm = int ◦ pm ◦ ext est un opérateur de fermeture sur Lint(m).
+Dans la conﬂuence de graphe de l’exemple ci-dessus, soit e = ext(q), ps(e) est
+la composante connexe de Ge contenant s. On a ps(e) = pv(e) pour tout sommet de
+
+3123414323341341423112142218
+
+cette composante. fs(q) est alors le motif fermé local associé à tout sommet de cette
+composante, c’est-à-dire le motif le plus spéciﬁque partagé par les éléments de cette
+composante.
+
+L’ensemble de ces extensions locales est elle-même ordonnée en une pré-conﬂuence :
+
+Theorem 1. La fonction h : F → F : h(e) = pm ◦ ext ◦ int(e) pour m ≤ e
+est un opérateur de fermeture sur F et E = h[F ] est une pré-conﬂuence.
+h(e) est l’extension locale de int(e) qui contient tout élément minimal m ≤ e. h[F ]
+est une pré-conﬂuence isomorphe à l’ensemble P des concepts locaux déﬁnis comme
+suit :
+Deﬁnition 8 L’ensemble des paires P = {(e, l) | e = pm ◦ ext(l), l = int(e), m ≤ e}
+est appelé une pre-conﬂuence de concepts.
+
+Pour résumer, nous avons donc déﬁni des concepts locaux comme des paires (ex-
+tension locale, motif fermé local) et montré qu’ils étaient organisés en une structure
+ordonnée, ayant en général plusieurs éléments minimaux, chacun étant le minimum
+d’un treillis, généralisant ainsi la déﬁnition de treillis de concepts. Dans le cas de la
+conﬂuence de graphe illustrée ci-dessus, les extensions locales sont simplement les
+composantes connexes des sous-graphes déﬁnis par les motifs. Nous déﬁnissons main-
+tenant plus précisément la notion de cc-conﬂuence.
+
+4.1 Cc-conﬂuences
+
+Nous remarquons d’abord que l’intersection de plusieurs conﬂuences est encore une
+
+conﬂuence :
+Proposition 7 Soit F1 et F2 des conﬂuences d’un treillis X, alors F1 ∩ F2 est une
+conﬂuence de X.
+
+Et les abstractions d’un treillis X étant des conﬂuences de X contenant le minimum
+de X comme unique élément minimal, en faisant l’intersection d’une conﬂuence et
+d’une abstraction nous obtenons encore une conﬂuence.
+
+Etant donné un graphe G = (O, E), nous pouvons alors construire un ensemble
+de conﬂuences, que nous appellerons les cc-conﬂuences de G. Une cc-conﬂuence est
+obtenue à partir de :
+
+— La conﬂuence F des sous-ensembles de sommets connexes de G.
+— Une abstraction de graphe A de G
+
+FA = F ∩ A est alors la cc-conﬂuence de G associée à A.
+
+Si on reprend l’exemple 3, F 1+3 est obtenue en considérant l’abstraction A des
+sous-ensembles de sommets contenant 1 ou 3 10. F 1+3 est donc une cc-conﬂuence de G.
+Si on considère l’abstraction k-clique, on obtient la cc-conﬂuence des sous-ensembles
+de sommets connexes dont le graphe induit est constitué de k-cliques.
+10. La propriété caractéristique de cette abstraction est : P (x, e) est vraie si x ∈ e et e contient
+1 ou 3.
+
+19
+
+Une remarque importante concernant les cc-conﬂuences est que lorsqu’on déﬁnit
+les opérateurs de fermeture locaux on peut se contenter de ne considérer que les som-
+mets, plutôt que tous les éléments minimaux de la cc-conﬂuence. Cela vient du fait que
+tous les éléments minimaux m d’une conﬂuence F contenus dans e conduisent à une
+projection pm(e) potentiellement différente et à un motif fermé local. Cependant dans
+une cc-conﬂuence, un sous-ensemble de sommets e est projeté sur les composantes
+connexes du sous-graphe abstrait, on n’aura donc besoin que de la composante connexe
+du sous-graphe abstrait associé à chaque sommet s pour calculer les extensions locales
+et fermés locaux, ce qui amène à la notation ps(e) = pm(e) bien que s ne soit pas
+un élément de F mais un sommet. Ceci est important aussi bien du point de vue com-
+binatoire que du point de vue du calcul : ainsi si on considère les sous-ensembles de
+sommets connexes de taille au moins l dans un graphe de n sommets, le nombre d’élé-
+ments minimaux peut-être beaucoup plus grand que n, il n’y aura pourtant pas plus de
+n fermés locaux à considérer pour un motif donné.
+
+4.2
+
+Implications locales dans une cc-conﬂuence
+
+L’inclusion des extensions locales conduit à la déﬁnition d’implications locales
+2mq → 2mw où m est un élément minimal de FA, que l’on peut également écrire
+dans le cas des cc-conﬂuences 2sq → 2sw, où s est un sommet de m, Remarquons
+que, comme dans le cas des implications abstraites, les opérateurs intérieurs étant mo-
+notones, si l’implication abstraite 2q → 2w est valide et m ⊆ extA(w) alors 2sq →
+2sw est aussi valide : l’implication locale peut-être déduite de l’implication abstraite,
+le contraire n’étant pas vrai. Intuitivement, cela traduit le fait que si on considère que les
+sommets d’un groupe abstrait ayant q ont aussi w alors cela reste vrai lorsque ces som-
+mets sont dans une même composante connexe. Ainsi, si en se limitant aux k-cliques
+l’implication est valide, elle le reste dans chaque composante connexe du sous-graphe
+de q, abstrait selon les k-cliques, Nous donnons ci-dessous un exemple d’implication
+locale dans une cc-conﬂuence de triangles.
+
+Example 4. Considérons le graphe attribué de la ﬁgure 8. La cc-conﬂuence associée à
+l’abstraction 3-clique a comme éléments minimaux {123, 567, 678}. Elle est constituée
+de 4 éléments : FA = {123, 567, 678, 5678}. L’extension du motif b coincide avec
+son extension abstraite 123678. Le fermé abstrait est également b : ces sommets ont
+seulement b en commun. Cependant le sous-graphe abstrait induit est constitué de deux
+composantes connexes 123 et 678 et la seconde a comme motif fermé local bc. On a
+ainsi une implication locale à 678 qui est valide :
+
+— 2A
+Dans une cc-conﬂuence on peut interpréter la règle relativement aux sommets de
+s : un triangle dans la même composante connexe que 6, lorsqu’on se restreint au sous-
+graphe de b, a aussi c, ce que l’on écrit 2A
+6 bc Nous dirons plus simplement « un
+triangle près de 6 qui a b a aussi c ». Ici l’expression « près de »est relative à la prémisse
+de l’implication.
+
+6 b → 2A
+
+678b → 2A
+
+678bc
+
+Comme pour les implications abstraites, on cherchera à déﬁnir une base d’implica-
+tions locales B associée à une cc-conﬂuence, à partir de laquelle on pourra engendrer
+
+20
+
+FIGURE 8. Le sous-graphe abstrait selon les triangles du motif b et ses deux composantes
+connexes en gras. Le sous-graphe en bleu à gauche est aussi le sous-graphe abstrait (ici connexe)
+du motif a
+
+toutes les implications locales valides sur FA. Pour cela nous devons maintenant consi-
+dérer une base Bm chaque élément minimal de FA, ou de manière équivalente pour
+chaque sommet. Nous obtiendrons la base complète B = ∪Bm en faisant l’union de
+ces bases.
+
+ml | où c est un fermé abstrait , l est un fermé local , c (cid:54)=
+
+m(c)}
+
+Considérons un motif fermé abstrait c dont l’extension abstraite contient un groupe
+abstrait m de la cc-conﬂuence FA et soit l = fm(c) le motif fermé associé, c’est-à-
+dire le motif le plus spéciﬁque de la composante connexe contenant m. L’implication
+2mc → 2ml est alors valide. Parmi ces implications nous retiendrons dans Bm celles
+qui sont à la fois informatives (l (cid:54)= c) et non-redondantes au sens où il n’existe pas
+d’autre implication 2mc(cid:48) → 2ml avec c(cid:48) plus général que c dans l’ensemble de ces
+implications. De Bm nous pouvons déduire toutes les implications locales associées à
+m en appliquant les mêmes axiomes logiques utilisés pour déﬁnir la base min-max dans
+les cadres classiques ou abstraits. La base B = ∪Bm représente la connaissance locale
+dérivée de la réduction de l’espace extensionnel abstrait A à la cc-conﬂuence FA :
+Deﬁnition 9 (Base locale min-max) MFA = {2A
+m(l), et pour tout c(cid:48) ⊂ c on a extA
+l, extA
+
+mc → 2A
+m(c(cid:48)) (cid:54)= extA
+
+m(c) = extA
+
+Comme dans le cas abstrait nous mesurons ici les motifs fermés abstraits ainsi que
+les implications locales [20]. La démarche est analogue à celle utilisée dans le cas abs-
+trait. Un motif fermé local étant associé à une extension locale, nous allons considérer le
+rapport entre l’extension locale et l’extension abstraite. S’il est élevé le sous-graphe in-
+duit est essentiellement constitué de cette extension locale, autrement dit le motif n’est
+pas dispersé entre plusieurs régions denses mais spéciﬁque à la composante connexe
+considérée.
+Deﬁnition 10 Soit un motif q, F une cc-conﬂuence et m ∈ F tel que m ⊆ extA(q), la
+spéciﬁcité de q près de m est déﬁnie par :
+
+sF (q, m) =
+
+| extA
+m(q) |
+| extA(q) |
+
+Comme dans le cas abstrait nous mesurons l’informativité d’une implication locale
+relativement à l’implication globale (ici abstraite) correspondante. L’idée ici est que
+dans une implication locale valide, les motifs gauche et droit ont même extension locale
+
+1ab2ab3ab4ac5ac6bc7abc8bcalors que leurs extensions abstraites sont différentes. On estimera donc la probabilité,
+au niveau abstrait, de ne pas avoir la partie droite lorsque la partie gauche est vraie,
+alors que cette probabilité est estimée à 0 au niveau local :
+
+21
+
+Deﬁnition 11 (Informativité d’une implication locale r : 2A
+
+mq → 2A
+
+mqw)
+
+IF (r) = 1 − | extA(qw) |
+| extA(q) |
+
+Lorsque les parties gauche et droite ont même extension abstraite, on n’apprend rien
+de cette implication locale : elle était déjà valide au niveau abstrait. Si l’informativité
+est proche de 1 cela signiﬁe que la probabilité d’avoir la partie droite au niveau abstrait
+est faible : le fait de déduire w de q est spéciﬁque de la région du graphe où se trouve
+m.
+
+Example 5. Nous continuons sur l’exemple 4 illustré ﬁgure 8. La spéciﬁcité locale à
+678 du motif fermé local bc est sF (bc, 678) = 3 ÷ 3 = 1 : ce motif n’apparait dans
+l’extension abstraite qu’en 678. L’informativité de l’implication 2A
+678bc est
+de 1 − (2 ÷ 6) = 0, 5 : l’extension abstraite de b est de 6 mais seulement 3 sommets
+ont le motif fermé local bc. En ce qui concerne le motif fermé local ab, il est aussi de
+spéciﬁcité 1 : on ne trouve ab que dans la composante connexe 123 de son sous-graphe
+abstrait, et donne lieu à une autre implication locale 2A
+123ab d’informativité
+aussi égale à 0, 5. On a ainsi des connaissances locales nouvelles associées au même
+motif fermé abstrait b mais portant sur des régions différentes du graphe.
+
+678b → 2A
+
+123b → 2A
+
+Nous revenons à la question posée lors de nos expériences sur le jeu de données
+DBLP de la section 3.4 et concernant le motif fermé abstrait DMKD, IDArev, relati-
+vement à l’abstraction degré ≥ 4, dont l’extension abstraite est représentée en rouge
+ﬁgure 1. Si on considère la composante connexe sur la gauche de la ﬁgure, nous ob-
+tenons l’implication locale DMKD,IDArev →268924 DMgroup spéciﬁant que dans la
+composante connexe du sous-graphe abstrait de DMKD,IDArev à laquelle appartient
+l’auteur 268924 11, les auteurs ont aussi publié dans des conférences appartenant au
+groupe DMgroup.
+
+Si on considère le jeux de données s50 dont le graphe est représenté ﬁgure 2, il est
+clair que les relations d’amitié sont organisées préférentiellement en triangles et toute
+abstraction plus forte, par exemple degré ≥ 3, perdra une grande partie du graphe.
+Cependant comme mentionné dans l’introduction, nous observons, pour le motif vide,
+une grande composante connexe qu’il serait intéressant de décomposer en communau-
+tés chevauchantes (en couleur sur la ﬁgure). Dans ce qui suit nous montrons comment
+la méthodologie des extensions locales peut s’appliquer pour découvrir de telles sous-
+communautés dans un graphe attribué, en déﬁnissant les cc-conﬂuences sur un graphe
+dérivé du graphe original.
+
+11. Rappelons que dans une cc-conﬂuence, pour un motif donné, on peut se référer pour une
+extension locale à un sommet s comme à un groupe connexe m de FA qui le contient : une
+extension locale est une composante connexe et si elle contient s elle contient tout m dans lequel
+le motif apparaît.
+
+22
+
+5 Cc- conﬂuences dans un graphe dérivé
+
+Dans ce qui suit nous considérons une famille T ⊆ 2O de sous-ensembles de som-
+mets et un graphe GT = (T, ET ) dérivé de G. La conﬂuence de graphe F ⊆ 2T est
+alors le nouvel espace extensionnel permettant de déﬁnir les motifs fermés locaux. Les
+extensions locales dans F seront retranscrites dans 2O.
+Soit u : 2T → 2O telle que u(eT ) = ∪t∈eT t. u(eT ) est appelé l’aplatissement de
+— extT : L → 2T avec extT (q) = {t|t ⊆ ext(q)}
+— intT : 2T → L avec intT (eT ) = int ◦ u(eT )
+
+eT . Nous considérons alors les deux fonctions extT et intT déﬁnies comme suit :
+
+extT (q) est l’extension de q dans T quand on considère que q a une occurrence dans
+t lorsque q a une occurrence dans tous les sommets de t. Inversement intT (eT ) est le
+motif le plus spéciﬁque de L dont l’extension dans T contient eT , c’est-à-dire dont
+l’extension dans O contient, en tant que sous-ensembles, les sommets dans GT de eT .
+Considérons en particulier la famille T des k-cliques de G et posons que (t1, t2)
+forment une arête dans GT lorsque t1 et t2 partagent k − 1 sommets dans G. Une
+k-communauté de G, telle qu’elle est déﬁnie dans [11], est alors l’aplatissement (au
+sens déﬁni ci-dessus) d’une composante connexe de GT . Nous allons nous intéresser
+aux sous-communautés induites par les extensions des motifs de L, autrement dit aux k-
+communautés des sous-graphes induits par ces motifs. Les motifs fermés locaux sont les
+motifs les plus spéciﬁques partagés au sein de ces k-sous-communautés. Nous obtenons
+ainsi une base d’implications associées à ces k-sous-communautés.
+
+5.1 Expériences sur les 3-sous-communautés de jeu de données s50
+
+Nous avons construit le graphe dérivé GT , où T est l’ensemble des triangles du
+graphe d’amitiés entre élèves représenté ﬁgure 2. Nous représentons ﬁgures 9 et 10
+l’ordre partiel des 3-sous-communautés de taille au moins 4 12. Les plus petites 3-sous-
+communautés sont en bas dans les deux ﬁgures. Chaque 3-sous-communauté et son
+motif fermé local peuvent être associés à plusieurs implications locales. C’est ce qui
+se produit pour la 3-sous-communauté représentée en bas à droite de la ﬁgure 9 où les
+deux implications locales sont associées à des fermés abstraits différents (relativement à
+l’abstraction de triangle). Chaque cadre montre en rouge et gras la 3-sous-communauté,
+et en rouge ou noir et en trait plein l’extension abstraite associée à la partie gauche de
+l’implication locale. Dans la ﬁgure 10 nous avons une 3-communauté maximale unique
+en haut, et en dessous la hiérarchie de ses 3-sous-communautés.
+
+6
+
+Implementation
+
+Dans nos expériences sur les abstractions de graphes nous avons d’abord utilisé
+le logiciel CORON[23] pour calculer les motifs fermés fréquents, puis appliqué un
+
+12. Nous éliminons ainsi les sous-graphes connexes de GT dont la taille, en nombre de som-
+
+mets dans le graphe d’origine, est inférieure à 4.
+
+23
+
+FIGURE 9. L’ordre partiel selon l’inclusion des 3-sous-communautés du graphe d’amitié S50 de
+taille au moins 4 (partie-I). Les 3-sous-communautés sont en rouge et en gras et ordonnées de
+haut en bas, des plus grandes aux plus petites. Les sous-graphes abstraits sont en trait plein. En
+bas à droite, une sous-communauté associée à deux règles locales
+
+□{}↓□{��}□{���}↓□{��������������}□{}↓□{��������}□{��}↓□{����������}□{���}↓□{����������}□{}↓□{�������}□{}↓□{���������}24
+
+FIGURE 10. Les 3-sous-communautés du graphe d’amitié de taille au moins 4 (partie-II). Cette
+partie a un plus grand élément (en haut) qui se décompose, en descendant, en sous-communautés
+chevauchantes
+
+□{}↓□{�����}□{�����}↓□{�����������}□{�����������}↓□{����������}□{�����}↓□{�����������}□{��}↓□{��������}□{���������}↓□{���������}□{����}↓□{����������}□{������������}↓□{��������������}25
+
+ensemble de fonctions PYTHON en post-traitement 13. Le post-traitement permet de
+calculer pour chaque motif fermé fréquent c le sous-graphe induit par son extension
+abstraite, calculer les motifs fermés abstraits associés et la base min-max abstraite.
+
+En ce qui concerne les fermés locaux et les bases d’implications locales, nous
+avons proposé et implémenté un algorithme efﬁcace, utilisant une stratégie de parti-
+tionnement similaire à celle proposée dans [6] et implémentée par B. Negrevergne et
+co-auteurs dans le programme PARAMINER [10]. Une première version de l’algo-
+rithme, nommée ParaminerLC, est décrite et expérimentée dans [21]. Elle permet le
+calcul efﬁcace des fermés locaux et implications locales associées à l’ensemble des 3-
+sous-communautés 14. La base des règles locales mini-max est calculée a posteriori.
+La ﬁgure 11 résulte de l’exécution de ParaminerLC sur le jeu de données DBLP. Elle
+#c,
+présente le temps CPU t (à gauche) ainsi que le temps CPU par motif fermé abstrait
+en fonction du seuil de fréquence minimal, exprimé en nombre de sommets requis dans
+une 3-sous-communauté. On constate sur la courbe du temps CPU par motif fréquent
+que celui-ci décroît avec le seuil de fréquence, montrant l’efﬁcacité de ParaminerLC
+lorsque il doit produire un grand nombre d’implications locales. Le nombre d’implica-
+tions varie ici de 425, pour un seuil de fréquence de 200, à 31 067, pour un seuil de
+fréquence de 10.
+
+t
+
+FIGURE 11. Temps CPU total (gauche) et temps CPU par motif fermé abstrait (droite) en fonc-
+tion du seuil de fréquence
+
+Enﬁn, nous développons actuellement, sur le même schéma algorithmique, mi-
+nerLC, un programme plus versatile, permettant d’avoir en entrée les abstractions de
+graphe et cc-conﬂuences choisies, pour le calcul des fermés abstraits et locaux, et des
+implications locales associées, y compris dans le cas des 3-sous-communautés. Ce pro-
+gramme est entouré d’une suite de fonctions PYTHON permettant les pré-traitements
+et post-traitements, et en particulier le calcul des spéciﬁcités et informativités abstraites
+et locales.
+
+13. Le logiciel correspondant est à l’adresse https://lipn.univ-paris13.fr/
+
+~santini/ .
+
+14. ParaminerLC est disponible à l’adresse https://lipn.univ-paris13.fr/
+
+~bouthinon/.
+
+◆◆◆◆◆◆◆2001005010ls100200300400500t(ins.)◆◆◆◆◆◆◆2001005010ls0.10.20.30.40.50.60.7t#c(ins.)26
+
+7 Conclusion
+
+Dans cet article nous proposons une méthodologie de fouille de graphes attribués
+étendant à ce contexte les notions de motifs fermés et d’ensembles ordonnés de paires
+(extension, motif fermé) proposées par l’analyse formelle de concept. L’adaptation aux
+graphes attribués est sous-tendue par l’intuition du rôle joué par les relations entre les
+objets dans le graphe : en s’intéressant à des parties denses du sous-graphe induit par
+un motif donné, on rend plus grossière la relations d’équivalence entre motifs de même
+extension. On diminue ainsi le nombre de paires (extension, motif fermé) et on fait
+apparaitre des implications qui ne sont pas valides, si on considère l’extension indé-
+pendamment du graphe, mais qui le deviennent lorsqu’on restreint les extensions en les
+rendant abstraites (les sommets peu connectés sont éliminés des extensions) ou locales
+(la validité est alors restreinte à des régions du graphe).
+
+La méthodologie distingue les aspects globaux et locaux des motifs et règles à ex-
+traire. Au niveau global il s’agit d’extraire les motifs fermés abstraits. Un tel motif est
+ici le plus spéciﬁque commun aux sommets lorsque l’on réduit le sous-graphe induit
+par un motif à son noyau selon une certaine propriété topologique. Au niveau local,
+on s’intéresse aux motifs les plus spéciﬁques associés aux composantes connexes d’un
+sous-graphe réduit du graphe d’origine ou d’un graphe dérivé de celui-ci.
+
+Nous avons décrit les adaptations de ces notions de fermeture, et d’implications,
+conduisant à des structures d’ordre partielles nouvelles en ce qui concerne les notions
+locales, proposé des mesures d’intérêt des motifs et implications abstraits et locaux,
+et illustré sur deux jeux de données la nature des connaissances nouvelles ainsi décou-
+vertes. En particulier nous avons montré comment, en jouant sur le niveau d’abstraction,
+et sur le graphe lui-même, on pouvait explorer de différentes manières un même graphe
+attribué. Ceci a conduit en particulier à ordonner l’ensemble des k-sous-communautés
+associées aux sous-graphes induits par les motifs, et à leur associer des motifs maxi-
+maux ainsi que des implications. Un des intérêts de cette formulation reposant sur les
+ensembles ordonnés, est que l’algorithmique qui en découle est relativement simple et
+versatile, les mêmes schémas permettant d’énumérer les motifs et implications avec
+des points de vue et des niveaux d’abstraction assez différents. La contre-partie de cette
+ﬂexibilité est que l’on multiplie les choix à faire pour examiner le graphe. On pourra ce-
+pendant pour cela s’aider a posteriori des mesures d’intérêt décrites ci-dessus, et adapter
+a priori l’analyse à un point de vue privilégié. Ainsi, dans le cas des réseaux d’amitié ou
+d’afﬁnités, comme le montre l’exemple du jeu de données S50, le triangle joue un rôle
+prépondérant. En revanche dans un réseau de co-auteurs on aura des structures denses
+à plusieurs échelles, ce que peut révéler une analyse en k-core, ou chercher des auteurs
+dominants au moyen d’abstractions de type nearStar(k, d), que nous sommes en train
+d’examiner expérimentalement.
+
+En résumé, nous espérons que cette nouvelle méthodologie permettra d’organiser
+la fouille de graphes attribués, en suivant ou se démarquant des notions de fermetures
+abstraites et locales proposées ici. Nous nous proposons de continuer cette exploration
+dans deux directions, d’abord en adaptant les notions d’abstraction et de localité aux
+graphes dirigés, ce qui permettra de traiter directement des graphes de citation ou de
+régulation, par exemple, puis en élargissant ces notions aux réseaux multiplexes, ces
+
+27
+
+derniers étant constitués de plusieurs couches, chacune dédiée à un type de lien parti-
+culier, et exprimant ainsi un certain prédicat binaire [5].
+
+Références
+
+1. Balasundaram, B., Butenko, S., Trukhanov, S. : Novel approaches for analyzing biological
+
+networks. Journal of Combinatorial Optimization 10(1), 23–39 (2005)
+
+2. Barabàsi, A.L., Albert, R. : Emergence of scaling in random networks. Science 286(5439),
+
+509–512 (1999)
+
+3. Batagelj, V., Zaversnik, M. : Fast algorithms for determining (generalized) core groups in
+
+social networks. Adv. Data Analysis and Classiﬁcation 5(2), 129–145 (2011)
+
+4. Bechara Prado, A., Plantevit, M., Robardet, C., Boulicaut, J.F. : Mining Graph Topological
+Patterns : Finding Co-variations among Vertex Descriptors. IEEE Transactions on Know-
+ledge and Data Engineering 25(9), 2090–2104 (2013)
+
+5. Berlingerio, M., Coscia, M., Giannotti, F., Monreale, A., Pedreschi, D. : Multidimensional
+
+networks : foundations of structural analysis. World Wide Web 16(5-6), 567–593 (2013)
+
+6. Boley, M., Horváth, T., Poigné, A., Wrobel, S. : Listing closed sets of strongly accessible set
+
+systems with applications to data mining. Theor. Comput. Sci. 411(3), 691–700 (2010)
+
+7. Fortunato, S. : Community detection in graphs. Physics Reports 486(3–5), 75 – 174 (2010)
+8. Galbrun, E., Gionis, A., Tatti, N. : Overlapping community detection in labeled graphs. Data
+
+Min. Knowl. Discov. 28(5-6), 1586–1610 (2014)
+
+9. Mougel, P.N., Rigotti, C., Gandrillon, O. : Finding collections of k-clique percolated com-
+ponents in attributed graphs. In : PAKDD(2), Advances in Knowledge Discovery and Data
+Mining - 16th Paciﬁc-Asia Conference, PAKDD 2012, Kuala Lumpur, Malaysia, May 29 -
+June 1, 2012. Lecture Notes in Computer Science, vol. 7302, pp. 181–192. Springer (2012)
+10. Negrevergne, B., Termier, A., Rousset, M.C., Méhaut, J.F. : Paraminer : a generic pattern
+mining algorithm for multi-core architectures. Data Mining and Knowledge Discovery 28(3),
+593–633 (2013)
+
+11. Palla, G., Derenyi, I., Farkas, I., Vicsek, T. : Uncovering the overlapping community structure
+
+of complex networks in nature and society. Nature 435(7043), 814–818 (Jun 2005)
+
+12. Pasquier, N., Taouil, R., Bastide, Y., Stumme, G., Lakhal, L. : Generating a condensed repre-
+sentation for association rules. Journal Intelligent Information Systems (JIIS) 24(1), 29–60
+(2005)
+
+13. Pernelle, N., Rousset, M.C., Soldano, H., Ventos, V. : Zoom : a nested Galois lattices-based
+system for conceptual clustering. J. of Experimental and Theoretical Artiﬁcial Intelligence
+2/3(14), 157–187 (2002)
+
+14. Seidman, S.B. : Network structure and minimum degree. Social Networks 5, 269–287 (1983)
+15. Silva, A., Meira, Jr., W., Zaki, M.J. : Mining attribute-structure correlated patterns in large
+
+attributed graphs. Proc. VLDB Endow. 5(5), 466–477 (Jan 2012)
+
+16. Soldano, H. : A modal view on abstract learning and reasoning. In : Genesereth, M., Revesz,
+P.Z. (eds.) Ninth Symposium on Abstraction, Reformulation, and Approximation, SARA
+2011, Cardona, Catalonia, SPAIN. pp. 99–106. AAAI Press (July 2011)
+
+17. Soldano, H. : Extensional conﬂuences and local closure operators. In : Baixeries, J., Saca-
+rea, C., Ojeda-Aciego, M. (eds.) Formal Concept Analysis - 13th International Conference,
+ICFCA 2015, Nerja, Spain, June 23-26, 2015, Proceedings. Lecture Notes in Computer
+Science, vol. 9113, pp. 128–144. Springer (2015)
+
+28
+
+18. Soldano, H. : Motifs fermés et abstraction : au delà des treillis. Revue d’Intelligence Artiﬁ-
+
+cielle 29(3-4), 321–348 (2015)
+
+19. Soldano, H., Santini, G. : Graph abstraction for closed pattern mining in attributed network.
+In : Schaub, T., Friedrich, G., O’Sullivan, B. (eds.) European Conference in Artiﬁcial Intel-
+ligence (ECAI). Frontiers in Artiﬁcial Intelligence and Applications, vol. 263, pp. 849–854.
+IOS Press (2014)
+
+20. Soldano, H., Santini, G., Bouthinon, D. : Abstract and local rule learning in attributed net-
+works. In : Esposito, F., Hacid, M.S., Pivert, O., Ras, Z. (eds.) Foundations of Intelligent
+Systems 22nd International Symposium, ISMIS. LNAI, vol. 9384, pp. 313–323. Springer,
+Lyon, France (October 21-23 2015)
+
+21. Soldano, H., Santini, G., Bouthinon, D. : Local knowledge discovery in attributed graphs. In :
+Esposito, A. (ed.) 27th IEEE International Conference on Tools with Artiﬁcial Intelligence,
+ICTAI, Vietri sul Mare, Italy. pp. 250–257. IEEE Computer Society (November 9-11 2015)
+22. Soldano, H., Ventos, V. : Abstract Concept Lattices. In : Valtchev, P., Jäschke, R. (eds.)
+International Conference on Formal Concept Analysis (ICFCA). LNAI, vol. 6628, pp. 235–
+250. Springer, Heidelberg (2011)
+
+23. Szathmary, L., Napoli, A. : Coron : A framework for levelwise itemset mining algorithms.
+In : Ganter, B., Godin, R., Nguifo, E.M. (eds.) Third International Conference on For-
+mal Concept Analysis (ICFCA’05), Lens, France, Supplementary Proceedings. pp. 110–113
+(2005)
+
+

@@ -1,0 +1,1157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Trans SYSTEM "trans-14.dtd">
+<Trans audio_filename="20140919-screen" version="4" version_date="170613">
+<Speakers>
+<Speaker id="spk1" name="Locuteur 1" type="male" dialect="native" accent="" scope="local"/>
+</Speakers>
+<Episode>
+<Section type="report" startTime="0" endTime="2248.528">
+<Turn startTime="0.0" speaker="spk1" endTime="2248.528" mode="planned" fidelity="high" channel="studio">
+<Sync time="0.0"/>
+
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ du cours d'introduction à l'informatique qui porte sur les structures de contrôle,
+<Sync time="3.620"/>
+où on va répondre principalement à la question : comment peut-on faire pour répéter une instruction, 
+<Sync time="8.084"/>
+et comment peut-on faire pour éviter de d'exécuter une in() certaine instru() instruction ?
+<Sync time="14.731"/>
+commençons par un petit rappel :
+<Sync time="16.627"/>
+l'organisation basique d'un algorithme, qui est une suite d'instructions, est le séquencement. autrement dit
+<Sync time="22.471"/>
+quand on écrit
+<Sync time="24.154"/>
+l'instruction a suivi de l'instruction b,
+<Sync time="27.006"/>
+alors on exécute d'abord l'instruction a puis on exécute instruction b en se servant des résultats obtenus après exécution de l'instruction a.
+<Sync time="35.320"/>
+si on prend cet exemple-là,
+<Sync time="37.799"/>
+on voit très bien que ces deux algorithmes sont différents puisque les deux dernières instructions
+<Sync time="42.894"/>
+ont été euh inversées,
+<Sync time="45.385"/>
+ce qui se remarque très très bien quand on construit les historiques d'exécution de ces deux algorithmes
+<Sync time="51.130"/>
+où pour le premier algorithme, on va avoir un résultat final
+<Sync time="55.61"/>
+euh de
+<Sync time="57.231"/>
+douze pour la valeur de la variable a et dix-sept pour la valeur de la variable b,
+<Sync time="63.285"/>
+et pour le deuxième algorithme, on aura dix-neuf comme valeur de la variable a et douze comme valeur *pour la variable b,
+<Sync time="69.641"/>
+ce qui démontre bien que l'ordre d'exécution des instructions est très important.
+<Sync time="75.445"/>
+alors évidemment, c'est insuffisant quand on cherche à programmer des choses un peu plus compliquées.
+<Sync time="82.036"/>
+et on a souvent envie de faire deux choses :
+<Sync time="84.735"/>
+premièrement, on n'a pas toujours envie de faire la même chose, autrement dit on a envie d'exécuter un certain nombre d'instructions
+<Sync time="90.829"/>
+sous certaines conditions ;
+<Sync time="92.914"/>
+ça donnera lieu à une première structure de contrôle.
+<Sync time="96.135"/>
+la deuxième chose qu'on a envie de faire, c'est souvent de répéter ou d'itérer plusieurs fois la même chose
+<Sync time="101.730"/>
+plu() plusieurs fois le même bloc d'instructions. ça, ça donnera lieu à une deuxième famille de structures de contrôle
+<Sync time="107.482"/>
+qui sont les répétitions.
+<Sync time="111.380"/>
+modifier l'ordre naturel des instructions se fait donc à l'aide de structures de contrôle, qu'on appellera les structures conditionnelles
+<Sync time="117.207"/>
+et et qu'on appellera les structures répétitives.
+<Sync time="120.911"/>
+on va commencer par les conditionnelles.
+<Sync time="123.011"/>
+donc dans cette partie, on va présenter la syntaxe, on va présenter comment ça s'utilise,
+<Sync time="127.68"/>
+on va parler de conditionnelles imbriquées, d'arbres de décision pour construire des conditions un peu plus complexes.
+<Sync time="135.040"/>
+les motivations qu'on peut voir aux conditionnelles, c'est par exemple lorsqu'on cherche à calculer la valeur absolue d'un nombre
+<Sync time="142.033"/>
+alors la manière simple de la calculer, c'est
+<Sync time="144.847"/>
+d'inverser s() de prendre l'opposé de sa valeu() de de la valeur du nombre quand ce nombre est négatif
+<Sync time="150.825"/>
+donc on a une instruction qui calcule l'inverse de x
+<Sync time="154.403"/>
+qu'on doit exécuter que quand x est négatif.
+<Sync time="158.022"/>
+quand on cherche à afficher l'inverse d'un nombre,
+<Sync time="161.396"/>
+alors on va () on doit voir s() on doit se poser la question de : qu'est-ce que c'est que l'inverse de un plus () un sur zéro ? et on doit faire un cas particulier de ce de ce de ce traitement-là.
+<Sync time="170.841"/>
+donc
+<Sync time="171.695"/>
+en gros, dans tous les cas où il y a un traitement alternatif,
+<Sync time="175.37"/>
+il y a besoin d'une structure de contrôle adaptée qui permet ce traitement alternatif.
+<Sync time="181.260"/>
+la structure de contrôle s'appelle une conditionnelle ou encore une alternative, puisqu'on va avoir *l'alternative entre deux
+<Sync time="187.710"/>
+possibilités.
+<Sync time="190.347"/>
+la syntaxe est donnée par
+<Sync time="192.639"/>
+ce que vous voyez en gras, donc si entre *parenthèses une condition
+<Sync time="197.1"/>
+qui sera vérifiée, vraie ou fausse
+<Sync time="199.669"/>
+si la condition est vraie,
+<Sync time="201.534"/>
+alors on va exécuter un certain type d'instructions
+<Sync time="204.982"/>
+si un () si la condition est fausse, alors on va exécuter un autre type d'instructions :
+<Sync time="209.422"/>
+les instructions du sinon.
+<Sync time="211.231"/>
+*alors prenons un exemple :
+<Sync time="213.423"/>
+euh la condition peut être une condition sur l'âge, par exemple, et si on prend cette condition sur l'âge
+<Sync time="219.985"/>
+alors si l'âge est inférieur à dix-huit ans,
+<Sync time="222.433"/>
+on est mineur,
+<Sync time="223.772"/>
+sinon on est majeur ; et il y aura deux traitements différents.
+<Sync time="230.520"/>
+ce qu'il faut noter, c'est que la condition peut être n'importe quelle expression
+<Sync time="234.457"/>
+qui peut être une expression complexe
+<Sync time="236.952"/>
+euh mais dont le résultat
+<Sync time="239.323"/>
+est un va() est un booléen.
+<Sync time="243.779"/>
+il y a des cas particuliers à l'alternative, s() ce cas pa() ces cas *particuliers s'appellent les conditionnelles simples
+<Sync time="249.726"/>
+s() ils sont ils sont euh
+<Sync time="251.919"/>
+évidents, ces cas particuliers, c'est que le sinon n'est pas toujours indispensable pour répondre à un problème.
+<Sync time="256.795"/>
+par exemple, quand on cherche à calculer l'opposé d'un n() le la valeur absolue d'un nombre,
+<Sync time="261.343"/>
+il suffit de tester si le nombre est négatif, et dans ce cas-là on a une instruction à exécuter quand il est négatif mais on n'a rien à faire quand il est positif.
+<Sync time="268.496"/>
+dans ce cas-là, on va utiliser plutôt une conditionnelle simple qui est un cas particulier
+<Sync time="272.414"/>
+de l'alternative pour lesquels on a supprimé le bloc de sinon ;
+<Sync time="276.070"/>
+autrement dit, le bloc de sinon est facultatif.
+<Sync time="281.920"/>
+en javascript,
+<Sync time="283.346"/>
+le si alors sinon va se traduire presque euh littéralement par un if
+<Sync time="289.153"/>
+else
+<Sync time="290.694"/>
+alors on traduira jamais le alors qui est implicite dans le langage, puisque le bloc est obligatoire
+<Sync time="296.911"/>
+et on traduit euh littéralement comme ceci : 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ s() if,
+<Sync time="302.074"/>
+la condition entre parenthèses,
+<Sync time="304.664"/>
+un bloc d'instructions
+<Sync time="307.330"/>
+qu'on va repérer par des accolades ouvrantes et fermantes,
+<Sync time="310.820"/>
+sinon, le bloc d'instructions qui va correspondre
+<Sync time="314.357"/>
+aux instructions du sinon, lui aussi délimité par des accolades ouvrantes et fermantes.
+<Sync time="319.331"/>
+alors évidemment
+<Sync time="320.935"/>
+dans le cas de la conditionnelle simple,
+<Sync time="322.830"/>
+le sinon est facultatif, mais le else du javascript est lui aussi facultatif
+<Sync time="328.586"/>
+donc on peut ne pas l'écrire
+<Sync time="330.519"/>
+et une conditionnelle simple se traduira en javascript par
+<Sync time="334.429"/>
+une conditionnelle avec une absence de else.
+<Sync time="340.810"/>
+on va maintenant parler des historiques d'exécution dans le cadre d'une conditionnelle.
+<Sync time="345.187"/>
+ceci va changer l'ordre dans lequel é() sont évaluées les instructions
+<Sync time="350.070"/>
+comment ça va se passer pour construire un historique d'exécution ?
+<Sync time="353.415"/>
+comme dans tous les cas, il faut numéroter les instructions.
+<Sync time="357.073"/>
+donc là j'ai euh cinq instructions à numéroter.
+<Sync time="360.866"/>
+et puis comme dans le le cas standard, il faut repérer les variables
+<Sync time="365.23"/>
+donc là il y en a deux : âge et statut. ce sont les variables qu'on va vouloir suivre.
+<Sync time="368.652"/>
+ceci nous permet de construire
+<Sync time="370.756"/>
+l'historique d'exécution
+<Sync time="372.475"/>
+qui sera un ensemble
+<Sync time="374.318"/>
+de lignes,
+<Sync time="375.456"/>
+chaque ligne correspondant à l'exécution d'une instruction
+<Sync time="378.029"/>
+et un ensemble de colonnes k() *où chaque colonne correspondra au suivi d'une variable.
+<Sync time="384.057"/>
+alors c'est facile de de voir ce qui se passe avant d'exécuter la première instruction, il y a il y a rien en mémoire donc euh les valeurs les variables sont non définies.
+<Sync time="392.272"/>
+après l'instruction un,
+<Sync time="395.764"/>
+ben là on on a un cas aussi particulier des historiques 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ d'exécution, c'est qu'on va demander à l'utilisateur de saisir une valeur. donc dans ce cas-là,
+<Sync time="402.738"/>
+il peut y avoir plusieurs historiques d'exécution possibles, et il faudra en tenir compte quand on les écrit.
+<Sync time="407.180"/>
+quand il y a plusieurs historiques d'exécution possibles,
+<Sync time="409.685"/>
+il faut en écrire () il faut
+<Sync time="411.618"/>
+écrire plusieurs historiques d'exécution.
+<Sync time="414.347"/>
+donc voilà, on en est on en est ici : on demande à l'utilisateur de saisir une valeur.
+<Sync time="418.333"/>
+premier cas :
+<Sync time="419.469"/>
+imaginons que l'utilisateur saisisse la valeur quinze.
+<Sync time="422.72"/>
+donc s'il saisit quinze,
+<Sync time="425.217"/>
+quand on passe à l'exécution de l'instruction deux, on commence l'exécution
+<Sync time="429.563"/>
+la première chose euh qu'on qu'on fait, c'est qu'on compare l'âge saisi avec la valeur dix-huit
+<Sync time="434.936"/>
+donc ici,
+<Sync time="436.441"/>
+il est inférieur, donc le test est vrai
+<Sync time="438.711"/>
+et on exécute les instructions du s() du signe () de du alors,
+<Sync time="442.740"/>
+*donc l'instruction trois.
+<Sync time="444.650"/>
+c'est ce qu'on repère sur la sur la ligne après trois
+<Sync time="448.999"/>
+et évidemment, ça change le statut
+<Sync time="450.96"/>
+de rien du tout en m() en mineur.
+<Sync time="453.068"/>
+on n'exécute pas l'instruction quatre
+<Sync time="455.431"/>
+et on passe directement à la fin de l'instruction, alors j'attire votre as() attention sur le fait que l'instruction deux
+<Sync time="462.210"/>
+ne se termine
+<Sync time="463.769"/>
+qu'ici, après avoir totalement réalisé le si.
+<Sync time="468.404"/>
+et enfin dernière ligne, c'est une c'est un affichage qui ne change pas les valeurs des variables.
+<Sync time="475.454"/>
+si l'utilisateur avait saisi une valeur plus grande que dix-huit, par exemple vingt et un
+<Sync time="481.572"/>
+alors
+<Sync time="483.783"/>
+l'instruction trois n'aurait pas été exécutée, l'instruction quatre aurait quant à elle été exécutée ; on aurait eu comme statut majeur
+<Sync time="490.559"/>
+et on aurait terminé l'instruction deux à ce moment-là.
+<Sync time="493.760"/>
+voilà, donc
+<Sync time="495.437"/>
+dans un historique d'exécution,
+<Sync time="497.060"/>
+on ne note effectivement que les instructions qui sont exécutées.
+<Sync time="504.170"/>
+là maintenant, on va voir ce qui se passe quand euh une alternative ne suffit pas pour prendre une décision.
+<Sync time="510.427"/>
+c'est le cas par exemple où il y a trois choix possibles : dans ce cas-là,
+<Sync time="514.104"/>
+il faut s'en() il faut se s'en sortir
+<Sync time="517.578"/>
+avec des alternatives pour faire pour
+<Sync time="520.708"/>
+pour prendre une décision entre trois ch() trois possibilités.
+<Sync time="524.700"/>
+bah ce qu'il va se passer, c'est que dans le alors ou dans le sinon, on peut mettre n'importe quel ch() n'importe quoi, notamment on peut mettre des si.
+<Sync time="532.295"/>
+donc on peut mettre des alternatives dans des alternatives
+<Sync time="536.379"/>
+ceci, ça s'appelle avoir des conditionnelles imbriquées.
+<Sync time="540.446"/>
+et des conditionnelles imbriquées, bah on va on va voir ça tout de suite mais ça sert à implémenter des arbres de décision, des arbres qui p() permettent de prendre des décisions par des suites
+<Sync time="548.723"/>
+de décisions élémentaires de type vrai ou faux.
+<Sync time="553.450"/>
+alors prenons un cas pratique : euh vous connaissez tous ce que c'est que le le ph
+<Sync time="557.603"/>
+un ph qui est une euh qui est une valeur réelle
+<Sync time="560.92"/>
+comprise entre zéro et quatorze, peut être soit basique, soit neutre, soit acide.
+<Sync time="566.594"/>
+trois () il y a il y a trois possibilités, donc on ne peut pas se servir d'une alternative pour les distinguer, ces trois possibilités.
+<Sync time="573.057"/>
+on peut résoudre cependant le problème en utilisant l'arbre de décision suivant
+<Sync time="577.781"/>
+qui teste d'abord si le ph est strictement plus petit que sept
+<Sync time="582.109"/>
+si c'est le si c'est le cas, alors
+<Sync time="584.490"/>
+la solution est acide.
+<Sync time="586.449"/>
+si ce n'est pas le cas, il reste deux possibilités : soit le ph est égal à sept, soit il est strictement plus grand que sept.
+<Sync time="592.778"/>
+et c'est le test qu'on réalise par la suite
+<Sync time="595.362"/>
+donc cet
+<Sync time="596.478"/>
+arbre de décision
+<Sync time="598.926"/>
+qui est une succession de prises de décision binaires permet de décider
+<Sync time="604.848"/>
+du caractère acide, basique ou neutre de la solution ; c'est ce qui s'appelle un arbre de décision.
+<Sync time="611.566"/>
+cet arbre de décision s'implémente très bien avec des si, alors, sinon, tout simplement en mettant un si dans le sinon
+<Sync time="618.248"/>
+du premier euh du premier si.
+<Sync time="620.15"/>
+c'est ce qui s'appelle une conditionnelle imbriquée.
+<Sync time="622.948"/>
+alors évidemment, on peut imbriquer des conditionnelles et imbriquer des conditionnelles et imbriquer des *conditionnelles pour prendre des décisions très très compliquées.
+<Sync time="632.030"/>
+j'attire votre attention là-dessus :
+<Sync time="634.097"/>
+j'ai pas écrit mon programme n'importe comment, j'ai fait attention à à bien aligner les alors et les sinon, à bien décaler les les si imbriqués les uns dans les autres ;
+<Sync time="642.241"/>
+tout ceci, ça s'appelle l'indentation.
+<Sync time="644.502"/>
+et avoir une bonne indentation, j'espère que vous en êtes convaincus, c'est primordial pour simplifier la lecture et même la compréhension d'un algorithme, et même d'un programme.
+<Sync time="655.303"/>
+donc je j() ce qu'on vous demande dans les td et en tp, c'est de soigner votre indentation pour que
+<Sync time="661.398"/>
+au moment du transfert de votre programme ou de votre algorithme
+<Sync time="665.685"/>
+à un de vos camarades ou à votre enseignant, il y ait pas de problèmes de compréhension,
+<Sync time="669.718"/>
+et donc pas de problèmes de notes.
+<Sync time="672.870"/>
+alors quelques mots sur les arbres de décision :
+<Sync time="675.432"/>
+les arbres de décision sont composés d'embranchements de type
+<Sync time="678.594"/>
+un test qui peut être vrai ou faux
+<Sync time="681.693"/>
+et après cet embranchement, soit on a pris la décision
+<Sync time="684.981"/>
+et on trace une feuille de l'arbre dans () de décision, soit on
+<Sync time="689.268"/>
+on ajoute ce qu'on appelle un noeud d'embranchements
+<Sync time="692.207"/>
+qui permet de prendre une nouvelle décision.
+<Sync time="694.057"/>
+donc c'est () ils décrivent euh exactement la succession de tests à réaliser pour prendre une décision qu'on pourra as() appeler complexe
+<Sync time="701.161"/>
+et souvent
+<Sync time="702.499"/>
+ce qu'on peut remarquer, c'est que il y a plusieurs manières de de concevoir cette prise de décision,
+<Sync time="707.783"/>
+et donc plusieurs arbres qui permettent de prè() de prendre la même décision.
+<Sync time="711.541"/>
+il suffit de réordonner les les tests, par exemple on aurait pu commencer par tester si la solution é() était euh avait un ph égal à sept,
+<Sync time="719.35"/>
+puis prendre une décision différente après.
+<Sync time="722.495"/>
+
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+
+<Sync time="723.886"/>
+la deuxième chose qu'il faut retenir, c'est que construire l'arbre de décision, c'est la partie difficile de la résolution du problème
+<Sync time="731.062"/>
+puisque on peut imaginer plein de manière quasi automatiques pour passer de l'arbre de décision à son écriture dans le langage algorithmique, et même dans le langage de programmation.
+<Sync time="739.866"/>
+alors si on p() on va prendre l'exemple sur le langage algorithmique :
+<Sync time="742.889"/>
+connaissant l'arbre de décision, il suffit d'écrire quelques petites choses
+<Sync time="746.770"/>
+si, des parenthèses, alors, sinon,
+<Sync time="749.823"/>
+finsi,
+<Sync time="751.965"/>
+et ensuite
+<Sync time="753.114"/>
+en parcourant l'arbre de décision et en écrivant tout ce qu'on lit sous le trait vert,
+<Sync time="758.729"/>
+alors on réussit
+<Sync time="760.886"/>
+à écrire la la partie algorithmique correspondante, et s() la partie sera bien écrite.
+<Sync time="766.441"/>
+si vous avez suivi convenablement ces étapes-là, la partie sera bien écrite. elle sera écrite comme ça : si entre parenthèses une expression booléenne, alors
+<Sync time="773.495"/>
+bla bla bla des instructions, sinon
+<Sync time="776.022"/>
+des instructions et finsi. et ça c'est une ex() c'est un une partie euh
+<Sync time="780.654"/>
+algorithmique valide. on peut faire la même chose dans dans le cas du langage de *programmation. donc
+<Sync time="785.448"/>
+vraiment, la partie difficile c'est construire l'arbre de décision. s() c'est pas
+<Sync time="789.553"/>
+c'est pas écrire le l'algorithme ou c'est pas écrire le programme.
+<Sync time="794.930"/>
+voilà, donc c'est tout ce que on voulait dire sur les les conditionnelles.
+<Sync time="798.909"/>
+après les conditionnelles, je vous ai parlé d'une deuxième structure de contrôle qui s'appelait les répétitives.
+<Sync time="803.444"/>
+alors dans cette partie, on va regarder la syntaxe, on va regarder les usages
+<Sync time="808.253"/>
+et puis on va euh voir ce qui se passe quand on met des
+<Sync time="811.784"/>
+des boucles dans des boucles, tout 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ tout comme on l'a fait quand on a parlé de conditionnelles.
+<Sync time="816.874"/>
+donc ça, on appellera ça des doubles boucles ou des triples boucles et cetera, ou des boucles imbriquées.
+<Sync time="822.516"/>
+les motivations euh à avoir des répétitions, ben c'est que on a très souvent envie de répéter 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ une ou plusieurs instructions
+<Sync time="831.004"/>
+ça, c'est un premier fait.
+<Sync time="832.840"/>
+dans les répétitions qu'on va vouloir faire, parfois on saura combien de fois on doit répéter les choses, mais parfois on l'ignorera.
+<Sync time="839.730"/>
+donc si je j'insiste là-dessus, c'est parce que on va présenter deux structures de contrôle répétitives ; chaque structure de contrôle répondra à une de ces problématiques.
+<Sync time="850.136"/>
+alors pourquoi on veut répéter les choses ? tout simplement parce qu'on n'a pas envie que nos algorithmes ressemblent à des choses comme ça
+<Sync time="855.766"/>
+donc por() par exemple pour calculer trois à la puissance dix,
+<Sync time="858.837"/>
+eh ben euh un exemple d'algorithme valide, c'est de faire x reçoit la valeur un, puis x reçoit la valeur trois fois x, puis x reçoit la valeur trois fois x, et puis ça on le fait dix fois
+<Sync time="868.490"/>
+et ça permet de calculer trois la puissance dix.
+<Sync time="871.080"/>
+et puis évidemment, si on avait voulu le faire pour trois à la puissance cinquante, ben il aurait fallu répéter cinquante fois la même instruction
+<Sync time="877.699"/>
+et euh c'est même encore pire quand on cherche à calculer trois à la puissance cent.
+<Sync time="882.904"/>
+donc ce dont on rêve, c'est d'écrire
+<Sync time="885.563"/>
+une seule fois x reçoit la valeur un,
+<Sync time="888.393"/>
+mais d'avoir une sorte de s()
+<Sync time="891.536"/>
+de mot-clé qui permet de répéter n fois
+<Sync time="894.996"/>
+une instruction.
+<Sync time="897.630"/>
+alors le mot-clé il existe, mais s'appelle pas répéter n fois
+<Sync time="902.830"/>
+il y en a deux, et le premier s'appelle pour.
+<Sync time="906.220"/>
+donc la boucle pour, c'est une boucle qui intègre un compteur de répétitions.
+<Sync time="910.589"/>
+c'est la boucle euh à utiliser quand on connaît à l'avance le nombre de tours de boucle qui doivent être réalisés.
+<Sync time="916.645"/>
+la syntaxe de cette boucle pour est la suivante : donc pour
+<Sync time="921.023"/>
+une variable
+<Sync time="922.435"/>
+qui va être finalement un compteur
+<Sync time="924.658"/>
+donc par exemple pour i
+<Sync time="927.115"/>
+le mot-clé allant de, une valeur de début entière à une valeur de fin entière
+<Sync time="932.521"/>
+faire, et là on écrit les instructions qu'on doit répéter.
+<Sync time="936.455"/>
+donc ça, c'est la syntaxe.
+<Sync time="938.150"/>
+on peut prendre un exemple : pour calculer trois à la puissance dix,
+<Sync time="942.340"/>
+il aurait fallu écrire : pour i allant de un à dix, faire x reçoit trois fois x.
+<Sync time="947.998"/>
+alors pourquoi une boucle pour plutôt qu'une boucle répéter ? ben tout simplement la boucle pour, avec sa variable supplémentaire,
+<Sync time="953.463"/>
+apporte une malléabilité euh très importante
+<Sync time="957.006"/>
+parce que la variable i, on peut s'en servir euh pour décrire les instructions.
+<Sync time="960.971"/>
+*donc ce n'est pas utile dans cet exemple-là, mais dans d'autres exemples c'est utile
+<Sync time="964.735"/>
+
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ alors euh ça, c'est c'est une première chose. euh ce qu'on aurait pu ce qu'on peut voir assez facilement, c'est que c'est bien
+<Sync time="971.471"/>
+d'avoir une boucle pour puisque l'algorithme est aussi long
+<Sync time="975.797"/>
+pour calculer trois à la puissance cent que pour calculer trois à la puissance dix. il suffit de changer dix en cent et on est () on a trois à la puissance cent. donc l'algorithme
+<Sync time="983.605"/>
+s'écrit de manière aussi courte
+<Sync time="986.845"/>
+que l'algorithme pour *calculer trois la puissance dix. et on peut même
+<Sync time="990.385"/>
+euh le faire pour n'importe quel n en demandant à l'utilisateur de saisir la valeur
+<Sync time="994.196"/>
+de de n, la valeur de la puissance.
+<Sync time="998.468"/>
+voilà
+<Sync time="1000.720"/>
+pourquoi la variable i est utile ? ben tout simplement parce qu'on peut l'utiliser, et ça c'est par exemple euh ce qu'on va chercher à faire quand on cherche à calculer
+<Sync time="1008.729"/>
+factoriel vingt.
+<Sync time="1010.039"/>
+factoriel vingt, c'est une première exécution de l'instruction
+<Sync time="1013.643"/>
+x reçoit un fois x, puis une euh une exécution de l'instruction x reçoit deux fois x, puis une ex()
+<Sync time="1019.948"/>
+puis x reçoit trois fois x, et cetera et cetera,
+<Sync time="1022.425"/>
+jusqu'à x reçoit vingt fois x.
+<Sync time="1024.185"/>
+donc l'instruction à répéter n'est pas la même,
+<Sync time="1027.020"/>
+mais on peut l'exprimer assez facilement en fonction de i, en fonction de l() de la valeur courante
+<Sync time="1032.3"/>
+de la variable de la boucle
+<Sync time="1033.883"/>
+qui vaudra successivement les valeurs un, deux, trois jusqu'à vingt.
+<Sync time="1039.716"/>
+donc la boucle pour est particulièrement adaptée à ces traitements.
+<Sync time="1044.158"/>
+i, c'est une variable entière
+<Sync time="1046.290"/>
+elle doit être déclarée dans l'algorithme
+<Sync time="1049.275"/>
+elle est incrémentée de un à chaque tour de boucle, c'est pour ça qu'on peut l'utiliser à l'intérieur de la boucle.
+<Sync time="1055.996"/>
+en javascript, ça s'écrit comme ça. alors la syntaxe est un petit peu particulière
+<Sync time="1059.622"/>
+en javascript et puis dans tous les langages qui ressemblent à
+<Sync time="1062.525"/>
+à à du c.
+<Sync time="1065.022"/>
+
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+
+<Sync time="1066.013"/>
+la traduction de pour, c'est for
+<Sync time="1067.981"/>
+pour le moment, il y a rien de difficile mais par contre ce qui est entre parenthèses
+<Sync time="1071.090"/>
+n'est pas si facile que ça à comprendre.
+<Sync time="1073.892"/>
+la variable
+<Sync time="1076.030"/>
+i () pardon, donc voilà un exemple
+<Sync time="1078.446"/>
+mais
+<Sync time="1079.219"/>
+la variable de boucle i
+<Sync time="1081.690"/>
+il y a un moment où il faut l'initialiser ; c'est le i allant de
+<Sync time="1085.450"/>
+alors là on va dire : i allant de un
+<Sync time="1088.910"/>
+et on n'écrit pas i allant de un dans () en javascript, *on écrit i re() a pour valeur un à l'initialisation
+<Sync time="1094.632"/>
+de la boucle. donc c'est l'affectation de la valeur de départ à la *variable de boucle.
+<Sync time="1098.682"/>
+la deuxième partie qu'on retrouve, c'est une expression booléenne qui est en fait un test de continuation
+<Sync time="1105.910"/>
+la b() on on restera dans la boucle tant que cette expression booléenne sera vraie
+<Sync time="1111.721"/>
+autrement dit on écrira, toujours dans notre cas, i inférieur ou égal à la valeur de fin.
+<Sync time="1118.867"/>
+et enfin le troisième bloc,
+<Sync time="1120.896"/>
+c'est une affectation qui décrit comment on va faire varier la variable de boucle à chaque tour de boucle.
+<Sync time="1126.220"/>
+autrement dit, on a une beaucoup plus grande mané() malléabilité des boucles du javascript
+<Sync time="1132.544"/>
+par rapport aux boucles euh du du langage algorithmique, mais c'est pas grave.
+<Sync time="1138.480"/>
+alors on va prendre maintenant un exemple, euh un exemple visuel qui est tiré du
+<Sync time="1143.856"/>
+de la de la tortue logo où on a quatre instructions qui permettent de faire des dessins : avancer de dix pixels et tracer,
+<Sync time="1150.943"/>
+tourner à droite de euh un certain angle en degrés, ou il y a évidemment les instructions tourner à gauche et reculer
+<Sync time="1158.366"/>
+donc cet algorithme
+<Sync time="1160.311"/>
+polygone
+<Sync time="1163.560"/>
+puisqu'on réalise n fois
+<Sync time="1166.548"/>
+euh ces deux instructions-là, permet de tracer un polygone.
+<Sync time="1170.237"/>
+
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ prenons l'exemple de n égal quatre, eh bah on va répéter quatre fois avancer de dix pas,
+<Sync time="1175.237"/>
+tourner à droite de quatre-vingt-dix degrés
+<Sync time="1177.612"/>
+et si on le répète quatre fois, vous voyez très très bien qu'on va finir par tracer un carré ;
+<Sync time="1181.609"/>
+donc ça se généralise pour toutes les valeurs de n.
+<Sync time="1187.536"/>
+la deuxième boucle qu'on va aborder, c'est la boucle tant que.
+<Sync time="1190.032"/>
+alors on pourrait l'appeler la boucle universelle,
+<Sync time="1192.839"/>
+*parce que c'est la boucle à utiliser quand on ne connaît pas à l'avance le nombre de tours de boucle qui doivent être réalisés, et puis ça c'est quand même un cas qui se produit assez souvent.
+<Sync time="1201.734"/>
+donc sa syntaxe est relativement simple : on écrit tant que,
+<Sync time="1206.280"/>
+une expression booléenne qui sera un test de continuation
+<Sync time="1210.981"/>
+faire, des instructions qui seront répétées tant que l'expression booléenne sera vraie.
+<Sync time="1217.070"/>
+prenons l'exemple : alors euh un exemple tiré du calcul de trois à la puissance euh dix, mais on va le prendre à l'envers
+<Sync time="1223.838"/>
+on va utiliser le calcul de trois à la puissance dix pour calculer des logarithmes
+<Sync time="1228.038"/>
+des des parties entières de logarithmes.
+<Sync time="1230.864"/>
+comment on fait ? ben tout simplement on va prendre les puissances
+<Sync time="1234.721"/>
+euh de trois
+<Sync time="1235.809"/>
+et puis si on veut calculer le logarithme en base trois deux cents, bah il ch() il faudra chercher
+<Sync time="1239.965"/>
+le plus petit i
+<Sync time="1242.599"/>
+tel que euh trois à la puissance euh i
+<Sync time="1246.925"/>
+reste plus petit que cent.
+<Sync time="1249.081"/>
+donc on va y arriver avec une boucle tant que,
+<Sync time="1251.357"/>
+en calculant les puissances tant que cette puissance est plus petite que cent. dès qu'on a dépassé cent, c'est qu'on est allé un cran trop loin
+<Sync time="1258.058"/>
+donc euh il suffira d'écrire i moins un pour avoir le bon résultat.
+<Sync time="1263.970"/>
+voilà un exemple. alors il y a beaucoup de dangers à écrire des boucles tant que :
+<Sync time="1267.725"/>
+le premier danger, c'est que () *enfin c'est c'est pas un danger, c'est une particularité. d'ailleurs, c'est que si le test est faux dès le début,
+<Sync time="1273.569"/>
+aucune instruction s() ne sera exécutée.
+<Sync time="1276.272"/>
+donc première cho() première chose : le test doit pouvoir être réalisé
+<Sync time="1279.950"/>
+avant de rentrer dans la boucle ; il ne peut pas y avoir de variable in() qui ne soit pas initialisée dans le calcul du test
+<Sync time="1287.889"/>
+et ensuite
+<Sync time="1289.059"/>
+il peut se produire que le test soit faux dès le début
+<Sync time="1291.435"/>
+et que aucun aucune instruction ne soit exécutée
+<Sync time="1294.228"/>
+
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ on rentre pas du tout dans la boucle. donc le nombre de tours de boucle 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ tant que peut être zéro, un, deux, mille, un milliard
+<Sync time="1301.607"/>
+et cetera
+<Sync time="1302.772"/>
+et en général, il faut s'arrêter euh
+<Sync time="1305.353"/>
+à un milliard, parce que ensuite euh l'ordinateur a des p() a des soucis.
+<Sync time="1310.628"/>
+ce qu'il faut surtout pas faire,
+<Sync time="1312.368"/>
+c'est tomber dans le cas d'une boucle infinie
+<Sync time="1314.434"/>
+et ça, ça se produit quand le test
+<Sync time="1317.239"/>
+est toujours vrai.
+<Sync time="1318.472"/>
+donc ça, c'est un cas à éviter évidemment, puisque ça pose euh des soucis euh
+<Sync time="1323.311"/>
+des soucis au moment de l'exécution de l'algorithme.
+<Sync time="1327.120"/>
+et ça pose même des s() des soucis au moment de l'exécution du programme, quand on est dans la dans la vé() dans la vie réelle.
+<Sync time="1334.720"/>
+ce dont il faut faire très attention, c'est que les instructions doivent donc modifier la valeur calculée de l'expression booléenne.
+<Sync time="1341.606"/>
+il y a un moment où l'expression booléenne doit être évaluée à faux
+<Sync time="1345.230"/>
+et ça, il y a que les instructions qui permettent de modifier
+<Sync time="1348.34"/>
+le calcul de cette expression.
+<Sync time="1351.780"/>
+donc il faudra passer par des variables dont la valeur est changée au moment d() au cours des instructions.
+<Sync time="1359.266"/>
+en javascript, la traduction de la boucle tant que est assez élémentaire : tant que se traduit par while
+<Event desc="en" type="language" extent="previous"/>
+, entre parenthèses une condition, et entre accolades le bloc d'instructions répétées.
+<Sync time="1371.090"/>
+l'expression booléenne est donc le test de continuation, le même que de tant que
+<Sync time="1376.690"/>
+et puis là, je vais vous donner un algorithme mystère, encore une fois à base de tortue logo
+<Sync time="1382.082"/>
+et je vais vous demander ce qu'il permet de tracer.
+<Sync time="1384.990"/>
+alors en réfléchissant un petit peu, euh on se rend compte que on avance, on tourne d'un degré puis on tourne () on avance, on tourne de deux degrés puis on avance, on tourne de trois degrés
+<Sync time="1394.989"/>
+jusqu'à arriver à cent quatre-vingts degrés, où là on va se mettre à faire demi-tour
+<Sync time="1399.31"/>
+donc on va faire une sorte de spirale
+<Sync time="1402.098"/>
+qui fait demi-tour
+<Sync time="1404.110"/>
+et qui retourne à faire une spirale, parce qu'une fois qu'on a passé trois cent soixante degrés c'est comme si on recommençait à zéro
+<Sync time="1409.553"/>
+eh bah en fait, le dessin ce sera ça :
+<Sync time="1412.439"/>
+des spirales inversées. c'est un un joli dessin, réalisé en en trois lignes de programme
+<Sync time="1418.430"/>
+avec une boucle tant que.
+<Sync time="1420.97"/>
+voilà
+<Sync time="1421.760"/>
+on va maintenant parler des historiques d'exécution pour les répétitives.
+<Sync time="1425.696"/>
+dans le cas d'une répétitive, les instructions répétées on va les retrouver plusieurs fois puisqu'elles sont évaluées plusieurs fois, il faut les retrouver plusieurs fois dans l'historique d'exécution.
+<Sync time="1433.512"/>
+donc si on prend cet exemple très très simple
+<Sync time="1436.563"/>
+comme d'habitude, on va devoir numéroter les instructions
+<Sync time="1440.023"/>
+comme d'habitude, il va *falloir falloir repérer les variables, nb un et nb deux,
+<Sync time="1444.525"/>
+ce qui nous permettra de commencer
+<Sync time="1446.348"/>
+à tracer l'historique d'exécution.
+<Sync time="1449.573"/>
+mais pour euh tracer totalement l'historique d'exécution, ben il va falloir quand même dérouler l'exécution de 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ dérouler l'algorithme.
+<Sync time="1457.689"/>
+donc si on reprend cet algorithme dans l'ordre, avant l'instruction un il n'y a rien dans nb un, il n'y a rien dans dans nb deux mais après l'instruction un, on a mis un dans nb un
+<Sync time="1467.134"/>
+après l'instruction deux, on a mis dix dans nb deux.
+<Sync time="1470.304"/>
+et là on se retrouve à commencer la boucle tant que, donc on commence l'instruction trois mais on ne la terminera évidemment que quand toutes les instructions de la boucle tant que seront terminées
+<Sync time="1478.532"/>
+seront évaluées.
+<Sync time="1480.539"/>
+et on commence la boucle tant que en faisant un test, donc en se *posant la question : est-ce que un est inférieur à dix ? la réponse est vrai
+<Sync time="1487.642"/>
+donc on rentre dans la boucle
+<Sync time="1490.039"/>
+et on exécute les l'instruction quatre,
+<Sync time="1492.862"/>
+qui place euh la valeur deux dans nb un
+<Sync time="1496.036"/>
+puis on exécute l'instruction cinq qui place la valeur neuf dans nb deux.
+<Sync time="1502.251"/>
+et on se repose la question
+<Sync time="1505.026"/>
+du test de continuation
+<Sync time="1507.055"/>
+qui est : est-ce que cette fois-ci, deux est inférieur à neuf ?
+<Sync time="1510.865"/>
+*donc la réponse est encore vrai
+<Sync time="1512.602"/>
+on réexécute encore une fois les instructions quatre et les instructions cinq, et on passe
+<Sync time="1517.454"/>
+aux valeurs quatre et huit.
+<Sync time="1519.666"/>
+on se repose encore une fois la question : est-ce que quatre est inférieur à huit ? la réponse est vrai. on passe
+<Sync time="1523.761"/>
+encore une fois
+<Sync time="1525.278"/>
+dans les le bloc d'instructions quatre et cinq
+<Sync time="1529.171"/>
+et à la fin de ce bloc, on se retrouve dans la situation où enfin nb un est supérieur ou égal à nb deux
+<Sync time="1536.348"/>
+donc on sort de la boucle.
+<Sync time="1537.959"/>
+et on s() c'est à ce moment-là et une() et uniquement à ce moment-là que l'instruction trois est terminée
+<Sync time="1542.230"/>
+et et qu'on la note.
+<Sync time="1548.060"/>
+alors comme dans le cas des ré() des conditionnelles, on peut être amené à mettre des boucles dans des boucles
+<Sync time="1554.181"/>
+puisque les instructions à l'intérieur d'une boucle sont quelconques
+<Sync time="1558.298"/>
+et dans ce cas-là, on parle de boucles imbriquées
+<Sync time="1560.876"/>
+ou de boucles doubles. alors ces boucles euh doubles sont particulièrement utiles pour parcourir des espaces à deux dimensions, et l'*exemple typique
+<Sync time="1568.394"/>
+que vous aurez à manipuler
+<Sync time="1569.951"/>
+euh dans ce cas-là, c'est par exemple pour parcourir tout l'écran de votre ordinateur et mettre une couleur à tous les pixels de l'écran.
+<Sync time="1577.847"/>
+ça
+<Sync time="1579.116"/>
+voici un exemple
+<Sync time="1580.535"/>
+de boucle pour qui fait ceci
+<Sync time="1582.832"/>
+donc pour x allant de zéro à huit cents, pour y allant de zéro à six cents,
+<Sync time="1587.919"/>
+on modifie la couleur de chaque point, et évidemment on peut utiliser les variables euh de boucles x et y
+<Sync time="1593.794"/>
+qui sont connues
+<Sync time="1595.596"/>
+dans () à l'intérieur des de de ce dernier euh de ce dernier euh de ce dernier bloc d'instructions. donc ça, ça va donner
+<Sync time="1602.33"/>
+une valeur à chaque couleur, à chaque pixel de l'écran
+<Sync time="1605.379"/>
+et le résultat, c'est ceci :
+<Sync time="1607.118"/>
+donc euh
+<Sync time="1607.895"/>
+un j() de jolis dégradés de couleurs.
+<Sync time="1613.680"/>
+voilà. on va maintenant passer à une partie importante,
+<Sync time="1616.613"/>
+tout simplement parce que on va voir ici des schémas standards de programmation à base de boucles
+<Sync time="1623.690"/>
+schémas standards qu'on va devoir euh qu'on va avoir à appliquer dans plein de cas de résolutions de problèmes.
+<Sync time="1629.785"/>
+donc il y en a trois, des schémas de standards : il y a des vérifications de saisie, ou on peut appeler ça aussi de validations de saisie,
+<Sync time="1634.598"/>
+il y aura des compteurs et des accumulateurs.
+<Sync time="1638.270"/>
+et comme ces schémas sont standards, et que beaucoup de problèmes reposent sur des
+<Sync time="1643.167"/>
+mélanges de ces schémas, ou des applications pures et () stricto sensu de ces schémas, alors il faudra les reconnaître quand on lit l'énoncé d'un problème
+<Sync time="1651.173"/>
+et il faudra savoir les écrire ; ça, c'est très important.
+<Sync time="1655.400"/>
+le premier schéma de () le sch() premier schéma standard qu'on va voir, c'est la vérification de saisie
+<Sync time="1660.813"/>
+alors on parle de *vérification de saisie lorsqu'une boucle contient une saisie
+<Sync time="1665.835"/>
+et que la valeur saisie est utilisée par le test de continuation de la boucle.
+<Sync time="1670.159"/>
+
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ typiquement, on utilisera euh une boucle tant que car dans ce cas, on on ne connaît pas le nombre de tours de boucles nécessaires à l'utilisateur pour rentrer
+<Sync time="1678.104"/>
+une valeur convenable.
+<Sync time="1679.930"/>
+un cas typique de la vérification de saisie, c'est par exemple pour demander à l'utilisateur de saisir un nombre positif
+<Sync time="1686.314"/>
+on a deux possibilités :
+<Sync time="1687.870"/>
+soit on fait confiance à l'utilisateur et on lui écrit juste un message pour lui dire "rentrer un nombre positif",
+<Sync time="1693.215"/>
+soit on lui p() fait pas confiance, et c'est
+<Sync time="1695.674"/>
+dans dans beaucoup de cas, il ne faut pas forcément faire confiance à l'utilisateur,
+<Sync time="1699.693"/>
+et on met en place un processus qui va vérifier
+<Sync time="1703.076"/>
+la saisie de l'utilisateur et lui redemandera de saisir une valeur si ce qu'il a saisi n'est pas convenable.
+<Sync time="1710.079"/>
+c'est
+<Sync time="1710.858"/>
+un cas typique de vérification de saisie.
+<Sync time="1713.853"/>
+donc ce qu'on retrouve dans une boucle tant que, c'est
+<Sync time="1717.25"/>
+à l'intérieur de la boucle tant que, une instruction qui saisit une valeur ;
+<Sync time="1722.110"/>
+et dans le test de continuation, un test
+<Sync time="1725.929"/>
+sur s() la valeur qui a été saisie
+<Sync time="1728.281"/>
+voilà. *donc les deux instructions importantes, ce sont ces deux-là.
+<Sync time="1731.386"/>
+euh il y a une euh une instruction x reçoit saisit avant la boucle tant que parce que évidemment
+<Sync time="1736.467"/>
+ce que je vous ai dit tout à l'heure, c'est qu'il faut que les le test puisse être réalisé
+<Sync time="1740.662"/>
+avant de rentrer dans la boucle, donc il faut que x ait une valeur.
+<Sync time="1743.511"/>
+ça représentera
+<Sync time="1745.083"/>
+la première valeur c. donc
+<Sync time="1746.74"/>
+une vérification de saisie s'écrit comme ça.
+<Sync time="1749.545"/>
+deux fois la saisie, dont une à l'intérieur de la boucle, et un test
+<Sync time="1753.307"/>
+sur la saisie () sur la valeur saisie.
+<Sync time="1757.590"/>
+le deuxième schéma classique de programmation, c'est ce qui s'appelle le compteur.
+<Sync time="1761.978"/>
+et on va parler de compteur dès qu'on a ajouté les instructions qui permettent de compter le nombre de tours de boucles. alors il y a plein d'occasions
+<Sync time="1768.224"/>
+euh il y a plein de moments où on veut avoi() savoir combien de tours de boucles on a réalisé.
+<Sync time="1773.088"/>
+quelles instructions on va devoir rajouter ? ben tout simplement on va devoir
+<Sync time="1776.202"/>
+déclarer une nouvelle variable,
+<Sync time="1778.48"/>
+une variable compteur
+<Sync time="1780.098"/>
+et on va devoir ajouter deux instructions
+<Sync time="1782.587"/>
+au pro() euh à l'algorithme : une instruction d'initialisation du compteur
+<Sync time="1786.974"/>
+à zéro, par exemple
+<Sync time="1789.187"/>
+et une instruction d'incrémentation du compteur.
+<Sync time="1792.917"/>
+ce qu'il faut noter, c'est qu'un compteur ça s'ajoute à tout type de boucles.
+<Sync time="1796.233"/>
+mais euh il est rare d'avoir à rajouter un deuxième compteur à une boucle pour, puisque donc la boucle pour intègre un compteur.
+<Sync time="1806.115"/>
+alors si on reprend les () un exemple, je suis pas allé le chercher loin, je suis allé re() le rechercher sur le calcul du log en en base trois de cent
+<Sync time="1813.271"/>
+ben tout simplement
+<Sync time="1815.326"/>
+là, on a un cas typique où euh un cas typique de compteur
+<Sync time="1818.91"/>
+qu'on retrouve ici
+<Sync time="1820.792"/>
+où le compteur c'est la variable i,
+<Sync time="1823.021"/>
+qui permet de compter le nombre de tours de boucle
+<Sync time="1825.54"/>
+qu'on va réaliser avant de tomber sur la bonne valeur
+<Sync time="1829.666"/>
+du logarithme en base cent.
+<Sync time="1831.779"/>
+voilà, donc c'est la variable i qui a deux instructions : i reçoit zéro, c'est l'initialisation
+<Sync time="1836.054"/>
+et i reçoit i plus un, c'est l'incrémentation. et puis il faut pas oublier la déclaration de cette variable
+<Sync time="1841.177"/>
+comme une variable de l'algorithme.
+<Sync time="1843.053"/>
+donc trois
+<Sync time="1844.855"/>
+ins() trois instructions,
+<Sync time="1846.909"/>
+deux instructions à noter et une déclaration.
+<Sync time="1851.290"/>
+le troisiè() troisième schéma qu'il faut retenir, c'est ce qui s'appelle l'accumulateur
+<Sync time="1855.547"/>
+et on parle d'accumulateur dès lors qu'on a ajouté les instructions permettant de cumuler des valeurs à chaque tour de boucle
+<Sync time="1861.813"/>
+donc les va() les instructions qu'on doit ajouter, c'est une déclaration de variables, les deux instructions ;
+<Sync time="1866.852"/>
+encore une fois une initialisation
+<Sync time="1868.839"/>
+et une instruction de modification de l'accumulateur. donc c'est vraiment très très proche d'un compteur 
+<Sync time="1874.27"/>
+la seule différence c'est qu'un compteur,
+<Sync time="1876.490"/>
+c'est fait pour compter les choses, c'est forcément additif alors qu'un accumulateur peut être additif ou va vouloir
+<Sync time="1883.624"/>
+additionner des choses,
+<Sync time="1885.959"/>
+mais il peut être multiplicatif.
+<Sync time="1888.370"/>
+dans ce cas-là, on va vouloir multiplier des choses, ou ça peut être une concaténation, donc un ajout
+<Sync time="1893.179"/>
+progressif de bouts de chaînes de caractères.
+<Sync time="1896.351"/>
+l'accumulateur peut s'ajouter à tout type de boucle.
+<Sync time="1899.543"/>
+et qu'est-ce que permet de faire un accumulateur ? ben
+<Sync time="1901.611"/>
+typiquement, il est utilisé pour calculer des formules de type somme des i égale zéro à n de 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ ou produit de i égale zéro à n 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+
+<Sync time="1910.134"/>
+ce sont des cas typiques où on a besoin d'un accumulateur.
+<Sync time="1913.090"/>
+euh s()
+<Sync time="1916.414"/>
+par exemple,
+<Sync time="1917.476"/>
+pour calculer la factorielle, c'est un cas *typique où on a besoin d'un accumulateur
+<Sync time="1923.591"/>
+un accumulateur qu'on va placer dans une boucle pour,
+<Sync time="1926.477"/>
+qui va nous permettre de faire vingt *itérations
+<Sync time="1930.858"/>
+d'une instruction qui modifie l'accumulateur appelé x.
+<Sync time="1934.945"/>
+donc l'accumulateur, on a besoin
+<Sync time="1937.483"/>
+de de l'initialiser à à valeur un et de le modifier
+<Sync time="1941.661"/>
+à la valeur i par la l'instruction x reçoit x fois i.
+<Sync time="1945.799"/>
+un deuxième cas typique, c'est pour euh faire une répétition de caractères 
+<Event desc="pif" type="pronounce" extent="instantaneous"/>
+ là on va avoir un accumulateur qui est euh une concaténation ; on va chercher à ajouter
+<Sync time="1954.255"/>
+cent fois une étoile à une chaîne de caractères. donc le résultat de cette accumulation
+<Sync time="1959.203"/>
+sera une chaîne de caractères de longueur cent con() ne con() composée uniquement d'étoiles.
+<Sync time="1964.513"/>
+troisième cas typique
+<Sync time="1966.240"/>
+bah c'est par exemple pour saisir des notes
+<Sync time="1968.948"/>
+de d'élèves
+<Sync time="1970.258"/>
+donc on va avoir euh
+<Sync time="1972.097"/>
+on va vouloir calculer une moyenne
+<Sync time="1974.301"/>
+et pour ça euh on va accumuler
+<Sync time="1977.29"/>
+des notes
+<Sync time="1978.631"/>
+des notes saisies euh donc on va devoir accumuler trente-six notes
+<Sync time="1982.457"/>
+qu'on va demander à l'utilisateur de saisir.
+<Sync time="1986.072"/>
+ce qu'on retrouve, et ce qui est important,
+<Sync time="1989.082"/>
+c'est ce fait-là.
+<Sync time="1992.050"/>
+l'initiali() la valeur d'initialisation sera for() toujours liée
+<Sync time="1996.186"/>
+à l'opération qu'on va vouloir faire.
+<Sync time="1998.83"/>
+et ce qu'il faut retenir, c'est que dans quatre-vingt-dix-neuf pourcent des cas,
+<Sync time="2001.798"/>
+on 
+<Event desc="pi" type="pronounce" extent="instantaneous"/>
+ on initialisera un accumulateur
+<Sync time="2005.628"/>
+avec
+<Sync time="2006.859"/>
+comme valeur l'élément neutre de l'opération qu'on considère. donc l'élément neutre de la multiplication, c'est un
+<Sync time="2012.616"/>
+un fois n'importe quoi est égal à n'importe quoi fois un égale un () égale n'importe quoi, pardon.
+<Sync time="2019.996"/>
+l'élément neutre de l'opération plus
+<Sync time="2022.823"/>
+ben c'est zéro
+<Sync time="2024.111"/>
+zéro plus n'importe quoi,
+<Sync time="2026.434"/>
+c'est la même chose que n'importe quoi plus zéro et c'est n'importe quoi
+<Sync time="2031.313"/>
+et on fera la même chose pour le l'opération concaténation, mais cette fois euh c'est un un peu moins intuitif
+<Sync time="2038.519"/>
+ce qu'il faut retenir, c'est que le l'élément neutre de l'opération concaténation, c'est la chaîne vide.
+<Sync time="2043.879"/>
+guillemets, rien entre les deux, guillemets. et c'est ce qu'on utilisera comme initialisa() comme initialisateur, valeur d'initialisation de la variable accumulateur.
+<Sync time="2053.236"/>
+voilà
+<Sync time="2054.150"/>
+donc là maintenant, on a présenté les trois schémas
+<Sync time="2056.65"/>
+de programmation, et puis on va voir comment on peut les combiner et les utiliser
+<Sync time="2060.665"/>
+pour construire un jeu un peu plus ambitieux,
+<Sync time="2062.793"/>
+un jeu que vous avez probablement déjà programmé sur votre calculatrice, donc c'est le jeu du plus ou moins.
+<Sync time="2068.261"/>
+qu'est-ce que c'est que ce jeu ?
+<Sync time="2069.710"/>
+bah au départ, c'est une simple vérification de saisie : on va demander à l'utilisateur de saisir une valeur
+<Sync time="2075.631"/>
+et puis on va vérifier que la valeur qui est saisie
+<Sync time="2079.225"/>
+est égale au nombre caché ou n'est pas égale au nombre caché.
+<Sync time="2082.707"/>
+ça donne ça :
+<Sync time="2083.834"/>
+donc le jeu du plus ou moins,
+<Sync time="2085.33"/>
+ça prend deux variables : une variable cachée et la proposition de l'utilisateur.
+<Sync time="2089.739"/>
+la variable cachée, on peut demander à quelqu'un de la saisir en cachette mais on peut aussi demander à l'utilisateur d'en choisir une au hasard
+<Sync time="2097.785"/>
+entre zéro et neuf
+<Sync time="2099.958"/>
+et là, on écrit une vérification de saisie, comme on a fait tout à l'heure : proposition reçoit saisie. tant que la proposition n'est pas égale au nombre caché,
+<Sync time="2106.829"/>
+alors on redemande de saisir une valeur.
+<Sync time="2110.193"/>
+et on fait tout ça
+<Sync time="2111.795"/>
+jusqu'à ce que la personne gagne.
+<Sync time="2116.350"/>
+voilà. mais on veut aller plus loin quand on écrit le jeu du plus ou moins
+<Sync time="2120.551"/>
+ça ne devient le jeu du plus ou moins que quand on indi() on ajoute l'indication à l'utilisateur du () c'est-à-dire le fameux plus ou moins.
+<Sync time="2126.836"/>
+donc ça, c'est une alternative
+<Sync time="2129.831"/>
+qu'on ajoute
+<Sync time="2132.251"/>
+à l'intérieur de la boucle tant que.
+<Sync time="2134.095"/>
+si la proposition est plus petite que euh la valeur cachée, alors il doit saisir une valeur plus grande, sinon il doit saisir une valeur moins grande.
+<Sync time="2143.010"/>
+donc
+<Sync time="2145.022"/>
+à cette vérification de saisie, on a ajouté une alternative ; on a commencé à construire notre pro() notre projet de programme 
+<Event desc="pif" type="pronounce" extent="instantaneous"/>
+ un peu complexe.
+<Sync time="2153.837"/>
+mais c'est pas fini : le jeu du plus ou moins, on a envie quand même de savoir
+<Sync time="2158.688"/>
+combien de fois il a joué avant de trouver la bonne solution.
+<Sync time="2161.530"/>
+ben maintenant
+<Sync time="2162.718"/>
+pour ça, il suffit de compter le nombre de propositions, donc ajouter un compteur de boucles,
+<Sync time="2167.189"/>
+un compteur de propositions.
+<Sync time="2170.479"/>
+alors le compteur il s'ajoute comme ça : nombre de propositions reçoit, alors cette fois-ci, un et pas zéro, tout simplement parce que
+<Sync time="2176.675"/>
+il y aura déjà une saisie avant de rentrer dans la boucle, donc il y aura déjà une proposition
+<Sync time="2180.794"/>
+et puis ensuite, à chaque fois qu'on fait un tour de boucle, on incrémente le compteur de propositions.
+<Sync time="2184.800"/>
+et voilà
+<Sync time="2186.153"/>
+avec ça
+<Sync time="2187.730"/>
+moralité :
+<Sync time="2189.083"/>
+en combinant une vérification de saisie, un compteur de boucle et en ajoutant une conditionnelle,
+<Sync time="2193.857"/>
+on a créé notre jeu complet
+<Sync time="2196.510"/>
+du jeu () le jeu du plus ou moins.
+<Sync time="2200.250"/>
+voilà, donc ça évidemment ça s'écrit en javascript mais vous trouverez tout ça dans les compléments associés
+<Sync time="2205.727"/>
+aux notes de cours.
+<Sync time="2208.872"/>
+au bilan
+<Sync time="2209.979"/>
+bilan de cette partie :
+<Sync time="2211.29"/>
+un algorithme, c'est une suite séquentielle d'instructions qui modifient l'état de la mémoire.
+<Sync time="2216.620"/>
+mais l'ordre séquentiel n'est pas suffisant, et on on a on a enrichi la syntaxe de structures de contrôle qui sont des conditionnelles ou des répétitives
+<Sync time="2224.880"/>
+qui permettent
+<Sync time="2226.067"/>
+en gros de *simplifier simplifier ou d'optimiser l'écriture de l'algorithme.
+<Sync time="2229.980"/>
+un n() on n'a un langage de programmation que
+<Sync time="2232.663"/>
+lorsqu'on dispose d'une conditionnelle et d'une répétitive.
+<Sync time="2238.310"/>
+on a eu aussi des schémas standards, qui s'appliquent et qui se combinent dans énormément de cas de résolutions de problèmes.
+<Sync time="2244.696"/>
+donc ceci termine cette euh troisième partie du cours.
+</Turn>
+</Section>
+</Episode>
+</Trans>

@@ -1,0 +1,947 @@
+http://marami.mines-ales.fr/sites/mines-ales.fr/files/u348/marami_2015_benyahia.pdf
+
+Mesures d’inﬂuence via les indicateurs de
+centralité dans les réseaux sociaux
+
+Oualid Benyahia 1, Christine Largeron 2
+
+1. Universite Jean Monnet
+
+Laboratoire Hubert Curien UMR CNRS 5516
+18 rue Lauras 42000 Saint-Etienne, France
+oualid.benyahia@univ-st-etienne.fr
+
+2. Universite Jean Monnet
+
+Laboratoire Hubert Curien UMR CNRS 5516
+18 rue Lauras 42000 Saint-Etienne, France
+Christine.Largeron@univ-st-etienne.fr
+
+ABSTRACT. Identiﬁer les acteurs importants dans un réseau est une tâche difﬁcile qui est ce-
+pendant très utile dans diverses applications comme par exemple dans les systèmes de recom-
+mandation, le marketing ou encore l’analyse épidémiologique où il est essentiel de cibler des
+acteurs susceptibles de favoriser ou limiter un phénomène de propagation. Dans cette optique,
+plusieurs mesures ont été proposées dans le cadre de l’analyse des réseaux sociaux. C’est le
+cas notamment des indicateurs de centralité qui permettent d’évaluer, selon différents point de
+vue, l’importance d’un acteur en fonction de ses relations aux autres. Dans cet article, nous
+proposons des variantes de ces mesures de centralité qui exploitent non seulement la structure
+du réseau mais aussi des attributs décrivant les acteurs. Des expérimentations, réalisées à par-
+tir de données extraites du réseau ArnetMiner, ont permis de valider l’apport de ces nouvelles
+mesures.
+KEYWORDS: analyse des réseaux sociaux, mesure de centralité, mesure d’inﬂuence, graphes at-
+tribués
+
+DOI:10.3166/RMPD..1–12 c(cid:13) 2015 Lavoisier
+
+Road Materials and Pavement Design – No. /2015, 1–12
+
+2 RMPD. Volume – No. /2015
+
+1. Introduction
+
+Dans la littérature sur les réseaux sociaux, des indicateurs permettent d’identi-
+ﬁer des acteurs importants dans le réseau comme les mesures de centralité (Freeman,
+1979 ; Wasserman, Faust, 1994). Un des avantages de ces mesures est qu’elles sont
+faciles à mettre en œuvre. De plus, elles peuvent être mises à jour en tenant compte
+seulement d’une information locale correspondant à une fraction du réseau. Ces me-
+sures permettent en fait de comparer la position d’un acteur relativement à celles des
+autres selon différents points de vue. Ainsi, la centralité de degré permet de repérer les
+acteurs qui ont le plus de voisins directs et la centralité de proximité ceux qui peuvent
+joindre le plus facilement tous les autres membres du réseau. De même la centralité
+d’intermédiarité permet d’identiﬁer les acteurs qui ont le plus de chance d’être entre
+deux autres acteurs du réseau alors que la centralité des valeurs propres ou sa variante,
+le PageRank, ceux qui sont le plus en relation avec des membres eux même fortement
+reliés à d’autres acteurs du réseau. Ces mesures peuvent être calculées pour des ré-
+seaux représentés par un graphe orienté ou non. Ainsi, par exemple, la centralité de
+degré, peut être déﬁnie en considérant tous les voisins d’un nœud ou bien ses suc-
+cesseurs ou encore ses prédécesseurs. De même certaines mesures sont applicables à
+des graphes valués ou non valués. Ainsi, par exemple, la centralité des valeurs propres
+peut être déterminée en tenant compte de la valuation du lien existant entre deux ac-
+teurs traduisant l’intensité de leur relation, de même que les centralités de degré et de
+proximité (Barrat et al., 2004 ; Opsahl et al., 2010).
+
+Cependant, proposées dès les débuts de l’analyse des réseaux sociaux, ces mesures
+ont été conçues pour analyser des réseaux qui peuvent être décrits par un graphe simple
+dont les sommets correspondent aux acteurs et les liens aux relations qui existent entre
+eux. Or, les réseaux actuels, en particulier les réseaux d’information, sont représentés
+sous la forme de graphes plus complexes comme les graphes à attributs dans lesquels
+des caractéristiques, tel que le sexe ou l’âge, sont associées aux sommets pour les
+décrire. La prise en compte de ces informations complémentaires s’étant révélée per-
+tinente notamment dans le cadre des modèles de propagation, nous avons donc estimé
+qu’elle méritait de l’être dans la déﬁnition des mesures de centralité.
+
+Dans cette optique, Evrett et Borgatti (Everett, Borgatti, 2012) ont considéré le
+cas des graphes attribués, où les nœuds sont caractérisés par des attributs catégoriels,
+pour déterminer les groupes de nœuds. Ils intègrent les attributs des sommets dans le
+calcul des mesures de centralité en utilisant deux métriques connues: le E-I homophily
+index (Krackhardt, Stern, 1988) et le Gould and Fernandez brokerage metrics (Gould,
+Fernandez, 1989). L’index E-I consiste a partitionner la centralité de degré selon les
+groupes d’appartenance des nœuds. Il est ainsi généralisé pour être intégré dans les
+autres types de centralité tels que la centralité de proximité et la centralité des va-
+leurs propres. De même, pour la centralité d’intermédiarité elle est généralisée via un
+partitionnement des nœuds (Gould and Fernandez brokerage metrics) pour diviser le
+voisinage d’un nœud en différents groupes.
+
+Mesures d’inﬂuence via les indicateurs de centralité
+
+3
+
+Le but de notre travail a aussi été de revisiter des indicateurs de centralité, en tenant
+compte de la structure du réseau notamment du sens des relations et des valuations
+qui peuvent les quantiﬁer mais aussi d’informations complémentaires décrivant les
+acteurs et qui sont susceptibles d’indiquer la notoriété d’un acteur indépendamment
+de la structure du réseau. Par contre, à la différence de Everett et Borgatti (2012), nous
+considérons le cas de graphes attribués où les nœuds sont caractérisés par des attributs
+numériques.
+
+L’article est organisé comme suit. La section 2 décrit les différentes mesures que
+nous avons introduites et la section 3 présente les résultats d’une expérimentation
+menée sur des données réelles pour évaluer l’intérêt des mesures que nous avons pro-
+posées.
+
+2. Mesures d’inﬂuence par les indicateurs de centralité
+
+1, yi
+
+2, . . . , yi
+
+Un réseau d’information peut être représenté par un graphe avec attributs G =
+(V, E) où V est l’ensemble des sommets, E ⊂ V × V est l’ensemble des arêtes et où
+chaque sommet vi ∈ V est associé à un vecteur numérique Y i = (yi
+L)T
+le décrivant (Zhou et al., 2009). Dans la suite de cet article, yi
+l désigne la modalité ou
+la valeur de l’attribut l ∈ {1,··· , L} observée pour le nœud vi, où L est le nombre
+d’attributs et wi = (cid:107)Y i(cid:107) désignera la norme de ce vecteur représentant le poids as-
+socié au nœud. Ce poids peut décrire par exemple sa notoriété. Aﬁn de comparer les
+positions occupées par les sommets dans le graphe, plusieurs mesures de centralité
+ont été déﬁnies : la centralité de degré, de proximité, d’intermédiarité, ou encore de
+vecteurs propres dont une variante est le PageRank. Elles peuvent être employées pour
+évaluer l’importance d’un nœud en fonction de son nombre de liens sortants dans un
+graphe ou parfois même son inﬂuence dans le réseau, même si cette dernière notion est
+trop complexe pour pouvoir être correctement appréhendée par les simples mesures de
+centralité. Dans la suite, nous proposons d’étendre ces mesures, initialement déﬁnies
+sur des graphes sans attribut, de façon à tenir compte non seulement des relations qui
+existent entre les sommets du graphe mais aussi d’informations les caractérisant.
+
+2.1. La centralité de Degré (degree centrality)
+
+La centralité de degré mesure l’importance relative d’un nœud dans un graphe en
+fonction du nombre de ses liens. Elle peut être déﬁnie en considérant le nombre de
+liens sortants (out-degree) ou entrants (in-degree) dans un graphe orienté, ou simple-
+ment le nombre de liens deg(vi), normalisé par le nombre maximal de liens, dans un
+graphe non orienté (Freeman, 1979) :
+
+Degree(vi) =
+
+deg(vi)
+|V | − 1
+
+(1)
+
+4 RMPD. Volume – No. /2015
+
+Dans le cas d’un graphe orienté et valué, elle est calculée en utilisant les poids des
+liens comme décrit dans (Barrat et al., 2004) :
+
+(cid:88)
+
+W EDegree(vi) =
+
+wij
+
+vj∈out(vi)
+
+où wij est le poids du lien entre le sommet vi et le sommet vj, out(vi) représente
+l’ensemble des successeurs vj de vi. Dans (Opsahl et al., 2010) une autre mesure de
+centralité de degré est proposée :
+
+(2)
+
+(3)
+
+ (cid:88)
+
+wij
+
+vj∈out(vi)
+
+α
+
+W EOpsahlDegree(vi) = (degout(vi))(1−α) ·
+
+Dans nos expérimentations, nous avons choisi de ﬁxer le paramètre α à 0.5 pour équi-
+librer l’apport des liens par rapport aux poids de ces derniers.
+
+Dans le cas d’un graphe avec des attributs décrivant les nœuds, nous introdui-
+sons des variantes de ces mesures notées respectivement WNDegree et WNEDegree
+ou WNEOpsahlDegree selon que le graphe est valué ou non :
+W N Degree(vi) = wi · Degree(vi)
+
+(4)
+
+W N EDegree(vi) = wi · W EDegree(vi)
+
+W N EOpsahlDegree(vi) = wi · W EOpsahlDegree(vi)
+
+(5)
+
+(6)
+
+2.2. La centralité de proximité (closeness centrality)
+
+D’après la centralité de proximité, un nœud est considéré comme important s’il
+peut rapidement atteindre les autres sommets ((Wasserman, Faust, 1994 ; Hakimi,
+1964)). La mesure usuelle est égale à l’inverse de la somme des distances du nœud
+vi à tous les autres nœuds du graphe. La distance entre deux nœuds correspond à la
+longueur du plus court chemin (distance géodésique) les reliant :
+
+CCentr(vi) =
+
+1
+
+|ShortP ath(vi, vj)|
+
+(7)
+
+(cid:80)
+
+vj∈V
+j(cid:54)=i
+
+où ShortP ath(vi, vj) représente un des chemins les plus courts entre deux som-
+mets vi et vj et |ShortP ath(vi, vj)| la longueur, en nombre de liens, du chemin.
+Par convention, |ShortP ath(vi, vj)| est égal à |V | ou à ∞ s’il n’existe pas un tel
+chemin.
+
+Pour les graphes valués, (Opsahl et al., 2010) ont déﬁni une variante tenant compte
+du poids des liens qui fait appel à l’algorithme de Dijsktra. Nous proposons de mesurer
+
+Mesures d’inﬂuence via les indicateurs de centralité
+
+5
+
+la centralité de proximité d’un nœud par la somme des poids moyens des chemins les
+plus courts le reliant aux autres nœuds du graphe :
+
+CW ECentr(vi) =
+
+w(e)
+e∈ShortP ath(vi,vj )
+|ShortP ath(vi, vj)|
+
+(8)
+
+(cid:80)
+
+(cid:88)
+
+vj∈V
+j(cid:54)=i
+
+où w(e) est le poids, mesurant l’intensité de la relation entre deux nœuds, d’un lien
+e ∈ E appartenant à un chemin. Dans le cas ou aucun chemin n’existe entre les deux
+nœuds vi et vj, alors le terme au numérateur est nul. L’idée ici est que l’inﬂuence
+se fait essentiellement via les plus courts chemins. Cette inﬂuence est d’autant plus
+importante que le poids moyen du chemin est plus grand. S’il existe plusieurs plus
+courts chemins entre deux nœuds, c’est celui avec le plus grand poids moyen qui est
+retenu.
+
+Si les sommets du graphe sont caractérisés par des attributs alors nous proposons
+de calculer la centralité de proximité, selon que le graphe soit non valué ou valué,
+respectivement par :
+
+CW N Centr(vi) = wi · CCentr(vi)
+
+CW N ECentr(vi) = wi · CW ECentr(vi)
+
+(9)
+
+(10)
+
+2.3. La centralité d’intermédiarité (betweenness centrality)
+
+D’après la centralité d’intermédiarité, un nœud est considéré comme important s’il
+est placé sur un nombre important de chemins (géodésiques) reliant les autres nœuds
+du graphe (Wasserman, Faust, 1994 ; Freeman, 1979). Cet indicateur est déﬁni par :
+
+BCentr(vi) =
+
+|gkj(vi)|/|gkj|
+
+(11)
+
+(cid:88)
+
+(vk,vj )∈V ×V
+
+i(cid:54)=k(cid:54)=j
+
+où gkj(vi) (resp. |gkj(vi)|) est l’ensemble des plus cours chemins entre les som-
+mets vk et vj qui passent par vi (resp. son cardinal) et gkj (resp. |gkj|) l’ensemble des
+chemins les plus courts de vk à vj (resp. son cardinal).
+
+Ainsi, plus il y a de chemins qui passent par un nœud, plus ce dernier est important.
+Ces nœuds intermédiaires jouent un rôle important dans les processus de diffusion ou
+de propagation puisqu’ils ont un certain contrôle sur les interactions indirectes qui
+peuvent exister entre les nœuds non adjacents du réseau.
+
+Dans le cas d’un graphe valué, cette mesure peut facilement être adaptée de façon
+
+à tenir compte des poids associés aux liens :
+
+(cid:88)
+
+(cid:80)
+(cid:80)
+
+(cid:80)
+(cid:80)
+
+e∈S
+
+S∈gkj (vi)
+
+w(e)
+
+w(e)
+
+(vk,vj )∈V ×V
+
+i(cid:54)=j(cid:54)=k
+
+S∈gkj
+
+e∈S
+
+BW ECentr(vi) =
+
+(12)
+
+6 RMPD. Volume – No. /2015
+où w(e) est le poids du lien e ∈ E appartenant au plus court chemin S ∈ gkj entre les
+deux sommets vk et vj.
+
+Si les nœuds du graphe sont caractérisés par des attributs alors, l’indicateur est
+pondéré par le poids du nœud wi, donnant différents déﬁnitions selon que le graph
+soit valué ou non :
+
+BW N Centr(vi) = wi · BCentr(vi)
+
+BW N ECentr(vi) = wi · BW ECentr(vi)
+
+(13)
+(14)
+
+2.4. La centralité des vecteurs propres et d’autorité (Eigenvector Centrality et
+
+PageRank)
+
+La centralité des vecteurs propres est basée sur l’idée que le score d’un nœud est
+plus élevé s’il est connecté à des nœuds ayant eux mêmes un score élevé que s’il
+est connecté à des nœuds ayant des scores faibles (Bonacich, Paulette, 2001 ; Ghosh,
+Lerman, 2010). En général, elle est calculée de façon itérative comme suit :
+
+· (cid:88)
+
+vj∈V
+
+EV Centr(vi) =
+
+1
+λ1
+
+aij · EV Centr(vj)
+
+(15)
+
+où A = {aij} est la matrice d’adjacence du graphe et λ1 correspond à la plus grande
+valeur propre solution de l’équation AX = λX.
+
+Le P ageRank est une variante de la centralité des vecteurs propres (Brin, Page,
+1998 ; Ghosh, Lerman, 2010). Introduite initialement pour mesurer la popularité d’une
+page Web. Elle est déﬁnie usuellement par :
+
+P RankCentr(vi) = (1 − β) · W0 + β · (cid:88)
+
+aji · P RankCentr(vj)
+
+deg(vj)
+
+(16)
+
+vj∈V
+
+où W0 est habituellement choisi uniformément (W0 = 1/|V |) pour tous les nœuds du
+graphe.
+
+Dans le cas d’un graphe avec attributs, nous proposons d’adopter une forme per-
+sonnalisée P RankW N ECentr du PageRank (Sergey et al., 1998 ; Jeh, Widom,
+2003) avec une distribution non-uniforme des poids initiaux en remplaçant W0 par
+les poids wi déﬁnis à partir des attributs pour chaque sommet vi.
+
+3. Expérimentations
+
+Des expérimentions ont été menées sur des graphes attribués réels pour évaluer la
+
+pertinence des mesures proposées.
+
+3.1. Dataset
+
+Pour l’expérimentation, nous avons exploité le jeu de données utilisé par (Tang et
+al., 2009). Il permet de construire des graphes réels de terrain avec des liens valués
+
+Mesures d’inﬂuence via les indicateurs de centralité
+
+7
+
+et des attributs décrivant les nœuds. Le graphe est issu des publications dans diffé-
+rents domaines académiques 1 et représente les relations de co-publications entre les
+auteurs (graphe de co-auteurs). Il a été construit à partir du système de recherche aca-
+démique Arnetminer 2. Il comprend au total 640134 auteurs et 1554643 relations de
+co-publications dans différents sujets.
+
+Plus formellement, pour chaque sujet de recherche, on dispose d’un graphe G =
+(V, E) de co-publications dont l’ensemble V des nœuds correspond aux auteurs et
+où chaque auteur vi est caractérisé par un attribut wi correspondant à son nombre
+de publications, recensé dans Arnetminer, tous sujets confondus (indépendamment du
+graphe considéré). L’ensemble E des liens entre les nœuds représente des liens de co-
+publications qui sont valués par le nombre total d’articles wij co-écrits par les deux
+auteurs vi et vj.
+
+Pour les expérimentations nous avons retenu trois graphes. Le premier graphe est
+consacré au sujet Data-mining et comprend 679 nœuds et 1687 liens non orientés. Le
+deuxième graphe, portant sur le thème Information Retrieval, comprend 657 nœuds et
+1907 liens non orientés. Le troisième graphe, ayant Bayesian Network comme sujet,
+dispose de 554 nœuds et de 1238 liens de co-publications.
+
+3.2. Évaluation
+
+Pour évaluer les mesures de centralité que nous avons proposées (cf. section 2),
+nous considérons deux autres indicateurs comme référence de l’importance réelle d’un
+auteur : le H-Index et le nombre de Citations. Ces indicateurs ont été récupérés à partir
+du site Arnetminer 3. Le H-index (ou indice de HIRSCH) (Hirsch, 2005) est un indice
+permettant d’évaluer le rang d’un chercheur : un chercheur a un indice h si h de ses
+articles ont chacun au moins h citations, et les autres articles ont au plus h citations.
+Ainsi, après avoir calculé la centralité des acteurs dans le graphe à l’aide d’une
+des mesures que nous avons déﬁnie, nous pouvons comparer le résultat par rapport au
+H-Index ou au nombre de Citations. Nous avons choisi de prendre pour chaque indi-
+cateur, les tops 20 meilleurs auteurs classés par leur rang par rapport au H-Index d’une
+part et par rapport au nombre de Citations d’autre part, l’objectif étant ici d’évaluer la
+pertinence des mesures de centralité pour identiﬁer quelques acteurs très importants.
+Aﬁn de déterminer la performance d’une mesure de centralité, on calcule l’indice de
+Jaccard entre l’ensemble des auteurs retournés par cette mesure et l’ensemble des au-
+teurs de référence (i.e. suivant le H-Index ou le nombre de Citations).
+
+Par ailleurs, chaque mesure de centralité est aussi évaluée en fonction de sa Pré-
+cision et de son Rappel. Il faut noter que le nombre total d’auteurs retournés par une
+
+1. http://arnetminer.org/lab-datasets/soinf/.
+2. http://www.arnetminer.org.
+3. http://arnetminer.org/person-ranklist/hindex/89.
+
+8 RMPD. Volume – No. /2015
+
+mesure étant égal au nombre total d’auteurs inﬂuents par rapport au H-index ou par
+rapport au nombre de Citations, les taux de précision et de rappel sont donc identiques.
+
+3.3. Résultats et analyse
+
+Les tableaux 1, 2 et 3 présentent respectivement les résultats (indice de Jaccard,
+Précision/Rappel) des expérimentations pour les cinq familles de mesures (18 mesures
+au total) de centralité : Degree, Closeness, Betweenness, PageRank et Eigenvector,
+pour les trois thèmes retenus pour l’expérimentation : Data-Mining, Information Re-
+trieval (IR) et Bayesian Networks. La centralité d’un auteur est calculée en fonction
+des mesures classiques et des variantes que nous avons proposées, notées (*) dans les
+tableaux, et qui prennent en compte les valuations des liens ou les attributs des nœuds.
+Les scores de la plupart des mesures de centralité sont meilleurs quand elles sont com-
+parées au H-Index que par rapport au nombre de Citations notamment pour le taux de
+Précision/Rappel dans les trois graphes.
+
+Tableau 1. Résultats des mesures de centralité sur le graphe ayant Data-mining
+
+comme sujet.
+
+Degree
+WNDegree(*)
+WEDegree
+WEOpsahlDegree
+WNEDegree(*)
+WNEOpsahlDegree(*)
+CCentr
+CWNCentr(*)
+CWECentr(*)
+CWNECentr(*)
+BCentr
+BWNCentr(*)
+BWECentr(*)
+BWNECentr(*)
+PRankCentr
+PRankWNECentr(*)
+EVCentr
+EVWNECentr(*)
+
+Jaccard (H-Index)
+
+Jaccard (C)
+
+P/R (H-Index)
+
+P/R (C)
+
+0.3333
+0.3333
+0.3333
+0.3333
+0.3793
+0.3793
+0.3333
+0.3333
+
+0.0
+0.25
+0.3333
+0.3793
+0.2903
+0.3793
+0.4286
+0.2903
+0.2121
+0.4286
+
+0.1765
+0.1765
+0.2121
+0.2121
+0.2121
+0.2121
+0.1765
+0.2121
+0.0256
+0.1765
+0.1429
+0.1765
+0.1765
+0.1765
+0.1765
+0.1765
+0.1111
+0.2121
+
+0.5
+0.5
+0.5
+0.5
+0.55
+0.55
+0.5
+0.5
+0.0
+0.4
+0.5
+0.55
+0.45
+0.55
+0.6
+0.45
+0.35
+0.6
+
+0.3
+0.3
+0.35
+0.35
+0.35
+0.35
+0.3
+0.35
+0.05
+0.3
+0.25
+0.3
+0.3
+0.3
+0.3
+0.3
+0.2
+0.35
+
+On peut observer que pour le graphe Data-Mining ce sont les mesures d’autorité à
+savoir le PageRank classique PRankCentr et la nouvelle variante de la centralité des
+vecteurs propres EVWNECentr) qui sont les mieux classées, en terme d’indice de
+Jaccard et de Précison/Rappel, par rapport au H-Index. Par rapport au nombre de Ci-
+tation ce sont plutôt les indicateurs de degré classique du graphe valué WEDegree et
+WEOpsahlDegree) et les nouvelles variantes WNEDegree et WNEOpsahlDegree)
+qui donnent des scores élevés. Ceci souligne l’apport des poids des liens (nombre
+
+Mesures d’inﬂuence via les indicateurs de centralité
+
+9
+
+Tableau 2. Résultats des mesures de centralité sur le graphe ayant Information
+
+Retrieval (IR) comme sujet.
+
+Degree
+WNDegree(*)
+WEDegree
+WEOpsahlDegree
+WNEDegree(*)
+WNEOpsahlDegree(*)
+CCentr
+CWNCentr(*)
+CWECentr(*)
+CWNECentr(*)
+BCentr
+BWNCentr(*)
+BWECentr(*)
+BWNECentr(*)
+PRankCentr
+PRankWNECentr(*)
+EVCentr
+EVWNECentr(*)
+
+Jaccard (H-Index)
+
+Jaccard (C)
+
+P/R (H-Index)
+
+P/R (C)
+
+0.25
+0.4286
+0.25
+0.2903
+0.2903
+0.3793
+0.25
+0.3793
+
+0.0
+
+0.2121
+0.1765
+0.3793
+0.25
+0.3793
+0.25
+0.3793
+0.25
+0.2903
+
+0.2121
+0.3333
+0.2121
+0.25
+0.2121
+0.2903
+0.2121
+0.2903
+
+0.0
+
+0.1765
+0.1429
+0.2903
+0.2121
+0.2903
+0.2121
+0.25
+0.2121
+0.25
+
+0.4
+0.6
+0.4
+0.45
+0.45
+0.55
+0.4
+0.55
+0.0
+0.35
+0.3
+0.55
+0.4
+0.55
+0.4
+0.55
+0.4
+0.45
+
+0.35
+0.5
+0.35
+0.4
+0.35
+0.45
+0.35
+0.45
+0.0
+0.3
+0.25
+0.45
+0.35
+0.45
+0.35
+0.4
+0.35
+0.4
+
+Tableau 3. Résultats des mesures de centralité sur le graphe ayant Bayesian
+
+Networks comme sujet.
+
+Degree
+WNDegree(*)
+WEDegree
+WEOpsahlDegree
+WNEDegree(*)
+WNEOpsahlDegree(*)
+CCentr
+CWNCentr(*)
+CWECentr(*)
+CWNECentr(*)
+BCentr
+BWNCentr(*)
+BWECentr(*)
+BWNECentr(*)
+PRankCentr
+PRankWNECentr(*)
+EVCentr
+EVWNECentr(*)
+
+Jaccard (H-Index)
+
+Jaccard (C)
+
+P/R (H-Index)
+
+P/R (C)
+
+0.2121
+0.3333
+0.25
+0.2903
+0.3793
+0.3793
+0.2121
+0.3333
+0.0526
+0.2903
+0.2903
+0.3793
+0.25
+0.3333
+0.3333
+0.25
+0.1111
+0.3333
+
+0.1429
+0.25
+0.1765
+0.2121
+0.2903
+0.2903
+0.1765
+0.25
+0.0256
+0.2121
+0.25
+0.3333
+0.25
+0.25
+0.25
+0.2121
+0.0811
+0.25
+
+0.35
+0.5
+0.4
+0.45
+0.55
+0.55
+0.35
+0.5
+0.1
+0.45
+0.45
+0.55
+0.4
+0.5
+0.5
+0.4
+0.2
+0.5
+
+0.25
+0.4
+0.3
+0.35
+0.45
+0.45
+0.3
+0.4
+0.05
+0.35
+0.4
+0.5
+0.4
+0.4
+0.4
+0.35
+0.15
+0.4
+
+10 RMPD. Volume – No. /2015
+
+de co-publications) dans la pertinence des résultats et la prépondérance des mesures
+d’autorité dans le graphe ayant Data-Mining comme sujet.
+
+Pour le graphe IR, c’est la variante WNDegree des mesures de degré qui obtient
+les meilleurs résultats par rapport aux deux références: le H-Index et le nombre de Ci-
+tation. On peut aussi distinguer l’apport des valuations, spécialement les attributs des
+nœuds, dans l’amélioration des scores obtenus par les mesures classiques (WNEOp-
+sahlDegree, CWNCentr, BWNCentr, BWNECentr, PRankWNECentr) même pour la
+mesure de proximité qui donne en général de très faibles résultats.
+
+Pour le graphe Bayesian Network, c’est les trois variantes WNEDegree, WNEOp-
+sahlDegree et BWNCentr qui obtiennent les meilleurs scores pour les deux réfé-
+rences (H-Index et nombre de Citation). Les valuations apportent des améliorations
+plus ou moins importantes dans le score des mesures classiques sauf pour le Page-
+Rank.
+
+En conclusion, les variantes des mesures de centralités introduites sont bien clas-
+sées par rapport aux mesures classiques ; ce qui conﬁrme l’apport des attributs dans le
+calcul de la centralité d’un auteur. Il faut noter que la centralité de proximité, ainsi que
+ses variantes, donne de piètres résultats car elle n’est pas bien adaptée pour les graphes
+étudiés. D’une manière générale, même si les résultats varient d’un graphe à l’autre
+et dépendent forcément du sujet traité, on peut constater une tendance caractérisant
+les variantes des centralités de degré, intégrant à la fois les attributs et les poids des
+liens, qui sont toujours classées parmi les meilleures mesures sur les trois graphes. En
+effet, les nouvelles variantes de la centralité de degré, et spéciﬁquement les deux me-
+sures WNEDegree et WNEOpsahlDegree, qui prennent en charge les valuations des
+liens et les attributs des nœuds, donnent en général de très bons résultats sur les trois
+graphes et ne sont pas gourmandes en matière de temps de calcul. En effet, elles ont
+l’avantage d’êtres calculées localement, i.e. ne nécessitent pas d’avoir connaissance
+de la structure globale du graphe, elles sont donc plus rapides à calculer par rapport
+aux autres mesures.
+
+Pour les centralités classiques du degré, de l’intermédiarité et des vecteurs propres
+l’apport des valuations des liens a permis d’améliorer la pertinence des résultats, tout
+particulièrement si on se réfère au H-index. Cette amélioration est encore plus forte
+si on prend en compte, en plus des valuations des liens, les attributs décrivant les
+nœuds. Ceci n’est pas toujours le cas pour les autres familles de mesures basées sur
+la proximité ou le PageRank. Dans ces deux familles de mesures, les résultats des
+variantes basées sur les valuations des liens ne sont pas homogènes et sont parfois
+encore plus faibles que les mesures classiques.
+
+La complexité en temps de calcul des nouvelles variantes des mesures de centralité
+reste dans le même ordre de grandeur que celle des mesures classiques de centralité.
+Pour la centralité du degré, la somme des poids des liens adjacents à un nœud est cal-
+culée sur des valeurs numériques plutôt que sur des valeurs binaires. Pour la centralité
+des vecteurs propres et le PageRank, le même processus itératif de calcul est utilisé
+pour atteindre une distribution stationnaire. Pour les deux centralités de proximité et
+
+Mesures d’inﬂuence via les indicateurs de centralité
+
+11
+
+d’intermédiarité, il est nécessaire de calculer les plus courts chemins entre toutes les
+paires de nœuds dans le graphe. La tâche est encore plus difﬁcile dans le cas des
+graphes valués, où il faut en plus calculer les poids moyens cumulés des plus courts
+chemins, mais ceci reste une opération avec une complexité linéaire comparable à
+celle des mesures usuelles.
+
+4. Conclusion
+
+Nous avons présenté dans ce travail un ensemble de mesures de centralité permet-
+tant d’évaluer la position occupée par les acteurs dans un réseau social. Ces variantes
+de mesures classiques prennent en compte non seulement la structure du réseau mais
+elles intègrent aussi des valuations qui caractérisent à la fois les liens qui existent entre
+les acteurs et les attributs spéciﬁques à ces derniers. Une série d’expérimentations a
+été réalisée sur trois graphes de co-publications scientiﬁques.
+
+Ces expérimentations ont permis d’évaluer la performance de ces mesures pour
+identiﬁer les utilisateurs considérés comme les plus inﬂuents dans leur domaine de
+recherche. Les résultats montrent que notre approche est encore plus pertinente que
+les indicateurs classique de centralité notamment pour les variantes pondérées de la
+centralité du degré.
+
+Bibliographie
+
+Barrat A., Barthelemy M., Pastor-Satorras R., Vespignani A. (2004). The architecture of com-
+plex weighted networks. Proceedings of the National Academy of Sciences of the United
+States of America, vol. 101, no 11, p. 3747–3752.
+
+Bonacich P., Paulette L. (2001, jul,). Eigenvector-like measures of centrality for asymmetric
+
+relations. Social Networks, vol. 23, no 3, p. 191–201.
+
+Brin S., Page L.
+
+(1998). The anatomy of a large-scale hypertextual web search engine.
+Proceedings of the seventh international conference on world wide web 7, p. 107–117.
+
+In
+
+Everett M. G., Borgatti S. P. (2012). Categorical attribute based centrality: E-I and G-F centra-
+
+lity. Social Networks, vol. 34, p. 562 - 569.
+
+Freeman L. C. (1979). Centrality in social networks: Conceptual clariﬁcation. Social Networks,
+
+vol. 1, no 3, p. 215-239.
+
+Ghosh R., Lerman K. (2010, July). Predicting inﬂuential users in online social networks. In
+
+Proceedings of kdd workshop on social network analysis (sna-kdd).
+
+Gould R. V., Fernandez R. M. (1989). Structures of mediation: A formal approach to brokerage
+
+in transaction networks. Sociological Methodology, vol. 19, no 1, p. 89.
+
+Hakimi S. L. (1964). Optimum locations of switching centers and the absolute centers and
+
+medians of a graph. Operations Research, vol. 12, no 3, p. 450–459.
+
+Hirsch J. E. (2005). An index to quantify an individual’s scientiﬁc research output. Proceedings
+of the National Academy of Sciences of the United States of America, vol. 102, no 46,,
+p. 16569-16572.
+
+12 RMPD. Volume – No. /2015
+
+Jeh G., Widom J. (2003). Scaling personalized web search. In Www ’03: Proceedings of the
+12th international conference on world wide web, p. 271–279. New York, NY, USA, ACM
+Press.
+
+Krackhardt D., Stern R. N. (1988). Informal networks and organizational crises: An experi-
+
+mental simulation. Social Psychology Quarterly, vol. 51, no 2, p. 123 - 140.
+
+Opsahl T., Agneessens F., , Skvoretz J.
+
+(2010, jul,). Node centrality in weighted networks:
+
+Generalizing degree and shortest paths. Social Networks, vol. 32, no 3, p. 245–251.
+
+Sergey B., Motwani R., , Page L., Winograd T. (1998). What can you do with a web in your
+
+pocket? IEEE Data Engineering Bulletin, vol. 21, p. 37-47.
+
+Tang J., Sun J., , Wang C., Yang Z. (2009). Social inﬂuence analysis in large-scale networks. In
+Proceedings of the 15th acm sigkdd international conference on knowledge discovery and
+data mining, p. 807–816. New York, NY, USA, ACM.
+
+Wasserman S., Faust K. (1994). Social network analysis, methods and application (4th edition:
+
+1998, 1999 éd.; C. U. Press, Ed.). Cambridge University Press, New York, USA.
+
+Zhou Y., Cheng H., Yu J. X. (2009). Graph clustering based on structural/attribute similarities.
+
+Proceedings of the VLDB Endowment, vol. 2, p. 718–729.
+
+

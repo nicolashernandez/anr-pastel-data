@@ -1,0 +1,199 @@
+https://svn.labri.fr/repos/visu/EGC2012/proceedings/D07/D7_EGC2012_DEMO.pdf
+
+GT-FLMin: Un Outil Graphique pour l’Extraction de Liens
+
+Fréquents dans les Réseaux Sociaux
+
+Erick Stattner∗, Martine Collard∗
+
+∗ Laboratoire LAMIA
+
+Université des Antilles et de la Guyane, France
+
+{erick.stattner, martine.collard}@univ-ag.fr
+
+http://lamia.univ-ag.fr
+
+Résumé. Dans le domaine des réseaux sociaux, la recherche de motifs fréquents
+correspond à l’extraction de sous-graphes retrouvés fréquemment dans un ré-
+seau ou un ensemble de réseaux. Contrairement aux approches classiques qui
+s’appuient uniquement sur des régularités structurelles, nous présentons dans ce
+travail l’outil GT-FLMin, capable d’exploiter les informations sur la structure
+pour extraire des régularités dans les liens qui connectent des noeuds similaires
+du point de vue de leurs caractéristiques. Nous appelons de tels motifs des liens
+fréquents.
+
+1 Introduction
+
+Ces dernières décennies ont vu naitre la “science des réseaux”, une discipline qui vise à
+l’étude des relations que des entités de tout type entretiennent entre elles (Barabasi, 2002).
+Cette approche s’inscrit comme un clivage avec les approches traditionnelles de fouille de
+données qui considèrent les données comme des ensembles indépendants et identiquement
+distribués (IID). Il est en effet aujoud’hui reconnu que les relations sociales entre les individus
+déterminent leurs comportements et leurs décisions.
+
+De nombreuses communautés s’intéressent à l’analyse de ce type de liens. Les méthodes
+traditionnelles dans ce domaine, dont les travaux les plus célèbres se retrouvent en sociolo-
+gie (Milgram, 1967), se sont limités pour la plupart à la mesure d’indicateurs issus de la théorie
+des graphes. Récemment, de nouvelles solutions ont été proposées pour appliquer les concepts
+de la fouille de données à l’analyse des réseaux (Getoor et Diehl, 2005). Elles se restreignent en
+générale à l’exploitation d’informations sur la structure du réseau en s’intéressant uniquement
+aux sous-graphes fréquents (Kuramochi et Karypis, 2001; Yan et Han, 2002).
+
+Cet article présente GT-FLMin, un outil graphique développé pour rechercher des motifs
+réguliers, que nous appelons “liens fréquents”, au sein des liens qui connectent des noeuds
+attributs-similaires. L’originalité de notre outil est qu’il exploite à la fois les informations sur
+la structure du réseau et sur les noeuds dans la recherche de motifs.
+
+La section 2 est consacrée à l’outil. Nous y introduisons le concept de liens fréquents et
+détaillons le fonctionnement de GT-FLmin. Dans la section 3, nous présentons les résultats
+obtenus sur un réseau de contacts de proximité. Enﬁn dans la section 4, nous concluons et
+présentons nos travaux futurs.
+
+GT-FLMin pour l’Extraction de Liens Fréquents dans les Réseaux Sociaux
+
+2 Outil d’Extraction GT-FLMin
+2.1 Concept de liens fréquents
+
+Soit G = (V, E) un réseau dans lequel V est l’ensemble des noeuds et E ⊆ V × V
+l’ensemble des liens. V est déﬁni comme une relation R(A1, ..., Ap) ou chaque Ai est un
+attribut. Ainsi, chaque noeud v ∈ V est déﬁni par le tuple (a1, ..., ap) où ∀k ∈ [1..p], v[Ak] =
+ak est la valeur de l’attribut Ak dans v.
+Un item est une expression logique A = x où A est un attribut et x une valeur. Un itemset est
+une conjonction d’items, par exemple A1 = x et A2 = y et A3 = z. Posons m1 et m2 deux
+itemsets et Vm1, Vm2, respectivement les ensembles de noeuds dans V qui satisfont m1 et m2.
+Nous notons E(m1,m2) l’ensemble des liens connectant des noeuds de Vm1 à des noeuds de
+Vm2, i.e. E(m1,m2) = {e ∈ E ; e = (a, b) a ∈ Vm1 et b ∈ Vm2}.
+
+Nous appelons support de E(m1,m2), le pourcentage de liens appartenant à E(m1,m2) dans
+
+|E(m1,m2)|
+
+|E|
+
+E, i.e. supp(E(m1,m2)) =
+
+Déﬁnition 1. Nous disons qu’il y a un lien fréquent, et nous notons (m1, m2), si le support
+
+de E(m1,m2) est plus grand qu’un seuil de support minimum β, i.e. supp(E(m1,m2)) > β
+liens fréquents comme F L = ∪m1∈I,m2∈I {E(m1,m2) ; supp(E(m1,m2)) > β}
+
+Déﬁnition 2. Soit I l’ensemble des itemsets dans V , nous déﬁnissons F L l’ensemble des
+
+2.2 L’outil GT-FLMin
+
+Notre outil d’extraction des liens fréquents GT-FLMin 1a été implémenté en JAVA. Il est
+une première version de l’approche décrite dans (Stattner et Collard, 2012) et vise à proposer
+une plateforme simple et ergonomique pour extraire les liens fréquents de divers types de
+réseaux sociaux.
+
+Comme le montre la ﬁgure 1, l’interface de GT-FLMin est divisée en trois panneaux princi-
+paux. Le panneau de gauche permet d’effectuer les opérations de calibrage tels que le charge-
+ment du réseau (liens et attributs) ou le réglage des différents paramètres. Le réseau est chargé
+dans un ﬁchier texte sous la forme <noeud 1> <noeud 2> <valeur>. Ainsi, chaque ligne
+du ﬁchier représente un lien du réseau. De la même façon, les attributs sont chargés dans un
+ﬁchier texte qui à la forme <noeud 1> <attribut 1> <attribut 2> ... <attribut n>.
+
+Le panneau du centre permet à l’utilisateur de visualiser et d’interagir avec le réseau chargé
+à travers un vue en 2D (ﬁgure 1(a)). Les attributs des noeuds peuvent également être visualisés
+dans ce panneau en utilisant les onglets(ﬁgure 1(b)). Enﬁn, le panneau de droite permet de
+suivre l’évolution du processus d’extraction des liens fréquents. Des informations résumant ce
+processus, tels que le nombre de liens fréquents extraits et le temps d’exécution sont également
+fournis.
+
+3 Exemple d’application
+
+Nous avons utilisé GT-FLMin pour extraire les liens fréquent d’un réseau de proximité
+géographique obtenu à partir de l’outil de simulation de déplacements EpiSim (Barrett et al.,
+
+1. GT-FLMin : http ://erickstattner.com/GT-FLMin
+
+E. Stattner et M. Collard
+
+(a)
+
+(b)
+
+FIG. 1 – Capture de l’interface de GT-FLMin
+
+2008). Dans ce réseau, deux individus sont connectés s’ils ont été géographiquement proches
+durant la simulation. Chaque individu possède 5 attributs qui le caractérise (1) classe d’age,
+(2) sexe (1-homme, 2-femme), (3) statut professionnel (1-a une profession, 2-n’en a pas),
+(4) type de relation avec le chef de famille (1-conjoint, partenaire, ou chef de famille, 2-enfant,
+3-parent, adulte, 4-autre) et (5) nombre de contacts.
+
+La ﬁgure 2 montre quelques exemples de liens fréquents extraits avec notre outil. Il est
+facile d’observer l’aspect pratique des motifs extraits. Par exemple, la première ligne de la
+
+GT-FLMin pour l’Extraction de Liens Fréquents dans les Réseaux Sociaux
+
+table 2(a) indique que 14.6% des liens du réseau connectent des individus d’une quarantaine
+d’années et des individus qui n’ont pas de profession.
+
+Liens fréquents
+((4 ;* ;* ;* ;*),(* ;* ;2 ;* ;*))
+((2 ;* ;* ;* ;*),(* ;2 ;* ;* ;*))
+((* ;* ;1 ;* ;*),(* ;* ;* ;2 ;*))
+((* ;1 ;* ;* ;*),(* ;2 ;* ;* ;*))
+
+Support
+0.146
+0.138
+0.230
+0.295
+
+(a)
+
+Liens fréquents
+((1 ;* ;2 ;* ;*),(* ;* ;2 ;* ;*))
+((4 ;* ;1 ;* ;*),(* ;* ;2 ;* ;*))
+((4 ;* ;* ;1 ;*),(* ;1 ;* ;* ;*))
+((1 ;* ;* ;2 ;*),(* ;* ;2 ;* ;*))
+
+Support
+0.113
+0.117
+0.149
+0.113
+
+(b)
+
+FIG. 2 – Exemples de liens fréquents entre des (a) 1-itemsets et (b) 2-itemsets
+
+4 Conclusion
+
+Dans ce papier, nous avons présenté l’outil graphique GT-FLMin qui recherche des mo-
+tifs fréquents, sous forme de liens fréquents qui connectent des noeuds attributs-similaires
+dans un réseau social. Cet outil est ﬂexible et évolutif. Il trouve des applications intéressantes
+dans le domaine du marketing, en analysant par exemple des réseaux bipartites impliquant des
+consommateurs et leurs produits cibles.
+
+Références
+Barabasi, A. L. (2002). Linked : The New Science of Networks. Perseus Books.
+Barrett, C. L., K. R. Bisset, S. G. Eubank, X. Feng, et M. V. Marathe (2008). Episimdemics : an
+efﬁcient algorithm for simulating the spread of infectious disease over large realistic social
+networks. In Conference on Supercomputing, pp. 1–12.
+
+Getoor, L. et C. P. Diehl (2005). Link mining : a survey. SIGKDD Explor. 7, 3–12.
+Kuramochi, M. et G. Karypis (2001). Frequent subgraph discovery. In Proceedings of the 2001
+
+IEEE International Conference on Data Mining, pp. 313–320.
+
+Milgram, S. (1967). The small world problem. Psychology Today 1, 61–67.
+Stattner, E. et M. Collard (2012). Extraction de liens frequents dans les reseaux sociaux (a
+
+paraitre). Extraction et gestion des connaissances (EGC).
+
+Yan, X. et J. Han (2002). gspan : Graph-based substructure pattern mining. In Proceedings of
+
+the 2002 IEEE International Conference on Data Mining.
+
+Summary
+
+In the area of social networks, the search for frequent patterns refers to the extraction of
+frequent subgraphs found in a network or a set of networks. Unlike traditional approaches that
+rely solely on structural regularities, the GT-FLMin tool presented in this paper is able to elicit
+frequent patterns from links between attributes-similar nodes. We call such patterns frequent
+links.
+
+

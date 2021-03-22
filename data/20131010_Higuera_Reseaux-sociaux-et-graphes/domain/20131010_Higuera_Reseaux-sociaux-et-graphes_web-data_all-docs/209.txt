@@ -1,0 +1,2851 @@
+https://dumas.ccsd.cnrs.fr/dumas-00725254/file/Guesmoune.pdf
+
+Anonymisation de r´eseaux sociaux
+
+Mohammed Ghesmoune
+
+Sous la direction de :
+
+Sophie Pinchinat, S´ebastien Gambs
+
+Master Recherche en Informatique
+
+Universit´e de Rennes 1
+
+05 Juin 2012
+
+R´esum´e
+
+Les r´eseaux sociaux ont ´et´e utilis´es comme objet d’´etude dans de
+nombreux domaines tels que la sociologie, l’´epid´emiologie ou encore le
+marketing viral. Ainsi, il est possible en analysant certaines propri´et´es
+structurelles d’un graphe social, telles que le degr´e des nœuds ou encore
+le diam`etre du graphe, d’en d´eduire des informations sur la dynamique
+des individus qui composent ce graphe. N´eanmoins, publier directement
+un graphe social en enlevant simplement le nom des personnes qui ont
+contribu´e `a ce graphe soul`eve d’importants probl`emes de vie priv´ee. En
+particulier, certaines attaques par inf´erence sur le graphe publi´e peuvent
+conduire `a d´e-anonymiser certains nœuds, apprendre l’existence d’une re-
+lation sociale entre deux nœuds ou encore `a utiliser la structure du graphe
+elle-mˆeme pour d´eduire la valeur de certains attributs sensibles. Une des
+mani`ere d’anonymiser un graphe consiste `a g´en´eraliser certains groupes
+de nœuds en un super-nœud et plusieurs liens en un m´eta-lien. Cepen-
+dant, cette m´ethode d’anonymisation peut avoir un impact important sur
+l’utilit´e r´esultante qui peut ˆetre extraite du graphe g´en´eralis´e. Dans ce
+travail de recherche, nous proposons de d´evelopper une technique d’ano-
+nymisation de graphe social guid´ee par l’utilit´e qui cherche `a atteindre
+un ´equilibre entre les garanties oﬀertes en terme de vie priv´ee et l’utilit´e
+r´esultante du graphe g´en´eralis´e.
+
+1
+
+Table des mati`eres
+
+1 Introduction
+
+2 Pr´eliminaires
+
+2.1 Mod´elisation d’un r´eseau social
+. . . . . . . . . . . . . . . . . .
+2.2 Notions fondamentales . . . . . . . . . . . . . . . . . . . . . . .
+2.3 Sources et partage de donn´ees . . . . . . . . . . . . . . . . . . .
+2.4 Diﬀ´erence entre l’anonymisation dans les graphes sociaux et les
+bases de donn´ees . . . . . . . . . . . . . . . . . . . . . . . . . .
+2.5 Mesures d’utilit´e . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+3 Etat de l’art des attaques par inf´erence d’un graphe social
+
+3.1 R´e-identiﬁcation de nœuds . . . . . . . . . . . . . . . . . . . . .
+3.1.1 Connaissances d’un adversaire
+. . . . . . . . . . . . . .
+3.1.2 Attaque passive . . . . . . . . . . . . . . . . . . . . . . .
+3.1.3 Attaque active . . . . . . . . . . . . . . . . . . . . . . .
+Inf´erence d’attributs . . . . . . . . . . . . . . . . . . . . . . . .
+
+3.2
+
+4 Etat de l’art sur les approches d’anonymisation
+
+4.1 Anonymisation de degr´es
+. . . . . . . . . . . . . . . . . . . . .
+4.2 Anonymisation de voisinage . . . . . . . . . . . . . . . . . . . .
+4.2.1 Composante de voisinage
+. . . . . . . . . . . . . . . . .
+4.2.2 Coˆut d’anonymisation . . . . . . . . . . . . . . . . . . .
+4.2.3 Anonymisation de voisinage . . . . . . . . . . . . . . . .
+4.2.4 Algorithme d’anonymisation . . . . . . . . . . . . . . . .
+4.3 k-automorphisme . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.4 G´en´eralisation d’un graphe social . . . . . . . . . . . . . . . . .
+4.4.1 Algorithme GraphGen . . . . . . . . . . . . . . . . . . .
+4.4.2 Algorithme SaNGreeA . . . . . . . . . . . . . . . . . . .
+4.5 Anonymisation par perturbation al´eatoire . . . . . . . . . . . .
+k-brouillage . . . . . . . . . . . . . . . . . . . . . . . . .
+4.5.1
+k- pr´eimage brouillage . . . . . . . . . . . . . . . . . . .
+4.5.2
+4.5.3
+k-degr´e brouillage
+. . . . . . . . . . . . . . . . . . . . .
+´Etude critique des approches d’anonymisation . . . . . . . . . .
+
+4.6
+
+5 G´en´eralisation guid´ee par l’utilit´e
+
+5.1 Propri´et´es structurelles et utilit´e . . . . . . . . . . . . . . . . .
+5.2 G´en´eralisation et bornes de mesures d’utilit´e
+. . . . . . . . . .
+5.2.1 Bornes pour le degr´e d’un nœud . . . . . . . . . . . . .
+5.2.2 Bornes sur le diam`etre . . . . . . . . . . . . . . . . . . .
+5.2.3 Bornes sur le rayon . . . . . . . . . . . . . . . . . . . . .
+5.2.4 Bornes sur d’autres propri´et´es structurelles
+. . . . . . .
+5.3 Algorithme de g´en´eralisation guid´e par l’utilit´e . . . . . . . . .
+5.4 Garantie en termes d’anonymat/respect de la vie priv´ee . . . .
+5.5
+Impl´ementation . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+6 Conclusion et perspectives
+
+3
+
+3
+4
+4
+5
+
+6
+7
+
+7
+8
+8
+10
+11
+12
+
+15
+15
+16
+16
+17
+17
+18
+19
+20
+20
+21
+23
+23
+24
+24
+24
+
+25
+28
+30
+31
+32
+33
+34
+34
+36
+37
+
+38
+
+2
+
+1
+
+Introduction
+
+Un r´eseau social tel que Facebook, Google+, Myspace, etc., peut ˆetre re-
+pr´esent´e sous la forme d’un graphe social o`u les nœuds repr´esentent les utilisa-
+teurs et les arˆetes mod´elisent les liens sociaux entre individus (amiti´e, ´echange
+ﬁnancier, inimiti´e, ...). Chaque utilisateur poss`ede un proﬁl repr´esentant ses
+relations et interactions dans le r´eseau, ce proﬁl peut d´ecrire un certain nombre
+d’informations personnelles sur cette personne (par exemple, son ˆage, sa lo-
+calisation, son aﬃliation politique, ...). Les utilisateurs d’un r´eseau social ont
+tendance `a cacher leurs interactions et `a ne pas partager ses informations
+qu’avec certains de leurs “amis”. Aﬁn de permettre des analyses utiles sur les
+donn´ees d’un r´eseau social, on anonymise g´en´eralement le graphe social avant
+de le publier, en supprimant les noms des utilisateurs (par exemple, le nom, le
+num´ero de s´ecurit´e social, ...), et cela pour pr´eserver la vie priv´ee des membres
+du r´eseau.
+
+Malgr´e cette proc´edure d’anonymisation, il est parfois possible d’apprendre
+des liens sociaux entre utilisateurs, de r´e-identiﬁer des nœuds du graphe `a
+travers une attaque par inf´erence. Cette derni`ere consiste `a d´eduire des infor-
+mations personnelles, des attributs d’un proﬁl priv´e, cach´ees par des indivi-
+dus au moyen d’informations auxiliaires publiques. Ainsi, plusieurs approches
+d’anonymisation d’un graphe social ont ´et´e d´evelopp´es. La g´en´eralisation d’un
+graphe social est reconnu comme une technique, d’anonymisation d’un graphe
+social, proposant un degr´e ´elev´e de garantie en termes de pr´eservation de la vie
+priv´ee (proportionnelement avec la taille minimale des clusters). Cependant,
+l’utilit´e d’un tel graphe social publi´e n’atteint souvent pas un niveau accep-
+table au niveau pratique. Les analystes d’un graphe social consid`erent des
+propri´et´es structurelles aﬁn d’´etudier l’inﬂuence et le pouvoir des nœuds, faire
+de la marketing virale ou ´etudier les mod`eles de propagation de l’information
+et de la maladie.
+
+Comme exemple d’anonymisation et d’attaque par inf´erence, nous citons
+le cas historique, la comp´etition mise en place par Netﬂix qui est propos´e
+comme un d´eﬁ `a la communaut´e d’apprentissage machine pour am´eliorer la
+pr´ecision de son syst`eme de recommandation de ﬁlms. Chaque client (ligne)
+donne son score `a propos d’un ﬁlm (colonne). Bien qu’aucun identiﬁant n’ait
+´et´e utilis´e, une d´e-anonymisation a ´et´e possible pour un nombre important
+d’enregistrements `a l’aide d’une attaque par inf´erence utilisant Internet Movie
+DataBase (IMDB) comme informations auxiliaires [1].
+
+Le reste de ce rapport est organis´e comme suit. Tout d’abord, la Section 2
+d´ecrit des notions fondamentales n´ecessaires pour mieux comprendre le reste
+de ce rapport. Ensuite, la Section 3 d´etaille quelques algorithmes et m´ethodes
+d’attaques par inf´erence sur un graphe social. Puis, la Section 4 pr´esente un
+´etat de l’art sur les approches d’anonymisation d’un graphe social. Apr`es, la
+Section 5 pr´esente notre algorithme d’anonymisation d’un graphe social guid´e
+par l’utilit´e qu’on veut pr´eserver du graphe publi´e. Enﬁn, la Section 6 conclut
+ce rapport et propose des perspectives de recherche pour la poursuite de ce
+projet.
+
+2 Pr´eliminaires
+
+Dans cette section, nous d´eﬁnissons des notions fondamentales telle que
+l’utilit´e d’un graphe social, puis nous pr´esentons les diﬃcult´es du probl`eme
+
+3
+
+de l’anonymisation dans les graphes sociaux ainsi que les diﬀ´erents types de
+mesures d’utilit´e consid´er´ees par les analystes d’un graphe social.
+
+2.1 Mod´elisation d’un r´eseau social
+
+Dans ce rapport, on mod´elise un r´eseau social comme ´etant un graphe
+G = (V, E) enrichi par un ensemble d’attributs A, o`u V repr´esente l’ensemble
+des nœuds et tel que chaque nœud correspond `a un individu, et E un ensemble
+d’arˆetes tel que chaque arˆete repr´esente une relation sociale (amiti´e, int´erˆets
+communs, relations sexuelles, ´echanges ﬁnanciers, inimiti´e, etc.) entre deux
+individus. L’ensemble d’attributs A est tel que pour tout nœud dans V on
+peut trouver des attributs comme par exemple le nom, le num´ero de t´el´ephone,
+l’ˆage, etc., et pour chaque arˆete dans E, on peut la caract´eriser par un attribut
+comme par exemple le type de la relation.
+
+2.2 Notions fondamentales
+
+Dans cette partie, nous allons aborder la d´eﬁnition de certaines notions
+fondamentales dans le domaine de l’anonymisation d’un graphe social et qui
+sont essentielles pour mieux comprendre le reste de ce rapport telles que les
+notions d’adversaire, d’attaque par inf´erence, de connaissance d’un adversaire,
+d’utilit´e d’un graphe social, et de k-anonymit´e.
+
+D´eﬁnition 2.1 (Adversaire). Un adversaire, dans le contexte des r´eseaux so-
+ciaux, repr´esente toute personne capable de causer un bris de vie priv´ee des uti-
+lisateurs en acc´edant `a la totalit´e ou une partie du graphe social. Par exemple,
+l’adversaire pourrait ˆetre un fournisseur d’un r´eseau social, un gouvernement,
+ou encore des chercheurs.
+
+D´eﬁnition 2.2 (Attaque par inf´erence). Une attaque par inf´erence sur un
+graphe social anonymis´e a pour but de causer un bris de vie priv´ee sur des
+individus en divulguant certaines informations personnelles non pr´esentes ex-
+plicitement dans le graphe social rendu public. Cela pourrait ˆetre par exemple
+le fait d’inf´erer l’aﬃliation politique d’une personne ou encore le fait qu’elle
+partage un lien social avec un autre individu.
+
+On peut distinguer trois cat´egories de bris de vie priv´ee dans les graphes
+
+sociaux [2] :
+
+– La divulgation d’identit´e : l’identit´e (nom, num´ero de s´ecurit´e social, ...)
+
+de l’individu qui est associ´e au nœud est r´ev´el´ee.
+
+– La divulgation de lien : une relation sociale sensible entre deux individus
+
+est divulgu´ee.
+
+– La divulgation d’attribut : les donn´ees sensibles associ´ees avec un nœud
+
+sont d´evoil´ees.
+
+D´eﬁnition 2.3 (Connaissance d’un adversaire). Une connaissance repr´esente
+potentiellement toute information auxiliaire sur les utilisateurs du r´eseau social
+que poss`ede un adversaire et qui peut l’aider pendant l’attaque par inf´erence
+(D´eﬁnition 2.2), cette connaissance peut ˆetre individuelle ou collective.
+
+Par exemple, l’adversaire peut savoir que Bob a 30 amis, ou qu’il participe
+
+au groupe Yucatan, ou bien que son ˆage est de 18 ans.
+
+4
+
+D´eﬁnition 2.4 (Utilit´e d’un graphe social). L’ utilit´e d’un graphe social quan-
+tiﬁe `a quel point les donn´ees issues d’un graphe social (y compris sa structure
+topologique) sont utilisables dans l’analyse des r´eseaux sociaux. Une mesure
+d’utilit´e est souvent fortement d´ependante du domaine d’application consid´e-
+r´ee. En g´en´eral, plus le graphe anonymis´e partage de l’information et se rap-
+proche du graphe d’origine, plus la mesure d’utilit´e de ce graphe est importante.
+
+D´eﬁnition 2.5 (Anonymisation na¨ıve). L’ anonymisation na¨ıve d’un graphe
+G = (V, E) consiste `a produire un graphe isomorphe G(cid:48) = (V (cid:48), E(cid:48)), d´eﬁni par
+une bijection al´eatoire f : V → V (cid:48), et tel que les arˆetes de G(cid:48) sont E(cid:48) =
+{(f (x), f (x(cid:48)))|(x, x(cid:48)) ∈ E}.
+
+Autrement dit, l’anonymisation na¨ıve d’un graphe social consiste `a suppri-
+mer les noms des utilisateurs et `a les remplacer par des pseudonymes. Cette
+proc´edure est souvent insuﬃsante pour pr´eserver la vie priv´ee des individus
+pr´esents dans un graphe social. Par exemple, si un adversaire sait que Bob a
+30 amis, et que dans le graphe social publi´e il existe un seul nœud de degr´e 30,
+l’adversaire peut conclure sans aucun doute que ce nœud correspond `a Bob.
+
+D´eﬁnition 2.6 (k-anonymit´e). Soit un graphe social G = (V, E), et une
+connaissance auxiliaire Q (D´eﬁnition 2.3) que poss`ede un adversaire, G sa-
+tisfait la condition de k-anonymit´e par rapport `a Q, si et seulement si pour
+tout nœud v ∈ V , il existe au moins (k − 1) autres nœuds dans V poss`edent
+la mˆeme caract´eristique que celle du nœud v par rapport `a Q, c’est-`a-dire que
+au moins k nœuds sont indistinguables vis-`a-vis de l’adversaire [3, 4].
+
+Par exemple, si la connaissance d’un adversaire repr´esente le nombre d’amis
+que poss`ede un individu v (c’est-`a-dire le degr´e, dv, du nœud v), la condition
+de k-anonymit´e exige que le graphe rendu public ait au moins (k − 1) autres
+nœuds ayant le mˆeme degr´e dv.
+
+2.3 Sources et partage de donn´ees
+
+Une partie consid´erable des attaques sur les r´eseaux sociaux s’appuie sur le
+graphe social publi´e et sur des connaissances auxiliaires que l’adversaire peut
+acqu´erir et exploiter. Ces connaissances peuvent avoir ´et´e r´ecup´er´ees `a partir
+de plusieurs sources de donn´ees :
+
+– Les graphes sociaux des appels t´el´ephoniques peuvent ˆetre utilis´es pour
+d´etecter des activit´es illicites telles que des fraudes [5] et pour d´etecter
+des probl`emes de s´ecurit´e nationale. Ces graphes sociaux contiennent des
+millions de nœuds.
+
+– Les sociologistes, ´epid´emiologistes et professionnels de la sant´e collectent
+des donn´ees correspondantes `a diﬀ´erents types de graphes sociaux (fa-
+mille, liens sociaux et localisations) pour ´etudier les risques de la propa-
+gation de maladies 1. Il est possible que l’adversaire puisse acc´eder `a ces
+donn´ees suite `a une publication d’informations.
+
+– Pour les r´eseaux sociaux en ligne, les donn´ees peuvent ˆetre collect´ees par
+crawling via une API ou par screen-scrapping. Par exemple, Mislove,
+Marcon, Gummadi, Druschel et Bhattacharjee ont collect´e les donn´ees
+de r´eseaux sociaux tels que Flickr, YouTube, LiveJournal et Orkut [6].
+
+– Les op´erateurs des r´eseaux sociaux en ligne partagent parfois leurs graphes
+
+sociaux avec des op´erateurs publicitaires pour leur permettre un meilleur
+
+1. The
+
+National
+
+Longitudinal
+
+Study
+
+of
+
+Adolescent
+
+Health.
+
+http ://www.cpc.unc.edu/projects/addhealth, 2008.
+
+5
+
+ciblage de la publicit´e [7]. Par exemple, Facebook mentionne explicite-
+ment dans la politique de conﬁdentialit´e que les proﬁls des utilisateurs
+peuvent ˆetre partag´es pour ﬁns de publicit´es personnalis´ees tout en pr´e-
+tendant anonymiser ces donn´ees.
+
+– Des applications tierces peuvent ˆetre install´ees sur certains r´eseaux so-
+ciaux et servir `a collecter des informations sur les utilisateurs de ces
+syst`emes. Ainsi, l’application Top-Friends qui donne une note de proxi-
+mit´e aux amis, d´evelopp´ee par la soci´et´e Slide, a ´et´e suspendue car elle
+ne respecte pas les choix d´eﬁnis par l’utilisateur en termes de protection
+de ses donn´ees sur Facebook 2.
+
+– L’agr´egation des informations `a partir de plusieurs r´eseaux sociaux, fa-
+cilit´es par des projets comme OpenID 3 et le projet graphe social [8],
+pr´esentent potentiellement une menace pour la vie priv´ee des individus
+de ces r´eseaux, une fois que ces donn´ees seront publi´ees.
+
+2.4 Diﬀ´erence entre l’anonymisation dans les graphes sociaux
+
+et les bases de donn´ees
+
+Bien que le respect de la vie priv´ee dans la publication de bases de donn´ees
+relationnelles a ´et´e largement ´etudi´e et plusieurs mod`eles importants de respect
+de la vie priv´ee tels que k-anonymit´e [9], l-diversit´e [10] ainsi que de nombreux
+algorithmes eﬃcaces ont ´et´e propos´es, la plupart des m´ethodes d’anonymi-
+sation existantes peuvent traiter uniquement des donn´ees relationnelles. Ces
+m´ethodes ne peuvent pas ˆetre appliqu´ees directement aux donn´ees de graphes
+sociaux. En eﬀet, l’anonymisation des graphes sociaux est plus diﬃcile que
+celle pour les bases de donn´ees.
+
+Premi`erement, il est plus diﬃcile de mod´eliser les connaissances auxiliaires
+des adversaires sur un graphe social que sur une base de donn´ees. Dans le
+contexte des bases de donn´ees, il est souvent suppos´e qu’un ensemble d’at-
+tributs pouvant jouer le rˆole de quasi-identiﬁcateurs est utilis´e pour associer
+des donn´ees provenant de plusieurs bases de donn´ees, et les attaques par in-
+f´erence consistent souvent en la r´e-identiﬁcation des personnes `a partir de cet
+ensemble d’attributs quasi-identiﬁcateurs. Cependant, dans un graphe social
+de nombreuses informations peuvent ˆetre utilis´ees pour identiﬁer les indivi-
+dus, tels que les ´etiquettes des nœuds et d’arˆetes, le degr´e ou le voisinage d’un
+nœud, les sous-graphes induits, ainsi que leurs combinaisons. Ainsi, l’anony-
+misation dans les graphes sociaux est beaucoup plus complexe que dans le cas
+des bases de donn´ees.
+
+Deuxi`emement, le calcul de l’information perdue en anonymisant les don-
+n´ees d’un graphe social est plus diﬃcile que celle dans l’anonymisation de
+bases de donn´ees. En g´en´eral, la perte d’information dans une table anony-
+mis´ee peut ˆetre calcul´ee en utilisant la somme de la perte d’information de
+diﬀ´erents tuples (les enregistrements de la table). Etant donn´e un tuple dans
+la table d’origine et le tuple correspondant dans la table anonymis´ee, on peut
+calculer la distance entre les deux tuples pour quantiﬁer l’information perdue
+au niveau d’un tuple. Cependant, un graphe social est constitu´e d’un ensemble
+de nœuds et un ensemble d’arˆetes. Il est diﬃcile de comparer deux graphes so-
+ciaux en comparant les nœuds et les arˆetes individuellement. Deux graphes
+sociaux ayant le mˆeme nombre de nœuds et le mˆeme nombre d’arˆetes peuvent
+
+2. Facebook. Facebook’s privacy policy. http ://www.new.facebook.com/policy.php, 2012.
+3. OpenID. http ://openid.net, 2008.
+
+6
+
+ˆetre tr`es diﬀ´erents du point de vue de la perspective des propri´et´es structu-
+relles telles que la connectivit´e, l’interm´ediarit´e, et le diam`etre. Ainsi, il peut y
+avoir plusieurs fa¸cons pertinentes de d´eﬁnir les mesures de perte d’information
+ainsi que la qualit´e d’anonymisation.
+
+Troisi`emement, la diﬃcult´e de mettre au point des m´ethodes d’anonymi-
+sation des donn´ees de graphes sociaux en comparaison des m´ethodes d’anony-
+misation de donn´ees relationnelles. Les approches du type diviser pour r´egner
+sont largement appliqu´ees dans l’anonymisation de donn´ees relationnelles en
+raison du fait que les tuples d’une table relationnelle sont s´eparables durant la
+phase d’anonymisation. En d’autres termes, l’anonymisation d’un groupe de
+tuples n’aﬀecte pas les autres tuples de la table. Cependant, l’anonymisation
+d’un graphe social est beaucoup plus complexe car changer les ´etiquettes des
+nœuds et des arˆetes peut aﬀecter les voisinages d’autres nœuds, et la suppres-
+sion et l’ajout de nœuds et d’arˆetes peut aﬀecter d’autres nœuds et arˆetes ainsi
+que les propri´et´es d’un graphe.
+
+2.5 Mesures d’utilit´e
+
+L’objectif principal derri`ere la publication d’un graphe social est de pouvoir
+permettre de faire des analyses sur la structure du graphe. En g´en´eral, la
+qualit´e des analyses qui peuvent ˆetre faites `a partir du graphe publi´e sont
+quantiﬁ´ees par une mesure d’utilit´e. Jusqu’`a pr´esent, trois types d’utilit´es ont
+´et´e consid´er´ees dans la litt´erature [11] :
+
+– Propri´et´es structurelles (topologiques). L’une des plus importantes
+applications des donn´ees d’un graphe social publi´e est d’analyser les pro-
+pri´et´es structurelles de son graphe. Pour comprendre et utiliser les infor-
+mations contenues dans un graphe social, les chercheurs ont d´evelopp´e
+diverses mesures pour indiquer la structure et les caract´eristiques d’un
+graphe de diﬀ´erents points de vue. Cela inclut des propri´et´es telles que la
+s´equence de degr´es, le diam`etre d’un graphe, le cœﬃcient de clustering,
+etc.
+
+– Propri´et´es spectrales. Le spectre d’un graphe peut ˆetre d´eﬁni comme
+l’ensemble des valeurs propres de la matrice d’adjacence (ou autres ma-
+trices telle que la matrice Laplacienne) repr´esentant le graphe ´etudi´e. Le
+spectre d’un graphe est fortement corr´el´e avec de nombreuses propri´et´es
+structurelles d’un graphe.
+
+– Requˆetes d’agr´egation d’un graphe social. Une requˆete d’agr´ega-
+tion sur un graphe social calcule l’agr´egat de certaines propri´et´es sur cer-
+tains chemins ou sous-graphes satisfaisant des conditions d’une requˆete.
+Par exemple, la requˆete pourrait ˆetre “quelle est la distance moyenne
+d’un m´edecin `a un enseignant dans un graphe social ?”.
+
+Les propri´et´es structurelles d’un graphe social seront abord´ees en d´etails dans
+la Section 5.
+
+3 Etat de l’art des attaques par inf´erence d’un graphe
+
+social
+
+Il existe dans la litt´erature trois types de bris de la vie priv´ee des individus
+pr´esents dans un graphe social : (1) la divulgation d’identit´e qui consiste `a
+r´ev´eler l’identit´e de l’individu qui est associ´e au nœud, (2) la divulgation d’at-
+tribut o`u les donn´ees sensibles associ´ees avec un nœud sont d´evoil´ees et (3)
+
+7
+
+la divulgation de lien o`u une relation sociale sensible entre deux individus est
+divulgu´ee. Nous allons pr´esenter et d´etailler les deux premiers types d’attaques
+en d´ecrivant des techniques permettant de faire r´eussir de telles attaques.
+
+3.1 R´e-identiﬁcation de nœuds
+
+Dans cette partie, nous allons pr´esenter quelques types de connaissances
+que l’adversaire peut acqu´erir en les mod´elisant formellement sous forme de re-
+quˆetes, puis nous d´etaillerons quelques algorithmes pouvant ˆetre appliqu´es par
+l’adversaire pour pouvoir r´e-identiﬁer des individus pr´esents dans un graphe
+social rendu public.
+
+3.1.1 Connaissances d’un adversaire
+
+Dans [12], les auteurs ont ´etudi´e deux classes de requˆetes d´ecrivant les
+connaissances externes disponibles `a un adversaire pour r´eussir une attaque
+sur un graphe social anonymis´e. Ils mod´elisent les connaissances auxiliaires
+d’un adversaire comme l’acc`es `a une source qui fournit des r´eponses `a une
+requˆete de connaissance restreinte Q concernant un seul nœud cible dans le
+graphe original.
+
+a. Requˆetes de raﬃnement de nœuds
+
+Ces requˆetes de connaissance, Hi, d´ecrivent la structure locale du graphe
+autour du nœud cible d’une mani`ere qui permet un raﬃnement it´eratif de
+nœuds `a travers ces requˆetes. Ainsi, la requˆete H0(x) retourne l’´etiquette
+d’un nœud x. Or, les noms des nœuds sont cach´es (anonymis´es), donc H0 =
+ε, H1(x) retourne le degr´e d’un nœud x, H2(x) retourne les degr´es de chaque
+voisin d’un nœud x. Hi(x) peut ˆetre d´eﬁni r´ecursivement comme :
+
+Hi(x) = {Hi−1(y) | (x, y) ∈ E}.
+
+Exemple 3.1 (Calcul de H0, H1 et H2). La Figure 1 illustre le calcul de
+H0, H1 et H2 de chaque nœud du graphe 1(a). Ainsi, H0 vaut uniform´ement
+ε, H1(Bob) = {ε, ε, ε, ε}, abr´eg´e dans le tableau simplement comme 4. En
+utilisant cette abr´eviation, H2(Bob) = {1, 1, 4, 4} qui repr´esente les degr´es
+des voisins de Bob.
+
+Figure 1 – (a) un graphe social ; (b) connaissances auxiliaires consistant en re-
+quˆetes de raﬃnement de nœuds calcul´ees pour chaque individu dans le graphe ;
+(c) les classes d’´equivalences implicites par le raﬃnement de nœuds.
+
+D´eﬁnition 3.1 (Relation d’´equivalence). Deux nœuds x et y dans un
+graphe sont ´equivalents relativement `a Hi, not´ee x ≡Hi y, si et seulement
+si Hi(x) = Hi(y).
+
+8
+
+Par exemple, en se basant sur le tableau 1(c), Bob et Dave sont ´equivalents
+relativement `a la requˆete H1 et donc ne peuvent pas ˆetre distingu´es par un
+adversaire qui ne poss`ede que la la connaissance auxiliaire correspondante
+`a la requˆete H1. Cependant, relativement `a H2, ils appartiennent `a deux
+classes d’´equivalence diﬀ´erentes et donc ils sont distinguables si l’adversaire
+peut poser la requˆete de connaissance H2, c’est-`a-dire il y aura une atteinte
+de la vie priv´ee des individus Bob et Dave, en les r´e-identiﬁant dans leur
+graphe social publi´e, par un adversaire poss´edant la requˆete H2.
+Th´eor`eme 3.1 (Babai et Kucera [13]). Soit G = (V, E) un graphe al´eatoire
+sur n nœuds avec probabilit´e d’arˆete p = 1
+2 . La probabilit´e qu’il existe deux
+nœuds distincts x, y ∈ V tel que x ≡H3 y est moins que 2−cn, pour une
+certaine constante c > 0.
+
+Ce th´eor`eme d´emontre que la connaissance de H3(x) par l’adversaire lui
+permet de r´e-identiﬁer avec une forte probabilit´e un nœud cible x.
+
+b. Requˆetes de connaissance de sous-graphe
+
+Les requˆetes de raﬃnement de nœuds pr´e-supposent une connaissance com-
+pl`ete sur les nœuds adjacents du nœud cible. Cependant, en pratique, l’ad-
+versaire peut souvent obtenir seulement une liste partielle des voisins du
+nœud cible. Un autre inconv´enient est que les requˆetes H d´ecrivent arbi-
+trairement des sous-graphes importants centr´es autour de x si ce nœud est
+fortement connect´e (l’adversaire apprend alors un sous-graphe dans G).
+Une autre possibilit´e est de consid´erer une classe de requˆetes qui conﬁrment
+l’existence d’un sous-graphe autour du nœud cible. La puissance descrip-
+tive d’une telle requˆete est proportionnelle au nombre d’arˆetes dans le sous-
+graphe d´ecrit. Par exploration du voisinage du nœud cible x, l’adversaire
+apprend l’existence d’un sous-graphe repr´esentant une connaissance par-
+tielle sur la structure autour de x. L’existence de ce sous-graphe peut ˆetre
+exprim´ee par une requˆete et l’octroi d’une r´eponse `a cette requˆete mod´elise
+la connaissance d’un adversaire.
+
+Exemple 3.2 (Sous-graphes autour d’un nœud). La Figure 2 montre trois
+sous-graphes centr´es autour de Bob, le premier conﬁrme que Bob a (au
+moins) trois voisins, le deuxi`eme d´ecrit un arbre de nœuds proches de Bob,
+et le troisi`eme ´etablit les nœuds `a proximit´e de Bob dans un sous-graphe.
+
+Figure 2 – Trois instances de l’information partielle autour de Bob qui peut ˆetre
+d´ecrite sous forme de requˆetes de connaissance de sous-graphe, tir´ee de [12].
+
+Les requˆetes ci-dessus repr´esentent un ensemble de connaissances struc-
+turelles qui peuvent ˆetre accessibles `a un adversaire connaissant des des-
+criptions compl`etes ou partielles sur les voisinages locaux d’un nœud. Les
+requˆetes de raﬃnement de nœuds fournissent des informations compl`etes
+sur le degr´e d’un nœud, alors qu’une requˆete de sous-graphe ne peut pas
+
+9
+
+exprimer une connaissance Hi. En eﬀet, les requˆetes de sous-graphes sont
+existentielles et ne peuvent pas conﬁrmer les contraintes exactes sur les de-
+gr´es ou l’absence d’une arˆete dans le graphe. Souvent, il est diﬃcile pour
+un adversaire d’acqu´erir une description structurelle compl`ete et d´etaill´ee
+d’une requˆete de raﬃnement de nœuds de haut-niveau, d’o`u la s´emantique
+des requˆetes de sous-graphe pour mod´eliser la capacit´e d’un adversaire r´ea-
+liste.
+
+3.1.2 Attaque passive
+
+Lors d’une attaque passive, l’adversaire n’inﬂue pas directement sur le r´e-
+seau social, il n’est donc qu’un observateur qui essaie de comprendre sa struc-
+ture. Diﬀ´erents types d’attaques passives sont possibles. Ainsi, Backstrom,
+Dwork et Kleinberg [14] consid`erent une coalition entre plusieurs adversaires
+passifs qui sont des voisins dans le graphe G pour compromettre la vie priv´ee
+d’autres voisins. Ainsi, les voisins connect´es `a un unique sous-ensemble de la
+coalition seront reconnus sans aucune ambiguit´e une fois la coalition identiﬁ´ee.
+Apr`es la lib´eration de G, la coalition applique le mˆeme algorithme bas´e sur l’at-
+taque par marche al´eatoire (d´ecrit plus loin dans la section 3.1.3) pour trouver
+les nœuds cibles dans le graphe anonymis´e, et donc inf´erer l’existence de liens
+entre ces nœuds. Cette impl´ementation d’attaque ne cible pas un ensemble
+de nœuds particuliers, mais plutˆot un ensemble de voisins de la coalition (on
+suppose que les attaquants connaissent les noms de leurs voisins).
+
+Dans [15], les auteurs ont propos´e un algorithme de r´e-identiﬁcation de
+nœuds en faisant une correspondance entre un graphe auxiliaire, dont les
+nœuds sont connus, et le graphe anonymis´e, sous l’hypoth`ese qu’une fraction
+importante des nœuds cibles appartient aux deux graphes. Cet algorithme
+fonctionne en deux ´etapes :
+
+– Identiﬁcation initiale : L’adversaire identiﬁe un petit nombre de nœuds
+“germes” qui sont pr´esents dans le graphe auxiliaire et le graphe anony-
+mis´e. On pourra par exemple, appliquer les attaques d´ecrites dans la
+Section 3.1.3 pour cela.
+
+– Propagation : L’algorithme de propagation prend deux graphes G1 =
+(V1, E1) et G2 = (V2, E2), et ´etablit une correspondance d´eterministe 1 `a
+1 entre les nœuds des deux graphes. Ainsi, la correspondance des nœuds
+construite durant la premi`ere ´etape sera ´etendue en utilisant la topologie
+du graphe.
+`A chaque it´eration, l’algorithme choisit arbitrairement un nœud u ∈ V1
+non encore associ´e et calcule un score pour chaque nœud non associ´e
+v ∈ V2 ´egal au nombre de voisins de u ayant ´et´e associ´es aux voi-
+sins de v. Si l’excentricit´e de l’ensemble de ces scores est sup´erieure
+`a un seuil, on ajoute une association entre u et le nœud v tel que
+score(u, v) = max(scores(u)). Plus pr´ecis´ement, l’excentricit´e est une
+m´etrique d´eﬁnie dans [1] dans le contexte de d´esanonymisation de bases
+de donn´ees. Elle mesure l’´eloignement d’un ´el´ement quelconque appar-
+tenant `a un ensemble X par rapport au reste de cet ensemble, et est
+d´eﬁnie par :
+
+max1 (X) − max2 (X)
+
+.
+
+Ecc(X) =
+
+σ (X)
+
+o`u max1(X) et max2(X) d´enotent la plus grande valeur et la deuxi`eme
+plus grande valeur de l’ensemble X et σ d´enote l’´ecart type.
+
+10
+
+Le lecteur curieux peut trouver le pseudo-code d´ecrivant l’algorithme de
+propagation de mani`ere plus d´etaill´ee dans [15]. La complexit´e de cet
+algorithme est : O ((|E1| + |E2|) d1d2), o`u d1 (respectivement d2) est une
+borne sur les degr´es des nœuds de V1 (respectivement V2). L’ex´ecution de
+cet algorithme sur le graphe anonymis´e de Twitter (comme graphe cible)
+et le graphe social de Flickr (comme connaissances auxiliaires), montre
+que 30.8% d’associations entre nœuds sont corrects, alors que 12.1% de
+nœuds identiﬁ´es sont incorrects, et 57% ne sont pas identiﬁ´es [15].
+
+3.1.3 Attaque active
+
+Lors d’une attaque active, l’adversaire cherche `a modiﬁer et inﬂuencer la
+structure du graphe avant qu’il soit rendu public. La version la plus simple
+consiste `a cr´eer autant de nœuds xi que de nœuds cibles wi en liant chaque xi
+`a wi pour tout i = 1, ..., k. Puis, on ajoute un arc entre chaque paire (xi, xj)
+avec probabilit´e 1
+2 . Par exemple, on tire `a pile-ou-face, si on voit “pile” on cr´ee
+l’arc (xi, xj), alors que si le r´esultat est “face” on ne le cr´ee pas. On r´ep`ete cette
+op´eration pour chaque paire (xi, xj) pour tout i, j = 1, ..., k. Ce sous-graphe,
+G[W ] = H, est construit avant que le graphe social soit publi´e. En pratique,
+la construction du sous-graphe H r´eussit si :
+
+– Toute copie de H qu’on trouve dans G est celle que l’adversaire a construite.
+– H peut ˆetre trouv´e de mani`ere rapide et eﬃcace ´etant donn´e G.
+– Une fois H trouv´e, on peut correctement ´etiqueter ses nœuds comme
+
+x1, ..., xk et ainsi trouver w1, ..., wk.
+
+La section suivante pr´esente deux attaques actives diﬀ´erentes.
+
+a. Attaque par marche al´eatoire
+
+La version compl`ete de la construction du sous-graphe H est obtenue en
+prenant un nombre de nœuds cibles (|W| = b) sup´erieur `a k. On construit
+b comme sous-ensembles Ni ⊆ X, puis on lie le nœud wi `a tous les nœuds
+de Ni, de fa¸con `a ce que wi est le seul nœud du graphe G − H attach´e
+pr´ecis´ement aux nœuds de Ni. La recherche du chemin x1, ..., xk conduit `a
+l’identiﬁcation de H. L’arbre de recherche T repr´esente le d´eroulement de
+la recherche. Chaque nœud dans T correspond `a un nœud dans le graphe
+G. On construit T de mani`ere `a ce que chaque chemin dans T corresponde
+`a un chemin dans G. Pour un point interm´ediaire dans la construction de
+T , on prend chaque nœud feuille α (soit l l’ordre du nœud α dans le chemin
+partant de la racine de T ) et on lui ajoute un nouveau ﬁls β si ce dernier
+a le mˆeme degr´e et la mˆeme structure que le nœud xl+1. Finalement s’il
+existe dans T un seul chemin de longueur k, alors celui-ci doit correspondre
+`a H. Une fois H trouv´e, les nœuds cibles sont facilement identiﬁables.
+
+b. Attaque bas´ee sur la coupe
+
+b = O(cid:112)log(n) nœuds (on peut remarquer que O(log(n)) nœuds sont n´e-
+
+Dans cette attaque, le sous-graphe H est construit en ajoutant seulement
+
+cessaires pour la premi`ere attaque, o`u n est le nombre de nœuds pr´esents
+dans le graphe G) qui sont fortement connect´es entre eux et faiblement li´es
+avec le reste du graphe. Un danger de cette attaque est qu’elle peut ˆetre
+d´etect´ee par les op´erateurs des r´eseaux sociaux. Apr`es la divulgation de G,
+on proc`ede `a la recherche du sous-graphe H comme suit [14] :
+– On calcule l’arbre de Gomory-Hu [16], T , du graphe G. Il s’agit d’un
+arbre avec arˆetes pond´er´es sur l’ensemble de nœuds V du graphe G, tel
+
+11
+
+que pour tout u, v ∈ V , la valeur de la coupe minimum u − v dans G est
+´egale au poids minimum de l’arˆete sur le chemin de u− v dans l’arbre T .
+– On supprime toutes les arˆetes de poids au plus b de l’arbre T , produisant
+une forˆet T (cid:48). Pour trouver l’ensemble de nœuds X qu’on a construit, on
+cherche toutes les composantes (ensembles de nœuds S1, ..., Sr) dans T (cid:48)
+de mˆeme taille X. Les auteurs prouvent qu’avec une forte probabilit´e un
+seul sous ensemble Si est isomorphe au sous-graphe H = G[X].
+
+– Tant que H n’a pas d’automorphes, en connaissant Si on peut identiﬁer
+les nœuds x1, ..., xb qu’on a li´e aux nœuds cibles w1, ..., wb respectivement.
+Ainsi, l’identiﬁcation des nœuds cible se fait sans ambigu¨ıt´e.
+
+L’attaque par marche al´eatoire poss`ede un algorithme de recouvrement ra-
+pide, donc il est applicable de mani`ere eﬃcace mˆeme sur des r´eseaux so-
+ciaux ayant des millions d’utilisateurs, alors que l’utilisation de l’arbre de
+Gomory-Hu rend l’algorithme de recouvrement de l’attaque par coupe plus
+coˆuteux en termes de temps d’ex´ecution. En cr´eant k nouveaux nœuds par
+l’adversaire, l’attaque par marche al´eatoire peut compromettre Θ(k2) utili-
+sateurs, alors que l’attaque par coupe peut compromettre seulement O(k)
+utilisateurs. Exp´erimentalement, la cr´eation de 7 nouveaux nœuds dans le
+r´eseau social LiveJournal (qui poss`ede 4.4 millions de nœuds et 77 millions
+d’arˆetes) par l’attaquant, l’algorithme d’attaque par marche al´eatoire arrive
+
+`a r´ev´eler une moyenne de 70 nœuds cibles, et ainsi(cid:0)70
+
+eux [14]. Une attaque hybride dite semi-passive est possible, dans laquelle
+les attaquants, formant la coalition, ne cr´eent pas de nouveaux nœuds mais
+plutˆot de nouveaux liens vers les nœuds cibles.
+
+(cid:1) = 2415 liens entre
+
+2
+
+Backstrom, Dwork et Kleinberg dans leur travail [14] sont consid´er´es comme
+des pionniers du domaine de la pr´eservation de la vie priv´ee des utilisateurs
+d’un r´eseau social. Mˆeme si leurs travaux d´emontrent un risque s´erieux en
+termes de bris de la vie priv´ee des utilisateurs d’un r´eseau social, les attaques
+actives sont diﬃciles `a adapter sur une grande ´echelle pour les raisons sui-
+vantes :
+
+1. Elles sont limit´ees aux r´eseaux sociaux en ligne.
+
+2. L’attaquant a peu de contrˆole sur les arcs entrant vers les nœuds qu’il
+
+cr´ee (les attaques actives sont faciles `a d´etecter).
+
+3. La troisi`eme limitation des attaques actives est le fait que de nombreux
+op´erateurs de r´eseaux sociaux comme Facebook ont besoin de faire un
+lien mutuel avant que l’information est mise `a disposition sous toute
+forme. Par cons´equent, en supposant que les utilisateurs r´eels n’ont pas
+un lien vers les utilisateurs factices, les liens `a partir de faux nœuds vers
+les vrais nœuds ne se pr´esentent pas dans le r´eseau.
+
+L’attaques passive est r´ealiste, mais l`a encore, ne fonctionne que sur une
+petite ´echelle (ils ne peuvent compromettre que la vie priv´ee de certains des
+utilisateurs qui sont d´ej`a leurs amis). Cependant, le probl`eme de la conception
+de techniques qui pourraient prot´eger la vie priv´ee des utilisateurs d’un r´eseau
+social n’a pas ´et´e abord´e dans [14].
+
+3.2 Inf´erence d’attributs
+
+Dans [17], les auteurs ont d´emontr´e qu’il est possible d’apprendre des in-
+formations personnelles mˆeme sur des utilisateurs ayant des proﬁls priv´es `a
+travers sa connaissance du graphe social causant ainsi un bris de la vie priv´ee
+
+12
+
+des individus, en publiant, dans la plupart des r´eseaux sociaux, les apparte-
+nances aux groupes des utilisateurs.
+
+Un attribut sensible est une donn´ee `a caract`ere personnel, tel que l’ˆage,
+l’aﬃliation politique, la localisation. Les auteurs de [17] consid`erent que les
+utilisateurs n’ont que des attributs sensibles. Un attribut sensible prend une
+des valeurs possibles parmi un ensemble {a1, ..., am}. Le proﬁl d’un utilisateur
+est associ´e `a un identiﬁant unique avec lequel l’utilisateur forme des liens et
+participe dans des groupes. Chaque proﬁl est compos´e d’au moins un attribut
+sensible qui peut ˆetre soit observ´e, soit cach´e. Dans un proﬁl publique la valeur
+de son attribut sensible est observ´ee, alors que dans un proﬁl priv´e est un proﬁl
+dans lequel la valeur de l’attribut sensible est cach´e. L’ensemble des utilisateurs
+(nœuds) ayant des proﬁls priv´es repr´esente l’ensemble sensible, d´enot´e Vs,
+alors que le reste des nœuds, Vo, repr´esente l’ensemble observ´e. Le probl`eme
+d’inf´erence des attributs sensibles est d’inf´erer les valeurs d’attributs sensibles
+cach´ees, Vs.A, en se basant sur les valeurs d’attributs sensibles observ´ees, les
+liens entre les nœuds, et les appartenances aux groupes dans le graphe G.
+
+a. Attaques utilisant la distribution globale des attributs
+
+En l’absence d’information sur les liens sociaux entre individus et leur ap-
+partenance `a des groupes, la principale information disponible est la distri-
+bution globale des attributs sensibles dans les proﬁls publics. Dans ce cas,
+l’adversaire applique un mod`ele d’inf´erence simple, BASIC, pour pr´edire les
+valeurs des attributs sensibles des proﬁls priv´es. La probabilit´e d’une valeur
+sensible est estim´ee par :
+
+PBASIC(vs.a = ai; G) = P (vs.a = ai|Vo.A) =
+
+(|Vo.ai|)
+(|Vo|)
+
+,
+
+tel que : PBASIC(vs.a = ai; G) est la probabilit´e que, la valeur de l’attribut
+sensible a ´egale ai, du nœud vs ∈ Vs suivant le mod`ele BASIC et la partie
+observ´ee du graphe G, |Vo.ai| est le nombre de proﬁls publics ayant ai pour
+valeur de l’attribut sensible, et |Vo| est le nombre total de proﬁls publics.
+Suivant ce mod`ele, l’adversaire choisit la valeur la plus probable d’apr`es la
+distribution globale des attributs.
+
+b. Attaques se basant sur les liens sociaux
+
+Les attaques par inf´erence se basant sur les liens sociaux tirent parti de
+la propri´et´e d’auto-corr´elation, qui mesure la corr´elation entre attributs de
+proﬁls qui sont li´es. Par exemple l’auto-corr´elation entre des personnes qui
+sont “amis” est souvent forte car ils partagent souvent des caract´eristiques
+communes.
+– Mod`ele ami-agr´egat (AGG)
+
+Ce mod`ele prend en consid´eration la distribution des attributs sensibles
+parmi les amis de la personne dont on veut inf´erer les attributs priv´es. En
+se basant sur ce mod`ele, la probabilit´e d’une valeur d’un attribut sensible
+est estim´ee par :
+
+PAGG(vs.a = ai; G) = P (vs.a = ai|Vo.A, E) =
+o = {vs ∈ Vo|∃(vs, vo) ∈ E} et V (cid:48)
+
+tel que :V (cid:48)
+Suivant ce mod`ele, l’adversaire choisit la valeur la plus probable d’apr`es
+la distribution globale des attributs de ses amis. Un d´efaut de cette m´e-
+thode est celui quand les amis de la personne sont tr`es divers alors leur
+distribution va ˆetre aussi tr`es diverse.
+
+o .ai = {vo ∈ V (cid:48)
+
+,
+
+(|V (cid:48)
+o .ai|)
+(|V (cid:48)
+o|)
+o|vo.a = ai}.
+
+13
+
+– Mod`ele de classiﬁcation collective (CC)
+
+La classiﬁcation collective vise `a apprendre et d´eduire les attributs d’ob-
+jets reli´es entre eux. Dans notre contexte, elle fait appel non seulement des
+proﬁls publics mais aussi les valeurs d´eduites des proﬁls priv´es connect´es.
+Les auteurs utilisent l’algorithme de classiﬁcation it´erative (ICA) [18],
+comme algorithme d’inf´erence approximative. Sans rentrer dans les d´e-
+tails, ICA commence `a attacher une ´etiquette `a chaque proﬁl priv´e en se
+basant sur les ´etiquettes des amis ayant un proﬁl public, puis il r´eaﬀecte
+it´erativement des ´etiquettes en consid´erant les ´etiquettes des amis de pro-
+ﬁls `a la fois publics et priv´es. L’aﬀectation est bas´ee sur un classiﬁcateur
+local qui prend des ´etiquettes de classe des amis comme entr´ees et essaye
+de pr´edire en sortie une nouvelle ´etiquette d’un nœud priv´e. Par exemple,
+un classiﬁcateur simple pourrait attribuer une ´etiquette en se basant sur
+l’´etiquette majoritaire parmi les ´etiquettes des amis.
+
+– Mod`ele se basant sur les liens (LINK)
+
+Une autre approche se basant sur les liens consiste `a “lisser” les donn´ees
+en tenant compte de la matrice d’adjacence du graphe social. Chaque
+utilisateur poss`ede une liste de caract´eristiques binaires de la taille du
+r´eseau, et chaque caract´eristique a une valeur de 1 si l’utilisateur est
+ami avec la personne qui correspond `a cette fonctionnalit´e, et 0 sinon.
+Chaque utilisateur a ´egalement une ´etiquette de classe qui est consid´er´e
+connue si son proﬁl est public, et inconnue s’il est priv´e. Les instances
+avec des proﬁls publics sont les donn´ees d’entraˆınement d’un classiﬁcateur
+“traditionnel” d’apprentissage machine tels qu’un pr´edicteur de Bayes
+na¨ıf. Le mod`ele appris peut alors ˆetre utilis´e pour pr´edire les ´etiquettes
+de proﬁls priv´es.
+
+– Attaque bas´ee sur les clusters (BLOCK)
+
+L’id´ee fondamentale derri`ere cette attaque est que les utilisateurs forment
+des cat´egories naturelles (clusters), et leurs interactions peuvent ˆetre ex-
+pliqu´ees par les clusters auxquels ils appartiennent. Si des valeurs poten-
+tielles d’un attribut sensible s´eparent les diﬀ´erents utilisateurs en clus-
+ters, sur la base des interactions observ´ees d’un utilisateur de proﬁl priv´e
+avec les proﬁls publics des utilisateurs, on peut pr´edire le cluster le plus
+probable auquel appartient l’utilisateur et ainsi lui associer la valeur ma-
+joritaire de l’attribut recherch´e.
+
+c. Attaques se basant sur les groupes
+
+En plus des informations de liens sociaux, les r´eseaux sociaux oﬀrent une
+structure plus complexe o`u chaque utilisateur peut appartenir `a un ou plu-
+sieurs groupes. Si un utilisateur appartient `a un seul groupe, il sera ´evident
+d’inf´erer une ´etiquette en utilisant un agr´egat par exemple le mode des
+´etiquettes de son groupe. Le probl`eme d’inf´erence des attributs sensibles
+devient plus diﬃcile si l’utilisateur participe `a plusieurs groupes. Deux mo-
+d`eles ont ´et´e propos´es pour utiliser l’appartenance des utilisateurs `a plu-
+sieurs groupes :
+– Mod`ele groupe-lien (CLIQUE)
+
+Dans ce mod`ele, on suppose que les membres d’un groupe soient des
+“amis”, cr´eant ainsi un lien de similarit´e entre les utilisateurs qui ont
+au moins un groupe en commun. Cette repr´esentation des donn´ees nous
+permet d’appliquer n’importe lequel des mod`eles bas´es sur les liens d´ecrits
+pr´ec´edemment. Une limite de ce mod`ele est qu’il ne tient pas compte de la
+force de la relation entre deux personnes, comme par exemple, le nombre
+
+14
+
+de groupes en commun.
+
+– Mod`ele de classiﬁcation bas´e sur les groupes (GROUP)
+
+L’approche de classiﬁcation fond´ee sur les groupes comporte trois ´etapes.
+Durant la premi`ere ´etape, l’algorithme s´electionne les groupes qui sont
+pertinents `a la tˆache de classiﬁcation de nœuds. Pendant la deuxi`eme
+´etape, l’algorithme apprend une fonction globale f (par exemple un clas-
+siﬁcateur) qui prend les groupes pertinents d’un nœud comme caract´eris-
+tiques d’entr´ees et retourne la valeur de l’attribut sensible. Cette ´etape
+utilise uniquement les nœuds de l’ensemble des attributs observ´es dont
+les attributs sensibles sont connus. Lors de la troisi`eme ´etape, le classiﬁ-
+cateur retourne l’attribut sensible pr´edit pour chaque proﬁl priv´e.
+
+d. Attaques combinant les liens et les groupes
+
+Il est possible de construire une m´ethode qui utilise `a la fois les liens et
+les groupes pour pr´edire les attributs sensibles des utilisateurs. La m´ethode
+simple propos´ee combine les deux mod`eles LINK et GROUP.
+
+Les auteurs de [17] ont appliqu´e ces m´ethodes sur un ensemble de donn´ees
+issues de quatre r´eseaux sociaux (Flicker, Facebook, Dogster, BibSonomy) en
+supposant que 50% des proﬁls sont priv´es. Les m´ethodes bas´ees sur les liens
+sociaux n’ont pas produit des r´esultats importants, alors que les m´ethodes ba-
+s´ees sur les groupes ont donn´e des pr´ecisions, d’inf´erences d’attributs de proﬁls
+priv´es, importantes (par exemple, la m´ethode GROUP a donn´ee une pr´ecision
+d’inf´erence d’attributs priv´es ´egale `a 63.5% sur les donn´ees du r´eseau social
+Flicker, alors que la m´ethode utilisant la distribution globale des attributs a
+donn´e 27.7%).
+
+4 Etat de l’art sur les approches d’anonymisation
+
+Pour se prot´eger contre diﬀ´erentes attaques sur un graphe social, les cher-
+cheurs ont d´evelopp´e de nombreux mod`eles de protection de la vie priv´ee et
+diﬀ´erentes m´ethodes d’anonymisation d’un graphe social ont ´et´e con¸cues. Sem-
+blable `a la conception des m´ethodes d’anonymisation pour les bases de don-
+n´ees, la conception des m´ethodes d’anonymisation d’un graphe social doivent
+´egalement prendre en compte les mod`eles d’attaque ainsi que l’utilit´e des don-
+n´ees publi´e. Nous pr´esentons dans cette section un ´etat de l’art sur les ap-
+proches d’anonymisation des donn´ees d’un r´eseau social.
+
+4.1 Anonymisation de degr´es
+
+Liu et Terzi [19] proposent une approche d’anonymisation d’un graphe
+social contre un adversaire poss´edant les degr´es de quelques nœuds, pr´esents
+dans le graphe publi´e, comme connaissances auxiliaires. Ainsi, si cet adversaire
+sait que Bob a 30 amis et que dans le graphe publi´e il existe un seul nœud
+de degr´e 30, ce nœud sera aucun doute Bob. Ainsi, leur approche consiste `a
+rendre chaque valeur de degr´e apparait au moins k fois dans le graphe rendu
+public. L’algorithme propos´e s’ex´ecute en deux ´etapes :
+a. Soient d = (d(1), ..., d(|V |)), une s´equence non croissante des degr´es d’un
+graphe G = (V, E), et k un entier, construire une autre s´equence de degr´es
+d(cid:48) o`u chaque degr´e apparait au moins k fois (la condition de k-anonymit´e) et
+i |d(cid:48)(i) − d(i)| soit
+minimal (o`u d(i) est le degr´e du nœud xi). Pour r´esoudre cela, les auteurs
+de [19] utilisent un algorithme de type programmation dynamique.
+
+tel que le coˆut d’anonymisation de degr´es DA(d(cid:48), d) =(cid:80)
+
+15
+
+b. Soit G = (V, E) un graphe et d(cid:48) une s´equence de degr´es, construire un
+nouveau graphe Ga = (V, Ea) tel que la s´equence des degr´es du graphe Ga
+est ´egale `a d(cid:48) (c’est-`a-dire, dGa = d(cid:48)), et que la diﬀ´erence structurelle entre
+Ga et G qui est la diﬀ´erence sym´etrique entre leurs ensembles d’arˆetes,
+∆(Ga, G) = |Ea \ E| + |E \ Ea|, soit minimale. Pour cela, deux algorithmes
+sont con¸cus :
+– Algorithme ConstructGraph : cet algorithme prend en entr´ee la s´equence
+d´esir´ee de degr´es d et rend en sortie un graphe consistant avec cette
+s´equence de degr´es si un tel graphe existe, sinon il retourne “Non”. `A
+chaque it´eration, on choisit arbitrairement un nœud v et on ajoute des
+arˆetes de v `a d(v) nœuds ayant de plus grandes valeurs de degr´es restants,
+o`u d(v) est le degr´e restant du nœud v. Dans ce cas, les degr´es restants
+de ces d(v) nœuds sont d´ecr´ement´es de 1.
+qui ´etant donn´es G(cid:48)
+Graph), et le graphe original G, il transforme G(cid:48)
+s´equence de degr´es dG(cid:48) = d = dG(cid:48)
+nimale. A chaque ´etape i, le graphe G(cid:48)
+i−1(V, E(cid:48)
+un graphe G(cid:48)
+= dGi−1 = dG(cid:48)
+∆(G(cid:48)
+d’´echange (swap, en anglais) valide comme la montre la Figure 3.
+
+– Algorithme GreedySwap : cet algorithme est une heuristique gloutonne
+0 `a G(cid:48)(V, E(cid:48)) ayant pour
+de telle sorte que ∆(G(cid:48), G) soit mi-
+i−1) est transform´e en
+i, G) <
+i−1, G). La transformation est eﬀectu´ee en utilisant une op´eration
+
+= d et ∆(G(cid:48)
+
+0 (le graphe obtenu en appliquant l’algorithme Construct-
+
+i
+
+0
+
+i(V, E(cid:48)
+
+i) tel que dG(cid:48)
+
+0
+
+Figure 3 – Op´eration d’´echange.
+
+4.2 Anonymisation de voisinage
+
+Dans [20], Zhou et Pei proposent une m´ethode d’anonymisation d’un graphe
+social par anonymisation de voisinage. Cette m´ethode satisfait la condition de
+k-anonymit´e et qui est consacr´ee contre les attaques se basant sur le voisinage
+d’un nœud pour lui r´e-identiﬁer dans un graphe social rendu public. On consi-
+d`ere que les nœuds sont ´etiquet´es (portent des attributs). Avant de pr´esenter
+leur algorithme, nous commen¸cons par d´eﬁnir quelques notions fondamentales.
+
+4.2.1 Composante de voisinage
+
+On d´eﬁnit le voisinage d’un nœud u par le sous-graphe induit sur les nœuds
+
+voisins du nœud u et est ´ecrit voisinageG(u) = G(Vu) o`u Vu = {v|(u, v) ∈ E(G)} .
+Une composante de voisinage d’un nœud u est un sous-graphe connexe maxi-
+mal compos´e de nœuds voisins au nœud u. La Figure 4 montre le voisinage
+d’un nœud u, voisinageG(u), qui contient trois composantes de voisinage C1,
+C2 et C3.
+
+16
+
+Figure 4 – Voisinage et composantes de voisinage (les arˆetes pointill´ees sont
+juste pour illustration), tir´ee de [20].
+
+Remarque 4.1 (Diﬀ´erence entre voisinage et degr´e d’un nœud). La Figue 4
+montre la diﬀ´erence entre le degr´e et le voisinage d’un nœud. Ainsi, un ad-
+versaire poss´edant le voisinage d’un nœud u comme connaissances auxiliaires
+apprend, en plus du degr´e du nœud u, l’existence de liens entre ses voisins.
+
+4.2.2 Coˆut d’anonymisation
+
+Soit u un nœud ´etiquet´e par l1 (par exemple l1=“enseignant d’´ecole pri-
+maire”) tel que l1 est un nœud feuille dans la hi´erarchie des ´etiquettes. Suppo-
+sant que l1 est g´en´eralis´e `a l2 (par exemple l2=“enseignant”), on note taille(l2)
+le nombre de descendants de l2 dans la hi´erarchie des ´etiquettes, et taille(∗)
+est le nombre total des feuilles dans la hi´erarchie des ´etiquettes. On d´eﬁnit la
+P´enalit´e Normalis´ee de la Certitude par :
+
+P N C(l2) =
+
+taille(l2)
+taille(∗)
+
+.
+
+Soit G = (V, E) un graphe social, et G(cid:48) = (V (cid:48), E(cid:48)) le graphe anonymis´e publi´e.
+On suppose que pas de faux nœuds sont ajout´es au graphe publi´e. Ainsi, il
+existe une bijection A : V → V (cid:48). Soient u1 et u2 ∈ V deux nœuds, suppo-
+sant que leurs voisinages, voisinageG(u1) et voisinageG(u2), sont g´en´eralis´es
+`a voisinageG(cid:48)(A(u1)) et voisinageG(cid:48)(A(u2)), tel que voisinageG(cid:48)(A(u1)) et
+voisinageG(cid:48)(A(u2)) sont isomorphes. Soit H = voisinageG(u1)∪voisinageG(u2),
+et H(cid:48) = voisinageG(cid:48)(A(u1)) ∪ voisinageG(cid:48)(A(u2)). Le coˆut d’anonymisation
+est d´eﬁni comme :
+E(H(cid:48))}| + γ.(|V (H(cid:48))| − |V (H)|).
+
+v(cid:48)∈H(cid:48) P N C(v(cid:48))+β.|{(v1, v2)|(v1, v2) /∈ E(H), (A(v1),A(v2)) ∈
+
+Coˆut(u, v) = α.(cid:80)
+
+tel que α, β et γ sont des poids sp´eciﬁ´es par la personne en charge de
+l’anonymisation du graphe. Litt´erairement, le coˆut d’anonymisation consiste en
+trois parties : la premi`ere partie mesure la perte d’information en g´en´eralisant
+les ´etiquettes des nœuds. La deuxi`eme partie mesure la perte d’information en
+ajoutant des arˆetes. Enﬁn, la derni`ere partie comptabilise le nombre de nœuds
+qui sont reli´es aux voisinages anonymis´es pour atteindre le k-anonymit´e.
+
+4.2.3 Anonymisation de voisinage
+
+La Figure 5 montre la proc´edure d’anonymisation des voisinages de deux
+nœuds u et v o`u les nœuds sont repr´esent´es sous la forme (id, ´etiquette). La
+composante de voisinage C2(u) correspond exactement `a C3(v). C1(u) et C1(v)
+
+17
+
+sont correspondus en ajoutant un nouveau nœud w1, existant dans le graphe
+social `a anonymiser, `a la composante C1(v). La s´election du nœud `a ajouter
+est bas´ee sur l’optimisation du coˆut d’anonymisation. De la mˆeme fa¸con on
+anonymise C3(u) et C2(v) par l’ajout d’un nouveau nœud w2 `a la composante
+C3(u).
+
+Figure 5 – Anonymisation de deux voisinages, adapt´ee de [20].
+
+4.2.4 Algorithme d’anonymisation
+
+L’algorithme d’anonymisation prend en entr´ee un graphe social, un para-
+m`etre d’anonymisation k, et trois param`etres α, β et γ qui servent `a calculer
+la fonction de coˆut. La sortie de l’algorithme est un graphe anonymis´e satis-
+faisant la condition de k-anonymit´e de fa¸con `a ce que les voisins d’au moins k
+nœuds sont isomorphes. L’ex´ecution de l’algorithme se d´eroule de la mani`ere
+suivante.
+
+D’abord, on marque tous les nœuds comme “non-anonymis´e”, puis on or-
+donne une liste, ListeNœud, contenant les nœuds marqu´es “non-anonymis´e”
+suivant la taille de leur voisinage par ordre d´ecroissant. Puis, it´erativement on
+choisit le premier nœud, “NœudGerme”, dans la liste ListeNœud et on s´elec-
+tionne (k − 1) autres nœuds, “EnsembleCandidat”, de la tˆete de la liste Lis-
+teNœud qui produisent un plus petit coˆut d’anonymisation. Ensuite, le nœud
+NœudGerme et les nœuds de EnsembleCandidat={u1, ..., um} sont anonymi-
+s´es `a tour de rˆole suivant la m´ethode d’anonymisation de deux voisinages cit´ee
+ci-dessus. Chaque nœud ui anonymis´e sera marqu´e “anonymis´e” et ajout´e `a
+NœudGerme. Durant la proc´edure d’anonymisation d’un groupe de nœuds,
+des changements peuvent avoir lieu `a d’autres nœuds qui sont d´ej`a marqu´es
+“anonymis´e” dans d’autres groupes (par exemple, l’ajout d’une arˆete entre un
+nœud anonymis´e et un nœud `a ˆetre anonymis´e en se basant sur la correspon-
+dance de nœuds). Pour pr´eserver la condition de k-anonymit´e pour ces derniers
+nœuds, on applique les mˆemes changements `a chacun des autres (k− 1) nœuds
+ayant des voisinages isomorphes. Une fois que les k nœuds sont subis de chan-
+
+18
+
+gements, ils sont marqu´es “non-anonymis´e” et r´eins´er´es `a la liste ListeNœud.
+L’algorithme d’anonymisation continue jusqu’`a ce que tous les nœuds soient
+marqu´es “anonymis´e”.
+
+4.3 k-automorphisme
+
+Dans [21], Zou, Chen et ¨Ozsu ont adopt´e une hypoth`ese plus g´en´erale :
+l’adversaire peut savoir tout sous-graphe autour d’un certain nœud u. Si un
+tel sous-graphe pourrait ˆetre identiﬁ´e dans le graphe publi´e avec une forte
+probabilit´e, l’utilisateur a un risque ´elev´e de divulgation d’identit´e. Les auteurs
+ont cherch´e `a construire un graphe ˜G `a partir du graphe d’origine G tel que
+pour tout sous-graphe X ⊂ G, ˜G contient au moins k sous-graphes isomorphes
+`a X.
+
+D´eﬁnition 4.1 (Graphe isomorphe et graphe automorphe). Soient deux graphes
+G1 = (V1, E1) et G2 = (V2, E2), G1 est dit graphe isomorphe `a G2 si et seule-
+ment si, il existe une fonction bijective f : V1 → V2 tel que pour toute arˆete
+(u, v) ∈ E1, il existe une arˆete (f (u), f (v)) ∈ E2. Si G1 est isomorphe `a lui-
+mˆeme sous une fonction f alors G1 est dit graphe automorphe et f est dite
+fonction automorphe.
+
+D´eﬁnition 4.2 (Graphe k-automorphe). Un graphe G = (V, E) est k-automorphe
+si et seulement si 1) il existe (k − 1) fonctions automorphes f1, ..., fk−1 dans
+G, et 2) pour tout nœud u dans G, fi(u) (cid:54)= fj(u) (i (cid:54)= j).
+
+Si le graphe publi´e ˜G est un graphe k-automorphe, lorsque l’adversaire
+essaie de r´e-identiﬁer un nœud u `a travers un sous-graphe, il sera toujours au
+moins k diﬀ´erents sous-graphes dans ˜G qui correspondent `a sa requˆete sous-
+graphe. Pour g´en´erer un graphe k-automorphe, les auteurs de [21] ont propos´e
+un algorithme qui pourrait ˆetre r´esum´e en ces ´etapes :
+1 Partitionner le graphe G en diﬀ´erents groupes de sous-graphes {Ui}, tel que
+chaque groupe Ui contient ki ≥ k sous-graphes {Pi1, ..., Piki} o`u chaque deux
+sous-graphes ne partagent aucun nœud ni arˆete.
+2 Pour chaque Ui, rendre Pij ∈ Ui isomorphes entre-eux en ajoutant des arˆetes.
+s,t(.) en vertu de laquelle Pis est isomorphe `a
+3 Pour chaque arˆete (u, v) `a travers deux sous-graphes, c’est-`a-dire u ∈ Pij
+
+et v ∈ Pst (Pij (cid:54)= Pst), ajouter une arˆete(cid:0)f (i)
+
+Ainsi, il existe une fonction f i
+Pit.
+
+(j + r) mod k, r = 1, ..., k − 1.
+Apr`es la modiﬁcation, pour chaque nœud u ∈ Pij, on d´eﬁnit fr(.) comme
+j,πj (r)(u), r = 1, ..., k−1. Ainsi, fr(u), r = 1, ..., k−1 sont des fonctions
+fr(u) = f (i)
+automorphes dans ˜G, et pour tout s (cid:54)= t, fs(u) (cid:54)= ft(u), garantissant ainsi le
+k-automorphisme.
+
+Pour mieux pr´eserver l’utilit´e du graphe publi´e, cet algorithme devrait
+introduire le minimum nombre de faux arˆetes, ce qui implique que les sous-
+graphes au sein d’un groupe Ui devraient ˆetre tr`es similaires entre-eux (de
+sorte que l’´etape 2 introduit seulement un petit nombre d’arˆetes), et il y a
+quelques arˆetes `a travers des sous-graphes diﬀ´erents (de sorte que l’´etape 3
+n’ajouterait pas de nombreuses arˆetes). Cela d´epend de la fa¸con dont le graphe
+est partitionn´e. Si G est divis´e en petit nombre de sous-graphes, il y aura moins
+d’arˆetes `a ajouter `a travers les sous-graphes. Cependant, moins de sous-graphes
+
+19
+
+t,πt(r)(v)(cid:1), o`u πj(r) =
+
+j,πj (r)(u), f (s)
+
+implique que la taille de chaque sous-graphe est grande, et ainsi plus d’arˆetes
+au sein de chaque sous-graphe doivent ˆetre ajout´es `a l’´etape 2. Les auteurs ont
+prouv´e que trouver la solution optimale est NP-complet, mais ils ont propos´e
+une heuristique gloutonne pour atteindre l’objectif [21].
+
+4.4 G´en´eralisation d’un graphe social
+
+Pour pr´eserver la vie priv´ee des individus pr´esents dans un graphe social,
+plusieurs techniques d’anonymisation modiﬁent la structure du graphe social
+en ajoutant et/ou supprimant des nœuds et/ou des arˆetes. Attaquant le pro-
+bl`eme sous un angle diﬀ´erent de ces approches, la technique de g´en´eralisation
+d’un graphe social consiste `a regrouper plusieurs nœuds en une mˆeme partition
+appel´ee super-nœud ou cluster, et regrouper plusieurs arˆetes en une super-
+arˆete. Nous allons pr´esenter deux algorithmes d’anonymisation d’un graphe
+social par la technique de g´en´eralisation, GraphGen et SaNGreeA.
+
+4.4.1 Algorithme GraphGen
+
+La technique d’anonymisation d’un graphe social en le g´en´eralisant, propo-
+s´ee dans [22] par Hay, Miklau, Jensen, Towsley, et Weis, consiste `a partitionner
+les nœuds d’un graphe en un ensemble de super-nœuds, puis publier le nombre
+de nœuds dans chaque partition ainsi que la densit´e d’arˆetes existantes dans
+et entre les partitions. Si chaque super-nœud contient au moins k nœuds on
+dit que le graphe g´en´eralis´e satisfait la condition de k-anonymit´e. On note cet
+algorithme de g´en´eralisation d’un graphe social par GraphGen, qui prend en
+entr´ee un graphe social na¨ıvement anonymis´e G = (V, E), et le param`etre de
+protection de la vie priv´ee k, et rend en sortie un graphe g´en´eralis´e G = (V,E)
+qui satisfait la condition de k-anonymit´e et qui maximise la vraisemblance
+
+1/(|(cid:86)G(cid:87)|), tel que
+
+|(cid:86)G(cid:87)| =
+
+(cid:89)
+
+(cid:18) 1
+2|X|(|X| − 1)
+
+(cid:19) (cid:89)
+
+(cid:18)|X||Y |
+
+(cid:19)
+
+,
+
+X∈V
+
+mX
+
+X∈V
+
+mX,Y
+
+et est le nombre de graphes, dont ses nœuds appartiennent `a V , consistants
+avec G, et mX,Y est le nombre d’arˆetes entre les nœuds, du graphe d’origine,
+r´esum´es par les super-nœuds X et Y . Leur algorithme recherche le partitionne-
+ment approximatif optimal en se basant sur le principe de la technique “recuit
+simul´e” [23]. Pour trouver le graphe g´en´eralis´e qui maximise la fonction de
+vraisemblance, l’algorithme GraphGen commence avec un graphe g´en´eralis´e
+contenant une seule partition (super-nœud) regroupant tous les nœuds de V ,
+puis il propose un changement d’´etat, en divisant une partition, fusionnant
+deux partitions, ou d´epla¸cant un nœud d’une partition `a une autre. La pro-
+position du changement d’´etat d’un graphe g´en´eralis´e `a un autre nouveau
+graphe g´en´eralis´e est ´evalu´ee en se basant sur la diﬀ´erence de vraisemblance
+r´esultant. La proposition est toujours accept´ee si elle am´eliore la vraisemblance
+et accept´ee avec une certaine probabilit´e si elle diminue la vraisemblance. La
+probabilit´e d’acceptation commence avec une grande valeur et diminue rapi-
+dement jusqu’`a ce qu’un changement est accept´e seulement s’il am´eliore la
+vraisemblance. La recherche est termin´ee quand il y aura moins de 0.02% de
+propositions accept´ees (cette constante est souvent utilis´ee dans la conception
+des algorithmes de type “recuit simul´e” [23]).
+
+20
+
+4.4.2 Algorithme SaNGreeA
+
+On consid`ere un graphe social G = (N, E) o`u N est l’ensemble des nœuds et
+E l’ensemble des arˆetes. Chaque nœud est d´ecrit par un ensemble d’attributs.
+Ces attributs peuvent ˆetre class´es comme suit :
+
+– I1, I2, ..., Im ensemble d’attributs identiﬁants tels que Nom et NSS.
+– Q1, Q2, ..., Qq ensemble d’attributs quasi-identiﬁants tels que CodeZip,
+
+Sexe et Age qui peuvent ˆetre connus par un adversaire.
+
+– S1, S2, ..., Sr ensemble d’attributs sensibles tels que Maladie et Revenu
+
+qui sont suppos´es `a ˆetre inconnus par un adversaire.
+
+Dans la proc´edure d’anonymisation d’un graphe social, il existe deux as-
+pects `a consid´erer. Les donn´ees associ´ees aux nœuds d’un graphe social (at-
+tributs identiﬁants, quasi-identiﬁants et sensibles) et l’information structurelle
+que porte ce graphe concernant les relations entre les nœuds. Le but de l’anony-
+misation d’un graphe social est de rendre chaque groupe de k nœuds similaires
+et donc indistinguables, par g´en´eralisation. Ceci se fait en ces trois op´erations.
+On remplace la valeur actuelle d’un attribut quasi-identiﬁant par une valeur
+moins sp´eciﬁque. On attache `a chaque super-nœud une information structu-
+relle (|cl|,|Ecl|) o`u |cl| est le nombre de nœuds regroup´es dans cl et |Ecl| est
+le nombre d’arˆetes existant entre ces nœuds. Les arˆetes entre les nœuds g´en´e-
+ralis´es par deux super-nœuds diﬀ´erents sont g´en´eralis´ees par une super-arˆete
+portant le nombre d’arˆetes g´en´eralis´ees.
+
+D´eﬁnition 4.3 (Perte d’information de g´en´eralisation). Soit cl un super-
+nœud et QI = (N1, N2, ..., Ns, C1, C2, ..., Ct) l’ensemble des attributs quasi-
+identiﬁants num´eriques et cat´egorielles. la perte d’information caus´ee par la
+g´en´eralisation des attributs quasi-identiﬁants du super-nœud cl est :
+
+size(minx∈N (x[Nj ]),maxx∈N (x[Nj ])) +(cid:80)t
+
+size(gen(cl)[Nj ]))
+
+GIL (cl) = |cl|.
+
+(cid:18)(cid:80)s
+
+j=1
+
+– gen(cl)[Nj] = l’intervalle [min(cid:8)x1[Nj], ..., xu[Nj](cid:9) , max(cid:8)x1[Nj], ..., xu[Nj](cid:9)]
+– gen(cl)[Cj] = le plus petit ancˆetre commun de(cid:8)x1[Cj], ..., xu[Cj](cid:9) dans
+
+o`u :
+– size([i1, i2]) = la taille de l’intervalle [i1, i2], c’est-`a-dire (i2 − i1)
+
+height(HCj )
+
+j=1
+
+height(Λ(gen(cl)[Cj ]))
+
+(cid:19)
+
+,
+
+la hi´erarchie d’´etiquettes.
+
+– Λ(w) est la sous-hi´erarchie d’´etiquettes de racine w.
+– height(HCj ) d´enote la hauteur de la hi´erarchie d’arbre HCj
+
+D´eﬁnition 4.4 (Perte d’information de g´en´eralisation normalis´ee). Il s’agit de
+la somme des pertes d’information de g´en´eralisation pour chaque super-nœud
+dans l’ensemble de super-nœuds S :
+
+N GIL(G, S) = GIL(G,S)
+
+n.(s+t) . (o`u n est le nombre de nœuds et (s+t) est le
+
+nombre d’attributs quasi-identiﬁants).
+
+D´eﬁnition 4.5 (Distance entre deux nœuds). Soit Bi = (bi
+de voisinage d’un nœud xi, o`u bi
+La distance entre deux nœuds xi et xj est d´eﬁnit de la mani`ere suivante :
+|{l|l=1..n∧l(cid:54)=i,j;bi
+
+n) le vecteur
+j = 1 s’il existe une arˆete (xi, xj), et O sinon.
+
+1, ..., bi
+
+l}|
+l(cid:54)=bj
+
+dist(xi, xj) =
+
+n−2
+
+.
+
+D´eﬁnition 4.6 (Distance entre un nœud et un super-nœud). La distance
+entre un nœud x et un super-nœud cl est la distance moyenne entre x et
+chaque nœud dans cl.
+
+21
+
+L’algorithme SaNGreeA (Social Network Greedy Anonymization) est un
+algorithme d’anonymisation d’un graphe social en le g´en´eralisant par groupes
+de nœuds ou super-nœuds (clusters en anglais), les nœuds d’un mˆeme groupe
+doivent ˆetre aussi similaires que possible. Cette similarit´e est calcul´ee, `a la fois,
+en termes des valeurs des attributs quasi-identiﬁants de chaque nœud, et en
+termes de sa structure de voisinage [24]. Cette approche gloutonne tente de
+minimiser la perte d’information caus´ee par la g´en´eralisation des valeurs des
+attributs et la perte d’information structurelle pour le graphe social g´en´er´e qui
+satisfait la condition de k-anonymit´e. Le pseudo-code de l’algorithme peut-ˆetre
+donn´e comme suit (sa complexit´e temporelle est O(n2)) :
+
+Algorithme 1: SaNGreeA
+
+Entr´ees : G = (V, E), un graphe `a g´en´eraliser
+
+k, cardinalit´e minimale des clusters
+α, β, deux param`etres d´eﬁnis par l’utilisateur
+
+Sortie : S = {cl1, cl2, ..., clv}, un ensemble de clusters assurant le
+
+k-anoymit´e
+
+1 S ← ∅
+2 i ← 1
+3 r´ep´eter
+4
+
+xseed ← un nœud de V de degr´e maximal
+cli ← xseed
+V ← V − xseed
+r´ep´eter
+
+x∗ = argminx∈V (α.N GIL(G, S) + β.dist(x, cli) cli = cli ∪ x∗
+V ← V − x∗
+jusqu’`a (cli a k ´el´ements) ou (V = ∅);
+si |cli| < k alors
+
+5
+
+6
+
+7
+
+8
+
+9
+
+10
+
+11
+
+12
+
+13
+
+14
+
+15
+
+16
+
+sinon
+
+DisperseCluster(S, cli)
+S = S ∪ cli
+i ← i + 1
+
+ﬁnsi
+
+17 jusqu’`a V = ∅;
+18 Retourner S
+
+Algorithme 2: DisperseCluster
+Entr´ees : S = {cl1, cl2, ..., clv}, un ensemble de clusters
+Sortie : S = {cl1, cl2, ..., clv}, un ensemble de clusters
+
+cl, un cluster
+
+2
+
+1 pour tout x ∈ cl faire
+bestCluster = null
+infoLoss ← ∞
+pour tout clj ∈ S faire
+
+3
+
+4
+
+si α.NGIL(G1,S1) + β.dist(x,clj)<infoLoss alors
+
+infoLoss = α.NGIL(G1,S1) + β.dist(x,clj)
+bestCluster ← clj
+
+ﬁnsi
+
+ﬁn
+bestCluster ← bestCluster ∪{x}
+
+5
+
+6
+
+7
+
+8
+
+9
+
+10
+11 ﬁn
+
+22
+
+4.5 Anonymisation par perturbation al´eatoire
+
+Le brouillage par perturbation al´eatoire consiste en deux ´etapes – suppres-
+sion d’arˆetes suivie par ajout d’arˆetes. Une mani`ere de r´ealiser cela est que le
+propri´etaire des donn´ees s´electionne un entier h, puis, il choisit al´eatoirement
+un sous ensemble de h arˆetes et il les supprime. Dans la deuxi`eme ´etape le pro-
+pri´etaire des donn´ees choisit al´eatoirement h paires de nœuds non connect´es
+et il ajoute des arˆetes entre eux. Nous consid´erons des perturbations al´eatoires
+qui utilisent une s´equence de tirages de Bernoulli. Durant la premi`ere ´etape le
+propri´etaire des donn´ees choisit une probabilit´e p ∈ [0, 1]. Puis, pour chaque
+arˆete e, on la garde avec une probabilit´e p. Lors de la deuxi`eme ´etape le pro-
+pri´etaire des donn´ees doit choisir une autre probabilit´e q, puis, il ajoute une
+arˆete entre deux nœuds non encore connect´es avec une probabilit´e q. Pour ga-
+rantir que le nombre d’arˆetes attendu dans le graphe perturb´e ´egal au nombre
+d’arˆetes existant dans le graphe initial, la probabilit´e q devrait ˆetre choisie de
+
+telle sorte que : pm + q.(cid:0)(cid:0)n
+
+(cid:1) − m(cid:1) = m.
+
+Dans [25], les auteurs ont d´eﬁni deux notions de protection de la vie priv´ee.
+La premi`ere prot`ege contre des adversaires qui essayent de r´eidentiﬁer un indi-
+vidu sp´eciﬁque dans le graphe perturb´e, alors que la deuxi`eme prot`ege contre
+des adversaires qui ne ciblent pas une personne sp´eciﬁque.
+
+2
+
+4.5.1 k-brouillage
+
+On suppose que l’adversaire sache la m´ethode de perturbation et la valeur
+de p. Le but de l’adversaire est localiser l’image du nœud v ∈ V dans l’ensemble
+des nœuds du graphe perturb´e U . Pour cela, l’adversaire peut associer une
+probabilit´e, Xv(u), `a chaque nœud u dans U comme ´etant l’image recherch´ee
+du v dans V .
+D´eﬁnition 4.7 (k-brouillage). Soit v ∈ V et soit p(v) = (p1, ..., pn) d´enote la
+distribution de probabilit´e Xv, on d´eﬁnit l’ entropie par :
+
+(cid:88)
+
+i
+
+(cid:18) 1
+
+(cid:19)
+
+.
+
+pi
+
+H(p(v)) =
+
+pi log
+
+Un graphe perturb´e satisfait k-brouillage si pour chaque nœud v dans V , l’en-
+tropie de la variable al´eatoire Xv sur U est au moins log k.
+
+Les auteurs de [25] pr´etendent que la condition de k-candidat anonymit´e,
+Xv(u) ≤ 1
+k , ne mesure pas correctement la quantit´e d’incertitude que l’ad-
+versaire poss`ede par rapport `a l’identiﬁcation correcte d’un nœud cible. Par
+exemple, la d´eﬁnition de k-candidat anonymit´e ne diﬀ´erencie pas entre les deux
+situations suivantes :
+(1) Xv(u1) = Xv(u2) = 1
+
+2 , et
+
+Xv(u1) = 0 pour tout 3 ≤ i ≤ n ;
+
+(2) Xv(u1) = 1
+2 ,
+2t pour tout 2 ≤ i ≤ t + 1, et
+Xv(ui) = 1
+Xv(ui) = 0 pour tout t + 2 ≤ i ≤ n.
+Les deux cas respectent 2-candidat anonymit´e (la probabilit´e maximale
+dans les deux cas est 1
+2 ). Cependant, il est ´evident que dans le premier cas, o`u
+il y a deux suspects, la quantit´e d’incertitude est plus petite que celle dans le
+deuxi`eme cas, o`u il y a t + 1 suspects.
+
+23
+
+Selon [25], la fa¸con correcte pour mesurer l’incertitude est l’entropie. En ap-
+pliquant la d´eﬁnition de k-brouillage aux deux cas, on trouve que le le premier
+cas satisfait 2-brouillage, alors que le deuxi`eme cas satisfait (2
+t)-brouillage.
+
+√
+
+4.5.2 k- pr´eimage brouillage
+
+Cette notion de protection de la vie priv´e lutte contre un adversaire int´e-
+ress´e par la r´e-identiﬁcation de n’importe quel individu pr´esent dans le graphe
+rendu public.
+
+D´eﬁnition 4.8 (k-pr´eimage brouillage). Soit G = (V, E) et Gp = (U, Ep)
+un graphe social et son graphe perturb´e. Pour chaque u ∈ U soit Xu d´enote
+la variable al´eatoire correspondante d´eﬁnie sur V , c’est-`a-dire Xu(v) est la
+probabilit´e que v est la pr´eimage de u dans G. Le graphe perturb´e Gp satisfait
+k-pr´eimage brouillage si pour chaque nœud u ∈ U , l’entropie de la variable
+al´eatoire Xu sur V est au moins log k.
+
+4.5.3 k-degr´e brouillage
+
+Soit v ∈ V un nœud cible dans V , supposant que l’adversaire sait son
+degr´e d(v) = a. Soit u ∈ U un nœud candidat dans U dont le degr´e d(u) = b.
+La probabilit´e, f (v, u), qu’un nœud avec un degr´e d(v) a ´et´e convertie `a un
+nœud avec un degr´e d(u), est ´egale `a la probabilit´e conditionnelle suivante :
+f (u, v) = P r(d(u) = b|d(v) = a, v (cid:55)→ u), c’est-`a-dire, soit v un nœud de
+degr´e a et son image dans Gp est u, f (u, v) est la probabilit´e que le degr´e
+du nœud u est b. Dans le cas de l’approche consistant `a supprimer des arˆetes
+de mani`ere al´eatoire (randomization by sparsiﬁcation, en anglais), b ∼ B(a, p)
+tel que B(a, p) est la distribution Binomiale sur a exp´erimentations et de
+probabilit´e de succ`es p. Dans le cas de l’approche de perturbation al´eatoire,
+b ∼ B(a, p) + B(n − 1 − a, q(p)).
+
+4.6
+
+´Etude critique des approches d’anonymisation
+
+La plupart des m´ethodes d’anonymisation d’un graphe social cit´ees ci-
+dessus pr´e-supposent un mod`ele d’adversaire et con¸coivent des algorithmes
+d’anonymisation d’un graphe social bas´es sur cette hypoth`ese. Ainsi, Liu et
+Terzi [19] supposent un adversaire poss´edant le degr´e d’un nœud comme connais-
+sance auxiliaire. Cependant, il n’existe aucune motivation claire pour justiﬁer
+cette restriction, car un adversaire pourrait avoir tout un sous-graphe autour
+d’un nœud cible et pas seulement son degr´e. Zhou et Pei [20] consid`erent une
+supposition plus forte avec la prise en compte des attributs mod´elis´ee par une
+hi´erarchie d’´etiquettes. Un adversaire peut avoir le voisinage d’un nœud comme
+connaissance auxiliaire. Cependant, les exp´eriences sont r´ealis´ees sur un graphe
+non orient´e avec un degr´e moyen de 4 (un ordre de grandeur plus faible que
+dans de v´eritables r´eseaux sociaux) et en appliquant leur algorithme, il faudra
+accroˆıtre le nombre d’arˆetes de 6%. Le nombre d’arˆetes `a ajouter et le temps
+de calcul (le temps d’ex´ecution de l’algorithme) sont susceptibles d’augmenter
+fortement avec le degr´e moyen des nœuds.
+
+La technique de g´en´eralisation d’un graphe social demande `a ce que les
+k nœuds d’un mˆeme cluster soient ´equivalents, c’est-`a-dire qu’il doit exister
+des automorphismes dans le graphe publi´e qui ´etablissent une correspondance
+entre chacun des k nœuds. C’est une exigence structurelle tr`es forte, qui n’est
+atteinte que contre des adversaires strictement restreints : dans un mod`ele,
+
+24
+
+l’attaquant ne dispose que d’informations sur les s´equences des degr´es autour
+de son nœud cible ; dans un autre, la connaissance partielle de la structure
+dans le voisinage de la cible. Dans cette technique d’anonymisation, nous avons
+pr´esent´e deux algorithmes, GraphGen et SaNGreeA. L’algorithme SaNGreeA
+englobe GraphGen par le fait qu’il consid`ere les attributs des nœuds alors
+que GraphGen ne prend en consid´eration que la structure du graphe social.
+G´en´eralement, le graphe social anonymis´e par la technique de g´en´eralisation
+n’atteint pas un niveau acceptable en termes de mesures d’utilit´e.
+
+Les mˆemes inconv´enients de la technique de g´en´eralisation peuvent ˆetre
+rapporter en parlant de l’algorithme de k-automorphisme. La diﬀ´erence entre
+les algorithmes de g´en´eralisation et l’algorithme de k-automorphisme est que
+les algorithmes de g´en´eralisation entre dans la cat´egorie des m´ethodes bas´ees
+sur l’approche de clustering des nœuds alors que le k-automorphisme entre
+dans la cat´egorie des m´ethodes bas´ees sur la modiﬁcation des arˆetes.
+
+L’approche bas´ee sur la perturbation al´eatoire du graphe social consid`ere
+un adversaire poss´edant le degr´e d’un nœud comme connaissance auxiliaire.
+Ainsi, ce que nous avons dit `a propos de cette supposition peut ˆetre redit. De
+plus, la technique de perturbation du graphe peut modiﬁer consid´erablement
+les propri´et´es structurelles du graphe, et donc son utilit´e potentielle.
+
+La condition de k-anonymit´e est souvent rencontr´ee dans la plupart des
+approches d’anonymisation d’un graphe social. Cependant, cette notion souﬀre
+de quelques lacunes :
+
+1. La premi`ere limite est qu’elle ne garantie pas contre la divulgation d’at-
+tributs : imaginons le cas o`u tous les nœuds d’un mˆeme groupe de k
+nœuds partagent la mˆeme valeur pour un attribut sensible, mˆeme si
+l’adversaire ne peut pas localiser son nœud cible u, il connait de fa¸con
+certaine la valeur de son attribut sensible.
+
+2. La deuxi`eme limite pourrait ˆetre une question de faible utilit´e. En eﬀet,
+l’utilit´e d’un graphe social diminue inversement avec le nombre k de la
+condition de k-anonymit´e.
+
+Pour pallier la premi`ere limite de cette approche, plusieurs mod`eles et no-
+tions ont ´et´e propos´es tels que la l-diversit´e [26] et la p-sensitive [27]. Nous
+proposons dans notre travail de recherche de nous occuper de la deuxi`eme d´e-
+faillance, ainsi de concevoir un algorithme d’anonymisation orient´e par l’utilit´e
+tout en pr´eservant la vie priv´ee des individus pr´esents dans le graphe social
+publi´e.
+
+5 G´en´eralisation guid´ee par l’utilit´e
+
+Dans ce travail de recherche, nous visons `a am´eliorer la technique d’ano-
+nymisation d’un graphe social par g´en´eralisation. Bien que cette technique
+d’anonymisation produise un niveau ´elev´e (proportionnel au nombre k de la
+condition de k-anonymit´e) de garantie en termes de protection de la vie pri-
+v´ee des individus pr´esents dans un graphe social, l’utilit´e d’un tel graphe so-
+cial publi´e n’atteint souvent pas un niveau acceptable au niveau pratique [2].
+Dans [22] (voir aussi la version journal [28]), Hay, Miklau, Jensen, Towsley, et
+Weis proposent un algorithme de g´en´eralisation d’un graphe social. Son crit`ere
+pour accepter ou ne pas accepter un partitionnement candidat est bas´e sur le
+nombre de graphes candidats pouvant ˆetre ´echantillonn´es `a partir d’un graphe
+g´en´eralis´e (le partitionnement candidat). Cet algorithme cherche `a minimiser
+
+25
+
+le nombre de graphes candidats pouvant avoir conduit au graphe g´en´eralis´e.
+Cependant, cet algorithme ne garantit rien par rapport `a l’utilit´e r´esultante
+de la g´en´eralisation en termes de pr´eservation des diﬀ´erentes propri´et´es struc-
+turelles.
+
+Comme en g´en´eral, une analyse sp´eciﬁque d’un graphe social s’int´eresse `a
+une propri´et´e structurelle bien pr´ecise du graphe publi´e, nous proposons de
+concevoir un algorithme g´en´eral d’anonymisation d’un graphe social par la
+technique de g´en´eralisation qui est guid´e par le niveau d’utilit´e qu’on souhaite
+pr´eserver dans le graphe publi´e. Ainsi, notre algorithme fournit un graphe
+social g´en´eralis´e pr´eservant le mieux possible la propri´et´e structurelle consi-
+d´er´ee. Les analystes d’un graphe social doivent cibler le graphe social publi´e
+qui pr´eserve le mieux la (ou les) propri´et´e(s) structurelle(s) qu’ils souhaitent
+´etudier.
+
+Dans l’´etude d’un graphe g´en´eralis´e, l’analyste peut ´echantillonner un graphe
+
+candidat `a partir du graphe g´en´eralis´e rendu public, ensuite il eﬀectue une
+analyse standard sur le graphe ´echantillonn´e. `A ce stade, il est possible que
+l’analyse de deux graphes candidats diﬀ´erents puissent donner des r´esultats
+tr`es divergents. Aﬁn d’´eviter cela et de g´en´erer des r´esultats d’analyse plus
+proches quelque soit le graphe ´echantillonn´e, notre algorithme doit l’assurer
+en calculant des bornes possibles sur la valeur de cette propri´et´e structurelle
+qui soient les plus pr´ecises possibles.
+
+D´eﬁnition 5.1 (Graphe g´en´eralis´e). On appelle graphe g´en´eralis´e un graphe
+G = (V,E) muni de deux fonctions d’´etiquetage :
+
+nodeLabels : V → N × N
+edgeLabels : E → N
+
+D´eﬁnition 5.2 (G´en´eralisation d’un graphe). Soit G = (V, E) un graphe,
+une g´en´eralisation de G est un graphe g´en´eralis´e G = (V,E) avec une bijection
+clusterG : V → 2V telle que :
+– si nodeLabels(u) = (m1, m2) alors m1 = |X| et m2 = |{(x, x(cid:48)) ∈ E |
+– si edgeLabels(u, u(cid:48)) = m alors m =
+et {clusterG(u)}u∈V est une partition de V .
+
+x, x(cid:48) ∈ X}| = |E ∩ (X × X)|, o`u X = clusterG(u).
+et Y = clusterG(u(cid:48)).
+
+, o`u X = clusterG(u)
+
+|E∩{(X×Y )∪(Y ×X)}|
+
+2
+
+D´eﬁnition 5.3 (Graphe candidat). Soit G = (V,E) un graphe g´en´eralis´e, on
+appelle graphe candidat tout graphe G = (V, E) dont G est une g´en´eralisation
+et on le note G (cid:69) G. On note l’ensemble de graphes candidats d’un graphe
+
+g´en´eralis´e G par(cid:86)G(cid:87) = {G | G (cid:69) G}.
+
+Par exemple, dans la Figure 6, on peut voir un graphe g´en´eralis´e (`a gauche)
+
+situ´e cˆote-`a-cˆote avec un graphe candidat.
+
+26
+
+Figure 6 – Un graphe g´en´eralis´e cˆote-`a-cˆote avec un graphe candidat.
+
+Soit mX,X repr´esente le nombre d’arˆetes entre les nœuds d’un cluster X, et
+mX,Y est le nombre d’arˆetes reliant les nœuds d’un cluster X avec les nœuds
+d’un autre cluster Y . Nous rappelons que le nombre de graphes candidats est
+donn´e par la formule suivante :
+
+|(cid:86)G(cid:87)| = (cid:81)
+
+X∈V
+
+(cid:18) 1
+2|X|(|X| − 1)
+
+(cid:19)(cid:81)
+
+mX,X
+
+(cid:18)|X||Y |
+
+(cid:19)
+
+mX,Y
+
+X∈V
+
+.
+
+(1)
+
+D´eﬁnition 5.4 (Mesure d’utilit´e). Soit G un ensemble de graphes. On appelle
+mesure d’utilit´e sur G, une fonction U : G −→ R.
+
+Par exemple, le degr´e d’un nœud dans un graphe est une mesure d’utilit´e.
+D´eﬁnition 5.5 (Bornes d’une mesure d’utilit´e). Soit G ⊆ G, un ensemble
+ﬁni de graphes. On appelle bornes sur une mesure d’utilit´e U (ou simple-
+ment bornes d’utilit´e) d’un ensemble ﬁni de graphes G, une paire de valeurs
+(Umin, Umax) ∈ R2 tel que ∀ G ∈ G :
+
+Umin (cid:54) U (G) (cid:54) Umax.
+
+L’algorithme suivant calcule les bornes d’utilit´e (Umin et Umax) sur une
+
+mesure d’utilit´e U d’un graphe g´en´eralis´e G :
+Algorithme 3: BornesU (G)
+Entr´ees : {G1, G2, ..., GN}, un ensemble ﬁni de graphes
+
+U , une mesure d’utilit´e
+
+Sortie : des bornes d’utilit´e de l’ensemble d’entr´ee
+
+1 Umin ← U (G1) ; Umax ← U (G1)
+2 pour i de 2 `a N faire
+3
+
+util ← U (Gi)
+Umin ← min(Umin, util)
+Umax ← max(Umax, util)
+
+5
+6 ﬁn
+7 Retourner (Umin, Umax)
+
+4
+
+Par exemple, `a partir du graphe g´en´eralis´e G de la Figure 6 la paire de
+valeurs (1, 5) sont des bornes d’utilit´e pour le degr´e d’un nœud dans un graphe
+G (cid:69) G. ´Etant donn´ee une utilit´e U : G −→ R, et soit G ⊆ G tel que |G| = N .
+On note util(n) ∈ R, une borne de calcul de U (G) pour G ∈ G et |G| = n. Le
+coˆut de calcul de BornesU (G) est en O(N. maxi util(|Gi|)).
+
+27
+
+Remarque 5.1 (Complexit´e de BornesU ). Soit G un graphe g´en´eralis´e. Alors
+
+se calcule en O(cid:0)|(cid:86)G(cid:87)|.util(CardElem(G))(cid:1), tel que |(cid:86)G(cid:87)| est donn´e par l’´equa-
+∀G, G(cid:48) ∈(cid:86)G(cid:87), |G| = |G(cid:48)| ; on note cette valeur CardElem(G). Ainsi, BornesU (G)
+
+tion (1).
+
+D´eﬁnition 5.6 (Pr´ecision de bornes d’utilit´e). La pr´ecision d’une paire de
+bornes d’utilit´e (Umin, Umax) est donn´ee par la diﬀ´erence entre ces deux va-
+leurs :
+
+Precision(Umin, Umax) = Umax − Umin.
+
+5.1 Propri´et´es structurelles et utilit´e
+
+Dans le contexte de notre ´etude, nous nous int´eressons aux mesures d’uti-
+lit´e reﬂ´etant des propri´et´es structurelles d’un graphe social G = (V, E) que
+nous supposons d´esormais connexe. Nous consid´erons donc des mesures qui
+permettent de quantiﬁer diﬀ´erents aspects structurels et des propri´et´es glo-
+bales d’un graphe telles que la connectivit´e et la centralit´e. Ces caract´eris-
+tiques sont g´en´eralement utilis´ees par des analystes, par exemple pour ´etudier
+l’inﬂuence, le pouvoir, l’engagement et les formes de communication dans les
+r´eseaux sociaux. Ci-apr`es, nous d´eﬁnissons quelques propri´et´es structurelles et
+pour chacune nous donnons `a titre d’exemple un type d’analyse qui se base
+sur cette propri´et´e structurelle :
+• L’excentricit´e d’un nœud est sa distance (on d´eﬁnit la distance entre
+deux nœuds comme le nombre de liens dans un plus court chemin entre
+ces deux nœuds) maximale `a tous les autres nœuds, et est d´eﬁnie par :
+
+ε(v) = max{d(v, w) | w ∈ V } .
+
+Notons que pour les graphes connexes ε(v) < +∞,∀v ∈ V .
+
+• Le rayon d’un graphe est l’excentricit´e minimale de ses nœuds, c’est-`a-
+dire la plus petite distance `a laquelle puisse se trouver un nœud de tous
+les autres, et d´eﬁni par :
+
+rayon(G) = min{ε(v) | v ∈ V } .
+
+Le centre d’un graphe est form´e de l’ensemble de ses nœuds d’excentricit´e
+minimale. Comme exemple d’utilisation pratique du rayon d’un graphe
+social dans l’´epid´emiologie, imaginons qu’une maladie se propage d’un
+individu `a ces voisins au bout d’un jour. Soit J le jour o`u un individu
+est infect´e, au jour (J + n) si n < rayon(G) alors on est sˆur qu’il reste
+au moins (rayon(G) − n) individus non encore infect´es et on peut donc
+encore r´eagir.
+• Le diam`etre d’un graphe est l’excentricit´e maximale de tous les nœuds
+
+du graphe, et est d´eﬁni par :
+
+diametre(G) = max{ε(v) | v ∈ V } .
+
+Dans ce contexte, nous citons le probl`eme du petit monde (small world
+problem en anglais) o`u les exp´eriences sondaient la distribution des lon-
+gueurs de chemins dans un r´eseau de connaissance en demandant aux
+participants de passer une lettre `a un de leurs premiers noms de connais-
+sances dans une tentative de se rendre `a un individu cible (le r´esutat
+obtenu ´etait, il suﬃt, en moyenne, six nœuds interm´ediaires pour faire
+
+28
+
+arriver une lettre `a un individu cible) [29]. Une telle exp´erience permet
+d’´etablir la th´eorie de “six degr´es de s´eparation”4.
+• La densit´e d’un graphe G est la proportion des arˆetes d’un graphe
+
+relativement au total de liens possibles, et est d´eﬁnie par :
+
+Densite(G) =
+
+2|E|
+
+n(n − 1)
+
+,
+
+tel que n est le nombre de nœuds du graphe G, et |E| est le nombre
+d’arˆetes. Une densit´e plus ´elev´ee est le reﬂet d’un grand nombre de
+contacts moyen dans un graphe social.
+• La centralit´e de degr´e d’un nœud v est le nombre de nœuds voisins `a
+ce nœud. Pour comparer entre diﬀ´erents graphes, on utilise la centralit´e
+de degr´e normalis´ee :
+
+CD(v) =
+
+d
+
+n − 1
+
+,
+
+o`u d est le degr´e d’un nœud v, et n est le nombre de nœuds du graphe.
+Une centralit´e de degr´e plus ´elev´ee peut signiﬁer qu’un individu a plus de
+connexions, indiquant ainsi un plus grand cercle social dans son r´eseau
+social.
+
+• La centralit´e de degr´e d’un graphe est d´eﬁnie par :
+
+(cid:80)n
+i=1 [CD(v∗) − CD(i)]
+
+n − 2
+
+(cid:80)n
+i=1 [deg(v∗) − deg(i)]
+(n − 1)(n − 2)
+
+,
+
+=
+
+CD(G) =
+
+o`u v∗ est un nœud ayant une plus grande valeur de centralit´e de degr´e
+parmi tous les nœuds {1, ..., n} du graphe G.
+• La centralit´e de proximit´e d’un nœud v est l’inverse de la distance
+
+moyenne du nœud v `a tous les autres nœuds :
+
+(cid:80)
+
+n − 1
+
+CP (v) =
+
+v(cid:48)∈V \{v} g (v, v(cid:48))
+
+,
+
+tel que g (v, v(cid:48)) est la distance g´eod´esique entre v et v(cid:48) o`u v(cid:48) est un des
+autres nœuds du graphe (la distance g´eod´esique est la longueur d’un
+plus court chemin entre deux nœuds). La centralit´e de proximit´e mesure
+combien un nœud est proche des autres nœuds et ainsi, par exemple,
+une propagation rapide d’information, de maladie ou de rumeur peut
+ˆetre mesur´ee. Ainsi, si un nœud est connect´e `a tous les autres nœuds
+alors sa centralit´e de proximit´e est ´egale `a 1 et ce nœud sera consid´er´e
+comme le voisin le plus proche `a tous les autres nœuds. Ainsi dans le
+cadre de marketing cibl´e, il pourrait ˆetre int´eressant de cibler ce type de
+nœud pour avoir ensuite un impact important sur le r´eseau.
+• La centralit´e de proximit´e d’un graphe est d´eﬁnie par :
+
+(cid:80)n
+i=1 [CP (v∗) − CP (i)]
+(n − 1)(n − 2)/(2n − 3)
+
+,
+
+CP (G) =
+
+o`u v∗ est un nœud ayant une plus grande valeur de centralit´e de proximit´e
+parmi tous les nœuds d’un graphe G.
+
+4. http ://en.wikipedia.org/wiki/Six degrees of separation
+
+29
+
+• La centralit´e d’interm´ediarit´e d’un nœud v est la proportion du
+nombre de plus courts chemins passants par v par rapport au nombre
+total des plus courts chemins existants dans le graphe :
+
+(cid:88)
+
+s(cid:54)=v(cid:54)=t
+
+σst (v)
+
+σst
+
+,
+
+CI (v) =
+
+o`u σst est le nombre total de plus courts chemins entre les nœuds s et t,
+et σst (v) est le nombre de plus courts chemins entre les nœuds s et t et
+qui passent par le nœud v. Plus la valeur de la centralit´e d’interm´ediarit´e
+est ´elev´ee, plus ce nœud peut ˆetre important dans la perspective de la
+communication dans un r´eseau. Une autre exp´erience, consid´erant une
+communaut´e o`u une proc´edure de vaccination doit se d´erouler, si un
+nœud v a une centralit´e d’interm´ediarit´e ´elev´ee et qu’il est vaccin´e alors
+on coupe beaucoup de chemins de propagation de la maladie.
+
+• La centralit´e d’interm´ediarit´e d’un graphe est d´eﬁnie par :
+
+(cid:80)n
+i=1 [CI (v∗) − CI (i)]
+
+(n − 1)
+
+,
+
+CI (G) =
+
+o`u v∗ est un nœud ayant la plus grande valeur de centralit´e d’interm´e-
+diarit´e parmi tous les nœuds d’un graphe G.
+• La centralit´e vecteur propre est une mesure de l’importance d’un
+nœud en fonction de ses liens avec les nœuds importants. On consid`ere
+le principal vecteur propre de la matrice d’adjacence repr´esentant un
+graphe social. Ce vecteur propre est le seul vecteur propre de valeurs
+positives associ´e `a la plus grande valeur propre de la matrice d’adjacence
+(le lecteur curieux pourra consulter [30] pour avoir la formulation et la
+d´emonstration du th´eor`eme de principal vecteur propre ).
+L’algorithme PageRank calcule une variante de la mesure centralit´e vec-
+teur propre [31].
+• Le cœﬃcient de clustering global d’un graphe mesure le nombre de
+triangles transitifs existants proportionnel au nombre de triplets connec-
+t´es :
+
+CG =
+
+3 ∗ ∆
+Λ
+
+,
+
+tel que ∆ est le nombre de triangles, et Λ est le nombre de triplets
+connect´es. Dans le contexte de r´eseaux sociaux le cœﬃcient de clustering
+mesure la probabilit´e moyenne qu’un ami d’un ami est un ami.
+Le cœﬃcient de clustering local d’un nœud vi est d´eﬁni comme :
+
+Ci =
+
+|ejk|
+
+ki ∗ (ki − 1)
+
+,
+
+o`u |ejk| est le nombre d’arˆetes entre les paires de nœuds (vj, vk) voisins
+de vi, et ki est le nombre de nœuds voisins de vi.
+
+5.2 G´en´eralisation et bornes de mesures d’utilit´e
+
+Nous constatons que les algorithmes de g´en´eralisation d’un graphe social
+tel que celui propos´e dans [22] ne donnent aucune garantie en termes de pr´e-
+servation des diﬀ´erentes mesures d’utilit´e. Nous proposons un algorithme dont
+le crit`ere d’´evaluation d’un partitionnement candidat est bas´e sur la pr´ecision
+des bornes d’utilit´e. Ainsi, en ﬁxant une propri´et´e structurelle (par exemple
+
+30
+
+le degr´e des nœuds, le diam`etre d’un graphe, etc.), lors du partitionnement,
+notre algorithme calcule les bornes d’une mesure d’utilit´e donn´ee et d´ecide
+d’accepter ou ne pas accepter un partitionnement candidat suivant le chan-
+gement dans la pr´ecision (D´eﬁnition 5.6) obtenue sur les bornes de la mesure
+d’utilit´e consid´er´ee.
+Soient G = (V, E) un graphe et G = (V,E) une g´en´eralisation de G. Dans
+la suite on confondra un nœud de G avec le cluster qui lui correspond. Pour
+calculer les bornes d’utilit´e du graphe G, on proc`ede comme suit. Pour chaque
+cluster X ∈ V, on d´eﬁnit :
+
+1. U l(X) comme ´etant la valeur locale de la mesure d’utilit´e U pour le
+
+sous-graphe induit par les nœuds de X.
+
+2. U g(X) comme ´etant la valeur globale de la mesure d’utilit´e U pour le
+sous-graphe induit par les nœuds de X et ses voisins (c’est-`a-dire, en
+consid´erant les arˆetes entre clusters).
+
+Nous d´etaillons ci-apr`es des bornes d’utilit´e d’un graphe g´en´eralis´e pour quelques
+propri´et´es structurelles.
+
+5.2.1 Bornes pour le degr´e d’un nœud
+Lemme 5.1 (Bornes sur le degr´e maximal et minimal). Soient n ≥ 1 et
+m ≥ n − 1 :
+1. degrel
+
+(cid:40)
+max = n − 1
+1
+m − (n−1)(n−2)
+
+min =
+
+2
+
+2. degrel
+
+si m ≤ (n−1)(n−2)
+sinon
+
+2
+
++ 1
+
+Alors pour tout graphe G = (V, E) tel que |V | = n et |E| = m, on a :
+
+degrel
+
+min ≤ Degre(G) ≤ degrel
+
+max.
+
+min.
+
+max = 0.
+
+0, or degrel
+
+min = 0 et degrel
+
+D´emonstration. ´Etant donn´e n et m, on construit par r´ecurrence sur (n, m)
+un graphe G = ({1, ..., n}, E) tel que : Degre(G) = degrel
+– Cas de base (1, 0) : il n’y a qu’un seul graphe G = ({1},∅) et Degre(G) =
+– Cas (n, m) : n− 1 ≤ m ≤ n(n−1)
+
+, sachant que la propri´et´e est vraie pour
+tous (p, q) avec (p < q et q ≤ m) ou (p = n et q < m).
+Soit V (cid:48) = {1, ..., n−1}, par hypoth`ese d’induction sur (n−1, (n−1)(n−2)
+),
+construire G(cid:48) = (V (cid:48), E(cid:48)) tel que |E(cid:48)| = (n−1)(n−2)
+et 1 ≤ Degremin(G(cid:48)) ≤
+2
+m − (n−1)(n−2)
+arˆetes entre le nœud n et les
+nœuds de V (cid:48).
+Pour le degr´e maximal, cela est ´evident.
+
+. On ajoute m − (n−1)(n−2)
+
+2
+
+2
+
+2
+
+2
+
+(X, mX,X ) et (Y, mY,Y ), on pose :
+
+Soient X et Y deux super-nœuds (clusters). Ils d´eﬁnissent deux graphes
+Y ∈V (1, mX,Y − (|X| − 1)|Y |), c’est-`a-
+Y ∈V (1, mX,Y − (|X| −
+
+min(X) = degrel
+min(X) = max(1, mX,X − (n−1)(n−2)
+
+) +(cid:80)
+
+2
+
+max(X) = min(|X| − 1, mX,X ) +(cid:80)
+
+max(X) = degrel
+
+Y ∈V min(|Y |, mX,Y ), c’est-`a-dire :
+
+Y ∈V min(|Y |, mX,Y ).
+
+min(X) +(cid:80)
+max(X) +(cid:80)
+
+– degreg
+dire :
+degreg
+1)|Y |).
+– degreg
+degreg
+
+31
+
+On peut calculer le degr´e minimal et maximal d’un graphe g´en´eralis´e G comme
+suit. En posant, degremin(G) = minX∈V degreg
+on a :
+
+min(X) et degremax(G) = maxX∈V degreg
+
+max(X),
+
+Bornesdegre(G) = (degremin(G), degremax(G)).
+
+5.2.2 Bornes sur le diam`etre
+
+X∈S diametre(X).
+
+prendre le diam`etre de G est donn´e par le lemme suivant :
+
+Lemme 5.2 (Bornes sur le diam`etre). Soit G = (V, E) un graphe qui se
+g´en´eralise en G = (V,E), le diam`etre de G peut ˆetre born´e comme suit :
+
+Soit G un graphe g´en´eralis´e et G ∈ (cid:86)G(cid:87), l’intervalle de valeurs que peut
+diametre(G) +(cid:0)diametre(G) + 1(cid:1). minX∈V diametre(X) ≤ diametre(G) ≤
+diametre(G) +(cid:0)diametre(G) + 1(cid:1). maxX∈V diametre(X).
+X∈S diametre(X) ≤ diametre(G) ≤ diametre(G)+(cid:80)
+diametre(G)+(cid:80)
+
+Soit S = {X1, X2, ...Xi} une chaˆıne constitu´ee de super-nœuds engendr´es
+dans le calcul du diam`etre d’un graphe g´en´eralis´e G, le diam`etre d’un graphe
+candidat peut ˆetre born´e de mani`ere plus stricte comme suit :
+
+Pour calculer le diam`etre minimal que peut prendre un graphe, on proc`ede
+`a une construction d’un graphe sous forme ´etoile (cf. Figure 7). Un tel graphe
+a un diam`etre ´egal `a 2 si ce graphe n’est pas complet (cf. Figure 8 pour voir
+l’exemple d’un graphe complet), et 1 sinon.
+
+Figure 7 – Graphe sous forme ´etoile.
+
+Figure 8 – Graphe complet.
+
+Lemme 5.3 (Diam`etre minimal). Soit un graphe G = (V, E) tel que |V | = n
+et |E| = m, le diam`etre minimal que peut prendre G est :
+
+32
+
+(cid:40)
+
+2
+1
+
+Diametremin =
+
+si n − 1 ≤ m < n(n−1)
+si m = n(n−1)
+
+2
+
+2
+
+D´emonstration. On construit un graphe connexe G = ({1, ..., n}, E) comme
+suit :
+On forme les (n − 1) arˆetes (1, i) ∀i ≥ 2. C’est une ´etoile. On ajoute les
+m − (n − 1) arˆetes restantes, si ce graphe est complet alors son diam`etre est
+de 1 sinon il est de 2.
+
+Pour calculer le diam`etre maximal que peut prendre un cluster X (ou de
+mani`ere g´en´eral, un graphe), tel que |X| = n (le nombre de nœuds dans un
+cluster X) et |EX| = m (le nombre d’arˆetes dans un cluster X), on proc`ede
+`a la construction d’un graphe tel que, `a chaque ´etape dans la construction,
+le graphe construit poss`ede le diam`etre maximal que peut prendre un graphe
+avec un tel nombre de nœuds et un tel nombre d’arˆetes. Pour avoir un diam`etre
+maximal, on commence `a construire une chaˆıne, et s’il reste encore des arˆetes
+`a ajouter, on se permet de placer le maximum d’arˆetes tel qu’`a l’´etape i on ne
+diminue le diam`etre que de 1 par rapport `a l’´etape (i − 1). En se basant sur
+cette construction (voir Figure 9, une ligne en pointill´es “Uni” est construite
+`a l’´etape 1, une ligne en pointill´es “Tiret” est construite `a l’´etape 2, et une
+ligne en pointill´es “Point carr´e” est construite `a l’´etape 3) on pourrait donner
+le diam`etre maximal d’un graphe d´ecrit par la conjecture suivante (`a noter
+que n > 5) :
+
+Figure 9 – Construction d’un graphe pour maximiser le diam`etre.
+
+Conjecture 5.1 (Bornes sur le diam`etre maximal). Soit un graphe G = (V, E)
+tel que |V | = n et |E| = m, le diam`etre maximal que peut prendre G est :
+
+(cid:40) 4n−m−5
+3 −(cid:0) m−2n
+
+3
+2n−5
+
+n−3
+
+Diametremax ≤
+
+(cid:1)2
+
+si n ≤ m ≤ 2n
+si 2n < m ≤ n(n−1)
+
+2
+
+5.2.3 Bornes sur le rayon
+
+Soit G un graphe g´en´eralis´e et G ∈ (cid:86)G(cid:87), l’intervalle de valeurs que peut
+
+prendre le rayon de G se caract´erise par le lemme suivant :
+
+33
+
+Lemme 5.4 (Bornes sur le rayon). Soit G = (V, E) un graphe qui se g´en´eralise
+en G = (V,E), et soit X ∈ V un super-nœud, le rayon d’un graphe G peut ˆetre
+born´e comme suit :
+
+rayon(G) +(cid:0)rayon(G) + 1(cid:1). minX∈V rayon(X) ≤ rayon(G) ≤ rayon(G) +
+(cid:0)rayon(G) + 1(cid:1). maxX∈V rayon(X).
+rayon(G) +(cid:80)
+
+Soit S = {X1, X2, ...Xi} une chaˆıne constitu´ee de super-nœuds engendr´es
+dans le calcul du rayon d’un graphe g´en´eralis´e G, le rayon d’un graphe candidat
+peut ˆetre born´e de mani`ere plus stricte comme suit :
+
+X∈S rayon(X) ≤ rayon(G) ≤ rayon(G) +(cid:80)
+
+X∈S rayon(X).
+D’apr`es l’in´egalit´e suivante qui donne la relation entre le rayon et le dia-
+
+m`etre d’un graphe G [32] :
+
+rayon(G) (cid:54) diametre(G) (cid:54) 2.rayon(G).
+
+⇒ rayon(G) (cid:54) diametre(G) et
+
+.diametre(G) (cid:54) rayon(G).
+
+1
+2
+
+Ainsi, le rayon d’un graphe candidat peut ˆetre calcul´e en fonction du dia-
+rayon(G)+ 1
+
+2 .(cid:80)
+X∈S diametre(X) ≤ rayon(G)+(cid:80)
+X∈S rayon(X) ≤ rayon(G) +(cid:80)
+
+X∈S rayon(X) ≤ rayon(G) ≤
+
+m`etre comme suit :
+
+rayon(G) +(cid:80)
+
+X∈S diametre(X).
+
+5.2.4 Bornes sur d’autres propri´et´es structurelles
+
+`A cause de la diﬃcult´e `a donner des bornes d’utilit´e pour des propri´et´es
+structurelles telles que la centralit´e intermidiarit´e, le cœﬃcient de clustering,
+..., une alternative possible est de concevoir un algorithme qui ´etant donn´e un
+graphe g´en´eralis´e G = (V,E), retourne la valeur minimale et la valeur maximale
+que peut prendre un graphe candidat. Un algorithme possible consisterait par
+exemple `a ´enum`erer tous les graphes candidats, soit les ´el´ements de l’ensemble
+
+(cid:86)G(cid:87) = {G = (V, E) | G (cid:69) G}, et pour chaque graphe candidat `a calculer son
+Comme la cardinalit´e de l’ensemble(cid:86)G(cid:87) peut ˆetre assez importante (voir
+
+utilit´e. L’algorithme retourne la paire de bornes d’utilit´e (Umin, Umax) tel que
+d´ecrit par l’Algorithme 3.
+
+l’´equation (1), on peut ´eviter de faire une ´enum´eration de tous les graphes can-
+didats possibles en ´echantillonnant de mani`ere al´eatoire un certains nombre de
+graphes candidats. Cependant, l’application d’une telle solution peut conduire
+`a une sous estimation de la pr´ecision des bornes d’utilit´e. Toute fois, on peut
+esp´erer que les ´echantillonnages al´eatoires calcul´es par les analystes donnent
+lieu `a des utilit´es `a des bornes approximatives que nous aurons exhib´ees.
+
+5.3 Algorithme de g´en´eralisation guid´e par l’utilit´e
+
+Nous d´ecrivons maintenant notre algorithme de g´en´eralisation d’un graphe
+social guid´e par l’utilit´e. Les entr´ees de cet algorithme sont, un graphe G,
+un param`etre k (pour la condition de k-anonymit´e), une mesure d’utilit´e U ,
+qu’on souhaite pr´eserver dans le graphe publi´e. La sortie est une g´en´eralisa-
+tion de G dont les clusters sont de taille au moins k. La conception de l’algo-
+rithme de recherche est bas´ee sur des techniques pour r´esoudre un probl`eme
+li´e `a l’analyse des r´eseaux sociaux : blockmodeling stochastique [33] (stochastic
+block-modeling, en anglais). Le pseudo-code de cet algorithme est d´ecrit par
+l’Algorithme 4.
+
+Soumis `a la condition de k-anonymit´e, qui exige que la taille de chaque
+cluster soit au moins k, et ´etant donn´ee une mesure d’utilit´e U qu’on souhaite
+
+34
+
+favoriser (voir Section 5.1), nous cherchons `a g´en´erer un graphe g´en´eralis´e bas´e
+sur des clusters de taille au moins k tel que la pr´ecision des bornes d’utilit´e
+soit la meilleur possible, de sorte que les valeurs d’utilit´e des graphes candidats
+soient les plus proches possibles.
+
+L’algorithme recherche un bon partitionnement, proche de l’optimal, en
+se basant sur le principe de la technique “recuit simul´e” [23]. Pour trouver le
+graphe g´en´eralis´e qui minimise la pr´ecision des bornes d’utilit´e de la mesure U ,
+l’algorithme commence avec un graphe g´en´eralis´e ayant une seule partition (un
+seul super-nœud) regroupant tous les nœuds du graphe d’origine. Au moment
+de la recherche, chaque partitionnement valide (c’est-`a-dire celui bas´e sur des
+clusters de taille au moins k) est un ´etat (´el´ement) dans l’espace de recherche,
+l’algorithme propose un changement d’´etat, soit en divisant une partition, soit
+en fusionnant deux partitions, soit en d´epla¸cant un nœud vers une autre par-
+tition. La proposition d’un changement d’´etat d’un graphe g´en´eralis´e G `a un
+nouveau graphe g´en´eralis´e G(cid:48) est ´evalu´ee en se basant sur le changement dans
+la pr´ecision des bornes d’utilit´e de la propri´et´e structurelle consid´er´ee. Une
+fonction Bornes U (G) retourne Umin la valeur minimale et Umax la valeur maxi-
+male que peut prendre n’importe quel graphe candidat du graphe g´en´eralis´e
+G pour la propri´et´e structurelle U , ces bornes sont calcul´ees comme expliqu´e
+dans la Section 5.2. Le changement d’´etat propos´e est toujours accept´e si le
+graphe d´eriv´e am´eliore la pr´ecision des bornes d’utilit´e, et il est accept´e avec
+probabilit´e p s’il n’am´eliore pas la pr´ecision. La probabilit´e d’acceptation com-
+mence avec une valeur ´elev´ee p o`u p = e∆P/T (tel que ∆P est la diﬀ´erence
+entre la pr´ecision d’utilit´e du partitionnement propos´e et celle du partitionne-
+ment courant, et T est la temp´erature courante) et diminue lentement jusqu’`a
+ce qu’un changement, en approchant de z´ero, n’est accept´e que s’il am´eliore la
+pr´ecision. On termine la recherche quand il y a moins de 0.02% de propositions
+sont accept´ees (souvent cette constante est utilis´ee par des algorithmes de type
+“recuit simul´e”).
+La fonction Successeurs(G, k), retourne un ensemble de graphes g´en´eralis´es
+(valides) qui peuvent ˆetre d´eriv´es `a partir de G en faisant un seul changement
+local, tel que d´eplacement d’un nœud, partitionnement ou fusion d’un super-
+nœud dans G.
+– La proc´edure Partitionner(X,G) partitionne un super-nœud X de car-
+dinal au moins 2k de mani`ere gloutonne : un nœud quelconque u ∈ X
+est s´electionn´e pour ˆetre d´eplac´e vers un nouveau super-nœud X(cid:48). On
+compl`ete X(cid:48) en ajoutant (k − 1) autre nœuds de X : on s´electionne dans
+X un nœud u(cid:48) dont le d´eplacement vers X(cid:48) optimise la pr´ecision des
+bornes d’utilit´e du graphe g´en´eralis´e courant 5. Cette approche gloutonne
+n’est cependant envisageable que pour un calcul de BornesU eﬃcace, par
+exemple parce qu’il suﬃt de ne consid´erer que le changement local du
+graphe g´en´eralis´e, sans recalculer les nouvelles bornes “from scratch”,
+comme c’est le cas pour le degr´e.
+– La fonction D´eplacerNœud(u, X, Y,G) consiste `a d´eplacer le nœud u du
+– La proc´edure FusionnerEtPartitionner(X, Y,G) consiste `a fusionner les
+
+cluster X vers le cluster Y .
+clusters X et Y suivie de l’op´eration Partitionner(X ∪ Y,G).
+
+5. Notons que ce graphe g´en´eralis´e interm´ediaire n’est pas forc´ement valide.
+
+35
+
+Algorithme 4: Algorithme de g´en´eralisation d’un graphe social
+
+Entr´ees : G = (V, E), un graphe `a g´en´eraliser
+
+k, une cardinalit´e des clusters
+U , une mesure d’utilit´e
+
+Sortie : G = (V,E), une g´en´eralisation de G dont les clusters sont de
+
+taille au moins k
+
+1 G ← Initialiser(G) {mettre tous les nœuds dans un mˆeme cluster}
+2 P ← Pr´ecision(G)
+3 T ← T0 {Initialisation de la temp´erature}
+4 r´ep´eter
+5
+
+G(cid:48) ←(cid:0) arg minG(cid:48)∈S Pr´ecisionU (G(cid:48))(cid:1)
+
+S ← Successeurs(G, k)
+P(cid:48) ← Pr´ecision(G(cid:48))
+∆P ← P - P(cid:48)
+P ← P(cid:48)
+si ∆P > 0 alors
+
+G ← G(cid:48)
+G ← G(cid:48) avec probabilit´e e∆P/T
+
+sinon
+
+ﬁnsi
+T ← d´ecr´ementer(T)
+
+6
+
+7
+
+8
+
+9
+
+10
+
+11
+
+12
+
+13
+
+14
+
+15
+
+4
+
+9
+
+10
+
+11
+
+12
+
+16 jusqu’`a G est mis-`a-jour moins de 0.02% dans les derni`eres it´erations;
+17 Retourner G
+
+Algorithme 5: Successeurs, fonction qui retourne un ensemble de
+graphes g´en´eralis´es
+Entr´ees : G = (V,E), une g´en´eralisation d’un graphe G
+
+k, un entier non nul ≤ |G|
+
+Sortie : un ensemble g´en´eralisation valides de G
+
+1 S ← ∅ {ensemble des successeurs}
+2 u ← choisir un nœud al´eatoire, soit X son cluster
+3 si |X| > 2k alors
+
+G(cid:48) ← Partitionner(X,G)
+S ← S ∪ G(cid:48)
+
+5
+6 ﬁnsi
+7 pour tout Y tel que X, Y sont voisins ou ont un voisin commun faire
+8
+
+si |X| > k alors
+G(cid:48) ← D´eplacerNœud(u, X, Y,G)
+S ← S ∪ G(cid:48)
+
+ﬁnsi
+G(cid:48) ← FusionnerEtPartitionner(X, Y,G)
+S ← S ∪ G(cid:48)
+
+13
+14 ﬁn
+15 Retourner S
+
+5.4 Garantie en termes d’anonymat/respect de la vie priv´ee
+
+Notre algorithme, pr´esent´e en Section 5.3, fait partie des algorithmes d’ano-
+nymisation d’un graphe social par g´en´eralisation. Cet technique assure que
+chaque cluster contient au moins k nœuds du graphe initial, autrement dit,
+
+36
+
+chaque k nœuds sont indistinguables du point de vue de l’adversaire. Un ad-
+versaire poss´edant quelques connaissances auxiliaires `a propos des individus
+pr´esents dans un graphe social rendu public commence son attaque en ´echan-
+tillonnant tous les graphes candidats G tel que G (cid:69)G, ce qui rend son attaque
+plus diﬃcile car cela lui demande de g´en´erer un grand nombre de graphes
+candidats.
+
+Aﬁn de pr´eserver l’utilit´e d’un graphe social publi´e, les algorithmes de g´en´e-
+ralisation minimisent (de mani`ere directe ou indirecte) le nombre de graphes
+candidats. Dans notre cas, le fait d’optimiser la pr´ecision des bornes d’uti-
+lit´e d’une propri´et´e structurelle donn´ee, entraine une r´eduction de nombre
+de graphes candidats. Malgr´e cette r´eduction, le nombre de graphes candi-
+dats reste en pratique suﬃsamment ´elev´e en prenant en compte le cas des
+graphes sociaux r´eels qui poss`edent g´en´eralement un grand nombre de nœuds
+et d’arˆetes. G´en´eralement, la condition de k-anonymit´e assure un degr´e as-
+sez acceptable de protection de la vie priv´ee (relativement au nombre k). Le
+nombre de graphes candidats d’un graphe g´en´eralis´e G = (V,E) est donn´e par
+
+c´edente (chaque combinaison(cid:0)n
+(cid:1)) est ´egal `a 1, c’est-`a-dire soit il n’y a pas de
+l’´equation (1). Ainsi, |(cid:86)G(cid:87)| = 1 si chaque facteur entrant dans la formule pr´e-
+
+p
+
+liens entre les nœuds d’un mˆeme cluster soit ce cluster forme un sous-graphe
+complet, et en mˆeme temps soit il n’y a pas de liens entre les nœuds de deux
+clusters soit il y a un lien entre chaque paire de nœuds de ces deux clusters.
+Ainsi, mˆeme si un graphe g´en´eralis´e a un seul graphe candidat, il est diﬃcile
+
+pour un adversaire de r´eussir une attaque par inf´erence, car quand |(cid:86)G(cid:87)| = 1
+
+tous les nœuds d’un mˆeme cluster ont la mˆeme caract´eristique (le mˆeme de-
+gr´e) et donc ne sont distinguables par un adversaire poss´edant le degr´e des
+nœuds comme connaissance auxiliaire. Cependant, nous pouvons garantir que
+le nombre de graphes candidats soit sup´erieur `a un seuil donn´e et cela pour
+oﬀrir plus de garantie en termes de pr´eservation de la vie priv´ee des individus
+pr´esents dans un graphe social. Pour r´ealiser cela, nous diminuons la probabi-
+lit´e pour laquelle notre algorithme termine sa recherche d’un graphe g´en´eralis´e
+(le nombre de propositions de changement d’´etat non accept´ees dans les der-
+
+ni`ere it´erations) jusqu’`a ce que le nombre de graphes candidats (|(cid:86)G(cid:87)|) soit
+
+sup´erieur `a un seuil ﬁx´e.
+
+5.5 Impl´ementation
+
+Nous sommes en train d’impl´ementer notre algorithme, d´ecrit dans la Sec-
+tion 5.3, en langage de programmation Python 6, sous l’environnement de d´e-
+veloppement PyDev 7 int´egr´e sous Eclipse 8. Nous utilisons la librairie Net-
+workX 9 pour la cr´eation et la manipulation de graphes.
+
+Jusqu’`a l’´ecriture de ce rapport, nous n’avions pas encore termin´e l’impl´e-
+mentation de notre algorithme. Cependant, nous esp´erons d’ici ﬁn du stage
+d’avoir de r´esultats d’ex´ecution de cet algorithme en ´evaluant sa performance
+sur des donn´ees issues de graphes sociaux r´eels et en comparant ses r´esul-
+tats avec ceux obtenus des algorithmes de clustering de graphes notamment
+les deux algorithmes de g´en´eralisation de graphes sociaux, GraphGen et SaN-
+GreeA, pr´esent´es en Section 4.4.1 et Section 4.4.2 respectivement.
+
+6. http ://www.python.org/
+7. http ://pydev.org/
+8. http ://www.eclipse.org/
+9. http ://networkx.lanl.gov/
+
+37
+
+Un algorithme de clustering de graphes prend en entr´ees un graphe et un
+nombre k repr´esentant le taille minimale de chaque cluster, et rend en sortie
+un graphe compos´e de clusters chacun de taille au moins k. Notre algorithme
+pourrait ˆetre vu comme un algorithme de clustering de graphes `a la diﬀ´erence
+qu’il prend en entr´ees, en plus du graphe `a g´en´eraliser et du param`etre k, une
+mesure d’utilit´e U `a pr´eserver, et rend en sortie un graphe g´en´eralis´e pr´eservant
+le mieux la mesure d’utilit´e U , et tel que chaque cluster est de taille au moins
+k. Ainsi, pour pouvoir tester l’eﬃcacit´e et la performance de notre algorithme,
+plusieurs sources fournissant des donn´ees de graphes sociaux r´eels peuvent ˆetre
+utilis´ees par exemple :
+
+– Stanford Network Analysis Project (SNAP) 10 qui regroupe une collection
+de donn´ees de graphes issues de r´eseaux sociaux en ligne, r´eseaux de
+communication, collaboration entre auteurs, ...
+
+– The Social Computing Data Repository 11 qui contient en particulier des
+graphes sociaux issues de r´eseaux sociaux tel que Flickr, Twitter, Friend-
+ster, ...
+
+Aﬁn d’eﬀectuer leurs analyses, les chercheurs (analystes) de graphes sociaux
+commencent `a ´echantillonner un graphe candidat `a partir du graphe g´en´era-
+lis´e rendu public, puis ils r´ealisent une analyse standard sur le graphe ´echan-
+tillonn´e. Nous suivons le mˆeme principe `a la diﬀ´erence qu’on ´echantillonne,
+non pas seulement un seul graphe candidat, mais plutˆot un certains nombre
+de graphes candidats (soit par exemple 100) et cela pour conﬁrmer notre hy-
+poth`ese supposant que l’´ecart de valeurs de la mesure d’utilit´e consid´er´ee est
+assez petit en analysant plusieurs graphes candidats ´echantillonn´es `a partir
+d’un graphe g´en´eralis´e par notre algorithme. Pour cela, nous avons d´ej`a im-
+pl´ement´e une proc´edure permettant d’´echantillonner un graphe candidat `a
+partir d’un graphe g´en´eralis´e : `a partir des cardinales des clusters on engendre
+tous les noeuds du graphe, puis on place al´eatoirement les arˆetes au sein d’un
+mˆeme cluster (en pr´eservant la connexit´e) et entre les clusters. Pour chacun des
+graphes candidats ´echantillonn´es et pour chacune des mesures d’utilit´e dont
+nous avons calcul´e les bornes (Section 5.2), nous calculons diﬀ´erentes propri´e-
+t´es structurelles (d´ecrites en Section 5.1) et nous comparons la moyenne des
+valeurs d’une propri´et´e structurelle donn´ee avec celle du graphe d’origine. Pour
+calculer la valeur d’une propri´et´e structurelle d’un graphe donn´e, nous pou-
+vons soit faire une impl´ementation “maison” soit utiliser des outils existants
+d’analyse de graphes, par exemple UCINET 12 et Pajek 13. On r´ep`ete toute
+cette proc´edure de g´en´eralisation, d’´echantillonnage, et de mesures en variant
+la taille minimale des clusters, par exemple pour k = 5, 10, et 20.
+
+6 Conclusion et perspectives
+
+L’anonymisation d’un graphe social est un proc´ed´e n´ecessaire avant toute
+publication des donn´ees d’un r´eseau social aﬁn de pr´eserver la vie priv´ee des
+individus pr´esents dans ce r´eseau. Plusieurs travaux sont r´ealis´es pour d´emon-
+trer les risques d’atteinte `a la vie priv´ee suite `a une publication d’un graphe
+social anonymis´e na¨ıvement. Ainsi, un adversaire peut r´ev´eler l’existence d’une
+relation sociale entre deux utilisateurs en cr´eant un certains nombre de nœuds,
+
+10. http ://snap.stanford.edu/
+11. http ://socialcomputing.asu.edu/
+12. https ://sites.google.com/site/ucinetsoftware/home
+13. http ://vlado.fmf.uni-lj.si/pub/networks/pajek/
+
+38
+
+en ajoutant des liens vers les nœuds cibles, et en ´etablissant un motif parti-
+culier qui aide `a retrouver ces nœuds ajout´es, attach´es avec les nœuds cibles,
+dans le graphe social publi´e. Un autre exemple serait, un adversaire qui sait
+que Alice poss`ede 60 amis dont 3 ont 30 amis et qui peut r´e-identiﬁer Alice
+dans le graphe social. Un autre type d’attaque consiste `a inf´erer des attributs
+des proﬁls priv´es `a partir des attributs des proﬁls publics des individus en
+relations (que ce soit ses amis ou partagent au moins un groupe en commun)
+avec l’individu cible.
+
+Aﬁn de permettre des analyses utiles sur un graphe social tout en pr´eser-
+vant la vie priv´ee des utilisateurs de ce r´eseau social, plusieurs approches d’ano-
+nymisation d’un graphe social sont d´evelopp´ees. Ainsi, ces m´ethodes d’ano-
+nymisation peuvent ˆetre regroup´ees en trois cat´egories. Le k-anonymit´e par
+modiﬁcation d’arˆetes qui consiste `a modiﬁer la structure d’un graphe social
+par une s´erie d’ajout et de suppression d’arˆetes de telle sorte que chaque nœud
+dans le graphe modiﬁ´e est indistinguable d’au moins (k − 1) autre nœuds en
+termes de quelques motifs structurels, par exemple le degr´e d’un nœud, son
+voisinage, ou tout un sous-graphe autour d’un nœud. La perturbation al´eatoire
+des arˆetes d’un graphe social qui consiste `a ajouter/supprimer des arˆetes ou
+les ´echanger aﬁn de pr´eserver contre toute tentative de r´e-identiﬁcation dans
+une mani`ere probabiliste. La g´en´eralisation d’un graphe social qui consiste `a
+regrouper les nœuds d’un graphe social en clusters chacun de taille au moins
+k, puis r´esumer le nombre d’arˆetes existant entre et `a travers ces clusters par
+des super-arˆetes.
+
+Nous nous sommes focalis´es dans ce travail de recherche `a am´eliorer la tech-
+nique de g´en´eralisation d’un graphe social. Il est reconnu que cette technique
+d’anonymisation propose un niveau ´elev´e de garantie en termes de respect de
+la vie priv´ee des individus pr´esents dans un graphe social. Cependant, l’utilit´e
+d’un tel graphe social n’atteint pas en pratique un niveau acceptable. Pour ces
+deux raisons et du fait que plusieurs analyses d’un graphe social s’int´eressent `a
+´etudier des propri´et´es structurelles du graphe social ´etudi´e, nous avons propos´e
+de guider la fa¸con dont on g´en´eralise un graphe social en prenant en consid´era-
+tion la mesure d’utilit´e qu’on veut pr´eserver du graphe publi´e. Pour cela, nous
+avons propos´e des bornes d’utilit´e de diﬀ´erentes propri´et´es structurelles tel que
+le degr´e des nœuds, le diam`etre et le rayon d’un graphe. Une borne d’utilit´e
+repr´esente la plus petite (respectivement la plus grande) valeur d’une mesure
+d’utilit´e donn´ee que peut prendre n’importe quel graphe candidat d’un graphe
+g´en´eralis´e. Lors de sa recherche, notre algorithme tente `a minimiser l’´ecart
+entre les bornes d’utilit´e minimale et maximale dans l’objectif que la valeur
+de cette propri´et´e structurelle pour n’importe quel graphe candidat du graphe
+g´en´eralis´e se rapproche de celle du graphe d’origine.
+
+Comme perspectives `a court et `a moyen terme pour mener `a bien notre
+projet de recherche, nous esp´erons d’abord avoir de r´esultats d’ex´ecution de
+notre algorithme aﬁn de pouvoir le comparer exp´erimentalement avec d’autres
+algorithmes de g´en´eralisation de graphes sociaux. Nous envisageons aussi de
+concevoir des algorithmes qui calculent des bornes d’utilit´e pour des propri´et´es
+structurelles (par exemple, le cœﬃcient de clustering, la centralit´e d’intermi-
+diarit´e, ...) o`u il est diﬃcile de les donner sous formules math´ematiques.
+
+Le domaine de l’anonymisation de r´eseaux sociaux est un domaine de re-
+cherche et de d´eveloppement tr`es prometteur. Nous proposons comme pers-
+pectives `a long terme de prendre en consid´eration, dans notre algorithme de
+g´en´eralisation d’un graphe social, l’ensemble d’attributs d´ecrivant les utili-
+
+39
+
+sateurs du r´eseau social `a anonymiser. Pour cela, nous pouvons adopter la
+technique de g´en´eralisation des valeurs des attributs en utilisant une hi´erar-
+chie d’´etiquettes pour chacun des attributs. Nous proposons aussi de prendre
+en compte les analyses de graphes sociaux n’int´eressant aux requˆetes d’agr´e-
+gation d’un graphe social. Ainsi, une ´etude permettant d’´evaluer laquelle des
+propri´et´es structurelles doit on consid´erer dans notre algorithme de g´en´eralisa-
+tion guid´e par l’utilit´e pour pouvoir r´epondre assez correctement `a une requˆete
+d’agr´egation.
+
+R´ef´erences
+
+[1] Arvind Narayanan and Vitaly Shmatikov. Robust de-anonymization of
+large sparse datasets. In IEEE Symposium on Security and Privacy, pages
+111–125, 2008.
+
+[2] Elena Zheleva and Lise Getoor. Privacy in social networks : A survey. In
+
+Social Network Data Analytics, pages 277–306. 2011.
+
+[3] L. Sweeney et al. k-anonymity : A model for protecting privacy. Interna-
+tional Journal of Uncertainty Fuzziness and Knowledge Based Systems,
+10(5) :557–570, 2002.
+
+[4] P. Samarati. Protecting respondents identities in microdata release.
+Knowledge and Data Engineering, IEEE Transactions on, 13(6) :1010–
+1027, 2001.
+
+[5] Graham J. Wills. An interactive view for hierarchical clustering.
+
+In
+
+INFOVIS, pages 26–31, 1998.
+
+[6] Alan Mislove, Massimiliano Marcon, P. Krishna Gummadi, Peter Dru-
+schel, and Bobby Bhattacharjee. Measurement and analysis of online so-
+cial networks. In Internet Measurement Comference, pages 29–42, 2007.
+
+[7] Matthew Richardson and Pedro Domingos. Mining knowledge-sharing
+
+sites for viral marketing. In KDD, pages 61–70, 2002.
+
+[8] B. Fitzpatrick and D. Recordon. Thoughts on the social graph. Number 92.
+
+2007.
+
+[9] Bradley Malin and Latanya Sweeney.
+
+Inferring genotype from clinical
+phenotype through a knowledge based algorithm. In Paciﬁc Symposium
+on Biocomputing, pages 41–52, 2002.
+
+[10] Ashwin Machanavajjhala, Johannes Gehrke, Daniel Kifer, and Muthu-
+l-diversity : Privacy beyond k-
+
+ramakrishnan Venkitasubramaniam.
+anonymity. In ICDE, page 24, 2006.
+
+[11] Xintao Wu, Xiaowei Ying, Kun Liu, and Lei Chen. A survey of privacy-
+In Managing and Mining
+
+preservation of graphs and social networks.
+Graph Data, pages 421–453. 2010.
+
+[12] Michael Hay, Gerome Miklau, David Jensen, Philipp Weis, and Siddharth
+Srivastava. Anonymizing social networks. Technical Report 07-19, Uni-
+versity of Massachusetts Amherst, 2007.
+
+[13] L´aszl´o Babai and Ludek Kucera. Canonical labelling of graphs in linear
+
+average time. In FOCS, pages 39–46, 1979.
+
+[14] Lars Backstrom, Cynthia Dwork, and Jon M. Kleinberg. Wherefore art
+thou r3579x ? : anonymized social networks, hidden patterns, and struc-
+tural steganography. In WWW, pages 181–190, 2007.
+
+40
+
+[15] Arvind Narayanan and Vitaly Shmatikov. De-anonymizing social net-
+In IEEE Symposium on Security and Privacy, pages 173–187,
+
+works.
+2009.
+
+[16] Gary William Flake, Robert Endre Tarjan, and Kostas Tsioutsioulik-
+Internet Mathematics,
+
+lis. Graph clustering and minimum cut trees.
+1(4) :385–408, 2003.
+
+[17] Elena Zheleva and Lise Getoor. To join or not to join : the illusion of
+privacy in social networks with mixed public and private user proﬁles. In
+WWW, pages 531–540, 2009.
+
+[18] Prithviraj Sen, Galileo Namata, Mustafa Bilgic, Lise Getoor, Brian Gal-
+lagher, and Tina Eliassi-Rad. Collective classiﬁcation in network data.
+AI Magazine, 29(3) :93–106, 2008.
+
+[19] Kun Liu and Evimaria Terzi. Towards identity anonymization on graphs.
+
+In SIGMOD Conference, pages 93–106, 2008.
+
+[20] Bin Zhou and Jian Pei. Preserving privacy in social networks against
+
+neighborhood attacks. In ICDE, pages 506–515, 2008.
+
+[21] Lei Zou, Lei Chen, and M. Tamer ¨Ozsu. K-automorphism : A general
+framework for privacy preserving network publication. PVLDB, 2(1) :946–
+957, 2009.
+
+[22] Michael Hay, Gerome Miklau, David Jensen, Donald F. Towsley, and Phi-
+lipp Weis. Resisting structural re-identiﬁcation in anonymized social net-
+works. PVLDB, 1(1) :102–114, 2008.
+
+[23] Stuart Russell and Peter Norvig. Artiﬁcial Intelligence : A Modern Ap-
+
+proach. Prentice Hall, third edition, December 2009.
+
+[24] Alina Campan and Traian Marius Truta. Data and structural k-
+
+anonymity in social networks. In PinKDD, pages 33–54, 2008.
+
+[25] Francesco Bonchi, Aristides Gionis, and Tamir Tassa. Identity obfuscation
+in graphs through the information theoretic lens. In ICDE, pages 924–935,
+2011.
+
+[26] Bin Zhou and Jian Pei. The k-anonymity and l-diversity approaches
+for privacy preservation in social networks against neighborhood attacks.
+Knowl. Inf. Syst., 28(1) :47–77, 2011.
+
+[27] Roy Ford, Traian Marius Truta, and Alina Campan. P-sensitive k-
+
+anonymity for social networks. In DMIN, pages 403–409, 2009.
+
+[28] M. Hay, G. Miklau, D. Jensen, D. Towsley, and C. Li. Resisting structu-
+ral re-identiﬁcation in anonymized social networks. The VLDB Journal,
+19(6) :797–823, 2010.
+
+[29] S. Milgram. The small world problem. Psychology Today, 2 :60–67, 1967.
+
+[30] Thomas L. Saaty. Decision-making with the ahp : Why is the princi-
+pal eigenvector necessary. European Journal of Operational Research,
+145(1) :85–91, 2003.
+
+[31] Sergey Brin and Lawrence Page. The anatomy of a large-scale hypertex-
+
+tual web search engine. Computer Networks, 30(1-7) :107–117, 1998.
+
+[32] Erich Prisner. Radius versus diameter in cocomparability and intersection
+
+graphs. Discrete Mathematics, 163(1-3) :109–117, 1997.
+
